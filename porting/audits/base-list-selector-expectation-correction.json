@@ -1,0 +1,50 @@
+{
+  "schema": "rustycad.stale-selector-test-correction.v1",
+  "base_commit": "363237df6ed055c1a15a6d76e4f8c6e6cd1609ea",
+  "status": "targeted_fix_verified_pending_integration",
+  "cause": "BaseList exact reconciliation commit8e1b5c7a corrected old typed ListCursor claims to the actual BaseListRawIterator bodies and partial status. The mixed collection/vector selector regression retained both old ListCursor expected paths. Its first loop failure hid the second stale expectation.",
+  "scope": "Only two expected Rust paths changed, plus a regression requiring both BaseList rows to remain partial function bindings with exact rust_items. Native declaration IDs, vector expectations, production code and parity ledger are unchanged.",
+  "corrections": [
+    {
+      "cpp_id": "1ea4eb28cc74bffb0498a53af80854ee310c5f008b3d805650d3bf8e8881a7e5",
+      "method": "NCollection_BaseList::Iterator::operator==",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::<core::cmp::PartialEq>::eq"
+    },
+    {
+      "cpp_id": "d07c339f7869fe0440be0d3330a93aad911e7d0a71e9bc9092b8c854401c2e09",
+      "method": "NCollection_BaseList::Iterator::IsEqual",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::is_equal"
+    }
+  ],
+  "checks": {
+    "before_fix": {
+      "command": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p 'test_ncollection_vector_comparison_selectors.py'",
+      "tests": 1,
+      "failures": 1,
+      "exit": 1
+    },
+    "after_fix": {
+      "targeted": 2,
+      "related_selectors": 46,
+      "binding_replay": 16,
+      "exit": 0
+    },
+    "format_exit": 0
+  },
+  "original_snapshot_status": "Parent reported724 Python checks with one failure. This receipt independently reproduces the targeted failure and records post-fix bounded checks; it does not relabel the original full snapshot as green.",
+  "source_sha256": {
+    "tools/tests/test_ncollection_vector_comparison_selectors.py": "ad92b796002e6f425570f04740219653199d1b94197963c34791931f9cf7d89e",
+    "crates/tkernel/src/ncollection/base_list/cursor.rs": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9"
+  },
+  "evidence_inputs_sha256": {
+    "porting/audits/base-list-ledger-records.jsonl": "3c9d95dd1986a462ac07b203c7fbc9a1318a5cbc87cccdf4fefe94a5978788e8",
+    "porting/parity.json": "bae31e3dc8317e26023e77f664f7c2c54ba42356709fd8cc25b0b2d3429f455e"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/base-list-selector-expectation-red.log.gz": "ef7c294d8542b19a7bae2fb82a3650ba5079b11735fcf3aa595cdd139289464a",
+    "porting/runtime-evidence/base-list-selector-expectation-green.log.gz": "cc86b70d51c6ac71ff7becd6dfada063670bb62df4cb68ba8dac534176e591f8",
+    "porting/runtime-evidence/base-list-selector-expectation-related.log.gz": "42d9ddd44a332db3f0b36700f0bec35c26c5dd73ccb6d830e756c49ec618eee7",
+    "porting/runtime-evidence/base-list-selector-expectation-binding.log.gz": "25d3ef79ca21fcdd36fdc50483dd54a368e4ed8383d5c9b5154aa29097b1aa8b",
+    "porting/runtime-evidence/base-list-selector-expectation-format.log.gz": "fd34c7d8126fe8ceb1b61693860db45d69151373634eef677d10040f9458facf"
+  }
+}
