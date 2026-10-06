@@ -268,10 +268,12 @@
   "native_probe_adaptation": "GCC -std=c++17 -fno-access-control exposes protected IndexedMapNode and private IndexedDataMapNode for probe construction. OCCT headers and node method bodies remain unchanged; this disables compile-time access checking only.",
   "owned_move_probe_domain": "Tracked C++ move constructors transfer their resource and silence moved-from destruction; they intentionally add no move-count event. Rust ownership transfer therefore matches the observed key/value lifetime domain, not arbitrary C++ move-constructor side effects.",
   "remaining_gaps": [
+    "Measured native node layout/allocation-byte mismatch: seven of ten scalar/over-aligned payload combinations differ. For example IndexedMap<i32> size16/Index12 native versus size24/Index16 Rust; IndexedDataMap<u8,u8> size16/Key9/Index12 native versus size32/Key16/Index24 Rust. See indexed-node-layout-gap.json; flat storage correction is mandatory before container migration.",
     "Typed IndexedMap remains backed by its prior simplified IndexedNode and Vec buckets, and IndexedDataMap still allocates keys and values separately. These standalone nested node ports do not close their container representation, allocation-count or destructor observation gaps.",
     "Subsequent atomic storage migration must use actual BaseIndexedMapStorage, real bucket links and dense native index slots; Swap must update node Index and index table together, and RemoveLast/Clear must preserve native callback ordering.",
     "Native IndexedIterator dispatch remains container based through IndexedCursorSource. No unsupported BasicIterator Key() contract was added to native node types whose member is Key1().",
     "Rust closures and explicit owned/borrowed overload adapters cannot reproduce arbitrary address-sensitive C++ construction, move hooks or C++ throwing-noexcept destructor termination. Such domains receive no parity credit.",
     "Raw allocation byte-for-byte C++ ABI equivalence, compiler declaration/body inventory binding and complete container/API parity remain unclaimed."
-  ]
+  ],
+  "layout_followup": "porting/audits/indexed-node-layout-gap.json"
 }
