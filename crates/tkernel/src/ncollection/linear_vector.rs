@@ -3,6 +3,7 @@ use super::{Array1, ArrayError};
 
 mod borrowed;
 mod pointers;
+mod relocation;
 mod trivial_assignment;
 
 struct LengthRollback<'a, T> {
@@ -86,7 +87,7 @@ impl<T> LinearVector<T> {
         if minimum <= self.capacity() {
             return;
         }
-        let grown = self.capacity().saturating_mul(2).max(2).max(minimum);
+        let grown = relocation::next_capacity_for(self.capacity(), minimum, Self::max_size());
         self.elements.reserve_exact(grown - self.len());
     }
     /// Appends an owned value; `vector.append(42)`.

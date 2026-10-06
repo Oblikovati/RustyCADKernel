@@ -26,6 +26,12 @@ impl<T, const N: usize> Default for LocalArray<T, N> {
 }
 
 impl<T, const N: usize> LocalArray<T, N> {
+    /// Reports native `isInline()` storage state; `LocalArray::<i32, 4>::new(3).is_inline()`.
+    /// Shrinking a heap buffer retains heap ownership until a later relocation.
+    pub fn is_inline(&self) -> bool {
+        !self.elements.spilled()
+    }
+
     /// Returns the logical size; `LocalArray::<i32>::default().len() == 0`.
     pub fn len(&self) -> usize {
         self.elements.len()
