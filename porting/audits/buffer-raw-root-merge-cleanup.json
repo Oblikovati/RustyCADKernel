@@ -1,0 +1,57 @@
+{
+  "schema": "rustycad.integration-cleanup.v1",
+  "integration_revision": "ad81cd52c39ebba298517c6ec7f8293fdea4f970",
+  "focused_rust_passed": 83,
+  "strict_provenance_seed0_preemption1_miri_passed": 9,
+  "resolved_prior_checkpoint_gap": "The owned-byte Incremental allocation/reset race recorded in foundation-map-engines-checkpoint is corrected by holding one engine guard through allocation and lease acquisition.",
+  "tkernel_doctests_passed": 259,
+  "focused_rust_failed": 0,
+  "focused_targets": [
+    "allocator_supplemental",
+    "buffer_adopted_size_contracts",
+    "buffer_pointer_contracts",
+    "buffer_raw_adoption_contracts",
+    "ncollection_allocator_views_behavior",
+    "ncollection_allocators_api_behavior",
+    "ncollection_base_allocator",
+    "ncollection_buffer",
+    "ncollection_occ_allocator",
+    "occ_allocator_method_contracts",
+    "typed_allocator_provenance_contracts"
+  ],
+  "strict_workspace_clippy_exit": 0,
+  "format_exit": 0,
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/buffer-raw-root-rust.gz",
+      "sha256": "0d0c71bcd1b04b345dbe4f003a6f757a8b6b75528472e6d43b0eba88cb289c44"
+    },
+    "doc": {
+      "path": "porting/runtime-evidence/buffer-raw-root-doc.gz",
+      "sha256": "b4bb9e0cb5056dd97053908cab85599197ae3a72b90720d6efd9662fb04a3e2d"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/buffer-raw-root-clippy.gz",
+      "sha256": "2e1654337e3fdd43749fdda80012e445dc1d9407888b8a93107f44f80dce8c04"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/buffer-raw-root-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/buffer-raw-root-miri.gz",
+      "sha256": "e5b7f775344101b2492b070bd259e8738203096d9167fffdf818507df8e5dcb6"
+    }
+  },
+  "deleted_completed_worktrees": [
+    {
+      "branch_commit": "f51a93dc18062e3067cd2ad5aacc8a6492793ce5",
+      "deleted_worktree": "/tmp/rustycad-buffer-raw-adoption",
+      "deleted_branch": "port/buffer-raw-adoption",
+      "worktree_absent": true,
+      "branch_absent": true,
+      "process_scan_empty": true
+    }
+  ],
+  "full_workspace_checkpoint_pending": true
+}
