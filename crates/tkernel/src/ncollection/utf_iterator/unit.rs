@@ -10,7 +10,7 @@ pub type WideChar = u32;
 pub type WideChar = u16;
 
 /// A Unicode code unit (`u8` UTF-8, `u16` UTF-16, `u32` UTF-32), chosen by size as
-/// `CharTypeChooser` does; also supports signed UTF-8 units (`i8`) with native unsigned-byte decoding.
+/// `CharTypeChooser` does; supports signed units (`i8`, `i16`, `i32`) with native width-specific decoding.
 ///
 /// ```
 /// use rustycad_tkernel::ncollection::UtfUnit;
