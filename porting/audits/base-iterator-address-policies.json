@@ -1,0 +1,163 @@
+{
+  "schema": "rustycad.base-iterator-address-policies.v1",
+  "status": "partial_candidate_verified_pending_integration",
+  "base_commit": "14dba9ccefe050fe5cd7aeccd6552381a3e8b61f",
+  "branch": "port/base-iterator-next",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Two native BasicIterator::operator-> declarations, BaseList and BaseSequence. Four explicit readonly/writable address-policy methods close the overloaded unary address-of dispatch gap. No shared ledger or test-map edits.",
+  "new_adapters": [
+    "BaseListBasicIterator<N,false>::arrow_with",
+    "BaseListBasicIterator<N,true>::arrow_with",
+    "BaseSequenceBasicIterator<N,false>::arrow_with",
+    "BaseSequenceBasicIterator<N,true>::arrow_with"
+  ],
+  "behavior": "Native arrow evaluates &operator*(). Overloaded const/mutable unary address-of can redirect to another live object and mutate the original object. New callbacks run after existing Value/ChangeValue dispatch. Existing ordinary arrows delegate builtin pointer identity through the same adapters. Existing source comments/docs preserved.",
+  "checks": {
+    "rust_passed": 119,
+    "new_tests": 3,
+    "native_originals_passed": 54,
+    "strict_provenance_miri_passed": 19,
+    "python_binding_tests_passed": 32,
+    "strict_scoped_clippy_exit": 0,
+    "cargo_fmt_exit": 0,
+    "diff_check_exit": 0,
+    "exact_scoped_binding_replay": {
+      "native_ids": 2,
+      "public_bodies": 8,
+      "ledger_changes": 0,
+      "checks": {
+        "wrong_native_id_rejected": true,
+        "last_policy_hash_rejected": true,
+        "missing_last_policy_rejected": true,
+        "opposite_specialization_rejected": true,
+        "duplicate_selector_rejected": true
+      }
+    }
+  },
+  "native_oracle": {
+    "command": [
+      "g++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+      "tools/oracle/tkernel_base_iterator_address_policies.cxx",
+      "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+      "-lTKernel",
+      "-o",
+      "/tmp/base-iterator-address-policies-native"
+    ],
+    "build_exit": 0,
+    "build_stderr": "",
+    "run_exit": 0,
+    "run_stderr": "",
+    "rows": 8
+  },
+  "fixture_join": "All eight native rows are generated dynamically by Rust and compared exactly. Four overloaded-arrow rows cover getter/address order, redirection to a distinct allocation and source mutation. Four explicitly builtin-address rows use native std::addressof(*iterator) to verify unchanged Rust default arrow behavior; they do not claim native overloaded arrow uses builtin identity.",
+  "safety": "Raw cursors require live concrete-node provenance and shared/exclusive borrowing as documented. Address callbacks preserve these borrows during dispatch. A returned raw pointer does not carry automatic lifetime, provenance or access-permission guarantees; callers justify any later dereference separately. Rust fixtures own both allocations, use nonzero embedded-link offsets, and pass strict-provenance Miri. Additional checks write through the redirected valid pointer and consume a noncopy FnOnce capture.",
+  "compiler_capture": {
+    "command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features -- --document-private-items --output-format json -Z unstable-options",
+    "exit": 0,
+    "format_version": 61,
+    "preexisting_unrelated_doc_warnings": 9,
+    "exact_native_ids": 2,
+    "compiler_bodies": 8,
+    "unique_paths": 4,
+    "binding_scope": "Both readonly/mutable arrow and arrow_with compiler bodies are selected by exact declaration digest and full impl context; fresh normalized compiler and current file hashes independently replay. Scoped records remain partial and do not change ledger coverage."
+  },
+  "current_proof_refresh": {
+    "reason": "Whole-source-file hash pinning in prior current-proof wrappers rejected otherwise unchanged BaseList change_value and four BaseSequence methods after new neighboring arrow methods were added. The original failing Python log is retained.",
+    "new_receipts": [
+      "porting/audits/base-list-address-current-bindings.json",
+      "porting/audits/base-sequence-address-current-bindings.json"
+    ],
+    "exact_native_ids_preserved": 134,
+    "base_list_records": 63,
+    "base_sequence_records": 71,
+    "ledger_rows_preserved": 134,
+    "affected_existing_method_bodies_unchanged": 5,
+    "verification": "All prior signature/impl/kind/path fields match fresh compiler records exactly. Declaration digests include whole-file source hashes, so affected digests legitimately refresh. Five existing method bodies were byte-compared against Git base and hashed in existing-body-text.json.gz. Current wrappers replay all63/all71 exact identities against unchanged ledger rows; historical receipts/archives/fixture tests are unchanged.",
+    "historical_receipts": [
+      "porting/audits/base-list-ledger-bindings.json",
+      "porting/audits/base-sequence-api-reconciliation.json"
+    ],
+    "behavior_or_coverage_credit_delta": 0
+  },
+  "original_tests": {
+    "joined": 54,
+    "archive": "porting/runtime-evidence/base-iterator-address-original-joins.json.gz",
+    "scope": "All native NCollection_ListTest and NCollection_SequenceTest passing declaration names join existing Rust passing names exactly. Existing test assertions and mappings unchanged; no new exhaustive assertion-faithfulness audit claimed."
+  },
+  "commands": {
+    "rust": "cargo test --locked -p rustycad-tkernel --test base_iterator_address_policies --test base_list_basic_iterator_contracts --test base_list_iterator_contracts --test base_list_storage_contracts --test base_sequence_generic_contracts --test base_sequence_method_contracts --test base_sequence_storage_contracts --test base_sequence_self_splice_contracts --test ncollection_list --test ncollection_sequence",
+    "miri": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test base_iterator_address_policies --test base_list_basic_iterator_contracts --test base_sequence_generic_contracts",
+    "python": "PYTHONPATH=tools:tools/tests python3 -m unittest test_api_binding_replay test_api_binding_specializations test_base_sequence_bindings",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --test base_iterator_address_policies --test base_list_basic_iterator_contracts --test base_sequence_generic_contracts -- -D warnings",
+    "native_originals": "OpenCascadeGTest --gtest_filter='NCollection_ListTest.*:NCollection_SequenceTest.*'"
+  },
+  "limits": [
+    "Explicit callbacks are policies selected by the caller; arbitrary C++ overloaded operator& behavior is not inferred automatically.",
+    "Native noexcept termination for throwing overloaded address/getter operations is not equivalent to Rust unwinding and is not claimed.",
+    "Null/dangling nodes, invalid returned pointers and overlapping Rust mutable references are outside the tested defined domain.",
+    "No ABI/layout equivalence, full class parity, native alias coverage or exposed-private-return inventory change."
+  ],
+  "ledger_changes": 0,
+  "implemented_credit_delta": 0,
+  "legacy_test_mapping_delta": 0,
+  "replay_command": "gzip -dc porting/runtime-evidence/base-iterator-address-replay.py.gz > /tmp/replay-base-iterator-address.py && python3 /tmp/replay-base-iterator-address.py \"$PWD\"",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs": "baf8bcf71eb092d74bb6504bb83b5709b878fe53a104b3dca7292a2bd6a1eb0e",
+    "crates/tkernel/src/ncollection/sequence/basic_iterator/access.rs": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336",
+    "crates/tkernel/src/ncollection/base_list/basic_node.rs": "f141eae1cd72f5c6bbb6702091db407ae6adf70391b3f1672e7f4c29538acfdf",
+    "crates/tkernel/src/ncollection/sequence/basic_node.rs": "626d6c6a8b05d86efa251583f51bd8ebcc6a6f127d8d6b89a3eb30df5be2eb6d",
+    "crates/tkernel/tests/base_iterator_address_policies.rs": "a3a6402031d9a0b2da8816a93761ea5fa30408ac25378b49982e1519b67624f3",
+    "crates/tkernel/tests/base_iterator_address_policies/fixture.rs": "80b943f5b306562e36500ebf203356dc22b8f90c529118eeb960cf81ba5a912f",
+    "crates/tkernel/tests/base_list_basic_iterator_contracts.rs": "eb50cdf7f5476485eeb884ceb8977d32e6ffdbe8581d25fb4b11bd26de44fe9e",
+    "crates/tkernel/tests/base_sequence_generic_contracts.rs": "495e99510b4559f57f761d782cc5061843f8c9d0c990add13e7bbd9db4aeba38",
+    "tools/oracle/tkernel_base_iterator_address_policies.cxx": "aac17ebd42d80c86ebaa8d87c36f7f9e18bf1352116a1bc1b77d658aa673b80a",
+    "tools/oracle/tkernel_base_iterator_address_policies.expected": "c01ef904f6d165ac7cb53f25aaef358213525cf43b4d875a12598f46ce9f9bd2",
+    "tools/verify_base_list_bindings.py": "0e9b9c1669991bee6511764b283928b982936ee6d6191142be8367f6846661ad",
+    "tools/verify_base_sequence_bindings.py": "ae9a8ecc775dd115baa48843c1991c4a986d7f1b31c4d178579fc25a6871ba2f"
+  },
+  "input_sha256": {
+    "porting/api-inventory/occt-declarations.jsonl.gz": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "porting/api-header-manifest.json": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "tools/api_binding_replay.py": "8770d78503a4ac3cd637c588049e725e3add70fea544ece7e165c689df93c76b",
+    "tools/api_binding_transaction.py": "5fb604a7c56b470f4958a12be285f6ff428131d3b4becec260531aca5236ebd1",
+    "tools/api_crosswalk.py": "0c2afa145233d376b80356d0b693caa7a88291034c24b393cb6d1ec1cff07344",
+    "tools/api_rust_declaration_selectors.py": "cd640e93d2d2aca1fdc0b71cf6848e33119801a16c16903ce13d3f179c19435f",
+    "Cargo.lock": "b3f23000254d952d6f3a49d324937f926df4f9f42d36ae935e02bd35c65431cb",
+    "rust-toolchain.toml": "e2b3d4c9502c23c86bf062704cd18d61805c31f3fd9d2ef37cbe2a242cdc4612",
+    "porting/audits/base-list-address-current-bindings.json": "4bb5a23a1205b0faa9ab99cca364ebd691362d32149e429f69fff799485564be",
+    "porting/audits/base-sequence-address-current-bindings.json": "26842179747d1efe136644d00ac2cd90e4ad4f5a130f9c65897f6bfc5540deb0"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx": "d88ee7d178fc00567026a9e1b1427cdb94df3adb90fc94df0971df87b508ee43",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx": "7e0bf197ad5ec0e66bb5e263efe0d328ea170e39e2695d0623e6f281da75348d"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/base-iterator-address-base-list-current.jsonl.gz": "6669d27f7ebcbcba74f50454b8b45b3c11a588010a601e276f0391dee38fe5a5",
+    "porting/runtime-evidence/base-iterator-address-base-sequence-current.jsonl.gz": "0f2dfc5e710eabaee1169b1d27567c67f72e3d760fda1b7f39f031a2b53e5333",
+    "porting/runtime-evidence/base-iterator-address-binding-tests-before-refresh.log.gz": "598033801a40d6ee51862970404830d82aefea98a70e41a42d3f6959f08a007b",
+    "porting/runtime-evidence/base-iterator-address-binding-tests.log.gz": "a159044b4963fd148e9ff764db73a2672b5c4b8ba39e804397ee3172958a5fc9",
+    "porting/runtime-evidence/base-iterator-address-bindings.json.gz": "adc18f664d66e4cfd3212b07ac2a585f7133c534de75f69ba7004645e8acf94b",
+    "porting/runtime-evidence/base-iterator-address-clippy.log.gz": "78aa9e6420e3c1d2d989a1d7bee5c2b11b0768142826677179dc4f3835872846",
+    "porting/runtime-evidence/base-iterator-address-compiler.log.gz": "777ca17e801425aacbc1252f457408cd2eba2b2754c46356a6ec7a05de26ffa2",
+    "porting/runtime-evidence/base-iterator-address-existing-body-text.json.gz": "e55129156f250bd769e8f40d28ef203b8c5b6ad7659a68cf36dfde4a24d20453",
+    "porting/runtime-evidence/base-iterator-address-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/base-iterator-address-miri.log.gz": "50acb168cb27e3ea90cf041c8e423af2219d66cb7bb8b4d3828359ba135781cc",
+    "porting/runtime-evidence/base-iterator-address-native-command.json.gz": "c24c31ba5e9b11e2ac1d78842d171161cb66f60353e7bb0a7de16112c99b2278",
+    "porting/runtime-evidence/base-iterator-address-native-originals.log.gz": "48a4652d68abe9489c2c2f5a6ed14dd9177d1a8382480697e14c1f3c808926f2",
+    "porting/runtime-evidence/base-iterator-address-native.stdout.gz": "a089f72ecfe42e91f89163897a2c84358a014299e72663fb870c2238182aeeb6",
+    "porting/runtime-evidence/base-iterator-address-normalized.json.gz": "172311ac079321500a03d68367c7ed77c7cb6f63e2bb540f4bd96a20a2b0bec3",
+    "porting/runtime-evidence/base-iterator-address-original-joins.json.gz": "d36000eb27fd4f7b46197febce00f6185b445365d2aba07225d7c1362a30853f",
+    "porting/runtime-evidence/base-iterator-address-replay.log.gz": "5b3ff7787cd08203551d95df9525c00109f17eda828896945f907db72092a9ee",
+    "porting/runtime-evidence/base-iterator-address-replay.py.gz": "064a6699606fba5f78904eccbac46be26293226ccfb1904a9b8771dd0ffd6005",
+    "porting/runtime-evidence/base-iterator-address-rust.log.gz": "5207a48826bbce7698193c159b505c59cdae1c68621a31cfaf55f1f53bbf9459",
+    "porting/runtime-evidence/base-iterator-address-rustdoc.json.gz": "e308bfe2ff5fc11415774abc66ef028233fa209de04a43afcd200371c6d21175"
+  }
+}

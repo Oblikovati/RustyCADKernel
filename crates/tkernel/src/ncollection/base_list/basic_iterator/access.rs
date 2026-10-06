@@ -19,13 +19,26 @@ impl<N: BasicListNode> BaseListBasicIterator<N, false> {
         // SAFETY: the same node and reference contract is forwarded.
         unsafe { self.dereference() }
     }
+    /// Applies native overloaded address-of after Value; `unsafe { cursor.arrow_with(address) }`.
+    ///
+    /// # Safety
+    /// Current must satisfy dereference's live concrete-node and shared-borrow contract.
+    /// The policy must preserve that borrow during dispatch. Returned raw-pointer validity,
+    /// provenance and read permissions must be established separately before dereference.
+    pub unsafe fn arrow_with(
+        &self,
+        address: impl FnOnce(&N::Item) -> *const N::Item,
+    ) -> *const N::Item {
+        // SAFETY: caller guarantees shared access while the address policy runs.
+        address(unsafe { self.dereference() })
+    }
     /// Returns native const operator-> identity; `unsafe { cursor.arrow() }`.
     ///
     /// # Safety
     /// Current must satisfy dereference's shared-node contract for this call.
     pub unsafe fn arrow(&self) -> *const N::Item {
         // SAFETY: caller guarantees a readable concrete node during dispatch.
-        std::ptr::from_ref(unsafe { self.dereference() })
+        unsafe { self.arrow_with(std::ptr::from_ref) }
     }
 }
 impl<N: BasicListNodeMut> BaseListBasicIterator<N, true> {
@@ -54,12 +67,25 @@ impl<N: BasicListNodeMut> BaseListBasicIterator<N, true> {
         // SAFETY: caller provides the same exclusive-node guarantee.
         unsafe { self.dereference() }
     }
+    /// Applies mutable overloaded address-of after ChangeValue; `unsafe { cursor.arrow_with(address) }`.
+    ///
+    /// # Safety
+    /// Current must satisfy dereference's live concrete-node and exclusive-borrow contract.
+    /// The policy must preserve that borrow during dispatch. Returned raw-pointer validity,
+    /// provenance and write permissions must be established separately before dereference.
+    pub unsafe fn arrow_with(
+        &mut self,
+        address: impl FnOnce(&mut N::Item) -> *mut N::Item,
+    ) -> *mut N::Item {
+        // SAFETY: caller guarantees exclusive access while the address policy runs.
+        address(unsafe { self.dereference() })
+    }
     /// Returns native writable operator-> identity; `unsafe { cursor.arrow() }`.
     ///
     /// # Safety
     /// Current must satisfy dereference's exclusive-node contract for this call.
     pub unsafe fn arrow(&mut self) -> *mut N::Item {
         // SAFETY: caller guarantees an exclusively accessible node during dispatch.
-        std::ptr::from_mut(unsafe { self.dereference() })
+        unsafe { self.arrow_with(std::ptr::from_mut) }
     }
 }
