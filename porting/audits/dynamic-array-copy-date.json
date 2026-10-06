@@ -1,0 +1,210 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "bounded_defined_domains_pending_integration",
+  "branch": "port/dynamic-copy-date",
+  "base_commit": "c341956cca261507a7d3abf636123453435530d2",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/mod.rs": "59df767a26a5ab14170b51d7b983240246705a43adb232eaa09c7c472bfbe8a9",
+    "crates/tkernel/src/ncollection/dynamic_array.rs": "4e62e110a430d32db2b6180c8bd67c17b14ff1694d0d53ac00430c0625d4997a",
+    "crates/tkernel/src/ncollection/dynamic_array/copy_date.rs": "583cf40bcaf7e5111f1bbd90cf0ebdc05c80cb9167065cedeed08f56df634513",
+    "crates/tkernel/src/ncollection/dynamic_array/copy_date/copy_bits.rs": "ce6c717b1c84b707043ce542a2d2598352f1947b2809731bc76c76aeabf47b80",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension.rs": "184373437540af883a4f3aedba88dc8619b165ce9e12d9ce3dcb5305e865da18",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/copy_policy.rs": "4cb21f873f5f28338429e0f4117dc7d005b3a40ad0e961e62319d2f5b97c1295",
+    "crates/tkernel/tests/dynamic_array_copy_date.rs": "6bc88b234c9d90b719745c3d61aebd49f58df8b6a5551a4cecbed1dfcdc3732b",
+    "crates/tkernel/tests/dynamic_array_copy_date/contracts.rs": "58abad0fc0bdfe99bb1e7cd11f2d57754f3771fa213929c73bad195e09512f54",
+    "crates/tkernel/tests/dynamic_array_copy_date/oracle.rs": "f5d23b8ffd140c8dbe635886aeb4a4f1750fed333cef66862947d9035cab7b90",
+    "tools/oracle/tkernel_dynamic_copy_date.cxx": "6ff254f430a96d99eed976657fa56cb8135d5dccb6e72e53a91d1ba255050fb4",
+    "tools/oracle/tkernel_dynamic_copy_date.expected": "4d233128b458094f5a40c3a9c7d2e4f4be6a087fd2a2a92c2b7d98352ad261ab"
+  },
+  "upstream_sha256": {
+    "NCollection/NCollection_DynamicArray.hxx": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "GTests/NCollection_DynamicArray_Test.cxx": "78f4686c5d767b7a8111b7671223983193f73302ce712f2738f13280f8730bcc"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-copy-date-focused.log.gz": "d3c38bb87f0024ff6694b5d4b86ea9862d7e492e4382d56a4cef41769cb286d7",
+    "porting/runtime-evidence/dynamic-copy-date-miri-strict.log.gz": "fc59f11212574e1b188f7689f4b4c38246232d05f14684ae1cdac1efb740cffd",
+    "porting/runtime-evidence/dynamic-copy-date-clippy.log.gz": "ae80bf7ff59ebae475de4afd0126c8d9c458523f7c3c0b4e932af859d3ed7b46",
+    "porting/runtime-evidence/dynamic-copy-date-native.log.gz": "fdba65ee8a7a85c2175c6b3ca498f47a92af7623adae9e9b5517fa5a4af39652",
+    "porting/runtime-evidence/dynamic-copy-date-oracle-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-copy-date-oracle-runtime.log.gz": "813e38618a09c7aadc74aa2044769c0bf6d3c29d06f41d9130a9ed36f96ce847",
+    "porting/runtime-evidence/dynamic-copy-date-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-copy-date-source.json.gz": "20cd7d6fc2a5ee297f9dfafcede72237f467b4b67d4a2035547cc2bed5d08fb2"
+  },
+  "source_scope": "One protected native copyDate declaration through explicit trivial/copy-constructor policies and a recoverable unpublished-block owner. Existing private Clone/Assign block-copy loop now reuses the same engine; existing public comments/docs/doctests and original test bodies retained. Global workspace closure remains coordinator integration work.",
+  "exit_codes": {
+    "focused": 0,
+    "miri-strict": 0,
+    "clippy": 0,
+    "native": 0,
+    "oracle-compile": 0,
+    "oracle-runtime": 0,
+    "fmt": 0
+  },
+  "focused_rust_passes": 127,
+  "new_test_count": 7,
+  "new_test_names": [
+    "dynamic_array_copy_date::contracts::trivial_policy_reports_storage_failure_without_allocating",
+    "dynamic_array_copy_date::contracts::failed_block_remains_owned_and_readable_after_destination_drop",
+    "dynamic_array_copy_date::contracts::retained_destination_rejects_without_changing_owned_values",
+    "dynamic_array_copy_date::contracts::rust_callback_panic_cleans_unpublished_block_as_documented",
+    "dynamic_array_copy_date::contracts::trivial_policy_does_not_call_an_observable_clone_implementation",
+    "dynamic_array_copy_date::contracts::mismatched_stride_rejects_before_allocation_or_copying",
+    "dynamic_array_copy_date::oracle::native_copy_date_rows_join_allocations_publication_and_recovery"
+  ],
+  "strict_provenance_miri_passes": 7,
+  "strict_provenance_flags": "-Zmiri-strict-provenance; no leak-ignore or permissive-provenance flags",
+  "original_native_passes": 52,
+  "original_names_joined": [
+    "NCollection_DynamicArrayTest.DefaultConstructor",
+    "NCollection_DynamicArrayTest.ResizeConstructor",
+    "NCollection_DynamicArrayTest.Append",
+    "NCollection_DynamicArrayTest.SetValue",
+    "NCollection_DynamicArrayTest.Value",
+    "NCollection_DynamicArrayTest.ChangeValue",
+    "NCollection_DynamicArrayTest.FirstLast",
+    "NCollection_DynamicArrayTest.CopyConstructor",
+    "NCollection_DynamicArrayTest.AssignmentOperator",
+    "NCollection_DynamicArrayTest.Clear",
+    "NCollection_DynamicArrayTest.Iterator",
+    "NCollection_DynamicArrayTest.STLIterators",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.Grow",
+    "NCollection_DynamicArrayTest.Move",
+    "NCollection_DynamicArrayTest.EraseLast",
+    "NCollection_DynamicArrayTest.Appended",
+    "NCollection_DynamicArrayTest.CustomAllocator",
+    "NCollection_DynamicArrayTest.SetIncrement",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTValueAccess",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues"
+  ],
+  "original_assertion_audit": {
+    "inherited_full_body_audit": "porting/audits/dynamic-array-method-tail.json",
+    "subsequent_reviews": [
+      "porting/audits/dynamic-array-iterator-tail.json",
+      "porting/audits/dynamic-array-native-insertion.json",
+      "porting/audits/dynamic-array-protected-storage.json",
+      "porting/audits/dynamic-array-raw-lifetime.json",
+      "porting/audits/dynamic-array-replacement-policy.json"
+    ],
+    "current_change": "All52 original native/Rust declarations freshly pass. No original assertions changed. Existing copy-assignment panic-prefix regression still passes; new callback-panic test verifies previous Rust RAII cleanup remains explicit rather than mislabeled native throw behavior."
+  },
+  "protected_declaration_forms_in_batch": 1,
+  "native_declaration": "NCollection_DynamicArray<T>::copyDate(const NCollection_DynamicArray&)",
+  "native_line": 1000,
+  "public_declaration_bindings": [
+    {
+      "rust": "DynamicArrayStorageExtension::copy_date_with",
+      "native_branch": "nontrivially-copyable T: explicit copy construction",
+      "scope": "Unallocated destination, equal stride, valid source initialized prefix. Allocates one complete block, constructs its live prefix, then publishes pointer/size. A modeled constructor Err returns ownership of an unpublished incomplete block without dropping its constructed values.",
+      "rows": [
+        "constructor_copied",
+        "first_failure_failed",
+        "partial_failure_failed",
+        "second_block_failure_failed"
+      ]
+    },
+    {
+      "rust": "DynamicArrayStorageExtension::copy_date_trivial",
+      "native_branch": "trivially-copyable T: memcpy",
+      "scope": "Explicit T:Copy policy uses copy_nonoverlapping plus initialized-prefix publication; never invokes Clone. Copies retained empty blocks and supports empty source.",
+      "rows": [
+        "trivial_copied",
+        "empty_retained_copied",
+        "empty_copied"
+      ]
+    },
+    {
+      "rust": "DynamicArrayCopyFailure::{failure,has_incomplete_block,incomplete_values,into_failure} + Debug/Display/Error",
+      "native_branch": "Rust recovery boundary for otherwise leaked unpublished block",
+      "scope": "Not an additional native declaration. Failure token owns real AllocVec storage through original allocator; values remain readable after destination drop. into_failure or token Drop explicitly destroys initialized values and frees that block."
+    }
+  ],
+  "engine_sharing": "DynamicArray::copy_date_blocks owns validation/allocation/complete-block publication. Constructor and bitwise policies only fill that block. Existing copy_blocks_from invokes the constructor policy with Clone and retains its documented Rust-panic cleanup. No duplicate storage engine or arbitrary Clone-to-C++-copy inference.",
+  "native_fixture": {
+    "source": "tools/oracle/tkernel_dynamic_copy_date.cxx",
+    "expected": "tools/oracle/tkernel_dynamic_copy_date.expected",
+    "row_count": 17,
+    "exact_runtime_join_count": 17,
+    "row_keys": [
+      "constructor_copied",
+      "constructor_cleared",
+      "first_failure_failed",
+      "first_failure_recovered",
+      "first_failure_cleared",
+      "partial_failure_failed",
+      "partial_failure_recovered",
+      "partial_failure_cleared",
+      "second_block_failure_failed",
+      "second_block_failure_recovered",
+      "second_block_failure_cleared",
+      "trivial_copied",
+      "trivial_cleared",
+      "empty_retained_copied",
+      "empty_retained_cleared",
+      "empty_copied",
+      "empty_cleared"
+    ],
+    "rust_test": "dynamic_array_copy_date::oracle::native_copy_date_rows_join_allocations_publication_and_recovery",
+    "joined_columns": "Actual used size, registered block count, element allocator allocation/free counts, copy attempts, completed destructions, incomplete constructed-prefix length, registered values, unpublished values.",
+    "allocation_observation": "Native custom allocator counts actual AllocateOptimal/Free calls. Rust accumulating allocator live allocation deltas are observed at separate allocation-only and free-only phases. No expected allocation counters are injected; allocator payload byte sizes/layouts are outside this join.",
+    "native_failure_recovery": "Native copy constructor counts successful constructions; after throw the observing allocator retains its most recent raw allocation. Fixture inspects only constructed prefix count succeeded-target.Size, destroys that prefix, and frees the unregistered allocation explicitly. It does not pretend native copyDate performs cleanup.",
+    "rust_failure_recovery": "Returned token owns the actual unpublished partial block; no prefix Drop or free occurs before failed-state observation. into_failure then performs the same explicit prefix destruction/free as the native observer. Completed registered blocks remain in the target until Clear."
+  },
+  "additional_contracts": [
+    "Observable custom Clone is bypassed by trivial policy; existing DynamicArray::clone still invokes Clone.",
+    "Domain failures reject retained destination or mismatched stride before allocation/copying; destination values remain unchanged.",
+    "Failure token survives destination Drop, retains readable prefix and original allocator, and reclaims exactly that block on Drop.",
+    "Rust callback panic reclaims the incomplete block immediately, matching prior Rust behavior; modeled native constructor errors use Result and retained ownership.",
+    "Failure metadata exposes native-style Failure details plus Debug/Display/Error source; validation failures carry no incomplete block."
+  ],
+  "known_limits": [
+    "Native leaks the unpublished allocation on constructor throw. Rust returns a reachable recovery owner and ordinary token Drop cleans it. Parity covers the pre-cleanup observable state and explicit matched recovery; indefinite leaks/native exception propagation are not claimed.",
+    "Constructor errors must be returned as Err to request the native failure policy. Rust panics use RAII cleanup and are deliberately outside that policy. Generic Clone is not asserted to reproduce arbitrary C++ copy-constructor side effects.",
+    "Destination must be unallocated and source/destination stride equal, with every logical source value physically initialized. Other native metadata-only or retained-destination cases are not credited.",
+    "Allocation failure, pointer-vector allocation failure, address-dependent placement constructors, implicit C++ relocation hooks, and destructor-unwind/noexcept termination behavior remain outside the modeled domain.",
+    "Bitwise policy is explicitly selected using Rust Copy for soundness; Rust traits do not automatically infer OCCT C++ traits. No ZST/native sizeof-layout equivalence or global allocator byte-for-byte ABI claim.",
+    "The recovery Failure detail is boxed to keep Result small; this Rust metadata allocation is separate from native element-block allocation counts.",
+    "Protected retained-block copyParameters remains a bounded zero-block adapter pending compatible allocator/stride/lifetime policy work.",
+    "The17 rows are supplemental native behavior probes. All52 original mappings are rerun, not newly credited; no global coverage inflation."
+  ],
+  "validation_notes": {
+    "format": "cargo fmt --all -- --check",
+    "clippy": "cargo clippy -p rustycad-tkernel --lib --test dynamic_array_copy_date -- -D warnings",
+    "new_rust_function_max_lines": 20,
+    "new_files_under_500_lines": true,
+    "miri_dependency_warnings": "Existing nightly unstable-name-collision warnings in dependency crates remain in exact log; scoped stable Clippy exits0 with warnings denied."
+  },
+  "global_coverage_credit": 0
+}

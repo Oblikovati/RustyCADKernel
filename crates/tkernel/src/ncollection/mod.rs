@@ -48,7 +48,8 @@ pub use allocator::{
 };
 mod dynamic_array;
 pub use dynamic_array::{
-    DynamicArray, DynamicArrayIterator, DynamicArrayStorageExtension, DynamicCursor,
+    DynamicArray, DynamicArrayCopyFailure, DynamicArrayIterator, DynamicArrayStorageExtension,
+    DynamicCursor,
 };
 
 mod buffer;

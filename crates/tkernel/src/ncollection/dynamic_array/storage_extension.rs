@@ -2,6 +2,8 @@
 use super::{ArrayError, DynamicArray, emplacement::forget_block_values_after};
 use crate::standard::Failure;
 
+mod copy_policy;
+
 #[allow(unsafe_code)]
 mod raw_lifetime;
 #[allow(unsafe_code)]
