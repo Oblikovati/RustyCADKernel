@@ -1,0 +1,91 @@
+{
+  "schema": "rustycad.exact-partial-binding-transaction.v1",
+  "base_revision": "a006feb608b0983ed436d9e2e60b01befeb25c20",
+  "status": "partial_bindings_pending_root_integration",
+  "scope": "Only NCollection_BaseList ledger rows; 13 typed facade implemented claims corrected to exact partial base bodies and 50 previously unclaimed rows linked. Original test ledger untouched.",
+  "partial_rows_added": 50,
+  "implemented_rows_corrected_to_partial": 13,
+  "implemented_api_credit_delta": -13,
+  "legacy_test_credit_delta": 0,
+  "fresh_compiler_capture": true,
+  "exact_public_rust_bodies": 46,
+  "all_63_previous_body_contexts_unchanged": true,
+  "non_base_api_rows_unchanged": true,
+  "original_test_rows_unchanged": true,
+  "withheld_same_path_specializations": [
+    "15803841d92793dd39bc4e491bc077da0cd6f3127ed49f542f48697b56fcc50c",
+    "4574f3bb0db681b3e6fc55ac59c57dabcccc6d8116d4494711a968bca546b348",
+    "59cb15a8219446704807d0346d3ead20928e387d5882d6e66af4a59c87b2cc12",
+    "6bba1261e92c707ce013b58fdb79bcac4b4ed4736e4d1d443aa695d0f31ebb19",
+    "8b82260c63f3a5ebe635a605f9824b3ca90471754328a1d16dd958826ffea5a5",
+    "faf890122c909f038334cfd38ea2c8adc2170ec87252fa68d55029e1b253c2c5"
+  ],
+  "withheld_conditional_accessors": [
+    "289f658f218495d454b1db946328afa7a61ca601bb0660eee6c688f35a5951f9",
+    "5a33d8ca8c4da37c5c05f337504288ded278599b43c12902d1a3f35501572fc8",
+    "aecda403afcade696df7e6071399e5174fc02ce1bfcd31e5f48c9a897709ab7f"
+  ],
+  "historical_audit": "porting/audits/base-list-api-reconciliation.json",
+  "rustc": "nightly-2026-09-25",
+  "validation_command": "PYTHONPATH=tools python3 tools/verify_base_list_bindings.py",
+  "test_command": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p test_api_binding_replay.py -v",
+  "source_body_sha256": {
+    "crates/tkernel/src/ncollection/base_list/cursor.rs": "aa8962ec46d3886aab3357e81fc7b00510d7f45d49dbdd5fc5ce36c7058d54b9",
+    "crates/tkernel/src/ncollection/base_list/basic_iterator.rs": "6ff70f12ab5a6c54472d0349e7177aee6efd96a8796e7713425b1cc1b0eee1af",
+    "crates/tkernel/src/ncollection/base_list.rs": "391b5f76f2ebe9ac1851180e2744efcf68d787aa55d269f4cd4f0fd0efd409a1",
+    "crates/tkernel/src/ncollection/base_list/splicing.rs": "e6cd3c7f321e77c55020bba29759c98caa6ebe23733a417f704829252c68ae46",
+    "crates/tkernel/src/ncollection/base_list/editing.rs": "0d9f09eeabccad4c528ffd1a69979b2ba3dad2f2139719bbd5abca674a64ec26",
+    "crates/tkernel/src/ncollection/base_list/basic_iterator/access.rs": "aef1353547a05b18f546d8ecfa5b99ae126dbe10cb6bf1819b26be272c165fbd"
+  },
+  "api_parity_complete": false,
+  "bindings_path": "porting/audits/base-list-ledger-records.jsonl",
+  "bindings_sha256": "3c9d95dd1986a462ac07b203c7fbc9a1318a5cbc87cccdf4fefe94a5978788e8",
+  "rust_inventory_path": "porting/runtime-evidence/base-list-ledger-normalized.json.gz",
+  "rust_inventory_sha256": "cf9d75cbc6b1d3a62d8c84f7a5d8ea519873f55eab973bdbfa7622cde9a4ae35",
+  "rust_raw_path": "porting/runtime-evidence/base-list-ledger-rustdoc.json.gz",
+  "rust_raw_sha256": "3cabe3f62cdba91471080c9dcd589baee068af7ef06fc61ec8041d5aec88811e",
+  "compiler_log_path": "porting/runtime-evidence/base-list-ledger-rustdoc.log.gz",
+  "compiler_log_sha256": "56138d01dbbe8b6d3dd467968fe63c8701ce1f48b8e52fdb7a34e877b88e9986",
+  "checks": {
+    "unit_and_negative_tests_passed": 16,
+    "standalone_replay_exit_code": 0,
+    "standalone_replay_result": {
+      "verified_partial_bindings": 63,
+      "implemented_credit_added": 0
+    },
+    "fresh_rustdoc_exit_code": 0,
+    "format_exit_code": 0,
+    "scope_transaction_verified": true,
+    "production_rust_changed": false,
+    "original_test_rows_unchanged": true
+  },
+  "validation_artifacts": {
+    "tests": {
+      "path": "porting/runtime-evidence/base-list-ledger-tests.log.gz",
+      "sha256": "23c7d6616a3b14e88344ba17e8204b07f8ff567d74f144e524c82c551a1018a2",
+      "uncompressed_sha256": "32cc12c9c0971ff0e45058c6df5c9dc4aadb648ec6d7c383d0c47777ad192023"
+    },
+    "replay": {
+      "path": "porting/runtime-evidence/base-list-ledger-replay.log.gz",
+      "sha256": "3b212ced1dc119e611ca70d25ecc839b4d0a72ba902f155db41889deb51b7356",
+      "uncompressed_sha256": "ccbf41409d5848ab1e552339295211bf1d3d77e265abe4e4546ec96a1b01895a"
+    },
+    "format": {
+      "path": "porting/runtime-evidence/base-list-ledger-format.log.gz",
+      "sha256": "f234f7d28eef01ce3238c42abc8506aea2de6baa74c7fcbba8260e9a2a902db0",
+      "uncompressed_sha256": "eb509511f07d955385d4faa9c86dcc3bc364bd0e324d4a23de291c25f28e544d"
+    }
+  },
+  "validator_sha256": {
+    "tools/api_binding_replay.py": "8730756dc873c3f78340e4972bbb87bb07117b750013ab3f83c723643b14a4d0",
+    "tools/verify_base_list_bindings.py": "43ea8658a816183cd99dac08cc99a8a19851b5b4aeb0d78dbbe7c9bf3d525ebf",
+    "tools/tests/test_api_binding_replay.py": "5edbcda035b74941de7c981eef8084f12851b3d7545ad87045f9d4caa4b25fe8"
+  },
+  "capture_command": "CARGO_TARGET_DIR=/tmp/rustycad-base-api-check cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib -- -Z unstable-options --output-format json --document-private-items",
+  "limitations": [
+    "Compiler bindings and existing scoped fixture evidence remain partial; this transaction grants no full behavioral, allocation, destructor, alias, or configuration closure.",
+    "Standard-library default operator!= bodies remain outside the selected project body proof.",
+    "Fresh capture is TKernel only. The published whole-workspace API inventory is not refreshed by this branch.",
+    "Only source bodies and exact impl contexts involved in these bindings are checked on replay; raw compiler artifacts retain their capture revision."
+  ]
+}
