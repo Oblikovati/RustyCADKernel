@@ -1,9 +1,14 @@
 //! NCollection_IncAllocator's block bookkeeping: sorted allocation heap, used heap, growth levels.
 //!
-//! Linked lists of `IBlock*` become lists of block indices; each block's payload is one
-//! `raw_heap` allocation, exactly as the native block is one `Standard::AllocateOptimal` call.
-use super::raw_heap::{MALLOC_ALIGNMENT, heap_allocate, heap_free};
+//! Actual stable `IBlock` headers and intrusive links are the sole block topology.
+//! Each header and its payload share one `raw_heap` allocation, as native `AllocateOptimal`.
+use super::raw_heap::MALLOC_ALIGNMENT;
+mod block;
+mod operations;
 use crate::standard::Failure;
+use block::IncBlockLink;
+pub use block::{IncAllocatorBlock, IncBlockObservation};
+pub use operations::IncAllocatorObservation;
 use std::ptr::NonNull;
 
 /// `NCollection_IncAllocator::THE_DEFAULT_BLOCK_SIZE` (12 KB).
@@ -83,23 +88,14 @@ impl IncBlock {
     }
 }
 
-/// One block: payload, bump state and the two intrusive list links.
-struct BlockSlot {
-    payload: NonNull<u8>,
-    state: IncBlock,
-    next_block: Option<usize>,
-    next_ordered_block: Option<usize>,
-}
-
 /// The allocator state behind `NCollection_IncAllocator`.
 pub(super) struct IncEngine {
     block_size: u32,
     block_count: u32,
     thread_safe_policy: bool,
-    blocks: Vec<BlockSlot>,
-    allocation_heap: Option<usize>,
-    used_heap: Option<usize>,
-    ordered_blocks: Option<usize>,
+    allocation_heap: Option<IncBlockLink>,
+    used_heap: Option<IncBlockLink>,
+    ordered_blocks: Option<IncBlockLink>,
     /// Rust-only count of RAII/typed allocations still borrowed; guards `reset`.
     live: usize,
 }
@@ -119,7 +115,6 @@ impl IncEngine {
             block_size: size as u32, // static_cast<unsigned>, truncating like the native member
             block_count: 0,
             thread_safe_policy: false,
-            blocks: Vec::new(),
             allocation_heap: None,
             used_heap: None,
             ordered_blocks: None,
@@ -137,7 +132,7 @@ impl IncEngine {
         if self.thread_safe_policy
             && let Some(head) = self.available_head(size)
         {
-            return Some(self.bump_block(head, size));
+            return Some(head.bump(size));
         }
         self.allocate_slow(size)
     }
@@ -148,28 +143,19 @@ impl IncEngine {
             Some(head) => head,
             None => self.push_block(size)?,
         };
-        let address = self.bump_block(block, size);
+        let address = block.bump(size);
         self.reorder(block);
         Some(address)
     }
 
-    fn available_head(&self, size: usize) -> Option<usize> {
+    fn available_head(&self, size: usize) -> Option<IncBlockLink> {
         self.allocation_heap
-            .filter(|&head| self.blocks[head].state.available_size >= size)
+            .filter(|&head| head.available() >= size)
     }
 
     /// Protected increaseBlockSize updates the real capacity used for the next allocated block.
     pub(super) fn increase_block_size(&mut self) {
         self.block_size = IncBlockSizeLevel::of(self.block_size).grow(self.block_size);
-    }
-
-    fn bump_block(&mut self, block: usize, size: usize) -> NonNull<u8> {
-        let slot = &mut self.blocks[block];
-        // SAFETY: cursor + size is bounded by this block's available-size check.
-        let address = unsafe { slot.payload.add(slot.state.cursor) };
-        slot.state.cursor += size;
-        slot.state.available_size -= size;
-        address
     }
 
     /// Allocation honouring a Rust layout alignment (typed allocations only).
@@ -192,68 +178,66 @@ impl IncEngine {
         let Some(head) = self.allocation_heap else {
             return fresh_padding;
         };
-        let slot = &self.blocks[head];
-        let padding = slot
-            .payload
-            .as_ptr()
-            .wrapping_add(slot.state.cursor)
-            .align_offset(align);
+        let padding = head.current().as_ptr().align_offset(align);
         match size.checked_add(padding) {
-            Some(total) if total <= slot.state.available_size => padding,
+            Some(total) if total <= head.available() => padding,
             _ => fresh_padding,
         }
     }
 
     /// Allocates a new block from the heap and makes it the allocation-heap head.
-    fn push_block(&mut self, size: usize) -> Option<usize> {
+    fn push_block(&mut self, size: usize) -> Option<IncBlockLink> {
+        // The source seam also proves native state retained when the underlying allocation fails.
+        self.push_block_with(size, IncBlockLink::allocate)
+    }
+
+    fn push_block_with(
+        &mut self,
+        size: usize,
+        allocate: impl FnOnce(usize) -> Option<IncBlockLink>,
+    ) -> Option<IncBlockLink> {
         let requested = u32::try_from(size).ok()?; // native truncation would corrupt the block
         self.block_count = self.block_count.wrapping_add(1);
         if self.block_count.is_multiple_of(5) {
             self.increase_block_size();
         }
         self.block_size = self.block_size.max(requested);
-        let payload_size = self.block_size as usize;
-        let payload = heap_allocate(payload_size, MALLOC_ALIGNMENT, true)?;
-        self.blocks.push(BlockSlot {
-            payload,
-            state: IncBlock::new(payload_size),
-            next_block: self.allocation_heap,
-            next_ordered_block: self.ordered_blocks,
-        });
-        let index = self.blocks.len() - 1;
-        self.ordered_blocks = Some(index);
-        self.allocation_heap = Some(index);
-        Some(index)
+        let block = allocate(self.block_size as usize)?;
+        block.set_next(self.allocation_heap);
+        block.set_ordered_next(self.ordered_blocks);
+        self.ordered_blocks = Some(block);
+        self.allocation_heap = Some(block);
+        Some(block)
     }
 
     /// Keeps the allocation heap sorted by decreasing space; nearly full blocks become used.
-    fn reorder(&mut self, block: usize) {
-        if self.blocks[block].state.available_size < USED_BLOCK_THRESHOLD {
-            self.allocation_heap = self.blocks[block].next_block;
-            self.blocks[block].next_block = self.used_heap;
+    fn reorder(&mut self, block: IncBlockLink) {
+        if block.available() < USED_BLOCK_THRESHOLD {
+            self.allocation_heap = block.next();
+            block.set_next(self.used_heap);
             self.used_heap = Some(block);
             return;
         }
         let Some(after) = self.insertion_point(block) else {
             return;
         };
-        let next = self.blocks[after].next_block;
-        self.blocks[after].next_block = Some(block);
-        self.allocation_heap = self.blocks[block].next_block;
-        self.blocks[block].next_block = next;
+        let next = after.next();
+        after.set_next(Some(block));
+        self.allocation_heap = block.next();
+        block.set_next(next);
     }
 
     /// The last heap block with strictly more space than `block`, searching after it.
-    fn insertion_point(&self, block: usize) -> Option<usize> {
-        let available = self.blocks[block].state.available_size;
-        let mut iterator = self.blocks[block].next_block;
+    fn insertion_point(&self, block: IncBlockLink) -> Option<IncBlockLink> {
+        let available = block.available();
+        let mut iterator = block.next();
         let mut after = None;
         while let Some(index) = iterator {
-            if self.blocks[index].state.available_size <= available {
+            if index.available() <= available {
                 break;
             }
             after = Some(index);
-            iterator = self.blocks[index].next_block;
+            iterator = index.next();
         }
         after
     }
@@ -262,16 +246,7 @@ impl IncEngine {
     ///
     /// Rust refuses while RAII or typed allocations are alive: rewinding would alias them.
     pub(super) fn reset(&mut self, release: bool) -> Result<(), Failure> {
-        if self.live != 0 {
-            return Err(Failure::with_type(
-                "Standard_ProgramError",
-                &format!(
-                    "{} live allocations: expected 0 before NCollection_IncAllocator::Reset",
-                    self.live
-                ),
-                "",
-            ));
-        }
+        self.require_no_live("Reset")?;
         if release {
             self.clean();
             return Ok(());
@@ -284,11 +259,9 @@ impl IncEngine {
     fn rewind(&mut self) {
         let mut iterator = self.ordered_blocks;
         while let Some(index) = iterator {
-            let slot = &mut self.blocks[index];
-            iterator = slot.next_ordered_block;
-            slot.next_block = iterator;
-            slot.state.available_size += slot.state.cursor;
-            slot.state.cursor = 0;
+            iterator = index.ordered_next();
+            index.set_next(iterator);
+            index.reset();
         }
         self.allocation_heap = self.ordered_blocks;
         self.used_heap = None;
@@ -297,9 +270,11 @@ impl IncEngine {
     /// Native `clean()`: frees every block and, as upstream does, forgets the constructor's
     /// block size in favour of the 12 KB default.
     fn clean(&mut self) {
-        for slot in self.blocks.drain(..) {
-            // SAFETY: each payload came from heap_allocate and is freed exactly once here.
-            unsafe { heap_free(slot.payload) };
+        let mut iterator = self.ordered_blocks;
+        while let Some(block) = iterator {
+            iterator = block.ordered_next();
+            // SAFETY: no payload owner remains; ordered links visit each allocation exactly once.
+            unsafe { block.release() };
         }
         self.ordered_blocks = None;
         self.allocation_heap = None;
@@ -331,3 +306,6 @@ impl Drop for IncEngine {
 #[cfg(test)]
 #[path = "incremental/protected_tests.rs"]
 mod protected_tests;
+
+#[cfg(test)]
+mod failure_tests;

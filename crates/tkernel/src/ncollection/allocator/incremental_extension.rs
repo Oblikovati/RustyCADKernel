@@ -1,5 +1,5 @@
 //! Protected incremental operations borrow the canonical engine under its existing mutex.
-use super::{AllocatorKind, BaseAllocator, IncEngine, locked};
+use super::{AllocatorKind, BaseAllocator, IncAllocatorObservation, IncEngine, locked};
 use crate::standard::Failure;
 use std::{ptr::NonNull, sync::MutexGuard};
 
@@ -25,6 +25,27 @@ impl IncAllocatorExtension<'_> {
     /// Advances the real next-block capacity using the native growth level; `extension.increase_block_size()`.
     pub fn increase_block_size(&mut self) {
         self.engine.increase_block_size();
+    }
+    /// Copies actual header topology under this guard; `let state = extension.observation();`.
+    /// Pointer fields become numeric identities, and no writable native field escapes.
+    pub fn observation(&self) -> IncAllocatorObservation {
+        // Copy only while the guard excludes concurrent topology mutation.
+        self.engine.observation()
+    }
+
+    /// Rewinds one validated native block without changing its list membership.
+    /// `extension.reset_block(extension.observation().ordered_blocks)?;`
+    /// Rust rejects all live typed/RAII leases; addresses outside the current ownership chain are also rejected.
+    pub fn reset_block(&mut self, address: usize) -> Result<(), Failure> {
+        // Membership and live leases are checked under this same guard.
+        self.engine.reset_block(address)
+    }
+
+    /// Releases all actual blocks and restores native default capacity; `extension.clean()?;`.
+    /// The native thread policy survives. Rust rejects this operation while safe owners remain.
+    pub fn clean(&mut self) -> Result<(), Failure> {
+        // Keep lease validation and deallocation atomic with respect to other handles.
+        self.engine.clean_checked()
     }
 }
 impl BaseAllocator {
