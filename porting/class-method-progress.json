@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Native foundation tail integrated and validated on main; full parity remains incomplete.",
+  "integration_status": "Foundation topology checkpoint validated on main; root arrow/provenance changes await final commit.",
   "classes": [
     {
       "batch_order": 1,
@@ -164,8 +164,8 @@
   "published_api_inventory_credit_added": 0,
   "original_test_mapping_credit_added": 0,
   "full_workspace_runtime": {
-    "receipt": "porting/audits/foundation-native-tail-checkpoint.json",
-    "passed": 14086,
+    "receipt": "porting/audits/foundation-topology-checkpoint.json",
+    "passed": 14125,
     "failed": 0,
     "ignored": 70,
     "test_threads": 1,
@@ -182,5 +182,52 @@
     "workspace_ignored": 70,
     "new_miri_passed": 42,
     "joined_original_runtime_cases": 1066
+  },
+  "current_draft_checkpoint": {
+    "receipt": "porting/audits/foundation-topology-checkpoint.json",
+    "sha256": "162e91f190703132372055062761c0961b3e9f66a39921c824d03ce87b8b5bfd",
+    "runtime": {
+      "workspace_passed": 14125,
+      "workspace_failed": 0,
+      "workspace_ignored": 70,
+      "workspace_groups": 1296,
+      "miri_integration_passes": 89,
+      "new_miri_integration_passes": 39,
+      "strict_provenance_miri_passes": 13,
+      "source_inputs": 9571,
+      "source_inputs_after_run_identical": true,
+      "strict_clippy_exit": 0,
+      "strict_clippy_scope": "workspace --all-targets",
+      "format_exit": 0,
+      "compiler_exit": 0,
+      "joined_original_runtime_cases": 1066,
+      "new_original_runtime_joins": 0
+    },
+    "scoped_method_receipts": [
+      {
+        "path": "porting/audits/dynamic-array-iterator-tail.json",
+        "sha256": "bb1896fd82ba3b781802260141095b09d8771c1f5eb0edc22c6f0be487f2d519"
+      },
+      {
+        "path": "porting/audits/sparse-basic-iterator-contracts.json",
+        "sha256": "8ff5d761970d3d70d1c6b49e8acba24b3e35b3e6d959dc7e6681a0997095712e"
+      },
+      {
+        "path": "porting/audits/sequence-native-topology-methods.json",
+        "sha256": "639962bc3de810ed67b8581ea3102ee2490ef99a5c37040260d09d00ab195948"
+      },
+      {
+        "path": "porting/audits/dynamic-array-native-insertion.json",
+        "sha256": "61d7557edc0dd056d6e3110abeae1dffb336161903bc57d8f51ce123c1cf3d89"
+      },
+      {
+        "path": "porting/audits/forward-native-arrow-contracts.json",
+        "sha256": "c94af1735de5ba96e581ac0672dd9cb378e4cc9e47a5308b35c2450f3bf9096c"
+      },
+      {
+        "path": "porting/audits/accumulating-strict-provenance-contracts.json",
+        "sha256": "f57d8a0d71c4f08b96e30840758618108088970de780eb1e92e749c80fd7ed73"
+      }
+    ]
   }
 }

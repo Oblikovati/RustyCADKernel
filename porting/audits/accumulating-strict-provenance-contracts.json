@@ -1,0 +1,30 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "current_frozen_runtime_receipt": "porting/audits/foundation-topology-checkpoint.json",
+  "api_parity_complete": false,
+  "published_api_inventory_credit_added": 0,
+  "original_test_mapping_credit_added": 0,
+  "scope": "Accumulating allocator numeric block descriptors retain provenance through owning payload pointers",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/allocator/accumulating.rs": "bc7622139659ee3dd2f04df93536a3845f50b43427451cf859023ce22d34c48a",
+    "crates/tkernel/src/ncollection/allocator/block.rs": "f854a0644eb949b0d80e654a3be5da653bee37573091578580dee1e6e3645c8c",
+    "crates/tkernel/tests/accumulating_strict_provenance_contracts.rs": "f3f92b5303f0b5ff2b400ae5fb5255d3f421d8bcf0863ea711480c5ae947e518"
+  },
+  "runtime": {
+    "new_contract_tests": 2,
+    "strict_provenance_miri_tests": 2,
+    "related_dynamic_insertion_strict_miri_tests": 9
+  },
+  "artifacts": {
+    "strict-miri": {
+      "path": "porting/runtime-evidence/foundation-topology-strict-miri.gz",
+      "sha256": "205f2f0325c3f095e47216daecf4f72587519306307b650c1efacefeab57caf6"
+    }
+  },
+  "behavior": "Descriptors create non-dereferenceable numeric pointers; allocation restores owned payload provenance with with_addr. Defined native allocation behavior is unchanged.",
+  "remaining_gaps": [
+    "Synthetic wrapping addresses are a Rust descriptor extension, not evidence of defined native pointer arithmetic.",
+    "This receipt proves Rust memory-model behavior only and adds no native API or original-test mapping credit."
+  ]
+}

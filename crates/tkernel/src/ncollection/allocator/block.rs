@@ -43,12 +43,13 @@ impl AccBlock {
     pub fn set_free_size(&mut self, size: usize) {
         let cursor = self.address.wrapping_add(size);
         // The shared AlignedPtr constructor performs native SetFreeSize's four-byte rounding.
-        self.alloc_start = AccAlignedPtr::from_ptr(cursor as *mut u8);
+        // This descriptor carries numeric identities; only the owning slot can restore provenance.
+        self.alloc_start = AccAlignedPtr::from_ptr(std::ptr::without_provenance_mut(cursor));
     }
 
     /// Returns bytes between the block address and cursor; `AccBlock::new(0x1000, 16).free_size()`.
     pub fn free_size(&self) -> usize {
-        let cursor = self.alloc_start.as_ptr() as usize;
+        let cursor = self.alloc_start.as_ptr().addr();
         cursor.wrapping_sub(self.address)
     }
 

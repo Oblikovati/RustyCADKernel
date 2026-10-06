@@ -35,6 +35,24 @@ impl<I: ForwardHost> ForwardRangeIter<'_, I> {
         self.host.read(I::Accessors::read)
     }
 
+    /// Returns native by-value operator-> storage without checking More.
+    /// Example: `let proxy = iter.arrow_value(); assert_eq!(*proxy, expected)`.
+    pub fn arrow_value<T>(&self) -> ForwardArrowProxy<T>
+    where
+        I::Accessors: SelectAccessor<I, Item = T, Value = T>,
+    {
+        ForwardArrowProxy::new(self.dereference())
+    }
+
+    /// Preserves native borrowed operator-> identity without checking More.
+    /// Example: `std::ptr::eq(iter.arrow_reference(), &expected)`.
+    pub fn arrow_reference<'a, T: 'a>(&self) -> *const T
+    where
+        I::Accessors: SelectAccessor<I, Item = &'a T>,
+    {
+        std::ptr::from_ref(self.dereference())
+    }
+
     /// Captures the native value then calls Next, without consulting More.
     /// Example: `let old = iter.postfix_increment(); assert_eq!(*old, expected)`.
     /// The existing post_increment method remains the checked Rust adapter.

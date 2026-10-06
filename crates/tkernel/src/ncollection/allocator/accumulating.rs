@@ -55,7 +55,7 @@ struct AccBlockSlot {
 
 impl AccBlockSlot {
     fn new(address: NonNull<u8>, size: usize, prev_block: Option<usize>) -> Self {
-        let descriptor = AccBlock::with_previous(address.as_ptr() as usize, size, prev_block);
+        let descriptor = AccBlock::with_previous(address.as_ptr().addr(), size, prev_block);
         Self {
             payload: address,
             descriptor,
@@ -82,7 +82,7 @@ impl AccBlockSlot {
         let cursor = self.descriptor.allocate(AccAlignedSize::new(size));
         // SAFETY: selection guarantees the descriptor cursor stays within the owned block; the
         // slot's payload pointer supplies allocation provenance for the native numeric address.
-        NonNull::new(self.payload.as_ptr().with_addr(cursor.as_ptr() as usize))
+        NonNull::new(self.payload.as_ptr().with_addr(cursor.as_ptr().addr()))
     }
 }
 
