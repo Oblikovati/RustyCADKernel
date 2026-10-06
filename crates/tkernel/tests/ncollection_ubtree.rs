@@ -18,7 +18,7 @@ fn NCollection_UBTreeTest__EmptyTree() {
 fn NCollection_UBTreeTest__AddAndSelect_SingleObject() {
     let mut aTree: UBTree<i32, TestBnd1D> = UBTree::default();
 
-    aTree.add(1, TestBnd1D::new(0.0, 5.0));
+    aTree.add_ref(&1, &TestBnd1D::new(0.0, 5.0));
     assert!(!aTree.is_empty());
 
     // Query overlapping
@@ -39,10 +39,10 @@ fn NCollection_UBTreeTest__AddAndSelect_MultipleObjects() {
     let mut aTree: UBTree<i32, TestBnd1D> = UBTree::default();
 
     // Add intervals: [0,2], [3,5], [4,6], [8,10]
-    aTree.add(1, TestBnd1D::new(0.0, 2.0));
-    aTree.add(2, TestBnd1D::new(3.0, 5.0));
-    aTree.add(3, TestBnd1D::new(4.0, 6.0));
-    aTree.add(4, TestBnd1D::new(8.0, 10.0));
+    aTree.add_ref(&1, &TestBnd1D::new(0.0, 2.0));
+    aTree.add_ref(&2, &TestBnd1D::new(3.0, 5.0));
+    aTree.add_ref(&3, &TestBnd1D::new(4.0, 6.0));
+    aTree.add_ref(&4, &TestBnd1D::new(8.0, 10.0));
 
     // Query [3.5, 5.5] should overlap with objects 2 and 3
     let mut aSelector = TestSelector1D::new(TestBnd1D::new(3.5, 5.5));
@@ -66,7 +66,7 @@ fn NCollection_UBTreeTest__StopSelector() {
     let mut aTree: UBTree<i32, TestBnd1D> = UBTree::default();
 
     for i in 0..10 {
-        aTree.add(i, TestBnd1D::new(f64::from(i), f64::from(i + 1)));
+        aTree.add_ref(&i, &TestBnd1D::new(f64::from(i), f64::from(i + 1)));
     }
 
     // Query overlaps all, but stop after 3
@@ -80,8 +80,8 @@ fn NCollection_UBTreeTest__StopSelector() {
 fn NCollection_UBTreeTest__Clear() {
     let mut aTree: UBTree<i32, TestBnd1D> = UBTree::default();
 
-    aTree.add(1, TestBnd1D::new(0.0, 5.0));
-    aTree.add(2, TestBnd1D::new(3.0, 7.0));
+    aTree.add_ref(&1, &TestBnd1D::new(0.0, 5.0));
+    aTree.add_ref(&2, &TestBnd1D::new(3.0, 7.0));
 
     assert!(!aTree.is_empty());
 
@@ -98,7 +98,7 @@ fn NCollection_UBTreeTest__ManyObjects() {
 
     let n: i32 = 100;
     for i in 0..n {
-        aTree.add(i, TestBnd1D::new(f64::from(i), f64::from(i + 1)));
+        aTree.add_ref(&i, &TestBnd1D::new(f64::from(i), f64::from(i + 1)));
     }
 
     // Query that overlaps all
@@ -117,7 +117,7 @@ fn NCollection_UBTreeTest__DeepUnbalancedTree() {
     let n: i32 = 200; // well over the initial stack size of 64
     for i in 0..n {
         let aLo: f64 = f64::from(i) * 10.0;
-        aTree.add(i, TestBnd1D::new(aLo, aLo + 1.0));
+        aTree.add_ref(&i, &TestBnd1D::new(aLo, aLo + 1.0));
     }
 
     // Select all -- should find all n objects despite deep recursion
@@ -129,9 +129,9 @@ fn NCollection_UBTreeTest__DeepUnbalancedTree() {
 #[test]
 fn NCollection_UBTreeTest__MoveConstructor() {
     let mut aSrc: UBTree<i32, TestBnd1D> = UBTree::default();
-    aSrc.add(1, TestBnd1D::new(0.0, 2.0));
-    aSrc.add(2, TestBnd1D::new(3.0, 5.0));
-    aSrc.add(3, TestBnd1D::new(4.0, 6.0));
+    aSrc.add_ref(&1, &TestBnd1D::new(0.0, 2.0));
+    aSrc.add_ref(&2, &TestBnd1D::new(3.0, 5.0));
+    aSrc.add_ref(&3, &TestBnd1D::new(4.0, 6.0));
 
     let aDst = UBTree::move_from(&mut aSrc);
 
@@ -148,11 +148,11 @@ fn NCollection_UBTreeTest__MoveConstructor() {
 #[test]
 fn NCollection_UBTreeTest__MoveAssignment() {
     let mut aSrc: UBTree<i32, TestBnd1D> = UBTree::default();
-    aSrc.add(1, TestBnd1D::new(0.0, 2.0));
-    aSrc.add(2, TestBnd1D::new(3.0, 5.0));
+    aSrc.add_ref(&1, &TestBnd1D::new(0.0, 2.0));
+    aSrc.add_ref(&2, &TestBnd1D::new(3.0, 5.0));
 
     let mut aDst: UBTree<i32, TestBnd1D> = UBTree::default();
-    aDst.add(10, TestBnd1D::new(100.0, 200.0));
+    aDst.add_ref(&10, &TestBnd1D::new(100.0, 200.0));
 
     aDst.move_assign(&mut aSrc);
 

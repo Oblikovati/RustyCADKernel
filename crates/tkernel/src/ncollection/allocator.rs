@@ -29,7 +29,8 @@ mod incremental;
 mod incremental_extension;
 mod keys;
 mod owned;
-mod raw_heap;
+// Keep existing allocator callers on the shared Standard backend without retaining handles.
+use crate::standard::memory::raw_heap;
 mod typed_heap;
 use accumulating::AccEngine;
 pub use accumulating::{

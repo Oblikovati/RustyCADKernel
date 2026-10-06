@@ -1,7 +1,10 @@
 //! Rust-only open-trait unwind safety; OCCT's integral template arguments cannot panic.
 use super::{PackedInteger, PackedMap, PackedWord, pointers};
 use std::cell::Cell;
-thread_local! { static FAIL_WORD_READ: Cell<bool> = const { Cell::new(false) }; }
+thread_local! {
+    static FAIL_WORD_READ: Cell<bool> = const { Cell::new(false) };
+    static READS_BEFORE_FAILURE: Cell<Option<usize>> = const { Cell::new(None) };
+}
 #[derive(Clone, Copy, Default)]
 struct UnwindWord(u32);
 impl PackedWord for UnwindWord {
@@ -11,6 +14,7 @@ impl PackedWord for UnwindWord {
     fn bits(self) -> u64 {
         FAIL_WORD_READ
             .with(|fail| assert!(!fail.get(), "injected word read: expected no active fault"));
+        delayed_word_failure();
         u64::from(self.0)
     }
 }
@@ -28,17 +32,37 @@ impl PackedInteger for UnwindInteger {
         Self(value as u32)
     }
 }
+fn delayed_word_failure() {
+    READS_BEFORE_FAILURE.with(|remaining| {
+        if let Some(reads) = remaining.get() {
+            assert!(
+                reads != 0,
+                "injected delayed word read: expected a remaining read"
+            );
+            remaining.set(Some(reads - 1));
+        }
+    });
+}
 #[test]
 fn engine_hash_panic_preserves_original_node_ownership() {
+    preserved_hash_failure(None);
+}
+#[test]
+fn engine_late_hash_panic_preserves_original_node_ownership() {
+    preserved_hash_failure(Some(3));
+}
+fn preserved_hash_failure(reads: Option<usize>) {
     let mut map = PackedMap::<UnwindInteger>::default();
     for key in [0, 1, 32, 3232, u32::MAX] {
         map.add(UnwindInteger(key));
     }
     let original = pointers(&map);
     let values: Vec<_> = map.iter().collect();
-    FAIL_WORD_READ.with(|fail| fail.set(true));
+    FAIL_WORD_READ.with(|fail| fail.set(reads.is_none()));
+    READS_BEFORE_FAILURE.with(|remaining| remaining.set(reads));
     let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| map.resize(1000)));
     FAIL_WORD_READ.with(|fail| fail.set(false));
+    READS_BEFORE_FAILURE.with(|remaining| remaining.set(None));
     assert!(result.is_err());
     assert_eq!(pointers(&map), original);
     assert_eq!(map.iter().collect::<Vec<_>>(), values);

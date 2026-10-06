@@ -4,6 +4,7 @@ use std::collections::BTreeMap;
 mod bucket_policy;
 #[path = "../../../tests/packed_map_oracle/mod.rs"]
 mod decoder;
+mod rehash_guards;
 mod unwind;
 fn fixture() -> BTreeMap<&'static str, Vec<u64>> {
     decoder::decode_native_rows(include_str!(

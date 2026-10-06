@@ -2,7 +2,7 @@
   "schema": "rustycad.class-method-progress.v1",
   "base_revision": "704a94fbf268d96438108f69cff4847136f44677",
   "execution_policy": "Port foundational C++ classes method by method before progressing to dependent toolkits. Keep unresolved semantics explicit.",
-  "integration_status": "Foundation policy-callback checkpoint validated on frozen committed main source; receipt commit recorded separately.",
+  "integration_status": "Foundation native-storage checkpoint committed; full API and original-test parity remain incomplete.",
   "classes": [
     {
       "batch_order": 1,
@@ -164,8 +164,8 @@
   "published_api_inventory_credit_added": 0,
   "original_test_mapping_credit_added": 0,
   "full_workspace_runtime": {
-    "receipt": "porting/audits/foundation-policy-callbacks-checkpoint.json",
-    "passed": 15401,
+    "receipt": "porting/audits/foundation-native-storage-checkpoint.json",
+    "passed": 15495,
     "failed": 0,
     "ignored": 70,
     "test_threads": 1,
@@ -174,17 +174,42 @@
   "latest_foundation_run_note": "Historical class entries remain scoped evidence; current_integrated_checkpoint records the latest frozen workspace validation. Subsequent source edits require a new checkpoint.",
   "additional_allocator_miri_passes": 3,
   "current_integrated_checkpoint": {
-    "commit": "0d27fa8a10e3d29c5e910f5c2b84b028dc19bca8",
-    "receipt": "porting/audits/foundation-policy-callbacks-checkpoint.json",
-    "sha256": "f041d63761f6ed748c3d7b38dc7f5fd8062f0dac12a27a96b562f274ee3aaae3",
-    "workspace_passed": 15401,
-    "workspace_failed": 0,
-    "workspace_ignored": 70,
-    "miri_passes_total": 1029,
-    "strict_provenance_miri_passes": 1029,
-    "joined_original_runtime_cases": 1066,
-    "python_tools_exit": 0,
-    "python_tools_tests_passed": 787
+    "receipt": "porting/audits/foundation-native-storage-checkpoint.json",
+    "sha256": "294b7ba5613a1336c0193dbe7fcacc537899cc0e44898f9736af91658c1ccceb",
+    "runtime": {
+      "workspace_passed": 15495,
+      "workspace_failed": 0,
+      "workspace_ignored": 70,
+      "workspace_groups": 1394,
+      "workspace_ignored_doctests": 70,
+      "miri_passes_total": 1173,
+      "miri_counts": {
+        "linear-tail-miri": 4,
+        "allocator-unit-miri": 12,
+        "strict-miri": 1073,
+        "sparse-unit-miri": 2,
+        "packed-unit-miri": 19,
+        "ordered-unit-miri": 3,
+        "dynamic-unit-miri": 21,
+        "linear-unit-miri": 6,
+        "cell-unit-miri": 33
+      },
+      "strict_provenance_miri_passes": 1173,
+      "miri_scope": "Focused integrated changed-method targets and unit filters; prior broader memory run remains historical evidence, not a rerun on this source.",
+      "source_inputs": 10258,
+      "source_inputs_after_run_identical": true,
+      "native_extractor_ctests_passed": 3,
+      "native_extractor_exit": 0,
+      "strict_clippy_exit": 0,
+      "strict_clippy_scope": "workspace --all-targets",
+      "format_exit": 0,
+      "compiler_exit": 0,
+      "python_tools_tests_passed": 812,
+      "python_tools_exit": 0,
+      "joined_original_runtime_cases": 1066,
+      "new_original_runtime_joins": 0
+    },
+    "commit": "d49161deb59d73e869b56fa233fbeed10844a158"
   },
   "latest_scoped_integration": {
     "receipt": "porting/audits/foundation-policy-callbacks-merge-cleanup.json",

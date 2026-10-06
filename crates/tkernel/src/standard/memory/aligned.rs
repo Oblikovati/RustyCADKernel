@@ -1,27 +1,25 @@
 // Rust translation of FoundationClasses/TKernel/Standard/Standard.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Standard::AllocateAligned` / `FreeAligned` with the C runtime's alignment rules.
-use super::zeroed_bytes;
+use super::storage::StandardByteStorage;
 
 /// Owned bytes whose first byte sits on the requested boundary; `block.address() % 16 == 0`.
 ///
-/// The storage over-allocates `alignment - 1` bytes and starts the block at the first
-/// aligned address inside it, so no unsafe allocator call is needed. The heap buffer never
-/// moves while the block lives, which keeps the start address stable.
+/// The shared Standard allocation backend reserves the requested aligned extent and retains
+/// its original allocation layout. Even an empty block owns real storage; no dangling Vec
+/// address substitutes for the native result. Its address stays stable until the owner drops.
 #[derive(Debug)]
 pub struct AlignedMemory {
-    storage: Vec<u8>,
-    offset: usize,
-    length: usize,
+    storage: StandardByteStorage,
 }
 impl AlignedMemory {
     /// Borrows the aligned bytes; `block.as_slice().len()`.
     pub fn as_slice(&self) -> &[u8] {
-        &self.storage[self.offset..self.offset + self.length]
+        self.storage.as_slice()
     }
     /// Borrows the aligned bytes for writing; `block.as_mut_slice().fill(1)`.
     pub fn as_mut_slice(&mut self) -> &mut [u8] {
-        &mut self.storage[self.offset..self.offset + self.length]
+        self.storage.as_mut_slice()
     }
     /// Address of the first byte, the value the native pointer holds; `block.address()`.
     pub fn address(&self) -> usize {
@@ -29,11 +27,11 @@ impl AlignedMemory {
     }
     /// Returns the requested size; `allocate_aligned(24, 16).unwrap().len() == 24`.
     pub fn len(&self) -> usize {
-        self.length
+        self.storage.len()
     }
     /// Reports a zero-byte block; `allocate_aligned(0, 16).unwrap().is_empty()`.
     pub fn is_empty(&self) -> bool {
-        self.length == 0
+        self.storage.is_empty()
     }
 }
 
@@ -43,14 +41,8 @@ impl AlignedMemory {
 /// (see `effective_alignment`) or a request it cannot satisfy. It never raises.
 pub fn allocate_aligned(size: usize, alignment: usize) -> Option<AlignedMemory> {
     let alignment = effective_alignment(alignment)?;
-    let storage = zeroed_bytes(size.checked_add(alignment - 1)?)?;
-    let address = storage.as_ptr() as usize;
-    let offset = (alignment - address % alignment) % alignment;
-    Some(AlignedMemory {
-        storage,
-        offset,
-        length: size,
-    })
+    let storage = StandardByteStorage::allocate(size, alignment, false)?;
+    Some(AlignedMemory { storage })
 }
 
 /// Releases an aligned block; `None` is null, which the runtime ignores; `free_aligned(Some(b))`.

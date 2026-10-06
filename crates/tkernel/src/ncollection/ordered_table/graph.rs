@@ -36,7 +36,7 @@ impl<K, V, H, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
         self.free.push(slot);
         // SAFETY: all graph links were detached before releasing this exact native allocation.
         unsafe {
-            crate::ncollection::node_release::release_typed_node(node.cast::<N>(), &self.resource)
+            crate::ncollection::node_release::release_typed_node(node.cast::<N>(), self.resource())
         };
     }
     fn unlink_bucket(&mut self, target: *mut MapLinkNode, hash: usize) {
