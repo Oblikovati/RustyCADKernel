@@ -20,6 +20,8 @@ impl<T> Default for DynamicArray<T> {
         Self::with_increment(256)
     }
 }
+mod copy_date;
+pub use copy_date::DynamicArrayCopyFailure;
 mod emplacement;
 mod insertion;
 mod legacy_cursor;
@@ -276,18 +278,10 @@ impl<T: Clone> DynamicArray<T> {
     }
 
     fn copy_blocks_from(&mut self, source: &Self) {
-        let mut remaining = source.used;
-        for source_block in &source.blocks {
-            let count = remaining.min(self.increment);
-            let mut block = AllocVec::with_capacity_in(
-                self.increment,
-                self.allocator.clone().unwrap_or_default(),
-            );
-            block.extend(source_block.iter().take(count).cloned());
-            self.blocks.push(block);
-            self.used += count;
-            remaining -= count;
-        }
+        self.copy_date_using(source, |value| Ok(value.clone()))
+            .unwrap_or_else(|error| {
+                panic!("DynamicArray copy storage: expected valid source: {error:?}")
+            });
     }
 }
 impl<T> DynamicArray<T> {
