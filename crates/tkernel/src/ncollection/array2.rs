@@ -5,6 +5,7 @@ use super::{Array1, ArrayError};
 mod buffer_constructors;
 mod method_contracts;
 mod raw_copy;
+mod resize_policy;
 
 /// A rectangular owned array or borrowed view; `Array2::<i32>::with_size(2, 3)`.
 #[derive(Clone)]

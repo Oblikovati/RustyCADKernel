@@ -3,6 +3,7 @@
 mod buffer_constructors;
 mod pointers;
 mod raw_copy;
+mod resize_storage;
 mod returning;
 mod trivial_copy;
 
@@ -322,13 +323,15 @@ impl<T: Default + Clone> Array1<'_, T> {
 
     /// Resizes while keeping the lower bound; `array.resize(8, true)`.
     pub fn resize(&mut self, length: usize, copy: bool) {
+        if !copy {
+            self.resize_no_data(length);
+            return;
+        }
         if length == self.len() {
             return;
         }
         let mut values = Vec::new();
-        if copy {
-            values.extend_from_slice(&self.as_slice()[..length.min(self.len())]);
-        }
+        values.extend_from_slice(&self.as_slice()[..length.min(self.len())]);
         values.resize_with(length, T::default);
         self.storage = Storage::Owned(values);
     }
