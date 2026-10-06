@@ -1,3 +1,4 @@
+#![allow(unsafe_code)]
 use rustycad_tkernel::ncollection::LinearVector;
 use std::cell::Cell;
 use std::rc::Rc;
@@ -64,11 +65,11 @@ fn assert_failed_tail_state(
     assert_eq!((destination.capacity(), destination.len()), (4, 1));
     assert_eq!(destination[0].value, 10);
     assert_eq!((control.copies.get(), control.assignments.get()), (2, 1));
-    assert_eq!(control.drops.get(), 1);
+    assert_eq!(control.drops.get(), 0);
 }
 
 #[test]
-fn tail_copy_panic_keeps_common_assignment_and_drops_completed_tail() {
+fn tail_copy_panic_keeps_common_assignment_and_unpublished_tail() {
     let control = Rc::new(CopyControl::default());
     control.panic_at_copy.set(2);
     let source = vector_with_values(3, &[10, 20, 30], &control);
@@ -77,6 +78,11 @@ fn tail_copy_panic_keeps_common_assignment_and_drops_completed_tail() {
         destination.assign(&source);
     }));
     assert_failed_tail_state(&destination, &control, failure);
+    assert_eq!(Rc::strong_count(&control), 6);
+    // SAFETY: one tail clone completed before the second failed; no retry touched it.
+    // Explicit test repair follows native-state assertions and is not kernel behavior.
+    unsafe { crate::tail_repair::destroy_completed_tail(&mut destination, 1) };
+    assert_eq!(control.drops.get(), 1);
     drop(destination);
     drop(source);
     assert_eq!(control.drops.get(), 5);
