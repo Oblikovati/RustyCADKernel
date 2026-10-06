@@ -21,6 +21,7 @@ pub(super) fn compare_all_rows() {
         keyonly_rows(&mut rows, nodes, &calls);
         ordered_rows(&mut rows, nodes, &calls);
         copy_rows(&mut rows, nodes);
+        inequality_row(&mut rows, nodes);
         assert_eq!(
             rows,
             include_str!(
@@ -221,5 +222,23 @@ fn copy_rows(rows: &mut String, nodes: [*mut Node; 3]) {
         "shared_node_equality",
         (same == old) as u8,
         (same != Write::default()) as u8
+    );
+}
+
+fn inequality_row(rows: &mut String, nodes: [*mut Node; 3]) {
+    let old = Write::from_node(nodes[0]);
+    let mut other = ProbeMap::new([std::ptr::null_mut(); 3]);
+    other.storage.bucket_slots_mut()[40] = nodes[0].cast();
+    let same = Read::new(&other);
+    let empty = Write::default();
+    let empty2 = Read::default();
+    row!(
+        rows,
+        "inequality",
+        same.is_not_equal(&old) as u8,
+        same.is_not_equal(&empty) as u8,
+        empty.is_not_equal(&empty2) as u8,
+        old.is_not_equal(&same) as u8,
+        old.is_not_equal(&empty) as u8
     );
 }

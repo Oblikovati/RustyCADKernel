@@ -239002,6 +239002,2679 @@
       "rust_kind": "function",
       "status": "partial",
       "notes": "Exact erased-base/raw-iterator body on valid native block and caller borrow domains; native sparse fixtures and original tests support scoped behavior. Rust detached iterator safety adapters, allocation failures, object allocation macros, ABI/noexcept and configuration closure are not full parity. See porting/audits/sparse-base-exchange-and-resources.json. Metadata allocation stays on each container while fields and allocator ownership move; exchange_self represents native aliasing no-op without invalid Rust borrows."
+    },
+    {
+      "notes": "Actual Clone body copies table/bucket/raw-node state without requiring node Clone. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "344faf688687d062815518462b7130594d0d308f32bcffc8cb7287ae502c5bad",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Clone",
+              "resolved_item_path": "core::clone::Clone"
+            }
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::<core::clone::Clone>::clone"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::<core::clone::Clone>::clone",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::BasicIterator<TheContainer, TheNode, TheKey, TheValue, IsKeyOnly, IsConstant, IsOrdered>(const BasicIterator<TheContainer, TheNode, TheKey, TheValue, NCollection_BaseMap::BasicIterator::IsKeyOnly, NCollection_BaseMap::BasicIterator::IsConstant, NCollection_BaseMap::BasicIterator::IsOrdered> &) noexcept"
+    },
+    {
+      "notes": "Reports non-null node for every policy without dereference. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "d0bde2e842bd1643f5e3e74a9a5b4191d50c65bc0d8ebac9e583c4efe99a9380",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::more"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::more",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::More() const noexcept"
+    },
+    {
+      "notes": "Returns previous cursor copy then advances in selected chain/table policy; requires live readable node. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "d1c7357430e64d11ea3657896b90cf4769ff119742cf8a215056c47f43e7a8e6",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::advance_post"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::advance_post",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::operator++(int) noexcept"
+    },
+    {
+      "notes": "All three Key policies selected independently: mapped and ordered key-only use map_key; unordered key-only uses map_value. Explicit trait associated types must match native TheKey/TheValue choices. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "61e492c426fd361a6fec53678acb870a505aa91d19fb852f95d27338f3639520",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::key"
+        },
+        {
+          "declaration_sha256": "22645157ded28e03c415ccf545d11cfa4e544f2cdd5e4c20db0321a57f7f484c",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::key"
+        },
+        {
+          "declaration_sha256": "1294c63ec232acc8a612c6e397dd36ccb007696dde925c4d878cef91fdedfea7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::key"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::key",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::Key() const noexcept"
+    },
+    {
+      "notes": "Explicit named adapter negates node identity across mutable/const policies. Rust PartialEq default already supported !=; this body makes native inequality independently selectable. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "f65d5236a4ec42e4ebf00bd4e9b8276429dfa6288ebefb14c59c1cb5d195902b",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::is_not_equal"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::is_not_equal",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::operator!=(const NCollection_BaseMap::BasicIterator<TheContainer, TheNode, TheKey, TheValue, NCollection_BaseMap::BasicIterator::IsKeyOnly, theOtherIsConstant, NCollection_BaseMap::BasicIterator::IsOrdered> &) const noexcept"
+    },
+    {
+      "notes": "Actual Default body initializes no table, zero bucket and null node. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "59ce6f726e712fcdecefe7867ac596f948d5015d91186642e43b568a9d165d34",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Default",
+              "resolved_item_path": "core::default::Default"
+            }
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::<core::default::Default>::default"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::<core::default::Default>::default",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::BasicIterator<TheContainer, TheNode, TheKey, TheValue, IsKeyOnly, IsConstant, IsOrdered>() noexcept"
+    },
+    {
+      "notes": "Three dereference policies retain Value versus ChangeValue dispatch and shared/mutable access. Caller guarantees valid node and alias exclusions. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "20ce5c84ce817b2d6d98975235b1fbada334b15327569d5a0c8128d5c5b4ba18",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::value"
+        },
+        {
+          "declaration_sha256": "af0d1c626134c14f7ce13dd4a2c2ea31e33e8711829df21b3305ccbe6007b187",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::value"
+        },
+        {
+          "declaration_sha256": "f7221b7fe904641a46d3872070d63abc8a5152acacca2fcbf7e4945bb8e960cc",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNodeMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNodeMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::value"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::value",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::operator*() const noexcept"
+    },
+    {
+      "notes": "Returns typed const node identity for every policy without dereference. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "eb2a2a59d392999121e1fd1c6dd244a9e8d9d1f2d7021b429bbbb249e5e1e6a0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::node"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::node",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::Node() const noexcept"
+    },
+    {
+      "notes": "Requires live readable node. Ordered chain versus bucket chain/table scan preserves exhausted no-op. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "b5493e8999773c490b71a135815d21a44f8b20dad5e795a08ba48f10a77dffa9",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::advance"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::advance",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::Next() noexcept"
+    },
+    {
+      "notes": "Separate readonly/mutable constructors borrow bucket table; ordered policy uses first node, unordered scans buckets. Resizing while borrowed is prohibited. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "b9a37b7e21c1eec3e753c69a59709e9053992404614c59388a611cdb184695c1",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::new"
+        },
+        {
+          "declaration_sha256": "f31048b207db6a4196a3410e7b108c1db93ada3f986139b7947bca303d69847c",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::new"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::new",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::BasicIterator<TheContainer, TheNode, TheKey, TheValue, IsKeyOnly, IsConstant, IsOrdered>(NCollection_BaseMap::BasicIterator::container_type &) noexcept"
+    },
+    {
+      "notes": "Separate readonly/mutable raw constructors store a typed node pointer without table; traversal follows node chain only. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "41dacbaf58f8efb4093b2b071eff321ea952e9d400be9c1f767f33ed331300fe",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::from_node"
+        },
+        {
+          "declaration_sha256": "32dbcce44df44b7af3e9be3a2244185cc9c8116b238d5ee7194868e4bed2d9aa",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::from_node"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::from_node",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::BasicIterator<TheContainer, TheNode, TheKey, TheValue, IsKeyOnly, IsConstant, IsOrdered>(NCollection_BaseMap::BasicIterator::node_pointer) noexcept"
+    },
+    {
+      "notes": "Compares only raw node identity across mutable/const policies; independent containers and all null ends compare equally. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "a451d2f0ccaa7a7da0cf5364064c083e7f3fd428cda0934ca738e0df978c7dad",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::is_equal"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::is_equal",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::operator==(const NCollection_BaseMap::BasicIterator<TheContainer, TheNode, TheKey, TheValue, NCollection_BaseMap::BasicIterator::IsKeyOnly, theOtherIsConstant, NCollection_BaseMap::BasicIterator::IsOrdered> &) const noexcept"
+    },
+    {
+      "notes": "Advances and returns original cursor identity; requires live readable node. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "62a8c2f4554b6afb5e39750583646f25abdff4c42a38d40d16c36a1d3105fb32",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::advance_returning"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::advance_returning",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::operator++() noexcept"
+    },
+    {
+      "notes": "Three arrow policies retain Value versus ChangeValue dispatch and native pointer mutability. Returned pointer lifetime and alias exclusions remain caller obligations. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "730dd24c4c7c88c9afbcdc9e3243cd2f14e6783a7fc7f94f75c17472a4a76097",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::value_ptr"
+        },
+        {
+          "declaration_sha256": "4f23bf1966755d74b1bd08e05402141ae23de469d5fab7be2d32c57c16ae711f",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::value_ptr"
+        },
+        {
+          "declaration_sha256": "d487f04786d9d47541ce3805f54b99448e3fdfdda37887d1e372a3dad0a73bd4",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNodeMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNodeMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::value_ptr"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::value_ptr",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::operator->"
+    },
+    {
+      "notes": "assign plus assign_self preserve destination identity and shallow copied state, including self assignment without aliased mutable references. Partial domain: explicit BasicMapNode/BasicMapIteratorSource adapters, MapLinkNode repr(C) prefix, valid raw lifetimes and alias contracts; arbitrary C++ inheritance/layout, invalidation, noexcept termination and all derived-map integration are not claimed. Evidence: porting/audits/base-map-basic-specialization-bindings.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "3f07a44aaa36727f6b90ffbd4667cc0eca7c120d12c13258133dea3555349982",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::assign"
+        },
+        {
+          "declaration_sha256": "0f7dcbc52ac0a6c49b7c7262b5fc74045a5458f2668c1dcc656e359c6d03d67f",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'a"
+                      },
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "M",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "K",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "O",
+                          "is_literal": false,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseMapBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_iterator::BaseMapBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "lifetime": {
+                      "outlives": []
+                    }
+                  },
+                  "name": "'a"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicMapNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_map::basic_node::BasicMapNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "M"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "K"
+                },
+                {
+                  "kind": {
+                    "const": {
+                      "default": null,
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    }
+                  },
+                  "name": "O"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::BaseMapBasicIterator::assign_self"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::assign",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseMapBasicIterator::assign",
+        "rustycad_tkernel::ncollection::BaseMapBasicIterator::assign_self"
+      ],
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_BaseMap::BasicIterator::operator=(const BasicIterator<TheContainer, TheNode, TheKey, TheValue, NCollection_BaseMap::BasicIterator::IsKeyOnly, NCollection_BaseMap::BasicIterator::IsConstant, NCollection_BaseMap::BasicIterator::IsOrdered> &) noexcept"
     }
   ],
   "tests": [

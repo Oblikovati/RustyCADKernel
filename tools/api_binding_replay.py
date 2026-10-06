@@ -25,6 +25,20 @@ def binding_equal(actual: object, expected: object, label: str) -> None:
     raise ValueError(f"{label}={actual!r}; expected {expected!r}")
 
 
+def binding_bodies(record: JSONObject) -> list[JSONObject]:
+    """Require one old body or explicit multiple bodies; `binding_bodies(record)`."""
+    if "rust_bodies" not in record:
+        return [binding_object(record, "rust_body")]
+    supplied = record["rust_bodies"]
+    if "rust_body" in record or not isinstance(supplied, list) or not supplied:
+        raise ValueError(
+            f"rust_bodies={supplied!r}; expected nonempty bodies without rust_body"
+        )
+    if any(not isinstance(body, dict) for body in supplied):
+        raise ValueError(f"rust_bodies={supplied!r}; expected an array of body objects")
+    return [body for body in supplied if isinstance(body, dict)]
+
+
 @dataclass(frozen=True)
 class BindingReplay:
     """Inject inventories and source hashing; `BindingReplay(native, rust, digest)`."""
@@ -57,13 +71,14 @@ class BindingReplay:
     def _verify_rust(self, record: JSONObject, proposed: JSONObject) -> None:
         status, matches = row_rust_candidates(proposed, self.rust_by_crate)
         binding_equal(status, "unique", "Rust resolution")
-        binding_equal(len(matches), 1, "Rust body count")
-        body = matches[0]
-        binding_equal(body.get("kind"), "function", "Rust declaration kind")
-        binding_equal(
-            binding_object(body, "signature").get("has_body"), True, "Rust body"
-        )
-        self._verify_body_identity(body, binding_object(record, "rust_body"))
+        expected = binding_bodies(record)
+        binding_equal(len(matches), len(expected), "Rust body count")
+        for body, captured in zip(matches, expected, strict=True):
+            binding_equal(body.get("kind"), "function", "Rust declaration kind")
+            binding_equal(
+                binding_object(body, "signature").get("has_body"), True, "Rust body"
+            )
+            self._verify_body_identity(body, captured)
 
     def _verify_body_identity(self, body: JSONObject, expected: JSONObject) -> None:
         for field in (
