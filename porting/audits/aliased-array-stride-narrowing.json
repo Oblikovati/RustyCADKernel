@@ -1,0 +1,419 @@
+{
+  "schema": "rustycad.native-method-contract.v1",
+  "source_base_revision": "321cd5ac477abfdfd0a5afb5962c20c3b2beef2c",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "cpp_class": "NCollection_AliasedArray",
+  "checks": {
+    "rust": 22,
+    "miri": 22
+  },
+  "new_regressions": 6,
+  "native_rows": 7,
+  "original_runtime_names_joined": [
+    "NCollection_AliasedArrayTest.ResizeEmptyWithCopy",
+    "NCollection_AliasedArrayTest.ResizeWithoutCopy",
+    "NCollection_AliasedArrayTest.TypedDataAndInit",
+    "NCollection_AliasedArrayTest.WrapExternalArray"
+  ],
+  "original_test_mapping_credit_added": 0,
+  "compiler_bindings": [
+    {
+      "native": {
+        "access": "protected",
+        "ancestor_access": [
+          {
+            "access": "public",
+            "qualified_name": "NCollection_AliasedArray",
+            "usr": "c:@ST>1#NI@NCollection_AliasedArray"
+          }
+        ],
+        "api_visible": true,
+        "canonical_type": "unsigned int (unsigned long)",
+        "default_argument_capture": "complete",
+        "default_argument_observations": [
+          [
+            {
+              "expression": "",
+              "expression_status": "not_applicable",
+              "parameter_index": 0,
+              "state": "absent"
+            }
+          ]
+        ],
+        "default_arguments": [
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 0,
+            "state": "absent"
+          }
+        ],
+        "event": "declaration",
+        "exclusion_reason": "",
+        "expansion_location": {
+          "column": 19,
+          "file": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+          "line": 486
+        },
+        "id": "f025f292ccc39972ead75e2a448a02674687232f1cdfffff3d09041534b94366",
+        "identity_signature": "unsigned int (unsigned long)",
+        "implicit": false,
+        "kind": "CXXMethod",
+        "macro_generated": false,
+        "main_header": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+        "parameter_types": [
+          "unsigned long"
+        ],
+        "parent_usr": "c:@ST>1#NI@NCollection_AliasedArray",
+        "qualified_name": "NCollection_AliasedArray::checkedStride",
+        "signature": "unsigned int (unsigned long)",
+        "signature_variants": [
+          "unsigned int (unsigned long)"
+        ],
+        "sites": [
+          {
+            "expansion_location": {
+              "column": 19,
+              "file": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+              "line": 486
+            },
+            "observed_in": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+            "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+            "spelling_location": {
+              "column": 19,
+              "file": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+              "line": 486
+            }
+          }
+        ],
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+        "spelling_location": {
+          "column": 19,
+          "file": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+          "line": 486
+        },
+        "stable_identity": true,
+        "template_signature": "",
+        "template_signature_variants": [
+          ""
+        ],
+        "usr": "c:@ST>1#NI@NCollection_AliasedArray@F@checkedStride#l#S",
+        "variadic": false,
+        "written_parameter_types": [
+          "size_t"
+        ]
+      },
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::AliasedArray::checked_stride",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "stride",
+                {
+                  "primitive": "usize"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "primitive": "u32"
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/aliased_array/validation.rs",
+        "source_sha256": "e69ee056b5399ddb1e1bcdeb5cf6a20f40de0affc8224cfa0b2b48dcb11df4a2",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::AliasedArray",
+              "resolved_item_path": "rustycad_tkernel::ncollection::aliased_array::AliasedArray",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "702d7c9924a78a6a40da83521671f7eba3f615af3d8e6b7e50b538190afff759"
+      },
+      "status": "partial",
+      "limitation": "Exact callback-free validation behavior measured on pinned64bit native build; full class/configuration parity not claimed."
+    },
+    {
+      "native": {
+        "access": "protected",
+        "ancestor_access": [
+          {
+            "access": "public",
+            "qualified_name": "NCollection_AliasedArray",
+            "usr": "c:@ST>1#NI@NCollection_AliasedArray"
+          }
+        ],
+        "api_visible": true,
+        "canonical_type": "unsigned long (int)",
+        "default_argument_capture": "complete",
+        "default_argument_observations": [
+          [
+            {
+              "expression": "",
+              "expression_status": "not_applicable",
+              "parameter_index": 0,
+              "state": "absent"
+            }
+          ]
+        ],
+        "default_arguments": [
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 0,
+            "state": "absent"
+          }
+        ],
+        "event": "declaration",
+        "exclusion_reason": "",
+        "expansion_location": {
+          "column": 17,
+          "file": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+          "line": 476
+        },
+        "id": "ab68708a75a6672dfc6f6b9d45d36d474a1a5fd4d3b0d8015d61dd08e606268a",
+        "identity_signature": "unsigned long (int)",
+        "implicit": false,
+        "kind": "CXXMethod",
+        "macro_generated": false,
+        "main_header": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+        "parameter_types": [
+          "int"
+        ],
+        "parent_usr": "c:@ST>1#NI@NCollection_AliasedArray",
+        "qualified_name": "NCollection_AliasedArray::checkedSize",
+        "signature": "unsigned long (int)",
+        "signature_variants": [
+          "unsigned long (int)"
+        ],
+        "sites": [
+          {
+            "expansion_location": {
+              "column": 17,
+              "file": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+              "line": 476
+            },
+            "observed_in": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+            "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+            "spelling_location": {
+              "column": 17,
+              "file": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+              "line": 476
+            }
+          }
+        ],
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+        "spelling_location": {
+          "column": 17,
+          "file": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+          "line": 476
+        },
+        "stable_identity": true,
+        "template_signature": "",
+        "template_signature_variants": [
+          ""
+        ],
+        "usr": "c:@ST>1#NI@NCollection_AliasedArray@F@checkedSize#I#S",
+        "variadic": false,
+        "written_parameter_types": [
+          "int"
+        ]
+      },
+      "rust": {
+        "path": "rustycad_tkernel::ncollection::AliasedArray::checked_size",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "count",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "primitive": "usize"
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/aliased_array/validation.rs",
+        "source_sha256": "e69ee056b5399ddb1e1bcdeb5cf6a20f40de0affc8224cfa0b2b48dcb11df4a2",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::AliasedArray",
+              "resolved_item_path": "rustycad_tkernel::ncollection::aliased_array::AliasedArray",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "2a6a806cee9a0e9b0ec870749d2d76389555e29e1bfb6523bc297873049f6fe5"
+      },
+      "status": "partial",
+      "limitation": "Exact callback-free validation behavior measured on pinned64bit native build; full class/configuration parity not claimed."
+    }
+  ],
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/aliased-stride-rust.gz",
+      "sha256": "a4cd2efeda1e6952b692658d795f32a9f7f55665b69968776468224befd94b9e"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/aliased-stride-miri.gz",
+      "sha256": "f2d3c58e600fced255f11107450c93f2654c951fdd0dc2eda8e44b5de100cde9"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/aliased-stride-clippy.gz",
+      "sha256": "ec5ce04a0cb3503d8191754c0c616404fd824614eceae3bff983223045ac5f97"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/aliased-stride-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "native": {
+      "path": "porting/runtime-evidence/aliased-stride-native.gz",
+      "sha256": "8e18a1161f01db54eccd2c778bb45c83b6f636d9f2aa926ecea319e04500a220"
+    },
+    "original": {
+      "path": "porting/runtime-evidence/aliased-stride-original.gz",
+      "sha256": "97a5f92e643ca85b17a1355c56f3ac3ce92bc02e2edd4d8e8aa49ef94ed1697a"
+    },
+    "compiler": {
+      "path": "porting/runtime-evidence/aliased-stride-compiler.gz",
+      "sha256": "564d3893ade8d30095f79cf782dc30de9c76077fb33a37440c7d25a7bab92d2a"
+    },
+    "compiler-json": {
+      "path": "porting/runtime-evidence/aliased-stride-compiler-json.gz",
+      "sha256": "ae2f6f23bd31494d4fc65223b3680dcb0a105fdd26800b64cd17825304ac8518"
+    }
+  },
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/aliased_array.rs": "fda308ccc596934c79a0b0993313afb817456c355136dac72c3df5a92454b88f",
+    "crates/tkernel/src/ncollection/aliased_array/legacy.rs": "f58405673d735dd286521256ec8ef09a1682b2e164d4bb9296d7731d38214e73",
+    "crates/tkernel/src/ncollection/aliased_array/validation.rs": "e69ee056b5399ddb1e1bcdeb5cf6a20f40de0affc8224cfa0b2b48dcb11df4a2",
+    "crates/tkernel/tests/aliased_array_stride_narrowing.rs": "b36fa1a34d62f6981a07142e091b5bed4342586843a7671eecc8e82033d5cfd9",
+    "tools/oracle/tkernel_aliased_stride_narrowing.cxx": "2121efa3ce8aea9c8b26175380dca5c61aeb5c24c52dc0bcf616f456d61b7591",
+    "tools/oracle/tkernel_aliased_stride_narrowing.expected": "275da6ec1f9e50066d6c05eab07bfb22697f765289f575051faef78028bf7d4b"
+  },
+  "miri_flags": "-Zmiri-strict-provenance",
+  "compiler_warnings": "Six existing documentation warnings retained in compiler log; strict scoped Clippy and fmt pass.",
+  "behavior": "Reject zero size_t stride before uint32 narrowing; retain native wrapped stride through empty/allocated construction, copying, resizing and typed access. Signed checkedSize uses the original positive int domain.",
+  "limitations": [
+    "Native bytes are indeterminate; Rust initializes storage.",
+    "Only default16byte alignment and Pod payload domain are supported.",
+    "Zero-byte native allocation has platform allocator-dependent pointers; Rust allocator identity and out-of-memory behavior remain different.",
+    "Native moved-from nonowning alias and arbitrary writable const aliases remain open.",
+    "Measured native fixture targets64bit; no configuration matrix completion claimed."
+  ],
+  "api_parity_complete": false,
+  "global_api_claims_added": 0
+}
