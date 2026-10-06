@@ -303,3 +303,5 @@ super::ordered_table::ordered_policy_construction!(OrderedMap<K,H>, H);
 super::ordered_table::ordered_policy_exchange!(OrderedMap<K,H>, H);
 
 super::ordered_table::ordered_default_construction!(OrderedMap<K,H>, H);
+
+super::ordered_table::ordered_protected_lookup!(OrderedMap<K,H>,H,super::OrderedMapNode<K>);

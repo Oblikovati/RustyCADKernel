@@ -50,13 +50,9 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
         self.lookup_at_hash(key, hash)
     }
     fn lookup_at_hash(&self, key: &K, hash: usize) -> Option<usize> {
-        let mut node = self.base.bucket_slots()[hash];
-        while !node.is_null() {
-            // SAFETY: bucket links contain only owned live nodes; shared projection excludes values.
-            if self.hasher.equal(unsafe { &*N::key(node) }, key) {
-                return self.slot_of(node);
-            }
-            node = unsafe { (*node).next() };
+        let mut node = std::ptr::null_mut();
+        if self.lookup_nodes_at_hash(key, &mut node, hash) {
+            return self.slot_of(node.cast());
         }
         None
     }
@@ -136,3 +132,6 @@ pub(super) use policy_exchange::ordered_policy_exchange;
 
 mod copy_construction;
 pub(super) use copy_construction::ordered_default_construction;
+
+mod protected_lookup;
+pub(super) use protected_lookup::ordered_protected_lookup;
