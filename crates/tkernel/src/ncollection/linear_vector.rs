@@ -3,6 +3,7 @@ use super::{Array1, ArrayError};
 
 mod append_policy;
 mod borrowed;
+mod copy_construction;
 mod erase_policy;
 mod insert_policy;
 mod pointers;
@@ -226,9 +227,17 @@ impl<T: Default> LinearVector<T> {
     }
 }
 impl<T: Clone> Clone for LinearVector<T> {
+    /// Copies through element Clone callbacks; `let copy = vector.clone()`.
+    /// A panic retains native unpublished allocation and completed copies without Drop.
+    /// Use `clone_trivial` to select native trivially-copyable byte-copy behavior.
     fn clone(&self) -> Self {
-        Self {
-            elements: self.elements.clone(),
+        #[cfg(test)]
+        {
+            self.construct_copy(|_| {})
+        }
+        #[cfg(not(test))]
+        {
+            self.construct_copy()
         }
     }
 }
@@ -262,7 +271,8 @@ impl<T: Clone> LinearVector<T> {
     /// Common-slot assignments remain observable if copying later fails. With sufficient
     /// capacity, failed tail construction leaves len unchanged and completed spare copies
     /// live; subsequent overwrite/free omits their destructors as native operator= does.
-    /// Insufficient-capacity construction and throwing shrink retain Rust's safe cleanup.
+    /// Insufficient-capacity copy failure retains the native abandoned allocation and
+    /// copied prefix while leaving the receiver unchanged. Throwing shrink keeps safe cleanup.
     pub fn assign(&mut self, source: &Self) -> &mut Self {
         if source.len() > self.capacity() {
             *self = source.clone();
@@ -286,12 +296,7 @@ impl<T: Clone> LinearVector<T> {
             self.elements.truncate(source.len());
             return;
         }
-        let mut index = common_len;
-        self.construct_unpublished_tail(source.len(), || {
-            let copied = source.elements[index].clone();
-            index += 1;
-            copied
-        });
+        self.clone_unpublished_from(source, common_len);
     }
     /// Resizes by cloning `value` into each new slot:
     ///
