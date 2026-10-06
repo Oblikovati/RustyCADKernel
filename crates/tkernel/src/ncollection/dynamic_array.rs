@@ -24,8 +24,11 @@ impl<T> Default for DynamicArray<T> {
 }
 mod block_table;
 mod borrowed;
+mod copy_construction_failure;
 mod copy_date;
+mod copy_policy;
 mod increment;
+pub use copy_construction_failure::DynamicArrayCopyConstructionFailure;
 mod initialized_tail;
 pub use copy_date::DynamicArrayCopyFailure;
 mod emplacement;
@@ -268,12 +271,10 @@ impl<T: Clone> Clone for DynamicArray<T> {
 impl<T: Clone> DynamicArray<T> {
     /// Copies contents and optionally keeps destination allocator; `dest.assign(&source,true)`.
     pub fn assign(&mut self, source: &Self, own_allocator: bool) {
-        self.clear(true);
-        self.increment = source.increment;
-        if !own_allocator {
-            self.allocator = source.allocator.clone();
-        }
-        self.copy_blocks_from(source);
+        self.assign_with_constructor(source, own_allocator, |value| Ok(value.clone()))
+            .unwrap_or_else(|error| {
+                panic!("DynamicArray copy storage: expected valid source: {error:?}")
+            });
     }
 
     /// Copies values and returns the destination for native `Assign`-style chaining; `dest.assign_returning(&source,false)`.
