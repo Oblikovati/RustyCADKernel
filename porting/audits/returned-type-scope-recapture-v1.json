@@ -1,0 +1,371 @@
+{
+  "schema": "rustycad.returned-type-scope-recapture.v1",
+  "status": "global_recapture_staged_for_coordinator_review",
+  "baseline_source_revision": "14dba9ccefe050fe5cd7aeccd6552381a3e8b61f",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "supersedes_scope": {
+    "receipt": "porting/audits/returned-private-type-extractor-v1.json",
+    "scope": "Broader TKernel/global recapture and exact comparison; historical receipts remain unchanged."
+  },
+  "published_inventory_modified": false,
+  "ledger_modified": false,
+  "api_denominator_complete": false,
+  "coverage_credit": false,
+  "global_inventory": "porting/staged-api-inventory/returned-types-v1/global",
+  "global_report": "porting/staged-api-inventory/returned-types-v1/global-report",
+  "tkernel_inventory": "porting/staged-api-inventory/returned-types-v1/tkernel",
+  "tkernel_report": "porting/staged-api-inventory/returned-types-v1/tkernel-report",
+  "global_expected": {
+    "declarations": 271643,
+    "api_declarations": 108622,
+    "headers_by_status": {
+      "parsed": 5639,
+      "included_fragment": 384,
+      "parsed_with_context": 260,
+      "parse_failed": 6,
+      "missing_compile_configuration": 28
+    },
+    "unsupported_records": 5224
+  },
+  "global_reachability": {
+    "returned_edge_observations": 7352,
+    "distinct_returned_edges": 1418,
+    "edge_statuses": {
+      "cycle_or_repeated_target": 5,
+      "private_record_members_recorded": 6,
+      "unsupported_template_or_dependent_type": 7341
+    },
+    "distinct_reached_members": 15,
+    "distinct_reached_private_record_types": 2,
+    "primary_id_comparison": {
+      "unchanged": 271643
+    }
+  },
+  "tkernel_expected": {
+    "declarations": 17162,
+    "api_declarations": 7352,
+    "headers_by_status": {
+      "parsed": 308,
+      "included_fragment": 15,
+      "parse_failed": 2,
+      "parsed_with_context": 4
+    },
+    "unsupported_records": 4
+  },
+  "tkernel_comparison": {
+    "changed": 21,
+    "unchanged": 17141
+  },
+  "tkernel_difference_interpretation": {
+    "outside_scope_implementation_visibility_rows": 14,
+    "default_argument_first_observation_rows": 4,
+    "default_argument_full_observation_sets_equal": true,
+    "non_api_ancestry_identity_collision_rows": 3,
+    "native_callable_identity_or_signature_changes": 0,
+    "new_native_global_ids": 0
+  },
+  "open_conflicts": {
+    "observations": 5224,
+    "distinct_ids": 162,
+    "kinds": {
+      "ParmVar": 159,
+      "AccessSpec": 1,
+      "StaticAssert": 1,
+      "TypeAlias": 1
+    },
+    "public_conflicting_alias": "math_Vector",
+    "unchanged_from_published_snapshot": true
+  },
+  "native_bundle": {
+    "path": "porting/runtime-evidence/returned-type-recapture-native-v1.tar.zst",
+    "sha256": "a86717f7d9d793538c92d40335866a735c276bc51beaa4f9d8f7028c8d2927a0",
+    "uncompressed_bytes": 3390914560,
+    "zstd_integrity_exit": 0,
+    "contains": [
+      "all raw global header captures and status files",
+      "all raw TKernel final header captures and status files",
+      "same-owner and independently rerun historical TU contexts",
+      "bound capture and retry manifests, actual command flags and hashes",
+      "full native CMake configuration and generated headers",
+      "exact current extractor executable"
+    ],
+    "contains_git_worktree": false
+  },
+  "capture_provenance": {
+    "initial_tkernel_scope_headers": 328,
+    "generated_header_probes": 1,
+    "global_header_probes": 5905,
+    "global_standalone_passed": 5639,
+    "global_initial_failures": 266,
+    "global_same_owner_context_passed": 244,
+    "global_historical_context_hints_freshly_passed": 16,
+    "historical_parse_credit_reused": false,
+    "overlapping_successful_contexts_when_combining": 0,
+    "source_revision_and_header_hashes_verified_before_and_after": true,
+    "fresh_configuration_reason": "Previous published compile-database directory was deleted; a fresh all-module configuration used the pinned LLVM and native source with explicit installed Tcl/Freetype library paths and existing pinned RapidJSON headers. Primary identity and semantic projections were compared against the published snapshot."
+  },
+  "tooling_changes": [
+    "Explicit repeatable --toolkit scopes are fingerprinted; shared-owner headers retain ownership and missing configuration remains visible.",
+    "Generated Standard_Version input path resolves before the process switches into a toolkit build directory; relative-path regression has a unit test.",
+    "Context indexing skips toolkits that the existing matching_contexts policy would reject, preserving all eligible source contexts.",
+    "Historical context hints require matching native header/source hashes and actual current compile commands, then fresh successful parsing.",
+    "Reports authenticate inventory table hashes/row counts, compare every primary identity and semantic projection, retain all sites and overloaded IDs, and deduplicate reached members without granting callability/API credit."
+  ],
+  "validation": {
+    "ctest_passed": 3,
+    "occt_scoping_and_inventory_tests": 38,
+    "targeted_context_and_report_tests": 25,
+    "artifact_and_report_negative_tests": 10,
+    "recapture_replay_negative_tests": 4,
+    "native_archive_integrity": true,
+    "full_primary_projection_replay_pending": false,
+    "verified_primary_identities": 271643
+  },
+  "limitations": [
+    "Six global headers remain unparsed; 28 headers lack platform/dependency compile configuration. Their exact paths and original diagnostics remain in staged tables and the native bundle.",
+    "7,341 returned-type observations are template/dependent cases explicitly unresolved; no specialization or constraint satisfaction is invented.",
+    "15 inferred-public members on two private record types are supplemental evidence; the primary visibility policy and denominator are unchanged.",
+    "5,224 existing declaration conflicts remain open, including the public math_Vector alias.",
+    "Inherited-member, field/nested-type, function/member-pointer and configuration closure, and construction/cv/call viability remain unproved.",
+    "No Rust implementation mapping, original test credit or behavior-parity claim is changed by this inventory work."
+  ],
+  "commands": {
+    "deep_replay": "PYTHONPATH=tools python3 tools/verify_returned_type_recapture.py --deep",
+    "capture": "python3 tools/capture_occt_inventory.py --source /home/vmiguel/git/oblikovati-workspace/OCCT --database target/api-proof/occt-build/compile_commands.json --extractor target/returned-reachability/extractor/occt-api-extract --jobs 4 --timeout 120 --output target/returned-reachability/global-capture",
+    "retry": "python3 tools/retry_occt_header_context.py --source /home/vmiguel/git/oblikovati-workspace/OCCT --database target/api-proof/occt-build/compile_commands.json --extractor target/returned-reachability/extractor/occt-api-extract --capture target/returned-reachability/global-capture/capture-manifest.json --output target/returned-reachability/global-context --jobs 4 --timeout 120"
+  },
+  "attested_files": [
+    {
+      "path": "porting/api-header-manifest.json",
+      "sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43"
+    },
+    {
+      "path": "porting/api-proof-toolchain.json",
+      "sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a"
+    },
+    {
+      "path": "porting/runtime-evidence/returned-type-recapture-native-v1.tar.zst",
+      "sha256": "a86717f7d9d793538c92d40335866a735c276bc51beaa4f9d8f7028c8d2927a0"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/README.md",
+      "sha256": "8a646115f40e5b7fb4ff956006733cd35cc1518136e7906d69939fde50a77077"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global-report/primary-comparison.jsonl.gz",
+      "sha256": "ce6540d3da1685f793624185144e563bfa1d2af484e153d25b180c949ad2edfc"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global-report/reached-members.jsonl.gz",
+      "sha256": "0f08be2d8c90e6e5fab222957d77f3c5be48f7f604cc0fb21f1fcdfbb5a21f24"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global-report/report.json",
+      "sha256": "79c2bc0f78ad3b5e163d4866b0b8725e3d9f6605dc1a50f7e7c9d94be0652eff"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-alias-reachability.jsonl.gz",
+      "sha256": "76f3c7d699cd2834acd7601a06cd88351fe1276be92e373ad3c41e7ad59b82d5"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-compiler-summaries.jsonl.gz",
+      "sha256": "c14e4aa2d2360fd6bed38e2b60e24a48a9dd71485f2135a902d1c9ad6a66d93f"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-context-retries.jsonl.gz",
+      "sha256": "3c361bcb1073f74a3edbad14cbd2004d9806f18614c1a4a65cac5d6c34031375"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-declarations.jsonl.gz",
+      "sha256": "745ff418a4ce93c0be166f074bac5daa4474f09b4941403e5b9cd193462538f3"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-diagnostics.jsonl.gz",
+      "sha256": "cf9ec6187aa992bae154fe585008b6340cfc6a1318c14350c6014d076b77cc97"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-headers.jsonl.gz",
+      "sha256": "f6360706da3e81219c3cec0a4ba8a618a8d14cf0f4bb2ad1a8dd56fda4407077"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-included-files.jsonl.gz",
+      "sha256": "960daaf51cbf96e944bdd5aebb04107a0a2576eba5dc26b9f937d27a1710dd16"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-macros.jsonl.gz",
+      "sha256": "6237425735b1a66d28ab3610a82ab44f1e4504fd8b8d03750e11646dffc2b9e0"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-manifest.json",
+      "sha256": "311c9651755f3efd24c6e7c52acebfb44e4dc119462f0d1cbf42c5a2f76e4dc8"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-returned-type-reachability.jsonl.gz",
+      "sha256": "0d76d6ee9f960d61eb07738ed350257f340ae0bc167a91a6586f428bd5c2e288"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-skipped-ranges.jsonl.gz",
+      "sha256": "f7fff78b64dd38eddf43e646d85b67b86050a08ecad8603d87ca0ecc9c86484b"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/global/occt-unsupported.jsonl.gz",
+      "sha256": "138c795fcb72b5374e12a79e6d9e58f77d8090419e836b1f842a4e17d5e3506a"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/published-baseline-manifest.json",
+      "sha256": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel-report/primary-comparison.jsonl.gz",
+      "sha256": "a38bc176cb4080fb005125e3d80889d9eb06062afa899c240a7c4147a7043020"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel-report/reached-members.jsonl.gz",
+      "sha256": "0f08be2d8c90e6e5fab222957d77f3c5be48f7f604cc0fb21f1fcdfbb5a21f24"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel-report/report.json",
+      "sha256": "40a68c78fca18eb08d1a709202257d7bfb60c0ca513e2d3a310dfd2a9b244935"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-alias-reachability.jsonl.gz",
+      "sha256": "56928d301dca33d31806fe616c574b6116b336b5397bdfb81fa0c1fd101be3ef"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-compiler-summaries.jsonl.gz",
+      "sha256": "977c18242437497e5b59fc6e0e89bdb3de3f71773016e2339a0aaaa8089a3873"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-context-retries.jsonl.gz",
+      "sha256": "6c6d54e5d184bf9bd32f55545f1ea1059dbe68ccf4323a7b8355458f13822791"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-declarations.jsonl.gz",
+      "sha256": "0ccc83161aa8c292fff8db5a56e76f699edb9d6d01c339b3e48da0f5f9147033"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-diagnostics.jsonl.gz",
+      "sha256": "f916c0bf2427df38072a856085633a682039f340ea1fdc5f9a49a715611988a9"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-headers.jsonl.gz",
+      "sha256": "4f8991451564d5ac9576f0cc5d2d3674e853af3a3804b51ef0d80d02682824f9"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-included-files.jsonl.gz",
+      "sha256": "0a424faa421b87dae1f85f46a5a8b9ece3ca05935aa80b3aaca4106288db16cd"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-macros.jsonl.gz",
+      "sha256": "0bcfab8c52cdc635c172041a43a1bc2e920802d24b63510bcb20d4b374e37f5c"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-manifest.json",
+      "sha256": "826ee385cae0c2ad061ec084bf9dac76669c90407d2120d6843d314fbb58f4b5"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-returned-type-reachability.jsonl.gz",
+      "sha256": "5f6ee72a6706429f74e098c3b5140d45911db899883267bfc81b1aa1997b17fa"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-skipped-ranges.jsonl.gz",
+      "sha256": "51fa0d384dfad4a9e7221b6891801244f802e9902e29a6d901529f5d4e659a3c"
+    },
+    {
+      "path": "porting/staged-api-inventory/returned-types-v1/tkernel/occt-unsupported.jsonl.gz",
+      "sha256": "b2716b7190cec4b9cfa704e293d531f5284c8fef605b951b168a450cdea356c6"
+    },
+    {
+      "path": "tools/api_inventory/capture_scope.py",
+      "sha256": "1ed686459cccb5fb1cd6470839326b802d147661d1ff24b6056cda72763a329b"
+    },
+    {
+      "path": "tools/api_inventory/context_replay_plan.py",
+      "sha256": "d1a8870c5b71e6ed2b364884b75282363f06ac352686775ba8f1f39b08cdd7aa"
+    },
+    {
+      "path": "tools/api_inventory/context_replay_run.py",
+      "sha256": "f99f224d621b6d5d49a66ccd021b2bd7cdf6dfb9d1721e6b2feb0b17aca83aa2"
+    },
+    {
+      "path": "tools/api_inventory/context_retries.py",
+      "sha256": "1a75e3b39c52b45a66c7a2550c937f4342643cfe183f0faabe5e9b88aab7a308"
+    },
+    {
+      "path": "tools/api_inventory/inputs.py",
+      "sha256": "89f6b43239c663074e59e55fbd956853f12a514c1a35d0dd1b2099d7022d306f"
+    },
+    {
+      "path": "tools/api_inventory/merge.py",
+      "sha256": "df457cf3f2ab889d2ab6b8344996d5f879e66f04e939037c4eaa846d533ce8c3"
+    },
+    {
+      "path": "tools/api_inventory/returned_reachability.py",
+      "sha256": "87dae0f60dfbb6786d8d23e80bb6bf0c55ed9fc5e62ffbe5eddc891cbbb1ad1e"
+    },
+    {
+      "path": "tools/api_inventory/src/InventoryVisitor.cpp",
+      "sha256": "2292ed1d27dfe4438ce7f72011a97591cab48303b455c45855a328b07b7b1015"
+    },
+    {
+      "path": "tools/api_inventory/src/ReturnedTypeReachability.cpp",
+      "sha256": "a40273040ab7b8b3dd8f29be97f38ab52a38fa18db2835ab94d9703fe1186605"
+    },
+    {
+      "path": "tools/api_inventory/src/Schema.cpp",
+      "sha256": "93fe46b89542ef5a2627ae167fed449c6908f71829178a71205f095a870fc1c2"
+    },
+    {
+      "path": "tools/capture_occt_inventory.py",
+      "sha256": "e601e6b5e4f79b0c961929dce0289b0ebe770c7d3b98453a526fabdc8a45febd"
+    },
+    {
+      "path": "tools/merge_occt_inventory.py",
+      "sha256": "e176d806b5df6b2467d97e157d569986f0f3df189eff7f8d882161fdf73ec554"
+    },
+    {
+      "path": "tools/rebind_occt_context_plan.py",
+      "sha256": "42abd2fe5c14265c64b0377f6ed18d38211b05f2ab9f990420091ce3eda5cd8a"
+    },
+    {
+      "path": "tools/report_returned_type_inventory.py",
+      "sha256": "0bce7399514e3cca9487e9e2a5b743c8667cf32233c448f421a36056526a65f2"
+    },
+    {
+      "path": "tools/retry_occt_header_context.py",
+      "sha256": "173a0cd9014471330980028fc8ba5380cda7d930fcfe639001416a5c9d49a5bb"
+    },
+    {
+      "path": "tools/tests/test_occt_capture_scope.py",
+      "sha256": "c81b918351945bd3c09a46e1006990a6e81edc41655a12cdb15e3f014df7cd6f"
+    },
+    {
+      "path": "tools/tests/test_occt_retry_scope.py",
+      "sha256": "dd8129f5dac6a676d9c161277afedc660e8946b78a3ddf82f2e83d58709af7ce"
+    },
+    {
+      "path": "tools/tests/test_rebind_occt_context_plan.py",
+      "sha256": "3d4589caad9162596e9f3689afa5a0d15f6cb73035d13d517967bd5ae1858ac1"
+    },
+    {
+      "path": "tools/tests/test_returned_inventory_artifacts.py",
+      "sha256": "bca7c0055a191afa0a2e0ffa8293ee3a83839771c580d6df1fc8078b74361989"
+    },
+    {
+      "path": "tools/tests/test_returned_recapture_replay.py",
+      "sha256": "5cd317336a79f06c4d2b2b36b52a5e38d39193ebc187f4a7ec5900ac10ef6400"
+    },
+    {
+      "path": "tools/tests/test_returned_type_scope_report.py",
+      "sha256": "d0e96009471454a50158be1dee23ef259af1befa5b82e29450c8aa502110d3ba"
+    },
+    {
+      "path": "tools/verify_returned_private_reachability.py",
+      "sha256": "4cb80ff53c7a93eb719185599d8324f71520537c4f100c666b4b9d145df0625d"
+    },
+    {
+      "path": "tools/verify_returned_type_recapture.py",
+      "sha256": "c2fbc2cc369d2f530d2f3ba04033aa406c97c89eb59cfe6ca17946c6a0f0515b"
+    }
+  ]
+}
