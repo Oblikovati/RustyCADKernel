@@ -18,18 +18,32 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
     /// assert!(!map.are_bound(&1, &5)); // native answer, although (1, 5) is bound
     /// ```
     pub fn are_bound(&self, first: &A, second: &B) -> bool {
-        let Some(found) = self.lookup1(first) else {
+        if self.is_empty() {
+            return false;
+        }
+        let one = self.first_policy.hash(first) % self.bucket_count() + 1;
+        let two = self.second_policy.hash(second) % self.bucket_count() + 1;
+        let Some(found) = self.match_first(one, first) else {
             return false;
         };
-        let bucket = self.second_policy.hash(second) % self.bucket_count + 1;
-        let mut node = self.second_buckets[bucket].first().copied();
-        while let Some(slot) = node {
-            if self.second_policy.equal(&self.pair(slot).second, second) {
-                return slot == found;
+        self.match_second_through_primary(two, second) == Some(found)
+    }
+    fn match_second_through_primary(
+        &self,
+        bucket: usize,
+        second: &B,
+    ) -> Option<*mut super::MapLinkNode> {
+        let mut node = self.storage.head(bucket, true);
+        while !node.is_null() {
+            if self
+                .second_policy
+                .equal(unsafe { self.storage.node(node) }.key2(), second)
+            {
+                return Some(node);
             }
-            node = self.next_in_first_chain(slot);
+            node = unsafe { (*node).next() };
         }
-        false
+        None
     }
 
     /// `Find1(key1, key2&)`: copies the partner of a bound first key into `output`.
@@ -83,21 +97,6 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
     /// assert!(map.is_empty() && map.allocator() == &BaseAllocator::common());
     /// ```
     pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
-        self.clear(true);
-        self.resource = resource.unwrap_or_else(BaseAllocator::common);
-    }
-
-    /// The node after `slot` in its first-key bucket chain (the native `Next()` link).
-    fn next_in_first_chain(&self, slot: usize) -> Option<usize> {
-        let bucket = self.first_policy.hash(&self.pair(slot).first) % self.bucket_count + 1;
-        let chain = &self.first_buckets[bucket];
-        let position = chain.iter().position(|&entry| entry == slot)?;
-        chain.get(position + 1).copied()
-    }
-
-    fn pair(&self, slot: usize) -> &super::Pair<A, B> {
-        self.slots[slot]
-            .as_ref()
-            .expect("bucket chains hold live pairs only")
+        self.storage.clear_with_allocator(resource);
     }
 }

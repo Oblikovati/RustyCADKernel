@@ -1,6 +1,6 @@
 //! `NCollection_DoubleMap::Iterator`: the More/Next cursor over first-key bucket order.
 use super::super::base_map::exhausted_iterator;
-use super::{Debug, DoubleMap, DoubleMapItems, HashPolicy, Pair};
+use super::{Debug, DoubleMap, DoubleMapItems, DoubleMapNode, HashPolicy};
 use crate::standard::Failure;
 
 /// A read-only OCCT `DoubleMap::Iterator`; `let mut it = map.cursor();`.
@@ -36,15 +36,15 @@ impl<'a, A, B> DoubleMapIterator<'a, A, B> {
     }
     /// `Key1`: the current first key, or Standard_NoSuchObject past the end.
     pub fn key1(&self) -> Result<&'a A, Failure> {
-        Ok(&self.pair("NCollection_DoubleMap::Iterator::Key1")?.first)
+        Ok(self.pair("NCollection_DoubleMap::Iterator::Key1")?.key1())
     }
     /// `Key2`: the current second key, or Standard_NoSuchObject past the end.
     pub fn key2(&self) -> Result<&'a B, Failure> {
-        Ok(&self.pair("NCollection_DoubleMap::Iterator::Key2")?.second)
+        Ok(self.pair("NCollection_DoubleMap::Iterator::Key2")?.key2())
     }
     /// `Value`: the current second key (the map's value type), or Standard_NoSuchObject.
     pub fn value(&self) -> Result<&'a B, Failure> {
-        Ok(&self.pair("NCollection_DoubleMap::Iterator::Value")?.second)
+        Ok(self.pair("NCollection_DoubleMap::Iterator::Value")?.value())
     }
     /// `Initialize(const NCollection_DoubleMap&)`: restarts on another map.
     pub fn initialize<H1: HashPolicy<A>, H2: HashPolicy<B>>(
@@ -58,22 +58,15 @@ impl<'a, A, B> DoubleMapIterator<'a, A, B> {
     }
     /// `Reset`: restarts on the map the cursor was created for.
     pub fn reset(&mut self) {
-        self.pairs.bucket = 0;
-        self.pairs.index = 0;
-        self.pairs.seek();
+        self.pairs.reset();
     }
     /// `IsEqual`: both cursors are on the same pair, or both are past the end.
     pub fn is_equal(&self, other: &Self) -> bool {
         self.pairs == other.pairs
     }
-    fn pair(&self, method: &str) -> Result<&'a Pair<A, B>, Failure> {
-        let slot = self
-            .pairs
-            .buckets
-            .get(self.pairs.bucket)
-            .and_then(|bucket| bucket.get(self.pairs.index));
-        let pair = slot.and_then(|&slot| self.pairs.slots[slot].as_ref());
-        pair.map(|node| &**node)
+    fn pair(&self, method: &str) -> Result<&'a DoubleMapNode<A, B>, Failure> {
+        self.pairs
+            .current()
             .ok_or_else(|| exhausted_iterator(method))
     }
 }
@@ -82,12 +75,7 @@ impl<'a, A, B> DoubleMapIterator<'a, A, B> {
 impl<A, B> Default for DoubleMapIterator<'_, A, B> {
     fn default() -> Self {
         Self {
-            pairs: DoubleMapItems {
-                slots: &[],
-                buckets: &[],
-                bucket: 0,
-                index: 0,
-            },
+            pairs: DoubleMapItems::default(),
         }
     }
 }

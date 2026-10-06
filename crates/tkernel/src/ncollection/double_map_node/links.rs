@@ -18,4 +18,8 @@ impl<K, V> DoubleMapNode<K, V> {
     pub fn next2_value(&self) -> *mut Self {
         self.second_next
     }
+    pub(in crate::ncollection) unsafe fn set_second_link(node: *mut Self, next: *mut Self) {
+        // SAFETY: caller owns the live node's link mutation; write only Next2, preserving key tags.
+        unsafe { std::ptr::addr_of_mut!((*node).second_next).write(next) };
+    }
 }
