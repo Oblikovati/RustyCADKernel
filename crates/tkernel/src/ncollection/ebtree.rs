@@ -1,6 +1,6 @@
 //! Editable bounding tree maintains object-to-leaf bindings through node moves.
 use super::{BaseAllocator, BoundingNode, BoundingVolume, DataMap, HashKey, TreeSelector, UBTree};
-use crate::standard::Failure;
+use crate::{ncollection::destructor_unwind::DeferredDestructorPanic, standard::Failure};
 /// Unique objects with indexed removal; `EBTree::<i32, Bounds>::default()`.
 pub struct EBTree<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolume> {
     tree: UBTree<T, B>,
@@ -90,9 +90,19 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
     }
     /// Release nodes and bindings, then adopt `allocator` for future nodes when given
     /// (native `Clear(aNewAlloc)`); `tree.clear_with_allocator(Some(arena))`.
+    /// Rust destructor panics drain both structures and retain the original allocator.
     pub fn clear_with_allocator(&mut self, allocator: Option<BaseAllocator>) {
-        self.objects.clear(false);
-        self.tree.clear_with_allocator(allocator);
+        self.clear_object_index_and_nodes();
+        if let Some(resource) = allocator {
+            self.tree.clear_with_allocator(Some(resource));
+        }
+    }
+    fn clear_object_index_and_nodes(&mut self) {
+        let mut destructor_panics = DeferredDestructorPanic::default();
+        destructor_panics.capture(|| self.objects.clear(false));
+        destructor_panics.capture(|| self.tree.clear());
+        // Keep the graph and index consistent even when a map-key destructor unwinds.
+        destructor_panics.finish(Ok(()));
     }
     /// The underlying UBTree, for the inherited read-only members (`Root`, `IsEmpty`,
     /// `Allocator`, `Select`); `tree.as_ubtree().root()`.
@@ -104,9 +114,12 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
         let replacement: Self = Self::with_allocator(source.tree.allocator().clone());
         std::mem::replace(source, replacement)
     }
-    /// Replace old nodes with the source; `tree.move_assign(&mut source)`.
+    /// Clear the destination index and nodes before exchange; `tree.move_assign(&mut source)`.
+    /// The source receives the empty destination storage and its original allocator.
     pub fn move_assign(&mut self, source: &mut Self) -> &mut Self {
-        *self = Self::move_from(source);
+        // OCCT 3d097a0328 dispatches virtual Clear, then swaps base handles and map storage.
+        self.clear();
+        std::mem::swap(self, source);
         self
     }
     /// Preserves move self-assignment without aliasing references; `tree.move_assign_self()`.

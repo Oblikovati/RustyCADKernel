@@ -1,0 +1,13 @@
+clear DO1,DO2,DO3,DO0,DB2,DO0,DB3,DO1,DB1,DO3,DB3,DO2,DB2, 1
+assign 0 0 empty 1 1 1 1 1 1 1
+bindings 0 0 1 1 1
+assign 0 1 empty 1 1 1 1 1 1 1
+bindings 0 1 1 1 1
+assign 1 0 DO1,DO2,DO3,DO0,DB2,DO0,DB3,DO1,DB1,DO3,DB3,DO2,DB2, 1 1 1 1 1 1 1
+bindings 1 0 1 1 1
+assign 1 1 DO1,DO2,DO3,DO0,DB2,DO0,DB3,DO1,DB1,DO3,DB3,DO2,DB2, 1 1 1 1 1 1 1
+bindings 1 1 1 1 1
+self 0 empty 1 1 1
+self 1 empty 1 1 1
+clear_replace 0 empty 1 1
+clear_replace 1 DO1,DO2,DO3,DO0,DB2,DO0,DB3,DO1,DB1,DO3,DB3,DO2,DB2, 1 1
