@@ -7,6 +7,7 @@ mod erase_policy;
 mod insert_policy;
 mod pointers;
 mod relocation;
+mod resize_policy;
 mod trivial_assignment;
 
 struct LengthRollback<'a, T> {
@@ -235,6 +236,7 @@ impl<T: Default> LinearVector<T> {
         self.push_reserved_item(T::default())
     }
     /// Resizes, default-constructing new values; `vector.resize(10)`.
+    /// Use `resize_with_relocation` for observable native relocation callbacks.
     pub fn resize(&mut self, size: usize) {
         self.resize_with_constructor(size, T::default);
     }
