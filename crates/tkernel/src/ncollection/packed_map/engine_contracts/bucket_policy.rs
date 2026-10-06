@@ -1,6 +1,8 @@
 //! Exact native allocation-boundary traces; injected failure is not host heap exhaustion.
 use super::{PackedInteger, PackedMap, PackedWord, pointers};
+mod fixture_index;
 use crate::ncollection::packed_map::storage::allocation::observation::capture;
+use fixture_index::{NativeBucketRows, native_bucket_rows};
 fn keys<T: PackedInteger>() -> [T; 9] {
     [0, 1, 31, 32, 63, 64, 3232, 6464, u64::MAX].map(T::from_bits)
 }
@@ -74,8 +76,7 @@ fn retained_nodes<T: PackedInteger>(
     before.len() == after.len() && before.iter().all(|node| after.contains(node))
 }
 fn native_bucket_policy<T: PackedInteger>(name: &str) {
-    let fixture =
-        include_str!("../../../../../../tools/oracle/tkernel_packed_map_bucket_policy.expected");
+    let fixture = native_bucket_rows();
     for state in 0..5 {
         for (index, request) in [0, 1000, 1009, usize::MAX].into_iter().enumerate() {
             check_request::<T>(fixture, name, state, index, request);
@@ -83,7 +84,7 @@ fn native_bucket_policy<T: PackedInteger>(name: &str) {
     }
 }
 fn check_request<T: PackedInteger>(
-    fixture: &str,
+    fixture: &NativeBucketRows,
     name: &str,
     state: usize,
     index: usize,
@@ -92,10 +93,9 @@ fn check_request<T: PackedInteger>(
     for fail in [false, true] {
         let key = format!("{name}:{state}:{index}:{}", u8::from(fail));
         let expected = fixture
-            .lines()
-            .find_map(|line| line.strip_prefix(&format!("{key} ")))
-            .unwrap();
-        assert_eq!(scenario::<T>(state, request, fail), expected, "{key}");
+            .get(key.as_str())
+            .unwrap_or_else(|| panic!("native row {key}: expected a unique oracle fixture entry"));
+        assert_eq!(scenario::<T>(state, request, fail), *expected, "{key}");
     }
 }
 macro_rules! widths {
