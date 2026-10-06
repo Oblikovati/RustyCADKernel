@@ -10,6 +10,7 @@ import pathlib
 from dataclasses import dataclass
 
 from api_inventory.capture import CaptureContext, run_header_jobs
+from api_inventory.capture_scope import scoped_commands, scoped_manifest
 from api_inventory.dependencies import (
     compiler_library_fingerprints,
     external_include_fingerprints,
@@ -53,6 +54,12 @@ def arguments() -> argparse.Namespace:
     )
     for name, default in (("jobs", 8), ("timeout", 120), ("limit", 0)):
         parser.add_argument(f"--{name}", type=int, default=default)
+    parser.add_argument(
+        "--toolkit",
+        action="append",
+        default=[],
+        help="Capture only these toolkit owners (repeatable); default: every manifest header",
+    )
     parsed = parser.parse_args()
     if parsed.jobs < 1 or parsed.timeout < 1 or parsed.limit < 0:
         parser.error("jobs and timeout must be positive; limit must be nonnegative")
@@ -80,6 +87,7 @@ def base_inputs(args: argparse.Namespace) -> JSONObject:
 def capture_inputs(args: argparse.Namespace) -> JSONObject:
     """Bind evidence to configuration and tools; e.g. `capture_inputs(args)`."""
     inputs = base_inputs(args)
+    inputs["requested_toolkits"] = sorted(set(args.toolkit))
     inputs["sdk_headers"] = sdk_fingerprints(args.llvm_root)
     inputs["compiler_libraries"] = compiler_library_fingerprints(args.llvm_root)
     inputs["external_headers"] = external_include_fingerprints(
@@ -98,7 +106,7 @@ def add_generated_header(
     jobs: list[HeaderJob], coverage: list[JSONObject], args: argparse.Namespace
 ) -> None:
     """Probe the configured version header, retaining its distinct generated identity."""
-    native = args.database.parent / "include/opencascade/Standard_Version.hxx"
+    native = args.database.resolve().parent / "include/opencascade/Standard_Version.hxx"
     template = next(job for job in jobs if job.toolkit == "TKernel")
     identity = "@generated/Standard_Version.hxx"
     jobs.append(
@@ -121,8 +129,12 @@ def make_capture_plan(args: argparse.Namespace) -> CapturePlan:
         json.dumps(inputs, sort_keys=True).encode()
     ).hexdigest()
     commands = toolkit_commands(args.database, args.source.resolve())
-    jobs, coverage = select_header_jobs(manifest, commands)
-    add_generated_header(jobs, coverage, args)
+    selected = scoped_manifest(manifest, args.toolkit)
+    jobs, coverage = select_header_jobs(
+        selected, scoped_commands(commands, args.toolkit)
+    )
+    if any(job.toolkit == "TKernel" for job in jobs):
+        add_generated_header(jobs, coverage, args)
     context = CaptureContext(
         args.source.resolve(),
         args.extractor.resolve(),

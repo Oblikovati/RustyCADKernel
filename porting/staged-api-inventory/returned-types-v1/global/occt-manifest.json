@@ -1,0 +1,157 @@
+{
+  "schema": "occt-declaration-inventory-v1",
+  "inputs": {
+    "manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "database_sha256": "b4ddcffd211e937778c34371ba303efedbed8670883253b405ad58a0668d4a48",
+    "extractor_sha256": "6995709a196005b17a1bbbb1c8684728a0b6e827735df6ed3b615916341ee8c4",
+    "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
+    "cmake_cache_sha256": "ca1eb676fed291cf92873e2f0be8db026347ff21ed0096663d923256235706a0",
+    "generated_version_sha256": "c08af7e65b838a84fde395a55be184e079136a3cdf12f826a42c79da1666a1fc",
+    "file_inputs": {
+      "manifest": "/tmp/rustycad-tkernel-returned-type-recapture/porting/api-header-manifest.json",
+      "database": "/tmp/rustycad-tkernel-returned-type-recapture/target/api-proof/occt-build/compile_commands.json",
+      "extractor": "/tmp/rustycad-tkernel-returned-type-recapture/target/returned-reachability/extractor/occt-api-extract",
+      "toolchain_config": "/tmp/rustycad-tkernel-returned-type-recapture/porting/api-proof-toolchain.json",
+      "cmake_cache": "/tmp/rustycad-tkernel-returned-type-recapture/target/api-proof/occt-build/CMakeCache.txt",
+      "generated_version": "/tmp/rustycad-tkernel-returned-type-recapture/target/api-proof/occt-build/include/opencascade/Standard_Version.hxx"
+    },
+    "source": "/home/vmiguel/git/oblikovati-workspace/OCCT",
+    "generated_version_path": "/tmp/rustycad-tkernel-returned-type-recapture/target/api-proof/occt-build/include/opencascade/Standard_Version.hxx",
+    "requested_toolkits": [],
+    "sdk_headers": [
+      {
+        "root": "/usr/include",
+        "files": 4282,
+        "sha256": "880afe0f69e79cd9e787b2b1b4c9f0a720cab1d9e65e19938f8fd3100312b849"
+      },
+      {
+        "root": "/usr/local/include",
+        "files": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "root": "/home/vmiguel/.cache/rustycad-api-proof/llvm-23.1.2/lib/clang/23/include",
+        "files": 327,
+        "sha256": "6995ecc0260d2eee4fc7909689ca3a0eff2d36df04fb6f46621f662239b0d960"
+      }
+    ],
+    "compiler_libraries": [
+      {
+        "path": "/home/vmiguel/.cache/rustycad-api-proof/llvm-23.1.2/lib/libclang-cpp.so.23.1",
+        "sha256": "255add214d5aea3a28c8ba9dc5caf0b3e5a480bfc720ffe672597766b1340120"
+      }
+    ],
+    "external_headers": [
+      {
+        "root": "/home/vmiguel/.cache/rustycad-api-proof/deps/rapidjson-1.1.0/usr/include",
+        "files": 35,
+        "sha256": "474d444e61549f1cbec51ced309d260caf9e75ba51b0a490cb75131bb42e7655"
+      }
+    ],
+    "collector_sha256": "83941dcb9b0560ec9e247e7abfb539ba67afb6b1a8a736d3d172a64281cf96d0"
+  },
+  "capture_fingerprint": "736e8570e06d7a43b037b19eb7c0ebc7b86804af2eb3648c575bc82f7271b3f8",
+  "context_retry_sha256": "7fc8448c05ffb0641f78d2bc8a2af88bb8f9ea09be3f3003a20e84d775d67e79",
+  "expected_headers": 6317,
+  "headers_by_status": {
+    "parsed": 5639,
+    "included_fragment": 384,
+    "parsed_with_context": 260,
+    "parse_failed": 6,
+    "missing_compile_configuration": 28
+  },
+  "declarations": 271643,
+  "api_declarations": 108622,
+  "alias_reachability_records": 40,
+  "alias_reachability_members": 239,
+  "returned_type_reachability_records": 7352,
+  "returned_type_reachability_complete": false,
+  "macro_definitions": 12385,
+  "macro_candidates": 6465,
+  "declarations_by_kind": {
+    "Namespace": 53,
+    "Function": 900,
+    "FunctionTemplate": 644,
+    "CXXRecord": 5754,
+    "CXXMethod": 73779,
+    "ClassTemplateSpecialization": 128,
+    "CXXConstructor": 8020,
+    "Typedef": 5914,
+    "Enum": 630,
+    "EnumConstant": 4662,
+    "Field": 5562,
+    "CXXConversion": 173,
+    "CXXDestructor": 504,
+    "ClassTemplate": 228,
+    "Var": 185,
+    "TypeAlias": 604,
+    "ClassTemplatePartialSpecialization": 39,
+    "UnresolvedUsingValue": 6,
+    "UsingDirective": 29,
+    "Using": 806,
+    "TypeAliasTemplate": 2
+  },
+  "unsupported_records": 5224,
+  "diagnostics": 7807,
+  "skipped_ranges": 1094,
+  "configuration_matrix_complete": false,
+  "declaration_inventory_complete": false,
+  "coverage_proof": false,
+  "artifacts": {
+    "declarations": {
+      "path": "occt-declarations.jsonl.gz",
+      "sha256": "745ff418a4ce93c0be166f074bac5daa4474f09b4941403e5b9cd193462538f3",
+      "rows": 271643
+    },
+    "alias-reachability": {
+      "path": "occt-alias-reachability.jsonl.gz",
+      "sha256": "76f3c7d699cd2834acd7601a06cd88351fe1276be92e373ad3c41e7ad59b82d5",
+      "rows": 40
+    },
+    "returned-type-reachability": {
+      "path": "occt-returned-type-reachability.jsonl.gz",
+      "sha256": "0d76d6ee9f960d61eb07738ed350257f340ae0bc167a91a6586f428bd5c2e288",
+      "rows": 7352
+    },
+    "macros": {
+      "path": "occt-macros.jsonl.gz",
+      "sha256": "6237425735b1a66d28ab3610a82ab44f1e4504fd8b8d03750e11646dffc2b9e0",
+      "rows": 12385
+    },
+    "headers": {
+      "path": "occt-headers.jsonl.gz",
+      "sha256": "f6360706da3e81219c3cec0a4ba8a618a8d14cf0f4bb2ad1a8dd56fda4407077",
+      "rows": 6317
+    },
+    "diagnostics": {
+      "path": "occt-diagnostics.jsonl.gz",
+      "sha256": "cf9ec6187aa992bae154fe585008b6340cfc6a1318c14350c6014d076b77cc97",
+      "rows": 7807
+    },
+    "unsupported": {
+      "path": "occt-unsupported.jsonl.gz",
+      "sha256": "138c795fcb72b5374e12a79e6d9e58f77d8090419e836b1f842a4e17d5e3506a",
+      "rows": 5224
+    },
+    "skipped-ranges": {
+      "path": "occt-skipped-ranges.jsonl.gz",
+      "sha256": "f7fff78b64dd38eddf43e646d85b67b86050a08ecad8603d87ca0ecc9c86484b",
+      "rows": 1094
+    },
+    "compiler-summaries": {
+      "path": "occt-compiler-summaries.jsonl.gz",
+      "sha256": "c14e4aa2d2360fd6bed38e2b60e24a48a9dd71485f2135a902d1c9ad6a66d93f",
+      "rows": 5899
+    },
+    "context-retries": {
+      "path": "occt-context-retries.jsonl.gz",
+      "sha256": "3c361bcb1073f74a3edbad14cbd2004d9806f18614c1a4a65cac5d6c34031375",
+      "rows": 266
+    },
+    "included-files": {
+      "path": "occt-included-files.jsonl.gz",
+      "sha256": "960daaf51cbf96e944bdd5aebb04107a0a2576eba5dc26b9f937d27a1710dd16",
+      "rows": 10618
+    }
+  }
+}
