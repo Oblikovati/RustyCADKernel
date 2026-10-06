@@ -22,6 +22,7 @@ impl<T> Default for DynamicArray<T> {
 }
 mod emplacement;
 mod legacy_cursor;
+mod method_tail;
 pub use legacy_cursor::DynamicArrayIterator;
 impl<T> DynamicArray<T> {
     /// Selects initial block size, rounded up to a power of two; `DynamicArray::<i32>::with_increment(5)`.
@@ -71,7 +72,7 @@ impl<T> DynamicArray<T> {
         if !self.is_empty() {
             return;
         }
-        self.blocks.clear();
+        // OCCT keeps allocated blocks when changing the stride of an empty array.
         self.increment = increment.max(1).next_power_of_two();
     }
     /// Appends without moving existing elements; `array.append(42)`.
@@ -216,7 +217,7 @@ impl<T> DynamicArray<T> {
 impl<T: Default> DynamicArray<T> {
     /// Appends a default value; `*array.appended() = 42`.
     pub fn appended(&mut self) -> &mut T {
-        self.append(T::default())
+        self.emplace_append(T::default)
     }
     /// Overwrites or extends, default-constructing gaps; `array.set_value(5,42)?`.
     pub fn set_value<I: TryInto<usize> + Copy + Debug>(
@@ -224,14 +225,7 @@ impl<T: Default> DynamicArray<T> {
         index: I,
         value: T,
     ) -> Result<&mut T, ArrayError> {
-        let index = checked_index(index)?;
-        self.fill_default_gap(index);
-        if self.used == index {
-            return Ok(self.append(value));
-        }
-        let slot = self.change_value(index)?;
-        *slot = value;
-        Ok(slot)
+        self.emplace_value(index, || value)
     }
     /// Inserts before an existing index; `array.insert_before(1,42)?`.
     pub fn insert_before<I: TryInto<usize> + Copy + Debug>(
@@ -258,11 +252,6 @@ impl<T: Default> DynamicArray<T> {
         }
         self.insert_at(index + 1, value);
         self.change_value(index + 1)
-    }
-    fn fill_default_gap(&mut self, index: usize) {
-        while self.used < index {
-            self.appended();
-        }
     }
     fn insert_at(&mut self, index: usize, value: T) {
         self.append(value);

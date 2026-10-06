@@ -175,3 +175,9 @@ pub use items_view::{
     ItemsIterator, ItemsSource, ItemsSourceMut, ItemsView, ItemsViewMut, KeyIndexItems,
     KeyValueIndexItems, KeyValueItems,
 };
+
+/// Deprecated OCCT Vector name for segmented DynamicArray storage; `Vector::<i32>::default()`.
+#[deprecated(
+    note = "OCCT 8.0 renamed NCollection_Vector to NCollection_DynamicArray; use DynamicArray"
+)]
+pub type Vector<T> = DynamicArray<T>;

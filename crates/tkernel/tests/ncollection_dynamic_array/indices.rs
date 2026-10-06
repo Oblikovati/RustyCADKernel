@@ -1,11 +1,11 @@
 #[test]
 fn NCollection_DynamicArrayTest__SizeReturnsSizeT() {
     let mut array = DynamicArray::default();
-    let size: usize = array.len();
+    let size: usize = array.size();
     assert_eq!(size, 0);
     array.append(42);
     array.append(43);
-    assert_eq!(array.len(), 2_usize);
+    assert_eq!(array.size(), 2_usize);
 }
 #[test]
 fn NCollection_DynamicArrayTest__LengthStillReturnsInt() {
@@ -25,7 +25,7 @@ fn NCollection_DynamicArrayTest__UpperReturnsMinusOneForEmpty() {
 fn NCollection_DynamicArrayTest__SizeTConstructor() {
     let mut array = DynamicArray::with_increment(128_usize);
     array.append(1);
-    assert_eq!(array.len(), 1_usize);
+    assert_eq!(array.size(), 1_usize);
 }
 #[test]
 fn NCollection_DynamicArrayTest__SizeTValueAccess() {
@@ -42,14 +42,14 @@ fn NCollection_DynamicArrayTest__SizeTValueAccess() {
 fn NCollection_DynamicArrayTest__SizeTSetValueExtends() {
     let mut array = DynamicArray::default();
     array.set_value(5_usize, 99).unwrap();
-    assert_eq!(array.len(), 6);
+    assert_eq!(array.size(), 6);
     assert_eq!(*array.value(5_usize).unwrap(), 99);
 }
 #[test]
 fn NCollection_DynamicArrayTest__SizeTEmplaceValue() {
     let mut array = DynamicArray::default();
     array.emplace_value(3_usize, || (1, 2.5)).unwrap();
-    assert_eq!(array.len(), 4);
+    assert_eq!(array.size(), 4);
     assert_eq!(array[3].0, 1);
     assert_eq!(array[3].1, 2.5);
 }
@@ -57,20 +57,32 @@ fn NCollection_DynamicArrayTest__SizeTEmplaceValue() {
 fn NCollection_DynamicArrayTest__SizeTInsertBeforeAfter() {
     let mut array = values(&[0, 1, 2]);
     array.insert_before(1_usize, 99).unwrap();
-    assert_eq!(array.len(), 4);
+    assert_eq!(array.size(), 4);
     assert_eq!(array[1], 99);
     assert_eq!(array[2], 1);
     array.insert_after(0_usize, 42).unwrap();
-    assert_eq!(array.len(), 5);
+    assert_eq!(array.size(), 5);
     assert_eq!(array[1], 42);
 }
 #[test]
 fn NCollection_DynamicArrayTest__IntOverloadGuardsNegative() {
     let mut array = values(&[1]);
-    assert!(array.set_value(-1, 99).is_err());
-    assert!(array.insert_before(-1, 99).is_err());
-    assert!(array.insert_after(-1, 99).is_err());
-    assert!(array.emplace_value(-1, || 99).is_err());
+    assert!(matches!(
+        array.set_value(-1, 99),
+        Err(rustycad_tkernel::ncollection::ArrayError::Index { index: -1, .. })
+    ));
+    assert!(matches!(
+        array.insert_before(-1, 99),
+        Err(rustycad_tkernel::ncollection::ArrayError::Index { index: -1, .. })
+    ));
+    assert!(matches!(
+        array.insert_after(-1, 99),
+        Err(rustycad_tkernel::ncollection::ArrayError::Index { index: -1, .. })
+    ));
+    assert!(matches!(
+        array.emplace_value(-1, || 99),
+        Err(rustycad_tkernel::ncollection::ArrayError::Index { index: -1, .. })
+    ));
 }
 #[test]
 fn NCollection_DynamicArrayTest__IntAndSizeTOverloadsAgree() {
@@ -80,7 +92,7 @@ fn NCollection_DynamicArrayTest__IntAndSizeTOverloadsAgree() {
         integer.set_value(index, index * 3).unwrap();
         size.set_value(index as usize, index * 3).unwrap();
     }
-    assert_eq!(integer.len(), size.len());
+    assert_eq!(integer.size(), size.size());
     for index in 0..20 {
         assert_eq!(
             integer.value(index).unwrap(),
