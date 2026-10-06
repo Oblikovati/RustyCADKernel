@@ -2,6 +2,9 @@
 use super::{ArrayError, DynamicArray, emplacement::forget_block_values_after};
 use crate::standard::Failure;
 
+#[allow(unsafe_code)]
+mod raw_lifetime;
+
 /// Exclusively borrows the array for OCCT's protected block operations.
 /// `let mut storage = array.storage_extension(); storage.ensure_block_count(2, size_of::<i32>())?;`
 /// Raw pointer access never creates references to uninitialized block capacity.

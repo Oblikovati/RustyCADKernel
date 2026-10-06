@@ -1,0 +1,217 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "status": "partial_branch_pending_integration",
+  "branch": "port/dynamic-raw-lifetime",
+  "base_commit": "aa22e329",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension.rs": "a8f6c071822d272600dacd397e138484272e9f2e1bd285baa55b2d54964a0a91",
+    "crates/tkernel/src/ncollection/dynamic_array/storage_extension/raw_lifetime.rs": "41c54363d5db8df1db15c1daad9bd398c4a37902364d657b0a9c6bd172cc5ebd",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime.rs": "04d2991938e0f58511110dccc7542d3ae7f0e17775df325c246daf44db80b884",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime/contracts.rs": "9e73e8402dbd5172c7af2e4e0823ffe9e4aa571bbaf9aa2d0f8f49b2ff3d2e90",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime/oracle.rs": "232802eb0f7214040bd16dad06b40b7264e6bebb10de3da92a5ca7b48ae5f48d",
+    "tools/oracle/tkernel_dynamic_raw_lifetime.cxx": "7303efbe08fa4ae94c7eec9bbeab6e49fb17ca3317a7b9ea1db33bc04ccf1f21",
+    "tools/oracle/tkernel_dynamic_raw_lifetime.expected": "fac0dfecc3cf2cff3944d4a179b78a1dede4b3baa8eb0c72b2873b14137345fc"
+  },
+  "upstream_sha256": {
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f",
+    "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/GTests/NCollection_DynamicArray_Test.cxx": "78f4686c5d767b7a8111b7671223983193f73302ce712f2738f13280f8730bcc"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/dynamic-raw-lifetime-focused.log.gz": "36662c1586ab443236b1e53fd29e8dee62e88b796e99a061d3c6833abf7d9b00",
+    "porting/runtime-evidence/dynamic-raw-lifetime-miri-strict.log.gz": "b90a70310f2574b8435c129ef6124a443b21ee3cabb446af69cd52adee1efcf9",
+    "porting/runtime-evidence/dynamic-raw-lifetime-clippy.log.gz": "49802a64fed144486563ac8f6e1be809f86541ec8761bd5d21f43e577ef94b7e",
+    "porting/runtime-evidence/dynamic-raw-lifetime-native.log.gz": "fdba65ee8a7a85c2175c6b3ca498f47a92af7623adae9e9b5517fa5a4af39652",
+    "porting/runtime-evidence/dynamic-raw-lifetime-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-raw-lifetime-oracle-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/dynamic-raw-lifetime-oracle-runtime.log.gz": "da2bce564b6d3f0e9db3bca13e5798254c7574b6b522f36d8d00aef9ae17920c",
+    "porting/runtime-evidence/dynamic-raw-lifetime-source.tar.gz": "dac7bb65174c4c23651df75e2c6a44ebcd8c97c36191f170fd20d21b67d92f9c"
+  },
+  "source_scope": "Frozen raw-lifetime extension submodule/tests and native fixture. Root integration supplies full-workspace dependency closure. No global ledger/inventory changes.",
+  "exit_codes": {
+    "focused": 0,
+    "miri-strict": 0,
+    "clippy": 0,
+    "native": 0,
+    "fmt": 0,
+    "oracle-compile": 0,
+    "oracle-runtime": 0
+  },
+  "focused_rust_passes": 113,
+  "new_test_count": 8,
+  "new_test_names": [
+    "dynamic_array_raw_lifetime::contracts::common_raw_storage_is_separate_from_registered_blocks",
+    "dynamic_array_raw_lifetime::contracts::copy_parameters_rejects_live_and_retained_blocks_without_changes",
+    "dynamic_array_raw_lifetime::contracts::copy_parameters_does_not_copy_values_or_rebind_kept_allocator",
+    "dynamic_array_raw_lifetime::contracts::invalid_publication_preserves_initialized_prefix",
+    "dynamic_array_raw_lifetime::contracts::physical_capacity_is_checked_before_any_length_change",
+    "dynamic_array_raw_lifetime::contracts::shrinking_without_drop_can_be_cleaned_up_explicitly",
+    "dynamic_array_raw_lifetime::contracts::raw_block_size_overflow_leaves_array_and_allocator_unchanged",
+    "dynamic_array_raw_lifetime::oracle::native_raw_lifetime_rows_match_runtime_observations"
+  ],
+  "strict_provenance_miri_passes": 8,
+  "original_native_passes": 52,
+  "original_names_joined": [
+    "NCollection_DynamicArrayTest.DefaultConstructor",
+    "NCollection_DynamicArrayTest.ResizeConstructor",
+    "NCollection_DynamicArrayTest.Append",
+    "NCollection_DynamicArrayTest.SetValue",
+    "NCollection_DynamicArrayTest.Value",
+    "NCollection_DynamicArrayTest.ChangeValue",
+    "NCollection_DynamicArrayTest.FirstLast",
+    "NCollection_DynamicArrayTest.CopyConstructor",
+    "NCollection_DynamicArrayTest.AssignmentOperator",
+    "NCollection_DynamicArrayTest.Clear",
+    "NCollection_DynamicArrayTest.Iterator",
+    "NCollection_DynamicArrayTest.STLIterators",
+    "NCollection_DynamicArrayTest.STLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.IteratorsAcrossBlocks",
+    "NCollection_DynamicArrayTest.ConstSTLIteratorSurvivesAppendAcrossBlocks",
+    "NCollection_DynamicArrayTest.Grow",
+    "NCollection_DynamicArrayTest.Move",
+    "NCollection_DynamicArrayTest.EraseLast",
+    "NCollection_DynamicArrayTest.Appended",
+    "NCollection_DynamicArrayTest.CustomAllocator",
+    "NCollection_DynamicArrayTest.SetIncrement",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_MinMax",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Replace",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Reverse",
+    "NCollection_DynamicArrayTest.STLAlgorithmCompatibility_Sort",
+    "NCollection_DynamicArrayTest.EmplaceAppend",
+    "NCollection_DynamicArrayTest.EmplaceValue",
+    "NCollection_DynamicArrayTest.EmplaceValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.EmplaceWithMoveOnlyType",
+    "NCollection_DynamicArrayTest.ReplaceConstructOnlyType",
+    "NCollection_DynamicArrayTest.EmplaceAppendMany",
+    "NCollection_DynamicArrayTest.SetValue_ReplacesExisting",
+    "NCollection_DynamicArrayTest.InsertAfter_Middle",
+    "NCollection_DynamicArrayTest.InsertAfter_First",
+    "NCollection_DynamicArrayTest.InsertAfter_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_SingleElement",
+    "NCollection_DynamicArrayTest.InsertBefore_Middle",
+    "NCollection_DynamicArrayTest.InsertBefore_First",
+    "NCollection_DynamicArrayTest.InsertBefore_Last",
+    "NCollection_DynamicArrayTest.InsertAfter_MoveSemantics",
+    "NCollection_DynamicArrayTest.InsertAfter_MultipleInserts",
+    "NCollection_DynamicArrayTest.SizeReturnsSizeT",
+    "NCollection_DynamicArrayTest.LengthStillReturnsInt",
+    "NCollection_DynamicArrayTest.UpperReturnsMinusOneForEmpty",
+    "NCollection_DynamicArrayTest.SizeTConstructor",
+    "NCollection_DynamicArrayTest.SizeTValueAccess",
+    "NCollection_DynamicArrayTest.SizeTSetValueExtends",
+    "NCollection_DynamicArrayTest.SizeTEmplaceValue",
+    "NCollection_DynamicArrayTest.SizeTInsertBeforeAfter",
+    "NCollection_DynamicArrayTest.IntOverloadGuardsNegative",
+    "NCollection_DynamicArrayTest.IntAndSizeTOverloadsAgree",
+    "NCollection_DynamicArrayTest.SetValue_OutOfOrderIndices_CorrectValues"
+  ],
+  "original_assertion_audit": {
+    "inherited_full_body_audit": "porting/audits/dynamic-array-method-tail.json",
+    "subsequent_reviews": [
+      "porting/audits/dynamic-array-iterator-tail.json",
+      "porting/audits/dynamic-array-native-insertion.json",
+      "porting/audits/dynamic-array-protected-storage.json"
+    ],
+    "current_change": "No original test bodies or existing public DynamicArray algorithms changed. All52 mappings and every previous DynamicArray method/iterator/insertion/storage regression executed successfully."
+  },
+  "public_declaration_bindings": [
+    {
+      "native": "allocateBlock(size_t) const",
+      "rust": "DynamicArrayStorageExtension::allocate_block",
+      "scope": "Detached raw AllocateOptimal; checked increment*item_size and existing allocator allocation-failure boundary",
+      "fixture": "detached_alloc/failed_raw_constructor/empty_copy_parameters"
+    },
+    {
+      "native": "deallocateBlock(void*) const",
+      "rust": "DynamicArrayStorageExtension::deallocate_block (unsafe)",
+      "scope": "Raw nullable Free through current compatible allocator; not valid for registered typed AllocVec addresses",
+      "fixture": "detached_free/raw_retry_free"
+    },
+    {
+      "native": "constructAt(pointer,Args&&...)",
+      "rust": "DynamicArrayStorageExtension::construct_at (unsafe)",
+      "scope": "Explicit constructor closure writes to aligned exclusive uninitialized raw storage; does not publish ownership",
+      "fixture": "detached_construct/constructed_unpublished/failed_raw_constructor"
+    },
+    {
+      "native": "destroyAt(pointer)",
+      "rust": "DynamicArrayStorageExtension::destroy_at (unsafe)",
+      "scope": "Drop one exclusively owned live value removed from automatic ownership; no free or publication",
+      "fixture": "detached_destroy/destroyed_removed"
+    },
+    {
+      "native": "setUsedSize(size_t)",
+      "rust": "DynamicArrayStorageExtension::set_used_size (unsafe)",
+      "scope": "Prevalidated initialized prefix; each Vec length and logical Size updated without drop or element moves",
+      "fixture": "published_three/shrunk_one/restored_three/destroyed_removed"
+    },
+    {
+      "native": "copyParameters(const DynamicArray&,bool)",
+      "rust": "DynamicArrayStorageExtension::copy_parameters",
+      "scope": "Only destination with zero allocated blocks; preserve or adopt allocator, copy stride and reset size",
+      "fixture": "empty_copy_parameters"
+    }
+  ],
+  "protected_declaration_forms_in_batch": 6,
+  "native_fixture": {
+    "source": "tools/oracle/tkernel_dynamic_raw_lifetime.cxx",
+    "expected": "tools/oracle/tkernel_dynamic_raw_lifetime.expected",
+    "row_count": 16,
+    "exact_runtime_join_count": 16,
+    "row_keys": [
+      "detached_alloc",
+      "detached_value",
+      "detached_construct",
+      "detached_destroy",
+      "detached_free",
+      "constructed_unpublished",
+      "published_values",
+      "published_three",
+      "shrunk_one",
+      "restored_three",
+      "restored_values",
+      "destroyed_removed",
+      "cleared_published",
+      "failed_raw_constructor",
+      "raw_retry_free",
+      "empty_copy_parameters"
+    ],
+    "rust_test": "dynamic_array_raw_lifetime::oracle::native_raw_lifetime_rows_match_runtime_observations",
+    "joined_columns": "Size, registered block count, allocation/free counts and requested bytes, construction attempts and completed destructions, all published/restored values, allocator keep/adopt identities.",
+    "allocation_observation": "Rust reads actual accumulating allocator live counts and free-space deltas at each allocation-only or free-only phase. Fixture uses a single arena block with aligned8/16-byte requests, so measured consumed bytes equal native requested bytes; no expected counters are injected.",
+    "parameter_probe_order": "Native keep/adopt detached allocations coexist until the row prints; Rust observes and frees the independent keep allocation before the independent adopt allocation. Separate allocator identities and all recorded results are equal; simultaneous allocation lifetime is not claimed as a compared column.",
+    "defined_domain": "Detached raw pointers use their allocating raw resource. Three typed-capacity slots are constructed before publication; shrink/restore does not destroy them. Removed values are manually destroyed only after shrinking ownership. Failed construction is never destroyed and is retried before raw free. No invalid native pointer/lifetime case is executed."
+  },
+  "unsafe_ownership_contracts": [
+    "Raw allocation/free uses BaseAllocator::allocate_optimal_raw/free_raw_nullable and never the typed AllocVec allocation path. The API explicitly prohibits raw-freeing a registered block_at pointer because typed heap provenance/layout differs.",
+    "construct_at requires aligned writable exclusive uninitialized storage; caller owns cleanup until publication. destroy_at requires a live value removed from automatic Drop ownership, with no conflicting aliases.",
+    "set_used_size checks logical available capacity and EVERY physical Vec capacity before changing ANY length. Validation failure does not require initialization preconditions and leaves metadata unchanged.",
+    "Successful publication requires valid fully initialized uniquely owned T values throughout the new prefix. Vec::set_len changes metadata only; shrink/restore preserves bytes and ends no value lifetime. Removed values need explicit cleanup or valid reconstruction/publication as documented.",
+    "copy_parameters rejects all destination allocations, including retained empty blocks, before changing allocator/stride/size. Existing detached pointers retain their original allocator requirements after parameter changes.",
+    "Unsafe code is confined to the small raw_lifetime submodule and annotated with safety reasons. All8 tests pass strict-provenance Miri with normal leak checks, without permissive provenance or ignored leaks."
+  ],
+  "rust_safety_extensions": [
+    "Overflowing allocation-byte multiplication and publication beyond logical/physical capacity return Failure. The native raw setter alone accepts any numeric value; later uninitialized/out-of-bounds reads or destruction are not reproduced.",
+    "A test creates a larger retained stride only to prove Rust publication rejection before access; no equivalent undefined native memory access is compiled.",
+    "Retained/live copyParameters destinations are rejected, preserving existing owned allocator/layout metadata. This is a constrained binding, not full native retained-block semantics."
+  ],
+  "remaining_partial_parity": [
+    "copyDate and replaceAt remain deferred. Native incomplete copied-block leaks/trivial-copy dispatch and three-way assignment/move_if_noexcept/destruct+construct dispatch are not modeled by blanket Rust Clone or assignment.",
+    "copy_parameters does not yet cover existing allocated blocks, forgotten live slots or allocator rebinding on those blocks.",
+    "Constructor closures produce Rust values before ptr::write; arbitrary address-dependent/in-place C++ constructors, partially written byte observations after constructor failure and implicit custom C++ move hooks are not claimed.",
+    "destroy_at requires Drop not to unwind for native noexcept parity; Rust panic versus native termination behavior is not changed.",
+    "Raw allocator null/zero-size/OOM behavior follows the existing allocator abstraction; the16-row fixture verifies successful nonzero allocation and constructor failure, not every platform allocation edge.",
+    "Previous generic move, same-container alias, cursor identity/comparison, and pointer-vector allocation-policy limitations remain as recorded in earlier scoped receipts.",
+    "Six bounded declaration adapters and sixteen supplemental rows do not establish whole DynamicArray/template or global API parity."
+  ],
+  "global_api_coverage_credit": 0,
+  "global_legacy_test_credit": 0,
+  "commands": {
+    "focused": "cargo test --locked -p rustycad-tkernel --test dynamic_array_raw_lifetime --test dynamic_array_protected_storage --test dynamic_array_native_insertion --test dynamic_array_iterator_tail --test dynamic_array_method_tail --test dynamic_array_legacy_cursor_contracts --test ncollection_dynamic_array --test dynamic_array_default_constructor_order --test dynamic_array_emplace_allocation_order --test dynamic_array_emplace_value_order --test ncollection_dynamic_array_assignment_behavior",
+    "miri_strict": "MIRIFLAGS=-Zmiri-strict-provenance cargo +nightly-2026-09-25 miri test --locked -p rustycad-tkernel --test dynamic_array_raw_lifetime",
+    "clippy": "cargo clippy --locked -p rustycad-tkernel --lib --test dynamic_array_raw_lifetime -- -D warnings",
+    "native": "OpenCascadeGTest --gtest_filter=NCollection_DynamicArrayTest.*",
+    "oracle": "g++ -std=c++17 -O2 -I <native>/include/opencascade tools/oracle/tkernel_dynamic_raw_lifetime.cxx -L <native>/lin64/gcc/libi -Wl,-rpath,<native>/lin64/gcc/libi -lTKernel -o <probe>; <probe> | diff tools/oracle/tkernel_dynamic_raw_lifetime.expected -",
+    "fmt": "cargo fmt --all --check"
+  }
+}
