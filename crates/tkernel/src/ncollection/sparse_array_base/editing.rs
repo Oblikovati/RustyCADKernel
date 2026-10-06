@@ -105,10 +105,7 @@ impl SparseArrayBase {
         let block = unsafe { self.get_block(address) };
         unsafe { self.destroy_block_objects(block, destroy) };
         unsafe {
-            self.release_storage(
-                address.cast(),
-                SparseArrayBlock::size(self.block_size(), self.item_size()),
-            );
+            self.release_storage(address.cast(), self.checked_block_bytes());
             *(*self.state.get()).table.add(number) = std::ptr::null_mut();
         }
     }
