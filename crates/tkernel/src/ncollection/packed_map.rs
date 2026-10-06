@@ -194,3 +194,5 @@ impl<T: PackedInteger> Clone for PackedMap<T> {
 }
 
 mod method_contracts;
+mod operands;
+pub use operands::PackedMapOperand;

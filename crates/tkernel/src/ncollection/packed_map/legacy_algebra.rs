@@ -2,7 +2,7 @@
 //! native members forward to NCollection_PackedMapAlgo.
 //!
 //! Rust borrowing makes the native self-aliased calls (`aMap.Unite(aMap)`) unrepresentable,
-//! so their early-return branches have no counterpart here.
+//! so explicit self methods and `PackedMapOperand::Destination` preserve those branches.
 use super::{PackedInteger, PackedMap};
 use crate::ncollection::packed_map_algo as algo;
 

@@ -170,7 +170,9 @@ mod ubtree_filler;
 pub use ubtree_filler::{BoundingTreeInsertion, ObjBnd, UBTreeFiller};
 
 mod packed_map;
-pub use packed_map::{PackedCursor, PackedInteger, PackedMap, PackedMapIter, PackedWord};
+pub use packed_map::{
+    PackedCursor, PackedInteger, PackedMap, PackedMapIter, PackedMapOperand, PackedWord,
+};
 pub mod packed_map_algo;
 
 mod aliased_array;
