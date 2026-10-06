@@ -109,6 +109,8 @@ pub use base_map::{
 mod data_map_node;
 mod destructor_unwind;
 pub use data_map_node::{DataMapNode, DataMapNodeOwner};
+mod double_map_node;
+pub use double_map_node::{DoubleMapNode, DoubleMapNodeOwner};
 mod data_map;
 pub use data_map::{DataMap, DataMapItems, DataMapIterator, DataMapIteratorMut};
 
