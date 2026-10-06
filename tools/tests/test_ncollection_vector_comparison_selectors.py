@@ -8,16 +8,17 @@ from pathlib import Path
 from api_crosswalk import cpp_candidates, cpp_indexes
 
 ROOT = Path(__file__).resolve().parents[2]
+# 8e1b5c7a corrected typed ListCursor claims to exact raw BaseList iterator bodies.
 ROWS = (
     (
         "NCollection_BaseList::Iterator::operator==(const NCollection_BaseList::Iterator&) const noexcept",
         "1ea4eb28cc74bffb0498a53af80854ee310c5f008b3d805650d3bf8e8881a7e5",
-        "rustycad_tkernel::ncollection::ListCursor::<core::cmp::PartialEq>::eq",
+        "rustycad_tkernel::ncollection::BaseListRawIterator::<core::cmp::PartialEq>::eq",
     ),
     (
         "NCollection_BaseList::Iterator::IsEqual(const NCollection_BaseList::Iterator&) const noexcept",
         "d07c339f7869fe0440be0d3330a93aad911e7d0a71e9bc9092b8c854401c2e09",
-        "rustycad_tkernel::ncollection::ListCursor::<core::cmp::PartialEq>::eq",
+        "rustycad_tkernel::ncollection::BaseListRawIterator::is_equal",
     ),
     (
         "NCollection_Vec2::operator/=(Element_t)",
@@ -113,3 +114,10 @@ class VectorComparisonSelectorTest(unittest.TestCase):
             self.assertEqual(status, "unique", selector)
             self.assertEqual([row["id"] for row in candidates], [compiler_id])
             self.assertEqual(self.parity_rows[selector]["rust_item"], rust_item)
+
+    def test_base_list_comparison_bindings_remain_partial(self) -> None:
+        for selector, _compiler_id, rust_item in ROWS[:2]:
+            row = self.parity_rows[selector]
+            self.assertEqual(row["status"], "partial")
+            self.assertEqual(row["rust_items"], [rust_item])
+            self.assertEqual(row["rust_kind"], "function")
