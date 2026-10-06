@@ -2,6 +2,7 @@
 
 pub(super) mod assignment_policy;
 mod buffer_constructors;
+mod copy_assignment_policy;
 pub(super) mod emplace_policy;
 mod pointers;
 mod raw_copy;
@@ -227,14 +228,8 @@ impl<T: Clone> Array1<'_, T> {
 
     /// Copies equally sized contents without changing bounds; `dest.copy_values(&source)?`.
     pub fn copy_values(&mut self, source: &Array1<'_, T>) -> Result<(), super::ArrayError> {
-        if self.len() != source.len() {
-            return Err(super::ArrayError::DimensionMismatch {
-                expected: self.len(),
-                actual: source.len(),
-            });
-        }
-        self.as_mut_slice().clone_from_slice(source.as_slice());
-        Ok(())
+        self.copy_values_with_storage_assignment(source, <[T]>::clone_from_slice)
+            .map(|_| ())
     }
 }
 

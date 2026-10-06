@@ -4,6 +4,7 @@ use super::{Array1, ArrayError};
 
 mod assignment_policy;
 mod buffer_constructors;
+mod copy_assignment_policy;
 mod emplace_policy;
 mod method_contracts;
 mod raw_copy;
