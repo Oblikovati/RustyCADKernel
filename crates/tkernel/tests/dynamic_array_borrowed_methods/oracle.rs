@@ -1,15 +1,15 @@
 use super::super::*;
-fn actual_row(name: &str, operation: u8, index: i32, failure: &'static str, wide: bool) -> String {
+pub(super) fn actual_row(
+    name: &str,
+    operation: u8,
+    index: i32,
+    failure: &'static str,
+    wide: bool,
+    moving: bool,
+) -> String {
     let mut array = fixture(failure);
-    let source = BorrowedItem { value: 99 };
-    let outcome = catch_unwind(AssertUnwindSafe(|| {
-        let result = if wide {
-            operate(&mut array, &source, operation, index as usize)
-        } else {
-            operate(&mut array, &source, operation, index)
-        };
-        result.map(|value| value as *const BorrowedItem)
-    }));
+    let mut source = BorrowedItem { value: 99 };
+    let outcome = observed_call(&mut array, &mut source, operation, index, wide, moving);
     let returned = returned_address(&array, outcome, operation, index);
     let events = BORROWED_PROBE.with(|probe| probe.borrow().events.clone());
     let mut row = format!("{name} {events} {} {}", array.size(), usize::from(returned));
@@ -18,6 +18,35 @@ fn actual_row(name: &str, operation: u8, index: i32, failure: &'static str, wide
     }
     write!(row, " source={}", source.value).unwrap();
     row
+}
+fn observed_call(
+    array: &mut DynamicArray<BorrowedItem>,
+    source: &mut BorrowedItem,
+    operation: u8,
+    index: i32,
+    wide: bool,
+    moving: bool,
+) -> std::thread::Result<Result<*const BorrowedItem, ArrayError>> {
+    catch_unwind(AssertUnwindSafe(|| {
+        let result = if wide {
+            dispatch(array, source, operation, index as usize, moving)
+        } else {
+            dispatch(array, source, operation, index, moving)
+        };
+        result.map(|value| value as *const BorrowedItem)
+    }))
+}
+fn dispatch<'a, I: TryInto<usize> + Copy + std::fmt::Debug>(
+    array: &'a mut DynamicArray<BorrowedItem>,
+    source: &mut BorrowedItem,
+    operation: u8,
+    index: I,
+    moving: bool,
+) -> Result<&'a mut BorrowedItem, ArrayError> {
+    if moving {
+        return super::moving::operate_moved(array, source, operation, index);
+    }
+    operate(array, source, operation, index)
 }
 fn returned_address(
     array: &DynamicArray<BorrowedItem>,
@@ -46,7 +75,14 @@ macro_rules! native_case {
                     .find(|row| row.starts_with(concat!(stringify!($name), " ")))
                     .unwrap();
             assert_eq!(
-                actual_row(stringify!($name), $operation, $index, $failure, $wide),
+                actual_row(
+                    stringify!($name),
+                    $operation,
+                    $index,
+                    $failure,
+                    $wide,
+                    false
+                ),
                 expected
             );
         }

@@ -7,6 +7,7 @@ use std::{
 };
 mod dynamic_array_borrowed_methods {
     pub mod contracts;
+    pub mod moving;
     pub mod oracle;
 }
 #[derive(Default)]
@@ -82,7 +83,7 @@ fn move_assign(target: &mut BorrowedItem, source: &mut BorrowedItem) {
         probe.move_count
     });
     assert!(
-        !(call == 1 && failure == "move"),
+        !((call == 1 && failure == "move") || (target.value == 99 && failure == "final_move")),
         "move 1: expected success"
     );
 }
