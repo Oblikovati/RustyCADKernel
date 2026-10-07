@@ -7,27 +7,18 @@ mod support;
 use rustycad_tkbo::brep_algo_api::BRepAlgoAPIFuse;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkbrep::toptools::MapOfShape;
-use rustycad_tkcaf::tnaming::{
-    TNamingBuilder, TNamingNaming, TNamingNamingTool, TNamingSelector, TNamingTool,
-};
+use rustycad_tkcaf::tnaming::{TNamingBuilder, TNamingNaming, TNamingSelector, TNamingTool};
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkg3d::geom::{GeomCurve, GeomLine};
 use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tklcaf::tdf::{
-    TdfAttributeMap, TdfAttributeState, TdfChildIterator, TdfCopyLabel, TdfData, TdfLabel,
-    TdfLabelMap, TdfTool,
-};
-use rustycad_tkmath::gp::{Axis1, Axis2, Direction3, Plane3, Point3, Transform3, Vector3};
+use rustycad_tklcaf::tdf::{TdfAttributeMap, TdfCopyLabel, TdfData, TdfLabel, TdfLabelMap};
+use rustycad_tkmath::gp::{Axis2, Direction3, Plane3, Point3, Transform3, Vector3};
 use rustycad_tkprim::brep_prim_api::{BRepPrimAPIMakeOneAxis, BRepPrimAPIMakeSphere};
 use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape,
-    BRepBuilderAPIMakeVertex, BRepBuilderAPIMakeWire, BRepBuilderAPITransform,
+    BRepBuilderAPITransform,
 };
+use support::naming::{add_primitive, child, fill_selection_valid_map, selected, triangle};
 use support::{find_named_shape, make_box, make_box_at, shape_at};
-
-fn child(label: &TdfLabel, tag: i32) -> TdfLabel {
-    label.find_child(tag, true).unwrap()
-}
 
 fn point(x: f64, y: f64, z: f64) -> Point3 {
     Point3::new(x, y, z)
@@ -35,64 +26,6 @@ fn point(x: f64, y: f64, z: f64) -> Point3 {
 
 fn direction(x: f64, y: f64, z: f64) -> Direction3 {
     Direction3::new(x, y, z).unwrap()
-}
-
-/// `AddNamingPrimitives(label, &shape, 1)`.
-fn add_primitive(label: &TdfLabel, shape: &Shape) {
-    TNamingBuilder::new(label)
-        .unwrap()
-        .generated(shape)
-        .unwrap();
-}
-
-/// The triangle face of A3 and A5 with its three edges.
-fn triangle() -> (Shape, [Shape; 3]) {
-    let points = [
-        point(0.0, 0.0, 0.0),
-        point(0.0, 100.0, 0.0),
-        point(100.0, 0.0, 0.0),
-    ];
-    let vertices: Vec<_> = points
-        .iter()
-        .map(|&p| BRepBuilderAPIMakeVertex::new(p).unwrap().vertex().unwrap())
-        .collect();
-    let directions = [
-        direction(0.0, 1.0, 0.0),
-        direction(1.0, -1.0, 0.0),
-        direction(-1.0, 0.0, 0.0),
-    ];
-    let mut edges = Vec::new();
-    for index in 0..3 {
-        let line: Handle<dyn GeomCurve> =
-            Handle::new(GeomLine::new(Axis1::new(points[index], directions[index]))).cast();
-        let (first, last) = (&vertices[index], &vertices[(index + 1) % 3]);
-        let edge = BRepBuilderAPIMakeEdge::from_curve_vertices(&line, first, last)
-            .unwrap()
-            .edge()
-            .unwrap();
-        edges.push(edge);
-    }
-    let mut wire = BRepBuilderAPIMakeWire::new();
-    for edge in &edges {
-        wire.add_edge(edge).unwrap();
-    }
-    assert!(wire.is_done());
-    let plane = Plane3::new(point(0.0, 0.0, 0.0), direction(0.0, 0.0, 1.0)).unwrap();
-    let face = BRepBuilderAPIMakeFace::from_plane_wire(plane, &wire.wire().unwrap(), true)
-        .unwrap()
-        .face()
-        .unwrap()
-        .into_shape();
-    let edges = edges
-        .into_iter()
-        .map(|e| e.into_shape())
-        .collect::<Vec<_>>();
-    (face, [edges[0].clone(), edges[1].clone(), edges[2].clone()])
-}
-
-/// `TNaming_Tool::GetShape(aSelector.NamedShape())`.
-fn selected(selector: &TNamingSelector) -> Shape {
-    TNamingTool::get_shape(&selector.named_shape().unwrap()).unwrap()
 }
 
 // caf/nam/A5: SelectShape command flows resolve geometry and reject an insufficient
@@ -245,28 +178,6 @@ fn TNaming_Tool_Test__CafBug_26061_TranslatedMirroredSelection() {
             .unwrap()
             .is_same(&translated_mirrored)
     );
-}
-
-/// The file-static `FillSelectionValidMap(theLabel, theValidMap)`: the labels outside the
-/// selection that its sub-labels refer to, with the descendants of their named shapes (the
-/// referenced attributes accumulate over the sub-labels, as natively).
-fn fill_selection_valid_map(label: &TdfLabel, valid: &mut TdfLabelMap) {
-    let mut external = TdfAttributeMap::default();
-    let mut children = TdfChildIterator::new(label, true).unwrap();
-    while children.more() {
-        let child_label = children.value();
-        TdfTool::out_references(&child_label, &mut external).unwrap();
-        for attribute in external.iter() {
-            let attribute_label = attribute.get().unwrap().label();
-            if attribute_label != child_label && !attribute_label.is_descendant(label) {
-                valid.add(attribute_label.clone());
-                if let Some(named) = find_named_shape(&attribute_label) {
-                    TNamingNamingTool::build_descendants(&named, valid).unwrap();
-                }
-            }
-        }
-        children.next();
-    }
 }
 
 /// The D1-D3 flow: every distinct sub-shape of a type of a loaded box is selected with
