@@ -9,6 +9,7 @@ pub mod chamfer;
 pub mod chfi2d;
 pub mod chfi3d;
 pub mod chfi_ds;
+pub mod chfikpart;
 pub mod fillet;
 pub mod line_builders;
 pub mod rst_rst;

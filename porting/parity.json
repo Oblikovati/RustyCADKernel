@@ -528065,7 +528065,7 @@
       "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
     },
     {
-      "upstream_id": "BRepBlend_AppSurface::Dump(std::basic_ostream<char>&) const",
+      "upstream_id": "BRepBlend_AppSurface::Dump(Standard_OStream&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_AppSurface.hxx",
       "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendAppSurface::dump",
@@ -535534,6 +535534,9 @@
       "upstream_id": "BlendFunc_ChamfInv::Set",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ChamfInv.hxx",
+      "cpp_selector": {
+        "kind": "Using"
+      },
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: a using-declaration that re-exposes the inherited Set overloads of BlendFunc_GenChamfInv; the Rust traits (BlendFuncInv::set_curve, GenChamfInvFunction::set_distances) expose them on every inverse."
@@ -536698,6 +536701,9 @@
       "upstream_id": "BlendFunc_ConstThroatInv::Set",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstThroatInv.hxx",
+      "cpp_selector": {
+        "kind": "Using"
+      },
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: a using-declaration that re-exposes the inherited Set overloads of BlendFunc_GenChamfInv; the Rust traits (BlendFuncInv::set_curve, GenChamfInvFunction::set_distances) expose them on every inverse."
@@ -538747,6 +538753,38 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ChFiKPart_CornerSpine",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_CS.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::corner_spine",
+      "status": "implemented",
+      "notes": "ChFiKPart helpers without the data structure are functions of the chfikpart module; output references become returned values (CornerSpine returns the cylinder, the circle and the range, its unused P2S1 is not taken) and native exceptions become Failure values. Compared with OCCT by the fl_kpart_fcts and fl_corner_spine probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFiKPart_InPeriod",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_Fcts.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::in_period",
+      "status": "implemented",
+      "notes": "ChFiKPart helpers without the data structure are functions of the chfikpart module; output references become returned values (CornerSpine returns the cylinder, the circle and the range, its unused P2S1 is not taken) and native exceptions become Failure values. Compared with OCCT by the fl_kpart_fcts and fl_corner_spine probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFiKPart_PCurve",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_Fcts.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::pcurve",
+      "status": "implemented",
+      "notes": "ChFiKPart helpers without the data structure are functions of the chfikpart module; output references become returned values (CornerSpine returns the cylinder, the circle and the range, its unused P2S1 is not taken) and native exceptions become Failure values. Compared with OCCT by the fl_kpart_fcts and fl_corner_spine probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFiKPart_ProjPC",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData_Fcts.hxx",
+      "rust_item": "rustycad_tkfillet::chfikpart::proj_pc",
+      "status": "implemented",
+      "notes": "ChFiKPart helpers without the data structure are functions of the chfikpart module; output references become returned values (CornerSpine returns the cylinder, the circle and the range, its unused P2S1 is not taken) and native exceptions become Failure values. Compared with OCCT by the fl_kpart_fcts and fl_corner_spine probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
       "upstream_id": "FilletSurf_Builder::operator delete(void*) noexcept",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_Builder.hxx",
@@ -538865,6 +538903,126 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "201d00fec709b11b5529f14dae4a8858859ce5997480774413ae98d906bb19ea",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "FilletSurf_EdgeNotG1",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_ErrorTypeStatus.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::ErrorTypeStatus::EdgeNotG1",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_EdgeNotOnShape",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_ErrorTypeStatus.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::ErrorTypeStatus::EdgeNotOnShape",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_EmptyList",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_ErrorTypeStatus.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::ErrorTypeStatus::EmptyList",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_ErrorTypeStatus",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_ErrorTypeStatus.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::ErrorTypeStatus",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_FacesNotG1",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_ErrorTypeStatus.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::ErrorTypeStatus::FacesNotG1",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_IsNotOk",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_StatusDone.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::StatusDone::IsNotOk",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_IsOk",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_StatusDone.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::StatusDone::IsOk",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_IsPartial",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_StatusDone.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::StatusDone::IsPartial",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_NoExtremityOnEdge",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_StatusType.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::StatusType::NoExtremityOnEdge",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_NotSharpEdge",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_ErrorTypeStatus.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::ErrorTypeStatus::NotSharpEdge",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_OneExtremityOnEdge",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_StatusType.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::StatusType::OneExtremityOnEdge",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_PbFilletCompute",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_ErrorTypeStatus.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::ErrorTypeStatus::PbFilletCompute",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_StatusDone",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_StatusDone.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::StatusDone",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_StatusType",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_StatusType.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::StatusType",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
+    },
+    {
+      "upstream_id": "FilletSurf_TwoExtremityOnEdge",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_StatusType.hxx",
+      "rust_item": "rustycad_tkfillet::fillet_surf::StatusType::TwoExtremityOnEdge",
+      "status": "implemented",
+      "notes": "FilletSurf statuses are repr(i32) enums with the native values."
     },
     {
       "upstream_id": "BiTgte_Blend::operator delete(void*) noexcept",

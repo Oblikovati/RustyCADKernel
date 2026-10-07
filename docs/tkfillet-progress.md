@@ -101,6 +101,7 @@ FilletSurf.
 | ChFi2d | `fl_chfi2d_fillet`, `fl_chfi2d_chamfer`, `fl_chfi2d_builder` |
 | ChFi3d | `fl_hatching_domains` (`ChFi3d_ComputeHatchingDomains`), `fl_concave_side` (`ChFi3d::ConcaveSide` on every edge of box, prism, cylinder, cone, sphere, torus and revolved solids), `fl_search_sing` (`ChFi3d_SearchSing` and its `math_FunctionRoot`) |
 | ChFi3d_Builder_0 | `fl_b0_scalars`, `fl_bound_srf`, `fl_bound_fac`, `fl_enlarge_box`, `fl_b0_faces`, `fl_b0_spines`, `fl_inter_plane_edge`, `fl_b0_pcurves`, `fl_reparam_pcurv`, `fl_project_pcurv`, `fl_b0_bounds`, `fl_compute_arete`, `fl_fil_common_point`, `fl_b0_stripes`, `fl_b0_tols`, `fl_int_cs`, `fl_computes_int_pc`, `fl_b0_inter2d`, `fl_b0_topology`, `fl_b0_smooth`, `fl_compute_curves`, `fl_int_traces`, `fl_el_spine` |
+| ChFiKPart | `fl_kpart_fcts`, `fl_corner_spine` |
 | BRepFilletAPI | `fl_chfi2d_builder` (`BRepFilletAPI_MakeFillet2d` on the edited face) |
 
 The GTests of `ChFi3d_Hatching_Test.cxx` are translated in
@@ -108,13 +109,27 @@ The GTests of `ChFi3d_Hatching_Test.cxx` are translated in
 
 ## Blocked on TKBool
 
-ChFiKPart, the ChFi3d builders (`ChFi3d_Builder`, `ChFi3d_FilBuilder`,
-`ChFi3d_ChBuilder` and the `ChFi3d_Builder_*` functions), `BRepFilletAPI_MakeFillet`,
-`BRepFilletAPI_MakeChamfer` and FilletSurf write their surfaces and curves into
-`TopOpeBRepDS_DataStructure` and rebuild the solid with `TopOpeBRepBuild_HBuilder`.
-These TKBool classes are not ported yet (the `tkbool` scope ports them), so these
-packages wait for them. Their GTests (`BRepFilletAPI_MakeFillet_Test.cxx`,
-`BRepFilletAPI_MakeChamfer_Test.cxx`) and the `BFuseSimpleTest.BlendBoxWithCylinder*`
-GTests of TKBO are `pending_dependency` rows in `porting/parity.json`.
-`BRepFilletAPI_LocalOperation`, the interface of the two 3d algorithms, is ported as the
-`BRepFilletAPILocalOperation` trait.
+The particular cases of ChFiKPart (`ChFiKPart_ComputeData` and the `ChFiKPart_Make*`
+functions), the ChFi3d builders (`ChFi3d_Builder`, `ChFi3d_FilBuilder`,
+`ChFi3d_ChBuilder`, the `ChFi3d_Builder_*` member files and the free functions that
+take the data structure: `ChFi3d_FilDS`, `ChFi3d_StripeEdgeInter`, `ChFi3d_IsInFront`,
+`ChFi3d_SearchFD`, `ChFi3d_BoundSurf`, `ChFi3d_SolidIndex`, `ChFi3d_IndexPointInDS`,
+`ChFi3d_FilPointInDS`, `ChFi3d_FilVertexInDS`, `ChFi3d_FilCurveInDS`,
+`ChFi3d_ExtrSpineCarac`, `ChFi3d_SetPointTolerance` and the data-structure overload of
+`ChFi3d_EnlargeBox`), `BRepFilletAPI_MakeFillet`, `BRepFilletAPI_MakeChamfer`,
+`FilletSurf_Builder` and `FilletSurf_InternalBuilder` write their surfaces and curves
+into `TopOpeBRepDS_DataStructure` and rebuild the solid with
+`TopOpeBRepBuild_HBuilder`. These TKBool classes are not ported yet (the `tkbool` scope
+ports them), so these classes wait for them. Their GTests
+(`BRepFilletAPI_MakeFillet_Test.cxx`, `BRepFilletAPI_MakeChamfer_Test.cxx`) and the
+`BFuseSimpleTest.BlendBoxWithCylinder*` GTests of TKBO are `pending_dependency` rows in
+`porting/parity.json`.
+
+Everything of these packages that does not touch the data structure is ported:
+`BRepFilletAPI_LocalOperation` (the `BRepFilletAPILocalOperation` trait),
+`BRepFilletAPI_MakeFillet2d`, `ChFi3d::ConcaveSide`, `ChFi3d_SearchSing`,
+`ChFi3d_FilletShape`, the geometric and topological helpers of `ChFi3d_Builder_0`
+(including `ChFi3d_ComputeCurves`, `ChFi3d_IntTraces` and `ChFi3d_PerformElSpine`),
+`ChFi3d_ComputeHatchingDomains`, the ChFiKPart helpers (`ChFiKPart_InPeriod`,
+`ChFiKPart_PCurve`, `ChFiKPart_ProjPC`, `ChFiKPart_CornerSpine`) and the FilletSurf
+statuses. `ChFi3d_EnlargeFace` is declared but never defined natively.

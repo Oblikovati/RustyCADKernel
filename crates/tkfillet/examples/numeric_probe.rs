@@ -4,7 +4,7 @@ use std::io::{self, BufRead};
 mod fl_probe;
 use fl_probe::{
     app_func, blend_func, brep_blend, builder0, builder0_solve, builder0_topo, chamfer, chfi_ds,
-    chfi2d, chfi3d, fillet, line_builders, rst_rst, surf_rst, walking,
+    chfi2d, chfi3d, chfikpart, fillet, line_builders, rst_rst, surf_rst, walking,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -64,6 +64,9 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_compute_curves", builder0_topo::compute_curves_case),
     ("fl_int_traces", builder0_solve::int_traces_case),
     ("fl_el_spine", builder0_topo::el_spine_case),
+    // ChFiKPart (fl_probe/chfikpart.rs)
+    ("fl_kpart_fcts", chfikpart::fcts_case),
+    ("fl_corner_spine", chfikpart::corner_spine_case),
 ];
 
 fn main() {

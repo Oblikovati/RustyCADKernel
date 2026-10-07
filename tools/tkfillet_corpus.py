@@ -27,3 +27,5 @@ def append_tkfillet_requests(requests: list[str]) -> None:
     __import__('tkfillet_corpus_chfi3d').append_chfi3d_requests(requests)
     # ChFi3d_Builder_0 (tkfillet_corpus_builder0.py)
     __import__('tkfillet_corpus_builder0').append_builder0_requests(requests)
+    # ChFiKPart (tkfillet_corpus_chfikpart.py)
+    __import__('tkfillet_corpus_chfikpart').append_chfikpart_requests(requests)
