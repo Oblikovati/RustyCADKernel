@@ -3,8 +3,8 @@
     "cpp": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
     "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
     "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
-    "parity": "66f329e4af33ba7018a091b753bdfe1b8d3b039c20cb8e4422d9c5fd869d2371",
-    "rust": "f7cc77fd5a1b929bed5fbd9067d5ab9c642e75b9b4f433e5763b1c44b93c3d00"
+    "parity": "3e426443e813108cea8f046a3e5241989e4bff5c5e7a56009e970f689a413f4c",
+    "rust": "cf7d822f9fa8c0dab3522207cf5f82104091ab6764cb0674453b189af74526cd"
   },
   "schema_version": 1,
   "toolkits": {
@@ -345,9 +345,9 @@
         "done_percent": 97.9
       },
       "gtests": {
-        "mapped": 57,
+        "mapped": 64,
         "not_applicable": 0,
-        "unmapped": 8
+        "unmapped": 1
       },
       "ledger_defects": {},
       "open_boilerplate_by_category": {
@@ -456,13 +456,13 @@
           "claimed_unverified": 0,
           "excluded": 0,
           "partial": 0,
-          "unclaimed": 1,
+          "unclaimed": 0,
           "upstream_unimplemented": 0,
-          "verified": 199
+          "verified": 200
         },
         "declarations": 200,
-        "done": 199,
-        "done_percent": 99.5
+        "done": 200,
+        "done_percent": 100.0
       },
       "boilerplate": {
         "by_status": {
@@ -486,9 +486,7 @@
       "open_boilerplate_by_category": {
         "special-member": 1
       },
-      "open_gap_by_category": {
-        "record": 1
-      },
+      "open_gap_by_category": {},
       "scope": "port",
       "scope_reason": ""
     },
@@ -873,28 +871,28 @@
       "api": {
         "by_status": {
           "claimed_unverified": 0,
-          "excluded": 0,
-          "partial": 0,
-          "unclaimed": 792,
+          "excluded": 48,
+          "partial": 32,
+          "unclaimed": 31,
           "upstream_unimplemented": 0,
-          "verified": 0
+          "verified": 681
         },
         "declarations": 792,
-        "done": 0,
-        "done_percent": 0.0
+        "done": 729,
+        "done_percent": 92.0
       },
       "boilerplate": {
         "by_status": {
           "claimed_unverified": 0,
-          "excluded": 0,
+          "excluded": 56,
           "partial": 0,
-          "unclaimed": 195,
+          "unclaimed": 137,
           "upstream_unimplemented": 0,
-          "verified": 0
+          "verified": 2
         },
         "declarations": 195,
-        "done": 0,
-        "done_percent": 0.0
+        "done": 58,
+        "done_percent": 29.7
       },
       "gtests": {
         "mapped": 0,
@@ -903,18 +901,15 @@
       },
       "ledger_defects": {},
       "open_boilerplate_by_category": {
-        "alloc-macro": 54,
         "exception-macro": 3,
-        "rtti-macro": 132,
-        "special-member": 6
+        "rtti-macro": 129,
+        "special-member": 5
       },
       "open_gap_by_category": {
-        "alias": 10,
-        "enum-constant": 21,
-        "field": 70,
-        "member": 620,
-        "protected-member": 14,
-        "record": 57
+        "alias": 1,
+        "member": 10,
+        "protected-member": 1,
+        "record": 19
       },
       "scope": "port",
       "scope_reason": ""
@@ -1747,49 +1742,40 @@
       "api": {
         "by_status": {
           "claimed_unverified": 0,
-          "excluded": 0,
-          "partial": 0,
-          "unclaimed": 4502,
+          "excluded": 132,
+          "partial": 11,
+          "unclaimed": 0,
           "upstream_unimplemented": 0,
-          "verified": 0
+          "verified": 4359
         },
         "declarations": 4502,
-        "done": 0,
-        "done_percent": 0.0
+        "done": 4491,
+        "done_percent": 99.8
       },
       "boilerplate": {
         "by_status": {
           "claimed_unverified": 0,
-          "excluded": 0,
-          "partial": 0,
-          "unclaimed": 537,
+          "excluded": 144,
+          "partial": 41,
+          "unclaimed": 62,
           "upstream_unimplemented": 0,
-          "verified": 0
+          "verified": 290
         },
         "declarations": 537,
-        "done": 0,
-        "done_percent": 0.0
+        "done": 434,
+        "done_percent": 80.8
       },
       "gtests": {
-        "mapped": 0,
+        "mapped": 72,
         "not_applicable": 0,
-        "unmapped": 75
+        "unmapped": 3
       },
       "ledger_defects": {},
       "open_boilerplate_by_category": {
-        "alloc-macro": 48,
-        "exception-macro": 39,
-        "rtti-macro": 400,
-        "special-member": 50
+        "rtti-macro": 21,
+        "special-member": 41
       },
-      "open_gap_by_category": {
-        "alias": 58,
-        "enum-constant": 885,
-        "field": 616,
-        "member": 2527,
-        "protected-member": 90,
-        "record": 326
-      },
+      "open_gap_by_category": {},
       "scope": "port",
       "scope_reason": ""
     },
@@ -2387,28 +2373,28 @@
       "api": {
         "by_status": {
           "claimed_unverified": 0,
-          "excluded": 0,
+          "excluded": 22,
           "partial": 0,
-          "unclaimed": 2549,
-          "upstream_unimplemented": 0,
-          "verified": 1
+          "unclaimed": 46,
+          "upstream_unimplemented": 3,
+          "verified": 2479
         },
         "declarations": 2550,
-        "done": 1,
-        "done_percent": 0.0
+        "done": 2504,
+        "done_percent": 98.2
       },
       "boilerplate": {
         "by_status": {
           "claimed_unverified": 0,
-          "excluded": 0,
-          "partial": 0,
-          "unclaimed": 795,
+          "excluded": 383,
+          "partial": 29,
+          "unclaimed": 40,
           "upstream_unimplemented": 0,
-          "verified": 0
+          "verified": 343
         },
         "declarations": 795,
-        "done": 0,
-        "done_percent": 0.0
+        "done": 726,
+        "done_percent": 91.3
       },
       "gtests": {
         "mapped": 0,
@@ -2417,18 +2403,12 @@
       },
       "ledger_defects": {},
       "open_boilerplate_by_category": {
-        "alloc-macro": 270,
-        "exception-macro": 15,
-        "rtti-macro": 492,
-        "special-member": 18
+        "rtti-macro": 23,
+        "special-member": 17
       },
       "open_gap_by_category": {
-        "alias": 8,
-        "enum-constant": 69,
-        "field": 24,
-        "member": 2252,
-        "protected-member": 36,
-        "record": 160
+        "enum-constant": 34,
+        "record": 12
       },
       "scope": "port",
       "scope_reason": ""
@@ -2989,15 +2969,15 @@
       "api": {
         "by_status": {
           "claimed_unverified": 2,
-          "excluded": 857,
-          "partial": 513,
+          "excluded": 882,
+          "partial": 511,
           "unclaimed": 0,
           "upstream_unimplemented": 0,
-          "verified": 4926
+          "verified": 4903
         },
         "declarations": 6298,
-        "done": 5783,
-        "done_percent": 91.8
+        "done": 5785,
+        "done_percent": 91.9
       },
       "boilerplate": {
         "by_status": {
@@ -3041,12 +3021,12 @@
     },
     "port": {
       "api_declarations": 76041,
-      "api_done": 38487,
-      "api_open": 36622,
-      "api_partial": 932,
-      "gtests_mapped": 7879,
+      "api_done": 46213,
+      "api_open": 28855,
+      "api_partial": 973,
+      "gtests_mapped": 7958,
       "gtests_not_applicable": 2,
-      "gtests_unmapped": 570,
+      "gtests_unmapped": 491,
       "toolkits": 56
     },
     "replaced": {
