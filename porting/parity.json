@@ -165660,6 +165660,13 @@
       "notes": "C++ protected data member of IntPolyh_Array: Rust keeps it as the private field `nb_items` of IntPolyhArray (tkgeomalgo/src/int_polyh/array.rs), the state of IntPolyhArray; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "IntPolyh_Array::IntPolyh_VectorOfType",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "status": "excluded",
+      "notes": "Member typedef of the storage type (NCollection_DynamicArray<Type>) of IntPolyh_Array: Rust spells the storage directly as the private Vec<T> field `vector` of IntPolyhArray; no public behavior."
+    },
+    {
       "upstream_id": "IntPolyh_Couple()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
@@ -168736,6 +168743,14 @@
       "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildReport::is_approximate",
       "status": "implemented",
       "notes": "Public data member of GeomFill_Gordon::BuildReport: the public field `is_approximate` of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildReport",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildReport",
+      "status": "implemented",
+      "notes": "Public nested struct of GeomFill_Gordon: the Rust struct with the same public fields."
     },
     {
       "upstream_id": "GeomFill_NetworkSurface::ResultStatus",
@@ -187607,6 +187622,101 @@
       "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPointNormal::normal",
       "status": "implemented",
       "notes": "Public data member of IntPolyh_PointNormal: the public field `normal` of the Rust struct."
+    },
+    {
+      "upstream_id": "Geom2dInt_PCLocFOfTheLocateExtPCOfTheProjPCurOfGInter",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_PCLocFOfTheLocateExtPCOfTheProjPCurOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::PCLocFOfTheLocateExtPCOfTheProjPCurOfGInter",
+      "status": "implemented",
+      "notes": "Typedef of the native template instance: the Rust type alias names the same instance of the ported generic."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheCurveLocatorOfTheProjPCurOfGInter",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheCurveLocatorOfTheProjPCurOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheCurveLocatorOfTheProjPCurOfGInter",
+      "status": "implemented",
+      "notes": "Typedef of the native template instance: the Rust type alias names the same instance of the ported generic."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheLocateExtPCOfTheProjPCurOfGInter",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheLocateExtPCOfTheProjPCurOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_int::TheLocateExtPCOfTheProjPCurOfGInter",
+      "status": "implemented",
+      "notes": "Typedef of the native template instance: the Rust type alias names the same instance of the ported generic."
+    },
+    {
+      "upstream_id": "IntPatch_SearchPnt",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SearchPnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSearchPnt",
+      "status": "implemented",
+      "notes": "Typedef of Intf_InterferencePolygon2d: the Rust type alias names the same struct."
+    },
+    {
+      "upstream_id": "IntPolyh_ArrayOfEdges",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_ArrayOfEdges.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArrayOfEdges",
+      "status": "implemented",
+      "notes": "Typedef of an IntPolyh_Array instance: the Rust type alias names IntPolyhArray of the same item type."
+    },
+    {
+      "upstream_id": "IntPolyh_ArrayOfPointNormal",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_ArrayOfPointNormal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArrayOfPointNormal",
+      "status": "implemented",
+      "notes": "Typedef of an IntPolyh_Array instance: the Rust type alias names IntPolyhArray of the same item type."
+    },
+    {
+      "upstream_id": "IntPolyh_PointNormal",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_ArrayOfPointNormal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPointNormal",
+      "status": "implemented",
+      "notes": "Public struct of a point and its normal: the Rust struct with the same public fields."
+    },
+    {
+      "upstream_id": "IntPolyh_ArrayOfPoints",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_ArrayOfPoints.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArrayOfPoints",
+      "status": "implemented",
+      "notes": "Typedef of an IntPolyh_Array instance: the Rust type alias names IntPolyhArray of the same item type."
+    },
+    {
+      "upstream_id": "IntPolyh_ArrayOfSectionLines",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_ArrayOfSectionLines.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArrayOfSectionLines",
+      "status": "implemented",
+      "notes": "Typedef of an IntPolyh_Array instance: the Rust type alias names IntPolyhArray of the same item type."
+    },
+    {
+      "upstream_id": "IntPolyh_ArrayOfTangentZones",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_ArrayOfTangentZones.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArrayOfTangentZones",
+      "status": "implemented",
+      "notes": "Typedef of an IntPolyh_Array instance: the Rust type alias names IntPolyhArray of the same item type."
+    },
+    {
+      "upstream_id": "IntPolyh_ArrayOfTriangles",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_ArrayOfTriangles.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArrayOfTriangles",
+      "status": "implemented",
+      "notes": "Typedef of an IntPolyh_Array instance: the Rust type alias names IntPolyhArray of the same item type."
+    },
+    {
+      "upstream_id": "IntSurf_Allocator",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Allocator.hxx",
+      "status": "excluded",
+      "notes": "Typedef of occ::handle<NCollection_BaseAllocator> used only as the optional allocator argument of the IntSurf_LineOn2S constructor: Rust collections use the global allocator, so IntSurfLineOn2S::new takes no allocator; no behavior to port."
     },
     {
       "upstream_id": "BRepCheck::Add(NCollection_List<BRepCheck_Status>&,BRepCheck_Status)",
