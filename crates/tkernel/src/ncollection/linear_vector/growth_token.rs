@@ -130,6 +130,10 @@ impl<T> LinearVectorGrowth<T> {
             #[cfg(test)]
             observe_failure,
         );
+        self.destroy_and_publish(replacement);
+    }
+
+    fn destroy_and_publish(&mut self, replacement: LinearVector<T>) {
         self.abandoned = Some(ManuallyDrop::new(replacement));
         let original = self.take_live();
         self.current = Some(GrowthStorage::Interrupted(InterruptedGrowth::new(
