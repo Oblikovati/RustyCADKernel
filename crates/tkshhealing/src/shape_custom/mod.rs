@@ -9,6 +9,7 @@
 //! [`ShapeCustomDirectModification`], [`ShapeCustomConvertToRevolution`] and
 //! [`ShapeCustomConvertToBSpline`].
 //! docs/shhealing-design.md section 7 fixes how they map.
+mod bspline_restriction;
 mod convert_to_bspline;
 mod convert_to_revolution;
 mod curve2d;
@@ -20,6 +21,9 @@ mod surface;
 mod swept_to_elementary;
 mod trsf_modification;
 
+pub use bspline_restriction::{
+    ShapeCustomBSplineRestriction, ShapeCustomBSplineRestrictionSettings, ShapeCustomRestrictionBox,
+};
 pub use convert_to_bspline::ShapeCustomConvertToBSpline;
 pub use convert_to_revolution::ShapeCustomConvertToRevolution;
 pub use curve2d::{Line2dConversion, ShapeCustomCurve2d};

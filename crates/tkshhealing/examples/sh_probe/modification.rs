@@ -9,8 +9,10 @@ use super::wire_data::{sh_edge, sh_face, sh_shape};
 use rustycad_tkbrep::brep_tools::{BRepToolsModification, Modifier, NewCurve, NewSurface};
 use rustycad_tkbrep::topods;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkmath::geom_abs::Shape as Continuity;
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkshhealing::shape_custom::{
+    ShapeCustomBSplineRestriction, ShapeCustomBSplineRestrictionSettings,
     ShapeCustomConvertToBSpline, ShapeCustomConvertToRevolution, ShapeCustomDirectModification,
     ShapeCustomModification, ShapeCustomSweptToElementary, ShapeCustomTrsfModification,
 };
@@ -38,6 +40,7 @@ fn modification(r: &mut Reader<'_>) -> Result<Modification, Failure> {
             Handle::new(m).cast()
         }
         4 => Handle::new(ShapeCustomSweptToElementary::new()).cast(),
+        5 => bspline_restriction(r),
         _ => Handle::new(ShapeCustomConvertToRevolution::new()).cast(),
     })
 }
@@ -193,8 +196,57 @@ fn other(r: &mut Reader<'_>, t: &TpShapes, m: &Modification, op: i32) {
                 cm.send_msg(&s, &message(k), g);
             }
         }
+        11 => restriction_errors(m),
         _ => flag(cm.get().is_some_and(|cm| cm.msg_registrator().is_null())),
     }
+}
+
+/// Kind 5: a ShapeCustom_BSplineRestriction of the settings and restriction fields.
+fn bspline_restriction(r: &mut Reader<'_>) -> Modification {
+    let settings = ShapeCustomBSplineRestrictionSettings {
+        approx_surface: r.flag(),
+        approx_curve_3d: r.flag(),
+        approx_curve_2d: r.flag(),
+        tol_3d: r.real(),
+        tol_2d: r.real(),
+        continuity_3d: continuity_of(r.integer()),
+        continuity_2d: continuity_of(r.integer()),
+        max_degree: r.integer(),
+        nb_max_seg: r.integer(),
+        degree_priority: r.flag(),
+        rational: r.flag(),
+    };
+    let m = ShapeCustomBSplineRestriction::with_settings(settings);
+    let parameters = m.restriction_parameters();
+    for _ in 0..r.integer() {
+        let field = r.integer();
+        super::shape_custom::restriction_set(&parameters, field, r.integer());
+    }
+    Handle::new(m).cast()
+}
+
+fn continuity_of(value: i32) -> Continuity {
+    [
+        Continuity::C0,
+        Continuity::G1,
+        Continuity::C1,
+        Continuity::G2,
+        Continuity::C2,
+        Continuity::C3,
+        Continuity::CN,
+    ][value as usize]
+}
+
+/// Op 11: MaxErrors, NbOfSpan and the error accessors of a B-spline restriction.
+fn restriction_errors(m: &Modification) {
+    let b = m.cast::<ShapeCustomBSplineRestriction>();
+    let Some(b) = b.get() else { return };
+    let (surface, c3d, c2d) = b.max_errors();
+    [surface, c3d, c2d].into_iter().for_each(real);
+    int(b.nb_of_span());
+    [b.surface_error(), b.curve_3d_error(), b.curve_2d_error()]
+        .into_iter()
+        .for_each(real);
 }
 
 /// `sc_modif (prelude) program kind [(trsf) copymesh] reg nops (op)...`.

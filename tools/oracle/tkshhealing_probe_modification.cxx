@@ -7,8 +7,10 @@
 // ShapeCustom_TrsfModification of the transformation record with IsCopyMesh() set to
 // copymesh, 1 a ShapeCustom_DirectModification, 2 a ShapeCustom_ConvertToRevolution, 3 a
 // ShapeCustom_ConvertToBSpline with the flags extrusion revolution offset plane (each set
-// through its Set...Mode), 4 a ShapeCustom_SweptToElementary; with reg a
-// ShapeExtend_MsgRegistrator is set (kinds 1 to 4). ShapeExtend::Init() loads the
+// through its Set...Mode), 4 a ShapeCustom_SweptToElementary, 5 a
+// ShapeCustom_BSplineRestriction(surf c3d c2d tol3d tol2d cont3d cont2d maxdeg maxseg deg
+// rational) whose restriction parameters then get `nfields (field value)...` as in
+// sc_restriction; with reg a ShapeExtend_MsgRegistrator is set (kinds 1 to 5). ShapeExtend::Init() loads the
 // messages first. Each member starts from sentinel outputs (a null geometry, the identity
 // location, tolerance -1, RevWires true, RevFace false, the point (7, 7, 7), the
 // parameter 0.5) and prints its result and every output:
@@ -17,8 +19,10 @@
 //  M), IsDone and the digest of ModifiedShape(s); 7: the messages kept for each shape of
 //  the table; 8: the dynamic type and IsKind of ShapeCustom_Modification and
 //  BRepTools_TrsfModification; 9 s k g: SendMsg(shape, message "m<k>", gravity g);
-//  10: MsgRegistrator().IsNull().
+//  10: MsgRegistrator().IsNull(); 11: for a B-spline restriction MaxErrors (the three
+//  errors), NbOfSpan and the three error accessors.
 #include <BRepTools_Modifier.hxx>
+#include <ShapeCustom_BSplineRestriction.hxx>
 #include <ShapeCustom_ConvertToBSpline.hxx>
 #include <ShapeCustom_ConvertToRevolution.hxx>
 #include <ShapeCustom_DirectModification.hxx>
@@ -34,6 +38,12 @@ occ::handle<BRepTools_Modification> sc_modification(GaReader& r){
   m->SetExtrusionMode(r.flag());m->SetRevolutionMode(r.flag());m->SetOffsetMode(r.flag());m->SetPlaneMode(r.flag());
   return m;}
  if(kind==4)return new ShapeCustom_SweptToElementary();
+ if(kind==5){bool sf=r.flag(),c3=r.flag(),c2=r.flag();double t3=r.real(),t2=r.real();
+  GeomAbs_Shape k3=GeomAbs_Shape(r.integer()),k2=GeomAbs_Shape(r.integer());int deg=r.integer(),seg=r.integer();
+  bool pri=r.flag(),rat=r.flag();
+  occ::handle<ShapeCustom_BSplineRestriction> m=new ShapeCustom_BSplineRestriction(sf,c3,c2,t3,t2,k3,k2,deg,seg,pri,rat);
+  int n=r.integer();for(int k=0;k<n;++k){int field=r.integer();sc_restriction_set(*m->GetRestrictionParameters(),field,r.integer());}
+  return m;}
  return new ShapeCustom_ConvertToRevolution();}
 void sc_member(GaReader& r,const TpShapes& t,const occ::handle<BRepTools_Modification>& m,int op){
  if(op==0){TopoDS_Face f=sh_face(t,r.integer());occ::handle<Geom_Surface> S;TopLoc_Location L;double tol=-1.;bool rw=true,rf=false;
@@ -64,6 +74,9 @@ void sc_other(GaReader& r,const TpShapes& t,const occ::handle<BRepTools_Modifica
   ga_flag(m->IsKind(STANDARD_TYPE(BRepTools_TrsfModification)));}
  else if(op==9){TopoDS_Shape s=sh_shape(t,r.integer());int k=r.integer();Message_Gravity g=Message_Gravity(r.integer());
   if(!cm.IsNull())cm->SendMsg(s,sh_rg_message(k),g);}
+ else if(op==11){occ::handle<ShapeCustom_BSplineRestriction> b=occ::down_cast<ShapeCustom_BSplineRestriction>(m);
+  double e3=-1.,e2=-1.;ga_real(b->MaxErrors(e3,e2));ga_real(e3);ga_real(e2);ga_int(b->NbOfSpan());
+  ga_real(b->SurfaceError());ga_real(b->Curve3dError());ga_real(b->Curve2dError());}
  else ga_flag(!cm.IsNull()&&cm->MsgRegistrator().IsNull());}
 void sc_modif_case(std::istream& input){
  ShapeExtend::Init();

@@ -274478,6 +274478,288 @@
       "cpp_declaration_id": "f7066c47f54ba8119d6eeac6cf95b3130c55829fb7db7752f45a5bcc5cadd40d"
     },
     {
+      "upstream_id": "ShapeCustom_BSplineRestriction::ShapeCustom_BSplineRestriction()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::new",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). Default constructor values.",
+      "cpp_declaration_id": "368bc66949736d60f4c107f7b4c56d642264a1654877069679325971c5e7e984"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::ShapeCustom_BSplineRestriction(const bool,const bool,const bool,const double,const double,const GeomAbs_Shape,const GeomAbs_Shape,const int,const int,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::with_settings",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). The settings struct carries the eleven native arguments.",
+      "cpp_declaration_id": "d5605e896cc228be7c3aa26aeef25d5d4053aa687f8daec7d92346f164f2ecef"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::ShapeCustom_BSplineRestriction(const bool,const bool,const bool,const double,const double,const GeomAbs_Shape,const GeomAbs_Shape,const int,const int,const bool,const bool,const occ::handle<ShapeCustom_RestrictionParameters>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::with_settings_and_modes",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). The settings struct carries the eleven native arguments.",
+      "cpp_declaration_id": "cea017399596053137a0213f0089244cb2486ad4db308b63f1d753c14834f475"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::NewSurface(const TopoDS_Face&,occ::handle<Geom_Surface>&,TopLoc_Location&,double&,bool&,bool&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_surface",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "9955910f17e1d0faa38a436654ccf8766fe847105a88193ac4f684d6e954fcfa"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::NewCurve(const TopoDS_Edge&,occ::handle<Geom_Curve>&,TopLoc_Location&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_curve",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "0512e06e33a5573b69af2ac971989fa95236b201e647735b7a44838b43a7a0af"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::NewPoint(const TopoDS_Vertex&,gp_Pnt&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_point",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "c889d1c51bcf582c27c94b0c7ecfe1f4015c71e8f63d7c4612e5243a408cae42"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::NewCurve2d(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_curve2d",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "2e24a7450aed3007aa91833a31a8b99b6cf3f169b726571a81fa824a50e23edc"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::NewParameter(const TopoDS_Vertex&,const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_parameter",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "d9d5346c75f2d7f04a3a7cda1bcca3f881ce20a6ae88f5ff484089ba624087ea"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::Continuity(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::<rustycad_tkbrep::brep_tools::BRepToolsModification>::continuity",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "83a5fffb2a2d73d66c55ccbc7e1332033faab8d8576dacdef738eb0ed1b6ceb3"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::ConvertSurface(const occ::handle<Geom_Surface>&,occ::handle<Geom_Surface>&,const double,const double,const double,const double,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::convert_surface",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). The box is ShapeCustomRestrictionBox.",
+      "cpp_declaration_id": "37f116f8447136c42690e3f48b36cb8c61a95acfa16d876be41489d0d437c7eb"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::ConvertCurve(const occ::handle<Geom_Curve>&,occ::handle<Geom_Curve>&,const bool,const double,const double,double&,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::convert_curve",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). Native quirk kept: conics use the 2D continuity.",
+      "cpp_declaration_id": "9b06699b7dac3527786dd2143dd9b1b0eb6686072289863092dcad178e7b1603"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::ConvertCurve2d(const occ::handle<Geom2d_Curve>&,occ::handle<Geom2d_Curve>&,const bool,const double,const double,double&,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::convert_curve_2d",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). Native quirk kept: the C0 offset second pass reports success without writing C.",
+      "cpp_declaration_id": "161e82d71b9914ca46a54cc8f4be570553fb40b45edbbef552f39cac81fe4f77"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::SetTol3d(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_tol_3d",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "fd4bc548f615c4e01ba80d56cc7b4b219af3f0d48bdf88cd1783947ec76dfb8f"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::SetTol2d(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_tol_2d",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "4fc48974e37fdfb174a7209c11d112f17d81a2e6219f1d617024f447514f7ab2"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::SetContinuity3d(const GeomAbs_Shape)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_continuity_3d",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "a5c791227b59ccad425e0d5fa83e57ca1f6bcc205e85c1b990340644aed06011"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::SetContinuity2d(const GeomAbs_Shape)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_continuity_2d",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "2bac6d50ba316fe9c496e61ff781a83005d27bbe26db850f5851ce0ce30a0fad"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::SetMaxDegree(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_max_degree",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "15dd3d45adcbecd3ddae24c33202502e0e06f1019c183abdb91039b0d36e163b"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::SetMaxNbSegments(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_max_nb_segments",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "3f3ba716202cdbc3ebd10a4b2395baddaeefcbd6e7984500e1a39b9a383762eb"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::SetPriority(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_priority",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "7a62c4532194eced056638bb847caffa53a19d3971615c50e24796a1f747d628"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::SetConvRational(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_conv_rational",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "938ca31a0b62bd16cf6ca8c4fcd26e6e10ad84be2967dca80a2b0aab12badb11"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::GetRestrictionParameters() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::restriction_parameters",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "c89b730432200c6f1d6df58dcfae46900815786ad677fb9e34146aab69d5817f"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::SetRestrictionParameters(const occ::handle<ShapeCustom_RestrictionParameters>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_restriction_parameters",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "15c8936fd16add702e4a71290311565a47880eedc4b7693df7512f30012b8007"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::Curve3dError() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::curve_3d_error",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "27a3d3064841c767c6edeaf0edff7c78f96870d414c836fb7596f2f4e00a0ee8"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::Curve2dError() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::curve_2d_error",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "e9de65eed5e8dbe0912468a7ba2c37b25ccdb8e9204cc087fa2256f321db1bf6"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::SurfaceError() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::surface_error",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "6dbc4141a328958e561cd6b19ea4c0cd78269678f3db108a5368f89bf5ae11e3"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::NbOfSpan() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::nb_of_span",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "de53815573dfb2415eb68c3a8b18003d9218657e057183280df6511f14162635"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::MaxErrors(double&,double&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::max_errors",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). MaxErrors returns (surface, 3D, 2D).",
+      "cpp_declaration_id": "74d2c0604f4ea361f4d168d60c0bead2a48e5219fff70ca49cf8d18221266c1a"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::ModifyApproxSurfaceFlag()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::approx_surface_flag",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). Native reference accessor: approx_surface_flag reads, set_approx_surface_flag writes.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::approx_surface_flag",
+        "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_approx_surface_flag"
+      ],
+      "cpp_declaration_id": "fe2d155ddb0697f4dd4765797ba27579ce263e87da63bee018c08afd43360270"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::ModifyApproxCurve3dFlag()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::approx_curve_3d_flag",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). Native reference accessor: approx_curve_3d_flag reads, set_approx_curve_3d_flag writes.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::approx_curve_3d_flag",
+        "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_approx_curve_3d_flag"
+      ],
+      "cpp_declaration_id": "12559e4d3edd61e935f7d542afcb6eec4cd14a59ad67a35f75de1b7469fc6f54"
+    },
+    {
+      "upstream_id": "ShapeCustom_BSplineRestriction::ModifyApproxCurve2dFlag()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_BSplineRestriction.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::approx_curve_2d_flag",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/bspline_restriction); C++ output references become &mut outputs and native exceptions Failure errors (the approximation loops treat them as the native catch). Compared with OCCT by the sc_modif kind 5 requests (tools/tkshhealing_corpus_shapecustom.py). Native reference accessor: approx_curve_2d_flag reads, set_approx_curve_2d_flag writes.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::approx_curve_2d_flag",
+        "rustycad_tkshhealing::shape_custom::ShapeCustomBSplineRestriction::set_approx_curve_2d_flag"
+      ],
+      "cpp_declaration_id": "a4bc82d17062a0846ab1408afc7c1f348a1ceb57eddd2966a3ab818f149ed8f3"
+    },
+    {
       "upstream_id": "ShapeUpgrade::C0BSplineToSequenceOfC1BSplineCurve(const occ::handle<Geom_BSplineCurve>&,occ::handle<NCollection_HSequence<occ::handle<Geom_BoundedCurve>>>&)",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade.hxx",

@@ -74,7 +74,7 @@ pub fn curve2d_case(values: &[f64]) {
     end();
 }
 
-fn restriction_set(p: &ShapeCustomRestrictionParameters, field: i32, value: i32) {
+pub(super) fn restriction_set(p: &ShapeCustomRestrictionParameters, field: i32, value: i32) {
     type Setter = fn(&ShapeCustomRestrictionParameters, bool);
     const FLAGS: [Setter; 14] = [
         ShapeCustomRestrictionParameters::set_convert_plane,

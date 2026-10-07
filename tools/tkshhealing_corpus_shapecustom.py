@@ -241,7 +241,7 @@ def modif_requests(s: ModificationScene) -> list[str]:
 
 def ops_count(ops: list[int]) -> list[int]:
     """The ops of an op list (each op code with its operand count), to count them."""
-    widths = {0: 1, 1: 1, 2: 1, 3: 4, 4: 2, 5: 3, 6: 1, 7: 0, 8: 0, 9: 3, 10: 0}
+    widths = {0: 1, 1: 1, 2: 1, 3: 4, 4: 2, 5: 3, 6: 1, 7: 0, 8: 0, 9: 3, 10: 0, 11: 0}
     codes, k = [], 0
     while k < len(ops):
         codes.append(ops[k])
@@ -324,6 +324,28 @@ def swept_to_elementary_requests(s: ModificationScene) -> list[str]:
     return out
 
 
+C0, C1, C2, C3 = 0, 2, 4, 5
+RESTRICTIONS: list[list[float | int]] = [
+    [5, 1, 1, 1, 0.01, 1e-6, C1, C2, 9, 10000, 1, 0, 0],
+    [5, 1, 1, 1, 0.01, 1e-6, C1, C2, 9, 10000, 1, 0, 6, 2, 1, 4, 1, 5, 1, 6, 1, 12, 1, 14, 1],
+    [5, 1, 1, 1, 1e-3, 1e-6, C2, C1, 2, 4, 0, 1, 9, 3, 1, 7, 1, 8, 1, 9, 1, 10, 1, 11, 1, 13, 1, 15, 1, 0, 6],
+    [5, 0, 1, 1, 1e-3, 1e-5, C0, C0, 3, 2, 1, 0, 3, 12, 1, 14, 1, 1, 8],
+    [5, 1, 0, 0, 0.1, 1e-4, C3, C2, 1, 1, 1, 1, 2, 2, 1, 3, 1],
+]
+
+
+def bspline_restriction_requests(s: ModificationScene) -> list[str]:
+    """ShapeCustom_BSplineRestriction under several settings and modes on every face, then
+    the modifier on the compound and the error queries."""
+    out = []
+    for restriction in RESTRICTIONS:
+        for name in s.faces:
+            ops = face_ops(s, name) + [11]
+            out.append(request('sc_modif', s.tokens(), *restriction, 1, len(ops_count(ops)), *ops))
+        out.append(request('sc_modif', s.tokens(), *restriction, 1, 5, 6, s.compound, 7, 8, 11, 10))
+    return out
+
+
 def append_shapecustom_requests(requests: list[str]) -> None:
     """Append every ShapeCustom request family in a fixed order."""
     requests += is_linear_requests()
@@ -336,3 +358,4 @@ def append_shapecustom_requests(requests: list[str]) -> None:
     swept = spline_scene()
     requests += convert_to_bspline_requests(swept)
     requests += swept_to_elementary_requests(swept)
+    requests += bspline_restriction_requests(swept)
