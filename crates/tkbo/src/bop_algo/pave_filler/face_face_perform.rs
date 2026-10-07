@@ -179,7 +179,11 @@ impl BOPAlgoPaveFiller {
         Ok(())
     }
 
-    fn face_pair(&self, first: i32, second: i32) -> Result<[Face; 2], Failure> {
+    pub(in crate::bop_algo::pave_filler) fn face_pair(
+        &self,
+        first: i32,
+        second: i32,
+    ) -> Result<[Face; 2], Failure> {
         let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
         Ok([
             Face::unchecked(structure.shape(first)?.clone()),

@@ -278,6 +278,11 @@ impl DataStructure {
         &self.interf_ef
     }
 
+    /// Borrows face/face records in insertion order; `ds.interf_ff_records().len()`.
+    pub fn interf_ff_records(&self) -> &DynamicArray<InterfFF> {
+        &self.interf_ff
+    }
+
     /// Mutably borrows face/face records; `ds.interf_ff().append(InterfFF::default())`.
     pub fn interf_ff(&mut self) -> &mut DynamicArray<InterfFF> {
         &mut self.interf_ff

@@ -8,8 +8,9 @@ use rustycad_tkmath::bnd::BoundingBox3;
 use std::fmt::Write;
 
 /// Shapes and blocks shared by two faces, as filled by native `BOPDS_DS::SubShapesOnIn`.
-/// `let shared = ds.sub_shapes_on_in(f1, f2)?;`.
-#[derive(Default)]
+/// The maps keep their bucket state across [`SubShapesOnIn::clear`], as the native caller's
+/// maps do, because the iteration order of a map depends on it.
+/// `let mut shared = SubShapesOnIn::default(); ds.sub_shapes_on_in(f1, f2, &mut shared)?;`.
 pub struct SubShapesOnIn {
     /// Vertices of both faces' On/In blocks plus the vertices common to both faces.
     pub vertices_on_in: Map<i32>,
@@ -19,6 +20,28 @@ pub struct SubShapesOnIn {
     pub pave_blocks_on_in: PaveBlockIndexMap,
     /// The blocks of the first face that are also On/In the second one.
     pub common_pave_blocks: PaveBlockIndexMap,
+}
+
+impl Default for SubShapesOnIn {
+    /// Maps of 100 buckets, the size MakeBlocks gives them; `SubShapesOnIn::default()`.
+    fn default() -> Self {
+        Self {
+            vertices_on_in: Map::new(100),
+            vertices_common: Map::new(100),
+            pave_blocks_on_in: PaveBlockIndexMap::default(),
+            common_pave_blocks: PaveBlockIndexMap::default(),
+        }
+    }
+}
+
+impl SubShapesOnIn {
+    /// Empties all maps keeping their buckets (`Clear()`); `shared.clear()`.
+    pub fn clear(&mut self) {
+        self.vertices_on_in.clear(false);
+        self.vertices_common.clear(false);
+        self.pave_blocks_on_in.clear();
+        self.common_pave_blocks.clear();
+    }
 }
 
 impl DataStructure {
@@ -61,22 +84,26 @@ impl DataStructure {
         Ok(alone)
     }
 
-    /// Collects the On/In blocks and vertices of two faces and those common to both.
-    /// `let shared = ds.sub_shapes_on_in(f1, f2)?;`.
-    pub fn sub_shapes_on_in(&self, face1: i32, face2: i32) -> Result<SubShapesOnIn, Failure> {
+    /// Adds the On/In blocks and vertices of two faces and those common to both to `shared`.
+    /// `ds.sub_shapes_on_in(f1, f2, &mut shared)?;`.
+    pub fn sub_shapes_on_in(
+        &self,
+        face1: i32,
+        face2: i32,
+        shared: &mut SubShapesOnIn,
+    ) -> Result<(), Failure> {
         let info1 = self.face_info(face1)?;
         let info2 = self.face_info(face2)?;
-        let mut shared = SubShapesOnIn::default();
         for blocks in [
             info1.pave_blocks_on(),
             info1.pave_blocks_in(),
             info2.pave_blocks_on(),
             info2.pave_blocks_in(),
         ] {
-            add_blocks_and_bounds(blocks, &mut shared);
+            add_blocks_and_bounds(blocks, shared);
         }
         for blocks in [info1.pave_blocks_on(), info1.pave_blocks_in()] {
-            add_common_blocks(blocks, info2, &mut shared);
+            add_common_blocks(blocks, info2, shared);
         }
         for vertices in [info1.vertices_on(), info1.vertices_in()] {
             for vertex in vertices.iter().copied() {
@@ -86,7 +113,7 @@ impl DataStructure {
                 }
             }
         }
-        Ok(shared)
+        Ok(())
     }
 
     /// Returns the edges (split images when present) of the second face also bounding the first.

@@ -91,6 +91,11 @@ impl VertexIndexSet {
         self.0.contains(&index)
     }
 
+    /// Removes an index, reporting whether it was present; `vertices.remove(3)`.
+    pub fn remove(&mut self, index: i32) -> bool {
+        self.0.remove(&index)
+    }
+
     /// Returns the number of unique vertex indices.
     pub fn extent(&self) -> usize {
         self.0.extent()

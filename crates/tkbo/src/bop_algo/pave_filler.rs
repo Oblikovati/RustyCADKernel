@@ -1,4 +1,6 @@
 //! Native `BOPAlgo_PaveFiller::Init` state and broad-phase preparation.
+#[path = "pave_filler/degenerated.rs"]
+mod degenerated;
 #[path = "pave_filler/edge_edge.rs"]
 mod edge_edge;
 #[path = "pave_filler/edge_face.rs"]
@@ -15,13 +17,23 @@ mod face_face_task;
 #[cfg(test)]
 #[path = "pave_filler/face_face_task_tests.rs"]
 mod face_face_task_tests;
+#[path = "pave_filler/make_blocks.rs"]
+mod make_blocks;
+#[path = "pave_filler/pcurves.rs"]
+mod pcurves;
+#[path = "pave_filler/perform.rs"]
+mod perform;
 #[path = "pave_filler/sd_updates.rs"]
 mod sd_updates;
 #[cfg(test)]
 #[path = "pave_filler/section_attribute_tests.rs"]
 mod section_attribute_tests;
+#[path = "pave_filler/self_interference.rs"]
+mod self_interference;
 #[path = "pave_filler/shrunk_data.rs"]
 mod shrunk_data;
+#[path = "pave_filler/split_edges.rs"]
+mod split_edges;
 #[path = "pave_filler/vertex_edge.rs"]
 mod vertex_edge;
 #[path = "pave_filler/vertex_face.rs"]

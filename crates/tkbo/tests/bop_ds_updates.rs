@@ -210,7 +210,9 @@ fn seed_first_face(ds: &mut DataStructure, face: i32) {
 }
 
 fn on_in_rows(ds: &DataStructure, faces: &[i32], rows: &mut String) {
-    let shared = ds.sub_shapes_on_in(faces[0], faces[2]).unwrap();
+    let mut shared = rustycad_tkbo::bop_ds::SubShapesOnIn::default();
+    ds.sub_shapes_on_in(faces[0], faces[2], &mut shared)
+        .unwrap();
     write!(
         rows,
         "onin {} {} {} {} :",
