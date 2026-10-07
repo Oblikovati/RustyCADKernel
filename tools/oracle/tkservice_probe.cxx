@@ -28,6 +28,7 @@
 #include "tkservice_probe_pixel.cxx"
 #include "tkservice_probe_pbr.cxx"
 #include "tkservice_probe_material.cxx"
+#include "tkservice_probe_shader.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -47,6 +48,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sv_material", sv_material_case},
  {"sv_material_rank", sv_material_rank_case},
  {"sv_material_edit", sv_material_edit_case},
+ // Graphic3d_ShaderObject declarations (tkservice_probe_shader.cxx)
+ {"sv_shader_decl", sv_shader_decl_case},
 };
 int main() {
  std::string line;

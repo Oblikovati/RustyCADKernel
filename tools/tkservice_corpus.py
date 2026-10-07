@@ -21,3 +21,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_pbr').append_pbr_requests(requests)
     # Graphic3d_MaterialAspect (tkservice_corpus_material.py)
     __import__('tkservice_corpus_material').append_material_requests(requests)
+    # Graphic3d_ShaderObject declarations (tkservice_corpus_shader.py)
+    __import__('tkservice_corpus_shader').append_shader_requests(requests)

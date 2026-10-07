@@ -11,6 +11,9 @@ mod material_specs;
 mod material_table;
 mod pbr_material;
 mod render_enums;
+mod shader_object;
+mod shader_program;
+mod shader_variable;
 mod small_values;
 mod stats_enums;
 mod texture_enums;
@@ -21,6 +24,16 @@ pub use material_aspect::Graphic3dMaterialAspect;
 pub use material_enums::*;
 pub use pbr_material::{Graphic3dPbrMaterial, material_definition_error};
 pub use render_enums::*;
+pub use shader_object::{
+    Graphic3dShaderObject, Graphic3dShaderObjectVariable, Graphic3dShaderVariableList,
+};
+pub use shader_program::Graphic3dShaderProgram;
+pub use shader_variable::{
+    Graphic3dShaderAttribute, Graphic3dShaderVariable, Graphic3dUniformFloat, Graphic3dUniformInt,
+    Graphic3dUniformMat3, Graphic3dUniformMat4, Graphic3dUniformValue, Graphic3dUniformValueTypeId,
+    Graphic3dUniformVec2, Graphic3dUniformVec2i, Graphic3dUniformVec3, Graphic3dUniformVec3i,
+    Graphic3dUniformVec4, Graphic3dUniformVec4i, Graphic3dValueInterface,
+};
 pub use small_values::{Graphic3dBufferRange, Graphic3dPolygonOffset, Graphic3dVertex};
 pub use stats_enums::*;
 pub use texture_enums::*;
