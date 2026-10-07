@@ -48,3 +48,24 @@ TKService `NullGraphicDriver`, the native probe the `SvDriver` of
 `tools/oracle/tkservice_probe_null_driver.cxx`. A view refers to its viewer without owning
 it (native `V3d_View::MyViewer` is a raw pointer), so a caller keeps the viewer alive while
 it uses the view; a view whose viewer is gone skips its redraw.
+
+## 5. Presentable objects
+
+`PrsMgr_PresentableObject` is abstract and its virtual members are overridden down to the
+AIS objects, so it is the trait `PrsMgrPresentableObject` over an embedded
+`PrsMgrPresentableObjectBase` that holds the protected fields in one `SharedState`. Each
+virtual member has a default body that calls a `prs_mgr_*` function with the native base
+body; an override calls that function where the native code calls
+`PrsMgr_PresentableObject::Member`. The non-virtual members are the blanket traits
+`PrsMgrPresentableObjectMembers` and `PrsMgrPresentableObjectUpdates`. A constructor calls
+`prs_mgr_presentable_bind` once the handle exists, so the presentations and children receive
+the object handle (`this`).
+
+The raw back pointers (`myParent`, `PrsMgr_Presentation::myPresentableObject`) are weak
+handles. The structure manager keeps strong handles to displayed structures, so a
+presentation never relies on its destructor to leave the scene: the members that drop a
+presentation (`Erase`, the deprecated `Update(mode, true)`, the object destructor) erase it
+first. The virtual members of `Graphic3d_Structure` that return nothing natively
+(`Compute`, `computeHLR`) report a failure of the object computation as a fail message.
+Bounding boxes come from the driver structure, which a view computes when it displays the
+structure: without a view the box stays void, as natively.
