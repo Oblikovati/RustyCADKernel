@@ -79,6 +79,25 @@ class DisplayTest(unittest.TestCase):
         self.assertIsNone(trait_arguments(bad, PATHS))
 
 
+class CompositeTypeDisplayTest(unittest.TestCase):
+    def test_tuples_render_like_rust(self) -> None:
+        pair = {"tuple": [{"primitive": "i32"}, {"primitive": "i32"}]}
+        self.assertEqual(display_type(pair, PATHS), "(i32, i32)")
+        self.assertEqual(display_type({"tuple": []}, PATHS), "()")
+        self.assertEqual(display_type({"tuple": [GENERIC_T]}, PATHS), "(T,)")
+
+    def test_trait_objects_render_with_their_lifetime(self) -> None:
+        bound = {"trait": {"path": "BvhVector", "id": 3, "args": None}, "generic_params": []}
+        plain = {"dyn_trait": {"traits": [bound], "lifetime": None}}
+        scoped = {"dyn_trait": {"traits": [bound], "lifetime": "'a"}}
+        self.assertEqual(display_type(plain, PATHS), "dyn krate::bvh::BvhVector")
+        self.assertEqual(display_type(scoped, PATHS), "dyn krate::bvh::BvhVector + 'a")
+
+    def test_higher_ranked_trait_objects_are_not_guessed(self) -> None:
+        bound = {"trait": {"path": "BvhVector", "id": 3, "args": None}, "generic_params": [{"name": "'a"}]}
+        self.assertIsNone(display_type({"dyn_trait": {"traits": [bound], "lifetime": None}}, PATHS))
+
+
 class PointerSelfImplTest(unittest.TestCase):
     def test_anchor_status(self) -> None:
         self.assertEqual(pointer_self_text(pointer_impl(), PATHS), "*const T")

@@ -93,6 +93,10 @@ def display_type(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None
         return display_raw_pointer(body, paths)
     if kind == "qualified_path":
         return display_qualified_path(body, paths)
+    if kind == "tuple":
+        return display_tuple(body, paths)
+    if kind == "dyn_trait":
+        return display_dyn_trait(body, paths)
     if kind in {"generic", "primitive"} and isinstance(body, str):
         return body
     return None
@@ -175,3 +179,41 @@ def display_qualified_path(
     if self_type is None or trait_path is None or arguments is None:
         return None
     return f"<{self_type} as {trait_path}>::{name}{arguments}"
+
+
+def display_tuple(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None:
+    """Spell a tuple as Rust does; e.g. `(i32, i32)`, `(T,)` and the unit type `()`."""
+    if not isinstance(value, list):
+        return None
+    elements = [display_type(element, paths) for element in value]
+    if any(element is None for element in elements):
+        return None
+    if len(elements) == 1:
+        return f"({elements[0]},)"
+    return "(" + ", ".join(str(element) for element in elements) + ")"
+
+
+def display_dyn_trait(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None:
+    """Spell a trait object; e.g. `dyn krate::Curve` or `dyn krate::Curve + 'a`.
+
+    Higher-ranked bounds (`for<'a>`) have no captured spelling policy yet: None.
+    """
+    if not isinstance(value, dict) or set(value) != {"traits", "lifetime"}:
+        return None
+    traits, lifetime = value["traits"], value["lifetime"]
+    if not isinstance(traits, list) or not traits:
+        return None
+    bounds = [dyn_bound(bound, paths) for bound in traits]
+    if any(bound is None for bound in bounds):
+        return None
+    if lifetime is not None and display_lifetime_argument(lifetime) is None:
+        return None
+    suffix = f" + {lifetime}" if isinstance(lifetime, str) else ""
+    return "dyn " + " + ".join(str(bound) for bound in bounds) + suffix
+
+
+def dyn_bound(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None:
+    """One trait-object bound without higher-ranked parameters."""
+    if not isinstance(value, dict) or value.get("generic_params") != []:
+        return None
+    return display_resolved_path(value.get("trait"), paths)
