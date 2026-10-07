@@ -330094,10 +330094,6 @@
     {
       "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public iteration it implements (More, Next, Key, Value, node identity in bucket/chain order) is DataMap::cursor/items, Map::cursor/iter and the cursors of the other maps.",
       "rust_item": "rustycad_tkernel::ncollection::DataMapIterator",
-      "rust_items": [
-        "rustycad_tkernel::ncollection::BaseMapBasicIterator::assign",
-        "rustycad_tkernel::ncollection::BaseMapBasicIterator::assign_self"
-      ],
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
       "status": "excluded",
       "toolkit": "TKernel",
