@@ -443007,17 +443007,6 @@
       "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The class template is the generic struct."
     },
     {
-      "upstream_id": "Aspect_FrustumLRBT",
-      "toolkit": "TKService",
-      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
-      "cpp_selector": {
-        "kind": "CXXRecord"
-      },
-      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt",
-      "status": "implemented",
-      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The template record is the generic struct."
-    },
-    {
       "upstream_id": "Aspect_FrustumLRBT::Aspect_FrustumLRBT<Elem_t>()",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
@@ -444367,6 +444356,30 @@
       "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse",
       "status": "implemented",
       "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Keys",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::keys",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): abstract classes are traits over embedded bases with extension traits for the non-virtual members."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::ChangeKeys",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::change_keys",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): abstract classes are traits over embedded bases with extension traits for the non-virtual members."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::myKeys",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::keys",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): abstract classes are traits over embedded bases with extension traits for the non-virtual members."
     },
     {
       "upstream_id": "WNT_HIDSpaceMouse::(unnamed enum at src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx:94:3)",
@@ -447385,7 +447398,7 @@
       "upstream_id": "std::equal_to<opencascade::handle<Image_Texture>>::operator()(const occ::handle<Image_Texture> &,const occ::handle<Image_Texture> &) const",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
-      "rust_item": "rustycad_tkservice::image::ImageTextureHashPolicy::<rustycad_tkernel::ncollection::HashPolicy>::equal",
+      "rust_item": "rustycad_tkservice::image::ImageTextureHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<dyn rustycad_tkservice::image::texture::ImageTextureSource>>>::equal",
       "status": "implemented",
       "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
     },
@@ -447393,7 +447406,7 @@
       "upstream_id": "std::hash<opencascade::handle<Image_Texture>>::operator()(const occ::handle<Image_Texture> &) const",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
-      "rust_item": "rustycad_tkservice::image::ImageTextureHashPolicy::<rustycad_tkernel::ncollection::HashPolicy>::hash",
+      "rust_item": "rustycad_tkservice::image::ImageTextureHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<dyn rustycad_tkservice::image::texture::ImageTextureSource>>>::hash",
       "status": "implemented",
       "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
     },
@@ -447732,6 +447745,358 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: protected counter; rustycad_tkservice::image::ImageVideoRecorder keeps it private and frame_count gives it."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureHashPolicy",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md section 1): the std::hash and std::equal_to specializations of occ::handle<Image_Texture> are the HashPolicy of texture handles. Class record of the std::hash<occ::handle<Image_Texture>> specialization; its operator() is mapped by its own row."
+    },
+    {
+      "upstream_id": "std::equal_to",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureHashPolicy",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md section 1): the std::hash and std::equal_to specializations of occ::handle<Image_Texture> are the HashPolicy of texture handles. Class record of the std::equal_to<occ::handle<Image_Texture>> specialization; its operator() is mapped by its own row."
+    },
+    {
+      "upstream_id": "Font_FontAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_FontAspect_UNDEFINED",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect::Undefined",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_FontAspect_Regular",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect::Regular",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_FontAspect_Bold",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect::Bold",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_FontAspect_Italic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect::Italic",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_FontAspect_BoldItalic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect::BoldItalic",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_FA_Undefined",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect::FA_UNDEFINED",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_FA_Regular",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect::FA_REGULAR",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_FA_Bold",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect::FA_BOLD",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_FA_Italic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect::FA_ITALIC",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_FA_BoldItalic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontAspect::FA_BOLD_ITALIC",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_Hinting",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Hinting.hxx",
+      "rust_item": "rustycad_tkservice::font::FontHinting",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_Hinting_Off",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Hinting.hxx",
+      "rust_item": "rustycad_tkservice::font::FontHinting::OFF",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_Hinting_Normal",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Hinting.hxx",
+      "rust_item": "rustycad_tkservice::font::FontHinting::NORMAL",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_Hinting_Light",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Hinting.hxx",
+      "rust_item": "rustycad_tkservice::font::FontHinting::LIGHT",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_Hinting_ForceAutohint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Hinting.hxx",
+      "rust_item": "rustycad_tkservice::font::FontHinting::FORCE_AUTOHINT",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_Hinting_NoAutohint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Hinting.hxx",
+      "rust_item": "rustycad_tkservice::font::FontHinting::NO_AUTOHINT",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_StrictLevel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_StrictLevel.hxx",
+      "rust_item": "rustycad_tkservice::font::FontStrictLevel",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_StrictLevel_Strict",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_StrictLevel.hxx",
+      "rust_item": "rustycad_tkservice::font::FontStrictLevel::Strict",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_StrictLevel_Aliases",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_StrictLevel.hxx",
+      "rust_item": "rustycad_tkservice::font::FontStrictLevel::Aliases",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_StrictLevel_Any",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_StrictLevel.hxx",
+      "rust_item": "rustycad_tkservice::font::FontStrictLevel::Any",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_UnicodeSubset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_UnicodeSubset.hxx",
+      "rust_item": "rustycad_tkservice::font::FontUnicodeSubset",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_UnicodeSubset_Western",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_UnicodeSubset.hxx",
+      "rust_item": "rustycad_tkservice::font::FontUnicodeSubset::Western",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_UnicodeSubset_Korean",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_UnicodeSubset.hxx",
+      "rust_item": "rustycad_tkservice::font::FontUnicodeSubset::Korean",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_UnicodeSubset_CJK",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_UnicodeSubset.hxx",
+      "rust_item": "rustycad_tkservice::font::FontUnicodeSubset::Cjk",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_UnicodeSubset_Arabic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_UnicodeSubset.hxx",
+      "rust_item": "rustycad_tkservice::font::FontUnicodeSubset::Arabic",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_UnicodeSubset_NB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_UnicodeSubset.hxx",
+      "rust_item": "rustycad_tkservice::font::FontUnicodeSubset::Nb",
+      "status": "implemented",
+      "notes": "Font enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; obsolete aliases are associated constants; the hinting flags combine, so Font_Hinting is a newtype with associated constants."
+    },
+    {
+      "upstream_id": "Font_Rect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
+    },
+    {
+      "upstream_id": "Font_Rect::Left",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::left",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
+    },
+    {
+      "upstream_id": "Font_Rect::Right",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::right",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
+    },
+    {
+      "upstream_id": "Font_Rect::Top",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::top",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
+    },
+    {
+      "upstream_id": "Font_Rect::Bottom",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::bottom",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
+    },
+    {
+      "upstream_id": "Font_Rect::TopLeft() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::top_left",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
+    },
+    {
+      "upstream_id": "Font_Rect::TopLeft(NCollection_Vec2<float> &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::top_left",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector. The output vector is the returned value."
+    },
+    {
+      "upstream_id": "Font_Rect::TopRight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::top_right",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector. The output vector is the returned value."
+    },
+    {
+      "upstream_id": "Font_Rect::BottomLeft",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::bottom_left",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector. The output vector is the returned value."
+    },
+    {
+      "upstream_id": "Font_Rect::BottomRight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::bottom_right",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector. The output vector is the returned value."
+    },
+    {
+      "upstream_id": "Font_Rect::Width",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::width",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
+    },
+    {
+      "upstream_id": "Font_Rect::Height",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::height",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
+    },
+    {
+      "upstream_id": "Font_Rect::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_Rect.hxx",
+      "rust_item": "rustycad_tkservice::font::FontRect::dump_json",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
+    },
+    {
+      "upstream_id": "(unnamed enum at src/Visualization/TKService/Font/Font_FontAspect.hxx:35:1)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector. The anonymous enum is the FONT_FONT_ASPECT_NB constant of the module."
+    },
+    {
+      "upstream_id": "Font_FontAspect_NB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontAspect.hxx",
+      "rust_item": "rustycad_tkservice::font::FONT_FONT_ASPECT_NB",
+      "status": "implemented",
+      "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
     }
   ],
   "tests": [
@@ -555008,6 +555373,20 @@
       "rust_target": "image_video_recorder_test",
       "rust_test": "Image_VideoRecorderTest__CloseWithoutOpen",
       "rust_source": "crates/tkservice/tests/image_video_recorder_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_UnicodeSubsetTest.CountIncludesEveryDeclaredSubset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_UnicodeSubset_Test.cxx",
+      "source_sha256": "851694073d8f5559924deeca1c38062333944a05b0ddc17af797a8dc629ee747",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_unicode_subset_test",
+      "rust_test": "Font_UnicodeSubsetTest__CountIncludesEveryDeclaredSubset",
+      "rust_source": "crates/tkservice/tests/font_unicode_subset_test.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
