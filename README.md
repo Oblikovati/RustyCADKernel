@@ -64,6 +64,7 @@ Use `python` instead of `python3` if that is your Python launcher.
 | `crates/tkcdf` | TKCDF OCAF document and application framework (CDM, PCDM interfaces, CDF), in progress |
 | `crates/tklcaf` | TKLCAF OCAF data framework (TDF labels and transactions, TDataStd attributes, TFunction, TDocStd documents), in progress |
 | `crates/tkcaf` | TKCAF topological naming (TNaming named shapes, names, selections), extended attributes (TDataXtd) and AppStd, in progress |
+| `crates/tkde` | TKDE data exchange framework (DE_Wrapper format registry, configuration nodes and contexts, providers), in progress |
 | `crates/parity` | Numerical assertions for future differential tests |
 | `porting` | Pinned upstream identity, source inventory, API/test mapping ledger |
 | `tools` | Reproducible developer setup and inventory commands |

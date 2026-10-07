@@ -1,0 +1,16 @@
+[package]
+name = "rustycad-tkde"
+description = "OCCT TKDE toolkit: the data exchange framework (configuration nodes, providers and the format registry DE_Wrapper)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkbrep = { path = "../tkbrep" }
+# DE_Provider names TDocStd_Document (TKLCAF) through a forward declaration natively; the
+# Rust signatures need the type itself (docs/de-design.md section 2).
+rustycad-tklcaf = { path = "../tklcaf" }
