@@ -1,0 +1,26 @@
+clear release=0 fail=0 caught=0 size=0 blocks=3 ended=5 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+clear release=0 fail=1 caught=1 size=5 blocks=3 ended=1 events=D1@5#3:1;
+tail fail=1 value=2
+repair size=0 blocks=0 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+clear release=0 fail=2 caught=1 size=5 blocks=3 ended=2 events=D1@5#3:1;D2@5#3:1;
+tail fail=2 value=3
+repair size=0 blocks=0 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+clear release=0 fail=3 caught=1 size=5 blocks=3 ended=3 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;
+tail fail=3 value=4
+repair size=0 blocks=0 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+clear release=0 fail=5 caught=1 size=5 blocks=3 ended=5 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+tail fail=5 value=0
+repair size=0 blocks=0 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+clear release=1 fail=0 caught=0 size=0 blocks=0 ended=5 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+clear release=1 fail=1 caught=1 size=5 blocks=3 ended=1 events=D1@5#3:1;
+tail fail=1 value=2
+repair size=0 blocks=0 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+clear release=1 fail=2 caught=1 size=5 blocks=3 ended=2 events=D1@5#3:1;D2@5#3:1;
+tail fail=2 value=3
+repair size=0 blocks=0 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+clear release=1 fail=3 caught=1 size=5 blocks=3 ended=3 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;
+tail fail=3 value=4
+repair size=0 blocks=0 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+clear release=1 fail=5 caught=1 size=5 blocks=3 ended=5 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;
+tail fail=5 value=0
+repair size=0 blocks=0 events=D1@5#3:1;D2@5#3:1;D3@5#3:1;D4@5#3:1;D5@5#3:1;

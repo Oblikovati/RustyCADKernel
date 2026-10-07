@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "default_scope": "port",
+  "scopes": {
+    "port": "Ported to Rust with API and test parity against the pinned OCCT revision.",
+    "replaced": "Not ported; a new Rust design replaces it (user decision).",
+    "excluded": "Not ported (user decision).",
+    "undecided": "Not part of the library API; the user has not decided the scope yet."
+  },
+  "decisions": [
+    {
+      "scope": "replaced",
+      "reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns.",
+      "decided": "2026-09",
+      "toolkits": [
+        "TKOpenGl", "TKOpenGles", "TKOpenGlTest", "TKOpenGlesTest", "TKService", "TKV3d",
+        "TKMeshVS", "TKD3DHost", "TKD3DHostTest", "TKIVtk", "TKIVtkDraw"
+      ]
+    },
+    {
+      "scope": "excluded",
+      "reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are.",
+      "decided": "2026-09",
+      "toolkits": [
+        "TKBin", "TKBinL", "TKBinTObj", "TKBinXCAF", "TKXml", "TKXmlL", "TKXmlTObj", "TKXmlXCAF",
+        "TKStd", "TKStdL"
+      ]
+    },
+    {
+      "scope": "undecided",
+      "reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API.",
+      "decided": null,
+      "toolkits": [
+        "TKDraw", "TKDCAF", "TKTopTest", "TKViewerTest", "TKQADraw", "TKXDEDRAW", "TKTObjDRAW", "TKXSDRAW",
+        "TKXSDRAWDE", "TKXSDRAWGLTF", "TKXSDRAWIGES", "TKXSDRAWOBJ", "TKXSDRAWPLY",
+        "TKXSDRAWSTEP", "TKXSDRAWSTL", "TKXSDRAWVRML"
+      ]
+    }
+  ]
+}

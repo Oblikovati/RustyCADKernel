@@ -73402,14 +73402,6 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence(const NCollection_Sequence&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Sequence::<core::clone::Clone>::clone",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
-    },
-    {
       "upstream_id": "NCollection_Sequence(NCollection_Sequence&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
@@ -73464,22 +73456,6 @@
       "rust_item": "rustycad_tkernel::ncollection::Sequence::clear",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The nullable allocator handle is an Option."
-    },
-    {
-      "upstream_id": "NCollection_Sequence::Assign(const NCollection_Sequence&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Sequence::assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
-    },
-    {
-      "upstream_id": "NCollection_Sequence::operator=(const NCollection_Sequence&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Sequence::assign",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
       "upstream_id": "NCollection_Sequence::operator=(NCollection_Sequence&&)",
@@ -73736,22 +73712,6 @@
       "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_before",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Index 0 raises even for an empty source, as natively. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
-    },
-    {
-      "upstream_id": "NCollection_Sequence::InsertAfter(size_t,NCollection_Sequence&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Quirk preserved: an empty source returns before the index is checked."
-    },
-    {
-      "upstream_id": "NCollection_Sequence::InsertAfter(int,NCollection_Sequence&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Quirk preserved: an empty source returns before the index is checked. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
     },
     {
       "upstream_id": "NCollection_Sequence::InsertAfter(size_t,const TheItemType&)",
@@ -74078,14 +74038,6 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::HSequence::<core::default::Default>::default",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`."
-    },
-    {
-      "upstream_id": "NCollection_HSequence(const SequenceType&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HSequence::from_sequence",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`."
     },
@@ -252717,6 +252669,797 @@
       "status": "partial",
       "toolkit": "TKernel",
       "upstream_id": "NCollection_HArray2::NCollection_HArray2<TheItemType>(const NCollection_HArray2::Array2Type &)"
+    },
+    {
+      "upstream_id": "NCollection_Sequence::NCollection_Sequence<TheItemType>(const NCollection_Sequence<TheItemType> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::<core::clone::Clone>::clone",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::Sequence::<core::clone::Clone>::clone",
+        "rustycad_tkernel::ncollection::Sequence::from_copied_with"
+      ],
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::<core::clone::Clone>::clone",
+          "declaration_sha256": "9fa425a48df087b41da8905ff55978df1a916814a5e8fb05d399e6c6a2ea3b7d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "path": "Clone",
+              "resolved_item_path": "core::clone::Clone",
+              "args": null
+            }
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::from_copied_with",
+          "declaration_sha256": "a1fc5300f87e7da38e76465b13bf21b7eef252b62532a25e9314e0b0dc67b892",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial native copy-constructor domain. Ordinary Sequence::clone and HSequence::from_sequence now share a class-local incomplete-copy guard: completed node payloads survive a constructor panic, failed-current allocation is freed, owner allocator handles/leases are relinquished, and failed local topology is cleared before normal cleanup. This matches observable native failure prefix lifetime and restored allocator-handle baseline, rather than dropping copied values during unwinding. Explicit callback supports non-Clone and borrowed payloads through the same node engine. Absolute per-node allocator handle counts, allocation byte layouts/failure ABIs, zero-sized payload details and native RTTI/alias/reentrant access remain outside full parity. Raw abandoned pointers are not exposed by the new safe constructor; test-only recovery retains original provenance. See porting/audits/hsequence-copy-construction.json."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::NCollection_HSequence<TheItemType>(const NCollection_HSequence::SequenceType &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::from_sequence",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::HSequence::from_sequence",
+        "rustycad_tkernel::ncollection::HSequence::from_sequence_with_constructor"
+      ],
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::HSequence::from_sequence",
+          "declaration_sha256": "c3d40d01efcc29c55458005670fd9339eac1d754243bff217b5a7c984e5e7e59",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::HSequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::h_sequence::HSequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::HSequence::from_sequence_with_constructor",
+          "declaration_sha256": "b08b14fc2ed04e5dcad86f3aca1eedf0df0429e13f4b96de72c7f8533e3acee2",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::HSequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::h_sequence::HSequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial native copy-constructor domain. Ordinary Sequence::clone and HSequence::from_sequence now share a class-local incomplete-copy guard: completed node payloads survive a constructor panic, failed-current allocation is freed, owner allocator handles/leases are relinquished, and failed local topology is cleared before normal cleanup. This matches observable native failure prefix lifetime and restored allocator-handle baseline, rather than dropping copied values during unwinding. Explicit callback supports non-Clone and borrowed payloads through the same node engine. Absolute per-node allocator handle counts, allocation byte layouts/failure ABIs, zero-sized payload details and native RTTI/alias/reentrant access remain outside full parity. Raw abandoned pointers are not exposed by the new safe constructor; test-only recovery retains original provenance. See porting/audits/hsequence-copy-construction.json."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Assign(const NCollection_Sequence<TheItemType> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::assign",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::Sequence::assign",
+        "rustycad_tkernel::ncollection::Sequence::assign_with_constructor",
+        "rustycad_tkernel::ncollection::Sequence::assign_self"
+      ],
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::assign",
+          "declaration_sha256": "edd20cbe63ec1148578dcb1714b79099bde3077952ceb8f50465cdd10d641e75",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::assign_with_constructor",
+          "declaration_sha256": "16f1fc8f95bdc3eb1706a912f830c5858e5bf88622bc3e117e1e511afd125423",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::assign_self",
+          "declaration_sha256": "f332ab879aebef18b01af0b07619c800c69d5ddf9fc7ff00f5e2f4cfa46c0866",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial copy-assignment domain. Assign and actual Rust Clone::clone_from now share clear-before-copy node construction, preserve the receiver allocator, keep source values/cache while retaining observable const-copy reads, and commit each successfully constructed destination node before later failure. Failed current allocation frees without destroying the committed receiver prefix. Explicit assign_with_constructor supports non-Clone borrowed payloads using the same node engine; self aliasing uses assign_self. Native operator= returns a receiver reference; Rust Clone::clone_from returns unit by trait design, while assign/assign_with_constructor preserve receiver-reference return. No arbitrary C++ hook, allocator byte-layout/absolute handle-count, destructor exception or implicit-wrapper assignment parity is claimed. See porting/audits/sequence-assignment-policy.json."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator=(const NCollection_Sequence<TheItemType> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::assign",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::Sequence::assign",
+        "rustycad_tkernel::ncollection::Sequence::assign_with_constructor",
+        "rustycad_tkernel::ncollection::Sequence::assign_self",
+        "rustycad_tkernel::ncollection::Sequence::<core::clone::Clone>::clone_from"
+      ],
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::assign",
+          "declaration_sha256": "edd20cbe63ec1148578dcb1714b79099bde3077952ceb8f50465cdd10d641e75",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::assign_with_constructor",
+          "declaration_sha256": "16f1fc8f95bdc3eb1706a912f830c5858e5bf88622bc3e117e1e511afd125423",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::assign_self",
+          "declaration_sha256": "f332ab879aebef18b01af0b07619c800c69d5ddf9fc7ff00f5e2f4cfa46c0866",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::<core::clone::Clone>::clone_from",
+          "declaration_sha256": "3942ab3654e754b63141bd483d384b88255390092ca942c3a0204f94daf2d9ac",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "path": "Clone",
+              "resolved_item_path": "core::clone::Clone",
+              "args": null
+            }
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial copy-assignment domain. Assign and actual Rust Clone::clone_from now share clear-before-copy node construction, preserve the receiver allocator, keep source values/cache while retaining observable const-copy reads, and commit each successfully constructed destination node before later failure. Failed current allocation frees without destroying the committed receiver prefix. Explicit assign_with_constructor supports non-Clone borrowed payloads using the same node engine; self aliasing uses assign_self. Native operator= returns a receiver reference; Rust Clone::clone_from returns unit by trait design, while assign/assign_with_constructor preserve receiver-reference return. No arbitrary C++ hook, allocator byte-layout/absolute handle-count, destructor exception or implicit-wrapper assignment parity is claimed. See porting/audits/sequence-assignment-policy.json."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(const size_t,NCollection_Sequence<TheItemType> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::Sequence::insert_sequence_after",
+        "rustycad_tkernel::ncollection::Sequence::insert_self_after"
+      ],
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after",
+          "declaration_sha256": "ef8f58257584c74dfa4a588422fda35b887b4dd62bc9c9472fe405effc5a677b",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::insert_self_after",
+          "declaration_sha256": "383fca2e7e06c9ef23e3e3642f11ae65abdce75ae058cc80b7d2401e9b72aae3",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial Sequence splice domain. Empty donor returns before unsigned index validation; signed overload rejects negative indices before delegating. Distinct allocators preserve OCCT unsigned SIZE_MAX+1 wrap into prependSeq(...,0), publishing each copied node before the next constructor and clearing donor only after success. On copy failure the destination owns its committed prefix and donor remains intact apart from observable const-copy hook reads; current failed node allocation releases. Same allocator SIZE_MAX raises before copy. Self alias uses insert_self_after. Other nonempty out-of-range indices under distinct allocators reach invalid native pointers, so Rust keeps a checked extension and no parity is claimed for native undefined behavior. Generic Clone represents only the tested native copy-constructor policy; no arbitrary C++ hooks, allocator bytes, exception ABI, allocation failure or full-class parity. See porting/audits/sequence-splice-max.json."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(const int,NCollection_Sequence<TheItemType> &)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after_signed",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::Sequence::insert_sequence_after_signed",
+        "rustycad_tkernel::ncollection::Sequence::insert_sequence_after"
+      ],
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after_signed",
+          "declaration_sha256": "127d4d24c8e22b9a3d01cf91cdd17d203ed5c846699eaec1f6745e4dbf30cfae",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after",
+          "declaration_sha256": "ef8f58257584c74dfa4a588422fda35b887b4dd62bc9c9472fe405effc5a677b",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::Sequence",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "T",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone",
+                              "args": null
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Exact partial Sequence splice domain. Empty donor returns before unsigned index validation; signed overload rejects negative indices before delegating. Distinct allocators preserve OCCT unsigned SIZE_MAX+1 wrap into prependSeq(...,0), publishing each copied node before the next constructor and clearing donor only after success. On copy failure the destination owns its committed prefix and donor remains intact apart from observable const-copy hook reads; current failed node allocation releases. Same allocator SIZE_MAX raises before copy. Self alias uses insert_self_after. Other nonempty out-of-range indices under distinct allocators reach invalid native pointers, so Rust keeps a checked extension and no parity is claimed for native undefined behavior. Generic Clone represents only the tested native copy-constructor policy; no arbitrary C++ hooks, allocator bytes, exception ABI, allocation failure or full-class parity. See porting/audits/sequence-splice-max.json."
     }
   ],
   "tests": [

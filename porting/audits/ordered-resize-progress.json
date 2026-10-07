@@ -1,0 +1,3603 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "OrderedMap and OrderedDataMap explicit native ReSize interruption ownership and certified Clear failure states",
+  "base_revision": "a004c8e69ca3fd39b251633ad1199475506a750b",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "integration_status": "candidate awaiting coordinating main integration and checks",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/allocator/accumulating.rs": "4c65d9357eb8cb640a7dc28850e54ce151febe802bda6461a4f5a849e20b8a16",
+    "crates/tkernel/src/ncollection/allocator/aligned.rs": "ca0b0648c1923b14d7894f6361943d47ab586a1126fe05694bb8373d69e4c61a",
+    "crates/tkernel/src/ncollection/allocator/block.rs": "f854a0644eb949b0d80e654a3be5da653bee37573091578580dee1e6e3645c8c",
+    "crates/tkernel/src/ncollection/allocator/incremental/block.rs": "87ea3e39737767212bc353afec3f93b55fa78d664e855fa98a038c83465153ac",
+    "crates/tkernel/src/ncollection/allocator/incremental/block_tests.rs": "a8de602b8760955106f4d891e45467f7e33b8e7ba00b3d947227b2b4d2146774",
+    "crates/tkernel/src/ncollection/allocator/incremental/failure_tests.rs": "5fae1b7c56fc23c11821160564508df65903f4a34596e761ab1f5012b05476bb",
+    "crates/tkernel/src/ncollection/allocator/incremental/operations.rs": "de87beb70c0561fa7f61576b4eda8c5493dc2d96182ed7cfbab633030a63c603",
+    "crates/tkernel/src/ncollection/allocator/incremental/protected_tests.rs": "ef6834b815eafb296a7d8d5aa3593e5a1f2c2fd9a00e386fd89fa511af894fe3",
+    "crates/tkernel/src/ncollection/allocator/incremental.rs": "8a19c9861821782eaf0992aa6f5b354707d01f8d8f89fd4a874ca7835f7649c3",
+    "crates/tkernel/src/ncollection/allocator/incremental_extension.rs": "b7bd1592f6069565bbd98100ef748e82bfd1870881af49c5549e6d4bd9b5a70b",
+    "crates/tkernel/src/ncollection/allocator/keys.rs": "8b45c0c058fdf1a88a51d3c1b245e3d54e491fcbe305babee631bc1ce6d0bf68",
+    "crates/tkernel/src/ncollection/allocator/owned.rs": "4df702c5465a7919def7eda3b02bb1a0d3389368f07230bd638f9910afbf14b9",
+    "crates/tkernel/src/ncollection/allocator/owned_contracts.rs": "3d87808b8abdb8e447be8abba70fe5d252debef93916e1270696d2a34c77a5c7",
+    "crates/tkernel/src/ncollection/allocator/typed_heap.rs": "b25c8e4cbdb590206c21d0d65287f41ff5456ea84557335786aab749d987a399",
+    "crates/tkernel/src/ncollection/allocator.rs": "9ed87aa04ef7fa6a7af8a6e1b2d043f5ba22432dfd490a9fb3f903beb17a0f6b",
+    "crates/tkernel/src/ncollection/base_map/basic_iterator/access.rs": "078574530f97f4333b6eecba70893069ec8b431e6609b4c04a63f331c7586e77",
+    "crates/tkernel/src/ncollection/base_map/basic_iterator/construction.rs": "c9d2daaad2613fd951d922a7a02318d3e880906140edb9a2f84a77c8f86a638e",
+    "crates/tkernel/src/ncollection/base_map/basic_iterator.rs": "47d131dc0249e3d845acff5f6a4ce7b9d84b86a5852e6953bbb2ffdaf1d82fbf",
+    "crates/tkernel/src/ncollection/base_map/basic_node.rs": "f5aac544222f58a3ae6b9c61ff33c360a16d77b88bbf11782cf7a53f909822e2",
+    "crates/tkernel/src/ncollection/base_map/bucket_table.rs": "a83308853144918de7a83ab0c0b35804c62c9ee8c1c3111f0ca8ced4a1cd5976",
+    "crates/tkernel/src/ncollection/base_map/resize_plan.rs": "d9dcaed6a39e3292eb59bc406176d1e984182bbcadbc4c4e7a665e4f9481f5dc",
+    "crates/tkernel/src/ncollection/base_map/storage.rs": "2133a69fa13542b110d194aecfa1204ffcc6a4f2199c0cf7ad21b72e159f8223",
+    "crates/tkernel/src/ncollection/base_map.rs": "d74b17b5e35c7389e2b3c37604b6c36df20d860668c368f78034d58db0ec6182",
+    "crates/tkernel/src/ncollection/destructor_unwind.rs": "758266d3ca88c0840f7443a0cf4a0857d4dd6b9ff55c1b802f8fa8e329012289",
+    "crates/tkernel/src/ncollection/list_node.rs": "5a1d08e4b34d5954d7d186ee143a9a30620c2563e2b2d05b332cd37f71240249",
+    "crates/tkernel/src/ncollection/map_payload.rs": "3c155a8f314ec5ee22fd1b8272ec95e9bf25bc5755bf5dcf401e90b013ed8349",
+    "crates/tkernel/src/ncollection/mod.rs": "0bb57fd8d2fb1a9f55c31b5d8e617a7581f5b7af6f5e45b27779f8aa883a94bd",
+    "crates/tkernel/src/ncollection/node_owner.rs": "5f1c6b17408e3d42fab590cd36b310e6038708795609c5eaaa3683d73df3800f",
+    "crates/tkernel/src/ncollection/node_release.rs": "5c880b50d5e88d361912db359673b6dfeccf3c637e796d996182f0d78baa0fac",
+    "crates/tkernel/src/ncollection/ordered_data_map/binding.rs": "0d6b30b44cbcc89f156344d54fad0a2f7317593f8770cb635572e14893bac839",
+    "crates/tkernel/src/ncollection/ordered_data_map/cursor.rs": "290d2af1ed34dcad11b63549717df1a41961d6ec4c59874a165bd817dcde437d",
+    "crates/tkernel/src/ncollection/ordered_data_map/edges.rs": "2694f21bdfd61a6f545f9bb7feb66ba960efcd33fdea5254119328036f013f4f",
+    "crates/tkernel/src/ncollection/ordered_data_map/iteration.rs": "4f5b0c440651e1548f578c4b3622def5c94aa70ea09c254a18a9d860a0676c64",
+    "crates/tkernel/src/ncollection/ordered_data_map/method_contracts.rs": "785b22413bf465e068e90cc9c542526107e4744e3596d04e3619f7d17db6c057",
+    "crates/tkernel/src/ncollection/ordered_data_map/mixed_binding.rs": "892ba419751d6d9dbcdb20fc29467cfca589d1a5c54ab4866a675f6e69786c22",
+    "crates/tkernel/src/ncollection/ordered_data_map.rs": "128ac55a4741b9f8012816cb2f48ab359fe4c50351ea21edd66852a7035111fb",
+    "crates/tkernel/src/ncollection/ordered_data_map_node/borrowed.rs": "c15cdf852553b18ae303050c801dd4e47bda6d1c2f9737fef7abc80fd07f8e16",
+    "crates/tkernel/src/ncollection/ordered_data_map_node.rs": "daaf33f2a7fb947d23878d60d24aad80b84e9ea270a27f1249ae2692ddc33720",
+    "crates/tkernel/src/ncollection/ordered_map/construction.rs": "029a2f8ce113b179049c19e3da30ac454e039f2a4e9a38015d7a0a2b891dac95",
+    "crates/tkernel/src/ncollection/ordered_map.rs": "78fc003608c2cac23baa66e73dad9159d75d5c1f2d9cb76c9c2d1e31103bbca5",
+    "crates/tkernel/src/ncollection/ordered_map_node.rs": "09c5c96f59a0064ff0e75059bf1edecc6cbafebcb4b2410ad6e76827cd7213c6",
+    "crates/tkernel/src/ncollection/ordered_node_links.rs": "c03c3c8a78945e3196e2d2bd574b3b0c5a400ed25df42987da616120b97cd68d",
+    "crates/tkernel/src/ncollection/ordered_node_owner.rs": "27b86e409cb9062f6cf38b0a2164377922137e890b4379ddb71555bdef0ce75d",
+    "crates/tkernel/src/ncollection/ordered_resize_interruption.rs": "740893014ecedb2e16f3a896f35aed41e40c9268cf785284b6cf2bc1e3259828",
+    "crates/tkernel/src/ncollection/ordered_table/allocator_selection.rs": "397683844a98957f2d44c554efd2bfbdeb02c80a4d200b76e40cdf00be2a3f11",
+    "crates/tkernel/src/ncollection/ordered_table/base_bridge.rs": "71348fe352b88705abdbf03aa879b41e51b0973c998224ebf9bb9c07dd9b7c6a",
+    "crates/tkernel/src/ncollection/ordered_table/borrowed.rs": "4597d401912a2cf25ea63d5b30ad3f4976351a9ce074b48c2d4364269cbcfc63",
+    "crates/tkernel/src/ncollection/ordered_table/canonical_contracts.rs": "ad827402e6f6bed7568684c31f798711dbbbb548c1727b5ab57fb7ed74989f18",
+    "crates/tkernel/src/ncollection/ordered_table/copy_construction.rs": "3113ef22052f407b6a185852473ce22498dccb9cb60a1673ea04d22c7dcda1a9",
+    "crates/tkernel/src/ncollection/ordered_table/destruction.rs": "73db53865ca142ccf31fcf91b9e01b758dabe2f8dab3d9dd71c360cb2d804a89",
+    "crates/tkernel/src/ncollection/ordered_table/graph.rs": "273b3e4489438093e0aa27e2043854f67596ebb5e67cd84342cdcfb0583cf416",
+    "crates/tkernel/src/ncollection/ordered_table/iteration.rs": "bafb141d0e5d93a92435de001e9a5b4879b73fe2fb30c93a7b11906d0cdf51d4",
+    "crates/tkernel/src/ncollection/ordered_table/mutable.rs": "587dd66ad54ba1b281786993f777544e93aa82eaf2695b23b997d7ca025fc119",
+    "crates/tkernel/src/ncollection/ordered_table/node_contract.rs": "f89ac5dc4028fa4ccbcdb1a57a0376c9725650d12edc20479f1380858a1534c4",
+    "crates/tkernel/src/ncollection/ordered_table/nodes.rs": "87a727458a68c9a51feaa46be431042375ad9dc0a0afd206eef1b3589ccd7649",
+    "crates/tkernel/src/ncollection/ordered_table/placement.rs": "ec101169c163a2966c80396f3c79b19c5ed1f59c9850467f2ec767495d57e321",
+    "crates/tkernel/src/ncollection/ordered_table/policy_construction.rs": "6d77e831b9e45b8c3c47d9cddf311ac7ad877dcce179713fcd9445ffe091395d",
+    "crates/tkernel/src/ncollection/ordered_table/policy_exchange.rs": "8a4f76a0279f272911edee22024f705cb279e2002f240f487424ef7c0957e4c3",
+    "crates/tkernel/src/ncollection/ordered_table/projection.rs": "79cd442528437716b379bd528bbc2cd1551d61c58b3557b637601e0b5232b4c4",
+    "crates/tkernel/src/ncollection/ordered_table/protected_lookup.rs": "2f22711a362cf001e9aac5a496be162ff9e714697e362bf7bbefa048d1625a90",
+    "crates/tkernel/src/ncollection/ordered_table/resize.rs": "8a787d85581a11a206df988bbef75917d0254815466e3cf85dfb4df0a430f6bc",
+    "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs": "d25f753a4896972266a16304f9a26d166959a3a62d544eaef0299063e923652e",
+    "crates/tkernel/src/ncollection/ordered_table/traits.rs": "55567480694909fdecb3fd26ccfaf1250f2f8eb2a9d786fab4c1678e79440cde",
+    "crates/tkernel/src/ncollection/ordered_table.rs": "9c8e3bd08d22ffb18ffc8d4241c65449b82ef351fb8ff4c121a38213a0b22821",
+    "crates/tkernel/tests/fixtures/native_map_node_trace.rs": "a22983eb24238336c07ddd9ac62aac068ef32f069ede623821e514fb962d33f2",
+    "crates/tkernel/tests/ncollection_ordered_data_map/basic.rs": "53d70b1696e082458fd4de26142892c0c12fed6dc3973813a189e68b0850505b",
+    "crates/tkernel/tests/ncollection_ordered_data_map/binding.rs": "6112db7f03c74876c694a3a2ee488e8c5cca5d5379cc5ee8fd1f691f87c2f6dd",
+    "crates/tkernel/tests/ncollection_ordered_data_map/iteration.rs": "e9b839edb59851018abde863d3be0338b516e738f661409bd1fd41afd5b46872",
+    "crates/tkernel/tests/ncollection_ordered_data_map.rs": "f33acaaffb41208552c56474088ee28e38a26aea096e820140f35b2d11f21a0e",
+    "crates/tkernel/tests/ncollection_ordered_map/basic.rs": "bebd1c49b15bafd7da54388202a487d76af21c3f466fc8cfc2f5aac49268bcc0",
+    "crates/tkernel/tests/ncollection_ordered_map/iteration.rs": "f9ff666de8bc1f844cc2cf4e72d66460cbd15ee55ae9214cd338ba336869e651",
+    "crates/tkernel/tests/ncollection_ordered_map.rs": "5baeee16ede21147b1d2fc985c3c6e3f4944de5afc81e593bb4c5f64d7513b98",
+    "crates/tkernel/tests/ordered_base_bridge/fixture.rs": "10b9cc8c89f0497c6616e87e573ea4f21c7bb014174dc657af00fb6fbe6c1b08",
+    "crates/tkernel/tests/ordered_base_bridge.rs": "e855fc7e0da6878d3c02b407b104b43eeac739ac15f23da8af2e127de708b35d",
+    "crates/tkernel/tests/ordered_borrowed_clear/contracts.rs": "eb3607c76c964664817c5b1d8a355e81496d9ce26c9060ab8038e258897a55d8",
+    "crates/tkernel/tests/ordered_borrowed_clear/fixture.rs": "c6d83a33fa51191580d940114aba43d53ed7188aedd3aaf49dd3745b41c9ab3e",
+    "crates/tkernel/tests/ordered_borrowed_clear/modes.rs": "067eaa872d830c86f421bc6b24d865d4e4d151fc4dce68e129d3e7a1bc3a1ed2",
+    "crates/tkernel/tests/ordered_borrowed_clear.rs": "c9deb3a62bd3e063f4a6d6c0b15ff77acd6c68dc95849215437d09bc97783fa3",
+    "crates/tkernel/tests/ordered_canonical_storage.rs": "75352abcf539a305c555fb73cb36e36bd6eded40ef1a4d67fa6767349ad882a0",
+    "crates/tkernel/tests/ordered_copy_lifetimes/copy.rs": "c020710283e72826da3abf9bf1b3851668e44b1c32bdda9260d8ef3239709760",
+    "crates/tkernel/tests/ordered_copy_lifetimes/defaults.rs": "c8b3447fcef84ec9acc4e6ea5b9015412a2e53c790a0ac44cbde00d61c3fba4e",
+    "crates/tkernel/tests/ordered_copy_lifetimes/fixture.rs": "43b4b5ac1aee44dc2543fb688d2a663e067402e376586578dda5ced2a755f1bc",
+    "crates/tkernel/tests/ordered_copy_lifetimes.rs": "6818c810eb5d0f51c449e354e00008badd662b1778bba5ca6ebdb7b420143644",
+    "crates/tkernel/tests/ordered_data_map_method_contracts.rs": "655440c83191592c5d1231aeca58b63f282b76ade5620d4cc9db4726b0cca8be",
+    "crates/tkernel/tests/ordered_data_supplemental.rs": "3222a3120a8776970e4c5c3d36a1b1f75b5120842459a3f0214062f0d7d3282c",
+    "crates/tkernel/tests/ordered_emplace_construction/contracts.rs": "c87dcae16dbe53b78533c906543d95fed2186b0c906800241aec9897a86c5511",
+    "crates/tkernel/tests/ordered_emplace_construction/fixture.rs": "e68b8038324ae511c0e6b588eb409a6e813878b3a1304fe5935ada9ff9d358a3",
+    "crates/tkernel/tests/ordered_emplace_construction/scenarios.rs": "5ef1ef3b75494e51b0284e1983aed0913552a595bb9ccddebc378719e6a3c40c",
+    "crates/tkernel/tests/ordered_emplace_construction.rs": "6973aeba704793839abb797234684462c8d35df18720a3a4f57fa3ffe01c8f1d",
+    "crates/tkernel/tests/ordered_map_destruction.rs": "0e822d002a285aa11a433749ca8ba05b2d1bd7388d7c45fb535c5e5856349416",
+    "crates/tkernel/tests/ordered_map_generic_bounds.rs": "8183cf7ba91afa6344c0ae6d2d9260ad28ce20c715c4e95b7daa04d35c01b4a8",
+    "crates/tkernel/tests/ordered_map_method_contracts.rs": "8807bdd1813e0319cc5baf0e879877e655cddefd190b6c52ba93481aa9a9447e",
+    "crates/tkernel/tests/ordered_map_supplemental.rs": "ed590e70f2a5a1da70daada789a12ecc1c58589b7154937270538a0c8ece299f",
+    "crates/tkernel/tests/ordered_mixed_ownership.rs": "3de94e155820437cc5db1d327b659e7e588249374483e071919c276aee1b655d",
+    "crates/tkernel/tests/ordered_node_contracts/engine.rs": "06c1f3ff404eb36aded9f6fdc4220ef93cfc9f8f79274bd5d11cd048906fec7c",
+    "crates/tkernel/tests/ordered_node_contracts/fixture.rs": "aa940ba161f548e2e7e171e7f66e442d3c5f9d4ed814a8f8557fe7355348681c",
+    "crates/tkernel/tests/ordered_node_contracts/layout.rs": "0ad2320bdc115b2bfe0646342556265641a26349ad70fe10d97f2cc5784e2cbb",
+    "crates/tkernel/tests/ordered_node_contracts/lifetime.rs": "dd1e4b6e31c34e21c1d05a21a80d2148d476ce21c8c16c275a5be37b002caaad",
+    "crates/tkernel/tests/ordered_node_contracts/set.rs": "212f7488849ec22c2c9cf873d07b52f22ac1d5a3902e7b756c82bb8d17f3fdfe",
+    "crates/tkernel/tests/ordered_node_contracts.rs": "d54976c8e559a832030c001a127a351bcbb4014d02848f2b3eaca884cf0013ff",
+    "crates/tkernel/tests/ordered_policy_construction/fixture.rs": "b50a3e89778673a7205dd6f1a05fd1922123e69e9fdf62d2f8d1dfee30e68306",
+    "crates/tkernel/tests/ordered_policy_construction/payloads.rs": "06b03fde470c836bfc4e0bdf03bdcb7bca5567ad78680e042e087320f08853c6",
+    "crates/tkernel/tests/ordered_policy_construction.rs": "b5d9aab4bff5ece7c1de08862325ba788e19b9e3233904aadc70a9ea92227eab",
+    "crates/tkernel/tests/ordered_policy_exchange/adapters.rs": "e97ec51aaa09ba7de76edd8fe2531998209db40b6ff78440ac64a8ce69f7ea47",
+    "crates/tkernel/tests/ordered_policy_exchange/cursors.rs": "5ec35d8da240d46aceade2a9b585ccab2b6affccacd73021cb06b5a334512aad",
+    "crates/tkernel/tests/ordered_policy_exchange/fixture.rs": "498f4ec016ad7c3e16273209043d020976ca342f02ebbbc31e3ac36a5689103b",
+    "crates/tkernel/tests/ordered_policy_exchange/scenarios.rs": "ce8e9a7189624dc62133e6617ff4d9ef76b0538b6a801d65b3e3f780db6d45ee",
+    "crates/tkernel/tests/ordered_policy_exchange.rs": "810889e4c426e8957a8591278a9677a0165faa227400b159d456a7ee2502104d",
+    "crates/tkernel/tests/ordered_protected_lookup/contracts.rs": "c837cf3d3cdc2e3d58a81b1e0237a682788e4b7fde429fb2a4f4ea60bf729177",
+    "crates/tkernel/tests/ordered_protected_lookup/fixture.rs": "81e193e2b8ee0114f6bac0fd828f091eca6d17d2dc731a2be9230bf22874996b",
+    "crates/tkernel/tests/ordered_protected_lookup/opaque.rs": "f19fcb1ac30db5922394761e27bc5d8e2853f11d8f14c724246ab80c69098bcd",
+    "crates/tkernel/tests/ordered_protected_lookup.rs": "e1a7445f32f4e7d5382f0960cba92a2f191b3e2dee0fae22573c46385f9d8a62",
+    "crates/tkernel/tests/ordered_resize_progress/contracts.rs": "ef71adfa0c4389fe3572526093b872b275bb8f2211d56944d420f369758ee108",
+    "crates/tkernel/tests/ordered_resize_progress/fixture.rs": "2053af4fa35224e894980a019ff6f2ba06260de12434a3081316a26a7ff61582",
+    "crates/tkernel/tests/ordered_resize_progress.rs": "7e55362fae57c5c72136b3a19361683c7fe5cc3c8993c156cbf85139808aebea",
+    "tools/oracle/ordered_borrowed_clear/fixture.hxx": "8edc6bd44de466f2d89c5c8ed43b7ed650a5fb142e6c97ec3bff3d78794d730a",
+    "tools/oracle/ordered_borrowed_clear/termination.hxx": "d021390721ad47a2e80673a7b1c4a67f046bb4a1e4e574e24c49d10a6da7041d",
+    "tools/oracle/ordered_copy_lifetimes/defaults.hxx": "405dd5ecf7fa704e2f5139d68806732ff154a3cac681db889ab8f778cee7dda9",
+    "tools/oracle/ordered_copy_lifetimes/fixture.hxx": "11a5d6631db2573ab6f038d788139eaa663345b2458bf9989c1eece09e22a852",
+    "tools/oracle/ordered_emplace_construction/fixture.hxx": "70ddb2e919f1bfc7fa59e1afc2f0e68cf1c515dcd4db8e290a44b28de773ac44",
+    "tools/oracle/ordered_protected_lookup/fixture.hxx": "028559951a6b0a4224747fcaec1df0523c17da1e9ed790e220b0ceb7c28a73c4",
+    "tools/oracle/ordered_resize_progress/allocation.hxx": "7f4c21144b25c93b06e3df1ea5b049e7f7c16ff6c160829a27ef6c558c392508",
+    "tools/oracle/ordered_resize_progress/fixture.hxx": "d923599b2493d6053e9d641fc9ae17a69e1d568daa6bdde7693f77c2f113f482",
+    "tools/oracle/tkernel_native_map_node_trace.hxx": "c5d07a6a0aa85dc02a80b26feb7e78a64241303a07b50ad8ba7f9f4298894d7b",
+    "tools/oracle/tkernel_ordered_base_bridge.cxx": "f3681151470213ba934947d353198af233eaa4614d6791aad008fd7aaa645b9f",
+    "tools/oracle/tkernel_ordered_base_bridge.expected": "3d3f5d3fffe1fc8a8731a1004c0b323f37cf16909b5b53c88dc6bfae5e001001",
+    "tools/oracle/tkernel_ordered_borrowed_clear.cxx": "a7db29a43ffde152c42b8d8d196c3361468c61966dfa2630a6a7912907a7bd74",
+    "tools/oracle/tkernel_ordered_borrowed_clear.expected": "a9748f45f95e03e72b6a413695568453e038aa1efae2412e570c98a0242bd024",
+    "tools/oracle/tkernel_ordered_canonical.cxx": "68e6f63e4394609a822cc933f2fc8f641d6a5b8932bdf590af60f2d9252dd143",
+    "tools/oracle/tkernel_ordered_canonical.expected": "62a5226a7fc815f7f3fc783cb14e005c0f22e1b7442e061d9d788cb92af07cd4",
+    "tools/oracle/tkernel_ordered_copy_lifetimes.cxx": "1a877c1610fd862e09d53140bea2bd767999d642650abe8d3545e01ce7e9e5a8",
+    "tools/oracle/tkernel_ordered_copy_lifetimes.expected": "d54760748e6b7dd90ebdd720526adf97870bc3885d1e20532b478a6914405cc8",
+    "tools/oracle/tkernel_ordered_data_map_method_contracts.cxx": "2b9ec853c0c2ad1c78f38883008e432a758d380097dbaede1b12f369f8f5ed22",
+    "tools/oracle/tkernel_ordered_data_map_method_contracts.expected": "fc92d415a3b773177f3ca190517d2a1e58af1d1e98f5ea95231a0d789fc3bd5d",
+    "tools/oracle/tkernel_ordered_emplace_construction.cxx": "11d11eea46001fd48b865fdeeba062fb488ab6ea02731be84b1850937f8d311c",
+    "tools/oracle/tkernel_ordered_emplace_construction.expected": "164bf66236833045b32157280c30c2b69e52863c43f4a681bf67c95b31005571",
+    "tools/oracle/tkernel_ordered_map_destruction.cxx": "e2442fec067e4e5180e35dbf2140d42de0e9bbc6413459c5d72ae90faec5bcf6",
+    "tools/oracle/tkernel_ordered_map_destruction.expected": "ca895421a17ce14fdeb6af52e79300273b7966d4aec3be405b685915d9474f27",
+    "tools/oracle/tkernel_ordered_map_method_contracts.cxx": "df3cee96c997edcd78bb7f18531c4eab300997f85ff4191a3444e973b93545c7",
+    "tools/oracle/tkernel_ordered_map_method_contracts.expected": "2364b9d6a3ec41a9b3b3946e981bee7e318c19f2500973b08d753807823806c6",
+    "tools/oracle/tkernel_ordered_mixed_ownership.cxx": "4fc448860d0d700fbd5a5901eb8f8e9bb2d0d993578919c7a30bc69ce699e13b",
+    "tools/oracle/tkernel_ordered_mixed_ownership.expected": "bb8e5d6baebf9eae19139c2702271fad1fe2e115875b44534511e95574eccfa5",
+    "tools/oracle/tkernel_ordered_node_contracts.cxx": "2c9a00963a743e021187caf01dacb6be8841bc26c497fd98f1c47ebee1cb1788",
+    "tools/oracle/tkernel_ordered_node_contracts.expected": "5c5526ee92ba62d46451758a1a07a5a3fd36ec05c5d7c6234546ea6a30001afd",
+    "tools/oracle/tkernel_ordered_policy_construction.cxx": "14a8a2e1d45a1455d6f6393363cc79dfdfdd1985adcc91746715e7b6508f393e",
+    "tools/oracle/tkernel_ordered_policy_construction.expected": "586786b366fcc219985fd034cbabf1655033222ab1bd85d51cbf2b5fa1314dea",
+    "tools/oracle/tkernel_ordered_policy_exchange.cxx": "e0d0055d546d900376084dcdcf2f765a227e4fdf10a97b4e324fe099090a34cb",
+    "tools/oracle/tkernel_ordered_policy_exchange.expected": "ef317b409e9aa5a754c01b43cbaacf032885115b5ce1cdd9ce532c9df8e2557e",
+    "tools/oracle/tkernel_ordered_protected_lookup.cxx": "dcf1198a6b173feeca2d048a61d51d8cdf0df3ea0c0e31cf2b20d5fc540c1408",
+    "tools/oracle/tkernel_ordered_protected_lookup.expected": "b26e28c48f26eccca12fe5e71540259daa9375a3ec6add3788082285c605c869",
+    "tools/oracle/tkernel_ordered_resize_progress.cxx": "8fc1c75625bec854190513f9740cb90aa6be2d56b986a97fa998a3bdc97938ab",
+    "tools/oracle/tkernel_ordered_resize_progress.expected": "3963abfb50fb22add4704475d4e908b77c3e09b3aafc0690d0f4cb0dca0c4e11"
+  },
+  "upstream_sha256": {
+    "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx": "13e1b322e91e0814782f20aaed2ec6d994fa605ca8d343f0790923a642d941b3",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx": "dd38d42090a75c6d2d7fd9e405fdd829b1524e15a821308d2f432494089013fb",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx": "5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.cxx": "8d3b3d580ef2cfa4a2a53f11dc5b9b66ae3771edc7cd5f95126be6ab525a9a55",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.cxx": "a4a84687e85059dad70193d2b839dbffb6650dd360ff86dc94e61bb8f3461da0",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx": "d55a72f4269d9f0ce378165bf9ba1142b1b3e87b8272670f4eba4d1187e05f13",
+    "src/FoundationClasses/TKernel/GTests/NCollection_OrderedMap_Test.cxx": "8971dadeb7c5384847fc1630b915ea96820d8d6c239ba48adce1b4d7b49931d5",
+    "src/FoundationClasses/TKernel/GTests/NCollection_OrderedDataMap_Test.cxx": "ce59569b05703dae1e5df019f785b382f6a70433e29421957c5cebff8826590a"
+  },
+  "artifact_sha256": {
+    "porting/runtime-evidence/ordered-resize-ordered_resize_progress.gz": "41a198f2ea609ba401a51063a4af9167d70dc1041cd043f297326b8fb124f250",
+    "porting/runtime-evidence/ordered-resize-ordered_emplace_construction.gz": "a58cbe247a4d65730a06a4310f4ec077b94160ca85396945319b33217ce70e6d",
+    "porting/runtime-evidence/ordered-resize-ordered_borrowed_clear.gz": "99d198e8bba61d5d850bae3eca6a415d3a9c981bca3d72781938662919287438",
+    "porting/runtime-evidence/ordered-resize-ordered_borrowed_clear-stderr.gz": "97d6b928e54dda9c5aec4de04a67663d42015bda50d4d680fe1d4c41b6cbe545",
+    "porting/runtime-evidence/ordered-resize-ordered_protected_lookup.gz": "23946a2cdfbb076a98026426d62e1650c34c5c500a1935851cf48de074fb4714",
+    "porting/runtime-evidence/ordered-resize-rust.gz": "d8a94c99bc2dc807f95591d8eeb6b378bfa544c8227f3d32581307301b17c9fb",
+    "porting/runtime-evidence/ordered-resize-rust-unit.gz": "e52f1147a287197b1deea7230ee19c855558d396f15adda06c3fc16295e5040b",
+    "porting/runtime-evidence/ordered-resize-rust-owned.gz": "12bab5296178985cc663efca9bbdc50ceeb5d9df5c952aae4dcb22538a0862d2",
+    "porting/runtime-evidence/ordered-resize-miri.gz": "7de910d744ba060312a6049dbfbf558d95054838cfe2597a05c09f2d50ce3a7e",
+    "porting/runtime-evidence/ordered-resize-miri-unit.gz": "8ee769cea848da2af99c200f0885218b4cb29bc32d48a7d73df72f7f6fca4dec",
+    "porting/runtime-evidence/ordered-resize-miri-owned.gz": "aa61670f641cf18d83094d8968b8d15301aff1dd51f7f7d33b4744749f5fc028",
+    "porting/runtime-evidence/ordered-resize-ordered_copy_lifetimes.gz": "ea6f93c236b7687d957bdaca40492969b98a566792edd70a9e29ee11e120bcc2",
+    "porting/runtime-evidence/ordered-resize-ordered_copy_lifetimes-stderr.gz": "45dd8d7f918badfb803eb358f396095c327facf56d67188d3756cdc355d0f219",
+    "porting/runtime-evidence/ordered-resize-native-original.gz": "3e22e45ca4f81206d55f3af220de60a3b8a453c2c61d7c6e5dfe451e3155949e",
+    "porting/runtime-evidence/ordered-resize-ordered_policy_exchange.gz": "a59001dc8ef6668931cdc4c96fcfa3070fa2f31a06c24104f9633c437caf7c51",
+    "porting/runtime-evidence/ordered-resize-ordered_policy_construction.gz": "a40a0749934ed6b7fb72c25994390eeffeb37cc772bb5f0d5f4641924086f5cc",
+    "porting/runtime-evidence/ordered-resize-ordered_base_bridge.gz": "34cbb7461bf0d72bc92e32fed0c573efba25b375d5ee4f00ada6be30c27c22f5",
+    "porting/runtime-evidence/ordered-resize-ordered_canonical.gz": "108c244176eff5fca27470059c6a4e4a2eee04d02a5addbef54523a5a55f58a5",
+    "porting/runtime-evidence/ordered-resize-ordered_map_destruction.gz": "6b3d0dffede512da5cc1aa4991b9f957c63bf74758b4c110c4db7c6720d2c0ce",
+    "porting/runtime-evidence/ordered-resize-ordered_mixed_ownership.gz": "18fdceb5073e5499c7e6e4edd18b4a3d5940d7bda921c893c0da8c3b25a39e50",
+    "porting/runtime-evidence/ordered-resize-ordered_node_contracts.gz": "40cf06dc07ea6378fba3c37933a5752e94e26bb8ab4eda5a8ee984bba8b4fc43",
+    "porting/runtime-evidence/ordered-resize-clippy.gz": "6678efb7060a5ad0f7c992e7f46d6a4dae01083eaeda0b8528f141130ef2162d",
+    "porting/runtime-evidence/ordered-resize-fmt.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/ordered-resize-compiler.gz": "8b9af0ccc899c868a51cc699d88d0d253d5bebb02795720e968ff2116301d2e7",
+    "porting/runtime-evidence/ordered-resize-compiler-json.gz": "c1c3a54e8c8142a2daa5cd8990b5b349eb2addc72b0872d3219b96123fe64b86",
+    "porting/runtime-evidence/ordered-resize-normalized.gz": "226d2b29a8547db99a02fa20e0a816b18ad02faf91e423292e5cbde32b7d95ca",
+    "porting/runtime-evidence/ordered-resize-inputs.gz": "a4e98779f84241c42131d3f321773be1029dfcc908055887958f44f0f41c678f",
+    "porting/runtime-evidence/ordered-resize-commands.gz": "f47ec707a817e761acf61cf49b9d579df8f0a2d7d5641cde76bb45b3b9cf50f1",
+    "porting/runtime-evidence/ordered-resize-source.tar.gz": "cf1c3cd2d4e9d9dd412e8686548185f1a023e84021c8e7cbd456b336adc2f1c5"
+  },
+  "checks": [
+    {
+      "label": "rust",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--test",
+        "ordered_resize_progress",
+        "--test",
+        "ordered_emplace_construction",
+        "--test",
+        "ordered_borrowed_clear",
+        "--test",
+        "ordered_copy_lifetimes",
+        "--test",
+        "ordered_protected_lookup",
+        "--test",
+        "ordered_policy_exchange",
+        "--test",
+        "ordered_policy_construction",
+        "--test",
+        "ordered_base_bridge",
+        "--test",
+        "base_map_basic_iterator_contracts",
+        "--test",
+        "base_map_storage_contracts",
+        "--test",
+        "ordered_canonical_storage",
+        "--test",
+        "ordered_node_contracts",
+        "--test",
+        "data_map_node_contracts",
+        "--test",
+        "double_map_node_contracts",
+        "--test",
+        "map_node_bridge_contracts",
+        "--test",
+        "items_view_method_contracts",
+        "--test",
+        "indexed_items_mutable_view",
+        "--test",
+        "ordered_mixed_ownership",
+        "--test",
+        "ordered_map_generic_bounds",
+        "--test",
+        "ordered_map_destruction",
+        "--test",
+        "ncollection_ordered_map",
+        "--test",
+        "ncollection_ordered_data_map",
+        "--test",
+        "ordered_map_method_contracts",
+        "--test",
+        "ordered_data_map_method_contracts",
+        "--test",
+        "ncollection_flat_maps_api_behavior",
+        "--test",
+        "ordered_map_supplemental",
+        "--test",
+        "ordered_data_supplemental"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "rust-unit",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--lib",
+        "ordered_table::canonical_contracts"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "rust-owned",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--lib",
+        "allocator::owned::owned_contracts"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--lib",
+        "--test",
+        "ordered_resize_progress",
+        "--test",
+        "ordered_emplace_construction",
+        "--test",
+        "ordered_borrowed_clear",
+        "--test",
+        "ordered_copy_lifetimes",
+        "--test",
+        "ordered_protected_lookup",
+        "--test",
+        "ordered_policy_exchange",
+        "--test",
+        "ordered_policy_construction",
+        "--test",
+        "ordered_base_bridge",
+        "--test",
+        "base_map_basic_iterator_contracts",
+        "--test",
+        "base_map_storage_contracts",
+        "--test",
+        "ordered_canonical_storage",
+        "--test",
+        "ordered_node_contracts",
+        "--test",
+        "data_map_node_contracts",
+        "--test",
+        "double_map_node_contracts",
+        "--test",
+        "map_node_bridge_contracts",
+        "--test",
+        "items_view_method_contracts",
+        "--test",
+        "indexed_items_mutable_view",
+        "--test",
+        "ordered_mixed_ownership",
+        "--test",
+        "ordered_map_generic_bounds",
+        "--test",
+        "ordered_map_destruction",
+        "--test",
+        "ncollection_ordered_map",
+        "--test",
+        "ncollection_ordered_data_map",
+        "--test",
+        "ordered_map_method_contracts",
+        "--test",
+        "ordered_data_map_method_contracts",
+        "--test",
+        "ncollection_flat_maps_api_behavior",
+        "--test",
+        "ordered_map_supplemental",
+        "--test",
+        "ordered_data_supplemental",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compiler",
+      "command": [
+        "cargo",
+        "+nightly-2026-09-25",
+        "rustdoc",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--lib",
+        "--",
+        "-Z",
+        "unstable-options",
+        "--output-format",
+        "json",
+        "--document-private-items"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "miri",
+      "command": [
+        "cargo",
+        "+nightly-2026-09-25",
+        "miri",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--test",
+        "ordered_resize_progress",
+        "--test",
+        "ordered_emplace_construction",
+        "--test",
+        "ordered_borrowed_clear",
+        "--test",
+        "ordered_copy_lifetimes",
+        "--test",
+        "ordered_protected_lookup",
+        "--test",
+        "ordered_policy_exchange",
+        "--test",
+        "ordered_policy_construction",
+        "--test",
+        "ordered_base_bridge",
+        "--test",
+        "base_map_basic_iterator_contracts",
+        "--test",
+        "base_map_storage_contracts",
+        "--test",
+        "ordered_canonical_storage",
+        "--test",
+        "ordered_node_contracts",
+        "--test",
+        "data_map_node_contracts",
+        "--test",
+        "double_map_node_contracts",
+        "--test",
+        "map_node_bridge_contracts",
+        "--test",
+        "items_view_method_contracts",
+        "--test",
+        "indexed_items_mutable_view",
+        "--test",
+        "ordered_mixed_ownership",
+        "--test",
+        "ordered_map_generic_bounds",
+        "--test",
+        "ordered_map_destruction",
+        "--test",
+        "ncollection_ordered_map",
+        "--test",
+        "ncollection_ordered_data_map",
+        "--test",
+        "ordered_map_method_contracts",
+        "--test",
+        "ordered_data_map_method_contracts",
+        "--test",
+        "ncollection_flat_maps_api_behavior",
+        "--test",
+        "ordered_map_supplemental",
+        "--test",
+        "ordered_data_supplemental"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "miri-unit",
+      "command": [
+        "cargo",
+        "+nightly-2026-09-25",
+        "miri",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--lib",
+        "ordered_table::canonical_contracts"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "miri-owned",
+      "command": [
+        "cargo",
+        "+nightly-2026-09-25",
+        "miri",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--lib",
+        "allocator::owned::owned_contracts"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_resize_progress.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_resize_progress"
+      ],
+      "exit_code": 0,
+      "rows": 64,
+      "executable_sha256": "3ff61c557d4eed6a1447b3b811f82817f22496afbb794e5b4ce1073f6a3df5bd"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_emplace_construction.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_emplace_construction"
+      ],
+      "exit_code": 0,
+      "rows": 54,
+      "executable_sha256": "95c37f10168946b9d6fa475927f7aae42f56b29654bbf73ee5c02e755a17d483"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_borrowed_clear.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_borrowed_clear"
+      ],
+      "exit_code": 0,
+      "rows": 76,
+      "executable_sha256": "3ade6db40f486ef89918d33aeaa8b75547e524d413144ba82271c1399a262718"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_protected_lookup.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_protected_lookup"
+      ],
+      "exit_code": 0,
+      "rows": 62,
+      "executable_sha256": "04c10d3edc2fee39bbaa38eefb954808003e4eb2f46b477889e773ee1f42d75f"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_copy_lifetimes.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_copy_lifetimes"
+      ],
+      "exit_code": 0,
+      "rows": 58,
+      "executable_sha256": "8d861b031941c2a736774ab7d541c09f2d825213855e0e143d0b43e80deb86b4"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_policy_exchange.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_policy_exchange"
+      ],
+      "exit_code": 0,
+      "rows": 30,
+      "executable_sha256": "0e6f64f2a8bf27ade6d94b9e8a7e5a476c8fefe626074069b7d547f6c400ed6c"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_policy_construction.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_policy_construction"
+      ],
+      "exit_code": 0,
+      "rows": 32,
+      "executable_sha256": "00311249906acdabbed42a818db5faa204bdde52548d5055c630660e1a3dfede"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_base_bridge.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_base_bridge"
+      ],
+      "exit_code": 0,
+      "rows": 18,
+      "executable_sha256": "29115fbd3ddfde41a1fc712428706c6ddacfe32eeba050052d69d5e056c64a17"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_canonical.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_canonical"
+      ],
+      "exit_code": 0,
+      "rows": 12,
+      "executable_sha256": "420b3606e4a05a7a46003925ff21ea47938851e737dd0ea3658b4a34c6c59076"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_map_destruction.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_map_destruction"
+      ],
+      "exit_code": 0,
+      "rows": 16,
+      "executable_sha256": "54bbcc32cfe883ada2ed69523e0566fff8ab65dfe599a53d65e7605c77e29524"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_mixed_ownership.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_mixed_ownership"
+      ],
+      "exit_code": 0,
+      "rows": 32,
+      "executable_sha256": "315383ff4b8cb2a157c2dc5421a1089d5b75767b7caba54fb3197b949ca50b31"
+    },
+    {
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade",
+        "/tmp/rustycad-ordered-map-resize-progress/tools/oracle/tkernel_ordered_node_contracts.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/libi",
+        "-lTKernel",
+        "-ldl",
+        "-o",
+        "/tmp/rustycad-ordered-resize-evidence/ordered_node_contracts"
+      ],
+      "exit_code": 0,
+      "rows": 30,
+      "executable_sha256": "9917d74d0a3c2fe25db9bde736dae83726ce864c965fae986b29f2ef591e336d"
+    },
+    {
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/lin64/gcc/bini/OpenCascadeGTest",
+        "--gtest_filter=NCollection_OrderedMapTest.*:NCollection_OrderedDataMapTest.*"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "rust_integration_passed": 377,
+  "rust_canonical_unit_passed": 3,
+  "rust_allocator_owned_unit_passed": 6,
+  "rust_passed": 386,
+  "strict_provenance_miri_passed": 386,
+  "new_resize_progress_tests": 18,
+  "native_original_passed": 85,
+  "original_declaration_joins": [
+    {
+      "declaration_id": "d039091b8801c939ff34a20c9ed1217beb460a80fa62d3bf40139221396cb358",
+      "native_name": "NCollection_OrderedDataMapTest.AssignPreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__AssignPreservesOrder"
+    },
+    {
+      "declaration_id": "cb0215c4224bcc1324092024b0d2842e31ffaf60b4e322b61bad8e779126d37b",
+      "native_name": "NCollection_OrderedDataMapTest.AutoResize",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__AutoResize"
+    },
+    {
+      "declaration_id": "9d5688960819d6045b24d932bf0b3994eb17b6ad55580578d7303975c0f62f0b",
+      "native_name": "NCollection_OrderedDataMapTest.BindAndFind",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__BindAndFind"
+    },
+    {
+      "declaration_id": "1c8b73d9f6509f8e98bd68cdc2e11213432d33e2909774ff4f230f1885b469d0",
+      "native_name": "NCollection_OrderedDataMapTest.BindOverwritesValuePreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__BindOverwritesValuePreservesOrder"
+    },
+    {
+      "declaration_id": "583c74c7f9c270befe1af12e8ec295a69d17a515962fe7c58e4d0bfb60cdbc6e",
+      "native_name": "NCollection_OrderedDataMapTest.BindPreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__BindPreservesOrder"
+    },
+    {
+      "declaration_id": "4f10c78d366277a495d0a1e60a85203dd3e2705e34201e4a2bcbb1e37ccbf562",
+      "native_name": "NCollection_OrderedDataMapTest.ChangeFind",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ChangeFind"
+    },
+    {
+      "declaration_id": "1b8e5e03c3c201d0d156f3536ebd79794775434d7f31497e6e1ff01ef098ac62",
+      "native_name": "NCollection_OrderedDataMapTest.Clear",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__Clear"
+    },
+    {
+      "declaration_id": "25a697c1e4a6f86010f701c3fe7ce09eb4a2040956b14dcd83dff9c18d27774e",
+      "native_name": "NCollection_OrderedDataMapTest.ClearAndReAdd",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ClearAndReAdd"
+    },
+    {
+      "declaration_id": "b466659f967f135a3e43c80332d0ac43493277a46b9a0b3a69547c4127bf97fa",
+      "native_name": "NCollection_OrderedDataMapTest.ConstItemsIteration",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ConstItemsIteration"
+    },
+    {
+      "declaration_id": "dbe703f7bbf31e7625ca733995dfa7bc392d904abd9990af4413f27c4ea8c042",
+      "native_name": "NCollection_OrderedDataMapTest.ContainedConst_Found",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ContainedConst_Found"
+    },
+    {
+      "declaration_id": "b88aac92eeddde535d7ea3bb7c54ce481bc3f55e7039c3de7f5af2db74e3ac6c",
+      "native_name": "NCollection_OrderedDataMapTest.ContainedConst_NotFound",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ContainedConst_NotFound"
+    },
+    {
+      "declaration_id": "0bdf1a721e2079305b6fc0dc0bb3a37cb6c9b3f2750814c4d2ca0a01544f2d54",
+      "native_name": "NCollection_OrderedDataMapTest.ContainedEmpty",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ContainedEmpty"
+    },
+    {
+      "declaration_id": "4e78538552abf98f00e1d315a86c96d8fc47ec7db8fa450a599c62b1a35e074b",
+      "native_name": "NCollection_OrderedDataMapTest.ContainedMutable",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ContainedMutable"
+    },
+    {
+      "declaration_id": "49185b5af21129d5e0404e63da16c36d9b58f0e4e8c2f1dc9898e0fd9b1bfb4b",
+      "native_name": "NCollection_OrderedDataMapTest.CopyPreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__CopyPreservesOrder"
+    },
+    {
+      "declaration_id": "ef5787d7afc621ac1834621fbac6f7be0b0f06bc838614827a2da73a3e411743",
+      "native_name": "NCollection_OrderedDataMapTest.CustomStatefulHasher",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__CustomStatefulHasher"
+    },
+    {
+      "declaration_id": "06f7bfa678ba530d48b5616150aa0d1815cce5d206cd3bb73dcb79cf6b8b53d1",
+      "native_name": "NCollection_OrderedDataMapTest.DefaultConstructor",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__DefaultConstructor"
+    },
+    {
+      "declaration_id": "9f129b821cd69dc46f22be1a9c29f7bf9aeace979ca1aa105e2e7901d31b15fd",
+      "native_name": "NCollection_OrderedDataMapTest.Emplace_ExistingKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__Emplace_ExistingKey"
+    },
+    {
+      "declaration_id": "f47ae2713aad1407f6b6ca37875a18a16bbadafc306cde62f6bc27d33a3458ea",
+      "native_name": "NCollection_OrderedDataMapTest.Emplace_NewKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__Emplace_NewKey"
+    },
+    {
+      "declaration_id": "a4c9d8b5c2b6e212b98ab7d8ba792aabf11490114a6e93405f4516b6a0047abc",
+      "native_name": "NCollection_OrderedDataMapTest.Emplaced",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__Emplaced"
+    },
+    {
+      "declaration_id": "3ed7ab0244e548402f5526aa2d1723400183772168d576225f3f278a3de0fb52",
+      "native_name": "NCollection_OrderedDataMapTest.Exchange",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__Exchange"
+    },
+    {
+      "declaration_id": "c50e271e68a8ce188e20f5bda65ffbb17ad068f90252afd348fbc8533013c73f",
+      "native_name": "NCollection_OrderedDataMapTest.FindNonExisting",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FindNonExisting"
+    },
+    {
+      "declaration_id": "97521af4b50d68ca8975756bcf1bbb0f9eda40388781fa14ed90f68577f3c6c1",
+      "native_name": "NCollection_OrderedDataMapTest.FindWithCopy",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FindWithCopy"
+    },
+    {
+      "declaration_id": "475d9bf10c57d6f0f199823ade40e2ee9a4759066945d9bc45102b0614d50239",
+      "native_name": "NCollection_OrderedDataMapTest.FirstLastAfterRemove",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FirstLastAfterRemove"
+    },
+    {
+      "declaration_id": "d8860d9d3a1523f4813acf91f770d5320b6970d72199ec617b950ba6d4e41b4b",
+      "native_name": "NCollection_OrderedDataMapTest.FirstLastEmpty",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FirstLastEmpty"
+    },
+    {
+      "declaration_id": "498dda27d988591b08b0941e74483fa580036c29a77a61ab03b85ab011b4ae4a",
+      "native_name": "NCollection_OrderedDataMapTest.FirstLastKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FirstLastKey"
+    },
+    {
+      "declaration_id": "2ed96e48b31e0a5f3e0da0f8617ed7f02f3c3701ef5c781519351ad8ece65bcd",
+      "native_name": "NCollection_OrderedDataMapTest.FirstLastValue",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__FirstLastValue"
+    },
+    {
+      "declaration_id": "74b293ea22bf9b4ff1b331670e87921e8bd45562ac4608f88df062cea7b6a857",
+      "native_name": "NCollection_OrderedDataMapTest.ItemsIteratorEquality",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ItemsIteratorEquality"
+    },
+    {
+      "declaration_id": "f84be6e823eceb1792203c5096dad6a5557629e71bd3ec7bd3c987c54898018f",
+      "native_name": "NCollection_OrderedDataMapTest.ItemsModifyValue",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ItemsModifyValue"
+    },
+    {
+      "declaration_id": "8bba43b1209101a7dd6a9642d2ae93a4119fdaabe5504b94563925c02a9c6ddd",
+      "native_name": "NCollection_OrderedDataMapTest.ItemsStructuredBindings",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ItemsStructuredBindings"
+    },
+    {
+      "declaration_id": "4b3fd20ed7b62eeb8209163b7b34034806494710fc8df056bafba5f3024c5dc2",
+      "native_name": "NCollection_OrderedDataMapTest.LargeMapOrderPreservation",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__LargeMapOrderPreservation"
+    },
+    {
+      "declaration_id": "f4eec7006acfca7c64380c4d524da2449b7204b9fc67af399db2895e6d8ac5d0",
+      "native_name": "NCollection_OrderedDataMapTest.MoveAssignment",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__MoveAssignment"
+    },
+    {
+      "declaration_id": "46945316716bc670dd1473b621f07c04c9e56200821e3e0cd8f9ddbd4a9c549d",
+      "native_name": "NCollection_OrderedDataMapTest.MoveConstructor",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__MoveConstructor"
+    },
+    {
+      "declaration_id": "d2ea5370abd9dc32bab11db6a6c273d93a9f548669ea74f3cda322aa65bd7b40",
+      "native_name": "NCollection_OrderedDataMapTest.NativeIterator",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__NativeIterator"
+    },
+    {
+      "declaration_id": "4950b06fed4065824f79e625f3888ba805b18a538c1761428632a6b77791400f",
+      "native_name": "NCollection_OrderedDataMapTest.OperatorParens",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__OperatorParens"
+    },
+    {
+      "declaration_id": "0b8e04b02847f241076bc865df576a4cf065c0d5936236e22587918bba6c1ab5",
+      "native_name": "NCollection_OrderedDataMapTest.ReSizePreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__ReSizePreservesOrder"
+    },
+    {
+      "declaration_id": "79d1b2b17a2baddd8f41599c47bf5a34c4a0f047845e4597d9a31ea0c85fea4a",
+      "native_name": "NCollection_OrderedDataMapTest.STLBeginEnd",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__STLBeginEnd"
+    },
+    {
+      "declaration_id": "a41785e178e193f818d5f6d5647a2a5d7af40544b4011d7acee19c0791ccfa44",
+      "native_name": "NCollection_OrderedDataMapTest.SeekAndChangeSeek",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__SeekAndChangeSeek"
+    },
+    {
+      "declaration_id": "e6d26c328a1c35544fb8bae4567cdcfc9c9805c17eb8cccc6c9fd89dcf7af76b",
+      "native_name": "NCollection_OrderedDataMapTest.TryBindPreservesOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryBindPreservesOrder"
+    },
+    {
+      "declaration_id": "6894b7f401e34a989d7a999a8f5f6b4f569807a32cd86b5db2776b49390f357e",
+      "native_name": "NCollection_OrderedDataMapTest.TryBind_ExistingKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryBind_ExistingKey"
+    },
+    {
+      "declaration_id": "3c3afe2cbb55f4bb1d2d2aa101eadcc24932881101be50f18d65c3e0f52b2bba",
+      "native_name": "NCollection_OrderedDataMapTest.TryBind_NewKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryBind_NewKey"
+    },
+    {
+      "declaration_id": "9acc0f84396673a3ad7b7baf84dafe0b1fa74e90b84e0d304eb700d7628c9294",
+      "native_name": "NCollection_OrderedDataMapTest.TryBound_ExistingKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryBound_ExistingKey"
+    },
+    {
+      "declaration_id": "eba629a438ec9c7643e03a5875c5c5adea4d0a105423f5ba66792b3759f5dba2",
+      "native_name": "NCollection_OrderedDataMapTest.TryBound_NewKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryBound_NewKey"
+    },
+    {
+      "declaration_id": "441a0050e5cc4044c315db3832c9d7ec95ef187bbe76ba3ca68e514409287660",
+      "native_name": "NCollection_OrderedDataMapTest.TryEmplace_ExistingKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryEmplace_ExistingKey"
+    },
+    {
+      "declaration_id": "659da999ef87473538bfad2f4aaa9a6b0e4168d0da8ec5d25b5e9e769e792d2a",
+      "native_name": "NCollection_OrderedDataMapTest.TryEmplace_NewKey",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryEmplace_NewKey"
+    },
+    {
+      "declaration_id": "2b2b79ef584f20a2fe8c5d5c0c377e36f6b380696df491a06e07d5adad31919b",
+      "native_name": "NCollection_OrderedDataMapTest.TryEmplaced",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__TryEmplaced"
+    },
+    {
+      "declaration_id": "cc9da2771ead4dbac9d2d52edaea875cac2bbee69eacbd94cc36f7beed9bf608",
+      "native_name": "NCollection_OrderedDataMapTest.UnBindAndReAdd",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__UnBindAndReAdd"
+    },
+    {
+      "declaration_id": "95188dfd4e290b98e801b6904a5d7473d4ce176541458e9f36c74bbac45ab0aa",
+      "native_name": "NCollection_OrderedDataMapTest.UnBindOrder",
+      "rust_target": "ncollection_ordered_data_map",
+      "rust_test": "NCollection_OrderedDataMapTest__UnBindOrder"
+    },
+    {
+      "declaration_id": "f160cb47176d2466d851c62e7e84383c55f291fc5186d01748adf6d533987c6e",
+      "native_name": "NCollection_OrderedMapTest.AddAndContainsWithOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__AddAndContainsWithOrder"
+    },
+    {
+      "declaration_id": "932d20045e1c652cfecd847ca5051596154f548360042bd6f82834bd5ba9f1ad",
+      "native_name": "NCollection_OrderedMapTest.AddDuplicate",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__AddDuplicate"
+    },
+    {
+      "declaration_id": "7be6caf8938fbdf4b70464fef25d2b9ad7da2b49238ad0549ec51dd0454df625",
+      "native_name": "NCollection_OrderedMapTest.AddedMethod",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__AddedMethod"
+    },
+    {
+      "declaration_id": "f14e22b0a5113972aac5922e5f4b3f6f2a5bf9ebb2806faf659c44dc008ca3a3",
+      "native_name": "NCollection_OrderedMapTest.AssignPreservesOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__AssignPreservesOrder"
+    },
+    {
+      "declaration_id": "598c3253fd8b86c4f21ade24cbc9416442a26a372f1d3f5663255c5c8a72358e",
+      "native_name": "NCollection_OrderedMapTest.AutoResize",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__AutoResize"
+    },
+    {
+      "declaration_id": "164c0536d833d9eb7adf3a2dc2c3ceb5f54f98ff28480191349042929f601ba3",
+      "native_name": "NCollection_OrderedMapTest.ClearAndReAdd",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ClearAndReAdd"
+    },
+    {
+      "declaration_id": "a46cade26c1fb34066b1405772d4cfe5c0332994abb2b8a823db5819b27d3a75",
+      "native_name": "NCollection_OrderedMapTest.ConstructorWithBuckets",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ConstructorWithBuckets"
+    },
+    {
+      "declaration_id": "141270c24dd821cbabec950eee71990488270a2a05aea0577b97db9c215bb22e",
+      "native_name": "NCollection_OrderedMapTest.ContainedEmpty",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ContainedEmpty"
+    },
+    {
+      "declaration_id": "59355bdd38e6b2c7487d9ca6f2b7e24ae99446cb6f2c029c1e78f4a00195e3ba",
+      "native_name": "NCollection_OrderedMapTest.ContainedFound",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ContainedFound"
+    },
+    {
+      "declaration_id": "0bfe5175069e4abc74c228cac55abb081169f45497ec0e3ea8b146613f611428",
+      "native_name": "NCollection_OrderedMapTest.ContainedNotFound",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ContainedNotFound"
+    },
+    {
+      "declaration_id": "d93a86231954a0485c331dcb5ba608251c26c1f61f7719732ff47447d01c859e",
+      "native_name": "NCollection_OrderedMapTest.CopyPreservesOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__CopyPreservesOrder"
+    },
+    {
+      "declaration_id": "9ae88b7830c8da571e9b0b84850cc3b4b213c597020e22532238b4b26671df4a",
+      "native_name": "NCollection_OrderedMapTest.CustomStatefulHasher",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__CustomStatefulHasher"
+    },
+    {
+      "declaration_id": "1bbb40aed0c988ca59b240da92bd5e8986c77da4b7bb8925c234ca43f443c42e",
+      "native_name": "NCollection_OrderedMapTest.DefaultConstructor",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__DefaultConstructor"
+    },
+    {
+      "declaration_id": "3247abda9b4074d769649ca2ab5bfcfe0ec91f06968002202221ca0cc5addd1a",
+      "native_name": "NCollection_OrderedMapTest.EmplaceBasic",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__EmplaceBasic"
+    },
+    {
+      "declaration_id": "05bf73f26adf010ea33ec2d040d9b429a0af924ea5eee62ba9caa1c64997c5ff",
+      "native_name": "NCollection_OrderedMapTest.EmplacePreservesOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__EmplacePreservesOrder"
+    },
+    {
+      "declaration_id": "61fe940ccc346053893a0ea01e50c3745e652b0e79427b6c03ea2e8401d00d7b",
+      "native_name": "NCollection_OrderedMapTest.EmplacedBasic",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__EmplacedBasic"
+    },
+    {
+      "declaration_id": "fe9d3a7541d811c354ae75ce1b6e5cf6ed9c5858e84bbd7c7e724c1cf765eac9",
+      "native_name": "NCollection_OrderedMapTest.Exchange",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__Exchange"
+    },
+    {
+      "declaration_id": "ba0767d66ddf4fbc25031163945abe2978f7a9373e9ece0cb7d18167eaec0eba",
+      "native_name": "NCollection_OrderedMapTest.FirstLast",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__FirstLast"
+    },
+    {
+      "declaration_id": "212caa2add2e9730298d874b3eed2fca19ce23a66de4b951e7d99e6a61d7a44c",
+      "native_name": "NCollection_OrderedMapTest.FirstLastEmpty",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__FirstLastEmpty"
+    },
+    {
+      "declaration_id": "589e8be83bfb5544b8672e1ce05f050bf19822a2dadc60f35ab1ef82d277ca2c",
+      "native_name": "NCollection_OrderedMapTest.FirstLastSingleElement",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__FirstLastSingleElement"
+    },
+    {
+      "declaration_id": "98351fa6055fb1aa891f2b79b8e477aedc063195dad5eaccec56f176bde613f0",
+      "native_name": "NCollection_OrderedMapTest.IteratorEquality",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__IteratorEquality"
+    },
+    {
+      "declaration_id": "92a81bebe6200051ceef33e5244c0fd99e813fe5332b1963f6c1c293c8c475d5",
+      "native_name": "NCollection_OrderedMapTest.IteratorInitialize",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__IteratorInitialize"
+    },
+    {
+      "declaration_id": "e71affd50fe0435c7697756ae7e4da63e7fb2ccf74623b309cec0c94cb7a5640",
+      "native_name": "NCollection_OrderedMapTest.LargeMapOrderPreservation",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__LargeMapOrderPreservation"
+    },
+    {
+      "declaration_id": "994dfe005a1fed034cfa8df59df61f46b776617a66f2374e1953f29025dc4ad9",
+      "native_name": "NCollection_OrderedMapTest.MoveAssignment",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__MoveAssignment"
+    },
+    {
+      "declaration_id": "0be713219197fd2bd105a9de76ebd7d06978533498eb040df555a96ee1cbbfae",
+      "native_name": "NCollection_OrderedMapTest.MoveConstructor",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__MoveConstructor"
+    },
+    {
+      "declaration_id": "6b55a34e160d27d16ea3a31f6948935dea611fc52e9282e634f312d6a122fa70",
+      "native_name": "NCollection_OrderedMapTest.NativeIterator",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__NativeIterator"
+    },
+    {
+      "declaration_id": "ac2f39be817df59411a8f1e0a7c080364c296a3bf16f3eb7331022f12f194334",
+      "native_name": "NCollection_OrderedMapTest.RangeBasedFor",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RangeBasedFor"
+    },
+    {
+      "declaration_id": "6ed25225ded1af7ec83e1632d35fced13a181c42a4bc949023b82dd5e63472ed",
+      "native_name": "NCollection_OrderedMapTest.ReSizePreservesOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__ReSizePreservesOrder"
+    },
+    {
+      "declaration_id": "c4cb6d679216cc9de32c53ee7bae68f0a051b262cdb69c3afc54cac9f11d0727",
+      "native_name": "NCollection_OrderedMapTest.RemoveAll",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveAll"
+    },
+    {
+      "declaration_id": "d1bd856d760fca3a4d73b138c0425113a7c7ad48f3822500e38aa1b3e0cfb032",
+      "native_name": "NCollection_OrderedMapTest.RemoveAndReAdd",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveAndReAdd"
+    },
+    {
+      "declaration_id": "d2ab0313796f55543d0a87db71bb25e6639899428fa2d3902e5436dddfe6ca6d",
+      "native_name": "NCollection_OrderedMapTest.RemoveFirst",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveFirst"
+    },
+    {
+      "declaration_id": "aa2af04d7ffc077d87f601fdc7144365a46fc407cda9e8f02f681a5cc4263c99",
+      "native_name": "NCollection_OrderedMapTest.RemoveLast",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveLast"
+    },
+    {
+      "declaration_id": "00d8fd64bd95a57b50ee907eaa3d628ea264b8b99d353ce87ae735137a06c26d",
+      "native_name": "NCollection_OrderedMapTest.RemoveMiddle",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveMiddle"
+    },
+    {
+      "declaration_id": "919d47113a2639236b15589d19b07cb88101170deebc09319292fdd5cef45ab7",
+      "native_name": "NCollection_OrderedMapTest.RemoveNonExistent",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__RemoveNonExistent"
+    },
+    {
+      "declaration_id": "5cf929e9030039d8c0830e27dac6f804a7db37809544dfcc5c738e09c8c2d9fa",
+      "native_name": "NCollection_OrderedMapTest.STLBeginEnd",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__STLBeginEnd"
+    },
+    {
+      "declaration_id": "94efbd321c4d230ed4281dbb62a91595e90e35ab9f7c99fbe001f6cc529e5097",
+      "native_name": "NCollection_OrderedMapTest.TryEmplaceBasic",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__TryEmplaceBasic"
+    },
+    {
+      "declaration_id": "2f7b5e1960e32cf396fdd985306f7393aecd8c1aaf28841d1dfbb262597dc7fb",
+      "native_name": "NCollection_OrderedMapTest.TryEmplacePreservesOrder",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__TryEmplacePreservesOrder"
+    },
+    {
+      "declaration_id": "0b7ca92902743978cca958bd486fa6203217aa314d04cff53be6a79b62746bf2",
+      "native_name": "NCollection_OrderedMapTest.TryEmplacedBasic",
+      "rust_target": "ncollection_ordered_map",
+      "rust_test": "NCollection_OrderedMapTest__TryEmplacedBasic"
+    }
+  ],
+  "native_fixture_rows": 484,
+  "new_native_resize_progress_rows": 64,
+  "local_declaration_bindings": [
+    {
+      "occt_id": "347fdf4bcd95bea0b6a4d9ea0f7c582b338c3e705b693520bc2eb8af1ece7ee5",
+      "occt_name": "NCollection_OrderedDataMap::Clear",
+      "occt_kind": "CXXMethod",
+      "occt_signature": "void (bool)",
+      "receiver": "OrderedDataMapResizeInterruption",
+      "compiler_declarations": [
+        {
+          "path": "rustycad_tkernel::ncollection::OrderedDataMapResizeInterruption::native_clear",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ],
+                [
+                  "release",
+                  {
+                    "primitive": "bool"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "tuple": [
+                              {
+                                "resolved_path": {
+                                  "path": "OrderedDataMap",
+                                  "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMap",
+                                  "args": {
+                                    "angle_bracketed": {
+                                      "args": [
+                                        {
+                                          "type": {
+                                            "generic": "K"
+                                          }
+                                        },
+                                        {
+                                          "type": {
+                                            "generic": "V"
+                                          }
+                                        },
+                                        {
+                                          "type": {
+                                            "generic": "H"
+                                          }
+                                        }
+                                      ],
+                                      "constraints": []
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "resolved_path": {
+                                  "path": "Box",
+                                  "resolved_item_path": "alloc::boxed::Box",
+                                  "args": {
+                                    "angle_bracketed": {
+                                      "args": [
+                                        {
+                                          "type": {
+                                            "dyn_trait": {
+                                              "traits": [
+                                                {
+                                                  "trait": {
+                                                    "path": "std::any::Any",
+                                                    "resolved_item_path": "core::any::Any",
+                                                    "args": null
+                                                  },
+                                                  "generic_params": []
+                                                },
+                                                {
+                                                  "trait": {
+                                                    "path": "Send",
+                                                    "resolved_item_path": "core::marker::Send",
+                                                    "args": null
+                                                  },
+                                                  "generic_params": []
+                                                }
+                                              ],
+                                              "lifetime": null
+                                            }
+                                          }
+                                        }
+                                      ],
+                                      "constraints": []
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/ordered_data_map.rs",
+          "source_sha256": "128ac55a4741b9f8012816cb2f48ab359fe4c50351ea21edd66852a7035111fb",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "OrderedDataMapResizeInterruption",
+                "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMapResizeInterruption",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "K"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "V"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "H"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "K",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "V",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "H",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "da5d4b673b42bffffd75a2d08bdcda2e1bf53ff1b0ea5d2ac23400b281b8026d"
+        }
+      ],
+      "status": "partial: explicit consumed-map interruption models native partial rehash and certified defined Clear; ordinary resize retains rollback and native UB destruction is observation/repair-only"
+    },
+    {
+      "occt_id": "4fea6c8a5f57969600832cae18ba012612acafdca0a39ec745ae6aa10309469b",
+      "occt_name": "NCollection_OrderedDataMap::ReSize",
+      "occt_kind": "CXXMethod",
+      "occt_signature": "void (unsigned long)",
+      "receiver": "OrderedDataMap",
+      "compiler_declarations": [
+        {
+          "path": "rustycad_tkernel::ncollection::OrderedDataMap::resize_with_progress",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ],
+                [
+                  "requested",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "OrderedDataMapResizeInterruption",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMapResizeInterruption",
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "K"
+                                      }
+                                    },
+                                    {
+                                      "type": {
+                                        "generic": "V"
+                                      }
+                                    },
+                                    {
+                                      "type": {
+                                        "generic": "H"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/ordered_data_map.rs",
+          "source_sha256": "128ac55a4741b9f8012816cb2f48ab359fe4c50351ea21edd66852a7035111fb",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "OrderedDataMap",
+                "resolved_item_path": "rustycad_tkernel::ncollection::ordered_data_map::OrderedDataMap",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "K"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "V"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "H"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "K",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "V",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "H",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "super::HashPolicy",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy",
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "K"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              }
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "745cd3ca499bd1452228fb358869259d35298aa7183d15a0c32640d9eb738793"
+        }
+      ],
+      "status": "partial: explicit consumed-map interruption models native partial rehash and certified defined Clear; ordinary resize retains rollback and native UB destruction is observation/repair-only"
+    },
+    {
+      "occt_id": "c4bf6e3031f192510ac60efdee31a412cc9a3f8cbb7962cf5347d32e35d968f2",
+      "occt_name": "NCollection_OrderedMap::ReSize",
+      "occt_kind": "CXXMethod",
+      "occt_signature": "void (unsigned long)",
+      "receiver": "OrderedMap",
+      "compiler_declarations": [
+        {
+          "path": "rustycad_tkernel::ncollection::OrderedMap::resize_with_progress",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ],
+                [
+                  "requested",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        },
+                        {
+                          "type": {
+                            "resolved_path": {
+                              "path": "OrderedMapResizeInterruption",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::ordered_map::OrderedMapResizeInterruption",
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "K"
+                                      }
+                                    },
+                                    {
+                                      "type": {
+                                        "generic": "H"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/ordered_map.rs",
+          "source_sha256": "78fc003608c2cac23baa66e73dad9159d75d5c1f2d9cb76c9c2d1e31103bbca5",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "OrderedMap",
+                "resolved_item_path": "rustycad_tkernel::ncollection::ordered_map::OrderedMap",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "K"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "H"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "K",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "H",
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "trait": {
+                              "path": "super::HashPolicy",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy",
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "K"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              }
+                            },
+                            "generic_params": [],
+                            "modifier": "none"
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "9ef791e0e673343399a6781a0e47a80ee3b7573ecca96fa70bdd5e8b4b4d8fd6"
+        }
+      ],
+      "status": "partial: explicit consumed-map interruption models native partial rehash and certified defined Clear; ordinary resize retains rollback and native UB destruction is observation/repair-only"
+    },
+    {
+      "occt_id": "dcccd8efa9ee13bf9a8cad04d820de5f40aab3683a8de5b06f48feaa6ce18875",
+      "occt_name": "NCollection_OrderedMap::Clear",
+      "occt_kind": "CXXMethod",
+      "occt_signature": "void (bool)",
+      "receiver": "OrderedMapResizeInterruption",
+      "compiler_declarations": [
+        {
+          "path": "rustycad_tkernel::ncollection::OrderedMapResizeInterruption::native_clear",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ],
+                [
+                  "release",
+                  {
+                    "primitive": "bool"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "Result",
+                  "resolved_item_path": "core::result::Result",
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "tuple": [
+                              {
+                                "resolved_path": {
+                                  "path": "OrderedMap",
+                                  "resolved_item_path": "rustycad_tkernel::ncollection::ordered_map::OrderedMap",
+                                  "args": {
+                                    "angle_bracketed": {
+                                      "args": [
+                                        {
+                                          "type": {
+                                            "generic": "K"
+                                          }
+                                        },
+                                        {
+                                          "type": {
+                                            "generic": "H"
+                                          }
+                                        }
+                                      ],
+                                      "constraints": []
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "resolved_path": {
+                                  "path": "Box",
+                                  "resolved_item_path": "alloc::boxed::Box",
+                                  "args": {
+                                    "angle_bracketed": {
+                                      "args": [
+                                        {
+                                          "type": {
+                                            "dyn_trait": {
+                                              "traits": [
+                                                {
+                                                  "trait": {
+                                                    "path": "std::any::Any",
+                                                    "resolved_item_path": "core::any::Any",
+                                                    "args": null
+                                                  },
+                                                  "generic_params": []
+                                                },
+                                                {
+                                                  "trait": {
+                                                    "path": "Send",
+                                                    "resolved_item_path": "core::marker::Send",
+                                                    "args": null
+                                                  },
+                                                  "generic_params": []
+                                                }
+                                              ],
+                                              "lifetime": null
+                                            }
+                                          }
+                                        }
+                                      ],
+                                      "constraints": []
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": {
+                            "generic": "Self"
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/ordered_map.rs",
+          "source_sha256": "78fc003608c2cac23baa66e73dad9159d75d5c1f2d9cb76c9c2d1e31103bbca5",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "OrderedMapResizeInterruption",
+                "resolved_item_path": "rustycad_tkernel::ncollection::ordered_map::OrderedMapResizeInterruption",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "K"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "H"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "name": "K",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                },
+                {
+                  "name": "H",
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  }
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "1ddff6522c358c3be14327ab10bdb0db5b592672b75dbfceb50e0182db75ef54"
+        }
+      ],
+      "status": "partial: explicit consumed-map interruption models native partial rehash and certified defined Clear; ordinary resize retains rollback and native UB destruction is observation/repair-only"
+    }
+  ],
+  "local_binding_record_count": 4,
+  "unique_native_declaration_ids": 4,
+  "binding_record_note": "Two unsigned native ReSize declarations bind consumed-map interruption methods. Two native bool Clear declarations bind conditional native_clear on the corresponding interruption owner; signatures and receiver adaptation remain explicit. Ordinary resize rollback is unchanged. No global API or original-test mapping credit is granted.",
+  "compiler_private_engine_bodies": [
+    {
+      "compiler_id": 13539,
+      "name": "table",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          56,
+          5
+        ],
+        "end": [
+          60,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "borrowed_ref": {
+                "lifetime": null,
+                "is_mutable": false,
+                "type": {
+                  "resolved_path": {
+                    "path": "OrderedTable",
+                    "id": 13175,
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "generic": "K"
+                            }
+                          },
+                          {
+                            "type": {
+                              "generic": "V"
+                            }
+                          },
+                          {
+                            "type": {
+                              "generic": "H"
+                            }
+                          },
+                          {
+                            "type": {
+                              "generic": "N"
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13542,
+      "name": "node_pointers",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          72,
+          5
+        ],
+        "end": [
+          77,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Vec",
+                "id": 4,
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "raw_pointer": {
+                            "is_mutable": true,
+                            "type": {
+                              "generic": "N"
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13545,
+      "name": "certified_reachable",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          96,
+          5
+        ],
+        "end": [
+          110,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Option",
+                "id": 2,
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "HashSet",
+                            "id": 13546,
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "primitive": "usize"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13618,
+      "name": "relink",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize.rs",
+        "begin": [
+          35,
+          5
+        ],
+        "end": [
+          49,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "links",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "slice": {
+                        "tuple": [
+                          {
+                            "raw_pointer": {
+                              "is_mutable": true,
+                              "type": {
+                                "resolved_path": {
+                                  "path": "MapLinkNode",
+                                  "id": 9022,
+                                  "args": null
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "raw_pointer": {
+                              "is_mutable": true,
+                              "type": {
+                                "resolved_path": {
+                                  "path": "MapLinkNode",
+                                  "id": 9022,
+                                  "args": null
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "plan",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "resolved_path": {
+                        "path": "crate::ncollection::BaseMapResize",
+                        "id": 10695,
+                        "args": null
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13563,
+      "name": "drop",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          116,
+          5
+        ],
+        "end": [
+          124,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13541,
+      "name": "panic_payload",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          66,
+          5
+        ],
+        "end": [
+          71,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "borrowed_ref": {
+                "lifetime": null,
+                "is_mutable": false,
+                "type": {
+                  "dyn_trait": {
+                    "traits": [
+                      {
+                        "trait": {
+                          "path": "Any",
+                          "id": 120,
+                          "args": null
+                        },
+                        "generic_params": []
+                      },
+                      {
+                        "trait": {
+                          "path": "Send",
+                          "id": 79,
+                          "args": null
+                        },
+                        "generic_params": []
+                      }
+                    ],
+                    "lifetime": null
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13544,
+      "name": "native_clear",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          83,
+          5
+        ],
+        "end": [
+          95,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "resolved_path": {
+                    "path": "Box",
+                    "id": 1543,
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "generic": "Self"
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "release",
+                {
+                  "primitive": "bool"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "id": 33,
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": [
+                            {
+                              "resolved_path": {
+                                "path": "OrderedTable",
+                                "id": 13175,
+                                "args": {
+                                  "angle_bracketed": {
+                                    "args": [
+                                      {
+                                        "type": {
+                                          "generic": "K"
+                                        }
+                                      },
+                                      {
+                                        "type": {
+                                          "generic": "V"
+                                        }
+                                      },
+                                      {
+                                        "type": {
+                                          "generic": "H"
+                                        }
+                                      },
+                                      {
+                                        "type": {
+                                          "generic": "N"
+                                        }
+                                      }
+                                    ],
+                                    "constraints": []
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "resolved_path": {
+                                "path": "Box",
+                                "id": 1543,
+                                "args": {
+                                  "angle_bracketed": {
+                                    "args": [
+                                      {
+                                        "type": {
+                                          "dyn_trait": {
+                                            "traits": [
+                                              {
+                                                "trait": {
+                                                  "path": "Any",
+                                                  "id": 120,
+                                                  "args": null
+                                                },
+                                                "generic_params": []
+                                              },
+                                              {
+                                                "trait": {
+                                                  "path": "Send",
+                                                  "id": 79,
+                                                  "args": null
+                                                },
+                                                "generic_params": []
+                                              }
+                                            ],
+                                            "lifetime": null
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "constraints": []
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Box",
+                            "id": 1543,
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "Self"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13617,
+      "name": "original_links",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize.rs",
+        "begin": [
+          22,
+          5
+        ],
+        "end": [
+          34,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Vec",
+                "id": 4,
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": [
+                            {
+                              "raw_pointer": {
+                                "is_mutable": true,
+                                "type": {
+                                  "resolved_path": {
+                                    "path": "MapLinkNode",
+                                    "id": 9022,
+                                    "args": null
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "raw_pointer": {
+                                "is_mutable": true,
+                                "type": {
+                                  "resolved_path": {
+                                    "path": "MapLinkNode",
+                                    "id": 9022,
+                                    "args": null
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13547,
+      "name": "abandon_replacement",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          111,
+          5
+        ],
+        "end": [
+          113,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13620,
+      "name": "restore_bucket_links",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize.rs",
+        "begin": [
+          53,
+          5
+        ],
+        "end": [
+          60,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "links",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "slice": {
+                        "tuple": [
+                          {
+                            "raw_pointer": {
+                              "is_mutable": true,
+                              "type": {
+                                "resolved_path": {
+                                  "path": "MapLinkNode",
+                                  "id": 9022,
+                                  "args": null
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "raw_pointer": {
+                              "is_mutable": true,
+                              "type": {
+                                "resolved_path": {
+                                  "path": "MapLinkNode",
+                                  "id": 9022,
+                                  "args": null
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13647,
+      "name": "finish_captured_resize",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          36,
+          5
+        ],
+        "end": [
+          53,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "generic": "Self"
+                }
+              ],
+              [
+                "replacement",
+                {
+                  "resolved_path": {
+                    "path": "BaseMapResize",
+                    "id": 10695,
+                    "args": null
+                  }
+                }
+              ],
+              [
+                "original_links",
+                {
+                  "resolved_path": {
+                    "path": "Vec",
+                    "id": 4,
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "tuple": [
+                                {
+                                  "raw_pointer": {
+                                    "is_mutable": true,
+                                    "type": {
+                                      "resolved_path": {
+                                        "path": "MapLinkNode",
+                                        "id": 9022,
+                                        "args": null
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "raw_pointer": {
+                                    "is_mutable": true,
+                                    "type": {
+                                      "resolved_path": {
+                                        "path": "MapLinkNode",
+                                        "id": 9022,
+                                        "args": null
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "result",
+                {
+                  "resolved_path": {
+                    "path": "Result",
+                    "id": 33,
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "tuple": []
+                            }
+                          },
+                          {
+                            "type": {
+                              "resolved_path": {
+                                "path": "Box",
+                                "id": 1543,
+                                "args": {
+                                  "angle_bracketed": {
+                                    "args": [
+                                      {
+                                        "type": {
+                                          "dyn_trait": {
+                                            "traits": [
+                                              {
+                                                "trait": {
+                                                  "path": "Any",
+                                                  "id": 120,
+                                                  "args": null
+                                                },
+                                                "generic_params": []
+                                              },
+                                              {
+                                                "trait": {
+                                                  "path": "Send",
+                                                  "id": 79,
+                                                  "args": null
+                                                },
+                                                "generic_params": []
+                                              }
+                                            ],
+                                            "lifetime": null
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "constraints": []
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "id": 33,
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "Self"
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Box",
+                            "id": 1543,
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "path": "ResizeInterruption",
+                                        "id": 13317,
+                                        "args": {
+                                          "angle_bracketed": {
+                                            "args": [
+                                              {
+                                                "type": {
+                                                  "generic": "K"
+                                                }
+                                              },
+                                              {
+                                                "type": {
+                                                  "generic": "V"
+                                                }
+                                              },
+                                              {
+                                                "type": {
+                                                  "generic": "H"
+                                                }
+                                              },
+                                              {
+                                                "type": {
+                                                  "generic": "N"
+                                                }
+                                              }
+                                            ],
+                                            "constraints": []
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13650,
+      "name": "contain_resize_nodes",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          137,
+          5
+        ],
+        "end": [
+          147,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13540,
+      "name": "replacement",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          61,
+          5
+        ],
+        "end": [
+          65,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "borrowed_ref": {
+                "lifetime": null,
+                "is_mutable": false,
+                "type": {
+                  "resolved_path": {
+                    "path": "BaseMapResize",
+                    "id": 10695,
+                    "args": null
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13543,
+      "name": "recover",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          78,
+          5
+        ],
+        "end": [
+          82,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "generic": "Self"
+                }
+              ]
+            ],
+            "output": {
+              "tuple": [
+                {
+                  "resolved_path": {
+                    "path": "OrderedTable",
+                    "id": 13175,
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "generic": "K"
+                            }
+                          },
+                          {
+                            "type": {
+                              "generic": "V"
+                            }
+                          },
+                          {
+                            "type": {
+                              "generic": "H"
+                            }
+                          },
+                          {
+                            "type": {
+                              "generic": "N"
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    }
+                  }
+                },
+                {
+                  "resolved_path": {
+                    "path": "Box",
+                    "id": 1543,
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "dyn_trait": {
+                                "traits": [
+                                  {
+                                    "trait": {
+                                      "path": "Any",
+                                      "id": 120,
+                                      "args": null
+                                    },
+                                    "generic_params": []
+                                  },
+                                  {
+                                    "trait": {
+                                      "path": "Send",
+                                      "id": 79,
+                                      "args": null
+                                    },
+                                    "generic_params": []
+                                  }
+                                ],
+                                "lifetime": null
+                              }
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13616,
+      "name": "resize",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize.rs",
+        "begin": [
+          5,
+          5
+        ],
+        "end": [
+          21,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "requested",
+                {
+                  "primitive": "usize"
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13646,
+      "name": "resize_with_progress",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          19,
+          5
+        ],
+        "end": [
+          35,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "generic": "Self"
+                }
+              ],
+              [
+                "requested",
+                {
+                  "primitive": "usize"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "id": 33,
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "Self"
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Box",
+                            "id": 1543,
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "path": "ResizeInterruption",
+                                        "id": 13317,
+                                        "args": {
+                                          "angle_bracketed": {
+                                            "args": [
+                                              {
+                                                "type": {
+                                                  "generic": "K"
+                                                }
+                                              },
+                                              {
+                                                "type": {
+                                                  "generic": "V"
+                                                }
+                                              },
+                                              {
+                                                "type": {
+                                                  "generic": "H"
+                                                }
+                                              },
+                                              {
+                                                "type": {
+                                                  "generic": "N"
+                                                }
+                                              }
+                                            ],
+                                            "constraints": []
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "compiler_id": 13649,
+      "name": "abandon_unreachable",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+        "begin": [
+          127,
+          5
+        ],
+        "end": [
+          136,
+          6
+        ]
+      },
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "reached",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "resolved_path": {
+                        "path": "HashSet",
+                        "id": 13546,
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "primitive": "usize"
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    }
+  ],
+  "global_api_credit": 0,
+  "new_original_mapping_credit": 0,
+  "class_status": "partial",
+  "frozen_runtime_inputs": 10461,
+  "unchanged_runtime_inputs": true,
+  "changes": [
+    "Added resize_with_progress on both map families. Success returns the resized map; a caught hasher panic returns an owning typed interruption instead of an ordinary safe map with broken bucket invariants.",
+    "The interruption owns the actual OrderedTable, replacement BaseMapResize and original Next snapshots. Node payloads are never cloned or mirrored; the existing identity registry certifies ownership independently of partial bucket reachability.",
+    "The caught panic payload is retained unchanged and can be observed by Any downcast. Both recover and successful native_clear return the same original panic object explicitly.",
+    "recover restores original bucket Next links and releases exactly the pending table without hash/equality/key/value callbacks. Native old bucket address, all node identities, extent and insertion order survive repair.",
+    "native_clear preflights every old bucket chain before any release or mutation. Unknown, duplicate or cyclic nodes return the untouched interruption. Certified graphs destroy reachable nodes in native bucket order, preserve unreachable allocations/payloads and release only their incremental typed leases; the pending replacement table is intentionally abandoned.",
+    "Dropping an interruption abandons every node payload and replacement table without key/value destructors, neutralizes old roots and insertion links, then drops detached base and policy ownership. This explicit Rust containment policy is not claimed as native destructor behavior; H::drop may panic only after node leases and roots are neutralized.",
+    "Direct native Standard::Allocate/Free symbol interposition forwards calls to the pinned backend using RTLD_NEXT. Observed ReSize failure allocates one 8,080-byte replacement table, never frees it, retains the old modulus/table and preserves partial Next rewiring.",
+    "The 64-row native fixture covers success and first/middle/final hash failure across four collision distributions in both families. Two overlapping-graph cleanup rows are explicitly repaired before destruction and are not native UB semantic claims.",
+    "Eighteen new tests cover every native row, repeated rejection and callback-free repair, empty/no-op success, original custom panic values, five independent allocator policies, incremental reset after abandonment, and token policy-Drop panic. Unsafe test-only re-adoption/free runs only after recording native abandonment observations.",
+    "No shared allocator or BaseMap implementation is changed. The normal resize path reuses the same rehash phase and retains its existing safe rollback behavior."
+  ],
+  "limitations": [
+    "This is a bounded opt-in native failure-state representation, not full ReSize parity for the ordinary mutating resize API; that API still restores links when hashing panics.",
+    "Native graphs with multiply reachable nodes would double free during Clear/destruction. The oracle observes them then explicitly repairs their original links. Rust rejects their native_clear attempt without mutation; no parity claim is made for native undefined behavior.",
+    "Interruption token Drop intentionally contains the failure by abandoning payloads, then releases detached base/policy ownership. It may leak nodes that explicit native Clear would have destroyed; users select native_clear or recover explicitly for those behaviors.",
+    "The interruption exposes raw bucket/node observations only, not a safe map, iterator or payload reference. Dereferences require its nodes to remain live, valid provenance and aliasing discipline. External unsafe writes must be repaired before recover unless they only change original Next fields.",
+    "Failure metadata includes a boxed token, an original-link vector and validation HashSet. These Rust ownership/validation allocations are representation overhead and are not native allocation-parity claims.",
+    "Only hash callback panic is captured. Allocation failure, metadata allocation failure, foreign unwinding, simultaneous destructor panic, and native noexcept termination domains are not certified.",
+    "The signed ReSize overload retains its existing validation route; this new consuming progress API covers the native unsigned request domain.",
+    "The token has conservative raw-pointer and panic-payload auto-trait restrictions; no new Send/Sync promise is introduced.",
+    "Native malloc symbol interception is a Linux ELF oracle harness feature with the actual backend forwarded unchanged; it is not a Rust kernel dependency.",
+    "Existing safe detached cursor validation, registry overhead and generic raw map mutation adaptations remain separate gaps. Scoped evidence does not replace whole-workspace checks or the global completeness proof."
+  ],
+  "native_include_bridges": [
+    {
+      "include_bridge": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade/NCollection_OrderedMap.hxx",
+      "bridge_sha256": "6ac60696ca345332a51bfc072cc45af623fe3b733f81bdab75497791028b17c6",
+      "resolved_source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "source_sha256": "13e1b322e91e0814782f20aaed2ec6d994fa605ca8d343f0790923a642d941b3"
+    },
+    {
+      "include_bridge": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade/NCollection_OrderedDataMap.hxx",
+      "bridge_sha256": "aff8af1225878eb3d29b8a247eea6827eb9d9ce17cb747128bac10f323102351",
+      "resolved_source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "source_sha256": "dd38d42090a75c6d2d7fd9e405fdd829b1524e15a821308d2f432494089013fb"
+    },
+    {
+      "include_bridge": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade/NCollection_AccAllocator.hxx",
+      "bridge_sha256": "9c144bbb7858542be93a29deabd8a69e7377c8cea1e44d42f38b9a5f5a3c0b9b",
+      "resolved_source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "source_sha256": "5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585"
+    },
+    {
+      "include_bridge": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-modeling-full/include/opencascade/NCollection_BaseMap.hxx",
+      "bridge_sha256": "e5a147aef50e282234aec9148341ec1a1957441ba025b9e116a01e9d9f350832",
+      "resolved_source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "source_sha256": "d55a72f4269d9f0ce378165bf9ba1142b1b3e87b8272670f4eba4d1187e05f13"
+    }
+  ],
+  "miri_environment": {
+    "MIRIFLAGS": "-Zmiri-strict-provenance"
+  },
+  "compiler_exit_code": 0,
+  "compiler_warning_count": 9,
+  "compiler_warning_note": "Nightly rustdoc warnings outside this resize interruption scope are retained in raw output; scoped Clippy is run with warnings denied."
+}

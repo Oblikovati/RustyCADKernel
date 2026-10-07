@@ -1,0 +1,3190 @@
+{
+  "crosswalk_input_sha256": {
+    "cpp": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
+    "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
+    "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "parity": "4cb58b77264ba79390909c8b3a184398cae51a6958acf2d2f34aa13b4c88babd",
+    "rust": "766641557f15858c418e1348d6dcfe857ea00c1544fc47aa4c507b3ed5b72c17"
+  },
+  "schema_version": 1,
+  "toolkits": {
+    "TKBO": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 55,
+          "excluded": 0,
+          "partial": 270,
+          "unclaimed": 1065,
+          "upstream_unimplemented": 1,
+          "verified": 614
+        },
+        "declarations": 2005,
+        "done": 615,
+        "done_percent": 30.7
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 23,
+          "excluded": 1,
+          "partial": 2,
+          "unclaimed": 640,
+          "upstream_unimplemented": 0,
+          "verified": 3
+        },
+        "declarations": 669,
+        "done": 4,
+        "done_percent": 0.6
+      },
+      "gtests": {
+        "mapped": 11,
+        "unmapped": 288
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 78,
+        "rows_without_cpp_match": 6
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 426,
+        "rtti-macro": 180,
+        "special-member": 57
+      },
+      "open_gap_by_category": {
+        "alias": 11,
+        "enum-constant": 42,
+        "field": 302,
+        "member": 432,
+        "protected-member": 223,
+        "record": 110
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKBRep": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 266,
+          "excluded": 46,
+          "partial": 0,
+          "unclaimed": 1346,
+          "upstream_unimplemented": 0,
+          "verified": 2094
+        },
+        "declarations": 3752,
+        "done": 2140,
+        "done_percent": 57.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 1,
+          "excluded": 17,
+          "partial": 0,
+          "unclaimed": 534,
+          "upstream_unimplemented": 0,
+          "verified": 3
+        },
+        "declarations": 555,
+        "done": 20,
+        "done_percent": 3.6
+      },
+      "gtests": {
+        "mapped": 1332,
+        "unmapped": 4
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 263,
+        "rows_without_cpp_match": 267
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 294,
+        "exception-macro": 9,
+        "rtti-macro": 208,
+        "special-member": 24
+      },
+      "open_gap_by_category": {
+        "alias": 260,
+        "enum-constant": 186,
+        "field": 261,
+        "member": 525,
+        "protected-member": 35,
+        "record": 345
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKBin": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 87,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 87,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 52,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 52,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 12,
+        "rtti-macro": 40
+      },
+      "open_gap_by_category": {
+        "member": 65,
+        "record": 22
+      },
+      "scope": "excluded",
+      "scope_reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are."
+    },
+    "TKBinL": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 321,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 321,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 179,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 179,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 42,
+        "rtti-macro": 136,
+        "special-member": 1
+      },
+      "open_gap_by_category": {
+        "enum-constant": 2,
+        "field": 10,
+        "member": 249,
+        "protected-member": 14,
+        "record": 46
+      },
+      "scope": "excluded",
+      "scope_reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are."
+    },
+    "TKBinTObj": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 35,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 35,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 28,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 28,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 28
+      },
+      "open_gap_by_category": {
+        "member": 27,
+        "record": 8
+      },
+      "scope": "excluded",
+      "scope_reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are."
+    },
+    "TKBinXCAF": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 91,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 91,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 70,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 70,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 6,
+        "rtti-macro": 64
+      },
+      "open_gap_by_category": {
+        "enum-constant": 5,
+        "member": 65,
+        "protected-member": 2,
+        "record": 19
+      },
+      "scope": "excluded",
+      "scope_reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are."
+    },
+    "TKBool": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 33,
+          "unclaimed": 2670,
+          "upstream_unimplemented": 0,
+          "verified": 1
+        },
+        "declarations": 2704,
+        "done": 1,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 882,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 882,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 17
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 762,
+        "rtti-macro": 108,
+        "special-member": 12
+      },
+      "open_gap_by_category": {
+        "enum-constant": 50,
+        "field": 101,
+        "member": 2274,
+        "protected-member": 59,
+        "record": 186
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKCAF": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 586,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 586,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 194,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 194,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 65
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 114,
+        "rtti-macro": 76,
+        "special-member": 4
+      },
+      "open_gap_by_category": {
+        "enum-constant": 52,
+        "member": 465,
+        "record": 69
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKCDF": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 607,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 607,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 163,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 163,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 8
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 36,
+        "exception-macro": 3,
+        "rtti-macro": 76,
+        "special-member": 48
+      },
+      "open_gap_by_category": {
+        "alias": 1,
+        "enum-constant": 84,
+        "field": 23,
+        "member": 412,
+        "protected-member": 25,
+        "record": 62
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKDCAF": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 285,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 285,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 145,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 145,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 5
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 36,
+        "rtti-macro": 108,
+        "special-member": 1
+      },
+      "open_gap_by_category": {
+        "field": 4,
+        "member": 236,
+        "protected-member": 1,
+        "record": 44
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKDE": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 200,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 200,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 21,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 21,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 5
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 20,
+        "special-member": 1
+      },
+      "open_gap_by_category": {
+        "alias": 2,
+        "enum-constant": 3,
+        "field": 63,
+        "member": 115,
+        "protected-member": 2,
+        "record": 15
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKDECascade": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 73,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 73,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 16,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 16,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 5
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 16
+      },
+      "open_gap_by_category": {
+        "field": 10,
+        "member": 57,
+        "record": 6
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKDEGLTF": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 426,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 426,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 31,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 31,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 6
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 28,
+        "special-member": 3
+      },
+      "open_gap_by_category": {
+        "alias": 1,
+        "enum-constant": 64,
+        "field": 138,
+        "member": 127,
+        "protected-member": 57,
+        "record": 39
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKDEIGES": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 4411,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 4411,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 2161,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 2161,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 12
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 1128,
+        "rtti-macro": 1028,
+        "special-member": 5
+      },
+      "open_gap_by_category": {
+        "enum-constant": 42,
+        "field": 37,
+        "member": 3779,
+        "protected-member": 23,
+        "record": 530
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKDEOBJ": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 198,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 198,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 32,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 32,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 28,
+        "special-member": 4
+      },
+      "open_gap_by_category": {
+        "alias": 1,
+        "enum-constant": 4,
+        "field": 60,
+        "member": 92,
+        "protected-member": 24,
+        "record": 17
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKDEPLY": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 94,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 94,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 14,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 14,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 12,
+        "special-member": 2
+      },
+      "open_gap_by_category": {
+        "field": 20,
+        "member": 64,
+        "protected-member": 5,
+        "record": 5
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKDESTEP": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 7892,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 7892,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 4481,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 4481,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 173
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 1254,
+        "rtti-macro": 3212,
+        "special-member": 15
+      },
+      "open_gap_by_category": {
+        "alias": 9,
+        "enum-constant": 394,
+        "field": 60,
+        "member": 6248,
+        "protected-member": 64,
+        "record": 1117
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKDESTL": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 80,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 80,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 24,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 24,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 23
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 12,
+        "rtti-macro": 12
+      },
+      "open_gap_by_category": {
+        "field": 6,
+        "member": 66,
+        "record": 8
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKDEVRML": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 979,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 979,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 411,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 411,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 17
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 246,
+        "rtti-macro": 164,
+        "special-member": 1
+      },
+      "open_gap_by_category": {
+        "alias": 3,
+        "enum-constant": 76,
+        "field": 19,
+        "member": 748,
+        "protected-member": 23,
+        "record": 110
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKDraw": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 792,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 792,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 195,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 195,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 54,
+        "exception-macro": 3,
+        "rtti-macro": 132,
+        "special-member": 6
+      },
+      "open_gap_by_category": {
+        "alias": 10,
+        "enum-constant": 21,
+        "field": 70,
+        "member": 620,
+        "protected-member": 14,
+        "record": 57
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKExpress": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 570,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 570,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 237,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 237,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 5
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 36,
+        "exception-macro": 21,
+        "rtti-macro": 180
+      },
+      "open_gap_by_category": {
+        "alias": 2,
+        "enum-constant": 26,
+        "member": 476,
+        "protected-member": 7,
+        "record": 59
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKFeat": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 486,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 486,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 200,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 200,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 186,
+        "rtti-macro": 12,
+        "special-member": 2
+      },
+      "open_gap_by_category": {
+        "alias": 1,
+        "enum-constant": 39,
+        "field": 41,
+        "member": 345,
+        "protected-member": 20,
+        "record": 40
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKFillet": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 2,
+          "unclaimed": 1961,
+          "upstream_unimplemented": 0,
+          "verified": 10
+        },
+        "declarations": 1973,
+        "done": 10,
+        "done_percent": 0.5
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 436,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 436,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 21
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 390,
+        "rtti-macro": 44,
+        "special-member": 2
+      },
+      "open_gap_by_category": {
+        "alias": 14,
+        "enum-constant": 62,
+        "field": 74,
+        "member": 1643,
+        "protected-member": 69,
+        "record": 99
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKG2d": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 3,
+          "unclaimed": 32,
+          "upstream_unimplemented": 0,
+          "verified": 911
+        },
+        "declarations": 946,
+        "done": 911,
+        "done_percent": 96.3
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 1,
+          "partial": 0,
+          "unclaimed": 246,
+          "upstream_unimplemented": 0,
+          "verified": 5
+        },
+        "declarations": 252,
+        "done": 6,
+        "done_percent": 2.4
+      },
+      "gtests": {
+        "mapped": 523,
+        "unmapped": 0
+      },
+      "ledger_defects": {
+        "rows_without_cpp_match": 116
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 66,
+        "exception-macro": 4,
+        "rtti-macro": 136,
+        "special-member": 40
+      },
+      "open_gap_by_category": {
+        "alias": 2,
+        "field": 7,
+        "member": 1,
+        "protected-member": 1,
+        "record": 21
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKG3d": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 1,
+          "partial": 8,
+          "unclaimed": 157,
+          "upstream_unimplemented": 0,
+          "verified": 2189
+        },
+        "declarations": 2355,
+        "done": 2190,
+        "done_percent": 93.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 5,
+          "partial": 0,
+          "unclaimed": 550,
+          "upstream_unimplemented": 0,
+          "verified": 8
+        },
+        "declarations": 563,
+        "done": 13,
+        "done_percent": 2.3
+      },
+      "gtests": {
+        "mapped": 794,
+        "unmapped": 0
+      },
+      "ledger_defects": {
+        "rows_without_cpp_match": 279
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 186,
+        "exception-macro": 4,
+        "rtti-macro": 272,
+        "special-member": 88
+      },
+      "open_gap_by_category": {
+        "alias": 11,
+        "enum-constant": 25,
+        "field": 50,
+        "member": 1,
+        "protected-member": 2,
+        "record": 68
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKGeomAlgo": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 939,
+          "excluded": 17,
+          "partial": 0,
+          "unclaimed": 754,
+          "upstream_unimplemented": 0,
+          "verified": 2870
+        },
+        "declarations": 4580,
+        "done": 2887,
+        "done_percent": 63.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 15,
+          "excluded": 9,
+          "partial": 0,
+          "unclaimed": 1799,
+          "upstream_unimplemented": 0,
+          "verified": 4
+        },
+        "declarations": 1827,
+        "done": 13,
+        "done_percent": 0.7
+      },
+      "gtests": {
+        "mapped": 213,
+        "unmapped": 0
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 954,
+        "rows_without_cpp_match": 90
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 1566,
+        "exception-macro": 12,
+        "rtti-macro": 216,
+        "special-member": 20
+      },
+      "open_gap_by_category": {
+        "alias": 13,
+        "enum-constant": 165,
+        "field": 128,
+        "member": 978,
+        "protected-member": 101,
+        "record": 308
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKGeomBase": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 475,
+          "excluded": 12,
+          "partial": 2,
+          "unclaimed": 725,
+          "upstream_unimplemented": 0,
+          "verified": 2793
+        },
+        "declarations": 4007,
+        "done": 2805,
+        "done_percent": 70.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 2,
+          "excluded": 46,
+          "partial": 0,
+          "unclaimed": 1951,
+          "upstream_unimplemented": 0,
+          "verified": 1
+        },
+        "declarations": 2000,
+        "done": 47,
+        "done_percent": 2.4
+      },
+      "gtests": {
+        "mapped": 839,
+        "unmapped": 0
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 477,
+        "rows_without_cpp_match": 79
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 1686,
+        "exception-macro": 9,
+        "rtti-macro": 76,
+        "special-member": 182
+      },
+      "open_gap_by_category": {
+        "alias": 50,
+        "enum-constant": 105,
+        "field": 84,
+        "member": 554,
+        "protected-member": 83,
+        "record": 324
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKHLR": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 49,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 1086,
+          "upstream_unimplemented": 1,
+          "verified": 535
+        },
+        "declarations": 1671,
+        "done": 536,
+        "done_percent": 32.1
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 546,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 546,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 4
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 49,
+        "rows_without_cpp_match": 12
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 486,
+        "rtti-macro": 56,
+        "special-member": 4
+      },
+      "open_gap_by_category": {
+        "alias": 7,
+        "enum-constant": 77,
+        "field": 53,
+        "member": 855,
+        "protected-member": 36,
+        "record": 107
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKHelix": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 15,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 46,
+          "upstream_unimplemented": 0,
+          "verified": 33
+        },
+        "declarations": 94,
+        "done": 33,
+        "done_percent": 35.1
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 3,
+          "partial": 0,
+          "unclaimed": 42,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 45,
+        "done": 3,
+        "done_percent": 6.7
+      },
+      "gtests": {
+        "mapped": 44,
+        "unmapped": 0
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 15,
+        "rows_without_cpp_match": 1
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 36,
+        "rtti-macro": 4,
+        "special-member": 2
+      },
+      "open_gap_by_category": {
+        "field": 37,
+        "member": 15,
+        "protected-member": 2,
+        "record": 7
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKLCAF": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 1376,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 1376,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 402,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 402,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 124
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 120,
+        "rtti-macro": 280,
+        "special-member": 2
+      },
+      "open_gap_by_category": {
+        "alias": 2,
+        "enum-constant": 29,
+        "field": 19,
+        "member": 1227,
+        "protected-member": 10,
+        "record": 89
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKMath": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 168,
+          "excluded": 7,
+          "partial": 18,
+          "unclaimed": 1074,
+          "upstream_unimplemented": 0,
+          "verified": 3998
+        },
+        "declarations": 5265,
+        "done": 4005,
+        "done_percent": 76.1
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 6,
+          "excluded": 32,
+          "partial": 4,
+          "unclaimed": 773,
+          "upstream_unimplemented": 0,
+          "verified": 19
+        },
+        "declarations": 834,
+        "done": 51,
+        "done_percent": 6.1
+      },
+      "gtests": {
+        "mapped": 2023,
+        "unmapped": 0
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 170,
+        "rows_without_cpp_match": 189
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 678,
+        "exception-macro": 9,
+        "rtti-macro": 60,
+        "special-member": 32
+      },
+      "open_gap_by_category": {
+        "alias": 98,
+        "enum-constant": 184,
+        "field": 377,
+        "member": 341,
+        "protected-member": 25,
+        "record": 217
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKMesh": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 68,
+          "excluded": 0,
+          "partial": 45,
+          "unclaimed": 275,
+          "upstream_unimplemented": 0,
+          "verified": 400
+        },
+        "declarations": 788,
+        "done": 400,
+        "done_percent": 50.8
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 36,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 314,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 350,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 27,
+        "unmapped": 2
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 104,
+        "rows_without_cpp_match": 43
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 75,
+        "rtti-macro": 212,
+        "special-member": 63
+      },
+      "open_gap_by_category": {
+        "alias": 50,
+        "field": 9,
+        "member": 161,
+        "protected-member": 67,
+        "record": 56
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKMeshVS": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 422,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 422,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 89,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 89,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 6,
+        "rtti-macro": 80,
+        "special-member": 3
+      },
+      "open_gap_by_category": {
+        "alias": 6,
+        "enum-constant": 83,
+        "field": 24,
+        "member": 254,
+        "protected-member": 12,
+        "record": 43
+      },
+      "scope": "replaced",
+      "scope_reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns."
+    },
+    "TKOffset": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 57,
+          "unclaimed": 378,
+          "upstream_unimplemented": 1,
+          "verified": 66
+        },
+        "declarations": 502,
+        "done": 67,
+        "done_percent": 13.3
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 162,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 162,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 35
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 150,
+        "rtti-macro": 12
+      },
+      "open_gap_by_category": {
+        "enum-constant": 13,
+        "field": 3,
+        "member": 332,
+        "protected-member": 1,
+        "record": 29
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKOpenGl": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 6415,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 6415,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 274,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 274,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 92,
+        "rtti-macro": 144,
+        "special-member": 38
+      },
+      "open_gap_by_category": {
+        "alias": 3578,
+        "enum-constant": 125,
+        "field": 1224,
+        "member": 1211,
+        "protected-member": 111,
+        "record": 166
+      },
+      "scope": "replaced",
+      "scope_reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns."
+    },
+    "TKOpenGlTest": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 3,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 3,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 6,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 6,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 6
+      },
+      "open_gap_by_category": {
+        "member": 2,
+        "record": 1
+      },
+      "scope": "replaced",
+      "scope_reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns."
+    },
+    "TKPrim": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 71,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 54,
+          "upstream_unimplemented": 0,
+          "verified": 335
+        },
+        "declarations": 460,
+        "done": 335,
+        "done_percent": 72.8
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 2,
+          "partial": 0,
+          "unclaimed": 198,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 200,
+        "done": 2,
+        "done_percent": 1.0
+      },
+      "gtests": {
+        "mapped": 46,
+        "unmapped": 0
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 71
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 198
+      },
+      "open_gap_by_category": {
+        "enum-constant": 6,
+        "field": 12,
+        "member": 71,
+        "protected-member": 6,
+        "record": 30
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKQADraw": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 36,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 36,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 18,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 18,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 18
+      },
+      "open_gap_by_category": {
+        "member": 33,
+        "record": 3
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKRWMesh": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 283,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 283,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 20,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 20,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 16,
+        "special-member": 4
+      },
+      "open_gap_by_category": {
+        "enum-constant": 16,
+        "field": 59,
+        "member": 162,
+        "protected-member": 32,
+        "record": 14
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKService": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 4502,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 4502,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 537,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 537,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 75
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 48,
+        "exception-macro": 39,
+        "rtti-macro": 400,
+        "special-member": 50
+      },
+      "open_gap_by_category": {
+        "alias": 58,
+        "enum-constant": 885,
+        "field": 616,
+        "member": 2527,
+        "protected-member": 90,
+        "record": 326
+      },
+      "scope": "replaced",
+      "scope_reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns."
+    },
+    "TKShHealing": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 65,
+          "excluded": 1,
+          "partial": 102,
+          "unclaimed": 621,
+          "upstream_unimplemented": 0,
+          "verified": 974
+        },
+        "declarations": 1763,
+        "done": 975,
+        "done_percent": 55.3
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 517,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 517,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 140,
+        "unmapped": 3
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 65,
+        "rows_without_cpp_match": 27
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 264,
+        "rtti-macro": 252,
+        "special-member": 1
+      },
+      "open_gap_by_category": {
+        "alias": 9,
+        "enum-constant": 42,
+        "field": 195,
+        "member": 293,
+        "protected-member": 39,
+        "record": 108
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKStd": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 600,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 600,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 26,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 26,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 24,
+        "special-member": 2
+      },
+      "open_gap_by_category": {
+        "alias": 109,
+        "enum-constant": 2,
+        "field": 19,
+        "member": 380,
+        "protected-member": 6,
+        "record": 84
+      },
+      "scope": "excluded",
+      "scope_reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are."
+    },
+    "TKStdL": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 260,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 260,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 12,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 12,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 6,
+        "rtti-macro": 4,
+        "special-member": 2
+      },
+      "open_gap_by_category": {
+        "alias": 37,
+        "field": 7,
+        "member": 146,
+        "protected-member": 21,
+        "record": 49
+      },
+      "scope": "excluded",
+      "scope_reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are."
+    },
+    "TKTObj": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 353,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 353,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 75,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 75,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 44
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 72,
+        "special-member": 3
+      },
+      "open_gap_by_category": {
+        "alias": 2,
+        "enum-constant": 22,
+        "field": 11,
+        "member": 234,
+        "protected-member": 54,
+        "record": 30
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKTObjDRAW": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 3,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 3,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 6,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 6,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 6
+      },
+      "open_gap_by_category": {
+        "member": 2,
+        "record": 1
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKTopAlgo": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 435,
+          "excluded": 6,
+          "partial": 0,
+          "unclaimed": 511,
+          "upstream_unimplemented": 0,
+          "verified": 1578
+        },
+        "declarations": 2530,
+        "done": 1584,
+        "done_percent": 62.6
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 3,
+          "excluded": 12,
+          "partial": 0,
+          "unclaimed": 815,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 830,
+        "done": 12,
+        "done_percent": 1.4
+      },
+      "gtests": {
+        "mapped": 92,
+        "unmapped": 3
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 438,
+        "rows_without_cpp_match": 50
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 684,
+        "exception-macro": 3,
+        "rtti-macro": 124,
+        "special-member": 7
+      },
+      "open_gap_by_category": {
+        "alias": 13,
+        "enum-constant": 116,
+        "field": 86,
+        "member": 461,
+        "protected-member": 104,
+        "record": 166
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKTopTest": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 211,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 211,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 124,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 124,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 96,
+        "rtti-macro": 28
+      },
+      "open_gap_by_category": {
+        "field": 1,
+        "member": 176,
+        "record": 34
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKV3d": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 5172,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 5172,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 923,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 923,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 73
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 318,
+        "exception-macro": 9,
+        "rtti-macro": 556,
+        "special-member": 40
+      },
+      "open_gap_by_category": {
+        "alias": 40,
+        "enum-constant": 411,
+        "field": 702,
+        "member": 3384,
+        "protected-member": 296,
+        "record": 339
+      },
+      "scope": "replaced",
+      "scope_reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns."
+    },
+    "TKVCAF": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 149,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 149,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 46,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 46,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 1
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 6,
+        "rtti-macro": 40
+      },
+      "open_gap_by_category": {
+        "member": 132,
+        "protected-member": 2,
+        "record": 15
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKViewerTest": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 141,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 141,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 17,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 17,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 6,
+        "rtti-macro": 8,
+        "special-member": 3
+      },
+      "open_gap_by_category": {
+        "alias": 2,
+        "enum-constant": 3,
+        "field": 10,
+        "member": 112,
+        "protected-member": 2,
+        "record": 12
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXCAF": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 1363,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 1363,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 186,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 186,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 33
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 30,
+        "rtti-macro": 156
+      },
+      "open_gap_by_category": {
+        "alias": 2,
+        "enum-constant": 206,
+        "field": 50,
+        "member": 1023,
+        "protected-member": 7,
+        "record": 75
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKXDEDRAW": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 19,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 19,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 42,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 42,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 42
+      },
+      "open_gap_by_category": {
+        "member": 10,
+        "record": 9
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXMesh": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 3,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 3,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 4,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 4,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 4
+      },
+      "open_gap_by_category": {
+        "member": 2,
+        "record": 1
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKXSBase": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 2550,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 2550,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 795,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 795,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 270,
+        "exception-macro": 15,
+        "rtti-macro": 492,
+        "special-member": 18
+      },
+      "open_gap_by_category": {
+        "alias": 8,
+        "enum-constant": 69,
+        "field": 24,
+        "member": 2252,
+        "protected-member": 36,
+        "record": 161
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKXSDRAW": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 46,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 46,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 4,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 4,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 4
+      },
+      "open_gap_by_category": {
+        "member": 44,
+        "record": 2
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXSDRAWDE": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 2,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 2,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 0,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 0,
+        "done": 0,
+        "done_percent": 100.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {},
+      "open_gap_by_category": {
+        "member": 1,
+        "record": 1
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXSDRAWGLTF": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 2,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 2,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 0,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 0,
+        "done": 0,
+        "done_percent": 100.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {},
+      "open_gap_by_category": {
+        "member": 1,
+        "record": 1
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXSDRAWIGES": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 2,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 2,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 0,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 0,
+        "done": 0,
+        "done_percent": 100.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {},
+      "open_gap_by_category": {
+        "member": 1,
+        "record": 1
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXSDRAWOBJ": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 2,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 2,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 0,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 0,
+        "done": 0,
+        "done_percent": 100.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {},
+      "open_gap_by_category": {
+        "member": 1,
+        "record": 1
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXSDRAWPLY": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 2,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 2,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 0,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 0,
+        "done": 0,
+        "done_percent": 100.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {},
+      "open_gap_by_category": {
+        "member": 1,
+        "record": 1
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXSDRAWSTEP": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 2,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 2,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 0,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 0,
+        "done": 0,
+        "done_percent": 100.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {},
+      "open_gap_by_category": {
+        "member": 1,
+        "record": 1
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXSDRAWSTL": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 26,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 26,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 12,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 12,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 12
+      },
+      "open_gap_by_category": {
+        "member": 21,
+        "record": 5
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXSDRAWVRML": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 2,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 2,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 0,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 0,
+        "done": 0,
+        "done_percent": 100.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {},
+      "open_gap_by_category": {
+        "member": 1,
+        "record": 1
+      },
+      "scope": "undecided",
+      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+    },
+    "TKXml": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 77,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 77,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 58,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 58,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 177
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 18,
+        "rtti-macro": 40
+      },
+      "open_gap_by_category": {
+        "member": 59,
+        "record": 18
+      },
+      "scope": "excluded",
+      "scope_reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are."
+    },
+    "TKXmlL": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 265,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 265,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 186,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 186,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 54,
+        "rtti-macro": 132
+      },
+      "open_gap_by_category": {
+        "alias": 3,
+        "field": 10,
+        "member": 199,
+        "protected-member": 9,
+        "record": 44
+      },
+      "scope": "excluded",
+      "scope_reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are."
+    },
+    "TKXmlTObj": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 35,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 35,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 28,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 28,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 28
+      },
+      "open_gap_by_category": {
+        "member": 27,
+        "record": 8
+      },
+      "scope": "excluded",
+      "scope_reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are."
+    },
+    "TKXmlXCAF": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 84,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 84,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 70,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 70,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 0,
+        "unmapped": 20
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 6,
+        "rtti-macro": 64
+      },
+      "open_gap_by_category": {
+        "member": 64,
+        "protected-member": 2,
+        "record": 18
+      },
+      "scope": "excluded",
+      "scope_reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are."
+    },
+    "TKernel": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 60,
+          "excluded": 164,
+          "partial": 512,
+          "unclaimed": 1567,
+          "upstream_unimplemented": 0,
+          "verified": 3995
+        },
+        "declarations": 6298,
+        "done": 4159,
+        "done_percent": 66.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 10,
+          "excluded": 37,
+          "partial": 34,
+          "unclaimed": 788,
+          "upstream_unimplemented": 0,
+          "verified": 157
+        },
+        "declarations": 1026,
+        "done": 194,
+        "done_percent": 18.9
+      },
+      "gtests": {
+        "mapped": 1316,
+        "unmapped": 0
+      },
+      "ledger_defects": {
+        "rows_with_unresolved_rust_target": 67,
+        "rows_without_cpp_match": 457
+      },
+      "open_boilerplate_by_category": {
+        "alloc-macro": 364,
+        "exception-macro": 69,
+        "rtti-macro": 230,
+        "special-member": 135
+      },
+      "open_gap_by_category": {
+        "alias": 381,
+        "enum-constant": 206,
+        "field": 197,
+        "member": 434,
+        "protected-member": 133,
+        "record": 276
+      },
+      "scope": "port",
+      "scope_reason": ""
+    }
+  },
+  "totals_by_scope": {
+    "excluded": {
+      "api_declarations": 1855,
+      "api_done": 0,
+      "api_open": 1855,
+      "api_partial": 0,
+      "gtests_mapped": 0,
+      "gtests_unmapped": 197,
+      "toolkits": 10
+    },
+    "port": {
+      "api_declarations": 64372,
+      "api_done": 23653,
+      "api_open": 39667,
+      "api_partial": 1052,
+      "gtests_mapped": 7400,
+      "gtests_unmapped": 898,
+      "toolkits": 37
+    },
+    "replaced": {
+      "api_declarations": 16514,
+      "api_done": 0,
+      "api_open": 16514,
+      "api_partial": 0,
+      "gtests_mapped": 0,
+      "gtests_unmapped": 148,
+      "toolkits": 5
+    },
+    "undecided": {
+      "api_declarations": 1573,
+      "api_done": 0,
+      "api_open": 1573,
+      "api_partial": 0,
+      "gtests_mapped": 0,
+      "gtests_unmapped": 5,
+      "toolkits": 16
+    }
+  }
+}
