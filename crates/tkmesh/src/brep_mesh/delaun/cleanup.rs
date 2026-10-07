@@ -11,7 +11,7 @@ impl BRepMeshDelaun {
         }
         let mut boundary = loop_edges();
         for index in selector.elements().iter() {
-            self.delete_triangle(*index, &mut boundary)?;
+            self.delete_triangle(index, &mut boundary)?;
         }
         self.remove_auxiliary_boundary(&boundary)?;
         for index in self.auxiliary.iter() {

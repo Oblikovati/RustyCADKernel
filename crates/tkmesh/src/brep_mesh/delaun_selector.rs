@@ -2,16 +2,16 @@
 use super::{BRepMeshDataStructureOfDelaun, BRepMeshEdge, BRepMeshTriangle, BRepMeshVertex};
 use rustycad_tkernel::{
     impl_transient,
-    ncollection::Map,
+    ncollection::PackedMap,
     standard::{Failure, Handle, SharedState, StandardTransient},
 };
 #[derive(Default)]
 struct DelaunSelection {
     mesh: Handle<BRepMeshDataStructureOfDelaun>,
-    nodes: Map<i32>,
-    links: Map<i32>,
-    elements: Map<i32>,
-    frontier: Map<i32>,
+    nodes: PackedMap<i32>,
+    links: PackedMap<i32>,
+    elements: PackedMap<i32>,
+    frontier: PackedMap<i32>,
 }
 /// Accumulating native neighborhood selection; `BRepMeshSelectorOfDataStructureOfDelaun::new(&mesh)`.
 #[derive(Default)]
@@ -40,10 +40,10 @@ impl BRepMeshSelectorOfDataStructureOfDelaun {
     pub fn initialize(&self, mesh: &Handle<BRepMeshDataStructureOfDelaun>) {
         let mut selection = self.selection.write();
         selection.mesh = mesh.clone();
-        selection.nodes.clear(false);
-        selection.links.clear(false);
-        selection.elements.clear(false);
-        selection.frontier.clear(false);
+        selection.nodes.clear();
+        selection.links.clear();
+        selection.elements.clear();
+        selection.frontier.clear();
     }
     /// Select through the spatially coincident node's incident links; `selector.neighbours_of_vertex(&vertex)?`.
     pub fn neighbours_of_vertex(&self, vertex: &BRepMeshVertex) -> Result<(), Failure> {
@@ -88,19 +88,19 @@ impl BRepMeshSelectorOfDataStructureOfDelaun {
     /// Preserve the native empty expansion body; `selector.add_neighbours()`.
     pub fn add_neighbours(&self) {}
     /// Snapshot the native node map (selection does not populate it); `selector.nodes()`.
-    pub fn nodes(&self) -> Map<i32> {
+    pub fn nodes(&self) -> PackedMap<i32> {
         self.selection.read().nodes.clone()
     }
     /// Snapshot the native link map (selection does not populate it); `selector.links()`.
-    pub fn links(&self) -> Map<i32> {
+    pub fn links(&self) -> PackedMap<i32> {
         self.selection.read().links.clone()
     }
     /// Snapshot accumulated element indices in native hash order; `selector.elements()`.
-    pub fn elements(&self) -> Map<i32> {
+    pub fn elements(&self) -> PackedMap<i32> {
         self.selection.read().elements.clone()
     }
     /// Snapshot the native frontier map (selection does not populate it); `selector.frontier_links()`.
-    pub fn frontier_links(&self) -> Map<i32> {
+    pub fn frontier_links(&self) -> PackedMap<i32> {
         self.selection.read().frontier.clone()
     }
 }

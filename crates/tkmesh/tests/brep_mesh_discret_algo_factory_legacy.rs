@@ -1,7 +1,10 @@
 //! Direct Rust mirrors of the pinned discret-algorithm factory regressions.
 #![allow(non_snake_case)]
 use rustycad_tkbrep::topods::Shape;
-use rustycad_tkmesh::brep_mesh::{BRepMeshDiscretFactory, factories, find_factory};
+use rustycad_tkernel::message::ProgressRange;
+use rustycad_tkmesh::brep_mesh::{
+    BRepMeshDiscretFactory, default_factory, factories, find_factory,
+};
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
@@ -12,44 +15,47 @@ fn BRepMesh_DiscretAlgoFactoryTest__Factories_AtLeastOneRegistered() {
 
 #[test]
 fn BRepMesh_DiscretAlgoFactoryTest__DefaultFactory_ReturnsValid() {
-    assert!(rustycad_tkmesh::brep_mesh::default_factory().is_some());
+    assert!(!default_factory().is_null(), "DefaultFactory returned null");
 }
 
 #[test]
 fn BRepMesh_DiscretAlgoFactoryTest__FindFactory_FastDiscret() {
-    let factory = find_factory("FastDiscret").expect("FastDiscret factory not found");
+    let factory = find_factory("FastDiscret");
+    assert!(!factory.is_null(), "FastDiscret factory not found");
     assert_eq!(factory.name(), "FastDiscret");
 }
 
 #[test]
 fn BRepMesh_DiscretAlgoFactoryTest__FindFactory_NonExistent_ReturnsNull() {
-    assert!(find_factory("NonExistentFactory").is_none());
+    assert!(
+        find_factory("NonExistentFactory").is_null(),
+        "FindFactory should return null for non-existent factory"
+    );
 }
 
 #[test]
 fn BRepMesh_DiscretAlgoFactoryTest__CreateAlgorithm_ReturnsValid() {
-    let shape = box_shape();
-    let factory = rustycad_tkmesh::brep_mesh::default_factory().unwrap();
-    let _algorithm = factory.create_algorithm(&shape, 0.1, 0.5);
+    let factory = default_factory();
+    assert!(!factory.is_null());
+    let algorithm = factory.create_algorithm(&box_shape(), 0.1, 0.5);
+    assert!(!algorithm.is_null(), "CreateAlgorithm returned null");
 }
 
 #[test]
 fn BRepMesh_DiscretAlgoFactoryTest__CreateAlgorithm_CanMesh() {
-    let shape = box_shape();
-    let factory = rustycad_tkmesh::brep_mesh::default_factory().unwrap();
-    let mut algorithm = factory.create_algorithm(&shape, 0.1, 0.5);
-    assert!(!algorithm.is_done());
-    algorithm.perform();
+    let factory = default_factory();
+    assert!(!factory.is_null());
+    let algorithm = factory.create_algorithm(&box_shape(), 0.1, 0.5);
+    assert!(!algorithm.is_null());
+    algorithm.perform(&ProgressRange::default()).unwrap();
     assert!(algorithm.is_done(), "Meshing failed");
 }
 
 #[test]
 fn BRepMesh_DiscretAlgoFactoryTest__DiscretFactory_UsesRegistry() {
-    let shape = box_shape();
-    let mut algorithm = BRepMeshDiscretFactory::get()
-        .discret(&shape, 0.1, 0.5)
-        .expect("Discret returned null");
-    algorithm.perform();
+    let algorithm = BRepMeshDiscretFactory::get().discret(&box_shape(), 0.1, 0.5);
+    assert!(!algorithm.is_null(), "Discret returned null");
+    algorithm.perform(&ProgressRange::default()).unwrap();
     assert!(algorithm.is_done(), "Meshing failed");
 }
 
@@ -62,10 +68,9 @@ fn BRepMesh_DiscretAlgoFactoryTest__DiscretFactory_SetDefaultName() {
 
 #[test]
 fn BRepMesh_DiscretAlgoFactoryTest__RegisterFactory_Uniqueness() {
-    let factories = factories();
-    let count = factories
+    let count = factories()
         .iter()
-        .filter(|factory| factory.name() == "FastDiscret")
+        .filter(|factory| factory.get().is_some_and(|f| f.name() == "FastDiscret"))
         .count();
     assert_eq!(
         count, 1,

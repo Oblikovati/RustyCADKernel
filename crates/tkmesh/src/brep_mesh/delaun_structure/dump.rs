@@ -37,7 +37,7 @@ impl BRepMeshDataStructureOfDelaun {
             self.dump_vertices(&builder, &mut compound)?;
         } else {
             for index in domain.iter() {
-                self.dump_link(&builder, &mut compound, *index)?;
+                self.dump_link(&builder, &mut compound, index)?;
             }
         }
         Ok(compound.into())

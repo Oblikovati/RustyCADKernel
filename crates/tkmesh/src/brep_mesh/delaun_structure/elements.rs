@@ -9,7 +9,7 @@ impl BRepMeshDataStructureOfDelaun {
         self.connectivity.read().element(index)
     }
     /// Snapshot domain indices in native hash order; `mesh.elements_of_domain()`.
-    pub fn elements_of_domain(&self) -> Map<i32> {
+    pub fn elements_of_domain(&self) -> PackedMap<i32> {
         self.connectivity.read().element_domain.clone()
     }
     /// Append before registering adjacent pairs, retaining partial changes on failure; `mesh.add_element(&triangle)?`.
@@ -47,7 +47,7 @@ impl BRepMeshDataStructureOfDelaun {
         }
         state.clean_element(index, &element)?;
         state.mark_element_deleted(index)?;
-        state.element_domain.remove(&index);
+        state.element_domain.remove(index);
         Ok(())
     }
     /// Derive nodes solely from the first and third oriented edges; `mesh.element_nodes(&triangle)?`.
@@ -66,8 +66,8 @@ impl BRepMeshDataStructureOfDelaun {
     /// Clear active elements and then remove their unattached free links; `mesh.clear_domain()?`.
     pub fn clear_domain(&self) -> Result<(), Failure> {
         let mut state = self.connectivity.write();
-        let mut free_edges = Map::<i32>::default();
-        let indices: Vec<i32> = state.element_domain.iter().copied().collect();
+        let mut free_edges = PackedMap::<i32>::default();
+        let indices: Vec<i32> = state.element_domain.iter().collect();
         for index in indices {
             let element = state.element(index)?;
             for edge in element.edges {
@@ -76,9 +76,9 @@ impl BRepMeshDataStructureOfDelaun {
             state.clean_element(index, &element)?;
             state.mark_element_deleted(index)?;
         }
-        state.element_domain.clear(false);
+        state.element_domain.clear();
         for edge in free_edges.iter() {
-            state.remove_link(*edge, false)?;
+            state.remove_link(edge, false)?;
         }
         Ok(())
     }

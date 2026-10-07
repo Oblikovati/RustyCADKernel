@@ -17,7 +17,6 @@ pub trait ParametersList: Transient {
     /// Clear all, or retain endpoints; `curve.clear(true)`.
     fn clear(&self, keep_endpoints: bool);
     /// Native protected parameter removal; used by `RemovePoint` implementations.
-    #[doc(hidden)]
     fn remove_parameter(&self, index: i32) -> Result<(), Failure>;
 }
 impl_transient_interface!(

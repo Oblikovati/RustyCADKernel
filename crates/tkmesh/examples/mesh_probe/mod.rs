@@ -256,3 +256,4 @@ pub mod circle_tool;
 
 pub mod delaun_core;
 pub mod delaun_legacy;
+pub mod incremental;

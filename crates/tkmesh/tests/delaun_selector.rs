@@ -5,7 +5,7 @@ use rustycad_tkmesh::brep_mesh::BRepMeshSelectorOfDataStructureOfDelaun as Selec
 mod fixture;
 use fixture::*;
 fn selected(selector: &Selector) -> Vec<i32> {
-    let mut indices: Vec<i32> = selector.elements().iter().copied().collect();
+    let mut indices: Vec<i32> = selector.elements().iter().collect();
     indices.sort_unstable();
     indices
 }

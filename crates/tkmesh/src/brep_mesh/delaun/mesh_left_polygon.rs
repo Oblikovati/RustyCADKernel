@@ -1,7 +1,7 @@
 //! Constraint-loop recovery and decomposition of the polygon on one side of an edge.
 use super::polygon_state::{PolygonLoop, link_box};
 use super::{BRepMeshDelaun, BRepMeshVertex};
-use rustycad_tkernel::ncollection::Map;
+use rustycad_tkernel::ncollection::PackedMap;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::{bnd::CompactBox2, gp::Vector2};
 
@@ -12,11 +12,11 @@ impl BRepMeshDelaun {
         &mut self,
         start_link: i32,
         forward: bool,
-        skipped: Option<&mut Map<i32>>,
+        skipped: Option<&mut PackedMap<i32>>,
     ) -> Result<bool, Failure> {
         if skipped
             .as_deref()
-            .is_some_and(|map| map.contains(&start_link))
+            .is_some_and(|map| map.contains(start_link))
         {
             return Ok(true);
         }
@@ -34,7 +34,7 @@ impl BRepMeshDelaun {
         &self,
         start_link: i32,
         forward: bool,
-        skipped: Option<&Map<i32>>,
+        skipped: Option<&PackedMap<i32>>,
     ) -> Result<Option<PolygonLoop>, Failure> {
         let edge = self.get_edge(start_link.wrapping_abs())?;
         let (start, pivot) = oriented_nodes(&edge, forward);
@@ -84,7 +84,7 @@ impl BRepMeshDelaun {
         pivot_vertex: &BRepMeshVertex,
         reference: Vector2,
         polygon: &PolygonLoop,
-        skipped: Option<&Map<i32>>,
+        skipped: Option<&PackedMap<i32>>,
     ) -> Result<Option<PolygonSuccessor>, Failure> {
         let mut next_pivot = 0;
         let mut direction = Vector2::default();
@@ -121,8 +121,8 @@ struct PolygonWalkState {
     first: i32,
     pivot: i32,
     skip_leprous: bool,
-    dead: Map<i32>,
-    leprous: Map<i32>,
+    dead: PackedMap<i32>,
+    leprous: PackedMap<i32>,
 }
 
 struct PolygonSuccessor {
@@ -135,13 +135,13 @@ struct PolygonSuccessor {
 
 impl PolygonWalkState {
     fn new(first: i32, pivot: i32, start_link: i32) -> Self {
-        let mut leprous = Map::default();
+        let mut leprous = PackedMap::default();
         leprous.add(start_link.wrapping_abs());
         Self {
             first,
             pivot,
             skip_leprous: true,
-            dead: Map::default(),
+            dead: PackedMap::default(),
             leprous,
         }
     }
@@ -158,7 +158,7 @@ impl PolygonWalkState {
         let previous_length = polygon.len();
         let dead = polygon.links.last().copied().unwrap().wrapping_abs();
         self.dead.add(dead);
-        self.leprous.remove(&dead);
+        self.leprous.remove(dead);
         polygon.links.remove(previous_length)?;
         polygon.boxes.remove(previous_length)?;
         self.skip_leprous = false;

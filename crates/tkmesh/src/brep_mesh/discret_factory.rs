@@ -1,90 +1,126 @@
-//! Registry and compatibility factory for incremental BRep meshing.
+// Rust translation of BRepMesh_DiscretAlgoFactory, BRepMesh_IncrementalMeshFactory and
+// BRepMesh_DiscretFactory (.hxx/.cxx) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+
+//! The registry of named meshing algorithm factories.
 use super::BRepMeshIncrementalMesh;
-use crate::imesh_tools::MeshParameters;
+use super::discret_root::BRepMeshDiscretRoot;
 use rustycad_tkbrep::topods::Shape;
-use rustycad_tkernel::message::ProgressRange;
-use std::sync::{Arc, Mutex, OnceLock, RwLock};
+use rustycad_tkernel::standard::{Handle, StandardTransient, Transient};
+use rustycad_tkernel::{impl_transient, impl_transient_interface};
+use std::sync::{Mutex, OnceLock, PoisonError, RwLock};
 
-/// Common meshing operation returned by a discret algorithm factory.
-pub trait BRepMeshDiscretRoot: Send {
-    /// Run the mesher once; `algorithm.perform()`.
-    fn perform(&mut self);
-    /// Whether the most recent `perform` call succeeded; `algorithm.is_done()`.
-    fn is_done(&self) -> bool;
-}
-
-/// Factory interface for named BRep meshing algorithms.
-pub trait BRepMeshDiscretAlgoFactory: Send + Sync {
-    /// The case-insensitive registry name; `factory.name() == "FastDiscret"`.
+/// `BRepMesh_DiscretAlgoFactory`: a named maker of meshing algorithms.
+pub trait BRepMeshDiscretAlgoFactory: Transient + Send + Sync {
+    /// `Name()`: the registry name; `factory.name()`.
     fn name(&self) -> &str;
-    /// Create an algorithm for the given shape and deflection values.
+    /// `CreateAlgorithm(theShape, theLinDeflection, theAngDeflection)` (pure virtual).
     fn create_algorithm(
         &self,
         shape: &Shape,
-        linear_deflection: f64,
-        angular_deflection: f64,
-    ) -> Box<dyn BRepMeshDiscretRoot>;
+        lin_deflection: f64,
+        ang_deflection: f64,
+    ) -> Handle<dyn BRepMeshDiscretRoot>;
+}
+impl_transient_interface!(
+    dyn BRepMeshDiscretAlgoFactory,
+    "BRepMesh_DiscretAlgoFactory",
+    StandardTransient
+);
+
+type FactoryHandle = Handle<dyn BRepMeshDiscretAlgoFactory>;
+
+/// The process-wide registry, holding the self-registered incremental mesh factory
+/// from the start (the native static initializer).
+fn registry() -> &'static RwLock<Vec<FactoryHandle>> {
+    static REGISTRY: OnceLock<RwLock<Vec<FactoryHandle>>> = OnceLock::new();
+    REGISTRY.get_or_init(|| {
+        RwLock::new(vec![
+            Handle::new(BRepMeshIncrementalMeshFactory::unregistered()).cast(),
+        ])
+    })
 }
 
-/// Global registry adapter for named meshing algorithms.
-pub struct BRepMeshDiscretFactory;
+/// The registered factories, in default-selection order; `factories().len()`.
+pub fn factories() -> Vec<FactoryHandle> {
+    registry()
+        .read()
+        .unwrap_or_else(PoisonError::into_inner)
+        .clone()
+}
 
-impl BRepMeshDiscretFactory {
-    /// Return the process-wide factory; `BRepMeshDiscretFactory::get().default_name()`.
-    pub fn get() -> &'static Self {
-        static FACTORY: BRepMeshDiscretFactory = BRepMeshDiscretFactory;
-        ensure_builtin_factory();
-        &FACTORY
+/// `RegisterFactory(theFactory, theIsPreferred)`: a preferred factory replaces the
+/// same-named ones at the front; otherwise it is appended unless the name (compared
+/// without case) is taken; `register_factory(&factory, false)`.
+pub fn register_factory(factory: &FactoryHandle, preferred: bool) {
+    let Some(name) = factory.get().map(|f| f.name().to_owned()) else {
+        return;
+    };
+    if preferred {
+        unregister_factory(&name);
+        registry()
+            .write()
+            .unwrap_or_else(PoisonError::into_inner)
+            .insert(0, factory.clone());
+        return;
     }
-
-    /// Select a registered name, retaining the previous choice on failure.
-    /// Example: `assert!(BRepMeshDiscretFactory::get().set_default_name("FastDiscret"));`
-    pub fn set_default_name(&self, name: &str) -> bool {
-        if find_factory(name).is_none() {
-            return false;
-        }
-        *default_name()
-            .lock()
-            .expect("default factory lock poisoned") = name.to_owned();
-        true
-    }
-
-    /// Return the currently selected factory name; `get().default_name() == "FastDiscret"`.
-    pub fn default_name(&self) -> String {
-        default_name()
-            .lock()
-            .expect("default factory lock poisoned")
-            .clone()
-    }
-
-    /// Create an algorithm from the selected factory, or the first registry entry.
-    /// Example: `let algo = BRepMeshDiscretFactory::get().discret(&shape, 0.1, 0.5);`
-    pub fn discret(
-        &self,
-        shape: &Shape,
-        linear_deflection: f64,
-        angular_deflection: f64,
-    ) -> Option<Box<dyn BRepMeshDiscretRoot>> {
-        let selected_name = self.default_name();
-        let factory = if selected_name.is_empty() {
-            default_factory()
-        } else {
-            find_factory(&selected_name)
-        }?;
-        Some(factory.create_algorithm(shape, linear_deflection, angular_deflection))
+    let mut entries = registry().write().unwrap_or_else(PoisonError::into_inner);
+    if !entries.iter().any(|entry| same_name(entry, &name)) {
+        entries.push(factory.clone());
     }
 }
 
-/// Built-in meshing factory registered as `FastDiscret`.
-pub struct BRepMeshIncrementalMeshFactory;
+/// `UnregisterFactory(theName)`: removes every factory of that name (any case).
+pub fn unregister_factory(name: &str) {
+    registry()
+        .write()
+        .unwrap_or_else(PoisonError::into_inner)
+        .retain(|entry| !same_name(entry, name));
+}
+
+/// `DefaultFactory()`: the first registered factory, or a null handle.
+pub fn default_factory() -> FactoryHandle {
+    factories().into_iter().next().unwrap_or_default()
+}
+
+/// `FindFactory(theName)`: the first factory of that name (any case), or null.
+pub fn find_factory(name: &str) -> FactoryHandle {
+    factories()
+        .into_iter()
+        .find(|entry| same_name(entry, name))
+        .unwrap_or_default()
+}
+
+/// `TCollection_AsciiString::IsSameString(.., .., false)`.
+fn same_name(factory: &FactoryHandle, name: &str) -> bool {
+    factory
+        .get()
+        .is_some_and(|f| f.name().eq_ignore_ascii_case(name))
+}
+
+/// `BRepMesh_IncrementalMeshFactory`: the "FastDiscret" factory of
+/// BRepMesh_IncrementalMesh.
+///
+/// ```
+/// use rustycad_tkmesh::brep_mesh::{BRepMeshDiscretAlgoFactory, find_factory};
+/// assert_eq!(find_factory("fastdiscret").get().map(|f| f.name()), Some("FastDiscret"));
+/// ```
+#[derive(Default)]
+pub struct BRepMeshIncrementalMeshFactory {
+    transient: StandardTransient,
+}
+impl_transient!(BRepMeshIncrementalMeshFactory, "BRepMesh_IncrementalMeshFactory", dyn BRepMeshDiscretAlgoFactory, transient, interfaces: [dyn BRepMeshDiscretAlgoFactory]);
 
 impl BRepMeshIncrementalMeshFactory {
-    /// Register a new built-in factory as the preferred registry entry.
-    /// Example: `let _factory = BRepMeshIncrementalMeshFactory::new();`
-    pub fn new() -> Arc<Self> {
-        let factory = Arc::new(Self);
-        register_factory(factory.clone(), true);
+    /// `BRepMesh_IncrementalMeshFactory()`: a factory registered as preferred;
+    /// `BRepMeshIncrementalMeshFactory::new()`.
+    pub fn new() -> Handle<Self> {
+        let factory = Handle::new(Self::unregistered());
+        register_factory(&factory.clone().cast(), true);
         factory
+    }
+
+    fn unregistered() -> Self {
+        Self::default()
     }
 }
 
@@ -92,115 +128,67 @@ impl BRepMeshDiscretAlgoFactory for BRepMeshIncrementalMeshFactory {
     fn name(&self) -> &str {
         "FastDiscret"
     }
-
+    /// `CreateAlgorithm`: a BRepMesh_IncrementalMesh with these deflections and the
+    /// default parallel flag, not yet performed.
     fn create_algorithm(
         &self,
         shape: &Shape,
-        linear_deflection: f64,
-        angular_deflection: f64,
-    ) -> Box<dyn BRepMeshDiscretRoot> {
-        Box::new(IncrementalMeshAlgorithm {
-            shape: shape.clone(),
-            parameters: MeshParameters {
-                deflection: linear_deflection,
-                angle: angular_deflection,
-                ..Default::default()
-            },
-            is_done: false,
+        lin_deflection: f64,
+        ang_deflection: f64,
+    ) -> Handle<dyn BRepMeshDiscretRoot> {
+        BRepMeshIncrementalMesh::discret(shape, lin_deflection, ang_deflection).1
+    }
+}
+
+/// `BRepMesh_DiscretFactory`: the global selector of the default algorithm name.
+pub struct BRepMeshDiscretFactory {
+    default_name: Mutex<String>,
+}
+
+impl BRepMeshDiscretFactory {
+    /// `Get()`: the global instance, default name "FastDiscret";
+    /// `BRepMeshDiscretFactory::get().default_name()`.
+    pub fn get() -> &'static Self {
+        static FACTORY: OnceLock<BRepMeshDiscretFactory> = OnceLock::new();
+        FACTORY.get_or_init(|| BRepMeshDiscretFactory {
+            default_name: Mutex::new("FastDiscret".to_owned()),
         })
     }
-}
 
-struct IncrementalMeshAlgorithm {
-    shape: Shape,
-    parameters: MeshParameters,
-    is_done: bool,
-}
-
-impl BRepMeshDiscretRoot for IncrementalMeshAlgorithm {
-    fn perform(&mut self) {
-        self.is_done = BRepMeshIncrementalMesh::with_parameters(
-            &self.shape,
-            &self.parameters,
-            &ProgressRange::default(),
-        )
-        .is_ok();
+    /// `SetDefaultName(theName)`: false (and no change) when no factory has the name;
+    /// `BRepMeshDiscretFactory::get().set_default_name("FastDiscret")`.
+    pub fn set_default_name(&self, name: &str) -> bool {
+        if find_factory(name).is_null() {
+            return false;
+        }
+        *self
+            .default_name
+            .lock()
+            .unwrap_or_else(PoisonError::into_inner) = name.to_owned();
+        true
     }
 
-    fn is_done(&self) -> bool {
-        self.is_done
+    /// `DefaultName()`; `BRepMeshDiscretFactory::get().default_name()`.
+    pub fn default_name(&self) -> String {
+        self.default_name
+            .lock()
+            .unwrap_or_else(PoisonError::into_inner)
+            .clone()
     }
-}
 
-/// Register a factory once, or move it to the front when preferred.
-pub fn register_factory(factory: Arc<dyn BRepMeshDiscretAlgoFactory>, preferred: bool) {
-    let mut entries = registry().write().expect("factory registry lock poisoned");
-    if preferred {
-        entries.retain(|entry| !same_name(entry.name(), factory.name()));
-        entries.insert(0, factory);
-        return;
+    /// `Discret(theShape, theLinDeflection, theAngDeflection)`: an algorithm of the
+    /// named (or first) factory, or a null handle without factory;
+    /// `BRepMeshDiscretFactory::get().discret(&shape, 0.1, 0.5)`.
+    pub fn discret(&self, shape: &Shape, lin: f64, ang: f64) -> Handle<dyn BRepMeshDiscretRoot> {
+        let name = self.default_name();
+        let factory = if name.is_empty() {
+            default_factory()
+        } else {
+            find_factory(&name)
+        };
+        match factory.get() {
+            Some(factory) => factory.create_algorithm(shape, lin, ang),
+            None => Handle::default(),
+        }
     }
-    if entries
-        .iter()
-        .any(|entry| same_name(entry.name(), factory.name()))
-    {
-        return;
-    }
-    entries.push(factory);
-}
-
-/// Remove every registry entry matching `name` without regard to ASCII case.
-pub fn unregister_factory(name: &str) {
-    registry()
-        .write()
-        .expect("factory registry lock poisoned")
-        .retain(|entry| !same_name(entry.name(), name));
-}
-
-/// Return the registered factories in default-selection order.
-pub fn factories() -> Vec<Arc<dyn BRepMeshDiscretAlgoFactory>> {
-    ensure_builtin_factory();
-    registry()
-        .read()
-        .expect("factory registry lock poisoned")
-        .clone()
-}
-
-/// Find a registered factory using OCCT's case-insensitive name comparison.
-pub fn find_factory(name: &str) -> Option<Arc<dyn BRepMeshDiscretAlgoFactory>> {
-    ensure_builtin_factory();
-    registry()
-        .read()
-        .expect("factory registry lock poisoned")
-        .iter()
-        .find(|factory| same_name(factory.name(), name))
-        .cloned()
-}
-
-/// Return the first registered factory, if any.
-pub fn default_factory() -> Option<Arc<dyn BRepMeshDiscretAlgoFactory>> {
-    ensure_builtin_factory();
-    registry()
-        .read()
-        .expect("factory registry lock poisoned")
-        .first()
-        .cloned()
-}
-
-fn registry() -> &'static RwLock<Vec<Arc<dyn BRepMeshDiscretAlgoFactory>>> {
-    static REGISTRY: OnceLock<RwLock<Vec<Arc<dyn BRepMeshDiscretAlgoFactory>>>> = OnceLock::new();
-    REGISTRY.get_or_init(|| RwLock::new(vec![Arc::new(BRepMeshIncrementalMeshFactory)]))
-}
-
-fn default_name() -> &'static Mutex<String> {
-    static DEFAULT_NAME: OnceLock<Mutex<String>> = OnceLock::new();
-    DEFAULT_NAME.get_or_init(|| Mutex::new("FastDiscret".to_owned()))
-}
-
-fn ensure_builtin_factory() {
-    let _ = registry();
-}
-
-fn same_name(left: &str, right: &str) -> bool {
-    left.eq_ignore_ascii_case(right)
 }
