@@ -79980,7 +79980,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
+      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map keeps each entry in a private slot vector whose bucket chains and insertion-order links are slot indices (safe storage, 2026-10-07), created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode(const TheKeyType&,TheItemType&&,NCollection_ListNode*)",
@@ -79988,7 +79988,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
+      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map keeps each entry in a private slot vector whose bucket chains and insertion-order links are slot indices (safe storage, 2026-10-07), created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode(TheKeyType&&,const TheItemType&,NCollection_ListNode*)",
@@ -79996,7 +79996,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
+      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map keeps each entry in a private slot vector whose bucket chains and insertion-order links are slot indices (safe storage, 2026-10-07), created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode(TheKeyType&&,TheItemType&&,NCollection_ListNode*)",
@@ -80004,7 +80004,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
+      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map keeps each entry in a private slot vector whose bucket chains and insertion-order links are slot indices (safe storage, 2026-10-07), created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode::Key() const noexcept",
@@ -80036,7 +80036,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
+      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map keeps each entry in a private slot vector whose bucket chains and insertion-order links are slot indices (safe storage, 2026-10-07), created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::Iterator()",
@@ -80540,7 +80540,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
+      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map keeps each entry in a private slot vector whose bucket chains and insertion-order links are slot indices (safe storage, 2026-10-07), created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
       "upstream_id": "NCollection_OrderedMap::OrderedMapNode(TheKeyType&&,NCollection_ListNode*)",
@@ -80548,7 +80548,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
+      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map keeps each entry in a private slot vector whose bucket chains and insertion-order links are slot indices (safe storage, 2026-10-07), created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
       "upstream_id": "NCollection_OrderedMap::OrderedMapNode::Key()",
@@ -80588,7 +80588,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
+      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map keeps each entry in a private slot vector whose bucket chains and insertion-order links are slot indices (safe storage, 2026-10-07), created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
       "upstream_id": "NCollection_OrderedMap::Iterator()",
@@ -374498,7 +374498,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
+      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map keeps each entry in a private slot vector whose bucket chains and insertion-order links are slot indices (safe storage, 2026-10-07), created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::Iterator::Iterator(NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&)",
@@ -374768,17 +374768,17 @@
       "upstream_id": "NCollection_OrderedDataMap::lookup(const TheKeyType&,NCollection_OrderedDataMap::OrderedDataMapNode*&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::lookup_node",
-      "status": "implemented",
-      "notes": "Protected bucket lookup writing the found node through an out pointer; lookup_node(key, &mut *mut Node) -> bool keeps the native contract."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected bucket lookup of the C++ class; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps it as private code over its slot-indexed chains and exposes the behaviour through contains/contained/seek and the other public lookups."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::lookup(const TheKeyType&,NCollection_OrderedDataMap::OrderedDataMapNode*&,size_t&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::lookup_node_with_hash",
-      "status": "implemented",
-      "notes": "Protected lookup that also returns the bucket hash; lookup_node_with_hash keeps the native out-parameter contract."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected bucket lookup of the C++ class; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps it as private code over its slot-indexed chains and exposes the behaviour through contains/contained/seek and the other public lookups."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::appendToList(NCollection_OrderedDataMap::OrderedDataMapNode*)",
@@ -374786,7 +374786,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Protected insertion-order list maintenance; the Rust OrderedDataMap ordered table links the order chain privately (ordered_table/graph.rs) during Add/Bind."
+      "notes": "Protected insertion-order list maintenance; the Rust OrderedDataMap ordered table links the order chain privately (ordered_table/links.rs) during Add/Bind."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::unlinkFromList(NCollection_OrderedDataMap::OrderedDataMapNode*)",
@@ -374794,23 +374794,23 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Protected insertion-order unlink; the Rust OrderedDataMap ordered table unlinks the order chain privately (ordered_table/graph.rs) during Remove."
+      "notes": "Protected insertion-order unlink; the Rust OrderedDataMap ordered table unlinks the order chain privately (ordered_table/links.rs) during Remove."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode::myOrderNext",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OrderedDataMapNode::order_next_mut",
-      "status": "implemented",
-      "notes": "Public order-successor pointer of the node; the Rust node keeps it private and exposes read (order_next) and write (order_next_mut) access to the same pointer."
+      "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::order_next",
+      "status": "partial",
+      "notes": "Public successor link of the OrderedDataMap node: read through the node view (order_next, reached from first_node()). Writing the raw link is not offered: it would rewire the map graph behind its owner (plan D1 class B5), and the Rust map keeps the links as slot indices."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode::myOrderPrev",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OrderedDataMapNode::order_previous_mut",
-      "status": "implemented",
-      "notes": "Public order-predecessor pointer of the node; exposed for read (order_previous) and write (order_previous_mut)."
+      "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::order_previous",
+      "status": "partial",
+      "notes": "Public predecessor link of the OrderedDataMap node: read through the node view (order_previous, reached from first_node()). Writing the raw link is not offered: it would rewire the map graph behind its owner (plan D1 class B5), and the Rust map keeps the links as slot indices."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap",
@@ -374846,7 +374846,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
+      "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map keeps each entry in a private slot vector whose bucket chains and insertion-order links are slot indices (safe storage, 2026-10-07), created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
       "upstream_id": "NCollection_OrderedMap::Iterator::Iterator(const NCollection_OrderedMap<TheKeyType,Hasher>&)",
@@ -375092,17 +375092,17 @@
       "upstream_id": "NCollection_OrderedMap::lookup(const TheKeyType&,NCollection_OrderedMap::OrderedMapNode*&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OrderedMap::lookup_node",
-      "status": "implemented",
-      "notes": "Protected bucket lookup writing the found node through an out pointer; lookup_node(key, &mut *mut Node) -> bool keeps the native contract."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected bucket lookup of the C++ class; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps it as private code over its slot-indexed chains and exposes the behaviour through contains/contained/seek and the other public lookups."
     },
     {
       "upstream_id": "NCollection_OrderedMap::lookup(const TheKeyType&,NCollection_OrderedMap::OrderedMapNode*&,size_t&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OrderedMap::lookup_node_with_hash",
-      "status": "implemented",
-      "notes": "Protected lookup that also returns the bucket hash; lookup_node_with_hash keeps the native out-parameter contract."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected bucket lookup of the C++ class; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps it as private code over its slot-indexed chains and exposes the behaviour through contains/contained/seek and the other public lookups."
     },
     {
       "upstream_id": "NCollection_OrderedMap::appendToList(NCollection_OrderedMap::OrderedMapNode*)",
@@ -375110,7 +375110,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Protected insertion-order list maintenance; the Rust OrderedMap ordered table links the order chain privately (ordered_table/graph.rs) during Add/Bind."
+      "notes": "Protected insertion-order list maintenance; the Rust OrderedMap ordered table links the order chain privately (ordered_table/links.rs) during Add/Bind."
     },
     {
       "upstream_id": "NCollection_OrderedMap::unlinkFromList(NCollection_OrderedMap::OrderedMapNode*)",
@@ -375118,23 +375118,23 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Protected insertion-order unlink; the Rust OrderedMap ordered table unlinks the order chain privately (ordered_table/graph.rs) during Remove."
+      "notes": "Protected insertion-order unlink; the Rust OrderedMap ordered table unlinks the order chain privately (ordered_table/links.rs) during Remove."
     },
     {
       "upstream_id": "NCollection_OrderedMap::OrderedMapNode::myOrderNext",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OrderedMapNode::order_next_mut",
-      "status": "implemented",
-      "notes": "Public order-successor pointer of the node; the Rust node keeps it private and exposes read (order_next) and write (order_next_mut) access to the same pointer."
+      "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::order_next",
+      "status": "partial",
+      "notes": "Public successor link of the OrderedMap node: read through the node view (order_next, reached from first_node()). Writing the raw link is not offered: it would rewire the map graph behind its owner (plan D1 class B5), and the Rust map keeps the links as slot indices."
     },
     {
       "upstream_id": "NCollection_OrderedMap::OrderedMapNode::myOrderPrev",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OrderedMapNode::order_previous_mut",
-      "status": "implemented",
-      "notes": "Public order-predecessor pointer of the node; exposed for read (order_previous) and write (order_previous_mut)."
+      "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::order_previous",
+      "status": "partial",
+      "notes": "Public predecessor link of the OrderedMap node: read through the node view (order_previous, reached from first_node()). Writing the raw link is not offered: it would rewire the map graph behind its owner (plan D1 class B5), and the Rust map keeps the links as slot indices."
     },
     {
       "upstream_id": "NCollection_OrderedMap::myFirst",

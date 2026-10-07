@@ -61,10 +61,15 @@ impl<K, V> ChainedSlots<K, V> {
     /// Native `Clear(const Handle(NCollection_BaseAllocator)&)`: a new allocator releases the
     /// table; `None` (a null handle) selects the common allocator.
     pub(super) fn clear_with_allocator(&mut self, requested: Option<BaseAllocator>) {
-        let release = requested.as_ref() != Some(&self.allocator);
+        self.clear_with_borrowed_allocator(requested.as_ref());
+    }
+    /// The same with a borrowed handle: native `Clear` takes `const Handle&`, so no handle is
+    /// added while the entries drop; the new allocator is adopted only afterwards.
+    pub(super) fn clear_with_borrowed_allocator(&mut self, requested: Option<&BaseAllocator>) {
+        let release = requested != Some(&self.allocator);
         self.clear(release);
         if release {
-            self.allocator = requested.unwrap_or_else(BaseAllocator::common);
+            self.allocator = requested.cloned().unwrap_or_else(BaseAllocator::common);
         }
     }
 }

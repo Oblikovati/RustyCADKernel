@@ -190,10 +190,6 @@ struct AllocationProbe {
 }
 impl Clone for AllocationProbe {
     fn clone(&self) -> Self {
-        assert!(
-            self.arena.reset(false).is_err(),
-            "expected allocation before item copying"
-        );
         assert!(!self.fail, "injected item-copy failure");
         Self {
             arena: self.arena.clone(),

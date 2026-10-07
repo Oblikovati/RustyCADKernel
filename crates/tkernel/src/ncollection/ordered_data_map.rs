@@ -1,4 +1,4 @@
-//! Key/value hash nodes threaded in insertion order with stable entry storage.
+//! Key/value bindings threaded in insertion order over safe slots.
 use super::ordered_table::{
     OrderedItems, OrderedItemsMut, OrderedNodeMut, OrderedNodeRef, OrderedTable, buckets_from_int,
 };
@@ -28,16 +28,20 @@ pub struct OrderedDataValuesMut<'a, K, V> {
 /// A detached legacy cursor with explicit map reborrowing; `map.cursor().value(&map)?`.
 #[derive(Clone, Default)]
 pub struct OrderedDataCursor {
-    slot: Option<usize>,
-    // Identity tokens are never dereferenced: native equality compares nodes, not dense slots.
+    // The owning map's address is an identity token only and is never dereferenced.
     owner: *const (),
-    node: *const (),
+    // The current entry's never-reused identity (the native node), `None` once exhausted.
+    entry: Option<u64>,
 }
 /// Native `IsEqual`: two cursors of the same map are equal on the same node, and every
 /// exhausted cursor equals every other; `map.cursor() == map.cursor()`.
 impl PartialEq for OrderedDataCursor {
     fn eq(&self, other: &Self) -> bool {
-        self.node == other.node
+        match (self.entry, other.entry) {
+            (None, None) => true,
+            (Some(first), Some(second)) => first == second && self.owner == other.owner,
+            _ => false,
+        }
     }
 }
 impl Eq for OrderedDataCursor {}
@@ -46,7 +50,7 @@ impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     pub fn with_hasher(hasher: H, buckets: usize) -> Self {
         Self::with_allocator(hasher, buckets, BaseAllocator::common())
     }
-    /// Selects allocation for stable key/value nodes; `OrderedDataMap::with_allocator(policy,10,arena)`.
+    /// Selects the map allocator; `OrderedDataMap::with_allocator(policy,10,arena)`.
     pub fn with_allocator(hasher: H, buckets: usize, resource: BaseAllocator) -> Self {
         Self {
             table: OrderedTable::new(hasher, buckets, resource),
@@ -77,7 +81,7 @@ impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     }
     /// Counts bindings; `map.len()==3`.
     pub fn len(&self) -> usize {
-        self.table.count
+        self.table.len()
     }
     /// Returns OCCT's binding extent; `map.extent()==3`.
     pub fn extent(&self) -> usize {
@@ -89,17 +93,17 @@ impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     }
     /// Returns the hash modulus; `map.bucket_count()`.
     pub fn bucket_count(&self) -> usize {
-        self.table.bucket_count
+        self.table.bucket_count()
     }
     /// Borrows the retained hash policy; `map.hasher().salt`.
     pub fn hasher(&self) -> &H {
         &self.table.hasher
     }
-    /// Borrows the node allocator; `map.allocator()==&arena`.
+    /// Borrows the map allocator; `map.allocator()==&arena`.
     pub fn allocator(&self) -> &BaseAllocator {
         self.table.resource()
     }
-    /// Rehashes without changing order or node addresses; `map.resize(200)`.
+    /// Rehashes without changing insertion order; `map.resize(200)`.
     pub fn resize(&mut self, size: usize) {
         self.table.resize(size);
     }
@@ -129,7 +133,7 @@ impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     pub fn unbind(&mut self, key: &K) -> bool {
         self.table.remove(key)
     }
-    /// Drops nodes and optionally bucket storage; `map.clear(false)`.
+    /// Drops bindings and optionally bucket storage; `map.clear(false)`.
     pub fn clear(&mut self, release: bool) {
         self.table.clear(release);
     }
@@ -158,7 +162,7 @@ impl<K, V, H: HashPolicy<K> + Default> OrderedDataMap<K, V, H> {
 }
 impl<K, V, H: HashPolicy<K> + Clone> OrderedDataMap<K, V, H> {
     /// Compatibility transfer retaining a cloned source policy; use `move_from_with` for native policy moves.
-    /// Moves nodes, leaving source allocator and bucket selection intact; `OrderedDataMap::move_from(&mut source)`.
+    /// Moves the bindings, leaving source allocator and bucket selection intact; `OrderedDataMap::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {
         let empty = Self::with_allocator(
             source.hasher().clone(),
@@ -187,10 +191,10 @@ impl<K: Clone, V: Clone, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Copies order retaining destination policy/allocator; `map.assign(&source)`.
     pub fn assign(&mut self, source: &Self) -> &mut Self {
         self.table.clear(false);
-        if source.table.count == 0 {
+        if source.table.len() == 0 {
             return self;
         }
-        self.table.resize(source.table.count - 1);
+        self.table.resize(source.table.len() - 1);
         for (key, value) in source.table.items() {
             self.table.place_borrowed(key, value, true);
         }
@@ -224,10 +228,10 @@ fn missing_ordered_key<K: Debug>(key: &K) -> Failure {
         "",
     )
 }
-fn missing_ordered_node(slot: Option<usize>) -> Failure {
+fn empty_ordered_data() -> Failure {
     Failure::with_type(
         "Standard_NoSuchObject",
-        &format!("OrderedDataMap slot {slot:?}; expected a live node"),
+        "OrderedDataMap extent 0; expected at least one binding",
         "",
     )
 }
@@ -239,15 +243,13 @@ mod method_contracts;
 
 mod mixed_binding;
 
-super::ordered_table::ordered_base_bridge!(OrderedDataMap<K,V,H>,super::OrderedDataMapNode<K,V>);
+super::ordered_table::ordered_base_bridge!(OrderedDataMap<K,V,H>);
 
 super::ordered_table::ordered_policy_construction!(OrderedDataMap<K,V,H>, H);
 
 super::ordered_table::ordered_policy_exchange!(OrderedDataMap<K,V,H>, H);
 
 super::ordered_table::ordered_default_construction!(OrderedDataMap<K,V,H>, H);
-
-super::ordered_table::ordered_protected_lookup!(OrderedDataMap<K,V,H>,H,super::OrderedDataMapNode<K,V>);
 
 super::ordered_table::ordered_borrowed_clear!(OrderedDataMap<K,V,H>);
 

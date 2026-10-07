@@ -1,6 +1,9 @@
-//! Ownership-specific key inputs share native allocation, hashing and construction phases.
-use super::{HashPolicy, OrderedTable, StorageNode};
+//! Native `addImpl`/`emplaceImpl`: resize when `Resizable()`, hash once, then replace on a hit or
+//! construct the value before the key and append on a miss.
+use super::OrderedTable;
+use crate::ncollection::HashPolicy;
 
+/// An owned or a borrowed key: the borrowed form is cloned only when a new entry is made.
 trait KeyArgument<K> {
     fn lookup_key(&self) -> &K;
     fn construct_key(self) -> K;
@@ -23,7 +26,16 @@ impl<K: Clone> KeyArgument<K> for BorrowedKey<'_, K> {
         self.0.clone()
     }
 }
-impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
+
+/// What a hit replaces: the set's `Emplace` reconstructs the key, the data map's `Bind` the item.
+#[derive(Clone, Copy)]
+struct Replace {
+    key: bool,
+    value: bool,
+}
+
+impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
+    /// Adds or updates `key`; returns whether it was new and its slot.
     pub fn place(
         &mut self,
         key: K,
@@ -31,95 +43,93 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
         replace_key: bool,
         replace_value: bool,
     ) -> (bool, usize) {
-        self.place_argument(OwnedKey(key), construct, replace_key, replace_value)
-    }
-    fn place_argument<I: KeyArgument<K>>(
-        &mut self,
-        key: I,
-        construct: impl FnOnce() -> V,
-        replace_key: bool,
-        replace_value: bool,
-    ) -> (bool, usize) {
         self.prepare_insertion();
-        self.place_prepared_argument(key, construct, replace_key, replace_value)
+        let replace = Replace {
+            key: replace_key,
+            value: replace_value,
+        };
+        self.place_prepared(OwnedKey(key), construct, replace)
     }
     fn prepare_insertion(&mut self) {
-        if self.count == 0 || self.count > self.bucket_count {
-            self.resize(self.count);
+        if self.len() == 0 || self.len() > self.bucket_count() {
+            self.resize(self.len());
         }
     }
-    fn place_prepared_argument<I: KeyArgument<K>>(
+    fn place_prepared<I: KeyArgument<K>>(
         &mut self,
         key: I,
         construct: impl FnOnce() -> V,
-        replace_key: bool,
-        replace_value: bool,
+        replace: Replace,
     ) -> (bool, usize) {
-        let hash = self.hasher.hash(key.lookup_key()) % self.bucket_count + 1;
-        if let Some(slot) = self.lookup_at_hash(key.lookup_key(), hash) {
-            self.replace_argument(slot, key, construct, replace_key, replace_value);
-            return (false, slot);
-        }
-        (true, self.append_argument(key, construct, hash))
+        let (bucket, slot) = self
+            .storage
+            .lookup_with_bucket(key.lookup_key(), &self.hasher);
+        let Some(slot) = slot else {
+            let slot = self
+                .storage
+                .insert(bucket, || key.construct_key(), construct);
+            self.append_order(slot);
+            return (true, slot);
+        };
+        self.replace_entry(slot, key, construct, replace);
+        (false, slot)
     }
-    fn replace_argument<I: KeyArgument<K>>(
+    fn replace_entry<I: KeyArgument<K>>(
         &mut self,
         slot: usize,
         key: I,
         construct: impl FnOnce() -> V,
-        replace_key: bool,
-        replace_value: bool,
+        replace: Replace,
     ) {
-        let node = self.node_pointer(slot);
-        if replace_key {
-            // SAFETY: only set insertion enables key replacement under exclusive table access.
-            unsafe {
-                *N::key(node) = key.construct_key();
-            }
+        let (stored_key, stored_value) = self.storage.payload_mut().pair_mut(slot);
+        if replace.key {
+            *stored_key = key.construct_key();
         }
-        if replace_value {
-            // SAFETY: only data-map insertion enables value replacement; fields are disjoint.
-            unsafe {
-                *N::value(node) = construct();
-            }
+        if replace.value {
+            *stored_value = construct();
         }
-    }
-    fn append_argument<I: KeyArgument<K>>(
-        &mut self,
-        key: I,
-        construct: impl FnOnce() -> V,
-        hash: usize,
-    ) -> usize {
-        // Native allocation precedes value then key construction, including clone failures.
-        let node = N::allocate(
-            self.resource(),
-            self.base.bucket_slots()[hash],
-            || key.construct_key(),
-            construct,
-        );
-        self.append_allocated(node, hash)
     }
 }
-impl<K: Clone, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
+
+impl<K: Clone, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
+    /// Adds a borrowed key, cloning it only for a new entry; a hit replaces only the value.
     pub fn place_key_ref(
         &mut self,
         key: &K,
         construct: impl FnOnce() -> V,
-        replace: bool,
+        replace_value: bool,
     ) -> (bool, usize) {
-        self.place_argument(BorrowedKey(key), construct, false, replace)
+        self.prepare_insertion();
+        let replace = Replace {
+            key: false,
+            value: replace_value,
+        };
+        self.place_prepared(BorrowedKey(key), construct, replace)
     }
 }
 
-impl<K, H: HashPolicy<K>, N: StorageNode<K, ()>> OrderedTable<K, (), H, N> {
+impl<K: Clone, V: Clone, H: HashPolicy<K>> OrderedTable<K, V, H> {
+    /// OrderedDataMap copies the item before its key and never copies keys on hits.
+    pub fn place_borrowed(&mut self, key: &K, value: &V, replace: bool) -> (bool, usize) {
+        // Native emplaceImpl copy-constructs a temporary, then move-assigns it on hits.
+        self.place_key_ref(key, || value.clone(), replace)
+    }
+}
+
+impl<K, H: HashPolicy<K>> OrderedTable<K, (), H> {
+    /// Set `Emplace`/`TryEmplace` with a deferred key: OCCT 3d097a0 emplaceImpl resizes before
+    /// constructing the temporary, even for a duplicate Try.
     pub fn place_constructed_key(
         &mut self,
         construct: impl FnOnce() -> K,
         replace: bool,
     ) -> (bool, usize) {
-        // OCCT 3d097a0 emplaceImpl resizes before constructing even a duplicate Try temporary.
         self.prepare_insertion();
         let key = construct();
-        self.place_prepared_argument(OwnedKey(key), || (), replace, false)
+        let replace = Replace {
+            key: replace,
+            value: false,
+        };
+        self.place_prepared(OwnedKey(key), || (), replace)
     }
 }

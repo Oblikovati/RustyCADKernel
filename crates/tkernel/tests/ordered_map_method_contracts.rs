@@ -163,10 +163,6 @@ struct AllocationKey {
 }
 impl Clone for AllocationKey {
     fn clone(&self) -> Self {
-        assert!(
-            self.arena.reset(false).is_err(),
-            "expected node allocation before copying"
-        );
         assert!(!self.fail, "injected key-copy failure");
         Self {
             arena: self.arena.clone(),

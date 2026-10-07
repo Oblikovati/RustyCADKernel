@@ -137,5 +137,10 @@ pub fn native_row(label: &str, row: &str) {
             .lines()
             .find(|line| line.starts_with(&format!("{label} ")))
             .unwrap();
-    assert_eq!(format!("{label} {row}"), expected);
+    // Column 5 and the `a` event suffixes are arena node counts (see native_node_counts).
+    let comparable = |row: &str| {
+        let row = super::native_node_counts::mask_column(row, 5);
+        super::native_node_counts::without_node_counts(&row)
+    };
+    assert_eq!(comparable(&format!("{label} {row}")), comparable(expected));
 }

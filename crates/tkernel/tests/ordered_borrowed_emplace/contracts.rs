@@ -1,5 +1,5 @@
 use super::{cases::*, fixture::*};
-use rustycad_tkernel::ncollection::{BaseAllocator, BasicMapIteratorSource, OrderedDataMap};
+use rustycad_tkernel::ncollection::{BaseAllocator, OrderedDataMap};
 use std::panic::{AssertUnwindSafe, catch_unwind};
 type Map<'a, V> = OrderedDataMap<BorrowKey<'a>, V, BorrowPolicy>;
 fn initial_keys(kind: &str, count: usize) -> Vec<i32> {
@@ -69,7 +69,7 @@ fn stats<'a, V: EmplaceValue<'a>>(
     let counts = [
         map.len() as i64,
         map.bucket_count() as i64,
-        i64::from(!map.buckets().is_null()),
+        i64::from(!map.buckets().is_none()),
         i64::from(trace.allocations()),
         i64::from(same_first),
         i64::from(same_value),
@@ -84,14 +84,20 @@ fn run_case<'a, V: EmplaceValue<'a>>(trace: &'a BorrowTrace<'a>, method: Method,
         trace,
     };
     let before = map.seek(&key).map(std::ptr::from_ref);
-    let first = map.basic_first_node();
+    // The first entry is compared by key: slot growth may move it (plan D1 class B5).
+    let first = map.first_node().map(|node| node.key().id);
     let source = std::ptr::from_ref(&key);
     test.configure(trace);
     let result = invoke(&mut map, method, &key, trace);
     trace.finish();
     let after = map.seek(&key);
     let same_value = before.is_none() || before == after.map(std::ptr::from_ref);
-    let counts = stats(&map, trace, first == map.basic_first_node(), same_value);
+    let counts = stats(
+        &map,
+        trace,
+        first == map.first_node().map(|node| node.key().id),
+        same_value,
+    );
     let label = format!("{}_{}_{}", V::KIND, method.name(), test.label);
     record_snapshot(&label, &map, &key, &result, &counts);
     assert_eq!(std::ptr::from_ref(&key), source);
