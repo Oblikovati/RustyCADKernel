@@ -288,11 +288,5 @@ fn grow_internal_wire(
 
 /// The context created by `CheckData`.
 fn required_context(handle: &Handle<Context>) -> Result<&Context, Failure> {
-    handle.get().ok_or_else(|| {
-        Failure::with_type(
-            "Standard_NullObject",
-            "BOPAlgo_BuilderFace: context is null; expected CheckData to create it",
-            "",
-        )
-    })
+    super::builder_area::required_context(handle, "BOPAlgo_BuilderFace")
 }

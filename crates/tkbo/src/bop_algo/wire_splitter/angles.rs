@@ -89,11 +89,7 @@ fn angle_step(
 type RangedPCurve = (Handle<dyn Geom2dCurve>, (f64, f64));
 
 /// The p-curve of `edge` on `face` and its range (`BOPTools_AlgoTools2D::CurveOnSurface`).
-fn pcurve_of(
-    edge: &Edge,
-    face: &Face,
-    context: &Context,
-) -> Result<RangedPCurve, Failure> {
+fn pcurve_of(edge: &Edge, face: &Face, context: &Context) -> Result<RangedPCurve, Failure> {
     let mut pcurve = Handle::default();
     let mut range = (0., 0.);
     let mut tolerance = 0.;

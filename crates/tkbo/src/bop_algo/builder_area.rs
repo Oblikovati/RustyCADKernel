@@ -3,7 +3,7 @@ use super::Options;
 use crate::int_tools::Context;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::ncollection::{IndexedMap, List};
-use rustycad_tkernel::standard::Handle;
+use rustycad_tkernel::standard::{Failure, Handle};
 
 /// The input shapes, the loops and areas built from them, the shapes to avoid and the
 /// internal-shape option of an area builder.
@@ -98,4 +98,19 @@ impl BuilderArea {
     pub fn options_mut(&mut self) -> &mut Options {
         &mut self.options
     }
+}
+
+/// The context an area builder created before building (`myContext`); `algorithm` names
+/// the builder in the failure.
+pub(super) fn required_context<'a>(
+    handle: &'a Handle<Context>,
+    algorithm: &str,
+) -> Result<&'a Context, Failure> {
+    handle.get().ok_or_else(|| {
+        Failure::with_type(
+            "Standard_NullObject",
+            &format!("{algorithm}: context is null; expected the builder to create it"),
+            "",
+        )
+    })
 }
