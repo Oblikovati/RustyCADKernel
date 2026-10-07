@@ -15,6 +15,8 @@ pub(super) struct VertexUnion {
     pub(super) discard: Vertex,
     pub(super) distance: f64,
     pub(super) tolerance: f64,
+    /// The discarded vertex is the last one of the second edge.
+    discard_last: bool,
 }
 
 pub(super) struct VertexCandidate {
@@ -42,6 +44,7 @@ pub(super) fn closest_vertex_union(
         discard,
         distance,
         tolerance,
+        discard_last: second_index == 1,
     }))
 }
 
@@ -78,8 +81,13 @@ pub(super) fn replace_union_edges(
     boxes: &mut Vec<EdgeBox>,
     second_box: &BoundingBox2,
 ) -> Result<(), Failure> {
+    // Only the vertex slot of the discarded vertex changes, even on a closed edge.
     let (first, last) = edge_vertices(second);
-    let replacement = replace_discard_vertex(&ShapeBuildEdge, second, &first, &last, union)?;
+    let replacement = if union.discard_last {
+        ShapeBuildEdge.copy_replace_vertices(second, &first, &union.keep)?
+    } else {
+        ShapeBuildEdge.copy_replace_vertices(second, &union.keep, &last)?
+    };
     tool.context.replace(
         &second.clone().into_shape(),
         &replacement.clone().into_shape(),
@@ -95,26 +103,8 @@ fn edge_vertices(edge: &Edge) -> (Vertex, Vertex) {
     (analysis.first_vertex(edge), analysis.last_vertex(edge))
 }
 
-fn replace_discard_vertex(
-    build: &ShapeBuildEdge,
-    edge: &Edge,
-    first: &Vertex,
-    last: &Vertex,
-    union: &VertexUnion,
-) -> Result<Edge, Failure> {
-    let new_first = if union.discard.is_same(first) {
-        &union.keep
-    } else {
-        first
-    };
-    let new_last = if union.discard.is_same(last) {
-        &union.keep
-    } else {
-        last
-    };
-    build.copy_replace_vertices(edge, new_first, new_last)
-}
-
+// Both neighbours are read before either changes; each of the four native tests copies
+// the original neighbour, so a later match overrides an earlier one.
 fn replace_neighbor_vertices(
     tool: &ShapeFixIntersectionTool,
     wire: &ShapeExtendWireData,
@@ -122,18 +112,20 @@ fn replace_neighbor_vertices(
     union: &VertexUnion,
     boxes: &mut Vec<EdgeBox>,
 ) -> Result<(), Failure> {
-    let previous = if index > 1 {
-        index - 1
-    } else {
-        wire.nb_edges()
-    };
-    let next = if index < wire.nb_edges() {
-        index + 1
-    } else {
-        1
-    };
-    for neighbor_index in [previous, next] {
-        replace_neighbor_edge(tool, wire, neighbor_index, union, boxes)?;
+    let count = wire.nb_edges();
+    let previous = if index > 1 { index - 1 } else { count };
+    let next = if index < count { index + 1 } else { 1 };
+    let neighbors = [(wire.edge(previous)?, previous), (wire.edge(next)?, next)];
+    for (source, neighbor_index) in neighbors {
+        let (first, last) = edge_vertices(&source);
+        if first.is_same(&union.discard) {
+            let replacement = ShapeBuildEdge.copy_replace_vertices(&source, &union.keep, &last)?;
+            replace_neighbor_edge(tool, wire, (&source, neighbor_index), &replacement, boxes)?;
+        }
+        if last.is_same(&union.discard) {
+            let replacement = ShapeBuildEdge.copy_replace_vertices(&source, &first, &union.keep)?;
+            replace_neighbor_edge(tool, wire, (&source, neighbor_index), &replacement, boxes)?;
+        }
     }
     Ok(())
 }
@@ -141,26 +133,18 @@ fn replace_neighbor_vertices(
 fn replace_neighbor_edge(
     tool: &ShapeFixIntersectionTool,
     wire: &ShapeExtendWireData,
-    index: i32,
-    union: &VertexUnion,
+    (source, index): (&Edge, i32),
+    replacement: &Edge,
     boxes: &mut Vec<EdgeBox>,
 ) -> Result<(), Failure> {
-    let source = wire.edge(index)?;
-    let (first, last) = edge_vertices(&source);
-    if !union.discard.is_same(&first) && !union.discard.is_same(&last) {
-        return Ok(());
+    if let Some(bounds) = take_box(boxes, source) {
+        replace_box(boxes, replacement, bounds);
     }
-    let bounds = take_box(boxes, &source);
-    let replacement = replace_discard_vertex(&ShapeBuildEdge, &source, &first, &last, union)?;
     tool.context.replace(
         &source.clone().into_shape(),
         &replacement.clone().into_shape(),
     )?;
-    wire.set(&replacement, index)?;
-    if let Some(bounds) = bounds {
-        replace_box(boxes, &replacement, bounds);
-    }
-    Ok(())
+    wire.set(replacement, index)
 }
 
 fn take_box(boxes: &mut [EdgeBox], edge: &Edge) -> Option<BoundingBox2> {

@@ -130,7 +130,8 @@ fn process_pair(
     if first_index == 1 && second_index == wire.nb_edges() {
         return Ok(PairAction::Next);
     }
-    let (first, second) = (wire.edge(first_index)?, wire.edge(second_index)?);
+    // UnionVertexes replaces `second` for the segment repair that may follow.
+    let (first, mut second) = (wire.edge(first_index)?, wire.edge(second_index)?);
     if first.is_same(&second) || BRepTool::degenerated(&first)? || BRepTool::degenerated(&second)? {
         return Ok(PairAction::Next);
     }
@@ -151,23 +152,28 @@ fn process_pair(
     }
     let point_count = curves.intersections.nb_points()?;
     let segment_count = curves.intersections.nb_segments()?;
+    // A point repair that splits nothing falls through to the segment repair, as the
+    // native blocks follow each other without an else.
     if point_count > 0 && point_count < 3 {
         let candidate = points::selected_point(&curves.intersections, point_count)?;
-        return points::repair_point(
+        let action = points::repair_point(
             tool,
             wire,
             face,
             first_index,
             second_index,
             &first,
-            &second,
-            &first_box,
+            &mut second,
+            &second_box,
             &curves,
             candidate,
             max_vertex_tolerance,
             counts,
             boxes,
-        );
+        )?;
+        if let Some(action) = action {
+            return Ok(action);
+        }
     }
     if segment_count == 1 {
         let segment = curves.intersections.segment(1)?;

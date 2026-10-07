@@ -3,9 +3,10 @@
 `sh_fix_shape` runs ShapeFix_Shape::Perform, ShapeFix::SameParameter (plain and
 enforced), ShapeFix::FixVertexPosition, ShapeFix::RemoveSmallEdges, ShapeFix_Wireframe
 (wire gaps then small edges), ShapeFix_FixSmallFace, ShapeFix_FixSmallSolid (remove and
-merge) and ShapeFix_Shell / ShapeFix_Solid on each shell / solid, over the inputs of the
-`sh_unify` and `sh_fix_face` requests and the primitive solids, at the default precision
-and at a coarse one.
+merge) and ShapeFix_Shell / ShapeFix_Solid on each shell / solid, then ShapeAnalysis_CheckSmallFace,
+ShapeAnalysis_FreeBoundsProperties and the ShapeFix_Wire passes, over the inputs of the
+`sh_unify` and `sh_fix_face` requests, the primitive solids, Bezier faces and planar faces
+whose wires only BRep_Builder joins, at the default precision and at a coarse one.
 """
 from __future__ import annotations
 import math
@@ -61,17 +62,115 @@ def small_face_inputs() -> list[list[float]]:
     ]
 
 
+def bezier_face(rows: list[list[tuple[float, float, float]]]) -> list[float]:
+    return [3, len(rows), len(rows[0])] + [c for row in rows for p in row for c in p]
+
+
+def bezier_inputs() -> list[list[float]]:
+    """Bezier faces: flat, with a pin row spread within the coarse precision (smooth, with and
+    without repeated poles), with an exactly collapsed row, twisted (bow tie) and folded."""
+    e = 1e-5
+    grid = [[(float(i), float(j), 0.0) for j in range(3)] for i in range(3)]
+    smooth = [[(0.0, 0.0, 0.0), (0.0, e, 0.0), (0.0, 2 * e, 0.0)]] + grid[1:]
+    repeated = [[(0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, e, 0.0)]] + grid[1:]
+    collapsed = [[(0.0, 0.0, 0.0)] * 3] + grid[1:]
+    folded = [grid[0], [(1.0, 0.0, 4.0), (1.0, 1.0, 4.0), (1.0, 2.0, 4.0)], [(0.5, 0.0, 0.0), (0.5, 1.0, 0.0), (0.5, 2.0, 0.0)]]
+    return [bezier_face(r) for r in (grid, smooth, repeated, collapsed, folded)] + [
+        bezier_face([[(0, 0, 0), (0, 1, 0)], [(1, 1, 0), (1, 0, 0)]]),
+        bezier_face([[(0, 0, 0), (0, 1, 1)], [(1, 0, 1), (1, 1, 0)]]),
+    ]
+
+
+def raw_face(points: list[tuple[float, float, float]], gap: float = 0.0) -> list[float]:
+    """A planar face whose wire collects one segment per side, each shortened by `gap`."""
+    edges = []
+    for a, b in zip(points, points[1:] + points[:1]):
+        end = tuple(q - gap * (q - p) for p, q in zip(a, b))
+        edges.append(segment(a, end))
+    return [4, len(edges)] + [c for e in edges for c in e]
+
+
+def raw_face_inputs() -> list[list[float]]:
+    """Faces with tails, notches, crossings, gaps and arcs that only BRep_Builder joins, and a
+    face without a wire."""
+    o = (0.0, 0.0, 0.0)
+    tail = [o, (2, 0, 0), (2, 2, 0), (1, 2, 0), (1, 3, 0), (1 + 1e-4, 2, 0), (0, 2, 0)]
+    notch = [o, (2, 0, 0), (2, 1, 0), (0, 1, 0), (1, 1, 0)]
+    first_notch = [(0, 1, 0), (1, 1, 0), o, (2, 0, 0), (2, 1, 0)]
+    bow = [o, (2, 0, 0), (0, 1, 0), (2, 1, 0)]
+    # Nonadjacent edges overlapping on [1, 3] exactly and at 1e-5, and touching at (1, 1).
+    overlap = [o, (4, 0, 0), (4, 1, 0), (3, 1, 0), (3, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0)]
+    near_overlap = [o, (4, 0, 0), (4, 1, 0), (3, 1, 0), (3, 1e-5, 0), (1, 1e-5, 0), (1, 1, 0), (0, 1, 0)]
+    touching = [o, (1, 1, 0), (2, 0, 0), (2, 3, 0), (1, 1, 0), (0, 2, 0)]
+    arcs = [4, 4, *arc(o, 1.0, 0.0, PI / 2), *segment((0, 1, 0), (-1, 0, 0)), *arc(o, 1.0, PI, 1.5 * PI),
+            *segment((0, -1, 0), (1.001, 0, 0))]
+    return [raw_face(tail), raw_face(notch), raw_face(first_notch), raw_face(bow), raw_face(square(0, 0, 2.0)),
+            raw_face(square(0, 0, 2.0), 1e-4), raw_face(square(0, 0, 2.0), 0.02), raw_face(tail, 1e-5), arcs, [4, 0],
+            raw_face(overlap), raw_face(near_overlap), raw_face(touching)]
+
+
+def sphere_face(arcs: list[tuple]) -> list[float]:
+    return [5, len(arcs)] + [c for a in arcs for c in (*a[0], *a[1], a[2], a[3], a[4])]
+
+
+def sphere_inputs() -> list[list[float]]:
+    """Faces on the unit sphere bounded by circle arcs without pcurves: a meridian over the
+    north pole closed by half the equator, a lune between two meridians through both poles,
+    and a cap below a parallel."""
+    o, y, z = (0.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0)
+    over_pole = [(o, y, 1.0, PI, 2 * PI), (o, z, 1.0, PI, 2 * PI)]
+    lune = [(o, y, 1.0, 0.0, PI), (o, (0.6, 0.8, 0.0), 1.0, PI, 2 * PI)]
+    cap = [((0.0, 0.0, 0.6), z, 0.8, 0.0, 2 * PI)]
+    return [sphere_face(over_pole), sphere_face(lune), sphere_face(cap)]
+
+
+def multi_wire_face(wires: list) -> list[float]:
+    """A planar face of polygons (lists of points) and full circles (`(center, r)`)."""
+    fields: list[float] = [6, len(wires)]
+    for w in wires:
+        if isinstance(w, tuple):
+            fields += [1, *w[0], w[1]]
+        else:
+            fields += [0, len(w)] + [c for p in w for c in p]
+    return fields
+
+
+def multi_wire_inputs() -> list[list[float]]:
+    """Faces with several wires: crossing squares, an inner square on an outer side (big
+    overlap), a short overlap, an overlap near an end (cut), touching corners, a vertex on
+    a side, a circle across a side, three wires crossing pairwise, disjoint squares, nested
+    squares near each other, and an overlap with ends within the coarse tolerance."""
+    outer = square(0, 0, 4.0)
+    return [multi_wire_face(f) for f in (
+        [outer, square(3, 3, 2.0)],
+        [outer, [(1, 0, 0), (3, 0, 0), (3, 2, 0), (1, 2, 0)]],
+        [outer, [(3.5, 0, 0), (6, 0, 0), (6, 1, 0), (3.5, 1, 0)]],
+        [outer, [(3.99, 0, 0), (5, 0, 0), (5, 1, 0), (3.99, 1, 0)]],
+        [outer, [(4, 4, 0), (5, 4, 0), (5, 5, 0), (4, 5, 0)]],
+        [outer, [(2, 0, 0), (3, 1, 0), (2, 2, 0), (1, 1, 0)]],
+        [outer, ((2.0, 0.0, 0.0), 1.0)],
+        [outer, square(3, 3, 2.0), square(-1, 3, 2.0)],
+        [outer, square(3, -1, 2.0), [(3.5, -2, 0), (4.5, -2, 0), (4.5, 0.5, 0), (3.5, 0.5, 0)]],
+        [square(0, 0, 1.0), square(2, 2, 1.0)],
+        [outer, square(1, 1, 2.0), square(1.5, 1.5, 1.0)],
+        [outer, [(0.5, 1e-4, 0), (3.5, 1e-4, 0), (3.5, 1, 0), (0.5, 1, 0)]],
+        [outer, [(-1, 2, 0), (5, 2, 0), (5, 3, 0), (-1, 3, 0)]],
+        [((0.0, 0.0, 0.0), 2.0), ((1.0, 0.0, 0.0), 2.0)],
+    )]
+
+
 def inputs() -> list[list[float]]:
     unify = polygon_inputs() + revolved_inputs() + wire_inputs() + face_inputs() + [[3, 1.0, 2.0, 3.0]]
     unify += small_edge_inputs() + small_face_inputs()
     faces = planar_inputs() + loop_inputs() + lateral_inputs()
-    return [[0, *s] for s in unify] + [[1, *f] for f in faces] + [[2, *s] for s in solid_inputs()]
+    return ([[0, *s] for s in unify] + [[1, *f] for f in faces] + [[2, *s] for s in solid_inputs()]
+            + bezier_inputs() + raw_face_inputs() + sphere_inputs() + multi_wire_inputs())
 
 
 def append_fix_shape_requests(requests: list[str]) -> None:
     """Append the shape-level ShapeFix requests."""
     for shape in inputs():
-        for op in range(16):
+        for op in (*range(31), 32, 33):
             requests.append('sh_fix_shape ' + numbers(shape + [1e-7, 1.0, op]))
-        for op in (0, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15):
+        for op in (0, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15, *range(16, 31), 32, 33):
             requests.append('sh_fix_shape ' + numbers(shape + [1e-3, 0.1, op]))

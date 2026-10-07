@@ -6,7 +6,9 @@ in the trimmed-curve constructor) at several tolerances, continuities, segment c
 degrees. `2` converts elementary surfaces (exact path), extrusions of lines, conics and
 splines, revolutions of plain and offset curves (the offset basis converted first), Bezier
 and B-spline surfaces and trimmed wrappers, at tolerances that pass and fail the
-approximation. `3` joins p-curve chains: on a plane (the early return), on a cylinder with
+approximation. `4`/`5` join two 3D/2D curves (lines, circles, Bezier and B-spline curves,
+trimmed circles) over adjacent, swapped and gapped halves of their ranges in all four
+orientation pairs, the 2D ones with and without the crossing guard. `3` joins p-curve chains: on a plane (the early return), on a cylinder with
 collinear, reversed and kinked segments, with a seam pair (both seam p-curves joined), a
 chain mixing a seam with a non-seam edge and a chain with an edge without p-curve.
 `sc_surface` (tools/oracle/tkshhealing_probe_custom_surface.cxx) runs ShapeCustom_Surface
@@ -146,6 +148,26 @@ def join_requests() -> list[str]:
     return requests
 
 
+def join_curve_requests() -> list[str]:
+    """ShapeConstruct::JoinCurves on two pieces of one curve."""
+    spline3 = geom_bspline(3, False, POLES3, [(0.0, 4), (1.0, 4)])
+    spline2 = geom2d_bspline(3, False, POLES2, [(0.0, 4), (1.0, 4)])
+    curves = [
+        (4, [geom_gp(0), geom_gp(1, radius=2.0), geom_bezier(POLES3), spline3,
+             geom_trimmed(0.2, 2.5, geom_gp(1))], [[]]),
+        (5, [geom2d_gp(0), geom2d_gp(1, radius=2.0), geom2d_bezier(POLES2), spline2,
+             geom2d_trimmed(0.2, 2.5, geom2d_gp(1))], [[0], [1]]),
+    ]
+    ranges = [((0.0, 0.5), (0.5, 1.0)), ((0.5, 1.0), (0.0, 0.5)), ((0.0, 0.4), (0.6, 1.0)),
+              ((0.25, 0.5), (0.5, 0.75))]
+    requests = []
+    for op, kinds, tails in curves:
+        for curve, (r1, r2), o1, o2, tail in product(kinds, ranges, (FORWARD, REVERSED), (FORWARD, REVERSED), tails):
+            fields = [op, *curve, *curve, o1, o2, *r1, *r2, *tail]
+            requests.append('sh_construct_pkg ' + numbers(fields))
+    return requests
+
+
 def ring_bspline(closed_v: bool) -> list[float]:
     """A clamped quadratic B-spline whose first and last U rows coincide (V when asked)."""
     ring = [(2.0, 0.0), (2.0, 2.0), (-2.0, 2.0), (-2.0, -2.0), (2.0, -2.0), (2.0, 0.0)]
@@ -192,4 +214,5 @@ def append_construct_package_requests(requests: list[str]) -> None:
     requests.extend(curve_requests())
     requests.extend(surface_requests())
     requests.extend(join_requests())
+    requests.extend(join_curve_requests())
     requests.extend(custom_surface_requests())

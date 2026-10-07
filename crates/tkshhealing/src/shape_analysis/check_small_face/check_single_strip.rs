@@ -160,7 +160,8 @@ fn classify_same_vertex_edge(
     tolerance: f64,
     effective_tolerance: &mut f64,
 ) -> Result<SameVertexEdge, Failure> {
-    let (first, last) = edge_vertices(edge, true);
+    // TopExp::Vertices with its default CumOri = false.
+    let (first, last) = edge_vertices(edge, false);
     grow_tolerance(&first, &last, tolerance, effective_tolerance)?;
     if !first.is_same(&last) {
         return Ok(SameVertexEdge::NotSameVertex);
@@ -228,7 +229,7 @@ fn curve_points_are_small(
     ];
     let (mut minimum, mut maximum) = (Point3::default(), Point3::default());
     for (index, point) in points.into_iter().enumerate() {
-        update_bounds(&mut minimum, &mut maximum, point, index == 0);
+        update_bounds(&mut minimum, &mut maximum, point, index != 0);
     }
     Ok(axis_is_small(maximum.x() - minimum.x(), tolerance)
         && axis_is_small(maximum.y() - minimum.y(), tolerance)
@@ -236,7 +237,7 @@ fn curve_points_are_small(
 }
 
 fn record_great_edge(current: &Edge, scan: &mut SingleStripScan<'_>) -> Result<bool, Failure> {
-    let (start, end) = edge_vertices(current, true);
+    let (start, end) = edge_vertices(current, false);
     if start.is_same(&end) {
         return Ok(false);
     }
@@ -263,13 +264,15 @@ fn assign_edge_pair(
     second_edge: &mut Edge,
     vertices: &mut (&mut Vertex, &mut Vertex),
 ) -> bool {
-    let (start, end) = edge_vertices(current, true);
+    let (start, end) = edge_vertices(current, false);
     if count == 1 {
         return assign_first_pair(start, end, current, first_edge, vertices);
     }
-    let forward_pair = vertices.0.is_same(&start) && vertices.1.is_same(&end);
-    let reverse_pair = vertices.0.is_same(&end) && vertices.1.is_same(&start);
-    if !forward_pair && !reverse_pair {
+    // The native test rejects only a pair that shares one vertex but not the other.
+    if vertices.0.is_same(&start) && !vertices.1.is_same(&end) {
+        return false;
+    }
+    if vertices.0.is_same(&end) && !vertices.1.is_same(&start) {
         return false;
     }
     *second_edge = current.clone();

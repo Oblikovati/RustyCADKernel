@@ -1,10 +1,7 @@
 //! Native ShapeFix_Wire_1.cxx pcurve conversion and gap mutations.
-mod clipping;
 mod convert;
-mod domains;
-mod fallback;
-mod intersections;
-mod projection;
+mod range_clip;
+mod range_search;
 mod ranges;
 mod replace;
 use super::{FixRoot, ShapeFixWire};

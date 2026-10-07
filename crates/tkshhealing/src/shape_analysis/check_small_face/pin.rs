@@ -11,7 +11,8 @@ const DEFAULT_PRECISION: f64 = 1.0e-4;
 const POLE_EQUALITY_TOLERANCE: f64 = 1.0e-15;
 
 impl ShapeAnalysisCheckSmallFace {
-    /// Detects a pin on a Bezier or B-spline support and updates row/sense only for supported surfaces;
+    /// Detects a pin on a Bezier or B-spline support; once the support has poles the native
+    /// code resets `row` and `sense` to 0 before it scans the four natural bounds.
     /// `analyzer.check_pin(&face, &mut row, &mut sense)?`.
     pub fn check_pin(
         &mut self,
@@ -23,15 +24,34 @@ impl ShapeAnalysisCheckSmallFace {
         if is_elementary(&surface) {
             return Ok(false);
         }
-        let tolerance = self.pin_precision()?;
-        let result = check_surface_poles(&surface, tolerance)?;
-        let Some(result) = result else {
+        let poles = SurfacePoles::of(&surface);
+        if poles.u_count == 0 || poles.v_count == 0 {
             return Ok(false);
-        };
-        *row = result.row;
-        *sense = result.sense;
-        self.pin_status = ShapeExtend::encode_status(result.status);
+        }
+        // The native precision is read only on this path, where its value matters.
+        let tolerance = self.pin_precision()?;
+        let pole = |u: i32, v: i32| poles.pole(u, v);
+        let scan = inspect_bounds(poles.u_count, poles.v_count, tolerance, &pole)?;
+        (*sense, *row) = (scan.0, scan.1);
+        if scan.0 == 0 {
+            return Ok(false);
+        }
+        self.record_pin_status(scan.2, &poles)?;
         Ok(true)
+    }
+
+    // The switch on the last bound's status leaves the pin status as it was for 0.
+    fn record_pin_status(&mut self, status: i32, poles: &SurfacePoles) -> Result<(), Failure> {
+        match status {
+            1 => self.pin_status = ShapeExtend::encode_status(ShapeExtendStatus::Done1),
+            2 => self.pin_status = ShapeExtend::encode_status(ShapeExtendStatus::Done2),
+            _ => {}
+        }
+        let pole = |u: i32, v: i32| poles.pole(u, v);
+        if status == 1 && has_identical_boundary_poles(poles.u_count, poles.v_count, &pole)? {
+            self.pin_status = ShapeExtend::encode_status(ShapeExtendStatus::Done3);
+        }
+        Ok(())
     }
 
     fn pin_precision(&self) -> Result<f64, Failure> {
@@ -56,94 +76,40 @@ fn is_elementary(surface: &Handle<dyn GeomSurface>) -> bool {
         .is_some()
 }
 
-struct PinResult {
-    row: i32,
-    sense: i32,
-    status: ShapeExtendStatus,
-}
-
-fn check_surface_poles(
-    surface: &Handle<dyn GeomSurface>,
-    tolerance: f64,
-) -> Result<Option<PinResult>, Failure> {
-    if let Some(result) = check_bspline_poles(surface, tolerance)? {
-        return Ok(Some(result));
-    }
-    check_bezier_poles(surface, tolerance)
-}
-
-fn check_bspline_poles(
-    surface: &Handle<dyn GeomSurface>,
-    tolerance: f64,
-) -> Result<Option<PinResult>, Failure> {
-    let cast = surface.cast::<GeomBSplineSurface>();
-    let Some(surface) = cast.get() else {
-        return Ok(None);
-    };
-    inspect_poles(
-        surface.nb_u_poles(),
-        surface.nb_v_poles(),
-        tolerance,
-        |u, v| surface.pole(u, v),
-    )
-}
-
-fn check_bezier_poles(
-    surface: &Handle<dyn GeomSurface>,
-    tolerance: f64,
-) -> Result<Option<PinResult>, Failure> {
-    let cast = surface.cast::<GeomBezierSurface>();
-    let Some(surface) = cast.get() else {
-        return Ok(None);
-    };
-    inspect_poles(
-        surface.nb_u_poles(),
-        surface.nb_v_poles(),
-        tolerance,
-        |u, v| surface.pole(u, v),
-    )
-}
-
-fn inspect_poles(
+/// The pole net of a B-spline or Bezier support; both counts are 0 for another surface.
+struct SurfacePoles {
+    bspline: Handle<GeomBSplineSurface>,
+    bezier: Handle<GeomBezierSurface>,
     u_count: i32,
     v_count: i32,
-    tolerance: f64,
-    pole: impl Fn(i32, i32) -> Result<Point3, Failure>,
-) -> Result<Option<PinResult>, Failure> {
-    if u_count == 0 || v_count == 0 {
-        return Ok(None);
-    }
-    let (sense, row, status) = inspect_bounds(u_count, v_count, tolerance, &pole)?;
-    if sense == 0 {
-        return Ok(None);
-    }
-    let pin_status = initial_pin_status(status);
-    let pin_status = sharp_pole_status(pin_status, status, (u_count, v_count), &pole)?;
-    Ok(Some(PinResult {
-        row,
-        sense,
-        status: pin_status,
-    }))
 }
 
-fn initial_pin_status(status: i32) -> ShapeExtendStatus {
-    match status {
-        1 => ShapeExtendStatus::Done1,
-        2 => ShapeExtendStatus::Done2,
-        _ => ShapeExtendStatus::Ok,
+impl SurfacePoles {
+    fn of(surface: &Handle<dyn GeomSurface>) -> Self {
+        let bspline = surface.cast::<GeomBSplineSurface>();
+        let bezier = surface.cast::<GeomBezierSurface>();
+        let (u_count, v_count) = match (bspline.get(), bezier.get()) {
+            (Some(b), _) => (b.nb_u_poles(), b.nb_v_poles()),
+            (_, Some(b)) => (b.nb_u_poles(), b.nb_v_poles()),
+            _ => (0, 0),
+        };
+        Self {
+            bspline,
+            bezier,
+            u_count,
+            v_count,
+        }
     }
-}
 
-fn sharp_pole_status(
-    previous: ShapeExtendStatus,
-    status: i32,
-    counts: (i32, i32),
-    pole: &impl Fn(i32, i32) -> Result<Point3, Failure>,
-) -> Result<ShapeExtendStatus, Failure> {
-    if status != 1 || !has_identical_boundary_poles(counts.0, counts.1, pole)? {
-        return Ok(previous);
+    fn pole(&self, u: i32, v: i32) -> Result<Point3, Failure> {
+        if let Some(surface) = self.bspline.get() {
+            return surface.pole(u, v);
+        }
+        let surface = self.bezier.get().ok_or_else(|| {
+            Failure::new("CheckPin: support without poles; expected a B-spline or Bezier surface")
+        })?;
+        surface.pole(u, v)
     }
-    Ok(ShapeExtendStatus::Done3)
 }
 
 fn inspect_bounds(
@@ -287,10 +253,11 @@ fn boundary_has_equal_neighbors(
     Ok(false)
 }
 
-fn min_native(first: f64, second: f64) -> f64 {
-    if first < second { first } else { second }
+// MinMaxPnt: `if (minx > x) minx = x;` and `if (maxx < x) maxx = x;`.
+fn min_native(current: f64, point: f64) -> f64 {
+    if current > point { point } else { current }
 }
 
-fn max_native(first: f64, second: f64) -> f64 {
-    if first > second { first } else { second }
+fn max_native(current: f64, point: f64) -> f64 {
+    if current < point { point } else { current }
 }

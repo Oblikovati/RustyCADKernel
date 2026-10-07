@@ -51,9 +51,8 @@ fn joined_3d_observation() -> Vec<f64> {
             &mut first_range,
             &mut second_range,
         )
-        .unwrap()
         .unwrap();
-    let (start, end) = curve_endpoints_3d(&joined.curve);
+    let (start, end) = curve_endpoints_3d(joined.curve.as_ref().unwrap());
     observed_3d(&joined, first_range, second_range, start, end)
 }
 
@@ -70,12 +69,10 @@ fn joined_reversed_2d_observation() -> Vec<f64> {
 }
 
 fn observe_2d_request(request: &mut ShapeConstructCurveJoin2dRequest) -> Vec<f64> {
-    let joined = ShapeConstructCurve
-        .join_curves_2d(request)
-        .unwrap()
-        .unwrap();
-    let start = joined.curve.value(joined.curve.first_parameter()).unwrap();
-    let end = joined.curve.value(joined.curve.last_parameter()).unwrap();
+    let joined = ShapeConstructCurve.join_curves_2d(request).unwrap();
+    let curve = joined.curve.as_ref().unwrap();
+    let start = curve.value(curve.first_parameter()).unwrap();
+    let end = curve.value(curve.last_parameter()).unwrap();
     observed_2d(
         &joined,
         request.first_range,
@@ -325,8 +322,8 @@ fn observed_3d(
         first_range.1,
         second_range.0,
         second_range.1,
-        f64::from(joined.curve.degree()),
-        f64::from(joined.curve.nb_poles()),
+        f64::from(joined.curve.as_ref().unwrap().degree()),
+        f64::from(joined.curve.as_ref().unwrap().nb_poles()),
         start.x(),
         start.y(),
         end.x(),
@@ -349,13 +346,19 @@ fn observed_2d(
         first_range.1,
         second_range.0,
         second_range.1,
-        f64::from(joined.curve.degree()),
-        f64::from(joined.curve.nb_poles()),
+        f64::from(spline_2d(joined).degree()),
+        f64::from(spline_2d(joined).nb_poles()),
         start.x(),
         start.y(),
         end.x(),
         end.y(),
     ]
+}
+
+fn spline_2d(
+    joined: &rustycad_tkshhealing::shape_construct::ShapeConstructCurveJoin2d,
+) -> Handle<rustycad_tkg2d::geom2d::Geom2dBSplineCurve> {
+    joined.curve.as_ref().unwrap().cast()
 }
 
 fn line_3d() -> Handle<dyn GeomCurve> {

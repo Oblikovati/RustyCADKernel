@@ -41,7 +41,9 @@ impl ShapeFixWire {
             return Ok(false);
         };
         let plan = TailPlan::new(parts);
-        if !plan.keeps_a_wire(data.nb_edges()) {
+        // The native guard reads its running edge count, which a split of the removed
+        // edge leaves one below the wire's real count.
+        if !plan.keeps_a_wire(walk.count) {
             walk.advance_pair();
             return Ok(false);
         }
