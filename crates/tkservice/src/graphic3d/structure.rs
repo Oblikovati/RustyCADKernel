@@ -125,6 +125,16 @@ pub fn graphic3d_structure_bind(structure: &Handle<dyn Graphic3dStructureSource>
     }
 }
 
+/// The body of `Graphic3d_Structure::DumpJson`, for the subclasses that dump it as their base
+/// class (`OCCT_DUMP_BASE_CLASS`); `graphic3d_structure_dump_json(&*shadow, &mut stream, -1)?`.
+pub fn graphic3d_structure_dump_json(
+    structure: &dyn Graphic3dStructureSource,
+    stream: &mut DumpStream,
+    depth: i32,
+) -> io::Result<()> {
+    super::driver_dump::dump_structure(structure, stream, depth)
+}
+
 impl Drop for Graphic3dStructureBase {
     /// The destructor removes the structure, as `~Graphic3d_Structure` calls `Remove()`.
     fn drop(&mut self) {
