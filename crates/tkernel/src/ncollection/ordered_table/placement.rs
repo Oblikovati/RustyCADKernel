@@ -40,9 +40,21 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
         replace_key: bool,
         replace_value: bool,
     ) -> (bool, usize) {
+        self.prepare_insertion();
+        self.place_prepared_argument(key, construct, replace_key, replace_value)
+    }
+    fn prepare_insertion(&mut self) {
         if self.count == 0 || self.count > self.bucket_count {
             self.resize(self.count);
         }
+    }
+    fn place_prepared_argument<I: KeyArgument<K>>(
+        &mut self,
+        key: I,
+        construct: impl FnOnce() -> V,
+        replace_key: bool,
+        replace_value: bool,
+    ) -> (bool, usize) {
         let hash = self.hasher.hash(key.lookup_key()) % self.bucket_count + 1;
         if let Some(slot) = self.lookup_at_hash(key.lookup_key(), hash) {
             self.replace_argument(slot, key, construct, replace_key, replace_value);
@@ -96,5 +108,18 @@ impl<K: Clone, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, 
         replace: bool,
     ) -> (bool, usize) {
         self.place_argument(BorrowedKey(key), construct, false, replace)
+    }
+}
+
+impl<K, H: HashPolicy<K>, N: StorageNode<K, ()>> OrderedTable<K, (), H, N> {
+    pub fn place_constructed_key(
+        &mut self,
+        construct: impl FnOnce() -> K,
+        replace: bool,
+    ) -> (bool, usize) {
+        // OCCT 3d097a0 emplaceImpl resizes before constructing even a duplicate Try temporary.
+        self.prepare_insertion();
+        let key = construct();
+        self.place_prepared_argument(OwnedKey(key), || (), replace, false)
     }
 }
