@@ -10,11 +10,15 @@ pub use parallel::{ParallelAlgo, ParallelAlgoBase};
 pub use progress::{Algo, PISteps};
 pub use section_attribute::SectionAttribute;
 
-mod alerts;
+pub(crate) mod alerts;
 pub use alerts::*;
 mod bop;
 mod builder;
 pub use bop::BOPAlgoBOP;
+mod general_fuse;
+mod section;
+pub use general_fuse::GeneralFuseAlgorithm;
+pub use section::BOPAlgoSection;
 mod pave_filler;
 pub mod tools;
 mod tools_provider;
