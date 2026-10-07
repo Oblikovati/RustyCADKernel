@@ -33,7 +33,7 @@ impl<K, V, H, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
             *head = std::ptr::null_mut();
         }
     }
-    fn finish_clear(&mut self, release: bool) {
+    pub(super) fn finish_clear(&mut self, release: bool) {
         self.base.finish_destroy(release);
         self.slots.clear();
         self.free.clear();
