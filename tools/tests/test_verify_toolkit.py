@@ -84,5 +84,32 @@ class NativeExitCodeTests(unittest.TestCase):
                 run_native_suites(['gtest'], Path('log'), {}, False)
 
 
+class PassingCargoRun:
+    """A run() stand-in for `cargo test` that reports the given cases as passed."""
+
+    def __init__(self, names):
+        self.log = ''.join(f'test {name} ... ok\n' for name in names)
+
+    def __call__(self, command, log, env=None):
+        return self.log
+
+
+class RustTestIdentityTests(unittest.TestCase):
+    # mapped_runtime_sets yields (package, target, test) identities, so rust_tests
+    # must compare them per package and target.
+    ROWS = [{'rust_package': 'pkg-a', 'rust_target': 'suite'}]
+
+    def test_cases_of_other_packages_do_not_count(self):
+        expected = {('pkg-a', 'suite', 'case_one'), ('pkg-b', 'suite', 'other')}
+        with mock.patch.object(verify_toolkit, 'run', PassingCargoRun(['case_one'])):
+            verify_toolkit.rust_tests(Path('out'), self.ROWS, expected, {})
+
+    def test_a_missing_rust_case_is_refused(self):
+        expected = {('pkg-a', 'suite', 'case_one'), ('pkg-a', 'suite', 'case_two')}
+        with mock.patch.object(verify_toolkit, 'run', PassingCargoRun(['case_one'])):
+            with self.assertRaisesRegex(ValueError, 'pkg-a/suite'):
+                verify_toolkit.rust_tests(Path('out'), self.ROWS, expected, {})
+
+
 if __name__ == '__main__':
     unittest.main()
