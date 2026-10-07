@@ -45,20 +45,20 @@ fn substitute_link_resets_pairs_and_deleted_branch_does_not_attach() {
     mesh.remove_link(index, true).unwrap();
     assert!(mesh.substitute_link(index, &edge(1, 5)).unwrap());
     assert!(mesh.links_connected_to(5).unwrap().is_empty());
-    assert!(!mesh.links_of_domain().contains(&index));
+    assert!(!mesh.links_of_domain().contains(index));
 }
 #[test]
 fn add_element_failure_keeps_appended_element_and_prior_pairs() {
     let mesh = triangulated();
     assert!(mesh.add_element(&triangle([1, 3, 5])).is_err());
     assert_eq!(mesh.nb_elements(), 3);
-    assert!(mesh.elements_of_domain().contains(&3));
+    assert!(mesh.elements_of_domain().contains(3));
     assert_eq!(mesh.elements_connected_to(1).unwrap().index(2).unwrap(), 3);
     assert_eq!(mesh.elements_connected_to(5).unwrap().extent(), 1);
     assert!(mesh.add_link(&edge(1, 99)).is_err());
     assert_eq!(mesh.nb_links(), 6);
     assert!(mesh.links_connected_to(1).unwrap().contains(&6));
-    assert!(!mesh.links_of_domain().contains(&6));
+    assert!(!mesh.links_of_domain().contains(6));
 }
 #[test]
 fn native_substitute_element_writes_next_slot() {
@@ -77,7 +77,7 @@ fn deleted_element_replacement_retains_missing_pair_registration() {
     assert!(mesh.substitute_element(1, &triangle([1, 2, 3])).unwrap());
     assert_eq!(mesh.get_element(1).unwrap().movability, Freedom::Deleted);
     assert_eq!(mesh.get_element(2).unwrap().edges, [1, 2, 3]);
-    assert!(!mesh.elements_of_domain().contains(&1));
+    assert!(!mesh.elements_of_domain().contains(1));
     assert!(mesh.elements_connected_to(1).unwrap().is_empty());
 }
 #[test]
@@ -158,5 +158,5 @@ fn compact_attached_link_writes_following_element_slot() {
     assert_eq!(mesh.get_element(3).unwrap().edges, [2, 4, 6]);
     assert_eq!(mesh.get_element(4).unwrap().edges, [2, 4, 1]);
     assert_eq!(mesh.get_element(4).unwrap().movability, Freedom::Free);
-    assert!(!mesh.elements_of_domain().contains(&4));
+    assert!(!mesh.elements_of_domain().contains(4));
 }

@@ -10,7 +10,8 @@ import json
 import pathlib
 from collections import Counter, defaultdict
 from api_inventory.inputs import JSONValue, JSONObject, object_rows, text_field
-from legacy_pending_dependency import PENDING_DEPENDENCY, is_pending_dependency
+from legacy_not_applicable import is_not_applicable
+from legacy_pending_dependency import NOT_APPLICABLE_TO_RUST, PENDING_DEPENDENCY, is_pending_dependency
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 INVENTORY_DEFAULT = ROOT / "porting/inventory.json"
@@ -151,7 +152,10 @@ def mapping_state(matches: list[JSONObject], declaration_count: int) -> str:
         return "duplicate_parity_mapping"
     if not matches:
         return "unmapped"
-    # A test waiting for an unported class has no Rust side: it is never counted as mapped.
+    # A test waiting for an unported class, or one of a C++-only property, has no Rust side:
+    # it is never counted as mapped.
+    if is_not_applicable(matches[0]):
+        return NOT_APPLICABLE_TO_RUST
     return PENDING_DEPENDENCY if is_pending_dependency(matches[0]) else "mapped"
 
 
@@ -166,6 +170,7 @@ def make_gtest_record(
     row["mapping_status"] = state
     row["mapped_rust_test"] = matches[0] if state == "mapped" else None
     row["blocked_by"] = matches[0]["blocked_by"] if state == PENDING_DEPENDENCY else []
+    row["not_applicable_reason"] = matches[0]["reason"] if state == NOT_APPLICABLE_TO_RUST else None
     row["duplicate_mapping_rows"] = matches if len(matches) > 1 else []
     row["runtime_status"] = "unverified"
     return row
@@ -254,6 +259,7 @@ def toolkit_summary(
             "mapped": count_state(owned, "mapped"),
             "unmapped": count_state(owned, "unmapped"),
             "pending_dependency": count_state(owned, PENDING_DEPENDENCY),
+            "not_applicable_to_rust": count_state(owned, NOT_APPLICABLE_TO_RUST),
             "duplicate_mappings": count_state(owned, "duplicate_parity_mapping"),
             "duplicate_declarations": count_state(
                 owned, "duplicate_declaration_identity"
@@ -315,6 +321,7 @@ def gtest_summary(
         "mapped": count_state(gtests, "mapped"),
         "unmapped": count_state(gtests, "unmapped"),
         "pending_dependency": count_state(gtests, PENDING_DEPENDENCY),
+        "not_applicable_to_rust": count_state(gtests, NOT_APPLICABLE_TO_RUST),
         "duplicate_parity_mappings": count_state(gtests, "duplicate_parity_mapping"),
         "duplicate_declaration_identities": count_state(
             gtests, "duplicate_declaration_identity"
@@ -365,7 +372,8 @@ def main() -> None:
     regressions = object_field(summary, "regression_files")
     print(
         f"Legacy tests: {int_field(gtest, 'mapped')}/{int_field(gtest, 'declared')} mapped, "
-        f"{int_field(gtest, 'pending_dependency')} pending dependency; "
+        f"{int_field(gtest, 'pending_dependency')} pending dependency, "
+        f"{int_field(gtest, 'not_applicable_to_rust')} not applicable to Rust; "
         f"{int_field(draw, 'discovered')} DRAW candidates and "
         f"{int_field(regressions, 'discovered')} regression files discovered; runtime proof false"
     )

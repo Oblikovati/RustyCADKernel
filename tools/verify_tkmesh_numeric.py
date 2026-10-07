@@ -72,6 +72,8 @@ def corpus() -> str:
     rows += ['mesh_circle_tool ' + ' '.join(map(str, v)) for v in product((0,1,100), range(3), range(3), range(1,9), range(6))]
     rows += ['mesh_circle_make ' + ' '.join(map(str, v)) for v in product(range(10), range(4), range(8))]
     rows += ['mesh_circle_random']
+    rows += ['mesh_incremental_shape ' + ' '.join(map(str, v)) for v in product(range(8), range(2), range(4))]
+    rows += [f'mesh_triangulator {kind}' for kind in range(6)]
     return '\n'.join(rows) + '\n'
 
 

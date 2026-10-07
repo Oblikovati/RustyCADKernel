@@ -14,8 +14,13 @@ use rustycad_tkmath::{
     },
     poly::mesh_purpose,
 };
-use rustycad_tkmesh::{brep_mesh::BRepMeshIncrementalMesh, imesh_tools::MeshParameters};
-use rustycad_tkprim::brep_prim_api::{BRepPrimAPIMakeCone, BRepPrimAPIMakeCylinder};
+use rustycad_tkmesh::{
+    brep_mesh::{BRepMeshDiscretRoot, BRepMeshIncrementalMesh},
+    imesh_tools::MeshParameters,
+};
+use rustycad_tkprim::brep_prim_api::{
+    BRepPrimAPIMakeCone, BRepPrimAPIMakeCylinder, BRepPrimAPIMakeSphere,
+};
 #[path = "support/mesh_counts.rs"]
 mod mesh_counts;
 use mesh_counts::shape_mesh_counts;
@@ -161,6 +166,59 @@ fn BRepMesh_IncrementalMeshTest__OCC30234_ZeroLengthFreeEdgeHasNoTriangles() {
             .unwrap_or_default()
     );
     assert_zero_length_edge_has_no_face_mesh(&shape);
+}
+
+#[test]
+fn BRepMesh_IncrementalMeshTest__OCC31461_AllowQualityDecreaseRebuildsMesh() {
+    let sphere = BRepPrimAPIMakeSphere::new(10.0)
+        .unwrap()
+        .shape()
+        .unwrap()
+        .clone();
+    let fine_parameters = MeshParameters {
+        deflection: 0.01,
+        ..Default::default()
+    };
+    let fine_mesher = BRepMeshIncrementalMesh::with_parameters(
+        &sphere,
+        &fine_parameters,
+        &ProgressRange::default(),
+    )
+    .unwrap();
+    assert!(fine_mesher.is_done());
+    let fine_mesh = shape_mesh_counts(&sphere);
+    assert_eq!(fine_mesh.0, 5106);
+    assert_eq!(fine_mesh.1, 10108);
+
+    let coarse_parameters = MeshParameters {
+        deflection: 0.1,
+        allow_quality_decrease: true,
+        ..Default::default()
+    };
+    let coarse_mesher = BRepMeshIncrementalMesh::with_parameters(
+        &sphere,
+        &coarse_parameters,
+        &ProgressRange::default(),
+    )
+    .unwrap();
+    assert!(coarse_mesher.is_done());
+    let coarse_mesh = shape_mesh_counts(&sphere);
+    assert!(coarse_mesh.0 < fine_mesh.0);
+    assert!(coarse_mesh.1 < fine_mesh.1);
+
+    rustycad_tkbrep::brep_tools::clean_geometry(&sphere).unwrap();
+    let fine_after_clean_mesher = BRepMeshIncrementalMesh::with_parameters(
+        &sphere,
+        &fine_parameters,
+        &ProgressRange::default(),
+    )
+    .unwrap();
+    assert!(fine_after_clean_mesher.is_done());
+
+    rustycad_tkbrep::brep_tools::clean(&sphere, false).unwrap();
+    let after_clean_mesh = shape_mesh_counts(&sphere);
+    assert_eq!(after_clean_mesh.0, coarse_mesh.0);
+    assert_eq!(after_clean_mesh.1, coarse_mesh.1);
 }
 
 #[test]

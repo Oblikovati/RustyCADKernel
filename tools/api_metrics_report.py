@@ -31,6 +31,8 @@ INVENTORY = ROOT / "porting/api-inventory"
 STATUS_ORDER = (
     "verified", "partial", "excluded", "upstream_unimplemented", "claimed_unverified", "unclaimed",
 )
+# GTests of a C++-only property: accounted, but neither mapped nor unmapped (user decision 2026-10-07).
+NOT_APPLICABLE = "not_applicable_to_rust"
 DONE_STATUSES = frozenset({"verified", "excluded", "upstream_unimplemented"})
 _RESOLUTION_STATUS = {
     "implemented": "verified",
@@ -130,7 +132,7 @@ def gtest_counts(path: pathlib.Path) -> dict[str, Counter]:
 def unmapped_gtests(tests: Counter) -> int:
     """Every declaration without a Rust translation: unmapped, pending_dependency (waiting for an
     unported class) and duplicate mappings alike; unmapped_gtests(Counter(mapped=2, unmapped=1)) == 1."""
-    return sum(number for status, number in tests.items() if status != "mapped")
+    return sum(number for status, number in tests.items() if status not in ("mapped", NOT_APPLICABLE))
 
 
 def scope_index(scope: Record) -> dict[str, dict[str, str]]:
@@ -186,7 +188,11 @@ def toolkit_metrics(toolkit: str, inputs: Mapping[str, Mapping]) -> dict[str, ob
         "open_gap_by_category": open_gap(tally, boilerplate=False),
         "open_boilerplate_by_category": open_gap(tally, boilerplate=True),
         "ledger_defects": dict(inputs["defects"].get(toolkit, Counter())),
-        "gtests": {"mapped": tests["mapped"], "unmapped": unmapped_gtests(tests)},
+        "gtests": {
+            "mapped": tests["mapped"],
+            "unmapped": unmapped_gtests(tests),
+            "not_applicable": tests[NOT_APPLICABLE],
+        },
     }
 
 
@@ -202,6 +208,7 @@ def scope_totals(toolkits: Mapping[str, Mapping]) -> dict[str, dict[str, int]]:
         total["api_open"] += sum(metrics["open_gap_by_category"].values())
         total["gtests_mapped"] += metrics["gtests"]["mapped"]
         total["gtests_unmapped"] += metrics["gtests"]["unmapped"]
+        total["gtests_not_applicable"] += metrics["gtests"]["not_applicable"]
     return {scope: dict(total) for scope, total in sorted(totals.items())}
 
 

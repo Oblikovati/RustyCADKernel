@@ -2,7 +2,7 @@
 use super::super::{flag, int, real};
 use super::vertex_inspector::report_unit;
 use rustycad_tkernel::{
-    ncollection::{DataMap, DynamicArray, Map, Sequence},
+    ncollection::{DataMap, DynamicArray, PackedMap, Sequence},
     standard::{Failure, Handle},
 };
 use rustycad_tkmath::gp::{Point2, Vector2, Xy};
@@ -152,7 +152,7 @@ pub fn insert_vertex_case(values: &[i32]) {
     print!("OK ");
     if let Err(error) = delaun
         .init_circles_tool(8, 8)
-        .and_then(|()| delaun.insert_vertices_probe(&mut vertices))
+        .and_then(|()| delaun.add_vertices(&mut vertices, &Default::default()))
     {
         print!("{} ", error.exception_type());
     }
@@ -198,7 +198,9 @@ fn perform_vertices(mesh: &Handle<Mesh>, points: &[Xy]) -> Vec<i32> {
 }
 fn report_perform(delaun: &mut Delaun, indices: &mut [i32]) {
     print!("OK ");
-    if let Err(error) = delaun.triangulate_vertices_probe(indices) {
+    if let Err(error) = Delaun::with_indices(&delaun.result().clone(), indices, (-1, -1))
+        .map(|built| *delaun = built)
+    {
         print!("{} ", error.exception_type());
     }
     if let Err(error) = polygon_mesh_snapshot(delaun) {
@@ -323,8 +325,8 @@ fn report_next_link_case(
     report_sorted_map(&dead);
     Ok(())
 }
-fn seeded_map(mask: i32) -> Map<i32> {
-    let mut map = Map::default();
+fn seeded_map(mask: i32) -> PackedMap<i32> {
+    let mut map = PackedMap::default();
     for index in 1..=5 {
         if mask & (1 << (index - 1)) != 0 {
             map.add(index);
@@ -332,8 +334,8 @@ fn seeded_map(mask: i32) -> Map<i32> {
     }
     map
 }
-fn report_sorted_map(map: &Map<i32>) {
-    let mut indices = map.iter().copied().collect::<Vec<_>>();
+fn report_sorted_map(map: &PackedMap<i32>) {
+    let mut indices = map.iter().collect::<Vec<_>>();
     indices.sort_unstable();
     int(indices.len() as i32);
     for index in indices {
@@ -495,9 +497,9 @@ fn polygon_links(reverse: i32) -> Sequence<i32> {
 }
 fn polygon_mesh_snapshot(delaun: &Delaun) -> Result<(), Failure> {
     let mesh = delaun.result();
-    let mut links: Vec<i32> = mesh.links_of_domain().iter().copied().collect();
+    let mut links: Vec<i32> = mesh.links_of_domain().iter().collect();
     links.sort_unstable();
-    let mut triangles: Vec<i32> = mesh.elements_of_domain().iter().copied().collect();
+    let mut triangles: Vec<i32> = mesh.elements_of_domain().iter().collect();
     triangles.sort_unstable();
     report_sorted_indices(&links);
     report_sorted_indices(&triangles);
@@ -511,7 +513,7 @@ fn report_sorted_indices(indices: &[i32]) {
     }
 }
 fn snapshot_polygon_links(delaun: &Delaun, triangles: &[i32]) -> Result<(), Failure> {
-    let mut links: Vec<i32> = delaun.result().links_of_domain().iter().copied().collect();
+    let mut links: Vec<i32> = delaun.result().links_of_domain().iter().collect();
     links.sort_unstable();
     for index in links {
         let edge = delaun.get_edge(index)?;
@@ -565,10 +567,10 @@ fn core(v: &[i32]) -> Result<(), Failure> {
     flag(delaun.circles().is_empty());
     Ok(())
 }
-fn map_values(map: Map<i32>) {
-    int(map.extent() as i32);
+fn map_values(map: PackedMap<i32>) {
+    int(map.extent());
     for index in map.iter() {
-        int(*index);
+        int(index);
     }
 }
 fn mesh_snapshot(delaun: &Delaun) -> Result<(), Failure> {

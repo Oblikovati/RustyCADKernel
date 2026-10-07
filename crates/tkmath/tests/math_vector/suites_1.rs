@@ -112,7 +112,7 @@ fn MathVectorTest__ScalarOperations() {
 
     // Test operator/= for scalar
     aVec *= 6.0; // Set to [6, 12, 18]
-    aVec /= 2.0;
+    aVec.divide(2.0).unwrap();
     assert_eq!(aVec[1], 3.0);
     assert_eq!(aVec[2], 6.0);
     assert_eq!(aVec[3], 9.0);

@@ -59,7 +59,7 @@ pub(super) fn solve_refined(
     for _ in 1..=iterations {
         let residual = sec_member.subtracted(&mat.multiplied_vector(&sol)?)?;
         gauss.solve_into(&residual, &mut sol1)?;
-        sol += &sol1;
+        sol.add(&sol1)?;
     }
     Ok(sol)
 }

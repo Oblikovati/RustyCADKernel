@@ -1,8 +1,9 @@
 //! Native parametric ranges and physical-length scaling (OCCT 3d097a03).
+use crate::imesh_data::MEMORY_BLOCK_SIZE_HUGE;
 use crate::{imesh_data::FaceHandle, imesh_tools::MeshParameters};
 use rustycad_tkbrep::{brep::BRepTool, brep_adaptor::BRepAdaptorSurface};
 use rustycad_tkernel::{
-    ncollection::{List, Shared},
+    ncollection::{IncrementalAllocatorObject, List, Shared},
     precision,
     standard::{Failure, Handle},
 };
@@ -14,8 +15,51 @@ mod interface;
 pub use interface::RangeSplitter;
 mod sampling;
 pub use cone::ConeRangeSplitter;
+mod cylinder;
+pub use cylinder::CylinderRangeSplitter;
+mod sphere;
+pub use sphere::SphereRangeSplitter;
+mod torus;
+pub use torus::TorusRangeSplitter;
+mod uv_param;
+pub use uv_param::{IMapOfReal, UVParamRangeSplitter};
+mod nurbs;
+pub use nurbs::{
+    BoundaryParamsRangeSplitter, ExtrusionRangeSplitter, NURBSRangeSplitter,
+    NurbsRangeSplitterHooks, UndefinedRangeSplitter, nurbs_adjust_range,
+    nurbs_generate_surface_nodes,
+};
+mod nurbs_filter;
 /// Allocator-backed shared surface nodes; `SurfaceNodes::default()`.
 pub type SurfaceNodes = Handle<Shared<List<Point2>>>;
+
+/// An empty node list on its own temporary incremental allocator, as every native
+/// splitter creates it; `new_surface_nodes().is_empty()`.
+pub(crate) fn new_surface_nodes() -> List<Point2> {
+    let allocator = IncrementalAllocatorObject::new(MEMORY_BLOCK_SIZE_HUGE);
+    List::with_allocator(allocator.resource().clone())
+}
+
+/// The native regular grid of the cone and cylinder splitters: rows from `V0 + dV`
+/// while below `V1 - dV / 2`, columns from `U0 + dU` while below `U1 - dU / 2`.
+pub(crate) fn append_regular_grid(
+    nodes: &mut List<Point2>,
+    range_u: (f64, f64),
+    range_v: (f64, f64),
+    (du, dv): (f64, f64),
+) {
+    let max_v = range_v.1 - dv * 0.5;
+    let max_u = range_u.1 - du * 0.5;
+    let mut v = range_v.0 + dv;
+    while v < max_v {
+        let mut u = range_u.0 + du;
+        while u < max_u {
+            nodes.append(Point2::new(u, v));
+            u += du;
+        }
+        v += dv;
+    }
+}
 /// Default surface range tool; `DefaultRangeSplitter::default()`.
 pub struct DefaultRangeSplitter {
     /// Selected face; writable for native derived splitter implementations.

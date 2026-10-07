@@ -22,7 +22,7 @@ impl BRepMeshDataStructureOfDelaun {
             .snapshot())
     }
     /// Snapshot the domain's native hash iteration order; `mesh.links_of_domain()`.
-    pub fn links_of_domain(&self) -> Map<i32> {
+    pub fn links_of_domain(&self) -> PackedMap<i32> {
         self.connectivity.read().link_domain.clone()
     }
     /// Read the adjacent element pair; `mesh.elements_connected_to(1)?`.
@@ -51,6 +51,24 @@ impl BRepMeshDataStructureOfDelaun {
         state.attach_link(index, edge)?;
         state.link_domain.add(index);
         Ok(index)
+    }
+    /// Change the movability of a stored link in place, as the native callers do through
+    /// `const_cast<BRepMesh_Edge&>(GetLink(i)).SetMovability(...)`: the key is not
+    /// rehashed (movability is not part of the link hash) and the element pair and node
+    /// link lists are untouched; `mesh.set_link_movability(1, DegreeOfFreedom::Fixed)?`.
+    pub fn set_link_movability(
+        &self,
+        index: i32,
+        movability: DegreeOfFreedom,
+    ) -> Result<(), Failure> {
+        let state = self.connectivity.read();
+        state
+            .links
+            .find_key(index as usize)?
+            .0
+            .write()
+            .set_movability(movability);
+        Ok(())
     }
     /// Replace a link while preserving native empty-pair and deleted-slot behavior; `mesh.substitute_link(1,&edge)?`.
     pub fn substitute_link(&self, index: i32, edge: &BRepMeshEdge) -> Result<bool, Failure> {
@@ -129,7 +147,7 @@ impl DelaunConnectivity {
         self.clean_link(index, &edge)?;
         edge.set_movability(DegreeOfFreedom::Deleted);
         *self.links.find_key(index as usize)?.0.write() = edge;
-        self.link_domain.remove(&index);
+        self.link_domain.remove(index);
         self.deleted_links.append(index);
         Ok(())
     }

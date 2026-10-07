@@ -120,7 +120,7 @@ fn polymorphic_cone_preserves_interior_node_override() {
     };
     let face = fixture::range_face(0, 1e-7);
     face.set_deflection(0.01);
-    splitter.reset(&face, &parameters);
+    splitter.reset(&face, &parameters).unwrap();
     splitter.add_point(Point2::new(0.0, 0.0));
     splitter.add_point(Point2::new(1.0, 1.0));
     splitter.adjust_range().unwrap();

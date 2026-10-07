@@ -10,8 +10,8 @@ impl BRepMeshDelaun {
         let bounds = self.node_bounds()?;
         self.initialize_circle_bounds(&bounds, u, v)?;
         for index in self.mesh_ref()?.elements_of_domain().iter() {
-            let points = self.triangle_points(&self.get_triangle(*index)?)?;
-            self.circles.bind_points(*index, &points)?;
+            let points = self.triangle_points(&self.get_triangle(index)?)?;
+            self.circles.bind_points(index, &points)?;
         }
         Ok(())
     }

@@ -192,8 +192,8 @@ fn next_polygon_link_selects_visible_neighbor_and_preserves_empty_outputs() {
     let polygon = Sequence::default();
     let boxes = Sequence::default();
     let pivot = delaun.get_vertex(1).unwrap();
-    let mut leprous = rustycad_tkernel::ncollection::Map::default();
-    let mut dead = rustycad_tkernel::ncollection::Map::default();
+    let mut leprous = rustycad_tkernel::ncollection::PackedMap::default();
+    let mut dead = rustycad_tkernel::ncollection::PackedMap::default();
     let mut next_pivot = -77;
     let mut next_direction = Vector2::new(81., 82.);
     let mut bounds = rustycad_tkmath::bnd::CompactBox2::default();
@@ -219,9 +219,9 @@ fn next_polygon_link_selects_visible_neighbor_and_preserves_empty_outputs() {
     assert_eq!(next, -4);
     assert_eq!(next_pivot, 4);
     assert_eq!(next_direction, Vector2::new(0., 2.));
-    assert!(leprous.contains(&1));
-    assert!(leprous.contains(&4));
-    assert!(leprous.contains(&5));
+    assert!(leprous.contains(1));
+    assert!(leprous.contains(4));
+    assert!(leprous.contains(5));
     assert_eq!(
         bounds.corner_min().x(),
         -rustycad_tkernel::precision::p_confusion()
@@ -231,7 +231,7 @@ fn next_polygon_link_selects_visible_neighbor_and_preserves_empty_outputs() {
         rustycad_tkernel::precision::p_confusion()
     );
 
-    let mut blocked = rustycad_tkernel::ncollection::Map::default();
+    let mut blocked = rustycad_tkernel::ncollection::PackedMap::default();
     for link in [1, 4, 5] {
         blocked.add(link);
     }
@@ -340,7 +340,9 @@ fn batch_insertion_replaces_the_containing_circumcircle_cavity() {
     let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
     delaun.init_circles_tool(8, 8).unwrap();
 
-    delaun.insert_vertices_probe(&mut [vertex]).unwrap();
+    delaun
+        .add_vertices(&mut [vertex], &Default::default())
+        .unwrap();
 
     assert_eq!(delaun.result().elements_of_domain().extent(), 4);
 }
@@ -357,7 +359,9 @@ fn batch_insertion_orders_and_replaces_two_triangle_cavities() {
     let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
     delaun.init_circles_tool(8, 8).unwrap();
 
-    delaun.insert_vertices_probe(&mut vertices).unwrap();
+    delaun
+        .add_vertices(&mut vertices, &Default::default())
+        .unwrap();
 
     assert_eq!(delaun.result().elements_of_domain().extent(), 6);
 }
@@ -372,7 +376,9 @@ fn batch_insertion_skips_frontier_edge_and_outside_points() {
         let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
         delaun.init_circles_tool(8, 8).unwrap();
 
-        delaun.insert_vertices_probe(&mut [vertex]).unwrap();
+        delaun
+            .add_vertices(&mut [vertex], &Default::default())
+            .unwrap();
 
         assert!(delaun.result().elements_of_domain().is_empty());
         assert_eq!(delaun.result().links_of_domain().extent(), expected_links);
@@ -394,7 +400,9 @@ fn batch_insertion_retriangulates_a_four_point_sequence() {
     let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
     delaun.init_circles_tool(8, 8).unwrap();
 
-    delaun.insert_vertices_probe(&mut vertices).unwrap();
+    delaun
+        .add_vertices(&mut vertices, &Default::default())
+        .unwrap();
 
     assert_eq!(delaun.result().elements_of_domain().extent(), 10);
 }
@@ -416,9 +424,7 @@ fn constructor_flow_builds_supermesh_and_removes_auxiliary_domain_elements() {
                     .unwrap()
             })
             .collect::<Vec<_>>();
-        let mut delaun = Delaun::from_mesh(&mesh, -1, -1, false).unwrap();
-
-        delaun.triangulate_vertices_probe(&mut vertices).unwrap();
+        let delaun = Delaun::with_indices(&mesh, &mut vertices, (-1, -1)).unwrap();
 
         assert_eq!(
             delaun.result().elements_of_domain().extent(),

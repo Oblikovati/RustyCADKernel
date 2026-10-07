@@ -1,6 +1,7 @@
 //! Insert ordered vertices by replacing their connected circumcircle cavity.
 use super::triangle_build::{LoopEdges, loop_edges};
 use super::{BRepMeshDelaun, DegreeOfFreedom};
+use rustycad_tkernel::message::{ProgressRange, ProgressScope};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::{
     bnd::BoundingBox2,
@@ -8,39 +9,66 @@ use rustycad_tkmath::{
 };
 
 impl BRepMeshDelaun {
-    /// Insert a batch by native coordinate order; `delaun.insert_vertices_probe(&mut indices)?`.
-    #[doc(hidden)]
-    pub fn insert_vertices_probe(&mut self, indices: &mut [i32]) -> Result<(), Failure> {
+    /// `AddVertices(theVerticesIndices, theRange)`: sorts the indices in place by the
+    /// native `x + y` heap order, inserts each into its circumcircle cavity, then
+    /// processes the constraints; `delaun.add_vertices(&mut indices, &range)?`.
+    pub fn add_vertices(
+        &mut self,
+        indices: &mut [i32],
+        range: &ProgressRange<'_>,
+    ) -> Result<(), Failure> {
         self.sort_vertex_indices(indices)?;
-        self.create_triangles_on_new_vertices(indices)
+        self.create_triangles_on_new_vertices(indices, range)
     }
 
-    /// Perform the native supermesh, batch insertion, and auxiliary cleanup sequence.
-    ///
-    /// ```ignore
-    /// delaun.triangulate_vertices_probe(&mut vertex_indices)?;
-    /// ```
-    #[doc(hidden)]
-    pub fn triangulate_vertices_probe(&mut self, indices: &mut [i32]) -> Result<(), Failure> {
+    /// `perform(theVertexIndices, theCellsCountU, theCellsCountV)`: nothing for two
+    /// indices or fewer; else the circle grid over the indexed vertices, the super
+    /// triangle, the sorted insertion and the removal of the auxiliary elements.
+    pub(super) fn perform(
+        &mut self,
+        indices: &mut [i32],
+        cells: (i32, i32),
+    ) -> Result<(), Failure> {
         if indices.len() <= 2 {
             return Ok(());
         }
         let bounds = self.insertion_bounds(indices)?;
-        self.init_circles_tool(-1, -1)?;
-        let (_, super_edges) = self.build_super_mesh(bounds)?;
+        self.initialize_circle_bounds(&bounds, cells.0, cells.1)?;
+        let (_, super_edges) = self.build_super_mesh(bounds.get()?)?;
         self.sort_vertex_indices(indices)?;
+        self.compute(indices, super_edges)
+    }
+
+    /// `compute`: the fan of the first vertex over the super triangle, every vertex
+    /// (the first one again included, as natively), then RemoveAuxElements.
+    fn compute(&mut self, indices: &[i32], super_edges: [i32; 3]) -> Result<(), Failure> {
         let mut boundary = super_triangle_edges(super_edges);
-        self.create_triangles(indices[0], &mut boundary)?;
-        self.create_triangles_on_new_vertices(indices)?;
+        if let Some(first) = indices.first() {
+            self.create_triangles(*first, &mut boundary)?;
+            self.create_triangles_on_new_vertices(indices, &ProgressRange::default())?;
+        }
         self.remove_aux_elements()
     }
 
-    fn create_triangles_on_new_vertices(&mut self, indices: &[i32]) -> Result<(), Failure> {
+    /// `createTrianglesOnNewVertices`: the progress scope counts `Upper` (length less
+    /// one) steps, as natively; a user break stops before ProcessConstraints.
+    fn create_triangles_on_new_vertices(
+        &mut self,
+        indices: &[i32],
+        range: &ProgressRange<'_>,
+    ) -> Result<(), Failure> {
         let (tolerance_u, tolerance_v) = self.mesh_ref()?.vertex_tool().get_tolerance();
         let squared_tolerance = tolerance_u * tolerance_u + tolerance_v * tolerance_v;
+        let upper = indices.len() as f64 - 1.0;
+        let scope =
+            ProgressScope::with_literal(range, "Create triangles on new vertices", upper, false);
         for index in indices {
+            if !scope.more() {
+                return Ok(());
+            }
             let vertex = self.get_vertex(*index)?;
             self.insert_vertex_in_circle_cavity(*index, &vertex, squared_tolerance)?;
+            drop(scope.next(1.0));
         }
         self.process_constraints()
     }
@@ -130,13 +158,13 @@ impl BRepMeshDelaun {
         Ok(None)
     }
 
-    fn insertion_bounds(&self, indices: &[i32]) -> Result<[f64; 4], Failure> {
+    fn insertion_bounds(&self, indices: &[i32]) -> Result<BoundingBox2, Failure> {
         let mut bounds = BoundingBox2::default();
         for index in indices {
             bounds.add_point(Point2::from(*self.get_vertex(*index)?.coord()));
         }
         bounds.enlarge(rustycad_tkernel::precision::p_confusion());
-        bounds.get()
+        Ok(bounds)
     }
 }
 

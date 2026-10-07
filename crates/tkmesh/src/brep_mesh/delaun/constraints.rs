@@ -1,7 +1,7 @@
 //! Internal-edge constraint insertion and orchestration.
 use super::triangle_build::{LoopEdges, loop_edges};
 use super::{BRepMeshDelaun, BRepMeshTriangle};
-use rustycad_tkernel::{ncollection::Map, standard::Failure};
+use rustycad_tkernel::{ncollection::PackedMap, standard::Failure};
 
 impl BRepMeshDelaun {
     /// Process internal fixed edges; `delaun.insert_internal_edges_probe()?`.
@@ -18,7 +18,7 @@ impl BRepMeshDelaun {
 
     fn insert_internal_edges(&mut self) -> Result<(), Failure> {
         let edges = self.internal_edges()?;
-        for edge_id in edges.iter().copied() {
+        for edge_id in edges.iter() {
             let mut sides = [true, true];
             let triangles = self.mesh_ref()?.elements_connected_to(edge_id)?;
             for index in 1..=triangles.extent() {
@@ -67,7 +67,7 @@ impl BRepMeshDelaun {
         let frontier = self.frontier()?;
         let mut failed = Vec::new();
         let mut deleted_edges = loop_edges();
-        let mut skipped = Map::default();
+        let mut skipped = PackedMap::default();
         for pass in 1..=2 {
             self.remove_external_frontier_triangles(&frontier, &mut deleted_edges)?;
             self.remove_dangling_frontier_edges(&deleted_edges)?;
@@ -79,10 +79,10 @@ impl BRepMeshDelaun {
 
     fn remove_external_frontier_triangles(
         &mut self,
-        frontier: &Map<i32>,
+        frontier: &PackedMap<i32>,
         deleted_edges: &mut LoopEdges,
     ) -> Result<(), Failure> {
-        for edge in frontier.iter().copied() {
+        for edge in frontier.iter() {
             self.delete_external_frontier_triangle(edge, deleted_edges)?;
         }
         Ok(())
@@ -124,12 +124,12 @@ impl BRepMeshDelaun {
 
     fn recover_missing_frontier_loops(
         &mut self,
-        frontier: &Map<i32>,
+        frontier: &PackedMap<i32>,
         pass: i32,
         failed: &mut Vec<i32>,
-        skipped: &mut Map<i32>,
+        skipped: &mut PackedMap<i32>,
     ) -> Result<(), Failure> {
-        for edge in frontier.iter().copied() {
+        for edge in frontier.iter() {
             if !self.mesh_ref()?.elements_connected_to(edge)?.is_empty() {
                 continue;
             }
@@ -144,7 +144,7 @@ impl BRepMeshDelaun {
     fn retry_failed_frontier_loops(
         &mut self,
         failed: &[i32],
-        skipped: &mut Map<i32>,
+        skipped: &mut PackedMap<i32>,
     ) -> Result<(), Failure> {
         for edge in failed.iter().copied() {
             if self.mesh_ref()?.elements_connected_to(edge)?.is_empty() {
