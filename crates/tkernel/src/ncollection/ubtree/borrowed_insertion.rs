@@ -8,7 +8,7 @@ impl<T: Clone + Default, B: BoundingVolume + Default> UBTree<T, B> {
         self.insert_leaf_ref(object, bounds);
         true
     }
-    fn insert_leaf_ref(&mut self, object: &T, bounds: &B) -> usize {
+    pub(in crate::ncollection) fn insert_leaf_ref(&mut self, object: &T, bounds: &B) -> usize {
         let Some(branch) = self.insertion_branch(bounds) else {
             let owner = self
                 .resource

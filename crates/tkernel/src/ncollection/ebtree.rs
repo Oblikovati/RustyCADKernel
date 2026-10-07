@@ -1,6 +1,7 @@
 //! Editable bounding tree maintains object-to-leaf bindings through node moves.
 use super::{BaseAllocator, BoundingNode, BoundingVolume, DataMap, HashKey, TreeSelector, UBTree};
 use crate::{ncollection::destructor_unwind::DeferredDestructorPanic, standard::Failure};
+mod native_insertion;
 mod removal;
 /// Unique objects with indexed removal; `EBTree::<i32, Bounds>::default()`.
 pub struct EBTree<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolume> {
