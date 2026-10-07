@@ -19,9 +19,32 @@ pub(crate) fn int_from_f32(value: f32) -> i32 {
     int_from_f64(f64::from(value))
 }
 
+/// `(unsigned int)double` as compiled for x86-64: a 64-bit `cvttsd2si` whose low 32 bits
+/// are kept, so a negative value wraps and NaN or a value outside the `long` range gives 0.
+///
+/// Example: `uint_from_f64(2.7) == 2`, `uint_from_f64(-1.5) == u32::MAX`.
+pub(crate) fn uint_from_f64(value: f64) -> u32 {
+    let truncated = value.trunc();
+    let long_range = 9_223_372_036_854_775_808.0; // tol:exact 2^63, the `long` limit
+    if truncated.is_nan() || truncated < -long_range || truncated >= long_range {
+        return 0;
+    }
+    (truncated as i64) as u32
+}
+
 #[cfg(test)]
 mod tests {
-    use super::int_from_f64;
+    use super::{int_from_f64, uint_from_f64};
+
+    #[test]
+    fn unsigned_conversion_keeps_the_low_32_bits() {
+        assert_eq!(uint_from_f64(2.7), 2);
+        assert_eq!(uint_from_f64(-1.5), u32::MAX);
+        assert_eq!(uint_from_f64(-0.5), 0);
+        assert_eq!(uint_from_f64(4294967296.0 + 7.0), 7);
+        assert_eq!(uint_from_f64(f64::NAN), 0);
+        assert_eq!(uint_from_f64(1e300), 0);
+    }
 
     #[test]
     fn truncates_and_reports_out_of_range_as_int_min() {

@@ -45,3 +45,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_font').append_font_requests(requests)
     # Graphic3d_CullingTool (tkservice_corpus_culling.py)
     __import__('tkservice_corpus_culling').append_culling_requests(requests)
+    # Graphic3d_FrameStats, Graphic3d_FrameStatsData (tkservice_corpus_stats.py)
+    __import__('tkservice_corpus_stats').append_stats_requests(requests)

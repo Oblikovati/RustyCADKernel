@@ -467020,6 +467020,550 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText",
       "status": "implemented",
       "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStats",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::Graphic3d_FrameStats",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsBase::default",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::FormatStats(Graphic3d_RenderingParams::PerfCounters) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStats::format_stats",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::FormatStats(NCollection_IndexedDataMap<TCollection_AsciiString, TCollection_AsciiString> &,Graphic3d_RenderingParams::PerfCounters) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStats::format_stats_dict",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::UpdateInterval",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::update_interval",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::SetUpdateInterval",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::set_update_interval",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::IsLongLineFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::is_long_line_format",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::SetLongLineFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::set_long_line_format",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::FrameDuration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::frame_duration",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::FrameRate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::frame_rate",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::FrameRateCpu",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::frame_rate_cpu",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::CounterValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::counter_value",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::TimerValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::timer_value",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::HasCulledLayers",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::has_culled_layers",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::HasCulledStructs",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::has_culled_structs",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::LastDataFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::last_data_frame",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::LastDataFrameIndex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::last_data_frame_index",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::DataFrames",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::data_frames",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::ChangeDataFrames",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::change_data_frames",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. The reference becomes an edit closure over the shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::ActiveDataFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::active_data_frame",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. The reference becomes an edit closure over the shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::ChangeCounter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::change_counter",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Callers increment the returned reference; the port takes the increment."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::ChangeTimer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsMembers::change_timer",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Callers increment the returned reference; the port takes the increment."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::myFpsTimer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsFields::fps_timer",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::myFrameStartTime",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsFields::frame_start_time",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::myFrameDuration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsFields::frame_duration",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::myUpdateInterval",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsFields::update_interval",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::myFpsFrameCount",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsFields::fps_frame_count",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::myCounters",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsFields::counters",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::myCountersTmp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsFields::counters_tmp",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::myCountersMax",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsFields::counters_max",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::myLastFrameIndex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsFields::last_frame_index",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStats::myIsLongLineFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsFields::is_long_line_format",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::Graphic3d_FrameStatsData()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::default",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::Graphic3d_FrameStatsData(const Graphic3d_FrameStatsData &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::clone",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::Graphic3d_FrameStatsData(Graphic3d_FrameStatsData &&)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. A Rust move; the native moved-from vectors are never observable."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::operator[](Graphic3d_FrameStatsCounter) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. std::ops::Index<Graphic3dFrameStatsCounter>."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::operator[](Graphic3d_FrameStatsTimer) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. std::ops::Index<Graphic3dFrameStatsTimer>."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::FrameRate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::frame_rate",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::FrameRateCpu",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::frame_rate_cpu",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::ImmediateFrameRate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::immediate_frame_rate",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::ImmediateFrameRateCpu",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::immediate_frame_rate_cpu",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::CounterValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::counter_value",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::TimerValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::timer_value",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::Reset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::reset",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::FillMax",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::fill_max",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::myCounters",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Protected field `counters` (crate-visible)."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::myTimers",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Protected field `timers` (crate-visible)."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::myTimersMin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Protected field `timers_min` (crate-visible)."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::myTimersMax",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Protected field `timers_max` (crate-visible)."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::myFps",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Protected field `fps` (crate-visible)."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::myFpsCpu",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Protected field `fps_cpu` (crate-visible)."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::myFpsImmediate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Protected field `fps_immediate` (crate-visible)."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsData::myFpsCpuImmediate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Protected field `fps_cpu_immediate` (crate-visible)."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::Graphic3d_FrameStatsDataTmp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::default",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::operator[](Graphic3d_FrameStatsCounter)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. std::ops::IndexMut<Graphic3dFrameStatsCounter>."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::operator[](Graphic3d_FrameStatsTimer)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. std::ops::IndexMut<Graphic3dFrameStatsTimer>."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::FlushTimers",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::flush_timers",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::Reset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::reset",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::ChangeFrameRate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::change_frame_rate",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::ChangeFrameRateCpu",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::change_frame_rate_cpu",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::ChangeImmediateFrameRate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::change_immediate_frame_rate",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::ChangeImmediateFrameRateCpu",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::change_immediate_frame_rate_cpu",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::ChangeTimer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::change_timer",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::ChangeCounterValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::change_counter_value",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::ChangeTimerValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::change_timer_value",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::myOsdTimers",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Protected field `osd_timers`."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::myTimersPrev",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp",
+      "status": "implemented",
+      "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs. Protected field `timers_prev`."
     }
   ],
   "tests": [

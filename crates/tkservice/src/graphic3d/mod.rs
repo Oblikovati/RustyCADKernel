@@ -39,6 +39,10 @@ mod cube_map_separate;
 mod culling_tool;
 mod exceptions;
 mod flipper;
+mod frame_stats;
+mod frame_stats_data;
+mod frame_stats_format;
+mod frame_stats_text;
 mod hatch_style;
 mod index_buffer;
 mod light;
@@ -131,6 +135,12 @@ pub use exceptions::{
     group_definition_error, priority_definition_error, structure_definition_error,
 };
 pub use flipper::Graphic3dFlipper;
+pub use frame_stats::{
+    Graphic3dFrameStats, Graphic3dFrameStatsBase, Graphic3dFrameStatsFields,
+    Graphic3dFrameStatsMembers,
+};
+pub use frame_stats_data::{Graphic3dFrameStatsData, Graphic3dFrameStatsDataTmp};
+pub use frame_stats_text::Graphic3dFrameStatsDict;
 pub use hatch_style::Graphic3dHatchStyle;
 pub use index_buffer::{
     Graphic3dIndexBuffer, Graphic3dIndexBufferMembers, Graphic3dIndexBufferSource,

@@ -40,6 +40,7 @@
 #include "tkservice_probe_params.cxx"
 #include "tkservice_probe_font.cxx"
 #include "tkservice_probe_culling.cxx"
+#include "tkservice_probe_stats.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -91,6 +92,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sv_textfmt", sv_textfmt_case},
  // Graphic3d_CullingTool (tkservice_probe_culling.cxx)
  {"sv_culling", sv_culling_case},
+ // Graphic3d_FrameStats, Graphic3d_FrameStatsData (tkservice_probe_stats.cxx)
+ {"sv_stats", sv_stats_case},
 };
 int main() {
  std::string line;

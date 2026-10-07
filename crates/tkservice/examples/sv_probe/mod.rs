@@ -14,6 +14,7 @@ pub mod params;
 pub mod pbr;
 pub mod pixel;
 pub mod shader;
+pub mod stats;
 pub mod texture;
 pub mod tpers;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that every toolkit
