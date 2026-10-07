@@ -151,9 +151,11 @@ fn process_pair(
     }
     let point_count = curves.intersections.nb_points()?;
     let segment_count = curves.intersections.nb_segments()?;
+    // A point repair that splits nothing falls through to the segment repair, as the
+    // native blocks follow each other without an else.
     if point_count > 0 && point_count < 3 {
         let candidate = points::selected_point(&curves.intersections, point_count)?;
-        return points::repair_point(
+        let action = points::repair_point(
             tool,
             wire,
             face,
@@ -167,7 +169,10 @@ fn process_pair(
             max_vertex_tolerance,
             counts,
             boxes,
-        );
+        )?;
+        if let Some(action) = action {
+            return Ok(action);
+        }
     }
     if segment_count == 1 {
         let segment = curves.intersections.segment(1)?;

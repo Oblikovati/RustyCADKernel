@@ -71,6 +71,12 @@ impl ShapeFixIntersectionTool {
         if split_rejected(edge, parameter, vertex, face, precision)? {
             return Ok(false);
         }
+        // A SameParameter edge without 3D curve refuses the split, as natively.
+        let Some(point) = super::wire_split_tool::split_point_on(edge, face, parameter, true)?
+        else {
+            return Ok(false);
+        };
+        raise_vertex_tolerance(vertex, point, precision)?;
         let replacements = split_replacements(edge, parameter, vertex, face, precision)?;
         *first = replacements.0;
         *second = replacements.1;
@@ -347,7 +353,6 @@ fn split_replacements(
     face: &Face,
     precision: f64,
 ) -> Result<(Edge, Edge), Failure> {
-    raise_vertex_to_split_point(edge, parameter, vertex, face, precision)?;
     let (_, pcurve_first, pcurve_last) =
         ShapeAnalysisEdge::new().pcurve_on_face(edge, face, true)?;
     let mut transfer = ShapeAnalysisTransferParametersProj::from_edge(edge, face)?;
@@ -361,37 +366,17 @@ fn split_replacements(
     )
 }
 
-fn raise_vertex_to_split_point(
-    edge: &Edge,
-    parameter: f64,
+// `B.UpdateVertex(vert, P1.Distance(P2))`: only the tolerance grows, the point stays.
+fn raise_vertex_tolerance(
     vertex: &Vertex,
-    face: &Face,
+    point: rustycad_tkmath::gp::Point3,
     precision: f64,
 ) -> Result<(), Failure> {
-    let point = split_point(edge, parameter, face)?;
     let distance = point.distance(&BRepTool::pnt(vertex)?);
     if distance > precision {
-        BRepBuilder::default().update_vertex_point(vertex, point, distance)?;
+        BRepBuilder::default().update_vertex_tolerance(vertex, distance)?;
     }
     Ok(())
-}
-
-fn split_point(
-    edge: &Edge,
-    parameter: f64,
-    face: &Face,
-) -> Result<rustycad_tkmath::gp::Point3, Failure> {
-    if BRepTool::same_parameter(edge)? && !BRepTool::degenerated(edge)? {
-        let (curve, _, _) = BRepTool::curve(edge)?;
-        return curve.value(parameter);
-    }
-    let (curve, _, _) = ShapeAnalysisEdge::new().pcurve_on_face(edge, face, true)?;
-    let uv = curve
-        .get()
-        .ok_or_else(|| Failure::new("ShapeFix_IntersectionTool::SplitEdge has no p-curve"))?
-        .value(parameter)?;
-    let surface = BRepTool::surface(face)?;
-    ShapeAnalysisSurface::new(&surface)?.value(uv.x(), uv.y())
 }
 
 fn build_split_edges(

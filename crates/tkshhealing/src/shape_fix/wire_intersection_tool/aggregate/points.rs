@@ -88,7 +88,8 @@ pub(super) fn apply_pair_action(action: PairAction, first: &mut i32, second: &mu
     match action {
         PairAction::Next => *second += 1,
         PairAction::RetryFirst => *first -= 1,
-        PairAction::RetrySecond => *second -= 1,
+        // Natively `num2--; continue;`: the loop step brings num2 back to the split edge.
+        PairAction::RetrySecond => {}
         PairAction::Abort => unreachable!("aborted actions return before index updates"),
     }
 }
@@ -108,7 +109,7 @@ pub(super) fn repair_point(
     max_vertex_tolerance: &mut f64,
     counts: &mut RepairCounts<'_>,
     boxes: &mut Vec<boxes::EdgeBox>,
-) -> Result<PairAction, Failure> {
+) -> Result<Option<PairAction>, Failure> {
     let transitions = [point.transition_of_first(), point.transition_of_second()];
     match (
         transitions[0].position_on_curve(),
@@ -180,7 +181,7 @@ fn repair_union(
     second_box: &BoundingBox2,
     counts: &mut RepairCounts<'_>,
     boxes: &mut Vec<boxes::EdgeBox>,
-) -> Result<PairAction, Failure> {
+) -> Result<Option<PairAction>, Failure> {
     let mut replacement = second.clone();
     let unioned = tool.union_vertices(
         wire,
@@ -193,7 +194,7 @@ fn repair_union(
     if unioned {
         *counts.replaced += 1;
     }
-    Ok(PairAction::Next)
+    Ok(None)
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -211,7 +212,7 @@ fn repair_middle_crossing(
     max_vertex_tolerance: &mut f64,
     counts: &mut RepairCounts<'_>,
     boxes: &mut Vec<boxes::EdgeBox>,
-) -> Result<PairAction, Failure> {
+) -> Result<Option<PairAction>, Failure> {
     let first_point = point_on_edge(first, point.param_on_first(), &curves.pcurves[0], face)?;
     let second_point = point_on_edge(second, point.param_on_second(), &curves.pcurves[1], face)?;
     let mut shared_vertex = Vertex::default();
@@ -251,7 +252,7 @@ fn repair_middle_crossing(
         )?
     {
         *counts.split += 1;
-        return Ok(PairAction::RetrySecond);
+        return Ok(Some(PairAction::RetrySecond));
     }
     if !first_adjusted
         && second_adjusted
@@ -266,10 +267,10 @@ fn repair_middle_crossing(
         )?
     {
         *counts.split += 1;
-        return Ok(PairAction::RetryFirst);
+        return Ok(Some(PairAction::RetryFirst));
     }
     if first_adjusted || second_adjusted {
-        return Ok(PairAction::Next);
+        return Ok(None);
     }
     let midpoint = midpoint(first_point, second_point);
     let tolerance = (0.5 * first_point.distance(&second_point) * 1.00001)
@@ -299,13 +300,13 @@ fn repair_middle_crossing(
         boxes,
     )? {
         *counts.split += 1;
-        return Ok(PairAction::RetryFirst);
+        return Ok(Some(PairAction::RetryFirst));
     }
     if second_split {
-        return Ok(PairAction::RetrySecond);
+        return Ok(Some(PairAction::RetrySecond));
     }
     let _ = second_box;
-    Ok(PairAction::Next)
+    Ok(None)
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -369,7 +370,7 @@ fn repair_using_other_edge_vertex(
     max_vertex_tolerance: &mut f64,
     counts: &mut RepairCounts<'_>,
     boxes: &mut Vec<boxes::EdgeBox>,
-) -> Result<PairAction, Failure> {
+) -> Result<Option<PairAction>, Failure> {
     let mut index = edge_index;
     if tool.find_vertex_and_split_edge(
         parameter,
@@ -384,9 +385,9 @@ fn repair_using_other_edge_vertex(
         false,
     )? {
         *counts.split += 1;
-        return Ok(retry);
+        return Ok(Some(retry));
     }
-    Ok(PairAction::Next)
+    Ok(None)
 }
 
 fn midpoint(first: Point3, second: Point3) -> Point3 {
