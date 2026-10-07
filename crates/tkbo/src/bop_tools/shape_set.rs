@@ -100,6 +100,31 @@ impl ShapeSet {
         self.occurrences.append(shape);
     }
 }
+/// `BOPTools_Set::operator==`: the native one-way `IsEqual`.
+impl PartialEq for ShapeSet {
+    fn eq(&self, other: &Self) -> bool {
+        self.is_equal(other)
+    }
+}
+
+/// `std::hash<BOPTools_Set>`: the sum of the normalized occurrence hashes.
+impl rustycad_tkernel::ncollection::HashKey for ShapeSet {
+    fn occt_hash(&self) -> usize {
+        self.sum
+    }
+}
+
+impl std::fmt::Debug for ShapeSet {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("ShapeSet")
+            .field("shape", &self.shape)
+            .field("occurrences", &self.occurrences.len())
+            .field("sum", &self.sum)
+            .finish()
+    }
+}
+
 fn normalized_hash(hash: usize, count: usize) -> usize {
     let normalized = hash % 432123 + 1;
     let threshold = usize::MAX / count;

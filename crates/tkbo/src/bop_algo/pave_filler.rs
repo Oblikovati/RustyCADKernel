@@ -170,6 +170,12 @@ impl BOPAlgoPaveFiller {
         self.context.get()
     }
 
+    /// The shared geometric context (`Context`), null before `initialize`;
+    /// `filler.context_handle().is_null()`.
+    pub fn context_handle(&self) -> Handle<Context> {
+        self.context.clone()
+    }
+
     /// Borrows prepared AABB/OBB candidates; `filler.iterator().is_some()`.
     pub fn iterator(&self) -> Option<&BOPDSIterator> {
         self.iterator.as_ref()

@@ -1,33 +1,66 @@
-//! Argument and result state inherited by General Fuse and Boolean builders.
-use super::{Glue, Options};
-use rustycad_tkbrep::{topods::Shape, toptools::MapOfShape};
-use rustycad_tkernel::ncollection::{DataMap, List};
+//! `BOPAlgo_Builder`: the General Fuse algorithm, building the splits of the arguments from
+//! the intersection results of the pave filler.
+use super::{BOPAlgoPaveFiller, BuilderShape, Glue};
+use crate::int_tools::Context;
+use rustycad_tkbrep::topods::Shape;
+use rustycad_tkbrep::toptools::ShapeMapHasher;
+use rustycad_tkernel::ncollection::{DataMap, List, Map};
+use rustycad_tkernel::standard::{Failure, Handle};
+use std::ops::{Deref, DerefMut};
 
+#[path = "builder/bop.rs"]
+mod bop;
+#[path = "builder/containers.rs"]
+mod containers;
+#[path = "builder/draft_face.rs"]
+mod draft_face;
+#[path = "builder/faces.rs"]
+mod faces;
+#[path = "builder/history.rs"]
+mod history;
 #[path = "builder/images.rs"]
 mod images;
 #[path = "builder/images_edges.rs"]
 mod images_edges;
+#[path = "builder/internal_shapes.rs"]
+mod internal_shapes;
+#[path = "builder/perform.rs"]
+mod perform;
+#[path = "builder/same_domain_faces.rs"]
+mod same_domain_faces;
+#[path = "builder/solids.rs"]
+mod solids;
+#[path = "builder/split_solids.rs"]
+mod split_solids;
+pub use perform::BuilderHooks;
 
-/// The source-pinned argument and option state of `BOPAlgo_Builder`.
-/// Boolean execution is supplied by `BOPAlgo_PaveFiller` and is not part of this state slice.
+/// Shapes and their image, origin or IN-part lists (`myImages`, `myOrigins`, `myInParts`).
+pub type ShapeImages = DataMap<Shape, List<Shape>, ShapeMapHasher>;
+/// Shapes and their same-domain representative (`myShapesSD`).
+pub type SameDomainShapes = DataMap<Shape, Shape, ShapeMapHasher>;
+
+/// The General Fuse algorithm: splits every argument by the others and keeps the images,
+/// origins and same-domain links of all sub-shapes.
 ///
 /// ```
 /// use rustycad_tkbo::bop_algo::BOPAlgoBuilder;
 /// let builder = BOPAlgoBuilder::new();
-/// assert!(builder.arguments().is_empty());
+/// assert!(builder.arguments().is_empty() && builder.shape().is_null());
 /// ```
 pub struct BOPAlgoBuilder {
-    options: Options,
-    shape: Shape,
-    arguments: List<Shape>,
-    argument_fence: MapOfShape,
-    images: DataMap<Shape, List<Shape>, rustycad_tkbrep::toptools::ShapeMapHasher>,
-    origins: DataMap<Shape, List<Shape>, rustycad_tkbrep::toptools::ShapeMapHasher>,
-    shapes_sd: DataMap<Shape, Shape, rustycad_tkbrep::toptools::ShapeMapHasher>,
-    non_destructive: bool,
-    glue: Glue,
-    check_inverted: bool,
-    fill_history: bool,
+    base: BuilderShape,
+    pub(super) arguments: List<Shape>,
+    argument_fence: Map<Shape, ShapeMapHasher>,
+    /// The filler created by `perform` (`myPaveFiller` at entry point 1).
+    pub(super) filler: Option<BOPAlgoPaveFiller>,
+    pub(super) context: Handle<Context>,
+    pub(super) images: ShapeImages,
+    pub(super) shapes_sd: SameDomainShapes,
+    pub(super) origins: ShapeImages,
+    pub(super) in_parts: ShapeImages,
+    pub(super) non_destructive: bool,
+    pub(super) glue: Glue,
+    pub(super) check_inverted: bool,
 }
 
 impl Default for BOPAlgoBuilder {
@@ -36,32 +69,49 @@ impl Default for BOPAlgoBuilder {
     }
 }
 
+impl Deref for BOPAlgoBuilder {
+    type Target = BuilderShape;
+    fn deref(&self) -> &BuilderShape {
+        &self.base
+    }
+}
+
+impl DerefMut for BOPAlgoBuilder {
+    fn deref_mut(&mut self) -> &mut BuilderShape {
+        &mut self.base
+    }
+}
+
 impl BOPAlgoBuilder {
-    /// Creates builder state with OCCT defaults; `BOPAlgoBuilder::new()`.
+    /// A builder with no arguments and the native defaults (`BOPAlgo_Builder()`).
+    /// `BOPAlgoBuilder::new()`.
     pub fn new() -> Self {
         Self {
-            options: Options::new(),
-            shape: Shape::default(),
+            base: BuilderShape::new(),
             arguments: List::default(),
-            argument_fence: MapOfShape::default(),
-            images: DataMap::default(),
-            origins: DataMap::default(),
-            shapes_sd: DataMap::default(),
+            argument_fence: Map::with_hasher(ShapeMapHasher, 100),
+            filler: None,
+            context: Handle::default(),
+            images: DataMap::with_hasher(ShapeMapHasher, 100),
+            shapes_sd: DataMap::with_hasher(ShapeMapHasher, 100),
+            origins: DataMap::with_hasher(ShapeMapHasher, 100),
+            in_parts: DataMap::with_hasher(ShapeMapHasher, 100),
             non_destructive: false,
             glue: Glue::Off,
             check_inverted: true,
-            fill_history: true,
         }
     }
 
-    /// Adds a unique shape identity; reversed occurrences are duplicates; `builder.add_argument(shape)`.
+    /// Adds a unique shape identity; reversed occurrences are duplicates (`AddArgument`).
+    /// `builder.add_argument(&shape)`.
     pub fn add_argument(&mut self, shape: &Shape) {
         if self.argument_fence.add(shape.clone()) {
             self.arguments.append(shape.clone());
         }
     }
 
-    /// Replaces listed arguments while preserving the native fence until `clear`; `builder.set_arguments(&shapes)`.
+    /// Replaces the argument list, the fence kept until `clear` (`SetArguments`).
+    /// `builder.set_arguments(&shapes)`.
     pub fn set_arguments(&mut self, shapes: &List<Shape>) {
         self.arguments.clear();
         for shape in shapes.iter() {
@@ -69,75 +119,86 @@ impl BOPAlgoBuilder {
         }
     }
 
-    /// Borrows the unique argument list; `builder.arguments().len()`.
+    /// The unique arguments (`Arguments`); `builder.arguments().len()`.
     pub fn arguments(&self) -> &List<Shape> {
         &self.arguments
     }
 
-    /// Clears report, result, argument and shape maps while retaining configuration; `builder.clear()`.
+    /// Clears the report, the history, the arguments and the image maps, keeping the
+    /// options (`Clear`); `builder.clear()`.
     pub fn clear(&mut self) {
-        self.options.clear();
-        self.shape = Shape::default();
+        self.base.clear();
         self.arguments.clear();
         self.argument_fence.clear(false);
         self.images.clear(false);
-        self.origins.clear(false);
         self.shapes_sd.clear(false);
+        self.origins.clear(false);
+        self.in_parts.clear(false);
     }
 
-    /// Returns the current result shape, null before an execution algorithm is connected.
-    /// Example: `assert!(BOPAlgoBuilder::new().shape().is_null())`.
-    pub fn shape(&self) -> &Shape {
-        &self.shape
+    /// The filler created by `perform` (`PPaveFiller`); `None` after `perform_with_filler`.
+    /// `builder.pave_filler()`.
+    pub fn pave_filler(&self) -> Option<&BOPAlgoPaveFiller> {
+        self.filler.as_ref()
     }
 
-    /// Reads non-destructive mode; `builder.non_destructive()`.
-    pub fn non_destructive(&self) -> bool {
-        self.non_destructive
+    /// The geometric context of the last run (`Context`); `builder.context()`.
+    pub fn context(&self) -> &Handle<Context> {
+        &self.context
     }
 
-    /// Sets non-destructive mode; `builder.set_non_destructive(true)`.
+    /// Sets the non-destructive mode (`SetNonDestructive`); `builder.set_non_destructive(true)`.
     pub fn set_non_destructive(&mut self, enabled: bool) {
         self.non_destructive = enabled;
     }
 
-    /// Reads glue mode; `builder.glue()`.
-    pub fn glue(&self) -> Glue {
-        self.glue
+    /// The non-destructive mode (`NonDestructive`); `builder.non_destructive()`.
+    pub fn non_destructive(&self) -> bool {
+        self.non_destructive
     }
 
-    /// Sets glue mode; `builder.set_glue(Glue::Shift)`.
+    /// Sets the glue mode (`SetGlue`); `builder.set_glue(Glue::Shift)`.
     pub fn set_glue(&mut self, glue: Glue) {
         self.glue = glue;
     }
 
-    /// Reads inverted-solid checking mode; `builder.check_inverted()`.
+    /// The glue mode (`Glue`); `builder.glue()`.
+    pub fn glue(&self) -> Glue {
+        self.glue
+    }
+
+    /// Sets the inverted-solid check (`SetCheckInverted`); `builder.set_check_inverted(false)`.
+    pub fn set_check_inverted(&mut self, check: bool) {
+        self.check_inverted = check;
+    }
+
+    /// The inverted-solid check (`CheckInverted`); `builder.check_inverted()`.
     pub fn check_inverted(&self) -> bool {
         self.check_inverted
     }
 
-    /// Sets inverted-solid checking mode; `builder.set_check_inverted(false)`.
-    pub fn set_check_inverted(&mut self, enabled: bool) {
-        self.check_inverted = enabled;
+    /// The splits of the sub-shapes of the arguments (`Images`); `builder.images()`.
+    pub fn images(&self) -> &ShapeImages {
+        &self.images
     }
 
-    /// Reads history collection mode; `builder.has_history()`.
-    pub fn has_history(&self) -> bool {
-        self.fill_history
+    /// The sub-shapes of the arguments each split comes from (`Origins`); `builder.origins()`.
+    pub fn origins(&self) -> &ShapeImages {
+        &self.origins
     }
 
-    /// Sets history collection mode; `builder.set_to_fill_history(false)`.
-    pub fn set_to_fill_history(&mut self, enabled: bool) {
-        self.fill_history = enabled;
+    /// The same-domain representative of the splits (`ShapesSD`); `builder.shapes_sd()`.
+    pub fn shapes_sd(&self) -> &SameDomainShapes {
+        &self.shapes_sd
     }
 
-    /// Borrows the configured algorithm options; `builder.options().fuzzy_value()`.
-    pub fn options(&self) -> &Options {
-        &self.options
+    /// The solids and the faces inside them (`myInParts`); `builder.in_parts()`.
+    pub fn in_parts(&self) -> &ShapeImages {
+        &self.in_parts
     }
+}
 
-    /// Mutably borrows algorithm options; `builder.options_mut().set_fuzzy_value(0.1)`.
-    pub fn options_mut(&mut self) -> &mut Options {
-        &mut self.options
-    }
+/// The context taken from the pave filler.
+fn required_context(handle: &Handle<Context>) -> Result<&Context, Failure> {
+    super::builder_area::required_context(handle, "BOPAlgo_Builder")
 }
