@@ -355,7 +355,7 @@ fn face_wire_allows_join(
 fn wire_pair_allows_join(wire: &Wire, pair: &CandidatePair) -> Result<Option<bool>, Failure> {
     let tool = ShapeFixWire::new();
     tool.load(wire)?;
-    tool.fix_reorder()?;
+    tool.fix_reorder(false)?;
     let data = tool.wire_data()?;
     let first = data.index(&pair.first)?;
     let second = data.index(&pair.second)?;

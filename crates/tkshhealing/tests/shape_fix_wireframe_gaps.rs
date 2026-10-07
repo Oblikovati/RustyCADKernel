@@ -222,7 +222,7 @@ fn repeated_wire_gap_pass_resets_previous_done_status() {
     let wire = topods::wire(&fixture(1)).unwrap();
     let tool = rustycad_tkshhealing::shape_fix::ShapeFixWire::new();
     tool.load(&wire).unwrap();
-    tool.fix_reorder().unwrap();
+    tool.fix_reorder(false).unwrap();
     let first = tool.fix_gaps_3d().unwrap();
     let done = tool.status_gaps_3d(ShapeExtendStatus::Done);
     let second = tool.fix_gaps_3d().unwrap();
@@ -257,7 +257,7 @@ fn native_range_mode_preserves_lines_and_falls_back_for_closed_line() {
         let tool = rustycad_tkshhealing::shape_fix::ShapeFixWire::new();
         assert!(!tool.fix_gaps_by_ranges());
         tool.load(&topods::wire(&fixture(mode)).unwrap()).unwrap();
-        tool.fix_reorder().unwrap();
+        tool.fix_reorder(false).unwrap();
         tool.set_fix_gaps_by_ranges(true);
         let changed = tool.fix_gaps_3d().unwrap();
         let mut actual = vec![

@@ -90,7 +90,7 @@ fn prepared_wire_fixer(
     let tool = ShapeFixWire::new();
     tool.set_context(context);
     tool.load(wire)?;
-    tool.fix_reorder()?;
+    tool.fix_reorder(false)?;
     Ok(tool)
 }
 

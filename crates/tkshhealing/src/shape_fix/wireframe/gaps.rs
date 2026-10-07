@@ -184,7 +184,7 @@ impl ShapeFixWireframe {
         on_face: bool,
         cleanup: bool,
     ) -> Result<(), Failure> {
-        tool.fix_reorder()?;
+        tool.fix_reorder(false)?;
         if cleanup {
             return cleanup_gap_wire(tool, &topods::wire(source)?);
         }

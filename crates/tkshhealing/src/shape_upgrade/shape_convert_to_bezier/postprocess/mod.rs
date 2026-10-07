@@ -39,7 +39,7 @@ fn process_wire(
     fixer.load(wire)?;
     fixer.set_face(face)?;
     fixer.set_precision(tool.shape_divide_base().with(|fields| fields.precision));
-    fixer.fix_reorder()?;
+    fixer.fix_reorder(false)?;
     fixer.fix_shifted()?;
     let wire_data = fixer.wire_data()?;
     edges::process_wire_edges(tool, face, &wire_data)

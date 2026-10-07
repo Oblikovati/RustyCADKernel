@@ -97,7 +97,7 @@ fn assert_box_wire_fixes(
     let fixer = ShapeFixWire::new();
     fixer.init(&analyzer);
     analyzer.set_face(face).unwrap();
-    assert!(fixer.fix_reorder().unwrap());
+    assert!(fixer.fix_reorder(false).unwrap());
     assert!(fixer.status_reorder(ShapeExtendStatus::Done1));
     assert!(fixer.status_reorder(ShapeExtendStatus::Done5));
     assert!(!fixer.status_reorder(ShapeExtendStatus::Fail));

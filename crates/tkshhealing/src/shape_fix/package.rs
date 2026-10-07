@@ -44,6 +44,8 @@ fn sampled_edge_extent(edge: &Edge) -> Result<f64, Failure> {
 }
 
 mod plane_tolerances;
+mod remove_small_edges;
+pub use remove_small_edges::ShapeFixRemovedSmallEdges;
 mod same_parameter;
 
 #[cfg(test)]
