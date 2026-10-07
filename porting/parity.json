@@ -446572,6 +446572,1166 @@
       "rust_item": "rustycad_tkservice::image::ImageColorBgraf::a_mut",
       "status": "implemented",
       "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "IWICPalette",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: WinCodec palette forward declaration; the Windows image codec is not in the Linux configuration (visualization-design.md section 2)."
+    },
+    {
+      "upstream_id": "FIBITMAP",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FreeImage bitmap forward declaration; the oracle build has USE_FREEIMAGE=OFF (visualization-design.md section 2)."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::IsTopDownDefault",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::is_top_down_default",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::Image_AlienPixMap()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::Load(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::load",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Without an image library the load clears the image and fails with \"Error: no image library available\"."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::Load(std::istream &,const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::load_stream",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Without an image library the load clears the image and fails with \"Error: no image library available\"."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::Load(const uint8_t *,const size_t,const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::load_bytes",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Without an image library the load clears the image and fails with \"Error: no image library available\"."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::Save(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::save",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Writes binary PPM whatever the extension (the native branch without image library)."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::Save(std::ostream &,const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::save_stream",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Fails without an image library, as natively."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::Save(uint8_t *,const size_t,const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::save_bytes",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::InitTrash",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::init_trash",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::InitCopy",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::init_copy",
+      "status": "partial",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Partial: the override is an inherent method that shadows ImagePixMap::init_copy; a call through a Handle<ImagePixMap> reaches the base member."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::Clear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::clear",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_AlienPixMap::AdjustGamma",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_AlienPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageAlienPixMap::adjust_gamma",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. False without an image library, as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::BaseFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::base_format",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::SetBaseFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::set_base_format",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::CompressedFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::compressed_format",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::SetCompressedFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::set_compressed_format",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::FaceData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::face_data",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::SetFaceData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::set_face_data",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::MipMaps",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::mip_maps",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::ChangeMipMaps",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::change_mip_maps",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. The guard gives the mip_maps field (the 0-based array) for writing."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::IsCompleteMipMapSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::is_complete_mip_map_set",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::SetCompleteMipMapSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::set_complete_mip_map_set",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::FaceBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::face_bytes",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::SetFaceBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::set_face_bytes",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::SizeX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::size_x",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::SizeY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::size_y",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::SetSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::set_size",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::IsTopDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::is_top_down",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::NbFaces",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::nb_faces",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::SetNbFaces",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::set_nb_faces",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::Image_CompressedPixMap()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::myMipMaps",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMapFields::mip_maps",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::myFaceData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMapFields::face_data",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::myFaceBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMapFields::face_bytes",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::myNbFaces",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMapFields::nb_faces",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::mySizeX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMapFields::size_x",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::mySizeY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMapFields::size_y",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::myBaseFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMapFields::base_format",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::myFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMapFields::format",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap::myIsCompleteMips",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedPixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMapFields::is_complete_mips",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_DDSParser",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_DDSParser.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDdsParser",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_DDSParser::Load(const occ::handle<Image_SupportedFormats> &,const TCollection_AsciiString &,const int,const int64_t)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_DDSParser.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDdsParser::load",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_DDSParser::Load(const occ::handle<Image_SupportedFormats> &,const occ::handle<NCollection_Buffer> &,const int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_DDSParser.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDdsParser::load_buffer",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::Image_Diff()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::Init(const occ::handle<Image_PixMap> &,const occ::handle<Image_PixMap> &,const bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff::init",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Returns the Standard_OutOfRange that ToBlackWhite raises for float pixels outside [0, 1]."
+    },
+    {
+      "upstream_id": "Image_Diff::Init(const TCollection_AsciiString &,const TCollection_AsciiString &,const bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff::init_files",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Always fails without an image library, as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::SetColorTolerance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff::set_color_tolerance",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::ColorTolerance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff::color_tolerance",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::SetBorderFilterOn",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff::set_border_filter_on",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::IsBorderFilterOn",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff::is_border_filter_on",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::Compare",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff::compare",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Returns the Standard_OutOfRange that PixelColor raises for float pixels outside [0, 1]."
+    },
+    {
+      "upstream_id": "Image_Diff::SaveDiffImage(Image_PixMap &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff::save_diff_image",
+      "status": "partial",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Partial: for the 8-bit RGB formats with grouped pixels the native code memsets through the pixel bytes reinterpreted as a pointer (ChangeValue<uint8_t*>, undefined behaviour); Rust paints the pixel as the ungrouped branch does."
+    },
+    {
+      "upstream_id": "Image_Diff::SaveDiffImage(const TCollection_AsciiString &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiff::save_diff_image_file",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::ignoreBorderEffect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: protected step of rustycad_tkservice::image::ImageDiff::compare, which runs it with the border filter on; Rust keeps it private."
+    },
+    {
+      "upstream_id": "Image_Diff::releaseGroupsOfDiffPixels",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: protected step of rustycad_tkservice::image::ImageDiff::init and compare; Rust keeps it private."
+    },
+    {
+      "upstream_id": "Image_Diff::PackXY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::image_diff_pack_xy",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::UnpackX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::image_diff_unpack_x",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::UnpackY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::image_diff_unpack_y",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::myImageRef",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiffFields::image_ref",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::myImageNew",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiffFields::image_new",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::myColorTolerance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiffFields::color_tolerance",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::myIsBorderFilterOn",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiffFields::is_border_filter_on",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::myDiffPixels",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiffFields::diff_pixels",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::myLinearGroups",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiffFields::linear_groups",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Diff::myGroupsOfDiffPixels",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Diff.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageDiffFields::groups_of_diff_pixels",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. The groups are PackedMap<i32> values (natively shared TColStd_HPackedMapOfInteger handles)."
+    },
+    {
+      "upstream_id": "Image_SupportedFormats::Image_SupportedFormats()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_SupportedFormats.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageSupportedFormats::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_SupportedFormats::IsSupported(Image_Format) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_SupportedFormats.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageSupportedFormats::is_supported",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_SupportedFormats::Add(Image_Format)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_SupportedFormats.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageSupportedFormats::add",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_SupportedFormats::HasCompressed",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_SupportedFormats.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageSupportedFormats::has_compressed",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_SupportedFormats::IsSupported(Image_CompressedFormat) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_SupportedFormats.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageSupportedFormats::is_supported_compressed",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_SupportedFormats::Add(Image_CompressedFormat)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_SupportedFormats.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageSupportedFormats::add_compressed",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_SupportedFormats::Clear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_SupportedFormats.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageSupportedFormats::clear",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_SupportedFormats::myFormats",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_SupportedFormats.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: protected flag array; rustycad_tkservice::image::ImageSupportedFormats keeps it private and is_supported/add read and write it."
+    },
+    {
+      "upstream_id": "Image_SupportedFormats::myHasCompressed",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_SupportedFormats.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: protected flag; rustycad_tkservice::image::ImageSupportedFormats keeps it private and has_compressed/add_compressed read and write it."
+    },
+    {
+      "upstream_id": "Image_Texture::Image_Texture(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTexture::new",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::Image_Texture(const TCollection_AsciiString &,int64_t,int64_t)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTexture::with_range",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::Image_Texture(const occ::handle<NCollection_Buffer> &,const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTexture::with_buffer",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::TextureId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureMembers::texture_id",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::FilePath",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureMembers::file_path",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::FileOffset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureMembers::file_offset",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::FileLength",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureMembers::file_length",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::DataBuffer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureMembers::data_buffer",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::MimeType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureMembers::mime_type",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::ProbeImageFileFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureMembers::probe_image_file_format",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Native quirk kept: a file error returns \"0\" (return false converted to TCollection_AsciiString(int))."
+    },
+    {
+      "upstream_id": "Image_Texture::ReadCompressedImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureSource::read_compressed_image",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::ReadImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureSource::read_image",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::WriteImage(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureSource::write_image",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::WriteImage(std::ostream &,const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureSource::write_image_stream",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureSource::dump_json",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::loadImageFile",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureSource::load_image_file",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::loadImageOffset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureSource::load_image_offset",
+      "status": "partial",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Partial: without an image library the stream is never decoded, so the positioned file stream is not handed to the loader."
+    },
+    {
+      "upstream_id": "Image_Texture::loadImageBuffer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureSource::load_image_buffer",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::myTextureId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureBase::texture_id",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::myImagePath",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureBase::image_path",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::myBuffer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureBase::buffer",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::myOffset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureBase::offset",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_Texture::myLength",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureBase::length",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "std::equal_to<opencascade::handle<Image_Texture>>::operator()(const occ::handle<Image_Texture> &,const occ::handle<Image_Texture> &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureHashPolicy::<rustycad_tkernel::ncollection::HashPolicy>::equal",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "std::hash<opencascade::handle<Image_Texture>>::operator()(const occ::handle<Image_Texture> &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageTextureHashPolicy::<rustycad_tkernel::ncollection::HashPolicy>::hash",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "AVFormatContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg forward declaration; the oracle build has USE_FFMPEG=OFF (visualization-design.md section 2)."
+    },
+    {
+      "upstream_id": "AVCodecContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg forward declaration; the oracle build has USE_FFMPEG=OFF (visualization-design.md section 2)."
+    },
+    {
+      "upstream_id": "AVStream",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg forward declaration; the oracle build has USE_FFMPEG=OFF (visualization-design.md section 2)."
+    },
+    {
+      "upstream_id": "AVCodec",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg forward declaration; the oracle build has USE_FFMPEG=OFF (visualization-design.md section 2)."
+    },
+    {
+      "upstream_id": "AVFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg forward declaration; the oracle build has USE_FFMPEG=OFF (visualization-design.md section 2)."
+    },
+    {
+      "upstream_id": "SwsContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg forward declaration; the oracle build has USE_FFMPEG=OFF (visualization-design.md section 2)."
+    },
+    {
+      "upstream_id": "Image_VideoParams",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::Format",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::format",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::VideoCodec",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::video_codec",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::PixelFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::pixel_format",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::Width",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::width",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::Height",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::height",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::FpsNum",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::fps_num",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::FpsDen",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::fps_den",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::VideoCodecParams",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::video_codec_params",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::Image_VideoParams()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::SetFramerate(const int,const int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::set_framerate_fraction",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoParams::SetFramerate(const int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoParams::set_framerate",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::Image_VideoRecorder()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::Close",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::close",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::Open",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::open",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Native quirk kept: without FFmpeg Open returns true and opens nothing."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::ChangeFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::change_frame",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::FrameCount",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::frame_count",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::PushFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::push_frame",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. False without FFmpeg."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::formatAvError",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::format_av_error",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::getCodecContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::get_codec_context",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. The AVCodecContext* address; 0 without FFmpeg."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::addVideoStream",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::add_video_stream",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::openVideoCodec",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::open_video_codec",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::writeVideoFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRecorder::write_video_frame",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::VideoRational",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRational",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::VideoRational::num",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRational::num",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::VideoRational::den",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageVideoRational::den",
+      "status": "implemented",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::myAVContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg handle, always null in the USE_FFMPEG=OFF configuration; rustycad_tkservice::image::ImageVideoRecorder has no FFmpeg state."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::myVideoStream",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg handle, always null in the USE_FFMPEG=OFF configuration; rustycad_tkservice::image::ImageVideoRecorder has no FFmpeg state."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::myVideoCodec",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg handle, always null in the USE_FFMPEG=OFF configuration; rustycad_tkservice::image::ImageVideoRecorder has no FFmpeg state."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::myCodecCtx",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg handle, always null in the USE_FFMPEG=OFF configuration; rustycad_tkservice::image::ImageVideoRecorder::get_codec_context reports it."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::myFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg frame, always null in the USE_FFMPEG=OFF configuration; rustycad_tkservice::image::ImageVideoRecorder has no FFmpeg state."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::myScaleCtx",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: FFmpeg scaler, always null in the USE_FFMPEG=OFF configuration; rustycad_tkservice::image::ImageVideoRecorder has no FFmpeg state."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::myImgSrcRgba",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: protected frame image; rustycad_tkservice::image::ImageVideoRecorder keeps it private and change_frame gives it."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::myFrameRate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: protected frame rate; rustycad_tkservice::image::ImageVideoRecorder keeps it private and frame_rate gives it."
+    },
+    {
+      "upstream_id": "Image_VideoRecorder::myFrameCount",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_VideoRecorder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image mapping (docs/visualization-design.md sections 1 and 2): transients keep their fields in one SharedState; the image-library (FreeImage, WinCodec) and FFmpeg branches are not in the oracle configuration, so the port is the branch that configuration compiles; C++ streams are std::io readers and writers; failures are reported to the default messenger as natively. Excluded: protected counter; rustycad_tkservice::image::ImageVideoRecorder keeps it private and frame_count gives it."
     }
   ],
   "tests": [
@@ -553764,6 +554924,90 @@
       "rust_target": "aspect_grid_params_test",
       "rust_test": "Aspect_GridParamsTest__Setters_RejectNegativeValues",
       "rust_source": "crates/tkservice/tests/aspect_grid_params_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Image_VideoRecorderTest.DefaultConstructor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Image_VideoRecorder_Test.cxx",
+      "source_sha256": "c64e6f41325b0541854dec092ff760e6193f8fd303af1df7953236be8b20bc75",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "image_video_recorder_test",
+      "rust_test": "Image_VideoRecorderTest__DefaultConstructor",
+      "rust_source": "crates/tkservice/tests/image_video_recorder_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Image_VideoRecorderTest.VideoParamsStructure",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Image_VideoRecorder_Test.cxx",
+      "source_sha256": "c64e6f41325b0541854dec092ff760e6193f8fd303af1df7953236be8b20bc75",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "image_video_recorder_test",
+      "rust_test": "Image_VideoRecorderTest__VideoParamsStructure",
+      "rust_source": "crates/tkservice/tests/image_video_recorder_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Image_VideoRecorderTest.OpenVideoFile",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Image_VideoRecorder_Test.cxx",
+      "source_sha256": "c64e6f41325b0541854dec092ff760e6193f8fd303af1df7953236be8b20bc75",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "image_video_recorder_test",
+      "rust_test": "Image_VideoRecorderTest__OpenVideoFile",
+      "rust_source": "crates/tkservice/tests/image_video_recorder_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Image_VideoRecorderTest.InvalidParameters",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Image_VideoRecorder_Test.cxx",
+      "source_sha256": "c64e6f41325b0541854dec092ff760e6193f8fd303af1df7953236be8b20bc75",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "image_video_recorder_test",
+      "rust_test": "Image_VideoRecorderTest__InvalidParameters",
+      "rust_source": "crates/tkservice/tests/image_video_recorder_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Image_VideoRecorderTest.WriteFrames",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Image_VideoRecorder_Test.cxx",
+      "source_sha256": "c64e6f41325b0541854dec092ff760e6193f8fd303af1df7953236be8b20bc75",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "image_video_recorder_test",
+      "rust_test": "Image_VideoRecorderTest__WriteFrames",
+      "rust_source": "crates/tkservice/tests/image_video_recorder_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Image_VideoRecorderTest.CloseWithoutOpen",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Image_VideoRecorder_Test.cxx",
+      "source_sha256": "c64e6f41325b0541854dec092ff760e6193f8fd303af1df7953236be8b20bc75",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "image_video_recorder_test",
+      "rust_test": "Image_VideoRecorderTest__CloseWithoutOpen",
+      "rust_source": "crates/tkservice/tests/image_video_recorder_test.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
