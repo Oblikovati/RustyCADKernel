@@ -1,11 +1,11 @@
 # TKHLR port status
 
-**Intrv, TopBas, TopCnx and HLRAlgo are ported; the other packages follow in the order below.**
+**All eight packages are ported: Intrv, TopBas, TopCnx, Contap, HLRAlgo, HLRTopoBRep,
+HLRBRep and HLRAppli.**
 `crates/tkhlr` (`rustycad-tkhlr`) is the port of the ModelingAlgorithms toolkit TKHLR.
 It depends on the TKernel, TKMath, TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo and
 TKTopAlgo ports, as the native toolkit does (its EXTERNLIB). Each of the 8 OCCT packages
-is one module of the crate, declared up front in `src/lib.rs`; a module whose package
-is not ported yet holds only its documentation. Ported: Intrv, TopBas, TopCnx, HLRAlgo.
+is one module of the crate, declared up front in `src/lib.rs`.
 
 [hlr-design.md](hlr-design.md) fixes how the C++ constructs of the packages map to Rust
 and gives the class order of the HLRTopoBRep, HLRBRep and HLRAppli work.
@@ -21,13 +21,13 @@ ported):
 | 4 | HLRBRep |
 | 5 | HLRAppli |
 
-The toolkit test inventory has two suites. Both test HLRBRep classes, so they wait for
-the HLRBRep port and are not mapped yet:
+The toolkit test inventory has two suites, translated one to one (each `TEST` is a
+`#[test]` named `Suite__Test`):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
-| HLRBRep_Data_Test.cxx | waits for HLRBRep | - | - | - |
-| HLRBRep_InternalAlgo_Test.cxx | waits for HLRBRep | - | - | - |
+| HLRBRep_Data_Test.cxx | `hlrbrep_data_test` | 3 | pass | pass |
+| HLRBRep_InternalAlgo_Test.cxx | `hlrbrep_internalalgo_test` | 1 | pass | pass |
 
 ## Numeric corpus
 
@@ -331,3 +331,52 @@ covers real conic/spline/swept surfaces, locations, trims, derivatives and sampl
 The declared Axis member is undefined in pinned OCCT: its oracle first compiles the
 call, then requires the specific missing-symbol linker error. This remains an
 upstream-unimplemented API gap and is not recorded as an exclusion or parity pass.
+
+## HLRTopoBRep, HLRBRep and HLRAppli
+
+The exact hidden line chain is ported class by class in the order of
+[hlr-design.md](hlr-design.md) section 2, and the polyhedral chain beside it. The
+families of `tools/tkhlr_corpus_hlrbrep.py` (5,840 requests) compare every result bit
+for bit:
+
+| Family | Requests | What is compared |
+| --- | ---: | --- |
+| `hb_curve` | 600 | `HLRBRep_Curve` on every curve kind under parallel and perspective views: the projected type, line data, values, derivatives, poles and `HLRBRep_CurveTool` |
+| `hb_cinter` | 800 | the `HLRBRep_CInter` instances (domains, self and pair intersections, the projection of a point) |
+| `hb_surface` | 900 | `HLRBRep_Surface`, `SurfaceTool`, `SLProps` and the `InterCSurf` instances on sight lines (analytic and polyhedral) |
+| `hb_edgedata`, `hb_facedata`, `hb_edgeface` | 1,200 | the edge and face records, `FaceIterator`, `EdgeFaceTool` and `MakeEdge`/`MakeEdge3d` |
+| `ht_outliner` | 240 | `HLRTopoBRep_OutLiner::Fill` with `DSFiller` and `FaceIsoLiner`: the outlined shape and the data structure |
+| `hb_intersector` | 600 | `HLRBRep_Intersector`: self and pair intersections (moved ends, shared ends), the simulated point and the sight lines on faces |
+| `hb_data` | 320 | `ShapeToHLR::Load` and `HLRBRep_Data`: the records after Load and Update, and the hiding walk of every hiding face (interferences, rejections, classification, levels) |
+| `hb_hider` | 400 | `HLRBRep_Hider` by every hiding face: the visible parts of every edge |
+| `hb_algo` | 360 | `HLRBRep_Algo` on one to three shapes with `Hide`, `PartialHide` or the shape-by-shape hide, and every `HLRToShape` compound |
+| `hb_reflect` | 120 | `HLRAppli_ReflectLines` |
+| `hb_poly` | 300 | `HLRBRep_PolyAlgo` and `PolyHLRToShape` on shapes meshed by the deterministic grid and fan mesher both probes share |
+
+### HLRBRep quirks kept
+
+- `HLRBRep_Curve::D0` under the type-0 view leaves the point unchanged; `D3` and `DN`
+  are empty; `NbSamplesU/V(S, u1, u2)` keep the reversed span ratio and the x86
+  truncation of the sample count.
+- `HLRBRep_Intersector::Perform` on two edges doubles the moved-end shifts while the
+  closest moved ends are within 1000 tolerances; its stop test reads `b2 <= 0` where
+  the others read `< 0`.
+- `HLRBRep_Data::InitBoundSort` and the box rejections skip the second test of the
+  last direction; `HLRBRep_InternalAlgo::Hide(I, J)` skips one more (`I.Max[6] -
+  J.Min[6]`). `Update` writes the integer boxes with the x86 truncating conversion.
+- `NextEdge` sets the hide count of the final current edge once per skipped own edge,
+  as its native recursion does on return.
+- `ShapeToHLR::Load` keeps the native vertex index of an edge end and the infinite
+  parameter of an end without vertex; `EdgeBuilder` is compiled with `No_Exception`
+  (no refusal of an empty list).
+- `HLRBRep_PolyAlgo::InitBiPointsWithConnexity` reads the last node of the second
+  polygon at the size of the first one and flags the node of face 1 twice in its loop;
+  `Normal` transforms the normal with the translation in a parallel view.
+
+Deviations (docs/hlr-design.md section 6): the transients (`Data`, `InternalAlgo`,
+`Algo`, `PolyAlgo`) keep their members behind locks and return copies or write guards
+where the native accessors return references; the `ED` argument of `Compare`,
+`Classify`, `SimplClassify` and `HidingStartLevel` is the record `E` they read; the
+projector of the data structure is edited through `change_projector`; the overloads
+take suffixes; an ON interference with an UNKNOWN state before it moves the Hider on
+where the native loop does not (the state is never UNKNOWN).
