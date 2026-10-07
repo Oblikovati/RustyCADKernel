@@ -43,7 +43,7 @@ pub use curve_surface::{
 };
 pub use curve_tool::{ExtremaCurveTool, SplineKnots, ToolD1, ToolD2, ToolD3};
 pub use curve_tools::{Curve2dTool, CurveTool};
-pub use elementary_point_curve::ElementaryPointCurve;
+pub use elementary_point_curve::{ElementaryPointCurve, PointCurveExtrema};
 pub use ext_el_c::ExtElC;
 pub use ext_el_c2d::ExtElC2d;
 pub use ext_el_cs::ExtElCS;
@@ -52,6 +52,7 @@ pub use ext_p_el_c::ExtPElC;
 pub use ext_p_el_c2d::ExtPElC2d;
 pub use ext_p_el_s::ExtPElS;
 pub use gp_space::{GpPoint, GpVector};
+pub use pair_result::CurvePairExtrema;
 pub use point_curve::{
     ELPCOfLocateExtPC, ELPCOfLocateExtPC2d, EPCOfELPCOfLocateExtPC, EPCOfELPCOfLocateExtPC2d,
     EPCOfExtPC, EPCOfExtPC2d, ExtPC, ExtPC2d, GCurveLocator, GFuncExtPC, GGExtPC, GGenExtPC,

@@ -133,17 +133,20 @@ pub trait DirectCurve {
 #[derive(Clone, Copy, Debug, Default)]
 pub struct DirectAccess;
 
-impl<C: DirectCurve> CurveAccess<C, C::Vector> for DirectAccess {
-    fn d0(curve: &C, u: f64) -> Result<<C::Vector as PropsVector>::Point, Failure> {
+// The vector is a named parameter bound by `Vector = V` rather than the projection
+// `C::Vector`: the API inventory cannot spell a projection in a trait argument and
+// would drop the whole impl.
+impl<V: PropsVector, C: DirectCurve<Vector = V>> CurveAccess<C, V> for DirectAccess {
+    fn d0(curve: &C, u: f64) -> Result<V::Point, Failure> {
         curve.props_d0(u)
     }
-    fn d1(curve: &C, u: f64) -> Result<CurveD1<C::Vector>, Failure> {
+    fn d1(curve: &C, u: f64) -> Result<CurveD1<V>, Failure> {
         curve.props_d1(u)
     }
-    fn d2(curve: &C, u: f64) -> Result<CurveD2<C::Vector>, Failure> {
+    fn d2(curve: &C, u: f64) -> Result<CurveD2<V>, Failure> {
         curve.props_d2(u)
     }
-    fn d3(curve: &C, u: f64) -> Result<CurveD3<C::Vector>, Failure> {
+    fn d3(curve: &C, u: f64) -> Result<CurveD3<V>, Failure> {
         curve.props_d3(u)
     }
     fn first_parameter(curve: &C) -> Result<f64, Failure> {
@@ -178,17 +181,18 @@ pub trait CurveTool<C> {
 #[derive(Clone, Copy, Debug, Default)]
 pub struct ToolAccess<Tool>(PhantomData<Tool>);
 
-impl<C, Tool: CurveTool<C>> CurveAccess<C, Tool::Vector> for ToolAccess<Tool> {
-    fn d0(curve: &C, u: f64) -> Result<<Tool::Vector as PropsVector>::Point, Failure> {
+// `Vector = V` instead of `Tool::Vector`, for the same inventory reason as above.
+impl<V: PropsVector, C, Tool: CurveTool<C, Vector = V>> CurveAccess<C, V> for ToolAccess<Tool> {
+    fn d0(curve: &C, u: f64) -> Result<V::Point, Failure> {
         Tool::value(curve, u)
     }
-    fn d1(curve: &C, u: f64) -> Result<CurveD1<Tool::Vector>, Failure> {
+    fn d1(curve: &C, u: f64) -> Result<CurveD1<V>, Failure> {
         Tool::d1(curve, u)
     }
-    fn d2(curve: &C, u: f64) -> Result<CurveD2<Tool::Vector>, Failure> {
+    fn d2(curve: &C, u: f64) -> Result<CurveD2<V>, Failure> {
         Tool::d2(curve, u)
     }
-    fn d3(curve: &C, u: f64) -> Result<CurveD3<Tool::Vector>, Failure> {
+    fn d3(curve: &C, u: f64) -> Result<CurveD3<V>, Failure> {
         Tool::d3(curve, u)
     }
     fn first_parameter(curve: &C) -> Result<f64, Failure> {
