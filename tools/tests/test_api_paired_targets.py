@@ -1,7 +1,8 @@
 """A C++ mutable-reference mapping requires every declared Rust accessor."""
 import unittest
 from api_inventory.inputs import JSONValue
-from api_crosswalk import paired_rust_targets, row_rust_candidates, match_api_row
+from api_crosswalk import match_api_row
+from api_rust_candidates import paired_rust_targets, row_rust_candidates
 
 GETTER = "rustycad_tkmath::Tool::mode"
 SETTER = "rustycad_tkmath::Tool::set_mode"

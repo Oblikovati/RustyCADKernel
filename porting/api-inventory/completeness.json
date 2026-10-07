@@ -1,20 +1,20 @@
 {
-  "accounted_exclusions": 10650,
+  "accounted_exclusions": 11085,
   "artifacts": {
     "api-crosswalk": {
       "path": "api-crosswalk.json.gz",
-      "sha256": "da34370aab4c1f3de2be74a0224745bd4485b499d3ac4104b18ed8ca391799b8",
-      "uncompressed_sha256": "e7ec3725aac24abf389f9624903183fcf5587100dc1d87b333492210f6afb542"
+      "sha256": "e4d3a1634d2022d47a3d1b95fa140d2f319f3d1e25c1228cb2c461faa2599170",
+      "uncompressed_sha256": "faa72b6da30f6b7c43bd91f37c2d0d31ac331a6c2c440cc92be02dee63e69791"
     },
     "rust-api": {
       "path": "rust-api.json.gz",
-      "sha256": "adfe67ba86219847e06caa22dbb5610f46ab843a748e7ac640e4e2b804581dd3",
-      "uncompressed_sha256": "8e11b605a1adc72c33a193d01c633d925200d0ce0214b58120b243fff9b11365"
+      "sha256": "6dbb1c13642f9b5b2b5d66d83874752db36ed55ddb0036b2d742c604abbb5a2f",
+      "uncompressed_sha256": "98791b220a502942e46c9a5b1c91735682c4820f106c07f5eaaa5c5287396e51"
     }
   },
   "behavioral_equivalence_proven": false,
   "configuration_matrix_complete": false,
-  "cpp_declarations_with_resolved_implemented_claim": 31396,
+  "cpp_declarations_with_resolved_implemented_claim": 31931,
   "cpp_manifest_header_status": {
     "included_fragment": 384,
     "missing_compile_configuration": 28,
@@ -23,17 +23,1760 @@
     "parsed_with_context": 260
   },
   "declaration_crosswalk_proof": false,
+  "inactive_configuration_rows": [
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "Standard_Atomic::_InterlockedIncrement(volatile long*)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "Standard_Atomic::_InterlockedDecrement(volatile long*)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "Standard_Atomic::_InterlockedCompareExchange(long volatile*,long,long)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        "rustycad_tkernel::standard::Handle::cast"
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "rust_matches": [
+        {
+          "declaration_sha256": "eb6e78cbe12268f0af837fe55f5d30a499a66280fb5bf5c1845de8cdd158fc5d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Handle",
+                "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::standard::Handle::cast",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "U"
+                }
+              ],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": false
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "is_mutable": false,
+                      "lifetime": null,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "resolved_path": {
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "U"
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  },
+                  "path": "Handle",
+                  "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/standard/handle.rs",
+          "source_sha256": "836aa4b1d5e6c364f258589c9ef9d270f456eab1c9dd29f2a0985e7ff05ba7a5",
+          "source_status": null
+        }
+      ],
+      "rust_paths": [
+        "rustycad_tkernel::standard::Handle::cast"
+      ],
+      "rust_status": "unique",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "opencascade::handle(const handle<T2>&)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        "rustycad_tkernel::standard::Handle::into_cast"
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "rust_matches": [
+        {
+          "declaration_sha256": "2656115bb2029e0388d93f12b7f2f63e9759023a53dd850529ae89a840144fed",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Handle",
+                "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::standard::Handle::into_cast",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "U"
+                }
+              ],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": false
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "resolved_path": {
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "U"
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  },
+                  "path": "Handle",
+                  "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/standard/handle/casts.rs",
+          "source_sha256": "0acea1a08f1638a44c53a2e5c70283a9d1613e6ab914340dea5932517e5eee78",
+          "source_status": null
+        }
+      ],
+      "rust_paths": [
+        "rustycad_tkernel::standard::Handle::into_cast"
+      ],
+      "rust_status": "unique",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "opencascade::handle(handle<T2>&&)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        "rustycad_tkernel::standard::Handle::cast"
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "rust_matches": [
+        {
+          "declaration_sha256": "eb6e78cbe12268f0af837fe55f5d30a499a66280fb5bf5c1845de8cdd158fc5d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Handle",
+                "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::standard::Handle::cast",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "U"
+                }
+              ],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": false
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "is_mutable": false,
+                      "lifetime": null,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "resolved_path": {
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "U"
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  },
+                  "path": "Handle",
+                  "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/standard/handle.rs",
+          "source_sha256": "836aa4b1d5e6c364f258589c9ef9d270f456eab1c9dd29f2a0985e7ff05ba7a5",
+          "source_status": null
+        }
+      ],
+      "rust_paths": [
+        "rustycad_tkernel::standard::Handle::cast"
+      ],
+      "rust_status": "unique",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "opencascade::handle::operator=(const handle<T2>&)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        "rustycad_tkernel::standard::Handle::into_cast"
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "rust_matches": [
+        {
+          "declaration_sha256": "2656115bb2029e0388d93f12b7f2f63e9759023a53dd850529ae89a840144fed",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Handle",
+                "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::standard::Handle::into_cast",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "U"
+                }
+              ],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": false
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "resolved_path": {
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "U"
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  },
+                  "path": "Handle",
+                  "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/standard/handle/casts.rs",
+          "source_sha256": "0acea1a08f1638a44c53a2e5c70283a9d1613e6ab914340dea5932517e5eee78",
+          "source_status": null
+        }
+      ],
+      "rust_paths": [
+        "rustycad_tkernel::standard::Handle::into_cast"
+      ],
+      "rust_status": "unique",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "opencascade::handle::operator=(handle<T2>&&)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        "rustycad_tkernel::standard::Handle::cast"
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "rust_matches": [
+        {
+          "declaration_sha256": "eb6e78cbe12268f0af837fe55f5d30a499a66280fb5bf5c1845de8cdd158fc5d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Handle",
+                "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::standard::Handle::cast",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "U"
+                }
+              ],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": false
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "borrowed_ref": {
+                      "is_mutable": false,
+                      "lifetime": null,
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "resolved_path": {
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "U"
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  },
+                  "path": "Handle",
+                  "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/standard/handle.rs",
+          "source_sha256": "836aa4b1d5e6c364f258589c9ef9d270f456eab1c9dd29f2a0985e7ff05ba7a5",
+          "source_status": null
+        }
+      ],
+      "rust_paths": [
+        "rustycad_tkernel::standard::Handle::cast"
+      ],
+      "rust_status": "unique",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "opencascade::handle(const handle<T2>&,std::enable_if<is_base_but_not_same<T,T2>::value>::type*)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        "rustycad_tkernel::standard::Handle::into_cast"
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "rust_matches": [
+        {
+          "declaration_sha256": "2656115bb2029e0388d93f12b7f2f63e9759023a53dd850529ae89a840144fed",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Handle",
+                "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::standard::Handle::into_cast",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "maybe",
+                            "trait": {
+                              "args": null,
+                              "path": "Sized",
+                              "resolved_item_path": "core::marker::Sized"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "RuntimeTyped",
+                              "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "U"
+                }
+              ],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": false
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "resolved_path": {
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "generic": "U"
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  },
+                  "path": "Handle",
+                  "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/standard/handle/casts.rs",
+          "source_sha256": "0acea1a08f1638a44c53a2e5c70283a9d1613e6ab914340dea5932517e5eee78",
+          "source_status": null
+        }
+      ],
+      "rust_paths": [
+        "rustycad_tkernel::standard::Handle::into_cast"
+      ],
+      "rust_status": "unique",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "opencascade::handle(handle<T2>&&,std::enable_if<is_base_but_not_same<T,T2>::value>::type*)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        "rustycad_tkernel::standard::assert::standard_assert_report"
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "rust_matches": [
+        {
+          "declaration_sha256": "6a4655b2fd0932595cb304333273e06ee8f39a875dbc923e37eb7ce6dbc5a31d",
+          "impl_context": null,
+          "kind": "function",
+          "path": "rustycad_tkernel::standard::assert::standard_assert_report",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Write",
+                              "resolved_item_path": "core::io::write::Write"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": true
+                    }
+                  },
+                  "name": "impl Write"
+                }
+              ],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": false
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "stream",
+                  {
+                    "borrowed_ref": {
+                      "is_mutable": true,
+                      "lifetime": null,
+                      "type": {
+                        "impl_trait": [
+                          {
+                            "trait_bound": {
+                              "generic_params": [],
+                              "modifier": "none",
+                              "trait": {
+                                "args": null,
+                                "path": "Write",
+                                "resolved_item_path": "core::io::write::Write"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                [
+                  "file",
+                  {
+                    "borrowed_ref": {
+                      "is_mutable": false,
+                      "lifetime": null,
+                      "type": {
+                        "primitive": "str"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "line",
+                  {
+                    "primitive": "i32"
+                  }
+                ],
+                [
+                  "expression",
+                  {
+                    "borrowed_ref": {
+                      "is_mutable": false,
+                      "lifetime": null,
+                      "type": {
+                        "primitive": "str"
+                      }
+                    }
+                  }
+                ],
+                [
+                  "description",
+                  {
+                    "borrowed_ref": {
+                      "is_mutable": false,
+                      "lifetime": null,
+                      "type": {
+                        "primitive": "str"
+                      }
+                    }
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "resolved_path": {
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "type": {
+                            "primitive": "bool"
+                          }
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  },
+                  "path": "io::Result",
+                  "resolved_item_path": "core::io::error::Result"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/standard/assert.rs",
+          "source_sha256": "6e2fd74dfab2a1b882c9d487e40bcefa91a7e30ee243abdb2fdd382d3b610b8a",
+          "source_status": null
+        }
+      ],
+      "rust_paths": [
+        "rustycad_tkernel::standard::assert::standard_assert_report"
+      ],
+      "rust_status": "unique",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Assert.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "Standard_ASSERT_REPORT_(const char*,int,const char*,const char*)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "TCollection_ExtendedString::ToWideString() const"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "DIR_RESPONSE"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::AllocSD()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::FreeSD(PSECURITY_DESCRIPTOR)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::GetTokenInformationEx(HANDLE,TOKEN_INFORMATION_CLASS)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::FreeTokenInformation(LPVOID)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::GetFileSecurityEx(LPCWSTR,SECURITY_INFORMATION)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::FreeFileSecurity(PSECURITY_DESCRIPTOR)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::CreateAcl(DWORD)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::FreeAcl(PACL)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::PredefinedSid(PSID)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::NtPredefinedSid(PSID)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::AdminSid()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::WorldSid()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::InteractiveSid()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::NetworkSid()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::LocalSid()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::DialupSid()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::BatchSid()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::CreatorOwnerSid()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::NullSid()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::NtSid()"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::AllocAccessAllowedAce(DWORD,BYTE,PSID)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::FreeAce(PVOID)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::MoveDirectory(LPCWSTR,LPCWSTR)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::CopyDirectory(LPCWSTR,LPCWSTR)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::SetMoveDirectoryProc(MOVE_DIR_PROC)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::SetCopyDirectoryProc(COPY_DIR_PROC)"
+    },
+    {
+      "cpp_ids": [],
+      "cpp_matches": [],
+      "cpp_status": "inactive_configuration",
+      "declared_rust_kind": null,
+      "declared_rust_paths": [
+        null
+      ],
+      "declared_rust_selectors": null,
+      "parity_status": "excluded",
+      "resolution": "excluded",
+      "rust_matches": [],
+      "rust_paths": [],
+      "rust_status": "no_rust_target_declared",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "toolkit": "TKernel",
+      "upstream_id": "OSD_WNT::SetResponseDirectoryProc(RESPONSE_DIR_PROC)"
+    }
+  ],
   "input_sha256": {
     "cpp": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
     "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
     "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
-    "parity": "f55811e1046dbdee508161341ab90719f344d7921dc04d29396d19bacf719c6d",
-    "rust": "8e11b605a1adc72c33a193d01c633d925200d0ce0214b58120b243fff9b11365"
+    "parity": "fe679d0cd0c6a156caf31bc7344dc3c224acc63c674399519cb298ef02b5463f",
+    "rust": "98791b220a502942e46c9a5b1c91735682c4820f106c07f5eaaa5c5287396e51"
   },
-  "matched_declared_mappings": 31406,
+  "matched_declared_mappings": 31948,
   "observed_cpp_api_declarations": 108622,
-  "parity_api_rows": 44315,
-  "partial_mappings": 1142,
+  "parity_api_rows": 44673,
+  "partial_mappings": 1178,
+  "private_header_rows": [],
   "proof_gaps": [
     "cxx_configuration_matrix_incomplete",
     "cxx_declaration_inventory_incomplete",
@@ -42,60 +1785,71 @@
     "macro_candidate_crosswalk_pending",
     "partial_or_upstream_unimplemented_api_rows",
     "rust_unresolved_links:rustycad_kernel",
+    "rust_unresolved_links:rustycad_tkbo",
     "rust_unresolved_links:rustycad_tkbrep",
     "rust_unresolved_links:rustycad_tkernel",
     "rust_unresolved_links:rustycad_tkg3d",
     "rust_unresolved_links:rustycad_tkgeomalgo",
     "rust_unresolved_links:rustycad_tkgeombase",
+    "rust_unresolved_links:rustycad_tkhlr",
     "rust_unresolved_links:rustycad_tkmath",
+    "rust_unresolved_links:rustycad_tkmesh",
+    "rust_unresolved_links:rustycad_tkshhealing",
+    "rust_unresolved_links:rustycad_tktopalgo",
     "unclaimed_cpp_declarations",
     "unresolved_parity_rows",
     "unsupported_cpp_inventory_records:5224"
   ],
   "rust_capture_inputs": {
-    "cargo_metadata_sha256": "eeda11e690ddd14af1ff3e357de1b4b6018ecebd215f83e25ed07b03ed96f95c",
+    "cargo_metadata_sha256": "024dd1bac22302d75fcd4c1baf381969672f0b1bed55e496b3b107f4408b455f",
     "tool_versions": {
       "cargo": "cargo 1.100.0-nightly (98a09e7e7 2026-09-21)\n",
       "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
       "rustdoc": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustdoc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n"
     },
     "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
-    "workspace_file_count": 8559,
-    "workspace_inputs_sha256": "b065bdacb8393abef683b222247dfe5f131b6c7df4ba944bcb66b10f9e961ae0",
-    "workspace_revision": "11a44edf46e95748d3218e8d4fd0756c27cc2955"
+    "workspace_file_count": 8570,
+    "workspace_inputs_sha256": "c39b5c726b550ddc0b7269cf3c263924c586c86a3d9aed80f523724b7baa7dc0",
+    "workspace_revision": "42e1bbd300ccbe750aea7ac1548cda2622877161"
   },
-  "rust_capture_revision": "11a44edf46e95748d3218e8d4fd0756c27cc2955",
+  "rust_capture_revision": "42e1bbd300ccbe750aea7ac1548cda2622877161",
   "rust_crates": 20,
-  "rust_public_paths": 64014,
+  "rust_public_paths": 64083,
   "schema_version": 1,
   "tool_implementation_sha256": {
     "api_crosswalk": {
-      "tools/api_coverage_report.py": "99582d97de7478613d57e06da0d70d3ca495b068fed763d3be00b558a88cf5e5",
-      "tools/api_crosswalk.py": "b29170adecfe3fa56207a85e0ec231e2356e9eb3cc5fa7230e02f67d23ac54c6",
-      "tools/api_identity.py": "0f28536332ac78b14f7f1cb2d6b6cc48b241cf248f9f119062e005789212d5ed",
+      "tools/api_coverage_report.py": "5caac392def3270bf61a1b46c2c34662e5c85396f0ba38df488a501e5daff8a2",
+      "tools/api_cpp_configuration.py": "3526a43c4433f7e9c84818882951b5438f143a35d19844fde8e2bf9ea80db190",
+      "tools/api_cpp_selectors.py": "2160c3f8f6840992392f93a8ce00b0b6ec300b651c39745a6a8673811a4e586d",
+      "tools/api_crosswalk.py": "38dc6ad7b337eb844ea15008cbb713838cc0f8cbd8ae97581000c858168b3223",
+      "tools/api_identity.py": "01596dd7261507a3977b6133a4c01cb05bf82afad931c08d3d6d13639b469a4a",
       "tools/api_inventory/__init__.py": "e6ac33c73401e1312db21618162b44424b626cc60da375d920e490eb9f1200b6",
       "tools/api_inventory/inputs.py": "89f6b43239c663074e59e55fbd956853f12a514c1a35d0dd1b2099d7022d306f",
-      "tools/api_report_inputs.py": "737e538b3aacdfcdd454b930f912959b6d53cf803156dac11279dfe1592cc5d0",
+      "tools/api_inventory_conflicts.py": "21009f3b7bf411965018d5b24a6fbed0e1ff8eb6d51953eb142c1312848ffad7",
+      "tools/api_private_headers.py": "074b311b2e16eb58a2d24fac3036f059d2105f00eaec8a5f6c420197ada34efe",
+      "tools/api_report_inputs.py": "1b37610bfff21a9c0c29b1139cd25b72b966bed1e617ae45b21a38b9e54a2a09",
+      "tools/api_rust_candidates.py": "4503a9f61e95198df2dacebfaae2a98d4ace0d478201b84a8f0d18aab7bd2366",
       "tools/api_rust_declaration_selectors.py": "cd640e93d2d2aca1fdc0b71cf6848e33119801a16c16903ce13d3f179c19435f",
       "tools/api_rust_kind.py": "ba05b0fe24384047bba97af6aa1c35dbc247f18ffac76d8cda3063ac36921f41",
       "tools/api_rust_reference_targets.py": "850a562408ceb2b6302f13b6086525094e449108f618a913e0fbfef6aa00b344",
       "tools/api_scoped_alias_selectors.py": "90f23e4685fe3b9d2ae55d7a3d8c85b1f1aa81fbc95aa1f687bf92b3f65918c5",
       "tools/api_template_selectors.py": "ffd58784c323f2bd53458ef6822509f6544f0d05ad3cf78b9bc3d3b95aff9c3e",
-      "tools/api_tool_hashes.py": "69e12f9629869f8697603c265201f6d4b8e52d69e994085fc3c611986014ab20"
+      "tools/api_tool_hashes.py": "d363603c2a5e2fa0ebaf4df44bb1233d0ea11e01c021e9406066dde01cd7aa28"
     },
     "rust_normalizer": {
       "tools/api_inventory_capture.py": "2cbc42e0361bd190b8e1cd20673fbdce818cec5aaad8a42e0174d03254fec53e",
       "tools/api_inventory_json.py": "a0f06daca76c63309453225d4652b6e20a479a4959385ea5d913c1620cd58c5c",
-      "tools/api_inventory_reexports.py": "bc62f868566558f77a296c02103016c5c7ca98048470981f9986fa7bb09472dd",
-      "tools/api_tool_hashes.py": "69e12f9629869f8697603c265201f6d4b8e52d69e994085fc3c611986014ab20",
+      "tools/api_inventory_reexports.py": "0ee9e753cd81b5538bd94c898138adc60c647fbdb478dbd56601027e9d055aeb",
+      "tools/api_tool_hashes.py": "d363603c2a5e2fa0ebaf4df44bb1233d0ea11e01c021e9406066dde01cd7aa28",
       "tools/capture_rustdoc_json.py": "dd76870ac705c6d300f441d56b15245e4b1196ff709f29d5d651d5184906f1b0",
       "tools/normalize_rustdoc_inventory.py": "ecb1b4b9e7126845d1d014f1c5002e5489b16ebb0c52145e4247c047de02280c",
       "tools/rustdoc_bool_foreign_impls.py": "5068daddc044f3c492e69a069f2f02d79597944ce72e66411afcb6a411121a13",
       "tools/rustdoc_const_aliases.py": "b32665473589bb6114490d9421cf403fa2e2963b81b56cbffda69ca8c2741e4a",
       "tools/rustdoc_declarations.py": "5d0386f003d0da0498549b29de676a89c525030b371e76609821b9ce2700b36b",
       "tools/rustdoc_foreign_impls.py": "a54ace30b54504893ee60589aa0c684d6e1ca9d40c5fff936676079586aa9ba1",
-      "tools/rustdoc_generic_arguments.py": "b6a78ddaf6a839576b5b0bf1fb891825f6c4aced81f12cf1d2366d609d70c0e8",
-      "tools/rustdoc_impl_ownership.py": "c49fffb2be391fb56bfbd05a25d7f9de6d4369cd14fa817ce39f8b878b55201e",
+      "tools/rustdoc_generic_arguments.py": "7b6362308e1cf2e547e8fcf8c57648dfbce64495d4acf5477eb3c6125ab84343",
+      "tools/rustdoc_impl_ownership.py": "c4f8f87309ef4163a56ecb60de11f086792fddb888a7b841b150c2c29217d039",
+      "tools/rustdoc_pointer_impls.py": "96155150093e9cf6d5176bc49b9be43f0a6c4054c66194ababa4bdf7c633f602",
       "tools/rustdoc_reference_impls.py": "0e86543b0e2854cc6a169e7dcb52565b04fe2b53adfbad6434dc991d980644a6",
       "tools/rustdoc_trait_paths.py": "3f7527f65eaa12caf8ea6effc36e9c11e8d5bf7bae62208364b5e2f4c28cbee5",
       "tools/rustdoc_type_aliases.py": "0fab1864cda95503bfe46b0f0881052c43273983b3f484ae0590ca0382fc9fb0"
@@ -106,6 +1860,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 811,
       "excluded": 476,
       "implemented": 811,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2674,
       "parity_rows": 1642,
       "partial": 272,
@@ -114,20 +1869,22 @@
       "upstream_unimplemented": 1
     },
     "TKBRep": {
-      "cpp_declarations_with_resolved_implemented_claim": 3646,
+      "cpp_declarations_with_resolved_implemented_claim": 3654,
       "excluded": 474,
-      "implemented": 3646,
+      "implemented": 3654,
+      "inactive_configuration": 0,
       "observed_cpp_api": 4307,
-      "parity_rows": 4130,
+      "parity_rows": 4134,
       "partial": 6,
-      "unclaimed_cpp_api": 181,
-      "unresolved": 4,
+      "unclaimed_cpp_api": 173,
+      "unresolved": 0,
       "upstream_unimplemented": 0
     },
     "TKBin": {
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 139,
       "parity_rows": 0,
       "partial": 0,
@@ -139,6 +1896,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 500,
       "parity_rows": 0,
       "partial": 0,
@@ -150,6 +1908,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 63,
       "parity_rows": 0,
       "partial": 0,
@@ -161,6 +1920,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 161,
       "parity_rows": 0,
       "partial": 0,
@@ -172,6 +1932,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 26,
       "excluded": 763,
       "implemented": 26,
+      "inactive_configuration": 0,
       "observed_cpp_api": 3586,
       "parity_rows": 822,
       "partial": 33,
@@ -183,6 +1944,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 780,
       "parity_rows": 0,
       "partial": 0,
@@ -194,6 +1956,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 770,
       "parity_rows": 0,
       "partial": 0,
@@ -205,6 +1968,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 0,
       "parity_rows": 0,
       "partial": 0,
@@ -216,6 +1980,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 0,
       "parity_rows": 0,
       "partial": 0,
@@ -227,6 +1992,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 430,
       "parity_rows": 0,
       "partial": 0,
@@ -238,6 +2004,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 221,
       "parity_rows": 0,
       "partial": 0,
@@ -249,6 +2016,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 89,
       "parity_rows": 0,
       "partial": 0,
@@ -260,6 +2028,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 457,
       "parity_rows": 0,
       "partial": 0,
@@ -271,6 +2040,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 6572,
       "parity_rows": 0,
       "partial": 0,
@@ -282,6 +2052,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 230,
       "parity_rows": 0,
       "partial": 0,
@@ -293,6 +2064,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 108,
       "parity_rows": 0,
       "partial": 0,
@@ -304,6 +2076,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 12373,
       "parity_rows": 0,
       "partial": 0,
@@ -315,6 +2088,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 104,
       "parity_rows": 0,
       "partial": 0,
@@ -326,6 +2100,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 1390,
       "parity_rows": 0,
       "partial": 0,
@@ -337,6 +2112,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 987,
       "parity_rows": 0,
       "partial": 0,
@@ -348,6 +2124,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 807,
       "parity_rows": 0,
       "partial": 0,
@@ -359,6 +2136,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 686,
       "parity_rows": 0,
       "partial": 0,
@@ -370,6 +2148,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 15,
       "excluded": 390,
       "implemented": 15,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2409,
       "parity_rows": 407,
       "partial": 2,
@@ -381,28 +2160,31 @@
       "cpp_declarations_with_resolved_implemented_claim": 1029,
       "excluded": 145,
       "implemented": 1029,
+      "inactive_configuration": 0,
       "observed_cpp_api": 1198,
-      "parity_rows": 1267,
+      "parity_rows": 1185,
       "partial": 7,
       "unclaimed_cpp_api": 17,
-      "unresolved": 86,
+      "unresolved": 4,
       "upstream_unimplemented": 0
     },
     "TKG3d": {
       "cpp_declarations_with_resolved_implemented_claim": 2490,
       "excluded": 369,
       "implemented": 2490,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2918,
-      "parity_rows": 3089,
+      "parity_rows": 2879,
       "partial": 12,
       "unclaimed_cpp_api": 47,
-      "unresolved": 218,
+      "unresolved": 8,
       "upstream_unimplemented": 0
     },
     "TKGeomAlgo": {
       "cpp_declarations_with_resolved_implemented_claim": 4544,
       "excluded": 1825,
       "implemented": 4554,
+      "inactive_configuration": 0,
       "observed_cpp_api": 6403,
       "parity_rows": 6382,
       "partial": 3,
@@ -414,6 +2196,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 3878,
       "excluded": 2065,
       "implemented": 3878,
+      "inactive_configuration": 0,
       "observed_cpp_api": 6007,
       "parity_rows": 5953,
       "partial": 5,
@@ -425,6 +2208,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 602,
       "excluded": 495,
       "implemented": 602,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2217,
       "parity_rows": 1151,
       "partial": 0,
@@ -436,6 +2220,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 43,
       "excluded": 40,
       "implemented": 43,
+      "inactive_configuration": 0,
       "observed_cpp_api": 139,
       "parity_rows": 98,
       "partial": 0,
@@ -447,6 +2232,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 0,
       "parity_rows": 0,
       "partial": 0,
@@ -458,6 +2244,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 0,
       "parity_rows": 0,
       "partial": 0,
@@ -469,6 +2256,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 1778,
       "parity_rows": 0,
       "partial": 0,
@@ -477,20 +2265,22 @@
       "upstream_unimplemented": 0
     },
     "TKMath": {
-      "cpp_declarations_with_resolved_implemented_claim": 4956,
+      "cpp_declarations_with_resolved_implemented_claim": 4967,
       "excluded": 1019,
-      "implemented": 4956,
+      "implemented": 4967,
+      "inactive_configuration": 0,
       "observed_cpp_api": 6099,
       "parity_rows": 6034,
       "partial": 28,
-      "unclaimed_cpp_api": 96,
-      "unresolved": 31,
+      "unclaimed_cpp_api": 85,
+      "unresolved": 20,
       "upstream_unimplemented": 0
     },
     "TKMesh": {
       "cpp_declarations_with_resolved_implemented_claim": 535,
       "excluded": 128,
       "implemented": 535,
+      "inactive_configuration": 0,
       "observed_cpp_api": 1138,
       "parity_rows": 817,
       "partial": 45,
@@ -502,6 +2292,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 511,
       "parity_rows": 0,
       "partial": 0,
@@ -513,6 +2304,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 72,
       "excluded": 151,
       "implemented": 72,
+      "inactive_configuration": 0,
       "observed_cpp_api": 664,
       "parity_rows": 281,
       "partial": 57,
@@ -524,6 +2316,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 6691,
       "parity_rows": 0,
       "partial": 0,
@@ -535,6 +2328,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 9,
       "parity_rows": 0,
       "partial": 0,
@@ -546,6 +2340,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 6691,
       "parity_rows": 0,
       "partial": 0,
@@ -557,6 +2352,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 9,
       "parity_rows": 0,
       "partial": 0,
@@ -568,6 +2364,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 361,
       "excluded": 200,
       "implemented": 361,
+      "inactive_configuration": 0,
       "observed_cpp_api": 660,
       "parity_rows": 632,
       "partial": 0,
@@ -579,6 +2376,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 54,
       "parity_rows": 0,
       "partial": 0,
@@ -590,6 +2388,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 303,
       "parity_rows": 0,
       "partial": 0,
@@ -601,6 +2400,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 5037,
       "parity_rows": 0,
       "partial": 0,
@@ -612,6 +2412,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 1218,
       "excluded": 319,
       "implemented": 1218,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2280,
       "parity_rows": 1705,
       "partial": 103,
@@ -623,6 +2424,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 626,
       "parity_rows": 0,
       "partial": 0,
@@ -634,6 +2436,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 272,
       "parity_rows": 0,
       "partial": 0,
@@ -645,6 +2448,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 428,
       "parity_rows": 0,
       "partial": 0,
@@ -656,6 +2460,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 9,
       "parity_rows": 0,
       "partial": 0,
@@ -667,6 +2472,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 2431,
       "excluded": 896,
       "implemented": 2431,
+      "inactive_configuration": 0,
       "observed_cpp_api": 3364,
       "parity_rows": 3336,
       "partial": 5,
@@ -678,6 +2484,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 335,
       "parity_rows": 0,
       "partial": 0,
@@ -689,6 +2496,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 6095,
       "parity_rows": 0,
       "partial": 0,
@@ -700,6 +2508,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 195,
       "parity_rows": 0,
       "partial": 0,
@@ -711,6 +2520,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 158,
       "parity_rows": 0,
       "partial": 0,
@@ -722,6 +2532,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 1549,
       "parity_rows": 0,
       "partial": 0,
@@ -733,6 +2544,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 61,
       "parity_rows": 0,
       "partial": 0,
@@ -744,6 +2556,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 7,
       "parity_rows": 0,
       "partial": 0,
@@ -755,6 +2568,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 3345,
       "parity_rows": 0,
       "partial": 0,
@@ -766,6 +2580,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 50,
       "parity_rows": 0,
       "partial": 0,
@@ -777,6 +2592,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2,
       "parity_rows": 0,
       "partial": 0,
@@ -788,6 +2604,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2,
       "parity_rows": 0,
       "partial": 0,
@@ -799,6 +2616,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2,
       "parity_rows": 0,
       "partial": 0,
@@ -810,6 +2628,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2,
       "parity_rows": 0,
       "partial": 0,
@@ -821,6 +2640,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2,
       "parity_rows": 0,
       "partial": 0,
@@ -832,6 +2652,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2,
       "parity_rows": 0,
       "partial": 0,
@@ -843,6 +2664,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 38,
       "parity_rows": 0,
       "partial": 0,
@@ -854,6 +2676,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 2,
       "parity_rows": 0,
       "partial": 0,
@@ -865,6 +2688,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 135,
       "parity_rows": 0,
       "partial": 0,
@@ -876,6 +2700,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 451,
       "parity_rows": 0,
       "partial": 0,
@@ -887,6 +2712,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 63,
       "parity_rows": 0,
       "partial": 0,
@@ -898,6 +2724,7 @@
       "cpp_declarations_with_resolved_implemented_claim": 0,
       "excluded": 0,
       "implemented": 0,
+      "inactive_configuration": 0,
       "observed_cpp_api": 154,
       "parity_rows": 0,
       "partial": 0,
@@ -906,18 +2733,19 @@
       "upstream_unimplemented": 0
     },
     "TKernel": {
-      "cpp_declarations_with_resolved_implemented_claim": 4739,
-      "excluded": 895,
-      "implemented": 4739,
+      "cpp_declarations_with_resolved_implemented_claim": 5255,
+      "excluded": 1330,
+      "implemented": 5262,
+      "inactive_configuration": 39,
       "observed_cpp_api": 7324,
-      "parity_rows": 6569,
-      "partial": 564,
-      "unclaimed_cpp_api": 1110,
-      "unresolved": 371,
+      "parity_rows": 7215,
+      "partial": 600,
+      "unclaimed_cpp_api": 171,
+      "unresolved": 23,
       "upstream_unimplemented": 0
     }
   },
-  "unclaimed_cpp_count": 65034,
-  "unresolved_row_count": 1114,
+  "unclaimed_cpp_count": 64076,
+  "unresolved_row_count": 459,
   "upstream_unimplemented": 3
 }

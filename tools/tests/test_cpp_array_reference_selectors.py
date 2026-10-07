@@ -54,7 +54,8 @@ class ArrayReferenceSelectorsTest(unittest.TestCase):
         for parameter in [
             "int (*)(int)",
             "int(&)(int)",
-            "char(*)[N]",
+            # A top-level const pointer to an array still needs a declarator parser.
+            "char(*const)[N]",
             "char(&value)[N]",
             "char(&)[]",
             "char(&)[N+1]",
@@ -63,6 +64,11 @@ class ArrayReferenceSelectorsTest(unittest.TestCase):
         ]:
             with self.subTest(parameter=parameter):
                 self.assertIsNone(canonical_parameter_type(parameter))
+
+    def test_pointer_to_array_keeps_its_exact_declarator(self) -> None:
+        # MathSys::Utils::Solve2x2(const double (*)[2], ...): the const binds the element.
+        self.assertEqual(canonical_parameter_type("const double (*)[2]"), "const double(*)[2]")
+        self.assertEqual(canonical_parameter_type("char(*)[N]"), "char(*)[N]")
 
     def test_duplicate_array_reference_candidates_remain_ambiguous(self) -> None:
         row = array_reference_declaration("const char (&)[N]")
