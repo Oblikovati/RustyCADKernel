@@ -98,7 +98,8 @@ impl LdomString {
         }
     }
     /// `LDOMString(anOther, const occ::handle<LDOM_MemManager>&)`: a copy into the
-    /// document (see [`LdomBasicString::document_copy`]).
+    /// document. An integer stays an integer; a free string becomes a document string; a
+    /// document string is copied with its type; a hashed string is shared.
     pub fn copied_into(other: &LdomBasicString, document: &Handle<LdomMemManager>) -> Self {
         Self {
             base: other.document_copy(),
