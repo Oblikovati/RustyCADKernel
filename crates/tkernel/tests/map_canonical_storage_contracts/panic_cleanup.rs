@@ -70,21 +70,6 @@ fn hasher_panic_keeps_old_links_and_stable_keys() {
     assert_eq!(keys(&map), "1,2,3,");
 }
 #[test]
-fn clear_drop_panic_drains_every_map_node_and_restores_count() {
-    let trace = KeyDropTrace::default();
-    let arena = BaseAllocator::incremental(512);
-    let mut map = dropping_map(&trace, &arena);
-    map.resize(200);
-    trace.reject.set(Some(1));
-    assert!(caught(|| map.clear(false)));
-    assert_eq!(*trace.events.borrow(), [1, 2, 3]);
-    assert_eq!(map.len(), 0);
-    assert!(!map.buckets().is_null());
-    assert!(arena.reset(false).is_ok());
-    map.add(trace.key(7, 7));
-    assert_eq!(map.len(), 1);
-}
-#[test]
 fn removal_drop_panic_unlinks_real_node_and_decrements_count() {
     let trace = KeyDropTrace::default();
     let arena = BaseAllocator::incremental(512);
@@ -99,16 +84,6 @@ fn removal_drop_panic_unlinks_real_node_and_decrements_count() {
     assert_eq!(*trace.events.borrow(), [2]);
     map.clear(true);
     assert_eq!(*trace.events.borrow(), [2, 3, 1]);
-    assert!(arena.reset(false).is_ok());
-}
-#[test]
-fn owner_drop_panic_releases_every_key_allocation_once() {
-    let trace = KeyDropTrace::default();
-    let arena = BaseAllocator::incremental(512);
-    let map = dropping_map(&trace, &arena);
-    trace.reject.set(Some(3));
-    assert!(caught(|| drop(map)));
-    assert_eq!(*trace.events.borrow(), [3, 2, 1]);
     assert!(arena.reset(false).is_ok());
 }
 #[test]

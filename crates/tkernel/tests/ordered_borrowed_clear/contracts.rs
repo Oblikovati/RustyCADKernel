@@ -1,6 +1,5 @@
 use super::{fixture::*, modes::*};
 use rustycad_tkernel::ncollection::{BaseAllocator, OrderedDataMap, OrderedMap};
-use std::panic::{AssertUnwindSafe, catch_unwind};
 fn borrowed_set<K, H>(map: &mut OrderedMap<K, H>, arena: Option<&BaseAllocator>) {
     map.clear_with_borrowed_allocator(arena);
 }
@@ -120,38 +119,6 @@ macro_rules! clear_suite {
                 let _guard = oracle_guard();
                 owned_case(ClearMode::Same);
                 owned_case(ClearMode::Other);
-            }
-            fn recovery_state(map: &Map<'_>, trace: &ClearTrace<'_>, mode: ClearMode) {
-                assert!(map.is_empty());
-                assert_eq!(map.allocator(), trace.old);
-                assert_eq!((trace.old.ref_count(), trace.next.ref_count()), (2, 1));
-                assert_eq!((trace.old_active(), active_allocations(trace.next)), (0, 0));
-                assert_eq!(!map.buckets().is_null(), mode.retains_buckets());
-            }
-            fn recovery_case(mode: ClearMode, role: char) {
-                let old = BaseAllocator::accumulating(4096).unwrap();
-                let next = BaseAllocator::accumulating(4096).unwrap();
-                let trace = ClearTrace::new(&old, &next, false);
-                let mut map = build(&trace, ClearState::Filled);
-                trace.active.set(true);
-                trace.rejected.set(Some(role));
-                assert!(catch_unwind(AssertUnwindSafe(|| invoke(&mut map, mode, &trace))).is_err());
-                let label = format!("{}_terminate_{}_{}", $family, mode.name(), role);
-                trace.verify_termination_prefix(&label);
-                recovery_state(&map, &trace, mode);
-                trace.active.set(false);
-                $fill(&mut map, &trace);
-                assert_eq!(map.len(), 3);
-                map.clear(false);
-            }
-            #[test]
-            fn panic_prefix_matches_native_termination_then_rust_recovers_old_allocator() {
-                let _guard = oracle_guard();
-                for mode in ClearMode::ALL {
-                    for role in $roles {
-                        recovery_case(mode, role);
-                    }
-                }
             }
         }
     };

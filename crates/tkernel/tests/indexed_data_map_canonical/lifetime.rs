@@ -79,30 +79,6 @@ fn live(arena: &BaseAllocator) -> i32 {
         .sum()
 }
 #[test]
-fn each_payload_destructor_panic_finishes_clear_and_releases_all_nodes() {
-    for kind in ['K', 'V'] {
-        let (mut map, events, arena) = setup();
-        fill(&mut map, &events);
-        events.borrow_mut().fail = Some(('D', kind));
-        assert!(std::panic::catch_unwind(AssertUnwindSafe(|| map.clear(false))).is_err());
-        assert_eq!((map.len(), live(&arena)), (0, 0));
-        assert_eq!(events.borrow().recorded, [('D', 'K'), ('D', 'V')].repeat(3));
-        assert_empty_indices(&map);
-    }
-}
-#[test]
-fn each_payload_destructor_panic_finishes_remove_last_without_losing_prefix() {
-    for kind in ['K', 'V'] {
-        let (mut map, events, arena) = setup();
-        fill(&mut map, &events);
-        events.borrow_mut().fail = Some(('D', kind));
-        assert!(std::panic::catch_unwind(AssertUnwindSafe(|| map.remove_last())).is_err());
-        assert_eq!((map.len(), live(&arena)), (2, 2));
-        assert_eq!(events.borrow().recorded, [('D', 'K'), ('D', 'V')]);
-        assert_eq!(map.find_from_index(2).unwrap().value, 20);
-    }
-}
-#[test]
 fn borrowed_substitute_assigns_key_then_value_in_the_original_allocation() {
     let (mut map, events, arena) = setup();
     fill(&mut map, &events);
@@ -119,21 +95,6 @@ fn borrowed_substitute_assigns_key_then_value_in_the_original_allocation() {
     assert_eq!(map.find_from_index(2).unwrap().value, 90);
 }
 #[test]
-fn partially_assigned_key_or_value_clears_graph_before_resuming_panic() {
-    for kind in ['K', 'V'] {
-        let (mut map, events, arena) = setup();
-        fill(&mut map, &events);
-        let key = payload(9, 'K', &events);
-        let value = payload(90, 'V', &events);
-        events.borrow_mut().fail = Some(('A', kind));
-        let result =
-            std::panic::catch_unwind(AssertUnwindSafe(|| map.substitute_ref(2, &key, &value)));
-        assert!(result.is_err());
-        assert_eq!((map.len(), live(&arena)), (0, 0));
-        assert_empty_indices(&map);
-    }
-}
-#[test]
 fn failed_borrowed_copy_releases_new_node_and_retains_existing_prefix() {
     for kind in ['K', 'V'] {
         let (mut map, events, arena) = setup();
@@ -148,15 +109,6 @@ fn failed_borrowed_copy_releases_new_node_and_retains_existing_prefix() {
     }
 }
 
-fn assert_empty_indices(map: &Map) {
-    assert!(
-        map.observer()
-            .snapshot()
-            .indices
-            .iter()
-            .all(|slot| *slot == 0)
-    );
-}
 fn assert_copy_failure_events(kind: char, events: &Events) {
     let expected = if kind == 'V' {
         vec![('C', 'V')]

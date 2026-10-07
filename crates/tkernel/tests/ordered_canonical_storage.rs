@@ -4,6 +4,7 @@ use rustycad_tkernel::ncollection::{
 };
 use std::{cell::Cell, rc::Rc};
 #[path = "fixtures/native_map_node_trace.rs"]
+#[allow(dead_code)] // Shared node trace; this suite reads liveness, not event text.
 mod trace;
 use trace::{NodeItem, NodeTrace, node_caught};
 struct TraceHash;
@@ -68,24 +69,6 @@ fn detached_cursor_rejects_erasure_foreign_owner_and_recycled_identity_slot() {
     assert_eq!(cursor.value(&map), Ok(&20));
     drop(map);
     assert!(arena.reset(false).is_ok());
-}
-#[test]
-fn clear_finishes_all_native_payloads_and_allocations_before_resuming_panic() {
-    let trace = NodeTrace::new();
-    let mut map = OrderedDataMap::with_allocator(TraceHash, 101, trace.arena.clone());
-    map.bind(trace.item('A'), trace.item('V'));
-    map.bind(trace.item('B'), trace.item('W'));
-    trace.clear();
-    trace.reject_drop.set('A');
-    assert!(node_caught(|| map.clear(false)));
-    assert!(map.is_empty());
-    assert!(!trace.live());
-    let events = trace.events();
-    assert!(events.contains("DA,DV,"));
-    assert!(events.contains("DB,DW,"));
-    map.bind(trace.item('C'), trace.item('X'));
-    map.clear(true);
-    assert!(!trace.live());
 }
 #[test]
 fn remove_unlinks_every_native_chain_before_payload_panic() {

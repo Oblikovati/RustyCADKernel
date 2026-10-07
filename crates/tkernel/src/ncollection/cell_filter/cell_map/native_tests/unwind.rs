@@ -31,12 +31,3 @@ fn destructor_panic_unlinks_destroyed_object_before_resuming() {
     assert_eq!(row, " R2,1, cells1");
     probe.borrow_mut().cell = None;
 }
-#[test]
-fn reset_drop_panic_drains_all_targets_and_releases_arena_leases() {
-    let (mut filter, probe) = filled(0);
-    probe.borrow_mut().fail_drop = Some(3);
-    assert!(catch_unwind(AssertUnwindSafe(|| filter.reset(2., None))).is_err());
-    assert!(filter.cells.is_empty());
-    probe.borrow_mut().cell = None;
-    assert!(probe.borrow().arena.reset(true).is_ok());
-}

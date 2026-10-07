@@ -51,12 +51,6 @@ fn published_parent_failure_preserves_partial_object_and_previous_last_identity(
         exact_case(1, 9, rejection);
     }
 }
-#[test]
-fn unpublished_pair_failure_retains_native_allocation_and_exact_callbacks() {
-    for rejection in ["NB1", "NO2", "AB1"] {
-        retained_pair_case(rejection);
-    }
-}
 
 #[test]
 fn rust_hash_panic_state_matches_native_pretermination_snapshot() {

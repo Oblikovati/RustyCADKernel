@@ -23,7 +23,7 @@ impl<T> LinearVector<T> {
     /// Querying len/capacity and acquiring raw storage pointers does not read dead elements.
     /// Never read/drop a dead slot or leak the extra tail.
     /// Returning a value does not model address-dependent in-place constructors. Failed growth
-    /// retains unpublished replacement storage through reserve_with_relocation before any destructive shift.
+    /// (see reserve_with_relocation) leaves the receiver unchanged before any destructive shift.
     pub unsafe fn insert_before_with_constructors(
         &mut self,
         index: usize,

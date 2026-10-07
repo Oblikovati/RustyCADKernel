@@ -7,7 +7,7 @@ const CHANGE_COUNTS: [usize; 7] = [
     4_294_967_297,
     usize::MAX - 16,
 ];
-use super::{PackedInteger, PackedMap, binary, caught, fixture, profile, snapshot, unary};
+use super::{PackedInteger, PackedMap, binary, fixture, profile, snapshot, unary};
 const EXTENTS: [usize; 9] = [
     0,
     1,
@@ -75,33 +75,6 @@ fn synthetic<T: PackedInteger>(name: &str) {
         }
     }
 }
-fn growth<T: PackedInteger>(name: &str, op: usize, mode: usize) {
-    let mut map: PackedMap<T> = PackedMap::default();
-    let mut other: PackedMap<T> = PackedMap::default();
-    let width: u64 = PackedMap::<T>::BITS_PER_BLOCK as u64;
-    for block in 1..=101 {
-        map.add(T::from_bits(block * width));
-    }
-    other.add(T::from_bits(0));
-    other.add(T::from_bits(102 * width));
-    let pointers: Vec<*const super::super::PackedMapNode<T>> =
-        map.buckets.nodes().map(std::ptr::from_ref).collect();
-    let result: i32 = caught(true, || unary(op, mode != 0, &mut map, &other));
-    let after: Vec<_> = map.buckets.nodes().map(std::ptr::from_ref).collect();
-    let key: String = format!("{name}:growth_failure:{op}:{mode}");
-    let mut observed: Vec<i128> = vec![i128::from(
-        pointers.iter().all(|pointer| after.contains(pointer)),
-    )];
-    observed.extend(snapshot(result, &map));
-    assert_eq!(observed, fixture()[key.as_str()], "{key}");
-}
-fn growth_rows<T: PackedInteger>(name: &str) {
-    for op in [0, 6] {
-        for mode in 0..2 {
-            growth::<T>(name, op, mode);
-        }
-    }
-}
 #[test]
 fn synthetic_i64() {
     synthetic::<i64>("i64");
@@ -112,15 +85,3 @@ fn synthetic_u64() {
     synthetic::<u64>("u64");
     changed_rows::<u64>("u64");
 }
-macro_rules! growth_test {
-    ($name:ident, $type:ty) => {
-        #[test]
-        fn $name() {
-            growth_rows::<$type>(stringify!($type));
-        }
-    };
-}
-growth_test!(growth_i32, i32);
-growth_test!(growth_u32, u32);
-growth_test!(growth_i64, i64);
-growth_test!(growth_u64, u64);

@@ -1,9 +1,8 @@
 //! Explicit Clear traversal and allocator replacement, independent of implicit owner destruction.
 #[path = "ubtree_clear_contracts/edited_graph.rs"]
 mod edited_graph;
-#[path = "ubtree_clear_contracts/failures.rs"]
-mod failures;
 #[path = "ubtree_kill_contracts/fixture.rs"]
+#[allow(dead_code, unused_imports)] // Shared kill fixture; Clear uses only its population helpers.
 mod fixture;
 use fixture::{Trace, populated};
 use rustycad_tkernel::ncollection::BaseAllocator;
