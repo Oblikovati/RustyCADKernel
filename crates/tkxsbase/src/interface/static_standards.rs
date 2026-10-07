@@ -6,10 +6,12 @@
 use super::InterfaceStatic;
 use crate::xs_message::XSTEP_US;
 use rustycad_tkernel::{message::MsgFile, standard::Failure, tcollection::AsciiString};
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::{Mutex, PoisonError};
 
-/// `THE_Interface_Static_deja`: `Standards` runs once per process.
-static STANDARDS_DONE: AtomicBool = AtomicBool::new(false);
+/// `THE_Interface_Static_deja`: `Standards` runs once per process. The flag is held
+/// locked while the statics are defined, so that a concurrent caller waits for them
+/// instead of finding the flag set and the statics still missing.
+static STANDARDS_DONE: Mutex<bool> = Mutex::new(false);
 
 /// One standard static: name, type letter, init, the '&' edits, and the integer value
 /// set after them (`None` for a real).
@@ -84,7 +86,10 @@ impl InterfaceStatic {
     /// the XSTEP messages (from the `CSF_XSMessage` directory, else the compiled
     /// `XSTEP.us`); `Standard_ProgramError` when they are still missing.
     pub fn standards() -> Result<(), Failure> {
-        if STANDARDS_DONE.swap(true, Ordering::SeqCst) {
+        let mut done = STANDARDS_DONE
+            .lock()
+            .unwrap_or_else(PoisonError::into_inner);
+        if std::mem::replace(&mut *done, true) {
             return Ok(());
         }
         for (name, kind, init, edits, value) in STANDARD_STATICS {
