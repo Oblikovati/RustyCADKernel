@@ -1,14 +1,16 @@
 //! `Graphic3d_FrameStats`: the rendering statistics of a view. The class is abstract
 //! (`updateStatistics` is pure virtual, `FormatStats` virtual), so it is a trait over an
 //! embedded base, with the non-virtual members in [`Graphic3dFrameStatsMembers`].
+use super::Graphic3dCView;
 use super::frame_stats_format::{format_stats_dict, format_stats_text};
+use super::frame_stats_frame;
 use super::frame_stats_text::Graphic3dFrameStatsDict;
 use super::{
     Graphic3dFrameStatsCounter, Graphic3dFrameStatsData, Graphic3dFrameStatsDataTmp,
     Graphic3dFrameStatsTimer, Graphic3dRenderingParamsPerfCounters,
 };
 use rustycad_tkernel::osd::Timer;
-use rustycad_tkernel::standard::{SharedState, StandardTransient, Transient};
+use rustycad_tkernel::standard::{Handle, SharedState, StandardTransient, Transient};
 use rustycad_tkernel::tcollection::AsciiString;
 
 /// The protected fields of the frame statistics.
@@ -86,6 +88,16 @@ pub struct Graphic3dFrameStatsBase {
 pub trait Graphic3dFrameStats: Transient {
     /// The embedded base; `stats.frame_stats_base()`.
     fn frame_stats_base(&self) -> &Graphic3dFrameStatsBase;
+    /// `FrameStart`: starts a frame of the view (null for none); `stats.frame_start(&view, false)`.
+    fn frame_start(&self, view: &Handle<dyn Graphic3dCView>, is_immediate_only: bool) {
+        frame_stats_frame::frame_start(self, view, is_immediate_only);
+    }
+    /// `FrameEnd`: ends a frame, updates the meters and the data frames; `stats.frame_end(&view, false)`.
+    fn frame_end(&self, view: &Handle<dyn Graphic3dCView>, is_immediate_only: bool) {
+        frame_stats_frame::frame_end(self, view, is_immediate_only);
+    }
+    /// `updateStatistics`: fills the active frame counters from the view (the driver part).
+    fn update_statistics(&self, view: &Handle<dyn Graphic3dCView>, is_immediate_only: bool);
     /// `FormatStats(PerfCounters)`: the statistics as text lines;
     /// `stats.format_stats(Graphic3dRenderingParamsPerfCounters::BASIC)`.
     fn format_stats(&self, flags: Graphic3dRenderingParamsPerfCounters) -> AsciiString {

@@ -46,7 +46,7 @@ fn object_end(text: &[u8], open: usize) -> usize {
     }
 }
 
-fn masked(text: &[u8], key: &str) -> Vec<u8> {
+pub fn masked(text: &[u8], key: &str) -> Vec<u8> {
     let head = format!("\"{key}\": {{").into_bytes();
     let mut out = text.to_vec();
     let mut from = 0;

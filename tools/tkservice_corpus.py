@@ -47,3 +47,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_culling').append_culling_requests(requests)
     # Graphic3d_FrameStats, Graphic3d_FrameStatsData (tkservice_corpus_stats.py)
     __import__('tkservice_corpus_stats').append_stats_requests(requests)
+    # The Graphic3d driver model on a null driver (tkservice_corpus_driver.py)
+    __import__('tkservice_corpus_driver').append_driver_requests(requests)

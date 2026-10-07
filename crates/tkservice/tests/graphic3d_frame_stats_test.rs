@@ -2,9 +2,9 @@
 use rustycad_tkernel::standard::{Handle, StandardTransient};
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkservice::graphic3d::{
-    Graphic3dFrameStats, Graphic3dFrameStatsBase, Graphic3dFrameStatsCounter as Counter,
-    Graphic3dFrameStatsData, Graphic3dFrameStatsDataTmp, Graphic3dFrameStatsDict,
-    Graphic3dFrameStatsMembers, Graphic3dFrameStatsTimer as Timer,
+    Graphic3dCView, Graphic3dFrameStats, Graphic3dFrameStatsBase,
+    Graphic3dFrameStatsCounter as Counter, Graphic3dFrameStatsData, Graphic3dFrameStatsDataTmp,
+    Graphic3dFrameStatsDict, Graphic3dFrameStatsMembers, Graphic3dFrameStatsTimer as Timer,
     Graphic3dRenderingParamsPerfCounters as Perf,
 };
 
@@ -19,6 +19,7 @@ impl Graphic3dFrameStats for FakeFrameStats {
     fn frame_stats_base(&self) -> &Graphic3dFrameStatsBase {
         &self.base
     }
+    fn update_statistics(&self, _view: &Handle<dyn Graphic3dCView>, _is_immediate_only: bool) {}
 }
 
 fn text_of(text: &AsciiString) -> String {

@@ -4,10 +4,11 @@ use super::common::{Reader, end, flag, int, real, text};
 use rustycad_tkernel::standard::{Handle, StandardTransient};
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkservice::graphic3d::{
-    GRAPHIC3D_FRAME_STATS_COUNTER_NB, GRAPHIC3D_FRAME_STATS_TIMER_NB, Graphic3dFrameStats,
-    Graphic3dFrameStatsBase, Graphic3dFrameStatsCounter as Counter, Graphic3dFrameStatsData,
-    Graphic3dFrameStatsDataTmp, Graphic3dFrameStatsDict, Graphic3dFrameStatsMembers,
-    Graphic3dFrameStatsTimer as Timer, Graphic3dRenderingParamsPerfCounters,
+    GRAPHIC3D_FRAME_STATS_COUNTER_NB, GRAPHIC3D_FRAME_STATS_TIMER_NB, Graphic3dCView,
+    Graphic3dFrameStats, Graphic3dFrameStatsBase, Graphic3dFrameStatsCounter as Counter,
+    Graphic3dFrameStatsData, Graphic3dFrameStatsDataTmp, Graphic3dFrameStatsDict,
+    Graphic3dFrameStatsMembers, Graphic3dFrameStatsTimer as Timer,
+    Graphic3dRenderingParamsPerfCounters,
 };
 
 /// The abstract statistics with an empty `updateStatistics`.
@@ -22,6 +23,7 @@ impl Graphic3dFrameStats for SvFrameStats {
     fn frame_stats_base(&self) -> &Graphic3dFrameStatsBase {
         &self.base
     }
+    fn update_statistics(&self, _view: &Handle<dyn Graphic3dCView>, _is_immediate_only: bool) {}
 }
 
 const COUNTERS: [Counter; GRAPHIC3D_FRAME_STATS_COUNTER_NB as usize] = [

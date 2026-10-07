@@ -41,6 +41,7 @@
 #include "tkservice_probe_font.cxx"
 #include "tkservice_probe_culling.cxx"
 #include "tkservice_probe_stats.cxx"
+#include "tkservice_probe_driver.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -94,6 +95,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sv_culling", sv_culling_case},
  // Graphic3d_FrameStats, Graphic3d_FrameStatsData (tkservice_probe_stats.cxx)
  {"sv_stats", sv_stats_case},
+ // The Graphic3d driver model on a null driver (tkservice_probe_driver.cxx)
+ {"sv_scene", sv_scene_case},
 };
 int main() {
  std::string line;

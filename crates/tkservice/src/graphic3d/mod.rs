@@ -19,6 +19,7 @@ mod bound_buffer;
 mod bsdf;
 mod buffer;
 mod buffer_members;
+mod bvh_cstructure_set;
 mod camera;
 mod camera_fit;
 mod camera_interpolate;
@@ -32,19 +33,38 @@ mod clip_plane_capping;
 mod clip_plane_chain;
 mod clip_plane_probe;
 mod clip_plane_sequence;
+mod cstructure;
 mod cube_map;
 mod cube_map_order;
 mod cube_map_packed;
 mod cube_map_separate;
 mod culling_tool;
+mod cview;
+mod cview_computed;
+mod cview_display;
+mod cview_members;
+mod cview_structures;
+mod cview_subviews;
+mod cview_virtuals;
+mod cview_xr;
+mod driver_dump;
 mod exceptions;
 mod flipper;
 mod frame_stats;
 mod frame_stats_data;
 mod frame_stats_format;
+mod frame_stats_frame;
 mod frame_stats_text;
+mod graduated_trihedron;
+mod graphic_driver;
+mod graphic_driver_factory;
+mod group;
+mod group_text;
 mod hatch_style;
 mod index_buffer;
+mod layer;
+mod layer_bounds;
+mod layer_culling;
 mod light;
 mod light_set;
 mod light_setters;
@@ -65,6 +85,12 @@ mod shader_program;
 mod shader_variable;
 mod small_values;
 mod stats_enums;
+mod structure;
+mod structure_bounds;
+mod structure_display;
+mod structure_manager;
+mod structure_members;
+mod structure_network;
 mod text;
 mod texture_1d;
 mod texture_2d;
@@ -113,6 +139,10 @@ pub use buffer::{
     graphic3d_buffer_dump_json,
 };
 pub use buffer_members::{Graphic3dBufferMembers, Graphic3dBufferValue};
+pub use bvh_cstructure_set::{
+    Graphic3dBvhBuilder3d, Graphic3dBvhCStructureSet, Graphic3dBvhCStructureSetTrsfPers,
+    Graphic3dCStructureIndexedMap, Graphic3dTrsfPersView,
+};
 pub use camera::{
     Graphic3dCamera, Graphic3dCameraFocusType, Graphic3dCameraIodType, Graphic3dCameraMatrices,
     Graphic3dCameraProjection, Graphic3dCameraState,
@@ -124,6 +154,10 @@ pub use clip_plane::{Graphic3dClipPlane, Graphic3dClipPlaneEquation, Graphic3dCl
 pub use clip_plane_sequence::{
     Graphic3dSequenceOfHClipPlane, Graphic3dSequenceOfHClipPlaneIterator,
 };
+pub use cstructure::{
+    Graphic3dCStructure, Graphic3dCStructureBase, Graphic3dCStructureFields,
+    Graphic3dCStructureMembers,
+};
 pub use cube_map::{
     Graphic3dCubeMap, Graphic3dCubeMapBase, Graphic3dCubeMapIteration, Graphic3dCubeMapMembers,
 };
@@ -131,6 +165,19 @@ pub use cube_map_order::{Graphic3dCubeMapOrder, Graphic3dValidatedCubeMapOrder};
 pub use cube_map_packed::{Graphic3dCubeMapPacked, graphic3d_cube_map_packed_check_order};
 pub use cube_map_separate::Graphic3dCubeMapSeparate;
 pub use culling_tool::{Graphic3dCullingContext, Graphic3dCullingPlane, Graphic3dCullingTool};
+pub use cview::{
+    Graphic3dCView, Graphic3dCViewBase, Graphic3dCViewFields, Graphic3dDataStructureManager,
+    graphic3d_cview_register,
+};
+pub use cview_computed::Graphic3dCViewComputed;
+pub use cview_members::Graphic3dCViewMembers;
+pub use cview_structures::Graphic3dCViewStructures;
+pub use cview_subviews::Graphic3dCViewSubviews;
+pub use cview_virtuals::{
+    diagnostic_information as graphic3d_cview_diagnostic_information,
+    resized as graphic3d_cview_resized,
+};
+pub use cview_xr::Graphic3dCViewXr;
 pub use exceptions::{
     group_definition_error, priority_definition_error, structure_definition_error,
 };
@@ -141,11 +188,30 @@ pub use frame_stats::{
 };
 pub use frame_stats_data::{Graphic3dFrameStatsData, Graphic3dFrameStatsDataTmp};
 pub use frame_stats_text::Graphic3dFrameStatsDict;
+pub use graduated_trihedron::{
+    Graphic3dGraduatedTrihedron, Graphic3dGraduatedTrihedronAxisAspect,
+    Graphic3dGraduatedTrihedronCallback,
+};
+pub use graphic_driver::{
+    Graphic3dGraphicDriver, Graphic3dGraphicDriverBase, Graphic3dGraphicDriverFields,
+    Graphic3dGraphicDriverMembers,
+};
+pub use graphic_driver_factory::{
+    Graphic3dGraphicDriverFactory, Graphic3dGraphicDriverFactoryBase,
+    graphic3d_graphic_driver_factories, graphic3d_graphic_driver_factory_default,
+    graphic3d_graphic_driver_factory_register, graphic3d_graphic_driver_factory_unregister,
+};
+pub use group::{
+    Graphic3dAspectsReplaceMap, Graphic3dGroup, Graphic3dGroupBase, Graphic3dGroupFields,
+    Graphic3dGroupMembers,
+};
+pub use group_text::{Graphic3dGroupTextLayout, Graphic3dGroupTextMembers};
 pub use hatch_style::Graphic3dHatchStyle;
 pub use index_buffer::{
     Graphic3dIndexBuffer, Graphic3dIndexBufferMembers, Graphic3dIndexBufferSource,
     Graphic3dMutableIndexBuffer,
 };
+pub use layer::{Graphic3dArrayOfIndexedMapOfStructure, Graphic3dLayer};
 pub use light::Graphic3dCLight;
 pub use light_set::{
     Graphic3dLightSet, Graphic3dLightSetIterationFilter, Graphic3dLightSetIterator,
@@ -177,6 +243,20 @@ pub use shader_variable::{
 };
 pub use small_values::{Graphic3dBufferRange, Graphic3dPolygonOffset, Graphic3dVertex};
 pub use stats_enums::*;
+pub use structure::{
+    Graphic3dStructure, Graphic3dStructureBase, Graphic3dStructureFields, Graphic3dStructureSource,
+    graphic3d_structure_bind,
+};
+pub use structure_bounds::Graphic3dStructureBounds;
+pub use structure_display::Graphic3dStructureDisplay;
+pub use structure_manager::{
+    Graphic3dStructureManager, Graphic3dStructureManagerFields, Graphic3dStructureSet,
+};
+pub use structure_members::Graphic3dStructureMembers;
+pub use structure_network::{
+    Graphic3dStructureNetwork, graphic3d_structure_accept_connection, graphic3d_structure_network,
+    graphic3d_structure_print_network,
+};
 pub use text::Graphic3dText;
 pub use texture_1d::{
     Graphic3dTexture1D, Graphic3dTexture1DBase, Graphic3dTexture1DMembers,

@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod sv_probe;
 use sv_probe::{
-    array, aspects, camera, clip_plane, culling, font, grid, hid, light, marker, material, params,
-    pbr, pixel, shader, stats, texture, tpers,
+    array, aspects, camera, clip_plane, culling, driver, font, grid, hid, light, marker, material,
+    params, pbr, pixel, shader, stats, texture, tpers,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -65,6 +65,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sv_culling", culling::culling_case),
     // Graphic3d_FrameStats, Graphic3d_FrameStatsData (sv_probe/stats.rs)
     ("sv_stats", stats::stats_case),
+    // The Graphic3d driver model on the null driver (sv_probe/driver.rs)
+    ("sv_scene", driver::scene_case),
 ];
 
 fn main() {
