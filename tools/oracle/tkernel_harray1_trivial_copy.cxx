@@ -3,9 +3,7 @@
 #include <Standard_Handle.hxx>
 #include <iostream>
 #include <string>
-#include <type_traits>
-struct TrivialItem { int number; };
-static_assert(std::is_trivially_copyable<TrivialItem>::value);
+#include "tkernel_harray_trivial_item.hxx"
 using Array = NCollection_Array1<TrivialItem>;
 using SharedArray = NCollection_HArray1<TrivialItem>;
 static std::string values(const Array& array)
