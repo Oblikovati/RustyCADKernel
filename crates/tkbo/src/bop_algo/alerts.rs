@@ -98,3 +98,10 @@ define_alert_with_shape!(
     AlertUnableToMakeClosedEdgeOnFace,
     "BOPAlgo_AlertUnableToMakeClosedEdgeOnFace"
 );
+
+/// Wraps one alert for a report (`new BOPAlgo_Alert...`); `alert(AlertUserBreak)`.
+pub(crate) fn alert<T: rustycad_tkernel::message::Alert + 'static>(
+    value: T,
+) -> rustycad_tkernel::message::AlertHandle {
+    std::sync::Arc::new(value)
+}

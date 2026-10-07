@@ -40,6 +40,7 @@ mod vertex_edge;
 mod vertex_face;
 #[path = "pave_filler/vertex_vertex.rs"]
 mod vertex_vertex;
+use super::alerts::alert;
 use super::{AlertNullInputShapes, AlertTooFewArguments, Glue, Options, SectionAttribute};
 use crate::{
     bop_ds::{BOPDSIterator, DataStructure, Pair, PaveBlockHandle},
@@ -47,12 +48,10 @@ use crate::{
 };
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::{
-    message::AlertHandle,
     ncollection::{DataMap, List, Map as IndexMap},
     standard::Handle,
 };
 use std::collections::HashMap;
-use std::sync::Arc;
 
 /// `BOPAlgo_PaveFiller::EdgeRangeDistance`: the distance of an edge range to a face that it
 /// does not intersect; `EdgeRangeDistance { first: 0., last: 1., distance: 0.5 }`.
@@ -301,10 +300,6 @@ impl BOPAlgoPaveFiller {
         }
         Ok(())
     }
-}
-
-fn alert<T: rustycad_tkernel::message::Alert + 'static>(value: T) -> AlertHandle {
-    Arc::new(value)
 }
 
 /// The failure of a stage run before `initialize` built the data structure.
