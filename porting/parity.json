@@ -310444,8 +310444,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
       "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::check_small_edges",
-      "status": "partial",
-      "notes": "Ten native rows compare free/face/shared/reversed-face incidence, repeated/seam edges, standalone edges, empty wires and caller-preloaded maps. Curved/located/degenerate geometry and exceptional mutations still need differential evidence; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Ported line by line. Compared with OCCT by the sh_fix_shape requests (tools/oracle/tkshhealing_probe_fix_shape.cxx, ops 5, 11, 12: FixWireGaps then FixSmallEdges, also in drop mode and with a limit angle, with the flags of both statuses and the digest of the result) on faces, shells and free wires, including small edges inside a face, on the boundary shared by two faces, closing a hole and inside or at the end of free wires; joins (DONE1), drops (DONE2, DONE3) and failed joins (FAIL1) all match. Fills the maps that MergeSmallEdges consumes."
     },
     {
       "upstream_id": "ShapeFix_FixSmallFace::FixSplitFace(const TopoDS_Shape&)",
@@ -310723,8 +310723,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
       "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::fix_small_edges",
-      "status": "partial",
-      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Configured/explicit angle-limit rejection is now native-tested. Direct sole-edge free-wire dropping matches native map/context/status removal; shared-face/seam/multiple-face/other-drop/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Ported line by line. Compared with OCCT by the sh_fix_shape requests (tools/oracle/tkshhealing_probe_fix_shape.cxx, ops 5, 11, 12: FixWireGaps then FixSmallEdges, also in drop mode and with a limit angle, with the flags of both statuses and the digest of the result) on faces, shells and free wires, including small edges inside a face, on the boundary shared by two faces, closing a hole and inside or at the end of free wires; joins (DONE1), drops (DONE2, DONE3) and failed joins (FAIL1) all match. Compound recursion skips null results as native."
     },
     {
       "upstream_id": "ShapeFix_Wireframe::MergeSmallEdges(NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &, NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &, const bool, const double)",
@@ -310732,8 +310732,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
       "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::merge_small_edges",
-      "status": "partial",
-      "notes": "Native null/no-op/compound orchestration, empty map, free-wire 3D join, and single-face non-seam 3D/pcurve joins (one/two consecutive small edges) match native topology/ranges/UV endpoints. Configured/explicit angle-limit rejection is now native-tested. Direct sole-edge free-wire dropping matches native map/context/status removal; shared-face/seam/multiple-face/other-drop/NM/warning domains remain incomplete. Partial; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Ported line by line. Compared with OCCT by the sh_fix_shape requests (tools/oracle/tkshhealing_probe_fix_shape.cxx, ops 5, 11, 12: FixWireGaps then FixSmallEdges, also in drop mode and with a limit angle, with the flags of both statuses and the digest of the result) on faces, shells and free wires, including small edges inside a face, on the boundary shared by two faces, closing a hole and inside or at the end of free wires; joins (DONE1), drops (DONE2, DONE3) and failed joins (FAIL1) all match. JoinEdges exceptions give a null edge (FAIL1) as the native try/catch; where the native drop branch would loop forever (a neighbour renamed to itself in a small-edge list), the port returns Standard_ProgramError."
     },
     {
       "upstream_id": "ShapeFix_Wireframe",
