@@ -177613,6 +177613,86 @@
       "notes": "BRepClass mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 2): the TopClass generics of TKGeomAlgo instantiated on the BRepClass edge, intersector and face explorer; C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (brc_* requests)."
     },
     {
+      "upstream_id": "BRepClass_Edge::BndBoxState::NotBuilt",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BndBoxState::NotBuilt",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BndBoxState."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::BndBoxState::Ready",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BndBoxState::Ready",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BndBoxState."
+    },
+    {
+      "upstream_id": "BRepClass_Edge::BndBoxState::Unavailable",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_Edge.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BndBoxState::Unavailable",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BndBoxState."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::myClassifier",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of rustycad_tkgeomalgo::topclass::FaceClassifier (the generic BRepClassFClassifier aliases), which no derived class needs (Rust has no subclassing)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::myEdge",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of rustycad_tkgeomalgo::topclass::FaceClassifier (the generic BRepClassFClassifier aliases), which no derived class needs (Rust has no subclassing)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::myEdgeParameter",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of rustycad_tkgeomalgo::topclass::FaceClassifier (the generic BRepClassFClassifier aliases), which no derived class needs (Rust has no subclassing)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::myPosition",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of rustycad_tkgeomalgo::topclass::FaceClassifier (the generic BRepClassFClassifier aliases), which no derived class needs (Rust has no subclassing)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::nowires",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of rustycad_tkgeomalgo::topclass::FaceClassifier (the generic BRepClassFClassifier aliases), which no derived class needs (Rust has no subclassing)."
+    },
+    {
+      "upstream_id": "BRepClass_FClassifier::rejected",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FClassifier.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of rustycad_tkgeomalgo::topclass::FaceClassifier (the generic BRepClassFClassifier aliases), which no derived class needs (Rust has no subclassing)."
+    },
+    {
+      "upstream_id": "BRepClass_FaceExplorer::ComputeFaceBounds()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass/BRepClass_FaceExplorer.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class::BRepClassFaceExplorer::compute_face_bounds",
+      "status": "implemented",
+      "notes": "protected member; public in Rust."
+    },
+    {
       "upstream_id": "IntPatch_WLineTool::ExtendTwoWLines(NCollection_Sequence<occ::handle<IntPatch_Line>>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,double,const double* const,const Bnd_Box2d&,const Bnd_Box2d&,const NCollection_List<gp_Pnt>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_WLineTool.hxx",
@@ -181301,6 +181381,22 @@
       "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests)."
     },
     {
+      "upstream_id": "MAT_Left",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_Side.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatSide::Left",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as MatSide."
+    },
+    {
+      "upstream_id": "MAT_Right",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_Side.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatSide::Right",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as MatSide."
+    },
+    {
       "upstream_id": "MAT2d_BiInt::MAT2d_BiInt(int,int)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/MAT2d/MAT2d_BiInt.hxx",
@@ -182683,6 +182779,62 @@
       "rust_item": "rustycad_tktopalgo::brep_class3d::BRepClass3dSolidExplorer::change_intersector",
       "status": "implemented",
       "notes": "BRepClass3d mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 5): the solid explorer owns the face intersectors and the UB-tree of the edge and vertex boxes; in/out references stay &mut arguments (FacePointSample for the point, parameters and derivatives), overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bc3_* requests). The non-const reference of the const member is change_intersector (&mut); intersector is the shared view."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::EdgeParam",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::EdgeParam",
+      "status": "implemented",
+      "notes": "public nested struct."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::EdgeParam::myE",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::EdgeParam::my_e",
+      "status": "implemented",
+      "notes": "public field."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::EdgeParam::myLParam",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::EdgeParam::my_l_param",
+      "status": "implemented",
+      "notes": "public field."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::EdgeParam::myParam",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::EdgeParam::my_param",
+      "status": "implemented",
+      "notes": "public field."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::VertParam",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::VertParam",
+      "status": "implemented",
+      "notes": "public nested struct."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::VertParam::myLParam",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::VertParam::my_l_param",
+      "status": "implemented",
+      "notes": "public field."
+    },
+    {
+      "upstream_id": "BRepClass3d_BndBoxTreeSelectorLine::VertParam::myV",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepClass3d/BRepClass3d_BndBoxTree.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_class3d::VertParam::my_v",
+      "status": "implemented",
+      "notes": "public field."
     },
     {
       "upstream_id": "ApproxInt_KnotTools::BuildKnots(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<gp_Pnt2d>&,const math_Vector&,bool,bool,bool,int,NCollection_DynamicArray<int>&)",
@@ -186381,6 +186533,366 @@
       "notes": "BRepCheck mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 6): BRepCheck_Result is the trait BRepCheckResult over the embedded ResultBase and each checker a transient struct whose members take &self; the package class is the unit struct BRepCheck; overloads take distinct Rust names, output references become &mut parameters, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bck_* requests). DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type."
     },
     {
+      "upstream_id": "BRepCheck_ParallelAnalyzer",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "friend forward declaration in BRepCheck_Result.hxx of a functor defined only in BRepCheck_Analyzer.cxx; the Rust port is the private module brep_check/analyzer_contexts.rs, used by BRepCheckAnalyzer."
+    },
+    {
+      "upstream_id": "BRepCheck_Result()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::ResultBase::new",
+      "status": "implemented",
+      "notes": "protected constructor; the protected data of the class is the embedded ResultBase."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::myBlind",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of ResultBase, which no derived class needs (Rust has no subclassing), read through is_blind()/set_blind()."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::myIsParallel",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of ResultBase, which no derived class needs (Rust has no subclassing), read through is_parallel()."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::myMap",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of ResultBase, which no derived class needs (Rust has no subclassing), read through the status_on_shape_of/context iterator members."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::myMin",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of ResultBase, which no derived class needs (Rust has no subclassing), read through is_minimum()/set_minimum()."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::myMutex",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of ResultBase, which no derived class needs (Rust has no subclassing), read through its SharedState lock."
+    },
+    {
+      "upstream_id": "BRepCheck_Result::myShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Result.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of ResultBase, which no derived class needs (Rust has no subclassing), read through shape()."
+    },
+    {
+      "upstream_id": "BRepCheck_BadOrientation",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::BadOrientation",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_BadOrientationOfSubshape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::BadOrientationOfSubshape",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_CheckFail",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::CheckFail",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_EmptyShell",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::EmptyShell",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_EmptyWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::EmptyWire",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_EnclosedRegion",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::EnclosedRegion",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_FreeEdge",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::FreeEdge",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_IntersectingWires",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::IntersectingWires",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_Invalid3DCurve",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::Invalid3DCurve",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidCurveOnClosedSurface",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidCurveOnClosedSurface",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidCurveOnSurface",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidCurveOnSurface",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidDegeneratedFlag",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidDegeneratedFlag",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidImbricationOfShells",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidImbricationOfShells",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidImbricationOfWires",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidImbricationOfWires",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidMultiConnexity",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidMultiConnexity",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidPointOnCurve",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidPointOnCurve",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidPointOnCurveOnSurface",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidPointOnCurveOnSurface",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidPointOnSurface",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidPointOnSurface",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidPolygonOnTriangulation",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidPolygonOnTriangulation",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidRange",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidRange",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidSameParameterFlag",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidSameParameterFlag",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidSameRangeFlag",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidSameRangeFlag",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidToleranceValue",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidToleranceValue",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_InvalidWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::InvalidWire",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_Multiple3DCurve",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::Multiple3DCurve",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_No3DCurve",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::No3DCurve",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_NoCurveOnSurface",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::NoCurveOnSurface",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_NoError",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::NoError",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_NoSurface",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::NoSurface",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_NotClosed",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::NotClosed",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_NotConnected",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::NotConnected",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_RedundantEdge",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::RedundantEdge",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_RedundantFace",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::RedundantFace",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_RedundantWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::RedundantWire",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_SelfIntersectingWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::SelfIntersectingWire",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_SubshapeNotInShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::SubshapeNotInShape",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
+      "upstream_id": "BRepCheck_UnorientableShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepCheck/BRepCheck_Status.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_check::BRepCheckStatus::UnorientableShape",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepCheckStatus."
+    },
+    {
       "upstream_id": "BRepLib::Precision(double)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib.hxx",
@@ -188517,6 +189029,382 @@
       "notes": "C++ virtual destructor (defaulted): Rust drops the embedded base and the implementor with the value; nothing to port."
     },
     {
+      "upstream_id": "BRepLib_CheckCurveOnSurface::Compute(const occ::handle<Adaptor3d_CurveOnSurface>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_CheckCurveOnSurface.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepLibCheckCurveOnSurface::compute (brep_lib/check_curve_on_surface.rs), which Perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepLib_Command()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_Command.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibCommand::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "protected constructor; Rust builds the not-done command through Default."
+    },
+    {
+      "upstream_id": "BRepLib_Command::Done()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_Command.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepLibCommand::set_done (brep_lib/command.rs), which each BRepLib maker (all in this crate) calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepLib_Command::NotDone()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_Command.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepLibCommand::set_not_done (brep_lib/command.rs), which each BRepLib maker (all in this crate) calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepLib_DifferentPointsOnClosedCurve",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibEdgeError::DifferentPointsOnClosedCurve",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibEdgeError."
+    },
+    {
+      "upstream_id": "BRepLib_DifferentsPointAndParameter",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibEdgeError::DifferentsPointAndParameter",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibEdgeError."
+    },
+    {
+      "upstream_id": "BRepLib_EdgeDone",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibEdgeError::EdgeDone",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibEdgeError."
+    },
+    {
+      "upstream_id": "BRepLib_LineThroughIdenticPoints",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibEdgeError::LineThroughIdenticPoints",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibEdgeError."
+    },
+    {
+      "upstream_id": "BRepLib_ParameterOutOfRange",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibEdgeError::ParameterOutOfRange",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibEdgeError."
+    },
+    {
+      "upstream_id": "BRepLib_PointProjectionFailed",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibEdgeError::PointProjectionFailed",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibEdgeError."
+    },
+    {
+      "upstream_id": "BRepLib_PointWithInfiniteParameter",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibEdgeError::PointWithInfiniteParameter",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibEdgeError."
+    },
+    {
+      "upstream_id": "BRepLib_CurveProjectionFailed",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibFaceError::CurveProjectionFailed",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibFaceError."
+    },
+    {
+      "upstream_id": "BRepLib_FaceDone",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibFaceError::FaceDone",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibFaceError."
+    },
+    {
+      "upstream_id": "BRepLib_NoFace",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibFaceError::NoFace",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibFaceError."
+    },
+    {
+      "upstream_id": "BRepLib_NotPlanar",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibFaceError::NotPlanar",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibFaceError."
+    },
+    {
+      "upstream_id": "BRepLib_ParametersOutOfRange",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibFaceError::ParametersOutOfRange",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibFaceError."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibMakeShape::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "protected constructor; Rust builds the empty maker through Default."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::myEdgFaces",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepLibMakeShape, which no derived class needs (Rust has no subclassing), read through faces_from_edges()."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::myGenFaces",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepLibMakeShape, which no derived class needs (Rust has no subclassing), read through descendant_faces()."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::myNewFaces",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepLibMakeShape, which no derived class needs (Rust has no subclassing), read through new_faces()."
+    },
+    {
+      "upstream_id": "BRepLib_MakeShape::myShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeShape.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepLibMakeShape, which no derived class needs (Rust has no subclassing), read through shape()."
+    },
+    {
+      "upstream_id": "BRepLib_MakeSolid::myDeletedFaces",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeSolid.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepLibMakeSolid, which no derived class needs (Rust has no subclassing), read through face_status()."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::addDensityPoints(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::add_density_points",
+      "status": "implemented",
+      "notes": "protected member; a provided method of the trait in Rust."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::addPoint(const gp_Pnt&,const gp_Vec&,const gp_Pnt2d&,const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::add_point",
+      "status": "implemented",
+      "notes": "the pure virtual protected addPoint is the required trait method."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::addTriangulationPoints(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::add_triangulation_points",
+      "status": "implemented",
+      "notes": "protected member; a provided method of the trait in Rust."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::clear()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::clear",
+      "status": "implemented",
+      "notes": "protected member; a provided method of the trait."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::computeDensity()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::compute_density",
+      "status": "implemented",
+      "notes": "protected member; a provided method of the trait in Rust."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::faceArea(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape::face_area",
+      "status": "implemented",
+      "notes": "protected member; a provided method of the trait in Rust."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::myDist",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShapeBase::my_dist",
+      "status": "implemented",
+      "notes": "protected field; the protected data of the class is the BRepLibPointCloudShapeBase every implementor embeds."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::myFaceArea",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShapeBase::my_face_area",
+      "status": "implemented",
+      "notes": "protected field; the protected data of the class is the BRepLibPointCloudShapeBase every implementor embeds."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::myFacePoints",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShapeBase::my_face_points",
+      "status": "implemented",
+      "notes": "protected field; the protected data of the class is the BRepLibPointCloudShapeBase every implementor embeds."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::myNbPoints",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShapeBase::my_nb_points",
+      "status": "implemented",
+      "notes": "protected field; the protected data of the class is the BRepLibPointCloudShapeBase every implementor embeds."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::myShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShapeBase::my_shape",
+      "status": "implemented",
+      "notes": "protected field; the protected data of the class is the BRepLibPointCloudShapeBase every implementor embeds."
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape::myTol",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShapeBase::my_tol",
+      "status": "implemented",
+      "notes": "protected field; the protected data of the class is the BRepLibPointCloudShapeBase every implementor embeds."
+    },
+    {
+      "upstream_id": "BRepLib_BoundaryModified",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShapeModification.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShapeModification::BoundaryModified",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibShapeModification."
+    },
+    {
+      "upstream_id": "BRepLib_Deleted",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShapeModification.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShapeModification::Deleted",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibShapeModification."
+    },
+    {
+      "upstream_id": "BRepLib_Merged",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShapeModification.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShapeModification::Merged",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibShapeModification."
+    },
+    {
+      "upstream_id": "BRepLib_Preserved",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShapeModification.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShapeModification::Preserved",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibShapeModification."
+    },
+    {
+      "upstream_id": "BRepLib_Trimmed",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShapeModification.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShapeModification::Trimmed",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibShapeModification."
+    },
+    {
+      "upstream_id": "BRepLib_DisconnectedShell",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShellError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShellError::DisconnectedShell",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibShellError."
+    },
+    {
+      "upstream_id": "BRepLib_EmptyShell",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShellError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShellError::EmptyShell",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibShellError."
+    },
+    {
+      "upstream_id": "BRepLib_ShellDone",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShellError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShellError::ShellDone",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibShellError."
+    },
+    {
+      "upstream_id": "BRepLib_ShellParametersOutOfRange",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_ShellError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibShellError::ShellParametersOutOfRange",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibShellError."
+    },
+    {
+      "upstream_id": "BRepLib_DisconnectedWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_WireError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibWireError::DisconnectedWire",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibWireError."
+    },
+    {
+      "upstream_id": "BRepLib_EmptyWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_WireError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibWireError::EmptyWire",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibWireError."
+    },
+    {
+      "upstream_id": "BRepLib_NonManifoldWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_WireError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibWireError::NonManifoldWire",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibWireError."
+    },
+    {
+      "upstream_id": "BRepLib_WireDone",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_WireError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibWireError::WireDone",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepLibWireError."
+    },
+    {
       "upstream_id": "BRepGProp::LinearProperties(const TopoDS_Shape&,GProp_GProps&,bool,bool)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp.hxx",
@@ -189627,6 +190515,54 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Declared in BRepGProp_VinertGK.hxx but defined nowhere in OCCT (a call does not link natively); the absolute error is the value every Perform returns."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss(const BRepGProp_Gauss::GaussType)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropGauss::new",
+      "status": "implemented",
+      "notes": "the GaussType selects volume or surface integrals."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss::GaussType::Sinert",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::GaussType::Sinert",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as GaussType."
+    },
+    {
+      "upstream_id": "BRepGProp_Gauss::GaussType::Vinert",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::GaussType::Vinert",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as GaussType."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps(const BRepGProp_MeshProps::BRepGProp_MeshObjType)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps::new",
+      "status": "implemented",
+      "notes": "the mesh object type is MeshObjType."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps::Sinert",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::MeshObjType::Sinert",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as MeshObjType."
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps::Vinert",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::MeshObjType::Vinert",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as MeshObjType."
     },
     {
       "upstream_id": "BRepApprox_Approx()",
@@ -192293,6 +193229,310 @@
       "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
     },
     {
+      "upstream_id": "BRepApprox_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfApprox::Perform(const math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::BSpFunction::perform",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::BSpFunction::perform of that generic."
+    },
+    {
+      "upstream_id": "BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox::Affect(const BRepApprox_TheMultiLineOfApprox&,const int,AppParCurves_Constraint&,math_Vector&,math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::affect (least_square/init.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox::ComputeFunction(const math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::compute_function (least_square/perform.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox::Init(const BRepApprox_TheMultiLineOfApprox&,const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::init (least_square/init.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox::MakeTAA(math_Vector&,math_Matrix&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::make_taa_full / make_taa_blocks / make_taa_profile (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox::MakeTAA(math_Vector&,math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::make_taa_full / make_taa_blocks / make_taa_profile (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox::MakeTAA(math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::make_taa_full / make_taa_blocks / make_taa_profile (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox::NbBColumns(const BRepApprox_TheMultiLineOfApprox&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::nb_b_columns",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::nb_b_columns of that generic. The native const member reads no state, so the generic ports it as a free function."
+    },
+    {
+      "upstream_id": "BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox::SearchIndex(math_IntegerVector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::search_index (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox::TheFirstPoint(const AppParCurves_Constraint,const int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_first_point",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::the_first_point of that generic. The native const member reads no state, so the generic ports it as a free function."
+    },
+    {
+      "upstream_id": "BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox::TheLastPoint(const AppParCurves_Constraint,const int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_last_point",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::the_last_point of that generic. The native const member reads no state, so the generic ports it as a free function."
+    },
+    {
+      "upstream_id": "BRepApprox_MyBSplGradientOfTheComputeLineOfApprox::Perform(const BRepApprox_TheMultiLineOfApprox&,const int,const int,const occ::handle<NCollection_HArray1<AppParCurves_ConstraintCouple>>&,math_Vector&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const int,const double,const double,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_MyBSplGradientOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_BSpGradient.gxx instance; the TKGeomBase generic BSpGradient (the class this BRepApprox instance aliases) ports it as the private BSpGradient::perform (app_par_curves/bsp_gradient.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParFunctionOfMyGradientOfTheComputeLineBezierOfApprox::Perform(const math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParFunctionOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::Function::perform",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::Function::perform of that generic."
+    },
+    {
+      "upstream_id": "BRepApprox_ParFunctionOfMyGradientbisOfTheComputeLineOfApprox::Perform(const math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParFunctionOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::Function::perform",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::Function::perform of that generic."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox::Affect(const BRepApprox_TheMultiLineOfApprox&,const int,AppParCurves_Constraint&,math_Vector&,math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::affect (least_square/init.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox::ComputeFunction(const math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::compute_function (least_square/perform.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox::Init(const BRepApprox_TheMultiLineOfApprox&,const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::init (least_square/init.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox::MakeTAA(math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::make_taa_full / make_taa_blocks / make_taa_profile (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox::MakeTAA(math_Vector&,math_Matrix&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::make_taa_full / make_taa_blocks / make_taa_profile (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox::MakeTAA(math_Vector&,math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::make_taa_full / make_taa_blocks / make_taa_profile (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox::NbBColumns(const BRepApprox_TheMultiLineOfApprox&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::nb_b_columns",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::nb_b_columns of that generic. The native const member reads no state, so the generic ports it as a free function."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox::SearchIndex(math_IntegerVector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::search_index (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox::TheFirstPoint(const AppParCurves_Constraint,const int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_first_point",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::the_first_point of that generic. The native const member reads no state, so the generic ports it as a free function."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox::TheLastPoint(const AppParCurves_Constraint,const int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_last_point",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::the_last_point of that generic. The native const member reads no state, so the generic ports it as a free function."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox::Affect(const BRepApprox_TheMultiLineOfApprox&,const int,AppParCurves_Constraint&,math_Vector&,math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::affect (least_square/init.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox::ComputeFunction(const math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::compute_function (least_square/perform.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox::Init(const BRepApprox_TheMultiLineOfApprox&,const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::init (least_square/init.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox::MakeTAA(math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::make_taa_full / make_taa_blocks / make_taa_profile (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox::MakeTAA(math_Vector&,math_Matrix&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::make_taa_full / make_taa_blocks / make_taa_profile (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox::MakeTAA(math_Vector&,math_Vector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::make_taa_full / make_taa_blocks / make_taa_profile (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox::NbBColumns(const BRepApprox_TheMultiLineOfApprox&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::nb_b_columns",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::nb_b_columns of that generic. The native const member reads no state, so the generic ports it as a free function."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox::SearchIndex(math_IntegerVector&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected member of the AppParCurves_LeastSquare.gxx instance; the TKGeomBase generic LeastSquare (the class this BRepApprox instance aliases) ports it as the private LeastSquare::search_index (least_square/normal_equations.rs), called by its constructors and Perform members (docs/geomalgo-design.md section 20)."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox::TheFirstPoint(const AppParCurves_Constraint,const int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_first_point",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::the_first_point of that generic. The native const member reads no state, so the generic ports it as a free function."
+    },
+    {
+      "upstream_id": "BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox::TheLastPoint(const AppParCurves_Constraint,const int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_last_point",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::the_last_point of that generic. The native const member reads no state, so the generic ports it as a free function."
+    },
+    {
+      "upstream_id": "BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox::NbColumns(const BRepApprox_TheMultiLineOfApprox&,const int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_columns",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_columns of that generic."
+    },
+    {
+      "upstream_id": "BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox::NbConstraints(const BRepApprox_TheMultiLineOfApprox&,const int,const int,const occ::handle<NCollection_HArray1<AppParCurves_ConstraintCouple>>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_constraints",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_constraints of that generic."
+    },
+    {
+      "upstream_id": "BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox::NbColumns(const BRepApprox_TheMultiLineOfApprox&,const int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_columns",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_columns of that generic."
+    },
+    {
+      "upstream_id": "BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox::NbConstraints(const BRepApprox_TheMultiLineOfApprox&,const int,const int,const occ::handle<NCollection_HArray1<AppParCurves_ConstraintCouple>>&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_constraints",
+      "status": "implemented",
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the class is an alias of the TKGeomBase AppParCurves generic; the protected member is the public rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_constraints of that generic."
+    },
+    {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction3d()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
@@ -192443,6 +193683,30 @@
       "rust_item": "rustycad_tktopalgo::brep_int_curve_surface::BRepIntCurveSurfaceInter::face",
       "status": "implemented",
       "notes": "BRepIntCurveSurface_Inter (docs/topalgo-design.md section 12): the struct BRepIntCurveSurfaceInter; the Init overloads are init_curve (shape, curve, tol), init_line (shape, line, tol) and init (curve); Init and Load take &mut self and return Result; the accessors of the current point raise StdFail_NotDone without one and Face raises Standard_OutOfRange outside the loaded faces. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bics_* requests)."
+    },
+    {
+      "upstream_id": "BRepIntCurveSurface_Inter::Clear()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepIntCurveSurface/BRepIntCurveSurface_Inter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepIntCurveSurfaceInter::clear (brep_int_curve_surface/inter.rs), which every Init calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepIntCurveSurface_Inter::Find()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepIntCurveSurface/BRepIntCurveSurface_Inter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepIntCurveSurfaceInter::find (brep_int_curve_surface/find.rs), which Init and Next calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepIntCurveSurface_Inter::FindPoint()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepIntCurveSurface/BRepIntCurveSurface_Inter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepIntCurveSurfaceInter::find_point (brep_int_curve_surface/find.rs), which Find calls with the native order and failure modes."
     },
     {
       "upstream_id": "BRepBuilderAPI::Plane(const occ::handle<Geom_Plane>&)",
@@ -194861,6 +196125,1214 @@
       "notes": "BRepBuilderAPI_MakeShapeOnMesh mapping (docs/topalgo-design.md sections 11 and 14): the Build override of the trait BRepBuilderAPIMakeShape; the vertex map is a vector by node index and the mesh-edge map a hash map keeping the first edge of a key (both only searched by key natively); the progress scope steps as natively; the edge, wire and face makers' exceptions are returned; compared with OCCT by tools/verify_tktopalgo_numeric.py (bba_onmesh requests)."
     },
     {
+      "upstream_id": "BRepBuilderAPI_Command()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Command.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPICommand::new",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Command::Done()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Command.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPICommand::set_done",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Command::NotDone()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Command.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPICommand::set_not_done",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_DifferentPointsOnClosedCurve",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIEdgeError::DifferentPointsOnClosedCurve",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIEdgeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_DifferentsPointAndParameter",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIEdgeError::DifferentsPointAndParameter",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIEdgeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_EdgeDone",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIEdgeError::EdgeDone",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIEdgeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_LineThroughIdenticPoints",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIEdgeError::LineThroughIdenticPoints",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIEdgeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ParameterOutOfRange",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIEdgeError::ParameterOutOfRange",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIEdgeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_PointProjectionFailed",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIEdgeError::PointProjectionFailed",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIEdgeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_PointWithInfiniteParameter",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_EdgeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIEdgeError::PointWithInfiniteParameter",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIEdgeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_CurveProjectionFailed",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFaceError::CurveProjectionFailed",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIFaceError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FaceDone",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFaceError::FaceDone",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIFaceError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_NoFace",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFaceError::NoFace",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIFaceError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_NotPlanar",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFaceError::NotPlanar",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIFaceError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ParametersOutOfRange",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FaceError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIFaceError::ParametersOutOfRange",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIFaceError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::Compute3DRange()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPIFastSewing::compute_3d_range (fast_sewing/mod.rs), which BRepBuilderAPIFastSewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::CreateNewEdge(const int,const int,const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPIFastSewing::create_new_edge (fast_sewing/topology.rs), which BRepBuilderAPIFastSewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Degenerated",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatus::Degenerated",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as FastSewingStatus."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Edge",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "nested struct declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port is the private FsEdge of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Edge::CreateTopologicalEdge(const NCollection_DynamicArray<BRepBuilderAPI_FastSewing::FS_Vertex>&,const NCollection_DynamicArray<BRepBuilderAPI_FastSewing::FS_Face>&,const double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Edge, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsEdge (CreateTopologicalEdge) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Edge()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Edge, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsEdge (FS_Edge) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Edge(const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Edge, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsEdge (FS_Edge) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Edge::IsDegenerated() const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Edge, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsEdge (IsDegenerated) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Edge::SetVertex(const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Edge, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsEdge (the callers write its my_vertices / my_edges array directly) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Edge::myFaces",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Edge, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsEdge::my_faces of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Edge::myID",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Edge, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsEdge::my_id of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Edge::myTopoEdge",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Edge, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsEdge::my_topo_edge of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_EmptyInput",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatus::EmptyInput",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as FastSewingStatus."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Exception",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatus::Exception",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as FastSewingStatus."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "nested struct declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port is the private FsFace of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face::CreateTopologicalFace()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace (CreateTopologicalFace) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face::CreateTopologicalWire(const NCollection_DynamicArray<BRepBuilderAPI_FastSewing::FS_Edge>&,const double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace (CreateTopologicalWire) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace (FS_Face) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face::SetEdge(const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace (the callers write its my_vertices / my_edges array directly) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face::SetVertex(const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace (the callers write its my_vertices / my_edges array directly) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face::myEdges",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace::my_edges of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face::myID",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace (myID is never read natively; the index in the owning Vec carries it) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face::myRetFace",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace::my_ret_face of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face::mySrcFace",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace::my_src_face of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face::myVertices",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace::my_vertices of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Face::myWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Face, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsFace::my_wire of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_FaceWithNullSurface",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatus::FaceWithNullSurface",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as FastSewingStatus."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_FindEdgeError",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatus::FindEdgeError",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as FastSewingStatus."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_FindVertexError",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatus::FindVertexError",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as FastSewingStatus."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_InfiniteSurface",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatus::InfiniteSurface",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as FastSewingStatus."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_NotNaturalBoundsFace",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatus::NotNaturalBoundsFace",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as FastSewingStatus."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_OK",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatus::Ok",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as FastSewingStatus."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_VARStatuses",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::FastSewingStatuses",
+      "status": "implemented",
+      "notes": "the status bit set, a u32 alias in Rust."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Vertex",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "nested struct declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port is the private FsVertex of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Vertex::CreateTopologicalVertex(const double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Vertex, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsVertex (CreateTopologicalVertex) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Vertex()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Vertex, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsVertex (FS_Vertex) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Vertex::myEdges",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Vertex, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsVertex::my_edges of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Vertex::myFaces",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Vertex, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsVertex::my_faces of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Vertex::myID",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Vertex, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsVertex (myID is never read natively; the index in the owning Vec carries it) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Vertex::myPnt",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Vertex, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsVertex::my_pnt of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FS_Vertex::myTopoVert",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::FS_Vertex, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private FsVertex::my_topo_vert of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FindEdges(const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPIFastSewing::find_edges (fast_sewing/topology.rs), which BRepBuilderAPIFastSewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::FindVertexes(const int,NCollection_CellFilter<BRepBuilderAPI_FastSewing::NodeInspector>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPIFastSewing::find_vertexes (fast_sewing/topology.rs), which BRepBuilderAPIFastSewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::NodeInspector",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "nested struct declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port is the private NodeInspector of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::NodeInspector::Coord(int,const BRepBuilderAPI_FastSewing::NodeInspector::Point&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::NodeInspector, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private NodeInspector (CellInspector impl: Point = Xyz, Target = i32, DIMENSION = 3; the result is its my_res_id) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::NodeInspector::Dimension",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::NodeInspector, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private NodeInspector (CellInspector impl: Point = Xyz, Target = i32, DIMENSION = 3; the result is its my_res_id) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::NodeInspector::GetResult()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::NodeInspector, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private NodeInspector (CellInspector impl: Point = Xyz, Target = i32, DIMENSION = 3; the result is its my_res_id) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::NodeInspector::Inspect(const BRepBuilderAPI_FastSewing::NodeInspector::Target)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::NodeInspector, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private NodeInspector (CellInspector impl: Point = Xyz, Target = i32, DIMENSION = 3; the result is its my_res_id) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::NodeInspector(const NCollection_DynamicArray<BRepBuilderAPI_FastSewing::FS_Vertex>&,const gp_Pnt&,const double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::NodeInspector, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private NodeInspector (NodeInspector) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::NodeInspector::Point",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::NodeInspector, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private NodeInspector (CellInspector impl: Point = Xyz, Target = i32, DIMENSION = 3; the result is its my_res_id) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::NodeInspector::Shift(const BRepBuilderAPI_FastSewing::NodeInspector::Point&,double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::NodeInspector, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private NodeInspector (CellInspector impl: Point = Xyz, Target = i32, DIMENSION = 3; the result is its my_res_id) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::NodeInspector::Target",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "member of the nested BRepBuilderAPI_FastSewing::NodeInspector, declared in the protected section of BRepBuilderAPI_FastSewing; the Rust port keeps it as the private NodeInspector (CellInspector impl: Point = Xyz, Target = i32, DIMENSION = 3; the result is its my_res_id) of brep_builder_api/fast_sewing/topology.rs, used only by BRepBuilderAPIFastSewing::perform."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::SetStatus(BRepBuilderAPI_FastSewing::FS_Statuses)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPIFastSewing::set_status (fast_sewing/mod.rs), which BRepBuilderAPIFastSewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_FastSewing::UpdateEdgeInfo(const int,const int,const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_FastSewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPIFastSewing::update_edge_info (fast_sewing/topology.rs), which BRepBuilderAPIFastSewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeShape()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeBase::new",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10). The protected data of the class is the embedded BRepBuilderAPIMakeShapeBase."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeShape::myGenerated",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeBase::my_generated",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_MakeShape::myShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_MakeShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShapeBase::my_shape",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ModifyShape()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIModifyShape::new",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ModifyShape(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIModifyShape::with_shape",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ModifyShape(const TopoDS_Shape&,const occ::handle<BRepTools_Modification>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIModifyShape::with_shape_modification",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ModifyShape(const occ::handle<BRepTools_Modification>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIModifyShape::with_modification",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ModifyShape::DoModif(const TopoDS_Shape&,const occ::handle<BRepTools_Modification>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIModifyShape::do_modif_shape_modification",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ModifyShape::DoModif(const TopoDS_Shape&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIModifyShape::do_modif_shape",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ModifyShape::DoModif(const occ::handle<BRepTools_Modification>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIModifyShape::do_modif_modification",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ModifyShape::myInitialShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIModifyShape::my_initial_shape",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ModifyShape::myModification",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIModifyShape::my_modification",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ModifyShape::myModifier",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ModifyShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIModifyShape::my_modifier",
+      "status": "implemented",
+      "notes": "protected member of the C++ class; public in Rust because the derived classes live in other crates (docs/topalgo-design.md section 10)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ImpossibleContact",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_PipeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIPipeError::ImpossibleContact",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIPipeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_PipeDone",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_PipeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIPipeError::PipeDone",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIPipeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_PipeNotDone",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_PipeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIPipeError::PipeNotDone",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIPipeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_PlaneNotIntersectGuide",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_PipeError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIPipeError::PlaneNotIntersectGuide",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIPipeError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::AnalysisNearestEdges(const NCollection_Sequence<TopoDS_Shape>&,NCollection_Sequence<int>&,NCollection_Sequence<bool>&,const bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::analysis_nearest_edges (brep_builder_api/sewing/candidates.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::CreateCuttingNodes(const NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher>&,const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt>&,NCollection_Sequence<TopoDS_Shape>&,NCollection_Sequence<double>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::create_cutting_nodes (brep_builder_api/sewing/cutting_nodes.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::CreateOutputInformations()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::create_output_informations (brep_builder_api/sewing/sewed_shape.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::CreateSections(const TopoDS_Shape&,const NCollection_Sequence<TopoDS_Shape>&,const NCollection_Sequence<double>&,NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::create_sections (brep_builder_api/sewing/cutting_nodes.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::CreateSewedShape()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::create_sewed_shape (brep_builder_api/sewing/sewed_shape.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::Cutting(const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::cutting (brep_builder_api/sewing/cutting.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::EdgeProcessing(const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::edge_processing (brep_builder_api/sewing/edge_processing.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::EdgeRegularity(const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::edge_regularity (brep_builder_api/sewing/edge_processing.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::EvaluateAngulars(NCollection_Sequence<TopoDS_Shape>&,NCollection_Array1<bool>&,NCollection_Array1<double>&,const int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::evaluate_angulars (brep_builder_api/sewing/evaluate.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::EvaluateDistances(NCollection_Sequence<TopoDS_Shape>&,NCollection_Array1<bool>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,const int) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::evaluate_distances (brep_builder_api/sewing/evaluate.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::FaceAnalysis(const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::face_analysis (brep_builder_api/sewing/face_analysis.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::FindCandidates(NCollection_Sequence<TopoDS_Shape>&,NCollection_IndexedMap<int>&,NCollection_Sequence<int>&,NCollection_Sequence<bool>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::find_candidates (brep_builder_api/sewing/candidates.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::FindFreeBoundaries()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::find_free_boundaries (brep_builder_api/sewing/free_boundaries.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::GetFreeWires(NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher>&,NCollection_Sequence<TopoDS_Shape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::get_free_wires (brep_builder_api/sewing/edge_processing.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::IsMergedClosed(const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Face&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::is_merged_closed (brep_builder_api/sewing/closed_surface.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::IsUClosedSurface(const occ::handle<Geom_Surface>&,const TopoDS_Shape&,const TopLoc_Location&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::is_u_closed_surface (brep_builder_api/sewing/closed_surface.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::IsVClosedSurface(const occ::handle<Geom_Surface>&,const TopoDS_Shape&,const TopLoc_Location&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::is_v_closed_surface (brep_builder_api/sewing/closed_surface.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::MergedNearestEdges(const TopoDS_Shape&,NCollection_Sequence<TopoDS_Shape>&,NCollection_Sequence<bool>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::merged_nearest_edges (brep_builder_api/sewing/merged_nearest.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::Merging(const bool,const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::merging (brep_builder_api/sewing/merging.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::ProjectPointsOnCurve(const NCollection_Array1<gp_Pnt>&,const occ::handle<Geom_Curve>&,const double,const double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<gp_Pnt>&,const bool) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::project_points_on_curve (brep_builder_api/sewing/cutting.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SameParameter(const TopoDS_Edge&) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::same_parameter_guarded (brep_builder_api/sewing/same_parameter.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SameParameterEdge(const TopoDS_Edge&,const TopoDS_Edge&,const NCollection_List<TopoDS_Shape>&,const NCollection_List<TopoDS_Shape>&,const bool,int&,const bool)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::same_parameter_edge_of_pair (brep_builder_api/sewing/pair_edge.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SameParameterEdge(const TopoDS_Shape&,const NCollection_Sequence<TopoDS_Shape>&,const NCollection_Sequence<bool>&,NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher>&,const occ::handle<BRepTools_ReShape>&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::same_parameter_edge_of_sequence (brep_builder_api/sewing/same_parameter.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SameParameterShape()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::same_parameter_shape (brep_builder_api/sewing/sewed_shape.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::SameRange(const occ::handle<Geom2d_Curve>&,const double,const double,const double,const double) const",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::same_range_pcurve (brep_builder_api/sewing/same_parameter.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::VerticesAssembling(const Message_ProgressRange&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepBuilderAPISewing::vertices_assembling (brep_builder_api/sewing/glue_vertices.rs), which BRepBuilderAPISewing::perform calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myAnalysis",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myBoundFaces",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myBoundSections",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myContigSecBound",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myContigousEdges",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myCutting",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myCuttingNode",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myDegenerated",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myFreeEdges",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myLittleFace",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myMultipleEdges",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myNbEdges",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myNbShapes",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myNbVertices",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myNodeSections",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myNonmanifold",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myOldShapes",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myReShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::mySectionBound",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::mySewedShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::mySewing",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myTolerance",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myVertexNode",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Sewing::myVertexNodeFree",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepBuilderAPISewing, which no derived class needs (Rust has no subclassing); the public queries (SewedShape, FreeEdge, MultipleEdge, ContigousEdge, DegeneratedShape, Modified, ...) read it."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_DisconnectedShell",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ShellError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIShellError::DisconnectedShell",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIShellError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_EmptyShell",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ShellError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIShellError::EmptyShell",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIShellError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ShellDone",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ShellError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIShellError::ShellDone",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIShellError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_ShellParametersOutOfRange",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_ShellError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIShellError::ShellParametersOutOfRange",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIShellError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_RightCorner",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_TransitionMode.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPITransitionMode::RightCorner",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPITransitionMode."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_RoundCorner",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_TransitionMode.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPITransitionMode::RoundCorner",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPITransitionMode."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_Transformed",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_TransitionMode.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPITransitionMode::Transformed",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPITransitionMode."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector::Dimension",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::<rustycad_tkernel::ncollection::CellInspector>::DIMENSION",
+      "status": "implemented",
+      "notes": "the CellInspector associated constant (the dimension NCollection_CellFilter reads)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector::Point",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::<rustycad_tkernel::ncollection::CellInspector>::Point",
+      "status": "implemented",
+      "notes": "the CellInspector associated type (gp_XYZ is Xyz)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_VertexInspector::Target",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIVertexInspector::<rustycad_tkernel::ncollection::CellInspector>::Target",
+      "status": "implemented",
+      "notes": "the CellInspector associated type (int is i32)."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_DisconnectedWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_WireError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIWireError::DisconnectedWire",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIWireError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_EmptyWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_WireError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIWireError::EmptyWire",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIWireError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_NonManifoldWire",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_WireError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIWireError::NonManifoldWire",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIWireError."
+    },
+    {
+      "upstream_id": "BRepBuilderAPI_WireDone",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_WireError.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIWireError::WireDone",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepBuilderAPIWireError."
+    },
+    {
       "upstream_id": "BRepMAT2d_BisectingLocus::BRepMAT2d_BisectingLocus()",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepMAT2d/BRepMAT2d_BisectingLocus.hxx",
@@ -196779,6 +199251,286 @@
       "rust_item": "rustycad_tktopalgo::brep_extrema::uncompatible_shape",
       "status": "implemented",
       "notes": "BRepExtrema distance group (docs/topalgo-design.md section 13, docs/tktopalgo-progress.md): DistShapeShape keeps the native maps, boxes and task layout (the functors run on rustycad_tkernel::osd::Parallel), DistanceSS is built by new with its private overloads on an inner search state, SolutionElem is a value struct, output references become returned values and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxd_* requests)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ElementFilter::DoCheck",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ElementFilter.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaFilterResult::DoCheck",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepExtremaFilterResult."
+    },
+    {
+      "upstream_id": "BRepExtrema_ElementFilter::NoCheck",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ElementFilter.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaFilterResult::NoCheck",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepExtremaFilterResult."
+    },
+    {
+      "upstream_id": "BRepExtrema_ElementFilter::Overlap",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ElementFilter.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaFilterResult::Overlap",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepExtremaFilterResult."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::intersectTrianglesExact(const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepExtremaOverlapTool::intersect_triangles_exact (brep_extrema/overlap_tool/mod.rs), which the BvhPairTraverse accept of BRepExtremaOverlapTool calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepExtrema_OverlapTool::intersectTrianglesToler(const int,const int,const double)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected step of the C++ class, an extension point for subclasses that Rust (no inheritance) does not have; the step is ported as the crate-private BRepExtremaOverlapTool::intersect_triangles_toler (brep_extrema/overlap_tool/mod.rs), which the BvhPairTraverse accept of BRepExtremaOverlapTool calls with the native order and failure modes."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::BVH_PrjState",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ typedef of BVH_Tools<double, 3>::BVH_PrjStateInTriangle; Rust names rustycad_tkmath::bvh::tools::PrjStateInTriangle directly (BRepExtremaPrjState stores it)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::ComputeDistance()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::compute_distance",
+      "status": "implemented",
+      "notes": "protected member; public in Rust."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::DefineStatusProxPnt()",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::define_status_prox_pnt",
+      "status": "implemented",
+      "notes": "protected member; public in Rust."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::ProxPnt_Status_BORDER",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProxPntStatus::Border",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepExtremaProxPntStatus."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::ProxPnt_Status_MIDDLE",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProxPntStatus::Middle",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepExtremaProxPntStatus."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::ProxPnt_Status_UNKNOWN",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProxPntStatus::Unknown",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepExtremaProxPntStatus."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::myExtremaPoint",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaProximityDistTool, which no derived class needs (Rust has no subclassing)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::myMinDistPoint",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaProximityDistTool, which no derived class needs (Rust has no subclassing)."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::myMinDistance",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaProximityDistTool, which no derived class needs (Rust has no subclassing), read through proximity_distance()."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::myPnt1",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaProximityDistTool, which no derived class needs (Rust has no subclassing), read through proximity_points()."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::myPnt2",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaProximityDistTool, which no derived class needs (Rust has no subclassing), read through proximity_points()."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::myPntStatus1",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaProximityDistTool, which no derived class needs (Rust has no subclassing), read through proximity_points_status()."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::myPntStatus2",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaProximityDistTool, which no derived class needs (Rust has no subclassing), read through proximity_points_status()."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::myProxDist",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaProximityDistTool, which no derived class needs (Rust has no subclassing), read through proximity_distance()."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector::Dimension",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::DIMENSION",
+      "status": "implemented",
+      "notes": "the inherent constant (3)."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector::Point",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::<rustycad_tkernel::ncollection::CellInspector>::Point",
+      "status": "implemented",
+      "notes": "the CellInspector associated type (gp_XYZ is Xyz)."
+    },
+    {
+      "upstream_id": "BRepExtrema_VertexInspector::Target",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaVertexInspector::<rustycad_tkernel::ncollection::CellInspector>::Target",
+      "status": "implemented",
+      "notes": "the CellInspector associated type (int is i32)."
+    },
+    {
+      "upstream_id": "ProxPnt_Status",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ global typedef of BRepExtrema_ProximityDistTool::ProxPnt_Status in BRepExtrema_ProximityValueTool.hxx; Rust names the enum BRepExtremaProxPntStatus directly."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::PreCheckElements(const int,const int)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::pre_check_elements",
+      "status": "implemented",
+      "notes": "protected member; public in Rust."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::isRegularSharedEdge(const BVH_Vec3d&,const BVH_Vec3d&,const BVH_Vec3d&,const BVH_Vec3d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::is_regular_shared_edge",
+      "status": "implemented",
+      "notes": "protected member; public in Rust."
+    },
+    {
+      "upstream_id": "BRepExtrema_SelfIntersection::isRegularSharedVertex(const BVH_Vec3d&,const BVH_Vec3d&,const BVH_Vec3d&,const BVH_Vec3d&,const BVH_Vec3d&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::is_regular_shared_vertex",
+      "status": "implemented",
+      "notes": "protected member; public in Rust."
+    },
+    {
+      "upstream_id": "BRepExtrema_IsInFace",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SupportType.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSupportType::IsInFace",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepExtremaSupportType."
+    },
+    {
+      "upstream_id": "BRepExtrema_IsOnEdge",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SupportType.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSupportType::IsOnEdge",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepExtremaSupportType."
+    },
+    {
+      "upstream_id": "BRepExtrema_IsVertex",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SupportType.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSupportType::IsVertex",
+      "status": "implemented",
+      "notes": "enumerator of the enum ported as BRepExtremaSupportType."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::myNumTrgInShapeVec",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaTriangleSet (its locked TriangleSetState), which no derived class needs (Rust has no subclassing), read through get_trg_idx_in_shape()."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::myNumVtxInShapeVec",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaTriangleSet (its locked TriangleSetState), which no derived class needs (Rust has no subclassing), read through get_vtx_idx_in_shape()."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::myShapeIdxOfVtxVec",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaTriangleSet (its locked TriangleSetState), which no derived class needs (Rust has no subclassing), read through get_shape_id_of_vtx()."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::myTrgIdxMap",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaTriangleSet (its locked TriangleSetState), which no derived class needs (Rust has no subclassing), read through get_trg_idx_in_shape()."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::myTriangles",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaTriangleSet (its locked TriangleSetState), which no derived class needs (Rust has no subclassing), read through get_vtx_indices()."
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::myVertexArray",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaTriangleSet (its locked TriangleSetState), which no derived class needs (Rust has no subclassing), read through get_vertices()."
     },
     {
       "upstream_id": "HelixGeom_BuilderApproxCurve::SetApproxParameters(GeomAbs_Shape,int,int)",
@@ -246176,6 +248928,14 @@
       "status": "partial",
       "toolkit": "TKernel",
       "upstream_id": "NCollection_HArray2::NCollection_HArray2<TheItemType>(const NCollection_HArray2::Array2Type &)"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKTopAlgo",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::hash<MAT2d_BiInt> specialization; Rust derives Hash for Mat2dBiInt, whose hash row carries the operator()."
     }
   ],
   "tests": [
