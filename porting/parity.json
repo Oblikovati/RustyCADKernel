@@ -88969,6 +88969,1022 @@
       "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The protected static map is the write guard of the process-wide map."
     },
     {
+      "upstream_id": "Interface_CheckStatus",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckStatus",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_CheckOK",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckStatus::CheckOK",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_CheckWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckStatus::CheckWarning",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_CheckFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckStatus::CheckFail",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_CheckAny",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckStatus::CheckAny",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_CheckMessage",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckStatus::CheckMessage",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_CheckNoFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckStatus.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckStatus::CheckNoFail",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_DataState",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_DataState.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceDataState",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_StateOK",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_DataState.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceDataState::StateOK",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LoadWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_DataState.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceDataState::LoadWarning",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LoadFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_DataState.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceDataState::LoadFail",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_DataWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_DataState.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceDataState::DataWarning",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_DataFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_DataState.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceDataState::DataFail",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_StateUnloaded",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_DataState.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceDataState::StateUnloaded",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_StateUnknown",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_DataState.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceDataState::StateUnknown",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamMisc",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamMisc",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamInteger",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamInteger",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamReal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamReal",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamIdent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamIdent",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamVoid",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamVoid",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamText",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamText",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamEnum",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamEnum",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamLogical",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamLogical",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamSub",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamSub",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamHexa",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamHexa",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_ParamBinary",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamType.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamType::ParamBinary",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntVal::Interface_IntVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntVal.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntVal::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntVal::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntVal.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntVal::value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntVal::CValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntVal.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntVal::c_value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. int& is the write guard of the shared value."
+    },
+    {
+      "upstream_id": "Interface_BitMap::Interface_BitMap()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::Interface_BitMap(const int,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::with_items",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::Interface_BitMap(const Interface_BitMap&,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::from_other",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::Initialize(const int,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::initialize",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::Initialize(const Interface_BitMap&,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::initialize_from",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::Reservate",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::reservate",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::SetLength",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::set_length",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::AddFlag",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::add_flag",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::AddSomeFlags",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::add_some_flags",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::RemoveFlag",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::remove_flag",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. A null name list (before the first flag), dereferenced natively, reads as empty."
+    },
+    {
+      "upstream_id": "Interface_BitMap::SetFlagName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::set_flag_name",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::NbFlags",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::nb_flags",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::Length",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::length",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::FlagName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::flag_name",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::FlagNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::flag_number",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::SetValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::set_value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::SetTrue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::set_true",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::SetFalse",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::set_false",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::CTrue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::c_true",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::CFalse",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::c_false",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. Native quirk kept: the result is (word"
+    },
+    {
+      "upstream_id": "Interface_BitMap::Init",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::init",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_BitMap::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_BitMap.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceBitMap::clear",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Interface_IntList()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Interface_IntList(const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::with_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Interface_IntList(const Interface_IntList&,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::from_other",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Initialize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::initialize",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::NbReferences",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::nb_references",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Entities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::References",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::references",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Internals",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::internals",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. The three output references are the returned tuple."
+    },
+    {
+      "upstream_id": "Interface_IntList::NbEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::nb_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::SetNbEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::set_nb_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::SetNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::set_number",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Number",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::number",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::List",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::list",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::SetRedefined",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::set_redefined",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Reservate",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::reservate",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. Native quirk kept: Reservate(-n) reserves n-1 places but advances the reference count by n+1."
+    },
+    {
+      "upstream_id": "Interface_IntList::Add",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::add",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Length",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::length",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::IsRedefined",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::is_redefined",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::Remove",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::remove",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. Not implemented natively: always false."
+    },
+    {
+      "upstream_id": "Interface_IntList::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::clear",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_IntList::AdjustSize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceIntList::adjust_size",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Interface_LineBuffer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::SetMax",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::set_max",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::SetInitial",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::set_initial",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::SetKeep",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::set_keep",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::CanGet",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::can_get",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Content",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::content",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Length",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::length",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::clear",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::FreezeInitial",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::freeze_initial",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Move(TCollection_AsciiString&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::move_to",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Move(const occ::handle<TCollection_HAsciiString>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::move_to_h_string",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Moved",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::moved",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Add(const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::add_text",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Add(const char* const,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::add_bytes",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Add(const TCollection_AsciiString&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::add_string",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_LineBuffer::Add(const char)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_LineBuffer.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceLineBuffer::add_char",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_FloatWriter::Interface_FloatWriter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FloatWriter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFloatWriter::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_FloatWriter::SetFormat",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FloatWriter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFloatWriter::set_format",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_FloatWriter::SetFormatForRange",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FloatWriter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFloatWriter::set_format_for_range",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_FloatWriter::SetZeroSuppress",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FloatWriter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFloatWriter::set_zero_suppress",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_FloatWriter::SetDefaults",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FloatWriter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFloatWriter::set_defaults",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_FloatWriter::Options",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FloatWriter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFloatWriter::options",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. The four output references are the fields of InterfaceFloatWriterOptions."
+    },
+    {
+      "upstream_id": "Interface_FloatWriter::MainFormat",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FloatWriter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFloatWriter::main_format",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_FloatWriter::FormatForRange",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FloatWriter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFloatWriter::format_for_range",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_FloatWriter::Write",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FloatWriter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFloatWriter::write",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. The caller's char buffer is a Vec<u8> without the NUL; the C formats run through the TKernel Sprintf port."
+    },
+    {
+      "upstream_id": "Interface_FloatWriter::Convert",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FloatWriter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFloatWriter::convert",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. The zero suppression edits the C string byte for byte as natively."
+    },
+    {
+      "upstream_id": "Interface_MSG::Interface_MSG(const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Interface_MSG(const char* const,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::with_integer",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Interface_MSG(const char* const,const int,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::with_integers",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Interface_MSG(const char* const,const double,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::with_real",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Interface_MSG(const char* const,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::with_text",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Interface_MSG(const char* const,const int,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::with_integer_text",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Destroy",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::destroy",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. Returns Result: Translated raises Standard_DomainError in raising mode."
+    },
+    {
+      "upstream_id": "Interface_MSG::operator const char *",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. The conversion operator is Value."
+    },
+    {
+      "upstream_id": "Interface_MSG::Read(Standard_IStream&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::read",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Read(const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::read_file",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Write",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::write",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::IsKey",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::is_key",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Translated",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::translated",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Record",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::record",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::SetTrace",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::set_trace",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::SetMode",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::set_mode",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::PrintTrace",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::print_trace",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Intervalled",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::intervalled",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::TDate",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::t_date",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. The caller's char buffer is a Vec<u8> without the NUL, left unchanged for an unknown format as natively."
+    },
+    {
+      "upstream_id": "Interface_MSG::NDate",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::n_date",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray. The six in-out integers are an array."
+    },
+    {
+      "upstream_id": "Interface_MSG::CDate",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::c_date",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Blanks(const int,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::blanks_for_integer",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Blanks(const char* const,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::blanks_for_text",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Blanks(const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::blanks",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
+      "upstream_id": "Interface_MSG::Print",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_MSG.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceMsg::print",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
