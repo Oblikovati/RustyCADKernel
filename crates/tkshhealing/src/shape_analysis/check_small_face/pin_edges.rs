@@ -26,7 +26,8 @@ impl ShapeAnalysisCheckSmallFace {
     ) -> Result<bool, Failure> {
         let first = edge_curve(first_edge)?;
         let second = edge_curve(second_edge)?;
-        let parameters = shared_parameters(first_edge, &first, &second, tolerance)?;
+        // `toler == -1` takes the shared vertex tolerance, also for the projection.
+        let (parameters, tolerance) = shared_parameters(first_edge, &first, &second, tolerance)?;
         self.check_pin_pair(
             (&first, &second),
             parameters,
@@ -69,14 +70,16 @@ fn shared_parameters(
     first: &PinEdgeCurve,
     second: &PinEdgeCurve,
     tolerance: f64,
-) -> Result<(f64, f64), Failure> {
-    let shared_vertex = vertices(first_edge, true).1;
+) -> Result<((f64, f64), f64), Failure> {
+    // TopExp::LastVertex with its default CumOri = false.
+    let shared_vertex = vertices(first_edge, false).1;
     let point = BRepTool::pnt(&shared_vertex)?;
     let tolerance = shared_tolerance(&shared_vertex, tolerance)?;
-    Ok((
+    let parameters = (
         parameter_at_point(&first.curve, first.range, point, tolerance)?,
         parameter_at_point(&second.curve, second.range, point, tolerance)?,
-    ))
+    );
+    Ok((parameters, tolerance))
 }
 
 fn shared_tolerance(
@@ -149,8 +152,9 @@ fn projects_inside_shorter(
         &curves.1.curve
     };
     let adaptor = GeomAdaptorCurve::with_curve(chosen)?;
+    // ShapeAnalysis_Curve::Project with its default AdjustToEnds = true.
     let (distance, _, parameter) =
-        ShapeAnalysisCurve.project_adaptor(&adaptor, point, tolerance, false)?;
+        ShapeAnalysisCurve.project_adaptor(&adaptor, point, tolerance, true)?;
     Ok(distance <= tolerance
         && parameter >= chosen.first_parameter()
         && parameter <= chosen.last_parameter())

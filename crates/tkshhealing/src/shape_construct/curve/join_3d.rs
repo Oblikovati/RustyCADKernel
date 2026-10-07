@@ -1,4 +1,5 @@
-use super::{ShapeConstructCurve, join_math::endpoint_reversals};
+use super::ShapeConstructCurve;
+use super::join_math::{endpoint_reversals, segment_curve};
 use rustycad_tkernel::{
     precision,
     standard::{Failure, Handle},
@@ -10,19 +11,21 @@ use rustycad_tkg3d::{
 use rustycad_tkgeombase::geom_convert::CompCurveToBSplineCurve;
 use rustycad_tkmath::{convert::ParameterisationType, gp::Point3};
 
-/// Joined 3D curve and the native endpoint-reversal decisions.
+/// Joined 3D curve and the native endpoint-reversal decisions (`c3dOut`, `isRev1`, `isRev2`).
 pub struct ShapeConstructCurveJoin3d {
-    /// Composite output curve.
-    pub curve: Handle<GeomBSplineCurve>,
-    /// Whether native endpoint matching reverses the first input.
+    /// Composite output curve; `None` when the native call returns false.
+    pub curve: Option<Handle<GeomBSplineCurve>>,
+    /// Whether native endpoint matching reverses the first input; also set when the
+    /// final composition fails, false when a conversion to B-spline fails first.
     pub reversed_first: bool,
-    /// Whether native endpoint matching reverses the second input.
+    /// Whether native endpoint matching reverses the second input (as `reversed_first`).
     pub reversed_second: bool,
 }
 
 impl ShapeConstructCurve {
     /// Join two oriented curves as `ShapeConstruct::JoinCurves` does. The input ranges are
-    /// updated when an input orientation is reversed; `let joined = tool.join_curves_3d(...) ?;`.
+    /// updated when an input orientation is reversed; `joined.curve` is `None` where the
+    /// native call returns false; `let joined = tool.join_curves_3d(...)?;`.
     pub fn join_curves_3d(
         &self,
         first: &Handle<dyn GeomCurve>,
@@ -31,7 +34,7 @@ impl ShapeConstructCurve {
         second_orientation: Orientation,
         first_range: &mut (f64, f64),
         second_range: &mut (f64, f64),
-    ) -> Result<Option<ShapeConstructCurveJoin3d>, Failure> {
+    ) -> Result<ShapeConstructCurveJoin3d, Failure> {
         let first = oriented_copy(first, first_orientation, first_range)?;
         let second = oriented_copy(second, second_orientation, second_range)?;
         join_oriented_curves(self, &first, &second, first_range, second_range)
@@ -67,7 +70,7 @@ fn join_oriented_curves(
     second: &Handle<dyn GeomCurve>,
     first_range: &(f64, f64),
     second_range: &(f64, f64),
-) -> Result<Option<ShapeConstructCurveJoin3d>, Failure> {
+) -> Result<ShapeConstructCurveJoin3d, Failure> {
     let first =
         tool.convert_to_bspline(first, first_range.0, first_range.1, precision::confusion())?;
     let second = tool.convert_to_bspline(
@@ -76,16 +79,22 @@ fn join_oriented_curves(
         second_range.1,
         precision::confusion(),
     )?;
+    if first.is_null() || second.is_null() {
+        return Ok(ShapeConstructCurveJoin3d {
+            curve: None,
+            reversed_first: false,
+            reversed_second: false,
+        });
+    }
+    segment_curve(&*first, first_range.0, first_range.1)?;
+    segment_curve(&*second, second_range.0, second_range.1)?;
     join_bspline_curves(&first, &second)
 }
 
 fn join_bspline_curves(
     first: &Handle<GeomBSplineCurve>,
     second: &Handle<GeomBSplineCurve>,
-) -> Result<Option<ShapeConstructCurveJoin3d>, Failure> {
-    if first.is_null() || second.is_null() {
-        return Ok(None);
-    }
+) -> Result<ShapeConstructCurveJoin3d, Failure> {
     let reversals = curve_endpoint_reversals(first, second)?;
     reverse_bspline_if(first, reversals.0)?;
     reverse_bspline_if(second, reversals.1)?;
@@ -135,7 +144,7 @@ fn join_reversed_curves(
     first: &Handle<GeomBSplineCurve>,
     second: &Handle<GeomBSplineCurve>,
     reversals: (bool, bool),
-) -> Result<Option<ShapeConstructCurveJoin3d>, Failure> {
+) -> Result<ShapeConstructCurveJoin3d, Failure> {
     let midpoint = pole_midpoint(first, second)?;
     let first_last = first.nb_poles();
     first.set_pole(first_last, midpoint)?;
@@ -157,23 +166,20 @@ fn append_composite_curve(
     first: &Handle<GeomBSplineCurve>,
     second: &Handle<GeomBSplineCurve>,
     reversals: (bool, bool),
-) -> Result<Option<ShapeConstructCurveJoin3d>, Failure> {
+) -> Result<ShapeConstructCurveJoin3d, Failure> {
     let mut composite = composite_builder(first)?;
-    if !composite.add(
+    let added = composite.add(
         &second.cast::<dyn GeomBoundedCurve>(),
         precision::confusion(),
         true,
         false,
         0,
-    )? {
-        return Ok(None);
-    }
-    let curve = composite.bspline_curve();
-    Ok(Some(ShapeConstructCurveJoin3d {
-        curve,
+    )?;
+    Ok(ShapeConstructCurveJoin3d {
+        curve: added.then(|| composite.bspline_curve()),
         reversed_first: reversals.0,
         reversed_second: reversals.1,
-    }))
+    })
 }
 
 fn composite_builder(first: &Handle<GeomBSplineCurve>) -> Result<CompCurveToBSplineCurve, Failure> {
@@ -201,8 +207,9 @@ mod tests {
             (joined.reversed_first, joined.reversed_second),
             (false, false)
         );
-        assert_eq!(joined.curve.value(0.).unwrap(), Point3::new(0., 0., 0.));
-        assert_eq!(joined.curve.value(2.).unwrap(), Point3::new(2., 0., 0.));
+        let curve = joined.curve.unwrap();
+        assert_eq!(curve.value(0.).unwrap(), Point3::new(0., 0., 0.));
+        assert_eq!(curve.value(2.).unwrap(), Point3::new(2., 0., 0.));
     }
 
     fn adjacent_line_result() -> (super::ShapeConstructCurveJoin3d, (f64, f64), (f64, f64)) {
@@ -217,7 +224,6 @@ mod tests {
                 &mut first_range,
                 &mut second_range,
             )
-            .unwrap()
             .unwrap();
         (joined, first_range, second_range)
     }

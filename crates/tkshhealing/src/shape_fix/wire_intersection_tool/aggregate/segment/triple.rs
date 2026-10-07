@@ -12,7 +12,6 @@ use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topods::{Edge, Face, Vertex};
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::bnd::BoundingBox2;
 use rustycad_tkmath::gp::Point3;
 
@@ -284,6 +283,16 @@ fn split_second_replace_and_remove(
     Ok(super::super::PairAction::Next)
 }
 
+/// The vertices of the second edge while its ends are replaced: the current vertices and
+/// their native points read once before any replacement (PV12, PV22).
+struct SecondEnds {
+    edge: Edge,
+    vertices: [Vertex; 2],
+    stale_points: [Point3; 2],
+}
+
+// The four native tests, in their order: P01 against the first then the last end, then
+// P02 likewise; a later match overrides the key (1 first end, 2 last end).
 #[allow(clippy::too_many_arguments)] // Mirrors native endpoint selection and replacement.
 fn replace_overlap_endpoints(
     tool: &ShapeFixIntersectionTool,
@@ -296,124 +305,74 @@ fn replace_overlap_endpoints(
     counts: &mut RepairCounts<'_>,
 ) -> Result<(Edge, (i32, i32)), Failure> {
     let analysis = ShapeAnalysisEdge::new();
-    let mut current = source.clone();
-    let mut first = analysis.first_vertex(&current);
-    let mut last = analysis.last_vertex(&current);
-    let first_on_first = replace_edge_endpoint(
-        tool,
-        wire,
-        index,
-        &mut current,
-        &mut first,
-        &last,
-        true,
-        &candidates.first,
-        &candidates.first_point,
-        &mut candidates.first_tolerance,
-        counts,
-    )?;
-    let last_on_first = replace_edge_endpoint(
-        tool,
-        wire,
-        index,
-        &mut current,
-        &mut first,
-        &last,
-        true,
-        &candidates.last,
-        &candidates.last_point,
-        &mut candidates.last_tolerance,
-        counts,
-    )?;
-    let first_on_last = replace_edge_endpoint(
-        tool,
-        wire,
-        index,
-        &mut current,
-        &mut last,
-        &first,
-        false,
-        &candidates.first,
-        &candidates.first_point,
-        &mut candidates.first_tolerance,
-        counts,
-    )?;
-    let last_on_last = replace_edge_endpoint(
-        tool,
-        wire,
-        index,
-        &mut current,
-        &mut last,
-        &first,
-        false,
-        &candidates.last,
-        &candidates.last_point,
-        &mut candidates.last_tolerance,
-        counts,
-    )?;
-    wire.set(&current, index)?;
-    boxes::replace_box(boxes, &current, bounds.clone());
-    let first_key = if first_on_first {
-        1
-    } else if first_on_last {
-        2
-    } else {
-        0
+    let vertices = [analysis.first_vertex(source), analysis.last_vertex(source)];
+    let stale_points = [BRepTool::pnt(&vertices[0])?, BRepTool::pnt(&vertices[1])?];
+    let mut ends = SecondEnds {
+        edge: source.clone(),
+        vertices,
+        stale_points,
     };
-    let last_key = if last_on_first {
-        1
-    } else if last_on_last {
-        2
-    } else {
-        0
-    };
-    Ok((current, (first_key, last_key)))
+    let mut keys = (0, 0);
+    for (on_first_candidate, end) in [(true, 0), (true, 1), (false, 0), (false, 1)] {
+        let (vertex, point, tolerance) = if on_first_candidate {
+            (
+                &candidates.first,
+                candidates.first_point,
+                &mut candidates.first_tolerance,
+            )
+        } else {
+            (
+                &candidates.last,
+                candidates.last_point,
+                &mut candidates.last_tolerance,
+            )
+        };
+        let distance = point.distance(&ends.stale_points[end]);
+        if distance >= *tolerance {
+            continue;
+        }
+        *tolerance += distance;
+        BRepBuilder::default().update_vertex_tolerance(vertex, *tolerance)?;
+        replace_edge_end(tool, wire, index, &mut ends, end, vertex)?;
+        *counts.replaced += 1;
+        let key = end as i32 + 1;
+        if on_first_candidate {
+            keys.0 = key;
+        } else {
+            keys.1 = key;
+        }
+    }
+    boxes::replace_box(boxes, &ends.edge, bounds.clone());
+    Ok((ends.edge, keys))
 }
 
-#[allow(clippy::too_many_arguments)] // Keeps the native edge mutation inputs explicit.
-fn replace_edge_endpoint(
+// Replaces end `end` (0 first, 1 last) of the second edge by `vertex`, oriented as the
+// native code does (`V12.Orientation() == NewV1.Orientation() ? NewV1 : NewV1.Reversed()`).
+fn replace_edge_end(
     tool: &ShapeFixIntersectionTool,
     wire: &ShapeExtendWireData,
     index: i32,
-    edge: &mut Edge,
-    endpoint: &mut Vertex,
-    other: &Vertex,
-    is_first: bool,
-    candidate: &Vertex,
-    candidate_point: &Point3,
-    candidate_tolerance: &mut f64,
-    counts: &mut RepairCounts<'_>,
-) -> Result<bool, Failure> {
-    let distance = BRepTool::pnt(endpoint)?.distance(candidate_point);
-    if distance >= *candidate_tolerance {
-        return Ok(false);
-    }
-    *candidate_tolerance += distance;
-    BRepBuilder::default().update_vertex_tolerance(candidate, *candidate_tolerance)?;
-    let replacement = oriented(candidate, endpoint.orientation());
+    ends: &mut SecondEnds,
+    end: usize,
+    vertex: &Vertex,
+) -> Result<(), Failure> {
+    let current = &ends.vertices[end];
+    let replacement = if current.orientation() == vertex.orientation() {
+        vertex.clone()
+    } else {
+        Vertex::unchecked(vertex.reversed())
+    };
     tool.context().replace(
-        &endpoint.clone().into_shape(),
+        &current.clone().into_shape(),
         &replacement.clone().into_shape(),
     )?;
-    let (first, last) = if is_first {
-        (&replacement, other)
-    } else {
-        (other, &replacement)
-    };
-    let previous = edge.clone();
-    *edge = ShapeBuildEdge.copy_replace_vertices(edge, first, last)?;
+    ends.vertices[end] = replacement;
+    let previous = ends.edge.clone();
+    ends.edge =
+        ShapeBuildEdge.copy_replace_vertices(&previous, &ends.vertices[0], &ends.vertices[1])?;
     tool.context()
-        .replace(&previous.clone().into_shape(), &edge.clone().into_shape())?;
-    wire.set(edge, index)?;
-    *endpoint = replacement;
-    *counts.replaced += 1;
-    Ok(true)
-}
-
-fn oriented(vertex: &Vertex, orientation: Orientation) -> Vertex {
-    let mut result = vertex.clone();
-    result.set_orientation(orientation);
-    result
+        .replace(&previous.into_shape(), &ends.edge.clone().into_shape())?;
+    wire.set(&ends.edge, index)
 }
 
 fn midpoint(first: Point3, second: Point3) -> Point3 {

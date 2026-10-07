@@ -1,7 +1,10 @@
 //! Preserve the SplitTool tolerance-only vertex update and SameParameter repair.
 use super::ShapeFixSplitTool;
 use crate::{
-    shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisTransferParametersProj, TransferParameters},
+    shape_analysis::{
+        ShapeAnalysisEdge, ShapeAnalysisSurface, ShapeAnalysisTransferParametersProj,
+        TransferParameters,
+    },
     shape_build::ShapeBuildEdge,
     shape_fix::ShapeFixEdge,
 };
@@ -30,7 +33,7 @@ impl ShapeFixSplitTool {
         if (a - parameter).abs() < tolerance_2d || (b - parameter).abs() < tolerance_2d {
             return Ok(false);
         }
-        let Some(point) = split_point(edge, face, parameter)? else {
+        let Some(point) = split_point_on(edge, face, parameter, false)? else {
             return Ok(false);
         };
         let distance = point.distance(&BRepTool::pnt(vertex)?);
@@ -122,20 +125,41 @@ fn finish_split(
     }
     Ok(())
 }
-fn split_point(edge: &Edge, face: &Face, parameter: f64) -> Result<Option<Point3>, Failure> {
-    if BRepTool::same_parameter(edge)? {
-        let (curve, _, _) = BRepTool::curve(edge)?;
-        if curve.is_null() {
+/// The point of a split as SplitEdge computes it natively: on the unlocated 3D curve of a
+/// SameParameter edge (not a degenerated one when `skip_degenerated`), else through a
+/// ShapeAnalysis_Surface on the unlocated face surface, then moved by the location when it
+/// is not the identity; None for a SameParameter edge without 3D curve.
+/// `split_point_on(&edge, &face, 0.5, false)?`.
+pub(in crate::shape_fix::wire) fn split_point_on(
+    edge: &Edge,
+    face: &Face,
+    parameter: f64,
+    skip_degenerated: bool,
+) -> Result<Option<Point3>, Failure> {
+    let on_curve =
+        BRepTool::same_parameter(edge)? && !(skip_degenerated && BRepTool::degenerated(edge)?);
+    let (point, location) = if on_curve {
+        let found = BRepTool::curve_with_location(edge)?;
+        let Some(curve) = found.curve.get() else {
             return Ok(None);
-        }
-        return Ok(Some(curve.value(parameter)?));
+        };
+        (curve.value(parameter)?, found.location)
+    } else {
+        let (curve, _, _) = ShapeAnalysisEdge::new().pcurve_on_face(edge, face, true)?;
+        let pcurve = curve
+            .get()
+            .ok_or_else(|| Failure::new("SplitEdge: null pcurve; expected a curve on the face"))?;
+        let uv = pcurve.value(parameter)?;
+        let (surface, location) = BRepTool::surface_with_location(face)?;
+        (
+            ShapeAnalysisSurface::new(&surface)?.value(uv.x(), uv.y())?,
+            location,
+        )
+    };
+    if location.is_identity() {
+        return Ok(Some(point));
     }
-    let (curve, _, _) = ShapeAnalysisEdge::new().pcurve_on_face(edge, face, true)?;
-    let pcurve = curve.get().ok_or_else(|| {
-        Failure::new("ShapeFix_SplitTool::SplitEdge: null pcurve; expected a curve on the face")
-    })?;
-    let uv = pcurve.value(parameter)?;
-    Ok(Some(BRepTool::surface(face)?.value(uv.x(), uv.y())?))
+    Ok(Some(point.transformed(location.transformation())))
 }
 fn split_piece(
     piece: &mut Edge,

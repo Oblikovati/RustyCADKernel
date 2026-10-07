@@ -23,9 +23,9 @@ pub(super) fn cut_edge(
     cut_edge_by_pcurve(edge, endpoint, cut, face, original_range, cut_line)
 }
 
+// BRep_Tool::Range: the 3D range, or the first pcurve range of an edge without 3D curve.
 fn spatial_range(edge: &Edge) -> Result<(f64, f64), Failure> {
-    let curve = BRepTool::curve_with_location(edge)?;
-    Ok((curve.first, curve.last))
+    BRepTool::range(edge)
 }
 
 fn cut_edge_by_pcurve(
@@ -63,11 +63,12 @@ fn cut_trimmed_pcurve(
     cut_line: &mut bool,
 ) -> Result<bool, Failure> {
     let (endpoint, cut) = parameters;
-    let builder = BRepBuilder::default();
-    builder.range(edge, endpoint.min(cut), endpoint.max(cut), false)?;
+    // Only a trimmed line gets the new range; another trimmed pcurve keeps the edge.
     if trimmed.basis_curve().cast::<Geom2dLine>().is_null() {
         return Ok(true);
     }
+    let builder = BRepBuilder::default();
+    builder.range(edge, endpoint.min(cut), endpoint.max(cut), false)?;
     update_cut_line_range(
         &builder,
         edge,

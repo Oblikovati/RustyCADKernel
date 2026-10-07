@@ -94,7 +94,7 @@ fn revolved(r: &mut Reader<'_>) -> Result<Shape, Failure> {
     sewn(&faces, 1e-6)
 }
 
-fn edge(r: &mut Reader<'_>) -> Result<Edge, Failure> {
+pub(super) fn edge(r: &mut Reader<'_>) -> Result<Edge, Failure> {
     match r.integer() {
         0 => {
             let a = r.pnt();

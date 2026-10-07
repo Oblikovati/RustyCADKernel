@@ -15,6 +15,19 @@ fn check_pin_edges_matches_native_projection_and_derivative_branches() {
     assert_case("line", linear_pin_edges(), false);
 }
 
+// `toler == -1` takes the shared vertex tolerance (1e-3 here) for the end matching and
+// for the projection, so the answer equals the one for an explicit 1e-3. The port used
+// -1 in the projection and always answered false (found by sh_fix_shape op 16 on two
+// crossing circles).
+#[test]
+fn check_pin_edges_with_vertex_tolerance_projects_with_that_tolerance() {
+    let edges = circular_pin_edges();
+    let result = ShapeAnalysisCheckSmallFace::new()
+        .check_pin_edges(&edges.0, &edges.1, 100.0, 200.0, -1.0)
+        .unwrap();
+    assert!(result);
+}
+
 fn assert_case(name: &str, edges: (Edge, Edge), expected: bool) {
     let native = ORACLE.lines().find(|row| row.starts_with(name)).unwrap();
     let value = native

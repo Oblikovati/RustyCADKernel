@@ -12,7 +12,9 @@ use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topods::{Edge, Face, Vertex};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::Geom2dTrimmedCurve;
 use rustycad_tkg3d::geom::GeomCurve;
+use rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve;
 use rustycad_tkg3d::top_abs::Orientation;
 
 impl ShapeFixWire {
@@ -67,6 +69,7 @@ impl ShapeFixWire {
     ) -> Result<bool, Failure> {
         let forward = edge.orientation() == Orientation::Forward;
         edge.set_orientation(Orientation::Forward);
+        remove_split_pcurve(&edge, face)?;
         let segments = singularity_segments(&edge, face, &parameters)?;
         if segments.nb_edges() == 0 {
             return Ok(false);
@@ -112,6 +115,23 @@ impl ShapeFixWire {
     }
 }
 
+// The pcurve on the face goes before the split (10.04.2003 skl): always for a
+// SameParameter edge, otherwise unless it is a trimmed curve.
+fn remove_split_pcurve(edge: &Edge, face: &Face) -> Result<(), Failure> {
+    if BRepTool::same_parameter(edge)? {
+        return ShapeBuildEdge.remove_pcurve_on_face(edge, face);
+    }
+    let analysis = ShapeAnalysisEdge::new();
+    if !analysis.has_pcurve_on_face(edge, face)? {
+        return Ok(());
+    }
+    let (pcurve, _, _) = analysis.pcurve_on_face(edge, face, true)?;
+    if pcurve.is_null() || !pcurve.cast::<Geom2dTrimmedCurve>().is_null() {
+        return Ok(());
+    }
+    ShapeBuildEdge.remove_pcurve_on_face(edge, face)
+}
+
 fn singularity_parameters(
     analysis: &Handle<crate::shape_analysis::ShapeAnalysisSurface>,
     curve: &Handle<dyn GeomCurve>,
@@ -137,27 +157,33 @@ fn add_singularity_projection(
     let Some(singularity) = analysis.singularity(index)? else {
         return Ok(());
     };
+    // `SAC.Project(GAC, P3d, MinTolerance(), pr, split, true)` on the adaptor over [a, b].
+    let adaptor = GeomAdaptorCurve::with_range(curve, range.0, range.1)?;
     let (distance, _, parameter) =
-        ShapeAnalysisCurve.project(curve, singularity.point, tolerance, range, true)?;
+        ShapeAnalysisCurve.project_adaptor(&adaptor, singularity.point, tolerance, true)?;
     if distance < singularity.precision.max(tolerance) {
         insert_split_parameter(parameters, parameter, range);
     }
     Ok(())
 }
 
+// The native sorted insertion: before the first parameter it precedes by more than
+// PConfusion, nowhere when it is within PConfusion of one, else at the end.
 fn insert_split_parameter(parameters: &mut Vec<f64>, parameter: f64, range: (f64, f64)) {
     let margin = precision::p_confusion();
-    if parameter - range.0 <= margin || range.1 - parameter <= margin {
+    if !(parameter - range.0 > margin && range.1 - parameter > margin) {
         return;
     }
-    let index = parameters.partition_point(|existing| *existing < parameter - margin);
-    if parameters
-        .get(index)
-        .is_some_and(|existing| (parameter - existing).abs() <= margin)
-    {
-        return;
+    for (index, existing) in parameters.iter().enumerate() {
+        if parameter < existing - margin {
+            parameters.insert(index, parameter);
+            return;
+        }
+        if parameter < existing + margin {
+            return;
+        }
     }
-    parameters.insert(index, parameter);
+    parameters.push(parameter);
 }
 
 fn singularity_segments(

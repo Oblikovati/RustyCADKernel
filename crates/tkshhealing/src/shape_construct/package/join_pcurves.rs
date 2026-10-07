@@ -121,19 +121,18 @@ fn append_pcurves(
     next_seam: (Handle<dyn Geom2dCurve>, f64, f64),
 ) -> Result<bool, Failure> {
     let mut request = join_request(&joined.first, joined.range, &next, orientation);
-    let Some(curve) = ShapeConstructCurve.join_curves_2d(&mut request)? else {
+    let Some(curve) = ShapeConstructCurve.join_curves_2d(&mut request)?.curve else {
         return Ok(false);
     };
     let (first, last) = request.second_range;
     if joined.seam {
         // The native seam join starts from the range the first join left (newf, newl).
         let mut seam = join_request(&joined.second, request.first_range, &next_seam, orientation);
-        let Some(seam_curve) = ShapeConstructCurve.join_curves_2d(&mut seam)? else {
+        let Some(seam_curve) = ShapeConstructCurve.join_curves_2d(&mut seam)?.curve else {
             return Ok(false);
         };
-        joined.second = seam_curve.curve.cast();
+        joined.second = seam_curve;
     }
-    let curve: Handle<dyn Geom2dCurve> = curve.curve.cast();
     let (fp2d, lp2d) = (curve.first_parameter(), curve.last_parameter());
     joined.first = curve;
     let (mut newf, mut newl) = request.first_range;

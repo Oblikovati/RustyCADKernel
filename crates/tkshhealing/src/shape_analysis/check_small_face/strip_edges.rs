@@ -24,12 +24,14 @@ impl ShapeAnalysisCheckSmallFace {
     ) -> Result<bool, Failure> {
         let tolerance = comparison_tolerance(first_edge, second_edge, tolerance)?;
         *maximum_distance = 0.0;
-        let Some(first) = trimmed_edge_curve(first_edge)? else {
+        // Both curves are read and null-checked before either is trimmed, as natively.
+        let first = BRepTool::curve(first_edge)?;
+        let second = BRepTool::curve(second_edge)?;
+        if first.0.is_null() || second.0.is_null() {
             return Ok(false);
-        };
-        let Some(second) = trimmed_edge_curve(second_edge)? else {
-            return Ok(false);
-        };
+        }
+        let first = trimmed_edge_curve(first)?;
+        let second = trimmed_edge_curve(second)?;
         sample_curve_pair((&first, &second), tolerance, maximum_distance)
     }
 }
@@ -51,21 +53,22 @@ fn edge_tolerance_half_sum(first: &Edge, second: &Edge, tolerance: f64) -> Resul
     })
 }
 
-fn trimmed_edge_curve(edge: &Edge) -> Result<Option<TrimmedEdgeCurve>, Failure> {
-    let (curve, first, last) = BRepTool::curve(edge)?;
-    let Some(geometry) = curve.get() else {
-        return Ok(None);
-    };
+fn trimmed_edge_curve(
+    (curve, first, last): (Handle<dyn GeomCurve>, f64, f64),
+) -> Result<TrimmedEdgeCurve, Failure> {
+    let geometry = curve
+        .get()
+        .ok_or_else(|| Failure::new("CheckStripEdges: null edge curve; expected a 3D curve"))?;
     let first = native_max(first, geometry.first_parameter());
     let last = native_min(last, geometry.last_parameter());
     let trimmed: Handle<GeomTrimmedCurve> =
         Handle::new(GeomTrimmedCurve::new(&curve, first, last, true, true)?);
     let bounded = trimmed.cast::<dyn GeomCurve>();
     let parameters = (trimmed.first_parameter(), trimmed.last_parameter());
-    Ok(Some(TrimmedEdgeCurve {
+    Ok(TrimmedEdgeCurve {
         geometry: bounded,
         range: parameters,
-    }))
+    })
 }
 
 fn sample_curve_pair(
@@ -105,11 +108,14 @@ fn sample_one_direction(
     maximum_distance: &mut f64,
 ) -> Result<bool, Failure> {
     let adaptor = GeomAdaptorCurve::with_curve(&target.geometry)?;
-    for sample in 0..=10 {
-        let parameter = source.range.0 + source_step * f64::from(sample);
+    // The native parameter accumulates `u += cd1`, so its rounding differs from
+    // `first + i * step`.
+    let mut parameter = source.range.0;
+    for _ in 0..=10 {
         let point = source.geometry.value(parameter)?;
+        // ShapeAnalysis_Curve::Project with its default AdjustToEnds = true.
         let (distance, _, target_parameter) =
-            ShapeAnalysisCurve.project_adaptor(&adaptor, point, tolerance, false)?;
+            ShapeAnalysisCurve.project_adaptor(&adaptor, point, tolerance, true)?;
         if target_parameter < target.range.0 || target_parameter > target.range.1 {
             return Ok(false);
         }
@@ -121,6 +127,7 @@ fn sample_one_direction(
         if distance > tolerance {
             return Ok(false);
         }
+        parameter += source_step;
     }
     Ok(true)
 }

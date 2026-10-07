@@ -2,9 +2,9 @@
 // crates/tkshhealing/examples/sh_probe/fix_shape.rs.
 //
 // `sh_fix_shape family (input) prec maxtol op`: the input is a `sh_unify` input (family 0),
-// a `sh_fix_face` input (family 1) or a primitive solid (family 2: type 0 cylinder R H,
-// 1 cone R1 R2 H, 2 sphere R, 3 torus R1 R2). The op, after which the digest of the
-// resulting shape is printed:
+// a `sh_fix_face` input (family 1), a primitive solid (family 2: type 0 cylinder R H,
+// 1 cone R1 R2 H, 2 sphere R, 3 torus R1 R2), a face of tkshhealing_probe_fix_shape_checks.cxx
+// (families 3 to 5) or a multi-wire face of tkshhealing_probe_fix_shape_wires.cxx (family 6). The op, after which the digest of the resulting shape is printed:
 //  0 ShapeFix_Shape (precision, maximal tolerance) Perform: the flag and
 //    Status(DONE1..DONE8, FAIL1..FAIL3);
 //  1, 2 ShapeFix::SameParameter(shape, enforce = op == 2): the flag;
@@ -21,7 +21,9 @@
 //    then the CheckStripFace flag of each face and the digests of the two strip edges;
 //  14 ShapeFix_FixSmallFace (precision) Init, then on each strip face ReplaceInCaseOfStrip
 //    (the flag) and RemoveFacesInCaseOfStrip: the shape with the context applied; 15 the
-//    same, then the result of FixShape.
+//    same, then the result of FixShape;
+//  16 to 32 the checks and wire repairs of tkshhealing_probe_fix_shape_checks.cxx;
+//  33 the wire intersections of tkshhealing_probe_fix_shape_wires.cxx.
 #include <ShapeAnalysis_CheckSmallFace.hxx>
 #include <ShapeFix.hxx>
 #include <ShapeFix_FixSmallFace.hxx>
@@ -36,11 +38,6 @@ TopoDS_Shape sfs_solid(GaReader& r){
  if(type==1){double R1=r.real(),R2=r.real();return BRepPrimAPI_MakeCone(R1,R2,r.real()).Shape();}
  if(type==2)return BRepPrimAPI_MakeSphere(r.real()).Shape();
  double R1=r.real();return BRepPrimAPI_MakeTorus(R1,r.real()).Shape();}
-TopoDS_Shape sfs_input(GaReader& r){
- int family=r.integer();
- if(family==0)return su_input(r);
- if(family==1)return sff_input(r);
- return sfs_solid(r);}
 const ShapeExtend_Status sfs_statuses[11]={ShapeExtend_DONE1,ShapeExtend_DONE2,ShapeExtend_DONE3,ShapeExtend_DONE4,
  ShapeExtend_DONE5,ShapeExtend_DONE6,ShapeExtend_DONE7,ShapeExtend_DONE8,ShapeExtend_FAIL1,ShapeExtend_FAIL2,ShapeExtend_FAIL3};
 void sfs_shape_fix(const TopoDS_Shape& s,double prec,double maxtol){
@@ -55,6 +52,8 @@ void sfs_solids(const TopoDS_Shape& s){
   occ::handle<ShapeFix_Solid> f=new ShapeFix_Solid(TopoDS::Solid(e.Current()));
   GA_TRY(ga_flag(f->Perform());for(ShapeExtend_Status x:sfs_statuses)ga_flag(f->Status(x));tp_shape(f->Shape()))}}
 void sfs_edge(const TopoDS_Edge& e){ga_flag(!e.IsNull());if(!e.IsNull())tp_shape(e);}
+#include "tkshhealing_probe_fix_shape_checks.cxx"
+#include "tkshhealing_probe_fix_shape_wires.cxx"
 void sfs_small_faces(const TopoDS_Shape& s,double prec){
  ShapeAnalysis_CheckSmallFace a;
  for(TopExp_Explorer e(s,TopAbs_FACE);e.More();e.Next())GA_TRY(ga_flag(a.CheckSpotFace(TopoDS::Face(e.Current()),prec)))
@@ -88,7 +87,21 @@ void sfs_run(TopoDS_Shape s,double prec,double maxtol,int op){
  if(op==9){sfs_shells(s);return;}
  if(op==13){sfs_small_faces(s,prec);return;}
  if(op==14||op==15){sfs_strips(s,prec,op==15);return;}
+ if(op==16){sfs_small_face_checks(s,prec);return;}
+ if(op==17||op==18){sfs_free_properties(s,maxtol,op==18);return;}
+ if(op==32){sfs_split_tool(s,prec);return;}
+ if(op==33){sfs_intersecting_wires(s,prec,maxtol);return;}
+ if(op>=19){sfs_wire_fixes(s,prec,maxtol,op);return;}
  sfs_solids(s);}
+TopoDS_Shape sfs_input(GaReader& r){
+ int family=r.integer();
+ if(family==0)return su_input(r);
+ if(family==1)return sff_input(r);
+ if(family==2)return sfs_solid(r);
+ if(family==3)return sfs_bezier_face(r);
+ if(family==4)return sfs_raw_face(r);
+ if(family==5)return sfs_sphere_face(r);
+ return sfs_multi_wire_face(r);}
 void sh_fix_shape_case(std::istream& input){
  GaReader r{input};TopoDS_Shape s;GA_TRY(s=sfs_input(r))
  double prec=r.real(),maxtol=r.real();int op=r.integer();

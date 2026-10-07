@@ -55,7 +55,8 @@ impl ShapeFixWire {
     /// Sets the native maximum tail angle in radians; `fixer.set_max_tail_angle(0.25)`.
     pub fn set_max_tail_angle(&self, angle: f64) {
         let sine = angle.sin();
-        self.state.write().max_tail_angle_sine = sine.max(0.0);
+        // `(sine >= 0) ? sine : 0`: keeps -0.0 and maps NaN to 0, unlike f64::max.
+        self.state.write().max_tail_angle_sine = if sine >= 0.0 { sine } else { 0.0 };
     }
 
     /// Sets the maximum tail width; `fixer.set_max_tail_width(0.01)`.

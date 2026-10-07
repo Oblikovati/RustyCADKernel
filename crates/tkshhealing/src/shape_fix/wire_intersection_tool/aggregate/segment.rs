@@ -352,9 +352,9 @@ fn split_close_overlap(
             second_box,
         );
     }
+    // Unlike the point repair, the native segment repair leaves MaxTolVert as it is.
     let mut vertex = Vertex::default();
     BRepBuilder::default().make_vertex_at(&mut vertex, first_middle, tolerance)?;
-    *max_vertex_tolerance = max_vertex_tolerance.max(tolerance);
     let second_split = tool.split_edge2(
         wire,
         face,

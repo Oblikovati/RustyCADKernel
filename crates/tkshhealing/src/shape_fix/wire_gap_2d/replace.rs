@@ -69,38 +69,6 @@ fn replace_entry(
     replace_pcurve(tool, face, entry, curve, vertices)
 }
 
-pub(super) fn replace_single_pcurve_range(
-    tool: &ShapeFixWire,
-    face: &Face,
-    entry: &PcurveGap,
-    curve: &Handle<dyn Geom2dCurve>,
-    range: (f64, f64),
-) -> Result<(), Failure> {
-    let (before, _) = neighboring_vertices(tool, (entry, entry))?;
-    replace_single_curve(tool, face, entry, curve, range, &before)
-}
-
-fn replace_single_curve(
-    tool: &ShapeFixWire,
-    face: &Face,
-    entry: &PcurveGap,
-    curve: &Handle<dyn Geom2dCurve>,
-    range: (f64, f64),
-    before: &Vertex,
-) -> Result<(), Failure> {
-    replace_pcurve(
-        tool,
-        face,
-        entry,
-        &Some(CurveRepair {
-            curve: curve.clone(),
-            first: range.0,
-            last: range.1,
-        }),
-        (&Vertex::default(), before),
-    )
-}
-
 fn clone_other_end(
     tool: &ShapeFixWire,
     first: &Vertex,

@@ -2,7 +2,7 @@
 //! tools/oracle/tkshhealing_probe_construct_package.cxx (which documents the requests).
 use super::brep_lib_common::{geom_curve, geom2d_curve};
 use super::common::{Reader, attempt, end, flag, int, pnt, real};
-use super::face::{surface as tp_surface, tp_face};
+use super::face::{orientation, surface as tp_surface, tp_face};
 use super::sh_common::{curve, curve2d, surface};
 use super::shape_construct::{construct_spline_2d, construct_spline_3d};
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
@@ -16,7 +16,8 @@ use rustycad_tkg3d::geom::{
 use rustycad_tkmath::geom_abs::Shape as Continuity;
 use rustycad_tkmath::gp::Axis1;
 use rustycad_tkshhealing::shape_construct::{
-    ShapeConstruct, ShapeConstructApproxSettings, ShapeConstructSurfaceBounds,
+    ShapeConstruct, ShapeConstructApproxSettings, ShapeConstructCurve,
+    ShapeConstructCurveJoin2dRequest, ShapeConstructSurfaceBounds,
 };
 
 const CONTINUITIES: [Continuity; 7] = [
@@ -199,6 +200,61 @@ fn join_case(r: &mut Reader<'_>) -> Result<(), Failure> {
     Ok(())
 }
 
+/// `f1 l1 f2 l2 isRev1 isRev2`.
+fn join_outputs(first: (f64, f64), second: (f64, f64), reversed: (bool, bool)) {
+    [first.0, first.1, second.0, second.1]
+        .into_iter()
+        .for_each(real);
+    flag(reversed.0);
+    flag(reversed.1);
+}
+
+fn join_curves_case(r: &mut Reader<'_>) -> Result<(), Failure> {
+    let (c1, c2) = (geom_curve(r)?, geom_curve(r)?);
+    let (o1, o2) = (orientation(r), orientation(r));
+    let mut first = (r.real(), r.real());
+    let mut second = (r.real(), r.real());
+    let (mut out, mut reversed) = (Handle::default(), (false, false));
+    attempt(|| {
+        let joined =
+            ShapeConstructCurve.join_curves_3d(&c1, &c2, o1, o2, &mut first, &mut second)?;
+        reversed = (joined.reversed_first, joined.reversed_second);
+        flag(joined.curve.is_some());
+        out = joined.curve.map(|c| c.cast()).unwrap_or_default();
+        Ok(())
+    });
+    join_outputs(first, second, reversed);
+    curve(&out);
+    construct_spline_3d(&out);
+    Ok(())
+}
+
+fn join_curves2d_case(r: &mut Reader<'_>) -> Result<(), Failure> {
+    let (first, second) = (geom2d_curve(r)?, geom2d_curve(r)?);
+    let (first_orientation, second_orientation) = (orientation(r), orientation(r));
+    let mut request = ShapeConstructCurveJoin2dRequest {
+        first,
+        second,
+        first_orientation,
+        second_orientation,
+        first_range: (r.real(), r.real()),
+        second_range: (r.real(), r.real()),
+        is_error: r.flag(),
+    };
+    let (mut out, mut reversed) = (Handle::default(), (false, false));
+    attempt(|| {
+        let joined = ShapeConstructCurve.join_curves_2d(&mut request)?;
+        reversed = (joined.reversed_first, joined.reversed_second);
+        flag(joined.curve.is_some());
+        out = joined.curve.unwrap_or_default();
+        Ok(())
+    });
+    join_outputs(request.first_range, request.second_range, reversed);
+    curve2d(&out);
+    construct_spline_2d(&out);
+    Ok(())
+}
+
 /// `sh_construct_pkg op ...`.
 pub fn construct_package_case(values: &[f64]) {
     let mut r = Reader::new(values);
@@ -206,6 +262,8 @@ pub fn construct_package_case(values: &[f64]) {
         0 => curve_case(&mut r).expect("probe curve record"),
         1 => curve2d_case(&mut r).expect("probe curve record"),
         2 => surface_case(&mut r),
+        4 => join_curves_case(&mut r).expect("probe curve record"),
+        5 => join_curves2d_case(&mut r).expect("probe curve record"),
         _ => join_case(&mut r).expect("probe face record"),
     }
     end();

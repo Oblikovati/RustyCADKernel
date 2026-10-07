@@ -8,7 +8,7 @@ use crate::shape_construct::{ShapeConstructCurve, ShapeConstructCurveJoin2dReque
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
 use rustycad_tkbrep::topods::{self, Builder, Edge, Face, Shape};
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dCurve};
+use rustycad_tkg2d::geom2d::Geom2dCurve;
 use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomCurve};
 use rustycad_tkg3d::top_abs::Orientation;
 
@@ -118,7 +118,7 @@ fn join_3d(
 ) -> Result<bool, Failure> {
     let (o1, o2) = (e1.orientation(), e2.orientation());
     let joined = ShapeConstructCurve.join_curves_3d(&c3d1, &c3d2, o1, o2, &mut r1, &mut r2)?;
-    let Some(joined) = joined else {
+    let Some(curve) = joined.curve else {
         return Ok(false);
     };
     let (rev1, rev2) = (joined.reversed_first, joined.reversed_second);
@@ -134,12 +134,7 @@ fn join_3d(
         state.orientations = (joined_orientation(e1, rev1), joined_orientation(e2, rev2));
     }
     let tolerance = BRepTool::edge_tolerance(e1)?.max(BRepTool::edge_tolerance(e2)?);
-    install_curve(
-        &state.edge,
-        &joined.curve,
-        tolerance,
-        (r1.0, r1.1 + r2.1 - r2.0),
-    )?;
+    install_curve(&state.edge, &curve, tolerance, (r1.0, r1.1 + r2.1 - r2.0))?;
     Ok(true)
 }
 
@@ -179,7 +174,7 @@ fn join_on_face(e1: &Edge, e2: &Edge, face: &Face, state: &mut JoinState) -> Res
     let c = curve.get().ok_or_else(null_curve)?;
     let newf1 = first1.max(c.first_parameter());
     let newl1 = (last1 + (last2 - first2)).min(c.last_parameter());
-    if !install_pcurves(e1, e2, face, curve.cast(), state)? {
+    if !install_pcurves(e1, e2, face, curve.clone(), state)? {
         return Ok(false);
     }
     BRepBuilder::default().range_on_face(&state.edge, face, newf1, newl1)?;
@@ -222,13 +217,12 @@ fn install_pcurves(
     let Some((second, _, _, _)) = join_pcurves(&r1, &r2, face, state)? else {
         return Ok(false);
     };
-    let second: Handle<dyn Geom2dCurve> = second.cast();
     builder.update_edge_pcurves_on_face(&state.edge, (&curve, &second), face, 0.)?;
     Ok(true)
 }
 
 type JoinedPCurve = (
-    Handle<Geom2dBSplineCurve>,
+    Handle<dyn Geom2dCurve>,
     (bool, bool),
     (f64, f64),
     (f64, f64),
@@ -260,11 +254,12 @@ fn join_pcurves(
         second_range: (first2, last2),
         is_error: state.is_same,
     };
-    let Some(joined) = ShapeConstructCurve.join_curves_2d(&mut request)? else {
+    let joined = ShapeConstructCurve.join_curves_2d(&mut request)?;
+    let Some(curve) = joined.curve else {
         return Ok(None);
     };
     Ok(Some((
-        joined.curve,
+        curve,
         (joined.reversed_first, joined.reversed_second),
         request.first_range,
         request.second_range,

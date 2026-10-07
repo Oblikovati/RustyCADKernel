@@ -148,12 +148,16 @@ impl ShapeFixWire {
 impl AggregateWireState {
     fn check_reorder(fixer: &ShapeFixWire) -> Result<Self, Failure> {
         let mut order = ShapeAnalysisWireOrder::new();
-        fixer
-            .working_analyzer()
-            .check_order_with(&mut order, fixer.closed_mode(), true, false)?;
+        // `CheckOrder(...) == 0`: the bool DONE result, false also for a failed order.
+        let done = fixer.working_analyzer().check_order_with(
+            &mut order,
+            fixer.closed_mode(),
+            true,
+            false,
+        )?;
         let mut state = Self {
             fixed: false,
-            reorder_ok: order.status() == 0,
+            reorder_ok: !done,
         };
         if needs_fix(fixer.state.read().fix_reorder_mode, !state.reorder_ok) {
             state.fixed |= fixer.fix_reorder(false)?;

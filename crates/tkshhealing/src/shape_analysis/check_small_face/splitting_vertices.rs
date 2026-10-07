@@ -189,7 +189,8 @@ fn project_split_parameter(
         candidate.point,
         candidate.tolerance * PROJECT_TOLERANCE_SCALE,
         range,
-        false,
+        // ShapeAnalysis_Curve::Project with its default AdjustToEnds = true.
+        true,
     )?;
     let found = distance != 0.0
         && distance.partial_cmp(&candidate.tolerance) == Some(std::cmp::Ordering::Less);

@@ -32,9 +32,10 @@ fn require_wire(face: &Face) -> Result<(), Failure> {
     if wires.more() {
         return Ok(());
     }
+    // Natively the exhausted explorer returns the face itself, which TopoDS::Wire rejects.
     Err(Failure::with_message(
-        "Standard_NoSuchObject",
-        "ShapeAnalysis_CheckSmallFace::CheckPinFace: face has no wire; expected an outer wire",
+        "Standard_TypeMismatch",
+        "TopoDS::Wire: CheckPinFace found no wire in the face; expected an outer wire",
     ))
 }
 
@@ -278,15 +279,7 @@ fn initial_scale(length: f64, local_tolerance: f64, tolerance: f64) -> f64 {
 }
 
 fn bind_pin_pair(map: &mut PinFaceEdgeMap, first: &Edge, second: &Edge) -> Result<(), Failure> {
-    let first_shape = first.clone().into_shape();
-    if map.is_bound(&first_shape) {
-        return Err(Failure::with_message(
-            "Standard_DomainError",
-            &format!(
-                "ShapeAnalysis_CheckSmallFace::CheckPinFace: duplicate first edge {first_shape:?}; expected a new key"
-            ),
-        ));
-    }
-    map.bind(first_shape, second.clone().into_shape());
+    // NCollection_DataMap::Bind rebinds a bound key; CheckPinFace ignores its result.
+    let _ = map.bind(first.clone().into_shape(), second.clone().into_shape());
     Ok(())
 }

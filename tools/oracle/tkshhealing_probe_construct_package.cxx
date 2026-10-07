@@ -9,7 +9,10 @@
 //    `2 (curve record) P D` (a revolution), `3 (surface) u1 u2 v1 v2` (a trimmed one) or
 //    `4 (surface) u1 u2 v1 v2` (GeomConvert::SurfaceToBSplineSurface of the trimmed one);
 //  3 (tp_face record) n (edge index, orientation)...: JoinPCurves of the chain on the face
-//    into a new edge, then the flags, ranges and p-curves stored on it.
+//    into a new edge, then the flags, ranges and p-curves stored on it;
+//  4 (curve record) (curve record) o1 o2 f1 l1 f2 l2: JoinCurves of the 3D curves, 5 (2d
+//    curve record) (2d curve record) o1 o2 f1 l1 f2 l2 isError: of the 2D curves: the flag,
+//    the four updated parameters, isRev1, isRev2 (false before the call) and the result.
 // Every result prints whether it is the input handle, its digest and its B-spline data.
 #include <Geom_SurfaceOfLinearExtrusion.hxx>
 #include <Geom_SurfaceOfRevolution.hxx>
@@ -63,7 +66,23 @@ void scp_join(GaReader& r){
  ga_flag(BRep_Tool::IsClosed(e,t.face));
  GA_TRY(scp_pcurve(e,t.face))
  GA_TRY(scp_pcurve(TopoDS::Edge(e.Reversed()),t.face))}
+void scp_join_outputs(double f1,double l1,double f2,double l2,bool rev1,bool rev2){
+ ga_real(f1);ga_real(l1);ga_real(f2);ga_real(l2);ga_flag(rev1);ga_flag(rev2);}
+void scp_join_curves(GaReader& r){
+ occ::handle<Geom_Curve> c1=tp_geom_curve(r),c2=tp_geom_curve(r);
+ TopAbs_Orientation o1=TopAbs_Orientation(r.integer()),o2=TopAbs_Orientation(r.integer());
+ double f1=r.real(),l1=r.real(),f2=r.real(),l2=r.real();occ::handle<Geom_Curve> out;bool rev1=false,rev2=false;
+ GA_TRY(ga_flag(ShapeConstruct::JoinCurves(c1,c2,o1,o2,f1,l1,f2,l2,out,rev1,rev2)))
+ scp_join_outputs(f1,l1,f2,l2,rev1,rev2);shc_curve(out);sh_construct_spline3d(out);}
+void scp_join_curves2d(GaReader& r){
+ occ::handle<Geom2d_Curve> c1=tp_geom2d_curve(r),c2=tp_geom2d_curve(r);
+ TopAbs_Orientation o1=TopAbs_Orientation(r.integer()),o2=TopAbs_Orientation(r.integer());
+ double f1=r.real(),l1=r.real(),f2=r.real(),l2=r.real();bool isError=r.flag();
+ occ::handle<Geom2d_Curve> out;bool rev1=false,rev2=false;
+ GA_TRY(ga_flag(ShapeConstruct::JoinCurves(c1,c2,o1,o2,f1,l1,f2,l2,out,rev1,rev2,isError)))
+ scp_join_outputs(f1,l1,f2,l2,rev1,rev2);shc_curve2d(out);sh_construct_spline2d(out);}
 void sh_construct_pkg_case(std::istream& input){
  GaReader r{input};int op=r.integer();
- if(op==0)scp_curve(r);else if(op==1)scp_curve2d(r);else if(op==2)scp_surface_case(r);else scp_join(r);
+ if(op==0)scp_curve(r);else if(op==1)scp_curve2d(r);else if(op==2)scp_surface_case(r);
+ else if(op==4)scp_join_curves(r);else if(op==5)scp_join_curves2d(r);else scp_join(r);
  ga_end();}

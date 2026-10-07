@@ -212,6 +212,7 @@ impl ShapeFixSplitTool {
 
 #[path = "wire_split_tool/split.rs"]
 mod split;
+pub(super) use split::split_point_on;
 
 #[path = "wire_split_tool/sequence.rs"]
 mod sequence;

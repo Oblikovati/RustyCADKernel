@@ -52,7 +52,9 @@ impl ShapeFixWire {
         parameter: f64,
     ) -> Result<NotchAction, Failure> {
         let count = self.nb_edges();
-        let next = index.max(1);
+        // A whole-edge removal at the first edge steps the native index to 0 and below;
+        // such an index selects the last edge as the second of the pair.
+        let next = if index > 0 { index } else { count };
         let previous = if next > 1 { next - 1 } else { count };
         let remove_first = previous == to_remove;
         let split_index = if next == to_remove { previous } else { next };
@@ -61,6 +63,7 @@ impl ShapeFixWire {
             ShapeAnalysisEdge::new().pcurve_on_face(&edge, &self.face(), true)?;
         if self.notch_is_whole_edge(&edge, remove_first, first, last, parameter)? {
             self.fix_dummy_seam(previous)?;
+            self.update_wire_if_context()?;
             self.or_last_fix_status(ShapeExtendStatus::Done1);
             return Ok(NotchAction::Previous);
         }
@@ -130,8 +133,9 @@ impl ShapeFixWire {
         self.replace_notched_context(&forward, &pieces)?;
         let pieces = orient_parts(pieces, edge.orientation());
         self.insert_notched_parts(split_index, count, &pieces)?;
+        // The native call reads NbEdges() after the second part was added.
         let remove_at = if previous == count && next == 1 {
-            count
+            self.nb_edges()
         } else {
             to_remove
         };
@@ -196,7 +200,7 @@ fn split_edge_parts(
     transfer: &ShapeAnalysisTransferParametersProj,
 ) -> Result<[Edge; 2], Failure> {
     let analysis = ShapeAnalysisEdge::new();
-    let mut cut_start = Vertex::unchecked(vertex.oriented(Orientation::Reversed));
+    let cut_start = Vertex::unchecked(vertex.oriented(Orientation::Reversed));
     let first_piece =
         ShapeBuildEdge.copy_replace_vertices(edge, &analysis.first_vertex(edge), &cut_start)?;
     ShapeBuildEdge.copy_pcurves(&first_piece, edge)?;
@@ -211,7 +215,6 @@ fn split_edge_parts(
     builder.same_parameter(&first_piece, false)?;
     builder.same_range(&second_piece, false)?;
     builder.same_parameter(&second_piece, false)?;
-    cut_start.set_orientation(Orientation::Reversed);
     Ok([first_piece, second_piece])
 }
 

@@ -2,6 +2,8 @@
 //! tools/oracle/tkshhealing_probe_fix_shape.cxx (which documents the requests).
 use super::brep_lib_common::shape;
 use super::common::{Reader, attempt, end, flag};
+use super::fix_shape_checks;
+use super::fix_shape_wires;
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Edge, Shape};
@@ -20,7 +22,7 @@ use rustycad_tkshhealing::shape_fix::{
     ShapeFixSolid, ShapeFixWireframe,
 };
 
-const STATUSES: [ShapeExtendStatus; 11] = [
+pub(super) const STATUSES: [ShapeExtendStatus; 11] = [
     ShapeExtendStatus::Done1,
     ShapeExtendStatus::Done2,
     ShapeExtendStatus::Done3,
@@ -57,7 +59,11 @@ fn input(r: &mut Reader<'_>) -> Result<Shape, Failure> {
     match r.integer() {
         0 => super::unify::input(r),
         1 => Ok(super::fix_face::input(r)?.into_shape()),
-        _ => solid(r),
+        2 => solid(r),
+        3 => fix_shape_checks::bezier_face(r),
+        4 => fix_shape_checks::raw_face(r),
+        5 => fix_shape_checks::sphere_face(r),
+        _ => fix_shape_wires::multi_wire_face(r),
     }
 }
 
@@ -217,6 +223,11 @@ fn run(mut s: Shape, prec: f64, maxtol: f64, op: i32) -> Result<(), Failure> {
         9 => shells(&s),
         13 => small_faces(&s, prec),
         14 | 15 => strips(&s, prec, op == 15),
+        16 => fix_shape_checks::small_face_checks(&s, prec),
+        17 | 18 => fix_shape_checks::free_properties(&s, maxtol, op == 18),
+        32 => fix_shape_checks::split_tool(&s, prec),
+        33 => fix_shape_wires::intersecting_wires(&s, prec, maxtol),
+        19.. => fix_shape_checks::wire_fixes(&s, prec, maxtol, op),
         _ => solids(&s),
     }
 }
