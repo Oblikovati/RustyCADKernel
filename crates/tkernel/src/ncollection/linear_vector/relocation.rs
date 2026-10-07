@@ -16,37 +16,27 @@ impl<T> LinearVector<T> {
     /// Select a move callback for native nonthrowing moves or a copy callback
     /// when `move_if_noexcept` selects copying. Every old value stays alive
     /// until all new values are constructed, then old values drop in order.
-    /// A relocation panic retains native unpublished replacement objects/allocation and
-    /// source mutations, with unchanged receiver length/capacity. This can leak resources.
-    /// Throwing old-value destructors retain Rust cleanup rather than native dead slots.
+    /// A relocation panic keeps the receiver's length and capacity; the replacement
+    /// allocation is freed (the native leaked replacement is D1 class B2).
     pub fn reserve_with_relocation<F>(&mut self, minimum: usize, relocate: F)
     where
         F: FnMut(&mut T) -> T,
     {
-        self.reserve_relocation_owned(
-            minimum,
-            relocate,
-            #[cfg(test)]
-            |_| {},
-        );
+        self.reserve_relocation_owned(minimum, relocate);
     }
 
     pub(super) fn reserve_relocation_owned(
         &mut self,
         minimum: usize,
         mut relocate: impl FnMut(&mut T) -> T,
-        #[cfg(test)] observe_failure: impl FnOnce(&mut Self),
     ) {
         if minimum <= self.capacity() {
             return;
         }
         let capacity = next_capacity_for(self.capacity(), minimum, Self::max_size());
-        let replacement = Self::construct_owned(
-            capacity,
-            |destination| self.relocate_unpublished_into(destination, &mut relocate),
-            #[cfg(test)]
-            observe_failure,
-        );
+        let replacement = Self::construct_owned(capacity, |destination| {
+            self.relocate_unpublished_into(destination, &mut relocate)
+        });
         self.elements = replacement.elements;
     }
 
@@ -88,5 +78,5 @@ mod tests {
 }
 
 #[cfg(test)]
-#[path = "growth_ownership_tests.rs"]
-mod ownership_tests;
+#[path = "growth_relocation_tests.rs"]
+mod relocation_tests;

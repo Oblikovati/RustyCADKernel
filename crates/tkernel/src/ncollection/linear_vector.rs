@@ -7,8 +7,6 @@ mod constructor_ownership;
 mod copy_construction;
 mod erase_policy;
 mod fill_construction;
-mod growth_token;
-pub use growth_token::{GrowthProgress, LinearVectorGrowth};
 mod insert_policy;
 mod pointers;
 mod relocation;
@@ -232,17 +230,9 @@ impl<T: Default> LinearVector<T> {
 }
 impl<T: Clone> Clone for LinearVector<T> {
     /// Copies through element Clone callbacks; `let copy = vector.clone()`.
-    /// A panic retains native unpublished allocation and completed copies without Drop.
     /// Use `clone_trivial` to select native trivially-copyable byte-copy behavior.
     fn clone(&self) -> Self {
-        #[cfg(test)]
-        {
-            self.construct_copy(|_| {})
-        }
-        #[cfg(not(test))]
-        {
-            self.construct_copy()
-        }
+        self.construct_copy()
     }
 }
 impl<T: Clone> LinearVector<T> {
@@ -263,22 +253,15 @@ impl<T: Clone> LinearVector<T> {
     /// let vector = rustycad_tkernel::ncollection::LinearVector::with_value_ref(3, &fill);
     /// assert_eq!(vector.as_slice(), &[42, 42, 42]);
     /// ```
-    /// A clone panic retains the native abandoned allocation and completed copies;
-    /// no container destructor runs, and those payloads can remain leaked.
     pub fn with_value_ref(size: usize, value: &T) -> Self {
-        Self::construct_fill(
-            size,
-            value,
-            #[cfg(test)]
-            |_| {},
-        )
+        Self::construct_fill(size, value)
     }
     /// Reuses sufficient destination storage during assignment; `dest.assign(&source)`.
     /// Common-slot assignments remain observable if copying later fails. With sufficient
     /// capacity, failed tail construction leaves len unchanged and completed spare copies
     /// live; subsequent overwrite/free omits their destructors as native operator= does.
-    /// Insufficient-capacity copy failure retains the native abandoned allocation and
-    /// copied prefix while leaving the receiver unchanged. Throwing shrink keeps safe cleanup.
+    /// Insufficient-capacity copy failure leaves the receiver unchanged (the native abandoned
+    /// copy is D1 class B2 and is freed). Throwing shrink keeps safe cleanup.
     pub fn assign(&mut self, source: &Self) -> &mut Self {
         if source.len() > self.capacity() {
             *self = source.clone();
