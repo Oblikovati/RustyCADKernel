@@ -44,6 +44,12 @@ impl Default for ShapeFixFixSmallFace {
 }
 
 impl ShapeFixFixSmallFace {
+    /// `ShapeFix_FixSmallFace()`: no shape, status OK, precision Precision::Confusion();
+    /// `let fixer = ShapeFixFixSmallFace::empty();`.
+    pub fn empty() -> Self {
+        Self::default()
+    }
+
     /// `ShapeFix_FixSmallFace(shape)` followed by `Init`; `ShapeFixFixSmallFace::new(shape)`.
     pub fn new(shape: Shape) -> Self {
         let fixer = Self::default();
