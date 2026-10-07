@@ -373799,86 +373799,6 @@
       "notes": "Class template NCollection_Array1 is the generic Rust type Array1; its members are mapped row by row."
     },
     {
-      "upstream_id": "NCollection_Array1::operator delete(void*) noexcept",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1",
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which returns one object's memory through Standard::Free. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
-      "cpp_declaration_id": "f2b718d1081a941cb28a3ab341dc3f865131d33222c876b648cb685e4df49fca",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_Array1::operator delete(void*,const occ::handle<NCollection_BaseAllocator>&) noexcept",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1",
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_NCOLLECTION_ALLOC generates this class-specific operator, which frees through an NCollection_BaseAllocator handle. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
-      "cpp_declaration_id": "8de1f6003a45062bb89f32b3c585df1ad2e1629b5a736823b316629cc2915ff0",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_Array1::operator delete(void*,void*) noexcept",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1",
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which is the placement form that constructs into caller-provided storage. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
-      "cpp_declaration_id": "6a1e220a65836b0acd1127de97280eea24aad22b6b625c4832ba9df1ecaa2392",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_Array1::operator delete[](void*) noexcept",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1",
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which returns an array's memory through Standard::Free. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
-      "cpp_declaration_id": "bd5a5880c13407665c4c2cfdf0a5ded8c12535b65079c844c7ee29b9f23a7384",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_Array1::operator new(size_t)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1",
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates one object through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
-      "cpp_declaration_id": "3532ee5960282c2e06fa62d410be2cc4dcb5df091405a40c908ce288bbdfa8f5",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_Array1::operator new(size_t,const occ::handle<NCollection_BaseAllocator>&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1",
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_NCOLLECTION_ALLOC generates this class-specific operator, which allocates from an NCollection_BaseAllocator handle. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
-      "cpp_declaration_id": "a752170b3ad82418a63f9b344a78c933ecc4c1060850d4cd8ddf28d2c98529b0",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_Array1::operator new(size_t,void*) noexcept",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1",
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which is the placement form that constructs into caller-provided storage. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
-      "cpp_declaration_id": "3ee63fb213d2cc410b57bc6067e3b2575227bb1143eba9fcf6cb9a55dbc52c79",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_Array1::operator new[](size_t)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::Array1",
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
-      "cpp_declaration_id": "2721537698524a22ecacc457539b19e506420348a1666045f7324a3270131680",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "NCollection_Array1::construct(const size_t,const size_t,NCollection_Array1::pointer)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
@@ -373994,6 +373914,86 @@
         "kind": "FunctionTemplate",
         "signature": "std::enable_if<std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)"
       }
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator delete(void*) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which returns one object's memory through Standard::Free. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "f2b718d1081a941cb28a3ab341dc3f865131d33222c876b648cb685e4df49fca",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator delete(void*,const occ::handle<NCollection_BaseAllocator>&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_NCOLLECTION_ALLOC generates this class-specific operator, which frees through an NCollection_BaseAllocator handle. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "8de1f6003a45062bb89f32b3c585df1ad2e1629b5a736823b316629cc2915ff0",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator delete(void*,void*) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which is the placement form that constructs into caller-provided storage. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "6a1e220a65836b0acd1127de97280eea24aad22b6b625c4832ba9df1ecaa2392",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator delete[](void*) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which returns an array's memory through Standard::Free. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "bd5a5880c13407665c4c2cfdf0a5ded8c12535b65079c844c7ee29b9f23a7384",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator new(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates one object through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "3532ee5960282c2e06fa62d410be2cc4dcb5df091405a40c908ce288bbdfa8f5",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator new(size_t,const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_NCOLLECTION_ALLOC generates this class-specific operator, which allocates from an NCollection_BaseAllocator handle. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "a752170b3ad82418a63f9b344a78c933ecc4c1060850d4cd8ddf28d2c98529b0",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator new(size_t,void*) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which is the placement form that constructs into caller-provided storage. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "3ee63fb213d2cc410b57bc6067e3b2575227bb1143eba9fcf6cb9a55dbc52c79",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator new[](size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::ncollection::Array1 needs no counterpart; no behavior is lost.",
+      "cpp_declaration_id": "2721537698524a22ecacc457539b19e506420348a1666045f7324a3270131680",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "NCollection_Array2(const NCollection_Array2<TheItemType>&)",
@@ -378268,36 +378268,6 @@
       "notes": "C++17 class template argument deduction guide; Rust infers ForwardRange<I> from ForwardRange::new(host)."
     },
     {
-      "upstream_id": "NCollection_ForwardRange::NCollection_ForwardRange<HostType>(const NCollection_ForwardRange<HostType>&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange",
-      "status": "excluded",
-      "notes": "Excluded: C++ declares the copy constructor `= delete`, so no caller can use it. Rust rustycad_tkernel::ncollection::forward_range::ForwardRange does not implement Clone either.",
-      "cpp_declaration_id": "cfdb6a39df7e14100f2164706f15cd3d016d2df938dc4336c399f90a83fba332",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_ForwardRange::operator=(const NCollection_ForwardRange<HostType>&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange",
-      "status": "excluded",
-      "notes": "Excluded: C++ declares the copy assignment `= delete`, so no caller can use it. Rust rustycad_tkernel::ncollection::forward_range::ForwardRange does not implement Clone either.",
-      "cpp_declaration_id": "7144e5bcb3200891fc65b16b4efe71d7867aaace55596111c4245861ca914063",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_ForwardRangeIterator::PostfixProxy",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkernel::ncollection::forward_range::ForwardRangeIter (evidence: ledger record row); each member is mapped by its own row.",
-      "cpp_declaration_id": "efab73b2525f778023172b1119dbf7a4124c690beb35498311061ed57f02fa7f",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "NCollection_ForwardRangeDetail::HasValue",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
@@ -378409,6 +378379,36 @@
         "kind": "ClassTemplatePartialSpecialization",
         "usr": "c:@N@NCollection_ForwardRangeDetail@SP>1#T@AccessorTraits>#t0.0#^std::enable_if<NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value, void>:::type"
       }
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange::NCollection_ForwardRange<HostType>(const NCollection_ForwardRange<HostType>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange",
+      "status": "excluded",
+      "notes": "Excluded: C++ declares the copy constructor `= delete`, so no caller can use it. Rust rustycad_tkernel::ncollection::forward_range::ForwardRange does not implement Clone either.",
+      "cpp_declaration_id": "cfdb6a39df7e14100f2164706f15cd3d016d2df938dc4336c399f90a83fba332",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange::operator=(const NCollection_ForwardRange<HostType>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange",
+      "status": "excluded",
+      "notes": "Excluded: C++ declares the copy assignment `= delete`, so no caller can use it. Rust rustycad_tkernel::ncollection::forward_range::ForwardRange does not implement Clone either.",
+      "cpp_declaration_id": "7144e5bcb3200891fc65b16b4efe71d7867aaace55596111c4245861ca914063",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::PostfixProxy",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkernel::ncollection::forward_range::ForwardRangeIter (evidence: ledger record row); each member is mapped by its own row.",
+      "cpp_declaration_id": "efab73b2525f778023172b1119dbf7a4124c690beb35498311061ed57f02fa7f",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "NCollection_ItemsView::KeyValueRef::get() const noexcept",
