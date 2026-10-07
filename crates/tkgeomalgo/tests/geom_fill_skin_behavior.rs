@@ -3,62 +3,15 @@
 use rustycad_tkernel::ncollection::{Array1, HArray1};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg3d::geom::{GeomBSplineSurface, GeomCircle, GeomCurve, GeomEllipse};
 use rustycad_tkgeomalgo::app_blend::{AppBlendApprox, AppBlendSection, TheLine};
 use rustycad_tkgeomalgo::geom_fill::{
     GeomFillAppSurf, GeomFillLine, GeomFillProfiler, GeomFillSectionGenerator,
 };
-use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
+use rustycad_tkmath::gp::Point3;
 
-fn circle_and_ellipse() -> Result<[Handle<dyn GeomCurve>; 2], Failure> {
-    let normal = Direction3::new(0.0, 1.0, 1.0)?;
-    let circle = GeomCircle::new(Axis2::new(Point3::new(0.0, 100.0, 100.0), normal)?, 50.0)?;
-    let ellipse = GeomEllipse::new(Axis2::new(Point3::new(0.0, 0.0, 0.0), normal)?, 100.0, 50.0)?;
-    Ok([Handle::new(circle).cast(), Handle::new(ellipse).cast()])
-}
-
-/// The approximation path of the DRAW test bug13904 (the OCC13904 case of
-/// GeomFill_BSplineCurves_Test.cxx): a circle and an ellipse skinned by
-/// SectionGenerator -> AppSurf, whose result builds a B-spline surface.
-#[test]
-fn app_surf_between_circle_and_ellipse() -> Result<(), Failure> {
-    let mut section = GeomFillSectionGenerator::new();
-    for curve in circle_and_ellipse()? {
-        section.add_curve(&curve)?;
-    }
-    section.perform(precision::p_confusion())?;
-    let line = Handle::new(GeomFillLine::with_nb_points(2));
-    let mut approx = GeomFillAppSurf::new(
-        3,
-        8,
-        precision::confusion(),
-        precision::p_confusion(),
-        0,
-        false,
-    );
-    approx.perform(line.get(), &mut section, false)?;
-    assert!(approx.is_done());
-    let [
-        u_degree,
-        v_degree,
-        nb_u_poles,
-        nb_v_poles,
-        nb_u_knots,
-        nb_v_knots,
-    ] = approx.surf_shape()?;
-    assert!(u_degree >= 3 && v_degree >= 1);
-    assert!(nb_u_poles > 0 && nb_v_poles > 0 && nb_u_knots > 0 && nb_v_knots > 0);
-    let surface = GeomBSplineSurface::with_weights(
-        approx.surf_poles()?,
-        approx.surf_weights()?,
-        (approx.surf_u_knots()?, approx.surf_u_mults()?),
-        (approx.surf_v_knots()?, approx.surf_v_mults()?),
-        (approx.u_degree()?, approx.v_degree()?),
-        (false, false),
-    );
-    assert!(surface.is_ok());
-    Ok(())
-}
+#[path = "support/geom_fill_sections.rs"]
+mod geom_fill_sections;
+use geom_fill_sections::circle_and_ellipse;
 
 /// The two-section approximation narrows the V degree to 1, as natively (occ13904).
 #[test]

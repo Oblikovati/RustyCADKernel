@@ -493254,6 +493254,46 @@
       "notes": "Rust mirrors the native assertion path; statuses omitted where the source disables status checks."
     },
     {
+      "upstream_id": "BRepOffsetAPI_ThruSections_Test.OCC10006_LoftAndFusion",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepOffsetAPI_ThruSections_Test.cxx",
+      "source_sha256": "7b4cb6c9ba238164751691272789b93693e14d6bb45ea4d7a7d72da270d2c684",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_ThruSections",
+        "BRepAlgoAPI_Fuse"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections_Test.BSplineProfilesWithDifferentPoleCount",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepOffsetAPI_ThruSections_Test.cxx",
+      "source_sha256": "7b4cb6c9ba238164751691272789b93693e14d6bb45ea4d7a7d72da270d2c684",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepOffsetAPI_ThruSections_Test.OCC895_TwoCircularArcWires_NoTwist",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/GTests/BRepOffsetAPI_ThruSections_Test.cxx",
+      "source_sha256": "7b4cb6c9ba238164751691272789b93693e14d6bb45ea4d7a7d72da270d2c684",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepOffsetAPI_ThruSections"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
       "upstream_id": "BRepGraph_PolygonTest.MultiTriangulation_Roundtrip_PreservesAll",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Polygon_Test.cxx",
@@ -493372,9 +493412,9 @@
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_BSplineCurves_Test.cxx",
       "source_sha256": "f3b7fd67929126e922be5022c6fc5971a902398c9df3cec7d3554bfd77ed17a9",
       "rust_package": "rustycad-tkgeomalgo",
-      "rust_target": "geom_fill_skin_behavior",
+      "rust_target": "geom_fill_bspline_curves",
       "rust_test": "app_surf_between_circle_and_ellipse",
-      "rust_source": "crates/tkgeomalgo/tests/geom_fill_skin_behavior.rs",
+      "rust_source": "crates/tkgeomalgo/tests/geom_fill_bspline_curves.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
@@ -493386,9 +493426,9 @@
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/GeomFill_BSplineCurves_Test.cxx",
       "source_sha256": "f3b7fd67929126e922be5022c6fc5971a902398c9df3cec7d3554bfd77ed17a9",
       "rust_package": "rustycad-tkgeomalgo",
-      "rust_target": "geom_fill_filling_behavior",
+      "rust_target": "geom_fill_bspline_curves",
       "rust_test": "occ27704_two_pole_curves_raise_construction_error",
-      "rust_source": "crates/tkgeomalgo/tests/geom_fill_filling_behavior.rs",
+      "rust_source": "crates/tkgeomalgo/tests/geom_fill_bspline_curves.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
@@ -493941,6 +493981,19 @@
       ]
     },
     {
+      "upstream_id": "BRepGraph_CopyTest.FusedBoxes_Regularity_AreaPreserved",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Copy_Test.cxx",
+      "source_sha256": "b1fbd468fb9512e99773399ba056a36133fa38b03fe9eda49a854b587e5598fb",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Fuse"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
       "upstream_id": "BRepMesh_IncrementalMeshTest.ClosedCylinder_SeamPolygonsReferenceValidMeshNodes",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/GTests/BRepMesh_IncrementalMesh_Test.cxx",
@@ -493969,6 +494022,19 @@
         "linux-gcc-c-locale"
       ],
       "notes": "Uses two BRepPrimAPIMakeCone::new(100.0, 10.0, 100.0) solids, deflection 0.01, and angular deflections 10/1 degrees. Sums nodes and triangles over all face triangulations and asserts both totals differ, matching source observable; Rust target runtime is about 68 seconds."
+    },
+    {
+      "upstream_id": "BRepMesh_IncrementalMeshTest.BooleanTrimmedTorus_CrossingSeamProducesDenseMesh",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/GTests/BRepMesh_IncrementalMesh_Test.cxx",
+      "source_sha256": "e7ce09c59af7082bb43fc2f99ce72b746f260b15d098d57baeff019885e22986",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Fuse"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     },
     {
       "upstream_id": "BRepGraph_CompactTest.NoRemovedNodes_Noop",
@@ -494265,14 +494331,40 @@
       ]
     },
     {
+      "upstream_id": "BRepTools_Test.ModalgBug_24404_BoxFaceUVBounds",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepTools_Test.cxx",
+      "source_sha256": "e8c15fa03d5f2e6f01e39b4cb2be7693118d95f4d8633247f28673ce3a7604e7",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Cut"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepTools_Test.ModalgBug_29734_ExactAndTriangulatedProperties",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepTools_Test.cxx",
+      "source_sha256": "e8c15fa03d5f2e6f01e39b4cb2be7693118d95f4d8633247f28673ce3a7604e7",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Fuse"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
       "upstream_id": "ShapeUpgrade_UnifySameDomainTest.BasicBoxUnification",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
       "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
       "rust_package": "rustycad-tkshhealing",
-      "rust_target": "shape_upgrade_unify_same_domain",
+      "rust_target": "shape_upgrade_unify_same_domain_legacy",
       "rust_test": "basic_box_unification_matches_native_no_merge_result",
-      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain.rs",
+      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain_legacy.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
@@ -494284,9 +494376,9 @@
       "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
       "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
       "rust_package": "rustycad-tkshhealing",
-      "rust_target": "shape_upgrade_unify_same_domain",
+      "rust_target": "shape_upgrade_unify_same_domain_legacy",
       "rust_test": "closed_internal_wire_keeps_nonnull_result",
-      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain.rs",
+      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain_legacy.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
@@ -494298,9 +494390,9 @@
       "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
       "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
       "rust_package": "rustycad-tkshhealing",
-      "rust_target": "shape_upgrade_unify_same_domain",
+      "rust_target": "shape_upgrade_unify_same_domain_legacy",
       "rust_test": "multiple_coplanar_faces_with_internal_wires_merge_to_one_face",
-      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain.rs",
+      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain_legacy.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
@@ -494447,14 +494539,27 @@
       ]
     },
     {
+      "upstream_id": "BRepGraph_CompactTest.Compact_FaceWithInnerWires_WireCountPreserved",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Compact_Test.cxx",
+      "source_sha256": "2d2a9e7f99ad2f59ffd7f63db442a41f2c10f28db7401f746771ba9003dbf629",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Cut"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
       "upstream_id": "ShapeUpgrade_UnifySameDomainTest.InternalEdgesTermination_Issue925",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
       "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
       "rust_package": "rustycad-tkshhealing",
-      "rust_target": "shape_upgrade_unify_same_domain",
+      "rust_target": "shape_upgrade_unify_same_domain_legacy",
       "rust_test": "internal_open_path_terminates_and_keeps_its_face",
-      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain.rs",
+      "rust_source": "crates/tkshhealing/tests/shape_upgrade_unify_same_domain_legacy.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
@@ -494489,6 +494594,45 @@
         "linux-gcc-c-locale"
       ],
       "notes": "Pinned topology assertions are ported. A probe of the pinned OCCT fixture showed same-support source p-curve handle identity unchanged across Build; general face-group selection and non-identical-support TransformPCurves transformations remain unimplemented."
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomainTest.OCC29382_CommonShapeHasStableTopology",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
+      "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Common"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomainTest.OCC29544_NearbyLinearSplitIsUnified",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
+      "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BOPAlgo_Splitter"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomainTest.OCC30927_FusedSolidKeepsClosedWires",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/GTests/ShapeUpgrade_UnifySameDomain_Test.cxx",
+      "source_sha256": "2214339e0275b89018a09ca6cbd8e01e610614eacd4869f17f8001049db538a1",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Fuse"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     },
     {
       "upstream_id": "GeomFill_BSplineCurvesTest.OCC28131_SimpleOffsetOfFilledFace",
@@ -494530,6 +494674,98 @@
       "rust_test": "not_copy_constructible",
       "rust_source": "crates/tkbo/tests/brep_algo_api_noncopy_legacy.rs",
       "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_BuilderAlgoTest.NotCopyAssignable",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_BuilderAlgo_Test.cxx",
+      "source_sha256": "cd51a213c49541d232cb0f43cb4ab601b79609c21c38b23df43579f2537983ea",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_algo_api_noncopy_legacy",
+      "rust_test": "not_copy_assignable",
+      "rust_source": "crates/tkbo/tests/brep_algo_api_noncopy_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_BooleanOperationTest.NotCopyConstructible",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_BuilderAlgo_Test.cxx",
+      "source_sha256": "cd51a213c49541d232cb0f43cb4ab601b79609c21c38b23df43579f2537983ea",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_BooleanOperation"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_CutTest.NotCopyConstructible",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_BuilderAlgo_Test.cxx",
+      "source_sha256": "cd51a213c49541d232cb0f43cb4ab601b79609c21c38b23df43579f2537983ea",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Cut"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_FuseTest.NotCopyConstructible",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_BuilderAlgo_Test.cxx",
+      "source_sha256": "cd51a213c49541d232cb0f43cb4ab601b79609c21c38b23df43579f2537983ea",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Fuse"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_CommonTest.NotCopyConstructible",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_BuilderAlgo_Test.cxx",
+      "source_sha256": "cd51a213c49541d232cb0f43cb4ab601b79609c21c38b23df43579f2537983ea",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Common"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_SectionTest.NotCopyConstructible",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_BuilderAlgo_Test.cxx",
+      "source_sha256": "cd51a213c49541d232cb0f43cb4ab601b79609c21c38b23df43579f2537983ea",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Section"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_SplitterTest.NotCopyConstructible",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_BuilderAlgo_Test.cxx",
+      "source_sha256": "cd51a213c49541d232cb0f43cb4ab601b79609c21c38b23df43579f2537983ea",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepAlgoAPI_Splitter"
+      ],
       "profiles": [
         "linux-gcc-c-locale"
       ]
