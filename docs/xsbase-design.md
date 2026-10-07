@@ -124,7 +124,9 @@ The work session details:
 - `ClearData` is the only virtual member: `IFSelectWorkSessionOps::clear_data`. A
   derived session (`XSControl_WorkSession`) embeds `IFSelectWorkSession` and calls
   `bind_self` with its handle, so that `SetModel` and `ClearData(1)` call the override.
-- The native static `errhand` is a process-wide flag. A guarded call (native `try`
+- The native static `errhand` is a per-thread flag (the native sessions run on one
+  thread; a process-wide flag would let a guarded call of one thread change the error
+  handling of the others). A guarded call (native `try`
   around the call with `errhand` cleared) reports the error and gives an empty result
   when the errors are handled, else returns the error. The native defect of the
   sending calls is kept: after a successful guarded sending, `errhand` stays cleared.

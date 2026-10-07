@@ -16,6 +16,9 @@ mod editor;
 #[cfg(test)]
 mod editor_tests;
 mod enums;
+mod functions;
+#[cfg(test)]
+mod functions_tests;
 mod int_param;
 mod list_editor;
 mod model_copier;
@@ -77,6 +80,7 @@ pub use enums::{
     IFSelectEditValue, IFSelectPrintCount, IFSelectPrintFail, IFSelectRemainMode,
     IFSelectReturnStatus,
 };
+pub use functions::IFSelectFunctions;
 pub use int_param::IFSelectIntParam;
 pub use list_editor::{IFSelectListEditor, IFSelectTextList};
 pub use model_copier::IFSelectModelCopier;

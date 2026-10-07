@@ -10,18 +10,23 @@ use rustycad_tkernel::{
 use std::io::Cursor;
 use std::sync::{Mutex, MutexGuard, OnceLock, PoisonError};
 
-/// The shared pilot (the activator of the basic commands) with a loaded session.
-fn shared_pilot() -> (MutexGuard<'static, ()>, Handle<IFSelectSessionPilot>) {
+/// A new session loaded with the fake chain, with the fake work library.
+fn fresh_session() -> Handle<IFSelectWorkSession> {
+    let session = Handle::new(IFSelectWorkSession::new());
+    session.set_protocol(&fake_protocol());
+    session.set_library(&super::test_work_library::fake_work_library());
+    session.set_model(&fake_chain().0, true).unwrap();
+    session
+}
+
+/// The shared pilot (the activator of the basic commands) with a new loaded session.
+pub(super) fn shared_pilot() -> (MutexGuard<'static, ()>, Handle<IFSelectSessionPilot>) {
     static LOCK: Mutex<()> = Mutex::new(());
     static PILOT: OnceLock<Handle<IFSelectSessionPilot>> = OnceLock::new();
     let guard = LOCK.lock().unwrap_or_else(PoisonError::into_inner);
     let pilot = PILOT
         .get_or_init(|| {
             let pilot = IFSelectSessionPilot::new("").unwrap();
-            let session = Handle::new(IFSelectWorkSession::new());
-            session.set_protocol(&fake_protocol());
-            session.set_model(&fake_chain().0, true).unwrap();
-            pilot.set_session(&session);
             IFSelectAct::add_func(
                 "test.pilot.param",
                 "records an integer parameter",
@@ -35,6 +40,7 @@ fn shared_pilot() -> (MutexGuard<'static, ()>, Handle<IFSelectSessionPilot>) {
             pilot
         })
         .clone();
+    pilot.set_session(&fresh_session());
     pilot.clear();
     pilot.set_record_mode(false);
     (guard, pilot)

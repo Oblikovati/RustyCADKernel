@@ -21,9 +21,10 @@ use rustycad_tkernel::{
     standard::{Failure, Handle, SharedState, StandardTransient, Transient, WeakHandle},
     tcollection::AsciiString,
 };
+use std::cell::Cell;
 use std::fmt::Write as _;
 use std::sync::OnceLock;
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::atomic::Ordering;
 
 #[cfg(test)]
 mod dump_tests;
@@ -52,9 +53,34 @@ pub type IFSelectTransientList = Option<Vec<Handle<StandardTransient>>>;
 /// The flag of the incorrect entities in the bit map of the graph (natively a define).
 pub(crate) const FLAG_INCORRECT: i32 = 2;
 
+thread_local! {
+    /// The flag behind [`ERRHAND`].
+    static ERRHAND_FLAG: Cell<bool> = const { Cell::new(true) };
+}
+
 /// The native static `errhand`: true while the next guarded call catches the errors
-/// ("only one at a time" natively).
-static ERRHAND: AtomicBool = AtomicBool::new(true);
+/// ("only one at a time" natively). It is per thread here: the native sessions run on
+/// one thread, and a process-wide flag would let a guarded call on one thread change
+/// the error handling of the calls of the others.
+pub(crate) struct ErrHand;
+
+/// The `errhand` flag of the current thread.
+pub(crate) static ERRHAND: ErrHand = ErrHand;
+
+impl ErrHand {
+    /// The flag.
+    pub(crate) fn load(&self, _order: Ordering) -> bool {
+        ERRHAND_FLAG.with(Cell::get)
+    }
+    /// Sets the flag.
+    pub(crate) fn store(&self, value: bool, _order: Ordering) {
+        ERRHAND_FLAG.with(|f| f.set(value));
+    }
+    /// Sets the flag, returning the previous value.
+    pub(crate) fn swap(&self, value: bool, _order: Ordering) -> bool {
+        ERRHAND_FLAG.with(|f| f.replace(value))
+    }
+}
 
 /// The fields of `IFSelect_WorkSession` (the protected ones first).
 pub(crate) struct WorkSessionState {

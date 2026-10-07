@@ -104889,6 +104889,46 @@
       "notes": "The function returns a Result (the native exceptions as Failure errors)."
     },
     {
+      "upstream_id": "IFSelect_Functions::GiveEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Functions.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectFunctions::give_entity",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Vec or Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Functions::GiveEntityNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Functions.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectFunctions::give_entity_number",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Vec or Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. An empty name is read from the standard input, as natively."
+    },
+    {
+      "upstream_id": "IFSelect_Functions::GiveList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Functions.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectFunctions::give_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Vec or Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Functions::GiveDispatch",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Functions.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectFunctions::give_dispatch",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Vec or Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Native defect kept: a name which is not an item and lacks '(' or ')' raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "IFSelect_Functions::Init",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Functions.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectFunctions::init",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Vec or Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. The 96 command functions are private, as natively (functions/*.rs)."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
