@@ -1,5 +1,4 @@
 //! Typed DataMap delegates to native bucket/node storage; no parallel authoritative entry vectors.
-#![allow(unsafe_code)]
 #[path = "data_map_storage_contracts/cloning.rs"]
 mod cloning;
 #[path = "data_map_storage_contracts/fixture.rs"]
@@ -55,7 +54,7 @@ fn native_rehash_reverses_collision_chain_without_moving_values() {
             u8::from(same)
         ),
     );
-    assert_eq!(unsafe { *pointer }, 20);
+    assert_eq!(map.find(&2), Ok(&20));
 }
 #[test]
 fn native_noop_resize_keeps_table_and_skips_hashing() {

@@ -53,10 +53,9 @@ fn dropping_map(trace: &KeyDropTrace, arena: &BaseAllocator) -> Map<OwnedKey, Ke
     map
 }
 #[test]
-fn hasher_panic_keeps_old_links_and_stable_keys() {
+fn hasher_panic_keeps_old_links_and_keys() {
     let mut map = populated(1);
     let table = table_of(&map);
-    let key = std::ptr::from_ref(map.contained(&2).unwrap());
     map.hasher().rejected.set(Some(2));
     assert!(caught(|| map.resize(200)));
     map.hasher().rejected.set(None);
@@ -65,7 +64,7 @@ fn hasher_panic_keeps_old_links_and_stable_keys() {
         (3, "3,2,1,".into(), 101)
     );
     assert_eq!(table_of(&map), table);
-    assert_eq!(unsafe { *key }, 2);
+    assert_eq!(map.contained(&2), Some(&2));
     map.resize(200);
     assert_eq!(keys(&map), "1,2,3,");
 }

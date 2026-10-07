@@ -1,5 +1,4 @@
 //! Actual MapNode<K> facade storage and shared owner regressions.
-#![allow(unsafe_code)]
 #[path = "map_canonical_storage_contracts/fixture.rs"]
 mod fixture;
 #[path = "map_canonical_storage_contracts/graph.rs"]
@@ -53,7 +52,7 @@ fn native_rehash_reverses_collision_chain_without_moving_values() {
             u8::from(same)
         ),
     );
-    assert_eq!(unsafe { *pointer }, 2);
+    assert_eq!(map.contained(&2), Some(&2));
 }
 #[test]
 fn native_noop_resize_keeps_table_and_skips_hashing() {

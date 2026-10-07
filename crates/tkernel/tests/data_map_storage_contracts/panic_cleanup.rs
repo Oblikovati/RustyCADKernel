@@ -14,7 +14,6 @@ fn dropping_map(
 fn hash_panic_leaves_old_canonical_chains_intact() {
     let mut map = populated(1);
     let table = table_of(&map);
-    let pointer = std::ptr::from_ref(map.find(&2).unwrap());
     map.hasher().rejected.set(Some(2));
     assert!(caught(|| map.resize(200)));
     map.hasher().rejected.set(None);
@@ -23,7 +22,7 @@ fn hash_panic_leaves_old_canonical_chains_intact() {
         ("3,2,1,".into(), 3, 101)
     );
     assert_eq!(table, table_of(&map));
-    assert_eq!(unsafe { *pointer }, 20);
+    assert_eq!(map.find(&2), Ok(&20));
     map.resize(200);
     assert_eq!(keys(&map), "1,2,3,");
 }

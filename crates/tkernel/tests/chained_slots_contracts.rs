@@ -155,11 +155,13 @@ fn apply_data_step(
 
 #[test]
 fn data_map_slots_follow_the_native_chains_through_random_scripts() {
-    for seed in 1..=12 {
+    // Miri interprets every step; one short script still covers moves, rehash and clears.
+    let (seeds, steps) = if cfg!(miri) { (1, 120) } else { (12, 400) };
+    for seed in 1..=seeds {
         let mut script = Script(seed);
         let mut map = DataMap::with_hasher(ModuloHash, 1);
         let mut model = NativeModel::new(1);
-        for step in 0..400 {
+        for step in 0..steps {
             apply_data_step(&mut map, &mut model, &mut script);
             assert_data_map_matches(&map, &model, step);
         }
@@ -171,7 +173,7 @@ fn key_only_map_slots_follow_the_native_chains_through_removals() {
     let mut script = Script(99);
     let mut map = Map::with_hasher(ModuloHash, 1);
     let mut model = NativeModel::new(1);
-    for step in 0..600 {
+    for step in 0..if cfg!(miri) { 150 } else { 600 } {
         let key = script.key();
         if script.next(3) == 0 {
             assert_eq!(map.remove(&key), model.unbind(key), "remove {key}");
