@@ -69882,6 +69882,86 @@
       "notes": "Manual NCollection member mapping; keeps the lower bound; new slots are T::default()."
     },
     {
+      "upstream_id": "NCollection_Array1::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (type-parameter-0-0 *) of NCollection_Array1. Rust Array1 spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array1::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_Array1. Rust Array1 spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array1::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_Array1. Rust Array1 spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array1::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (const type-parameter-0-0 *) of NCollection_Array1. Rust Array1 spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array1::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_Array1. Rust Array1 spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array1::allocator_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef allocator_type (NCollection_Allocator<type-parameter-0-0>) of NCollection_Array1. Rust Array1 spells its allocator handle type directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array1::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-0 &) of NCollection_Array1. Rust Array1 spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array1::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_Array1. Rust Array1 spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array1::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_Array1. Rust Array1 spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array1::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_Array1. Rust Array1 spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_Array2::ArraySize(size_t,size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
@@ -70410,6 +70490,86 @@
       "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
     },
     {
+      "upstream_id": "NCollection_Array2::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (const type-parameter-0-0 *) of NCollection_Array2. Rust Array2 spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array2::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_Array2. Rust Array2 spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array2::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_Array2. Rust Array2 spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array2::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_Array2. Rust Array2 spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array2::allocator_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef allocator_type (NCollection_Allocator<type-parameter-0-0>) of NCollection_Array2. Rust Array2 spells its allocator handle type directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array2::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-0 &) of NCollection_Array2. Rust Array2 spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array2::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (type-parameter-0-0 *) of NCollection_Array2. Rust Array2 spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array2::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_Array2. Rust Array2 spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array2::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_Array2. Rust Array2 spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Array2::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_Array2. Rust Array2 spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_HArray1()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
@@ -70619,6 +70779,78 @@
       "status": "partial",
       "notes": "Rust returns a safe shared Array1 view that detaches on first write. The native const overload returns a mutable alias over the LocalArray buffer, so writes through that view mutate the original even when the LocalArray is const. Rust intentionally does not emulate that aliasing. See tools/oracle/tkernel_local_array_const_to_array1.md.",
       "source_sha256": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f"
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_LocalArray. Rust LocalArray spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_LocalArray. Rust LocalArray spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_LocalArray. Rust LocalArray spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (type-parameter-0-0 *) of NCollection_LocalArray. Rust LocalArray spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (const type-parameter-0-0 *) of NCollection_LocalArray. Rust LocalArray spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_LocalArray. Rust LocalArray spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_LocalArray. Rust LocalArray spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-0 &) of NCollection_LocalArray. Rust LocalArray spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_LocalArray. Rust LocalArray spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_LinearVector()",
@@ -71033,6 +71265,86 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LinearVector::iter`, `LinearVector::iter_mut` and `IntoIterator for &LinearVector` / `&mut LinearVector`."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_LinearVector. Rust LinearVector spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_LinearVector. Rust LinearVector spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (type-parameter-0-0 *) of NCollection_LinearVector. Rust LinearVector spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_LinearVector. Rust LinearVector spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-0 &) of NCollection_LinearVector. Rust LinearVector spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (const type-parameter-0-0 *) of NCollection_LinearVector. Rust LinearVector spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_LinearVector. Rust LinearVector spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::allocator_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef allocator_type (NCollection_Allocator<type-parameter-0-0>) of NCollection_LinearVector. Rust LinearVector spells its allocator handle type directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_LinearVector. Rust LinearVector spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_LinearVector. Rust LinearVector spells &T / *const T in its accessors; there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_DynamicArray::Iterator()",
@@ -72454,6 +72766,78 @@
       "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
     },
     {
+      "upstream_id": "NCollection_SparseArray::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_SparseArray. Rust SparseArray spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_SparseArray. Rust SparseArray spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_SparseArrayBase::BasicIterator<NCollection_SparseArray<TheItemType>, type-parameter-0-0, true>) of NCollection_SparseArray. Rust SparseArray spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_SparseArrayBase::BasicIterator<NCollection_SparseArray<TheItemType>, type-parameter-0-0, false>) of NCollection_SparseArray. Rust SparseArray spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_SparseArray. Rust SparseArray spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_SparseArray. Rust SparseArray spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_SparseArray. Rust SparseArray spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-0 &) of NCollection_SparseArray. Rust SparseArray spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_SparseArray. Rust SparseArray spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_SparseArrayBase::Size() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
@@ -72976,6 +73360,78 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_List::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_List. Rust List spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_List::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_BaseList::BasicIterator<NCollection_TListNode<type-parameter-0-0>, type-parameter-0-0, true>) of NCollection_List. Rust List spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_List::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_List. Rust List spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_List::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-0 &) of NCollection_List. Rust List spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_List::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_List. Rust List spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_List::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_List. Rust List spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_List::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_List. Rust List spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_List::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_List. Rust List spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_List::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseList::BasicIterator<NCollection_TListNode<type-parameter-0-0>, type-parameter-0-0, false>) of NCollection_List. Rust List spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
     },
     {
       "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
@@ -74669,6 +75125,86 @@
       "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
     },
     {
+      "upstream_id": "NCollection_FlatDataMap::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-1 &) of NCollection_FlatDataMap. Rust FlatDataMap spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-1 *) of NCollection_FlatDataMap. Rust FlatDataMap spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_FlatDataMap::iterator_impl<true>) of NCollection_FlatDataMap. Rust FlatDataMap spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_FlatDataMap. Rust FlatDataMap spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-1) of NCollection_FlatDataMap. Rust FlatDataMap spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_FlatDataMap::iterator_impl<false>) of NCollection_FlatDataMap. Rust FlatDataMap spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::key_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef key_type (type-parameter-0-0) of NCollection_FlatDataMap. Rust FlatDataMap spells the key type parameter K directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-1 *) of NCollection_FlatDataMap. Rust FlatDataMap spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-1 &) of NCollection_FlatDataMap. Rust FlatDataMap spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_FlatDataMap. Rust FlatDataMap spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_FlatMap::Iterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
@@ -75066,6 +75602,86 @@
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::end",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_FlatMap. Rust FlatMap spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_FlatMap::iterator_impl<true>) of NCollection_FlatMap. Rust FlatMap spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (const type-parameter-0-0 &) of NCollection_FlatMap. Rust FlatMap spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_FlatMap. Rust FlatMap spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_FlatMap. Rust FlatMap spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::key_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef key_type (type-parameter-0-0) of NCollection_FlatMap. Rust FlatMap spells the key type parameter K directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_FlatMap. Rust FlatMap spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_FlatMap. Rust FlatMap spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_FlatMap::iterator_impl<true>) of NCollection_FlatMap. Rust FlatMap spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (const type-parameter-0-0 *) of NCollection_FlatMap. Rust FlatMap spells &mut T / *mut T in its accessors; there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode(const TheKeyType&,const TheItemType&,NCollection_ListNode*)",
@@ -75764,6 +76380,86 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
+      "upstream_id": "NCollection_OrderedDataMap::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-1) of NCollection_OrderedDataMap. Rust OrderedDataMap spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_OrderedDataMap. Rust OrderedDataMap spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::key_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef key_type (type-parameter-0-0) of NCollection_OrderedDataMap. Rust OrderedDataMap spells the key type parameter K directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-1 *) of NCollection_OrderedDataMap. Rust OrderedDataMap spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-1 &) of NCollection_OrderedDataMap. Rust OrderedDataMap spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseMap::BasicIterator<NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>, class NCollection_OrderedDataMap::OrderedDataMapNode, type-parameter-0-0, type-parameter-0-1, false, false, true>) of NCollection_OrderedDataMap. Rust OrderedDataMap spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_BaseMap::BasicIterator<NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>, class NCollection_OrderedDataMap::OrderedDataMapNode, type-parameter-0-0, type-parameter-0-1, false, true, true>) of NCollection_OrderedDataMap. Rust OrderedDataMap spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-1 *) of NCollection_OrderedDataMap. Rust OrderedDataMap spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-1 &) of NCollection_OrderedDataMap. Rust OrderedDataMap spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_OrderedDataMap. Rust OrderedDataMap spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_OrderedMap::OrderedMapNode(const TheKeyType&,NCollection_ListNode*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
@@ -76220,6 +76916,94 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
+      "upstream_id": "NCollection_OrderedMap::key_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef key_type (type-parameter-0-0) of NCollection_OrderedMap. Rust OrderedMap spells the key type parameter K directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedMap::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_OrderedMap. Rust OrderedMap spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedMap::hasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef hasher (type-parameter-0-1) of NCollection_OrderedMap. Rust OrderedMap spells the hasher type parameter H directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedMap::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseMap::BasicIterator<NCollection_OrderedMap<TheKeyType, Hasher>, class NCollection_OrderedMap::OrderedMapNode, type-parameter-0-0, type-parameter-0-0, true, true, true>) of NCollection_OrderedMap. Rust OrderedMap spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedMap::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_OrderedMap. Rust OrderedMap spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedMap::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (const type-parameter-0-0 *) of NCollection_OrderedMap. Rust OrderedMap spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedMap::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_OrderedMap. Rust OrderedMap spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedMap::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_OrderedMap. Rust OrderedMap spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedMap::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_OrderedMap. Rust OrderedMap spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedMap::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_BaseMap::BasicIterator<NCollection_OrderedMap<TheKeyType, Hasher>, class NCollection_OrderedMap::OrderedMapNode, type-parameter-0-0, type-parameter-0-0, true, true, true>) of NCollection_OrderedMap. Rust OrderedMap spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedMap::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (const type-parameter-0-0 &) of NCollection_OrderedMap. Rust OrderedMap spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_PackedMap::Iterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
@@ -76602,6 +77386,78 @@
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::contains_map",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
+    },
+    {
+      "upstream_id": "NCollection_PackedMap::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (const type-parameter-0-0 &) of NCollection_PackedMap. Rust PackedMap spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_PackedMap::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_PackedMap. Rust PackedMap spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_PackedMap::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_PackedMap::BasicIterator<true>) of NCollection_PackedMap. Rust PackedMap spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_PackedMap::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_PackedMap. Rust PackedMap spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_PackedMap::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (const type-parameter-0-0 *) of NCollection_PackedMap. Rust PackedMap spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_PackedMap::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_PackedMap. Rust PackedMap spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_PackedMap::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_PackedMap. Rust PackedMap spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_PackedMap::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_PackedMap. Rust PackedMap spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_PackedMap::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_PackedMap::BasicIterator<false>) of NCollection_PackedMap. Rust PackedMap spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_PackedMapAlgo::Unite(NCollection_PackedMap<IntType>&,const NCollection_PackedMap<IntType>&)",
@@ -77716,6 +78572,22 @@
       "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. PartialEq is implemented for every const/mutable pairing."
     },
     {
+      "upstream_id": "NCollection_Iterator::iterator_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator_type (std::conditional<value-parameter-0-1, type-parameter-0-0::const_iterator, type-parameter-0-0::iterator>::type) of NCollection_Iterator. Rust CollectionCursor spells the wrapped iterator type parameter directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::owner_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef owner_type (std::conditional<value-parameter-0-1, const type-parameter-0-0, type-parameter-0-0>::type) of NCollection_Iterator. Rust CollectionCursor spells the borrowed owner type directly; there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_DataMap::DataMapNode(const TheKeyType&,const TheItemType&,NCollection_ListNode*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
@@ -78342,6 +79214,86 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_BaseMap::BasicIterator<NCollection_DataMap<TheKeyType, TheItemType, Hasher>, class NCollection_DataMap::DataMapNode, type-parameter-0-0, type-parameter-0-1, false, true, false>) of NCollection_DataMap. Rust DataMap spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_DataMap. Rust DataMap spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-1 &) of NCollection_DataMap. Rust DataMap spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_DataMap. Rust DataMap spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-1 *) of NCollection_DataMap. Rust DataMap spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::key_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef key_type (type-parameter-0-0) of NCollection_DataMap. Rust DataMap spells the key type parameter K directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-1 &) of NCollection_DataMap. Rust DataMap spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-1 *) of NCollection_DataMap. Rust DataMap spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-1) of NCollection_DataMap. Rust DataMap spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseMap::BasicIterator<NCollection_DataMap<TheKeyType, TheItemType, Hasher>, class NCollection_DataMap::DataMapNode, type-parameter-0-0, type-parameter-0-1, false, false, false>) of NCollection_DataMap. Rust DataMap spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_DefaultHasher::operator()(const TheKeyType&) const",
@@ -79096,6 +80048,94 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
+      "upstream_id": "NCollection_DoubleMap::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (const type-parameter-0-1 *) of NCollection_DoubleMap. Rust DoubleMap spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-1 *) of NCollection_DoubleMap. Rust DoubleMap spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-1) of NCollection_DoubleMap. Rust DoubleMap spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (const type-parameter-0-1 &) of NCollection_DoubleMap. Rust DoubleMap spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::key2_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef key2_type (type-parameter-0-1) of NCollection_DoubleMap. Rust DoubleMap spells the second key type parameter directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_DoubleMap. Rust DoubleMap spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseMap::BasicIterator<NCollection_DoubleMap<TheKey1Type, TheKey2Type, Hasher1, Hasher2>, class NCollection_DoubleMap::DoubleMapNode, type-parameter-0-1, type-parameter-0-1, true, true, false>) of NCollection_DoubleMap. Rust DoubleMap spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_BaseMap::BasicIterator<NCollection_DoubleMap<TheKey1Type, TheKey2Type, Hasher1, Hasher2>, class NCollection_DoubleMap::DoubleMapNode, type-parameter-0-1, type-parameter-0-1, true, true, false>) of NCollection_DoubleMap. Rust DoubleMap spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-1 &) of NCollection_DoubleMap. Rust DoubleMap spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_DoubleMap. Rust DoubleMap spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::key1_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef key1_type (type-parameter-0-0) of NCollection_DoubleMap. Rust DoubleMap spells the first key type parameter directly; there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_IndexedDataMap::Iterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
@@ -79816,6 +80856,94 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
+      "upstream_id": "NCollection_IndexedDataMap::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_BaseMap::IndexedIterator<NCollection_IndexedDataMap<TheKeyType, TheItemType, Hasher>, type-parameter-0-1, true>) of NCollection_IndexedDataMap. Rust IndexedDataMap spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_IndexedDataMap. Rust IndexedDataMap spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseMap::IndexedIterator<NCollection_IndexedDataMap<TheKeyType, TheItemType, Hasher>, type-parameter-0-1, false>) of NCollection_IndexedDataMap. Rust IndexedDataMap spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-1 &) of NCollection_IndexedDataMap. Rust IndexedDataMap spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-1 *) of NCollection_IndexedDataMap. Rust IndexedDataMap spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::hasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef hasher (type-parameter-0-2) of NCollection_IndexedDataMap. Rust IndexedDataMap spells the hasher type parameter H directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::key_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef key_type (type-parameter-0-0) of NCollection_IndexedDataMap. Rust IndexedDataMap spells the key type parameter K directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-1 *) of NCollection_IndexedDataMap. Rust IndexedDataMap spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-1 &) of NCollection_IndexedDataMap. Rust IndexedDataMap spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-1) of NCollection_IndexedDataMap. Rust IndexedDataMap spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_IndexedDataMap. Rust IndexedDataMap spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_IndexedMap::Iterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
@@ -80262,6 +81390,86 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_IndexedMap. Rust IndexedMap spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_BaseMap::IndexedIterator<NCollection_IndexedMap<TheKeyType, Hasher>, type-parameter-0-0, true>) of NCollection_IndexedMap. Rust IndexedMap spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_IndexedMap. Rust IndexedMap spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_IndexedMap. Rust IndexedMap spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::key_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef key_type (type-parameter-0-0) of NCollection_IndexedMap. Rust IndexedMap spells the key type parameter K directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseMap::IndexedIterator<NCollection_IndexedMap<TheKeyType, Hasher>, type-parameter-0-0, true>) of NCollection_IndexedMap. Rust IndexedMap spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_IndexedMap. Rust IndexedMap spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (const type-parameter-0-0 *) of NCollection_IndexedMap. Rust IndexedMap spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_IndexedMap. Rust IndexedMap spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (const type-parameter-0-0 &) of NCollection_IndexedMap. Rust IndexedMap spells &mut T borrows in its accessors; there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_Map::MapNode(const TheKeyType&,NCollection_ListNode*)",
@@ -80758,6 +81966,94 @@
       "status": "implemented",
       "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::Differ with *this as the first map. Exact template selector audit: porting/audits/ncollection-map-set-operations.json. Rust exposes free functions and in-place forms; alias input translation requires the appropriate in-place operation rather than simultaneous mutable/shared Rust borrows. No new implementation or test declaration.",
       "source_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
+    },
+    {
+      "upstream_id": "NCollection_Map::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_Map. Rust Map spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Map::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseMap::BasicIterator<NCollection_Map<TheKeyType, Hasher>, class NCollection_Map::MapNode, type-parameter-0-0, type-parameter-0-0, true, false, false>) of NCollection_Map. Rust Map spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Map::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (const type-parameter-0-0 &) of NCollection_Map. Rust Map spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Map::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_Map. Rust Map spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Map::hasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef hasher (type-parameter-0-1) of NCollection_Map. Rust Map spells the hasher type parameter H directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Map::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_BaseMap::BasicIterator<NCollection_Map<TheKeyType, Hasher>, class NCollection_Map::MapNode, type-parameter-0-0, type-parameter-0-0, true, true, false>) of NCollection_Map. Rust Map spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Map::key_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef key_type (type-parameter-0-0) of NCollection_Map. Rust Map spells the key type parameter K directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Map::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_Map. Rust Map spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Map::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_Map. Rust Map spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Map::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (const type-parameter-0-0 *) of NCollection_Map. Rust Map spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Map::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_Map. Rust Map spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_MapAlgo::Union(MapType&,const MapType&,const MapType&)",
@@ -81771,17 +83067,17 @@
       "upstream_id": "NCollection_Allocator::address(NCollection_Allocator::reference) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as AllocatorTypes>::address_mut",
+      "rust_item": "rustycad_tkernel::ncollection::AllocatorTypes::address_mut",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+      "notes": "STL address() of a mutable element reference; provided AllocatorTypes::address_mut method shared by StandardAllocator and OccAllocator, returning the element pointer."
     },
     {
       "upstream_id": "NCollection_Allocator::address(const_reference) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as AllocatorTypes>::address",
+      "rust_item": "rustycad_tkernel::ncollection::AllocatorTypes::address",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+      "notes": "STL address() of a const element reference; provided AllocatorTypes::address method shared by StandardAllocator and OccAllocator, returning the element pointer."
     },
     {
       "upstream_id": "NCollection_Allocator::allocate(size_type,const void*) const",
@@ -81811,57 +83107,137 @@
       "upstream_id": "NCollection_Allocator::construct(_Objty*,_Types&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as AllocatorTypes>::construct",
+      "rust_item": "rustycad_tkernel::ncollection::AllocatorTypes::construct",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+      "notes": "Placement-new construct; provided unsafe AllocatorTypes::construct writes the value without dropping the previous slot content (construct_with forwards constructor arguments as a closure)."
     },
     {
       "upstream_id": "NCollection_Allocator::destroy(pointer)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as AllocatorTypes>::destroy",
+      "rust_item": "rustycad_tkernel::ncollection::AllocatorTypes::destroy",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+      "notes": "Calls the element destructor in place; provided unsafe AllocatorTypes::destroy (drop_in_place)."
     },
     {
       "upstream_id": "NCollection_Allocator::operator==(const NCollection_Allocator<ItemType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<core::cmp::PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::occ_allocator::element::StandardAllocator<U>>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+      "notes": "Stateless standard allocators are interchangeable: native operator== is constexpr true for every element-type pair; the single generic PartialEq<StandardAllocator<U>> impl returns true."
     },
     {
       "upstream_id": "NCollection_Allocator::operator==(const NCollection_Allocator<U>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<core::cmp::PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::occ_allocator::element::StandardAllocator<U>>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+      "notes": "Stateless standard allocators are interchangeable: native operator== is constexpr true for every element-type pair; the single generic PartialEq<StandardAllocator<U>> impl returns true."
     },
     {
       "upstream_id": "NCollection_Allocator::operator!=(const NCollection_Allocator<ItemType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::occ_allocator::element::StandardAllocator<U>>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+      "notes": "Stateless standard allocators are interchangeable: native operator== is constexpr true for every element-type pair; the single generic PartialEq<StandardAllocator<U>> impl returns true; operator!= is PartialEq::ne, the provided negation of that eq."
     },
     {
       "upstream_id": "NCollection_Allocator::operator!=(const NCollection_Allocator<U>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::occ_allocator::element::StandardAllocator<U>>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+      "notes": "Stateless standard allocators are interchangeable: native operator== is constexpr true for every element-type pair; the single generic PartialEq<StandardAllocator<U>> impl returns true; operator!= is PartialEq::ne, the provided negation of that eq."
     },
     {
-      "upstream_id": "NCollection_Allocator::operator==(const NCollection_Allocator<U>&,const NCollection_Allocator<V>&)",
+      "upstream_id": "operator==(const NCollection_Allocator<U>&,const NCollection_Allocator<V>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<core::cmp::PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::occ_allocator::element::StandardAllocator<U>>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. The namespace-scope template shares PartialEq<StandardAllocator<U>>."
+      "notes": "Stateless standard allocators are interchangeable: native operator== is constexpr true for every element-type pair; the single generic PartialEq<StandardAllocator<U>> impl returns true (free function form; Rust has one symmetric trait impl)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::Value",
+      "status": "implemented",
+      "notes": "STL allocator member typedef value_type is the AllocatorTypes::Value associated type of StandardAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::Pointer",
+      "status": "implemented",
+      "notes": "STL allocator member typedef pointer is the AllocatorTypes::Pointer associated type of StandardAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::ConstPointer",
+      "status": "implemented",
+      "notes": "STL allocator member typedef const_pointer is the AllocatorTypes::ConstPointer associated type of StandardAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::Size",
+      "status": "implemented",
+      "notes": "STL allocator member typedef size_type is the AllocatorTypes::Size associated type of StandardAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::Difference",
+      "status": "implemented",
+      "notes": "STL allocator member typedef difference_type is the AllocatorTypes::Difference associated type of StandardAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::Reference",
+      "status": "implemented",
+      "notes": "STL allocator member typedef reference is the AllocatorTypes::Reference associated type of StandardAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::ConstReference",
+      "status": "implemented",
+      "notes": "STL allocator member typedef const_reference is the AllocatorTypes::ConstReference associated type of StandardAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::rebind",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ allocator-traits rebind<U> struct (a type-level function); Rust names StandardAllocator<U> directly and converts values with StandardAllocator::rebind::<U>()."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::rebind::other",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "rebind<U>::other typedef of the C++ allocator-traits protocol; Rust spells StandardAllocator<U> directly (StandardAllocator::rebind::<U>() builds the value)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator",
+      "status": "implemented",
+      "notes": "Class template NCollection_Allocator<T> is the generic struct StandardAllocator<T>; members are mapped individually."
     },
     {
       "upstream_id": "NCollection_OccAllocator()",
@@ -81907,9 +83283,9 @@
       "upstream_id": "NCollection_OccAllocator::operator=(const NCollection_OccAllocator<ItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as Clone>::clone_from",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+      "notes": "Same-type copy assignment copies the allocator handle; the generic OccAllocator::assign<U> covers U = T."
     },
     {
       "upstream_id": "NCollection_OccAllocator::operator=(NCollection_OccAllocator<ItemType>&&)",
@@ -81979,33 +83355,33 @@
       "upstream_id": "NCollection_OccAllocator::construct(_Objty*,_Types&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as AllocatorTypes>::construct",
+      "rust_item": "rustycad_tkernel::ncollection::AllocatorTypes::construct",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+      "notes": "Placement-new construct; provided unsafe AllocatorTypes::construct writes the value without dropping the previous slot content (construct_with forwards constructor arguments as a closure)."
     },
     {
       "upstream_id": "NCollection_OccAllocator::address(NCollection_OccAllocator::reference) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as AllocatorTypes>::address_mut",
+      "rust_item": "rustycad_tkernel::ncollection::AllocatorTypes::address_mut",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+      "notes": "STL address() of a mutable element reference; provided AllocatorTypes::address_mut method shared by StandardAllocator and OccAllocator, returning the element pointer."
     },
     {
       "upstream_id": "NCollection_OccAllocator::address(const_reference) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as AllocatorTypes>::address",
+      "rust_item": "rustycad_tkernel::ncollection::AllocatorTypes::address",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+      "notes": "STL address() of a const element reference; provided AllocatorTypes::address method shared by StandardAllocator and OccAllocator, returning the element pointer."
     },
     {
       "upstream_id": "NCollection_OccAllocator::destroy(_Uty*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as AllocatorTypes>::destroy",
+      "rust_item": "rustycad_tkernel::ncollection::AllocatorTypes::destroy",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+      "notes": "Calls the element destructor in place; provided unsafe AllocatorTypes::destroy (drop_in_place) for any pointee type."
     },
     {
       "upstream_id": "NCollection_OccAllocator::max_size() const noexcept",
@@ -82019,41 +83395,129 @@
       "upstream_id": "NCollection_OccAllocator::operator==(const NCollection_OccAllocator<ItemType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<core::cmp::PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::occ_allocator::OccAllocator<U>>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+      "notes": "Native operator== compares the two allocator handles (theOther.Allocator() == myAllocator); the generic PartialEq<OccAllocator<U>> impl compares the Option<BaseAllocator> handles by identity."
     },
     {
       "upstream_id": "NCollection_OccAllocator::operator==(const NCollection_OccAllocator<U>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<core::cmp::PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::occ_allocator::OccAllocator<U>>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+      "notes": "Native operator== compares the two allocator handles (theOther.Allocator() == myAllocator); the generic PartialEq<OccAllocator<U>> impl compares the Option<BaseAllocator> handles by identity."
     },
     {
       "upstream_id": "NCollection_OccAllocator::operator!=(const NCollection_OccAllocator<ItemType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::occ_allocator::OccAllocator<U>>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+      "notes": "Native operator== compares the two allocator handles (theOther.Allocator() == myAllocator); the generic PartialEq<OccAllocator<U>> impl compares the Option<BaseAllocator> handles by identity; operator!= is PartialEq::ne, the provided negation of that eq."
     },
     {
       "upstream_id": "NCollection_OccAllocator::operator!=(const NCollection_OccAllocator<U>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::occ_allocator::OccAllocator<U>>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+      "notes": "Native operator== compares the two allocator handles (theOther.Allocator() == myAllocator); the generic PartialEq<OccAllocator<U>> impl compares the Option<BaseAllocator> handles by identity; operator!= is PartialEq::ne, the provided negation of that eq."
     },
     {
-      "upstream_id": "NCollection_OccAllocator::operator==(const NCollection_OccAllocator<U>&,const NCollection_OccAllocator<V>&)",
+      "upstream_id": "operator==(const NCollection_OccAllocator<U>&,const NCollection_OccAllocator<V>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<core::cmp::PartialEq>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::occ_allocator::OccAllocator<U>>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. The namespace-scope template shares PartialEq<OccAllocator<U>>; natively a mixed-type a == b is ambiguous between it and the member template, so the probe names the member explicitly."
+      "notes": "Native operator== compares the two allocator handles (theOther.Allocator() == myAllocator); the generic PartialEq<OccAllocator<U>> impl compares the Option<BaseAllocator> handles by identity (free function form; Rust has one symmetric trait impl)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::Value",
+      "status": "implemented",
+      "notes": "STL allocator member typedef value_type is the AllocatorTypes::Value associated type of OccAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::Pointer",
+      "status": "implemented",
+      "notes": "STL allocator member typedef pointer is the AllocatorTypes::Pointer associated type of OccAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::ConstPointer",
+      "status": "implemented",
+      "notes": "STL allocator member typedef const_pointer is the AllocatorTypes::ConstPointer associated type of OccAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::Size",
+      "status": "implemented",
+      "notes": "STL allocator member typedef size_type is the AllocatorTypes::Size associated type of OccAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::Difference",
+      "status": "implemented",
+      "notes": "STL allocator member typedef difference_type is the AllocatorTypes::Difference associated type of OccAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::Reference",
+      "status": "implemented",
+      "notes": "STL allocator member typedef reference is the AllocatorTypes::Reference associated type of OccAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<rustycad_tkernel::ncollection::AllocatorTypes>::ConstReference",
+      "status": "implemented",
+      "notes": "STL allocator member typedef const_reference is the AllocatorTypes::ConstReference associated type of OccAllocator<T> (same element, pointer, size and reference spellings: T, *mut T, *const T, usize, isize, &mut T, &T)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::rebind",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ allocator-traits rebind<U> struct (a type-level function); Rust names OccAllocator<U> directly and converts values with OccAllocator::rebind::<U>()."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::rebind::other",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "rebind<U>::other typedef of the C++ allocator-traits protocol; Rust spells OccAllocator<U> directly (OccAllocator::rebind::<U>() builds the value)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator",
+      "status": "implemented",
+      "notes": "Class template NCollection_OccAllocator<T> is the generic struct OccAllocator<T>; members are mapped individually."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::propagate_on_container_move_assignment",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::PROPAGATE_ON_CONTAINER_MOVE_ASSIGNMENT",
+      "status": "implemented",
+      "notes": "std::false_type trait typedef becomes the associated constant PROPAGATE_ON_CONTAINER_MOVE_ASSIGNMENT = false."
     },
     {
       "upstream_id": "NCollection_Buffer::NCollection_Buffer(const occ::handle<NCollection_BaseAllocator>&,size_t,uint8_t*)",
@@ -82200,6 +83664,78 @@
       "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released. impl_transient! provides the NCollection_Buffer descriptor."
     },
     {
+      "upstream_id": "NCollection_Buffer::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (unsigned char *) of NCollection_Buffer. Rust Buffer spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (unsigned char *) of NCollection_Buffer. Rust Buffer spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (unsigned char) of NCollection_Buffer. Rust Buffer spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const unsigned char &) of NCollection_Buffer. Rust Buffer spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (unsigned char &) of NCollection_Buffer. Rust Buffer spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_Buffer. Rust Buffer spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const unsigned char *) of NCollection_Buffer. Rust Buffer spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (const unsigned char *) of NCollection_Buffer. Rust Buffer spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_Buffer. Rust Buffer spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_Handle()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
@@ -82270,6 +83806,14 @@
       "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::down_cast",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_Handle<T> is ObjectHandle<T>, a standard Handle to a private transient adaptor owning the object (the native Ptr class, whose dynamic type is Standard_Transient). Shared ownership grants only shared borrows in Rust, so the non-const accessors map to the same get and mutation goes through T's interior mutability; accessors return None for a null handle where upstream dereferences null. The inherited handle<Standard_Transient> base is ObjectHandle::transient."
+    },
+    {
+      "upstream_id": "NCollection_Handle::element_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef element_type (type-parameter-0-0) of NCollection_Handle. Rust ObjectHandle spells the element type parameter T directly; there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_Shared()",
@@ -237593,6 +239137,86 @@
       "notes": "Unsafe publication requires exact initialized [0,new_used) prefix with unique ownership and no conflicting aliases. Removed slots lose automatic Drop ownership and caller must destroy or validly republish them; dead slots must be reconstructed. Validation checks physical capacity before mutation. Scoped source/native evidence: porting/audits/dynamic-array-raw-lifetime.json."
     },
     {
+      "upstream_id": "NCollection_DynamicArray::allocator_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef allocator_type (NCollection_OccAllocator<type-parameter-0-0>) of NCollection_DynamicArray. Rust DynamicArray spells its allocator handle type directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_DynamicArray. Rust DynamicArray spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-0 &) of NCollection_DynamicArray. Rust DynamicArray spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_DynamicArray. Rust DynamicArray spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_DynamicArray. Rust DynamicArray spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_DynamicArray::BasicIterator<false>) of NCollection_DynamicArray. Rust DynamicArray spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_DynamicArray. Rust DynamicArray spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_DynamicArray::BasicIterator<true>) of NCollection_DynamicArray. Rust DynamicArray spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_DynamicArray. Rust DynamicArray spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_DynamicArray. Rust DynamicArray spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
       "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
       "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::more",
       "rust_items": [
@@ -238191,6 +239815,46 @@
       "status": "partial",
       "toolkit": "TKernel",
       "upstream_id": "NCollection_BaseList::pRemoveFirst(NCollection_DelListNode)"
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (std::conditional<value-parameter-0-2, const type-parameter-0-1 *, type-parameter-0-1 *>::type) of NCollection_BaseList::BasicIterator. Rust BaseListBasicIterator spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::iterator_category",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator_category (struct std::forward_iterator_tag) of NCollection_BaseList::BasicIterator. Rust BaseListBasicIterator spells the std::iter::Iterator traits it implements (categories are not types in Rust); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-1) of NCollection_BaseList::BasicIterator. Rust BaseListBasicIterator spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (std::conditional<value-parameter-0-2, const type-parameter-0-1 &, type-parameter-0-1 &>::type) of NCollection_BaseList::BasicIterator. Rust BaseListBasicIterator spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_BaseList::BasicIterator. Rust BaseListBasicIterator spells isize where a signed distance is needed; there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_BaseSequence::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(const NCollection_BaseSequence::Iterator &) noexcept",
@@ -238923,6 +240587,54 @@
       "rust_kind": "function",
       "status": "partial",
       "notes": "Exact BaseSequence base/generic cursor body on valid raw-node and caller borrow domains; metadata, callback, and generic fixtures support scoped behavior. Native virtual destructor, object allocation macros, iterator aliases, ABI/noexcept/configuration closure remain open. See porting/audits/base-sequence-api-reconciliation.json."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (std::conditional<value-parameter-0-2, const type-parameter-0-1 &, type-parameter-0-1 &>::type) of NCollection_BaseSequence::BasicIterator. Rust BaseSequenceBasicIterator spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::node_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef node_pointer (std::conditional<value-parameter-0-2, const NCollection_SeqNode *, NCollection_SeqNode *>::type) of NCollection_BaseSequence::BasicIterator. Rust BaseSequenceBasicIterator spells its private node references; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::iterator_category",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator_category (struct std::bidirectional_iterator_tag) of NCollection_BaseSequence::BasicIterator. Rust BaseSequenceBasicIterator spells the std::iter::Iterator traits it implements (categories are not types in Rust); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_BaseSequence::BasicIterator. Rust BaseSequenceBasicIterator spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-1) of NCollection_BaseSequence::BasicIterator. Rust BaseSequenceBasicIterator spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (std::conditional<value-parameter-0-2, const type-parameter-0-1 *, type-parameter-0-1 *>::type) of NCollection_BaseSequence::BasicIterator. Rust BaseSequenceBasicIterator spells &mut T / *mut T in its accessors; there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(const size_t,const occ::handle<NCollection_BaseAllocator> &)",
@@ -242058,6 +243770,54 @@
       "upstream_id": "NCollection_SparseArrayBase::Iterator::value() const noexcept"
     },
     {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-1) of NCollection_SparseArrayBase::BasicIterator. Rust SparseArrayBase spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::iterator_category",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator_category (struct std::forward_iterator_tag) of NCollection_SparseArrayBase::BasicIterator. Rust SparseArrayBase spells the std::iter::Iterator traits it implements (categories are not types in Rust); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::container_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef container_pointer (std::conditional<value-parameter-0-2, const type-parameter-0-0 *, type-parameter-0-0 *>::type) of NCollection_SparseArrayBase::BasicIterator. Rust SparseArrayBase spells the borrowed container reference; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (std::conditional<value-parameter-0-2, const type-parameter-0-1 &, type-parameter-0-1 &>::type) of NCollection_SparseArrayBase::BasicIterator. Rust SparseArrayBase spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_SparseArrayBase::BasicIterator. Rust SparseArrayBase spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (std::conditional<value-parameter-0-2, const type-parameter-0-1 *, type-parameter-0-1 *>::type) of NCollection_SparseArrayBase::BasicIterator. Rust SparseArrayBase spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
       "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
       "rust_declaration_selectors": [
         {
@@ -245008,6 +246768,110 @@
       "notes": "Defined-domain adapter: explicit live owner arguments validate pointer identity only along evaluated More paths. Equality/inequality preserve native short-circuit Size hooks and all-exhausted equality; ordering does not call Size and ignores owners. Native ptrdiff_t conversion/subtraction is credited only where represented and non-overflowing; Rust wrapping behavior outside that domain, native noexcept termination, invalid raw owners and arbitrary C++ layouts are not claimed. See porting/audits/base-map-indexed-comparisons.json."
     },
     {
+      "upstream_id": "NCollection_BaseMap::BasicIterator::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (std::conditional<value-parameter-0-4 || value-parameter-0-5, const type-parameter-0-3 *, type-parameter-0-3 *>::type) of NCollection_BaseMap::BasicIterator. Rust BaseMapBasicIterator spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::iterator_category",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator_category (struct std::random_access_iterator_tag) of NCollection_BaseMap::IndexedIterator. Rust BaseMapIndexedIterator spells the std::iter::Iterator traits it implements (categories are not types in Rust); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BasicIterator::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (std::conditional<value-parameter-0-4 || value-parameter-0-5, const type-parameter-0-3 &, type-parameter-0-3 &>::type) of NCollection_BaseMap::BasicIterator. Rust BaseMapBasicIterator spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (decltype(std::declval<std::conditional<value-parameter-0-2, const type-parameter-0-0, type-parameter-0-0>::type &>()(std::declval<unsigned long>()))) of NCollection_BaseMap::IndexedIterator. Rust BaseMapIndexedIterator spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BasicIterator::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-3) of NCollection_BaseMap::BasicIterator. Rust BaseMapBasicIterator spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::container_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef container_type (std::conditional<value-parameter-0-2, const type-parameter-0-0, type-parameter-0-0>::type) of NCollection_BaseMap::IndexedIterator. Rust BaseMapIndexedIterator spells the borrowed container type in its lifetime-bound fields; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BasicIterator::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_BaseMap::BasicIterator. Rust BaseMapBasicIterator spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_BaseMap::IndexedIterator. Rust BaseMapIndexedIterator spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BasicIterator::node_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef node_pointer (std::conditional<value-parameter-0-5, const type-parameter-0-1 *, type-parameter-0-1 *>::type) of NCollection_BaseMap::BasicIterator. Rust BaseMapBasicIterator spells its private node references; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-1) of NCollection_BaseMap::IndexedIterator. Rust BaseMapIndexedIterator spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BasicIterator::iterator_category",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator_category (struct std::forward_iterator_tag) of NCollection_BaseMap::BasicIterator. Rust BaseMapBasicIterator spells the std::iter::Iterator traits it implements (categories are not types in Rust); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BasicIterator::container_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef container_type (std::conditional<value-parameter-0-5, const type-parameter-0-0, type-parameter-0-0>::type) of NCollection_BaseMap::BasicIterator. Rust BaseMapBasicIterator spells the borrowed container type in its lifetime-bound fields; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (std::add_pointer<std::remove_reference<decltype(std::declval<std::conditional<value-parameter-0-2, const type-parameter-0-0, type-parameter-0-0>::type &>()(std::declval<unsigned long>()))>::type>::type) of NCollection_BaseMap::IndexedIterator. Rust BaseMapIndexedIterator spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
       "upstream_id": "NCollection_HArray1::NCollection_HArray1<TheItemType>(const int,const int,const TheItemType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
@@ -245986,6 +247850,14 @@
       "upstream_id": "NCollection_HArray1::NCollection_HArray1<TheItemType>(const NCollection_HArray1::Array1Type &)"
     },
     {
+      "upstream_id": "NCollection_HArray1::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_HArray1. Rust HArray1 spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
       "notes": "Exact partial const-Array2 constructor domain. Explicit from_array_trivial selects the native trivially-copyable policy through existing Array2::assign_trivial and bypasses Clone hooks, preserving rectangle metadata independently of inherited flat bounds/length, empty-source metadata and ownership-independent copied values. The unchanged ordinary from_array path remains a Clone policy and is not automatically equivalent to arbitrary C++ trivial/nontrivial copy construction. Tests prove ordinary Clone still dispatches and explicit trivial copy bypasses it. Allocation/default-copy failure, custom C++ lifetime/address effects, zero-sized Rust types, locking and Send+Sync+static restrictions remain outside full parity. See porting/audits/harray2-trivial-copy.json.",
       "rust_declaration_selectors": [
         {
@@ -246152,6 +248024,14 @@
       "status": "partial",
       "toolkit": "TKernel",
       "upstream_id": "NCollection_HArray2::NCollection_HArray2<TheItemType>(const NCollection_HArray2::Array2Type &)"
+    },
+    {
+      "upstream_id": "NCollection_HArray2::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_HArray2. Rust HArray2 spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_Sequence::NCollection_Sequence<TheItemType>(const NCollection_Sequence<TheItemType> &)",
@@ -246368,6 +248248,14 @@
       ],
       "status": "partial",
       "notes": "Exact partial native copy-constructor domain. Ordinary Sequence::clone and HSequence::from_sequence now share a class-local incomplete-copy guard: completed node payloads survive a constructor panic, failed-current allocation is freed, owner allocator handles/leases are relinquished, and failed local topology is cleared before normal cleanup. This matches observable native failure prefix lifetime and restored allocator-handle baseline, rather than dropping copied values during unwinding. Explicit callback supports non-Clone and borrowed payloads through the same node engine. Absolute per-node allocator handle counts, allocation byte layouts/failure ABIs, zero-sized payload details and native RTTI/alias/reentrant access remain outside full parity. Raw abandoned pointers are not exposed by the new safe constructor; test-only recovery retains original provenance. See porting/audits/hsequence-copy-construction.json."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_HSequence. Rust HSequence spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
     },
     {
       "upstream_id": "NCollection_Sequence::Assign(const NCollection_Sequence<TheItemType> &)",
@@ -246943,6 +248831,78 @@
       ],
       "status": "partial",
       "notes": "Exact partial Sequence splice domain. Empty donor returns before unsigned index validation; signed overload rejects negative indices before delegating. Distinct allocators preserve OCCT unsigned SIZE_MAX+1 wrap into prependSeq(...,0), publishing each copied node before the next constructor and clearing donor only after success. On copy failure the destination owns its committed prefix and donor remains intact apart from observable const-copy hook reads; current failed node allocation releases. Same allocator SIZE_MAX raises before copy. Self alias uses insert_self_after. Other nonempty out-of-range indices under distinct allocators reach invalid native pointers, so Rust keeps a checked extension and no parity is claimed for native undefined behavior. Generic Clone represents only the tested native copy-constructor policy; no arbitrary C++ hooks, allocator bytes, exception ABI, allocation failure or full-class parity. See porting/audits/sequence-splice-max.json."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseSequence::BasicIterator<class NCollection_Sequence::Node, type-parameter-0-0, false>) of NCollection_Sequence. Rust Sequence spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_Sequence. Rust Sequence spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef reference (type-parameter-0-0 &) of NCollection_Sequence. Rust Sequence spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::const_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_reference (const type-parameter-0-0 &) of NCollection_Sequence. Rust Sequence spells &T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_Sequence. Rust Sequence spells isize where a signed distance is needed; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::const_pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_Sequence. Rust Sequence spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::size_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_Sequence. Rust Sequence spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef const_iterator (NCollection_BaseSequence::BasicIterator<class NCollection_Sequence::Node, type-parameter-0-0, true>) of NCollection_Sequence. Rust Sequence spells its iter() iterator type (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_Sequence. Rust Sequence spells &mut T / *mut T in its accessors; there is no named alias to map."
     }
   ],
   "tests": [
