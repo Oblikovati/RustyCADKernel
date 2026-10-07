@@ -11,7 +11,7 @@ use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::standard::Failure;
 
 /// Prints the exception of a failed construction and ends the line.
-fn failed(error: Failure) {
+pub fn failed(error: Failure) {
     print!("{} ", error.exception_type());
     end();
 }
@@ -32,7 +32,7 @@ fn indexed(result: &IndexedMapOfShape, s: &Shape) -> Result<(), Failure> {
 }
 
 /// `bl_list`.
-fn list(result: &IndexedMapOfShape, l: &List<Shape>) -> Result<(), Failure> {
+pub fn list(result: &IndexedMapOfShape, l: &List<Shape>) -> Result<(), Failure> {
     int(l.len() as i32);
     for s in l.iter() {
         indexed(result, s)?;

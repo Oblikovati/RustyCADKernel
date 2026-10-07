@@ -429596,12 +429596,100 @@
       "notes": "Translated from BRepFill.cxx with the native operation order (static helpers MakeWire, CutEdge, TrimEdge included); compared with OCCT by tools/verify_tkbool_numeric.py (bf_face, bf_shell, bf_axe, bf_search_origin, bf_compute_acr, bf_insert_acr requests). The output reference parameters of Axe become the returned (frame, on-spine flag); SearchOrigin rewrites the wire in place."
     },
     {
-      "upstream_id": "BRepFill::SearchOrigin(TopoDS_Wire&,const gp_Pnt&,const gp_Vec&,double)",
+      "upstream_id": "BRepFill_CompatibleWires::BRepFill_CompatibleWires()",
       "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::search_origin",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::new",
       "status": "implemented",
-      "notes": "Translated from BRepFill.cxx with the native operation order (static helpers MakeWire, CutEdge, TrimEdge included); compared with OCCT by tools/verify_tkbool_numeric.py (bf_face, bf_shell, bf_axe, bf_search_origin, bf_compute_acr, bf_insert_acr requests). The output reference parameters of Axe become the returned (frame, on-spine flag); SearchOrigin rewrites the wire in place."
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::BRepFill_CompatibleWires(const NCollection_Sequence<TopoDS_Shape>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::with_sections",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::Init(const NCollection_Sequence<TopoDS_Shape>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::init",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::SetPercent(double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::set_percent",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::Perform(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::GetStatus() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::get_status",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::Shape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::GeneratedShapes(const TopoDS_Edge&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::generated_shapes",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::Generated() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::IsDegeneratedFirstSection() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::is_degenerated_first_section",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
+    },
+    {
+      "upstream_id": "BRepFill_CompatibleWires::IsDegeneratedLastSection() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CompatibleWires.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCompatibleWires::is_degenerated_last_section",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
     },
     {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",

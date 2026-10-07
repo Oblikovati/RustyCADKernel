@@ -15,3 +15,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_brepfill_generator').append_generator_requests(requests)
     # The BRepFill package functions (tkbool_corpus_brepfill_package.py)
     __import__('tkbool_corpus_brepfill_package').append_package_requests(requests)
+    # BRepFill_CompatibleWires (tkbool_corpus_brepfill_compatible.py)
+    __import__('tkbool_corpus_brepfill_compatible').append_compatible_requests(requests)

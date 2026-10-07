@@ -1,9 +1,11 @@
 //! `BRepFill`: sweeps, pipes, thru-sections and fillings of the topological shapes.
+mod compatible_wires;
 mod generator;
 mod package;
 mod thru_section_error_status;
 mod transition_style;
 
+pub use compatible_wires::BRepFillCompatibleWires;
 pub use generator::{BRepFillGenerator, GeneratedFaces};
 pub use package::{axe, compute_acr, insert_acr, ruled_face, ruled_shell, search_origin};
 pub use thru_section_error_status::ThruSectionErrorStatus;
