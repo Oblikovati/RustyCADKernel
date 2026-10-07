@@ -97297,14 +97297,6 @@
       "notes": "IFGraph mapping (docs/xsbase-design.md section 1): the graph contents embed an Interface_GraphContent (dereference target) and implement InterfaceGraphContentEvaluate for the virtual Evaluate; the sub-parts iterators embed IFGraphSubPartsIterator and implement IFGraphSubPartsEvaluate; the graph copies of the constructors are Interface_Graph copies; native exceptions and null dereferences are Failure errors."
     },
     {
-      "upstream_id": "IFGraph_SubPartsIterator::Graph",
-      "toolkit": "TKXSBase",
-      "source": "src/DataExchange/TKXSBase/IFGraph/IFGraph_SubPartsIterator.hxx",
-      "rust_item": "rustycad_tkxsbase::if_graph::IFGraphSubPartsIterator::graph",
-      "status": "implemented",
-      "notes": "IFGraph mapping (docs/xsbase-design.md section 1): the graph contents embed an Interface_GraphContent (dereference target) and implement InterfaceGraphContentEvaluate for the virtual Evaluate; the sub-parts iterators embed IFGraphSubPartsIterator and implement IFGraphSubPartsEvaluate; the graph copies of the constructors are Interface_Graph copies; native exceptions and null dereferences are Failure errors. Private natively; public here."
-    },
-    {
       "upstream_id": "IFGraph_StrongComponants::IFGraph_StrongComponants",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/IFGraph/IFGraph_StrongComponants.hxx",
@@ -98191,6 +98183,262 @@
       "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::check_object",
       "status": "implemented",
       "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgo",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo::Init",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgo::init",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors. Once per process, as natively (a static flag)."
+    },
+    {
+      "upstream_id": "XSAlgo::SetAlgoContainer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgo::set_algo_container",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo::AlgoContainer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgo::algo_container",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_AlgoContainer::XSAlgo_AlgoContainer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainer::new",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_AlgoContainer::PrepareForTransfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainerOps::prepare_for_transfer",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors. Virtual: the trait method with the native body."
+    },
+    {
+      "upstream_id": "XSAlgo_AlgoContainer::ProcessShape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainerOps::process_shape",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors. The scalar arguments are grouped in XSAlgoProcessShapeArgs; the failures of the default ShapeFix are caught and ignored as natively."
+    },
+    {
+      "upstream_id": "XSAlgo_AlgoContainer::CheckPCurve",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainerOps::check_pcurve",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_AlgoContainer::MergeTransferInfo(const occ::handle<Transfer_TransientProcess>&,const occ::handle<Standard_Transient>&,const int) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainerOps::merge_transfer_info",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_AlgoContainer::MergeTransferInfo(const occ::handle<Transfer_FinderProcess>&,const occ::handle<Standard_Transient>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoAlgoContainerOps::merge_transfer_info_finder",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::ParameterMap",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoParameterMap",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::ProcessingData",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoProcessingData",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::ProcessingFlags",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoProcessingFlags",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::XSAlgo_ShapeProcessor(const XSAlgo_ShapeProcessor::ParameterMap&,const DE_ShapeFixParameters&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::new",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::XSAlgo_ShapeProcessor(const DE_ShapeFixParameters&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::from_shape_fix",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::ProcessShape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::process_shape",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::GetContext",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::get_context",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::MergeTransferInfo(const occ::handle<Transfer_TransientProcess>&,const int) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::merge_transfer_info",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::MergeTransferInfo(const occ::handle<Transfer_FinderProcess>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::merge_transfer_info_finder",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::CheckPCurve",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::check_pcurve",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::ReadProcessingData",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::read_processing_data",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors. Native quirk kept: a key equal to the scope (no dot after it) is a Standard_OutOfRange failure of SubString."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::FillParameterMap",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::fill_parameter_map",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors. Native quirk kept: MaxTailAngle and MaxTailWidth are written as fix modes."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::SetShapeFixParameters",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::set_shape_fix_parameters",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::SetParameter(const char*,const DE_ShapeFixParameters::FixMode,const bool,XSAlgo_ShapeProcessor::ParameterMap&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::set_parameter_mode",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::SetParameter(const char*,const double,const bool,ParameterMap&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::set_parameter_real",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::SetParameter(const char*,const TCollection_AsciiString&,const bool,ParameterMap&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::set_parameter",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::PrepareForTransfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::prepare_for_transfer",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors. The process-wide cascade unit is xs_algo_units."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::MergeShapeTransferInfo(const occ::handle<Transfer_TransientProcess>&,const NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,const int,const occ::handle<ShapeExtend_MsgRegistrator>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::merge_shape_transfer_info",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "XSAlgo_ShapeProcessor::MergeShapeTransferInfo(const occ::handle<Transfer_FinderProcess>&,const NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,const occ::handle<ShapeExtend_MsgRegistrator>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSAlgo/XSAlgo_ShapeProcessor.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_algo::XSAlgoShapeProcessor::merge_shape_transfer_info_finder",
+      "status": "implemented",
+      "notes": "XSAlgo mapping (docs/xsbase-design.md section 4): DE_ShapeFixParameters (a TKDE header TKXSBase includes) is DEShapeFixParameters of this crate; ShapeProcess::OperationsFlags is ShapeProcessOperationsFlags; the process-wide container is a RwLock behind a OnceLock; the cascade length unit is the process-wide xs_algo_units (TKernel keeps UnitsMethods per instance); native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfTransientProcess::SetShapeFixParameters(const DE_ShapeFixParameters&,const XSAlgo_ShapeProcessor::ParameterMap&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfTransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::set_shape_fix_parameters_from",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): DE_ShapeFixParameters is DEShapeFixParameters of this crate. Reached through TransferActorOfTransientProcessOps::shape_processing."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::SetShapeFixParameters(const DE_ShapeFixParameters&,const XSAlgo_ShapeProcessor::ParameterMap&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::set_shape_fix_parameters_from",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): DE_ShapeFixParameters is DEShapeFixParameters of this crate. Reached through TransferActorOfFinderProcessOps::shape_processing."
     },
     {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",

@@ -117,6 +117,15 @@ class. `IFSelect_WorkSession` and `XSControl_WorkSession` keep their native item
 `IFSelect_Act`, the `*_Functions` packages) reads commands as text and writes plain text
 to a `std::io::Write`, as the native `std::cout` output.
 
+XSAlgo (the shape processing) needs two items from outside TKXSBase:
+
+- `DE_ShapeFixParameters` is a TKDE header that TKXSBase includes without linking TKDE
+  (TKDE does not depend on TKXSBase). TKDE is not ported, so `xs_algo` defines it as
+  `DEShapeFixParameters`; its parity rows stay with TKDE.
+- The cascade length unit of `UnitsMethods` is a process global natively. The TKernel
+  port keeps it per `UnitsMethods` instance, so `xs_algo_units()` is the process-wide
+  instance of the exchange formats.
+
 ## 5. Native quirks kept
 
 - `MoniTool_AttrList::SameAttributes` copies the attribute map: its documentation says

@@ -28,6 +28,19 @@ impl TransferShapeProcessing {
     pub fn set_shape_fix_parameters(&self, parameters: XSAlgoParameterMap) {
         *self.params.write() = parameters;
     }
+    /// `SetShapeFixParameters(theParameters, theAdditionalParameters = {})`: the shape
+    /// fix parameters (replacing), then the additional ones (not replacing).
+    pub fn set_shape_fix_parameters_from(
+        &self,
+        parameters: &crate::xs_algo::DEShapeFixParameters,
+        additional: &XSAlgoParameterMap,
+    ) {
+        crate::xs_algo::XSAlgoShapeProcessor::set_shape_fix_parameters(
+            parameters,
+            additional,
+            &mut self.params.write(),
+        );
+    }
     /// `GetShapeFixParameters`: a copy of the parameters.
     pub fn shape_fix_parameters(&self) -> XSAlgoParameterMap {
         self.params.read().clone()
