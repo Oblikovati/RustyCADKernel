@@ -60,7 +60,8 @@ fn input(r: &mut Reader<'_>) -> Result<Shape, Failure> {
         1 => Ok(super::fix_face::input(r)?.into_shape()),
         2 => solid(r),
         3 => fix_shape_checks::bezier_face(r),
-        _ => fix_shape_checks::raw_face(r),
+        4 => fix_shape_checks::raw_face(r),
+        _ => fix_shape_checks::sphere_face(r),
     }
 }
 

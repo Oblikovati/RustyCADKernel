@@ -9,16 +9,18 @@ use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Builder, Compound, Edge, Face, Shape, Vertex, Wire};
 use rustycad_tkernel::ncollection::{Array2, Sequence};
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg3d::geom::{GeomBezierSurface, GeomCurve, GeomPlane, GeomSurface};
+use rustycad_tkg3d::geom::{
+    GeomBezierSurface, GeomCircle, GeomCurve, GeomPlane, GeomSphericalSurface, GeomSurface,
+};
 use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tkmath::gp::{Axis3, Point3};
+use rustycad_tkmath::gp::{Axis2, Axis3, Point3};
 use rustycad_tkshhealing::shape_analysis::{
     PinFaceEdgeMap, ShapeAnalysisCheckSmallFace, ShapeAnalysisEdge, ShapeAnalysisFreeBoundData,
     ShapeAnalysisFreeBoundsProperties, SplittingVertexEdges, SplittingVertexParameters,
 };
 use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
 use rustycad_tkshhealing::shape_fix::{FixRoot, ShapeFixSplitTool, ShapeFixWire};
-use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeFace;
+use rustycad_tktopalgo::brep_builder_api::{BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace};
 
 /// Family 3: a face on the Bezier surface of `nu nv (pole)*`.
 pub(super) fn bezier_face(r: &mut Reader<'_>) -> Result<Shape, Failure> {
@@ -54,6 +56,28 @@ pub(super) fn raw_face(r: &mut Reader<'_>) -> Result<Shape, Failure> {
     if count > 0 {
         builder.add(&mut face, &wire.into_shape())?;
     }
+    Ok(face.into_shape())
+}
+
+/// Family 5: a face on the unit sphere whose wire collects `n (center normal r a1 a2)*`
+/// circle arcs without pcurves.
+pub(super) fn sphere_face(r: &mut Reader<'_>) -> Result<Shape, Failure> {
+    let builder = BRepBuilder::default();
+    let mut wire = Wire::default();
+    builder.make_wire(&mut wire);
+    for _ in 0..r.integer() {
+        let (center, normal) = (r.pnt(), r.dir());
+        let (radius, a1, a2) = (r.real(), r.real(), r.real());
+        let circle = GeomCircle::new(Axis2::new(center, normal)?, radius)?;
+        let curve: Handle<dyn GeomCurve> = Handle::new(circle).cast();
+        let edge = BRepBuilderAPIMakeEdge::from_curve_params(&curve, a1, a2)?.edge()?;
+        builder.add(&mut wire, &edge.into_shape())?;
+    }
+    let sphere = GeomSphericalSurface::new(Axis3::default(), 1.0)?;
+    let surface: Handle<dyn GeomSurface> = Handle::new(sphere).cast();
+    let mut face = Face::default();
+    builder.make_face_on_surface(&mut face, &surface, 1e-7)?;
+    builder.add(&mut face, &wire.into_shape())?;
     Ok(face.into_shape())
 }
 

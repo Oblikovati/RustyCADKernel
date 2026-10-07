@@ -104,12 +104,27 @@ def raw_face_inputs() -> list[list[float]]:
             raw_face(square(0, 0, 2.0), 1e-4), raw_face(square(0, 0, 2.0), 0.02), raw_face(tail, 1e-5), arcs, [4, 0]]
 
 
+def sphere_face(arcs: list[tuple]) -> list[float]:
+    return [5, len(arcs)] + [c for a in arcs for c in (*a[0], *a[1], a[2], a[3], a[4])]
+
+
+def sphere_inputs() -> list[list[float]]:
+    """Faces on the unit sphere bounded by circle arcs without pcurves: a meridian over the
+    north pole closed by half the equator, a lune between two meridians through both poles,
+    and a cap below a parallel."""
+    o, y, z = (0.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0)
+    over_pole = [(o, y, 1.0, PI, 2 * PI), (o, z, 1.0, PI, 2 * PI)]
+    lune = [(o, y, 1.0, 0.0, PI), (o, (0.6, 0.8, 0.0), 1.0, PI, 2 * PI)]
+    cap = [((0.0, 0.0, 0.6), z, 0.8, 0.0, 2 * PI)]
+    return [sphere_face(over_pole), sphere_face(lune), sphere_face(cap)]
+
+
 def inputs() -> list[list[float]]:
     unify = polygon_inputs() + revolved_inputs() + wire_inputs() + face_inputs() + [[3, 1.0, 2.0, 3.0]]
     unify += small_edge_inputs() + small_face_inputs()
     faces = planar_inputs() + loop_inputs() + lateral_inputs()
     return ([[0, *s] for s in unify] + [[1, *f] for f in faces] + [[2, *s] for s in solid_inputs()]
-            + bezier_inputs() + raw_face_inputs())
+            + bezier_inputs() + raw_face_inputs() + sphere_inputs())
 
 
 def append_fix_shape_requests(requests: list[str]) -> None:

@@ -4,7 +4,9 @@
 //
 // Extra inputs: family 3 is a face on a Bezier surface (`nu nv (pole)*`, poles row by row
 // in U), family 4 a face on the XY plane bounded by a wire whose edges are only added by
-// BRep_Builder, so it may have gaps (`n (sh_unify edge)*`; no wire at all for n = 0).
+// BRep_Builder, so it may have gaps (`n (sh_unify edge)*`; no wire at all for n = 0), and
+// family 5 a face on the unit sphere whose wire collects circle arcs without pcurves
+// (`n (cx cy cz nx ny nz r a1 a2)*`).
 //  16 ShapeAnalysis_CheckSmallFace (tolerance prec) on each face: CheckSingleStrip,
 //     FindStripEdges, CheckPin, CheckTwisted, CheckSplittingVertices, CheckPinFace with prec
 //     and -1, then CheckStripEdges (prec and -1) and CheckPinEdges on each pair of consecutive
@@ -25,7 +27,9 @@
 //     and from b to a+0.75d: each flag with the outputs.
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <Geom_BezierSurface.hxx>
+#include <Geom_Circle.hxx>
 #include <Geom_Plane.hxx>
+#include <Geom_SphericalSurface.hxx>
 #include <ShapeAnalysis_FreeBoundData.hxx>
 #include <ShapeAnalysis_FreeBoundsProperties.hxx>
 #include <ShapeFix_SplitTool.hxx>
@@ -38,6 +42,11 @@ TopoDS_Shape sfs_raw_face(GaReader& r){
  int n=r.integer();BRep_Builder B;TopoDS_Wire w;B.MakeWire(w);
  for(int k=0;k<n;++k)B.Add(w,su_edge(r));
  TopoDS_Face f;B.MakeFace(f,new Geom_Plane(gp_Pln()),1e-7);if(n>0)B.Add(f,w);return f;}
+TopoDS_Shape sfs_sphere_face(GaReader& r){
+ int n=r.integer();BRep_Builder B;TopoDS_Wire w;B.MakeWire(w);
+ for(int k=0;k<n;++k){gp_Pnt c=r.pnt();gp_Dir d=r.dir();double R=r.real(),a1=r.real(),a2=r.real();
+  occ::handle<Geom_Circle> circ=new Geom_Circle(gp_Ax2(c,d),R);B.Add(w,BRepBuilderAPI_MakeEdge(circ,a1,a2).Edge());}
+ TopoDS_Face f;B.MakeFace(f,new Geom_SphericalSurface(gp_Ax3(),1.0),1e-7);B.Add(f,w);return f;}
 void sfs_status_range(bool (*get)(const ShapeAnalysis_CheckSmallFace&,ShapeExtend_Status),
                       const ShapeAnalysis_CheckSmallFace& a){
  for(ShapeExtend_Status x:sfs_statuses)ga_flag(get(a,x));}

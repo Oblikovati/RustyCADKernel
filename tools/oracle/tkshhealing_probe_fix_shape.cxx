@@ -4,7 +4,7 @@
 // `sh_fix_shape family (input) prec maxtol op`: the input is a `sh_unify` input (family 0),
 // a `sh_fix_face` input (family 1), a primitive solid (family 2: type 0 cylinder R H,
 // 1 cone R1 R2 H, 2 sphere R, 3 torus R1 R2), or a face of tkshhealing_probe_fix_shape_checks.cxx
-// (families 3 and 4). The op, after which the digest of the resulting shape is printed:
+// (families 3 to 5). The op, after which the digest of the resulting shape is printed:
 //  0 ShapeFix_Shape (precision, maximal tolerance) Perform: the flag and
 //    Status(DONE1..DONE8, FAIL1..FAIL3);
 //  1, 2 ShapeFix::SameParameter(shape, enforce = op == 2): the flag;
@@ -96,7 +96,8 @@ TopoDS_Shape sfs_input(GaReader& r){
  if(family==1)return sff_input(r);
  if(family==2)return sfs_solid(r);
  if(family==3)return sfs_bezier_face(r);
- return sfs_raw_face(r);}
+ if(family==4)return sfs_raw_face(r);
+ return sfs_sphere_face(r);}
 void sh_fix_shape_case(std::istream& input){
  GaReader r{input};TopoDS_Shape s;GA_TRY(s=sfs_input(r))
  double prec=r.real(),maxtol=r.real();int op=r.integer();
