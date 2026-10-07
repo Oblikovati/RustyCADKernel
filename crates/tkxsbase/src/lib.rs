@@ -14,6 +14,7 @@
 mod attr_core;
 mod c_text;
 pub mod if_graph;
+pub mod if_select;
 pub mod interface;
 pub mod lib_ctl;
 pub mod moni_tool;
