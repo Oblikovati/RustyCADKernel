@@ -14,3 +14,4 @@
 mod c_text;
 pub mod moni_tool;
 mod ostream_text;
+pub mod xs_message;
