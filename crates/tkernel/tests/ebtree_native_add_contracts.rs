@@ -5,6 +5,8 @@ pub mod allocation_trace;
 pub mod failed_pair_repair;
 #[path = "ebtree_native_add_contracts/fixture.rs"]
 mod fixture;
+#[path = "support/ubtree_observed_key.rs"]
+pub mod observed_key;
 use fixture::*;
 #[path = "ebtree_native_add_contracts/borrowed.rs"]
 mod borrowed;
