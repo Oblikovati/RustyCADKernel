@@ -308972,8 +308972,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_closed",
-      "status": "partial",
-      "notes": "Native ordered connection, degenerated and lacking closing repairs and status accumulation. Thirteen native output rows cover unloaded, coincident, near, far, support-face, repeated call and reload reset. FixClosed inherits incomplete bent-pcurve follow-up repairs of FixLacking; no full parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). FixConnected(1, prec), FixDegenerated(1), FixLacking(1) with DONE1-3/FAIL1-3 accumulation. Compared by op 27 (FixClosed on every face and free wire) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::StatusClosed(ShapeExtend_Status) const",
@@ -310058,8 +310058,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_edge_curves",
-      "status": "partial",
-      "notes": "Native edge-curve repair pass order, configuration and status oracle. FixEdgeCurves inherits remaining primitive and geometry-domain limitations; no whole-class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Fixed: the singularity split projects on a GeomAdaptor_Curve over the edge range (not the Geom-curve overload that extends open curves), removes the face pcurve before splitting and inserts split parameters as the native loop does; an edge removed after FixAddCurve3d records DONE5 before and FAIL5 after a plain FixConnected(i + 1). Compared by op 26, including family-5 sphere faces whose meridian is split at the pole, of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::StatusEdgeCurves(ShapeExtend_Status) const",
@@ -310409,8 +310409,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix.hxx",
       "source_sha256": "2c10826e07b42961808f70aef86dfb88ff88b37c4bf4e072cf561b682041ad11",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFix::same_parameter",
-      "status": "partial",
-      "notes": "Pinned native oracle and focused Rust tests cover this implementation slice. Intersection tool wire aggregates remain unported. SameParameter inherits child geometry algorithm limits; its nine native rows cover traversal, cancellation, flags, tolerances and warning counts. Continuity wrapper has nine native geometry/topology rows. These are additional oracle cases, not new legacy declarations or a whole-class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix.cxx (2026-10-07): edge phase with enforce, per-face FixSameParameter, failure flags and warnings, then the 23-sample planar tolerance pass, both with the native cancellation points. Compared by ops 1/2 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT, besides the tkshhealing_same_parameter fixtures."
     },
     {
       "upstream_id": "ShapeFix_IntersectionTool::ShapeFix_IntersectionTool(const occ::handle<ShapeBuild_ReShape>&,double,double)",
@@ -310723,8 +310723,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
       "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::check_contours",
-      "status": "partial",
-      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_FreeBoundsProperties.cxx (2026-10-07): actual or forecast bounds, ContourProperties with 23 samples per edge, notches at junction angles above 0.95*PI with 23 projections, and the ratio/width formula. Compared by ops 17 (actual bounds) and 18 (forecast with maxtol and both splits), which print every closed and open record, notch and width, of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_FreeBoundsProperties::CheckNotches(const TopoDS_Wire &,const int,TopoDS_Wire &,double &,const double)",
@@ -310732,8 +310732,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
       "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::check_notches_at",
-      "status": "partial",
-      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_FreeBoundsProperties.cxx (2026-10-07): actual or forecast bounds, ContourProperties with 23 samples per edge, notches at junction angles above 0.95*PI with 23 projections, and the ratio/width formula. Compared by ops 17 (actual bounds) and 18 (forecast with maxtol and both splits), which print every closed and open record, notch and width, of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_FreeBoundsProperties::CheckNotches(const double)",
@@ -310741,8 +310741,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
       "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::check_notches",
-      "status": "partial",
-      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_FreeBoundsProperties.cxx (2026-10-07): actual or forecast bounds, ContourProperties with 23 samples per edge, notches at junction angles above 0.95*PI with 23 projections, and the ratio/width formula. Compared by ops 17 (actual bounds) and 18 (forecast with maxtol and both splits), which print every closed and open record, notch and width, of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_FreeBoundsProperties::CheckNotches(occ::handle<ShapeAnalysis_FreeBoundData> &,const double)",
@@ -310750,8 +310750,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
       "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::check_notches_data",
-      "status": "partial",
-      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_FreeBoundsProperties.cxx (2026-10-07): actual or forecast bounds, ContourProperties with 23 samples per edge, notches at junction angles above 0.95*PI with 23 projections, and the ratio/width formula. Compared by ops 17 (actual bounds) and 18 (forecast with maxtol and both splits), which print every closed and open record, notch and width, of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_FreeBoundsProperties::ClosedFreeBound(const int) const",
@@ -310777,8 +310777,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
       "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::dispatch_bounds",
-      "status": "partial",
-      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_FreeBoundsProperties.cxx (2026-10-07): actual or forecast bounds, ContourProperties with 23 samples per edge, notches at junction angles above 0.95*PI with 23 projections, and the ratio/width formula. Compared by ops 17 (actual bounds) and 18 (forecast with maxtol and both splits), which print every closed and open record, notch and width, of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_FreeBoundsProperties::FillProperties(occ::handle<ShapeAnalysis_FreeBoundData> &,const double)",
@@ -310786,8 +310786,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
       "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::fill_properties",
-      "status": "partial",
-      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_FreeBoundsProperties.cxx (2026-10-07): actual or forecast bounds, ContourProperties with 23 samples per edge, notches at junction angles above 0.95*PI with 23 projections, and the ratio/width formula. Compared by ops 17 (actual bounds) and 18 (forecast with maxtol and both splits), which print every closed and open record, notch and width, of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_FreeBoundsProperties::Init(const TopoDS_Shape &,const bool,const bool)",
@@ -310867,8 +310867,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBoundsProperties.hxx",
       "source_sha256": "bf8ec9a4a217e9a0470a2088a220ad0c70f753a65c028c822979e321973e4042",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisFreeBoundsProperties::perform",
-      "status": "partial",
-      "notes": "Ten native free-boundary property rows cover rectangles, circles, open contours, repeated calls, forecast sewing and two/three-edge notches. Child sewing/projection limits and null-handle failure-domain differences remain. Additional differential cases, not new legacy test declarations or a full-class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_FreeBoundsProperties.cxx (2026-10-07): actual or forecast bounds, ContourProperties with 23 samples per edge, notches at junction angles above 0.95*PI with 23 projections, and the ratio/width formula. Compared by ops 17 (actual bounds) and 18 (forecast with maxtol and both splits), which print every closed and open record, notch and width, of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_FreeBoundsProperties::Shape() const",
@@ -311268,8 +311268,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix.hxx",
       "source_sha256": "2c10826e07b42961808f70aef86dfb88ff88b37c4bf4e072cf561b682041ad11",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFix::fix_vertex_position",
-      "status": "partial",
-      "notes": "Fourteen pinned native fixture rows cover vertex grouping, recursive rejection, loop ordering, endpoint splitting and midpoint updates. Null reshape context returns explicit Failure on repair paths where native dereferences null; internal vertices, transformed placements and prepopulated contexts need broader oracle coverage. Additional differential cases, no new legacy mappings."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix.cxx (2026-10-07): vertex-edge map, getNearestEdges with its anchor-point quirk, loop reordering and recursion, suitable and rejected edge updates, midpoint vertex. Compared by op 3 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT, besides the tkshhealing_vertex_position fixtures. A null context on a repair path raises Standard_NullObject (native dereference, D3)."
     },
     {
       "upstream_id": "ShapeFix",
@@ -311383,8 +311383,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FixSmallSolid.hxx",
       "source_sha256": "706e72ee76367eddd223b4893da71ee1d796da1c2cf7afc952ead7e3a75333ff",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallSolid::remove",
-      "status": "partial",
-      "notes": "Eleven native small-solid rows cover thresholds, removal, iterative adjacency, merging and the retained last-direct-child iterator alias. A trailing non-shell child crashes native Merge; Rust reports Failure. Additional differential cases, no new legacy mappings or whole-class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_FixSmallSolid.cxx: thresholds, valid input types, IsSmall by volume and width factor, context removal with warning. Compared by op 7 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. A null context raises a Failure where native dereferences it (D3)."
     },
     {
       "upstream_id": "ShapeFix_FixSmallSolid::Merge(const TopoDS_Shape&,const occ::handle<ShapeBuild_ReShape>&) const",
@@ -311393,7 +311393,7 @@
       "source_sha256": "706e72ee76367eddd223b4893da71ee1d796da1c2cf7afc952ead7e3a75333ff",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFixSmallSolid::merge",
       "status": "partial",
-      "notes": "Eleven native small-solid rows cover thresholds, removal, iterative adjacency, merging and the retained last-direct-child iterator alias. A trailing non-shell child crashes native Merge; Rust reports Failure. Additional differential cases, no new legacy mappings or whole-class parity claim."
+      "notes": "Reviewed against ShapeFix_FixSmallSolid.cxx (2026-10-07), including the retained last-direct-child iterator alias of FindMostSharedShell; compared by op 8 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. Partial only for a native defect: MergeShells adds the free faces from an NCollection_Map and Merge rebuilds the shells from an NCollection_DataMap; iterates an NCollection_Map/DataMap keyed by TopoDS_Shape, whose order follows the TShape allocation addresses, so the native merged-shell face and rebuild order depends on the allocator; Rust iterates in insertion order and matches OCCT whenever the native order equals it (every corpus input). A trailing non-shell child crashes native Merge; Rust reports a Failure (D3)."
     },
     {
       "upstream_id": "ShapeFix_FixSmallSolid",
@@ -311451,8 +311451,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_IntersectionTool.hxx",
       "source_sha256": "719d1cccb35128dd497eac9ea13ff5614301353adc845419faf30e199b378bc3",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::fix_self_intersect_wire",
-      "status": "partial",
-      "notes": "Ten native fixtures cover interior/multiple/reversed crossings, endpoint reuse/union, near-endpoint cuts and long/short/endpoint-aligned overlaps. They exposed and corrected overlap removal order. Broader curved and replacement domains remain to be validated; no complete class parity claim or new legacy declarations."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_IntersectionTool.cxx (2026-10-07). Fixed: SplitEdge only raises the vertex tolerance (it moved the vertex) and refuses a SameParameter edge without 3D curve; a point repair that splits nothing falls through to the segment repair with the edge UnionVertexes replaced and with B2; a retried second edge keeps its index; the segment repair leaves MaxTolVert; UnionVertexes changes only the discarded slot and reads both neighbours first; the three-edge overlap repair uses PV12/PV22, the native test order and last key, and steps by dnum2; CutEdge uses BRep_Tool::Range and ranges only trimmed lines; GetPointOnEdge transforms the unlocated curve point. Compared by ops 21, 22, 28 and the wireframe ops on crossings, exact and near overlaps, touching ends and tails of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::IsStripSupport(const TopoDS_Face &,const double)",
@@ -311487,8 +311487,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitTool.hxx",
       "source_sha256": "7e2f9f47484c80db1baca68a3c686b0368595871c4accbb954c23b634860761d",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitTool::cut_edge",
-      "status": "partial",
-      "notes": "Eighteen native rows cover cuts, forward/reversed splitting, gap removal, sequence ordering, flags, tolerance-only vertex updates and context recording. Corrects trimmed-line rejection and all-representation range edits. Curved, seam, placed-face and non-SameParameter split domains need broader oracle evidence; null input failure domains remain explicit Rust failures. Additional differential cases, no new legacy declarations or complete class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_SplitTool.cxx (2026-10-07). Fixed: the split point is evaluated on the unlocated 3D curve, or through ShapeAnalysis_Surface on the unlocated face surface, then moved by the location (shared with ShapeFix_IntersectionTool::SplitEdge). Compared by op 32 (both SplitEdge forms, the sequence form over inner and end spans with a context, and CutEdge from both ends on every face edge) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. A null context raises Standard_NullObject where native dereferences it (D3)."
     },
     {
       "upstream_id": "ShapeFix_SplitTool::SplitEdge(const TopoDS_Edge &,const double,const double,const TopoDS_Vertex &,const TopoDS_Face &,TopoDS_Edge &,TopoDS_Edge &,const double,const double) const",
@@ -311496,8 +311496,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitTool.hxx",
       "source_sha256": "7e2f9f47484c80db1baca68a3c686b0368595871c4accbb954c23b634860761d",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitTool::split_edge_cut",
-      "status": "partial",
-      "notes": "Eighteen native rows cover cuts, forward/reversed splitting, gap removal, sequence ordering, flags, tolerance-only vertex updates and context recording. Corrects trimmed-line rejection and all-representation range edits. Curved, seam, placed-face and non-SameParameter split domains need broader oracle evidence; null input failure domains remain explicit Rust failures. Additional differential cases, no new legacy declarations or complete class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_SplitTool.cxx (2026-10-07). Fixed: the split point is evaluated on the unlocated 3D curve, or through ShapeAnalysis_Surface on the unlocated face surface, then moved by the location (shared with ShapeFix_IntersectionTool::SplitEdge). Compared by op 32 (both SplitEdge forms, the sequence form over inner and end spans with a context, and CutEdge from both ends on every face edge) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. A null context raises Standard_NullObject where native dereferences it (D3)."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckSpotFace(const TopoDS_Face &,const double)",
@@ -311515,7 +311515,7 @@
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status",
       "status": "partial",
-      "notes": "Native cases cover spot outputs, local/explicit tolerance, status retention and Bezier/B-spline strip support. Native constructor leaves overall status and tolerance indeterminate; Rust exposes None until defined, so those accessors remain partial. Remaining small-face checker methods are not claimed. Additional differential cases, no new legacy declarations or complete class parity claim."
+      "notes": "Partial only for a native defect: the ShapeAnalysis_CheckSmallFace constructor leaves myStatus (no method ever assigns it) uninitialized, so the native result reads indeterminate memory; Rust models the unset state explicitly (Option, None)."
     },
     {
       "upstream_id": "ShapeFix_SplitTool::SplitEdge(const TopoDS_Edge &,const double,const TopoDS_Vertex &,const double,const TopoDS_Vertex &,const TopoDS_Face &,NCollection_Sequence<TopoDS_Shape> &,int &,const occ::handle<ShapeBuild_ReShape> &,const double,const double) const",
@@ -311523,8 +311523,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitTool.hxx",
       "source_sha256": "7e2f9f47484c80db1baca68a3c686b0368595871c4accbb954c23b634860761d",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitTool::split_edge_sequence",
-      "status": "partial",
-      "notes": "Eighteen native rows cover cuts, forward/reversed splitting, gap removal, sequence ordering, flags, tolerance-only vertex updates and context recording. Corrects trimmed-line rejection and all-representation range edits. Curved, seam, placed-face and non-SameParameter split domains need broader oracle evidence; null input failure domains remain explicit Rust failures. Additional differential cases, no new legacy declarations or complete class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_SplitTool.cxx (2026-10-07). Fixed: the split point is evaluated on the unlocated 3D curve, or through ShapeAnalysis_Surface on the unlocated face surface, then moved by the location (shared with ShapeFix_IntersectionTool::SplitEdge). Compared by op 32 (both SplitEdge forms, the sequence form over inner and end spans with a context, and CutEdge from both ends on every face edge) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. A null context raises Standard_NullObject where native dereferences it (D3)."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusSpot(const ShapeExtend_Status) const",
@@ -311542,7 +311542,7 @@
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::tolerance",
       "status": "partial",
-      "notes": "Native cases cover spot outputs, local/explicit tolerance, status retention and Bezier/B-spline strip support. Native constructor leaves overall status and tolerance indeterminate; Rust exposes None until defined, so those accessors remain partial. Remaining small-face checker methods are not claimed. Additional differential cases, no new legacy declarations or complete class parity claim."
+      "notes": "Partial only for a native defect: the ShapeAnalysis_CheckSmallFace constructor leaves myPrecision until SetTolerance uninitialized, so the native result reads indeterminate memory; Rust models the unset state explicitly (Option, None before SetTolerance)."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::IsSpotFace(const TopoDS_Face &,gp_Pnt &,double &,const double) const",
@@ -311568,8 +311568,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_SplitTool.hxx",
       "source_sha256": "7e2f9f47484c80db1baca68a3c686b0368595871c4accbb954c23b634860761d",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSplitTool::split_edge",
-      "status": "partial",
-      "notes": "Eighteen native rows cover cuts, forward/reversed splitting, gap removal, sequence ordering, flags, tolerance-only vertex updates and context recording. Corrects trimmed-line rejection and all-representation range edits. Curved, seam, placed-face and non-SameParameter split domains need broader oracle evidence; null input failure domains remain explicit Rust failures. Additional differential cases, no new legacy declarations or complete class parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_SplitTool.cxx (2026-10-07). Fixed: the split point is evaluated on the unlocated 3D curve, or through ShapeAnalysis_Surface on the unlocated face surface, then moved by the location (shared with ShapeFix_IntersectionTool::SplitEdge). Compared by op 32 (both SplitEdge forms, the sequence form over inner and end spans with a context, and CutEdge from both ends on every face edge) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. A null context raises Standard_NullObject where native dereferences it (D3)."
     },
     {
       "upstream_id": "ShapeFix_SplitTool",
@@ -311764,7 +311764,7 @@
       "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::perform_with_progress",
       "status": "partial",
-      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+      "notes": "Reviewed line by line against ShapeFix_Shell.cxx (2026-10-07): face fixing with progress, FixFaceOrientation, closed-flag check and DONE1/DONE2 result; compared by ops 0 and 9 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. Partial only for a native defect: GetConnectedFaceGroups (through FixFaceOrientation) iterates an NCollection_Map/DataMap keyed by TopoDS_Shape, whose order follows the TShape allocation addresses, so the native face traversal and shell order depends on the allocator; Rust iterates in insertion order and matches OCCT whenever the native order equals it (every corpus input). "
     },
     {
       "upstream_id": "ShapeFix_Shell::FixFaceOrientation(const TopoDS_Shell &,const bool,const bool)",
@@ -311773,7 +311773,7 @@
       "source_sha256": "1a7ce39d3fbfe914da405f2b6fc7b0e9f3cecc93075187c9512f778d8d261e20",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShell::fix_face_orientation",
       "status": "partial",
-      "notes": "Eighteen pinned native rows cover face ordering, duplicates, disconnected and multiply connected shells, nonmanifold grouping, inconsistent orientation, Perform modes, cancellation and retained status. Complex closed-candidate containment and remaining geometric/error domains need broader oracle evidence. Additional differential cases; no new legacy declarations or full behavioral parity claim."
+      "notes": "Reviewed line by line against ShapeFix_Shell.cxx (2026-10-07): duplicates, free/multiconnected edges, closed flag, GetShells loop, multiconnexity faces, Mobius error shells, open-shell gluing, single-face shells, non-manifold merge and the DONE2/FAIL results; compared by ops 0 and 9 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. Partial only for a native defect: GetConnectedFaceGroups starts its traversals in DataMap order over the faces; GlueClosedCandidate and CreateNonManifoldShells iterate address-keyed maps; iterates an NCollection_Map/DataMap keyed by TopoDS_Shape, whose order follows the TShape allocation addresses, so the native face, candidate and shell order depends on the allocator; Rust iterates in insertion order and matches OCCT whenever the native order equals it (every corpus input). "
     },
     {
       "upstream_id": "ShapeFix_Shell::DynamicType() const",
@@ -311849,7 +311849,7 @@
       "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::perform_with_progress",
       "status": "partial",
-      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+      "notes": "Reviewed against ShapeFix_Solid.cxx (2026-10-07); compared by ops 0 and 10 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT, besides the tkshhealing_solid_perform fixtures. Partial only for a native defect: CollectSolids walks aMapShellHoles (a DataMap over shells) while it removes holes of holes; iterates an NCollection_Map/DataMap keyed by TopoDS_Shape, whose order follows the TShape allocation addresses, so the native nested-hole resolution order depends on the allocator; Rust iterates in insertion order and matches OCCT whenever the native order equals it (every corpus input). "
     },
     {
       "upstream_id": "ShapeFix_Solid::SolidFromShell(const TopoDS_Shell &)",
@@ -311857,8 +311857,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Solid.hxx",
       "source_sha256": "ec343880aafba5c49d2798d5ae712d78d51e45b49a58c308471f5019c6418533",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixSolid::solid_from_shell",
-      "status": "partial",
-      "notes": "Twenty-two pinned native rows cover construction, retained status, modes, nested and disconnected shells, open shells, shared-face compsolids, signed volumes and cancellation. Classification and containment on general curved shells, all error/context domains and all cancellation points still require evidence. Additional differential fixtures, not legacy declarations or a full parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Solid.cxx: free shell, infinite-point classification at Precision::Confusion, reversed shell and DONE2 when inside, the built solid returned when the classifier raises. Compared by ops 0 and 10 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT, besides the tkshhealing_solid_from_shell fixtures."
     },
     {
       "upstream_id": "ShapeFix_Solid::Status(const ShapeExtend_Status) const",
@@ -311999,8 +311999,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_strip_edges",
-      "status": "partial",
-      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_CheckSmallFace.cxx (2026-10-07). Fixed: both curves are null-checked before trimming, samples accumulate u += step, and projections use AdjustToEnds = true. Compared by op 16 (each consecutive edge pair at prec and -1) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::FindStripEdges(const TopoDS_Face &,TopoDS_Edge &,TopoDS_Edge &,const double,double &)",
@@ -312008,8 +312008,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::find_strip_edges",
-      "status": "partial",
-      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_CheckSmallFace.cxx (2026-10-07). Fixed: the middle point is taken on the edge range, vertices without cumulated orientation. Compared by op 16 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckSingleStrip(const TopoDS_Face &,TopoDS_Edge &,TopoDS_Edge &,const double)",
@@ -312017,8 +312017,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_single_strip",
-      "status": "partial",
-      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_CheckSmallFace.cxx (2026-10-07). Fixed: the closed-edge box no longer restarts at every point (it was always small), vertices without cumulated orientation, and the second edge is rejected only when it shares one vertex but not the other. Compared by ops 13-16 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckStripFace(const TopoDS_Face &,TopoDS_Edge &,TopoDS_Edge &,const double)",
@@ -312035,8 +312035,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_pin_edges",
-      "status": "partial",
-      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_CheckSmallFace.cxx (2026-10-07). Fixed: the shared vertex is TopExp::LastVertex without cumulated orientation and the projection uses AdjustToEnds = true. Compared by op 16 (each consecutive edge pair with 3D curves, both argument orders) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. A null edge curve, a native null dereference, raises Standard_NullObject (D3)."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckPin(const TopoDS_Face &,int &,int &)",
@@ -312045,7 +312045,7 @@
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_pin",
       "status": "partial",
-      "notes": "Source-ordered strip and pin algorithms with pinned native fixtures covering output mutation, status, sampling, seam/edge selection, elementary surfaces and smooth/sharp Bezier pins. Uninitialized native precision requires explicit Rust tolerance before supported-surface CheckPin; null-support native crash remains outside equivalent behavior. General geometry requires more differential evidence; no new legacy declaration mapping."
+      "notes": "Reviewed line by line against ShapeAnalysis_CheckSmallFace.cxx (2026-10-07). Fixed: once the support has poles row and sense are reset to 0, a last-bound status 0 keeps the pin status, and the precision is read only on that path. Compared by op 16 on Bezier pins (smooth, repeated, collapsed) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. Partial only for a native defect: the ShapeAnalysis_CheckSmallFace constructor leaves myPrecision until SetTolerance, which CheckPin then uses as toler uninitialized, so the native result reads indeterminate memory; Rust models the unset state explicitly (Standard_ConstructionError when unset)."
     },
     {
       "upstream_id": "ShapeFix_IntersectionTool::FixIntersectingWires(TopoDS_Face &) const",
@@ -312159,8 +312159,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::perform_with_progress",
-      "status": "partial",
-      "notes": "Ported line by line; a null shape now fails with Standard_NullObject (native dereferences it). Compared with OCCT by the sh_fix_shape requests (op 0: Perform with the flag, DONE1..DONE8, FAIL1..FAIL3 and the result digest) on sewn polygons, revolved pieces, wires, faces, boxes, primitive solids and small-edge / small-face inputs, all identical. Partial because it dispatches to ShapeFix_Wire, ShapeFix_Shell and ShapeFix_Solid, whose rows are still partial."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Shape.cxx (2026-10-07): small-area mode, recorded-shape early return, vertex positioning, per-type dispatch with the native DONE flags, progress stages, SameParameter and the OCC25455 vertex tolerances. Compared by op 0 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. A null shape raises Standard_NullObject (native dereference, D3). The shell and solid stages keep the documented address-order dependence of their own rows."
     },
     {
       "upstream_id": "ShapeFix_Shape::Shape() const",
@@ -312186,8 +312186,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Shape.hxx",
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::same_parameter",
-      "status": "partial",
-      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "status": "implemented",
+      "notes": "Reviewed against ShapeFix_Shape.cxx: ShapeFix::SameParameter(sh, enforce, 0.0, progress) without message registrator; a null shape is a no-op natively too (no edge, no face). Compared through ops 0-2 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Shape::FixSolidTool() const",
@@ -312440,8 +312440,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_twisted",
-      "status": "partial",
-      "notes": "Pinned fixtures cover flat/folded Bezier surfaces and elementary fast return, plus projected splitting vertex outputs and statuses. General geometry and unset native precision domains remain incomplete; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_CheckSmallFace.cxx (2026-10-07). Fixed: normals come from GeomAdaptor_Surface::D1 (span cache) and TwistedNorm is summed as natively; the native code reads myPrecision into a local it never uses, so an unset tolerance is deterministic and needs no SetTolerance. Compared by op 16 (flat, twisted and folded Bezier faces) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusTwisted(const ShapeExtend_Status) const",
@@ -312468,7 +312468,7 @@
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_splitting_vertices",
       "status": "partial",
-      "notes": "Pinned fixtures cover flat/folded Bezier surfaces and elementary fast return, plus projected splitting vertex outputs and statuses. General geometry and unset native precision domains remain incomplete; no legacy mapping increase."
+      "notes": "Reviewed line by line against ShapeAnalysis_CheckSmallFace.cxx (2026-10-07). Fixed: the projection uses the default AdjustToEnds = true. Compared by op 16 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT. Partial only for a native defect: the ShapeAnalysis_CheckSmallFace constructor leaves myPrecision until SetTolerance, which every vertex tolerance then reads uninitialized, so the native result reads indeterminate memory; Rust models the unset state explicitly (Standard_ConstructionError when unset)."
     },
     {
       "upstream_id": "ShapeFix_Face::FixWiresTwoCoincEdges()",
@@ -312642,8 +312642,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::perform_with_progress",
-      "status": "partial",
-      "notes": "Native-backed no-face aggregate stages, configuration, status and cancellation ordering. Face-ready aggregate stages remain explicitly incomplete; no full behavioral or legacy parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Fixed: ReorderOK is the negated CheckOrder DONE result, not the order status. Compared by op 28 (Perform on every face wire and free wire) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT; cancellation stays covered by the tkshhealing_wire_perform fixtures."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::CheckPinFace(const TopoDS_Face &,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher> &,const double)",
@@ -312651,8 +312651,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_CheckSmallFace.hxx",
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::check_pin_face",
-      "status": "partial",
-      "notes": "Native pair scan retains the restrictive second-edge length gate. No-wire native invalid Current access becomes explicit Rust failure. PinFace/PinEdges status fields are constructor-uninitialized and represented as unknown until written. General domains remain partial."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeAnalysis_CheckSmallFace.cxx (2026-10-07). Fixed: a bound edge is rebound as NCollection_DataMap::Bind does, and a face without wire raises Standard_TypeMismatch as natively (TopoDS::Wire on the face the exhausted explorer returns), confirmed by op 16 on a wireless face. Compared by op 16 (tolerance prec and -1) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusPinFace(const ShapeExtend_Status) const",
@@ -312661,7 +312661,7 @@
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status_pin_face",
       "status": "partial",
-      "notes": "Native constructor leaves this status indeterminate; Rust Option<bool> explicitly models unknown until written. This is an unresolved behavior domain, not an approved exception."
+      "notes": "Partial only for a native defect: the ShapeAnalysis_CheckSmallFace constructor leaves myStatusPinFace (only a successful CheckPinFace writes it) uninitialized, so the native result reads indeterminate memory; Rust models the unset state explicitly (Option, None until written)."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace::StatusPinEdges(const ShapeExtend_Status) const",
@@ -312670,7 +312670,7 @@
       "source_sha256": "6ea96ac657e8b93324d0e2f50bea4e05a8491914481508238bad86d9d7d1991b",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace::status_pin_edges",
       "status": "partial",
-      "notes": "Native constructor leaves this status indeterminate; Rust Option<bool> explicitly models unknown until written. This is an unresolved behavior domain, not an approved exception."
+      "notes": "Partial only for a native defect: the ShapeAnalysis_CheckSmallFace constructor leaves myStatusPinEdges (no method ever writes it) uninitialized, so the native result reads indeterminate memory; Rust models the unset state explicitly (Option, None)."
     },
     {
       "upstream_id": "ShapeAnalysis_CheckSmallFace",
@@ -313132,8 +313132,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::set_max_tail_angle",
-      "status": "partial",
-      "notes": "Source-pinned scalar setter stores max(sin(angle), 0). Direct value observation and non-default angle effect are not yet covered by the Rust/native differential fixture."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Stores `(sin >= 0) ? sin : 0` (keeps -0.0, maps NaN to 0, unlike f64::max). Op 19 sets 0.3 before FixTails in the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::SetMaxTailWidth(double)",
@@ -313150,8 +313150,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_tails",
-      "status": "partial",
-      "notes": "Exact native oracle covers no-match status retention and a removable two-edge tail. Remaining tail representations and p-curve/context failure branches are not yet proven."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Fixed: the guard that keeps one edge reads the native running edge count. Compared by op 19 (width maxtol, angle 0.3) on tails and every other wire of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::FixNotchedEdges()",
@@ -313159,8 +313159,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_notched_edges",
-      "status": "partial",
-      "notes": "Native differential covers a planar three-edge overlap that splits the long edge and removes the short edge, plus status and mode-accessor rows. Curved/seam p-curves, context failures and full Perform dispatch remain open."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Fixed: UpdateWire after a whole-edge removal, an index <= 0 selects the last edge, and the wrap-around seam removal reads NbEdges() after the insertion; FixDummySeam takes prev = NbEdges() for num <= 1. Compared by op 20 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::FixSelfIntersection()",
@@ -313168,8 +313168,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_self_intersection",
-      "status": "partial",
-      "notes": "Native aggregate pass ordering, component modes, unready status, adjacent tolerance repair and adjacent topology-mode cutting are differentially checked. Per-edge loop removal and nonadjacent wire removal cases remain unverified."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Fixed: one edge count shared by the passes (refreshed only by the loop-removal pass and a removal), num++ after a removal reset, the loop pass steps back when the count grows; ShapeFix_IntersectionTool::FixSelfIntersectWire reviewed and fixed with it. Compared by ops 21/22 (both loop modes), 28 and the wireframe ops 5/11/12 on crossings, overlaps, touching ends and tails of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::Perform(const Message_ProgressRange&)",
@@ -313177,8 +313177,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::perform_with_progress",
-      "status": "partial",
-      "notes": "Free-wire and one face-ready planar p-curve fixture match native stage statuses and edge count. Broader repair branches and interruption timing need more differential cases."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Fixed: ReorderOK is the negated CheckOrder DONE result, not the order status. Compared by op 28 (Perform on every face wire and free wire) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT; cancellation stays covered by the tkshhealing_wire_perform fixtures."
     },
     {
       "upstream_id": "ShapeFix_Wire::StatusRemovedSegment() const",
@@ -313186,8 +313186,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::status_removed_segment",
-      "status": "partial",
-      "notes": "Native mode/default and simple-run fixtures confirm false; nonadjacent removed-segment output has not yet been differentially exercised."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Set when FixSelfIntersectWire removes a segment; every pass of ops 19-30 prints it with the pass statuses in the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wireframe::FixWireGaps()",
@@ -313195,8 +313195,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wireframe.hxx",
       "source_sha256": "3c99beecc44299206b0a69be833eea66d483fb501b68f1fef3419d2ac613e1bb",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWireframe::fix_wire_gaps",
-      "status": "partial",
-      "notes": "Native face/free-wire/compound orchestration and status/context mutation; twelve geometry rows plus repeated wire pass. Gap conversion line/single-edge cases compare ranges, endpoints, midpoint and spline degree. Full 2D repair and curved/located/error domains remain incomplete. No legacy mapping increase."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wireframe.cxx (2026-10-07): compound recursion with the replacement map, per-face FixReorder/FixGaps3d/FixGaps2d with the shared context, free-wire FixGaps3d, then SameParameter, FixReorder, FixSelfIntersection and FixVertexTolerance on the applied shape. The tail-with-gaps face that diverged through ShapeFix_IntersectionTool::SplitEdge now matches; compared by ops 5, 11 and 12 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::FixGaps3d()",
@@ -313204,8 +313204,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_3d",
-      "status": "partial",
-      "notes": "Native conversion plus optional range-repair pass: projection, periodic parameters, extrema selection, closed-conic ranges, and context mutations. Native fixtures cover line extension/reversal, conversion fallback, and single-circle closure. Curved/extrema/located/nonmanifold and exceptional paths require broader evidence; partial, no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Conversion and range branches, AdjustOnPeriodic3d and the vertex/edge update follow the source. Compared by ops 23 (conversion), 25 (by ranges) and 30 (after FixReorder) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::FixGap3d(const int, const bool)",
@@ -313213,8 +313213,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gap_3d",
-      "status": "partial",
-      "notes": "Native conversion plus optional range-repair pass: projection, periodic parameters, extrema selection, closed-conic ranges, and context mutations. Native fixtures cover line extension/reversal, conversion fallback, and single-circle closure. Curved/extrema/located/nonmanifold and exceptional paths require broader evidence; partial, no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Conversion and range branches, AdjustOnPeriodic3d and the vertex/edge update follow the source. Compared by ops 23 (conversion), 25 (by ranges) and 30 (after FixReorder) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::FixGapsByRangesMode()",
@@ -313231,8 +313231,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gap_2d",
-      "status": "partial",
-      "notes": "Native pcurve spline conversion, segmentation, conic approximation, endpoint/context/vertex mutation and aggregate status reset. Planar and exact reversed-cone fixtures match. 2D range repair now has native crossing/reversed/parallel/clipping/single-circle fixtures; broader curved, seam and exceptional domains need evidence. Partial; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). The range branch is now a literal port (strict oriented acceptance, intersections, extrema and projections in native order, surface-bound clipping with its end-index quirk, exact cancelled-change test, try-block retrim); the conversion branch was reviewed. Compared by ops 24, 29 (by ranges) and 30 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::FixGaps2d()",
@@ -313240,8 +313240,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
       "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::fix_gaps_2d",
-      "status": "partial",
-      "notes": "Native pcurve spline conversion, segmentation, conic approximation, endpoint/context/vertex mutation and aggregate status reset. Planar and exact reversed-cone fixtures match. 2D range repair now has native crossing/reversed/parallel/clipping/single-circle fixtures; broader curved, seam and exceptional domains need evidence. Partial; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). The range branch is now a literal port (strict oriented acceptance, intersections, extrema and projections in native order, surface-bound clipping with its end-index quirk, exact cancelled-change test, try-block retrim); the conversion branch was reviewed. Compared by ops 24, 29 (by ranges) and 30 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT."
     },
     {
       "upstream_id": "ShapeFix_Wire::ClearModes()",
@@ -405279,8 +405279,8 @@
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix.hxx",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFix::remove_small_edges",
-      "status": "partial",
-      "notes": "Ported line by line (ShapeFix_Shape with only FixSmall enabled); the native context out argument is the `context` field of ShapeFixRemovedSmallEdges. Partial because it runs ShapeFix_Shape::Perform, whose face-ready aggregate wire path is partial.",
+      "status": "implemented",
+      "notes": "Reviewed against ShapeFix.cxx: ShapeFix_Shape restricted to FixSmall (topology mode on; connected, edge-curve, degenerated, self-intersection and lacking fixes off; missing-seam, orientation and small-area face fixes off); the native context out argument is ShapeFixRemovedSmallEdges::context. Compared by op 4 of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT.",
       "cpp_declaration_id": "63645e954181472c11ea59bc399e9690a6257905a99c723c4185db816f641cef"
     },
     {
