@@ -256,6 +256,50 @@ def message_requests(s: ModificationScene) -> list[str]:
     return [request('sc_modif', s.tokens(), kind, reg, 6, *ops) for kind in (1, 2) for reg in (0, 1)]
 
 
+def spline_scene() -> ModificationScene:
+    """Faces on extrusions, revolutions, offsets of them, a plane and trimmed wrappers."""
+    from tktopalgo_corpus_breplib_records import geom_bezier, geom_bspline, geom_gp
+    pre = Prelude()
+    circle = geom_gp(1, radius=2.)
+    spline = geom_bspline(3, False, [(0., 0., 0.), (1., 2., 0.5), (3., 0., 1.), (4., 1., 0.)],
+                          [(0., 4), (1., 4)])
+    line = geom_gp(0, p=(1., 0., 0.), d=(0.2, 0., 1.))
+    meridian = geom_bezier([(1., 0., 0.), (2., 0., 1.), (1.5, 0., 2.)])
+    s_: dict[str, int] = {}
+    s_['plane'] = pre.elementary(PLANE, O, Z, X, False)
+    s_['ext_circle'] = pre.extrusion(circle, Z)
+    s_['ext_spline'] = pre.extrusion(spline, (0., 0.6, 0.8))
+    s_['rev_line'] = pre.revolution(line, O, Z)
+    s_['rev_bezier'] = pre.revolution(meridian, O, Z)
+    s_['off_ext'] = pre.offset(s_['ext_circle'], 0.3)
+    s_['off_plane'] = pre.offset(s_['plane'], 0.5)
+    s_['trim_rev'] = pre.trimmed(s_['rev_bezier'], 0., 3., 0., 1.)
+    s_['trim_ext'] = pre.trimmed(s_['ext_spline'], 0., 1., -1., 2.)
+    s_['cyl'] = pre.elementary(CYLINDER, (0.5, -1., 0.), Z, X, False, 1.5)
+    scene = ModificationScene(pre, pre.program())
+    for name, surface in s_.items():
+        bounded_face(scene, name, surface)
+    scene.compound = scene.program.container(COMPOUND)
+    for face in scene.faces.values():
+        scene.program.add(scene.compound, face)
+    scene.other_edge = scene.edges['plane'][0]
+    return scene
+
+
+SPLINE_MODES = [(1, 1, 1, 0), (1, 1, 1, 1), (0, 0, 0, 0), (1, 1, 0, 1), (0, 1, 0, 0)]
+
+
+def convert_to_bspline_requests(s: ModificationScene) -> list[str]:
+    """ShapeCustom_ConvertToBSpline under several mode sets, on every face."""
+    out = []
+    for modes in SPLINE_MODES:
+        for name in s.faces:
+            ops = face_ops(s, name)
+            out.append(request('sc_modif', s.tokens(), 3, *modes, 1, len(ops_count(ops)), *ops))
+        out.append(request('sc_modif', s.tokens(), 3, *modes, 1, 4, 6, s.compound, 7, 8, 10))
+    return out
+
+
 def append_shapecustom_requests(requests: list[str]) -> None:
     """Append every ShapeCustom request family in a fixed order."""
     requests += is_linear_requests()
@@ -265,3 +309,4 @@ def append_shapecustom_requests(requests: list[str]) -> None:
     scene = modification_scene()
     requests += modif_requests(scene)
     requests += message_requests(scene)
+    requests += convert_to_bspline_requests(spline_scene())

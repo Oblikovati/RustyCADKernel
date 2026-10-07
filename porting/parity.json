@@ -274262,6 +274262,105 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::NewSurface(const TopoDS_Face&,occ::handle<Geom_Surface>&,TopLoc_Location&,double&,bool&,bool&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_surface",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "00bc95323bcb78547e9c4031cee80bbb6921a9abb7145f212d635e19e19791d3"
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::NewCurve(const TopoDS_Edge&,occ::handle<Geom_Curve>&,TopLoc_Location&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_curve",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "041b37235f93c2b72856dbc59dd42e817c03e272e63565ad8ad30444c018a571"
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::NewPoint(const TopoDS_Vertex&,gp_Pnt&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_point",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "1b0f86d9f93c96bada69c66eba0b537da6af015ec3d4dfadbad697c310005938"
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::NewParameter(const TopoDS_Vertex&,const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_parameter",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "4bf35823d4fe215f97284503432a138a6f6dbc2099f616e42a7832fb209e68e0"
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::ShapeCustom_ConvertToBSpline()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::new",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "7086fd7d815018fa4d9891c119c41d19534ba23646717bca8e3a4d6c31121ba3"
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::SetExtrusionMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::set_extrusion_mode",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "7900bafef6f131522a4be05c86cdc5b385410d33ab6a564b5f12b210ced9c512"
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::NewCurve2d(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_curve2d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "94be26e8d252eace1beaee52baab3755516c8745b6e622a980585ac2bf7c5397"
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::Continuity(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::<rustycad_tkbrep::brep_tools::BRepToolsModification>::continuity",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "a6f3a535cbb0d6a3bf8dd3af0a6dabe928c8d31138b8c1583f6ecf718d6cab94"
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::SetRevolutionMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::set_revolution_mode",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "abe6c750edc3da2deb00deb5c7b7a70d5b116dc70bc57a7dcd64020ccd1d6acc"
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::SetPlaneMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::set_plane_mode",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "edf96042a0bbb5bb89c8c746a61dfe3c46ff48024c1be74ab472732a2982d3d6"
+    },
+    {
+      "upstream_id": "ShapeCustom_ConvertToBSpline::SetOffsetMode(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomConvertToBSpline::set_offset_mode",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 3).",
+      "cpp_declaration_id": "fbcc027b191e7d3ca8dc93ac90ec1827e4a303b7b19924666bd8a9f738d75414"
+    },
+    {
       "upstream_id": "ShapeUpgrade::C0BSplineToSequenceOfC1BSplineCurve(const occ::handle<Geom_BSplineCurve>&,occ::handle<NCollection_HSequence<occ::handle<Geom_BoundedCurve>>>&)",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade.hxx",

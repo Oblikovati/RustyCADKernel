@@ -9,7 +9,8 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::Geom2dCurve;
 use rustycad_tkg3d::geom::{
     GeomConicalSurface, GeomCurve, GeomCylindricalSurface, GeomOffsetSurface, GeomPlane,
-    GeomRectangularTrimmedSurface, GeomSphericalSurface, GeomSurface, GeomToroidalSurface,
+    GeomRectangularTrimmedSurface, GeomSphericalSurface, GeomSurface, GeomSurfaceOfLinearExtrusion,
+    GeomSurfaceOfRevolution, GeomToroidalSurface,
 };
 use rustycad_tkmath::gp::{Axis1, Axis2, Axis3, Transform3, Vector3};
 use rustycad_tkmath::toploc::Location;
@@ -84,6 +85,18 @@ fn prelude(r: &mut Reader<'_>, t: &mut TpShapes) -> Result<(), Failure> {
                 let s = t.surfaces[r.integer() as usize].clone();
                 t.surfaces
                     .push(Handle::new(GeomOffsetSurface::new(&s, r.real(), false)?).cast());
+            }
+            4 => {
+                let c = super::brep_lib_common::geom_curve(r)?;
+                let surface = GeomSurfaceOfLinearExtrusion::new(&c, r.dir())?;
+                t.surfaces.push(Handle::new(surface).cast());
+            }
+            5 => {
+                let c = super::brep_lib_common::geom_curve(r)?;
+                let p = r.pnt();
+                let axis = Axis1::new(p, r.dir());
+                t.surfaces
+                    .push(Handle::new(GeomSurfaceOfRevolution::new(&c, axis)?).cast());
             }
             _ => t.locations.push(Location::new(trsf(r)?)),
         }

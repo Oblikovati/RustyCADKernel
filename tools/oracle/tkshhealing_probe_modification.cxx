@@ -5,8 +5,9 @@
 // `sc_modif (prelude) program kind [(trsf) copymesh] reg nops (op)...`: the shapes of a
 // prelude and a shape program (tkshhealing_probe_shcommon.cxx); kind 0 is a
 // ShapeCustom_TrsfModification of the transformation record with IsCopyMesh() set to
-// copymesh, 1 a ShapeCustom_DirectModification, 2 a ShapeCustom_ConvertToRevolution; with
-// reg a ShapeExtend_MsgRegistrator is set (kinds 1 and 2). ShapeExtend::Init() loads the
+// copymesh, 1 a ShapeCustom_DirectModification, 2 a ShapeCustom_ConvertToRevolution, 3 a
+// ShapeCustom_ConvertToBSpline with the flags extrusion revolution offset plane (each set
+// through its Set...Mode); with reg a ShapeExtend_MsgRegistrator is set (kinds 1 to 3). ShapeExtend::Init() loads the
 // messages first. Each member starts from sentinel outputs (a null geometry, the identity
 // location, tolerance -1, RevWires true, RevFace false, the point (7, 7, 7), the
 // parameter 0.5) and prints its result and every output:
@@ -17,6 +18,7 @@
 //  BRepTools_TrsfModification; 9 s k g: SendMsg(shape, message "m<k>", gravity g);
 //  10: MsgRegistrator().IsNull().
 #include <BRepTools_Modifier.hxx>
+#include <ShapeCustom_ConvertToBSpline.hxx>
 #include <ShapeCustom_ConvertToRevolution.hxx>
 #include <ShapeCustom_DirectModification.hxx>
 #include <ShapeCustom_TrsfModification.hxx>
@@ -26,6 +28,9 @@ occ::handle<BRepTools_Modification> sc_modification(GaReader& r){
  if(kind==0){gp_Trsf T=shc_trsf(r);occ::handle<ShapeCustom_TrsfModification> m=new ShapeCustom_TrsfModification(T);
   m->IsCopyMesh()=r.flag();return m;}
  if(kind==1)return new ShapeCustom_DirectModification();
+ if(kind==3){occ::handle<ShapeCustom_ConvertToBSpline> m=new ShapeCustom_ConvertToBSpline();
+  m->SetExtrusionMode(r.flag());m->SetRevolutionMode(r.flag());m->SetOffsetMode(r.flag());m->SetPlaneMode(r.flag());
+  return m;}
  return new ShapeCustom_ConvertToRevolution();}
 void sc_member(GaReader& r,const TpShapes& t,const occ::handle<BRepTools_Modification>& m,int op){
  if(op==0){TopoDS_Face f=sh_face(t,r.integer());occ::handle<Geom_Surface> S;TopLoc_Location L;double tol=-1.;bool rw=true,rf=false;

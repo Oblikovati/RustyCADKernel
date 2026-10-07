@@ -11,8 +11,8 @@ use rustycad_tkbrep::topods;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkshhealing::shape_custom::{
-    ShapeCustomConvertToRevolution, ShapeCustomDirectModification, ShapeCustomModification,
-    ShapeCustomTrsfModification,
+    ShapeCustomConvertToBSpline, ShapeCustomConvertToRevolution, ShapeCustomDirectModification,
+    ShapeCustomModification, ShapeCustomTrsfModification,
 };
 use rustycad_tkshhealing::shape_extend::{
     BasicMsgRegistrator, ShapeExtend, ShapeExtendMsgRegistrator,
@@ -29,6 +29,14 @@ fn modification(r: &mut Reader<'_>) -> Result<Modification, Failure> {
             Handle::new(m).cast()
         }
         1 => Handle::new(ShapeCustomDirectModification::new()).cast(),
+        3 => {
+            let m = ShapeCustomConvertToBSpline::new();
+            m.set_extrusion_mode(r.flag());
+            m.set_revolution_mode(r.flag());
+            m.set_offset_mode(r.flag());
+            m.set_plane_mode(r.flag());
+            Handle::new(m).cast()
+        }
         _ => Handle::new(ShapeCustomConvertToRevolution::new()).cast(),
     })
 }
