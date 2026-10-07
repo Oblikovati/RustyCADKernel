@@ -73,6 +73,16 @@ DE_TOOLKITS: tuple[str, ...] = ('TKDECascade', 'TKDEGLTF', 'TKDEIGES', 'TKDEOBJ'
 DE_LINKED_TOOLKITS: tuple[str, ...] = (*DE_TOOLKITS, 'TKDE', 'TKBRep', 'TKMath', 'TKernel')
 DE_CLOSURE_TARGETS: list[str] = [*DE_TOOLKITS, 'gtest_main']
 
+# The exchange oracle closure (TKXSBase, the foundation of the STEP and IGES toolkits) lives
+# in its own build tree too, so the geometry closure keeps its flags.
+EXCHANGE_TOOLKITS: tuple[str, ...] = ('TKXSBase',)
+# The exchange closure's shared libraries in link order, dependants first (the EXTERNLIB of
+# TKXSBase and TKShHealing's own TKGeomAlgo).
+EXCHANGE_LINKED_TOOLKITS: tuple[str, ...] = ('TKXSBase', 'TKShHealing', 'TKTopAlgo', 'TKGeomAlgo',
+                                             'TKBRep', 'TKGeomBase', 'TKG3d', 'TKG2d', 'TKMath',
+                                             'TKernel')
+EXCHANGE_CLOSURE_TARGETS: list[str] = [*EXCHANGE_TOOLKITS, 'gtest_main']
+
 
 def closure_flags(modules: list[str], toolkits: tuple[str, ...] = ADDITIONAL_TOOLKITS) -> list[str]:
     """CMake flags of a shared oracle closure (the geometry one by default); one spelling for
