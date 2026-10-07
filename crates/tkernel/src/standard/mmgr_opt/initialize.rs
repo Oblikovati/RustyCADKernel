@@ -1,16 +1,17 @@
 //! The protected Initialize resets free-list heads while retaining allocated pools and live blocks.
 use super::{
-    AddressSpace, BLOCK_SHIFT, BTreeMap, BTreeSet, MMgrOpt, index_cell, os_page, roundup_cell,
-    roundup16,
+    AddressSpace, BLOCK_SHIFT, BTreeSet, MMgrOpt, NativeFreeListSlots, index_cell, os_page,
+    roundup_cell, roundup16,
 };
 
 impl MMgrOpt {
     /// Reinitializes native free-list state; `allocator.initialize_native_free_lists()`.
     ///
     /// Recycled blocks become unreachable through free lists; pool cursors and live bytes survive.
-    /// Rust retains abandoned regions until owner drop, and uses a sparse table and anonymous
-    /// mappings. Native calloc-table leaks, allocation failure, and descriptor replacement are
-    /// not reproduced. Exclusive borrowing replaces native caller-controlled synchronization.
+    /// Rust retains abandoned regions and retired table backing until owner drop, and uses anonymous
+    /// mappings. Native post-drop leaks and descriptor replacement are
+    /// not reproduced. Failed table allocation is retained as a checked null-table state.
+    /// Exclusive borrowing replaces native caller-controlled synchronization.
     pub fn initialize_native_free_lists(&mut self) {
         self.nb_pages = if self.nb_pages < 100 {
             1000
@@ -21,7 +22,7 @@ impl MMgrOpt {
         // Initialize turns mapping off when the page size is unknown (getpagesize() == 0).
         self.mmap &= self.page_size != 0;
         self.free_list_max = index_cell(roundup_cell(self.threshold.wrapping_sub(BLOCK_SHIFT)));
-        self.free_lists.clear();
+        self.free_lists.replace_with_zeroed(self.free_list_max);
         self.cell_size = roundup16(self.cell_size);
     }
 
@@ -34,7 +35,7 @@ impl MMgrOpt {
             page_size: 0,
             threshold: 0,
             free_list_max: 0,
-            free_lists: BTreeMap::new(),
+            free_lists: NativeFreeListSlots::default(),
             alloc_list: 0,
             next_addr: 0,
             end_block: 0,

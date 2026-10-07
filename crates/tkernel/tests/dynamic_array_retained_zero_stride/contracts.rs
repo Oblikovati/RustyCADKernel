@@ -93,15 +93,15 @@ fn release_then_append_requires_reset_before_any_constructor_callback() {
     assert_eq!(array.first().unwrap(), &9);
 }
 #[test]
-fn cached_cursor_remains_explicitly_unsupported_for_zero_stride() {
+fn cached_cursor_accepts_only_the_registered_retained_first_slot() {
     let mut array = retained_integers();
     array.append(7);
     assert!(
-        rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_shared(&array, 0).is_err()
+        rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_shared(&array, 0).is_ok()
     );
     assert!(
         rustycad_tkernel::ncollection::DynamicArrayCachedIterator::from_mutable(&mut array, 0)
-            .is_err()
+            .is_ok()
     );
 }
 #[test]

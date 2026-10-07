@@ -128,7 +128,7 @@ python3 tools/capture_occt_inventory.py \
   --extractor target/api_inventory/occt-api-extract --jobs 8
 python3 tools/merge_occt_inventory.py \
   --capture target/api-proof/occt-inventory
-PYTHONPATH=tools python3 -m unittest discover -s tools/tests
+python3 tools/run_tool_tests.py --jobs 2
 ```
 
 `--limit N` runs a development subset and leaves every other header pending.

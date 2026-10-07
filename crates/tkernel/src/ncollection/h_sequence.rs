@@ -4,6 +4,7 @@
 //! every handle holder edits the one sequence. Rust handles share `&` access only, so the
 //! sequence sits behind a lock and is lent to closures (`sequence`, `change_sequence`).
 mod borrowed_append;
+mod copy_construction;
 use super::Sequence;
 use super::generic_transient::impl_generic_transient;
 use crate::standard::StandardTransient;
@@ -23,14 +24,6 @@ impl<T> Default for HSequence<T> {
     }
 }
 impl<T: Clone> HSequence<T> {
-    /// Copies `source` and keeps its allocator, as the C++ copy of the base sequence does;
-    /// `HSequence::from_sequence(&values)`.
-    pub fn from_sequence(source: &Sequence<T>) -> Self {
-        Self {
-            base: StandardTransient::default(),
-            items: RwLock::new(source.clone()),
-        }
-    }
     /// Appends and empties `source` (OCCT `Append(SequenceType&)`); `items.append_sequence(&mut more)`.
     pub fn append_sequence(&self, source: &mut Sequence<T>) {
         self.change_sequence(|items| items.append_sequence(source));

@@ -8,6 +8,7 @@ mod internal_init;
 mod pointers;
 mod raw_construction;
 mod raw_copy;
+mod raw_destruction;
 mod resize_storage;
 mod returning;
 mod trivial_copy;

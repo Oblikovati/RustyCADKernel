@@ -1,0 +1,117 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Canonical contiguous free-list head table consumed by actual Standard_MMgrOpt allocation, release, initialization and purge engines",
+  "integration_status": "branch candidate; root integration/check/deletion required",
+  "fresh_main_revision": "4be8ba8c",
+  "source_base_revision": "a4dca89b",
+  "dependency_commits": [
+    "fd9f9233",
+    "e6e106ee"
+  ],
+  "dependency_policy": "Exact queued Initialize and callback commits merged only into the isolated candidate before implementation; root integrates those independently first.",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_inputs_count": 402,
+  "source_manifest": "porting/runtime-evidence/standard-mmgr-opt-free-list-table-source-manifest.json.gz",
+  "source_capture_scope": "402 selected Standard/allocator/container sources, dependent test inputs, Cargo configuration and native oracles; not a complete workspace compiler-input capture",
+  "source_inputs_after_run_identical": true,
+  "artifact_sha256": {
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-source-manifest.json.gz": "85f0bcc403787f7549be3b0f1a1b60985e8fa517bf8d2e5ecb77d581446e536b",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-source.tar.gz": "f922c12a6b8a53c9199e1e6cd2b286467f91bd9979a6bb57d3a530077345647c",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-unit.log.gz": "160a58506320fcd12c68230e8256fcfff56584ae8a682e2eeb8e5883152bb3eb",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-rust.log.gz": "3dc079860d8b052bac6b37a20bcb27a17bf2b66bea4c49e320f4509d42a6d935",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-doc.log.gz": "334c702029b305852dc0bd5e6a57ffd57687fde8dfdd8cb405e07098133c5ca3",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-clippy.log.gz": "620cb6a05886aee225a10fd3feebbd6b8dff191b5a23dfafbb14e26bddc898b3",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-unit-miri.log.gz": "fad6cccf2e4ce43bc03799062bd9470bec90e43e2a035e3ccb95d7e5f717eee7",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-miri.log.gz": "6b65d6f850c88dedc877e408a4a5f0a5d6a76b971609cbac966f697b9818d51b",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-services-miri.log.gz": "675b5c9fc49e26cec3ca1f95cfefe01f9a21fe5eaeb6cbd254e23be2eab23bed",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-native-original.log.gz": "e8146c714e14713e34432b96f41db5d2288414de2ac77c17fbdf1709da56ad06",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-native-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-pre-fix-clippy.log.gz": "a57607fe2258b42f2a6ef39b201d1a09222974c54a5c3d26bfdd942fdf5c8038",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-commands.sh.gz": "d0fe6bb0b1b2467d9985715d9d626e50d933640192b2908902e0add355885571",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-native.log.gz": "0c44c6a571277d3cf4cec2738a4533e1eef3329b6a63cfddac6d06e2da0e2316",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-initialize-native.log.gz": "3b0d4378a2629af4b8af973ea92d34fac5160052407d5b484b930f83b3e6cc47",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-initialize-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-callback_unwind-native.log.gz": "e2a3a113aaebef951ade75608c7008cf98e2808b27a2a1dd9d4af3a8505550dc",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-callback_unwind-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-compiler-bindings.json.gz": "516e9408f7aea19cf51a4ee51882898f32397fcbf494af8d05a29fda8964462e",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-row-coverage.json.gz": "0ba04dd7e08199d144161a031346f01a0aaad962f4b9626c6964e9bc022a4f81",
+    "porting/runtime-evidence/standard-mmgr-opt-free-list-table-original-test-joins.json.gz": "498854987dd34840c51a6e5ab23cb07675de7e444299a0f40b01c62aee6b7f5d"
+  },
+  "occt_source_sha256": {
+    "Standard_MMgrOpt.hxx": "9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22",
+    "Standard_MMgrOpt.cxx": "5bc434cc85e3143f605d0ff852058eab8f168cea1bca8657bfdfc42819359424"
+  },
+  "compiler_evidence": {
+    "exact_records": 10,
+    "method_records": 8,
+    "protected_field_records": 2,
+    "qualified_names": [
+      "Standard_MMgrOpt::Allocate",
+      "Standard_MMgrOpt::Free",
+      "Standard_MMgrOpt::FreePools",
+      "Standard_MMgrOpt::Initialize",
+      "Standard_MMgrOpt::Purge",
+      "Standard_MMgrOpt::Reallocate",
+      "Standard_MMgrOpt::Standard_MMgrOpt",
+      "Standard_MMgrOpt::myFreeList",
+      "Standard_MMgrOpt::myFreeListMax",
+      "Standard_MMgrOpt::~Standard_MMgrOpt"
+    ],
+    "body_binding_performed": false,
+    "public_raw_field_binding_performed": false,
+    "new_public_rust_methods": 0
+  },
+  "automatic_api_parity_credit": 0,
+  "original_declaration_mapping_credit": 0,
+  "full_MMgrOpt_parity": false,
+  "behavior": [
+    "The sparse BTreeMap of heads was removed. NativeFreeListSlots owns one active StandardMemory payload containing exactly maximum+1 zeroed pointer-width words; those words are the sole current head authority used by Allocate, Free, pool-tail recycling, Purge and the safe FreePools adapter.",
+    "Allocation uses the existing shared Standard backend, with no copied heap implementation, allocator/owned.rs modification or CommonBaseAllocator handle. The table maximum copy is diagnostic metadata; actual allocated payload length bounds slot reads and writes.",
+    "Initialize allocates the next table while the previous active allocation is still live. Prior owners move into retired backing storage, which is never searched or traversed by the allocator graph. Repeated replacement preserves old addresses and old head bytes while all new active slots start zeroed.",
+    "Checked word-count multiplication overflow and shared-backend Rust Layout refusal both install a distinct null active state. They do not create an empty sparse table or reuse retired heads. The native oracle observes calloc null results and repairs native state before its destructor could dereference null.",
+    "Allocate and recyclable Free diagnose missing or invalid slot storage. Free validates the table before notification and retirement in this otherwise-native-undefined case, preserving live storage for recovery. Purge guards an actual missing-slot read with a panic; routes requiring no head-slot read retain their existing behavior.",
+    "Purge scans actual class indices in ascending order and releases each intrusive chain newest first. Each head word remains unchanged until its entire chain has reached system free, matching native release phases; the old sparse map removed that head before release.",
+    "The native GNU/Linux oracle interposes real TKernel free calls using fixed storage and memcpy of live table bytes. Numeric labels avoid dereferencing freed nodes or evaluating dangling pointer values. Rust observes the canonical numeric head immediately before the actual backing-release call through a private seam shared by production and tests, then verifies each backing region is gone. This adds no public callback API.",
+    "Existing pool membership logic is shared by Purge and FreePools instead of duplicated. StandardMemory ownership preserves Send, Sync and Unpin, checked by compilation and strict Miri alongside old-table retention, intrusive rewiring, partial clearing and null-state recovery."
+  ],
+  "checks": {
+    "rust_passed": 216,
+    "rust_private_units": 15,
+    "rust_integration": 201,
+    "miri_passed": 46,
+    "miri_scope_counts": {
+      "unit-miri": 15,
+      "miri": 22,
+      "services-miri": 9
+    },
+    "tkernel_doctests": 273,
+    "new_private_tests": 10,
+    "native_new_rows_exactly_compared": 16,
+    "prior_native_fixture_rows_reproduced": 22,
+    "native_originals_passed": 106,
+    "native_original_names_exactly_joined": true,
+    "strict_tkernel_all_targets_clippy_exit": 0,
+    "workspace_fmt_exit": 0,
+    "miri_toolchain": "nightly-2026-09-25",
+    "miri_flags": "-Zmiri-strict-provenance",
+    "miri_leak_checks_disabled": false
+  },
+  "native_build_sha256": {
+    "probe": "f84bd399d7d21aa7dbe1b84ea6c1149e679c90c5b2b9277cbf4e42cd047cb4fb",
+    "initialize_probe": "0ac48d3a1a3bd000cd23cd8b95ff876be0666ce0f2965ae8d5a904b4598ed3b4",
+    "callback_probe": "987ef9495ab8a1386c56bcd1cbc1be898930228ff167de8c3659bb8569f0d587",
+    "TKernel_library": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "original_test_binary": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693"
+  },
+  "remaining_gaps_and_adaptations": [
+    "Retired tables are freed when the Rust allocator owner drops; native repeated Initialize permanently loses those pointers. Preserving native live-address behavior until owner drop does not reproduce native leak lifetime. Retired-owner bookkeeping also introduces Rust allocations absent from native.",
+    "Native table payload extent and word offsets match the pinned 64-bit GNU/Linux measurements, but the shared Standard backend has a private Rust allocation header and different total system allocation requests. This is not raw malloc ABI, class object layout, or exact heap-accounting parity.",
+    "The native null-table rows prove allocation failure states only. Checked Rust Failure/panic behavior, retained safe handles, and subsequent recovery are explicit extensions where native would access null. Arbitrary writable protected fields, subclass mutation and raw pointer slots are not publicly exposed or credited.",
+    "Linux descriptor replacement/leaks and anonymous-mapping differences remain from the prior Initialize receipt. Allocation regions still use the existing AddressSpace heap/mapping owners, and moved Reallocate still uses temporary Vec bytes; these storage/resource differences are outside this table slice.",
+    "The release observer is a private test seam immediately before actual region release, not a public native free observer adapter. Native system-free entry and Rust pre-release metadata agree in the measured transitions, with no intervening table mutation; arbitrary reentrant owner access remains unsupported.",
+    "All selected existing normal regression tests run, including all 73 Standard services and their unchanged huge pool cases. Focused strict Miri covers all 10 new private cases, 5 earlier Initialize private cases, 11 Initialize/callback integrations, 11 Standard storage tests and 9 service-memory cases. No unchanged huge-pool Miri success is claimed.",
+    "The preexisting 1<<62 allocation request and unrelated locale FFI are outside the focused Miri selection as documented previously; complete normal Standard service tests include them. Miri leak detection stays enabled.",
+    "Earlier Initialize/callback receipts remain historical evidence. New table identity/slot evidence improves their bounded storage domain without changing global inventory counts or asserting full allocator-family/API parity."
+  ]
+}

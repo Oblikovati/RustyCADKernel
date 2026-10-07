@@ -1,29 +1,7 @@
 #![allow(unsafe_code)]
 use crate::allocation_trace::*;
-use rustycad_tkernel::ncollection::{BaseAllocator, EBTree, HashKey};
-#[repr(transparent)]
-#[derive(Debug, Default)]
-pub struct Key(pub Payload<'O'>);
-impl Clone for Key {
-    fn clone(&self) -> Self {
-        Self(self.0.clone())
-    }
-    fn clone_from(&mut self, source: &Self) {
-        self.0.clone_from(&source.0);
-    }
-}
-impl PartialEq for Key {
-    fn eq(&self, other: &Self) -> bool {
-        record_key_phase('Q', self.0.0);
-        self.0 == other.0
-    }
-}
-impl HashKey for Key {
-    fn occt_hash(&self) -> usize {
-        record_key_phase('H', self.0.0);
-        (self.0.0 % 2).occt_hash()
-    }
-}
+use crate::observed_key::Key;
+use rustycad_tkernel::ncollection::{BaseAllocator, EBTree};
 pub type Editable = EBTree<Key, Payload<'B'>>;
 pub fn populated(count: usize) -> (Editable, BaseAllocator) {
     let allocator = BaseAllocator::accumulating(65536).unwrap();

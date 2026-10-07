@@ -1,0 +1,26 @@
+new_ctor_throw caught=1 size=0 value=0 events=C-1,
+new caught=0 size=1 value=10 events=C10,
+replace caught=0 size=1 value=20 events=C20,A10:20,D20,
+existing_ctor_throw caught=1 size=1 value=20 events=C-1,
+assignment_throw caught=1 size=1 value=99 events=C99,A20:99,D99,
+erase_recovery caught=0 size=0 value=0 events=C21,A99:21,D21,D21,
+reset caught=0 size=1 value=22 events=C22,
+reset_clear caught=0 size=0 value=0 events=D22,
+borrow_new caught=0 size=1 value=30 events=K30,
+borrow_replace caught=0 size=1 value=31 events=K31,A30:31,D31,
+borrow_throw caught=1 size=1 value=31 events=K-2,
+move_new caught=0 size=1 value=40 events=M40,
+move_donor=-9
+move_replace caught=0 size=1 value=41 events=M41,A40:41,D41,
+move_throw caught=1 size=1 value=41 events=M-3,
+throw_donor=-9
+self_copy caught=0 size=1 value=50 events=K50,A50:50,D50,
+self_move caught=0 size=1 value=50 events=M50,A-9:50,D50,
+self_move_throw caught=1 size=1 value=-9 events=M-3,
+const_capture value=8 same=1
+capture value=8 same=1 more=1
+advance more=0
+retreat value=9
+move value=9 target=9
+reload value=101 same=1
+snapshot more=0 source_size=2
