@@ -1,0 +1,62 @@
+{
+  "schema": "rustycad.compiler-inventory-refresh.v1",
+  "source_revision": "07d24fa273a77a0386596a94df67694fe196c040",
+  "previous_snapshot_revision": "a3c6925b",
+  "rust_libraries": 20,
+  "all_features_per_library": true,
+  "source_and_artifact_hashes_verified": true,
+  "observed_cpp_api_declarations": 108622,
+  "resolved_implementation_claims": 23596,
+  "unresolved_ledger_rows": 4367,
+  "unclaimed_cpp_declarations": 80775,
+  "rust_public_paths": 63791,
+  "artifacts": {
+    "raw_rustdoc": {
+      "path": "porting/runtime-evidence/foundation-construction-protocols-api-raw-rustdoc.tar.gz",
+      "sha256": "3d0d441e2e66d4d3c3be41ea37388be7a155287587ca796e741e0203b76be5fd"
+    },
+    "capture": {
+      "path": "porting/runtime-evidence/foundation-construction-protocols-api-capture.gz",
+      "sha256": "7df2d6292e467eba319c750f5a2414f3e8109b9cfe4e287568a8e2f8f86d4628"
+    },
+    "normalizer": {
+      "path": "porting/runtime-evidence/foundation-construction-protocols-api-normalizer.gz",
+      "sha256": "a0e61995fc568b95441e96bd573b56563b2781223a3e8655f428df4d81d80361"
+    },
+    "crosswalk": {
+      "path": "porting/runtime-evidence/foundation-construction-protocols-api-crosswalk.gz",
+      "sha256": "d7d22126a202287ee7ad6138b7ab54e2a8218124e0b80ca5aa820b296d4ff766"
+    },
+    "parity_transactions": {
+      "path": "porting/runtime-evidence/foundation-construction-protocols-api-parity-transactions.gz",
+      "sha256": "c068eac6e742e141f3b44c48f307428ff992e75819669c06c364b9fa64c93f72"
+    },
+    "rust-api.json.gz": {
+      "path": "porting/api-inventory/rust-api.json.gz",
+      "sha256": "11755436963e911e7f7238430d0b107b1cf114c5ae5fd45bd66d85a674d2a5cd"
+    },
+    "api-crosswalk.json.gz": {
+      "path": "porting/api-inventory/api-crosswalk.json.gz",
+      "sha256": "0ef3f155d6c0aef718e2194f7c108941cf822ce857bd91d349d0cad3bcdbe112"
+    },
+    "completeness.json": {
+      "path": "porting/api-inventory/completeness.json",
+      "sha256": "d7b6422bd732c298399041049d83f88e1c8b05990c6fe4c8b16f0abc94d49630"
+    }
+  },
+  "current_status_lines": [
+    "Compiler API snapshot: 108622 observed C++ declarations; 23596 resolved implementation claims (source/ledger/artifact/tool fingerprints current)",
+    "Unresolved ledger rows: 4367; unclaimed C++ declarations: 80775",
+    "Full API coverage: UNKNOWN (explicit configuration/identity/mapping gaps); port completion: NOT COMPLETE"
+  ],
+  "api_parity_complete": false,
+  "configuration_matrix_complete": false,
+  "resolved_claim_delta": -2,
+  "carried_ambiguous_mappings": [],
+  "ambiguity_reason": "Existing vector selectors remain explicit. HArray copy-constructor receipts narrow overbroad implemented claims to exact partial behavior; inventory counts are not behavior-completeness proof.",
+  "limitations": [
+    "Raw all-features rustdoc capture and reachable-path normalization do not establish C++ overload/template behavioral equivalence.",
+    "Native capture retains existing platform/configuration/identity gaps;108622 is an observed candidate count, not a proven complete denominator.",
+    "No new native API implementations or original legacy mappings receive coverage credit from this inventory refresh."
+  ]
+}
