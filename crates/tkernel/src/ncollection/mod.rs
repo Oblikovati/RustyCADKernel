@@ -172,7 +172,9 @@ mod ubtree;
 pub use ebtree::EBTree;
 pub use ubtree::{BoundingNode, BoundingVolume, FallibleTreeSelector, TreeSelector, UBTree};
 mod ubtree_filler;
-pub use ubtree_filler::{BoundingTreeInsertion, NativeBoundingTree, ObjBnd, UBTreeFiller};
+pub use ubtree_filler::{
+    BoundingTreeInsertion, NativeBoundingTree, ObjBnd, UBTreeFiller, UBTreeFillerWithSelfAssignment,
+};
 
 mod packed_map;
 pub use packed_map::{
