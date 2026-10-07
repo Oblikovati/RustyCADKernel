@@ -36,19 +36,3 @@ pub type IndexedMapOfShape = IndexedMap<Shape, ShapeMapHasher>;
 pub type MapOfShape = Map<Shape, ShapeMapHasher>;
 /// `NCollection_IndexedDataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher>`.
 pub type IndexedDataMapOfShapeListOfShape = IndexedDataMap<Shape, List<Shape>, ShapeMapHasher>;
-
-/// `TopTools_FormatVersion`: the versions of the TopTools ASCII format.
-pub mod format_version {
-    /// `TopTools_FormatVersion_VERSION_1`: no CurveOnSurface UV points; reading calls `Check`.
-    pub const VERSION_1: i32 = 1;
-    /// `TopTools_FormatVersion_VERSION_2`: stores the CurveOnSurface UV points.
-    pub const VERSION_2: i32 = 2;
-    /// `TopTools_FormatVersion_VERSION_3`: stores per-vertex normals of triangulation-only faces.
-    pub const VERSION_3: i32 = 3;
-    /// `TopTools_FormatVersion_CURRENT`.
-    pub const CURRENT: i32 = VERSION_3;
-    /// `TopTools_FormatVersion_LOWER`.
-    pub const LOWER: i32 = VERSION_1;
-    /// `TopTools_FormatVersion_UPPER`.
-    pub const UPPER: i32 = VERSION_3;
-}
