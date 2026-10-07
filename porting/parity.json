@@ -92745,6 +92745,838 @@
       "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases (Interface_InterfaceModel over InterfaceModelBase, with its non-virtual members in the extension traits InterfaceModelEntities and InterfaceModelReports); `this` is the handle bound by InterfaceModelBase::bind_self; entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies. Protected data member; private state of rustycad_tkxsbase::interface::InterfaceCopyTool (no OCCT class derives from it)."
     },
     {
+      "upstream_id": "Interface_FileParameter::Interface_FileParameter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileParameter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileParameter::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileParameter::Init(const TCollection_AsciiString&,const Interface_ParamType)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileParameter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileParameter::init",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileParameter::Init(const char* const,const Interface_ParamType)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileParameter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileParameter::init_text",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. The text is the parameter's own copy (natively a pointer into the buffer of its parameter set)."
+    },
+    {
+      "upstream_id": "Interface_FileParameter::CValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileParameter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileParameter::c_value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. An unset text (native null or uninitialised pointer) is empty; has_value tells it apart."
+    },
+    {
+      "upstream_id": "Interface_FileParameter::ParamType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileParameter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileParameter::param_type",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileParameter::SetEntityNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileParameter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileParameter::set_entity_number",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileParameter::EntityNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileParameter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileParameter::entity_number",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileParameter::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileParameter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileParameter::clear",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileParameter::Destroy",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileParameter.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileParameter::destroy",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamList::Interface_ParamList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamList::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamList::Length",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamList::length",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamList::Lower",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamList::lower",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamList::Upper",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamList::upper",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamList::SetValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamList::set_value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamList::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamList::value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamList::operator()(const int) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamList::value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. The const call operator is Value."
+    },
+    {
+      "upstream_id": "Interface_ParamList::ChangeValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamList::change_value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamList::operator()(const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamList::change_value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. The call operator is ChangeValue."
+    },
+    {
+      "upstream_id": "Interface_ParamList::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamList::clear",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamSet::Interface_ParamSet",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamSet.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamSet::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamSet::Append(const char* const,const int,const Interface_ParamType,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamSet.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamSet::append",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. Native quirk kept: beyond the reserved count each append replaces the next set and returns the count plus 1."
+    },
+    {
+      "upstream_id": "Interface_ParamSet::Append(const Interface_FileParameter&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamSet.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamSet::append_parameter",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamSet::NbParams",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamSet.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamSet::nb_params",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamSet::Param",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamSet.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamSet::param",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamSet::ChangeParam",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamSet.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamSet::change_param",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamSet::SetParam",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamSet.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamSet::set_param",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamSet::Params",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamSet.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamSet::params",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ParamSet::Destroy",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ParamSet.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceParamSet::destroy",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::Interface_FileReaderData",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataBase::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. The protected constructor is the constructor of the embedded base."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::NbRecords",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderData::nb_records",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::NbEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderData::nb_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::FindNextRecord",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderData::find_next_record",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::InitParams",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::init_params",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::AddParam(const int,const char* const,const Interface_ParamType,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::add_param",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::AddParam(const int,const TCollection_AsciiString&,const Interface_ParamType,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::add_param_string",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::AddParam(const int,const Interface_FileParameter&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::add_param_parameter",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::SetParam",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::set_param",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::NbParams",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::nb_params",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::Params",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::params",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::Param",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::param",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. The native process-wide cache of the last record's first rank is not kept; the rank is computed each time (same parameter)."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::ChangeParam",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::change_param",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::ParamType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::param_type",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::ParamCValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::param_c_value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::IsParamDefined",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::is_param_defined",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::ParamNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::param_number",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::ParamEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::param_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::ParamFirstRank",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::param_first_rank",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::BoundEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::bound_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::BindEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::bind_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::SetErrorLoad",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::set_error_load",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::IsErrorLoad",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::is_error_load",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::ResetErrorLoad",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::reset_error_load",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::Destroy",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::destroy",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::Fastof",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataBase::fastof",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::ChangeParameter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::change_parameter",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderData::ParamPosition",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderData.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderDataParams::param_position",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. The two output references are the returned pair."
+    },
+    {
+      "upstream_id": "Interface_ReaderModule::CaseNum",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderModule.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceReaderModule::case_num",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderModule::Read",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderModule.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceReaderModule::read",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderModule::NewRead",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderModule.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceReaderModule::new_read",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::SetGlobal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::set_global",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. Interface_ReaderLib is LibCtlLibrary<InterfaceReaderLibKind> over its process-wide LibCtlRegistry."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::Interface_ReaderLib(const occ::handle<Interface_Protocol>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::Interface_ReaderLib()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::empty",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::AddProtocol",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::add_protocol",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::clear",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::SetComplete",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::set_complete",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::Select",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::select",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::Start",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::start",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::More",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::more",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::Next",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::next",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::Module",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::module",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_ReaderLib::Protocol",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlLibrary::protocol",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_GlobalNodeOfReaderLib::Interface_GlobalNodeOfReaderLib",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GlobalNodeOfReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlGlobalNode::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_GlobalNodeOfReaderLib::Add",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GlobalNodeOfReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlGlobalNode::add",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_GlobalNodeOfReaderLib::Module",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GlobalNodeOfReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlGlobalNode::module",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_GlobalNodeOfReaderLib::Protocol",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GlobalNodeOfReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlGlobalNode::protocol",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_GlobalNodeOfReaderLib::Next",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GlobalNodeOfReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlGlobalNode::next",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_NodeOfReaderLib::Interface_NodeOfReaderLib",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_NodeOfReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlNode::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_NodeOfReaderLib::AddNode",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_NodeOfReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlNode::add_node",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_NodeOfReaderLib::Module",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_NodeOfReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlNode::module",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_NodeOfReaderLib::Protocol",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_NodeOfReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlNode::protocol",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_NodeOfReaderLib::Next",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_NodeOfReaderLib.hxx",
+      "rust_item": "rustycad_tkxsbase::lib_ctl::LibCtlNode::next",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::Interface_FileReaderTool",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolBase",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. The protected constructor is the Default of the embedded base."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::SetData",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::set_data",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::Protocol",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::protocol",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::Data",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::data",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::SetModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::set_model",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::Model",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::model",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::SetMessenger",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::set_messenger",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::Messenger",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::messenger",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::SetTraceLevel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::set_trace_level",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::TraceLevel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::trace_level",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::SetErrorHandle",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::set_error_handle",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::ErrorHandle",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::error_handle",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::SetEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolLoad::set_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::Recognize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderTool::recognize",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::RecognizeByLib",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::recognize_by_lib",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::UnknownEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::unknown_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::NewModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::new_model",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::LoadModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolLoad::load_model",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>. The native try/catch blocks are the Err results of the reading members; an OSD_* failure ends the loading as natively."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::LoadedEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolLoad::loaded_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::BeginRead",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderTool::begin_read",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::AnalyseRecord",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderTool::analyse_record",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::EndRead",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderTool::end_read",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_FileReaderTool::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_FileReaderTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::clear",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",

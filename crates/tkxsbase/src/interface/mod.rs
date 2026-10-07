@@ -15,6 +15,10 @@ mod entity_iterator;
 mod entity_list;
 mod enums;
 mod errors;
+mod file_parameter;
+mod file_reader_data;
+mod file_reader_load;
+mod file_reader_tool;
 mod float_writer;
 mod general_lib;
 mod general_module;
@@ -37,7 +41,12 @@ mod model_reports;
 mod model_tests;
 mod msg;
 mod msg_text;
+mod param_list;
+mod param_set;
 mod protocol;
+mod reader_module;
+#[cfg(test)]
+mod reader_tests;
 mod report_entity;
 mod share_tool;
 mod sign_type;
@@ -54,6 +63,14 @@ pub use entity_iterator::{InterfaceEntityIterator, InterfaceEntityListHandle};
 pub use entity_list::InterfaceEntityList;
 pub use enums::{InterfaceCheckStatus, InterfaceDataState, InterfaceParamType};
 pub use errors::{check_failure, interface_error, interface_mismatch};
+pub use file_parameter::InterfaceFileParameter;
+pub use file_reader_data::{
+    InterfaceFileReaderData, InterfaceFileReaderDataBase, InterfaceFileReaderDataParams,
+};
+pub use file_reader_load::InterfaceFileReaderToolLoad;
+pub use file_reader_tool::{
+    InterfaceFileReaderTool, InterfaceFileReaderToolBase, InterfaceFileReaderToolOps,
+};
 pub use float_writer::{InterfaceFloatWriter, InterfaceFloatWriterOptions};
 pub use general_lib::{
     InterfaceGeneralLib, InterfaceGeneralLibKind, InterfaceGlobalNodeOfGeneralLib,
@@ -72,7 +89,13 @@ pub use model_base::InterfaceModelBase;
 pub use model_entities::InterfaceModelEntities;
 pub use model_reports::InterfaceModelReports;
 pub use msg::InterfaceMsg;
+pub use param_list::InterfaceParamList;
+pub use param_set::InterfaceParamSet;
 pub use protocol::{InterfaceProtocol, InterfaceProtocolBase};
+pub use reader_module::{
+    InterfaceGlobalNodeOfReaderLib, InterfaceNodeOfReaderLib, InterfaceReaderLib,
+    InterfaceReaderLibKind, InterfaceReaderModule,
+};
 pub use report_entity::InterfaceReportEntity;
 pub use share_tool::InterfaceShareTool;
 pub use sign_type::{InterfaceSignType, InterfaceSignTypeBase, interface_sign_type_text};
