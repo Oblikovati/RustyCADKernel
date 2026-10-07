@@ -3,6 +3,7 @@
 //! and the commands of the exchange.
 mod controller;
 mod controller_customise;
+mod func_shape;
 mod functions;
 mod package;
 mod reader;
@@ -23,6 +24,7 @@ mod work_session_status;
 mod work_session_transfer;
 
 pub use controller::{XSControlController, XSControlControllerBase};
+pub use func_shape::{XSControlFileAndVar, XSControlFuncShape};
 pub use functions::XSControlFunctions;
 pub use package::XSControl;
 pub use reader::{XSControlReader, XSControlTransferStats};
@@ -37,6 +39,8 @@ pub use vars::{XSControlVars, XSControlVarsOps};
 pub use work_session::XSControlWorkSession;
 #[cfg(test)]
 mod controller_tests;
+#[cfg(test)]
+mod func_shape_tests;
 #[cfg(test)]
 mod functions_tests;
 #[cfg(test)]

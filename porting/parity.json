@@ -106889,6 +106889,38 @@
       "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. Registered once per process, in the native order; the errors of IFSelect_Act registration are returned."
     },
     {
+      "upstream_id": "XSControl_FuncShape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_FuncShape.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlFuncShape",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. The command functions return a Result: the native null dereferences (no XSControl session, no variables, no transfer reader or writer, no model) are Failure errors; trsave and trscomp write the shapes with the ported BRepTools writer."
+    },
+    {
+      "upstream_id": "XSControl_FuncShape::Init",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_FuncShape.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlFuncShape::init",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. Registered once per process, in the native order; the errors of IFSelect_Act registration are returned."
+    },
+    {
+      "upstream_id": "XSControl_FuncShape::MoreShapes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_FuncShape.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlFuncShape::more_shapes",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. The in-out list is a &mut Vec (never null). Native quirk kept: in \"nom(n1-n2)\" the last '(' , '-' and ')' count, and a negative n1 is added to n2."
+    },
+    {
+      "upstream_id": "XSControl_FuncShape::FileAndVar",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_FuncShape.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlFuncShape::file_and_var",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. The result and the two output names are returned as XSControlFileAndVar; the C null texts are empty texts."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
