@@ -42,7 +42,7 @@ impl ShapeFixFace {
 fn reorder_wire(wire: &Wire) -> Result<Wire, Failure> {
     let fixer = ShapeFixWire::new();
     fixer.load(wire)?;
-    fixer.fix_reorder()?;
+    fixer.fix_reorder(false)?;
     fixer.wire()
 }
 fn closed_in_pcurve(face: &topods::Face, wire: &Wire) -> Result<bool, Failure> {

@@ -17,11 +17,14 @@ use rustycad_tkernel::standard::{Failure, Handle, SharedState};
 /// Shape-level repair dispatch with shared tools and context handling.
 ///
 /// ```
-/// use rustycad_tkbrep::topods::Shape;
+/// use rustycad_tkbrep::brep::BRepBuilder;
+/// use rustycad_tkbrep::topods::Compound;
 /// use rustycad_tkshhealing::shape_fix::ShapeFixShape;
-/// let fixer = ShapeFixShape::new(Shape::default());
+/// let mut compound = Compound::default();
+/// BRepBuilder::default().make_compound(&mut compound);
+/// let fixer = ShapeFixShape::new(compound.into_shape());
 /// assert!(!fixer.perform().unwrap());
-/// assert!(fixer.shape().is_null());
+/// assert!(!fixer.shape().is_null());
 /// ```
 pub struct ShapeFixShape {
     parent: super::ShapeFixRoot,
@@ -73,9 +76,12 @@ impl ShapeFixShape {
     /// `assert!(!fixer.perform()?)`.
     ///
     /// ```
-    /// use rustycad_tkbrep::topods::Shape;
+    /// use rustycad_tkbrep::brep::BRepBuilder;
+    /// use rustycad_tkbrep::topods::Compound;
     /// use rustycad_tkshhealing::shape_fix::ShapeFixShape;
-    /// let fixer = ShapeFixShape::new(Shape::default());
+    /// let mut compound = Compound::default();
+    /// BRepBuilder::default().make_compound(&mut compound);
+    /// let fixer = ShapeFixShape::new(compound.into_shape());
     /// assert!(!fixer.perform().unwrap());
     /// ```
     pub fn perform(&self) -> Result<bool, Failure> {
@@ -144,10 +150,12 @@ mod tests {
     use rustycad_tkbrep::topods::Shape;
 
     #[test]
-    fn perform_preserves_the_initialized_shape() {
+    fn perform_on_a_null_shape_fails() {
+        // Native dereferences the null shape (undefined behaviour); the port fails.
         let input = Shape::default();
         let fixer = ShapeFixShape::new(input.clone());
-        assert!(!fixer.perform().unwrap());
+        let failure = fixer.perform().unwrap_err();
+        assert_eq!(failure.exception_type(), "Standard_NullObject");
         assert_eq!(fixer.shape().tshape_address(), input.tshape_address());
         assert!(!fixer.context().is_null());
     }

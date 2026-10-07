@@ -64,6 +64,18 @@ class Prelude:
         self.surfaces += 1
         return self.surfaces-1
 
+    def extrusion(self, curve: list[float], d: Vec) -> int:
+        """A Geom_SurfaceOfLinearExtrusion of a tp_geom_curve record along d."""
+        self.records.append([4, *curve, *d])
+        self.surfaces += 1
+        return self.surfaces-1
+
+    def revolution(self, curve: list[float], p: Vec, d: Vec) -> int:
+        """A Geom_SurfaceOfRevolution of a tp_geom_curve record about (p, d)."""
+        self.records.append([5, *curve, *p, *d])
+        self.surfaces += 1
+        return self.surfaces-1
+
     def location(self, trsf: list[float | int]) -> int:
         self.records.append([3, *trsf])
         self.locations += 1

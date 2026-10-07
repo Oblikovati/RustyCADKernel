@@ -50,6 +50,20 @@ pub mod canonical;
 
 pub mod shape_construct;
 
+pub mod construct_package;
+
+pub mod custom_surface;
+
+pub mod shape_algo;
+
+pub mod unify;
+
+pub mod fix_face;
+
+pub mod fix_shape;
+
+pub mod shape_process;
+
 pub mod analysis_surface;
 pub mod shape_analysis_curve;
 

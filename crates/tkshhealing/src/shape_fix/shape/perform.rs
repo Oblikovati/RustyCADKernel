@@ -16,11 +16,14 @@ impl ShapeFixShape {
                 "ShapeFix_Shape::Perform: null context; expected Init(shape) before Perform()",
             ));
         }
-        // Existing Rust null-shape support is explicit; native ShapeType throws here.
+        // Native dereferences the null TShape in myShape.ShapeType() (undefined behaviour);
+        // the port reports it as the Standard_NullObject failure OCCT raises elsewhere.
         if input.is_null() {
-            *self.result.write() = input;
-            *self.status.write() = 0;
-            return Ok(false);
+            return Err(Failure::with_type(
+                "Standard_NullObject",
+                "ShapeFix_Shape::Perform: null shape; expected Init(shape) with a non-null shape",
+                "",
+            ));
         }
         self.perform_loaded_shape(&input, progress)
     }

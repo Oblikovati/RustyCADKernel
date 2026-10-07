@@ -9,7 +9,7 @@ use rustycad_tkbrep::topods::{self, Face, Shape, ShapeIterator};
 use rustycad_tkernel::message::Msg;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::tcollection::AsciiString;
-use rustycad_tkg3d::top_abs::ShapeEnum;
+use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::gp::Point3;
 
 pub(super) fn fix_spot_face(fixer: &ShapeFixFixSmallFace) -> Result<Shape, Failure> {
@@ -24,6 +24,8 @@ pub(super) fn fix_spot_face(fixer: &ShapeFixFixSmallFace) -> Result<Shape, Failu
         return Ok(reshaped);
     }
     let result = finish_spot_phase(fixer, &reshaped, done)?;
+    // Native: myShape = FixShape(); myResult = myShape.
+    *fixer.input.write() = result.clone();
     *fixer.result.write() = result.clone();
     Ok(result)
 }
@@ -181,7 +183,13 @@ fn replace_face_vertices(
     )?;
     while vertices.more() {
         let old = topods::vertex(vertices.current())?;
-        let replacement = shared.oriented(old.orientation());
+        // Native: FORWARD for a forward vertex, REVERSED for any other orientation.
+        let orientation = if old.orientation() == Orientation::Forward {
+            Orientation::Forward
+        } else {
+            Orientation::Reversed
+        };
+        let replacement = shared.oriented(orientation);
         ReShape::replace(context.get().unwrap(), &old.into_shape(), &replacement)?;
         vertices.next()?;
     }
@@ -233,28 +241,22 @@ fn fix_shape_faces(fixer: &ShapeFixFixSmallFace, shape: &Shape) -> Result<Shape,
     let context = context(fixer)?;
     let mut faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape)?;
     while faces.more() {
-        fix_one_face(&context, faces.current())?;
+        let applied = ReShape::apply(context.get().unwrap(), faces.current(), ShapeEnum::Shape)?;
+        let face = topods::face(&applied)?;
+        let fixed = fix_face(fixer, &face)?;
+        ReShape::replace(context.get().unwrap(), &applied, &fixed.into_shape())?;
         faces.next()?;
     }
     ReShape::apply(context.get().unwrap(), shape, ShapeEnum::Shape)
 }
 
+/// `FixFace`: ShapeFix_Face Perform with the shared context; the fixed face (`Face()`).
 pub(super) fn fix_face(fixer: &ShapeFixFixSmallFace, face: &Face) -> Result<Face, Failure> {
     let fixer_face = ShapeFixFace::default();
     fixer_face.set_context(&context(fixer)?);
     fixer_face.init(face.clone().into_shape());
     fixer_face.perform()?;
     fixer_face.face()
-}
-
-fn fix_one_face(context: &Handle<ShapeBuildReShape>, shape: &Shape) -> Result<(), Failure> {
-    let applied = ReShape::apply(context.get().unwrap(), shape, ShapeEnum::Shape)?;
-    let face = topods::face(&applied)?;
-    let fixer = ShapeFixFace::default();
-    fixer.set_context(context);
-    fixer.init(face.into_shape());
-    fixer.perform()?;
-    ReShape::replace(context.get().unwrap(), &applied, &fixer.result())
 }
 
 fn context(fixer: &ShapeFixFixSmallFace) -> Result<Handle<ShapeBuildReShape>, Failure> {

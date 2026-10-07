@@ -7,7 +7,9 @@
 //    3 cone angle R; 4 torus R r) on gp_Ax3(P, N, X), Y-reversed (indirect) when yrev;
 //  1 trimmed s u1 u2 v1 v2: Geom_RectangularTrimmedSurface of surface s;
 //  2 offset s d: Geom_OffsetSurface of surface s;
-//  3 location (trsf): a location of the transformation record.
+//  3 location (trsf): a location of the transformation record;
+//  4 extrusion (curve record) D: Geom_SurfaceOfLinearExtrusion of the curve along D;
+//  5 revolution (curve record) P D: Geom_SurfaceOfRevolution of the curve about (P, D).
 // A transformation record `kind ...`: 0 translation V; 1 rotation P D angle; 2 scale P s;
 // 3 mirror about point P; 4 mirror about axis P D; 5 mirror about plane P N; 6 product
 // (trsf) (trsf) (the first multiplied by the second).
@@ -21,6 +23,8 @@
 #include <Geom_Plane.hxx>
 #include <Geom_RectangularTrimmedSurface.hxx>
 #include <Geom_SphericalSurface.hxx>
+#include <Geom_SurfaceOfLinearExtrusion.hxx>
+#include <Geom_SurfaceOfRevolution.hxx>
 #include <Geom_ToroidalSurface.hxx>
 #include <gp_Ax3.hxx>
 gp_Trsf shc_trsf(GaReader& r){
@@ -48,6 +52,9 @@ void shc_prelude(GaReader& r,TpShapes& t){
   else if(kind==1){int s=r.integer();double u1=r.real(),u2=r.real(),v1=r.real();
    t.surfaces.push_back(new Geom_RectangularTrimmedSurface(t.surfaces.at(s),u1,u2,v1,r.real()));}
   else if(kind==2){int s=r.integer();t.surfaces.push_back(new Geom_OffsetSurface(t.surfaces.at(s),r.real()));}
+  else if(kind==4){occ::handle<Geom_Curve> c=tp_geom_curve(r);t.surfaces.push_back(new Geom_SurfaceOfLinearExtrusion(c,r.dir()));}
+  else if(kind==5){occ::handle<Geom_Curve> c=tp_geom_curve(r);gp_Pnt p=r.pnt();
+   t.surfaces.push_back(new Geom_SurfaceOfRevolution(c,gp_Ax1(p,r.dir())));}
   else t.locations.push_back(TopLoc_Location(shc_trsf(r)));}}
 // The prelude, then the shape program on the same tables.
 TpShapes shc_shapes(GaReader& r){TpShapes t;shc_prelude(r,t);tp_shapes_into(r,t);return t;}

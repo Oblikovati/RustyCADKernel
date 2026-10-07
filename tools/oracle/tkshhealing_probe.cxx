@@ -47,6 +47,13 @@
 #include "tkshhealing_probe_edge_outputs.cxx"
 #include "tkshhealing_probe_canonical.cxx"
 #include "tkshhealing_probe_shapeconstruct.cxx"
+#include "tkshhealing_probe_construct_package.cxx"
+#include "tkshhealing_probe_custom_surface.cxx"
+#include "tkshhealing_probe_shape_algo.cxx"
+#include "tkshhealing_probe_unify.cxx"
+#include "tkshhealing_probe_fix_face.cxx"
+#include "tkshhealing_probe_fix_shape.cxx"
+#include "tkshhealing_probe_shape_process.cxx"
 #include "tkshhealing_probe_analysiscurve.cxx"
 #include "tkshhealing_probe_analysis_surface.cxx"
 #include "tkshhealing_probe_project_curve.cxx"
@@ -86,6 +93,24 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sh_shell_sewing", sh_shell_sewing_case},
  {"sh_project_curve", sh_project_curve_case},
  {"sh_construct", sh_construct_case},
+ // ShapeConstruct package functions (tkshhealing_probe_construct_package.cxx)
+ {"sh_construct_pkg", sh_construct_pkg_case},
+ // ShapeAlgo_AlgoContainer (tkshhealing_probe_shape_algo.cxx)
+ {"sh_algo_geom", sh_algo_geom_case},
+ {"sh_algo_shape", sh_algo_shape_case},
+ // ShapeUpgrade_UnifySameDomain (tkshhealing_probe_unify.cxx)
+ {"sh_unify", sh_unify_case},
+ {"sh_face_connect", sh_face_connect_case},
+ // ShapeFix_Face (tkshhealing_probe_fix_face.cxx)
+ {"sh_fix_face", sh_fix_face_case},
+ // Shape-level ShapeFix (tkshhealing_probe_fix_shape.cxx)
+ {"sh_fix_shape", sh_fix_shape_case},
+ // ShapeCustom_Surface (tkshhealing_probe_custom_surface.cxx)
+ {"sc_surface", sc_surface_case},
+ // ShapeProcess and ShapeProcessAPI (tkshhealing_probe_shape_process.cxx)
+ {"sp_context", sp_context_case},
+ {"sp_process", sp_process_case},
+ {"sp_apply", sp_apply_case},
  {"sh_analysis_surface", sh_analysis_surface_case},
  {"sh_canonical", sh_canonical_case},
  {"sh_edgeoutputs", sh_edgeoutputs_case},

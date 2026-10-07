@@ -32,6 +32,8 @@ mod wire_nonadjacent_intersection_fix;
 mod wire_notched;
 #[path = "wire_perform.rs"]
 mod wire_perform;
+#[path = "wire_reorder.rs"]
+mod wire_reorder;
 #[path = "wire_seam.rs"]
 mod wire_seam;
 #[path = "wire_self_intersection_aggregate.rs"]
@@ -57,7 +59,7 @@ pub use wire_intersection_tool::ShapeFixIntersectionTool;
 pub use wire_split_tool::ShapeFixSplitTool;
 
 use super::{FixRoot, FixRootData, ShapeFixRoot};
-use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire, ShapeAnalysisWireOrder};
+use crate::shape_analysis::{ShapeAnalysisEdge, ShapeAnalysisWire};
 use crate::shape_build::{ShapeBuildEdge, ShapeBuildReShape};
 use crate::shape_extend::{ShapeExtend, ShapeExtendStatus, ShapeExtendWireData};
 use crate::shape_fix::ShapeFixEdge;
@@ -294,35 +296,6 @@ impl ShapeFixWire {
         ShapeExtend::decode_status(self.state.read().connected_status, status)
     }
 
-    /// `FixReorder()`: analyze the loaded 3D endpoints, then apply the proposed order.
-    pub fn fix_reorder(&self) -> Result<bool, Failure> {
-        let mut order = ShapeAnalysisWireOrder::new();
-        self.ensure_analyzer()
-            .check_order_with(&mut order, self.closed_mode(), true, false)?;
-        self.fix_reorder_with(&order)
-    }
-
-    /// `FixReorder(order)`: reorder existing wire data using its signed edge indices.
-    pub fn fix_reorder_with(&self, order: &ShapeAnalysisWireOrder) -> Result<bool, Failure> {
-        self.set_reorder_status(ShapeExtendStatus::Ok);
-        let wire_data = self.wire_data()?;
-        let count = wire_data.nb_edges();
-        if count == 0 || order.status() == 0 {
-            return Ok(false);
-        }
-        if order.status() <= -10 {
-            self.set_reorder_status(ShapeExtendStatus::Fail1);
-            return Ok(false);
-        }
-        if count != order.nb_edges() {
-            self.set_reorder_status(ShapeExtendStatus::Fail2);
-            return Ok(false);
-        }
-        self.apply_order(&wire_data, order, count)?;
-        self.record_reorder_status(order.status());
-        Ok(true)
-    }
-
     /// Splits one strict interior crossing between nonadjacent line p-curves.
     pub fn fix_line_self_intersections(&self) -> Result<bool, Failure> {
         self.state.write().intersections_status = ShapeExtend::encode_status(ShapeExtendStatus::Ok);
@@ -338,7 +311,7 @@ impl ShapeFixWire {
         self.state.write().intersections_status =
             ShapeExtend::encode_status(ShapeExtendStatus::Done1)
                 | ShapeExtend::encode_status(ShapeExtendStatus::Done5);
-        let _ = self.fix_reorder()?;
+        let _ = self.fix_reorder(false)?;
         Ok(true)
     }
 
@@ -448,60 +421,6 @@ impl ShapeFixWire {
         self.state.read().remove_loop_mode
     }
 
-    fn apply_order(
-        &self,
-        wire_data: &Handle<ShapeExtendWireData>,
-        order: &ShapeAnalysisWireOrder,
-        count: i32,
-    ) -> Result<(), Failure> {
-        let old_edges = (1..=count)
-            .map(|index| wire_data.edge(index))
-            .collect::<Result<Vec<Edge>, _>>()?;
-        for rank in 1..=count {
-            let Some(edge) = self.reordered_edge(&old_edges, order, rank, count)? else {
-                return Ok(());
-            };
-            wire_data.set(&edge, rank)?;
-        }
-        Ok(())
-    }
-
-    fn reordered_edge(
-        &self,
-        edges: &[Edge],
-        order: &ShapeAnalysisWireOrder,
-        rank: i32,
-        count: i32,
-    ) -> Result<Option<Edge>, Failure> {
-        let signed_index = order.ordered(rank)?;
-        if signed_index == 0 {
-            self.set_reorder_status(ShapeExtendStatus::Fail3);
-            return Ok(None);
-        }
-        let old_index = signed_index.abs();
-        if old_index > count {
-            return Err(invalid_order_index(signed_index, count));
-        }
-        let mut edge = edges[(old_index - 1) as usize].clone();
-        if signed_index < 0 {
-            edge.reverse();
-        }
-        Ok(Some(edge))
-    }
-
-    fn record_reorder_status(&self, order_status: i32) {
-        self.set_reorder_status(ShapeExtendStatus::Done1);
-        if matches!(order_status, 2 | -2) {
-            self.or_reorder_status(ShapeExtendStatus::Done2);
-        }
-        if order_status < 0 {
-            self.or_reorder_status(ShapeExtendStatus::Done3);
-        }
-        if order_status == 3 {
-            self.or_reorder_status(ShapeExtendStatus::Done5);
-        }
-    }
-
     fn first_line_crossing(
         &self,
         analyzer: &ShapeAnalysisWire,
@@ -599,14 +518,6 @@ impl ShapeFixWire {
         state.notches_status = 0;
         state.tails_status = 0;
     }
-
-    fn set_reorder_status(&self, status: ShapeExtendStatus) {
-        self.state.write().reorder_status = ShapeExtend::encode_status(status);
-    }
-
-    fn or_reorder_status(&self, status: ShapeExtendStatus) {
-        self.state.write().reorder_status |= ShapeExtend::encode_status(status);
-    }
 }
 
 fn crossing_vertex(face: &Face, point: Point2) -> Result<Vertex, Failure> {
@@ -635,15 +546,6 @@ impl FixRoot for ShapeFixWire {
     fn fix_root_data(&self) -> &FixRootData {
         self.parent.fix_root_data()
     }
-}
-
-fn invalid_order_index(index: i32, count: i32) -> Failure {
-    Failure::with_message(
-        "Standard_OutOfRange",
-        &format!(
-            "ShapeFix_Wire::FixReorder: ordered index {index}; expected an index within 1..={count}"
-        ),
-    )
 }
 
 fn replacement_edges(shape: &Shape) -> Result<Vec<Edge>, Failure> {

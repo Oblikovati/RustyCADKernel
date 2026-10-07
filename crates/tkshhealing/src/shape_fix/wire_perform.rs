@@ -109,8 +109,8 @@ impl ShapeFixWire {
             self.state.read().fix_self_intersection_mode,
             self.closed_mode(),
         ) {
+            // perform_self_intersection_stage runs the native trailing FixReorder once.
             state.fix_self_intersection(self)?;
-            let _ = self.fix_reorder()?;
         }
         Ok(())
     }
@@ -156,7 +156,7 @@ impl AggregateWireState {
             reorder_ok: order.status() == 0,
         };
         if needs_fix(fixer.state.read().fix_reorder_mode, !state.reorder_ok) {
-            state.fixed |= fixer.fix_reorder()?;
+            state.fixed |= fixer.fix_reorder(false)?;
             state.reorder_ok = !fixer.status_reorder(ShapeExtendStatus::Fail);
         }
         Ok(state)
@@ -167,13 +167,17 @@ impl AggregateWireState {
             return Ok(());
         }
         let lock_vertex = !fixer.topology_mode() || !self.reorder_ok;
-        self.fixed |= fixer.fix_small_all(lock_vertex, fixer.min_tolerance())? != 0;
+        if fixer.fix_small_all(lock_vertex, fixer.min_tolerance())? == 0 {
+            return Ok(());
+        }
+        // Native retries the reorder only after FixSmall changed the wire.
+        self.fixed = true;
         self.retry_reorder(fixer)
     }
 
     fn retry_reorder(&mut self, fixer: &ShapeFixWire) -> Result<(), Failure> {
         if needs_fix(fixer.state.read().fix_reorder_mode, !self.reorder_ok) {
-            let _ = fixer.fix_reorder()?;
+            let _ = fixer.fix_reorder(false)?;
             self.reorder_ok = !fixer.status_reorder(ShapeExtendStatus::Fail);
         }
         Ok(())

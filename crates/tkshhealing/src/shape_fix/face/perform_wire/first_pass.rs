@@ -33,7 +33,8 @@ fn configure_first_pass(
     source: &Shape,
     saved_precision: f64,
 ) -> Result<(), Failure> {
-    let face = topods::face(source)?;
+    // Natively SetFace(myFace, mySurf) takes the current face, not its context image.
+    let face = topods::face(&fixer.face_state.read())?;
     set_wire_face(fixer, &face)?;
     update_auto_precision(fixer, source, saved_precision)?;
     Ok(())
@@ -98,7 +99,10 @@ fn copy_first_pass_children(
         }
         let (child_fixed, child_reordered) =
             perform_first_wire(fixer, &child, rebuilt, progress, reordered_wires)?;
-        fixed = child_fixed;
+        // The native `fixed` is only written by a dropped empty wire or a performed wire.
+        if let Some(child_fixed) = child_fixed {
+            fixed = child_fixed;
+        }
         reordered |= child_reordered;
     }
     Ok(FirstPassOutcome { fixed, reordered })
@@ -121,7 +125,7 @@ fn perform_first_wire(
     rebuilt: &mut Face,
     progress: &ProgressRange<'_>,
     reordered_wires: &mut Vec<(Shape, Shape)>,
-) -> Result<(bool, bool), Failure> {
+) -> Result<(Option<bool>, bool), Failure> {
     let wire = topods::wire(child)?;
     fixer.wire_tool.load(&wire)?;
     if fixer.wire_tool.nb_edges() == 0 {
@@ -129,22 +133,23 @@ fn perform_first_wire(
     }
     if !fixer.wire_tool.perform_with_progress(progress)? {
         BRepBuilder::default().add(rebuilt, &wire.clone().into_shape())?;
-        return Ok((false, false));
+        return Ok((None, false));
     }
-    append_first_performed_wire(fixer, &wire, rebuilt, reordered_wires)
+    let (fixed, reordered) = append_first_performed_wire(fixer, &wire, rebuilt, reordered_wires)?;
+    Ok((Some(fixed), reordered))
 }
 
 fn preserve_or_drop_empty_wire(
     fixer: &ShapeFixFace,
     wire: &Wire,
     rebuilt: &mut Face,
-) -> Result<(bool, bool), Failure> {
+) -> Result<(Option<bool>, bool), Failure> {
     if fixer.wire_tool.wire_data()?.nb_non_manifold_edges() > 0 {
         BRepBuilder::default().add(rebuilt, &wire.clone().into_shape())?;
-        return Ok((false, false));
+        return Ok((None, false));
     }
     fixer.record_wire_face_stage(ShapeExtendStatus::Done5);
-    Ok((true, false))
+    Ok((Some(true), false))
 }
 
 fn append_first_performed_wire(

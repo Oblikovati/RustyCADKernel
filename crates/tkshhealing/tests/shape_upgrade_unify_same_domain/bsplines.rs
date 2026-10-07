@@ -94,8 +94,11 @@ fn assert_merged_edge_pcurve(shape: &Shape, native: &str) {
     let face = rustycad_tkbrep::topods::face(shape).unwrap();
     let edges = edge_shapes(shape);
     let merged = find_bspline_edge(&edges);
+    // Natively the merged edge gets no stored p-curve on the plane (GlueEdgesWith3DCurves
+    // builds none and ShapeFix_Face sees the planar projection); the native probe reads it
+    // through BRep_Tool::CurveOnSurface, which projects onto the plane.
     let pcurve = BRepTool::curve_on_face(merged, &face).unwrap();
-    assert!(pcurve.is_stored);
+    assert!(!pcurve.pcurve.is_null());
     let adaptor = BRepAdaptorCurve2d::with_edge_on_face(merged, &face).unwrap();
     assert_eq!(adaptor.get_type().unwrap(), CurveType::BSplineCurve);
     assert_eq!(adaptor.first_parameter().unwrap(), 0.);
