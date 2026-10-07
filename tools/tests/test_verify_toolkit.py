@@ -84,5 +84,31 @@ class NativeExitCodeTests(unittest.TestCase):
                 run_native_suites(['gtest'], Path('log'), {}, False)
 
 
+class CargoTestRun:
+    """A run() stand-in for `cargo test` that reports the given passing test names."""
+
+    def __init__(self, names):
+        self.names = names
+
+    def __call__(self, command, log, env=None):
+        return ''.join(f'test {name} ... ok\n' for name in self.names)
+
+
+class RustCaseTests(unittest.TestCase):
+    # mapped_runtime_sets keys Rust cases by (package, target, test); 2-tuples crashed here.
+    ROWS = [{'rust_package': 'rustycad-tkmath', 'rust_target': 'bnd_b2'}]
+
+    def test_exact_mapped_cases_pass(self):
+        expected = {('rustycad-tkmath', 'bnd_b2', 'a'), ('rustycad-tkmath', 'bnd_b2', 'b')}
+        with mock.patch.object(verify_toolkit, 'run', CargoTestRun(['a', 'b'])):
+            verify_toolkit.rust_tests(Path('out'), self.ROWS, expected, {})
+
+    def test_missing_or_foreign_package_cases_fail(self):
+        expected = {('rustycad-tkmath', 'bnd_b2', 'a'), ('rustycad-other', 'bnd_b2', 'b')}
+        with mock.patch.object(verify_toolkit, 'run', CargoTestRun(['a', 'b'])):
+            with self.assertRaises(ValueError):
+                verify_toolkit.rust_tests(Path('out'), self.ROWS, expected, {})
+
+
 if __name__ == '__main__':
     unittest.main()

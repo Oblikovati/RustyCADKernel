@@ -169,7 +169,8 @@ def rust_tests(output: Path, rows: list[dict], expected: set, environment: dict)
     for package,target in targets:
         result = run(['cargo','test','--locked','-p',package,'--test',target,'--','--test-threads=1'],output/f'rust-{target}.log',env=environment)
         passed = set(re.findall(r'^test (\S+) \.\.\. ok$',result,re.M))
-        if passed != {name for mapped,name in expected if mapped == target}:
+        # mapped_runtime_sets keys Rust cases by (package, target, test) since 1696fa2f.
+        if passed != {name for owner,mapped,name in expected if (owner,mapped) == (package,target)}:
             raise ValueError(f'Rust cases missing, skipped, or unmapped: {package}/{target}')
 
 
