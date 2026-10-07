@@ -13,3 +13,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     """Append every TKService request family in a fixed order."""
     # Aspect grids (tkservice_corpus_grid.py)
     __import__('tkservice_corpus_grid').append_grid_requests(requests)
+    # WNT_HIDSpaceMouse (tkservice_corpus_hid.py)
+    __import__('tkservice_corpus_hid').append_hid_requests(requests)

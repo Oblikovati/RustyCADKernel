@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod sv_probe;
-use sv_probe::grid;
+use sv_probe::{grid, hid};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -13,6 +13,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // Aspect grids (sv_probe/grid.rs)
     ("sv_rgrid", grid::rectangular_case),
     ("sv_cgrid", grid::circular_case),
+    // WNT_HIDSpaceMouse (sv_probe/hid.rs)
+    ("sv_hid", hid::hid_case),
 ];
 
 fn main() {

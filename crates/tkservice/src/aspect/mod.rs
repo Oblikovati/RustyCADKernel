@@ -9,6 +9,7 @@ pub mod exceptions;
 mod gen_id;
 mod grid;
 mod grid_params;
+mod input_values;
 mod native_types;
 mod neutral_window;
 mod rectangular_grid;
@@ -18,6 +19,7 @@ mod view_enums;
 mod vkey;
 mod vkey_set;
 mod window;
+mod window_input_listener;
 
 pub use background::{AspectBackground, AspectGradientBackground};
 pub use circular_grid::{AspectCircularGrid, AspectCircularGridBase, AspectCircularGridMembers};
@@ -25,6 +27,9 @@ pub use display_connection::AspectDisplayConnection;
 pub use gen_id::AspectGenId;
 pub use grid::{AspectGrid, AspectGridBase, AspectGridFields, AspectGridMembers};
 pub use grid_params::AspectGridParams;
+pub use input_values::{
+    AspectFrustumLrbt, AspectScrollDelta, AspectTouch, AspectTrackedDevicePose,
+};
 pub use native_types::{
     AspectDisplay, AspectDrawable, AspectFbConfig, AspectHandle, AspectRenderingContext,
 };
@@ -38,3 +43,7 @@ pub use view_enums::*;
 pub use vkey::*;
 pub use vkey_set::{AspectVKeySet, AspectVKeySetState};
 pub use window::{AspectWindow, AspectWindowBase, AspectWindowFields, AspectWindowMembers};
+pub use window_input_listener::{
+    ASPECT_TOUCH_ID_ALL, AspectWindowInputListener, AspectWindowInputListenerBase,
+    AspectWindowInputListenerMembers,
+};

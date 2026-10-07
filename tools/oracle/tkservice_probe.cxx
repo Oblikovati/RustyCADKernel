@@ -24,10 +24,13 @@
 // token stream; the Rust twin includes crates/tkgeomalgo/examples/ga_probe/common.rs.
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkservice_probe_grid.cxx"
+#include "tkservice_probe_hid.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
  {"sv_cgrid", sv_cgrid_case},
+ // WNT_HIDSpaceMouse (tkservice_probe_hid.cxx)
+ {"sv_hid", sv_hid_case},
 };
 int main() {
  std::string line;

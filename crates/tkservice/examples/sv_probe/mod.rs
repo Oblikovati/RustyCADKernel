@@ -1,5 +1,6 @@
 //! The TKService probe operations, one module per C++ probe file under tools/oracle.
 pub mod grid;
+pub mod hid;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that every toolkit
 // prints the same token stream (tools/oracle/tkservice_probe.cxx includes
 // tkgeomalgo_probe_common.cxx likewise). Each package uses a subset of them.

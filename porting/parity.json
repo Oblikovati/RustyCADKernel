@@ -442858,6 +442858,1675 @@
       "rust_item": "rustycad_tkservice::aspect::AspectGridParams::set_is_view_adaptive",
       "status": "implemented",
       "notes": "Aspect mapping (docs/visualization-design.md section 1): value classes are Rust structs with the native defaults; setters that raise Standard_NegativeValue return Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Display",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Display.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplay",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The Display* address."
+    },
+    {
+      "upstream_id": "Aspect_Drawable",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Drawable.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDrawable",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_FBConfig",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FBConfig.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectFbConfig",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The GLXFBConfig address."
+    },
+    {
+      "upstream_id": "GLXFBConfig",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FBConfig.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Excluded: GLX typedef `struct __GLXFBConfigRec*` declared only to spell Aspect_FBConfig without GL headers; rustycad_tkservice::aspect::AspectFbConfig (the address) carries it, and GLX belongs to the OpenGL driver that the Vulkan 1.3 driver replaces (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Aspect_Handle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Handle.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectHandle",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_RenderingContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_RenderingContext.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectRenderingContext",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The native context address."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::Aspect_DisplayConnection()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::new",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Opens $DISPLAY through the x11-dl wrapper; a missing libX11 is reported as the unreachable server."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::Aspect_DisplayConnection(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::with_display_name",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::Aspect_DisplayConnection(Aspect_XDisplay *)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::with_display",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The Display* is passed as its address."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::GetAtom",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::get_atom",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. NCollection_DataMap::Find raises Standard_NoSuchObject for an atom that was not interned; Rust returns that Failure."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::GetDefaultFBConfig",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::get_default_fb_config",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::GetDefaultVisualInfo",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::get_default_visual_info",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The XVisualInfo* address."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::GetDisplayAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::get_display_aspect",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The Display* address."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::GetDisplayName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::get_display_name",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::Init",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::init",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::IsOwnDisplay",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::is_own_display",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_DisplayConnection::SetDefaultVisualInfo",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectDisplayConnection::set_default_visual_info",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_FrustumLRBT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplate"
+      },
+      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The class template is the generic struct."
+    },
+    {
+      "upstream_id": "Aspect_FrustumLRBT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
+      "cpp_selector": {
+        "kind": "CXXRecord"
+      },
+      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The template record is the generic struct."
+    },
+    {
+      "upstream_id": "Aspect_FrustumLRBT::Aspect_FrustumLRBT<Elem_t>()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_FrustumLRBT::Aspect_FrustumLRBT<Elem_t>(const Aspect_FrustumLRBT<Other_t> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
+      "cpp_selector": {
+        "kind": "FunctionTemplate"
+      },
+      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt::from_f32",
+      "rust_items": [
+        "rustycad_tkservice::aspect::AspectFrustumLrbt::from_f32",
+        "rustycad_tkservice::aspect::AspectFrustumLrbt::from_f64"
+      ],
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The copy/cast template is instantiated natively for float <-> double (OpenGl and Graphic3d); Rust spells both instances."
+    },
+    {
+      "upstream_id": "Aspect_FrustumLRBT::Multiplied",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt::multiplied",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_FrustumLRBT::Multiply",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt::multiply",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_FrustumLRBT::Left",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt::left",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_FrustumLRBT::Right",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt::right",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_FrustumLRBT::Bottom",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt::bottom",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_FrustumLRBT::Top",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FrustumLRBT.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectFrustumLrbt::top",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_ScrollDelta::Aspect_ScrollDelta()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_ScrollDelta.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectScrollDelta::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_ScrollDelta::Aspect_ScrollDelta(const NCollection_Vec2<int> &,double,Aspect_VKeyFlags)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_ScrollDelta.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectScrollDelta::new",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_ScrollDelta::Aspect_ScrollDelta(double,Aspect_VKeyFlags)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_ScrollDelta.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectScrollDelta::with_delta",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_ScrollDelta::HasPoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_ScrollDelta.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectScrollDelta::has_point",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_ScrollDelta::ResetPoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_ScrollDelta.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectScrollDelta::reset_point",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_ScrollDelta::Point",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_ScrollDelta.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectScrollDelta::point",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_ScrollDelta::Delta",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_ScrollDelta.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectScrollDelta::delta",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_ScrollDelta::Flags",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_ScrollDelta.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectScrollDelta::flags",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Touch::Aspect_Touch()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Touch.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTouch::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Touch::Aspect_Touch(const NCollection_Vec2<double> &,bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Touch.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTouch::new",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Touch::Aspect_Touch(double,double,bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Touch.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTouch::at",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Touch::Delta",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Touch.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTouch::delta",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Touch::From",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Touch.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTouch::from",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Touch::To",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Touch.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTouch::to",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Touch::IsPreciseDevice",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Touch.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTouch::is_precise_device",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_TrackedDevicePose::Aspect_TrackedDevicePose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_TrackedDevicePose.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTrackedDevicePose::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_TrackedDevicePose::Orientation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_TrackedDevicePose.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTrackedDevicePose::orientation",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_TrackedDevicePose::Velocity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_TrackedDevicePose.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTrackedDevicePose::velocity",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_TrackedDevicePose::AngularVelocity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_TrackedDevicePose.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTrackedDevicePose::angular_velocity",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_TrackedDevicePose::IsValidPose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_TrackedDevicePose.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTrackedDevicePose::is_valid_pose",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_TrackedDevicePose::IsConnectedDevice",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_TrackedDevicePose.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectTrackedDevicePose::is_connected_device",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::Aspect_SkydomeBackground()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::Aspect_SkydomeBackground(const gp_Dir &,float,float,float,int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::new",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::Cloudiness",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::cloudiness",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::dump_json",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Native quirk kept: the class name written is Aspect_GradientBackground."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::Fogginess",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::fogginess",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::SetCloudiness",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::set_cloudiness",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::SetFogginess",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::set_fogginess",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::SetSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::set_size",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::SetSunDirection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::set_sun_direction",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::SetTimeParameter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::set_time_parameter",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::size",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::SunDirection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::sun_direction",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_SkydomeBackground::TimeParameter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_SkydomeBackground.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectSkydomeBackground::time_parameter",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::Aspect_NeutralWindow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::DoMapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::do_mapping",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::DoResize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::do_resize",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::IsMapped",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::is_mapped",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::Map",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::map",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::Unmap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::unmap",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::NativeFBConfig",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::native_fb_config",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::NativeHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::native_handle",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::NativeParentHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::native_parent_handle",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::Position",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::position",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::Ratio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::ratio",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::<rustycad_tkservice::aspect::AspectWindow>::size",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::SetNativeHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::set_native_handle",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::SetNativeHandles",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::set_native_handles",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::SetPosition(int,int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::set_position",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::SetPosition(int,int,int,int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::set_position_and_size",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::SetSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectNeutralWindow::set_size",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::myHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Excluded: protected data member that is private state of rustycad_tkservice::aspect::AspectNeutralWindow; native_handle and set_native_handles read and write it."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::myParentHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Excluded: protected data member that is private state of rustycad_tkservice::aspect::AspectNeutralWindow; native_parent_handle and set_native_handles read and write it."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::myFBConfig",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Excluded: protected data member that is private state of rustycad_tkservice::aspect::AspectNeutralWindow; native_fb_config and set_native_handles read and write it."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::myPosX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Excluded: protected data member that is private state of rustycad_tkservice::aspect::AspectNeutralWindow; position, set_position and set_position_and_size read and write it."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::myPosY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Excluded: protected data member that is private state of rustycad_tkservice::aspect::AspectNeutralWindow; position, set_position and set_position_and_size read and write it."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::myWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Excluded: protected data member that is private state of rustycad_tkservice::aspect::AspectNeutralWindow; size, set_size and set_position_and_size read and write it."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::myHeight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Excluded: protected data member that is private state of rustycad_tkservice::aspect::AspectNeutralWindow; size, set_size and set_position_and_size read and write it."
+    },
+    {
+      "upstream_id": "Aspect_NeutralWindow::myIsMapped",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_NeutralWindow.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Excluded: protected data member that is private state of rustycad_tkservice::aspect::AspectNeutralWindow; is_mapped, map and unmap read and write it."
+    },
+    {
+      "upstream_id": "Aspect_Window::Aspect_Window",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowBase::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The protected constructor builds the embedded base. Native quirk: MyIsVirtual is left indeterminate natively; Rust starts it false."
+    },
+    {
+      "upstream_id": "Aspect_Window::Background",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::background",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::BackgroundFillMethod",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::background_fill_method",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::ConvertPointFromBacking",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::convert_point_from_backing",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::ConvertPointToBacking",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::convert_point_to_backing",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::DevicePixelRatio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::device_pixel_ratio",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::Dimensions",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::dimensions",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::DisplayConnection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::display_connection",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::DoMapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::do_mapping",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::DoResize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::do_resize",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::dump_json",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::GradientBackground",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::gradient_background",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::InvalidateContent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::invalidate_content",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::IsMapped",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::is_mapped",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::IsVirtual",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::is_virtual",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::Map",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::map",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::NativeFBConfig",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::native_fb_config",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::NativeHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::native_handle",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::NativeParentHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::native_parent_handle",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::Position",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::position",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::Ratio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::ratio",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::SetBackground(const Aspect_Background &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::set_background",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::SetBackground(const Aspect_GradientBackground &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::set_gradient_background",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::SetBackground(const Quantity_Color &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::set_background_color",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::SetBackground(const Quantity_Color &,const Quantity_Color &,const Aspect_GradientFillMethod)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::set_gradient_background_colors",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::SetTitle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::set_title",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::SetVirtual",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::set_virtual",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::size",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::TopLeft",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowMembers::top_left",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::Unmap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::unmap",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_Window::myDisplay",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowFields::display",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The protected field is read through AspectWindowBase::fields and written through fields_mut."
+    },
+    {
+      "upstream_id": "Aspect_Window::MyBackground",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowFields::background",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The protected field is read through AspectWindowBase::fields and written through fields_mut."
+    },
+    {
+      "upstream_id": "Aspect_Window::MyGradientBackground",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowFields::gradient_background",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The protected field is read through AspectWindowBase::fields and written through fields_mut."
+    },
+    {
+      "upstream_id": "Aspect_Window::MyBackgroundFillMethod",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowFields::background_fill_method",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The protected field is read through AspectWindowBase::fields and written through fields_mut."
+    },
+    {
+      "upstream_id": "Aspect_Window::MyIsVirtual",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowFields::is_virtual",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The protected field is read through AspectWindowBase::fields and written through fields_mut."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Aspect_WindowInputListener",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::<core::default::Default>::default",
+      "rust_items": [
+        "rustycad_tkservice::aspect::AspectWindowInputListenerBase::<core::default::Default>::default",
+        "rustycad_tkservice::aspect::AspectWindowInputListenerBase::with_timer"
+      ],
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. The protected constructor builds the embedded base; with_timer injects the event timer."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::AddTouchPoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::add_touch_point",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Change3dMouseIsNoRotate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::change_3d_mouse_is_no_rotate",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Change3dMouseToReverse",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::change_3d_mouse_to_reverse",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::EventTime",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::event_time",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Get3dMouseIsNoRotate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::get_3d_mouse_is_no_rotate",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Get3dMouseRotationScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::get_3d_mouse_rotation_scale",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Get3dMouseToReverse",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::get_3d_mouse_to_reverse",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Get3dMouseTranslationScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::get_3d_mouse_translation_scale",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::HasTouchPoints",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::has_touch_points",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::KeyDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::key_down",
+      "rust_items": [
+        "rustycad_tkservice::aspect::AspectWindowInputListener::key_down",
+        "rustycad_tkservice::aspect::AspectWindowInputListenerBase::key_down"
+      ],
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Pure virtual with a native body; the body is the base method. Keys beyond Aspect_VKey_MAX return the Standard_OutOfRange the key array raises."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::KeyFromAxis",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::key_from_axis",
+      "rust_items": [
+        "rustycad_tkservice::aspect::AspectWindowInputListener::key_from_axis",
+        "rustycad_tkservice::aspect::AspectWindowInputListenerBase::key_from_axis"
+      ],
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Pure virtual with a native body; the body is the base method."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::KeyUp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::key_up",
+      "rust_items": [
+        "rustycad_tkservice::aspect::AspectWindowInputListener::key_up",
+        "rustycad_tkservice::aspect::AspectWindowInputListenerBase::key_up"
+      ],
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value. Pure virtual with a native body; the body is the base method."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::LastMouseFlags",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::last_mouse_flags",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::LastMousePosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::last_mouse_position",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::PressMouseButton",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::press_mouse_button",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::PressedMouseButtons",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::pressed_mouse_buttons",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::ProcessClose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::process_close",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::ProcessConfigure",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::process_configure",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::ProcessExpose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::process_expose",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::ProcessFocus",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::process_focus",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::ProcessInput",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::process_input",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::ReleaseMouseButton",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::release_mouse_button",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::RemoveTouchPoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::remove_touch_point",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Set3dMousePreciseInput",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::set_3d_mouse_precise_input",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Set3dMouseRotationScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::set_3d_mouse_rotation_scale",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Set3dMouseTranslationScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::set_3d_mouse_translation_scale",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::To3dMousePreciseInput",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::to_3d_mouse_precise_input",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::TouchPoints",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerMembers::touch_points",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::Update3dMouse",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::update_3d_mouse",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::UpdateMouseButtons",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::update_mouse_buttons",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::UpdateMousePosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::update_mouse_position",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::UpdateMouseScroll",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::update_mouse_scroll",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::UpdateTouchPoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::update_touch_point",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::update3dMouseKeys",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::update_3d_mouse_keys",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::update3dMouseRotation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::update_3d_mouse_rotation",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::update3dMouseTranslation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListener::update_3d_mouse_translation",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::my3dMouseAccelRotate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::mouse3d_accel_rotate",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::my3dMouseAccelTrans",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::mouse3d_accel_trans",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::my3dMouseButtonState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::mouse3d_button_state",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::my3dMouseIsQuadric",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::mouse3d_is_quadric",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::my3dMouseNoRotate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::mouse3d_no_rotate",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::my3dMouseToReverse",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::mouse3d_to_reverse",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::myEventTimer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::event_timer",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::myMouseModifiers",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::mouse_modifiers",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::myMousePositionLast",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::mouse_position_last",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::myMousePressed",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::mouse_pressed",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_WindowInputListener::myTouchPoints",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindowInputListenerBase::touch_points",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md sections 1 and 2): abstract classes are traits over embedded bases (AspectWindowBase, AspectWindowInputListenerBase) with extension traits for the non-virtual members; window-system pointers are kept as addresses (usize); C++ output references are returned tuples; exceptions are Failure errors carrying the offending value."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::Aspect_VKeySet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::Modifiers",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::modifiers",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::DownTime",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::down_time",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::TimeUp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::time_up",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::IsFreeKey",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::is_free_key",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::IsKeyDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::is_key_down",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::Mutex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::lock",
+      "status": "partial",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples. The shared_mutex is the SharedState lock; lock() holds it shared and gives the guarded state (modifiers), so several reads see one consistent state. Partial: the guarded state exposes the modifiers only, and the lock cannot be taken exclusively by the caller."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::Reset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::reset",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::KeyDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::key_down",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples. The default pressure 1.0 is explicit in Rust."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::KeyUp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::key_up",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::KeyFromAxis",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::key_from_axis",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::HoldDuration(Aspect_VKey,double,double &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::hold_duration",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples."
+    },
+    {
+      "upstream_id": "Aspect_VKeySet::HoldDuration(Aspect_VKey,double,double &,double &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectVKeySet::hold_duration_pressure",
+      "status": "implemented",
+      "notes": "Aspect mapping (docs/visualization-design.md section 1): the transient keeps its fields in one SharedState lock (the native std::shared_mutex); keys index the native key array, so a key beyond Aspect_VKey_MAX returns the Standard_OutOfRange that NCollection_Array1 raises; output references are returned tuples. The in-out pressure is passed in and returned (unchanged for a free key)."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::(unnamed enum at src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx:94:3)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples. The anonymous vendor-id enum is the WNT_HID_VENDOR_ID_* constants of the module, each mapped by its own row."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::VENDOR_ID_LOGITECH",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WNT_HID_VENDOR_ID_LOGITECH",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::VENDOR_ID_3DCONNEXION",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WNT_HID_VENDOR_ID_3DCONNEXION",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::IsKnownProduct",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::is_known_product",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::WNT_HIDSpaceMouse",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::new",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::RawValueRange",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::raw_value_range",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::SetRawValueRange",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::set_raw_value_range",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::IsTranslation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::is_translation",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::Translation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::translation",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples. Compared bit for bit by the sv_hid native probe."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::IsRotation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::is_rotation",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::Rotation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::rotation",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples. Compared bit for bit by the sv_hid native probe."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::IsKeyState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::is_key_state",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::KeyState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::key_state",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples. A chunk shorter than 5 bytes gives 0, where the native code reads past the chunk."
+    },
+    {
+      "upstream_id": "WNT_HIDSpaceMouse::HidToSpaceKey",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntHidSpaceMouse::hid_to_space_key",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples. Native quirk kept: SpaceVKey_10 maps to Aspect_VKey_F1."
+    },
+    {
+      "upstream_id": "WNT_OrientationType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_OrientationType.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntOrientationType",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_OT_PORTRAIT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_OrientationType.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntOrientationType::Portrait",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_OT_LANDSCAPE",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_OrientationType.hxx",
+      "rust_item": "rustycad_tkservice::wnt::WntOrientationType::Landscape",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_ClassDefinitionError",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_ClassDefinitionError.hxx",
+      "rust_item": "rustycad_tkservice::wnt::class_definition_error",
+      "status": "implemented",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples."
+    },
+    {
+      "upstream_id": "WNT_Window",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_WindowPtr.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples. Excluded: WNT_Window.cxx is compiled only under _WIN32 (Win32 window); the Linux library has no WNT_Window behavior (visualization-design.md section 4). The Linux window is Xw_Window."
+    },
+    {
+      "upstream_id": "WNT_WindowPtr",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/WNT/WNT_WindowPtr.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples. Excluded: pointer typedef of the Windows-only WNT_Window, which the Linux library does not build (visualization-design.md section 4)."
     }
   ],
   "tests": [
