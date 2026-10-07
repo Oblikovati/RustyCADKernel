@@ -325391,6 +325391,249 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPAlgo_MakerVolume()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::new",
+      "status": "implemented",
+      "notes": "Intersecting, internal shapes kept. Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::new",
+      "status": "implemented",
+      "notes": "The allocator is not ported (Rust collections own their storage). Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::clear",
+      "status": "implemented",
+      "notes": "Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::SetIntersect(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::set_intersect",
+      "status": "implemented",
+      "notes": "Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::IsIntersect() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::is_intersect",
+      "status": "implemented",
+      "notes": "Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::Box() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::bounding_box",
+      "status": "implemented",
+      "notes": "Named bounding_box: `box` is a reserved word in Rust. Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::Faces() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::faces",
+      "status": "implemented",
+      "notes": "Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::SetAvoidInternalShapes(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::set_avoid_internal_shapes",
+      "status": "implemented",
+      "notes": "Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::IsAvoidInternalShapes() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::is_avoid_internal_shapes",
+      "status": "implemented",
+      "notes": "Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::Perform(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::perform",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange: the Rust Boolean pipeline runs without progress reporting. Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::CheckData()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::<rustycad_tkbo::bop_algo::BuilderHooks>::check_data",
+      "status": "implemented",
+      "notes": "Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::PerformInternal1(const BOPAlgo_PaveFiller&,const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::<rustycad_tkbo::bop_algo::BuilderHooks>::perform_internal1",
+      "status": "implemented",
+      "notes": "Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::CollectFaces()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `collect_faces` run by `BOPAlgoMakerVolume::perform`; Rust has no subclass extension point for it. Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::MakeBox(NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `make_box` run by `BOPAlgoMakerVolume::perform`; Rust has no subclass extension point for it. Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::BuildSolids(NCollection_List<TopoDS_Shape>&,const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `build_solids` run by `BOPAlgoMakerVolume::perform`; Rust has no subclass extension point for it. Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::RemoveBox(NCollection_List<TopoDS_Shape>&,const NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `remove_box` run by `BOPAlgoMakerVolume::perform`; Rust has no subclass extension point for it. Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::FillInternalShapes(const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `fill_internal_shapes` run by `BOPAlgoMakerVolume::perform`; Rust has no subclass extension point for it. Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::BuildShape(const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `build_shape` run by `BOPAlgoMakerVolume::perform`; Rust has no subclass extension point for it. Verified bit for bit by the native replay tools/oracle/tkbo_maker_volume.cxx (crates/tkbo/tests/bop_algo_maker_volume.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::fillPISteps(BOPAlgo_PISteps&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step weights. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::BOPAlgo_PIOperation",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step weights. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::PIOperation_BuildSolids",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step weights. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::PIOperation_Last",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step weights. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::myIntersect",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakerVolume, which no derived class needs (Rust has no subclassing); set_intersect writes it and is_intersect reads it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::myBBox",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakerVolume, which no derived class needs (Rust has no subclassing); collect_faces grows it and make_box enlarges it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::mySBox",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakerVolume, which no derived class needs (Rust has no subclassing); make_box builds it and bounding_box reads it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::myFaces",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakerVolume, which no derived class needs (Rust has no subclassing); collect_faces and make_box fill it and faces reads it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakerVolume::myAvoidInternalShapes",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakerVolume.hxx",
+      "source_sha256": "40493ab386d34ff1b62ca6ff6af5e08b2ce635dee17ef00ff8a24a75b0487f10",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakerVolume",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakerVolume, which no derived class needs (Rust has no subclassing); set_avoid_internal_shapes writes it and is_avoid_internal_shapes reads it."
+    },
+    {
       "upstream_id": "BOPAlgo_RemoveFeatures::operator delete(void*) noexcept",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
