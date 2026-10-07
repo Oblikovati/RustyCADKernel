@@ -135,6 +135,11 @@ impl V3dTrihedron {
         trihedron.set_position(AspectTypeOfTriedronPosition::LEFT_LOWER)?;
         Ok(trihedron)
     }
+    /// `invalidate` (protected): the next display recomputes the structure.
+    /// Example: `trihedron.invalidate()`.
+    pub fn invalidate(&self) {
+        self.state.write().to_compute = true;
+    }
     /// Whether the axes are drawn as lines; `trihedron.is_wireframe()`.
     pub fn is_wireframe(&self) -> bool {
         self.state.read().is_wireframe

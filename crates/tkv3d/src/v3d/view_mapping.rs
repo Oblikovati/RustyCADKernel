@@ -206,8 +206,9 @@ impl V3dView {
         )?;
         Ok(true)
     }
-    /// `Scale` (protected): sets the camera scale to show a view size.
-    pub(crate) fn scale_camera(
+    /// `Scale(camera, SizeXv, SizeYv)` (protected): sets the camera scale to show a view size.
+    /// Example: `view.scale_camera(&camera, 200.0, 100.0)?`.
+    pub fn scale_camera(
         &self,
         camera: &Graphic3dCamera,
         size_xv: f64,
@@ -224,7 +225,8 @@ impl V3dView {
         Ok(())
     }
     /// `Translate(camera, DXv, DYv)` (protected): pans a camera by view distances.
-    pub(crate) fn translate_camera(
+    /// Example: `view.translate_camera(&camera, 10.0, 0.0)?`.
+    pub fn translate_camera(
         &self,
         camera: &Graphic3dCamera,
         dxv: f64,

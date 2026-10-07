@@ -432,7 +432,8 @@ impl V3dView {
         std::mem::replace(&mut self.state.write().immediate_update, immediate_update)
     }
     /// `ImmediateUpdate` (protected): `Update` when the immediate mode is on.
-    pub(crate) fn immediate_update(&self) -> Result<(), Failure> {
+    /// Example: `view.immediate_update()?`.
+    pub fn immediate_update(&self) -> Result<(), Failure> {
         if self.state.read().immediate_update {
             self.update()?;
         }

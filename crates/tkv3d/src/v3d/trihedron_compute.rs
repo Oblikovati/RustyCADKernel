@@ -15,8 +15,9 @@ use rustycad_tkservice::graphic3d::{
 use std::f64::consts::PI;
 
 impl V3dTrihedron {
-    /// `compute`: rebuilds the origin, the three axes and the labels.
-    pub(super) fn compute(&self) -> Result<(), Failure> {
+    /// `compute` (protected): rebuilds the origin, the three axes and the labels of the
+    /// structure. Example: `trihedron.compute()?`.
+    pub fn compute(&self) -> Result<(), Failure> {
         let state = {
             let mut state = self.state.write();
             state.to_compute = false;
