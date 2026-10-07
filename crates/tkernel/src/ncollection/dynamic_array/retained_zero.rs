@@ -29,6 +29,23 @@ impl<T> DynamicArray<T> {
             self.blocks.len()
         );
     }
+    pub(super) fn require_retained_first_index(&self, index: usize) {
+        let layout = self
+            .blocks
+            .as_slice()
+            .first()
+            .map(|slot| (slot.len(), slot.capacity()));
+        let valid = index == 0
+            && self.used <= 1
+            && size_of::<T>() != 0
+            && layout.is_some_and(|(length, capacity)| length == self.used && capacity > 0)
+            && self.blocks.iter().skip(1).all(|block| block.is_empty());
+        assert!(
+            valid,
+            "zero-stride index {index}, used {}, first layout {layout:?}: expected a retained first slot with registered length 0 or 1 and empty later blocks",
+            self.used
+        );
+    }
     pub(super) fn require_retained_erasure(&self) {
         if self.increment != 0 {
             return;
