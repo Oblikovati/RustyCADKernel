@@ -47795,6 +47795,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Handle_math_NotSquare",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NotSquare.hxx",
+      "rust_item": "rustycad_tkmath::math::not_square",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_HANDLE legacy typedef Handle_math_NotSquare = opencascade::handle<math_NotSquare>. math_NotSquare is an exception: Rust raises it as a Failure value built by rustycad_tkmath::math::not_square and never holds it in a Handle, so no alias exists."
+    },
+    {
       "upstream_id": "math_PSO::math_PSO(math_MultipleVarFunction*,const math_Vector&,const math_Vector&,const math_Vector&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_PSO.hxx",
@@ -48193,6 +48201,14 @@
       "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"math_SingularMatrix\", message, stack) builds the same exception.",
       "cpp_declaration_id": "d6ab8fdda71eed4589d5261434870d2c09493d8acefd746423364888fa20a70d",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Handle_math_SingularMatrix",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_SingularMatrix.hxx",
+      "rust_item": "rustycad_tkmath::math::singular_matrix",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_HANDLE legacy typedef Handle_math_SingularMatrix = opencascade::handle<math_SingularMatrix>. math_SingularMatrix is an exception: Rust raises it as a Failure value built by rustycad_tkmath::math::singular_matrix and never holds it in a Handle, so no alias exists."
     },
     {
       "upstream_id": "math_Status",
@@ -87229,6 +87245,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
+      "rust_item": "rustycad_tkernel::standard::Guid::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<Standard_GUID> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::standard::Guid::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "IsEqual(TheTimeType,TheTimeType)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Time.hxx",
@@ -88807,6 +88831,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkernel::standard::StandardTransient needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "ec5a3d7c946f965d8509affbb23b616fa6da8ed5d59fe8c8665cc5522530882a",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Standard_Transient::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardTransient",
+      "status": "excluded",
+      "notes": "Excluded: Standard_Transient declares `typedef void base_type` to end the DEFINE_STANDARD_RTTI parent chain. Rust has no alias for it; the root descriptor of StandardTransient has no parent, so RuntimeType::parent() returns None there."
     },
     {
       "upstream_id": "Standard_Type::SystemName() const",
@@ -108699,12 +108731,28 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<Quantity_Color> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::quantity::Color::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "Quantity_ColorRGBA::operator const NCollection_Vec4<float>&() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
       "rust_item": "rustycad_tkernel::quantity::ColorRgba::to_vec4",
       "status": "implemented",
       "notes": "The reinterpret_cast view of RGB plus alpha as one Vec4 is the explicit to_vec4 copy; Rust has no implicit conversion operators."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "partial",
+      "notes": "Class record of the std::hash<Quantity_ColorRGBA> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::quantity::ColorRgba::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher). Partial as its operator() row: see that row for the difference."
     },
     {
       "upstream_id": "GeomGridEval::EvaluateGridHelper(const NCollection_Array1<double>&,const NCollection_Array1<double>&,Evaluator)",
@@ -118551,6 +118599,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Vertex.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Vertex::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TopoDS_Vertex> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::topods::Vertex::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "TopoDS::Edge(const TopoDS_Shape&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
@@ -118641,6 +118697,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkbrep::topods::Edge needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "60073e769ac4dbc88062dae5749c7e58b26e8bed3cbb6224ef18153e9830cd16",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Edge.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Edge::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TopoDS_Edge> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::topods::Edge::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
     },
     {
       "upstream_id": "TopoDS::Wire(const TopoDS_Shape&)",
@@ -118735,6 +118799,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Wire.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Wire::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TopoDS_Wire> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::topods::Wire::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "TopoDS::Face(const TopoDS_Shape&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
@@ -118825,6 +118897,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkbrep::topods::Face needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "048e44d9a8db124b51195ef57dce4da33ee87f74c8a63a1bc9623496b86de401",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Face.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Face::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TopoDS_Face> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::topods::Face::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
     },
     {
       "upstream_id": "TopoDS::Shell(const TopoDS_Shape&)",
@@ -118919,6 +118999,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shell.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shell::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TopoDS_Shell> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::topods::Shell::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "TopoDS::Solid(const TopoDS_Shape&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
@@ -119011,6 +119099,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Solid.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Solid::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TopoDS_Solid> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::topods::Solid::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "TopoDS::CompSolid(const TopoDS_Shape&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
@@ -119101,6 +119197,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkbrep::topods::CompSolid needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "dcdb8fe482ccda7f68ddf5fd9cc86302cd561086ec1cabbcad522c1ef2171ea3",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_CompSolid.hxx",
+      "rust_item": "rustycad_tkbrep::topods::CompSolid::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TopoDS_CompSolid> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::topods::CompSolid::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
     },
     {
       "upstream_id": "TopoDS::Compound(const TopoDS_Shape&)",
@@ -119321,6 +119425,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkbrep::topods::Compound needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "73e309dcb6892a753487f0ee3c7d607dbb23fa7e86d61adb802f2bb0d794a87f",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Compound.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Compound::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TopoDS_Compound> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::topods::Compound::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
     },
     {
       "upstream_id": "TopoDS_AlertAttribute::TopoDS_AlertAttribute(const TopoDS_Shape&,const TCollection_AsciiString&)",
@@ -120446,6 +120558,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkbrep::topods::Shape needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "ababfbb566a2f338cea08f681c9ce42c481441cd62a9bed68963bdaef04dcb1e",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TopoDS_Shape> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::topods::Shape::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
     },
     {
       "upstream_id": "TopoDS_TCompSolid::TopoDS_TCompSolid()",
@@ -156612,6 +156732,28 @@
       "notes": "Class record: BRepGraph_RepId is ported as the type rustycad_tkbrep::brep_graph::RepId; each member is mapped by its own row."
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepId::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_RepId> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::RepId::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher).",
+      "cpp_selector": {
+        "usr": "c:@N@std@S@hash>#$@S@BRepGraph_RepId"
+      }
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_RepId::Typed<Kind>> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::TypedId::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher).",
+      "cpp_selector": {
+        "usr": "c:@N@std@SP>1#N$@S@BRepGraph_RepId@E@Kind@hash>#>@S@BRepGraph_RepId@ST>1#NS0_@Typed1"
+      }
+    },
+    {
       "upstream_id": "BRepGraphInc_Storage::BRepGraphInc_Storage()",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Storage.hxx",
@@ -159260,6 +159402,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ItemId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ItemId::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_ItemId> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::ItemId::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "BRepGraph_ItemUID::Domain",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ItemUID.hxx",
@@ -159436,6 +159586,14 @@
       "notes": "Class record: ported as a type, rustycad_tkbrep::brep_graph::ItemUid (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "b31177e9de38f21e289325812c60ae4f494abc9ecc05c11e7c71fefa263505a3",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ItemUID.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ItemUid::hash_value",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_ItemUID> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::ItemUid::hash_value, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
     },
     {
       "upstream_id": "BRepGraph_NodeId::Kind",
@@ -160125,6 +160283,28 @@
       "notes": "Class record: BRepGraph_NodeId is ported as the type rustycad_tkbrep::brep_graph::NodeId; each member is mapped by its own row."
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeId::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_NodeId> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::NodeId::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher).",
+      "cpp_selector": {
+        "usr": "c:@N@std@S@hash>#$@S@BRepGraph_NodeId"
+      }
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_NodeId::Typed<Kind>> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::TypedId::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher).",
+      "cpp_selector": {
+        "usr": "c:@N@std@SP>1#N$@S@BRepGraph_NodeId@E@Kind@hash>#>@S@BRepGraph_NodeId@ST>1#NS0_@Typed1"
+      }
+    },
+    {
       "upstream_id": "BRepGraph_ParallelPolicy::WorkerCount()",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ParallelPolicy.hxx",
@@ -160808,6 +160988,28 @@
       "notes": "Class record: BRepGraph_RefId is ported as the type rustycad_tkbrep::brep_graph::RefId; each member is mapped by its own row."
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefId::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_RefId> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::RefId::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher).",
+      "cpp_selector": {
+        "usr": "c:@N@std@S@hash>#$@S@BRepGraph_RefId"
+      }
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_RefId::Typed<Kind>> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::TypedId::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher).",
+      "cpp_selector": {
+        "usr": "c:@N@std@SP>1#N$@S@BRepGraph_RefId@E@Kind@hash>#>@S@BRepGraph_RefId@ST>1#NS0_@Typed1"
+      }
+    },
+    {
       "upstream_id": "BRepGraph_RefUID()",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefUID.hxx",
@@ -160904,6 +161106,14 @@
       "notes": "Class record: ported as a type, rustycad_tkbrep::brep_graph::RefUid (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "1b8ecc82de36cddf7d9742e60803bb2de35e82a1e67f6d43d058dc8c133cdc9a",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefUID.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefUid::hash_value",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_RefUID> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::RefUid::hash_value, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
     },
     {
       "upstream_id": "BRepGraph::RefsView::ShellOps::Nb() const",
@@ -162636,6 +162846,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_UID.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::Uid::hash_value",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_UID> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::Uid::hash_value, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "BRepGraph::UIDsView::Of(BRepGraph_NodeId) const",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_UIDsView.hxx",
@@ -162928,6 +163146,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_UsagePath.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::UsagePath::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_UsagePath> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::UsagePath::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "BRepGraph_VersionStamp::Domain",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_VersionStamp.hxx",
@@ -163112,6 +163338,14 @@
       "notes": "Class record: ported as a type, rustycad_tkbrep::brep_graph::VersionStamp (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "6709997101326152d6c55404c331ed8fcfecc97757b607591bca277e0393495a",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_VersionStamp.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::VersionStamp::hash_value",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraph_VersionStamp> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph::VersionStamp::hash_value, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
     },
     {
       "upstream_id": "BRepGraph_ChildExplorer::LinkKind",
@@ -165784,6 +166018,138 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Class template record: BRepGraph_IteratorDetail::NodeTraits<T> is the trait brep_graph::iterator::NodeTraits; the undefined primary has no impl, as in C++.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@ST>1#T@NodeTraits"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::SolidDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::SolidDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@SolidDef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::ShellDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::ShellDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@ShellDef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::FaceDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::FaceDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@FaceDef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::WireDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::WireDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@WireDef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::EdgeDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::EdgeDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@EdgeDef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::VertexDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::VertexDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@VertexDef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::ProductDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::ProductDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@ProductDef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::OccurrenceDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::OccurrenceDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@OccurrenceDef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::CoEdgeDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::CoEdgeDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@CoEdgeDef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::CompoundDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::CompoundDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@CompoundDef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail::NodeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Specialization record NodeTraits<BRepGraphInc::CompSolidDef>: the impl of brep_graph::iterator::NodeTraits for brep_graph_inc::CompSolidDef; TypedId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_IteratorDetail@S@NodeTraits>#$@N@BRepGraphInc@S@CompSolidDef"
+      }
+    },
+    {
       "upstream_id": "BRepGraph_ParentExplorer::LinkKind",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ParentExplorer.hxx",
@@ -167084,6 +167450,94 @@
       "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ShellOfSolidTraits",
       "status": "implemented",
       "notes": "Class record: BRepGraph_RefsIterator::ShellOfSolidTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::ShellOfSolidTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::Detail::RefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::RefTraits",
+      "status": "implemented",
+      "notes": "Class template record: BRepGraph_RefsIterator::Detail::RefTraits<T> is the trait brep_graph::refs_iterator::RefTraits; the undefined primary has no impl, as in C++.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_RefsIterator@N@Detail@ST>1#T@RefTraits"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::Detail::RefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::RefTraits",
+      "status": "implemented",
+      "notes": "Specialization record RefTraits<BRepGraphInc::ShellRef>: the impl of brep_graph::refs_iterator::RefTraits for brep_graph_inc::ShellRef; RefId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_RefsIterator@N@Detail@S@RefTraits>#$@N@BRepGraphInc@S@ShellRef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::Detail::RefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::RefTraits",
+      "status": "implemented",
+      "notes": "Specialization record RefTraits<BRepGraphInc::OccurrenceRef>: the impl of brep_graph::refs_iterator::RefTraits for brep_graph_inc::OccurrenceRef; RefId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_RefsIterator@N@Detail@S@RefTraits>#$@N@BRepGraphInc@S@OccurrenceRef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::Detail::RefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::RefTraits",
+      "status": "implemented",
+      "notes": "Specialization record RefTraits<BRepGraphInc::FaceRef>: the impl of brep_graph::refs_iterator::RefTraits for brep_graph_inc::FaceRef; RefId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_RefsIterator@N@Detail@S@RefTraits>#$@N@BRepGraphInc@S@FaceRef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::Detail::RefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::RefTraits",
+      "status": "implemented",
+      "notes": "Specialization record RefTraits<BRepGraphInc::ChildRef>: the impl of brep_graph::refs_iterator::RefTraits for brep_graph_inc::ChildRef; RefId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_RefsIterator@N@Detail@S@RefTraits>#$@N@BRepGraphInc@S@ChildRef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::Detail::RefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::RefTraits",
+      "status": "implemented",
+      "notes": "Specialization record RefTraits<BRepGraphInc::WireRef>: the impl of brep_graph::refs_iterator::RefTraits for brep_graph_inc::WireRef; RefId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_RefsIterator@N@Detail@S@RefTraits>#$@N@BRepGraphInc@S@WireRef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::Detail::RefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::RefTraits",
+      "status": "implemented",
+      "notes": "Specialization record RefTraits<BRepGraphInc::SolidRef>: the impl of brep_graph::refs_iterator::RefTraits for brep_graph_inc::SolidRef; RefId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_RefsIterator@N@Detail@S@RefTraits>#$@N@BRepGraphInc@S@SolidRef"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::Detail::RefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::RefTraits",
+      "status": "implemented",
+      "notes": "Specialization record RefTraits<BRepGraphInc::VertexRef>: the impl of brep_graph::refs_iterator::RefTraits for brep_graph_inc::VertexRef; RefId, Count and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_RefsIterator@N@Detail@S@RefTraits>#$@N@BRepGraphInc@S@VertexRef"
+      }
     },
     {
       "upstream_id": "BRepGraph_RelatedIterator::RelationKind",
@@ -168617,6 +169071,138 @@
       "notes": "Class record: BRepGraph_ReverseIterator::ShellFromFaceRefTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::ShellFromFaceRefTraits; each member is mapped by its own row."
     },
     {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Class template record: BRepGraph_ReverseIterator::DefTraits<TypedId> is the trait brep_graph::reverse_iterator::DefTraits; the undefined primary has no impl, as in C++.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@ST>1#T@DefTraits"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(0)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind0"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(1)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind1"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(2)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind2"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(3)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind3"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(4)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind4"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(5)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind5"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(6)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind6"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(7)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind7"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(8)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind8"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(10)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind10"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::DefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::DefTraits",
+      "status": "implemented",
+      "notes": "Specialization record DefTraits<BRepGraph_NodeId::Typed<Kind(11)>>: the impl of brep_graph::reverse_iterator::DefTraits for the matching node tag; the Def type and Get are mapped by their own rows.",
+      "cpp_selector": {
+        "usr": "c:@N@BRepGraph_ReverseIterator@S@DefTraits>#$@S@BRepGraph_NodeId@S@Typed>#V$@S@BRepGraph_NodeId@E@Kind11"
+      }
+    },
+    {
       "upstream_id": "BRepGraph_Tool::Vertex::Usage(const BRepGraph&,BRepGraph_VertexRefId)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Tool.hxx",
@@ -169576,6 +170162,14 @@
       "rust_item": "rustycad_tkbrep::brep_graph_inc::WireInstance",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ type alias: the Rust item of the same name (type alias, struct or associated type) names the same type."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Instance.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::Instance::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<BRepGraphInc::Instance<TypedIdT>> specialization: its one member operator() is mapped by its own row to rustycad_tkbrep::brep_graph_inc::Instance::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
     },
     {
       "upstream_id": "BRepGraphInc::BaseDef::LastPropWave",
@@ -225031,6 +225625,17 @@
       "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
     },
     {
+      "upstream_id": "IntPatch_PolyhedronBVH::Box",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSetAccess::cached_box",
+      "status": "implemented",
+      "notes": "using-declaration that re-exposes the inherited BVH_PrimitiveSet::Box() next to the class Box(int) override; int_patch::IntPatchPolyhedronBVH implements bvh::BvhPrimitiveSetAccess, whose provided cached_box is that inherited member.",
+      "cpp_selector": {
+        "usr": "c:@S@IntPatch_PolyhedronBVH@UD@Box"
+      }
+    },
+    {
       "upstream_id": "IntPatch_PolyhedronTool::Bounding(const IntPatch_Polyhedron&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronTool.hxx",
@@ -249051,6 +249656,17 @@
       "notes": "Class record: BRepGProp_MeshProps is ported as the type rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps; each member is mapped by its own row."
     },
     {
+      "upstream_id": "BRepGProp_MeshProps::BRepGProp_MeshObjType",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::MeshObjType",
+      "status": "implemented",
+      "notes": "typedef of the anonymous enum BRepGProp_MeshObjType (typedef enum {...} BRepGProp_MeshObjType); Rust has the enum brep_gprop::MeshObjType with the same enumerators.",
+      "cpp_selector": {
+        "usr": "c:BRepGProp_MeshProps.hxx@S@BRepGProp_MeshProps@T@BRepGProp_MeshObjType"
+      }
+    },
+    {
       "upstream_id": "BRepApprox_Approx()",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_Approx.hxx",
@@ -259085,6 +259701,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "VectorOfPoint",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_VertexInspector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray",
+      "status": "excluded",
+      "notes": "Excluded: file-scope typedef NCollection_DynamicArray<gp_XYZ> VectorOfPoint of BRepBuilderAPI_VertexInspector.hxx; Rust spells the instance directly as DynamicArray<Xyz> where the class stores its points."
+    },
+    {
       "upstream_id": "BRepBuilderAPI_DisconnectedWire",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_WireError.hxx",
@@ -262115,6 +262739,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "VectorOfPoint",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityValueTool.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray",
+      "status": "excluded",
+      "notes": "Excluded: file-scope typedef NCollection_DynamicArray<gp_XYZ> VectorOfPoint of BRepExtrema_ProximityValueTool.hxx; Rust spells the instance directly as DynamicArray<Xyz> where the class stores its points."
+    },
+    {
       "upstream_id": "BRepExtrema_SelfIntersection::PreCheckElements(const int,const int)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
@@ -262259,6 +262891,17 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(BRepExtremaTriangleSet, \"BRepExtrema_TriangleSet\", StandardTransient) at crates/tktopalgo/src/brep_extrema/triangle_set.rs:250 registers descriptor \"BRepExtrema_TriangleSet\"; C++ base_type is BVH_PrimitiveSet<double, 3>. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Not proven: the Rust registration names parent Standard_Transient.",
       "cpp_declaration_id": "23ad498dbb8161f0cb3e4fbcf2bd100f04f1896b00de3872f66566c633947f2e",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::Box",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSetAccess::cached_box",
+      "status": "implemented",
+      "notes": "using-declaration that re-exposes the inherited BVH_PrimitiveSet::Box() next to the class Box(int) override; brep_extrema::BRepExtremaTriangleSet (through its state) implements bvh::BvhPrimitiveSetAccess, whose provided cached_box is that inherited member.",
+      "cpp_selector": {
+        "usr": "c:@S@BRepExtrema_TriangleSet@UD@Box"
+      }
     },
     {
       "upstream_id": "HelixGeom_BuilderApproxCurve::SetApproxParameters(GeomAbs_Shape,int,int)",
@@ -350546,6 +351189,39 @@
       "notes": "TDistFunctionMV over an Adaptor2d curve."
     },
     {
+      "upstream_id": "GCPnts_TCurveTypes",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TCurveTypes.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TCurveTypes",
+      "status": "implemented",
+      "notes": "Class template record: GCPnts_TCurveTypes<TheCurve> is the trait gcpnts::TCurveTypes (associated Point, Line, BezierCurve and BSplineCurve types plus the curve operations the GCPnts templates need); the empty primary has no impl, as in C++.",
+      "cpp_selector": {
+        "usr": "c:@ST>1#T@GCPnts_TCurveTypes"
+      }
+    },
+    {
+      "upstream_id": "GCPnts_TCurveTypes",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TCurveTypes.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TCurveTypes",
+      "status": "implemented",
+      "notes": "Specialization record GCPnts_TCurveTypes<Adaptor3d_Curve>: the impl TCurveTypes for dyn Adaptor3dCurve (and the matching GeomAdaptor curve) selects the same point, Bezier and BSpline types; the DistFunction typedefs are the GCPnts distance functions the Rust templates call directly.",
+      "cpp_selector": {
+        "usr": "c:@S@GCPnts_TCurveTypes>#$@S@Adaptor3d_Curve"
+      }
+    },
+    {
+      "upstream_id": "GCPnts_TCurveTypes",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TCurveTypes.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TCurveTypes",
+      "status": "implemented",
+      "notes": "Specialization record GCPnts_TCurveTypes<Adaptor2d_Curve2d>: the impl TCurveTypes for dyn Adaptor2dCurve2d (and the matching GeomAdaptor curve) selects the same point, Bezier and BSpline types; the DistFunction typedefs are the GCPnts distance functions the Rust templates call directly.",
+      "cpp_selector": {
+        "usr": "c:@S@GCPnts_TCurveTypes>#$@S@Adaptor2d_Curve2d"
+      }
+    },
+    {
       "upstream_id": "AppCont_Function::myNbPnt",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
@@ -354402,6 +355078,62 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "(anonymous)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_GGenExtCC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::GGenExtCC",
+      "status": "excluded",
+      "notes": "Excluded: helper of the anonymous namespace of Extrema_GGenExtCC.hxx (internal linkage, not callable outside the header); the private Rust counterpart is the PointsInspector struct of extrema/curve_curve/gen_ext_cc/search.rs, used by GGenExtCC::perform."
+    },
+    {
+      "upstream_id": "(anonymous namespace)::Extrema_GGenExtCC_PointsInspector",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_GGenExtCC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::GGenExtCC",
+      "status": "excluded",
+      "notes": "Excluded: helper of the anonymous namespace of Extrema_GGenExtCC.hxx (internal linkage, not callable outside the header); the private Rust counterpart is the PointsInspector struct of extrema/curve_curve/gen_ext_cc/search.rs, used by GGenExtCC::perform."
+    },
+    {
+      "upstream_id": "(anonymous namespace)::Extrema_GGenExtCC_PointsInspector::Point",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_GGenExtCC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::GGenExtCC",
+      "status": "excluded",
+      "notes": "Excluded: helper of the anonymous namespace of Extrema_GGenExtCC.hxx (internal linkage, not callable outside the header); the private Rust counterpart is the PointsInspector struct of extrema/curve_curve/gen_ext_cc/search.rs, used by GGenExtCC::perform."
+    },
+    {
+      "upstream_id": "(anonymous namespace)::Extrema_GGenExtCC_PointsInspector::Target",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_GGenExtCC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::GGenExtCC",
+      "status": "excluded",
+      "notes": "Excluded: helper of the anonymous namespace of Extrema_GGenExtCC.hxx (internal linkage, not callable outside the header); the private Rust counterpart is the PointsInspector struct of extrema/curve_curve/gen_ext_cc/search.rs, used by GGenExtCC::perform."
+    },
+    {
+      "upstream_id": "(anonymous namespace)::Extrema_GGenExtCC_PointsInspector::Coord",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_GGenExtCC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::GGenExtCC",
+      "status": "excluded",
+      "notes": "Excluded: helper of the anonymous namespace of Extrema_GGenExtCC.hxx (internal linkage, not callable outside the header); the private Rust counterpart is the PointsInspector struct of extrema/curve_curve/gen_ext_cc/search.rs, used by GGenExtCC::perform."
+    },
+    {
+      "upstream_id": "(anonymous namespace)::Extrema_GGenExtCC_PointsInspector::isFind",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_GGenExtCC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::GGenExtCC",
+      "status": "excluded",
+      "notes": "Excluded: helper of the anonymous namespace of Extrema_GGenExtCC.hxx (internal linkage, not callable outside the header); the private Rust counterpart is the PointsInspector struct of extrema/curve_curve/gen_ext_cc/search.rs, used by GGenExtCC::perform."
+    },
+    {
+      "upstream_id": "(anonymous namespace)::Extrema_GGenExtCC_PointsInspector::Dimension",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_GGenExtCC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::GGenExtCC",
+      "status": "excluded",
+      "notes": "Excluded: helper of the anonymous namespace of Extrema_GGenExtCC.hxx (internal linkage, not callable outside the header); the private Rust counterpart is the PointsInspector struct of extrema/curve_curve/gen_ext_cc/search.rs, used by GGenExtCC::perform."
+    },
+    {
       "upstream_id": "Geom2d_Conic::pos",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Conic.hxx",
@@ -356374,6 +357106,28 @@
       "notes": "The empty statement that completes the macros."
     },
     {
+      "upstream_id": "Standard_Static_Assert",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Assert.hxx",
+      "rust_item": "rustycad_tkernel::standard::assert::StandardStaticAssert",
+      "status": "implemented",
+      "notes": "Class template record: Standard_Static_Assert<bool> declares assert_ok() only for true, so Standard_STATIC_ASSERT(false) fails to compile; rustycad_tkernel::standard::assert::StandardStaticAssert has the same shape (assert_ok only on StandardStaticAssert<true>).",
+      "cpp_selector": {
+        "usr": "c:@ST>1#Nb@Standard_Static_Assert"
+      }
+    },
+    {
+      "upstream_id": "Standard_Static_Assert",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Assert.hxx",
+      "rust_item": "rustycad_tkernel::standard::assert::StandardStaticAssert",
+      "status": "implemented",
+      "notes": "Specialization <true> record: Standard_Static_Assert<bool> declares assert_ok() only for true, so Standard_STATIC_ASSERT(false) fails to compile; rustycad_tkernel::standard::assert::StandardStaticAssert has the same shape (assert_ok only on StandardStaticAssert<true>).",
+      "cpp_selector": {
+        "usr": "c:@S@Standard_Static_Assert>#Vb1"
+      }
+    },
+    {
       "upstream_id": "TColStd_PackedMapOfInteger",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TColStd/TColStd_PackedMapOfInteger.hxx",
@@ -356458,6 +357212,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TCollection_ExtendedString> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::tcollection::ExtendedString::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "std::hash<opencascade::handle<TCollection_HExtendedString>>::operator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
@@ -356512,6 +357274,22 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(HExtendedString, \"TCollection_HExtendedString\", StandardTransient) at crates/tkernel/src/tcollection/h_extended_string.rs:21 registers descriptor \"TCollection_HExtendedString\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "69d73e49b09f37f420577dd2f7c6a896efeada74bce21d9d320a57a61eda7fbb",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_extended_string::HExtendedString>>>::hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<opencascade::handle<TCollection_HExtendedString>> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::tcollection::HExtendedStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_extended_string::HExtendedString>>>::hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
+      "upstream_id": "std::equal_to",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_extended_string::HExtendedString>>>::equal",
+      "status": "implemented",
+      "notes": "Class record of the std::equal_to<opencascade::handle<TCollection_HExtendedString>> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::tcollection::HExtendedStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_extended_string::HExtendedString>>>::equal, the HashPolicy equality the NCollection containers use for this key."
     },
     {
       "upstream_id": "TCollection_AsciiString::operator=(const TCollection_AsciiString&)",
@@ -360554,6 +361332,38 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::hash_code",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<opencascade::handle<T>> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::standard::Handle::hash_code, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
+      "upstream_id": "occ::handle",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle",
+      "status": "implemented",
+      "notes": "occ::handle<T> is the OCCT 8 alias template of opencascade::handle<T>; Rust spells the smart pointer rustycad_tkernel::standard::Handle<T> (an intrusive shared pointer to a Transient object).",
+      "cpp_selector": {
+        "usr": "c:@N@occ@handle",
+        "kind": "TypeAliasTemplate"
+      }
+    },
+    {
+      "upstream_id": "occ::handle",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle",
+      "status": "implemented",
+      "notes": "occ::handle<T> is the OCCT 8 alias template of opencascade::handle<T>; Rust spells the smart pointer rustycad_tkernel::standard::Handle<T> (an intrusive shared pointer to a Transient object). Clang records the alias template and its templated alias declaration separately.",
+      "cpp_selector": {
+        "usr": "c:@N@occ@handle",
+        "kind": "TypeAlias"
+      }
+    },
+    {
       "upstream_id": "GeomGridEval",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
@@ -361619,6 +362429,14 @@
       "notes": "the std::hash specialization is the NCollection HashKey impl returning hash_code()."
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.lxx",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<TCollection_AsciiString> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::tcollection::AsciiString::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
       "upstream_id": "std::hash<opencascade::handle<TCollection_HAsciiString>>::operator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HAsciiString.lxx",
@@ -361633,6 +362451,22 @@
       "rust_item": "rustycad_tkernel::tcollection::HAsciiStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_ascii_string::HAsciiString>>>::equal",
       "status": "implemented",
       "notes": "std specialization for handles of HAsciiString; HAsciiStringHasher is the same policy."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HAsciiString.lxx",
+      "rust_item": "rustycad_tkernel::tcollection::HAsciiStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_ascii_string::HAsciiString>>>::hash",
+      "status": "implemented",
+      "notes": "Class record of the std::hash<opencascade::handle<TCollection_HAsciiString>> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::tcollection::HAsciiStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_ascii_string::HAsciiString>>>::hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
+      "upstream_id": "std::equal_to",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HAsciiString.lxx",
+      "rust_item": "rustycad_tkernel::tcollection::HAsciiStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_ascii_string::HAsciiString>>>::equal",
+      "status": "implemented",
+      "notes": "Class record of the std::equal_to<opencascade::handle<TCollection_HAsciiString>> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::tcollection::HAsciiStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_ascii_string::HAsciiString>>>::equal, the HashPolicy equality the NCollection containers use for this key."
     },
     {
       "upstream_id": "Standard_UUID",
@@ -361756,6 +362590,26 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Std.hxx",
       "status": "excluded",
       "notes": "member typedef of the deduction blocker; Rust generics need no such helper."
+    },
+    {
+      "upstream_id": "opencascade::is_base_but_not_same",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Std.hxx",
+      "status": "excluded",
+      "notes": "Excluded: SFINAE type trait that enables the converting constructors and assignments of opencascade::handle only for a proper base class; Rust Handle conversions (Handle::cast, into_cast, down_cast) are checked by trait bounds and the runtime type, so no trait type exists.",
+      "cpp_selector": {
+        "usr": "c:@N@opencascade@ST>3#T#T#T@is_base_but_not_same"
+      }
+    },
+    {
+      "upstream_id": "opencascade::is_base_but_not_same",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Std.hxx",
+      "status": "excluded",
+      "notes": "Excluded: partial specialization of the SFINAE trait opencascade::is_base_but_not_same (same type gives false); Rust Handle conversions use trait bounds and the runtime type instead of a trait type.",
+      "cpp_selector": {
+        "usr": "c:@N@opencascade@SP>2#T#T@is_base_but_not_same>#t0.0#t0.1#^std::enable_if<std::is_same<type-parameter-0-0, type-parameter-0-1>::value, void>:::type"
+      }
     },
     {
       "upstream_id": "Standard_PCharacter",
@@ -366168,6 +367022,28 @@
       "notes": "Excluded: compile-time helper template that selects a type or an N-specific static function. Rust resolves the same choice through the BvhVector trait (associated types and methods) on the vector type."
     },
     {
+      "upstream_id": "BVH_BaseBox",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBox",
+      "status": "implemented",
+      "notes": "Class template record: the primary BVH_BaseBox is the empty base of BVH_Box for every dimension; its only members come from the N = 3 specialization, which Rust puts on bvh::BvhBox.",
+      "cpp_selector": {
+        "usr": "c:@ST>3#T#NI#t>2#T#NI@BVH_BaseBox"
+      }
+    },
+    {
+      "upstream_id": "BVH_BaseBox",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBox",
+      "status": "implemented",
+      "notes": "Specialization record BVH_BaseBox<T, 3, BVH_Box>: Transform and Transformed are bvh::BvhBox::transform and transformed (mapped by their own rows).",
+      "cpp_selector": {
+        "usr": "c:@SP>1#T@BVH_BaseBox>#t0.0#VI3#@ST>2#T#NI@BVH_Box"
+      }
+    },
+    {
       "upstream_id": "BVH::BVH_AxisSelector<type-parameter-0-0, 2>::BVH_VecNt",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
@@ -366184,6 +367060,28 @@
       "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkmath::bvh::BvhBinnedBuilder needs no callable counterpart.",
       "cpp_declaration_id": "d7e55196cc278fe39b7a51473d66e243e72977eae8f097d01e65f6cec12291e1",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BVH::BVH_AxisSelector",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::main_axis",
+      "status": "implemented",
+      "notes": "Class template record: BVH_AxisSelector only holds the static MainAxis, which is the generic free function bvh::main_axis (mapped by its own row).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@ST>2#T#NI@BVH_AxisSelector"
+      }
+    },
+    {
+      "upstream_id": "BVH::BVH_AxisSelector",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::main_axis",
+      "status": "implemented",
+      "notes": "Specialization record BVH_AxisSelector<T, 2>: its MainAxis (no Z axis) is the 2D branch of bvh::main_axis (mapped by its own row).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@BVH_AxisSelector>#t0.0#VI2"
+      }
     },
     {
       "upstream_id": "BVH::MatrixOp<type-parameter-0-0, 4>::BVH_Mat4t",
@@ -366236,6 +367134,80 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BVH::UnitVector",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector",
+      "status": "implemented",
+      "notes": "Class template record: the C++ primary template is an empty placeholder (\"Not implemented\") for unsupported dimensions; Rust has no impl for those dimensions, so misuse fails to compile as in C++. The supported specializations (N = 2, 3, 4) are BvhVector::unit_x/unit_y/unit_z.",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@ST>2#T#NI@UnitVector"
+      }
+    },
+    {
+      "upstream_id": "BVH::UnitVector",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector",
+      "status": "implemented",
+      "notes": "Specialization record BVH::UnitVector<T, 2>: DX/DY/DZ are BvhVector::unit_x/unit_y/unit_z of the 2D vector type (mapped by their own rows).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@UnitVector>#t0.0#VI2"
+      }
+    },
+    {
+      "upstream_id": "BVH::UnitVector",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector",
+      "status": "implemented",
+      "notes": "Specialization record BVH::UnitVector<T, 3>: DX/DY/DZ are BvhVector::unit_x/unit_y/unit_z of the 3D vector type (mapped by their own rows).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@UnitVector>#t0.0#VI3"
+      }
+    },
+    {
+      "upstream_id": "BVH::UnitVector",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector",
+      "status": "implemented",
+      "notes": "Specialization record BVH::UnitVector<T, 4>: DX/DY/DZ are BvhVector::unit_x/unit_y/unit_z of the 4D vector type (mapped by their own rows).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@UnitVector>#t0.0#VI4"
+      }
+    },
+    {
+      "upstream_id": "BVH::MatrixOp",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::matrix_op_inverse",
+      "rust_items": [
+        "rustycad_tkmath::bvh::matrix_op_inverse",
+        "rustycad_tkmath::bvh::matrix_op_multiply"
+      ],
+      "status": "implemented",
+      "notes": "Class template record: the C++ primary template is an empty placeholder (\"Not implemented\") for unsupported dimensions; Rust has no impl for those dimensions, so misuse fails to compile as in C++. The N = 4 specialization is the free functions bvh::matrix_op_inverse and matrix_op_multiply.",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@ST>2#T#NI@MatrixOp"
+      }
+    },
+    {
+      "upstream_id": "BVH::MatrixOp",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::matrix_op_inverse",
+      "rust_items": [
+        "rustycad_tkmath::bvh::matrix_op_inverse",
+        "rustycad_tkmath::bvh::matrix_op_multiply"
+      ],
+      "status": "implemented",
+      "notes": "Specialization record BVH::MatrixOp<T, 4>: its static Inverse and Multiply are the free functions bvh::matrix_op_inverse and matrix_op_multiply (mapped by their own rows).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@MatrixOp>#t0.0#VI4"
+      }
+    },
+    {
       "upstream_id": "BVH::VecComp<type-parameter-0-0, 2>::BVH_Vec2t",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
@@ -366258,6 +367230,116 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: C++ member typedef of a template specialization (BVH::VectorType<type-parameter-0-0, 4>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
+      "upstream_id": "BVH::VecComp",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector",
+      "status": "implemented",
+      "notes": "Class template record: the C++ primary template is an empty placeholder (\"Not implemented\") for unsupported dimensions; Rust has no impl for those dimensions, so misuse fails to compile as in C++. The supported specializations (N = 2, 3, 4) are the BvhVector::component accessor of the vector types.",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@ST>2#T#NI@VecComp"
+      }
+    },
+    {
+      "upstream_id": "BVH::VecComp",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector",
+      "status": "implemented",
+      "notes": "Specialization record BVH::VecComp<T, 2>: its static Get is BvhVector::component of the 2D vector type (mapped by its own row).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@VecComp>#t0.0#VI2"
+      }
+    },
+    {
+      "upstream_id": "BVH::VecComp",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector",
+      "status": "implemented",
+      "notes": "Specialization record BVH::VecComp<T, 3>: its static Get is BvhVector::component of the 3D vector type (mapped by its own row).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@VecComp>#t0.0#VI3"
+      }
+    },
+    {
+      "upstream_id": "BVH::VecComp",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector",
+      "status": "implemented",
+      "notes": "Specialization record BVH::VecComp<T, 4>: its static Get is BvhVector::component of the 4D vector type (mapped by its own row).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@VecComp>#t0.0#VI4"
+      }
+    },
+    {
+      "upstream_id": "BVH::VectorType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::VectorType",
+      "status": "implemented",
+      "notes": "Specialization record BVH::VectorType<T, 1>: the impl VectorType<T> for Dimension<1> selects the same vector type (Type is mapped by its own row).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@VectorType>#t0.0#VI1"
+      }
+    },
+    {
+      "upstream_id": "BVH::VectorType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::VectorType",
+      "status": "implemented",
+      "notes": "Specialization record BVH::VectorType<T, 2>: the impl VectorType<T> for Dimension<2> selects the same vector type (Type is mapped by its own row).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@VectorType>#t0.0#VI2"
+      }
+    },
+    {
+      "upstream_id": "BVH::VectorType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::VectorType",
+      "status": "implemented",
+      "notes": "Specialization record BVH::VectorType<T, 3>: the impl VectorType<T> for Dimension<3> selects the same vector type (Type is mapped by its own row).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@VectorType>#t0.0#VI3"
+      }
+    },
+    {
+      "upstream_id": "BVH::VectorType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::VectorType",
+      "status": "implemented",
+      "notes": "Specialization record BVH::VectorType<T, 4>: the impl VectorType<T> for Dimension<4> selects the same vector type (Type is mapped by its own row).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@VectorType>#t0.0#VI4"
+      }
+    },
+    {
+      "upstream_id": "BVH::MatrixType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhMat4d",
+      "status": "excluded",
+      "notes": "Excluded: type-selector metafunction whose primary template is an empty placeholder and whose only specialization maps N = 4 to NCollection_Mat4<T>; Rust spells Mat4<T> directly (bvh::BvhMat4d for f64).",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@ST>2#T#NI@MatrixType"
+      }
+    },
+    {
+      "upstream_id": "BVH::MatrixType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhMat4d",
+      "status": "excluded",
+      "notes": "Excluded: BVH::MatrixType<T, 4> only names NCollection_Mat4<T> as Type; Rust spells Mat4<T> directly (bvh::BvhMat4d for f64), and the Type row maps that alias.",
+      "cpp_selector": {
+        "usr": "c:@N@BVH@SP>1#T@MatrixType>#t0.0#VI4"
+      }
     },
     {
       "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt",
