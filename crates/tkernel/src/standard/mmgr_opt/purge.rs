@@ -9,6 +9,7 @@ impl MMgrOpt {
     /// the number of blocks taken out of the free lists; `manager.purge(false)`.
     /// `is_destroyed` is ignored (the native TODO). The pool tally never reaches the pool
     /// size (the pool's link word is never a free block), so pools are never released.
+    /// Reading a missing head table panics instead of performing native null-pointer access.
     pub fn purge(&mut self, is_destroyed: bool) -> i32 {
         let _ = is_destroyed;
         let first = index_cell(roundup_cell(self.cell_size + BLOCK_SHIFT));
@@ -18,22 +19,52 @@ impl MMgrOpt {
     }
 
     fn release_medium_lists(&mut self, first: usize) -> i32 {
-        let indices: Vec<usize> = self
-            .free_lists
-            .range(first..=self.free_list_max.max(first))
-            .map(|(index, _)| *index)
-            .collect();
+        // Production has no release observer; tests exercise this same canonical path.
+        self.release_medium_lists_observed(first, |_, _, _| {})
+    }
+
+    pub(super) fn release_medium_lists_observed(
+        &mut self,
+        first: usize,
+        mut observe: impl FnMut(usize, usize, usize),
+    ) -> i32 {
         let mut freed = 0;
-        for index in indices {
-            let mut block = self.free_lists.remove(&index).unwrap_or(0);
-            while block != 0 {
-                let next = self.space.read_word(block).unwrap_or(0);
-                self.free_memory(block);
-                freed += 1;
-                block = next;
-            }
+        for index in first..=self.free_list_max {
+            freed += self.release_size_class(index, &mut observe);
         }
         freed
+    }
+
+    fn release_size_class(
+        &mut self,
+        index: usize,
+        observe: &mut impl FnMut(usize, usize, usize),
+    ) -> i32 {
+        let mut block = self
+            .free_lists
+            .head(index)
+            .unwrap_or_else(|failure| panic!("{failure}"));
+        let mut freed = 0;
+        while block != 0 {
+            block = self.release_node_observed(index, block, observe);
+            freed += 1;
+        }
+        // Native Purge clears the head only after every node has reached system free.
+        self.set_head(index, 0)
+            .unwrap_or_else(|failure| panic!("{failure}"));
+        freed
+    }
+
+    fn release_node_observed(
+        &mut self,
+        index: usize,
+        block: usize,
+        observe: &mut impl FnMut(usize, usize, usize),
+    ) -> usize {
+        let next = self.space.read_word(block).unwrap_or(0);
+        observe(index, block, self.free_lists.head(index).unwrap());
+        self.free_memory(block);
+        next
     }
 
     /// Releases pools whose free small blocks add up to the whole pool. Native code scans
@@ -80,7 +111,12 @@ impl MMgrOpt {
     fn small_free_blocks(&self) -> Vec<(usize, usize)> {
         let cells = index_cell(self.cell_size);
         let mut blocks = Vec::new();
-        for (&index, &head) in self.free_lists.range(..=cells) {
+        for (index, head) in self
+            .free_lists
+            .heads()
+            .unwrap_or_else(|failure| panic!("{failure}"))
+            .take(cells.saturating_add(1))
+        {
             let mut block = head;
             while block != 0 {
                 blocks.push((index, block));
@@ -92,21 +128,18 @@ impl MMgrOpt {
 
     /// Removes the free blocks of the released pools from their lists, counting them.
     fn unlink_blocks_in(&mut self, free: &[usize], pool_size: usize) -> i32 {
-        let inside = |block: usize| {
-            free.iter()
-                .any(|pool| (*pool..*pool + pool_size).contains(&block))
-        };
         let mut removed = 0;
         let mut kept: Vec<(usize, usize)> = Vec::new();
         for (index, block) in self.small_free_blocks() {
-            if inside(block) {
+            if super::free_pools::is_in_pool(block, free, pool_size) {
                 removed += 1;
             } else {
                 kept.push((index, block));
             }
         }
         self.free_lists
-            .retain(|index, _| *index > index_cell(self.cell_size));
+            .clear_through(index_cell(self.cell_size))
+            .unwrap_or_else(|failure| panic!("{failure}"));
         for (index, block) in kept.into_iter().rev() {
             // Rebuilding newest-first from the reversed survivors keeps each list's order.
             let _ = self.push_free(index, block);
