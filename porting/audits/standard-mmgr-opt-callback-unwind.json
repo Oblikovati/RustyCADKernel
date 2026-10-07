@@ -1,0 +1,88 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Standard_MMgrOpt Free callback-before-retirement and defined Allocate/Reallocate callback unwind prefixes",
+  "integration_status": "branch candidate; root integration/check/deletion required",
+  "source_base_revision": "4be8ba8c",
+  "pending_independent_initialize_candidate": "fd9f9233 is separate; this branch does not depend on its constructor/reset changes",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_inputs_count": 391,
+  "source_manifest": "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-source-manifest.json.gz",
+  "source_capture_scope": "391 selected Standard/allocator/container sources, dependent test inputs, Cargo configuration and oracles; not a complete workspace compiler-input capture",
+  "source_inputs_after_run_identical": true,
+  "artifact_sha256": {
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-source-manifest.json.gz": "4b76a03d63d63de91ca6e0823f160fa88d2fd21971d3e81f642f43a4764a5c6f",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-source.tar.gz": "6abf6e947904ae6d18e81fb6126c30849f30fb0a47449e9fb619d50394d47ab4",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-rust.log.gz": "4c8f8cd5de0c4b4d57940a143216569695befb710c814b728bde49cf723eb3df",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-doc.log.gz": "e9391897d273409604af476e54828bd2f2eb7114210961203271cc361b943af8",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-clippy.log.gz": "3d578ec73491f89604cc02db7b25c4a70dc435e81f54a1ae5e83974531cead7f",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-miri.log.gz": "4097bf302e7519b3c65f685ccc1d4a366882d912e574ac493c0b5612329d8d0a",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-services-miri.log.gz": "4848068ebf1d3803cccb53eb810efdb8f685ee1a4ad16934e22aeb7038027648",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-native-original.log.gz": "d69305a080bc53a70c2f57c762a5de28367864a98e422c78ebef8bff0b47da18",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-baseline.log.gz": "d788ae814359b776652531bac65950f0941b0bb3d3ecaf2a6f5e1a98616d8be7",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-native-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-module-resolution.log.gz": "8315dd9842ee7ff9879955c75145756cecb4b0821345f2180ba301a4aef66c7f",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-commands.sh.gz": "258399909f63993957888c83fbaa384cff394e2628e706bdb75757b1a867ab02",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-native.log.gz": "e2a3a113aaebef951ade75608c7008cf98e2808b27a2a1dd9d4af3a8505550dc",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-compiler-bindings.json.gz": "c032211d34dba59df888ca87a347b2f72129de56a9d2aca0af81aad7d691c690",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-row-coverage.json.gz": "d475152549d74f2e7a858dbe9be3855e529a0dcc9936756710a6dba1b7b33a5c",
+    "porting/runtime-evidence/standard-mmgr-opt-callback-unwind-original-test-joins.json.gz": "498854987dd34840c51a6e5ab23cb07675de7e444299a0f40b01c62aee6b7f5d"
+  },
+  "occt_source_sha256": {
+    "Standard_MMgrOpt.hxx": "9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22",
+    "Standard_MMgrOpt.cxx": "5bc434cc85e3143f605d0ff852058eab8f168cea1bca8657bfdfc42819359424"
+  },
+  "compiler_evidence": {
+    "exact_declaration_records": 4,
+    "qualified_names": [
+      "Standard_MMgrOpt::Allocate",
+      "Standard_MMgrOpt::Free",
+      "Standard_MMgrOpt::Reallocate",
+      "Standard_MMgrOpt::SetCallBackFunction"
+    ],
+    "body_binding_performed": false,
+    "new_public_rust_methods": 0
+  },
+  "automatic_api_parity_credit": 0,
+  "original_declaration_mapping_credit": 0,
+  "behavior": [
+    "Native Free reads the block header, calls the user callback, and only then rewires a recyclable header or releases backing. Its callback type is not noexcept; a thrown callback leaves the storage live. Rust previously removed the safe live-handle entry before notification, making storage inaccessible after callback panic.",
+    "Free now validates and reads rounded size, invokes the existing callback, and retires the safe live handle only after the callback returns. Existing small/medium free-list and large-release routes are unchanged. Both original regression cases were red before this correction.",
+    "Small pool, medium heap and large heap Free callback failures preserve payload and live handle, do not create a purgeable free entry, and can be retried. Exact event shapes include both failed and successful Free notifications. Completed retry makes the safe handle invalid.",
+    "Allocate callback failure preserves the captured allocation for explicit cleanup. Reallocate failure in Allocate leaves old payload unchanged and new storage uncopied. Failure in old-block Free occurs after copying the entire old rounded payload and preserves both allocations. Captured handles are explicitly repaired after catch_unwind.",
+    "Fitting Reallocate and Free(nullptr) do not notify. A callback may replace the process-wide callback, and the next Free invokes that replacement. The existing notify implementation copies the function pointer and releases its global read lock before user code; this ordering is retained and regression checked.",
+    "Safe invalid StorageAddress inputs are rejected before any callback. This is an explicit Rust safety-domain regression, not a native-invalid-pointer equivalence claim. Tests serialize callback installation and record per-thread events without fabricating reentrant allocator references."
+  ],
+  "checks": {
+    "rust_passed": 198,
+    "miri_passed": 28,
+    "miri_scope_counts": {
+      "callback_and_storage": 19,
+      "service_memory": 9
+    },
+    "tkernel_doctests": 273,
+    "new_tests": 8,
+    "native_rows_exactly_compared": 11,
+    "native_originals_passed": 106,
+    "native_original_names_exactly_joined": true,
+    "red_baseline_failed_tests": 2,
+    "strict_tkernel_all_targets_clippy_exit": 0,
+    "workspace_fmt_exit": 0,
+    "miri_toolchain": "nightly-2026-09-25",
+    "miri_flags": "-Zmiri-strict-provenance",
+    "miri_leak_checks_disabled": false
+  },
+  "native_build_sha256": {
+    "probe": "987ef9495ab8a1386c56bcd1cbc1be898930228ff167de8c3659bb8569f0d587",
+    "TKernel_library": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "original_test_binary": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693"
+  },
+  "remaining_gaps_and_adaptations": [
+    "Callbacks receive an opaque StorageAddress in Rust. Arbitrary native void-pointer inspection/mutation during callbacks, same-owner reentrant operations and C++ subclass mutation are not reproduced. This scope compares capture, unwind, event order and callback replacement over the safe owner domain.",
+    "Rust callback panic is used as the defined counterpart of a C++ callback exception. Native destructor behavior, cross-thread raw callback-pointer races and exceptions escaping destructors are outside this scope.",
+    "MMgrOpt still uses a sparse free-list table, owned AddressSpace backing and temporary Vec bytes for moved Reallocate. Native table allocation/descriptor effects, exact scratch-allocation behavior and all resource-lifetime differences remain open. The canonical table proposal remains read-only next work.",
+    "All 73 Standard service tests, including the unchanged huge pool stress, pass normally. Focused strict Miri runs the eight new callback tests, eleven Standard storage tests and nine service-memory cases; no huge unchanged pool stress is claimed under Miri.",
+    "The existing 1<<62 AllocateOptimal resource-boundary test and unrelated locale FFI remain outside this focused Miri selection, as documented by the prior shared-storage receipt; complete normal tests include both.",
+    "An initial test-module naming collision was repaired before the two-test semantic red baseline. Its compiler log is preserved separately and contributes no test or parity credit. All final source inputs remained unchanged during acceptance checks; running scripts were not edited."
+  ]
+}
