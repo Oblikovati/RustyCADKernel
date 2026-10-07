@@ -96,15 +96,12 @@ impl ShapeInfo {
 
     /// Reports whether this type has boundary representation.
     pub fn has_brep(&self) -> bool {
-        matches!(
-            self.shape_type,
-            ShapeEnum::Vertex | ShapeEnum::Edge | ShapeEnum::Face
-        )
+        super::tools::has_brep(self.shape_type)
     }
 
     /// Reports whether the type can participate in an interference.
     pub fn is_interfering(&self) -> bool {
-        self.has_brep() || self.shape_type == ShapeEnum::Solid
+        super::tools::is_interfering(self.shape_type)
     }
 
     /// Reports whether the flag is nonnegative.

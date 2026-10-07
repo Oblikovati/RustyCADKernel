@@ -276250,6 +276250,15 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_CurveRangeSample.hxx",
+      "source_sha256": "7f2c464648b0214f7ee55c55c92d04c0ce8e8fdcd251d63a5573213b6339d875",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::hash specialization for IntTools_CurveRangeSample: replaced by the NCollection HashKey impl of CurveRangeSample, which the operator() row claims."
+    },
+    {
       "upstream_id": "IntTools_SurfaceRangeSample()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.hxx",
@@ -277054,6 +277063,15 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Pave.hxx",
+      "source_sha256": "5c96ca92a37bffebbeb3fdd41207dbe730fda1ef8ed3a97f4bd7a9ce76aa4d4f",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::hash specialization for BOPDS_Pave: replaced by the NCollection HashKey impl of Pave, which the operator() row claims."
+    },
+    {
       "upstream_id": "BOPDS_Pair()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Pair.hxx",
@@ -277194,6 +277212,15 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkbo::bop_ds::Pair needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "460cd8a82008d5140e158c6b1d5de50ab19a685b6e113065fffe98177b186aa0",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Pair.hxx",
+      "source_sha256": "0d6d425e976fe0a942becda6116da2e61aa5dc6d2df1b255214ed2a87f4c747a",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::hash specialization for BOPDS_Pair: replaced by the NCollection HashKey impl of Pair, which the operator() row claims."
     },
     {
       "upstream_id": "BOPDS_Point()",
@@ -289347,6 +289374,24 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "IntTools_FaceFace::ComputeTolReached3d(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "source_sha256": "4627c8fcfb7a09bc7e83a3bb21b6d75197eef03d47db9697ca16fd730bc290aa",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `compute_tolerance_reached` run by `FaceFace::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_FaceFace::MakeCurve(int,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_TopolTool>&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_FaceFace.hxx",
+      "source_sha256": "4627c8fcfb7a09bc7e83a3bb21b6d75197eef03d47db9697ca16fd730bc290aa",
+      "rust_item": "rustycad_tkbo::int_tools::FaceFace::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `make_curve` run by `FaceFace::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
       "upstream_id": "BRepMesh_ModelHealer",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_ModelHealer.hxx",
@@ -293241,6 +293286,114 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkbo::int_tools::EdgeEdge needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "a41abc2242e74ce33704242dce142d7b5a421a25237abe7cf024370bc0c4e1e4",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::AddSolution(double,double,double,double,TopAbs_ShapeEnum)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `add_solution` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::CheckCoincidence(double,double,double,double,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `check_coincidence` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::CheckData()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `check_data` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::ComputeLineLine()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `line_intersection` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::FindBestSolution(double,double,double,double,double&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `best_solution` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::FindParameters(const BRepAdaptor_Curve&,double,double,double,double,double,double,const Bnd_Box&,double&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `parameters::find` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::FindSolutions(NCollection_Sequence<IntTools_Range>&,NCollection_Sequence<IntTools_Range>&,bool&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `solutions::find` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::FindSolutions(const IntTools_Range&,const Bnd_Box&,const IntTools_Range&,const Bnd_Box&,NCollection_Sequence<IntTools_Range>&,NCollection_Sequence<IntTools_Range>&,bool&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `solutions::find` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::IsCoincident()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `is_coincident` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::IsIntersection(double,double,double,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `is_intersection` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::MergeSolutions(const NCollection_Sequence<IntTools_Range>&,const NCollection_Sequence<IntTools_Range>&,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `merge_solutions` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "IntTools_EdgeEdge::Prepare()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeEdge.hxx",
+      "source_sha256": "c1b7fb2385c87c6d834c8a8949765ac2e10bb24b8d7ea07b8d7fec6e962c936d",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeEdge::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `prepare` run by `EdgeEdge::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
     },
     {
       "upstream_id": "BRepMesh_Circle()",
@@ -297912,6 +298065,24 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPDS_Interf()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "source_sha256": "bceac50e4b1cef57eeea5a0ece142e31c7594c959dab82d812a604bc26f8080f",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Protected constructor of the record base: the shared indices start at -1. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPDS_Interf(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Interf.hxx",
+      "source_sha256": "bceac50e4b1cef57eeea5a0ece142e31c7594c959dab82d812a604bc26f8080f",
+      "rust_item": "rustycad_tkbo::bop_ds::Interference::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "The allocator is not ported (Rust collections own their storage). Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
       "upstream_id": "BOPDS_DS()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
@@ -297940,16 +298111,18 @@
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
       "rust_item": "rustycad_tkbo::bop_ds::DataStructure::clear",
-      "status": "partial",
-      "notes": "Clears the currently ported argument, shape, range and shape-index storage; unported BOPDS pools remain outside this Rust slice."
+      "status": "implemented",
+      "notes": "Clears the arguments, ranges, shape records and index, pave-block, common-block and face-info pools, same-domain bindings, interference table and every interference array, as the native Clear. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::Allocator() const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure",
+      "status": "excluded",
+      "notes": "The NCollection allocator is not ported: Rust collections own their storage, so DataStructure has no allocator to return.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::SetArguments(const NCollection_List<TopoDS_Shape>&)",
@@ -298317,9 +298490,10 @@
       "upstream_id": "BOPDS_DS::ShapesSD()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::shapes_sd",
+      "status": "implemented",
+      "notes": "The mutable map of direct same-domain bindings, as the native non-const reference. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::AddShapeSD(const int, const int)",
@@ -298567,9 +298741,10 @@
       "upstream_id": "BOPDS_DS::IsValidShrunkData(const occ::handle<BOPDS_PaveBlock>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::is_valid_shrunk_data",
+      "status": "implemented",
+      "notes": "Source translation: the shrunk-range end points against the vertex tolerances plus the confusion. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::BuildBndBoxSolid(int,Bnd_Box&,bool)",
@@ -314005,6 +314180,24 @@
       "notes": "ConnexityBlock shape/loop lists retain supplied allocator and regularity mutations. Class remains partial pending protected-member and constructor crosswalk proof. Native connectivity fixtures exercise shape list and regularity through all three MakeConnexityBlocks overloads."
     },
     {
+      "upstream_id": "BOPTools_ConnexityBlock()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_ConnexityBlock.hxx",
+      "source_sha256": "d96a8c51ae58a40e603c7e8a69ba6639bd1c8469d3e301c7850abc84b7f54e31",
+      "rust_item": "rustycad_tkbo::bop_tools::ConnexityBlock::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Regular block with the common allocator. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPTools_ConnexityBlock(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_ConnexityBlock.hxx",
+      "source_sha256": "d96a8c51ae58a40e603c7e8a69ba6639bd1c8469d3e301c7850abc84b7f54e31",
+      "rust_item": "rustycad_tkbo::bop_tools::ConnexityBlock::with_allocator",
+      "status": "implemented",
+      "notes": "Both lists share the supplied allocator. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
       "upstream_id": "BOPTools_AlgoTools::MakeConnexityBlocks(const TopoDS_Shape &, const TopAbs_ShapeEnum, const TopAbs_ShapeEnum, NCollection_List<NCollection_List<TopoDS_Shape>> &, NCollection_IndexedDataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_AlgoTools.hxx",
@@ -316725,6 +316918,24 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_Set.hxx",
+      "source_sha256": "e504e122b51ae94fe1a5fea30a8b1b6b3d66a7955767efe8fe4fc95a74872804",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::hash specialization for BOPTools_Set: replaced by the NCollection HashKey impl of ShapeSet, which the operator() row claims."
+    },
+    {
+      "upstream_id": "std::hash<BOPTools_Set>::operator()(const BOPTools_Set&) const noexcept",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_Set.hxx",
+      "source_sha256": "e504e122b51ae94fe1a5fea30a8b1b6b3d66a7955767efe8fe4fc95a74872804",
+      "rust_item": "rustycad_tkbo::bop_tools::ShapeSet::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "The std::hash specialization is the NCollection HashKey impl returning the native set hash. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
       "upstream_id": "BOPAlgo_PaveFiller::PerformEE(const Message_ProgressRange &)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
@@ -316804,6 +317015,15 @@
       "rust_item": "rustycad_tkbo::bop_tools::BoxSelector::accept",
       "status": "partial",
       "notes": "30 native 2D/3D ordered BVH selections and node metrics; tools/oracle/tkbo_box_selector.md. Generic layouts/builders/failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSelector",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxSelector.hxx",
+      "source_sha256": "b1ff5bd23f725625f92bc1a27468970ac16cb4f8b28372866cbd4785904782f7",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSelector",
+      "status": "partial",
+      "notes": "Class template BOPTools_BoxSelector is the generic Rust struct bop_tools::BoxSelector over the BVH vector type."
     },
     {
       "upstream_id": "BOPTools_PairSelector::RejectElement(const int, const int)",
@@ -316897,6 +317117,24 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPTools_PairSelector::PairIDs::operator<(const BOPTools_PairSelector::PairIDs&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_PairSelector.hxx",
+      "source_sha256": "7db386492e7a0486d3d9c43723c269f0cc8b925da8bc9d2df7def5545f99992f",
+      "rust_item": "rustycad_tkbo::bop_tools::PairIds::<core::cmp::PartialOrd>::partial_cmp",
+      "status": "implemented",
+      "notes": "The derived lexicographic order of (id1, id2) is the native comparison. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPTools_PairSelector",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_PairSelector.hxx",
+      "source_sha256": "7db386492e7a0486d3d9c43723c269f0cc8b925da8bc9d2df7def5545f99992f",
+      "rust_item": "rustycad_tkbo::bop_tools::PairSelector",
+      "status": "partial",
+      "notes": "Class template BOPTools_PairSelector is the generic Rust struct bop_tools::PairSelector (3D)."
+    },
+    {
       "upstream_id": "BOPTools_BoxSet::BOPTools_BoxSet<NumType, Dimension, DataType>(const opencascade::handle<BVH_Builder<NumType, BOPTools_BoxSet::Dimension>> &)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxTree.hxx",
@@ -316904,6 +317142,15 @@
       "rust_item": "rustycad_tkbo::bop_tools::BoxSet::new",
       "status": "partial",
       "notes": "Native linear-builder default with 30 ordered 2D/3D selections, supplied binned-builder replay and BOPDSIterator integration; tools/oracle/tkbo_bopds_iterator.md. Other dimensions/scalars/builders/failure and complete legacy/API parity unproven."
+    },
+    {
+      "upstream_id": "BOPTools_BoxSet",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_BoxTree.hxx",
+      "source_sha256": "ec5c7b6bb19feaef139553b8a144e94dfd3c3ad0adaa7021c5d4a40d0738465d",
+      "rust_item": "rustycad_tkbo::bop_tools::BoxSet",
+      "status": "partial",
+      "notes": "Class template BOPTools_BoxSet is the generic Rust struct bop_tools::BoxSet over the BVH vector and data types."
     },
     {
       "upstream_id": "BOPDS_Iterator::NbExtInterfs()",
@@ -316982,6 +317229,51 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkbo::bop_ds::BOPDSIterator needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "fd347d09d0c1671dbd1c1678c31a3fa5d9b798a7d490e0b7f914e7ecfc38f147",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BOPDS_Iterator()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Iterator.hxx",
+      "source_sha256": "7dac08c06ad9529647d09dfa0f960df0e515fcc0d2de2e1023e87cd9b95023cd",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSIterator::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Empty candidate lists. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPDS_Iterator(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Iterator.hxx",
+      "source_sha256": "7dac08c06ad9529647d09dfa0f960df0e515fcc0d2de2e1023e87cd9b95023cd",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSIterator::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "The allocator is not ported (Rust collections own their storage). Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPDS_Iterator::Intersect(const occ::handle<IntTools_Context>&,bool,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Iterator.hxx",
+      "source_sha256": "7dac08c06ad9529647d09dfa0f960df0e515fcc0d2de2e1023e87cd9b95023cd",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSIterator::prepare_with_context",
+      "status": "implemented",
+      "notes": "Protected virtual broad phase reached through Prepare: the Rust iterator has no virtual Intersect, so prepare_with_context runs it (BOPDSIteratorSI has its own). Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPDS_Iterator::SetDS(BOPDS_DS*const&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Iterator.hxx",
+      "source_sha256": "7dac08c06ad9529647d09dfa0f960df0e515fcc0d2de2e1023e87cd9b95023cd",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSIterator",
+      "status": "excluded",
+      "notes": "The Rust iterator stores no data-structure pointer: prepare, prepare_with_context and intersect_extended borrow the DataStructure for the call, so there is no pointer to set."
+    },
+    {
+      "upstream_id": "BOPDS_Iterator::DS() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Iterator.hxx",
+      "source_sha256": "7dac08c06ad9529647d09dfa0f960df0e515fcc0d2de2e1023e87cd9b95023cd",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSIterator",
+      "status": "excluded",
+      "notes": "The Rust iterator stores no data-structure pointer: prepare, prepare_with_context and intersect_extended borrow the DataStructure for the call, so there is no stored data structure to return."
     },
     {
       "upstream_id": "BOPAlgo_PaveFiller::PerformVF(const Message_ProgressRange &)",
@@ -317847,6 +318139,78 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkbo::int_tools::EdgeFace needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "c40c3fafe555536788cf6ba97cb0dc429b7f2c1a8b22bbe8982e5361ad18c856",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::CheckData()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::perform",
+      "status": "partial",
+      "notes": "Protected step ported as the private `check_data` run by `EdgeFace::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests. The step belongs to the IntTools_EdgeFace port, whose public rows stay partial for their evidence scope."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::CheckTouch(const IntTools_CommonPrt&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::perform",
+      "status": "partial",
+      "notes": "Protected step ported as the private `check_touch` run by `EdgeFace::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests. The step belongs to the IntTools_EdgeFace port, whose public rows stay partial for their evidence scope."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::CheckTouchVertex(const IntTools_CommonPrt&,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::perform",
+      "status": "partial",
+      "notes": "Protected step ported as the private `check_touch_vertex` run by `EdgeFace::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests. The step belongs to the IntTools_EdgeFace port, whose public rows stay partial for their evidence scope."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::DistanceFunction(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::perform",
+      "status": "partial",
+      "notes": "Protected step ported as the private `distance_function` run by `EdgeFace::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests. The step belongs to the IntTools_EdgeFace port, whose public rows stay partial for their evidence scope."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::IsCoincident()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::perform",
+      "status": "partial",
+      "notes": "Protected step ported as the private `is_coincident` run by `EdgeFace::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests. The step belongs to the IntTools_EdgeFace port, whose public rows stay partial for their evidence scope."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::IsEqDistance(const gp_Pnt&,const BRepAdaptor_Surface&,double,double&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::perform",
+      "status": "partial",
+      "notes": "Protected step ported as the private `equal_surface_distance` run by `EdgeFace::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests. The step belongs to the IntTools_EdgeFace port, whose public rows stay partial for their evidence scope."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::IsProjectable(double) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::perform",
+      "status": "partial",
+      "notes": "Protected step ported as the private `append_projectable_ranges` run by `EdgeFace::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests. The step belongs to the IntTools_EdgeFace port, whose public rows stay partial for their evidence scope."
+    },
+    {
+      "upstream_id": "IntTools_EdgeFace::MakeType(IntTools_CommonPrt&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_EdgeFace.hxx",
+      "source_sha256": "4fcc19a04081ec9a606f69c957d695f5c661e5aef7179f6c7e2a98a977287254",
+      "rust_item": "rustycad_tkbo::int_tools::EdgeFace::perform",
+      "status": "partial",
+      "notes": "Protected step ported as the private `common_part_type` run by `EdgeFace::perform`; Rust has no subclass extension point for it. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests. The step belongs to the IntTools_EdgeFace port, whose public rows stay partial for their evidence scope."
     },
     {
       "upstream_id": "BOPAlgo_PaveFiller::PerformEF(const Message_ProgressRange &)",
@@ -326911,6 +327275,78 @@
       "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::NotValid",
       "status": "implemented",
       "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.lxx",
+      "source_sha256": "c086698c2265aaf858d2c60c279ff5c21f28c2f4747708c45de8b683c5186f14",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::hash specialization for IntTools_SurfaceRangeSample: replaced by the NCollection HashKey impl of SurfaceRangeSample, which the operator() row claims."
+    },
+    {
+      "upstream_id": "std::hash<IntTools_SurfaceRangeSample>::operator()(const IntTools_SurfaceRangeSample&) const noexcept",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/IntTools/IntTools_SurfaceRangeSample.lxx",
+      "source_sha256": "c086698c2265aaf858d2c60c279ff5c21f28c2f4747708c45de8b683c5186f14",
+      "rust_item": "rustycad_tkbo::int_tools::SurfaceRangeSample::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "The std::hash specialization is the NCollection HashKey impl with the native hash formula. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPDS_Tools::HasBRep(TopAbs_ShapeEnum)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Tools.lxx",
+      "source_sha256": "2d676740e4b7d2d4f3f02fea89719e8a5d835fde7849ced268213ec8fbe48bb2",
+      "rust_item": "rustycad_tkbo::bop_ds::tools::has_brep",
+      "status": "implemented",
+      "notes": "Source translation; unit-tested. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPDS_Tools::IsInterfering(TopAbs_ShapeEnum)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Tools.lxx",
+      "source_sha256": "2d676740e4b7d2d4f3f02fea89719e8a5d835fde7849ced268213ec8fbe48bb2",
+      "rust_item": "rustycad_tkbo::bop_ds::tools::is_interfering",
+      "status": "implemented",
+      "notes": "Source translation; unit-tested. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPDS_Tools::TypeToInteger(TopAbs_ShapeEnum)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Tools.lxx",
+      "source_sha256": "2d676740e4b7d2d4f3f02fea89719e8a5d835fde7849ced268213ec8fbe48bb2",
+      "rust_item": "rustycad_tkbo::bop_ds::tools::type_to_integer",
+      "status": "implemented",
+      "notes": "Source translation (an unknown type cannot occur: the Rust enum is exhaustive). Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPDS_Tools::TypeToInteger(TopAbs_ShapeEnum,TopAbs_ShapeEnum)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_Tools.lxx",
+      "source_sha256": "2d676740e4b7d2d4f3f02fea89719e8a5d835fde7849ced268213ec8fbe48bb2",
+      "rust_item": "rustycad_tkbo::bop_ds::tools::type_pair_to_integer",
+      "status": "implemented",
+      "notes": "The two-type overload is a separately named function; source translation, unit-tested. Exercised by every Boolean replay (tools/oracle/tkbo_bop.cxx, tkbo_builder_general_fuse.cxx, tkbo_splitter.cxx, tkbo_checker_si.cxx) and the translated TKBO GTests."
+    },
+    {
+      "upstream_id": "BOPTools_Parallel::Perform(bool,TypeSolverVector&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_Parallel.hxx",
+      "source_sha256": "c37388f937cc096f136fbd0c0747ae24d321041d149a852ad1588bbf39486b17",
+      "rust_item": "rustycad_tkbo::bop_algo::ParallelAlgo",
+      "status": "excluded",
+      "notes": "C++ functor-dispatch template over OSD_Parallel/OSD_ThreadPool: the Rust port runs each algorithm's task vector in order inside the algorithm (the results do not depend on the order), so there is no generic functor runner; the per-task work is ported with its algorithm."
+    },
+    {
+      "upstream_id": "BOPTools_Parallel::Perform(bool,TypeSolverVector&,opencascade::handle<TypeContext>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPTools/BOPTools_Parallel.hxx",
+      "source_sha256": "c37388f937cc096f136fbd0c0747ae24d321041d149a852ad1588bbf39486b17",
+      "rust_item": "rustycad_tkbo::bop_algo::ParallelAlgo",
+      "status": "excluded",
+      "notes": "C++ functor-dispatch template over OSD_Parallel/OSD_ThreadPool: the Rust port runs each algorithm's task vector in order inside the algorithm (the results do not depend on the order), so there is no generic functor runner; the per-task work is ported with its algorithm."
     },
     {
       "upstream_id": "Geom2dAdaptor_Curve::OffsetData",

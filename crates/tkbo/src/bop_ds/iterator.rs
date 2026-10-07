@@ -256,39 +256,12 @@ fn stored_shape_type(types: &[ShapeEnum], index: i32) -> Result<ShapeEnum, Failu
     })
 }
 
+/// The interference list of two shape types, None for a pair that never interferes.
 fn interference_index(first: ShapeEnum, second: ShapeEnum) -> Option<usize> {
-    let first = interference_rank(first);
-    let second = interference_rank(second);
-    let code = second * 10 + first;
-    match code {
-        77 => Some(0),
-        76 | 67 => Some(1),
-        66 => Some(2),
-        74 | 47 => Some(3),
-        64 | 46 => Some(4),
-        44 => Some(5),
-        72 | 27 => Some(6),
-        62 | 26 => Some(7),
-        42 | 24 => Some(8),
-        22 => Some(9),
-        _ => None,
-    }
+    usize::try_from(super::tools::type_pair_to_integer(first, second)).ok()
 }
 
-fn interference_rank(shape_type: ShapeEnum) -> i32 {
-    shape_rank(shape_type)
-}
-
+/// The rank of a shape type (`BOPDS_Tools::TypeToInteger`).
 fn shape_rank(shape_type: ShapeEnum) -> i32 {
-    match shape_type {
-        ShapeEnum::Compound => 0,
-        ShapeEnum::CompSolid => 1,
-        ShapeEnum::Solid => 2,
-        ShapeEnum::Shell => 3,
-        ShapeEnum::Face => 4,
-        ShapeEnum::Wire => 5,
-        ShapeEnum::Edge => 6,
-        ShapeEnum::Vertex => 7,
-        ShapeEnum::Shape => 8,
-    }
+    super::tools::type_to_integer(shape_type)
 }

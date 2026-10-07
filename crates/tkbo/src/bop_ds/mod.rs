@@ -13,6 +13,7 @@ mod pave_block;
 mod point;
 mod shape_info;
 mod sub_iterator;
+pub mod tools;
 pub use common_block::{
     CommonBlock, CommonBlockHandle, CommonBlockHandleIdentity, common_block_handle,
     pave_block_handle,
