@@ -3,6 +3,9 @@
 //! traits over embedded bases; the native overrides inherited by many classes are
 //! functions (`extract_root_result`, `deduct_fill_iterator`...) or macros
 //! (`impl_extract_selection!`) the implementations call.
+mod dispatch;
+#[cfg(test)]
+mod dispatch_tests;
 mod enums;
 mod int_param;
 mod select_bases;
@@ -25,6 +28,10 @@ mod signature_list;
 mod signature_tests;
 mod signatures;
 
+pub use dispatch::{
+    IFSelectDispGlobal, IFSelectDispPerCount, IFSelectDispPerFiles, IFSelectDispPerOne,
+    IFSelectDispPerSignature, IFSelectDispatch, IFSelectDispatchBase,
+};
 pub use enums::{
     IFSelectEditValue, IFSelectPrintCount, IFSelectPrintFail, IFSelectRemainMode,
     IFSelectReturnStatus,

@@ -100465,6 +100465,342 @@
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
     },
     {
+      "upstream_id": "IFSelect_Dispatch::SetRootName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::set_root_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::HasRootName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::has_root_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::RootName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::root_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::SetFinalSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::set_final_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::FinalSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::final_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::Selections",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::selections",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors. Native quirk kept: the iterator returned is the one used to collect the selections, at its end."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::CanHaveRemainder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::can_have_remainder",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::LimitedMax",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::limited_max",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::GetEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::get_entities",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors. Standard_NullObject without final selection."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::Packets",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::packets",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::Packeted",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::packeted",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Dispatch::Remainder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Dispatch.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispatch::remainder",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispGlobal::IFSelect_DispGlobal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispGlobal.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispGlobal::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispGlobal::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispGlobal.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispGlobal::<rustycad_tkxsbase::if_select::IFSelectDispatch>::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispGlobal::LimitedMax",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispGlobal.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispGlobal::<rustycad_tkxsbase::if_select::IFSelectDispatch>::limited_max",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispGlobal::Packets",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispGlobal.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispGlobal::<rustycad_tkxsbase::if_select::IFSelectDispatch>::packets",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerOne::IFSelect_DispPerOne",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerOne.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerOne::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerOne::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerOne.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerOne::<rustycad_tkxsbase::if_select::IFSelectDispatch>::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerOne::LimitedMax",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerOne.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerOne::<rustycad_tkxsbase::if_select::IFSelectDispatch>::limited_max",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerOne::Packets",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerOne.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerOne::<rustycad_tkxsbase::if_select::IFSelectDispatch>::packets",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerCount::IFSelect_DispPerCount",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerCount::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerCount::Count",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerCount::count",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerCount::SetCount",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerCount::set_count",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerCount::CountValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerCount::count_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerCount::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerCount::<rustycad_tkxsbase::if_select::IFSelectDispatch>::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerCount::LimitedMax",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerCount::<rustycad_tkxsbase::if_select::IFSelectDispatch>::limited_max",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerCount::Packets",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerCount.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerCount::<rustycad_tkxsbase::if_select::IFSelectDispatch>::packets",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerFiles::IFSelect_DispPerFiles",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerFiles.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerFiles::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerFiles::Count",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerFiles.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerFiles::count",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerFiles::SetCount",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerFiles.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerFiles::set_count",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerFiles::CountValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerFiles.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerFiles::count_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerFiles::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerFiles.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerFiles::<rustycad_tkxsbase::if_select::IFSelectDispatch>::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerFiles::LimitedMax",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerFiles.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerFiles::<rustycad_tkxsbase::if_select::IFSelectDispatch>::limited_max",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerFiles::Packets",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerFiles.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerFiles::<rustycad_tkxsbase::if_select::IFSelectDispatch>::packets",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerSignature::IFSelect_DispPerSignature",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerSignature::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerSignature::SignCounter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerSignature::sign_counter",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerSignature::SetSignCounter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerSignature::set_sign_counter",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors. Standard_NullObject for a null counter (a native null dereference)."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerSignature::SignName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerSignature::sign_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerSignature::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerSignature::<rustycad_tkxsbase::if_select::IFSelectDispatch>::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerSignature::LimitedMax",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerSignature::<rustycad_tkxsbase::if_select::IFSelectDispatch>::limited_max",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_DispPerSignature::Packets",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_DispPerSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectDispPerSignature::<rustycad_tkxsbase::if_select::IFSelectDispatch>::packets",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases; output arguments are returned (LimitedMax: Some(max) for the native true); native exceptions and null dereferences are Failure errors."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
