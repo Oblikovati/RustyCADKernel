@@ -111,8 +111,6 @@ impl<T: Clone> Sequence<T> {
 }
 impl<T: Clone> Clone for Sequence<T> {
     fn clone(&self) -> Self {
-        let mut copy = Self::with_allocator(self.allocator().clone());
-        copy.assign(self);
-        copy
+        Self::from_copied_with(self, T::clone)
     }
 }
