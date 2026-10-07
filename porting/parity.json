@@ -149791,6 +149791,13 @@
       "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
     },
     {
+      "upstream_id": "GccInt_BCirc::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BCirc.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GccInt_Bisec that DEFINE_STANDARD_RTTIEXT(GccInt_BCirc, GccInt_Bisec) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GccInt_BElips::GccInt_BElips(const gp_Elips2d&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BElips.hxx",
@@ -149821,6 +149828,13 @@
       "rust_item": "<rustycad_tkgeomalgo::gcc_int::BElips as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BElips::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BElips.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GccInt_Bisec that DEFINE_STANDARD_RTTIEXT(GccInt_BElips, GccInt_Bisec) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GccInt_BHyper::GccInt_BHyper(const gp_Hypr2d&)",
@@ -149855,6 +149869,13 @@
       "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
     },
     {
+      "upstream_id": "GccInt_BHyper::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BHyper.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GccInt_Bisec that DEFINE_STANDARD_RTTIEXT(GccInt_BHyper, GccInt_Bisec) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GccInt_BLine::GccInt_BLine(const gp_Lin2d&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BLine.hxx",
@@ -149887,6 +149908,13 @@
       "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
     },
     {
+      "upstream_id": "GccInt_BLine::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BLine.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GccInt_Bisec that DEFINE_STANDARD_RTTIEXT(GccInt_BLine, GccInt_Bisec) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GccInt_BParab::GccInt_BParab(const gp_Parab2d&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BParab.hxx",
@@ -149917,6 +149945,13 @@
       "rust_item": "<rustycad_tkgeomalgo::gcc_int::BParab as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BParab::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BParab.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GccInt_Bisec that DEFINE_STANDARD_RTTIEXT(GccInt_BParab, GccInt_Bisec) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GccInt_Bisec::ArcType() const",
@@ -149981,6 +150016,13 @@
       "rust_item": "<dyn rustycad_tkgeomalgo::gcc_int::Bisec as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_Bisec::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_Bisec.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(GccInt_Bisec, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GccInt_IType",
@@ -154348,6 +154390,13 @@
       "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
     },
     {
+      "upstream_id": "IntSurf_LineOn2S::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(IntSurf_LineOn2S, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "IntSurf_PathPoint::IntSurf_PathPoint()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
@@ -155180,6 +155229,13 @@
       "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
     },
     {
+      "upstream_id": "Law_BSpFunc::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Law_Function that DEFINE_STANDARD_RTTIEXT(Law_BSpFunc, Law_Function) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "Law_BSpline::Law_BSpline(const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,bool)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
@@ -155692,6 +155748,13 @@
       "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
     },
     {
+      "upstream_id": "Law_BSpline::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(Law_BSpline, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "Law_BSplineKnotSplitting::Law_BSplineKnotSplitting(const occ::handle<Law_BSpline>&,int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSplineKnotSplitting.hxx",
@@ -155844,6 +155907,13 @@
       "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
     },
     {
+      "upstream_id": "Law_Composite::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Law_Function that DEFINE_STANDARD_RTTIEXT(Law_Composite, Law_Function) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "Law_Constant::Law_Constant()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
@@ -155932,6 +156002,13 @@
       "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
     },
     {
+      "upstream_id": "Law_Constant::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Law_Function that DEFINE_STANDARD_RTTIEXT(Law_Constant, Law_Function) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "Law_Function::Continuity() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
@@ -156004,6 +156081,13 @@
       "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
     },
     {
+      "upstream_id": "Law_Function::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(Law_Function, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "Law_Interpol::Law_Interpol()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpol.hxx",
@@ -156050,6 +156134,13 @@
       "rust_item": "rustycad_tkgeomalgo::law::LawInterpol::static_type",
       "status": "implemented",
       "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpol::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpol.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Law_BSpFunc that DEFINE_STANDARD_RTTIEXT(Law_Interpol, Law_BSpFunc) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "Law_Interpolate::Law_Interpolate(const occ::handle<NCollection_HArray1<double>>&,bool,double)",
@@ -156204,6 +156295,13 @@
       "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
     },
     {
+      "upstream_id": "Law_Linear::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Law_Function that DEFINE_STANDARD_RTTIEXT(Law_Linear, Law_Function) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "Law_S::Law_S()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_S.hxx",
@@ -156234,6 +156332,13 @@
       "rust_item": "rustycad_tkgeomalgo::law::LawS::static_type",
       "status": "implemented",
       "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_S::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_S.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Law_BSpFunc that DEFINE_STANDARD_RTTIEXT(Law_S, Law_BSpFunc) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "Plate_D1::Plate_D1(const gp_XYZ&,const gp_XYZ&)",
@@ -164477,6 +164582,13 @@
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
     },
     {
+      "upstream_id": "GeomFill_Line::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Line.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(GeomFill_Line, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_Profiler::GeomFill_Profiler()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Profiler.hxx",
@@ -165214,6 +165326,13 @@
       "notes": "C++ protected member constructor (Tol3d, Tolang): the tolerances that each boundary embeds."
     },
     {
+      "upstream_id": "GeomFill_Boundary::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Boundary.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(GeomFill_Boundary, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_SimpleBound::GeomFill_SimpleBound(const occ::handle<Adaptor3d_Curve>&,double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SimpleBound.hxx",
@@ -165270,6 +165389,13 @@
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
     },
     {
+      "upstream_id": "GeomFill_SimpleBound::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SimpleBound.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_Boundary that DEFINE_STANDARD_RTTIEXT(GeomFill_SimpleBound, GeomFill_Boundary) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_DegeneratedBound::GeomFill_DegeneratedBound(const gp_Pnt&,double,double,double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_DegeneratedBound.hxx",
@@ -165324,6 +165450,13 @@
       "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillDegeneratedBound::static_type",
       "status": "implemented",
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_DegeneratedBound::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_DegeneratedBound.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_Boundary that DEFINE_STANDARD_RTTIEXT(GeomFill_DegeneratedBound, GeomFill_Boundary) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_BoundWithSurf::GeomFill_BoundWithSurf(const Adaptor3d_CurveOnSurface&,double,double)",
@@ -165406,6 +165539,13 @@
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
     },
     {
+      "upstream_id": "GeomFill_BoundWithSurf::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_BoundWithSurf.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_Boundary that DEFINE_STANDARD_RTTIEXT(GeomFill_BoundWithSurf, GeomFill_Boundary) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_TgtField::IsScalable() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TgtField.hxx",
@@ -165454,6 +165594,13 @@
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
     },
     {
+      "upstream_id": "GeomFill_TgtField::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TgtField.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(GeomFill_TgtField, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_TgtOnCoons::GeomFill_TgtOnCoons(const occ::handle<GeomFill_CoonsAlgPatch>&,int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TgtOnCoons.hxx",
@@ -165492,6 +165639,13 @@
       "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTgtOnCoons::static_type",
       "status": "implemented",
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_TgtOnCoons::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TgtOnCoons.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TgtField that DEFINE_STANDARD_RTTIEXT(GeomFill_TgtOnCoons, GeomFill_TgtField) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_CoonsAlgPatch::GeomFill_CoonsAlgPatch(const occ::handle<GeomFill_Boundary>&,const occ::handle<GeomFill_Boundary>&,const occ::handle<GeomFill_Boundary>&,const occ::handle<GeomFill_Boundary>&)",
@@ -165580,6 +165734,13 @@
       "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillCoonsAlgPatch::static_type",
       "status": "implemented",
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_CoonsAlgPatch::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_CoonsAlgPatch.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(GeomFill_CoonsAlgPatch, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_CornerState::GeomFill_CornerState()",
@@ -169334,6 +169495,13 @@
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
     },
     {
+      "upstream_id": "IntPatch_ALine::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALine.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = IntPatch_Line that DEFINE_STANDARD_RTTIEXT(IntPatch_ALine, IntPatch_Line) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "IntPatch_ALineToWLine::IntPatch_ALineToWLine(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ALineToWLine.hxx",
@@ -169958,6 +170126,13 @@
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
     },
     {
+      "upstream_id": "IntPatch_GLine::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_GLine.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = IntPatch_Line that DEFINE_STANDARD_RTTIEXT(IntPatch_GLine, IntPatch_Line) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "IntPatch_HCurve2dTool::FirstParameter(const occ::handle<Adaptor2d_Curve2d>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_HCurve2dTool.hxx",
@@ -170533,6 +170708,13 @@
       "notes": "C++ protected member constructor: IntPatchLineBase::new with IntPatchLineTransitions::Undecided."
     },
     {
+      "upstream_id": "IntPatch_Line::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Line.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(IntPatch_Line, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "IntPatch_Point::IntPatch_Point()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Point.hxx",
@@ -170946,6 +171128,13 @@
       "notes": "C++ protected member constructor of the abstract IntPatch_PointLine that only forwards to the IntPatch_Line constructor: the Rust trait IntPatchPointLine has no data, and the concrete lines build their IntPatchLineBase with IntPatchLineBase::new."
     },
     {
+      "upstream_id": "IntPatch_PointLine::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PointLine.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = IntPatch_Line that DEFINE_STANDARD_RTTIEXT(IntPatch_PointLine, IntPatch_Line) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "IntPatch_RLine::IntPatch_RLine(bool,IntSurf_TypeTrans,IntSurf_TypeTrans)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_RLine.hxx",
@@ -171256,6 +171445,13 @@
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
     },
     {
+      "upstream_id": "IntPatch_RLine::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_RLine.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = IntPatch_PointLine that DEFINE_STANDARD_RTTIEXT(IntPatch_RLine, IntPatch_PointLine) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "IntPatch_SpecPntType",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecPntType.hxx",
@@ -171542,6 +171738,13 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheIWLineOfTheIWalking::static_type",
       "status": "implemented",
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWLineOfTheIWalking::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWLineOfTheIWalking.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(IntPatch_TheIWLineOfTheIWalking, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "IntPatch_TheIWalking(double,double,double,bool)",
@@ -172552,6 +172755,13 @@
       "notes": "Enumerator of IntPatch_WLine::IntPatch_WLType: the variant PrmPrm of the Rust enum that the IntPatch_WLine::IntPatch_WLType row names."
     },
     {
+      "upstream_id": "IntPatch_WLine::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_WLine.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = IntPatch_PointLine that DEFINE_STANDARD_RTTIEXT(IntPatch_WLine, IntPatch_PointLine) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill::Surface(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill.hxx",
@@ -173024,6 +173234,13 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_CircularBlendFunc::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_CircularBlendFunc.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Approx_SweepFunction that DEFINE_STANDARD_RTTIEXT(GeomFill_CircularBlendFunc, Approx_SweepFunction) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_ConstantBiNormal::GeomFill_ConstantBiNormal(const gp_Dir&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_ConstantBiNormal.hxx",
@@ -173118,6 +173335,13 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillConstantBiNormal as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_ConstantBiNormal::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_ConstantBiNormal.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TrihedronLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_ConstantBiNormal, GeomFill_TrihedronLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_CorrectedFrenet::GeomFill_CorrectedFrenet()",
@@ -173238,6 +173462,13 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillCorrectedFrenet as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_CorrectedFrenet::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_CorrectedFrenet.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TrihedronLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_CorrectedFrenet, GeomFill_TrihedronLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_CurveAndTrihedron::GeomFill_CurveAndTrihedron(const occ::handle<GeomFill_TrihedronLaw>&)",
@@ -173400,6 +173631,13 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_CurveAndTrihedron::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_CurveAndTrihedron.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_LocationLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_CurveAndTrihedron, GeomFill_LocationLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_Darboux::GeomFill_Darboux()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Darboux.hxx",
@@ -173486,6 +173724,13 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillDarboux as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Darboux::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Darboux.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TrihedronLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_Darboux, GeomFill_TrihedronLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_DiscreteTrihedron::GeomFill_DiscreteTrihedron()",
@@ -173592,6 +173837,13 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_DiscreteTrihedron::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_DiscreteTrihedron.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TrihedronLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_DiscreteTrihedron, GeomFill_TrihedronLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_DraftTrihedron::GeomFill_DraftTrihedron(const gp_Vec&,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_DraftTrihedron.hxx",
@@ -173686,6 +173938,13 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillDraftTrihedron as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_DraftTrihedron::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_DraftTrihedron.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TrihedronLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_DraftTrihedron, GeomFill_TrihedronLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_EvolvedSection::GeomFill_EvolvedSection(const occ::handle<Geom_Curve>&,const occ::handle<Law_Function>&)",
@@ -173872,6 +174131,13 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_EvolvedSection::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_EvolvedSection.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_SectionLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_EvolvedSection, GeomFill_SectionLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_Fixed::GeomFill_Fixed(const gp_Vec&,const gp_Vec&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Fixed.hxx",
@@ -173950,6 +174216,13 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillFixed as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Fixed::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Fixed.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TrihedronLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_Fixed, GeomFill_TrihedronLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_Frenet::GeomFill_Frenet()",
@@ -174054,6 +174327,13 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillFrenet as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Frenet::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Frenet.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TrihedronLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_Frenet, GeomFill_TrihedronLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_FunctionDraft::GeomFill_FunctionDraft(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Curve>&)",
@@ -174327,6 +174607,13 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_GuideTrihedronAC::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_GuideTrihedronAC.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TrihedronWithGuide that DEFINE_STANDARD_RTTIEXT(GeomFill_GuideTrihedronAC, GeomFill_TrihedronWithGuide) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_GuideTrihedronPlan::GeomFill_GuideTrihedronPlan(const occ::handle<Adaptor3d_Curve>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_GuideTrihedronPlan.hxx",
@@ -174453,6 +174740,13 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillGuideTrihedronPlan as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_GuideTrihedronPlan::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_GuideTrihedronPlan.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TrihedronWithGuide that DEFINE_STANDARD_RTTIEXT(GeomFill_GuideTrihedronPlan, GeomFill_TrihedronWithGuide) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_LocFunction::GeomFill_LocFunction(const occ::handle<GeomFill_LocationLaw>&)",
@@ -174726,6 +175020,13 @@
       "notes": "C++ protected data member of GeomFill_LocationDraft: Rust keeps it as the private field `poles2d` of DraftFields (tkgeomalgo/src/geom_fill/location_draft.rs), the state of GeomFillLocationDraft; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "GeomFill_LocationDraft::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationDraft.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_LocationLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_LocationDraft, GeomFill_LocationLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_LocationGuide::GeomFill_LocationGuide(const occ::handle<GeomFill_TrihedronWithGuide>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationGuide.hxx",
@@ -174989,6 +175290,13 @@
       "notes": "C++ protected data member of GeomFill_LocationGuide: Rust keeps it as the private field `poles2d` of GuideLocFields (tkgeomalgo/src/geom_fill/location_guide.rs), the state of GeomFillLocationGuide; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "GeomFill_LocationGuide::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationGuide.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_LocationLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_LocationGuide, GeomFill_LocationLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_LocationLaw::SetCurve(const occ::handle<Adaptor3d_Curve>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationLaw.hxx",
@@ -175195,6 +175503,13 @@
       "rust_item": "<dyn rustycad_tkgeomalgo::geom_fill::GeomFillLocationLaw as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_LocationLaw::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationLaw.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(GeomFill_LocationLaw, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_NSections::GeomFill_NSections(const NCollection_Sequence<occ::handle<Geom_Curve>>&)",
@@ -175443,6 +175758,13 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillNSections as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_NSections::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NSections.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_SectionLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_NSections, GeomFill_SectionLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_Pipe::GeomFill_Pipe()",
@@ -176053,6 +176375,13 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_SectionLaw::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SectionLaw.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(GeomFill_SectionLaw, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_SectionPlacement::GeomFill_SectionPlacement(const occ::handle<GeomFill_LocationLaw>&,const occ::handle<Geom_Geometry>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SectionPlacement.hxx",
@@ -176565,6 +176894,13 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_SweepFunction::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SweepFunction.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Approx_SweepFunction that DEFINE_STANDARD_RTTIEXT(GeomFill_SweepFunction, Approx_SweepFunction) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_SweepSectionGenerator::GeomFill_SweepSectionGenerator()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SweepSectionGenerator.hxx",
@@ -176993,6 +177329,13 @@
       "notes": "C++ protected data member of GeomFill_TrihedronLaw: Rust keeps it as the private field `trimmed` of LawCurves (tkgeomalgo/src/geom_fill/trihedron_law.rs), the state of GeomFillTrihedronLaw; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "GeomFill_TrihedronLaw::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronLaw.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(GeomFill_TrihedronLaw, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomFill_TrihedronWithGuide::Guide() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronWithGuide.hxx",
@@ -177044,6 +177387,13 @@
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronWithGuide.hxx",
       "status": "excluded",
       "notes": "C++ protected data member of GeomFill_TrihedronWithGuide: Rust keeps it as the private field `trim_g` of GuideFields (tkgeomalgo/src/geom_fill/trihedron_with_guide.rs), the state of GeomFillTrihedronWithGuide; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomFill_TrihedronWithGuide::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronWithGuide.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_TrihedronLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_TrihedronWithGuide, GeomFill_TrihedronLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomFill_UniformSection::GeomFill_UniformSection(const occ::handle<Geom_Curve>&,double,double)",
@@ -177228,6 +177578,13 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillUniformSection as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_UniformSection::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_UniformSection.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomFill_SectionLaw that DEFINE_STANDARD_RTTIEXT(GeomFill_UniformSection, GeomFill_SectionLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "IntPatch_BVHTraversal::TrianglePair(int,int)",
@@ -179021,6 +179378,13 @@
       "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `g0_crit` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "GeomPlate_CurveConstraint::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(GeomPlate_CurveConstraint, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
       "upstream_id": "GeomPlate_MakeApprox::GeomPlate_MakeApprox(const occ::handle<GeomPlate_Surface>&,const AdvApp2Var_Criterion&,double,int,int,GeomAbs_Shape,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_MakeApprox.hxx",
@@ -179258,6 +179622,13 @@
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
       "status": "excluded",
       "notes": "C++ protected data member of GeomPlate_PointConstraint: Rust keeps it as the private field `order` of PointConstraintState (tkgeomalgo/src/geom_plate/point_constraint.rs), the state of GeomPlatePointConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(GeomPlate_PointConstraint, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "GeomPlate_Surface::GeomPlate_Surface(const occ::handle<Geom_Surface>&,const Plate_Plate&)",
@@ -179506,6 +179877,13 @@
       "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlateSurface::static_type",
       "status": "implemented",
       "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_Surface::base_type",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_Surface.hxx",
+      "status": "excluded",
+      "notes": "Typedef base_type = Geom_Surface that DEFINE_STANDARD_RTTIEXT(GeomPlate_Surface, Geom_Surface) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
       "upstream_id": "BRepClass_Edge::BndBoxState",
