@@ -455696,6 +455696,1450 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::get_bit_map_array",
       "status": "implemented",
       "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::Graphic3d_Aspects",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspects::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::InteriorStyle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::interior_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetInteriorStyle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_interior_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ShadingModel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::shading_model",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetShadingModel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_shading_model",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::AlphaMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::alpha_mode",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::AlphaCutoff",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::alpha_cutoff",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetAlphaMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_alpha_mode",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ColorRGBA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::interior_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::Color",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::interior_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_interior_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::InteriorColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::interior_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::InteriorColorRGBA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::interior_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetInteriorColor(const Quantity_Color &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_interior_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetInteriorColor(const Quantity_ColorRGBA &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_interior_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::BackInteriorColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::back_interior_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::BackInteriorColorRGBA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::back_interior_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetBackInteriorColor(const Quantity_Color &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_back_interior_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetBackInteriorColor(const Quantity_ColorRGBA &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_back_interior_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::FrontMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::front_material",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetFrontMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_front_material",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::BackMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::back_material",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetBackMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_back_material",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::FaceCulling",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::face_culling",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetFaceCulling",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_face_culling",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ChangeFrontMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::change_front_material",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe. The mutable reference is a closure over the material under the write lock."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ChangeBackMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::change_back_material",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe. The mutable reference is a closure over the material under the write lock."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::Distinguish",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::distinguish",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetDistinguish",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_distinguish",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetDistinguishOn",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_distinguish",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetDistinguishOff",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_distinguish",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ToUseVertexColorForBackFaces",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::to_use_vertex_color_for_back_faces",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetUseVertexColorForBackFaces",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_use_vertex_color_for_back_faces",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ShaderProgram",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::shader_program",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetShaderProgram",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_shader_program",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::TextureSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::texture_set",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextureSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_texture_set",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::TextureMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::texture_map",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextureMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_texture_map",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ToMapTexture",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::to_map_texture",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::TextureMapState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::to_map_texture",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextureMapOn(bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_texture_map_on",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextureMapOn()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_texture_map_on",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextureMapOff",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_texture_map_on",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::PolygonOffset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::polygon_offset",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetPolygonOffset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_polygon_offset",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetPolygonOffsets",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::set_polygon_offsets",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::PolygonOffsets",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsRenderMembers::polygon_offsets",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe. The out-parameters are returned as a tuple."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::LineType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::line_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetLineType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::set_line_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::LinePattern",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::line_pattern",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetLinePattern",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::set_line_pattern",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::LineStippleFactor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::line_stipple_factor",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetLineStippleFactor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::set_line_stipple_factor",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::LineWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::line_width",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetLineWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::set_line_width",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::MarkerType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::marker_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetMarkerType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::set_marker_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::MarkerScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::marker_scale",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetMarkerScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::set_marker_scale",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::MarkerImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::marker_image",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetMarkerImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::set_marker_image",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::IsMarkerSprite",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::is_marker_sprite",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::EdgeLineType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::line_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetEdgeLineType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::set_line_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::EdgeWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::line_width",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetEdgeWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsLineMembers::set_edge_width",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::DefaultLinePatternForType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::graphic3d_default_line_pattern_for_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::DefaultLineTypeForPattern",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::graphic3d_default_line_type_for_pattern",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::TextFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::text_font",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::set_text_font",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::TextFontAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::text_font_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextFontAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::set_text_font_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::TextDisplayType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::text_display_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextDisplayType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::set_text_display_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::IsTextZoomable",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::is_text_zoomable",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextZoomable",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::set_text_zoomable",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::TextStyle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::text_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextStyle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::set_text_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::TextAngle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::text_angle",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetTextAngle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::set_text_angle",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ColorSubTitleRGBA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::edge_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ColorSubTitle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::edge_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetColorSubTitle(const Quantity_Color &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_edge_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetColorSubTitle(const Quantity_ColorRGBA &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_edge_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ToDrawEdges",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::to_draw_edges",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetDrawEdges",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_draw_edges",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetEdgeOn",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_draw_edges",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetEdgeOff",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_draw_edges",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::EdgeColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::edge_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::EdgeColorRGBA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::edge_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetEdgeColor(const Quantity_Color &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_edge_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetEdgeColor(const Quantity_ColorRGBA &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_edge_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ToSkipFirstEdge",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::to_skip_first_edge",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetSkipFirstEdge",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_skip_first_edge",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ToDrawSilhouette",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::to_draw_silhouette",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetDrawSilhouette",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_draw_silhouette",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::HatchStyle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::hatch_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetHatchStyle(const occ::handle<Graphic3d_HatchStyle> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_hatch_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetHatchStyle(const Aspect_HatchStyle)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_hatch_style_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::ToSuppressBackFaces",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::to_suppress_back_faces",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SetSuppressBackFaces",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::set_suppress_back_faces",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::BackFace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::to_suppress_back_faces",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::AllowBackFace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::allow_back_face",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::SuppressBackFace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEdgeMembers::suppress_back_face",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::IsEqual",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsEqual::is_equal",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsSource::dump_json",
+      "rust_items": [
+        "rustycad_tkservice::graphic3d::Graphic3dAspectsSource::dump_json",
+        "rustycad_tkservice::graphic3d::graphic3d_aspects_dump_json"
+      ],
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myProgram",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::program",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myTextureSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::texture_set",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myMarkerImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::marker_image",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myHatchStyle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::hatch_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myTextFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::text_font",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myFrontMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::front_material",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myBackMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::back_material",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myInteriorColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::interior_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myBackInteriorColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::back_interior_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myEdgeColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::edge_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myPolygonOffset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::polygon_offset",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myInteriorStyle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::interior_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myShadingModel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::shading_model",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myFaceCulling",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::face_culling",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myAlphaMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::alpha_mode",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myAlphaCutoff",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::alpha_cutoff",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myLineType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::line_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myLineWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::line_width",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myLineFactor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::line_factor",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myLinePattern",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::line_pattern",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myMarkerType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::marker_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myMarkerScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::marker_scale",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myTextStyle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::text_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myTextDisplayType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::text_display_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myTextFontAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::text_font_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myTextAngle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::text_angle",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myToSkipFirstEdge",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::to_skip_first_edge",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myToDistinguishMaterials",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::to_distinguish_materials",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myToUseVertexColorForBackFaces",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::to_use_vertex_color_for_back_faces",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myToDrawEdges",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::to_draw_edges",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myToDrawSilhouette",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::to_draw_silhouette",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myToMapTexture",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::to_map_texture",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Aspects::myIsTextZoomable",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsFields::is_text_zoomable",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectFillArea3d::Graphic3d_AspectFillArea3d()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectFillArea3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectFillArea3d::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectFillArea3d::Graphic3d_AspectFillArea3d(const Aspect_InteriorStyle,const Quantity_Color &,const Quantity_Color &,const Aspect_TypeOfLine,const double,const Graphic3d_MaterialAspect &,const Graphic3d_MaterialAspect &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectFillArea3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectFillArea3d::new",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe. A width <= 0 raises Standard_OutOfRange from SetEdgeWidth."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectFillArea3d::Edge",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectFillArea3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectFillArea3d::edge",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectLine3d::Graphic3d_AspectLine3d()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectLine3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectLine3d::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectLine3d::Graphic3d_AspectLine3d(const Quantity_Color &,Aspect_TypeOfLine,double)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectLine3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectLine3d::new",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectLine3d::Type",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectLine3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectLine3d::line_kind",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe. Named line_kind: the members trait already has line_type for the same field."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectLine3d::SetType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectLine3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectLine3d::set_line_kind",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectLine3d::Width",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectLine3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectLine3d::width",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectLine3d::SetWidth(const double)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectLine3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectLine3d::set_width_f64",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectLine3d::SetWidth(float)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectLine3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectLine3d::set_width",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d(const Aspect_TypeOfMarker,const Quantity_Color &,const double)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::new",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d(const Quantity_Color &,const int,const int,const occ::handle<NCollection_HArray1<uint8_t>> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::from_bitmap",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d(const occ::handle<Image_PixMap> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::from_image",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::Scale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::scale",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::SetScale(const float)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::set_scale",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::SetScale(const double)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::set_scale_f64",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::Type",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::marker_kind",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::SetType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::set_marker_kind",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::GetTextureSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::get_texture_size",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe. The out-parameters are returned."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::GetMarkerImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::get_marker_image",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectMarker3d::SetBitMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectMarker3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectMarker3d::set_bit_map",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::Graphic3d_AspectText3d()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectText3d::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::Graphic3d_AspectText3d(const Quantity_Color &,const char *,double,double,Aspect_TypeOfStyleText,Aspect_TypeOfDisplayText)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectText3d::new",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe. The null font pointer is None; the expansion factor and space are ignored, as natively."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::Color",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::interior_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe. The same field as Graphic3d_Aspects::Color."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::ColorRGBA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::interior_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::SetColor(const Quantity_Color &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_interior_color",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::SetColor(const Quantity_ColorRGBA &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsMembers::set_interior_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::Font",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectText3d::font",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::SetFont(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectText3d::set_font",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::SetFont(const char *const)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectText3d::set_font",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::Style",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::text_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::SetStyle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::set_text_style",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::DisplayType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::text_display_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::SetDisplayType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::set_text_display_type",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::GetTextZoomable",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::is_text_zoomable",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::GetTextAngle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::text_angle",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::SetTextAngle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectText3d::set_text_angle_f64",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::GetTextFontAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectsTextMembers::text_font_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_AspectText3d::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dAspectText3d::<rustycad_tkservice::graphic3d::Graphic3dAspectsSource>::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d aspects mapping (visualization-design.md section 1): Graphic3d_Aspects is the trait Graphic3dAspectsSource (virtual DumpJson) over Graphic3dAspectsBase, whose protected fields are the public Graphic3dAspectsFields behind the handle's shared lock; the non-virtual members are the blanket traits Graphic3dAspectsMembers, Graphic3dAspectsRenderMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers, Graphic3dAspectsEdgeMembers and Graphic3dAspectsEqual; range checks return Standard_OutOfRange with the offending value; the dump text and the class defaults are compared by the sv_aspects_dump native probe."
     }
   ],
   "tests": [
@@ -562986,6 +564430,174 @@
       "rust_target": "font_unicode_subset_test",
       "rust_test": "Font_UnicodeSubsetTest__CountIncludesEveryDeclaredSubset",
       "rust_source": "crates/tkservice/tests/font_unicode_subset_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.ShadingModel_Default",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__ShadingModel_Default",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.ShadingModel_ExplicitUnlit",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__ShadingModel_ExplicitUnlit",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.VertexColorForBackFaces_Default",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__VertexColorForBackFaces_Default",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.VertexColorForBackFaces_SetterAndEquality",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__VertexColorForBackFaces_SetterAndEquality",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.VertexColorForBackFaces_FillAreaAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__VertexColorForBackFaces_FillAreaAspect",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.ShadingModel_IndependentOfMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__ShadingModel_IndependentOfMaterial",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.ShadingModel_AllValues",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__ShadingModel_AllValues",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.ShadingModel_ExplicitUnlitWithColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__ShadingModel_ExplicitUnlitWithColor",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.ShadingModel_SurvivesMaterialChange",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__ShadingModel_SurvivesMaterialChange",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.ShadingModel_SetAfterMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__ShadingModel_SetAfterMaterial",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.ReflectionMode_IndependentOfShadingModel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__ReflectionMode_IndependentOfShadingModel",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_AspectsTest.ShadingModel_PbrNotAffectedByPhongMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
+      "source_sha256": "e51d349ae91927f1e11146fed58e74ef7fcfd592ea102e594ee5bdc0b2667f2d",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_aspects_test",
+      "rust_test": "Graphic3d_AspectsTest__ShadingModel_PbrNotAffectedByPhongMaterial",
+      "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
