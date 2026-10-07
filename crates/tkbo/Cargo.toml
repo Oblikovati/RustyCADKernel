@@ -19,6 +19,9 @@ rustycad-tkgeombase = { path = "../tkgeombase" }
 rustycad-tktopalgo = { path = "../tktopalgo" }
 # Native TKBO links TKPrim: BOPAlgo_MakerVolume bounds the faces with a BRepPrimAPI_MakeBox.
 rustycad-tkprim = { path = "../tkprim" }
+# Native TKBO links TKShHealing: ShapeUpgrade_UnifySameDomain merges the edges and faces of
+# one material (BOPAlgo_CellsBuilder), simplifies Boolean results and defeatured shapes.
+rustycad-tkshhealing = { path = "../tkshhealing" }
 
 [[example]]
 name = "rustycad-tkbo-numeric-probe"

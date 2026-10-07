@@ -5,6 +5,8 @@
 mod boundaries;
 #[path = "cells_builder/parts.rs"]
 mod parts;
+#[path = "cells_builder/unify.rs"]
+mod unify;
 use super::builder::history::HistorySources;
 use super::builder::perform::{no_structure, perform_internal1, perform_on, perform_with};
 use super::{BOPAlgoBuilder, BOPAlgoPaveFiller, BuilderHooks};

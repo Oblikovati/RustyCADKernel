@@ -1,10 +1,12 @@
 // Native oracle for BOPAlgo_CellsBuilder: parts taken into and out of the result with
-// materials, internal boundaries of solids removed, containers, and the history of the
-// arguments after each step (solids, faces and a mixed-dimensional case).
+// materials, internal boundaries of solids removed and of edges and faces unified, containers,
+// and the history of the arguments after each step (solids, faces, edges and a mixed case).
 #include <BOPAlgo_CellsBuilder.hxx>
 #include <BRepBuilderAPI_MakeEdge.hxx>
 #include <BRepBuilderAPI_MakeFace.hxx>
+#include <BRepBuilderAPI_MakeWire.hxx>
 #include <BRepPrimAPI_MakeBox.hxx>
+#include <gp_Circ.hxx>
 #include <gp_Pln.hxx>
 #include "tkbo_shape_dump.hxx"
 
@@ -112,10 +114,73 @@ static void mixed()
   step("mixed-material", cells, args);
 }
 
+static TopoDS_Shape circleFace(const gp_Pnt& center)
+{
+  const TopoDS_Edge edge = BRepBuilderAPI_MakeEdge(gp_Circ(gp_Ax2(center, gp::DZ()), 10.)).Edge();
+  return BRepBuilderAPI_MakeFace(BRepBuilderAPI_MakeWire(edge).Wire()).Face();
+}
+
+// Faces of one material unified by ShapeUpgrade_UnifySameDomain, keeping the material
+// boundaries (the configuration of tests/boolean/history/A5).
+static void unifiedFaces()
+{
+  const TopoDS_Shape f1 = circleFace(gp_Pnt(0, 0, 0));
+  const TopoDS_Shape f2 = circleFace(gp_Pnt(10, 0, 0));
+  const TopoDS_Shape f3 = circleFace(gp_Pnt(10, 10, 0));
+  NCollection_List<TopoDS_Shape> args = list(f1, f2);
+  args.Append(f3);
+  BOPAlgo_CellsBuilder cells;
+  cells.SetArguments(args);
+  cells.SetRunParallel(false);
+  cells.Perform();
+  std::cout << "case unified-faces errors " << cells.HasErrors() << '\n';
+  cells.AddToResult(list(f1), list(TopoDS_Shape()), 1, false);
+  cells.RemoveInternalBoundaries();
+  step("f1-rib", cells, args);
+  cells.RemoveAllFromResult();
+  cells.AddToResult(list(f1), list(f3), 1, false);
+  cells.AddToResult(list(f2), list(f3), 1, false);
+  cells.RemoveInternalBoundaries();
+  step("f1f2-not-f3-rib", cells, args);
+  cells.RemoveAllFromResult();
+  cells.AddToResult(list(f1), list(TopoDS_Shape()), 1, false);
+  cells.AddToResult(list(f2), list(f1), 2, false);
+  cells.AddToResult(list(f3), list(f1), 2, false);
+  cells.RemoveInternalBoundaries();
+  step("two-materials-rib", cells, args);
+  cells.MakeContainers();
+  step("two-materials-containers", cells, args);
+}
+
+// Edges of one material unified, a crossing edge of another material kept apart.
+static void unifiedEdges()
+{
+  const TopoDS_Shape e1 = BRepBuilderAPI_MakeEdge(gp_Pnt(0, 0, 0), gp_Pnt(10, 0, 0)).Edge();
+  const TopoDS_Shape e2 = BRepBuilderAPI_MakeEdge(gp_Pnt(5, 0, 0), gp_Pnt(15, 0, 0)).Edge();
+  const TopoDS_Shape e3 = BRepBuilderAPI_MakeEdge(gp_Pnt(7, -5, 0), gp_Pnt(7, 5, 0)).Edge();
+  NCollection_List<TopoDS_Shape> args = list(e1, e2);
+  args.Append(e3);
+  BOPAlgo_CellsBuilder cells;
+  cells.SetArguments(args);
+  cells.SetRunParallel(false);
+  cells.Perform();
+  std::cout << "case unified-edges errors " << cells.HasErrors() << '\n';
+  cells.AddToResult(list(e1), list(TopoDS_Shape()), 1, false);
+  cells.AddToResult(list(e2), list(TopoDS_Shape()), 1, false);
+  step("e1e2", cells, args);
+  cells.RemoveInternalBoundaries();
+  step("e1e2-rib", cells, args);
+  cells.AddToResult(list(e3), list(TopoDS_Shape()), 2, false);
+  cells.RemoveInternalBoundaries();
+  step("e3-rib", cells, args);
+}
+
 int main()
 {
   solids();
   faces();
   mixed();
+  unifiedFaces();
+  unifiedEdges();
   return 0;
 }

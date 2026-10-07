@@ -1,6 +1,4 @@
 //! Direct translation of src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_CellsBuilder_Test.cxx (3d097a0).
-//! A5_CircleCellsHistory waits for the removal of internal boundaries between faces, which
-//! needs ShapeUpgrade_UnifySameDomain with history.
 #![allow(non_snake_case)]
 
 use rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder;
@@ -9,9 +7,11 @@ use rustycad_tkbrep::topods::Shape;
 use rustycad_tkbrep::toptools::IndexedMapOfShape;
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tkmath::gp::Point3;
+use rustycad_tkmath::gp::{self, Axis2, Circle3, Point3};
 use rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox;
-use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
+use rustycad_tktopalgo::brep_builder_api::{
+    BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape, BRepBuilderAPIMakeWire,
+};
 
 fn CountShapes(shapes: &[Shape], kind: ShapeEnum) -> usize {
     let mut map = IndexedMapOfShape::default();
@@ -46,6 +46,70 @@ fn make_box(corner: Point3) -> Shape {
         .shape()
         .unwrap()
         .clone()
+}
+
+fn MakeCircleFace(center: Point3, radius: f64) -> Shape {
+    let frame = Axis2::new(center, gp::dz()).unwrap();
+    let edge = BRepBuilderAPIMakeEdge::from_circ(Circle3::new(frame, radius).unwrap())
+        .unwrap()
+        .edge()
+        .unwrap();
+    let wire = BRepBuilderAPIMakeWire::from_edge(&edge)
+        .unwrap()
+        .wire()
+        .unwrap();
+    BRepBuilderAPIMakeFace::from_wire(&wire, false)
+        .unwrap()
+        .face()
+        .unwrap()
+        .into_shape()
+}
+
+#[test]
+fn BOPAlgo_CellsBuilderTest__A5_CircleCellsHistory() {
+    let face1 = MakeCircleFace(Point3::new(0.0, 0.0, 0.0), 10.0);
+    let face2 = MakeCircleFace(Point3::new(10.0, 0.0, 0.0), 10.0);
+    let face3 = MakeCircleFace(Point3::new(10.0, 10.0, 0.0), 10.0);
+    let mut builder = BOPAlgoCellsBuilder::new();
+    builder.set_arguments(
+        &[face1.clone(), face2.clone(), face3.clone()]
+            .into_iter()
+            .collect(),
+    );
+    builder.options_mut().set_run_parallel(false);
+    builder.perform();
+    assert!(!builder.options().has_errors());
+
+    AddToResult(&mut builder, &face1, None, 1);
+    ExpectModified(&builder, &face1, ShapeEnum::Face, 4);
+    ExpectModified(&builder, &face2, ShapeEnum::Face, 2);
+    ExpectModified(&builder, &face3, ShapeEnum::Face, 2);
+    builder.remove_internal_boundaries().unwrap();
+    ExpectModified(&builder, &face1, ShapeEnum::Face, 1);
+    ExpectModified(&builder, &face2, ShapeEnum::Face, 1);
+    ExpectModified(&builder, &face3, ShapeEnum::Face, 1);
+
+    builder.remove_all_from_result().unwrap();
+    AddToResult(&mut builder, &face1, Some(&face3), 1);
+    AddToResult(&mut builder, &face2, Some(&face3), 1);
+    ExpectModified(&builder, &face1, ShapeEnum::Face, 2);
+    ExpectModified(&builder, &face2, ShapeEnum::Face, 2);
+    assert!(builder.is_deleted(&face3).unwrap());
+    builder.remove_internal_boundaries().unwrap();
+    ExpectModified(&builder, &face1, ShapeEnum::Face, 1);
+    ExpectModified(&builder, &face2, ShapeEnum::Face, 1);
+
+    builder.remove_all_from_result().unwrap();
+    AddToResult(&mut builder, &face1, None, 1);
+    AddToResult(&mut builder, &face2, Some(&face1), 2);
+    AddToResult(&mut builder, &face3, Some(&face1), 2);
+    ExpectModified(&builder, &face1, ShapeEnum::Face, 4);
+    ExpectModified(&builder, &face2, ShapeEnum::Face, 4);
+    ExpectModified(&builder, &face3, ShapeEnum::Face, 4);
+    builder.remove_internal_boundaries().unwrap();
+    ExpectModified(&builder, &face1, ShapeEnum::Face, 1);
+    ExpectModified(&builder, &face2, ShapeEnum::Face, 2);
+    ExpectModified(&builder, &face3, ShapeEnum::Face, 2);
 }
 
 // Equivalent to tests/boolean/history/A6.

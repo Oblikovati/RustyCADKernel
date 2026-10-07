@@ -1,6 +1,7 @@
 //! `BOPAlgo_CellsBuilder::RemoveInternalBoundaries`: the parts of one material merged into
 //! one shape, and the typed containers of the result.
 use super::parts::{compound_of, sub_shapes};
+use super::unify::UnifyQueue;
 use super::{BOPAlgoCellsBuilder, children};
 use crate::bop_algo::{
     AlertRemovalOfIBForMDimShapes, AlertRemovalOfIBForSolidsFailed, BuilderSolid,
@@ -17,27 +18,27 @@ use std::sync::Arc;
 
 impl BOPAlgoCellsBuilder {
     /// Merges the parts of each material: the solids of a connected block into one solid
-    /// without their shared faces; parts of several dimensions only warn. The parts without
-    /// material keep their place, and the history is refilled when a merge happened
-    /// (`RemoveInternalBoundaries`). Merging the edges or faces of a material needs
-    /// ShapeUpgrade_UnifySameDomain with its history, which the TKShHealing port does not
-    /// provide: such a material is refused with a named error before the result changes.
+    /// without their shared faces, then the edges and the faces of all materials, each
+    /// type unified at once keeping the material boundaries; parts of several dimensions
+    /// only warn. The parts without material keep their place, and the history is refilled
+    /// when a merge happened (`RemoveInternalBoundaries`);
     /// `cells.remove_internal_boundaries()?`.
     pub fn remove_internal_boundaries(&mut self) -> Result<(), Failure> {
         if self.materials.is_empty() {
             return Ok(());
         }
-        self.refuse_edge_and_face_materials()?;
         let mut result = new_compound();
         let mut changed = false;
+        let mut unify = UnifyQueue::default();
         let materials: Vec<i32> = self
             .materials
             .items()
             .map(|(material, _)| *material)
             .collect();
         for material in materials {
-            changed |= self.merge_material(material, &mut result)?;
+            changed |= self.merge_material(material, &mut result, &mut unify)?;
         }
+        changed |= self.unify_queued(unify, &mut result)?;
         if !changed {
             return Ok(());
         }
@@ -46,35 +47,14 @@ impl BOPAlgoCellsBuilder {
         self.prepare_history()
     }
 
-    /// The decline for a material made of several edges or faces of one type.
-    fn refuse_edge_and_face_materials(&self) -> Result<(), Failure> {
-        for (material, parts) in self.materials.items() {
-            let Some(first) = parts.first() else {
-                continue;
-            };
-            let kind = first.shape_type()?;
-            let same_type = parts
-                .iter()
-                .all(|part| part.shape_type().is_ok_and(|other| other == kind));
-            if same_type && matches!(kind, ShapeEnum::Edge | ShapeEnum::Face) && parts.extent() > 1
-            {
-                return Err(Failure::with_type(
-                    "Standard_NotImplemented",
-                    &format!(
-                        "BOPAlgo_CellsBuilder::RemoveInternalBoundaries: material {material} has {} {kind:?} parts; \
-                         unifying edges or faces needs ShapeUpgrade_UnifySameDomain with history, not ported yet",
-                        parts.extent()
-                    ),
-                    "",
-                ));
-            }
-        }
-        Ok(())
-    }
-
-    /// Adds the parts of one material to the result, merged when they are solids; true
-    /// when solids were merged.
-    fn merge_material(&mut self, material: i32, result: &mut Shape) -> Result<bool, Failure> {
+    /// Adds the parts of one material to the result, merged when they are solids, or
+    /// queues them when they are several edges or faces; true when solids were merged.
+    fn merge_material(
+        &mut self,
+        material: i32,
+        result: &mut Shape,
+        unify: &mut UnifyQueue,
+    ) -> Result<bool, Failure> {
         let parts: Vec<Shape> = match self.materials.seek(&material) {
             Some(parts) if !parts.is_empty() => parts.iter().cloned().collect(),
             _ => return Ok(false),
@@ -94,6 +74,10 @@ impl BOPAlgoCellsBuilder {
             let shapes = compound_of(&[parts[0].clone(), other.clone()])?;
             let alert: AlertHandle = Arc::new(AlertRemovalOfIBForMDimShapes::new(&shapes));
             self.builder.options().add_warning(&alert);
+        } else if matches!(kind, ShapeEnum::Edge | ShapeEnum::Face) {
+            // Unified later with the edges or faces of the other materials.
+            unify.queue(kind, &parts)?;
+            return Ok(false);
         } else if kind == ShapeEnum::Solid {
             let (solids, removed) = self.remove_internal_faces(&parts)?;
             if removed {
