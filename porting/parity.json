@@ -329317,6 +329317,24 @@
       "notes": "Static helper ported as a free function of bop_algo::tools. Source translation verified bit for bit by the native replay tools/oracle/tkbo_pave_filler_perform.cxx (crates/tkbo/tests/bop_algo_pave_filler_perform.rs)."
     },
     {
+      "upstream_id": "BOPAlgo_Tools::EdgesToWires(const TopoDS_Shape&,TopoDS_Shape&,bool,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Tools.hxx",
+      "source_sha256": "98425506b9f2af957c6c72df1181c7d1b0791eb9d3e6c416786ef7cb0b0b2087",
+      "rust_item": "rustycad_tkbo::bop_algo::tools::edges_to_wires",
+      "status": "implemented",
+      "notes": "The native defaults (theShared = false, theAngTol = 1e-8) are explicit arguments; the error codes 0/1/2 are kept. The static FindPlane/FindEdgeTangent/MakeWires helpers are ported in bop_algo/tools/planes.rs. Verified bit for bit (wires, then the faces built from them) by the native replay tools/oracle/tkbo_edges_to_wires.cxx (crates/tkbo/tests/bop_algo_edges_to_wires.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_Tools::WiresToFaces(const TopoDS_Shape&,TopoDS_Shape&,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Tools.hxx",
+      "source_sha256": "98425506b9f2af957c6c72df1181c7d1b0791eb9d3e6c416786ef7cb0b0b2087",
+      "rust_item": "rustycad_tkbo::bop_algo::tools::wires_to_faces",
+      "status": "implemented",
+      "notes": "The native default angular tolerance (1e-8) is an explicit argument; a plane whose split fails is skipped as by the native catch. Verified bit for bit (wires, then the faces built from them) by the native replay tools/oracle/tkbo_edges_to_wires.cxx (crates/tkbo/tests/bop_algo_edges_to_wires.rs)."
+    },
+    {
       "upstream_id": "BOPAlgo_WireEdgeSet::operator delete(void*) noexcept",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_WireEdgeSet.hxx",
