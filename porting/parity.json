@@ -309652,8 +309652,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
       "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_missing_seam",
-      "status": "partial",
-      "notes": "Direct periodic seam repair now matches native sphere and two-wire cylinder results and context lifetime. Torus, periodic B-spline and broader multiwire paths still require source audit and native end-to-end validation; Face Perform remains separate and partial."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_fix_face requests (tkshhealing_probe_fix_face.cxx): Perform (also with the wire, loop, split and intersecting-wire modes off) and each public Fix method on planar faces with holes of both orientations, crossing, touching and coincident wires, a tiny hole, two outer wires, a wire through one vertex twice, and whole and partial cylinder, cone (with apex), sphere and torus faces, with and without a context, at two precisions."
     },
     {
       "upstream_id": "ShapeUpgrade_FaceDivideArea::ShapeUpgrade_FaceDivideArea()",
@@ -313100,8 +313100,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
       "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_wires_two_coinc_edges",
-      "status": "partial",
-      "notes": "Two-coincident-edge wire removal follows native eligibility, orientation, context, result and status behavior with six pinned rows. Cross-wire repair delegates to the partially ported IntersectionTool and preserves face mutations on failure. Broader context and topology domains remain unproven; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_fix_face requests (tkshhealing_probe_fix_face.cxx): Perform (also with the wire, loop, split and intersecting-wire modes off) and each public Fix method on planar faces with holes of both orientations, crossing, touching and coincident wires, a tiny hole, two outer wires, a wire through one vertex twice, and whole and partial cylinder, cone (with apex), sphere and torus faces, with and without a context, at two precisions."
     },
     {
       "upstream_id": "ShapeFix_Face::FixIntersectingWires()",
@@ -313109,8 +313109,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
       "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_intersecting_wires",
-      "status": "partial",
-      "notes": "Two-coincident-edge wire removal follows native eligibility, orientation, context, result and status behavior with six pinned rows. Cross-wire repair delegates to the partially ported IntersectionTool and preserves face mutations on failure. Broader context and topology domains remain unproven; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_fix_face requests (tkshhealing_probe_fix_face.cxx): Perform (also with the wire, loop, split and intersecting-wire modes off) and each public Fix method on planar faces with holes of both orientations, crossing, touching and coincident wires, a tiny hole, two outer wires, a wire through one vertex twice, and whole and partial cylinder, cone (with apex), sphere and torus faces, with and without a context, at two precisions. Delegates to ShapeFix_IntersectionTool."
     },
     {
       "upstream_id": "ShapeFix_Face::ClearModes()",
@@ -313257,8 +313257,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
       "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_periodic_degenerated",
-      "status": "partial",
-      "notes": "Eight pinned rows cover above/below apex, reverse wire/face, partial loop, missing p-curve, multiple wires and context. Result changes while Face remains original; edge tolerance follows configured precision. Legacy Perform cone path still adds seams separately. Located/transformed and broader failure domains need more oracle coverage; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_fix_face requests (tkshhealing_probe_fix_face.cxx): Perform (also with the wire, loop, split and intersecting-wire modes off) and each public Fix method on planar faces with holes of both orientations, crossing, touching and coincident wires, a tiny hole, two outer wires, a wire through one vertex twice, and whole and partial cylinder, cone (with apex), sphere and torus faces, with and without a context, at two precisions."
     },
     {
       "upstream_id": "ShapeFix_Wire::Perform(const Message_ProgressRange &)",
@@ -313372,8 +313372,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
       "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_loop_wire",
-      "status": "partial",
-      "notes": "Eight native rows compare branching graph reconstruction, output append/early return, ordered oriented endpoint coordinates, DONE7, closure flags and nonplanar missing-pcurve false return with retained outputs. Seam/small-edge and broader curved/located failure cases need oracle coverage; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_fix_face requests (tkshhealing_probe_fix_face.cxx): Perform (also with the wire, loop, split and intersecting-wire modes off) and each public Fix method on planar faces with holes of both orientations, crossing, touching and coincident wires, a tiny hole, two outer wires, a wire through one vertex twice, and whole and partial cylinder, cone (with apex), sphere and torus faces, with and without a context, at two precisions. Reads the wire loaded in FixWireTool, as natively (false on a fresh fixer)."
     },
     {
       "upstream_id": "ShapeFix_Face::FixSplitFace(const NCollection_DataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher> &)",
@@ -313381,8 +313381,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
       "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::fix_split_face",
-      "status": "partial",
-      "notes": "Ten native rows cover multiple outer wires, missing map entries, open/empty/single wires, hole orientation, reversed face, internal wire exclusion, result/working-face/status state and context replacement. Broader curved/located classification and failure domains need oracle coverage; no legacy mapping increase."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_fix_face requests (tkshhealing_probe_fix_face.cxx): Perform (also with the wire, loop, split and intersecting-wire modes off) and each public Fix method on planar faces with holes of both orientations, crossing, touching and coincident wires, a tiny hole, two outer wires, a wire through one vertex twice, and whole and partial cylinder, cone (with apex), sphere and torus faces, with and without a context, at two precisions."
     },
     {
       "upstream_id": "ShapeFix_Face::Perform(const Message_ProgressRange &)",
@@ -313390,8 +313390,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Face.hxx",
       "source_sha256": "1554cc409bdc3c0ece9ed2fb960207b2aab7c069190177654c4c01ce23e4293e",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFace::perform",
-      "status": "partial",
-      "notes": "Native wire-enabled and disabled orchestration, progress overload, two wire passes, splitting, context and result mutations translated. Native bowtie and planar/periodic fixtures match. Broader geometry and cancellation paths remain partial; no blanket behavior or legacy parity claim."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_fix_face requests (tkshhealing_probe_fix_face.cxx): Perform (also with the wire, loop, split and intersecting-wire modes off) and each public Fix method on planar faces with holes of both orientations, crossing, touching and coincident wires, a tiny hole, two outer wires, a wire through one vertex twice, and whole and partial cylinder, cone (with apex), sphere and torus faces, with and without a context, at two precisions. The second wire pass now runs the removed-segment check and FixLoopWire also when ShapeFix_Wire::Perform returns false, and the first pass only writes its `fixed` flag for performed or dropped wires, as natively; SetFace takes the current face."
     },
     {
       "upstream_id": "ShapeFix_Face",

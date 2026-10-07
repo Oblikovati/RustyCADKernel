@@ -58,6 +58,8 @@ pub mod shape_algo;
 
 pub mod unify;
 
+pub mod fix_face;
+
 pub mod shape_process;
 
 pub mod analysis_surface;

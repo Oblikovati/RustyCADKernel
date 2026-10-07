@@ -116,7 +116,8 @@ fn edge(r: &mut Reader<'_>) -> Result<Edge, Failure> {
     }
 }
 
-fn wire(r: &mut Reader<'_>) -> Result<Shape, Failure> {
+/// The wire of `n (edge)*n`.
+pub(super) fn wire(r: &mut Reader<'_>) -> Result<Shape, Failure> {
     let mut maker = BRepBuilderAPIMakeWire::new();
     for _ in 0..r.integer() {
         maker.add_edge(&edge(r)?)?;

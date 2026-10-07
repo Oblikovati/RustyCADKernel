@@ -73,6 +73,9 @@ impl ShapeFixFace {
         wire.set_fix_degenerated_mode(saved.degenerated);
     }
 
+    /// One wire of the second pass: ShapeFix_Wire::Perform (its output replacing the wire
+    /// when a lacking, self-intersection, notch or tail fix ran), then, whatever Perform
+    /// returned, the removed-segment check and the loop split of the loaded wire.
     fn process_second_pass_wire(
         &self,
         child: &Shape,
@@ -85,11 +88,16 @@ impl ShapeFixFace {
         if self.wire_tool.nb_edges() == 0 {
             return self.keep_or_drop_empty_wire(&wire, rebuilt, pass);
         }
-        if !self.wire_tool.perform()? {
-            BRepBuilder::default().add(rebuilt, &wire.clone().into_shape())?;
-            return Ok(());
+        let mut current = wire;
+        if self.wire_tool.perform()? {
+            current = self.record_performed_wire(child, pass, reordered_wires)?;
         }
-        self.append_performed_wire(child, rebuilt, pass, reordered_wires)
+        pass.split_needed |= self.wire_tool.status_removed_segment();
+        // "fix for loop of wire".
+        if !self.add_loop_wires_if_enabled(rebuilt, pass)? {
+            BRepBuilder::default().add(rebuilt, &current.into_shape())?;
+        }
+        Ok(())
     }
 
     fn keep_or_drop_empty_wire(
@@ -107,29 +115,22 @@ impl ShapeFixFace {
         Ok(())
     }
 
-    fn append_performed_wire(
+    /// The output of a performed wire, recorded in the context when fixed, else as a
+    /// reordered wire.
+    fn record_performed_wire(
         &self,
         original: &Shape,
-        rebuilt: &mut Face,
         pass: &mut SecondPassChanges,
         reordered_wires: &mut Vec<(Shape, Shape)>,
-    ) -> Result<(), Failure> {
+    ) -> Result<rustycad_tkbrep::topods::Wire, Failure> {
         pass.fixed = second_wire_was_fixed(self);
-        pass.split_needed |= self.wire_tool.status_removed_segment();
         let output = self.wire_tool.wire()?;
-        if pass.fixed && self.wire_tool.nb_edges() == 0 {
-            self.record_wire_face_stage(ShapeExtendStatus::Done5);
-            return self.replace_wire(original, &output);
-        }
         if pass.fixed {
             self.replace_wire(original, &output)?;
         } else {
             remember_reordered_wire(original, &output, reordered_wires);
         }
-        if !self.add_loop_wires_if_enabled(rebuilt, pass)? {
-            BRepBuilder::default().add(rebuilt, &output.clone().into_shape())?;
-        }
-        Ok(())
+        Ok(output)
     }
 
     fn replace_wire(

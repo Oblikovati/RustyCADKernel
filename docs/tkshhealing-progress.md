@@ -216,6 +216,16 @@ kept out of the corpus: natively FixFaceSize or FixShape after ToBezier crash on
 converted plane face; ToBezier with SurfaceMode on extrusion faces diverges in
 ShapeUpgrade_ShapeConvertToBezier (whose Perform row is partial).
 
+## ShapeFix_Face evidence (wave 3)
+
+The `sh_fix_face` requests (tools/tkshhealing_corpus_fix_face.py) compare Perform (also
+with the wire, loop, split and intersecting-wire modes off) and each public Fix method
+with OCCT on planar faces with holes, crossing and coincident wires, a wire through one
+vertex twice and whole and partial cylinder, cone, sphere and torus faces. They exposed
+two faithfulness bugs, now fixed: the second wire pass of Perform skipped FixLoopWire and
+the removed-segment check when ShapeFix_Wire::Perform returned false, and the first pass
+reset its `fixed` flag for wires that were neither performed nor dropped.
+
 ## ShapeAlgo
 
 Ported in October 2026 (wave 3): ShapeAlgo_ToolContainer, ShapeAlgo_AlgoContainer

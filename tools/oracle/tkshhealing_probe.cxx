@@ -51,6 +51,7 @@
 #include "tkshhealing_probe_custom_surface.cxx"
 #include "tkshhealing_probe_shape_algo.cxx"
 #include "tkshhealing_probe_unify.cxx"
+#include "tkshhealing_probe_fix_face.cxx"
 #include "tkshhealing_probe_shape_process.cxx"
 #include "tkshhealing_probe_analysiscurve.cxx"
 #include "tkshhealing_probe_analysis_surface.cxx"
@@ -99,6 +100,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // ShapeUpgrade_UnifySameDomain (tkshhealing_probe_unify.cxx)
  {"sh_unify", sh_unify_case},
  {"sh_face_connect", sh_face_connect_case},
+ // ShapeFix_Face (tkshhealing_probe_fix_face.cxx)
+ {"sh_fix_face", sh_fix_face_case},
  // ShapeCustom_Surface (tkshhealing_probe_custom_surface.cxx)
  {"sc_surface", sc_surface_case},
  // ShapeProcess and ShapeProcessAPI (tkshhealing_probe_shape_process.cxx)
