@@ -129,7 +129,8 @@ impl DrawTrSurfDrawable {
     }
 
     /// `DrawCurveOn`: plots a 3D curve, by uniform deflection in draw mode 1, else
-    /// adaptively per CN interval (see [`Self::draw_intervals_on`]).
+    /// adaptively per CN interval (circles and ellipses by equal steps, other curves by
+    /// double steps refined while the chord midpoint is off the curve).
     pub fn draw_curve_on(
         &self,
         curve: &dyn Adaptor3dCurve,
