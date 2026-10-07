@@ -15668,7 +15668,7 @@
       "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "MathPoly::Utils::ScalePolynomial(const double*,int,LongCoefficients&,int&)",
+      "upstream_id": "MathPoly::Utils::ScalePolynomial(const double*,int,MathPoly::Utils::LongCoefficients&,int&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
       "rust_item": "rustycad_tkmath::math_poly::utils::scale_polynomial",
@@ -15676,7 +15676,7 @@
       "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "MathPoly::Utils::Evaluate(const LongCoefficients&,int,long double,long double&,long double&,long double&)",
+      "upstream_id": "MathPoly::Utils::Evaluate(const MathPoly::Utils::LongCoefficients&,int,long double,long double&,long double&,long double&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
       "rust_item": "rustycad_tkmath::math_poly::utils::evaluate",
@@ -15684,7 +15684,7 @@
       "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "MathPoly::Utils::HasSmallResidual(const LongCoefficients&,int,long double,long double)",
+      "upstream_id": "MathPoly::Utils::HasSmallResidual(const MathPoly::Utils::LongCoefficients&,int,long double,long double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
       "rust_item": "rustycad_tkmath::math_poly::utils::has_small_residual",
@@ -15692,7 +15692,7 @@
       "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "MathPoly::Utils::RootBound(const LongCoefficients&,int)",
+      "upstream_id": "MathPoly::Utils::RootBound(const MathPoly::Utils::LongCoefficients&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
       "rust_item": "rustycad_tkmath::math_poly::utils::root_bound",
@@ -15708,7 +15708,7 @@
       "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "MathPoly::Utils::SolveDistinctReal(const LongCoefficients&,int,std::array<long double,4>&,size_t&)",
+      "upstream_id": "MathPoly::Utils::SolveDistinctReal(const MathPoly::Utils::LongCoefficients&,int,std::array<long double, 4>&,size_t&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
       "rust_item": "rustycad_tkmath::math_poly::utils::solve_distinct_real",
@@ -15804,7 +15804,7 @@
       "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "MathPoly::Utils::ConsolidateRealRoots(PolyResult&,double,const double*,int,int)",
+      "upstream_id": "MathPoly::Utils::ConsolidateRealRoots(MathPoly::PolyResult&,double,const double*,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
       "rust_item": "rustycad_tkmath::math_poly::utils::consolidate_real_roots",
@@ -15820,7 +15820,7 @@
       "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "MathPoly::Utils::ConsolidateComplexRoots(PolyResult&,double,const double*,int,int)",
+      "upstream_id": "MathPoly::Utils::ConsolidateComplexRoots(MathPoly::PolyResult&,double,const double*,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
       "rust_item": "rustycad_tkmath::math_poly::utils::consolidate_complex_roots",
@@ -31669,12 +31669,116 @@
       "notes": "Explicit overload mapping; the unscoped IntersectStatus enum becomes the Rust enum IntersectStatus with Out/In/Boundary variants of the native values. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "MathPoly::Octic(const double[9])",
+      "upstream_id": "MathPoly::Octic(const double*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
       "rust_item": "rustycad_tkmath::math_poly::octic",
       "status": "implemented",
       "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, degrees outside the fixed arrays, overflowing root arrays) raises Standard_OutOfRange with the offending sizes and the expected shape: those Utils helpers return Result. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::ComplexMultiplicities",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::complex_multiplicities",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::ComplexRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::complex_roots",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::Multiplicities",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::multiplicities",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::NbComplexRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::nb_complex_roots",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::NbRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::nb_roots",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::Roots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::roots",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::IterationResult::NbIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::IterationResult::nb_iterations",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::IterationResult::Root",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::IterationResult::root",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::IterationResult::RootError",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::IterationResult::root_error",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::IterationResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::IterationResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathPoly",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Cubic.hxx",
+      "rust_item": "rustycad_tkmath::math_poly",
+      "status": "implemented",
+      "notes": "C++ namespace MathPoly is the Rust module math_poly."
+    },
+    {
+      "upstream_id": "MathPoly::Utils",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils",
+      "status": "implemented",
+      "notes": "C++ helper namespace MathPoly::Utils is the Rust module math_poly::utils."
     },
     {
       "upstream_id": "MathUtils::BracketResult",
@@ -35707,6 +35811,374 @@
       "rust_item": "rustycad_tkmath::math_lin::utils::relative_tolerance",
       "status": "implemented",
       "notes": "Explicit MathLin namespace mapping; MathLin::Utils is public as math_lin::utils (the IsFinite overloads are is_finite_matrix/is_finite_vector), MathLin::EigenResult is math_lin::TridiagonalResult so it stays apart from the math_utils::EigenResult that Jacobi returns, acronym result types are Rust-cased (LUResult -> LuResult), std::optional is Option, and a zero-based read the native code would make out of bounds panics with the index. Bit parity: modern_eigen, modern_lu, modern_factors and integ_lin_* numeric probes."
+    },
+    {
+      "upstream_id": "MathLin::LeastSquaresMethod::NormalEquations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LeastSquaresMethod::NormalEquations",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathLin::LeastSquaresMethod::QR",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LeastSquaresMethod::Qr",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathLin::LeastSquaresMethod::SVD",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LeastSquaresMethod::Svd",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathLin::CroutResult::ConditionEstimate",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::CroutResult::condition_estimate",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::CroutResult::Determinant",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::CroutResult::determinant",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::CroutResult::Inverse",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::CroutResult::inverse",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::CroutResult::MaxAbsPivot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::CroutResult::max_abs_pivot",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::CroutResult::MinAbsPivot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::CroutResult::min_abs_pivot",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::CroutResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::CroutResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::ColLower",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::col_lower",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::ConditionEstimate",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::condition_estimate",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::Determinant",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::determinant",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::Dimension",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::dimension",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::LU",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::lu",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::MaxAbsPivot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::max_abs_pivot",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::MinAbsPivot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::min_abs_pivot",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::Pivot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::pivot",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::RowLower",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::row_lower",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::Sign",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::sign",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LUResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LuResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LeastSquaresResult::ConditionNumber",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LeastSquaresResult::condition_number",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LeastSquaresResult::Rank",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LeastSquaresResult::rank",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LeastSquaresResult::Residual",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LeastSquaresResult::residual",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LeastSquaresResult::ResidualSq",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LeastSquaresResult::residual_sq",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LeastSquaresResult::Solution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LeastSquaresResult::solution",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::LeastSquaresResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::LeastSquaresResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::QRResult::ConditionEstimate",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Householder.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::QrResult::condition_estimate",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::QRResult::DiagonalThreshold",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Householder.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::QrResult::diagonal_threshold",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::QRResult::Q",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Householder.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::QrResult::q",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::QRResult::R",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Householder.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::QrResult::r",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::QRResult::Rank",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Householder.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::QrResult::rank",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::QRResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Householder.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::QrResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::SVDResult::ConditionNumber",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_SVD.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::SvdResult::condition_number",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::SVDResult::Rank",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_SVD.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::SvdResult::rank",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::SVDResult::SingularValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_SVD.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::SvdResult::singular_values",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::SVDResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_SVD.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::SvdResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::SVDResult::U",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_SVD.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::SvdResult::u",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::SVDResult::V",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_SVD.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::SvdResult::v",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::CroutResult::D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::CroutResult::diagonal",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::CroutResult::L",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::CroutResult::lower",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
+      "rust_item": "rustycad_tkmath::math_lin",
+      "status": "implemented",
+      "notes": "C++ namespace MathLin is the Rust module math_lin."
+    },
+    {
+      "upstream_id": "MathLin::Utils",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_EigenSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::utils",
+      "status": "implemented",
+      "notes": "C++ helper namespace MathLin::Utils is the Rust module math_lin::utils."
+    },
+    {
+      "upstream_id": "MathLin::EigenResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_EigenSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::TridiagonalResult::status",
+      "status": "implemented",
+      "notes": "MathLin::EigenResult is math_lin::TridiagonalResult (kept apart from math_utils::EigenResult); Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::EigenResult::EigenValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_EigenSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::TridiagonalResult::eigen_values",
+      "status": "implemented",
+      "notes": "MathLin::EigenResult is math_lin::TridiagonalResult (kept apart from math_utils::EigenResult); Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::EigenResult::EigenVectors",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_EigenSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::TridiagonalResult::eigen_vectors",
+      "status": "implemented",
+      "notes": "MathLin::EigenResult is math_lin::TridiagonalResult (kept apart from math_utils::EigenResult); Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::EigenResult::Dimension",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_EigenSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_lin::TridiagonalResult::dimension",
+      "status": "implemented",
+      "notes": "MathLin::EigenResult is math_lin::TridiagonalResult (kept apart from math_utils::EigenResult); Public C++ data member mapped to the Rust public struct field of the same meaning."
     },
     {
       "upstream_id": "MathOpt::BFGS(Function &,const math_Vector &,const MathUtils::Config &)",
