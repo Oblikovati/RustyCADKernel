@@ -37,16 +37,31 @@ impl DrawBox {
     }
 
     /// `ToWCS`: a point given in the box frame, in world coordinates.
-    fn to_wcs(&self, x: f64, y: f64, z: f64) -> Point3 {
+    pub fn to_wcs(&self, x: f64, y: f64, z: f64) -> Point3 {
         let obb = &self.obb;
         Point3::from(
             obb.center() + x * obb.x_direction() + y * obb.y_direction() + z * obb.z_direction(),
         )
     }
 
-    /// `MoveX`/`MoveY`/`MoveZ`: `point` shifted by `shift` along a box axis.
+    /// `point` shifted by `shift` along a box axis.
     fn moved(point: Point3, shift: f64, axis: Xyz) -> Point3 {
         Point3::from(point.xyz() + shift * axis)
+    }
+
+    /// `MoveX`: `point` shifted by `shift` along the box X axis.
+    pub fn move_x(&self, shift: f64, point: Point3) -> Point3 {
+        Self::moved(point, shift, self.obb.x_direction())
+    }
+
+    /// `MoveY`: `point` shifted by `shift` along the box Y axis.
+    pub fn move_y(&self, shift: f64, point: Point3) -> Point3 {
+        Self::moved(point, shift, self.obb.y_direction())
+    }
+
+    /// `MoveZ`: `point` shifted by `shift` along the box Z axis.
+    pub fn move_z(&self, shift: f64, point: Point3) -> Point3 {
+        Self::moved(point, shift, self.obb.z_direction())
     }
 }
 
@@ -64,31 +79,33 @@ impl Drawable3D for DrawBox {
             self.obb.y_h_size(),
             self.obb.z_h_size(),
         );
-        let (ax, ay, az) = (
-            self.obb.x_direction(),
-            self.obb.y_direction(),
-            self.obb.z_direction(),
-        );
         let mut point = self.to_wcs(-hx, -hy, -hz);
         display.move_to_3d(point);
         for _ in 0..2 {
-            for (shift, axis) in [
-                (2.0 * hx, ax),
-                (2.0 * hy, ay),
-                (-2.0 * hx, ax),
-                (-2.0 * hy, ay),
-            ] {
-                point = Self::moved(point, shift, axis);
-                display.draw_to_3d(point);
-            }
+            // The rectangle ends where it started; the next one starts at the top face.
+            self.draw_rectangle(display, point, hx, hy);
             point = self.to_wcs(-hx, -hy, hz);
             display.move_to_3d(point);
         }
         for (x, y) in [(-hx, -hy), (hx, -hy), (hx, hy), (-hx, hy)] {
             let bottom = self.to_wcs(x, y, -hz);
             display.move_to_3d(bottom);
-            display.draw_to_3d(Self::moved(bottom, 2.0 * hz, az));
+            display.draw_to_3d(self.move_z(2.0 * hz, bottom));
         }
+    }
+}
+
+impl DrawBox {
+    /// Draws the rectangle of the box face through `point` (X, Y, -X, -Y).
+    fn draw_rectangle(&self, display: &mut DrawDisplay<'_>, mut point: Point3, hx: f64, hy: f64) {
+        point = self.move_x(2.0 * hx, point);
+        display.draw_to_3d(point);
+        point = self.move_y(2.0 * hy, point);
+        display.draw_to_3d(point);
+        point = self.move_x(-2.0 * hx, point);
+        display.draw_to_3d(point);
+        point = self.move_y(-2.0 * hy, point);
+        display.draw_to_3d(point);
     }
 }
 
@@ -127,9 +144,24 @@ impl DrawGrid {
             .set(steps.0 > MINIMUM_STEP && steps.1 > MINIMUM_STEP && steps.2 > MINIMUM_STEP);
     }
 
-    /// `StepX`, `StepY`, `StepZ`.
+    /// `(StepX, StepY, StepZ)`.
     pub fn steps(&self) -> (f64, f64, f64) {
         self.steps.get()
+    }
+
+    /// `StepX`.
+    pub fn step_x(&self) -> f64 {
+        self.steps.get().0
+    }
+
+    /// `StepY`.
+    pub fn step_y(&self) -> f64 {
+        self.steps.get().1
+    }
+
+    /// `StepZ`.
+    pub fn step_z(&self) -> f64 {
+        self.steps.get().2
     }
 
     /// `IsActive`.
@@ -192,4 +224,45 @@ fn draw_cross(display: &mut DrawDisplay<'_>, inverse: Transform3, (x, y): (f64, 
     display.draw_3d(model(x - offset, y), model(x + offset, y));
     display.set_color(DrawColor::new(DrawColorKind::Bleu));
     display.draw_3d(model(x, y - offset), model(x, y + offset));
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rustycad_tkmath::gp::Direction3;
+
+    fn unit_box() -> DrawBox {
+        let axes = [
+            rustycad_tkmath::gp::dx(),
+            rustycad_tkmath::gp::dy(),
+            rustycad_tkmath::gp::dz(),
+        ];
+        let _: [Direction3; 3] = axes;
+        DrawBox::new(
+            OrientedBoundingBox::new(Point3::new(1.0, 2.0, 3.0), axes, 1.0, 2.0, 3.0),
+            DrawColor::default(),
+        )
+    }
+
+    #[test]
+    fn box_points_follow_the_box_frame() {
+        let drawable = unit_box();
+        let corner = drawable.to_wcs(-1.0, -2.0, -3.0);
+        assert_eq!((corner.x(), corner.y(), corner.z()), (0.0, 0.0, 0.0));
+        let moved = drawable.move_z(6.0, drawable.move_y(4.0, drawable.move_x(2.0, corner)));
+        assert_eq!((moved.x(), moved.y(), moved.z()), (2.0, 4.0, 6.0));
+    }
+
+    #[test]
+    fn grid_steps_are_absolute_and_activate_above_the_minimum() {
+        let grid = DrawGrid::new();
+        grid.set_steps(-1.0, 2.0, 3.0);
+        assert_eq!(
+            (grid.step_x(), grid.step_y(), grid.step_z()),
+            (1.0, 2.0, 3.0)
+        );
+        assert!(grid.is_active());
+        grid.set_steps(1.0, 2.0, 1e-4);
+        assert!(!grid.is_active());
+    }
 }

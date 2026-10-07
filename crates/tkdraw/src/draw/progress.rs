@@ -161,6 +161,12 @@ impl DrawProgressIndicator {
         self.shared.state().graph_mode
     }
 
+    /// `Show(theScope, force)`: presents the progress of `scope` at the current position
+    /// (the base indicator calls it on every advance).
+    pub fn show(&self, scope: &ProgressScope<'_>, force: bool) {
+        show_progress(&self.shared, scope, self.indicator.get_position(), force);
+    }
+
     /// `Reset`: closes the progress window if shown and clears the break flag.
     pub fn reset(&self) {
         reset_shared(&self.shared);

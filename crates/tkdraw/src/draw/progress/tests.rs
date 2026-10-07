@@ -62,3 +62,12 @@ fn modes_default_from_the_process_settings() {
     assert!(progress.console_mode());
     assert!(!progress.tcl_mode());
 }
+
+#[test]
+fn show_presents_the_current_position() {
+    let di = interpretor();
+    let progress = DrawProgressIndicator::new(&di, 1.0);
+    progress.set_tcl_mode(true);
+    progress.show(progress.indicator().root_scope(), true);
+    assert_eq!(di.result().unwrap(), "Progress: 0%\n");
+}

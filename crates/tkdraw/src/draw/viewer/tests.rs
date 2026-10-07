@@ -321,3 +321,16 @@ fn the_grid_draws_crosses_at_the_visible_nodes() {
     // Frame [-10, 10] x [-10, 10] at zoom 1: nodes -1..1 on both axes, two strokes each.
     assert_eq!(segments, 18);
 }
+
+#[test]
+fn exposing_a_view_repaints_it() {
+    let system = FakeWindowSystem::new();
+    let mut viewer = DrawViewer::with_window_system(system.clone());
+    viewer.make_view(1, "+X+Y", 0, 0, 200, 100);
+    viewer.display(&segment_3d());
+    system.log.borrow_mut().clear();
+    viewer.expose_view(1);
+    let log = system.log.borrow().clone();
+    assert_eq!(log.first().map(String::as_str), Some("101 clear"));
+    assert!(log.iter().any(|line| line.contains("segment")));
+}

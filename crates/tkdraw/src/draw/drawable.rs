@@ -129,6 +129,43 @@ pub trait Drawable3D: Any {
         true
     }
 
+    // The non-virtual members of `Draw_Drawable3D`, provided over the base state.
+
+    /// `SetBounds`.
+    fn set_bounds(&self, x_min: f64, x_max: f64, y_min: f64, y_max: f64) {
+        self.base().bounds.set([x_min, x_max, y_min, y_max]);
+    }
+
+    /// `Bounds`: `[x_min, x_max, y_min, y_max]`.
+    fn bounds(&self) -> [f64; 4] {
+        self.base().bounds.get()
+    }
+
+    /// `Visible()`.
+    fn visible(&self) -> bool {
+        self.base().visible.get()
+    }
+
+    /// `Visible(bool)`.
+    fn set_visible(&self, visible: bool) {
+        self.base().visible.set(visible);
+    }
+
+    /// `Protected()`.
+    fn protected(&self) -> bool {
+        self.base().protected.get()
+    }
+
+    /// `Protected(bool)`.
+    fn set_protected(&self, protected: bool) {
+        self.base().protected.set(protected);
+    }
+
+    /// `Name()`: the variable name, `None` before the object was stored.
+    fn name(&self) -> Option<String> {
+        self.base().name.borrow().clone()
+    }
+
     /// `Name(const char*)` (virtual): records the variable name.
     fn set_name(&self, name: Option<&str>) {
         *self.base().name.borrow_mut() = name.map(str::to_string);
@@ -136,41 +173,6 @@ pub trait Drawable3D: Any {
 }
 
 impl dyn Drawable3D {
-    /// `SetBounds`.
-    pub fn set_bounds(&self, x_min: f64, x_max: f64, y_min: f64, y_max: f64) {
-        self.base().bounds.set([x_min, x_max, y_min, y_max]);
-    }
-
-    /// `Bounds`: `[x_min, x_max, y_min, y_max]`.
-    pub fn bounds(&self) -> [f64; 4] {
-        self.base().bounds.get()
-    }
-
-    /// `Visible()`.
-    pub fn visible(&self) -> bool {
-        self.base().visible.get()
-    }
-
-    /// `Visible(bool)`.
-    pub fn set_visible(&self, visible: bool) {
-        self.base().visible.set(visible);
-    }
-
-    /// `Protected()`.
-    pub fn protected(&self) -> bool {
-        self.base().protected.get()
-    }
-
-    /// `Protected(bool)`.
-    pub fn set_protected(&self, protected: bool) {
-        self.base().protected.set(protected);
-    }
-
-    /// `Name()`: the variable name, `None` before the object was stored.
-    pub fn name(&self) -> Option<String> {
-        self.base().name.borrow().clone()
-    }
-
     /// `occ::down_cast`: the concrete object when it is a `T`.
     pub fn downcast_ref<T: Drawable3D>(&self) -> Option<&T> {
         let any: &dyn Any = self;

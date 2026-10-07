@@ -24,7 +24,7 @@ mod view;
 mod viewer;
 mod window;
 
-pub use appli::{AppliOptions, InitAppli, draw_appli, interprete};
+pub use appli::{AppliOptions, InitAppli, draw_appli, draw_main, interprete};
 pub use arguments::{parse_on_off, parse_on_off_iterator, parse_on_off_no_iterator};
 pub use color::{COLOR_NAMES, DrawColor, DrawColorKind, DrawMarkerShape, MAXCOLOR};
 pub use commands::{

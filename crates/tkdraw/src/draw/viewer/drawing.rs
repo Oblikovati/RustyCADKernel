@@ -139,6 +139,15 @@ impl DrawViewer {
         }
     }
 
+    /// `Draw_View::WExpose`: forgets the cached frame of view `id` and repaints it (the
+    /// window system calls it when the window is exposed).
+    pub fn expose_view(&mut self, id: i32) {
+        if let Some(view) = self.view_mut(id) {
+            view.reset_frame();
+        }
+        self.repaint_view(id);
+    }
+
     /// `RepaintAll`.
     pub fn repaint_all(&mut self) {
         for id in self.view_ids() {

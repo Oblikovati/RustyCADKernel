@@ -18,6 +18,23 @@ use std::rc::Rc;
 /// commands, as `Draw_InitAppli` does in an executable.
 pub type InitAppli = fn(&DrawSession) -> Result<(), Failure>;
 
+/// `Draw_Main(argc, argv, Draw_InitAppli)`: `Tcl_FindExecutable`, then [`draw_appli`];
+/// returns 0, as the C++ function does.
+///
+/// ```no_run
+/// use rustycad_tkdraw::draw::{ProcessConsole, draw_main};
+/// use std::rc::Rc;
+/// let args: Vec<String> = std::env::args().collect();
+/// draw_main(&args, |_| Ok(()), Rc::new(ProcessConsole));
+/// ```
+pub fn draw_main(args: &[String], init: InitAppli, console: Rc<dyn DrawConsole>) -> i32 {
+    rustycad_tcl::initialize_library();
+    if let Err(failure) = draw_appli(args, init, console.clone()) {
+        console.write_err(&format!("DRAWEXE: {failure}\n"));
+    }
+    0
+}
+
 /// `MAXCMD`: the longest line the batch loop reads.
 const MAX_COMMAND_LINE: usize = 2048;
 

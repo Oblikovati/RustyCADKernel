@@ -76,8 +76,9 @@ impl DrawSession {
         (count, color.map(|rgba| *rgba.rgb()))
     }
 
-    /// `Draw::parseColor`.
-    fn parse_color(&self, args: &[&str], with_alpha: bool) -> (usize, Option<ColorRgba>) {
+    /// `Draw::parseColor`: the common parser of both `ParseColor` overloads; alpha is
+    /// parsed when `with_alpha`.
+    pub fn parse_color(&self, args: &[&str], with_alpha: bool) -> (usize, Option<ColorRgba>) {
         if let Some(color) = args
             .first()
             .and_then(|first| ColorRgba::from_hex(first, !with_alpha))
@@ -175,4 +176,30 @@ fn numerical_color<T: Copy>(
         }
     }
     Some((count, values))
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::draw::{DrawSession, DrawViewer, RecordingConsole};
+    use std::rc::Rc;
+
+    fn session() -> Rc<DrawSession> {
+        DrawSession::new(Rc::new(RecordingConsole::default()), DrawViewer::batch())
+    }
+
+    #[test]
+    fn colors_parse_from_names_hex_and_components() {
+        let session = session();
+        assert_eq!(session.parse_color_rgba(&["RED", "0.5"]).0, 2);
+        assert_eq!(session.parse_color_rgb(&["RED", "0.5"]).0, 1);
+        assert_eq!(session.parse_color_rgba(&["#FF0000"]).0, 1);
+        let (count, color) = session.parse_color_rgba(&["255", "0", "0", "x"]);
+        assert_eq!(count, 3);
+        assert_eq!(color.unwrap().alpha(), 1.0);
+        let (count, color) = session.parse_color(&["0.5", "0.25", "0", "0.5"], true);
+        assert_eq!(count, 4);
+        assert_eq!(color.unwrap().alpha(), 0.5);
+        assert_eq!(session.parse_color_rgb(&["bad", "1", "2"]).0, 0);
+        assert_eq!(session.parse_color_rgb(&["bad"]).0, 0);
+    }
 }

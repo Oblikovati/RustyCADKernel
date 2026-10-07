@@ -269,7 +269,7 @@ pub fn variable_commands(session: &DrawSession) -> Result<(), Failure> {
         return Ok(());
     }
     session.command_hooks.set(true);
-    session.register_factory("Draw_Number", DrawNumber::restore);
+    DrawNumber::register_factory(session);
     standard_variables(session);
     register(
         session,

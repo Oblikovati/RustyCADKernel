@@ -78,6 +78,16 @@ impl DrawSession {
         self.pick_drawable()
     }
 
+    /// `Draw::getDrawable(name, allowPick)`: [`Self::get`] when picking is allowed,
+    /// [`Self::get_existing`] otherwise.
+    pub fn get_drawable(&self, name: &str, allow_pick: bool) -> Option<DrawableHandle> {
+        if allow_pick {
+            self.get(name)
+        } else {
+            self.get_existing(name)
+        }
+    }
+
     /// `Draw::GetExisting(name)`: as [`Self::get`] without picking.
     pub fn get_existing(&self, name: &str) -> Option<DrawableHandle> {
         if name == "." {
@@ -218,4 +228,45 @@ fn trace_body(session: Weak<DrawSession>, key: u64) -> Box<dyn rustycad_tcl::Var
             session.upgrade()?.on_variable_event(&event.part1, key)
         },
     )
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::draw::{DrawNumber, DrawSession, DrawViewer, DrawableHandle, RecordingConsole};
+    use std::rc::Rc;
+
+    fn session() -> (Rc<DrawSession>, Rc<RecordingConsole>) {
+        let console = Rc::new(RecordingConsole::default());
+        (
+            DrawSession::new(console.clone(), DrawViewer::batch()),
+            console,
+        )
+    }
+
+    #[test]
+    fn a_drawable_variable_holds_its_name_and_is_found_again() {
+        let (session, _) = session();
+        let number: DrawableHandle = Rc::new(DrawNumber::new(4.0));
+        session.set_drawable("v", Some(number.clone()), false);
+        assert!(Rc::ptr_eq(&session.get("v").unwrap(), &number));
+        assert_eq!(number.name().as_deref(), Some("v"));
+        assert!(session.get_drawable("v", false).is_some());
+        assert!(session.get_drawable(".", false).is_none());
+        assert_eq!(session.drawables().len(), 1);
+    }
+
+    #[test]
+    fn overwriting_a_variable_forgets_its_drawable_unless_protected() {
+        let (session, console) = session();
+        session.set_number("p", 1.0);
+        session.get("p").unwrap().set_protected(true);
+        session.set_number("p", 2.0);
+        assert_eq!(session.get_number("p"), Some(2.0));
+        session.set_drawable("p", None, false);
+        assert_eq!(console.take_output(), "variable is protected\n");
+        session.get("p").unwrap().set_protected(false);
+        session.set_string("p", "text");
+        assert!(session.get("p").is_none());
+        assert!(session.drawables().is_empty());
+    }
 }

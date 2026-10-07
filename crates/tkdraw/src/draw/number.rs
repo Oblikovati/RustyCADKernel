@@ -42,6 +42,12 @@ impl DrawNumber {
         self.value.set(value);
     }
 
+    /// `RegisterFactory` (the `Draw_Drawable3D_FACTORY` macro): registers
+    /// [`DrawNumber::restore`] under `Draw_Number` in `session`.
+    pub fn register_factory(session: &crate::draw::DrawSession) {
+        session.register_factory("Draw_Number", Self::restore);
+    }
+
     /// `Restore`: reads one number; a missing number restores 0 (`operator>>` stores 0
     /// on failure since C++11, which overwrites the `RealLast()` initial value).
     pub fn restore(stream: &mut DrawIStream) -> Option<DrawableHandle> {
