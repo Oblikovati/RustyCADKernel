@@ -2,7 +2,7 @@
 use super::super::base_map::exhausted_iterator;
 use super::{DataMap, DataMapItems, DataMapStorage, Debug, HashPolicy};
 use crate::{
-    ncollection::chained_slots::{ChainPosition, ChainSlot},
+    ncollection::slot_chains::{ChainPosition, ChainSlot},
     standard::Failure,
 };
 /// Read-only OCCT cursor; `let mut cursor=map.cursor(); while cursor.more() { cursor.next(); }`.
@@ -40,7 +40,7 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// ```
     pub fn cursor_mut(&mut self) -> DataMapIteratorMut<'_, K, V> {
         DataMapIteratorMut {
-            position: ChainPosition::first(&self.storage),
+            position: ChainPosition::first(self.storage.chains()),
             source: Some(&mut self.storage),
         }
     }
@@ -118,7 +118,7 @@ impl<'a, K, V> DataMapIteratorMut<'a, K, V> {
     /// Advances native Next; `cursor.next()`.
     pub fn next(&mut self) {
         if let Some(source) = self.source.as_deref() {
-            self.position.advance(source);
+            self.position.advance(source.chains());
         }
     }
     /// Borrows native Value without permitting changes; `cursor.value()?`.
@@ -148,7 +148,7 @@ impl<'a, K, V> DataMapIteratorMut<'a, K, V> {
     /// Restarts on this map's first node; `cursor.reset()`.
     pub fn reset(&mut self) {
         if let Some(source) = self.source.as_deref() {
-            self.position = ChainPosition::first(source);
+            self.position = ChainPosition::first(source.chains());
         }
     }
     fn entry(&self, method: &str) -> Result<&ChainSlot<K, V>, Failure> {

@@ -80,11 +80,11 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     }
     /// Removes a binding, returning whether it existed; `map.unbind(&1)`.
     pub fn unbind(&mut self, key: &K) -> bool {
-        let Some((bucket, slot)) = self.lookup(key) else {
+        let Some((_, slot)) = self.lookup(key) else {
             return false;
         };
         // Native UnBind unlinks and counts down before the node destructor runs.
-        drop(self.storage.remove(bucket, slot));
+        drop(self.storage.remove(slot));
         true
     }
     /// Frees bindings and optionally bucket storage; `map.clear(true)`.
@@ -97,7 +97,7 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     }
     /// Borrows values while keeping keys immutable; `map.items_mut().for_each(|(_,v)|*v+=1)`.
     pub fn items_mut(&mut self) -> impl Iterator<Item = (&K, &mut V)> {
-        iteration::DataMapItemsMut::new(&mut self.storage)
+        self.storage.range_mut()
     }
     /// Iterates shared values; `map.values().min()`.
     pub fn values(&self) -> impl Iterator<Item = &V> {

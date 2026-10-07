@@ -1,5 +1,5 @@
-//! Safe form of the public `NCollection_BaseMap::Buckets()` table of DataMap and Map.
-use super::{ChainedSlots, SlotLink};
+//! Safe form of the public `NCollection_BaseMap::Buckets()` table of the hashed maps.
+use super::{ChainView, SlotLink};
 use crate::standard::Failure;
 
 /// Read-only view of an allocated bucket table, as native `Buckets()` returns it.
@@ -22,61 +22,57 @@ use crate::standard::Failure;
 /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
 pub struct HashBucketTable<'a, K, V> {
-    storage: &'a ChainedSlots<K, V>,
-    heads: &'a [SlotLink],
+    view: ChainView<'a, K, V>,
 }
 
 /// One bucket chain of a [`HashBucketTable`], head first; yields `(key, value)` pairs.
 ///
 /// Example: `table.chain(1)?.map(|(key, _)| *key).collect::<Vec<_>>()`.
 pub struct HashBucketChain<'a, K, V> {
-    storage: &'a ChainedSlots<K, V>,
+    view: ChainView<'a, K, V>,
     link: SlotLink,
 }
 
 impl<'a, K, V> HashBucketTable<'a, K, V> {
+    /// The allocated table of `view`, or `None` where native `Buckets()` returns null.
+    pub(in crate::ncollection) fn of(view: ChainView<'a, K, V>) -> Option<Self> {
+        view.chains().is_allocated().then_some(Self { view })
+    }
     /// Address of the table storage, the native `Buckets()` pointer value; `table.identity()`.
     pub fn identity(&self) -> *const () {
-        self.heads.as_ptr().cast()
+        self.heads().as_ptr().cast()
     }
     /// Number of heads, `NbBuckets() + 1` (bucket zero stays empty); `table.len()`.
     pub fn len(&self) -> usize {
-        self.heads.len()
+        self.heads().len()
     }
     /// Always false: an allocated table holds at least bucket zero; `table.is_empty()`.
     pub fn is_empty(&self) -> bool {
-        self.heads.is_empty()
+        self.heads().is_empty()
     }
     /// The chain of `bucket` in native order, or Standard_OutOfRange past the last head.
     pub fn chain(&self, bucket: usize) -> Result<HashBucketChain<'a, K, V>, Failure> {
         let link = *self
-            .heads
+            .heads()
             .get(bucket)
             .ok_or_else(|| out_of_table(bucket, self.len()))?;
         Ok(HashBucketChain {
-            storage: self.storage,
+            view: self.view,
             link,
         })
+    }
+    fn heads(&self) -> &'a [SlotLink] {
+        self.view.chains().table()
     }
 }
 
 impl<'a, K, V> Iterator for HashBucketChain<'a, K, V> {
     type Item = (&'a K, &'a V);
     fn next(&mut self) -> Option<Self::Item> {
-        let entry = self.storage.slot(self.link?);
-        self.link = entry.next;
+        let slot = self.link?;
+        self.link = self.view.chains().next(slot);
+        let entry = self.view.slot(slot);
         Some((entry.key(), entry.value()))
-    }
-}
-
-impl<K, V> ChainedSlots<K, V> {
-    /// The allocated table, or `None` where native `Buckets()` returns null.
-    pub(in crate::ncollection) fn buckets(&self) -> Option<HashBucketTable<'_, K, V>> {
-        let heads = self.heads.as_deref()?;
-        Some(HashBucketTable {
-            storage: self,
-            heads,
-        })
     }
 }
 

@@ -1,7 +1,7 @@
 //! Hash keys with OCCT's bucket growth, head insertion and traversal behavior.
 use super::{
-    BaseAllocator, BaseMap, DefaultHashPolicy, HashPolicy,
-    chained_slots::{ChainedSlots, SlotRange},
+    BaseAllocator, BaseMap, DefaultHashPolicy, HashPolicy, chained_slots::ChainedSlots,
+    slot_chains::SlotRange,
 };
 use std::fmt::Debug;
 /// A set of hash keys; `Map::<i32>::default().add(42)`.
@@ -90,11 +90,11 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     }
     /// Removes an equivalent key, reporting whether found; `map.remove(&42)`.
     pub fn remove(&mut self, key: &K) -> bool {
-        let Some((bucket, slot)) = self.storage.lookup(key, &self.hasher) else {
+        let Some((_, slot)) = self.storage.lookup(key, &self.hasher) else {
             return false;
         };
         // Native Remove unlinks and counts down before the node destructor runs.
-        drop(self.storage.remove(bucket, slot));
+        drop(self.storage.remove(slot));
         true
     }
     /// Frees keys and optionally buckets; `map.clear(true)`.
@@ -108,7 +108,7 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     /// Borrows keys in bucket traversal order; `for key in map.iter() {}`.
     pub fn iter(&self) -> MapIter<'_, K> {
         MapIter {
-            entries: SlotRange::new(&self.storage),
+            entries: SlotRange::new(self.storage.view()),
         }
     }
     /// Returns an exhausted iterator for OCCT iterator comparisons; `map.iter()!=map.end()`.

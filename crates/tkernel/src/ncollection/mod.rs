@@ -110,7 +110,8 @@ pub use base_map::{
     IndexedCursorSourceMut, MapLinkNode,
 };
 mod chained_slots;
-pub use chained_slots::{HashBucketChain, HashBucketTable};
+mod slot_chains;
+pub use slot_chains::{HashBucketChain, HashBucketTable};
 mod double_map_node;
 mod native_noexcept;
 pub use double_map_node::{DoubleMapNode, DoubleMapNodeOwner};
