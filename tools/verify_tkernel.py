@@ -22,6 +22,7 @@ from legacy_runtime_evidence import (
 from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, runtime_case_results, verified_native_skips
 from tkernel_native_baseline import compile_sources
+from legacy_pending_dependency import implemented_classes, pending_dependency_rows, runnable_rows
 from native_build import CLOSURE_TARGETS, LINKED_TOOLKITS, closure_flags, locked_cmake
 import tkernel_ncollection_corpus
 import tkernel_quantity_corpus
@@ -129,13 +130,17 @@ def main():
     mappings = [m for m in mappings if m["toolkit"] == "TKernel"]
     if not mappings:
         raise RuntimeError("No TKernel mappings; refusing an empty success")
+    # A pending-dependency row runs natively only; it lapses once its blocking class is ported.
+    pending = pending_dependency_rows(mappings, implemented_classes(ledger["api"]))
+    runnable = runnable_rows(mappings)
     all_candidates = {c["name"] for t in inventory["toolkits"] if t["name"] == "TKernel" for c in t["gtest_declaration_candidates"]}
-    missing = all_candidates - {m["upstream_id"] for m in mappings}
+    missing = all_candidates - {m["upstream_id"] for m in runnable}
     if args.require_complete and (missing or not ledger["runtime_test_inventory_complete"] or not ledger["api_inventory_complete"]):
         raise RuntimeError(f"TKernel NOT COMPLETE: {len(missing)} unmapped GoogleTest declarations; full runtime/DRAW and API inventories also required")
-    print(f"TKernel progress: {len(mappings)}/{len(all_candidates)} discovered declarations mapped; toolkit acceptance pending", flush=True)
+    print(f"TKernel progress: {len(runnable)}/{len(all_candidates)} discovered declarations mapped, {len(pending)} pending dependency; toolkit acceptance pending", flush=True)
     sources = sorted({m["source"] for m in mappings})
-    expected, rust_expected = mapped_runtime_sets(mappings)
+    expected, rust_expected = mapped_runtime_sets(runnable)
+    expected |= set(pending)
     if len({m["upstream_id"] for m in mappings}) != len(mappings):
         raise RuntimeError("Duplicate upstream test mappings")
     for path in sources:
@@ -153,7 +158,7 @@ def main():
     flags += [f"-DBUILD_MODULE_{module}={'ON' if module == 'FoundationClasses' else 'OFF'}" for module in inventory["modules"]]
     print("Building TKernel and GoogleTest for the focused oracle", flush=True)
     build = locked_cmake(source, build, flags, ["TKernel", "gtest_main"], args.jobs, output/"configure.log", output/"build.log", run, env)
-    if any(m["rust_target"] in {"standard_dump", "toploc_location"} for m in mappings):
+    if any(m["rust_target"] in {"standard_dump", "toploc_location"} for m in runnable):
         build = ROOT / "target/occt-tkernel-full"
         print("Building the geometry dependency closure used by TKernel legacy tests", flush=True)
         build = locked_cmake(source, build, closure_flags(inventory["modules"]), CLOSURE_TARGETS, args.jobs, output/"configure-geometry.log", output/"build-geometry.log", run, env)
@@ -181,15 +186,15 @@ def main():
     cases = ET.parse(output/"upstream.xml").findall(".//testcase")
     if {c.attrib['classname']+'.'+c.attrib['name'] for c in cases} != expected:
         raise RuntimeError("Missing, failed or skipped upstream tests")
-    native_skips = verified_native_skips(cases, mappings)
+    native_skips = verified_native_skips(cases, runnable)
     native_statuses = {case.attrib['classname']+'.'+case.attrib['name']:
                        'upstream_skipped' if case.find('skipped') is not None else 'passed'
                        for case in cases}
     native_passed = len(cases) - len(native_skips)
     print(f"OCCT: {native_passed} legacy tests passed; {len(native_skips)} explicit upstream skips; running mapped Rust tests", flush=True)
     rust_passed = run_rust_mappings(rust_expected, env, output)
-    case_results = runtime_case_results(mappings, native_statuses, rust_passed)
-    if any(m["rust_target"] == "quantity_color" for m in mappings):
+    case_results = runtime_case_results(runnable, native_statuses, rust_passed)
+    if any(m["rust_target"] == "quantity_color" for m in runnable):
         # The named-color table is generated data; a stale copy would pass the Rust tests alone.
         run([sys.executable, ROOT/"tools/generate_quantity_color_table.py", "--check", "--source", source], output/"quantity-color-table-check.log", env=env)
     probe = output/"occt-probe"
@@ -208,30 +213,30 @@ def main():
                 raise RuntimeError(f"Differential mismatch for {requests.splitlines()[i]}: OCCT={a}; Rust={b}")
         raise RuntimeError("Differential result lengths differ")
     numeric_report = None
-    if any(m["rust_target"] == "standard_strtod" for m in mappings):
+    if any(m["rust_target"] == "standard_strtod" for m in runnable):
         run([sys.executable, ROOT/"tools/verify_strtod.py", "--source", source], output/"strtod-verification.log", env=env)
         numeric_report = json.loads((output/"strtod/report.json").read_text())
     string_report = None
-    if any(m["rust_target"] == "tcollection_ascii_string" for m in mappings):
+    if any(m["rust_target"] == "tcollection_ascii_string" for m in runnable):
         run([sys.executable, ROOT/"tools/verify_ascii_string.py", "--source", source], output/"ascii-string-verification.log", env=env)
         string_report = json.loads((output/"ascii-string/report.json").read_text())
     extended_report = None
-    if any(m["rust_target"] == "tcollection_extended_string" for m in mappings):
+    if any(m["rust_target"] == "tcollection_extended_string" for m in runnable):
         run([sys.executable, ROOT/"tools/verify_extended_string.py", "--source", source], output/"extended-string-verification.log", env=env)
         extended_report = json.loads((output/"extended-string/report.json").read_text())
     kdtree_report = None
-    if any(m["rust_target"] == "ncollection_kdtree" for m in mappings):
+    if any(m["rust_target"] == "ncollection_kdtree" for m in runnable):
         run([sys.executable, ROOT/"tools/verify_kdtree.py", "--source", source], output/"kdtree-verification.log", env=env)
         kdtree_report = json.loads((output/"kdtree/report.json").read_text())
     units_report = None
-    if any(m["rust_target"] == "units_api" for m in mappings):
+    if any(m["rust_target"] == "units_api" for m in runnable):
         run([sys.executable, ROOT/"tools/generate_units_data.py", "--check", "--source", source], output/"units-data-check.log", env=env)
         run([sys.executable, ROOT/"tools/verify_units.py", "--source", source], output/"units-verification.log", env=env)
         units_report = json.loads((output/"units/report.json").read_text())
     run([sys.executable, ROOT/"tools/verify_tkernel_api.py", "--source", source], output/"api-verification.log", env=env)
     api_report = json.loads((output/"api/report.json").read_text())
     geometry_report = None
-    if any(m["rust_target"] == "standard_dump" for m in mappings):
+    if any(m["rust_target"] == "standard_dump" for m in runnable):
         run([sys.executable, ROOT/"tools/verify_geometry.py", "--source", source], output/"geometry-verification.log", env=env)
         geometry_report = json.loads((output/"geometry/report.json").read_text())
     require_unchanged_runtime_inputs(initial_hashes, runtime_input_hashes(ROOT))
@@ -247,7 +252,9 @@ def main():
               "compiler":run([compiler,"--version"],output/"compiler.txt").splitlines()[0],
               "rustc":run(["rustc","--version"],output/"rustc.txt",env=env).strip(),
               "legacy_tests_passed":native_passed,"upstream_skips":native_skips,
-              "declarations_mapped":len(mappings),"rust_translations_passed":sum(m["status"]=="translated" for m in mappings),
+              "declarations_mapped":len(runnable),
+              "rust_pending_dependency":{name:list(case.blocked_by) for name,case in sorted(pending.items())},
+              "rust_translations_passed":sum(m["status"]=="translated" for m in runnable),
               "current_behavior_regressions_passed":len(native_skips),"rust_runtime_cases_passed":len(rust_expected),
               "runtime_evidence_schema":1,"runtime_evidence_toolkit":"TKernel",
               "runtime_case_results":case_results,
@@ -266,7 +273,7 @@ def main():
               "rust_source_clean":initial_rust_state["clean"],
               "toolkit_complete":False,"scope":"Mapped suites only; full TKernel and DRAW acceptance pending"}
     report_path.write_text(json.dumps(report,indent=2)+'\n')
-    print(f"PASS: {len(mappings)} mapped declarations ({len(native_skips)} upstream skips with separate compatibility regressions) and {report['differential_cases_passed']} differential cases; report: {report_path.relative_to(ROOT)}")
+    print(f"PASS: {len(runnable)} mapped declarations ({len(pending)} pending dependency, native only; {len(native_skips)} upstream skips with separate compatibility regressions) and {report['differential_cases_passed']} differential cases; report: {report_path.relative_to(ROOT)}")
 
 
 if __name__ == '__main__':

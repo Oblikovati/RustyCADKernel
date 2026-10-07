@@ -1,5 +1,6 @@
 """The toolkit verifier: the numeric hang guard, declaration parsing and approved native failures."""
 import inspect
+import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -109,6 +110,41 @@ class RustTestIdentityTests(unittest.TestCase):
         with mock.patch.object(verify_toolkit, 'run', PassingCargoRun(['case_one'])):
             with self.assertRaisesRegex(ValueError, 'pkg-a/suite'):
                 verify_toolkit.rust_tests(Path('out'), self.ROWS, expected, {})
+
+    def test_a_port_only_test_in_a_mapped_target_is_refused_by_name(self):
+        expected = {('pkg-a', 'suite', 'case_one')}
+        with mock.patch.object(verify_toolkit, 'run', PassingCargoRun(['case_one', 'port_only'])):
+            with self.assertRaisesRegex(ValueError, r"unmapped=\['port_only'\]"):
+                verify_toolkit.rust_tests(Path('out'), self.ROWS, expected, {})
+
+
+class FakeOcctSource:
+    """A temporary OCCT tree holding one GTest source file."""
+
+    def __init__(self, folder: Path, relative: str, text: str) -> None:
+        self.root = folder
+        (folder/relative).parent.mkdir(parents=True, exist_ok=True)
+        (folder/relative).write_text(text)
+
+
+class PendingNativeCaseTests(unittest.TestCase):
+    SOURCE = 'src/TKA/GTests/A_Test.cxx'
+
+    def pending_row(self, blocked_by):
+        return {'upstream_id': 'A.Fused', 'source': self.SOURCE, 'source_sha256': 'b' * 64,
+                'status': 'pending_dependency', 'blocked_by': blocked_by}
+
+    def test_pending_rows_run_natively_only(self):
+        with tempfile.TemporaryDirectory() as folder:
+            occt = FakeOcctSource(Path(folder), self.SOURCE, 'TEST(A, Fused) { BRepAlgoAPI_Fuse f; }')
+            cases = verify_toolkit.pending_native_cases(occt.root, [self.pending_row(['BRepAlgoAPI_Fuse'])])
+        self.assertEqual(set(cases), {'A.Fused'})
+
+    def test_a_blocker_the_source_never_names_is_refused(self):
+        with tempfile.TemporaryDirectory() as folder:
+            occt = FakeOcctSource(Path(folder), self.SOURCE, 'TEST(A, Fused) {}')
+            with self.assertRaisesRegex(ValueError, 'never names'):
+                verify_toolkit.pending_native_cases(occt.root, [self.pending_row(['BRepAlgoAPI_Fuse'])])
 
 
 if __name__ == '__main__':
