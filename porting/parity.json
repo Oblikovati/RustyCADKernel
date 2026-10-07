@@ -452185,6 +452185,502 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dHatchStyle::dump_json",
       "status": "implemented",
       "notes": "Graphic3d mapping (docs/visualization-design.md section 1): value classes are Rust structs with public fields where the native ones are public; C++ output references are returned tuples; overloads that differ by float/double are distinct methods."
+    },
+    {
+      "upstream_id": "Graphic3d_FresnelModel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnelModel",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_FM_SCHLICK",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnelModel::Schlick",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_FM_CONSTANT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnelModel::Constant",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_FM_CONDUCTOR",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnelModel::Conductor",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_FM_DIELECTRIC",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnelModel::Dielectric",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::Graphic3d_Fresnel()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::Graphic3d_Fresnel(Graphic3d_FresnelModel,const NCollection_Vec3<float> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::new",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::CreateSchlick",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::create_schlick",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::CreateConstant",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::create_constant",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::CreateDielectric",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::create_dielectric",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::CreateConductor(float,float)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::create_conductor",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::CreateConductor(const NCollection_Vec3<float> &,const NCollection_Vec3<float> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::create_conductor_rgb",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::Serialize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::serialize",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::operator==",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::FresnelType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::fresnel_type",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Fresnel::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFresnel::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::Kc",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::kc",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::Kd",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::kd",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::Ks",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::ks",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::Kt",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::kt",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::Le",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::le",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::Absorption",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::absorption",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::FresnelCoat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::fresnel_coat",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::FresnelBase",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::fresnel_base",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::CreateDiffuse",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::create_diffuse",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::CreateMetallic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::create_metallic",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::CreateTransparent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::create_transparent",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::CreateGlass",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::create_glass",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::CreateMetallicRoughness",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::create_metallic_roughness",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::Graphic3d_BSDF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::Normalize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::normalize",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::operator==",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_BSDF::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBsdf::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialDefinitionError",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialDefinitionError.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::material_definition_error",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BSDF.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::Graphic3d_PBRMaterial()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::Graphic3d_PBRMaterial(const Graphic3d_BSDF &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::from_bsdf",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes. Native quirk: the members SetBSDF does not set are indeterminate natively; Rust starts from the defaults."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::Metallic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::metallic",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::SetMetallic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::set_metallic",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::Roughness(float)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::roughness_of",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::Roughness() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::roughness",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::NormalizedRoughness",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::normalized_roughness",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::SetRoughness",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::set_roughness",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::IOR",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::ior",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::SetIOR",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::set_ior",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::Color",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::color",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::SetColor(const Quantity_ColorRGBA &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::set_color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::SetColor(const Quantity_Color &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::set_color",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::Alpha",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::alpha",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::SetAlpha",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::set_alpha",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::Emission",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::emission",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::SetEmission",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::set_emission",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::SetBSDF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::set_bsdf",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::operator==",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::GenerateEnvLUT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::generate_env_lut",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::RoughnessFromSpecular",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::roughness_from_specular",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::MetallicFromSpecular",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::metallic_from_specular",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::MinRoughness",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::min_roughness",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::SpecIBLMapSamplesFactor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::spec_ibl_map_samples_factor",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_PBRMaterial::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PBRMaterial.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
     }
   ],
   "tests": [

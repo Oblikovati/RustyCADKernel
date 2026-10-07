@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod sv_probe;
-use sv_probe::{grid, hid, pixel};
+use sv_probe::{grid, hid, pbr, pixel};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -19,6 +19,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sv_pixel", pixel::pixel_case),
     ("sv_rawpixel", pixel::raw_pixel_case),
     ("sv_half", pixel::half_case),
+    // Graphic3d_PBRMaterial and Graphic3d_BSDF (sv_probe/pbr.rs)
+    ("sv_pbr_lut", pbr::lut_case),
+    ("sv_pbr_factor", pbr::factor_case),
+    ("sv_pbr_bsdf", pbr::bsdf_case),
+    ("sv_fresnel", pbr::fresnel_case),
 ];
 
 fn main() {

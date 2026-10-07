@@ -17,3 +17,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_hid').append_hid_requests(requests)
     # Image_PixMap pixel conversions (tkservice_corpus_pixel.py)
     __import__('tkservice_corpus_pixel').append_pixel_requests(requests)
+    # Graphic3d_PBRMaterial and Graphic3d_BSDF (tkservice_corpus_pbr.py)
+    __import__('tkservice_corpus_pbr').append_pbr_requests(requests)

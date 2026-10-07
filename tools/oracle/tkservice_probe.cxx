@@ -26,6 +26,7 @@
 #include "tkservice_probe_grid.cxx"
 #include "tkservice_probe_hid.cxx"
 #include "tkservice_probe_pixel.cxx"
+#include "tkservice_probe_pbr.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -36,6 +37,11 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sv_pixel", sv_pixel_case},
  {"sv_rawpixel", sv_rawpixel_case},
  {"sv_half", sv_half_case},
+ // Graphic3d_PBRMaterial and Graphic3d_BSDF (tkservice_probe_pbr.cxx)
+ {"sv_pbr_lut", sv_pbr_lut_case},
+ {"sv_pbr_factor", sv_pbr_factor_case},
+ {"sv_pbr_bsdf", sv_pbr_bsdf_case},
+ {"sv_fresnel", sv_fresnel_case},
 };
 int main() {
  std::string line;
