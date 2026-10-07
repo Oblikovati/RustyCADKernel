@@ -1,0 +1,42 @@
+warning: a method with this name may be added to the standard library in the future
+  --> crates/tkmath/src/gp/transform/json.rs:62:85
+   |
+62 |                 output.set_value(row, column, self.coefficient(row + 1, column + 1).cast());
+   |                                                                                     ^^^^
+   |
+   = help: call with fully qualified syntax `rustycad_tkernel::ncollection::ElementCast::cast(...)` to keep using the current method
+   = warning: once this associated item is added to the standard library, the ambiguity may cause an error or change in behavior!
+   = note: for more information, see issue #48919 <https://github.com/rust-lang/rust/issues/48919>
+   = note: `#[warn(unstable_name_collisions)]` (part of `#[warn(future_incompatible)]`) on by default
+help: add `#![feature(float_conversions)]` to the crate attributes to enable `core::f64::<impl f64>::cast`
+  --> crates/tkmath/src/lib.rs:2:1
+   |
+ 2 + #![feature(float_conversions)]
+   |
+
+warning: a method with this name may be added to the standard library in the future
+   --> crates/tkmath/src/gp/general_transform/algebra.rs:108:85
+    |
+108 |                 output.set_value(row, column, self.coefficient(row + 1, column + 1).cast());
+    |                                                                                     ^^^^
+    |
+    = help: call with fully qualified syntax `rustycad_tkernel::ncollection::ElementCast::cast(...)` to keep using the current method
+    = warning: once this associated item is added to the standard library, the ambiguity may cause an error or change in behavior!
+    = note: for more information, see issue #48919 <https://github.com/rust-lang/rust/issues/48919>
+help: add `#![feature(float_conversions)]` to the crate attributes to enable `core::f64::<impl f64>::cast`
+   --> crates/tkmath/src/lib.rs:2:1
+    |
+  2 + #![feature(float_conversions)]
+    |
+
+warning: `rustycad-tkmath` (lib) generated 2 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running tests/osd_iterator_interface.rs (target/miri/x86_64-unknown-linux-gnu/debug/build/rustycad-tkernel/a1d7f55ea9a81aa7/out/osd_iterator_interface-a1d7f55ea9a81aa7)
+
+running 3 tests
+test optional_and_foreign_comparison_states_are_not_equal ... ok
+test parallel_for_each_still_accepts_borrowed_non_clone_payloads ... ok
+test virtual_clone_outlives_source_wrapper_and_preserves_borrowed_payload ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.39s
+
