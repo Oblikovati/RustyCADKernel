@@ -22,8 +22,6 @@ mod sd_updates;
 mod section_attribute_tests;
 #[path = "pave_filler/shrunk_data.rs"]
 mod shrunk_data;
-#[path = "pave_filler/split_blocks.rs"]
-mod split_blocks;
 #[path = "pave_filler/vertex_edge.rs"]
 mod vertex_edge;
 #[path = "pave_filler/vertex_face.rs"]
@@ -31,14 +29,30 @@ mod vertex_face;
 #[path = "pave_filler/vertex_vertex.rs"]
 mod vertex_vertex;
 use super::{AlertNullInputShapes, AlertTooFewArguments, Glue, Options, SectionAttribute};
-use crate::{bop_ds::BOPDSIterator, bop_ds::DataStructure, int_tools::Context};
+use crate::{
+    bop_ds::{BOPDSIterator, DataStructure, Pair, PaveBlockHandle},
+    int_tools::Context,
+};
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::{
     message::AlertHandle,
-    ncollection::{List, Map as IndexMap},
+    ncollection::{DataMap, List, Map as IndexMap},
     standard::Handle,
 };
+use std::collections::HashMap;
 use std::sync::Arc;
+
+/// `BOPAlgo_PaveFiller::EdgeRangeDistance`: the distance of an edge range to a face that it
+/// does not intersect; `EdgeRangeDistance { first: 0., last: 1., distance: 0.5 }`.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct EdgeRangeDistance {
+    /// First parameter of the range.
+    pub first: f64,
+    /// Last parameter of the range.
+    pub last: f64,
+    /// Minimal distance between the range and the face.
+    pub distance: f64,
+}
 
 /// `BOPAlgo_PaveFiller` through data-structure and iterator preparation.
 /// Boolean intersection stages are not attached yet; `filler.initialize()?` prepares candidates.
@@ -54,6 +68,8 @@ pub struct BOPAlgoPaveFiller {
     is_primary: bool,
     vertices_to_avoid_extension: Vec<i32>,
     increased_ss: IndexMap<i32>,
+    fpb_done: HashMap<i32, Vec<PaveBlockHandle>>,
+    distances: DataMap<Pair, Vec<EdgeRangeDistance>>,
     section_attribute: SectionAttribute,
 }
 
@@ -78,6 +94,8 @@ impl BOPAlgoPaveFiller {
             is_primary: true,
             vertices_to_avoid_extension: Vec::new(),
             increased_ss: IndexMap::new(1),
+            fpb_done: HashMap::new(),
+            distances: DataMap::default(),
             section_attribute: SectionAttribute::new(),
         }
     }
@@ -281,7 +299,7 @@ fn alert<T: rustycad_tkernel::message::Alert + 'static>(value: T) -> AlertHandle
 fn missing_structure() -> rustycad_tkernel::standard::Failure {
     rustycad_tkernel::standard::Failure::with_type(
         "Standard_NullObject",
-        "BOPAlgo_PaveFiller: data structure is null; expected initialize() to have run",
+        "BOPAlgo_PaveFiller: data structure is None; expected initialize() to have run",
         "",
     )
 }

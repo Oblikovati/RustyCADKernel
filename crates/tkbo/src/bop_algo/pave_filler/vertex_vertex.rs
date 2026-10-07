@@ -1,197 +1,202 @@
-use super::BOPAlgoPaveFiller;
-use crate::bop_ds::{DataStructure, InterfVV, Pair, ShapeInfo};
+//! `BOPAlgo_PaveFiller_1.cxx`: vertex/vertex intersection and same-domain vertex creation.
+use super::{BOPAlgoPaveFiller, missing_structure};
+use crate::bop_algo::AlertSelfInterferingShape;
+use crate::bop_algo::tools::{ConnectionMap, fill_map, make_blocks};
+use crate::bop_ds::{DataStructure, InterfVV, ShapeInfo};
 use crate::bop_tools::{compute_vertices, make_vertex};
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
-    topods::{Shape, Vertex},
+    topods::{Compound, Shape, Vertex},
 };
-use rustycad_tkernel::{ncollection::List, precision, standard::Failure};
+use rustycad_tkernel::{
+    message::AlertHandle,
+    ncollection::{DefaultHashPolicy, List},
+    precision,
+    standard::Failure,
+};
 use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tkmath::bnd::BoundingBox3;
+use std::sync::Arc;
+
+type VertexLinks = ConnectionMap<i32, i32, DefaultHashPolicy>;
 
 impl BOPAlgoPaveFiller {
-    /// Performs native vertex/vertex candidate intersection and same-domain grouping.
-    /// `filler.perform_vv()?` records coincident candidates and updates DS vertices.
+    /// Intersects all vertex pairs with interfering boxes, merges connected coincident vertices
+    /// into same-domain vertices and prepares pave blocks of the touched edges (`PerformVV`).
+    /// `filler.perform_vv()?`.
     pub fn perform_vv(&mut self) -> Result<(), Failure> {
-        let pairs = self.vertex_pairs()?;
+        let pairs = self.iterator_pairs(ShapeEnum::Vertex, ShapeEnum::Vertex)?;
         if pairs.is_empty() {
             return Ok(());
         }
-        let groups = self.vertex_groups(&pairs)?;
-        for group in groups {
-            self.make_same_domain_vertices(&group)?;
+        let links = self.coincident_vertex_links(&pairs)?;
+        for block in make_blocks(&links, DefaultHashPolicy)? {
+            self.make_sd_vertices(&block, true)?;
         }
-        self.initialize_vertex_pave_blocks()?;
-        Ok(())
-    }
-
-    pub(super) fn initialize_vertex_pave_blocks(&mut self) -> Result<(), Failure> {
-        let structure = self.data_structure.as_mut().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformVV requires initialized data structure")
-        })?;
-        let vertices: Vec<i32> = structure
+        let structure = self.data_structure.as_mut().ok_or_else(missing_structure)?;
+        let sources: Vec<i32> = structure
             .shape_sd_items()
             .map(|(source, _)| *source)
             .collect();
-        for vertex in vertices {
-            structure.init_pave_blocks_for_vertex(vertex)?;
+        for source in sources {
+            structure.init_pave_blocks_for_vertex(source)?;
         }
         Ok(())
     }
 
-    fn vertex_pairs(&mut self) -> Result<Vec<Pair>, Failure> {
-        let iterator = self.iterator.as_mut().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformVV requires initialized iterator")
-        })?;
-        iterator.initialize(ShapeEnum::Vertex, ShapeEnum::Vertex);
-        let mut pairs = Vec::new();
+    /// Merges the given vertices (and their current same-domain vertices) into one vertex,
+    /// updating the first existing same-domain vertex in place or appending a new one, then
+    /// binds every input to it and optionally records VV interferences (`MakeSDVertices`).
+    /// `let merged = filler.make_sd_vertices(&[3, 7], true)?;`.
+    pub fn make_sd_vertices(
+        &mut self,
+        vertices: &[i32],
+        add_interfs: bool,
+    ) -> Result<i32, Failure> {
+        let structure = self.data_structure.as_mut().ok_or_else(missing_structure)?;
+        let (existing, shapes) = sd_vertex_inputs(structure, vertices)?;
+        let mut merged = Vertex::default();
+        make_vertex(&shapes, &mut merged)?;
+        let index = store_sd_vertex(structure, existing, &mut merged)?;
+        let point = BRepTool::pnt(&merged)?;
+        let gap = BRepTool::vertex_tolerance(&merged)? + precision::confusion();
+        let bounds = structure.change_shape_info(index)?.change_box();
+        bounds.add_point(point);
+        bounds.set_gap(gap);
+        self.bind_sd_vertices(vertices, index, add_interfs)?;
+        Ok(index)
+    }
+
+    /// Returns the iterator pairs of the two shape types in traversal order.
+    pub(super) fn iterator_pairs(
+        &mut self,
+        first: ShapeEnum,
+        second: ShapeEnum,
+    ) -> Result<Vec<(i32, i32)>, Failure> {
+        let iterator = self.iterator.as_mut().ok_or_else(missing_structure)?;
+        iterator.initialize(first, second);
+        let mut pairs = Vec::with_capacity(iterator.expected_length().max(0) as usize);
         while iterator.more() {
-            let (first, second) = iterator.value()?;
-            pairs.push(Pair::new(first, second));
+            pairs.push(iterator.value()?);
             iterator.next();
         }
         Ok(pairs)
     }
 
-    fn vertex_groups(&self, pairs: &[Pair]) -> Result<Vec<Vec<i32>>, Failure> {
-        let structure = self.data_structure.as_ref().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformVV requires initialized data structure")
-        })?;
-        let mut connections = Vec::new();
-        for pair in pairs {
-            let (source_first, source_second) = pair.indices();
-            if structure.has_interference_between(source_first, source_second) {
-                connections.push((source_first, source_second));
+    fn coincident_vertex_links(&self, pairs: &[(i32, i32)]) -> Result<VertexLinks, Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        let mut links = VertexLinks::with_hasher(DefaultHashPolicy, 100);
+        for (first, second) in pairs.iter().copied() {
+            if structure.has_interference_between(first, second) {
+                fill_map(&mut links, first, second);
                 continue;
             }
-            let (first, second) = (source_first, source_second);
-            let (first, second) = resolved_vertices(structure, first, second);
-            let first_shape = Vertex::unchecked(structure.shape(first)?.clone());
-            let second_shape = Vertex::unchecked(structure.shape(second)?.clone());
+            let first_shape = sd_vertex(structure, first)?;
+            let second_shape = sd_vertex(structure, second)?;
             if compute_vertices(&first_shape, &second_shape, self.options.fuzzy_value())? == 0 {
-                connections.push((source_first, source_second));
+                fill_map(&mut links, first, second);
             }
         }
-        Ok(connected_groups(&connections))
+        Ok(links)
     }
 
-    pub(super) fn make_same_domain_vertices(&mut self, group: &[i32]) -> Result<(), Failure> {
-        let structure = self.data_structure.as_mut().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformVV requires initialized data structure")
-        })?;
-        let shapes = vertex_shapes(structure, group)?;
-        let mut merged = Vertex::default();
-        make_vertex(&shapes, &mut merged)?;
-        let representative = update_or_append_vertex(structure, group, &merged)?;
-        update_vertex_bounds(structure, representative)?;
-        bind_group_interferences(structure, group, representative);
+    fn bind_sd_vertices(
+        &mut self,
+        vertices: &[i32],
+        merged: i32,
+        add_interfs: bool,
+    ) -> Result<(), Failure> {
+        for (position, first) in vertices.iter().copied().enumerate() {
+            let structure = self.data_structure.as_mut().ok_or_else(missing_structure)?;
+            structure.add_shape_sd(first, merged);
+            let rank = structure.rank(first);
+            for second in vertices[position + 1..].iter().copied() {
+                self.check_vertex_pair(first, second, rank, merged, add_interfs)?;
+            }
+        }
+        Ok(())
+    }
+
+    fn check_vertex_pair(
+        &mut self,
+        first: i32,
+        second: i32,
+        rank: i32,
+        merged: i32,
+        add_interfs: bool,
+    ) -> Result<(), Failure> {
+        let structure = self.data_structure.as_mut().ok_or_else(missing_structure)?;
+        if rank >= 0 && rank == structure.rank(second) {
+            let pair = pair_compound(structure.shape(first)?, structure.shape(second)?)?;
+            let alert: AlertHandle = Arc::new(AlertSelfInterferingShape::new(&pair));
+            self.options.add_warning(&alert);
+        }
+        let structure = self.data_structure.as_mut().ok_or_else(missing_structure)?;
+        if add_interfs && structure.add_interference(first, second) {
+            let record = structure.interf_vv().append(InterfVV::default());
+            record.set_indices(first, second);
+            record.set_index_new(merged);
+        }
         Ok(())
     }
 }
 
-fn resolved_vertices(structure: &DataStructure, first: i32, second: i32) -> (i32, i32) {
-    (
-        structure.shape_sd(first).unwrap_or(first),
-        structure.shape_sd(second).unwrap_or(second),
-    )
+fn sd_vertex(structure: &DataStructure, index: i32) -> Result<Vertex, Failure> {
+    let mut representative = index;
+    structure.has_shape_sd_into(index, &mut representative);
+    Ok(Vertex::unchecked(structure.shape(representative)?.clone()))
 }
 
-fn connected_groups(pairs: &[(i32, i32)]) -> Vec<Vec<i32>> {
-    let mut groups: Vec<Vec<i32>> = Vec::new();
-    for (first, second) in pairs {
-        merge_connection(&mut groups, *first, *second);
-    }
-    groups
-}
-
-fn merge_connection(groups: &mut Vec<Vec<i32>>, first: i32, second: i32) {
-    let first_group = groups.iter().position(|group| group.contains(&first));
-    let second_group = groups.iter().position(|group| group.contains(&second));
-    match (first_group, second_group) {
-        (None, None) => groups.push(vec![first, second]),
-        (Some(index), None) => append_unique(&mut groups[index], second),
-        (None, Some(index)) => append_unique(&mut groups[index], first),
-        (Some(first_index), Some(second_index)) if first_index != second_index => {
-            let (keep_index, remove_index) = if first_index < second_index {
-                (first_index, second_index)
+/// The first same-domain vertex (kept out of the list, as natively) and the merge inputs:
+/// the other same-domain vertices and every input vertex.
+fn sd_vertex_inputs(
+    structure: &DataStructure,
+    vertices: &[i32],
+) -> Result<(Option<i32>, List<Shape>), Failure> {
+    let mut existing: Option<i32> = None;
+    let mut shapes = List::default();
+    for vertex in vertices.iter().copied() {
+        let mut representative = vertex;
+        if structure.has_shape_sd_into(vertex, &mut representative) {
+            if existing.is_none() {
+                existing = Some(representative);
             } else {
-                (second_index, first_index)
-            };
-            let second_group = groups.remove(remove_index);
-            for index in second_group {
-                append_unique(&mut groups[keep_index], index);
+                shapes.append(structure.shape(representative)?.clone());
             }
         }
-        _ => {}
+        shapes.append(structure.shape(vertex)?.clone());
     }
+    Ok((existing, shapes))
 }
 
-fn append_unique(group: &mut Vec<i32>, index: i32) {
-    if !group.contains(&index) {
-        group.push(index);
-    }
-}
-
-fn vertex_shapes(structure: &DataStructure, group: &[i32]) -> Result<List<Shape>, Failure> {
-    let mut shapes = List::default();
-    for index in group {
-        if let Some(representative) = structure.shape_sd(*index) {
-            shapes.append(structure.shape(representative)?.clone());
-        }
-        shapes.append(structure.shape(*index)?.clone());
-    }
-    Ok(shapes)
-}
-
-fn update_or_append_vertex(
+/// Moves the merged geometry into the existing same-domain vertex, or appends the new vertex.
+fn store_sd_vertex(
     structure: &mut DataStructure,
-    group: &[i32],
-    merged: &Vertex,
+    existing: Option<i32>,
+    merged: &mut Vertex,
 ) -> Result<i32, Failure> {
-    if let Some(index) = group.iter().find_map(|source| structure.shape_sd(*source)) {
-        let existing = Vertex::unchecked(structure.shape(index)?.clone());
+    if let Some(index) = existing {
+        let target = Vertex::unchecked(structure.shape(index)?.clone());
         BRepBuilder::default().set_vertex_point_and_tolerance(
-            &existing,
+            &target,
             BRepTool::pnt(merged)?,
             BRepTool::vertex_tolerance(merged)?,
         )?;
+        *merged = target;
         return Ok(index);
     }
-    append_merged_vertex(structure, merged)
-}
-
-fn update_vertex_bounds(structure: &mut DataStructure, index: i32) -> Result<(), Failure> {
-    let vertex = Vertex::unchecked(structure.shape(index)?.clone());
-    let point = BRepTool::pnt(&vertex)?;
-    let gap = BRepTool::vertex_tolerance(&vertex)? + precision::confusion();
-    let bounds = structure.change_shape_info(index)?.change_box();
-    bounds.add_point(point);
-    bounds.set_gap(gap);
-    Ok(())
-}
-
-fn append_merged_vertex(structure: &mut DataStructure, vertex: &Vertex) -> Result<i32, Failure> {
     let mut info = ShapeInfo::default();
     info.set_shape_type(ShapeEnum::Vertex);
-    info.set_shape(&vertex.clone().into_shape());
-    let point = BRepTool::pnt(vertex)?;
-    let gap = BRepTool::vertex_tolerance(vertex)? + precision::confusion();
-    let mut bounds = BoundingBox3::default();
-    bounds.add_point(point);
-    bounds.set_gap(gap);
-    info.set_box(&bounds);
+    info.set_shape(&merged.clone().into_shape());
     Ok(structure.append_shape_info(&info))
 }
 
-fn bind_group_interferences(structure: &mut DataStructure, group: &[i32], new_index: i32) {
-    for (position, first) in group.iter().enumerate() {
-        structure.add_shape_sd(*first, new_index);
-        for second in group.iter().skip(position + 1) {
-            if structure.add_interference(*first, *second) {
-                let record = structure.interf_vv().append(InterfVV::default());
-                record.set_indices(*first, *second);
-                record.set_index_new(new_index);
-            }
-        }
-    }
+/// A compound of two shapes for warning alerts; `pair_compound(&v1, &v2)?`.
+pub(super) fn pair_compound(first: &Shape, second: &Shape) -> Result<Shape, Failure> {
+    let builder = BRepBuilder::default();
+    let mut compound = Compound::default();
+    builder.make_compound(&mut compound);
+    let mut shape = compound.into_shape();
+    builder.add(&mut shape, first)?;
+    builder.add(&mut shape, second)?;
+    Ok(shape)
 }

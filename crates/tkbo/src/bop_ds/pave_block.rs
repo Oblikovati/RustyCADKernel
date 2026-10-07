@@ -246,4 +246,3 @@ impl PaveBlock {
         output.write_str(" }")
     }
 }
-

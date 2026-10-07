@@ -7,8 +7,10 @@ use std::sync::Arc;
 
 const INITIAL_BUCKETS: usize = 100;
 
+/// Native `std::hash<occ::handle<BOPDS_PaveBlock>>`: pave blocks are keyed by handle identity.
+/// `IndexedMap::with_hasher(PaveBlockHandleIdentity, 1)`.
 #[derive(Clone, Copy, Debug, Default)]
-struct PaveBlockHandleIdentity;
+pub struct PaveBlockHandleIdentity;
 
 impl HashPolicy<PaveBlockHandle> for PaveBlockHandleIdentity {
     fn hash(&self, block: &PaveBlockHandle) -> usize {

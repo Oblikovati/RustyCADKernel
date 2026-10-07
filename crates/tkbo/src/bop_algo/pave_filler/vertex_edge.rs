@@ -1,346 +1,219 @@
-use super::BOPAlgoPaveFiller;
-use crate::bop_algo::{AlertIntersectionOfPairOfShapesFailed, Options};
-use crate::bop_ds::{DataStructure, InterfVE, Pave, PaveBlockHandle};
-use crate::int_tools::Context;
-use rustycad_tkbrep::{
-    brep::BRepBuilder,
-    topods::{Compound, Edge, Shape, Vertex},
-};
+//! `BOPAlgo_PaveFiller_2.cxx`: vertex/edge intersection and the splitting of pave blocks.
+use super::vertex_vertex::pair_compound;
+use super::{BOPAlgoPaveFiller, missing_structure};
+use crate::bop_algo::AlertIntersectionOfPairOfShapesFailed;
+use crate::bop_algo::tools::{PaveBlockIndexLinks, fill_map_one, pave_block_index_links};
+use crate::bop_ds::{InterfVE, Pair, Pave, PaveBlockHandle};
+use rustycad_tkbrep::topods::{Edge, Shape, Vertex};
 use rustycad_tkernel::{
     message::AlertHandle,
-    standard::{Failure, Handle},
+    ncollection::{DataMap, Map},
+    standard::Failure,
 };
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use std::sync::Arc;
 
-#[path = "vertex_edge/generated_vertices.rs"]
-mod generated_vertices;
+#[path = "vertex_edge/split.rs"]
+mod split;
 
-#[path = "vertex_edge/force_interference.rs"]
-mod force_interference;
-
-struct CandidateGroup {
-    block: PaveBlockHandle,
-    vertices: Vec<i32>,
-}
-
-struct SharedVertexCandidate {
-    representative: i32,
-    originals: Vec<i32>,
+/// One prepared `BOPAlgo_VertexEdge` solver: indices, its pave block and computed result.
+struct VertexEdgeSolver {
+    vertex: i32,
+    edge: i32,
+    flag: i32,
+    parameter: f64,
+    new_tolerance: f64,
+    failed: bool,
 }
 
 impl BOPAlgoPaveFiller {
-    pub(super) fn intersect_ef_generated_vertices(
-        &mut self,
-        associations: &[(PaveBlockHandle, i32)],
-    ) -> Result<Vec<i32>, Failure> {
-        generated_vertices::intersect(self, associations)
-    }
-
-    /// Performs the defined ordinary vertex/edge intersection path; `filler.perform_ve()?`.
+    /// Intersects the vertices with the first splittable pave block of each edge whose box
+    /// they touch (`PerformVE`); `filler.perform_ve()?`.
     pub fn perform_ve(&mut self) -> Result<(), Failure> {
         self.fill_shrunk_data(ShapeEnum::Vertex, ShapeEnum::Edge)?;
-        let groups = self.vertex_edge_candidates()?;
-        let mut changed_edges = Vec::new();
-        for group in groups {
-            self.intersect_vertex_edge_group(&group, &mut changed_edges)?;
+        let pairs = self.iterator_pairs(ShapeEnum::Vertex, ShapeEnum::Edge)?;
+        if pairs.is_empty() {
+            return Ok(());
         }
-        self.split_intersected_edges(&changed_edges)?;
-        Ok(())
-    }
-
-    fn vertex_edge_candidates(&mut self) -> Result<Vec<CandidateGroup>, Failure> {
-        let pairs = self.selected_vertex_edge_pairs()?;
-        let structure = self.data_structure.as_ref().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformVE requires initialized data structure")
-        })?;
-        let mut groups = Vec::new();
+        let mut vertex_edge_pairs = pave_block_index_links();
         for (vertex, edge) in pairs {
-            append_vertex_edge_candidate(structure, vertex, edge, &mut groups)?;
+            if let Some(block) = self.ve_candidate_block(vertex, edge)? {
+                fill_map_one(&mut vertex_edge_pairs, block, vertex);
+            }
         }
-        Ok(groups)
+        self.intersect_ve(&vertex_edge_pairs, true)
     }
 
-    fn selected_vertex_edge_pairs(&mut self) -> Result<Vec<(i32, i32)>, Failure> {
-        let iterator = self.iterator.as_mut().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformVE requires initialized iterator")
-        })?;
-        iterator.initialize(ShapeEnum::Vertex, ShapeEnum::Edge);
-        let mut pairs = Vec::new();
-        while iterator.more() {
-            pairs.push(iterator.value()?);
-            iterator.next();
-        }
-        Ok(pairs)
-    }
-
-    fn intersect_vertex_edge_group(
+    /// Computes the parameters of the vertices on the pave blocks' edges, adds extra paves
+    /// (and VE interferences when `add_interfs`) and splits the touched edges (`IntersectVE`).
+    /// `filler.intersect_ve(&pairs, true)?`.
+    pub fn intersect_ve(
         &mut self,
-        group: &CandidateGroup,
-        changed_edges: &mut Vec<i32>,
+        pairs: &PaveBlockIndexLinks,
+        add_interfs: bool,
     ) -> Result<(), Failure> {
-        let block = &group.block;
-        let edge_index = block
-            .lock()
-            .expect("pave-block lock must not be poisoned")
-            .original_edge();
-        let candidates = self.shared_vertex_candidates(group, edge_index)?;
-        for candidate in candidates {
-            self.compute_vertex_edge(&candidate, edge_index, block, changed_edges)?;
+        if pairs.extent() == 0 {
+            return Ok(());
+        }
+        let mut same_domain: DataMap<Pair, Vec<i32>> = DataMap::default();
+        let mut solvers = self.prepare_ve_solvers(pairs, &mut same_domain)?;
+        for solver in &mut solvers {
+            self.compute_ve_solver(solver)?;
+        }
+        let mut edges: Map<i32> = Map::new(1);
+        for solver in &solvers {
+            self.apply_ve_solver(solver, &same_domain, add_interfs, &mut edges)?;
+        }
+        self.split_pave_blocks(&edges, add_interfs)
+    }
+
+    /// Warns that the intersection of two sub-shapes failed; `filler.add_intersection_failed_warning(&a, &b)?`.
+    pub fn add_intersection_failed_warning(
+        &mut self,
+        first: &Shape,
+        second: &Shape,
+    ) -> Result<(), Failure> {
+        let pair = pair_compound(first, second)?;
+        let alert: AlertHandle = Arc::new(AlertIntersectionOfPairOfShapesFailed::new(&pair));
+        self.options.add_warning(&alert);
+        Ok(())
+    }
+
+    fn ve_candidate_block(
+        &self,
+        vertex: i32,
+        edge: i32,
+    ) -> Result<Option<PaveBlockHandle>, Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        let info = structure.shape_info(edge)?;
+        if info.has_sub_shape(vertex) || info.has_flag() {
+            return Ok(None);
+        }
+        if structure.has_interference_between(vertex, edge)
+            || structure.has_interference_shape_subshapes(vertex, edge)?
+        {
+            return Ok(None);
+        }
+        let Some(first) = structure.pave_blocks(edge)?.first() else {
+            return Ok(None);
+        };
+        // A non-splittable first block marks a micro edge, which is ignored.
+        if !first.lock().expect("pave-block lock").is_splittable() {
+            return Ok(None);
+        }
+        Ok(Some(Arc::clone(first)))
+    }
+
+    fn prepare_ve_solvers(
+        &self,
+        pairs: &PaveBlockIndexLinks,
+        same_domain: &mut DataMap<Pair, Vec<i32>>,
+    ) -> Result<Vec<VertexEdgeSolver>, Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        let mut solvers = Vec::new();
+        for index in 1..=pairs.extent() {
+            let edge = pairs
+                .find_key(index)?
+                .lock()
+                .expect("pave-block lock")
+                .original_edge();
+            let mut bounding: Map<i32> = Map::new(1);
+            for block in structure.pave_blocks(edge)? {
+                let (first, last) = block.lock().expect("pave-block lock").indices();
+                bounding.add(first);
+                bounding.add(last);
+            }
+            for vertex in pairs.find_from_index(index)?.iter().copied() {
+                let mut representative = vertex;
+                structure.has_shape_sd_into(vertex, &mut representative);
+                if bounding.contains(&representative) {
+                    continue;
+                }
+                let key = Pair::new(representative, edge);
+                if let Some(list) = same_domain.change_seek(&key) {
+                    list.push(vertex);
+                    continue;
+                }
+                same_domain.bind(key, vec![vertex]);
+                solvers.push(VertexEdgeSolver {
+                    vertex: representative,
+                    edge,
+                    flag: -1,
+                    parameter: -1.,
+                    new_tolerance: -1.,
+                    failed: false,
+                });
+            }
+        }
+        Ok(solvers)
+    }
+
+    fn compute_ve_solver(&self, solver: &mut VertexEdgeSolver) -> Result<(), Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        let vertex = Vertex::unchecked(structure.shape(solver.vertex)?.clone());
+        let edge = Edge::unchecked(structure.shape(solver.edge)?.clone());
+        let context = self.context.get().ok_or_else(missing_structure)?;
+        // An exception of ComputeVE becomes the solver's error; its flag stays -1.
+        match context.compute_ve(
+            &vertex,
+            &edge,
+            &mut solver.parameter,
+            &mut solver.new_tolerance,
+            self.options.fuzzy_value(),
+        ) {
+            Ok(flag) => solver.flag = flag,
+            Err(_) => solver.failed = true,
         }
         Ok(())
     }
 
-    fn shared_vertex_candidates(
-        &self,
-        group: &CandidateGroup,
-        edge: i32,
-    ) -> Result<Vec<SharedVertexCandidate>, Failure> {
-        let structure = self.data_structure.as_ref().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformVE requires initialized data structure")
-        })?;
-        let mut candidates: Vec<SharedVertexCandidate> = Vec::new();
-        for original in &group.vertices {
-            let representative = structure.shape_sd(*original).unwrap_or(*original);
-            if edge_has_vertex_endpoint(structure, edge, representative)? {
-                continue;
-            }
-            append_shared_vertex(&mut candidates, representative, *original);
-        }
-        Ok(candidates)
-    }
-
-    fn compute_vertex_edge(
+    fn apply_ve_solver(
         &mut self,
-        candidate: &SharedVertexCandidate,
-        edge_index: i32,
-        block: &PaveBlockHandle,
-        changed_edges: &mut Vec<i32>,
+        solver: &VertexEdgeSolver,
+        same_domain: &DataMap<Pair, Vec<i32>>,
+        add_interfs: bool,
+        edges: &mut Map<i32>,
     ) -> Result<(), Failure> {
-        let (vertex, edge, context) =
-            self.vertex_edge_inputs(candidate.representative, edge_index)?;
-        let Some((parameter, tolerance)) =
-            compute_vertex_edge_hit(&self.options, &context, &vertex, &edge)?
-        else {
+        if solver.flag != 0 {
+            if solver.failed {
+                let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+                let vertex = structure.shape(solver.vertex)?.clone();
+                let edge = structure.shape(solver.edge)?.clone();
+                self.add_intersection_failed_warning(&vertex, &edge)?;
+            }
+            return Ok(());
+        }
+        let new_vertex = self.update_vertex(solver.vertex, solver.new_tolerance)?;
+        let structure = self.data_structure.as_mut().ok_or_else(missing_structure)?;
+        let target = structure.pave_blocks(solver.edge)?.iter().find(|block| {
+            let (first, last) = block.lock().expect("pave-block lock").range();
+            solver.parameter > first && solver.parameter < last
+        });
+        let Some(target) = target.cloned() else {
             return Ok(());
         };
-        self.accept_vertex_edge_hit(
-            candidate,
-            edge_index,
-            block,
-            parameter,
-            tolerance,
-            changed_edges,
-        )
-    }
-
-    fn accept_vertex_edge_hit(
-        &mut self,
-        candidate: &SharedVertexCandidate,
-        edge: i32,
-        block: &PaveBlockHandle,
-        parameter: f64,
-        tolerance: f64,
-        changed_edges: &mut Vec<i32>,
-    ) -> Result<(), Failure> {
-        let new_vertex = self.update_vertex(candidate.representative, tolerance)?;
-        if !append_block_pave(block, new_vertex, parameter) {
+        let pave = Pave::new(new_vertex, solver.parameter);
+        target
+            .lock()
+            .expect("pave-block lock")
+            .append_ext_pave(pave);
+        edges.add(solver.edge);
+        if !add_interfs {
             return Ok(());
         }
-        self.append_vertex_edge_interferences(candidate, edge, new_vertex, parameter);
-        append_unique(changed_edges, edge);
+        let originals = same_domain
+            .find(&Pair::new(solver.vertex, solver.edge))?
+            .clone();
+        let is_new = structure.is_new_shape(new_vertex);
+        for original in originals {
+            let record = structure.interf_ve().append(InterfVE::default());
+            record.set_indices(original, solver.edge);
+            record.set_parameter(solver.parameter);
+            if is_new {
+                record.set_index_new(new_vertex);
+            }
+            structure.add_interference(original, solver.edge);
+        }
         Ok(())
-    }
-
-    fn vertex_edge_inputs(
-        &self,
-        vertex_index: i32,
-        edge_index: i32,
-    ) -> Result<(Vertex, Edge, Handle<Context>), Failure> {
-        let structure = self.data_structure.as_ref().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformVE requires initialized data structure")
-        })?;
-        let vertex = Vertex::unchecked(structure.shape(vertex_index)?.clone());
-        let edge = Edge::unchecked(structure.shape(edge_index)?.clone());
-        Ok((vertex, edge, self.context.clone()))
-    }
-
-    fn append_vertex_edge_interferences(
-        &mut self,
-        candidate: &SharedVertexCandidate,
-        edge: i32,
-        new_vertex: i32,
-        parameter: f64,
-    ) {
-        let structure = self
-            .data_structure
-            .as_mut()
-            .expect("initialized data structure");
-        for original in &candidate.originals {
-            append_vertex_edge_record(structure, *original, edge, new_vertex, parameter);
-        }
-    }
-}
-
-fn append_vertex_edge_candidate(
-    structure: &DataStructure,
-    vertex: i32,
-    edge: i32,
-    groups: &mut Vec<CandidateGroup>,
-) -> Result<(), Failure> {
-    if !is_vertex_edge_candidate(structure, vertex, edge)? {
-        return Ok(());
-    }
-    let Some(block) = first_splittable_block(structure, edge)? else {
-        return Ok(());
-    };
-    group_candidate(groups, block, vertex);
-    Ok(())
-}
-
-fn is_vertex_edge_candidate(
-    structure: &DataStructure,
-    vertex: i32,
-    edge: i32,
-) -> Result<bool, Failure> {
-    let info = structure.shape_info(edge)?;
-    Ok(!info.has_sub_shape(vertex)
-        && !info.has_flag()
-        && !structure.has_interference_between(vertex, edge)
-        && !structure.has_interference_shape_subshapes(vertex, edge)?)
-}
-
-fn first_splittable_block(
-    structure: &DataStructure,
-    edge: i32,
-) -> Result<Option<PaveBlockHandle>, Failure> {
-    let Some(block) = structure.pave_blocks(edge)?.first() else {
-        return Ok(None);
-    };
-    let splittable = block
-        .lock()
-        .expect("pave-block lock must not be poisoned")
-        .is_splittable();
-    Ok(splittable.then(|| Arc::clone(block)))
-}
-
-fn group_candidate(groups: &mut Vec<CandidateGroup>, block: PaveBlockHandle, vertex: i32) {
-    if let Some(group) = groups
-        .iter_mut()
-        .find(|group| Arc::ptr_eq(&group.block, &block))
-    {
-        append_unique(&mut group.vertices, vertex);
-        return;
-    }
-    groups.push(CandidateGroup {
-        block,
-        vertices: vec![vertex],
-    });
-}
-
-fn append_shared_vertex(
-    candidates: &mut Vec<SharedVertexCandidate>,
-    representative: i32,
-    original: i32,
-) {
-    if let Some(candidate) = candidates
-        .iter_mut()
-        .find(|candidate| candidate.representative == representative)
-    {
-        append_unique(&mut candidate.originals, original);
-        return;
-    }
-    candidates.push(SharedVertexCandidate {
-        representative,
-        originals: vec![original],
-    });
-}
-
-fn edge_has_vertex_endpoint(
-    structure: &DataStructure,
-    edge: i32,
-    vertex: i32,
-) -> Result<bool, Failure> {
-    for block in structure.pave_blocks(edge)? {
-        let locked = block.lock().expect("pave-block lock must not be poisoned");
-        let (first, last) = locked.indices();
-        if first == vertex || last == vertex {
-            return Ok(true);
-        }
-    }
-    Ok(false)
-}
-
-fn append_block_pave(block: &PaveBlockHandle, vertex: i32, parameter: f64) -> bool {
-    let mut locked = block.lock().expect("pave-block lock must not be poisoned");
-    let (first, last) = locked.range();
-    if parameter <= first || parameter >= last {
-        return false;
-    }
-    locked.append_ext_pave(Pave::new(vertex, parameter));
-    true
-}
-
-fn append_unique(values: &mut Vec<i32>, value: i32) {
-    if !values.contains(&value) {
-        values.push(value);
-    }
-}
-
-fn failure_alert_shape(vertex: &Vertex, edge: &Edge) -> Result<Shape, Failure> {
-    let builder = BRepBuilder::default();
-    let mut compound = Compound::default();
-    builder.make_compound(&mut compound);
-    let mut shape = compound.into_shape();
-    builder.add(&mut shape, &vertex.clone().into_shape())?;
-    builder.add(&mut shape, &edge.clone().into_shape())?;
-    Ok(shape)
-}
-
-fn warning(options: &Options, vertex: &Vertex, edge: &Edge) -> Result<(), Failure> {
-    let shape = failure_alert_shape(vertex, edge)?;
-    let alert: AlertHandle = Arc::new(AlertIntersectionOfPairOfShapesFailed::new(&shape));
-    options.add_warning(&alert);
-    Ok(())
-}
-
-fn compute_vertex_edge_hit(
-    options: &Options,
-    context: &Context,
-    vertex: &Vertex,
-    edge: &Edge,
-) -> Result<Option<(f64, f64)>, Failure> {
-    let mut parameter = -1.0;
-    let mut tolerance = -1.0;
-    let status = context.compute_ve(
-        vertex,
-        edge,
-        &mut parameter,
-        &mut tolerance,
-        options.fuzzy_value(),
-    );
-    let Ok(status) = status else {
-        warning(options, vertex, edge)?;
-        return Ok(None);
-    };
-    Ok((status == 0).then_some((parameter, tolerance)))
-}
-
-fn append_vertex_edge_record(
-    structure: &mut DataStructure,
-    original: i32,
-    edge: i32,
-    new_vertex: i32,
-    parameter: f64,
-) {
-    if !structure.add_interference(original, edge) {
-        return;
-    }
-    let is_new_shape = structure.is_new_shape(new_vertex);
-    let record = structure.interf_ve().append(InterfVE::default());
-    record.set_indices(original, edge);
-    record.set_parameter(parameter);
-    if is_new_shape {
-        record.set_index_new(new_vertex);
     }
 }
