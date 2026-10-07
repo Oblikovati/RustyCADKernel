@@ -430068,6 +430068,358 @@
       "notes": "C++ protected data member of BRepFill_ShapeLaw: Rust keeps it as the private field `vertex` of BRepFillShapeLaw, read through IsVertex (BRepFillSectionLaw::is_vertex), so it is not public API."
     },
     {
+      "upstream_id": "BRepFill_LocationLaw::GetStatus() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::get_status",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::TransformInG0Law()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::transform_in_g0_law",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::TransformInCompatibleLaw(double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::transform_in_compatible_law",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::DeleteTransform()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::delete_transform",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::NbHoles(double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::nb_holes",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::Holes(NCollection_Array1<int>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::holes",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::NbLaw() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::nb_law",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::Law(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::law",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::Wire() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::wire",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::Edge(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::edge",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::Vertex(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::vertex",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::PerformVertex(int,const TopoDS_Vertex&,double,TopoDS_Vertex&,int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::perform_vertex",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::CurvilinearBounds(int,double&,double&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::curvilinear_bounds",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::IsClosed() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::is_closed",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::IsG1(int,double,double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::is_g1",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::D0(double,TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::d0",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::Parameter(double,int&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::parameter",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::Abscissa(int,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw::abscissa",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::Init(const TopoDS_Wire&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLawBase::new",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::TangentIsMain()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLawBase::tangent_is_main",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::NormalIsMain()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLawBase::normal_is_main",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::BiNormalIsMain()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLawBase::binormal_is_main",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_Edge3DLaw::BRepFill_Edge3DLaw(const TopoDS_Wire&,const occ::handle<GeomFill_LocationLaw>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Edge3DLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdge3DLaw::new",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_DraftLaw::BRepFill_DraftLaw(const TopoDS_Wire&,const occ::handle<GeomFill_LocationDraft>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_DraftLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraftLaw::new",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_DraftLaw::CleanLaw(double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_DraftLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraftLaw::clean_law",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_EdgeOnSurfLaw::BRepFill_EdgeOnSurfLaw(const TopoDS_Wire&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeOnSurfLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdgeOnSurfLaw::new",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_EdgeOnSurfLaw::HasResult() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeOnSurfLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdgeOnSurfLaw::has_result",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_ACRLaw::BRepFill_ACRLaw(const TopoDS_Wire&,const occ::handle<GeomFill_LocationGuide>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ACRLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillACRLaw::new",
+      "status": "implemented",
+      "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw",
+      "status": "implemented",
+      "notes": "Class record: ported as a trait reached as Handle<dyn Trait>, rustycad_tkbool::brep_fill::BRepFillLocationLaw; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(BRepFill_LocationLaw, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
+      "upstream_id": "BRepFill_Edge3DLaw",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Edge3DLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdge3DLaw",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillEdge3DLaw; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_Edge3DLaw::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Edge3DLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type = BRepFill_LocationLaw that DEFINE_STANDARD_RTTIEXT(BRepFill_Edge3DLaw, BRepFill_LocationLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
+      "upstream_id": "BRepFill_DraftLaw",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_DraftLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraftLaw",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillDraftLaw; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_DraftLaw::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_DraftLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type = BRepFill_Edge3DLaw that DEFINE_STANDARD_RTTIEXT(BRepFill_DraftLaw, BRepFill_Edge3DLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
+      "upstream_id": "BRepFill_EdgeOnSurfLaw",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeOnSurfLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdgeOnSurfLaw",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillEdgeOnSurfLaw; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_EdgeOnSurfLaw::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeOnSurfLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type = BRepFill_LocationLaw that DEFINE_STANDARD_RTTIEXT(BRepFill_EdgeOnSurfLaw, BRepFill_LocationLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
+      "upstream_id": "BRepFill_ACRLaw",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ACRLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillACRLaw",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillACRLaw; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_ACRLaw::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ACRLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type = BRepFill_LocationLaw that DEFINE_STANDARD_RTTIEXT(BRepFill_ACRLaw, BRepFill_LocationLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::myPath",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_LocationLaw: Rust keeps it as the crate-private field `path` of BRepFillLocationLawBase (tkbool/src/brep_fill/location_law/mod.rs), reached by the subclasses and through the BRepFillLocationLaw methods, so it is not public API."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::myTol",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_LocationLaw: Rust keeps it as the crate-private field `tol` of BRepFillLocationLawBase (tkbool/src/brep_fill/location_law/mod.rs), reached by the subclasses and through the BRepFillLocationLaw methods, so it is not public API."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::myLaws",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_LocationLaw: Rust keeps it as the crate-private field `laws` of BRepFillLocationLawBase (tkbool/src/brep_fill/location_law/mod.rs), reached by the subclasses and through the BRepFillLocationLaw methods, so it is not public API."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::myLength",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_LocationLaw: Rust keeps it as the crate-private field `length` of BRepFillLocationLawBase (tkbool/src/brep_fill/location_law/mod.rs), reached by the subclasses and through the BRepFillLocationLaw methods, so it is not public API."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::myEdges",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_LocationLaw: Rust keeps it as the crate-private field `edges` of BRepFillLocationLawBase (tkbool/src/brep_fill/location_law/mod.rs), reached by the subclasses and through the BRepFillLocationLaw methods, so it is not public API."
+    },
+    {
+      "upstream_id": "BRepFill_LocationLaw::myDisc",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_LocationLaw: Rust keeps it as the crate-private field `disc` of BRepFillLocationLawBase (tkbool/src/brep_fill/location_law/mod.rs), reached by the subclasses and through the BRepFillLocationLaw methods, so it is not public API."
+    },
+    {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
