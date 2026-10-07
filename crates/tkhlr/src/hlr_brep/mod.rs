@@ -16,14 +16,22 @@ pub use curve::{Curve, MinMaxBox};
 mod curve_tool;
 mod data;
 pub use data::{Data, EdgeDataArray, FaceDataArray, LocalGeometry2D};
+mod edge_builder;
+pub use edge_builder::EdgeBuilder;
 mod edge_data;
 pub use edge_data::EdgeData;
 mod edge_face_tool;
+mod edge_i_list;
+pub use edge_i_list::EdgeIList;
+mod edge_interference_tool;
 pub use edge_face_tool::{EdgeFaceTool, TypeOfResultingEdge};
+pub use edge_interference_tool::EdgeInterferenceTool;
 mod face_data;
 pub use face_data::FaceData;
 mod face_iterator;
 pub use face_iterator::FaceIterator;
+mod hider;
+pub use hider::Hider;
 mod inter_c_surf;
 pub use inter_c_surf::{
     InterCSurf, InterCSurfTypes, TheCSFunctionOfInterCSurf, TheExactInterCSurf,
@@ -44,8 +52,10 @@ pub use sl_props::{SLProps, SLPropsATool};
 mod surface;
 pub use surface::Surface;
 mod surface_tool;
+mod vertex_list;
 pub use curve_tool::CurveTool;
 pub use surface_tool::SurfaceTool;
+pub use vertex_list::VertexList;
 mod c_inter;
 pub use c_inter::{
     CInter, CInterTypes, ExactIntersectionPointOfTheIntPCurvePCurveOfCInter, IntConicCurveOfCInter,

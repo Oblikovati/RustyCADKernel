@@ -69,6 +69,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("hb_facedata", hl_probe::hlrbrep_records::facedata_case),
     ("hb_edgeface", hl_probe::hlrbrep_records::edgeface_case),
     ("hb_data", hl_probe::hlrbrep_data::data_case),
+    ("hb_hider", hl_probe::hlrbrep_hider::hider_case),
     (
         "hb_intersector",
         hl_probe::hlrbrep_intersector::intersector_case,

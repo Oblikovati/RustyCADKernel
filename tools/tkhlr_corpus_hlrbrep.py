@@ -288,6 +288,17 @@ def data_requests(rng: random.Random) -> list[str]:
     return requests
 
 
+def hider_requests(rng: random.Random) -> list[str]:
+    """hb_hider: HLRBRep_Hider::Hide by every hiding face, then the visible parts."""
+    requests = []
+    for index in range(400):
+        proj = projector(rng, rng.choice((0, 0, 1)))
+        if proj[0] == 1:
+            proj[-1] = rng.choice((30.0, 60.0))
+        requests.append('hb_hider ' + numbers(proj + shape(rng, index % 8) + [rng.choice((0, 0, 2))]))
+    return requests
+
+
 def append_hlrbrep_requests(requests: list[str]) -> None:
     """Append every HLRBRep request family in a fixed order."""
     rng = random.Random(0x41B12E9)
@@ -300,3 +311,4 @@ def append_hlrbrep_requests(requests: list[str]) -> None:
     requests.extend(outliner_requests(rng))
     requests.extend(intersector_requests(rng))
     requests.extend(data_requests(rng))
+    requests.extend(hider_requests(rng))

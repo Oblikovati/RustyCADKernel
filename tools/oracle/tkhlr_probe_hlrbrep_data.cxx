@@ -1,6 +1,7 @@
 // HLRBRep_ShapeToHLR and HLRBRep_Data, the Rust twin of crates/tkhlr/examples/hl_probe/hlrbrep_data.rs.
 #include <HLRBRep_Data.hxx>
 #include <HLRBRep_ShapeToHLR.hxx>
+#include <HLRBRep_Hider.hxx>
 #include <HLRTopoBRep_OutLiner.hxx>
 #include <HLRAlgo.hxx>
 #include <HLRAlgo_WiresBlock.hxx>
@@ -39,6 +40,33 @@ void hb_data_hide(HLRBRep_Data& ds,int f,NCollection_DataMap<TopoDS_Shape,BRepTo
    GA_TRY(ga_int(ds.SimplClassify(e,ed,3,a,b)));GA_TRY(ga_int(ds.HidingStartLevel(e,ed,il)));
    ga_flag(ds.EdgeOfTheHidingFace(e,ed)));}
  ga_flag(ds.MoreEdge());}
+// InitBoundSort on the box of the edges and faces (as HLRBRep_InternalAlgo::Update).
+void hb_bound_sort(HLRBRep_Data& ds){
+ int ne=ds.NbEdges(),nf=ds.NbFaces();
+ HLRAlgo_EdgesBlock::MinMaxIndices smin,smax,tmin,tmax,tot;
+ for(int e=1;e<=ne;++e){HLRAlgo::DecodeMinMax(ds.EDataArray()(e).MinMax(),tmin,tmax);
+  if(e==1)HLRAlgo::CopyMinMax(tmin,tmax,smin,smax);else HLRAlgo::AddMinMax(tmin,tmax,smin,smax);}
+ for(int f=1;f<=nf;++f){HLRAlgo::DecodeMinMax(ds.FDataArray()(f).Wires()->MinMax(),tmin,tmax);HLRAlgo::AddMinMax(tmin,tmax,smin,smax);}
+ HLRAlgo::EncodeMinMax(smin,smax,tot);ds.InitBoundSort(tot,1,ne);}
+// The visible parts of every edge.
+void hb_edge_status(HLRBRep_Data& ds){
+ for(int e=1;e<=ds.NbEdges();++e){HLRAlgo_EdgeStatus& st=ds.EDataArray()(e).Status();
+  ga_flag(st.AllHidden());ga_flag(st.AllVisible());int n=st.NbVisiblePart();ga_int(n);
+  for(int k=1;k<=n;++k){double a,b;float ta,tb;st.VisiblePart(k,a,ta,b,tb);ga_real(a);ga_real(ta);ga_real(b);ga_real(tb);}}}
+// `projector shape nbIso`: Load, Update, InitBoundSort, then HLRBRep_Hider::Hide by
+// every hiding face, and the visible parts of the edges.
+void hb_hider_case(std::istream& input){
+ GaReader r{input};HLRAlgo_Projector projector=hb_projector(r);
+ try{TopoDS_Shape s=hb_shape(r);int nb_iso=r.integer();
+  occ::handle<HLRTopoBRep_OutLiner> o=new HLRTopoBRep_OutLiner(s);
+  NCollection_DataMap<TopoDS_Shape,BRepTopAdaptor_Tool,TopTools_ShapeMapHasher> mst;
+  occ::handle<HLRBRep_Data> ds=HLRBRep_ShapeToHLR::Load(o,projector,mst,nb_iso);ds->Update(projector);
+  if(ds->NbEdges()==0){ga_end();return;}
+  hb_bound_sort(*ds);HLRBRep_Hider h(ds);
+  for(int f=1;f<=ds->NbFaces();++f)if(ds->FDataArray()(f).Hiding())GA_TRY(h.Hide(f,mst));
+  hb_edge_status(*ds);
+ }catch(const Standard_Failure& ga_error){std::cout<<ga_error.ExceptionType()<<' ';}
+ ga_end();}
 // `projector shape nbIso`: ShapeToHLR::Load, the records, Update and the records, then
 // InitBoundSort on the box of the shape and the hiding walk of every hiding face.
 void hb_data_case(std::istream& input){

@@ -166,7 +166,7 @@ fn hide(ds: &Data, f: i32, mst: &mut MapOfShapeTool) -> Result<(), Failure> {
 }
 
 // The box of the shape: the union of the edge boxes and the face boxes.
-fn shape_box(ds: &Data, ne: i32, nf: i32) -> Result<MinMaxIndices, Failure> {
+pub fn shape_box(ds: &Data, ne: i32, nf: i32) -> Result<MinMaxIndices, Failure> {
     let (mut smin, mut smax) = (MinMaxIndices::default(), MinMaxIndices::default());
     let (mut tmin, mut tmax) = (MinMaxIndices::default(), MinMaxIndices::default());
     let ed = ds.e_data_array();
