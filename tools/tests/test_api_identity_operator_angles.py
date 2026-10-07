@@ -32,6 +32,12 @@ class OperatorAngleParsingTest(unittest.TestCase):
         )
         self.assertEqual(call, ("C::operator()", ["const std::array<int,3>&"], "const"))
 
+    def test_member_access_operators_keep_their_parameter_list(self) -> None:
+        for symbol in ("->", "->*"):
+            with self.subTest(symbol=symbol):
+                parsed = parse_upstream_id(f"C::operator{symbol}() const noexcept")
+                self.assertEqual(parsed, (f"C::operator{symbol}", [], "const noexcept"))
+
     def test_missing_parameter_list_remains_a_name_only_identity(self) -> None:
         self.assertEqual(parse_upstream_id("C::operator<"), ("C::operator<", None, ""))
 
