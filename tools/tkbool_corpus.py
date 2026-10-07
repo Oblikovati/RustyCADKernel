@@ -25,3 +25,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_brepfill_section').append_section_family_requests(requests)
     # BRepFill_Sweep and BRepFill_TrimShellCorner (tkbool_corpus_brepfill_sweep.py)
     __import__('tkbool_corpus_brepfill_sweep').append_sweep_requests(requests)
+    # BRepFill_PipeShell (tkbool_corpus_brepfill_pipe_shell.py)
+    __import__('tkbool_corpus_brepfill_pipe_shell').append_pipe_shell_requests(requests)

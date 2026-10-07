@@ -3,6 +3,7 @@ mod compatible_wires;
 mod generator;
 mod location_law;
 mod package;
+mod pipe_shell;
 mod section;
 mod section_law;
 mod section_placement;
@@ -19,6 +20,7 @@ pub use location_law::{
     BRepFillLocationLaw, BRepFillLocationLawBase,
 };
 pub use package::{axe, compute_acr, insert_acr, ruled_face, ruled_shell, search_origin};
+pub use pipe_shell::BRepFillPipeShell;
 pub use section::BRepFillSection;
 pub use section_law::{
     BRepFillNSections, BRepFillSectionLaw, BRepFillSectionLawBase, BRepFillShapeLaw,

@@ -3,6 +3,7 @@ pub mod brep_fill_compatible;
 pub mod brep_fill_generator;
 pub mod brep_fill_location_law;
 pub mod brep_fill_package;
+pub mod brep_fill_pipe_shell;
 pub mod brep_fill_section;
 pub mod brep_fill_section_law;
 pub mod brep_fill_sweep;
