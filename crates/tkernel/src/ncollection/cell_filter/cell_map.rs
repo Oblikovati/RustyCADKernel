@@ -1,17 +1,11 @@
-//! Canonical `Map<Cell>` and Object-first list nodes, without duplicate order/owner registries.
-#![allow(unsafe_code)]
-use super::{CellHash, CellIndex};
-#[cfg(test)]
-use crate::ncollection::owned_bucket_chains::BucketNodeRange;
-use crate::ncollection::owned_bucket_chains::OwnedBucketChains;
-use crate::ncollection::{BaseAllocator, BaseMap, HashPolicy, MapLinkNode, MapNode};
+//! The filter's native `NCollection_Map<Cell>` on the safe slot storage of `Map`.
+use super::CellIndex;
+use crate::ncollection::{BaseAllocator, BaseMap, HashPolicy, chained_slots::ChainedSlots};
 pub(super) mod cell_node;
-mod object_node;
 mod retention;
-use cell_node::{CellMapNode, CellRecord};
-use object_node::CellObjectNode;
+use cell_node::CellRecord;
 pub(super) struct CellMap<T> {
-    storage: OwnedBucketChains<CellMapNode<T>>,
+    storage: ChainedSlots<CellRecord<T>, ()>,
 }
 #[derive(Clone, Copy)]
 struct CellMapHash;
@@ -26,37 +20,34 @@ impl<T> HashPolicy<CellRecord<T>> for CellMapHash {
 impl<T> CellMap<T> {
     pub(super) fn new(allocator: BaseAllocator) -> Self {
         Self {
-            storage: OwnedBucketChains::new(1, allocator),
+            storage: ChainedSlots::new(1, allocator),
         }
     }
+    /// Native `myCells.Clear(myAllocator)`: drops every cell; a new allocator releases the table.
     pub(super) fn clear_with_allocator(&mut self, requested: Option<BaseAllocator>) {
         self.storage.clear_with_allocator(requested);
     }
-    fn lookup_index(&self, index: &[i32]) -> Option<(usize, *mut MapLinkNode)> {
-        if self.storage.base.size() == 0 {
-            return None;
-        }
-        let (bucket, found) = self.storage.lookup_with_bucket_by(
-            &index,
-            |key| CellHash::hash_coordinates(key),
-            |cell, key| cell.index.as_slice() == *key,
-        );
-        found.map(|node| (bucket, node))
+    /// Native `Contained(Cell(index))`: the slot of the cell with `index`, if any.
+    fn lookup_index(&self, index: &[i32]) -> Option<usize> {
+        let probe = CellRecord::from_coordinates(index);
+        self.storage
+            .lookup(&probe, &CellMapHash)
+            .map(|(_, slot)| slot)
     }
-    fn prepare_cell(&mut self, index: &[i32]) -> *mut CellRecord<T> {
-        let size = self.storage.base.size();
-        if size == 0 || size > self.storage.base.nb_buckets() {
+    // Native TryEmplaced: grow first, construct the lookup Cell, then hash it once.
+    fn prepare_cell(&mut self, index: &[i32]) -> &mut CellRecord<T> {
+        let size = self.storage.size();
+        if size == 0 || size > self.storage.nb_buckets() {
             self.storage.resize(size, &CellMapHash);
         }
-        // Native TryEmplaced constructs the lookup Cell after map growth, even for a hit.
-        let mut cell = CellRecord::from_coordinates(index);
+        let cell = CellRecord::from_coordinates(index);
         let (bucket, existing) = self.storage.lookup_with_bucket(&cell, &CellMapHash);
-        let node = existing.unwrap_or_else(|| {
-            self.storage.allocate_node(bucket, |next| {
-                CellMapNode(MapNode::new(CellRecord::move_construct(&mut cell), next))
-            })
-        });
-        unsafe { CellMapNode::cell_ptr(node.cast()) }
+        let slot = existing.unwrap_or_else(|| self.storage.insert(bucket, || cell, || ()));
+        self.storage.payload_mut().key_mut(slot)
+    }
+    // Native Map::Remove of a cell whose target list became empty.
+    fn remove_slot(&mut self, slot: usize) {
+        drop(self.storage.remove(slot));
     }
 }
 impl<T: Clone> CellMap<T> {
@@ -64,27 +55,27 @@ impl<T: Clone> CellMap<T> {
         self.add_index(index.as_slice(), target);
     }
     pub(super) fn add_index(&mut self, index: &[i32], target: &T) {
-        let cell = self.prepare_cell(index);
-        let allocator = self.storage.base.allocator();
-        unsafe { CellObjectNode::prepend(cell, target, allocator) };
+        self.prepare_cell(index).prepend(target);
     }
 }
 #[cfg(test)]
 impl<T> CellMap<T> {
     pub(super) fn len(&self) -> usize {
-        self.storage.base.size()
+        self.storage.size()
     }
     pub(super) fn is_empty(&self) -> bool {
         self.len() == 0
     }
     pub(super) fn bucket_count(&self) -> usize {
-        self.storage.base.nb_buckets()
+        self.storage.nb_buckets()
     }
     pub(super) fn allocator(&self) -> &BaseAllocator {
-        self.storage.base.allocator()
+        self.storage.allocator()
     }
+    /// Every cell in native bucket order.
     pub(super) fn items(&self) -> impl Iterator<Item = (&CellIndex, &CellRecord<T>)> {
-        BucketNodeRange::new(&self.storage).map(|node| (&node.0.key().index, node.0.key()))
+        crate::ncollection::slot_chains::SlotRange::new(self.storage.view())
+            .map(|(cell, ())| (&cell.index, cell))
     }
 }
 

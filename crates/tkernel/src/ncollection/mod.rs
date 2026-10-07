@@ -211,10 +211,4 @@ pub use sparse_array_base::{
     SparseArrayBlockCell, SparseCopyItemFunc, SparseCreateItemFunc, SparseDestroyItemFunc,
 };
 
-mod map_node;
-mod node_owner;
-pub use map_node::{MapNode, MapNodeOwner};
-
-mod owned_bucket_chains;
-
 mod map_payload;
