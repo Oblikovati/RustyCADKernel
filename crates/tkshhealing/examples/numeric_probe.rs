@@ -105,6 +105,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sh_unify", sh_probe::unify::unify_case),
     ("sh_face_connect", sh_probe::unify::face_connect_case),
     ("sh_fix_face", sh_probe::fix_face::fix_face_case),
+    ("sh_fix_shape", sh_probe::fix_shape::fix_shape_case),
     ("sc_surface", sh_probe::custom_surface::custom_surface_case),
     ("sp_context", sh_probe::shape_process::context_case),
     ("sp_process", sh_probe::shape_process::process_case),

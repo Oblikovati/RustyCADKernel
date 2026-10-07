@@ -226,6 +226,27 @@ two faithfulness bugs, now fixed: the second wire pass of Perform skipped FixLoo
 the removed-segment check when ShapeFix_Wire::Perform returned false, and the first pass
 reset its `fixed` flag for wires that were neither performed nor dropped.
 
+## Shape-level ShapeFix evidence (wave 3)
+
+The `sh_fix_shape` requests (tools/tkshhealing_corpus_fix_shape.py) compare
+ShapeFix_Shape::Perform, ShapeFix::SameParameter, FixVertexPosition, RemoveSmallEdges,
+ShapeFix_Wireframe (FixWireGaps then FixSmallEdges, also in drop mode and with a limit
+angle, with both statuses), ShapeFix_FixSmallFace, ShapeFix_FixSmallSolid and
+ShapeFix_Shell / ShapeFix_Solid with OCCT, on the `sh_unify` and `sh_fix_face` inputs,
+primitive solids and faces and free wires with small edges. They exposed a restructured
+ShapeFix_Wireframe::MergeSmallEdges that was not faithful (a two-edge wire was never
+merged, the angle limit always took the smaller angle, the circle protection, FAIL1 and
+the unconditional FixConnected of each wire were missing, and exceptions of JoinEdges
+were not caught). MergeSmallEdges and the static JoinEdges are now ported line by line
+(crates/tkshhealing/src/shape_fix/wireframe/merge_small and join_edges.rs). Native
+quirks kept: the free-wire block compares the faces of a small edge with the whole shape
+(the exhausted face explorer returns it); without a shared face set, `take_next` keeps
+its initial value (the previous edge is the same as the next one) and the drop branches
+then remove the previous edge from the context while the middle edge leaves the wire;
+FixConnected at the end of each wire uses the default maximal tolerance of the internal
+ShapeFix_Wire. Where the native drop branch would loop forever (a neighbour renamed to
+itself in a small-edge list), the Rust port returns a Standard_ProgramError failure.
+
 ## ShapeAlgo
 
 Ported in October 2026 (wave 3): ShapeAlgo_ToolContainer, ShapeAlgo_AlgoContainer

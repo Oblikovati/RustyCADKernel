@@ -67,7 +67,8 @@ fn lateral(r: &mut Reader<'_>) -> Result<Face, Failure> {
     }
 }
 
-fn input(r: &mut Reader<'_>) -> Result<Face, Failure> {
+/// The `sh_fix_face` input face.
+pub(super) fn input(r: &mut Reader<'_>) -> Result<Face, Failure> {
     match r.integer() {
         0 => planar(r),
         1 => lateral(r),

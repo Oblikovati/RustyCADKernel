@@ -125,7 +125,8 @@ pub(super) fn wire(r: &mut Reader<'_>) -> Result<Shape, Failure> {
     Ok(maker.wire()?.into_shape())
 }
 
-fn input(r: &mut Reader<'_>) -> Result<Shape, Failure> {
+/// The `sh_unify` input shape.
+pub(super) fn input(r: &mut Reader<'_>) -> Result<Shape, Failure> {
     match r.integer() {
         0 => polygons(r),
         1 => revolved(r),
