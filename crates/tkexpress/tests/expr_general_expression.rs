@@ -98,6 +98,10 @@ fn Expr_GeneralExpression_Test__OCC22611_ParseNumericLiteral() {
 #[test]
 fn Expr_GeneralExpression_Test__FClassesBug_23403_TabInputDoesNotThrow() {
     let a_generator: Handle<ExprIntrpGenExp> = ExprIntrpGenExp::create();
+    // The scanner echoes the tab to its output, the standard output by default as flex's
+    // `yyout`. GoogleTest reads its results from XML, but the Rust harness parses its own
+    // standard output, which the echo would corrupt; the echo goes to a sink instead.
+    a_generator.set_scanner_output(Box::new(std::io::sink()));
     // EXPECT_NO_THROW: Process returns nothing and cannot fail in Rust; it must not panic.
     a_generator.process(&AsciiString::new("\t"));
 }
