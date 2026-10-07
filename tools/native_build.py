@@ -32,7 +32,9 @@ ADDITIONAL_TOOLKITS: tuple[str, ...] = ('TKBO', 'TKTopAlgo', 'TKPrim', 'TKMesh',
 # The closure's shared libraries in link order, dependants first. TKOffset is linked only for
 # the TKGeomAlgo GTest GeomFill_BSplineCurves_Test (OCC28131 offsets the filled face); it is
 # also an additional toolkit, so every closure build (verify_tkernel too) produces the library.
-LINKED_TOOLKITS: tuple[str, ...] = ('TKOffset', 'TKBO', 'TKMesh', 'TKPrim',
+# TKFillet is linked for the TKBO GTest BRepAlgoAPI_Fuse_Test (BOPTest_Utilities::CreateBlend
+# builds a BRepFilletAPI_MakeFillet); TKOffset depends on it, so the closure builds it too.
+LINKED_TOOLKITS: tuple[str, ...] = ('TKOffset', 'TKFillet', 'TKBO', 'TKMesh', 'TKPrim',
                                     'TKHelix',
                                     'TKShHealing',
                                         'TKHLR',
