@@ -25,6 +25,19 @@ const PERSPECTIVE_LIMIT: f64 = 0.95;
 /// Coordinates beyond this magnitude are not drawn (the `1.e09` guards).
 const COORDINATE_LIMIT: f64 = 1.0e09;
 
+/// The view parameters a drawable may query while drawing.
+#[derive(Debug, Clone, PartialEq)]
+pub struct ViewQuery {
+    /// The view type (`+X+Y`, `-2D-`, ...).
+    pub view_type: String,
+    /// `(xmin, ymin, xmax, ymax)` of the visible area in view pixels.
+    pub frame: (i32, i32, i32, i32),
+    /// The view matrix.
+    pub matrix: rustycad_tkmath::gp::Transform3,
+    /// The zoom.
+    pub zoom: f64,
+}
+
 /// A view and the shared state a display draws with.
 struct DisplayTarget<'a> {
     surface: &'a mut dyn DisplaySurface,
@@ -103,6 +116,28 @@ impl<'a> DrawDisplay<'a> {
         self.target
             .as_ref()
             .map_or(0, |target| target.state.view_id)
+    }
+
+    /// What `Draw_Grid` asks the global viewer about the view being drawn (`HasView`,
+    /// `GetType`, `GetFrame`, `GetTrsf`, `Zoom`); `None` in batch mode, where the
+    /// viewer has no views.
+    pub fn view_query(&self) -> Option<ViewQuery> {
+        let target = self.target.as_ref()?;
+        let surface = &target.surface;
+        Some(ViewQuery {
+            view_type: surface.view_type(),
+            frame: surface.viewer_frame(),
+            matrix: surface.matrix(),
+            zoom: surface.zoom(),
+        })
+    }
+
+    /// `Draw_Bounds = enabled`: whether drawing grows the bounds (drawables such as the
+    /// axes switch it off while they draw).
+    pub fn set_draw_bounds(&mut self, enabled: bool) {
+        if let Some(target) = self.target.as_mut() {
+            target.state.draw_bounds = enabled;
+        }
     }
 
     /// `HasPicked`: true when the last operations hit the pick point.

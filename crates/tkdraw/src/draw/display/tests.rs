@@ -49,6 +49,12 @@ impl DisplaySurface for RecordingSurface {
     fn frame(&mut self) -> (i32, i32, i32, i32) {
         self.frame
     }
+    fn viewer_frame(&self) -> (i32, i32, i32, i32) {
+        self.frame
+    }
+    fn view_type(&self) -> String {
+        "+X+Y".to_string()
+    }
     fn set_color(&mut self, color: DrawColorKind) {
         self.calls.push(format!("color {}", color.index()));
     }

@@ -50,8 +50,12 @@ pub trait DisplaySurface {
     fn dx(&self) -> i32;
     /// `GetDy`: vertical offset of the view origin in pixels.
     fn dy(&self) -> i32;
-    /// `GetFrame`: the visible frame `(x0, y0, x1, y1)` in view pixels.
+    /// `GetFrame`: the visible frame `(x0, y0, x1, y1)` in view pixels (cached).
     fn frame(&mut self) -> (i32, i32, i32, i32);
+    /// `Draw_Viewer::GetFrame`: the frame computed from the window size and pan.
+    fn viewer_frame(&self) -> (i32, i32, i32, i32);
+    /// `Draw_Viewer::GetType`: the view type (`+X+Y`, `-2D-`, `AXON`, ...).
+    fn view_type(&self) -> String;
     /// `Draw_Window::SetColor`.
     fn set_color(&mut self, color: DrawColorKind);
     /// `Draw_Window::SetMode` (3 = copy, 6 = xor).

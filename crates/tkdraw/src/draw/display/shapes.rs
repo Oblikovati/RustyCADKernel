@@ -239,13 +239,6 @@ impl DrawDisplay<'_> {
             DrawingMode::Pick => {}
         }
     }
-
-    /// Sets `Draw_Bounds`.
-    fn set_draw_bounds(&mut self, enabled: bool) {
-        if let Some(target) = self.target.as_mut() {
-            target.state.draw_bounds = enabled;
-        }
-    }
 }
 
 /// The string bounds update of `DrawString`: the comparison includes the shift but the
