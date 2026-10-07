@@ -3,18 +3,22 @@
   "default_scope": "port",
   "scopes": {
     "port": "Ported to Rust with API and test parity against the pinned OCCT revision.",
-    "replaced": "Not ported; a new Rust design replaces it (user decision).",
+    "replaced": "Not ported 1:1; a new Rust design takes its place (user decision).",
     "excluded": "Not ported (user decision).",
     "undecided": "Not part of the library API; the user has not decided the scope yet."
   },
   "decisions": [
     {
       "scope": "replaced",
-      "reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns.",
-      "decided": "2026-09",
+      "reason": "OpenGL graphic drivers are not ported; a new Rust Vulkan 1.3 graphic driver that follows the Oblikovati renderer takes TKOpenGl's place behind the TKService/TKV3d interfaces (user decisions 2026-10-01 and 2026-10-07).",
+      "decided": "2026-10-07",
       "toolkits": [
-        "TKOpenGl", "TKOpenGles", "TKOpenGlTest", "TKOpenGlesTest", "TKService", "TKV3d",
-        "TKMeshVS", "TKD3DHost", "TKD3DHostTest", "TKIVtk", "TKIVtkDraw"
+        "TKOpenGl",
+        "TKOpenGles",
+        "TKOpenGlTest",
+        "TKOpenGlesTest",
+        "TKD3DHost",
+        "TKD3DHostTest"
       ]
     },
     {
@@ -22,18 +26,25 @@
       "reason": "OCCT native file formats are not ported; only exchange formats (STEP, IGES, STL, OBJ, glTF, VRML, PLY, DE) are.",
       "decided": "2026-09",
       "toolkits": [
-        "TKBin", "TKBinL", "TKBinTObj", "TKBinXCAF", "TKXml", "TKXmlL", "TKXmlTObj", "TKXmlXCAF",
-        "TKStd", "TKStdL"
+        "TKBin",
+        "TKBinL",
+        "TKBinTObj",
+        "TKBinXCAF",
+        "TKXml",
+        "TKXmlL",
+        "TKXmlTObj",
+        "TKXmlXCAF",
+        "TKStd",
+        "TKStdL"
       ]
     },
     {
       "scope": "undecided",
-      "reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API.",
+      "reason": "VTK integration; VTK renders through its own OpenGL pipeline. Not yet discussed with the user.",
       "decided": null,
       "toolkits": [
-        "TKDraw", "TKTopTest", "TKViewerTest", "TKQADraw", "TKXDEDRAW", "TKTObjDRAW", "TKXSDRAW",
-        "TKXSDRAWDE", "TKXSDRAWGLTF", "TKXSDRAWIGES", "TKXSDRAWOBJ", "TKXSDRAWPLY",
-        "TKXSDRAWSTEP", "TKXSDRAWSTL", "TKXSDRAWVRML"
+        "TKIVtk",
+        "TKIVtkDraw"
       ]
     }
   ]

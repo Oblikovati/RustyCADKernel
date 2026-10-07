@@ -937,8 +937,8 @@
         "protected-member": 14,
         "record": 57
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKExpress": {
       "api": {
@@ -1583,8 +1583,8 @@
         "protected-member": 12,
         "record": 43
       },
-      "scope": "replaced",
-      "scope_reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKOffset": {
       "api": {
@@ -1678,7 +1678,7 @@
         "record": 166
       },
       "scope": "replaced",
-      "scope_reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns."
+      "scope_reason": "OpenGL graphic drivers are not ported; a new Rust Vulkan 1.3 graphic driver that follows the Oblikovati renderer takes TKOpenGl's place behind the TKService/TKV3d interfaces (user decisions 2026-10-01 and 2026-10-07)."
     },
     "TKOpenGlTest": {
       "api": {
@@ -1720,7 +1720,7 @@
         "record": 1
       },
       "scope": "replaced",
-      "scope_reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns."
+      "scope_reason": "OpenGL graphic drivers are not ported; a new Rust Vulkan 1.3 graphic driver that follows the Oblikovati renderer takes TKOpenGl's place behind the TKService/TKV3d interfaces (user decisions 2026-10-01 and 2026-10-07)."
     },
     "TKPrim": {
       "api": {
@@ -1808,8 +1808,8 @@
         "member": 33,
         "record": 3
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKRWMesh": {
       "api": {
@@ -1903,8 +1903,8 @@
         "protected-member": 90,
         "record": 326
       },
-      "scope": "replaced",
-      "scope_reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKShHealing": {
       "api": {
@@ -2137,8 +2137,8 @@
         "member": 2,
         "record": 1
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKTopAlgo": {
       "api": {
@@ -2233,8 +2233,8 @@
         "member": 176,
         "record": 34
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKV3d": {
       "api": {
@@ -2282,8 +2282,8 @@
         "protected-member": 296,
         "record": 339
       },
-      "scope": "replaced",
-      "scope_reason": "Do not port OCCT OpenGL visualization; write a new Vulkan renderer on the ../Oblikovati renderer patterns."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKVCAF": {
       "api": {
@@ -2374,8 +2374,8 @@
         "protected-member": 2,
         "record": 12
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXCAF": {
       "api": {
@@ -2463,8 +2463,8 @@
         "member": 10,
         "record": 9
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXMesh": {
       "api": {
@@ -2596,8 +2596,8 @@
         "member": 44,
         "record": 2
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXSDRAWDE": {
       "api": {
@@ -2636,8 +2636,8 @@
         "member": 1,
         "record": 1
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXSDRAWGLTF": {
       "api": {
@@ -2676,8 +2676,8 @@
         "member": 1,
         "record": 1
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXSDRAWIGES": {
       "api": {
@@ -2716,8 +2716,8 @@
         "member": 1,
         "record": 1
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXSDRAWOBJ": {
       "api": {
@@ -2756,8 +2756,8 @@
         "member": 1,
         "record": 1
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXSDRAWPLY": {
       "api": {
@@ -2796,8 +2796,8 @@
         "member": 1,
         "record": 1
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXSDRAWSTEP": {
       "api": {
@@ -2836,8 +2836,8 @@
         "member": 1,
         "record": 1
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXSDRAWSTL": {
       "api": {
@@ -2878,8 +2878,8 @@
         "member": 21,
         "record": 5
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXSDRAWVRML": {
       "api": {
@@ -2918,8 +2918,8 @@
         "member": 1,
         "record": 1
       },
-      "scope": "undecided",
-      "scope_reason": "DRAW Tcl test-harness command toolkits; they expose commands, not library API."
+      "scope": "port",
+      "scope_reason": ""
     },
     "TKXml": {
       "api": {
@@ -3160,31 +3160,22 @@
       "toolkits": 10
     },
     "port": {
-      "api_declarations": 64657,
+      "api_declarations": 76041,
       "api_done": 23653,
-      "api_open": 39952,
+      "api_open": 51336,
       "api_partial": 1052,
       "gtests_mapped": 7400,
-      "gtests_unmapped": 903,
-      "toolkits": 38
+      "gtests_unmapped": 1051,
+      "toolkits": 56
     },
     "replaced": {
-      "api_declarations": 16514,
+      "api_declarations": 6418,
       "api_done": 0,
-      "api_open": 16514,
-      "api_partial": 0,
-      "gtests_mapped": 0,
-      "gtests_unmapped": 148,
-      "toolkits": 5
-    },
-    "undecided": {
-      "api_declarations": 1288,
-      "api_done": 0,
-      "api_open": 1288,
+      "api_open": 6418,
       "api_partial": 0,
       "gtests_mapped": 0,
       "gtests_unmapped": 0,
-      "toolkits": 15
+      "toolkits": 2
     }
   }
 }

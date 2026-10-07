@@ -7,6 +7,7 @@
 //! [`IoStream`](rustycad_tkernel::storage::IoStream), and the text the native code
 //! writes to `std::cout` goes to the injected GeomTools
 //! [`ConsoleOutput`](rustycad_tkgeombase::geom_tools::ConsoleOutput).
+pub mod format_version;
 mod location_set;
 mod location_text;
 mod shape_map_hasher;
@@ -17,6 +18,6 @@ pub(crate) mod shape_set_text;
 
 pub use location_set::LocationSet;
 pub use shape_map_hasher::{
-    IndexedDataMapOfShapeListOfShape, IndexedMapOfShape, MapOfShape, ShapeMapHasher, format_version,
+    IndexedDataMapOfShapeListOfShape, IndexedMapOfShape, MapOfShape, ShapeMapHasher,
 };
 pub use shape_set::{ShapeSet, ShapeSetData, THE_ASCII_VERSIONS, TopToolsShapeSet};
