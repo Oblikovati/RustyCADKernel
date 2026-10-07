@@ -63,14 +63,15 @@ pub trait InterfaceGeneralModule: Transient {
         _iter: &mut InterfaceEntityIterator,
     ) {
     }
-    /// `CheckCase(CN, ent, shares, ach)`: the semantic check of an entity.
+    /// `CheckCase(CN, ent, shares, ach)`: the semantic check of an entity. Returns
+    /// `Result`: `Interface_CheckTool` catches what a check raises.
     fn check_case(
         &self,
         cn: i32,
         ent: &Handle<StandardTransient>,
         shares: &InterfaceShareTool,
         ach: &mut Handle<InterfaceCheck>,
-    );
+    ) -> Result<(), Failure>;
     /// `CanCopy(CN, ent)`: false by default.
     fn can_copy(&self, _cn: i32, _ent: &Handle<StandardTransient>) -> bool {
         false

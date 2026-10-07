@@ -2,12 +2,15 @@
 //! libraries, checks, graphs, copies, file reading tools and static parameters);
 //! docs/xsbase-design.md section 1.
 mod bit_map;
+mod category;
 mod check;
 mod check_edit;
 mod check_iterator;
 mod check_iterator_print;
 #[cfg(test)]
 mod check_tests;
+mod check_tool;
+mod check_tool_lists;
 mod copy_map;
 mod copy_tool;
 mod entity_cluster;
@@ -23,6 +26,7 @@ mod float_writer;
 mod general_lib;
 mod general_module;
 mod graph;
+mod graph_content;
 mod graph_fill;
 mod graph_queries;
 #[cfg(test)]
@@ -48,6 +52,7 @@ mod reader_module;
 #[cfg(test)]
 mod reader_tests;
 mod report_entity;
+mod share_flags;
 mod share_tool;
 mod sign_type;
 mod static_registry;
@@ -58,10 +63,13 @@ mod static_value;
 #[cfg(test)]
 mod test_norm;
 mod typed_value;
+mod undefined_content;
 
 pub use bit_map::InterfaceBitMap;
+pub use category::InterfaceCategory;
 pub use check::InterfaceCheck;
 pub use check_iterator::InterfaceCheckIterator;
+pub use check_tool::InterfaceCheckTool;
 pub use copy_map::{InterfaceCopyControl, InterfaceCopyMap};
 pub use copy_tool::InterfaceCopyTool;
 pub use entity_cluster::InterfaceEntityCluster;
@@ -84,6 +92,7 @@ pub use general_lib::{
 };
 pub use general_module::InterfaceGeneralModule;
 pub use graph::{InterfaceGraph, InterfaceSharingTable};
+pub use graph_content::{InterfaceGraphContent, InterfaceGraphContentEvaluate};
 pub use gtool::InterfaceGTool;
 pub use h_graph::InterfaceHGraph;
 pub use int_array::InterfaceIntArray;
@@ -103,7 +112,9 @@ pub use reader_module::{
     InterfaceReaderLibKind, InterfaceReaderModule,
 };
 pub use report_entity::InterfaceReportEntity;
+pub use share_flags::InterfaceShareFlags;
 pub use share_tool::InterfaceShareTool;
 pub use sign_type::{InterfaceSignType, InterfaceSignTypeBase, interface_sign_type_text};
 pub use static_value::{InterfaceStatic, InterfaceStaticSatisfies};
 pub use typed_value::InterfaceTypedValue;
+pub use undefined_content::InterfaceUndefinedContent;

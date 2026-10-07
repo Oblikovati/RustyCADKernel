@@ -93,14 +93,18 @@ impl InterfaceGeneralModule for FakeModule {
         ent: &Handle<StandardTransient>,
         _shares: &InterfaceShareTool,
         ach: &mut Handle<InterfaceCheck>,
-    ) {
-        if ent
-            .cast::<FakeEntity>()
-            .get()
-            .is_some_and(|e| e.shared.read().is_empty())
-        {
+    ) -> Result<(), Failure> {
+        let fake = ent.cast::<FakeEntity>();
+        let Some(live) = fake.get() else {
+            return Ok(());
+        };
+        if *live.name.read() == "raise" {
+            return Err(Failure::new("check raised"));
+        }
+        if live.shared.read().is_empty() {
             ach.add_warning_text("no shared entity", "");
         }
+        Ok(())
     }
     fn can_copy(&self, _cn: i32, _ent: &Handle<StandardTransient>) -> bool {
         true

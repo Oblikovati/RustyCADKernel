@@ -93825,6 +93825,518 @@
       "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
     },
     {
+      "upstream_id": "Interface_ShareFlags::Interface_ShareFlags(const occ::handle<Interface_InterfaceModel>&,const Interface_GeneralLib&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ShareFlags.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceShareFlags::with_lib",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_ShareFlags::Interface_ShareFlags(const occ::handle<Interface_InterfaceModel>&,const occ::handle<Interface_GTool>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ShareFlags.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceShareFlags::with_gtool",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_ShareFlags::Interface_ShareFlags(const occ::handle<Interface_InterfaceModel>&,const occ::handle<Interface_Protocol>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ShareFlags.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceShareFlags::with_protocol",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_ShareFlags::Interface_ShareFlags(const occ::handle<Interface_InterfaceModel>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ShareFlags.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceShareFlags::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts. Native defect kept as a failure: the constructor reads the GTool of its model field before setting it (a null dereference), so it returns Standard_NullObject."
+    },
+    {
+      "upstream_id": "Interface_ShareFlags::Interface_ShareFlags(const Interface_Graph&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ShareFlags.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceShareFlags::from_graph",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_ShareFlags::Model",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ShareFlags.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceShareFlags::model",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_ShareFlags::IsShared",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ShareFlags.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceShareFlags::is_shared",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_ShareFlags::RootEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ShareFlags.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceShareFlags::root_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_ShareFlags::NbRoots",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ShareFlags.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceShareFlags::nb_roots",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_ShareFlags::Root",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_ShareFlags.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceShareFlags::root",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::Interface_Category()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::Interface_Category(const occ::handle<Interface_Protocol>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::with_protocol",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::Interface_Category(const occ::handle<Interface_GTool>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::with_gtool",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::SetProtocol",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::set_protocol",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::CatNum",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::cat_num",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::ClearNums",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::clear_nums",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::Compute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::compute",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::Num",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::num",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::AddCategory",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::add_category",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts. Native quirks kept: a new name returns the count plus 1, and the first name (index 0) is never found."
+    },
+    {
+      "upstream_id": "Interface_Category::NbCategories",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::nb_categories",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::Name",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::name",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::Number",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::number",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_Category::Init",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Category.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCategory::init",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts. The process-wide list of names is a Mutex behind a OnceLock."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::Interface_CheckTool(const occ::handle<Interface_InterfaceModel>&,const occ::handle<Interface_Protocol>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::with_protocol",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::Interface_CheckTool(const occ::handle<Interface_InterfaceModel>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::Interface_CheckTool(const Interface_Graph&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::from_graph",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::Interface_CheckTool(const occ::handle<Interface_HGraph>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::from_h_graph",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::FillCheck",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::fill_check",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts. The native process-wide errh flag is an AtomicBool; a caught failure is recorded as natively (raisecheck), an OSD_Signal is returned."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::Print(const occ::handle<Interface_Check>&,Standard_OStream&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::print_check",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::Print(const Interface_CheckIterator&,Standard_OStream&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::print_list",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::Check",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::check",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::CheckSuccess",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::check_success",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::CompleteCheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::complete_check_list",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts. Each native try block restarting after the failing entity is a per-entity step; the running check is reused between entities as natively."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::CheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::check_list",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::AnalyseCheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::analyse_check_list",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::VerifyCheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::verify_check_list",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::WarningCheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::warning_check_list",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts. Native quirk kept: the running check gets the previous entity first."
+    },
+    {
+      "upstream_id": "Interface_CheckTool::UnknownEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_CheckTool.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheckTool::unknown_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_GraphContent::Interface_GraphContent()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GraphContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceGraphContent::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_GraphContent::Interface_GraphContent(const Interface_Graph&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GraphContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceGraphContent::from_graph",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_GraphContent::Interface_GraphContent(const Interface_Graph&,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GraphContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceGraphContent::from_graph_status",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_GraphContent::Interface_GraphContent(const Interface_Graph&,const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GraphContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceGraphContent::from_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_GraphContent::GetFromGraph(const Interface_Graph&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GraphContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceGraphContent::get_from_graph",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_GraphContent::GetFromGraph(const Interface_Graph&,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GraphContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceGraphContent::get_from_graph_status",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_GraphContent::Result",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GraphContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceGraphContentEvaluate::result",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts. The virtual Evaluate and the members calling it are the trait InterfaceGraphContentEvaluate, which the IFGraph tools implement."
+    },
+    {
+      "upstream_id": "Interface_GraphContent::Begin",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GraphContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceGraphContentEvaluate::begin",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_GraphContent::Evaluate",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_GraphContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceGraphContentEvaluate::evaluate",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::Interface_UndefinedContent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::NbParams",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::nb_params",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::NbLiterals",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::nb_literals",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::ParamData",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::param_data",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts. The result and the three outputs are the returned tuple."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::ParamType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::param_type",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::IsParamEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::is_param_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::ParamEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::param_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::ParamValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::param_value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::Reservate",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::reservate",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::AddLiteral",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::add_literal",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::AddEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::add_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::RemoveParam",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::remove_param",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::SetLiteral",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::set_literal",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::SetEntity(const int,const Interface_ParamType,const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::set_entity_typed",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::SetEntity(const int,const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::set_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::EntityList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::entity_list",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
+      "upstream_id": "Interface_UndefinedContent::GetFromAnother",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_UndefinedContent.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceUndefinedContent::get_from_another",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
