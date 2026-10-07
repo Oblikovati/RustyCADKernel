@@ -9,6 +9,7 @@
 //! [`ShapeIterator`] (`TopoDS_Iterator`) walks the direct sub-shapes. The mapping rules
 //! are in docs/topology-design.md.
 mod alerts;
+pub mod bit_layout;
 mod builder;
 pub mod errors;
 mod hshape;
@@ -26,7 +27,7 @@ pub use hshape::HShape;
 pub use iterator::ShapeIterator;
 pub use shape::Shape;
 pub(crate) use tshape::dump_tshape;
-pub use tshape::{TShape, TShapeBase, bit_layout};
+pub use tshape::{TShape, TShapeBase};
 pub use tshapes::{TCompSolid, TCompound, TEdge, TFace, TShell, TSolid, TVertex, TWire};
 pub use typed::{
     CompSolid, Compound, Edge, Face, Shell, Solid, Vertex, Wire, comp_solid, compound, edge, face,

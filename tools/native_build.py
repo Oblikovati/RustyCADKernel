@@ -28,8 +28,10 @@ ADDITIONAL_TOOLKITS: tuple[str, ...] = ('TKBO', 'TKTopAlgo', 'TKPrim', 'TKMesh',
                                         'TKShHealing',
                                         'TKHLR',
                                         )
-# The closure's shared libraries in link order, dependants first.
-LINKED_TOOLKITS: tuple[str, ...] = ('TKBO', 'TKMesh', 'TKPrim',
+# The closure's shared libraries in link order, dependants first. TKOffset is linked only for
+# the TKGeomAlgo GTest GeomFill_BSplineCurves_Test (OCC28131 offsets the filled face).
+# TKOffset is not an additional toolkit: the occt-modeling-full build already has it.
+LINKED_TOOLKITS: tuple[str, ...] = ('TKOffset', 'TKBO', 'TKMesh', 'TKPrim',
                                     'TKHelix',
                                     'TKShHealing',
                                         'TKHLR',
