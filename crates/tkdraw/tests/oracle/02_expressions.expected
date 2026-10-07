@@ -1,0 +1,56 @@
+DRAW is running in batch mode
+dval 1+2*3 = 7
+dval 8/2/2 = 2
+dval 2-3-4 = -5
+dval -(1+2)*2 = -6
+dval --3 = 3
+dval +5 = 5
+dval 1.5e2 = 150
+dval 2e-1 = 0.20000000000000001
+dval 12abc = 12
+dval 0.1 = 0.10000000000000001
+dval 1/3 = 0.33333333333333331
+dval 2e = 2
+dval 1.5e+ = 1.5
+dval .5 = 0.5
+dval 5. = 5
+dval x*2 = 8
+dval x+y = 1.5
+dval x/y = -1.6000000000000001
+dval -x = -4
+dval (x) = 4
+dval ((x+1)*(y-1)) = -17.5
+dval x*x*x = 64
+dval 1e308*10 = inf
+dval -1e308*10 = -inf
+dval 0/0 = -nan
+dval cos(0) = 1
+dval sin(0)+1 = 1
+dval sqrt(16) = 4
+dval atan2(1,1) = 0.78539816339744828
+dval cos(sqrt(0)) = 1
+dval acos(1) = 0
+dval tan(0) = 0
+dval 1 + 2 = 3
+dval  x  = 4
+dval pi = 3.1415926535897931
+dval pinf = 1.7976931348623157e+308
+dval minf = -1.7976931348623157e+308
+dval {y+1} = 0 -1.5
+dval {unknown} = 0 0
+dval {1(2} = 0 1
+Mismatched parenthesis
+dval {(1+2} = 0 3
+dval {2**3} = 0 0
+dval {1&2} = 0 1
+Unclosed parenthesis
+dval {f(1} = 0 0
+dval {x(} = 0 4
+dval {1} = 0 1
+dval {2} = 0 2
+user function: 42
+Call of function failing 1 failed
+failing function: 1
+Call of function double double(2) failed
+nested: 0
+result kept: 6

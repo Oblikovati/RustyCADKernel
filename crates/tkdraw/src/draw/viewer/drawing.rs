@@ -42,6 +42,22 @@ impl DrawViewer {
         display_on(id, view, &mut self.state)
     }
 
+    /// The display `d` of a C++ command that keeps drawing after `MakeDisplay`: a
+    /// display on view `id` that keeps the current color, mode and segment buffer (a
+    /// `Draw_Display` has no state of its own; `MakeDisplay` is what resets them).
+    pub fn resume_display(&mut self, id: i32) -> DrawDisplay<'_> {
+        if self.is_batch() {
+            return DrawDisplay::batch();
+        }
+        let Some(Some(view)) = usize::try_from(id)
+            .ok()
+            .and_then(|index| self.views.get_mut(index))
+        else {
+            return DrawDisplay::batch();
+        };
+        DrawDisplay::new(view, &mut self.state)
+    }
+
     /// `AddDrawable`: appends `drawable` to the displayed list and marks it visible.
     pub fn add_drawable(&mut self, drawable: &DrawableHandle) {
         if self.is_batch() || drawable.visible() {

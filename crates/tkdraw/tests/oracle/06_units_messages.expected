@@ -1,0 +1,28 @@
+DRAW is running in batch mode
+unit: 1000 63.5 3.1415926535897931
+unit args: 1
+unitconvtoSI: result: 0.001 / result: 2000
+unitconvtoMDTV: result: 1000
+unitparsing: Token word : (((k)*(g))/(m))/(s)
+unitparsing args: 1 <Usage : unitparsing string [nbiter]
+>
+hello
+world
+SendMessage args: 1 <Error: wrong number of arguments>
+SetMessagePrinter args: 1 <Error: wrong number of arguments>
+SetMessagePrinter bad: 1 <Syntax error: unknown printer type 'nothing'>
+SetMessagePrinter bad arg: 1 <Syntax error: unknown argument '-bogus'>
+to
+the
+result
+draw printer: <to
+the
+result
+>
+ClearReport: 1 <Error: report is no created>
+SetReportMetric bad: 1 <Error: unrecognized message metric: 99>
+SetReportMetric: 
+CollectMetricMessages off: 1 <Error: collecting was not activated>
+CollectMetricMessages:  1 <Error: collecting already activated>
+ClearReport after: 
+PrintReport: <>
