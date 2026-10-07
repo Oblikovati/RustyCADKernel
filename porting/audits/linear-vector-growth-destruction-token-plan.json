@@ -1,0 +1,45 @@
+{
+  "schema": "rustycad.native-growth-destruction-token-plan.v1",
+  "status": "contract_implemented_pending_native_and_miri_validation",
+  "fresh_main_base": "d2cfaa1eba16c8f97947b25fd8a1bfd14d6503c4",
+  "explicit_dependency": "cf1e0b67372a84a602350bf153e7f0e4914fde5c",
+  "dependency_merge": "6d8ca8910dbad3d68ed60959495a4522447ec423",
+  "native_fixture": "tools/oracle/tkernel_linear_growth_destruction.cxx",
+  "native_expected": "tools/oracle/tkernel_linear_growth_destruction.expected",
+  "native_cases": 17,
+  "native_rows": 59,
+  "observed_native_failure": "grow has fully constructed replacement storage before destroying old slots in ascending order. A throwing destructor ends that slot lifetime, stops destruction, keeps original receiver Size/Capacity/Data, and abandons the completed replacement allocation. Failed reconstruction similarly leaves an uninitialized slot and preserves earlier repaired slots.",
+  "safe_baseline": "Current reserve_with_relocation is intentionally retained: old Drop panic destroys remaining old values and publishes replacement capacity/storage through Vec assignment. Three baseline probes at first/middle/final drops all show capacity8 and changed pointer versus native capacity4/original pointer.",
+  "ownership_token": [
+    "Consume the original LinearVector into a private ownership token. Do not implement Deref, Index, slice, iterator, AsRef, or mutable vector access. Checked extraction returns the vector only when all registered original slots are known live.",
+    "Reuse existing constructor/unpublished-tail relocation ownership while the source remains fully valid. A relocation panic keeps the token original valid and preserves native leaked replacement prefix semantics.",
+    "After full replacement construction, retain that complete vector in ManuallyDrop and convert original allocation without relocation into ManuallyDrop<Vec<MaybeUninit<T>>>. This raw representation is valid even with dead slots and cannot accidentally run T destructors.",
+    "Immediately before each original drop_in_place, advance dead_end. A throwing destructor therefore leaves [0,dead_end) dead and [dead_end,size) live. Track reconstructed prefix independently so repair panic leaves [repaired,dead_end) dead.",
+    "During interruption, expose only logical size/capacity, liveness progress, and raw pointers. No safe reference covers an uninitialized slot. Methods that require a valid vector reject this state before accessing elements.",
+    "Explicit repair constructs into tracked dead slots in ascending order; publish each repaired lifetime only after successful construction. When all holes are filled, reconstitute Vec<T> from the same allocation and permit extraction. Repair performs no silent cleanup of abandoned replacement objects.",
+    "An interrupted token dropped without repair intentionally forgets both raw original allocation/live suffix and completed replacement. This preserves memory safety and does not invent native automatic destruction/free of invalid registered slots. A valid token drops its valid original normally; abandoned replacement remains deliberately forgotten.",
+    "Test-only ownership extraction reclaims the abandoned replacement after native observations. It is not a production hook or automatic recovery policy. Test teardown repairs every original hole before normal original destruction.",
+    "A successful destruction loop leaves no old live slots, releases original allocation without T Drop, then publishes the complete replacement. Ordinary safe reserve behavior and its existing destructor-panic tests remain unchanged."
+  ],
+  "lifetime_provenance_contract": [
+    "Raw storage conversion must preserve allocator, capacity, alignment and allocation provenance. Vec<T> and Vec<MaybeUninit<T>> have identical T element layout/alignment; no raw allocation is freed twice or reconstructed with wrong capacity.",
+    "Destruction takes place at actual original slot addresses. No safe slice or &T can span a dead slot. No &mut reference to a T survives its drop_in_place; each raw slot pointer is derived for its one lifetime operation.",
+    "For a destructor panic Rust field cleanup ends the entire T lifetime; the throwing slot must never be considered still live. A failed repair callback returns no T and writes no slot.",
+    "Callbacks receiving &mut T must leave their source valid on unwind; safe callback signatures enforce ordinary Rust validity. Address-dependent placement construction and callback-time aliases of the original C++ receiver remain separate unsupported domains.",
+    "Token metadata observation is independent of safe element access. Native destructor callback metadata is recorded directly; Rust tests must not fabricate aliased references to the exclusively borrowed token/vector just to reproduce that observation.",
+    "Panic payload is propagated unchanged. No production catch/resume is needed for progress: counters advance before destruction and after successful repair. Borrowed lifetimes, covariance, auto-traits and zero-sized Rust safety need separate compiler/Miri checks.",
+    "Public reserve entry is explicitly unsafe: no live references may alias original slots or owned payload lifetimes being ended, and callbacks may not alias the exclusively borrowed token. The token still statically blocks all safe reads/extraction/drop of dead values."
+  ],
+  "required_tests": [
+    "Native17 cases/59 rows including original-slot destructor addresses and metadata, exact live suffix/replacement state, explicit repair, and first/middle/final repair failures.",
+    "Public token extraction and repeated growth reject dead state without reading/dropping slots. Compile-fail probes prove absence of safe slice/index/Deref access.",
+    "Strict Miri validates interrupted and partially repaired lifetimes/provenance, exact panic payload, empty/ZST, owned/borrowed domains, and typed teardown without ignore-leaks.",
+    "Normal safe reserve original destructor behavior remains independently tested. All49 legacy declarations remain unchanged and green."
+  ],
+  "out_of_scope": [
+    "Shrink/Clear/destructive Erase reuse until their distinct publication order is audited.",
+    "Automatic recovery of arbitrary native invalid state, OOM/allocator exceptions, generalized placement/alias/ABI parity."
+  ],
+  "api_parity_complete": false,
+  "global_api_claims_added": 0
+}

@@ -7,6 +7,8 @@ mod constructor_ownership;
 mod copy_construction;
 mod erase_policy;
 mod fill_construction;
+mod growth_token;
+pub use growth_token::{GrowthProgress, LinearVectorGrowth};
 mod insert_policy;
 mod pointers;
 mod relocation;

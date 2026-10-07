@@ -14,7 +14,7 @@ mod harray;
 pub use harray::{HArray1, HArray2};
 mod linear_vector;
 mod raw_element_lifetime;
-pub use linear_vector::LinearVector;
+pub use linear_vector::{GrowthProgress, LinearVector, LinearVectorGrowth};
 mod vector_component;
 pub use vector_component::{
     VectorAbsoluteComponent, VectorDumpComponent, VectorMagnitudeComponent, VectorSquareComponent,
