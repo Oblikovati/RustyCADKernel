@@ -443,7 +443,10 @@ impl Prs3dDrawer {
     ) -> Result<bool, Failure> {
         let updated = to_override_defaults && self.setup_own_shading_aspect(&Handle::default())?;
         let shading = self.fields.read().shading_aspect.clone();
-        let fill = shading.get().map(Prs3dShadingAspect::aspect).unwrap_or_default();
+        let fill = shading
+            .get()
+            .map(Prs3dShadingAspect::aspect)
+            .unwrap_or_default();
         if let Some(fill) = fill.get() {
             fill.set_shading_model(model);
         }
