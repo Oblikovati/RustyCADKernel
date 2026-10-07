@@ -128,7 +128,7 @@ impl Drawable3D for DrawSegment2D {
     }
 
     /// The end points, each coordinate right-aligned in 17 columns.
-    fn dump(&self, stream: &mut DrawOStream) {
+    fn dump(&self, stream: &mut DrawOStream) -> Result<(), Failure> {
         let (first, last) = (self.first(), self.last());
         stream
             .set_width(17)
@@ -144,6 +144,7 @@ impl Drawable3D for DrawSegment2D {
             .set_width(17)
             .put_real(last.y());
         stream.put_str("\n");
+        Ok(())
     }
 
     fn whatis(&self, di: &DrawInterpretor) -> Result<(), Failure> {

@@ -18,6 +18,7 @@ mod plugins;
 mod printer;
 mod progress;
 mod session;
+mod shared_buffer;
 mod stdio_capture;
 mod variables;
 mod view;
@@ -36,7 +37,7 @@ pub use display::{
     DRAWINFINITE, DisplayState, DisplaySurface, DrawBounds, DrawDisplay, DrawXSegment, DrawingMode,
     MAXSEGMENT, PickState, PostScriptState, ViewQuery, trim_segment,
 };
-pub use drawable::{Drawable3D, Drawable3DBase, DrawableHandle, downcast_handle};
+pub use drawable::{Drawable3D, Drawable3DBase, DrawableHandle, downcast_handle, kind_of};
 pub use drawables::{
     DEFAULT_AXIS_SIZE, DrawAxis2D, DrawAxis3D, DrawBox, DrawGrid, DrawMarker2D, DrawMarker3D,
     DrawSegment2D, DrawSegment3D, DrawText2D, DrawText3D, MarkerSize,

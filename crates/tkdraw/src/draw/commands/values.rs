@@ -107,7 +107,7 @@ pub(super) fn dump(
             .put_str("\n\n*********** Dump of ")
             .put_str(name)
             .put_str(" *************\n");
-        drawable.dump(&mut stream);
+        drawable.dump(&mut stream)?;
         di.append(stream.take_text())?;
     }
     Ok(0)
@@ -132,7 +132,7 @@ pub(super) fn copy(
             continue;
         };
         let target = if make_copy {
-            drawable.copy(&drawable)
+            drawable.copy(&drawable)?
         } else {
             session.set_drawable_auto(from, None)?;
             drawable

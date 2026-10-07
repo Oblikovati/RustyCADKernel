@@ -4,6 +4,7 @@ use super::display::DrawDisplay;
 use super::drawable::{Drawable3D, Drawable3DBase, DrawableHandle};
 use super::istream::DrawIStream;
 use super::ostream::DrawOStream;
+use super::session::DrawSession;
 use rustycad_tkernel::osd::Timer;
 use rustycad_tkernel::standard::Failure;
 use std::cell::{Cell, RefCell, RefMut};
@@ -44,13 +45,13 @@ impl DrawNumber {
 
     /// `RegisterFactory` (the `Draw_Drawable3D_FACTORY` macro): registers
     /// [`DrawNumber::restore`] under `Draw_Number` in `session`.
-    pub fn register_factory(session: &crate::draw::DrawSession) {
+    pub fn register_factory(session: &DrawSession) {
         session.register_factory("Draw_Number", Self::restore);
     }
 
     /// `Restore`: reads one number; a missing number restores 0 (`operator>>` stores 0
     /// on failure since C++11, which overwrites the `RealLast()` initial value).
-    pub fn restore(stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(_session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
         let value = stream.read_real().unwrap_or(0.0);
         Some(Rc::new(Self::new(value)))
     }
@@ -74,12 +75,13 @@ impl Drawable3D for DrawNumber {
         false
     }
 
-    fn copy(&self, _this: &DrawableHandle) -> DrawableHandle {
-        Rc::new(Self::new(self.value()))
+    fn copy(&self, _this: &DrawableHandle) -> Result<DrawableHandle, Failure> {
+        Ok(Rc::new(Self::new(self.value())))
     }
 
-    fn dump(&self, stream: &mut DrawOStream) {
+    fn dump(&self, stream: &mut DrawOStream) -> Result<(), Failure> {
         stream.put_real(self.value());
+        Ok(())
     }
 
     /// Scientific, precision 15, width 30, then a newline. Upstream quirk, kept: the
@@ -135,14 +137,15 @@ impl Drawable3D for DrawChronometer {
     }
 
     /// A new, stopped chronometer (the timer state is not copied, as upstream).
-    fn copy(&self, _this: &DrawableHandle) -> DrawableHandle {
-        Rc::new(Self::new())
+    fn copy(&self, _this: &DrawableHandle) -> Result<DrawableHandle, Failure> {
+        Ok(Rc::new(Self::new()))
     }
 
-    fn dump(&self, stream: &mut DrawOStream) {
+    fn dump(&self, stream: &mut DrawOStream) -> Result<(), Failure> {
         stream
             .put_str("Chronometer, ")
             .put_str(&self.timer.borrow().show_to());
+        Ok(())
     }
 
     fn whatis(&self, di: &DrawInterpretor) -> Result<(), Failure> {
@@ -162,17 +165,22 @@ mod tests {
         number.save(&mut stream).unwrap();
         assert_eq!(stream.text(), "        -2.500000000000000e+00\n");
         let mut input = DrawIStream::new(stream.take_text().into_bytes());
-        let restored = DrawNumber::restore(&mut input).unwrap();
+        let console = Rc::new(crate::draw::RecordingConsole::default());
+        let session = DrawSession::new(console, crate::draw::DrawViewer::batch());
+        let restored = DrawNumber::restore(&session, &mut input).unwrap();
         assert_eq!(restored.downcast_ref::<DrawNumber>().unwrap().value(), -2.5);
     }
 
     #[test]
     fn copies_are_new_objects() {
         let handle: DrawableHandle = Rc::new(DrawNumber::new(1.0));
-        let copy = handle.copy(&handle);
+        let copy = handle.copy(&handle).unwrap();
         assert!(!Rc::ptr_eq(&handle, &copy));
         let chrono: DrawableHandle = Rc::new(DrawChronometer::new());
-        assert_eq!(chrono.copy(&chrono).type_name(), "Draw_Chronometer");
+        assert_eq!(
+            chrono.copy(&chrono).unwrap().type_name(),
+            "Draw_Chronometer"
+        );
         assert!(!handle.is_displayable());
     }
 
@@ -180,7 +188,7 @@ mod tests {
     fn dump_uses_the_stream_precision() {
         let mut stream = DrawOStream::new();
         stream.set_precision(15);
-        DrawNumber::new(1.0 / 3.0).dump(&mut stream);
+        DrawNumber::new(1.0 / 3.0).dump(&mut stream).unwrap();
         assert_eq!(stream.text(), "0.333333333333333");
     }
 }

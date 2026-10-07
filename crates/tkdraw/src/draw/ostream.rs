@@ -1,6 +1,7 @@
 //! `Standard_OStream` as the drawables use it: a text buffer with the `std::ostream`
 //! precision, `scientific` flag and field width that `operator<<(double)` reads.
-use rustycad_tkernel::storage::format_general;
+use super::shared_buffer::SharedBuffer;
+use rustycad_tkernel::storage::{IoStream, format_general};
 
 /// An in-memory output stream with `std::ostream` number formatting.
 ///
@@ -86,6 +87,33 @@ impl DrawOStream {
             format_general(value, self.precision)
         };
         self.pad_and_push(text)
+    }
+
+    /// Lets `write` print on this stream through the TKernel `std::ostream` model (the
+    /// GeomTools and Poly printers take an [`IoStream`]) at this stream's precision;
+    /// what it wrote is appended, also when it fails.
+    ///
+    /// ```
+    /// use rustycad_tkdraw::draw::DrawOStream;
+    /// let mut stream = DrawOStream::new();
+    /// stream.set_precision(3);
+    /// let written: Result<(), ()> = stream.write_through(|io| {
+    ///     io.insert_real(0.123456);
+    ///     Ok(())
+    /// });
+    /// assert!(written.is_ok());
+    /// assert_eq!(stream.text(), "0.123");
+    /// ```
+    pub fn write_through<E>(
+        &mut self,
+        write: impl FnOnce(&mut IoStream) -> Result<(), E>,
+    ) -> Result<(), E> {
+        let buffer = SharedBuffer::default();
+        let mut stream = buffer.stream(self.precision);
+        let written = write(&mut stream);
+        let (bytes, _) = buffer.finish(stream);
+        self.text.push_str(&String::from_utf8_lossy(&bytes));
+        written
     }
 
     /// Right-aligns `text` in the pending width (the default `std::ios::right` fill).

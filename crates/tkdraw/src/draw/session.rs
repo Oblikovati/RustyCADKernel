@@ -18,14 +18,16 @@ use rustycad_tkernel::resource::ResourceHost;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::units::Units;
 use rustycad_tkernel::units_api::UnitsApi;
+use std::any::{Any, TypeId};
 use std::cell::{Cell, RefCell};
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::fs::File;
 use std::rc::{Rc, Weak};
 use std::sync::Arc;
 
-/// A restore factory (`Draw_Drawable3D::FactoryFunction_t`).
-pub type DrawableFactory = fn(&mut DrawIStream) -> Option<DrawableHandle>;
+/// A restore factory (`Draw_Drawable3D::FactoryFunction_t`). The session stands for
+/// the package globals a factory reads (`DrawTrSurf::Parameters()`, ...).
+pub type DrawableFactory = fn(&DrawSession, &mut DrawIStream) -> Option<DrawableHandle>;
 
 /// A command body with access to the session: `int f(Draw_Interpretor&, int, const char**)`
 /// plus the globals it reads.
@@ -73,6 +75,9 @@ pub struct DrawSession {
     perf_registry: PerfRegistry,
     pub(crate) loaded_groups: RefCell<HashSet<&'static str>>,
     pub(crate) self_reference: Weak<DrawSession>,
+    /// The static state of the packages above Draw (`DrawTrSurf::Parameters()`, ...),
+    /// one value per type.
+    package_states: RefCell<HashMap<TypeId, Rc<dyn Any>>>,
     /// The `Draw::Atoi` closure the interpreter uses for `Draw_ExitOnCatch`; owned here
     /// because the interpreter only keeps a weak reference.
     _integer_parser: Rc<IntegerParser>,
@@ -127,6 +132,7 @@ impl DrawSession {
                 perf_registry: PerfRegistry::new(Rc::new(NativeCpuClock)),
                 loaded_groups: RefCell::new(HashSet::new()),
                 self_reference: weak.clone(),
+                package_states: RefCell::new(HashMap::new()),
                 _integer_parser: integer_parser,
             }
         })
@@ -209,7 +215,29 @@ impl DrawSession {
     /// `None` when no factory is registered.
     pub fn restore(&self, type_name: &str, stream: &mut DrawIStream) -> Option<DrawableHandle> {
         let factory = self.factories.borrow().get(type_name).copied()?;
-        factory(stream)
+        factory(self, stream)
+    }
+
+    /// The function-local statics of a package above Draw (such as
+    /// `DrawTrSurf::Parameters()`): one `T` per session, made on first use.
+    ///
+    /// ```
+    /// use rustycad_tkdraw::draw::{DrawSession, DrawViewer, RecordingConsole};
+    /// use std::cell::Cell;
+    /// use std::rc::Rc;
+    /// let session = DrawSession::new(Rc::new(RecordingConsole::default()), DrawViewer::batch());
+    /// session.package_state::<Cell<i32>>().set(3);
+    /// assert_eq!(session.package_state::<Cell<i32>>().get(), 3);
+    /// ```
+    pub fn package_state<T: Default + 'static>(&self) -> Rc<T> {
+        let mut states = self.package_states.borrow_mut();
+        let state = states
+            .entry(TypeId::of::<T>())
+            .or_insert_with(|| Rc::new(T::default()));
+        // The map key is the TypeId of the value, so the downcast cannot fail.
+        Rc::clone(state)
+            .downcast::<T>()
+            .unwrap_or_else(|_| Rc::new(T::default()))
     }
 
     /// `Draw::Atof`: the value of a numeric expression (see [`evaluate`]).

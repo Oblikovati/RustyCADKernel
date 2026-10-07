@@ -1,6 +1,8 @@
 //! `Standard_IStream` as the restore factories read it: whitespace-separated words and
 //! numbers with `operator>>` semantics.
+use super::shared_buffer::SharedBuffer;
 use rustycad_tkernel::standard::strtod;
+use rustycad_tkernel::storage::IoStream;
 
 /// An input stream over the bytes of a saved DRAW file.
 ///
@@ -82,6 +84,31 @@ impl DrawIStream {
         }
         self.position += consumed;
         Some(value)
+    }
+
+    /// Lets `read` extract from this stream through the TKernel `std::istream` model
+    /// (the GeomTools and Poly readers take an [`IoStream`]); the position advances by
+    /// what it consumed, and a failed extraction fails this stream.
+    ///
+    /// ```
+    /// use rustycad_tkdraw::draw::DrawIStream;
+    /// let mut stream = DrawIStream::new(b" 7 next".to_vec());
+    /// let value = stream.read_through(|io| {
+    ///     let mut value = 0;
+    ///     io.extract_int(&mut value);
+    ///     value
+    /// });
+    /// assert_eq!(value, 7);
+    /// assert_eq!(stream.read_word().as_deref(), Some("next"));
+    /// ```
+    pub fn read_through<R>(&mut self, read: impl FnOnce(&mut IoStream) -> R) -> R {
+        let buffer = SharedBuffer::new(self.bytes[self.position..].to_vec());
+        let mut stream = buffer.stream(6);
+        let result = read(&mut stream);
+        self.failed |= stream.fail();
+        let (_, consumed) = buffer.finish(stream);
+        self.position += usize::try_from(consumed).unwrap_or(0);
+        result
     }
 }
 
