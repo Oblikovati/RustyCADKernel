@@ -32,7 +32,7 @@ pub(crate) mod package;
 mod section_solve;
 mod tensor;
 #[cfg(test)]
-mod test_fixtures;
+pub(crate) mod test_fixtures;
 pub(crate) mod two_surfaces;
 
 pub use ch_asym::ChAsym;

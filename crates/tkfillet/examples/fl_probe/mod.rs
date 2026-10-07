@@ -4,6 +4,7 @@ pub mod brep_blend;
 pub mod chamfer;
 pub mod chfi_ds;
 pub mod fillet;
+pub mod rst_rst;
 pub mod surf_rst;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that both toolkits
 // print the same token stream (tools/oracle/tkfillet_probe.cxx includes
