@@ -1,0 +1,104 @@
+{
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_header_sha256": "d934e128555d8333055b2e99893f6f116f0fb7957eb575d79d9d9956d660ee1b",
+  "compile_argv": [
+    "c++",
+    "-std=c++17",
+    "-UNDEBUG",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=all",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/FSD",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Message",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/NCollection",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/OSD",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Plugin",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Precision",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Quantity",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Resource",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Standard",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/StdFail",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Storage",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/TColStd",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/TCollection",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/Units",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/UnitsAPI",
+    "-I/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/UnitsMethods",
+    "tools/oracle/tkernel_osd_universal_iterator.cxx",
+    "-o",
+    "/tmp/osd-universal-native"
+  ],
+  "compile_exit_code": 0,
+  "compile_stderr": "",
+  "probes": [
+    {
+      "mode": "positive",
+      "argv": [
+        "/tmp/osd-universal-native"
+      ],
+      "exit_code": 0,
+      "stdout": "empty 1 1 1\nsource_drop_copy 1 cdi\ncomparison_increment 3 4 ceeiciee\nassignment_self 2 cd\nthrow_preserves 5 2 cc\nnative_nullable_clone 1 1 ccd\nnative_nullable_post_self 1 3 1 cicd\n",
+      "stderr": ""
+    },
+    {
+      "mode": "copy",
+      "argv": [
+        "/tmp/osd-universal-native",
+        "copy"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx:138:38: runtime error: member access within null pointer of type 'struct IteratorInterface'\n"
+    },
+    {
+      "mode": "assign",
+      "argv": [
+        "/tmp/osd-universal-native",
+        "assign"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx:144:40: runtime error: member access within null pointer of type 'struct IteratorInterface'\n"
+    },
+    {
+      "mode": "equal",
+      "argv": [
+        "/tmp/osd-universal-native",
+        "equal"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx:155:28: runtime error: member access within null pointer of type 'struct IteratorInterface'\n"
+    },
+    {
+      "mode": "not_equal",
+      "argv": [
+        "/tmp/osd-universal-native",
+        "not_equal"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx:150:29: runtime error: member access within null pointer of type 'struct IteratorInterface'\n"
+    },
+    {
+      "mode": "pre_increment",
+      "argv": [
+        "/tmp/osd-universal-native",
+        "pre_increment"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx:160:23: runtime error: member access within null pointer of type 'struct IteratorInterface'\n"
+    },
+    {
+      "mode": "post_increment",
+      "argv": [
+        "/tmp/osd-universal-native",
+        "post_increment"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "/home/vmiguel/git/oblikovati-workspace/OCCT/src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx:138:38: runtime error: member access within null pointer of type 'struct IteratorInterface'\n"
+    }
+  ]
+}

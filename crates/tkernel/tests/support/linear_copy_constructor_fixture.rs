@@ -1,8 +1,6 @@
 //! Shared native observations; this module contains no allocation recovery or kernel policy.
 use super::LinearVector;
-#[path = "linear_constructor_item.rs"]
-mod item;
-pub use item::{CopyItem, CopyTrace};
+pub use super::item::{CopyItem, CopyTrace};
 
 pub struct CopySpec {
     pub name: &'static str,

@@ -348,3 +348,6 @@ impl<'a, T> IntoIterator for &'a mut LinearVector<T> {
         self.iter_mut()
     }
 }
+
+#[cfg(test)]
+mod constructor_test_support;

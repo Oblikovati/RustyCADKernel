@@ -8,9 +8,11 @@ import unittest
 from pathlib import Path
 
 from api_inventory.inputs import JSONObject
-from verify_osd_iterator_interface import RECEIPT, verify_binding, verify_rust_shape
+from verify_osd_iterator_interface import verify_binding, verify_rust_shape
 
 ROOT = Path(__file__).resolve().parents[2]
+# The original non-null contract receipt remains a historical snapshot.
+RECEIPT = "porting/audits/osd-universal-interface-bindings-v1.json"
 
 
 class OsdIteratorInterfaceBindingTests(unittest.TestCase):
@@ -20,6 +22,16 @@ class OsdIteratorInterfaceBindingTests(unittest.TestCase):
 
     def replay_one(self, binding: JSONObject) -> None:
         verify_binding(binding, [binding["native"]], [binding["rust"]], ROOT)
+
+    def test_current_nullable_contract_keeps_original_box_snapshot(self) -> None:
+        historical_path = ROOT / "porting/audits/osd-iterator-interface-v1.json"
+        historical = json.loads(historical_path.read_text())["bindings"][4]
+        current = self.bindings[4]
+        self.assertEqual(historical["native"], current["native"])
+        old_output = historical["rust"]["signature"]["sig"]["output"]["resolved_path"]
+        new_output = current["rust"]["signature"]["sig"]["output"]["resolved_path"]
+        self.assertEqual(old_output["path"], "Box")
+        self.assertEqual(new_output["path"], "Option")
 
     def test_five_scoped_bindings_pass(self) -> None:
         for binding in self.bindings:

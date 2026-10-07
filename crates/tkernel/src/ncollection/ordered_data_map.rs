@@ -248,3 +248,5 @@ super::ordered_table::ordered_policy_exchange!(OrderedDataMap<K,V,H>, H);
 super::ordered_table::ordered_default_construction!(OrderedDataMap<K,V,H>, H);
 
 super::ordered_table::ordered_protected_lookup!(OrderedDataMap<K,V,H>,H,super::OrderedDataMapNode<K,V>);
+
+super::ordered_table::ordered_borrowed_clear!(OrderedDataMap<K,V,H>);

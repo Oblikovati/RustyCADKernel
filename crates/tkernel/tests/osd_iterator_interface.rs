@@ -43,12 +43,12 @@ impl<'a> ParallelIteratorInterface<'a> for BorrowedCursor<'a> {
         self.position += 1;
     }
 
-    fn clone_box(&self) -> Box<dyn ParallelIteratorInterface<'a> + 'a> {
-        Box::new(Self {
+    fn clone_box(&self) -> Option<Box<dyn ParallelIteratorInterface<'a> + 'a>> {
+        Some(Box::new(Self {
             payload: self.payload,
             position: self.position,
             destroyed: self.destroyed,
-        })
+        }))
     }
 
     fn comparison_value(&self) -> Option<&dyn Any> {
@@ -63,8 +63,8 @@ impl<'a> ParallelIteratorInterface<'a> for OpaqueCursor {
         false
     }
     fn increment(&mut self) {}
-    fn clone_box(&self) -> Box<dyn ParallelIteratorInterface<'a> + 'a> {
-        Box::new(Self)
+    fn clone_box(&self) -> Option<Box<dyn ParallelIteratorInterface<'a> + 'a>> {
+        Some(Box::new(Self))
     }
 }
 
@@ -77,8 +77,8 @@ impl<'a> ParallelIteratorInterface<'a> for ForeignCursor {
     fn increment(&mut self) {
         self.0 += 1;
     }
-    fn clone_box(&self) -> Box<dyn ParallelIteratorInterface<'a> + 'a> {
-        Box::new(Self(self.0))
+    fn clone_box(&self) -> Option<Box<dyn ParallelIteratorInterface<'a> + 'a>> {
+        Some(Box::new(Self(self.0)))
     }
     fn comparison_value(&self) -> Option<&dyn Any> {
         Some(&self.0)
@@ -91,7 +91,7 @@ fn virtual_clone_outlives_source_wrapper_and_preserves_borrowed_payload() {
     let payload = BorrowedPayload { values: &values };
     let destroyed = Cell::new(0);
     let mut source = BorrowedCursor::start(&payload, &destroyed);
-    let mut copy = source.clone_box();
+    let mut copy = source.clone_box().unwrap();
     assert!(source.is_equal(copy.as_ref()));
     source.increment();
     assert!(!source.is_equal(copy.as_ref()));
@@ -114,10 +114,10 @@ fn optional_and_foreign_comparison_states_are_not_equal() {
     assert!(!cursor.is_equal(&OpaqueCursor));
     assert!(!cursor.is_equal(&ForeignCursor(0)));
     assert!(OpaqueCursor.comparison_value().is_none());
-    let mut foreign = ForeignCursor(0).clone_box();
+    let mut foreign = ForeignCursor(0).clone_box().unwrap();
     foreign.increment();
     assert!(!foreign.is_equal(&cursor));
-    assert!(!OpaqueCursor.clone_box().is_equal(&cursor));
+    assert!(!OpaqueCursor.clone_box().unwrap().is_equal(&cursor));
 }
 
 #[test]

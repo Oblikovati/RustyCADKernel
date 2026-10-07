@@ -4,15 +4,9 @@ mod native_rows;
 use rustycad_tkernel::ncollection::{Array1, HArray1};
 use std::panic::{AssertUnwindSafe, catch_unwind};
 
-#[derive(Copy)]
-struct TrivialItem(i32);
-// Deliberately distinguish explicit Copy policy from the ordinary constructor's Clone policy.
-#[allow(clippy::non_canonical_clone_impl)]
-impl Clone for TrivialItem {
-    fn clone(&self) -> Self {
-        panic!("Clone hook requested; expected explicit trivial-copy dispatch")
-    }
-}
+#[path = "support/harray_trivial_item.rs"]
+mod trivial_item;
+use trivial_item::TrivialItem;
 
 #[test]
 fn native_trivial_copy_rows_match_storage_bounds_empty_ranges_and_handles() {

@@ -1,0 +1,1484 @@
+{
+  "api_denominator_complete": false,
+  "attested_files": [
+    {
+      "path": "crates/tkernel/src/osd/parallel.rs",
+      "sha256": "525a7208806e2009333ff4fa4fb931c1766d68d44d280c1b9f4c2cd164000430"
+    },
+    {
+      "path": "crates/tkernel/src/osd/parallel/iterator_interface.rs",
+      "sha256": "f2667a1d63c0c637476a0c9335a4a1275f0fcff6eeedb32e14ad4ff66605542f"
+    },
+    {
+      "path": "crates/tkernel/src/osd/parallel/loops.rs",
+      "sha256": "d532f34cc3040a642f5f27cf50acabd735b9346287041d3fa8b912df1701a9a7"
+    },
+    {
+      "path": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+      "sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6"
+    },
+    {
+      "path": "crates/tkernel/tests/osd_iterator_interface.rs",
+      "sha256": "c28c8cdb893ee1a655c84cb355e61ddb82b490595c114e4b0ac6ea4e2ff9c497"
+    },
+    {
+      "path": "crates/tkernel/tests/osd_parallel.rs",
+      "sha256": "072c8d1bb0a188131fd543471f83ae5035df0668208584b922c4c72e5a9ae004"
+    },
+    {
+      "path": "crates/tkernel/tests/osd_universal_iterator.rs",
+      "sha256": "8ad1b82f9b0df3a3a1ea16aa3e902e9c3a7dfef5e8159671b4428035c01a7066"
+    },
+    {
+      "path": "crates/tkernel/tests/support/osd_universal/mod.rs",
+      "sha256": "03530b557b593fca59b9f3d14f314830beeae3d1a5688254b6cc18c93973c18d"
+    },
+    {
+      "path": "porting/audits/osd-iterator-interface-v1.json",
+      "sha256": "21a86c3bd0ebcaab4a42e6c88b54b29bc8b95c9e8db4332a636b88a504a217d6"
+    },
+    {
+      "path": "porting/audits/osd-universal-interface-bindings-v1.json",
+      "sha256": "838f2347e6cb0aaa45baa394e8cbb0b25f1383c6aef758fb00014c6ad066fdbe"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-iterator-interface-v1.rust-inventory.json.gz",
+      "sha256": "7c29d59987da5b173b3b3b58001f1080f39130afb066c41201ac420f815f604c"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-iterator-interface-v1.rustdoc.json.gz",
+      "sha256": "bc88996daff5a915d0419c6f8d767e6cd4d5713bc31cde2ac4cc6d1b4d3d3ca6"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-universal-iterator-v1.clippy.log",
+      "sha256": "467ceb106f17e9e10600603e49f223fc214acbaf69b31743115a2665d4f29e90"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-universal-iterator-v1.doctest.log",
+      "sha256": "c8042593bf1d75570a681dbab45be268ca191af62a175dde7007c3c59a807fd1"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-universal-iterator-v1.lifetime-negative.json",
+      "sha256": "f0954192e1cd6286ddee10f4a2b572b7cfdb7871389c3a61b4867ec4fe599b1b"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-universal-iterator-v1.miri.log",
+      "sha256": "2747731a06af87ec44bb88c245ed79caaee597ca2a7cc3a419cbbae311e595a7"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-universal-iterator-v1.native.json",
+      "sha256": "29c6d97a83ff9f2b5da199456b0571e66a4536f6192ac8aadc441ae76b245fb5"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-universal-iterator-v1.python.log",
+      "sha256": "296ab46059c3498c3742d27b53571e32dc987db2056512ae995f5186594c24e1"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-universal-iterator-v1.rust-inventory.json.gz",
+      "sha256": "5b5885cde7bb2dafa8547fb789eaee3ae65a25b61d88e280295a6eec01eb27c2"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-universal-iterator-v1.rustdoc.json.gz",
+      "sha256": "ea845350d505d25138d517695160db59878e9738a74c34e4eb54b6214a79306e"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-universal-iterator-v1.rustdoc.log",
+      "sha256": "3b20f66f87b533b835b8e1e1ccabd1509ff63432931c59895571ff24e0e5846f"
+    },
+    {
+      "path": "porting/runtime-evidence/osd-universal-iterator-v1.tests.log",
+      "sha256": "83236a97eed24e862ce86f793bde18aff549e0b6216349a8c8710ae8c6487852"
+    },
+    {
+      "path": "tools/oracle/tkernel_osd_universal_iterator.cxx",
+      "sha256": "f4282b4f2984be2c756cda4a1e833e81176f7a60ad476387423c566877f2398f"
+    },
+    {
+      "path": "tools/oracle/tkernel_osd_universal_iterator.expected",
+      "sha256": "0161df9caf0da981d2661d6d538620034bca0dd4b708d1f38c023615873eff4a"
+    },
+    {
+      "path": "tools/tests/test_osd_iterator_interface_bindings.py",
+      "sha256": "2bb75083ae00f3ecfb75e07ce80e062772ec9f4f07ce8c0b62689a95f0485844"
+    },
+    {
+      "path": "tools/tests/test_osd_universal_iterator_bindings.py",
+      "sha256": "b02d62a38e4592327f487384e4ad88e75e32c0e5e668f3100cd3756b09e378f2"
+    },
+    {
+      "path": "tools/verify_osd_iterator_interface.py",
+      "sha256": "80c11e3c25f5b7ff7cb4bd562ba4f15a3be14facf485bf509c2055ad214871f6"
+    },
+    {
+      "path": "tools/verify_osd_universal_iterator.py",
+      "sha256": "70bbd89843a8c2cc59f4d873fbfe29d1d102ec2acafd33078e4d64d8f01a95af"
+    }
+  ],
+  "base_main_commit": "4be8ba8c0fab63a2f1ec72693cd96a669f55b221",
+  "bindings": [
+    {
+      "evidence_mode": "nominal_record",
+      "native": {
+        "access": "protected",
+        "ancestor_access": [
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "75eb795690685cfab9774769a528772b738cfcbe21816be97445b4df6eb88b4a",
+        "kind": "CXXRecord",
+        "qualified_name": "OSD_Parallel::UniversalIterator",
+        "signature": ""
+      },
+      "rust": {
+        "canonical_type_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator",
+        "declaration_sha256": "91c1cf037a7b10b87ce9726b0d5b34b3f7884b564ab6b7993e6a2fd259466feb",
+        "kind": "struct",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator",
+        "reexport": {
+          "canonical_target_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator",
+          "is_glob": false,
+          "source": "universal_iterator::ParallelUniversalIterator",
+          "source_file": "crates/tkernel/src/osd/parallel.rs",
+          "source_sha256": "525a7208806e2009333ff4fa4fb931c1766d68d44d280c1b9f4c2cd164000430",
+          "source_status": null
+        },
+        "signature": {
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'data"
+              }
+            ],
+            "where_predicates": []
+          },
+          "shape": {
+            "field_count": 1,
+            "has_stripped_fields": false,
+            "kind": "plain"
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    },
+    {
+      "evidence_mode": "concrete_body",
+      "native": {
+        "access": "public",
+        "ancestor_access": [
+          {
+            "access": "protected",
+            "qualified_name": "OSD_Parallel::UniversalIterator",
+            "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+          },
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "5ebd3fd2daa60776d6bac798de41d86e1b29d2b71187bb8534285746c50fd0db",
+        "kind": "CXXConstructor",
+        "qualified_name": "OSD_Parallel::UniversalIterator::UniversalIterator",
+        "signature": "void ()"
+      },
+      "rust": {
+        "declaration_sha256": "28614e7a6472ceaca7ff6dbc10fd52106b37b5f6dee0cbe597b998b5bd06d343",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'data"
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "ParallelUniversalIterator",
+              "resolved_item_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'data"
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator::new",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    },
+    {
+      "evidence_mode": "concrete_body",
+      "native": {
+        "access": "public",
+        "ancestor_access": [
+          {
+            "access": "protected",
+            "qualified_name": "OSD_Parallel::UniversalIterator",
+            "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+          },
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "16ec06ece3506f3a90b32f4bf88385385556dbc5d9e2d887e77512f93ce8d684",
+        "kind": "CXXConstructor",
+        "qualified_name": "OSD_Parallel::UniversalIterator::UniversalIterator",
+        "signature": "void (class OSD_Parallel::IteratorInterface *)"
+      },
+      "rust": {
+        "declaration_sha256": "c6e7cc1273410f43998140bd11d436e2dff5d2051fdce050a8b77454667d877c",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'data"
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "ParallelUniversalIterator",
+              "resolved_item_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'data"
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator::from_interface",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "iterator",
+                {
+                  "resolved_path": {
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "resolved_path": {
+                                "args": {
+                                  "angle_bracketed": {
+                                    "args": [
+                                      {
+                                        "type": {
+                                          "dyn_trait": {
+                                            "lifetime": "'data",
+                                            "traits": [
+                                              {
+                                                "generic_params": [],
+                                                "trait": {
+                                                  "args": {
+                                                    "angle_bracketed": {
+                                                      "args": [
+                                                        {
+                                                          "lifetime": "'data"
+                                                        }
+                                                      ],
+                                                      "constraints": []
+                                                    }
+                                                  },
+                                                  "path": "ParallelIteratorInterface",
+                                                  "resolved_item_path": "rustycad_tkernel::osd::parallel::iterator_interface::ParallelIteratorInterface"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "constraints": []
+                                  }
+                                },
+                                "path": "Box",
+                                "resolved_item_path": "alloc::boxed::Box"
+                              }
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    },
+                    "path": "Option",
+                    "resolved_item_path": "core::option::Option"
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    },
+    {
+      "evidence_mode": "concrete_body",
+      "native": {
+        "access": "public",
+        "ancestor_access": [
+          {
+            "access": "protected",
+            "qualified_name": "OSD_Parallel::UniversalIterator",
+            "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+          },
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "89695ccfe02f9796b811b2989b8699ce022a7c10bf013ad20bb492a3488e60b7",
+        "kind": "CXXConstructor",
+        "qualified_name": "OSD_Parallel::UniversalIterator::UniversalIterator",
+        "signature": "void (const class OSD_Parallel::UniversalIterator &)"
+      },
+      "rust": {
+        "declaration_sha256": "1079c5aa57074f79e1a9eeeb52a629623025d2bfcb7588938d5553d1a85be134",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "ParallelUniversalIterator",
+              "resolved_item_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": {
+            "args": null,
+            "path": "Clone",
+            "resolved_item_path": "core::clone::Clone"
+          }
+        },
+        "kind": "function",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator::<core::clone::Clone>::clone",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    },
+    {
+      "evidence_mode": "concrete_body",
+      "native": {
+        "access": "public",
+        "ancestor_access": [
+          {
+            "access": "protected",
+            "qualified_name": "OSD_Parallel::UniversalIterator",
+            "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+          },
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "3abe488350c4b2a773344c7836502c8e19723f972d631e83f2e55c42a4f6b68e",
+        "kind": "CXXMethod",
+        "qualified_name": "OSD_Parallel::UniversalIterator::operator=",
+        "signature": "class OSD_Parallel::UniversalIterator &(const class OSD_Parallel::UniversalIterator &)"
+      },
+      "rust": {
+        "declaration_sha256": "01cf7249a85cfbc7bd29cc9eef600e77804d9e7ab94a48ab7479dc53f397713a",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'data"
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "ParallelUniversalIterator",
+              "resolved_item_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'data"
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator::assign",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": true,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "source",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "borrowed_ref": {
+                "is_mutable": true,
+                "lifetime": null,
+                "type": {
+                  "generic": "Self"
+                }
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    },
+    {
+      "evidence_mode": "concrete_body",
+      "native": {
+        "access": "public",
+        "ancestor_access": [
+          {
+            "access": "protected",
+            "qualified_name": "OSD_Parallel::UniversalIterator",
+            "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+          },
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "9dfaf29a4f59cdef3e954ca4279a34a877c3f7488b97a1d9c3c469a3351e1f17",
+        "kind": "CXXMethod",
+        "qualified_name": "OSD_Parallel::UniversalIterator::operator!=",
+        "signature": "bool (const class OSD_Parallel::UniversalIterator &) const"
+      },
+      "rust": {
+        "declaration_sha256": "2d5fcc9ea275673dee65d148d8b6b0e38b82f767ffe07627ac15fcae989bb682",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "ParallelUniversalIterator",
+              "resolved_item_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": {
+            "args": null,
+            "path": "PartialEq",
+            "resolved_item_path": "core::cmp::PartialEq"
+          }
+        },
+        "kind": "function",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator::<core::cmp::PartialEq>::ne",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "other",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "primitive": "bool"
+            }
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    },
+    {
+      "evidence_mode": "concrete_body",
+      "native": {
+        "access": "public",
+        "ancestor_access": [
+          {
+            "access": "protected",
+            "qualified_name": "OSD_Parallel::UniversalIterator",
+            "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+          },
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "f436fd28fe5651ee18f6523f1bac41b0305f760dc0ce74434f3877f8172d8fb6",
+        "kind": "CXXMethod",
+        "qualified_name": "OSD_Parallel::UniversalIterator::operator==",
+        "signature": "bool (const class OSD_Parallel::UniversalIterator &) const"
+      },
+      "rust": {
+        "declaration_sha256": "282c8f61bb4bbcf6e41e7c6904b515c162756f4d01087d2a2e199cc202dc36c8",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "ParallelUniversalIterator",
+              "resolved_item_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": {
+            "args": null,
+            "path": "PartialEq",
+            "resolved_item_path": "core::cmp::PartialEq"
+          }
+        },
+        "kind": "function",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator::<core::cmp::PartialEq>::eq",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "other",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "primitive": "bool"
+            }
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    },
+    {
+      "evidence_mode": "concrete_body",
+      "native": {
+        "access": "public",
+        "ancestor_access": [
+          {
+            "access": "protected",
+            "qualified_name": "OSD_Parallel::UniversalIterator",
+            "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+          },
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "6ddfeff5d93f33f56c9bd093b6c8c6742175cb191c970ebe91b7738790fdbc0c",
+        "kind": "CXXMethod",
+        "qualified_name": "OSD_Parallel::UniversalIterator::operator++",
+        "signature": "class OSD_Parallel::UniversalIterator &()"
+      },
+      "rust": {
+        "declaration_sha256": "ef5d942c108ca32b41d4dc22898675c02e66942478e438cbde4eee101222b2b3",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'data"
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "ParallelUniversalIterator",
+              "resolved_item_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'data"
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator::increment",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": true,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "borrowed_ref": {
+                "is_mutable": true,
+                "lifetime": null,
+                "type": {
+                  "generic": "Self"
+                }
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    },
+    {
+      "evidence_mode": "concrete_body",
+      "native": {
+        "access": "public",
+        "ancestor_access": [
+          {
+            "access": "protected",
+            "qualified_name": "OSD_Parallel::UniversalIterator",
+            "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+          },
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "44e85539e781d43715f2cb90ef05c4746ac8d9ed697948b9ddb03e4f92566e1c",
+        "kind": "CXXMethod",
+        "qualified_name": "OSD_Parallel::UniversalIterator::operator++",
+        "signature": "class OSD_Parallel::UniversalIterator (int)"
+      },
+      "rust": {
+        "declaration_sha256": "e2401a73e543ae7e073762f90658d4c411db522f93b095b98de5bc65ce928a34",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'data"
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "ParallelUniversalIterator",
+              "resolved_item_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'data"
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator::post_increment",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": true,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    },
+    {
+      "evidence_mode": "concrete_body",
+      "native": {
+        "access": "public",
+        "ancestor_access": [
+          {
+            "access": "protected",
+            "qualified_name": "OSD_Parallel::UniversalIterator",
+            "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+          },
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "84555456be19e9758b55f42d868f4f3995e4cee4adaab50466ec708d1b93d703",
+        "kind": "CXXMethod",
+        "qualified_name": "OSD_Parallel::UniversalIterator::operator*",
+        "signature": "class OSD_Parallel::IteratorInterface *() const"
+      },
+      "rust": {
+        "declaration_sha256": "28eaf2e2dba37d638814404e8676a7ad1d7f79a5a73bc8bec1a446fcaae86aef",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'data"
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "ParallelUniversalIterator",
+              "resolved_item_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'data"
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator::value",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "borrowed_ref": {
+                            "is_mutable": false,
+                            "lifetime": null,
+                            "type": {
+                              "dyn_trait": {
+                                "lifetime": "'data",
+                                "traits": [
+                                  {
+                                    "generic_params": [],
+                                    "trait": {
+                                      "args": {
+                                        "angle_bracketed": {
+                                          "args": [
+                                            {
+                                              "lifetime": "'data"
+                                            }
+                                          ],
+                                          "constraints": []
+                                        }
+                                      },
+                                      "path": "ParallelIteratorInterface",
+                                      "resolved_item_path": "rustycad_tkernel::osd::parallel::iterator_interface::ParallelIteratorInterface"
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Option",
+                "resolved_item_path": "core::option::Option"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    },
+    {
+      "evidence_mode": "concrete_body",
+      "native": {
+        "access": "public",
+        "ancestor_access": [
+          {
+            "access": "protected",
+            "qualified_name": "OSD_Parallel::UniversalIterator",
+            "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+          },
+          {
+            "access": "public",
+            "qualified_name": "OSD_Parallel",
+            "usr": "c:@S@OSD_Parallel"
+          }
+        ],
+        "api_visible": true,
+        "exclusion_reason": "",
+        "id": "bb5e88bef2d24b478a422dcfedd816c44d28445db1e81aca6bb948d4cc13c9f4",
+        "kind": "CXXMethod",
+        "qualified_name": "OSD_Parallel::UniversalIterator::operator*",
+        "signature": "class OSD_Parallel::IteratorInterface *()"
+      },
+      "rust": {
+        "declaration_sha256": "792c2f4a61523334a9314694d1b1cd174ce864e5af7c5a9192f80c5d4608398a",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'data"
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "ParallelUniversalIterator",
+              "resolved_item_path": "rustycad_tkernel::osd::parallel::universal_iterator::ParallelUniversalIterator"
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                },
+                "name": "'data"
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkernel::osd::ParallelUniversalIterator::value_mut",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": true,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "borrowed_ref": {
+                            "is_mutable": true,
+                            "lifetime": null,
+                            "type": {
+                              "dyn_trait": {
+                                "lifetime": "'data",
+                                "traits": [
+                                  {
+                                    "generic_params": [],
+                                    "trait": {
+                                      "args": {
+                                        "angle_bracketed": {
+                                          "args": [
+                                            {
+                                              "lifetime": "'data"
+                                            }
+                                          ],
+                                          "constraints": []
+                                        }
+                                      },
+                                      "path": "ParallelIteratorInterface",
+                                      "resolved_item_path": "rustycad_tkernel::osd::parallel::iterator_interface::ParallelIteratorInterface"
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Option",
+                "resolved_item_path": "core::option::Option"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkernel/src/osd/parallel/universal_iterator.rs",
+        "source_sha256": "a894306d5ae8d0cde8875656ccd1a567a24890ae015abbc4eaf5fa8ab9d62eb6",
+        "source_status": null
+      },
+      "status": "partial"
+    }
+  ],
+  "capture_command": "cargo +nightly-2026-09-25 rustdoc --locked -p rustycad-tkernel --lib --all-features --target-dir target/osd-universal-rustdoc -Z unstable-options -- --document-private-items --output-format json -Z unstable-options",
+  "capture_domain": "isolated TKernel all-features Linux x86_64 capture; not global or cross-configuration completeness",
+  "current_interface_receipt": "porting/audits/osd-universal-interface-bindings-v1.json",
+  "implementation_credit": false,
+  "ledger_changes": 0,
+  "lifetime_negative": "porting/runtime-evidence/osd-universal-iterator-v1.lifetime-negative.json",
+  "native_defined_domain": [
+    "empty default/null construction and both pointer dereference overloads",
+    "independent clone owns a wrapper over borrowed non-Clone data",
+    "copy and assignment accept a null result from Clone",
+    "postincrement clones before increment even if clone result is null",
+    "assignment and self-assignment clone before releasing old wrapper",
+    "equality/inequality forward to IsEqual without identity shortcuts",
+    "throwing/panicking Clone leaves source and assignment target unchanged",
+    "virtual destruction of owned interfaces; no payload cloning"
+  ],
+  "native_probe": "porting/runtime-evidence/osd-universal-iterator-v1.native.json",
+  "next_method_work": [
+    "Reconcile five iterator aliases into explicit Rust type obligations while preserving mutable-pointer alias limitations.",
+    "Port concrete IteratorWrapper template adapters in a bounded iterator comparison domain, using native bad_cast and Clone/Increment probes."
+  ],
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "original_commit_dependencies": [
+    "98059e5f"
+  ],
+  "original_tests_preserved": [
+    "OSD_ParallelTest.OCC24826_SaxpyParallelMatchesSequential",
+    "OSD_ParallelTest.OCC29935_MatrixMultiplyParallelMatchesSequential"
+  ],
+  "remaining_gaps": [
+    "Five native aliases iterator_category/value_type/difference_type/pointer/reference remain explicit unresolved API obligations.",
+    "Arbitrary IteratorWrapper template RTTI and FunctorInterface are separate classes and remain outside this slice.",
+    "Pointer aliasing and explicit raw ownership transfer are represented by safe borrowing and Box ownership rather than arbitrary native pointer access.",
+    "C++ noexcept destructor termination behavior on throwing custom destructors is not emulated by Rust Drop unwinding."
+  ],
+  "replay_command": "PYTHONPATH=tools python3 tools/verify_osd_universal_iterator.py",
+  "rust_inventory": "porting/runtime-evidence/osd-universal-iterator-v1.rust-inventory.json.gz",
+  "rustdoc_capture": "porting/runtime-evidence/osd-universal-iterator-v1.rustdoc.json.gz",
+  "rustdoc_format_version": 61,
+  "safety_boundary": [
+    "Native empty copy, assignment-from-empty, equality, inequality and pre/post increment trigger UBSan null-pointer diagnostics. Rust explicitly panics before dispatch; no parity is claimed for undefined native behavior.",
+    "Native const dereference returns a mutable raw pointer; Rust value and value_mut enforce shared/exclusive borrowing.",
+    "Safe assign_self exposes native self-assignment without creating aliased mutable/reference arguments.",
+    "Wrapper stores Option<Box<dyn interface + data lifetime>> with no Send/Sync/Any/Clone bound on payload."
+  ],
+  "schema_version": 1,
+  "scope": "OSD_Parallel::UniversalIterator record and all ten declared callables; five alias obligations remain unresolved",
+  "unmapped_alias_obligations": [
+    {
+      "access": "public",
+      "ancestor_access": [
+        {
+          "access": "protected",
+          "qualified_name": "OSD_Parallel::UniversalIterator",
+          "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+        },
+        {
+          "access": "public",
+          "qualified_name": "OSD_Parallel",
+          "usr": "c:@S@OSD_Parallel"
+        }
+      ],
+      "api_visible": true,
+      "exclusion_reason": "",
+      "id": "3ed2b0986b31affb849ce1edc6ba3e527f58b8fd6f0231bfc2f9573eb51651f3",
+      "kind": "TypeAlias",
+      "qualified_name": "OSD_Parallel::UniversalIterator::value_type",
+      "signature": "class OSD_Parallel::IteratorInterface *"
+    },
+    {
+      "access": "public",
+      "ancestor_access": [
+        {
+          "access": "protected",
+          "qualified_name": "OSD_Parallel::UniversalIterator",
+          "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+        },
+        {
+          "access": "public",
+          "qualified_name": "OSD_Parallel",
+          "usr": "c:@S@OSD_Parallel"
+        }
+      ],
+      "api_visible": true,
+      "exclusion_reason": "",
+      "id": "45005c26328515e71e8fc55e0ee063a886fbfd6310ecd30fbe19d89f5153ddc0",
+      "kind": "TypeAlias",
+      "qualified_name": "OSD_Parallel::UniversalIterator::difference_type",
+      "signature": "long"
+    },
+    {
+      "access": "public",
+      "ancestor_access": [
+        {
+          "access": "protected",
+          "qualified_name": "OSD_Parallel::UniversalIterator",
+          "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+        },
+        {
+          "access": "public",
+          "qualified_name": "OSD_Parallel",
+          "usr": "c:@S@OSD_Parallel"
+        }
+      ],
+      "api_visible": true,
+      "exclusion_reason": "",
+      "id": "97f6ecf45880a5fd33dbaf82bad0df24f9dd06e528c439b5a64515476b0bccec",
+      "kind": "TypeAlias",
+      "qualified_name": "OSD_Parallel::UniversalIterator::pointer",
+      "signature": "class OSD_Parallel::IteratorInterface *"
+    },
+    {
+      "access": "public",
+      "ancestor_access": [
+        {
+          "access": "protected",
+          "qualified_name": "OSD_Parallel::UniversalIterator",
+          "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+        },
+        {
+          "access": "public",
+          "qualified_name": "OSD_Parallel",
+          "usr": "c:@S@OSD_Parallel"
+        }
+      ],
+      "api_visible": true,
+      "exclusion_reason": "",
+      "id": "ca17442e5653524fc33d5e989829427d1365c36d4d4c4e3aa856c3a02ac77f6e",
+      "kind": "TypeAlias",
+      "qualified_name": "OSD_Parallel::UniversalIterator::iterator_category",
+      "signature": "struct std::forward_iterator_tag"
+    },
+    {
+      "access": "public",
+      "ancestor_access": [
+        {
+          "access": "protected",
+          "qualified_name": "OSD_Parallel::UniversalIterator",
+          "usr": "c:@S@OSD_Parallel@S@UniversalIterator"
+        },
+        {
+          "access": "public",
+          "qualified_name": "OSD_Parallel",
+          "usr": "c:@S@OSD_Parallel"
+        }
+      ],
+      "api_visible": true,
+      "exclusion_reason": "",
+      "id": "ec1728d3368a03f1c9e7da783791ea18d0d3bc0141e7aebf3d6340c7a1d6572f",
+      "kind": "TypeAlias",
+      "qualified_name": "OSD_Parallel::UniversalIterator::reference",
+      "signature": "class OSD_Parallel::IteratorInterface *"
+    }
+  ],
+  "validation": {
+    "binding_validator_tests": 18,
+    "cargo_fmt_check": true,
+    "clippy_warnings_denied": true,
+    "compile_fail_doctests": 1,
+    "direct_E0515_escape_rejections": 2,
+    "miri_strict_provenance_tests": 12,
+    "native_positive": 1,
+    "native_undefined_empty_state_UBSan_rejections": 6,
+    "new_wrapper_tests": 9,
+    "original_OSD_tests": 2,
+    "ruff_check": true,
+    "updated_interface_tests": 3
+  }
+}

@@ -70442,14 +70442,6 @@
       "notes": "Manual NCollection member mapping; NCollection_HArray2<T> is HArray2<T>, a Standard_Transient shared through Handle whose Array2 sits behind a lock: every inherited Array2 member is reached through the array2()/change_array2() guards."
     },
     {
-      "upstream_id": "NCollection_HArray2(const Array2Type&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::HArray2::from_array",
-      "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_HArray2<T> is HArray2<T>, a Standard_Transient shared through Handle whose Array2 sits behind a lock: every inherited Array2 member is reached through the array2()/change_array2() guards. The copy owns its storage and keeps the bounds."
-    },
-    {
       "upstream_id": "NCollection_HArray2::Array2() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
@@ -246040,6 +246032,174 @@
       "status": "partial",
       "toolkit": "TKernel",
       "upstream_id": "NCollection_HArray1::NCollection_HArray1<TheItemType>(const NCollection_HArray1::Array1Type &)"
+    },
+    {
+      "notes": "Exact partial const-Array2 constructor domain. Explicit from_array_trivial selects the native trivially-copyable policy through existing Array2::assign_trivial and bypasses Clone hooks, preserving rectangle metadata independently of inherited flat bounds/length, empty-source metadata and ownership-independent copied values. The unchanged ordinary from_array path remains a Clone policy and is not automatically equivalent to arbitrary C++ trivial/nontrivial copy construction. Tests prove ordinary Clone still dispatches and explicit trivial copy bypasses it. Allocation/default-copy failure, custom C++ lifetime/address effects, zero-sized Rust types, locking and Send+Sync+static restrictions remain outside full parity. See porting/audits/harray2-trivial-copy.json.",
+      "rust_declaration_selectors": [
+        {
+          "declaration_sha256": "cd719dc684a4dff02d55430df9681955dbc82c9a4b201c0e5f42719b59a9a1a0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::HArray2",
+                "resolved_item_path": "rustycad_tkernel::ncollection::harray::HArray2"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Clone",
+                              "resolved_item_path": "core::clone::Clone"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Send",
+                              "resolved_item_path": "core::marker::Send"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Sync",
+                              "resolved_item_path": "core::marker::Sync"
+                            }
+                          }
+                        },
+                        {
+                          "outlives": "'static"
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::HArray2::from_array"
+        },
+        {
+          "declaration_sha256": "6c851a32941aea9f96d04023a818c2c847a61c6ed078c3cc6a0a91bb5fefff1c",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::HArray2",
+                "resolved_item_path": "rustycad_tkernel::ncollection::harray::HArray2"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Copy",
+                              "resolved_item_path": "core::marker::Copy"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Send",
+                              "resolved_item_path": "core::marker::Send"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Sync",
+                              "resolved_item_path": "core::marker::Sync"
+                            }
+                          }
+                        },
+                        {
+                          "outlives": "'static"
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "path": "rustycad_tkernel::ncollection::HArray2::from_array_trivial"
+        }
+      ],
+      "rust_item": "rustycad_tkernel::ncollection::HArray2::from_array",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::HArray2::from_array",
+        "rustycad_tkernel::ncollection::HArray2::from_array_trivial"
+      ],
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "status": "partial",
+      "toolkit": "TKernel",
+      "upstream_id": "NCollection_HArray2::NCollection_HArray2<TheItemType>(const NCollection_HArray2::Array2Type &)"
     }
   ],
   "tests": [

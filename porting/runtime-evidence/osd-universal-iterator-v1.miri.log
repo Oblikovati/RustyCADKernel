@@ -1,0 +1,75 @@
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling rustc_apfloat v0.2.3+llvm-462a31f5a5ab
+   Compiling smallvec v1.16.2
+   Compiling bitflags v2.13.2
+   Compiling allocator-api2 v0.4.0
+   Compiling rustycad-cmath v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/cmath)
+   Compiling bytemuck v1.25.2
+   Compiling num-traits v0.2.19
+   Compiling num-complex v0.4.6
+   Compiling rustycad-tkernel v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkernel)
+   Compiling rustycad-tkmath v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkmath)
+warning: a method with this name may be added to the standard library in the future
+  --> crates/tkmath/src/gp/transform/json.rs:62:85
+   |
+62 |                 output.set_value(row, column, self.coefficient(row + 1, column + 1).cast());
+   |                                                                                     ^^^^
+   |
+   = help: call with fully qualified syntax `rustycad_tkernel::ncollection::ElementCast::cast(...)` to keep using the current method
+   = warning: once this associated item is added to the standard library, the ambiguity may cause an error or change in behavior!
+   = note: for more information, see issue #48919 <https://github.com/rust-lang/rust/issues/48919>
+   = note: `#[warn(unstable_name_collisions)]` (part of `#[warn(future_incompatible)]`) on by default
+help: add `#![feature(float_conversions)]` to the crate attributes to enable `core::f64::<impl f64>::cast`
+  --> crates/tkmath/src/lib.rs:2:1
+   |
+ 2 + #![feature(float_conversions)]
+   |
+
+warning: a method with this name may be added to the standard library in the future
+   --> crates/tkmath/src/gp/general_transform/algebra.rs:108:85
+    |
+108 |                 output.set_value(row, column, self.coefficient(row + 1, column + 1).cast());
+    |                                                                                     ^^^^
+    |
+    = help: call with fully qualified syntax `rustycad_tkernel::ncollection::ElementCast::cast(...)` to keep using the current method
+    = warning: once this associated item is added to the standard library, the ambiguity may cause an error or change in behavior!
+    = note: for more information, see issue #48919 <https://github.com/rust-lang/rust/issues/48919>
+help: add `#![feature(float_conversions)]` to the crate attributes to enable `core::f64::<impl f64>::cast`
+   --> crates/tkmath/src/lib.rs:2:1
+    |
+  2 + #![feature(float_conversions)]
+    |
+
+   Compiling rustycad-tkg2d v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkg2d)
+warning: `rustycad-tkmath` (lib) generated 2 warnings
+   Compiling rustycad-tkg3d v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkg3d)
+   Compiling rustycad-tkgeombase v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkgeombase)
+   Compiling rustycad-tkbrep v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkbrep)
+   Compiling rustycad-tkgeomalgo v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkgeomalgo)
+   Compiling rustycad-tktopalgo v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tktopalgo)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 46.75s
+     Running tests/osd_iterator_interface.rs (target/miri/x86_64-unknown-linux-gnu/debug/build/rustycad-tkernel/a1d7f55ea9a81aa7/out/osd_iterator_interface-a1d7f55ea9a81aa7)
+
+running 3 tests
+test optional_and_foreign_comparison_states_are_not_equal ... ok
+test parallel_for_each_still_accepts_borrowed_non_clone_payloads ... ok
+test virtual_clone_outlives_source_wrapper_and_preserves_borrowed_payload ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.36s
+
+     Running tests/osd_universal_iterator.rs (target/miri/x86_64-unknown-linux-gnu/debug/build/rustycad-tkernel/dec46c8ad388fab6/out/osd_universal_iterator-dec46c8ad388fab6)
+
+running 9 tests
+test assignment_and_self_assignment_clone_before_old_drop ... ok
+test clone_panic_preserves_assignment_target_and_post_increment_source ... ok
+test default_and_pointer_constructors_preserve_empty_state ... ok
+test empty_operations_are_rejected_without_undefined_behavior ... ok
+test independently_owned_clone_retains_non_clone_borrowed_payload ... ok
+test legal_null_clone_preserves_native_copy_and_assignment_states ... ok
+test legal_null_clone_preserves_self_assignment_and_post_increment_states ... ok
+test mutable_dereference_dispatches_without_extra_clone ... ok
+test native_equality_pre_and_post_increment_dispatch_order ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.48s
+
