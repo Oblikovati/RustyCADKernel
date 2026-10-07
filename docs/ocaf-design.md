@@ -303,3 +303,10 @@ explicit `new`/`delete`.
 - **TDataXtd_Triangulation** covers the `Poly_Triangulation` methods so that each change
   is backed up. `Restore` and `Paste` install a copy of the mesh. The methods on an
   attribute without a mesh are `Standard_NullObject` errors (natively a null dereference).
+
+## 12. AppStd
+
+`AppStd_Application` is `AppStdApplication`, a `TDocStd_Application` built like
+`TDocStdStandardApplication` (`new` returns its bound handle). Its `ResourcesName` is
+`Standard`. Its `DumpJson` is an inherent method: the native one hides the non-virtual
+`TDocStd_Application::DumpJson`, and it dumps that one as its base class.
