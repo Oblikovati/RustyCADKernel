@@ -1,0 +1,96 @@
+{
+  "schema": "rustycad.test-integration-correction.v1",
+  "base_revision": "07d24fa273a77a0386596a94df67694fe196c040",
+  "implementation_revision": "e1854d772ef3b2f810b1015176cc1235483e6817",
+  "reason": "Integrated strict Clippy detects duplicated fixture-module loading and a Sparse test module preceding its impl. Candidate-scoped checks had missed these all-target lints.",
+  "changes": [
+    "Share copy/fill fixture item and recovery module identity through one cfg(test) support module.",
+    "Inject assertion callback into shared test repair; original native traces stay unchanged.",
+    "Move SparseArrayBlock tests below its unchanged production implementation."
+  ],
+  "scope": "Test organization only; no production algorithm changes.",
+  "checks": {
+    "vector_unit_passes": 49,
+    "sparse_unit_passes": 1,
+    "strict_miri_vector_passes": 49,
+    "native_public_copy_rows": 14,
+    "native_public_fill_rows": 20,
+    "tkernel_all_targets_clippy_exit": 0,
+    "default_formatter_exit": 0
+  },
+  "attested_files": [
+    {
+      "path": "crates/tkernel/src/ncollection/linear_vector.rs",
+      "sha256": "972956cc9114011804265a912e3aba734bd2303989280dd1ac78f814a53e6606"
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/linear_vector/constructor_test_support.rs",
+      "sha256": "b66644ce8d98063de77c10e6aebdcd17463778b29c68b69d9d2fb4e1962c4033"
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/linear_vector/copy_construction/tests.rs",
+      "sha256": "9f62f8c659ddbde1437c9ff443baa1f7ae8d957e9a7110a0d1009e6a52beffdb"
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/linear_vector/fill_construction/tests.rs",
+      "sha256": "b89a8c5317f189602b234b4c29a9a58ec8ab7e1a2e751dd54464a4fa45864399"
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+      "sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0"
+    },
+    {
+      "path": "crates/tkernel/tests/support/linear_constructor_recovery.rs",
+      "sha256": "5f9dfb0a408d93e267e91520ce64653ef12e45fcbae9f19284655e0a3909f8fd"
+    },
+    {
+      "path": "crates/tkernel/tests/support/linear_copy_constructor_fixture.rs",
+      "sha256": "0b61e06fcdcdfbe0ffd355ca1e751b954f749b63c7a500f28aacc96ebf8cd1fc"
+    },
+    {
+      "path": "crates/tkernel/tests/support/linear_fill_constructor_fixture.rs",
+      "sha256": "1a0138e518fc0ff094383eed33cde4d80e622e35c8ebe42346eafe5180d5ca23"
+    },
+    {
+      "path": "tools/oracle/tkernel_linear_copy_constructor_rust.rs",
+      "sha256": "7169c031ce427e24b726fa03fb8dd650ef9ecb6caaa0975afc9a1021fd810c94"
+    },
+    {
+      "path": "tools/oracle/tkernel_linear_fill_constructor_rust.rs",
+      "sha256": "9ee1124681c834a1c5580374d7e849254a280a0b4b18cc3a26874cbeaf589c3d"
+    }
+  ],
+  "artifacts": {
+    "initial-integrated-clippy": {
+      "path": "porting/runtime-evidence/construction-integration-lints-initial-integrated-clippy.gz",
+      "sha256": "5408e00eecb4760b753c3012be4a308a6c8c81d75b088fd836b28868a9ec5b57"
+    },
+    "linear-unit": {
+      "path": "porting/runtime-evidence/construction-integration-lints-linear-unit.gz",
+      "sha256": "f8134b1953f7825e4895b46a725d0165646226c88c152f2fabd24a38a9f2c02e"
+    },
+    "sparse-unit": {
+      "path": "porting/runtime-evidence/construction-integration-lints-sparse-unit.gz",
+      "sha256": "5c25014da8c2df2898e754e633715251702e3b58fd375c8303f171f3a1bea2a5"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/construction-integration-lints-clippy.gz",
+      "sha256": "f9d2f5da2c3056d39dfb6bf409900be728f170c1dd69e5f4c8ee509ed2bb31be"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/construction-integration-lints-miri.gz",
+      "sha256": "6a53664e5d1a58dd2140f3d9ce844b6b185228d2aac186df42c97e5ff27f10e9"
+    },
+    "copy-oracle": {
+      "path": "porting/runtime-evidence/construction-integration-lints-copy-oracle.gz",
+      "sha256": "8447d7632d82a5ebb297d412826f0e224c2531b962a6f419b076655dc2c23a16"
+    },
+    "fill-oracle": {
+      "path": "porting/runtime-evidence/construction-integration-lints-fill-oracle.gz",
+      "sha256": "3eeedd4e407b3bf28edb5265853ed5eb61ef6fa1822f0693abdb825924ba13b3"
+    }
+  },
+  "api_implementation_credit_added": 0,
+  "legacy_mapping_credit_added": 0,
+  "integration_validation_pending": true
+}

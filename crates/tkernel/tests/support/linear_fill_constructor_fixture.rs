@@ -1,8 +1,6 @@
 //! Fill kernel observations keep the Rust owned-donor wrapper separately labeled.
 use super::LinearVector;
-#[path = "linear_constructor_item.rs"]
-mod item;
-pub use item::{CopyItem, CopyTrace};
+pub use super::item::{CopyItem, CopyTrace};
 
 pub struct FillSpec {
     pub name: &'static str,

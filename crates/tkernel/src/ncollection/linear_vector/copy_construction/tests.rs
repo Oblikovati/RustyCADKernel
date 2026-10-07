@@ -7,8 +7,7 @@ use std::{
 };
 #[path = "../../../../tests/support/linear_copy_constructor_fixture.rs"]
 mod fixture;
-#[path = "../../../../tests/support/linear_constructor_recovery.rs"]
-mod recovery;
+use super::super::constructor_test_support::{item, recovery};
 mod safety;
 use fixture::{COPY_CASES, CopySpec, CopyTrace, filled, row};
 
@@ -65,7 +64,7 @@ fn run(spec: &CopySpec) {
             outcome.as_ref().unwrap_err().downcast_ref::<usize>(),
             Some(&spec.fail)
         );
-        recovery::repair(spec.name, spec.count, &trace, allocation);
+        recovery::repair(spec.name, spec.count, &trace, allocation, assert_native);
         assert_native(&row(
             "repaired", spec, &source, result, before, &trace, false,
         ));

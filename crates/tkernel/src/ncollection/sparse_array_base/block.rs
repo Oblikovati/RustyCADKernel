@@ -15,24 +15,6 @@ pub struct SparseArrayBlock {
     pub bits: *mut SparseArrayBlockCell,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::SparseArrayBlock;
-
-    #[test]
-    fn checked_storage_rejects_native_wrapping_and_pointer_span_overflow() {
-        assert_eq!(
-            SparseArrayBlock::checked_storage_size(9, 12),
-            Some(size_of::<usize>() + 110)
-        );
-        assert_eq!(SparseArrayBlock::checked_storage_size(usize::MAX, 1), None);
-        assert_eq!(
-            SparseArrayBlock::checked_storage_size(1, isize::MAX as usize),
-            None
-        );
-    }
-}
-
 impl SparseArrayBlock {
     /// Returns the native cell width; `SparseArrayBlock::bits_per_cell() == 8`.
     pub const fn bits_per_cell() -> usize {
@@ -110,5 +92,23 @@ impl SparseArrayBlock {
         let old = unsafe { *cell & mask };
         unsafe { *cell &= !mask };
         old
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::SparseArrayBlock;
+
+    #[test]
+    fn checked_storage_rejects_native_wrapping_and_pointer_span_overflow() {
+        assert_eq!(
+            SparseArrayBlock::checked_storage_size(9, 12),
+            Some(size_of::<usize>() + 110)
+        );
+        assert_eq!(SparseArrayBlock::checked_storage_size(usize::MAX, 1), None);
+        assert_eq!(
+            SparseArrayBlock::checked_storage_size(1, isize::MAX as usize),
+            None
+        );
     }
 }
