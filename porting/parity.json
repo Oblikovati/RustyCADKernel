@@ -378545,9 +378545,9 @@
       "upstream_id": "NCollection_BaseDoubleMap::~NCollection_BaseDoubleMap() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
+      "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkernel::ncollection::DoubleMap needs no callable counterpart.",
+      "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. A Rust port of the class needs no callable counterpart.",
       "cpp_declaration_id": "3c4631bd3ab28c5c37ae7a0a6c7565f7fdb655cc3e0e853ff297c048a3ce9ef5",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
