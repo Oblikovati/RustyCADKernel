@@ -3,11 +3,16 @@
 //! traits over embedded bases; the native overrides inherited by many classes are
 //! functions (`extract_root_result`, `deduct_fill_iterator`...) or macros
 //! (`impl_extract_selection!`) the implementations call.
+mod context_modif;
+mod context_write;
 mod dispatch;
 #[cfg(test)]
 mod dispatch_tests;
 mod enums;
 mod int_param;
+#[cfg(test)]
+mod modifier_tests;
+mod modifiers;
 mod select_bases;
 mod select_chains;
 mod select_combine;
@@ -28,6 +33,8 @@ mod signature_list;
 mod signature_tests;
 mod signatures;
 
+pub use context_modif::IFSelectContextModif;
+pub use context_write::IFSelectContextWrite;
 pub use dispatch::{
     IFSelectDispGlobal, IFSelectDispPerCount, IFSelectDispPerFiles, IFSelectDispPerOne,
     IFSelectDispPerSignature, IFSelectDispatch, IFSelectDispatchBase,
@@ -37,6 +44,10 @@ pub use enums::{
     IFSelectReturnStatus,
 };
 pub use int_param::IFSelectIntParam;
+pub use modifiers::{
+    IFSelectAppliedModifiers, IFSelectGeneralModifier, IFSelectGeneralModifierBase,
+    IFSelectModifReorder, IFSelectModifier,
+};
 pub use select_bases::{
     IFSelectSelectEntityNumber, IFSelectSelectModelEntities, IFSelectSelectModelRoots,
     IFSelectSelectShared, IFSelectSelectSharing,
