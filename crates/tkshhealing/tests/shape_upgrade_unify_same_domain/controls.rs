@@ -93,7 +93,7 @@ fn initialize_clears_kept_shapes_and_preserves_safe_mode() {
     let unifier = ShapeUpgradeUnifySameDomain::new(&input, true, false, false);
     unifier.keep_shape(&junction.into_shape()).unwrap();
     unifier.set_safe_input_mode(false);
-    unifier.initialize(&input, true, false, false);
+    unifier.initialize(&input, true, false, false).unwrap();
     unifier.build().unwrap();
     assert_eq!(edge_shapes(&unifier.shape()).len(), 1);
     assert_original_endpoints_reused(&input, &unifier.shape());
@@ -109,7 +109,11 @@ fn first_two_edges(
 
 fn add_kept_shapes(unifier: &ShapeUpgradeUnifySameDomain, plural: bool, shapes: &[Shape]) {
     if plural {
-        unifier.keep_shapes(shapes).unwrap();
+        let mut map = rustycad_tkbrep::toptools::MapOfShape::default();
+        for shape in shapes {
+            map.add(shape.clone());
+        }
+        unifier.keep_shapes(&map).unwrap();
         return;
     }
     for shape in shapes {

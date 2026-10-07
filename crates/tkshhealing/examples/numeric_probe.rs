@@ -102,6 +102,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ),
     ("sh_algo_geom", sh_probe::shape_algo::geom_case),
     ("sh_algo_shape", sh_probe::shape_algo::shape_case),
+    ("sh_unify", sh_probe::unify::unify_case),
     ("sc_surface", sh_probe::custom_surface::custom_surface_case),
     ("sp_context", sh_probe::shape_process::context_case),
     ("sp_process", sh_probe::shape_process::process_case),

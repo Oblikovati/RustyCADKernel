@@ -56,6 +56,8 @@ pub mod custom_surface;
 
 pub mod shape_algo;
 
+pub mod unify;
+
 pub mod shape_process;
 
 pub mod analysis_surface;

@@ -41,6 +41,8 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_shapeconstruct').append_shapeconstruct_requests(requests)
     # ShapeConstruct package functions: B-spline conversions and JoinPCurves.
     __import__('tkshhealing_corpus_construct_package').append_construct_package_requests(requests)
+    # ShapeUpgrade_UnifySameDomain: sewn faces, revolution pieces, wires and settings.
+    __import__('tkshhealing_corpus_unify').append_unify_requests(requests)
     # ShapeAlgo_AlgoContainer: polyline approximation, wire matching and delegations.
     __import__('tkshhealing_corpus_shape_algo').append_shape_algo_requests(requests)
     # ShapeProcess and ShapeProcessAPI: contexts, sequences and operation flags.

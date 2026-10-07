@@ -238,6 +238,23 @@ ShapeUpgrade_Tool, ShapeUpgrade_RemoveLocations and ShapeUpgrade_SplitCurve
 splitter is the trait `SplitCurve` with the struct `ShapeUpgradeSplitCurve`.
 `crates/tkshhealing/tests/shape_upgrade_basics.rs` holds the behavior tests.
 
+ShapeUpgrade_UnifySameDomain was ported again in October 2026 (wave 3), this time as a
+faithful translation of the whole native algorithm (module
+`shape_upgrade/unify_same_domain`): UnifyFaces/IntUnifyFaces (the face groups of the same
+domain, the p-curves moved onto the reference surface, the seams, the periodic B-spline
+conversion with ConcatBSplines, the relocation to a new U or V origin, the wire walk with
+the rebuilt seams, SplitWire, the internal wires and the new faces merged in the
+context), UnifyEdges (MergeEdges, generateSubSeq, MergeSubSeq for lines, circles,
+degenerated edges and B-spline chains, UnionPCurves, GlueEdgesWith3DCurves, the face and
+shell fixes) and FillHistory. It replaces the earlier focused implementation, which only
+handled the paths its tests pinned. The `sh_unify` requests
+(tools/tkshhealing_corpus_unify.py) compare the result digest and the history of every
+input sub-shape with OCCT on sewn planar polygons, sewn pieces of cylinders, cones and
+spheres (faces and shells), wires and a box under ten setting variants. The existing
+unify tests pass unchanged except one premise: the merged edge of the B-spline face
+gets no stored p-curve on its plane natively (the native probe reads it through the
+planar projection of BRep_Tool::CurveOnSurface). The three remaining GTests need TKBO.
+
 Not ported yet, because they use classes of the parallel ShapeAnalysis/ShapeFix work that
 are not in this branch: ShapeUpgrade_ShellSewing (ShapeAnalysis_ShapeTolerance),
 ShapeUpgrade_SplitCurve2d and ShapeUpgrade_SplitCurve3d (ShapeAnalysis_Curve),

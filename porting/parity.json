@@ -304556,8 +304556,8 @@
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::build",
-      "status": "partial",
-      "notes": "Focused same-domain face/edge handling and exact missing-pcurve regressions are implemented. General native face-group selection and TransformPCurves for non-identical supports, axes, projection and seam handling remain unported. Passing the two missing-pcurve declarations does not establish this full API behavior; native probing preserves source pcurve identity in both fixtures."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Faithful port of Build, UnifyFaces, IntUnifyFaces, UnifyEdges and FillHistory."
     },
     {
       "upstream_id": "BRepOffset::Surface(const occ::handle<Geom_Surface>&,double,BRepOffset_Status&,bool)",
@@ -318311,8 +318311,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
       "source_sha256": "d116b92ce97ce9b7ef461e16711747dd39e5ac3c10634406846da774f46f234d",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::keep_shape",
-      "status": "partial",
-      "notes": "Native-backed KeepShape/KeepShapes and safe-input controls for vertex-protected edge chains and edge-protected face merges; tools/oracle/tkshhealing_unify_controls.md. Broader topology/history/aliasing cases remain partial; no Boolean legacy completion claim."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Edges and vertices only, as natively."
     },
     {
       "upstream_id": "ShapeUpgrade_UnifySameDomain::KeepShapes(const NCollection_Map<TopoDS_Shape, TopTools_ShapeMapHasher> &)",
@@ -318320,8 +318320,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
       "source_sha256": "d116b92ce97ce9b7ef461e16711747dd39e5ac3c10634406846da774f46f234d",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::keep_shapes",
-      "status": "partial",
-      "notes": "Native-backed KeepShape/KeepShapes and safe-input controls for vertex-protected edge chains and edge-protected face merges; tools/oracle/tkshhealing_unify_controls.md. Broader topology/history/aliasing cases remain partial; no Boolean legacy completion claim."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). KeepShape for each shape of the map."
     },
     {
       "upstream_id": "ShapeUpgrade_UnifySameDomain::SetSafeInputMode(bool)",
@@ -318329,8 +318329,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
       "source_sha256": "d116b92ce97ce9b7ef461e16711747dd39e5ac3c10634406846da774f46f234d",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::set_safe_input_mode",
-      "status": "partial",
-      "notes": "Native-backed KeepShape/KeepShapes and safe-input controls for vertex-protected edge chains and edge-protected face merges; tools/oracle/tkshhealing_unify_controls.md. Broader topology/history/aliasing cases remain partial; no Boolean legacy completion claim."
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). "
     },
     {
       "upstream_id": "ShapeUpgrade_UnifySameDomain",
@@ -318381,6 +318381,181 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(ShapeUpgradeUnifySameDomain, \"ShapeUpgrade_UnifySameDomain\", StandardTransient) at crates/tkshhealing/src/shape_upgrade/unify_same_domain.rs:39 registers descriptor \"ShapeUpgrade_UnifySameDomain\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "85cfcd7f1e7e8045ad730e449bc979f1c10aeb7dd06ec75415b60276b5152da2",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::DataMapOfFacePlane",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::DataMapOfFacePlane",
+      "status": "implemented",
+      "notes": "",
+      "cpp_declaration_id": "2542e3a3b128f9e280dff16a57762e999a9a68037b1b1fa8be916ff6963f4328"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::DataMapOfShapeMapOfShape",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::DataMapOfShapeMapOfShape",
+      "status": "implemented",
+      "notes": "",
+      "cpp_declaration_id": "fe4aeb7f1f6d0f5f8eea01848ad0037b11aebd5e332c24b3bdc74fdf52931c62"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::ShapeUpgrade_UnifySameDomain()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::empty",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Initialize path of the probe.",
+      "cpp_declaration_id": "a5914d8840e0f6b3057fe051c30c26226c73787740df4979c971fb9228714020"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::ShapeUpgrade_UnifySameDomain(const TopoDS_Shape&,const bool,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::new",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). ",
+      "cpp_declaration_id": "34408fe2b7a0a46f6ee9db6ec4de1b18eda825fd445d9c5499d8edacf0bda3b9"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::Initialize(const TopoDS_Shape&,const bool,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::initialize",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Clears the context, kept shapes, maps and history; a null history is Standard_NullObject.",
+      "cpp_declaration_id": "e8e7dc53d089e60dd1cd25be246e279362e0a2061986e3e8d2915f2180e4fd95"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::AllowInternalEdges(const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::allow_internal_edges",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). ",
+      "cpp_declaration_id": "b6cf04f66e72d9d3c6d7956f03dc4ca356e1685f7d3d0382db992dea705fab07"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::SetLinearTolerance(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::set_linear_tolerance",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). ",
+      "cpp_declaration_id": "fbb0e60f6b4331363fad9b7936d9f0132f666fc3eecbad44a59f5f501ff9e2bb"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::SetAngularTolerance(const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::set_angular_tolerance",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Clamped to Precision::Angular.",
+      "cpp_declaration_id": "0ed68cb235ed17451678e9479084b57d4423ade5f8f2c6bbc29b0ff3a9350956"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::Shape() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::shape",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). ",
+      "cpp_declaration_id": "3faa80852a9434079c147074a268a303ff97c3bf1b9b2ea033d38db4c79e2a1d"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::History() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::history",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Const accessor.",
+      "cpp_declaration_id": "4b8ab2920b0e87fac69c3dac82b157eb2d944a3630eb8fd6975ad9425630ae48"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::History()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::history",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Non-const reference: history / set_history.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::history",
+        "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::set_history"
+      ],
+      "cpp_declaration_id": "db4354be82cb4460c92554054693b0c3fb333a838f88cd03fe6fe1690107731d"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::UnifyFaces()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::unify_faces",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Protected member exposed.",
+      "cpp_declaration_id": "1387729c6d5c3fa7644ace30ee6ad8bdc00b6cf8051ac3e221bca03e9dea99c4"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::UnifyEdges()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::unify_edges",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Protected member exposed.",
+      "cpp_declaration_id": "83456c12a8ff65b4231fb589693d488c1d9bb3316841120d763fbf6510d91cea"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::FillHistory()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::fill_history",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Protected member exposed.",
+      "cpp_declaration_id": "b925ddd45722e47fee356171674fbc31a2bdfd5a4478322f43f56f68aa7f23d6"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::IntUnifyFaces(const TopoDS_Shape&,const NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,const ShapeUpgrade_UnifySameDomain::DataMapOfShapeMapOfShape&,const NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::int_unify_faces",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Protected member exposed. Native quirks kept: an edge of a new face found in no merged face is Standard_OutOfRange (an out-of-range sequence access natively).",
+      "cpp_declaration_id": "378aef46e8d41e9136f5121e10b548c9ddd850f57f994357d750234606ef1543"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::MergeEdges(NCollection_Sequence<TopoDS_Shape>&,const NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,NCollection_Sequence<ShapeUpgrade_UnifySameDomain::SubSequenceOfEdges>&,const NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::merge_edges",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Protected member exposed; the sub-sequences are a Vec of ShapeUpgradeSubSequenceOfEdges.",
+      "cpp_declaration_id": "97070a9ea070f19a0fc3437b2dd3a4cf12134b0be07ec42dcc592cd7901151ce"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::MergeSeq(NCollection_Sequence<TopoDS_Shape>&,const NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,const NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::merge_seq",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Protected member exposed.",
+      "cpp_declaration_id": "181420d1cad57a38ce29041fd3e74c7afa49cbed059024383d376227b6462c34"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::MergeSubSeq(const NCollection_Sequence<TopoDS_Shape>&,const NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,TopoDS_Edge&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::merge_sub_seq",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Protected member exposed; None is the native false.",
+      "cpp_declaration_id": "ae6eef8dcf33d945e9dfdb62ff379baecd96275757968e561ca35dedda6125d5"
+    },
+    {
+      "upstream_id": "ShapeUpgrade_UnifySameDomain::UnionPCurves(const NCollection_Sequence<TopoDS_Shape>&,TopoDS_Edge&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_UnifySameDomain.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain::union_pcurves",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_unify requests (tkshhealing_probe_unify.cxx: result digest and history of every input sub-shape). Protected member exposed.",
+      "cpp_declaration_id": "8cce0252f06aa1177f84a4c94ea15faf2e1a9f17f9b9ee3d0fce7add65d513e3"
     },
     {
       "upstream_id": "BOPTools_AlgoTools3D::IsEmptyShape(const TopoDS_Shape &)",
