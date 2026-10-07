@@ -5,10 +5,22 @@ from __future__ import annotations
 from collections import defaultdict
 import re
 from api_inventory.inputs import JSONValue
-from api_identity import leaf_name, norm_cpp, parse_upstream_id
-from api_rust_kind import select_rust_kind
-from api_rust_declaration_selectors import selected_rust_candidates, SELECTION_FAILURES
-from api_rust_reference_targets import nominal_reference_owner
+from api_cpp_configuration import (
+    CONFIGURATION_FAILURES,
+    ConfigurationEvidence,
+    INACTIVE as INACTIVE_CONFIGURATION,
+    configured_cpp_status,
+)
+from api_cpp_selectors import CppPin, INVALID_PIN, pinned_candidates, row_cpp_pin
+from api_identity import leaf_name, norm_cpp, parse_upstream_id, portable_qualified_name
+from api_rust_candidates import (
+    candidate_status,
+    row_list,
+    row_rust_candidates,
+    rust_candidates,
+    rust_crates,
+)
+from api_rust_declaration_selectors import SELECTION_FAILURES
 from api_scoped_alias_selectors import qualify_member_aliases
 from api_template_selectors import (
     constructor_candidates,
@@ -17,13 +29,6 @@ from api_template_selectors import (
     suffix_matches,
     template_parameter_match,
 )
-
-
-def row_list(document: dict[str, JSONValue], field: str) -> list[dict[str, JSONValue]]:
-    rows = document.get(field)
-    if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
-        raise ValueError(f"JSON field {field!r} must be an array of objects")
-    return rows
 
 
 def header_owners(manifest: dict[str, JSONValue]) -> dict[str, set[str]]:
@@ -77,6 +82,8 @@ def cpp_indexes(
             malformed += 1
             continue
         declaration["_toolkits"] = declaration_toolkits(declaration, owners)
+        name = portable_qualified_name(name, declaration.get("source"))
+        declaration["qualified_name"] = name
         by_name[name].append(declaration)
         if identity in by_id:
             duplicates.add(identity)
@@ -194,8 +201,12 @@ def remove_token_spans(text: str, tokens: list[tuple[str, int, int]]) -> str:
 
 
 def cpp_candidates(
-    identity: str, toolkit: str, by_name: dict[str, list[dict[str, JSONValue]]]
+    identity: str,
+    toolkit: str,
+    by_name: dict[str, list[dict[str, JSONValue]]],
+    pin: CppPin | None = None,
 ) -> tuple[str, list[dict[str, JSONValue]]]:
+    """Match an upstream id, narrowed by an explicit row pin when one is declared."""
     parsed = parse_upstream_id(identity)
     if parsed is None:
         return "invalid_upstream_id", []
@@ -217,6 +228,9 @@ def cpp_candidates(
         for row in candidates
         if row.get("api_visible") is True and toolkit in row.get("_toolkits", set())
     ]
+    # Pin before the unresolved-using check: a pinned method must not inherit the
+    # unresolved status of a using-declaration that only shares its name.
+    candidates = pinned_candidates(pin, candidates)
     unresolved = [
         row
         for row in candidates
@@ -246,161 +260,15 @@ def cpp_candidates(
     return status, candidates
 
 
-def candidate_status(candidates: list[dict[str, JSONValue]]) -> str:
-    if not candidates:
-        return "missing"
-    return "unique" if len(candidates) == 1 else "ambiguous"
-
-
-def rust_crates(
-    document: dict[str, JSONValue],
-) -> dict[str, dict[str, list[dict[str, JSONValue]]]]:
-    result = {}
-    for crate in row_list(document, "crates"):
-        crate_name = crate.get("crate")
-        if not isinstance(crate_name, str):
-            continue
-        paths: dict[str, list[dict[str, JSONValue]]] = defaultdict(list)
-        for item in crate.get("declarations", []):
-            if isinstance(item, dict) and isinstance(item.get("path"), str):
-                paths[item["path"]].append(item)
-        result[crate_name.replace("-", "_")] = dict(paths)
-    return result
-
-
-def rust_candidates(
-    rust_item: JSONValue, crates: dict[str, dict[str, list[dict[str, JSONValue]]]]
-) -> tuple[str, list[dict[str, JSONValue]]]:
-    if not isinstance(rust_item, str) or not rust_item:
-        return "no_rust_target_declared", []
-    if bool_primitive_ufcs_target(rust_item):
-        return bool_primitive_candidates(rust_item, crates)
-    prefix, separator = rust_target_prefix(rust_item)
-    if not separator or prefix not in crates:
-        return "unknown_rust_crate", []
-    candidates = crates[prefix].get(rust_item, [])
-    status = candidate_status(candidates)
-    if status == "unique" and not rust_source_is_pinned(candidates[0]):
-        return "unverifiable_source", candidates
-    return status, candidates
-
-
-def bool_primitive_ufcs_target(target: str) -> bool:
-    return target.startswith("<bool as ") and ">::" in target
-
-
-def bool_primitive_candidates(
-    target: str, crates: dict[str, dict[str, list[dict[str, JSONValue]]]]
-) -> tuple[str, list[dict[str, JSONValue]]]:
-    matches = [
-        item
-        for crate_name, paths in crates.items()
-        for item in paths.get(target, [])
-        if item.get("foreign_impl_self_primitive") == "bool"
-        and normalized_origin(item) == crate_name
-    ]
-    status = candidate_status(matches)
-    if status == "unique" and not bool_source_is_pinned(matches[0]):
-        return "unverifiable_source", matches
-    return status, matches
-
-
-def bool_source_is_pinned(item: dict[str, JSONValue]) -> bool:
-    anchor_file = item.get("foreign_impl_anchor_source_file")
-    anchor_hash = item.get("foreign_impl_anchor_source_sha256")
-    return (
-        rust_source_is_pinned(item)
-        and isinstance(anchor_file, str)
-        and bool(anchor_file)
-        and isinstance(anchor_hash, str)
-        and re.fullmatch(r"[0-9a-f]{64}", anchor_hash) is not None
-    )
-
-
-def normalized_origin(item: dict[str, JSONValue]) -> str | None:
-    origin = item.get("foreign_impl_origin_crate")
-    return origin.replace("-", "_") if isinstance(origin, str) else None
-
-
-def rust_target_prefix(target: str) -> tuple[str, bool]:
-    if target.startswith("<"):
-        owner, separator, _rest = target[1:].partition(" as ")
-        prefix, path_separator, _tail = nominal_reference_owner(owner).partition("::")
-        return prefix, bool(separator and path_separator)
-    prefix, separator, _path = target.partition("::")
-    return prefix, bool(separator)
-
-
-def row_rust_candidates(
-    row: dict[str, JSONValue],
-    crates: dict[str, dict[str, list[dict[str, JSONValue]]]],
-) -> tuple[str, list[dict[str, JSONValue]]]:
-    """Require all accessor targets; e.g. `row_rust_candidates(row, crates)`."""
-    if "rust_kind" in row:
-        selected = select_rust_kind(crates, row["rust_kind"])
-        if selected is None:
-            return "invalid_rust_kind", []
-        crates = selected
-    return rust_target_candidates(row, crates)
-
-
-def rust_target_candidates(
-    row: dict[str, JSONValue],
-    crates: dict[str, dict[str, list[dict[str, JSONValue]]]],
-) -> tuple[str, list[dict[str, JSONValue]]]:
-    """Resolve path-only or explicit declarations; `rust_target_candidates(row, crates)`."""
-    if "rust_items" not in row:
-        if "rust_declaration_selectors" in row:
-            target = row.get("rust_item")
-            paths = [target] if isinstance(target, str) else []
-            return selected_rust_candidates(row, paths, crates, rust_candidates)
-        return rust_candidates(row.get("rust_item"), crates)
-    targets = paired_rust_targets(row)
-    if targets is None:
-        return "invalid_rust_targets", []
-    if "rust_declaration_selectors" in row:
-        return selected_rust_candidates(row, targets, crates, rust_candidates)
-    matches = [rust_candidates(target, crates) for target in targets]
-    status = next((status for status, _ in matches if status != "unique"), "unique")
-    return status, [item for _, candidates in matches for item in candidates]
-
-
-def paired_rust_targets(row: dict[str, JSONValue]) -> list[str] | None:
-    """Validate an ordered target set; e.g. `paired_rust_targets(row)`."""
-    targets = row.get("rust_items")
-    if not isinstance(targets, list) or not targets:
-        return None
-    if any(not isinstance(target, str) or not target for target in targets):
-        return None
-    if len(set(targets)) != len(targets):
-        return None
-    primary = row.get("rust_item")
-    if "rust_item" in row and primary != targets[0]:
-        return None
-    return targets
-
-
-def rust_source_is_pinned(item: dict[str, JSONValue]) -> bool:
-    source_file = item.get("source_file")
-    source_hash = item.get("source_sha256")
-    return (
-        isinstance(source_file, str)
-        and bool(source_file)
-        and item.get("source_status") is None
-        and isinstance(source_hash, str)
-        and re.fullmatch(r"[0-9a-f]{64}", source_hash) is not None
-    )
-
-
 def match_api_row(
     row: dict[str, JSONValue],
     by_name: dict[str, list[dict[str, JSONValue]]],
     rust: dict[str, dict[str, list[dict[str, JSONValue]]]],
     known_sources: set[str],
+    configuration: ConfigurationEvidence | None = None,
 ) -> dict[str, JSONValue]:
-    cpp_status, cpp = cpp_candidates(
-        row.get("upstream_id", ""), row.get("toolkit", ""), by_name
-    )
+    cpp_status, cpp = row_cpp_candidates(row, by_name)
+    cpp_status = configured_cpp_status(row, cpp_status, configuration)
     rust_status, rust_rows = row_rust_candidates(row, rust)
     source_status = row.get("status", "missing_status")
     source = row.get("source")
@@ -424,21 +292,44 @@ def match_api_row(
     }
 
 
+def row_cpp_candidates(
+    row: dict[str, JSONValue], by_name: dict[str, list[dict[str, JSONValue]]]
+) -> tuple[str, list[dict[str, JSONValue]]]:
+    """Resolve a row's C++ side with its pin; e.g. `row_cpp_candidates(row, by_name)`."""
+    pin, error = row_cpp_pin(row)
+    if error is not None:
+        return INVALID_PIN, []
+    identity, toolkit = row.get("upstream_id", ""), row.get("toolkit", "")
+    return cpp_candidates(identity, toolkit, by_name, pin)
+
+
+CPP_FAILURES = {
+    "conflicting_inventory": "conflicting_cpp_inventory",
+    "unresolved_member_target": "unresolved_cpp_member_target",
+    "unstable_cpp_identity": "unstable_cpp_identity",
+    "ambiguous": "ambiguous_cpp",
+    "missing": "missing_cpp",
+}
+
+
+def cpp_resolution(parity: str, cpp: str, source_known: bool) -> str | None:
+    """Resolution decided by the C++ side alone, or None when the Rust side decides."""
+    if cpp == INVALID_PIN or cpp in CONFIGURATION_FAILURES:
+        return cpp
+    if parity == "excluded" and cpp == "missing":
+        return "unmatched_exclusion" if source_known else "stale_exclusion"
+    # A proven inactive-configuration declaration resolves like a unique match.
+    if cpp in {"unique", INACTIVE_CONFIGURATION}:
+        return None
+    return CPP_FAILURES.get(cpp, "invalid_cpp_identity")
+
+
 def resolve_status(parity: str, cpp: str, rust: str, source_known: bool = True) -> str:
     if rust in SELECTION_FAILURES:
         return rust
-    if parity == "excluded" and cpp == "missing":
-        return "unmatched_exclusion" if source_known else "stale_exclusion"
-    if cpp == "conflicting_inventory":
-        return "conflicting_cpp_inventory"
-    if cpp == "unresolved_member_target":
-        return "unresolved_cpp_member_target"
-    if cpp == "unstable_cpp_identity":
-        return "unstable_cpp_identity"
-    if cpp == "ambiguous":
-        return "ambiguous_cpp"
-    if cpp != "unique":
-        return "missing_cpp" if cpp == "missing" else "invalid_cpp_identity"
+    decided = cpp_resolution(parity, cpp, source_known)
+    if decided is not None:
+        return decided
     if parity == "upstream_unimplemented":
         return "upstream_unimplemented"
     if parity == "partial":
@@ -455,7 +346,7 @@ def resolve_status(parity: str, cpp: str, rust: str, source_known: bool = True) 
         return "missing_rust_target"
     if parity == "excluded":
         return "excluded"
-    if parity == "implemented" and rust == "unique":
+    if parity == "implemented":
         return "implemented"
     return "unhandled_parity_status"
 

@@ -29,10 +29,17 @@ from api_crosswalk import (
     rust_summary,
     suffix_matches,
 )
+from api_cpp_configuration import (
+    INACTIVE as INACTIVE_CONFIGURATION,
+    ConfigurationEvidence,
+    configuration_evidence,
+)
+from api_private_headers import split_private_header_rows
 from api_report_inputs import (
     crosswalk_input_hashes,
     mark_conflicted_declarations,
     verify_conflict_artifact,
+    verify_manifest_artifact,
 )
 from api_tool_hashes import implementation_hashes, stage_hashes
 
@@ -203,8 +210,14 @@ def toolkit_report(
                 for row in mapped
             ),
             "unclaimed_cpp_api": sum(row.get("id") not in claims for row in visible),
+            "inactive_configuration": count_inactive_configuration(mapped),
         }
     return summary
+
+
+def count_inactive_configuration(rows: list[dict[str, JSONValue]]) -> int:
+    """Rows proven to describe code outside the captured build configuration."""
+    return sum(row.get("cpp_status") == INACTIVE_CONFIGURATION for row in rows)
 
 
 def count_resolution(rows: list[dict[str, JSONValue]], resolution: str) -> int:
@@ -221,13 +234,20 @@ def report_document(
     source_headers: dict[str, JSONValue],
     rust_doc: dict[str, JSONValue],
     parity: dict[str, JSONValue],
+    configuration: ConfigurationEvidence | None = None,
 ) -> dict[str, JSONValue]:
     owners = header_owners(source_headers)
     known_sources = {header.get("path") for header in source_headers.get("headers", [])}
     by_name, duplicate_ids, malformed = cpp_indexes(cpp, owners)
     rust = rust_crates(rust_doc)
-    api_rows = row_list(parity, "api")
-    matched = [match_api_row(row, by_name, rust, known_sources) for row in api_rows]
+    # Private implementation headers are not public API; their rows count for nothing.
+    api_rows, private_rows = split_private_header_rows(
+        row_list(parity, "api"), known_sources
+    )
+    matched = [
+        match_api_row(row, by_name, rust, known_sources, configuration)
+        for row in api_rows
+    ]
     claims, duplicate_claims = row_claims(matched)
     visible, unclaimed = visible_declarations(cpp, claims)
     unresolved = unresolved_rows(matched)
@@ -247,7 +267,7 @@ def report_document(
         for row in source_headers["headers"]
         for owner in row.get("owners", [])
     }
-    return report_fields(
+    report = report_fields(
         cpp,
         cpp_manifest,
         toolkits,
@@ -260,6 +280,8 @@ def report_document(
         unresolved,
         unclaimed,
     )
+    report["private_header_rows"] = [row.get("upstream_id") for row in private_rows]
+    return report
 
 
 def visible_declarations(
@@ -377,6 +399,9 @@ def report_fields(
         "unresolved_rows": unresolved,
         "unclaimed_cpp_declarations": unclaimed,
         "excluded_rows": rows_for_resolution(matched, "excluded"),
+        "inactive_configuration_rows": [
+            row for row in matched if row.get("cpp_status") == INACTIVE_CONFIGURATION
+        ],
         "partial_rows": rows_for_resolution(matched, "partial"),
         "upstream_unimplemented_rows": rows_for_resolution(
             matched, "upstream_unimplemented"
@@ -408,6 +433,15 @@ def print_summary(report: dict[str, JSONValue]) -> None:
         )
 
 
+def read_configuration_evidence(
+    cpp_manifest: dict[str, JSONValue], directory: Path
+) -> ConfigurationEvidence:
+    """Load the hash-bound skipped ranges and header statuses of the C++ capture."""
+    skipped = read_jsonl(verify_manifest_artifact(cpp_manifest, directory, "skipped-ranges"))
+    headers = read_jsonl(verify_manifest_artifact(cpp_manifest, directory, "headers"))
+    return configuration_evidence(skipped, headers)
+
+
 def main() -> int:
     args = arguments()
     cpp = read_jsonl(args.cpp)
@@ -419,7 +453,10 @@ def main() -> int:
     source_headers = read_json(args.headers)
     rust_doc = read_json(args.rust)
     parity = read_json(args.parity)
-    report = report_document(cpp, cpp_manifest, source_headers, rust_doc, parity)
+    configuration = read_configuration_evidence(cpp_manifest, args.cpp_manifest.parent)
+    report = report_document(
+        cpp, cpp_manifest, source_headers, rust_doc, parity, configuration
+    )
     report["input_sha256"] = crosswalk_input_hashes(
         {
             key: getattr(args, key)

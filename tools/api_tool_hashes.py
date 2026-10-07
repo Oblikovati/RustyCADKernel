@@ -30,6 +30,10 @@ IMPLEMENTATION_FILES: dict[str, tuple[str, ...]] = {
     "api_crosswalk": (
         "tools/api_coverage_report.py",
         "tools/api_crosswalk.py",
+        "tools/api_cpp_selectors.py",
+        "tools/api_cpp_configuration.py",
+        "tools/api_private_headers.py",
+        "tools/api_rust_candidates.py",
         "tools/api_rust_kind.py",
         "tools/api_rust_declaration_selectors.py",
         "tools/api_rust_reference_targets.py",
