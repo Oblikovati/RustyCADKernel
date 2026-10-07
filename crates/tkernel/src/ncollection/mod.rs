@@ -177,7 +177,7 @@ pub use ubtree_filler::{BoundingTreeInsertion, NativeBoundingTree, ObjBnd, UBTre
 mod packed_map;
 pub use packed_map::{
     PackedCursor, PackedInteger, PackedMap, PackedMapIter, PackedMapNode, PackedMapOperand,
-    PackedWord, PackedWordReader,
+    PackedWord,
 };
 pub mod packed_map_algo;
 

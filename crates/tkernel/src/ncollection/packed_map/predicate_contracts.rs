@@ -4,7 +4,6 @@ use super::{PackedInteger, PackedMap};
 use crate::ncollection::packed_map_algo as algo;
 use std::collections::BTreeMap;
 use std::sync::OnceLock;
-mod callbacks;
 const EXTENTS: [usize; 9] = [
     0,
     1,

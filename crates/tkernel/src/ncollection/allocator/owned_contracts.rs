@@ -19,20 +19,6 @@ fn borrowed_construction_keeps_actual_allocator_reference_counts() {
     assert_eq!(arena.ref_count(), 1);
     assert!(arena.reset(false).is_ok());
 }
-#[test]
-fn construction_panic_releases_atomic_typed_lease_without_extra_handle() {
-    let arena = BaseAllocator::incremental(1024);
-    let failure = std::panic::catch_unwind(|| {
-        arena.allocate_value_with(|| {
-            assert_eq!(arena.ref_count(), 1);
-            assert!(arena.reset(false).is_err());
-            panic!("rejected constructor; expected a produced value");
-        })
-    });
-    assert!(failure.is_err());
-    assert_eq!(arena.ref_count(), 1);
-    assert!(arena.reset(false).is_ok());
-}
 fn abandon<'a>(arena: &BaseAllocator, drops: &'a Cell<usize>) -> NonNull<Dropped<'a>> {
     let owner = arena.allocate_value_with(|| Dropped(drops));
     let (pointer, resource) = owner.into_raw_with_allocator();

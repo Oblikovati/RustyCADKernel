@@ -1,5 +1,4 @@
-//! Native words relink directly; open custom words retain transactional hash evaluation.
-use super::super::{PackedWord, PackedWordReader};
+//! Native ReSize relinks each chain in old-bucket order into the new table.
 use super::{PackedInteger, PackedMapNode, PackedNodeTable};
 use std::num::NonZeroUsize;
 fn checked_modulus(modulus: usize) -> NonZeroUsize {
@@ -13,50 +12,17 @@ impl<T: PackedInteger> PackedNodeTable<T> {
             panic!("bucket count {modulus}; expected space for the terminal slot")
         });
         let mut replacement = Self::allocated(length);
-        match T::Word::NATIVE_REHASH_READER {
-            Some(reader) => self.rehash_native(&mut replacement, modulus, reader),
-            None => self.rehash_custom(&mut replacement, modulus),
+        for bucket in 0..self.length {
+            self.transfer_chain(bucket, &mut replacement, modulus);
         }
         replacement
     }
-    fn rehash_native(
-        &mut self,
-        replacement: &mut Self,
-        modulus: NonZeroUsize,
-        reader: PackedWordReader<T::Word>,
-    ) {
-        for bucket in 0..self.length {
-            let mut pointer = self.head_ptr(bucket);
-            self.set_head(bucket, std::ptr::null_mut());
-            while !pointer.is_null() {
-                // The private-constructor reader excludes user callbacks; target is in 1..=modulus.
-                let mask = unsafe { (*pointer).mask() };
-                let target = reader.bucket(mask, T::IS_64_BIT, modulus);
-                pointer = replacement.prepend_existing(target, pointer);
-            }
-        }
-    }
-    fn rehash_custom(&mut self, replacement: &mut Self, modulus: NonZeroUsize) {
-        // Public integer traits may panic. Resolve all hashes before changing any ownership.
-        let destinations: Vec<usize> = self
-            .nodes()
-            .map(|node| node.hash_code(modulus.get()))
-            .collect();
-        let mut targets = destinations.into_iter();
-        for bucket in 0..self.length {
-            self.transfer_custom_chain(bucket, replacement, &mut targets);
-        }
-    }
-    fn transfer_custom_chain(
-        &mut self,
-        bucket: usize,
-        replacement: &mut Self,
-        targets: &mut impl Iterator<Item = usize>,
-    ) {
+    fn transfer_chain(&mut self, bucket: usize, replacement: &mut Self, modulus: NonZeroUsize) {
         let mut pointer = self.head_ptr(bucket);
         self.set_head(bucket, std::ptr::null_mut());
         while !pointer.is_null() {
-            let target = targets.next().expect("one destination per owned node");
+            // Sealed native words: the hash is a plain cast and cannot unwind mid-relink.
+            let target = unsafe { (*pointer).hash_code(modulus.get()) };
             pointer = replacement.prepend_existing(target, pointer);
         }
     }
