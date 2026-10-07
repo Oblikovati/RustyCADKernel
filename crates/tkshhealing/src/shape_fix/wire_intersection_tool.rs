@@ -241,10 +241,13 @@ fn point_on_edge(
     pcurve: &Handle<dyn Geom2dCurve>,
     face: &Face,
 ) -> Result<rustycad_tkmath::gp::Point3, Failure> {
+    // GetPointOnEdge: the unlocated 3D curve, then the edge location's transformation.
     if BRepTool::same_parameter(edge)? {
-        let (curve, _, _) = BRepTool::curve(edge)?;
-        if !curve.is_null() {
-            return curve.value(parameter);
+        let found = BRepTool::curve_with_location(edge)?;
+        if let Some(curve) = found.curve.get() {
+            return Ok(curve
+                .value(parameter)?
+                .transformed(found.location.transformation()));
         }
     }
     let uv = pcurve.value(parameter)?;

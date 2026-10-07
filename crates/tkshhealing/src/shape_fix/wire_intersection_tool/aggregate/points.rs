@@ -102,7 +102,7 @@ pub(super) fn repair_point(
     first_index: i32,
     second_index: i32,
     first: &Edge,
-    second: &Edge,
+    second: &mut Edge,
     second_box: &BoundingBox2,
     curves: &PairCurves,
     point: IntersectionPoint,
@@ -176,21 +176,13 @@ fn repair_union(
     tool: &ShapeFixIntersectionTool,
     wire: &ShapeExtendWireData,
     first: &Edge,
-    second: &Edge,
+    second: &mut Edge,
     second_index: i32,
     second_box: &BoundingBox2,
     counts: &mut RepairCounts<'_>,
     boxes: &mut Vec<boxes::EdgeBox>,
 ) -> Result<Option<PairAction>, Failure> {
-    let mut replacement = second.clone();
-    let unioned = tool.union_vertices(
-        wire,
-        first,
-        &mut replacement,
-        second_index,
-        boxes,
-        second_box,
-    )?;
+    let unioned = tool.union_vertices(wire, first, second, second_index, boxes, second_box)?;
     if unioned {
         *counts.replaced += 1;
     }

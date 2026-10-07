@@ -130,7 +130,8 @@ fn process_pair(
     if first_index == 1 && second_index == wire.nb_edges() {
         return Ok(PairAction::Next);
     }
-    let (first, second) = (wire.edge(first_index)?, wire.edge(second_index)?);
+    // UnionVertexes replaces `second` for the segment repair that may follow.
+    let (first, mut second) = (wire.edge(first_index)?, wire.edge(second_index)?);
     if first.is_same(&second) || BRepTool::degenerated(&first)? || BRepTool::degenerated(&second)? {
         return Ok(PairAction::Next);
     }
@@ -162,8 +163,8 @@ fn process_pair(
             first_index,
             second_index,
             &first,
-            &second,
-            &first_box,
+            &mut second,
+            &second_box,
             &curves,
             candidate,
             max_vertex_tolerance,

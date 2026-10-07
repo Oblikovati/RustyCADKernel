@@ -49,7 +49,7 @@ pub(super) fn split_second_overlap(
     if endpoint_keys.0 > 0 || endpoint_keys.1 > 0 {
         return Ok((inserted, segment_index));
     }
-    inserted += split_if_success(
+    let first_inserted = split_if_success(
         tool,
         wire,
         face,
@@ -66,7 +66,13 @@ pub(super) fn split_second_overlap(
     let outside = (first_range - points.second_parameters.1)
         * (last_range - points.second_parameters.1)
         > 0.0;
-    let next_index = index + i32::from(outside);
+    // Natively the edge after the first split is num2 + dnum1 + dnum2, so it moves only
+    // when that split happened; the segment then is that edge.
+    let next_index = if outside {
+        index + first_inserted
+    } else {
+        index
+    };
     let second_inserted = split_if_success(
         tool,
         wire,
@@ -78,9 +84,9 @@ pub(super) fn split_second_overlap(
         boxes,
         counts,
     )?;
-    inserted += second_inserted;
+    inserted += first_inserted + second_inserted;
     if second_inserted > 0 {
-        segment_index = index + 1;
+        segment_index = if outside { next_index } else { index + 1 };
     }
     Ok((inserted, segment_index))
 }
