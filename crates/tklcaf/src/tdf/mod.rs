@@ -36,6 +36,7 @@ pub use closure::{TdfClosureMode, TdfClosureTool};
 pub use copy_label::TdfCopyLabel;
 pub use copy_tool::TdfCopyTool;
 pub use data::TdfData;
+pub(crate) use data_commit::{abort_until_transaction, commit_until_transaction, open_transaction};
 pub use data_set::{TdfAttributeMap, TdfDataSet, TdfLabelMap};
 pub use delta::TdfDelta;
 pub use delta_on::{

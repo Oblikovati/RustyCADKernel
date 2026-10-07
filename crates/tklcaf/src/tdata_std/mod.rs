@@ -7,7 +7,7 @@ mod integer;
 mod name;
 mod package;
 mod real;
-mod support;
+pub(crate) mod support;
 mod u_attribute;
 pub use ascii_string::TDataStdAsciiString;
 pub use generic_empty::{
