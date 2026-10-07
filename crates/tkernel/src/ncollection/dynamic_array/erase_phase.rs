@@ -53,8 +53,8 @@ impl<T> DynamicArray<T> {
         }
         self.validate_erasure_prefix()?;
         let index = self.used - 1;
-        let block = &mut self.blocks[index / self.increment];
-        let offset = index % self.increment;
+        let (block_index, offset) = self.element_coordinates(index);
+        let block = &mut self.blocks[block_index];
         let phase = EraseSizePhase::begin(&mut self.used, &mut self.needs_tail_scan);
         // Validation proves this is the final live slot; removing ownership does not move bytes.
         let slot = unsafe { block.as_mut_ptr().add(offset) };
@@ -64,19 +64,25 @@ impl<T> DynamicArray<T> {
         Ok(())
     }
     fn validate_erasure_prefix(&self) -> Result<(), Failure> {
+        if self.increment == 0 {
+            return self.validate_retained_erasure();
+        }
         for (index, block) in self.blocks.iter().enumerate() {
             let expected = self
                 .used
                 .saturating_sub(index * self.increment)
                 .min(self.increment);
             if block.len() != expected {
-                let reason = format!(
-                    "block {index} initialized length {}: expected canonical prefix length {expected}",
-                    block.len()
-                );
-                return Err(Failure::with_type("Standard_DomainError", &reason, ""));
+                return Err(erasure_prefix_mismatch(index, block.len(), expected));
             }
         }
         Ok(())
     }
+}
+
+fn erasure_prefix_mismatch(index: usize, length: usize, expected: usize) -> Failure {
+    let reason = format!(
+        "block {index} initialized length {length}: expected canonical prefix length {expected}"
+    );
+    Failure::with_type("Standard_DomainError", &reason, "")
 }
