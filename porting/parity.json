@@ -102409,6 +102409,774 @@
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. The graph, library, protocol, packet, file name and ranks are IFSelectCopiedModelArgs; the applied modifiers are returned."
     },
     {
+      "upstream_id": "IFSelect_Editor::IFSelect_Editor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditorBase::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. The protected constructor of the embedded base; bind_self records the handle the forms need."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::SetNbValues",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::set_nb_values",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange beyond the capacity."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::SetValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::set_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_NullObject for a null value in range."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::SetList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::set_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::NbValues",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::nb_values",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::TypedValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::typed_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange out of the capacity."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::IsList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::is_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::MaxList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::max_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::Name",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::EditMode",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::edit_mode",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::NameNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::name_number",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::PrintNames",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::print_names",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::PrintDefs",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::print_defs",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::MaxNameLength",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::max_name_length",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::Form",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::form",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_NullObject for an editor not bound to its handle."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::Recognize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::recognize",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::StringValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::string_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::ListEditor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::list_editor",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::ListValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::list_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::Load",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::load",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::Update",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::update",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::UpdateList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::update_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Editor::Apply",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Editor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditor::apply",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::IFSelect_ListEditor()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::IFSelect_ListEditor(const occ::handle<Interface_TypedValue>&,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::with_definition",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::LoadModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::load_model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::LoadValues",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::load_values",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::SetTouched",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::set_touched",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::ClearEdit",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::clear_edit",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Native quirk kept: without original values the touched status is kept."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::LoadEdited",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::load_edited",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Native quirk kept: the maximum 0 (no limit) refuses any non empty list."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::SetValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::set_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::AddValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::add_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange for atnum beyond the end plus one."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::Remove",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::remove",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Native defects kept: the items num to howmany are removed (a range, not a count), Standard_OutOfRange when num > howmany, and Remove(0, nb) recurses without end natively (a Standard_ProgramError here)."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::OriginalValues",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::original_values",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::EditedValues",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::edited_values",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::NbValues",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::nb_values",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::IsChanged",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::is_changed",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::IsModified",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::is_modified",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::IsAdded",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::is_added",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ListEditor::IsTouched",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ListEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectListEditor::is_touched",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::IFSelect_EditForm(const occ::handle<IFSelect_Editor>&,const bool,const bool,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. The form is built as its handle; Standard_NullObject for a null editor."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::IFSelect_EditForm(const occ::handle<IFSelect_Editor>&,const NCollection_Sequence<int>&,const bool,const bool,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::with_numbers",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. The form is built as its handle; Standard_NullObject for a null editor."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::EditKeepStatus",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::set_edit_keep_status",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. The returned reference is edit_keep_status (read) and set_edit_keep_status (write)."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::IsLoaded",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::is_loaded",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::ClearData",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::clear_data",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::SetData",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::set_data",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::SetEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::set_entity",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::SetModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::set_model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::Entity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::entity",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::Model",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::Editor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::editor",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::IsComplete",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::is_complete",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::NbValues",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::nb_values",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::NumberFromRank",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::number_from_rank",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::RankFromNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::rank_from_number",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::NameNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::name_number",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Native defect kept: the search runs to Length, so a number absent from the extraction raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::NameRank",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::name_rank",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Native defect kept: the search runs to Length, so a number absent from the extraction raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::LoadDefault",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::load_default",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::LoadData(const occ::handle<Standard_Transient>&,const occ::handle<Interface_InterfaceModel>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::load_data",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Virtual without override natively: an inherent method."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::LoadEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::load_entity",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::LoadModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::load_model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::LoadData()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::load_data_default",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::ListEditor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::list_editor",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Native quirk kept: the list status is read at the rank, not the number."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::LoadValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::load_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::LoadList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::load_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::OriginalValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::original_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange beyond the values kept."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::OriginalList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::original_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange beyond the values kept."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::EditedValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::edited_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange beyond the values kept."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::EditedList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::edited_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange beyond the values kept."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::IsModified",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::is_modified",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange beyond the values kept."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::IsTouched",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::is_touched",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange beyond the values kept."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::Modify",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::modify",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Native quirk kept: a read only (EditRead) value is not refused."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::ModifyList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::modify_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::ModifyListValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::modify_list_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::Touch",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::touch",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::TouchList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::touch_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::NbTouched",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "",
+      "status": "upstream_unimplemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Declared in the header, defined nowhere upstream."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::ClearEdit",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::clear_edit",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Native quirk kept: the bound test reads the number, not the rank."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::PrintDefs",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::print_defs",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::PrintValues",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::print_values",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::Apply",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::apply",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::Recognize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::recognize",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Virtual without override natively: an inherent method."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::ApplyData",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::apply_data",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Virtual without override natively: an inherent method."
+    },
+    {
+      "upstream_id": "IFSelect_EditForm::Undo",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_EditForm.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectEditForm::undo",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ParamEditor::IFSelect_ParamEditor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ParamEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectParamEditor::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. The editor is built as its handle, bound for its forms."
+    },
+    {
+      "upstream_id": "IFSelect_ParamEditor::AddValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ParamEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectParamEditor::add_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange beyond the room."
+    },
+    {
+      "upstream_id": "IFSelect_ParamEditor::AddConstantText",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ParamEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectParamEditor::add_constant_text",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange beyond the room."
+    },
+    {
+      "upstream_id": "IFSelect_ParamEditor::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ParamEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectParamEditor::<rustycad_tkxsbase::if_select::IFSelectEditor>::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ParamEditor::Recognize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ParamEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectParamEditor::<rustycad_tkxsbase::if_select::IFSelectEditor>::recognize",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ParamEditor::StringValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ParamEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectParamEditor::<rustycad_tkxsbase::if_select::IFSelectEditor>::string_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ParamEditor::Load",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ParamEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectParamEditor::<rustycad_tkxsbase::if_select::IFSelectEditor>::load",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ParamEditor::Apply",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ParamEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectParamEditor::<rustycad_tkxsbase::if_select::IFSelectEditor>::apply",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_ParamEditor::StaticEditor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ParamEditor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectParamEditor::static_editor",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",

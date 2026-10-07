@@ -8,8 +8,14 @@ mod context_write;
 mod dispatch;
 #[cfg(test)]
 mod dispatch_tests;
+mod edit_form;
+mod edit_form_edit;
+mod editor;
+#[cfg(test)]
+mod editor_tests;
 mod enums;
 mod int_param;
+mod list_editor;
 mod model_copier;
 mod model_copier_send;
 #[cfg(test)]
@@ -19,6 +25,7 @@ mod model_copier_whole;
 mod modifier_tests;
 mod modifiers;
 mod packet_list;
+mod param_editor;
 mod select_bases;
 mod select_chains;
 mod select_combine;
@@ -55,11 +62,14 @@ pub use dispatch::{
     IFSelectDispGlobal, IFSelectDispPerCount, IFSelectDispPerFiles, IFSelectDispPerOne,
     IFSelectDispPerSignature, IFSelectDispatch, IFSelectDispatchBase,
 };
+pub use edit_form::IFSelectEditForm;
+pub use editor::{IFSelectEditor, IFSelectEditorBase};
 pub use enums::{
     IFSelectEditValue, IFSelectPrintCount, IFSelectPrintFail, IFSelectRemainMode,
     IFSelectReturnStatus,
 };
 pub use int_param::IFSelectIntParam;
+pub use list_editor::{IFSelectListEditor, IFSelectTextList};
 pub use model_copier::IFSelectModelCopier;
 pub use model_copier_send::IFSelectCopiedModelArgs;
 pub use modifiers::{
@@ -67,6 +77,7 @@ pub use modifiers::{
     IFSelectGeneralModifierBase, IFSelectModifReorder, IFSelectModifier,
 };
 pub use packet_list::IFSelectPacketList;
+pub use param_editor::IFSelectParamEditor;
 pub use select_bases::{
     IFSelectSelectEntityNumber, IFSelectSelectModelEntities, IFSelectSelectModelRoots,
     IFSelectSelectShared, IFSelectSelectSharing,
