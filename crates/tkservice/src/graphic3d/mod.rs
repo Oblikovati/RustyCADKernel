@@ -31,10 +31,12 @@ mod clip_plane;
 mod clip_plane_capping;
 mod clip_plane_chain;
 mod clip_plane_probe;
+mod clip_plane_sequence;
 mod cube_map;
 mod cube_map_order;
 mod cube_map_packed;
 mod cube_map_separate;
+mod exceptions;
 mod flipper;
 mod hatch_style;
 mod index_buffer;
@@ -61,6 +63,7 @@ mod texture_map;
 mod texture_params;
 mod texture_root;
 mod texture_set;
+mod view_affinity;
 
 pub use array_classes::{
     Graphic3dArrayOfPoints, Graphic3dArrayOfPolygons, Graphic3dArrayOfPolylines,
@@ -101,12 +104,18 @@ pub use camera_fit::*;
 pub use camera_projection::Graphic3dCameraScalar;
 pub use camera_values::{Graphic3dCameraTile, Graphic3dWorldViewProjState};
 pub use clip_plane::{Graphic3dClipPlane, Graphic3dClipPlaneEquation, Graphic3dClipState};
+pub use clip_plane_sequence::{
+    Graphic3dSequenceOfHClipPlane, Graphic3dSequenceOfHClipPlaneIterator,
+};
 pub use cube_map::{
     Graphic3dCubeMap, Graphic3dCubeMapBase, Graphic3dCubeMapIteration, Graphic3dCubeMapMembers,
 };
 pub use cube_map_order::{Graphic3dCubeMapOrder, Graphic3dValidatedCubeMapOrder};
 pub use cube_map_packed::{Graphic3dCubeMapPacked, graphic3d_cube_map_packed_check_order};
 pub use cube_map_separate::Graphic3dCubeMapSeparate;
+pub use exceptions::{
+    group_definition_error, priority_definition_error, structure_definition_error,
+};
 pub use flipper::Graphic3dFlipper;
 pub use hatch_style::Graphic3dHatchStyle;
 pub use index_buffer::{
@@ -149,3 +158,4 @@ pub use texture_root::{
     graphic3d_textures_folder,
 };
 pub use texture_set::Graphic3dTextureSet;
+pub use view_affinity::Graphic3dViewAffinity;

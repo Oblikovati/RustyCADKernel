@@ -460464,6 +460464,238 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::m_count_aspect",
       "status": "implemented",
       "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator::Iterator()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::default",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator::Iterator(const Graphic3d_SequenceOfHClipPlane &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::new",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator::Iterator(const occ::handle<Graphic3d_SequenceOfHClipPlane> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::from_handle",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator::Init(const Graphic3d_SequenceOfHClipPlane &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::init",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator::Init(const occ::handle<Graphic3d_SequenceOfHClipPlane> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::init_handle",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. A null handle empties the iterator, as natively."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Graphic3d_SequenceOfHClipPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::default",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::ToOverrideGlobal",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::to_override_global",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::SetOverrideGlobal",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::set_override_global",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::IsEmpty",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::is_empty",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::size",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Append",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::append",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Remove(const occ::handle<Graphic3d_ClipPlane> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::remove",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Remove(Graphic3d_SequenceOfHClipPlane::Iterator &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::remove_at",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. An iterator past the end raises Standard_OutOfRange with its position (natively a null node dereference)."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Clear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::clear",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::First",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::first",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. An empty sequence raises Standard_NoSuchObject, as the NCollection_Sequence::First Raise_if does."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::myItems",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::items",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. The protected field is private shared state, read through items()."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::myToOverrideGlobal",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::to_override_global",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. The protected field is private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_ViewAffinity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ViewAffinity.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dViewAffinity",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_ViewAffinity::Graphic3d_ViewAffinity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ViewAffinity.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dViewAffinity::default",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_ViewAffinity::IsVisible",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ViewAffinity.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dViewAffinity::is_visible",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. View ids outside 0..31 shift modulo 32, as the x86 shift does (natively undefined behaviour)."
+    },
+    {
+      "upstream_id": "Graphic3d_ViewAffinity::SetVisible(const bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ViewAffinity.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dViewAffinity::set_visible",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_ViewAffinity::SetVisible(const int,const bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ViewAffinity.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dViewAffinity::set_view_visible",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_ViewAffinity::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ViewAffinity.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dViewAffinity::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_GroupDefinitionError",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_GroupDefinitionError.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::group_definition_error",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_PriorityDefinitionError",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PriorityDefinitionError.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::priority_definition_error",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_StructureDefinitionError",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_StructureDefinitionError.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::structure_definition_error",
+      "status": "implemented",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
     }
   ],
   "tests": [
