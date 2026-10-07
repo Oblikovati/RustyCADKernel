@@ -524325,6 +524325,1502 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Typedef of a raw V3d_Viewer pointer: Rust has no raw object pointers; a view refers to its viewer with a WeakHandle<V3dViewer> (V3dView::viewer returns the upgraded handle)."
+    },
+    {
+      "upstream_id": "AIS_DS_Displayed",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_DisplayStatus.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrDisplayStatus::AIS_DS_DISPLAYED",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
+    },
+    {
+      "upstream_id": "AIS_DS_Erased",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_DisplayStatus.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrDisplayStatus::AIS_DS_ERASED",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
+    },
+    {
+      "upstream_id": "AIS_DS_None",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_DisplayStatus.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrDisplayStatus::AIS_DS_NONE",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
+    },
+    {
+      "upstream_id": "PrsMgr_DisplayStatus",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_DisplayStatus.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrDisplayStatus",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
+    },
+    {
+      "upstream_id": "PrsMgr_DisplayStatus_Displayed",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_DisplayStatus.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrDisplayStatus::Displayed",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
+    },
+    {
+      "upstream_id": "PrsMgr_DisplayStatus_Erased",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_DisplayStatus.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrDisplayStatus::Erased",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
+    },
+    {
+      "upstream_id": "PrsMgr_DisplayStatus_None",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_DisplayStatus.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrDisplayStatus::None",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_ListOfPresentableObjects.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::AcceptDisplayMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::accept_display_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::AddChild",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::add_child",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::AddChildWithCurrentTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::add_child_with_current_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::AddClipPlane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::add_clip_plane",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Attributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::attributes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::BoundingBox",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::bounding_box",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Children",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::children",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::ClipPlanes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::clip_planes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Color",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::color",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::CombinedParentTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::combined_parent_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Compute",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::compute",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::CurrentFacingModel",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::current_facing_model",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::DefaultDisplayMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::default_display_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::DisplayMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::display_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::DisplayStatus",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::display_status",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::DumpJson",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::dump_json",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::DynamicHilightAttributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::dynamic_hilight_attributes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Fill",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::fill",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::HasColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::has_color",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::HasDisplayMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::has_display_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::HasHilightMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::has_hilight_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::HasMaterial",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::has_material",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::HasOwnPresentations",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::has_own_presentations",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::HasPolygonOffsets",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::has_polygon_offsets",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::HasTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::has_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::HasWidth",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::has_width",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::HilightAttributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::hilight_attributes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::HilightMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::hilight_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::InversedTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::inversed_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::IsInfinite",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::is_infinite",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::IsMutable",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::is_mutable",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::IsTransparent",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::is_transparent",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::LocalTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::local_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::LocalTransformationGeom",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::local_transformation_geom",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Material",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::material",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Parent",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::parent",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::PolygonOffsets",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::polygon_offsets",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Presentations",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::presentations",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::PrsMgr_PresentableObject",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectBase::new",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::RecomputeTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::recompute_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::RemoveChild",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::remove_child",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::RemoveChildWithRestoreTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::remove_child_with_restore_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::RemoveClipPlane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::remove_clip_plane",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::ResetTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::reset_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetAttributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_attributes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetClipPlanes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_clip_planes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_color",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetCombinedParentTransform",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_combined_parent_transform",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetCurrentFacingModel",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::set_current_facing_model",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetDisplayMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::set_display_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetDynamicHilightAttributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_dynamic_hilight_attributes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetHilightAttributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_hilight_attributes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetHilightMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::set_hilight_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetInfiniteState",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::set_infinite_state",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetIsoOnTriangulation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::set_iso_on_triangulation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetLocalTransformation(const gp_Trsf &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::set_local_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetLocalTransformation(const occ::handle<TopLoc_Datum3D> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_local_transformation_datum",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetMaterial",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_material",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetMutable",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_mutable",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetPolygonOffsets",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_polygon_offsets",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetPropagateVisualState",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::set_propagate_visual_state",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetToUpdate()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::set_to_update_all",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetToUpdate(int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::set_to_update",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetTransformPersistence",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_transform_persistence",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetTransparency",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_transparency",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetTypeOfPresentation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::set_type_of_presentation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetWidth",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_width",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SetZLayer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_z_layer",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::SynchronizeAspects",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::synchronize_aspects",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::ToBeUpdated(bool) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::to_be_updated",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::ToBeUpdated(NCollection_List<int> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectUpdates::to_be_updated_modes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::ToPropagateVisualState",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::to_propagate_visual_state",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::TransformPersistence",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::transform_persistence",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Transformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::TransformationGeom",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::transformation_geom",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Transparency",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::transparency",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::TypeOfPresentation3d",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::type_of_presentation3d",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UnsetAttributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::unset_attributes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UnsetColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::unset_color",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UnsetDisplayMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::unset_display_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UnsetHilightAttributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::unset_hilight_attributes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UnsetHilightMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::unset_hilight_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UnsetMaterial",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::unset_material",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UnsetTransparency",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::unset_transparency",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UnsetWidth",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::unset_width",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Update(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectUpdates::update_all",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Update(int,bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectUpdates::update_mode",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UpdateClipping",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::update_clipping",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UpdatePresentations",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectUpdates::update_presentations",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::UpdateTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::update_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::ViewAffinity",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::view_affinity",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::Width",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::width",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::ZLayer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectMembers::z_layer",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::computeHLR",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::compute_hlr",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::getIdentityTrsf",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::prs_mgr_identity_trsf",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::hasOwnColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::has_own_color",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::hasOwnMaterial",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::has_own_material",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myChildren",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::children",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myClipPlanes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::clip_planes",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myCombinedParentTransform",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::combined_parent_transform",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myCurrentFacingModel",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::current_facing_model",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myDisplayStatus",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::display_status",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myDrawer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::drawer",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myDynHilightDrawer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::dyn_hilight_drawer",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myHasOwnPresentations",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::has_own_presentations",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myHilightDrawer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::hilight_drawer",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myInfiniteState",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::infinite_state",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myInvTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::inv_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myIsMutable",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::is_mutable",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myLocalTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::local_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myOwnWidth",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::own_width",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myParent",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::parent",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myPresentations",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::presentations",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myToPropagateVisualState",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::to_propagate_visual_state",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myTransformPersistence",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::transform_persistence",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myTypeOfPresentation3d",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::type_of_presentation3d",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::myViewAffinity",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectFields::view_affinity",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::recomputeComputed",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectUpdates::recompute_computed",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::replaceAspects",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObjectUpdates::replace_aspects",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentableObject::setLocalTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject::set_local_transformation_datum",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentableObject mapping (v3d-design.md section 5): the abstract class is the trait PrsMgrPresentableObject over an embedded PrsMgrPresentableObjectBase (the protected fields in one SharedState); each virtual member is a trait method whose default body is the prs_mgr_* function of the native base body; the non-virtual members are the blanket traits PrsMgrPresentableObjectMembers and PrsMgrPresentableObjectUpdates; out arguments are returned; members that raise natively (singular transformations, material checks) return Result. Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::Clear",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::<rustycad_tkservice::graphic3d::Graphic3dStructureSource>::clear",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::Compute",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::<rustycad_tkservice::graphic3d::Graphic3dStructureSource>::compute",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::Display",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::<rustycad_tkservice::graphic3d::Graphic3dStructureSource>::display",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::DumpJson",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::<rustycad_tkservice::graphic3d::Graphic3dStructureSource>::dump_json",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::Erase",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::<rustycad_tkservice::graphic3d::Graphic3dStructureSource>::erase",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::Highlight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::highlight_with",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::IsDisplayed",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::<rustycad_tkservice::graphic3d::Graphic3dStructureSource>::is_displayed",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::Mode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::mode",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::MustBeUpdated",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::must_be_updated",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::Presentation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::presentation",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::PresentationManager",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::presentation_manager",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::PrsMgr_Presentation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::new",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::RecomputeTransformation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::<rustycad_tkservice::graphic3d::Graphic3dStructureSource>::recompute_transformation",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::SetUpdateStatus",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::set_update_status",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::Unhighlight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::unhighlight_restore",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::computeHLR",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::<rustycad_tkservice::graphic3d::Graphic3dStructureSource>::compute_hlr",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::display",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentation::display_for",
+      "status": "implemented",
+      "notes": "PrsMgr_Presentation mapping (v3d-design.md section 5): a Graphic3d structure subclass that embeds Graphic3dStructureBase and overrides Display, Erase, Clear, IsDisplayed, Compute, computeHLR, RecomputeTransformation and DumpJson in Graphic3dStructureSource; Highlight/Unhighlight are highlight_with/unhighlight_restore (the base UnHighlight keeps its name), the protected display is display_for; the object is a weak handle (a raw pointer natively)."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::myBeforeHighlightState",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::prs_mgr::PrsMgrPresentation (v3d-design.md section 1); its value is reached through the ported accessors."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::myMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::prs_mgr::PrsMgrPresentation (v3d-design.md section 1); its value is reached through the ported accessors."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::myMustBeUpdated",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::prs_mgr::PrsMgrPresentation (v3d-design.md section 1); its value is reached through the ported accessors."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::myPresentableObject",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::prs_mgr::PrsMgrPresentation (v3d-design.md section 1); its value is reached through the ported accessors."
+    },
+    {
+      "upstream_id": "PrsMgr_Presentation::myPresentationManager",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::prs_mgr::PrsMgrPresentation (v3d-design.md section 1); its value is reached through the ported accessors."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::AddToImmediateList",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::add_to_immediate_list",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::BeginImmediateDraw",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::begin_immediate_draw",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::Clear",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::clear",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::ClearImmediateDraw",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::clear_immediate_draw",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::Color",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::color",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::Connect",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::connect",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::Display",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::display",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::DisplayPriority",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::display_priority",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::EndImmediateDraw",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::end_immediate_draw",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::Erase",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::erase",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::GetZLayer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::get_z_layer",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::HasPresentation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::has_presentation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::IsDisplayed",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::is_displayed",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::IsHighlighted",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::is_highlighted",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::IsImmediateModeOn",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::is_immediate_mode_on",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::Presentation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::presentation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::PrsMgr_PresentationManager",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::new",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::RedrawImmediate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::redraw_immediate",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::RemovePresentation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::remove_presentation",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::SetDisplayPriority",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::set_display_priority",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::SetVisibility",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::set_visibility",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::SetZLayer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::set_z_layer",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::StructureManager",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::structure_manager",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::Transform",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::transform",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::Unhighlight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::unhighlight",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::Update",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::update",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::UpdateHighlightTrsf",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager::update_highlight_trsf",
+      "status": "implemented",
+      "notes": "PrsMgr_PresentationManager mapping: a transient struct over the structure manager with the immediate lists in one SharedState; the members propagate to the children as natively; Display, Update, Presentation, Color and Connect return the Failure of the object computation; Transform of a missing presentation raises Standard_NullObject (a null dereference natively). Covered by tests/prs_mgr_test.rs."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::myImmediateList",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager (v3d-design.md section 1); its value is reached through the ported accessors."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::myImmediateModeOn",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager (v3d-design.md section 1); its value is reached through the ported accessors."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::myStructureManager",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager (v3d-design.md section 1); its value is reached through the ported accessors."
+    },
+    {
+      "upstream_id": "PrsMgr_PresentationManager::myViewDependentImmediateList",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::prs_mgr::PrsMgrPresentationManager (v3d-design.md section 1); its value is reached through the ported accessors."
+    },
+    {
+      "upstream_id": "PrsMgr_TOP_AllView",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_TypeOfPresentation3d.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrTypeOfPresentation3d::AllView",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
+    },
+    {
+      "upstream_id": "PrsMgr_TOP_ProjectorDependant",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_TypeOfPresentation3d.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PRS_MGR_TOP_PROJECTOR_DEPENDANT",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
+    },
+    {
+      "upstream_id": "PrsMgr_TOP_ProjectorDependent",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_TypeOfPresentation3d.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrTypeOfPresentation3d::ProjectorDependent",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
+    },
+    {
+      "upstream_id": "PrsMgr_TypeOfPresentation3d",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/PrsMgr/PrsMgr_TypeOfPresentation3d.hxx",
+      "rust_item": "rustycad_tkv3d::prs_mgr::PrsMgrTypeOfPresentation3d",
+      "status": "implemented",
+      "notes": "PrsMgr enumeration: a #[repr(i32)] Rust enum with the native values; the AIS_DS_* aliases are associated constants and PrsMgr_TOP_ProjectorDependant is a module constant."
     }
   ],
   "tests": [
