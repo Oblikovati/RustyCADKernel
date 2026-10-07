@@ -112,10 +112,8 @@ pub use base_map::{
 mod chained_slots;
 mod slot_chains;
 pub use slot_chains::{HashBucketChain, HashBucketTable};
-mod double_map_node;
-mod native_noexcept;
-pub use double_map_node::{DoubleMapNode, DoubleMapNodeOwner};
 mod data_map;
+mod native_noexcept;
 pub use data_map::{DataMap, DataMapItems, DataMapIterator, DataMapIteratorMut};
 
 mod map;
@@ -136,10 +134,7 @@ pub use indexed_data_map::{
 };
 
 mod double_map;
-pub use double_map::{
-    DoubleMap, DoubleMapItems, DoubleMapIterator, DoubleMapObservation, DoubleMapObserver,
-    DoubleMapValues,
-};
+pub use double_map::{DoubleMap, DoubleMapItems, DoubleMapIterator, DoubleMapValues};
 
 mod flat_map;
 mod flat_table;

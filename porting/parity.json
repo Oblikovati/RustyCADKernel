@@ -82884,7 +82884,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
+      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose two bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode(TheKey1Type&&,const TheKey2Type&,NCollection_ListNode*,NCollection_ListNode*)",
@@ -82892,7 +82892,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
+      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose two bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode(const TheKey1Type&,TheKey2Type&&,NCollection_ListNode*,NCollection_ListNode*)",
@@ -82900,7 +82900,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
+      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose two bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode(TheKey1Type&&,TheKey2Type&&,NCollection_ListNode*,NCollection_ListNode*)",
@@ -82908,7 +82908,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
+      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose two bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode::Key1()",
@@ -82916,7 +82916,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
+      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose two bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode::Key1() const",
@@ -82924,7 +82924,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
+      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose two bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode::Key2() const",
@@ -82932,7 +82932,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
+      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose two bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode::Next2()",
@@ -82940,7 +82940,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
+      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose two bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode::delNode(NCollection_ListNode*,occ::handle<NCollection_BaseAllocator>&)",
@@ -82948,7 +82948,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
+      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose two bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
       "upstream_id": "NCollection_DoubleMap::Iterator()",
@@ -377875,7 +377875,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
+      "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose two bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
       "upstream_id": "NCollection_DoubleMap(NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&&)",
@@ -378075,7 +378075,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
       "status": "excluded",
-      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust ncollection::DoubleMap keeps its nodes private in allocator-owned storage; every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
+      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust ncollection::DoubleMap keeps its pairs private in a slot vector indexed by two slot-index bucket chains; every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
     },
     {
       "upstream_id": "NCollection_DoubleMap::Iterator",

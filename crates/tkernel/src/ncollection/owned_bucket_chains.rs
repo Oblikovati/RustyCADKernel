@@ -10,8 +10,10 @@ mod lookup;
 mod range;
 #[cfg(test)]
 pub(super) use range::BucketNodeRange;
+#[cfg(test)]
 mod position;
-pub(super) use position::BucketChainPosition;
+#[cfg(test)]
+use position::BucketChainPosition;
 mod resize;
 mod topology;
 pub(super) struct OwnedBucketChains<N: CanonicalMapNode> {

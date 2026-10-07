@@ -39,6 +39,7 @@ fn cursor_covariant<'short>(
 }
 fn all_traits<T: Send + Sync + Unpin + UnwindSafe + RefUnwindSafe>() {}
 fn movable<T: Send + Unpin>() {}
+fn unwind<T: UnwindSafe>() {}
 #[test]
 fn owner_and_ranges_preserve_baseline_variance_and_auto_traits() {
     all_traits::<DoubleMap<i32, i32>>();
@@ -49,7 +50,8 @@ fn owner_and_ranges_preserve_baseline_variance_and_auto_traits() {
     movable::<DoubleMap<PhantomPinned, PhantomPinned>>();
     assert_not!(DoubleMap<Cell<i32>, i32>, Sync);
     assert_not!(DoubleMap<i32,Cell<i32>>,Sync);
-    assert_not!(DoubleMap<Cell<i32>, i32>, UnwindSafe);
+    // Owned keys follow std collections: Vec<Cell<i32>> is UnwindSafe but not RefUnwindSafe.
+    unwind::<DoubleMap<Cell<i32>, i32>>();
     assert_not!(DoubleMap<i32,Cell<i32>>,RefUnwindSafe);
     assert_not!(DoubleMap<Rc<i32>, i32>, Send);
     assert_not!(DoubleMap<i32,Rc<i32>>,Send);
@@ -82,20 +84,6 @@ fn readonly_range_can_cross_threads_without_sending_local_hashers() {
                 .join()
                 .unwrap(),
             6
-        )
-    });
-}
-#[test]
-fn observer_is_thread_safe_without_exposing_non_send_payloads() {
-    let map = super::observation_fixture::CallbackTrace::new().map(Default::default());
-    let observer = map.observer();
-    std::thread::scope(|scope| {
-        assert_eq!(
-            scope
-                .spawn(move || observer.snapshot().size)
-                .join()
-                .unwrap(),
-            0
         )
     });
 }
