@@ -95,7 +95,38 @@ session holds `DrawPluginLibraries`: plugin libraries registered by file name wi
 factory, the model of OCCT's static build (`OCCT_NO_PLUGINS`). The resource lookup, the
 cache by key and the `Draw_Failure` texts (with glibc `dlerror()` wording) are kept.
 
-## 5. Checking against native DRAWEXE
+## 5. Drawables, DrawTrSurf and DBRep
+
+- `Draw_Drawable3D` is the trait `Drawable3D`; a drawable is shared as
+  `Rc<dyn Drawable3D>` and keeps its common state in a `Drawable3DBase` with interior
+  mutability. `DrawOn`, `Copy`, `Dump` and `Save` return `Result`: the C++ methods may
+  throw while they evaluate geometry, and the failure travels through the viewer
+  (display, repaint, pick, PostScript, fit) and `Draw::Set` to the command.
+- A C++ subclass is composition: `DrawTrSurf_BSplineCurve` embeds a `DrawTrSurfCurve`,
+  which embeds a `DrawTrSurfDrawable`. Each drawable answers `Drawable3D::ancestor` for
+  its embedded part, so `downcast_kind::<T>()` finds `T` in a subclass as
+  `occ::down_cast` does. Members a C++ subclass inherits live on the shared part
+  (`CurveStyle`, `PolesStyle`, `KnotsStyle`, the surface iso settings); the virtual
+  `ShowIsos`/`ClearIsos` of the BSpline surface keep their override as a flag of the
+  surface part.
+- The function-local statics of the packages above Draw (`DrawTrSurf::Parameters()`,
+  `DBRep::Parameters()`) are per-session package state (`DrawSession::package_state`).
+  Restore factories receive the session and return `Result<Option<_>>` (a failing
+  shape read leaves `brestore` with the error, as the C++ exception does).
+- `Save` has no session parameter but reads `Draw::GetProgressBar()`: the indicator a
+  session installs is also published to `draw::active_progress_bar` (per thread). The
+  pick statics of `DBRep_DrawableShape` (`LastPick`) are per thread for the same
+  reason (`DrawOn` only receives the display).
+- `Standard_OStream`/`Standard_IStream` of the DRAW files are the text streams
+  `DrawOStream`/`DrawIStream`; they hand their bytes to the TKernel `IoStream` (GeomTools,
+  BRepTools) or to `std::io` (Poly) and continue at the position the reader stopped.
+- `std::cout` reports of library code (iso builder, normals) go to a `DrawConsole`
+  parameter (the process console in `drawexe`).
+- The native persistence classes (GeomTools, BRepTools and BinTools shape sets, Poly)
+  are the existing TKG2d/TKG3d/TKBRep/TKMath ports; DRAW uses them and does not extend
+  them (user decision 2026-09).
+
+## 6. Checking against native DRAWEXE
 
 `tools/verify_tkdraw_oracle.py --native-build <build>` runs every
 `crates/tkdraw/tests/oracle/*.tcl` script with `-b -f` on the native DRAWEXE of the build
@@ -104,10 +135,11 @@ and on the Rust `drawexe`, both with an empty `DRAWDEFAULT`, and compares the ou
 integration test `drawexe_oracle` compares the Rust executable with the recorded outputs
 without a native build. The scripts cover the interpreter (results, errors, help and
 group registration, log, echo), the expression language, variables and protection,
-the basic, graphic (batch), unit and message commands, and `bsave`/`brestore` of
-numbers.
+the basic, graphic (batch), unit and message commands, `bsave`/`brestore`, every
+DrawTrSurf drawable and command, and the DBRep commands on a BRep file. Batch mode never
+draws; the drawing paths are unit-tested on a recording window system.
 
-## 6. Deviations (each is documented at its code)
+## 7. Deviations (each is documented at its code)
 
 - `~Draw_Interpretor` calls `Tcl_Exit(0)`, ending the process. A Rust value is dropped in
   tests, so `drawexe` calls `Tcl_Exit(0)` explicitly at the end instead.
@@ -123,10 +155,17 @@ numbers.
   `wzoom` in batch mode (zero coordinates), `Atof` past a missing `)`.
 - `dperf` reports the session's `PerfRegistry` (the Rust meters have no process-wide
   registry).
+- A drawable restored from an unreadable record keeps a null geometry; drawing or
+  dumping it fails with `Standard_NullObject` where C++ dereferences the null handle.
+- `Draw::Get(".")` reports a pick that fails while drawing on the error console and
+  returns nothing (every caller of `Draw::Get` would otherwise need a failure path);
+  `clpoles`/`shpoles`/`clknots`/`shknots` pick once where C++ calls `Draw::Get` once
+  per spline kind it tries.
+- `normals` takes the faces in exploration order; the C++ map of faces iterates in
+  object-address order.
 
-## 7. Waiting for other toolkits
+## 8. Waiting for other toolkits
 
 - The native window backend (section 3) and `xwd` snapshots (`Image_AlienPixMap`) wait
   for TKService.
-- DBRep and DrawTrSurf need their own drawables; their status is in
-  `docs/tkdraw-progress.md`.
+- The status of the packages is in `docs/tkdraw-progress.md`.
