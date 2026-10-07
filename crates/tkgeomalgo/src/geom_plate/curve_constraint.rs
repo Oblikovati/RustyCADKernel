@@ -155,6 +155,38 @@ impl GeomPlateCurveConstraint {
         Ok(Self::from_parts(state, lprop))
     }
 
+    /// The fields a derived constructor assigns, as the native protected members are
+    /// (`BRepFill_CurveConstraint(Boundary, Order, ...)` sets `myFrontiere`, the
+    /// tolerances, the order, the point count, the G0..G2 flags and the surface of
+    /// `myLProp` itself, the surface of a face included): a constraint on the curve on
+    /// surface whose local properties are those of `surface`; the derived class checks
+    /// the order and the boundary first. `tols` is `[TolDist, TolAng, TolCurv]`;
+    /// `GeomPlateCurveConstraint::from_derived_state(&on_surface, 1, 10, [1e-4, 0.01, 0.1], &surface)?`.
+    pub fn from_derived_state(
+        frontiere: &Handle<Adaptor3dCurveOnSurface>,
+        order: i32,
+        npt: i32,
+        tols: [f64; 3],
+        surface: &Handle<dyn rustycad_tkg3d::geom::GeomSurface>,
+    ) -> Result<Self, Failure> {
+        let [tol_dist, tol_ang, tol_curv] = tols;
+        let mut lprop: SLProps = SLProps::without_surface(2, tol_dist)?;
+        let state = CurveConstraintState {
+            frontiere: frontiere.clone(),
+            nb_points: npt,
+            order,
+            const_g0: true,
+            const_g1: true,
+            const_g2: true,
+            tol_dist,
+            tol_ang,
+            tol_curv,
+            ..CurveConstraintState::empty()
+        };
+        lprop.set_surface(surface.clone());
+        Ok(Self::from_parts(state, lprop))
+    }
+
     /// Sets the order (`SetOrder`); `c.set_order(1)`.
     pub fn set_order(&self, order: i32) {
         self.state.write().order = order;

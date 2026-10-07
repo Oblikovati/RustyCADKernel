@@ -431260,6 +431260,254 @@
       "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillDraft; each member is mapped by its own row."
     },
     {
+      "upstream_id": "BRepFill_Filling",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillFilling; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::BRepFill_Filling(int,int,int,bool,double,double,double,double,int,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::SetConstrParam(double,double,double,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::set_constr_param",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::SetResolParam(int,int,int,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::set_resol_param",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::SetApproxParam(int,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::set_approx_param",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::LoadInitSurface(const TopoDS_Face&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::load_init_surface",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::Add(const TopoDS_Edge&,GeomAbs_Shape,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::add_edge",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::Add(const TopoDS_Edge&,const TopoDS_Face&,GeomAbs_Shape,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::add_edge_on_face",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::Add(const TopoDS_Face&,GeomAbs_Shape)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::add_face",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::Add(const gp_Pnt&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::add_point",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::Add(double,double,const TopoDS_Face&,GeomAbs_Shape)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::add_point_on_face",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::Build()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::build",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::Face() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::face",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::G0Error() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::g0_error",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::G1Error() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::g1_error",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::G2Error() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::g2_error",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::G0Error(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::g0_error_of",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::G1Error(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::g1_error_of",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_Filling::G2Error(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling::g2_error_of",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
+    },
+    {
+      "upstream_id": "BRepFill_CurveConstraint",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCurveConstraint",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillCurveConstraint; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_CurveConstraint::BRepFill_CurveConstraint(const occ::handle<Adaptor3d_CurveOnSurface>&,int,int,double,double,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCurveConstraint::on_surface",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CurveConstraint.cxx; Rust has no class inheritance, so the constructors return the GeomPlate_CurveConstraint they initialize (through GeomPlateCurveConstraint::from_derived_state, which sets the fields the derived constructor assigns natively). Exercised by the bf_filling requests of tools/verify_tkbool_numeric.py. Native quirks kept: an order outside -1..=2 is a Standard_Failure; the surface of the local properties is that of a GeomAdaptor_Surface or the located surface of a BRepAdaptor_Surface face."
+    },
+    {
+      "upstream_id": "BRepFill_CurveConstraint::BRepFill_CurveConstraint(const occ::handle<Adaptor3d_Curve>&,int,int,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CurveConstraint.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCurveConstraint::with_curve",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_CurveConstraint.cxx; Rust has no class inheritance, so the constructors return the GeomPlate_CurveConstraint they initialize (through GeomPlateCurveConstraint::from_derived_state, which sets the fields the derived constructor assigns natively). Exercised by the bf_filling requests of tools/verify_tkbool_numeric.py. Native quirks kept: an order outside -1..=2 is a Standard_Failure; the surface of the local properties is that of a GeomAdaptor_Surface or the located surface of a BRepAdaptor_Surface face."
+    },
+    {
+      "upstream_id": "BRepFill_CurveConstraint::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CurveConstraint.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type = GeomPlate_CurveConstraint that DEFINE_STANDARD_RTTIEXT(BRepFill_CurveConstraint, GeomPlate_CurveConstraint) expands: Rust has no class inheritance to name; the constructors return the GeomPlate_CurveConstraint itself, so there is no public item to port."
+    },
+    {
+      "upstream_id": "BRepFill_EdgeFaceAndOrder",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeFaceAndOrder.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdgeFaceAndOrder",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillEdgeFaceAndOrder; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_EdgeFaceAndOrder::BRepFill_EdgeFaceAndOrder()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeFaceAndOrder.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdgeFaceAndOrder::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_EdgeFaceAndOrder.cxx; the fields are private (friend BRepFill_Filling) and read by the filling only. The uninitialized native order of the default constructor is C0."
+    },
+    {
+      "upstream_id": "BRepFill_EdgeFaceAndOrder::BRepFill_EdgeFaceAndOrder(const TopoDS_Edge&,const TopoDS_Face&,GeomAbs_Shape)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeFaceAndOrder.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdgeFaceAndOrder::with_edge",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_EdgeFaceAndOrder.cxx; the fields are private (friend BRepFill_Filling) and read by the filling only. The uninitialized native order of the default constructor is C0."
+    },
+    {
+      "upstream_id": "BRepFill_FaceAndOrder",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_FaceAndOrder.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFaceAndOrder",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillFaceAndOrder; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_FaceAndOrder::BRepFill_FaceAndOrder()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_FaceAndOrder.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFaceAndOrder::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_FaceAndOrder.cxx; the fields are private (friend BRepFill_Filling) and read by the filling only. The uninitialized native order of the default constructor is C0."
+    },
+    {
+      "upstream_id": "BRepFill_FaceAndOrder::BRepFill_FaceAndOrder(const TopoDS_Face&,GeomAbs_Shape)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_FaceAndOrder.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFaceAndOrder::with_face",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_FaceAndOrder.cxx; the fields are private (friend BRepFill_Filling) and read by the filling only. The uninitialized native order of the default constructor is C0."
+    },
+    {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
