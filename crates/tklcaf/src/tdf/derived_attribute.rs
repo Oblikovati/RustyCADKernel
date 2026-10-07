@@ -4,13 +4,18 @@
 //! `TDF_DerivedAttribute`: the process-wide registry of attribute types by name.
 //!
 //! Natively `IMPLEMENT_DERIVED_ATTRIBUTE` registers each creator from a static initializer
-//! when its library loads. Rust has no static initializers: a toolkit calls
-//! [`TdfDerivedAttribute::register`] for its attributes (TKLCAF does it in
-//! `tdata_std::register_derived_attributes`) before the registry is read.
+//! when its library loads. Rust has no static initializers: the queries first register the
+//! TKLCAF attributes once (`tdata_std::register_derived_attributes`, in the native file
+//! order); another toolkit calls [`TdfDerivedAttribute::register`] for its own attributes
+//! before the registry is read. The prototypes sit in an `NCollection_DataMap` with the
+//! native `Standard_CStringHasher`, so `Attributes` lists them in the native map order.
 use super::TdfAttribute;
-use rustycad_tkernel::{standard::Handle, tcollection::AsciiString};
-use std::collections::BTreeMap;
-use std::sync::{Mutex, PoisonError};
+use rustycad_tkernel::{
+    ncollection::DataMap,
+    standard::{Handle, c_string::CStringHasher},
+    tcollection::AsciiString,
+};
+use std::sync::{Mutex, Once, PoisonError};
 
 /// `TDF_DerivedAttribute::NewDerived`: makes a new attribute of one type.
 pub type TdfNewDerived = fn() -> Handle<dyn TdfAttribute>;
@@ -22,14 +27,24 @@ struct Creator {
     type_name: Option<&'static str>,
 }
 
-#[derive(Default)]
+/// The native globals: the pending creators, and the prototypes (`Attributes()`) and type
+/// names (`Types()`) by dynamic type name, one map here since they share their keys.
 struct Registry {
     creators: Vec<Creator>,
-    /// By dynamic type name: the prototype attribute and the type name.
-    derived: BTreeMap<String, (Handle<dyn TdfAttribute>, AsciiString)>,
-    /// The registration order of `derived`, the native map iteration stand-in.
-    order: Vec<String>,
+    derived: DataMap<String, (Handle<dyn TdfAttribute>, AsciiString), CStringHasher>,
 }
+
+impl Default for Registry {
+    fn default() -> Self {
+        Self {
+            creators: Vec::new(),
+            derived: DataMap::with_hasher(CStringHasher, 1),
+        }
+    }
+}
+
+/// The one-time registration of the TKLCAF attributes (their library load natively).
+static TOOLKIT_REGISTRATION: Once = Once::new();
 
 static REGISTRY: Mutex<Option<Registry>> = Mutex::new(None);
 
@@ -43,7 +58,7 @@ impl TdfDerivedAttribute {
         name_space: Option<&'static str>,
         type_name: Option<&'static str>,
     ) -> TdfNewDerived {
-        with_registry(|registry| {
+        lock_registry(|registry| {
             registry.creators.push(Creator {
                 create,
                 name_space,
@@ -58,7 +73,7 @@ impl TdfDerivedAttribute {
             initialize(registry);
             registry
                 .derived
-                .get(type_name)
+                .find(&type_name.to_owned())
                 .map(|(prototype, _)| prototype.clone())
                 .unwrap_or_default()
         })
@@ -70,7 +85,7 @@ impl TdfDerivedAttribute {
             initialize(registry);
             registry
                 .derived
-                .get(type_name)
+                .find(&type_name.to_owned())
                 .map(|(_, name)| name.clone())
                 .unwrap_or_default()
         })
@@ -79,16 +94,24 @@ impl TdfDerivedAttribute {
     pub fn attributes(list: &mut Vec<Handle<dyn TdfAttribute>>) {
         with_registry(|registry| {
             initialize(registry);
-            for name in &registry.order {
-                if let Some((prototype, _)) = registry.derived.get(name) {
-                    list.push(prototype.clone());
-                }
-            }
+            list.extend(
+                registry
+                    .derived
+                    .values()
+                    .map(|(prototype, _)| prototype.clone()),
+            );
         });
     }
 }
 
+/// Runs `action` on the registry, after the one-time TKLCAF registration.
 fn with_registry<R>(action: impl FnOnce(&mut Registry) -> R) -> R {
+    TOOLKIT_REGISTRATION.call_once(crate::tdata_std::register_derived_attributes);
+    lock_registry(action)
+}
+
+/// Runs `action` on the locked registry.
+fn lock_registry<R>(action: impl FnOnce(&mut Registry) -> R) -> R {
     let mut guard = REGISTRY.lock().unwrap_or_else(PoisonError::into_inner);
     action(guard.get_or_insert_with(Registry::default))
 }
@@ -106,11 +129,8 @@ fn initialize(registry: &mut Registry) {
             name.push(':');
         }
         name.push_str(creator.type_name.unwrap_or(&dynamic));
-        if !registry.derived.contains_key(&dynamic) {
-            registry.order.push(dynamic.clone());
-        }
         registry
             .derived
-            .insert(dynamic, (prototype, AsciiString::new(&name)));
+            .bind(dynamic, (prototype, AsciiString::new(&name)));
     }
 }

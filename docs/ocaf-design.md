@@ -153,3 +153,15 @@ a null handle would give natively.
   build. The port checks it and returns `Standard_OutOfRange`.
 - **Native null dereferences** (`ChangeArray` with a null array, `ChangeArray` of an
   attribute with no array whose bounds match) are `Standard_NullObject` errors.
+- **Derived classes by embedding.** A native class derived from a concrete attribute
+  (`TDataStd_Relation` from `TDataStd_Expression`) embeds the base struct and registers it
+  as its RTTI parent, so its handle casts to the base. A base member that natively calls a
+  virtual function on `this` (`Backup` calls the virtual `BackupCopy`) goes through the
+  attribute's own handle, so the derived override runs.
+- **Derived-attribute registry.** `TDF_DerivedAttribute` keeps its prototypes in an
+  `NCollection_DataMap` with `Standard_CStringHasher`, so `Attributes` lists them in the
+  native map order. The TKLCAF registrations (the static initializers of
+  `IMPLEMENT_DERIVED_ATTRIBUTE`) run once before the first query.
+- **Tree nodes.** The raw `TDataStd_TreeNode*` links are weak handles: the labels own the
+  nodes. The structure members need the node's own handle, bound when the node is added
+  to a label; a node never added to a label cannot be linked.

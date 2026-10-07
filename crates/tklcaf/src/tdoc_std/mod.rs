@@ -10,6 +10,7 @@ mod multi_transaction_dump;
 mod owner;
 mod small;
 mod xlink;
+mod xlink_tool;
 pub use application::{TDocStdApplication, TDocStdApplicationBase, TDocStdStandardApplication};
 pub use application_io::TDocStdApplicationIo;
 pub use document::TDocStdDocument;
@@ -22,6 +23,7 @@ pub use small::{
     TDocStdContext, TDocStdFormatVersion, TDocStdPathParser,
 };
 pub use xlink::{TDocStdXLink, TDocStdXLinkIterator, TDocStdXLinkRoot};
+pub use xlink_tool::TDocStdXLinkTool;
 
 use rustycad_tkernel::standard::Guid;
 
