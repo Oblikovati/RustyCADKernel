@@ -7,7 +7,7 @@ use bl_probe::{
     brep_fill_filling, brep_fill_generator, brep_fill_location_law, brep_fill_multi_line,
     brep_fill_offset_wire, brep_fill_package, brep_fill_pipe, brep_fill_pipe_shell,
     brep_fill_section, brep_fill_section_law, brep_fill_sweep, brep_proj, top_ope_brep_ds,
-    top_ope_brep_tool_curve_tool,
+    top_ope_brep_tool_curve_tool, top_ope_brep_tool_shapes,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -71,6 +71,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // TopOpeBRepDS (bl_probe/top_ope_brep_ds.rs)
     ("ds_transition", top_ope_brep_ds::transition_case),
     ("ds_kind", top_ope_brep_ds::kind_case),
+    // TopOpeBRepTool shape helpers (bl_probe/top_ope_brep_tool_shapes.rs)
+    ("tt_shape_tool", top_ope_brep_tool_shapes::shape_tool_case),
+    ("tt_project", top_ope_brep_tool_shapes::project_case),
+    ("tt_geometry", top_ope_brep_tool_shapes::geometry_case),
+    ("tt_fc2d", top_ope_brep_tool_shapes::fc2d_case),
+    ("tt_hbox", top_ope_brep_tool_shapes::hbox_case),
 ];
 
 fn main() {

@@ -17,6 +17,7 @@ pub mod brep_fill_sweep;
 pub mod brep_proj;
 pub mod top_ope_brep_ds;
 pub mod top_ope_brep_tool_curve_tool;
+pub mod top_ope_brep_tool_shapes;
 
 // The reader and bit printers of the TKGeomAlgo probe, the shape digest of the TKTopAlgo
 // probe and the face frames of the TKPrim probe, shared so that every toolkit prints the

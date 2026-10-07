@@ -55,6 +55,7 @@
 #include "tkbool_probe_brepproj.cxx"
 #include "tkbool_probe_topopebreptool_curve_tool.cxx"
 #include "tkbool_probe_topopebrepds.cxx"
+#include "tkbool_probe_topopebreptool_shapes.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFill (tkbool_probe_brepfill_generator.cxx, tkbool_probe_brepfill_package.cxx,
  // tkbool_probe_brepfill_compatible.cxx, tkbool_probe_brepfill_section_law.cxx,
@@ -99,6 +100,12 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // TopOpeBRepDS (tkbool_probe_topopebrepds.cxx)
  {"ds_transition", bl_ds_transition_case},
  {"ds_kind", bl_ds_kind_case},
+ // TopOpeBRepTool shape helpers (tkbool_probe_topopebreptool_shapes.cxx)
+ {"tt_shape_tool", bl_tt_shape_tool_case},
+ {"tt_project", bl_tt_project_case},
+ {"tt_geometry", bl_tt_geometry_case},
+ {"tt_fc2d", bl_tt_fc2d_case},
+ {"tt_hbox", bl_tt_hbox_case},
 };
 int main() {
  std::string line;

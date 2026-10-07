@@ -312955,6 +312955,782 @@
       "notes": "Translated from TopOpeBRepTool_CurveTool.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (tt_make_curves: polylines on the circle cut by a square plane face in a cylinder face, each plane case, the 3d curve not asked, confused poles, a p-curve off the face, a partial index range, polylines of more than 100 poles, an edge as face; tt_pcurve_on_face: circles, an ellipse and line ranges on both faces, ranges across the cylinder seam). Native quirks kept: the CurveImprovement of more than 100 poles replaces the caller's input curves (a const_cast natively, `&mut SectionCurves` here) while the approximation still reads the original poles up to the reduced count; the bad-poles curvature criterion never updates its previous jump (kc = kcprev); MakeCurve2DfromWLineApprox leaves the poles at the origin for a missing curve index; the outputs stay untouched when the 3d curve is not asked and are null (None) when the approximation fails."
     },
     {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type that DEFINE_STANDARD_RTTIEXT(TopOpeBRepTool_HBoxTool, Standard_Transient) expands: Rust has no class inheritance to name; the class is registered with Standard_Transient as its parent, so there is no public item to port."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_C2DF::TopOpeBRepTool_C2DF()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_C2DF.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolC2DF::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_C2DF.cxx (the default range and tolerance, uninitialized natively, are 0); exercised by the FC2D cache in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_C2DF::TopOpeBRepTool_C2DF(const occ::handle<Geom2d_Curve>&,double,double,double,const TopoDS_Face&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_C2DF.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolC2DF::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_C2DF.cxx (the default range and tolerance, uninitialized natively, are 0); exercised by the FC2D cache in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::TopOpeBRepTool_HBoxTool()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_C2DF::Face() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_C2DF.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolC2DF::face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_C2DF.cxx (the default range and tolerance, uninitialized natively, are 0); exercised by the FC2D cache in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_C2DF::IsFace(const TopoDS_Face&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_C2DF.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolC2DF::is_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_C2DF.cxx (the default range and tolerance, uninitialized natively, are 0); exercised by the FC2D cache in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_C2DF::IsPC(const occ::handle<Geom2d_Curve>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_C2DF.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolC2DF::is_pc",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_C2DF.cxx (the default range and tolerance, uninitialized natively, are 0); exercised by the FC2D cache in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_C2DF::PC(double&,double&,double&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_C2DF.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolC2DF::pc",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_C2DF.cxx (the default range and tolerance, uninitialized natively, are 0); exercised by the FC2D cache in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_C2DF::SetFace(const TopoDS_Face&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_C2DF.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolC2DF::set_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_C2DF.cxx (the default range and tolerance, uninitialized natively, are 0); exercised by the FC2D cache in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_C2DF::SetPC(const occ::handle<Geom2d_Curve>&,double,double,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_C2DF.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolC2DF::set_pc",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_C2DF.cxx (the default range and tolerance, uninitialized natively, are 0); exercised by the FC2D cache in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::AddBox(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::add_box",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::AddBoxes(const TopoDS_Shape&,TopAbs_ShapeEnum,TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::add_boxes",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::Box(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::box_of_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::Box(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::box_of_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::ChangeIMS()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::change_ims",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::Clear()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::clear",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::ComputeBox(const TopoDS_Shape&,Bnd_Box&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::compute_box",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::ComputeBoxOnVertices(const TopoDS_Shape&,Bnd_Box&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::compute_box_on_vertices",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::DumpB(const Bnd_Box&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::dump_b",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::Extent() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::extent",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::HasBox(const TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::has_box",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::IMS() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::ims",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::Index(const TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool::Shape(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool::shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_HBoxTool.cxx; the map is shared through handles (SharedState), keyed with orientation as the native default hasher; Box returns a copy and ChangeIMS takes a closure; compared with OCCT by tools/verify_tkbool_numeric.py (tt_hbox: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::AdjustOnPeriodic(const TopoDS_Shape&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::adjust_on_periodic",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::BASISCURVE(const TopoDS_Edge&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::basis_curve_of_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::BASISCURVE(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::basis_curve",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::BASISSURFACE(const TopoDS_Face&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::basis_surface_of_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::BASISSURFACE(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::basis_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::Closed(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::closed",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::CurvesSameOriented(const BRepAdaptor_Curve&,const BRepAdaptor_Curve&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::curves_same_oriented",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::EdgeData(const BRepAdaptor_Curve&,double,gp_Dir&,gp_Dir&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::edge_data",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::EdgeData(const TopoDS_Shape&,double,gp_Dir&,gp_Dir&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::edge_data_of_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::EdgesSameOriented(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::edges_same_oriented",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::FacesSameOriented(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::faces_same_oriented",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::PeriodizeParameter(double,const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::periodize_parameter",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::Pnt(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::pnt",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::Resolution3d(const TopoDS_Face&,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::resolution3d_of_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::Resolution3d(const occ::handle<Geom_Surface>&,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::resolution3d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::Resolution3dU(const occ::handle<Geom_Surface>&,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::resolution3d_u",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::Resolution3dV(const occ::handle<Geom_Surface>&,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::resolution3d_v",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::ShapesSameOriented(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::shapes_same_oriented",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::SurfacesSameOriented(const BRepAdaptor_Surface&,const BRepAdaptor_Surface&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::surfaces_same_oriented",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::Tolerance(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::tolerance",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::UVBOUNDS(const TopoDS_Face&,bool&,bool&,double&,double&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::uv_bounds_of_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeTool::UVBOUNDS(const occ::handle<Geom_Surface>&,bool&,bool&,double&,double&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeTool::uv_bounds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeTool.cxx (static members of a unit struct); compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_tool: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: EdgeData compares the curvature with RealLast, so the normal output is never written; PeriodizeParameter moves an iso-U seam parameter by the U period of the natural bounds; UVBOUNDS leaves the outputs of the non-periodic swept directions untouched; SurfacesSameOriented and CurvesSameOriented answer true for the NYI types."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::UVISO(const TopOpeBRepTool_C2DF&,bool&,bool&,gp_Dir2d&,gp_Pnt2d&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::uviso_c2df",
+      "status": "implemented",
+      "notes": "Translated from the UVISO overloads of TopOpeBRepTool_TOOL.cxx as free functions; d2d and o2d are &mut, written where natively written; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::UVISO(const TopoDS_Edge&,const TopoDS_Face&,bool&,bool&,gp_Dir2d&,gp_Pnt2d&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::uviso_edge",
+      "status": "implemented",
+      "notes": "Translated from the UVISO overloads of TopOpeBRepTool_TOOL.cxx as free functions; d2d and o2d are &mut, written where natively written; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::UVISO(const occ::handle<Geom2d_Curve>&,bool&,bool&,gp_Dir2d&,gp_Pnt2d&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::uviso",
+      "status": "implemented",
+      "notes": "Translated from the UVISO overloads of TopOpeBRepTool_TOOL.cxx as free functions; d2d and o2d are &mut, written where natively written; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0)."
+    },
+    {
+      "upstream_id": "BASISCURVE2D(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::basis_curve2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FBOX_Box(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_box.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fbox_box",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_box.cxx; the function static box tool is a process OnceLock handle; exercised through FTOL_FaceTolerances3d in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "FBOX_GetHBoxTool()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_box.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fbox_get_hbox_tool",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_box.cxx; the function static box tool is a process OnceLock handle; exercised through FTOL_FaceTolerances3d in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "FBOX_Prepare()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_box.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fbox_prepare",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_box.cxx; the function static box tool is a process OnceLock handle; exercised through FTOL_FaceTolerances3d in tt_fc2d of tools/verify_tkbool_numeric.py."
+    },
+    {
+      "upstream_id": "FC2D_AddNewCurveOnSurface(const occ::handle<Geom2d_Curve>&,const TopoDS_Edge&,const TopoDS_Face&,const double&,const double&,const double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_add_new_curve_on_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_CurveOnSurface(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Edge&,double&,double&,double&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_curve_on_surface_on_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_CurveOnSurface(const TopoDS_Edge&,const TopoDS_Face&,double&,double&,double&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_curve_on_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_EditableCurveOnSurface(const TopoDS_Edge&,const TopoDS_Face&,double&,double&,double&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_editable_curve_on_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_HasC3D(const TopoDS_Edge&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_has_c3d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_HasCurveOnSurface(const TopoDS_Edge&,const TopoDS_Face&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_has_curve_on_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_HasNewCurveOnSurface(const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_has_new_curve_on_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_HasNewCurveOnSurface(const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_has_new_curve_on_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_HasOldCurveOnSurface(const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_has_old_curve_on_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_HasOldCurveOnSurface(const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_has_old_curve_on_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_MakeCurveOnSurface(const TopoDS_Edge&,const TopoDS_Face&,double&,double&,double&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_make_curve_on_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FC2D_Prepare(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_2d.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fc2d_prepare",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_2d.cxx; the native thread_local GLOBAL_* cache of new p-curves and edge ancestors is a thread_local RefCell; compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). Native quirks kept: FC2D_AddNewCurveOnSurface rebinds the edge to a one-element list (dropping its p-curves on other faces); the in-out tolerance of FC2D_MakeCurveOnSurface is a parameter, returned when no projection sets it; the ancestor faces are read before FC2D_Prepare as a Standard_NullObject (a null dereference natively)."
+    },
+    {
+      "upstream_id": "FTOL_FaceTolerances(const Bnd_Box&,const Bnd_Box&,const TopoDS_Face&,const TopoDS_Face&,const BRepAdaptor_Surface&,const BRepAdaptor_Surface&,double&,double&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_tol.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::ftol_face_tolerances",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_tol.cxx; the outputs are returned as FaceTolerances (myTol1, myTol2, Deflection, MaxUV); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d (FTOL_FaceTolerances3d): the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). The edge tolerances and the UV step are computed but unused, as natively."
+    },
+    {
+      "upstream_id": "FTOL_FaceTolerances2d(const Bnd_Box&,const Bnd_Box&,const TopoDS_Face&,const TopoDS_Face&,const BRepAdaptor_Surface&,const BRepAdaptor_Surface&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_tol.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::ftol_face_tolerances2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_tol.cxx; the outputs are returned as FaceTolerances (myTol1, myTol2, Deflection, MaxUV); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d (FTOL_FaceTolerances3d): the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). The edge tolerances and the UV step are computed but unused, as natively."
+    },
+    {
+      "upstream_id": "FTOL_FaceTolerances3d(const Bnd_Box&,const Bnd_Box&,const TopoDS_Face&,const TopoDS_Face&,const BRepAdaptor_Surface&,const BRepAdaptor_Surface&,double&,double&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_tol.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::ftol_face_tolerances3d_on_boxes",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_tol.cxx; the outputs are returned as FaceTolerances (myTol1, myTol2, Deflection, MaxUV); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d (FTOL_FaceTolerances3d): the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). The edge tolerances and the UV step are computed but unused, as natively."
+    },
+    {
+      "upstream_id": "FTOL_FaceTolerances3d(const TopoDS_Face&,const TopoDS_Face&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_tol.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::ftol_face_tolerances3d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_tol.cxx; the outputs are returned as FaceTolerances (myTol1, myTol2, Deflection, MaxUV); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fc2d (FTOL_FaceTolerances3d): the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). The edge tolerances and the UV step are computed but unused, as natively."
+    },
+    {
+      "upstream_id": "FUN_quadCT(const GeomAbs_CurveType&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_quad_ct",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_UpdateBnd2d(Bnd_Box2d&,const Bnd_Box2d&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_update_bnd2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_bounds(const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_bounds",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_closed(const occ::handle<Geom_Surface>&,bool&,double&,bool&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_closed",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_dirC(double,const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_dir_c",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_line(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_line2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_line(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_line",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_nC2dINSIDES(const gp_Dir2d&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_nc2d_inside_s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_nCinsideS(const gp_Dir&,const gp_Dir&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_nc_inside_s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_ngS(const gp_Pnt2d&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_ng_s",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_onapex(const gp_Pnt2d&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_onapex",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonC(const gp_Pnt&,const BRepAdaptor_Curve&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_ponc",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonC(const gp_Pnt&,const BRepAdaptor_Curve&,double,double,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_ponc_range",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonC(const gp_Pnt&,double,const BRepAdaptor_Curve&,double,double,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_ponc_tol",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonC2D(const gp_Pnt&,const BRepAdaptor_Curve2d&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_ponc2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonC2D(const gp_Pnt&,const BRepAdaptor_Curve2d&,double,double,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_ponc2d_range",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonC2D(const gp_Pnt&,double,const BRepAdaptor_Curve2d&,double,double,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_ponc2d_tol",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonE(const gp_Pnt&,const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_pone",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonE(const gp_Pnt&,double,const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_pone_tol",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonF(const gp_Pnt&,const TopoDS_Face&,gp_Pnt2d&,double&,Extrema_ExtFlag,Extrema_ExtAlgo)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_ponf",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonS(const gp_Pnt&,const occ::handle<Geom_Surface>&,gp_Pnt2d&,double&,Extrema_ExtFlag,Extrema_ExtAlgo)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_pons",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_projPonboundedF(const gp_Pnt&,const TopoDS_Face&,gp_Pnt2d&,double&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_proj_ponbounded_f",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_quad(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_quad2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_quad(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_quad",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "FUN_tool_quad(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_GEOMETRY.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_quad_surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_GEOMETRY.cxx (FUN_tool_nCinsideS and FUN_tool_nC2dINSIDES from TopOpeBRepTool_matter.cxx); compared with OCCT by tools/verify_tkbool_numeric.py (tt_geometry: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_closed returns None for a null surface (false natively, the closure flags untouched)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_HBoxTool",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_HBoxTool.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolHBoxTool; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "FUN_tool_getindex(const Extrema_ExtPC2d&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_getindex2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
+      "upstream_id": "FUN_tool_getindex(const Extrema_ExtPC&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_PROJECT.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fun_tool_getindex",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
+    },
+    {
       "upstream_id": "ChFi3d::IsTangentFaces(const TopoDS_Edge &, const TopoDS_Face &, const TopoDS_Face &, const GeomAbs_Shape)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d.hxx",
