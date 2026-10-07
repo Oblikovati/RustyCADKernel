@@ -44,14 +44,6 @@ impl<T> Sequence<T> {
     }
 }
 impl<T: Clone> Sequence<T> {
-    /// Copies elements into this allocator; `sequence.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) -> &mut Self {
-        self.clear(None);
-        for value in source.iter() {
-            self.append_ref(value);
-        }
-        self
-    }
     /// Appends and empties a source sequence; `sequence.append_sequence(&mut source)`.
     pub fn append_sequence(&mut self, source: &mut Self) {
         self.splice_sequence(self.len(), source);
@@ -62,6 +54,8 @@ impl<T: Clone> Sequence<T> {
     }
     /// Splices after a one-based index, copying when allocators differ. As in OCCT, an empty
     /// source returns before the index is checked; `sequence.insert_sequence_after(1,&mut source)?`.
+    /// Distinct allocators preserve OCCT's unsigned MAX+1 prepend behavior. Other out-of-range
+    /// indices remain checked errors where native prependSeq would dereference invalid links.
     pub fn insert_sequence_after(
         &mut self,
         index: usize,
@@ -70,6 +64,7 @@ impl<T: Clone> Sequence<T> {
         if source.is_empty() {
             return Ok(());
         }
+        let index = native_sequence_copy_offset(index, self.allocator() == source.allocator());
         if index > self.len() {
             let expected = format!("0..={}", self.len());
             return Err(out_of_range("InsertAfter", index, &expected));
@@ -111,8 +106,21 @@ impl<T: Clone> Sequence<T> {
 }
 impl<T: Clone> Clone for Sequence<T> {
     fn clone(&self) -> Self {
-        let mut copy = Self::with_allocator(self.allocator().clone());
-        copy.assign(self);
-        copy
+        Self::from_copied_with(self, T::clone)
+    }
+    fn clone_from(&mut self, source: &Self) {
+        self.assign(source);
     }
 }
+
+// OCCT 3d097a03 passes index+1 into prependSeq only when allocator identities differ.
+fn native_sequence_copy_offset(index: usize, same_allocator: bool) -> usize {
+    if index == usize::MAX && !same_allocator {
+        return 0;
+    }
+    index
+}
+
+#[cfg(test)]
+#[path = "splice_max_tests.rs"]
+mod splice_max_tests;

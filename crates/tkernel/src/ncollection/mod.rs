@@ -14,7 +14,7 @@ mod harray;
 pub use harray::{HArray1, HArray2};
 mod linear_vector;
 mod raw_element_lifetime;
-pub use linear_vector::LinearVector;
+pub use linear_vector::{GrowthProgress, LinearVector, LinearVectorGrowth};
 mod vector_component;
 pub use vector_component::{
     VectorAbsoluteComponent, VectorDumpComponent, VectorMagnitudeComponent, VectorSquareComponent,
@@ -51,8 +51,8 @@ pub use allocator::{
 mod dynamic_array;
 pub use dynamic_array::DynamicArrayCachedIterator;
 pub use dynamic_array::{
-    DynamicArray, DynamicArrayCopyConstructionFailure, DynamicArrayCopyFailure,
-    DynamicArrayIterator, DynamicArrayStorageExtension, DynamicCursor,
+    DynamicArray, DynamicArrayClearState, DynamicArrayCopyConstructionFailure,
+    DynamicArrayCopyFailure, DynamicArrayIterator, DynamicArrayStorageExtension, DynamicCursor,
 };
 
 mod buffer;
@@ -172,7 +172,9 @@ mod ubtree;
 pub use ebtree::EBTree;
 pub use ubtree::{BoundingNode, BoundingVolume, FallibleTreeSelector, TreeSelector, UBTree};
 mod ubtree_filler;
-pub use ubtree_filler::{BoundingTreeInsertion, ObjBnd, UBTreeFiller};
+pub use ubtree_filler::{
+    BoundingTreeInsertion, NativeBoundingTree, ObjBnd, UBTreeFiller, UBTreeFillerWithSelfAssignment,
+};
 
 mod packed_map;
 pub use packed_map::{
@@ -239,3 +241,7 @@ mod ordered_node_links;
 mod ordered_node_owner;
 pub use ordered_data_map_node::{OrderedDataMapNode, OrderedDataMapNodeOwner};
 pub use ordered_map_node::{OrderedMapNode, OrderedMapNodeOwner};
+
+mod ordered_resize_interruption;
+pub use ordered_data_map::OrderedDataMapResizeInterruption;
+pub use ordered_map::OrderedMapResizeInterruption;

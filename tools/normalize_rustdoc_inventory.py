@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import pathlib
@@ -399,9 +400,21 @@ def emit_inventory(
 ) -> None:
     result = normalized_manifest(capture, workspace)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(
-        json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    write_inventory_text(output, json.dumps(result, indent=2, sort_keys=True) + "\n")
+
+
+def write_inventory_text(output: pathlib.Path, text: str) -> None:
+    """Write plain JSON, or deterministic gzip when the path ends in `.gz`.
+
+    Readers choose the decoder from the suffix, so a `.json.gz` path that held plain
+    JSON failed later with "Not a gzipped file". Example:
+    `write_inventory_text(Path("rust-api.json.gz"), "{}\\n")`.
+    """
+    if output.suffix != ".gz":
+        output.write_text(text, encoding="utf-8")
+        return
+    with output.open("wb") as raw, gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as packed:
+        packed.write(text.encode("utf-8"))
 
 
 def argument_parser() -> argparse.ArgumentParser:

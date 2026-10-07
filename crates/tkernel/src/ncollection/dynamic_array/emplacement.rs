@@ -142,6 +142,11 @@ impl<T> DynamicArray<T> {
     where
         T: Default,
     {
+        if self.increment == 0 {
+            self.require_retained_first_index(index);
+            self.append_constructed_with(construct);
+            return index;
+        }
         if self.has_initialized_tail() {
             return self.emplace_with_initialized_tail(index, construct);
         }
