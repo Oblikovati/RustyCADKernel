@@ -4,6 +4,7 @@ This directory contains reproducible evidence for the pinned OCCT revision
 `3d097a0328e71b826377d4814ab05ec3c3d23871` and the Rust source snapshot identified
 inside `rust-api.json.gz`. Full API and test parity are **not complete**.
 
+- `METRICS.md` and `metrics.json`: the parity metrics to quote (see below).
 - `completeness.json`: small crosswalk summary, per-toolkit counts and proof gaps.
 - `api-crosswalk.json.gz`: every ledger row resolution and unclaimed C++ declaration.
 - `rust-api.json.gz`: reachable public Rust paths, signatures and source hashes.
@@ -53,6 +54,7 @@ python3 tools/capture_rustdoc_json.py capture
 python3 tools/normalize_rustdoc_inventory.py
 python3 tools/api_coverage_report.py
 python3 tools/publish_api_snapshot.py
+python3 tools/api_metrics_report.py
 PYTHONPATH=tools python3 -m unittest discover -s tools/tests
 ```
 
@@ -68,6 +70,25 @@ as current. Freshness checks also bind the Rust normalizer and crosswalk tool
 implementations by content hash; changing those tools requires regenerating
 the affected stages. Captured absolute build paths identify the original environment;
 content hashes and source-relative declaration paths are the portable identity.
+
+## Parity metrics
+
+Quote `METRICS.md`, not the raw counts of `completeness.json`. The raw counts include every
+macro expansion, count a row as implemented when its Rust path does not resolve, and count a
+shared package once per toolkit. `tools/api_metrics_report.py` corrects this:
+
+- Each declaration belongs to one toolkit: the `src/<Area>/<Toolkit>/` of its header.
+- Each declaration has one status: `verified`, `partial`, `excluded`, `upstream_unimplemented`,
+  `claimed_unverified` (a row claims it, but the Rust target does not resolve) or `unclaimed`.
+- `tools/api_gap_categories.py` separates boilerplate (allocation, RTTI and exception macro
+  expansions, destructors, copy/move constructors, assignment) from the API that needs Rust code.
+  The categories come from the declaration table (`macro_generated`, `spelling_location`,
+  `access`, `parameter_types`), not from name patterns.
+- `porting/scope.json` records the user's scope decisions: OpenGL visualization is replaced by
+  a new Vulkan renderer, native file formats are excluded, and the DRAW harness is undecided.
+- Ledger defects count the rows that match no C++ declaration or no Rust item.
+
+Regenerate after each snapshot publication with `python3 tools/api_metrics_report.py`.
 
 ## Legacy test obligations
 
