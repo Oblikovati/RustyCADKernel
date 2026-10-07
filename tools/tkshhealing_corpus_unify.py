@@ -131,3 +131,25 @@ def append_unify_requests(requests: list[str]) -> None:
     for shape in inputs:
         for variant in VARIANTS:
             requests.append('sh_unify ' + numbers(shape + settings(variant)))
+    append_face_connect_requests(requests)
+
+
+def face_connect(faces, pairs, sew: float = 1e-6, fix: float = 1e-7) -> str:
+    fields: list[float] = [len(faces)]
+    for face in faces:
+        fields += [len(face)] + [c for p in face for c in p]
+    fields += [len(pairs)] + [c for pair in pairs for c in pair] + [sew, fix]
+    return 'sh_face_connect ' + numbers(fields)
+
+
+def append_face_connect_requests(requests: list[str]) -> None:
+    """ShapeFix_FaceConnect on separate polygon faces of one shell, in the cases whose
+    result does not depend on the order of the faces in the connection map: natively the
+    map iterates in the order of the TShape addresses (TopTools_ShapeMapHasher), so the
+    face sewn first of a real pair, hence the orientation of the shared edge, changes
+    from run to run. The translated GTests cover the real pairs."""
+    a, b = square(0, 0), square(1, 0)
+    far = square(1.01, 0)
+    cases = [([a, b], [(0, 0)]), ([a, b], [(1, 1)]), ([a], [(0, 0)]), ([a, b], []), ([a, far], [(0, 1)])]
+    for faces, pairs in cases:
+        requests.append(face_connect(faces, pairs))

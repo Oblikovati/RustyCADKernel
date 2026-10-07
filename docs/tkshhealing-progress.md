@@ -805,13 +805,13 @@ unmapped suites are FaceConnect (16), Face (4), Shape (7), and UnifySameDomain (
 
 All 16 declarations in `ShapeFix_FaceConnect_Test.cxx` are mapped as a unit. The
 filtered gate passes 16 unchanged native OCCT tests and all 16 Rust translations.
-The implementation groups only registered faces, delegates shared-boundary sewing to
-the existing `BRepBuilderAPI_Sewing` port, and retains unrelated shell faces. The test
-cases cover null and duplicate registration, clear/reuse, coincident and tolerance-gap
-boundaries, orientation, chains, independent pairs, and stable rebuilds. `Build` remains
-an API-level partial: its fixing-tolerance argument and the later `ShapeFix_Wire` /
-`ShapeFix_Face` repair phase are not yet ported; the pinned rectangular-face suite needs
-no such repair. TKShHealing now maps 127/143 source declarations. Remaining unmapped
+In October 2026 (wave 3) the class was ported again as a faithful translation of the
+native maps and of collectFreeEdges, sewConnectedFaces and rebuildShell (the edge
+replacement wires, the ShapeFix_Wire reorder and repair with the fixing tolerance, the
+ShapeFix_Face orientation fix and the vertex merge); the 16 translations pass unchanged.
+The `sh_face_connect` requests compare only the cases whose result does not depend on
+the order of the connection map, which natively follows the TShape addresses.
+TKShHealing now maps 127/143 source declarations. Remaining unmapped
 suites are Shape (7) and UnifySameDomain (9).
 
 ### Pending whole-source suite blockers

@@ -1,4 +1,4 @@
-// ShapeUpgrade_UnifySameDomain probe operation; the Rust twin is
+// ShapeUpgrade_UnifySameDomain and ShapeFix_FaceConnect probe operations; the Rust twin is
 // crates/tkshhealing/examples/sh_probe/unify.rs.
 //
 // `sh_unify (input) init ue uf concat allow safe lintol angtol nkeep (kind index)...`:
@@ -29,6 +29,7 @@
 #include <BRepPrimAPI_MakeSphere.hxx>
 #include <Geom_BezierCurve.hxx>
 #include <Geom_Circle.hxx>
+#include <ShapeFix_FaceConnect.hxx>
 #include <ShapeUpgrade_UnifySameDomain.hxx>
 TopoDS_Shape su_polygons(GaReader& r){
  int n=r.integer();std::vector<TopoDS_Shape> faces;
@@ -88,4 +89,19 @@ void sh_unify_case(std::istream& input){
  TopExp::MapShapes(shape,TopAbs_EDGE,edges);TopExp::MapShapes(shape,TopAbs_VERTEX,vertices);
  for(const auto& [kind,index]:keep){const auto& m=kind==0?edges:vertices;if(index>=1&&index<=m.Extent())u->KeepShape(m(index));}
  GA_TRY(u->Build();tp_shape(u->Shape());su_history(shape,u->Shape(),u->History()))
+ ga_end();}
+// `sh_face_connect n (m (point)*m)*n npairs (i j)* sewtol fixtol`: ShapeFix_FaceConnect on
+// a shell (BRep_Builder) of n separate planar polygon faces with the pairs of face indices
+// connected; the digest of the result (also a second Build on it with the same object).
+void sh_face_connect_case(std::istream& input){
+ GaReader r{input};BRep_Builder B;TopoDS_Shell shell;B.MakeShell(shell);std::vector<TopoDS_Face> faces;
+ int n=r.integer();
+ for(int k=0;k<n;++k){int m=r.integer();BRepBuilderAPI_MakePolygon poly;
+  for(int i=0;i<m;++i)poly.Add(r.pnt());poly.Close();
+  faces.push_back(BRepBuilderAPI_MakeFace(poly.Wire(),true).Face());B.Add(shell,faces.back());}
+ ShapeFix_FaceConnect connector;int npairs=r.integer();
+ for(int k=0;k<npairs;++k){int i=r.integer(),j=r.integer();ga_flag(connector.Add(faces.at(i),faces.at(j)));}
+ double sewtol=r.real(),fixtol=r.real();
+ GA_TRY(TopoDS_Shell result=connector.Build(shell,sewtol,fixtol);tp_shape(result);
+  tp_shape(connector.Build(result,sewtol,fixtol)))
  ga_end();}

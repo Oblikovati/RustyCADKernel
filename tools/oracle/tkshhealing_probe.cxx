@@ -98,6 +98,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sh_algo_shape", sh_algo_shape_case},
  // ShapeUpgrade_UnifySameDomain (tkshhealing_probe_unify.cxx)
  {"sh_unify", sh_unify_case},
+ {"sh_face_connect", sh_face_connect_case},
  // ShapeCustom_Surface (tkshhealing_probe_custom_surface.cxx)
  {"sc_surface", sc_surface_case},
  // ShapeProcess and ShapeProcessAPI (tkshhealing_probe_shape_process.cxx)

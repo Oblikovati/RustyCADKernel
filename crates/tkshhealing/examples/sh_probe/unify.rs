@@ -1,4 +1,4 @@
-//! ShapeUpgrade_UnifySameDomain probe operation, the Rust twin of
+//! ShapeUpgrade_UnifySameDomain and ShapeFix_FaceConnect probe operations, the Rust twin of
 //! tools/oracle/tkshhealing_probe_unify.cxx (which documents the requests).
 use super::brep_lib_common::shape;
 use super::common::{Reader, attempt, end, flag, int};
@@ -227,6 +227,39 @@ pub fn unify_case(values: &[f64]) {
         unifier.build()?;
         shape(&unifier.shape())?;
         history(&s, &unifier.shape(), &unifier.history())
+    });
+    end();
+}
+
+/// `sh_face_connect n (m (point)*m)*n npairs (i j)* sewtol fixtol`.
+pub fn face_connect_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let builder = rustycad_tkbrep::brep::BRepBuilder::default();
+    let mut shell = rustycad_tkbrep::topods::Shell::default();
+    builder.make_shell(&mut shell);
+    let mut faces = Vec::new();
+    for _ in 0..r.integer() {
+        let mut polygon = BRepBuilderAPIMakePolygon::new();
+        for _ in 0..r.integer() {
+            polygon.add_point(r.pnt()).expect("probe polygon");
+        }
+        polygon.close().expect("probe polygon");
+        let face = BRepBuilderAPIMakeFace::from_wire(&polygon.wire().expect("probe wire"), true)
+            .and_then(|m| m.face())
+            .expect("probe face");
+        builder.add(&mut shell, &face).expect("probe shell");
+        faces.push(face);
+    }
+    let mut connector = rustycad_tkshhealing::shape_fix::ShapeFixFaceConnect::new();
+    for _ in 0..r.integer() {
+        let (i, j) = (r.integer() as usize, r.integer() as usize);
+        flag(connector.add(&faces[i], &faces[j]));
+    }
+    let (sew, fix) = (r.real(), r.real());
+    attempt(|| {
+        let result = connector.build(&shell, sew, fix)?;
+        shape(result.as_ref())?;
+        shape(connector.build(&result, sew, fix)?.as_ref())
     });
     end();
 }

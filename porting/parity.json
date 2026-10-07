@@ -298560,7 +298560,7 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FaceConnect.hxx",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFaceConnect::new",
       "status": "implemented",
-      "notes": "The constructor initializes an empty connection set."
+      "notes": "Faithful port of the native maps (myConnected, myOriFreeEdges, myResFreeEdges, myResSharEdges) and of collectFreeEdges, sewConnectedFaces and rebuildShell. Compared with OCCT by the order-independent sh_face_connect requests (tkshhealing_probe_unify.cxx); natively the connection map iterates in TShape address order, so the face sewn first of a real pair changes from run to run and the 16 translated GTests cover those cases. Empty maps."
     },
     {
       "upstream_id": "ShapeFix_FaceConnect::Add(const TopoDS_Face&,const TopoDS_Face&)",
@@ -298568,15 +298568,15 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FaceConnect.hxx",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFaceConnect::add",
       "status": "implemented",
-      "notes": "Null faces are rejected; duplicate and self connections are accepted, with duplicate registration suppressed."
+      "notes": "Faithful port of the native maps (myConnected, myOriFreeEdges, myResFreeEdges, myResSharEdges) and of collectFreeEdges, sewConnectedFaces and rebuildShell. Compared with OCCT by the order-independent sh_face_connect requests (tkshhealing_probe_unify.cxx); natively the connection map iterates in TShape address order, so the face sewn first of a real pair changes from run to run and the 16 translated GTests cover those cases. Each face in the list of the other (a face once with itself); false for a null face."
     },
     {
       "upstream_id": "ShapeFix_FaceConnect::Build(const TopoDS_Shell&,double,double)",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FaceConnect.hxx",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFaceConnect::build",
-      "status": "partial",
-      "notes": "Ports registered-face grouping and sews each selected group with BRepBuilderAPI_Sewing. The third argument is not yet used for post-sewing ShapeFix_Wire/ShapeFix_Face repair; all 16 pinned FaceConnect test declarations pass, whose planar rectangle cases need no such repair."
+      "status": "implemented",
+      "notes": "Faithful port of the native maps (myConnected, myOriFreeEdges, myResFreeEdges, myResSharEdges) and of collectFreeEdges, sewConnectedFaces and rebuildShell. Compared with OCCT by the order-independent sh_face_connect requests (tkshhealing_probe_unify.cxx); natively the connection map iterates in TShape address order, so the face sewn first of a real pair changes from run to run and the 16 translated GTests cover those cases. The fixing tolerance drives the ShapeFix_Wire precision of the rebuilt wires; the sewing tolerance is their maximal tolerance. Native quirk kept: the count of faces to sew is never reset to 1 inside one connection list."
     },
     {
       "upstream_id": "ShapeFix_FaceConnect::Clear()",
@@ -298584,7 +298584,7 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_FaceConnect.hxx",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixFaceConnect::clear",
       "status": "implemented",
-      "notes": "Clears all registered face connections; per-build sewing data is local and therefore also discarded."
+      "notes": "Faithful port of the native maps (myConnected, myOriFreeEdges, myResFreeEdges, myResSharEdges) and of collectFreeEdges, sewConnectedFaces and rebuildShell. Compared with OCCT by the order-independent sh_face_connect requests (tkshhealing_probe_unify.cxx); natively the connection map iterates in TShape address order, so the face sewn first of a real pair changes from run to run and the 16 translated GTests cover those cases. Clears the four maps."
     },
     {
       "upstream_id": "ShapeFix_FaceConnect",
