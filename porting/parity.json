@@ -309549,7 +309549,7 @@
       "source_sha256": "e8413576506d8fe2888b964fa200ed374fb2af669ef0f53b53dce58590c1bff4",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixShape::perform_with_progress",
       "status": "partial",
-      "notes": "Seventeen pinned native rows cover dispatch, status, modes, compound recursion, cancellation, repeated calls, Init retention and vertex positioning. Shared tools propagate precision/tolerances/messages. Free-wire dispatch is ported; face-ready aggregate wire and full Face Perform remain incomplete; Rust null-shape no-op is a known unapproved difference. Additional fixtures do not add legacy mappings."
+      "notes": "Ported line by line; a null shape now fails with Standard_NullObject (native dereferences it). Compared with OCCT by the sh_fix_shape requests (op 0: Perform with the flag, DONE1..DONE8, FAIL1..FAIL3 and the result digest) on sewn polygons, revolved pieces, wires, faces, boxes, primitive solids and small-edge / small-face inputs, all identical. Partial because it dispatches to ShapeFix_Wire, ShapeFix_Shell and ShapeFix_Solid, whose rows are still partial."
     },
     {
       "upstream_id": "ShapeFix_Shape::Shape() const",

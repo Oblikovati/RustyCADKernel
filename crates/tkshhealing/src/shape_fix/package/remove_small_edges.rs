@@ -60,10 +60,12 @@ mod tests {
     use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape;
 
     #[test]
-    fn null_shape_returns_null_result_and_a_fresh_context() {
-        let fixed = ShapeFix::remove_small_edges(&Shape::default(), 1.0e-3).unwrap();
-        assert!(fixed.shape.is_null());
-        assert!(!fixed.context.is_null());
+    fn null_shape_fails_in_shape_fix_shape() {
+        // Native ShapeFix_Shape::Perform dereferences the null shape; the port fails.
+        let Err(failure) = ShapeFix::remove_small_edges(&Shape::default(), 1.0e-3) else {
+            panic!("a null shape must fail");
+        };
+        assert_eq!(failure.exception_type(), "Standard_NullObject");
     }
 
     #[test]
