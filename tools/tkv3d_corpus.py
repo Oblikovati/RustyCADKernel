@@ -13,3 +13,5 @@ def append_tkv3d_requests(requests: list[str]) -> None:
     """Append every TKV3d request family in a fixed order."""
     # Prs3d tools, arrows, deflection and boxes (tkv3d_corpus_prs3d.py)
     __import__('tkv3d_corpus_prs3d').append_prs3d_requests(requests)
+    # V3d view camera operations (tkv3d_corpus_v3d.py)
+    __import__('tkv3d_corpus_v3d').append_v3d_requests(requests)

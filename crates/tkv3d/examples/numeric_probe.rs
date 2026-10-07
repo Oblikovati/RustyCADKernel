@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod v3_probe;
-use v3_probe::prs3d;
+use v3_probe::{prs3d, v3d};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -14,6 +14,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("v3_quadric", prs3d::quadric_case),
     ("v3_arrow", prs3d::arrow_case),
     ("v3_prs3d", prs3d::prs3d_case),
+    // V3d view camera operations (v3_probe/v3d.rs)
+    ("v3_view", v3d::view_case),
 ];
 
 fn main() {

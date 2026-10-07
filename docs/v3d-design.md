@@ -42,3 +42,9 @@ operations) is compared bit for bit with the native toolkit by
 `tools/oracle/tkv3d_probe.cxx` and its Rust twin `crates/tkv3d/examples/numeric_probe.rs`
 through `tools/verify_tkv3d_numeric.py`, on the request corpus of `tools/tkv3d_corpus.py`.
 The native float steps of `Prs3d_ToolQuadric::FillArray` (`1.0f / n`) are kept.
+
+The V3d view requests run a viewer on a null driver on both sides: the Rust probe uses the
+TKService `NullGraphicDriver`, the native probe the `SvDriver` of
+`tools/oracle/tkservice_probe_null_driver.cxx`. A view refers to its viewer without owning
+it (native `V3d_View::MyViewer` is a raw pointer), so a caller keeps the viewer alive while
+it uses the view; a view whose viewer is gone skips its redraw.

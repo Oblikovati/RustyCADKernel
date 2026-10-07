@@ -27,11 +27,14 @@
 // crates/tkservice/examples/sv_probe/array.rs.
 #include "tkservice_probe_array.cxx"
 #include "tkv3d_probe_prs3d.cxx"
+#include "tkv3d_probe_v3d.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Prs3d tools, arrows, deflection and boxes (tkv3d_probe_prs3d.cxx)
  {"v3_quadric", v3_quadric_case},
  {"v3_arrow", v3_arrow_case},
  {"v3_prs3d", v3_prs3d_case},
+ // V3d view camera operations (tkv3d_probe_v3d.cxx)
+ {"v3_view", v3_view_case},
 };
 int main() {
  std::string line;

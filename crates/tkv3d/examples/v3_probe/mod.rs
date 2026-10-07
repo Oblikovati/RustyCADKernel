@@ -1,5 +1,6 @@
 //! The TKV3d probe operations, one module per C++ probe file under tools/oracle.
 pub mod prs3d;
+pub mod v3d;
 
 // The reader and bit printers of the TKGeomAlgo probe, shared so that every toolkit
 // prints the same token stream (tools/oracle/tkv3d_probe.cxx includes

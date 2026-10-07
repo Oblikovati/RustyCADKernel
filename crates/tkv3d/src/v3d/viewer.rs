@@ -12,7 +12,7 @@ use super::{
 use rustycad_tkernel::quantity::{Color, NamedColor};
 use rustycad_tkernel::standard::short_real::short_real_last;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, WeakHandle};
-use rustycad_tkmath::gp::{Axis3, Point3, StandardDirection3};
+use rustycad_tkmath::gp::{Axis3, Direction3, Point3, StandardDirection3};
 use rustycad_tkservice::aspect::{
     AspectBackground, AspectGenId, AspectGradientBackground, AspectGradientFillMethod,
     AspectGridType,
@@ -75,11 +75,13 @@ impl V3dViewer {
     /// Example: `V3dViewer::new(&NullGraphicDriver::new_handle())?`.
     pub fn new(driver: &Handle<dyn Graphic3dGraphicDriver>) -> Result<Handle<Self>, Failure> {
         let manager = Handle::new(Graphic3dStructureManager::new(driver)?);
-        let plane = Axis3::with_standard_frame(
+        // gp_Ax3(P, gp_Dir(D::Z), gp_Dir(D::X)) takes the general constructor: its cross
+        // products give the Y direction (-0, 1, 0).
+        let plane = Axis3::new(
             Point3::new(0.0, 0.0, 0.0),
-            StandardDirection3::Z,
-            StandardDirection3::X,
-        );
+            Direction3::from_standard(StandardDirection3::Z),
+            Direction3::from_standard(StandardDirection3::X),
+        )?;
         let last = short_real_last();
         let state = V3dViewerState {
             layer_ids: BTreeSet::new(),
