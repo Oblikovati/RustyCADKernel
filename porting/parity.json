@@ -94337,6 +94337,630 @@
       "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies; const char* results are owned texts."
     },
     {
+      "upstream_id": "Transfer_StatusResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusResult.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferStatusResult",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_StatusExec",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_StatusExec.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferStatusExec",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::Transfer_Binder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinderBase",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors. The protected constructor is the Default of the embedded base (void, initial, an empty check)."
+    },
+    {
+      "upstream_id": "Transfer_Binder::Merge",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::merge",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::IsMultiple",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::is_multiple",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::ResultType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::result_type",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::ResultTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::result_type_name",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::AddResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::add_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors. Native quirk kept: re-adding a binder of the chain appends it after the end binder, whose own CutResult can drop binders from the chain."
+    },
+    {
+      "upstream_id": "Transfer_Binder::NextResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::next_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::HasResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::has_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::SetAlreadyUsed",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::set_already_used",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::Status",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::status",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::StatusExec",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::status_exec",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::SetStatusExec",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::set_status_exec",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::AddFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::add_fail",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::AddWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::add_warning",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::Check",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::check",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::CCheck",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::c_check",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Binder::SetResultPresent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Binder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferBinder::set_result_present",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors. Transfer_TransferFailure when the result is already used."
+    },
+    {
+      "upstream_id": "Transfer_SimpleBinderOfTransient::Transfer_SimpleBinderOfTransient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_SimpleBinderOfTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferSimpleBinderOfTransient::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_SimpleBinderOfTransient::ResultType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_SimpleBinderOfTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferSimpleBinderOfTransient::<rustycad_tkxsbase::transfer::TransferBinder>::result_type",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_SimpleBinderOfTransient::ResultTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_SimpleBinderOfTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferSimpleBinderOfTransient::<rustycad_tkxsbase::transfer::TransferBinder>::result_type_name",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_SimpleBinderOfTransient::SetResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_SimpleBinderOfTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferSimpleBinderOfTransient::set_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_SimpleBinderOfTransient::Result",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_SimpleBinderOfTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferSimpleBinderOfTransient::result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_SimpleBinderOfTransient::GetTypedResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_SimpleBinderOfTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferSimpleBinderOfTransient::get_typed_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_VoidBinder::Transfer_VoidBinder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_VoidBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferVoidBinder::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_VoidBinder::ResultType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_VoidBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferVoidBinder::<rustycad_tkxsbase::transfer::TransferBinder>::result_type",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_VoidBinder::ResultTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_VoidBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferVoidBinder::<rustycad_tkxsbase::transfer::TransferBinder>::result_type_name",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_MultipleBinder::Transfer_MultipleBinder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_MultipleBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferMultipleBinder::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_MultipleBinder::IsMultiple",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_MultipleBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferMultipleBinder::<rustycad_tkxsbase::transfer::TransferBinder>::is_multiple",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_MultipleBinder::ResultType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_MultipleBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferMultipleBinder::<rustycad_tkxsbase::transfer::TransferBinder>::result_type",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_MultipleBinder::ResultTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_MultipleBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferMultipleBinder::<rustycad_tkxsbase::transfer::TransferBinder>::result_type_name",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_MultipleBinder::AddResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_MultipleBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferMultipleBinder::add_transient_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors. Renamed: the trait method AddResult(binder) of Transfer_Binder keeps its name."
+    },
+    {
+      "upstream_id": "Transfer_MultipleBinder::NbResults",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_MultipleBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferMultipleBinder::nb_results",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_MultipleBinder::ResultValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_MultipleBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferMultipleBinder::result_value",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_MultipleBinder::MultipleResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_MultipleBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferMultipleBinder::multiple_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_MultipleBinder::SetMultipleResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_MultipleBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferMultipleBinder::set_multiple_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors. A null sequence is None."
+    },
+    {
+      "upstream_id": "Transfer_TransientListBinder::Transfer_TransientListBinder()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientListBinder::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientListBinder::Transfer_TransientListBinder(const occ::handle<NCollection_HSequence<occ::handle<Standard_Transient>>>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientListBinder::with_list",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientListBinder::IsMultiple",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientListBinder::<rustycad_tkxsbase::transfer::TransferBinder>::is_multiple",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientListBinder::ResultType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientListBinder::<rustycad_tkxsbase::transfer::TransferBinder>::result_type",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientListBinder::ResultTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientListBinder::<rustycad_tkxsbase::transfer::TransferBinder>::result_type_name",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientListBinder::AddResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientListBinder::add_transient_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors. Renamed: the trait method AddResult(binder) of Transfer_Binder keeps its name."
+    },
+    {
+      "upstream_id": "Transfer_TransientListBinder::Result",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientListBinder::result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientListBinder::SetResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientListBinder::set_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientListBinder::NbTransients",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientListBinder::nb_transients",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientListBinder::Transient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientListBinder::transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::GetHashCode",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::get_hash_code",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::Equates",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::equates",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::ValueType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::value_type",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::ValueTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::value_type_name",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::SetAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::set_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::RemoveAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::remove_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::GetAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::get_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::Attribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::AttributeType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::attribute_type",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::SetIntegerAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::set_integer_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::GetIntegerAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::get_integer_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::IntegerAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::integer_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::SetRealAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::set_real_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors. The real is natively boxed in a Geom2d_CartesianPoint (val, 0), kept."
+    },
+    {
+      "upstream_id": "Transfer_Finder::GetRealAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::get_real_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::RealAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::real_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::SetStringAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::set_string_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::GetStringAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::get_string_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::StringAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::string_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::AttrList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::attr_list",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::SameAttributes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::same_attributes",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::GetAttributes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::get_attributes",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_Finder::SetHashCode",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_Finder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinder::set_hash_code",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_FindHasher::operator()(const occ::handle<Transfer_Finder>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FindHasher.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFindHasher::<rustycad_tkernel::ncollection::HashPolicy>::hash",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_FindHasher::operator()(const occ::handle<Transfer_Finder>&,const occ::handle<Transfer_Finder>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FindHasher.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFindHasher::<rustycad_tkernel::ncollection::HashPolicy>::equal",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientMapper::Transfer_TransientMapper",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientMapper.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientMapper::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientMapper::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientMapper.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientMapper::value",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientMapper::Equates",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientMapper.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientMapper::<rustycad_tkxsbase::transfer::TransferFinder>::equates",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientMapper::ValueType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientMapper.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientMapper::<rustycad_tkxsbase::transfer::TransferFinder>::value_type",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_TransientMapper::ValueTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientMapper.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientMapper::<rustycad_tkxsbase::transfer::TransferFinder>::value_type_name",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_DataInfo::Type",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_DataInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferDataInfo::type_of",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_DataInfo::TypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_DataInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferDataInfo::type_name",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
