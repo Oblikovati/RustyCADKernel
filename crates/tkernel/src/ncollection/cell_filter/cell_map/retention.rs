@@ -1,6 +1,6 @@
-//! Native Object destruction precedes unlink; callback failures preserve the current node.
-use super::{BaseAllocator, BaseMap, CellIndex, CellMap, CellObjectNode, cell_node::CellRecord};
-use std::panic::{AssertUnwindSafe, catch_unwind, resume_unwind};
+//! Native `remove`/`inspect`: walk one cell's targets newest first, destroy each purged target
+//! as it is met, and drop the cell from the map once its list is empty.
+use super::{CellIndex, CellMap};
 impl<T> CellMap<T> {
     pub(in crate::ncollection::cell_filter) fn try_retain<E>(
         &mut self,
@@ -9,79 +9,36 @@ impl<T> CellMap<T> {
     ) -> Result<(), E> {
         self.try_retain_index(index.as_slice(), keep)
     }
+    /// Rust-only fallible form: a `keep` error stops the walk; purges already made stay made.
     pub(in crate::ncollection::cell_filter) fn try_retain_index<E>(
         &mut self,
         index: &[i32],
         keep: impl FnMut(&T) -> Result<bool, E>,
     ) -> Result<(), E> {
-        let Some((bucket, node)) = self.lookup_index(index) else {
+        let Some(slot) = self.lookup_index(index) else {
             return Ok(());
         };
-        let cell = unsafe { super::CellMapNode::cell_ptr(node.cast()) };
-        let result = catch_unwind(AssertUnwindSafe(|| unsafe {
-            retain_objects(cell, self.storage.base.allocator(), keep)
-        }));
-        self.finish_retention(cell, bucket, node, result)
-    }
-    fn finish_retention<E>(
-        &mut self,
-        cell: *mut CellRecord<T>,
-        bucket: usize,
-        node: *mut super::MapLinkNode,
-        result: std::thread::Result<Result<(), E>>,
-    ) -> Result<(), E> {
-        // An already-destroyed final Object must not leave a dead cell after Rust unwinding.
-        if unsafe { (*cell).objects.is_null() } {
-            self.storage.remove(bucket, node);
+        let cell = self.storage.payload_mut().key_mut(slot);
+        let outcome = retain_newest_first(&mut cell.objects, keep);
+        if cell.is_vacant() {
+            self.remove_slot(slot);
         }
-        match result {
-            Ok(outcome) => outcome,
-            Err(panic) => resume_unwind(panic),
-        }
+        outcome
     }
 }
-unsafe fn retain_objects<T, E>(
-    cell: *mut CellRecord<T>,
-    allocator: &BaseAllocator,
+// The vector holds the native list reversed, so its last element is the list head.
+fn retain_newest_first<T, E>(
+    objects: &mut Vec<T>,
     mut keep: impl FnMut(&T) -> Result<bool, E>,
 ) -> Result<(), E> {
-    let (mut previous, mut node) = (std::ptr::null(), unsafe { (*cell).objects });
-    while !node.is_null() {
-        let next = unsafe { (*node).next };
-        if keep(unsafe { &(*node).object })? {
-            previous = node;
-        } else {
-            unsafe { purge_object(cell, previous, node, next, allocator) };
+    let mut position = objects.len();
+    while position > 0 {
+        position -= 1;
+        if !keep(&objects[position])? {
+            // Native destroys the target, then unlinks its node; the vector is consistent
+            // before the destructor runs.
+            drop(objects.remove(position));
         }
-        node = next;
     }
     Ok(())
-}
-unsafe fn purge_object<T>(
-    cell: *mut CellRecord<T>,
-    previous: *const CellObjectNode<T>,
-    node: *const CellObjectNode<T>,
-    next: *const CellObjectNode<T>,
-    allocator: &BaseAllocator,
-) {
-    let dropped = catch_unwind(AssertUnwindSafe(|| unsafe {
-        CellObjectNode::drop_object(node)
-    }));
-    unsafe { publish_unlink(cell, previous, next) };
-    unsafe { CellObjectNode::release_storage(node, allocator) };
-    if let Err(panic) = dropped {
-        resume_unwind(panic);
-    }
-}
-
-unsafe fn publish_unlink<T>(
-    cell: *mut CellRecord<T>,
-    previous: *const CellObjectNode<T>,
-    next: *const CellObjectNode<T>,
-) {
-    if previous.is_null() {
-        unsafe { (*cell).objects = next };
-    } else {
-        unsafe { (*previous.cast_mut()).next = next };
-    }
 }

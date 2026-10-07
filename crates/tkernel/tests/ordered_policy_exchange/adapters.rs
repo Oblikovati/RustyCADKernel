@@ -1,11 +1,9 @@
 use super::fixture::{Payload, SwapPolicy, SwapTrace};
-use rustycad_tkernel::ncollection::{
-    BaseAllocator, BaseMap, BasicMapIteratorSource, OrderedDataMap, OrderedMap,
-};
+use rustycad_tkernel::ncollection::{BaseAllocator, BaseMap, OrderedDataMap, OrderedMap};
 use std::rc::Rc;
 pub type Set = OrderedMap<Payload, SwapPolicy>;
 pub type Map = OrderedDataMap<Payload, Payload, SwapPolicy>;
-pub trait OrderedExchangeFixture: BaseMap + BasicMapIteratorSource {
+pub trait OrderedExchangeFixture: BaseMap {
     const PAYLOADS_PER_NODE: usize;
     fn construct(policy: SwapPolicy, buckets: usize, arena: BaseAllocator) -> Self;
     fn insert(&mut self, key: i32, trace: &Rc<SwapTrace>);
@@ -15,6 +13,11 @@ pub trait OrderedExchangeFixture: BaseMap + BasicMapIteratorSource {
     fn native_self_assign(&mut self);
     fn native_self_exchange(&mut self);
     fn keys(&self) -> Vec<i32>;
+    /// The stored first key's address (null when empty): an entry identity that moves with
+    /// the graph, as the native first node does.
+    fn first_identity(&self) -> *const ();
+    /// The public `Buckets()` table identity, null where native returns null.
+    fn table_identity(&self) -> *const ();
 }
 macro_rules! adapter {
     ($map:ty,$payloads:expr,$insert:expr,$keys:expr) => {
@@ -48,6 +51,15 @@ macro_rules! adapter {
             }
             fn keys(&self) -> Vec<i32> {
                 ($keys)(self)
+            }
+            fn first_identity(&self) -> *const () {
+                self.first_node().map_or(std::ptr::null(), |node| {
+                    std::ptr::from_ref(node.key()).cast()
+                })
+            }
+            fn table_identity(&self) -> *const () {
+                self.buckets()
+                    .map_or(std::ptr::null(), |table| table.identity())
             }
         }
     };

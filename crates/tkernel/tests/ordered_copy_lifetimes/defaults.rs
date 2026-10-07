@@ -152,6 +152,7 @@ fn default_case(prefix: &str, label: &str, mode: DefaultMode, reject: bool) {
 }
 #[test]
 fn default_constructor_order_and_negative_validation_match_native_for_both_families() {
+    let _serial = super::fixture::serial();
     for prefix in ["set", "data"] {
         for (label, mode, reject) in cases() {
             default_case(prefix, label, mode, reject);

@@ -23,13 +23,13 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
         };
         if replace {
             // Native Emplace destroys the stored key and reconstructs it in place.
-            self.storage.slot_mut(slot).replace_key(key);
+            *self.storage.payload_mut().key_mut(slot) = key;
         }
-        (false, self.storage.slot(slot).key())
+        (false, self.storage.payload().key(slot))
     }
     fn insert_key(&mut self, bucket: usize, construct: impl FnOnce() -> K) -> (bool, &K) {
         let slot = self.storage.insert(bucket, construct, || ());
-        (true, self.storage.slot(slot).key())
+        (true, self.storage.payload().key(slot))
     }
 }
 impl<K: Debug + Clone, H: HashPolicy<K>> Map<K, H> {
@@ -37,7 +37,7 @@ impl<K: Debug + Clone, H: HashPolicy<K>> Map<K, H> {
         self.prepare_emplacement();
         let (bucket, slot) = self.storage.lookup_with_bucket(key, &self.hasher);
         match slot {
-            Some(slot) => (false, self.storage.slot(slot).key()),
+            Some(slot) => (false, self.storage.payload().key(slot)),
             None => self.insert_key(bucket, || key.clone()),
         }
     }

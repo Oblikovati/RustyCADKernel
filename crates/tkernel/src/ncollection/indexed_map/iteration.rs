@@ -1,18 +1,17 @@
+//! Keys in dense index order: the slot vector is the native index table.
 use super::{Debug, HashPolicy, IndexedMap, IndexedMapItems, IndexedMapIter};
 impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
     /// Traverses keys in dense index order; `map.iter().min()`.
     pub fn iter(&self) -> IndexedMapIter<'_, K> {
         IndexedMapIter {
-            nodes: self.storage.indices(),
-            ownership: std::marker::PhantomData,
+            keys: self.storage.payload().keys(),
             position: 0,
         }
     }
     /// Returns an exhausted key iterator; `map.iter()!=map.end()`.
     pub fn end(&self) -> IndexedMapIter<'_, K> {
         IndexedMapIter {
-            nodes: self.storage.indices(),
-            ownership: std::marker::PhantomData,
+            keys: self.storage.payload().keys(),
             position: self.len(),
         }
     }
@@ -28,25 +27,23 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
 impl<'a, K> Iterator for IndexedMapIter<'a, K> {
     type Item = &'a K;
     fn next(&mut self) -> Option<Self::Item> {
-        let node = self.nodes.get(self.position)?;
+        let key = self.keys.get(self.position)?;
         self.position += 1;
-        // SAFETY: the iterator borrows the owning map, preventing removal or reallocation.
-        Some(unsafe { (&*node.cast::<super::IndexedMapNode<K>>()).value() })
+        Some(key)
     }
 }
 impl<K> Clone for IndexedMapIter<'_, K> {
     fn clone(&self) -> Self {
         Self {
-            nodes: self.nodes,
-            ownership: std::marker::PhantomData,
+            keys: self.keys,
             position: self.position,
         }
     }
 }
 impl<K> PartialEq for IndexedMapIter<'_, K> {
     fn eq(&self, other: &Self) -> bool {
-        (self.position >= self.nodes.len() && other.position >= other.nodes.len())
-            || (self.nodes.as_ptr() == other.nodes.as_ptr() && self.position == other.position)
+        (self.position >= self.keys.len() && other.position >= other.keys.len())
+            || (self.keys.as_ptr() == other.keys.as_ptr() && self.position == other.position)
     }
 }
 impl<K> Eq for IndexedMapIter<'_, K> {}
@@ -77,7 +74,3 @@ impl<'a, K: Debug, H: HashPolicy<K>> IntoIterator for &'a IndexedMap<K, H> {
         self.iter()
     }
 }
-
-// SAFETY: a shared map borrow keeps all keys alive and excludes all mutation.
-unsafe impl<K: Sync> Send for IndexedMapIter<'_, K> {}
-unsafe impl<K: Sync> Sync for IndexedMapIter<'_, K> {}

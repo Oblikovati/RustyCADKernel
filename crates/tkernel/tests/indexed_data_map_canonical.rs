@@ -1,4 +1,4 @@
-//! Single native indexed key/value nodes, allocator callbacks and disjoint borrowed views.
+//! Indexed key/value bindings, callback order and disjoint borrowed views against native rows.
 #[path = "indexed_data_map_canonical/borrowing.rs"]
 mod borrowing;
 #[path = "indexed_data_map_canonical/lifetime.rs"]
@@ -9,7 +9,7 @@ mod observers;
 mod route_changes;
 #[path = "indexed_data_map_canonical/topology.rs"]
 mod topology;
-fn native_row(label: &str, actual: &str) {
+fn native_row_text(label: &str) -> &'static str {
     static ROWS: std::sync::OnceLock<std::collections::BTreeMap<&str, &str>> =
         std::sync::OnceLock::new();
     let rows = ROWS.get_or_init(|| {
@@ -18,5 +18,8 @@ fn native_row(label: &str, actual: &str) {
             .map(|row| (row.split_once(' ').unwrap().0, row))
             .collect()
     });
-    assert_eq!(rows.get(label).copied(), Some(actual));
+    rows.get(label).copied().unwrap()
+}
+fn native_row(label: &str, actual: &str) {
+    assert_eq!(native_row_text(label), actual);
 }

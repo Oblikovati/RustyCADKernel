@@ -49,14 +49,13 @@ fn key(value: i32) -> Key {
     }
 }
 #[test]
-fn borrowed_substitute_uses_assignment_and_retains_node() {
+fn borrowed_substitute_uses_assignment_in_place() {
     let mut map = IndexedMap::with_hasher(Policy, 1);
     let original = key(7);
     let assignments = original.assignments.clone();
     map.add(original);
-    let identity = map.observer().snapshot().indices[0];
     map.substitute_ref(1, &key(9)).unwrap();
     assert_eq!(assignments.get(), 1);
     assert_eq!(map.find_key(1).unwrap().value, 9);
-    assert_eq!(map.observer().snapshot().indices[0], identity);
+    assert_eq!(map.find_index(&key(9)), 1);
 }

@@ -1,7 +1,5 @@
 type ObservedCell<'a> = CellFilterCell<Target<'a>>;
-use super::{
-    BaseAllocator, CellFilterCell, Target, Trace, assert_row, coordinates, head, live_nodes,
-};
+use super::{BaseAllocator, CellFilterCell, Target, Trace, assert_row, coordinates, head};
 pub fn compare_construction(row: usize, size: usize) {
     let (arena, trace) = (BaseAllocator::incremental(1024), Trace::default());
     let mut source = CellFilterCell::from_indices(&coordinates(size, 10), arena.clone());
@@ -9,12 +7,7 @@ pub fn compare_construction(row: usize, size: usize) {
     trace.prepend(&mut source, 2);
     let before = (source.index_data_ptr(), head(&source));
     let moved = CellFilterCell::move_construct(&mut source);
-    emit_move(
-        (row, size, live_nodes(&arena)),
-        [&source, &moved],
-        before,
-        &trace,
-    );
+    emit_move((row, size, 0), [&source, &moved], before, &trace);
     drop((moved, source));
     assert_row(
         row + 1,
@@ -52,7 +45,6 @@ pub fn compare_assignment(row: usize, from: usize, to: usize) {
     let pointers = (keys.0, keys.1, head(&source));
     receiver.move_from_discard(&mut source);
     emit_assign((row, from, to), [&source, &receiver], pointers, &trace);
-    assert_eq!(live_nodes(&arena), 1);
     drop((receiver, source));
     assert_row(
         row + 1,

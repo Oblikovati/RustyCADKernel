@@ -1,7 +1,7 @@
-//! Native Cell moves transfer object heads independently from LocalArray's storage policy.
+//! Native Cell moves transfer the target list independently from the index's storage policy.
 use super::CellRecord;
+use crate::ncollection::Array1;
 use crate::ncollection::cell_filter::{CellGeometry, CellHash, CellIndex};
-use crate::ncollection::{Array1, BaseAllocator};
 impl<T> CellRecord<T> {
     pub(in crate::ncollection::cell_filter) fn from_point<I: CellGeometry<CellTarget = T>>(
         point: &I::CellPoint,
@@ -14,8 +14,7 @@ impl<T> CellRecord<T> {
     pub(in crate::ncollection::cell_filter) fn move_construct(source: &mut Self) -> Self {
         Self {
             index: CellIndex::move_construct(&mut source.index),
-            objects: std::mem::replace(&mut source.objects, std::ptr::null()),
-            ownership: std::marker::PhantomData,
+            objects: std::mem::take(&mut source.objects),
         }
     }
     pub(in crate::ncollection::cell_filter) fn is_equal(&self, other: &Self) -> bool {
@@ -24,43 +23,28 @@ impl<T> CellRecord<T> {
     pub(in crate::ncollection::cell_filter) fn hash_code(&self) -> usize {
         CellHash::hash_coordinates(self.index.as_slice())
     }
-    pub(in crate::ncollection::cell_filter) fn move_from_discard(
-        &mut self,
-        source: &mut Self,
-        allocator: &BaseAllocator,
-    ) {
+    /// Native move assignment: the index moves and the old target list is overwritten without
+    /// running the targets' destructors (a native leak of target-owned resources).
+    pub(in crate::ncollection::cell_filter) fn move_from_discard(&mut self, source: &mut Self) {
         self.index.move_from(&mut source.index);
-        self.discard_objects(allocator);
-        self.objects = std::mem::replace(&mut source.objects, std::ptr::null());
+        self.discard_objects();
+        self.objects = std::mem::take(&mut source.objects);
     }
-    pub(in crate::ncollection::cell_filter) fn discard_objects(
-        &mut self,
-        allocator: &BaseAllocator,
-    ) {
-        let mut node = self.objects;
-        self.objects = std::ptr::null();
-        while !node.is_null() {
-            let next = unsafe { (*node).next };
-            // Native overwritten heads never invoke Target destruction. Rust only releases
-            // typed storage leases here; an incremental arena retains its block bytes.
-            unsafe { super::CellObjectNode::release_storage(node, allocator) };
-            node = next;
+    /// Forgets every target without its destructor, as a native overwritten list head does.
+    pub(in crate::ncollection::cell_filter) fn discard_objects(&mut self) {
+        for target in std::mem::take(&mut self.objects) {
+            std::mem::forget(target);
         }
     }
-    pub(in crate::ncollection::cell_filter) fn prepend(
-        &mut self,
-        target: &T,
-        allocator: &BaseAllocator,
-    ) where
+    /// Native `add`: the copy becomes the new list head.
+    pub(in crate::ncollection::cell_filter) fn prepend(&mut self, target: &T)
+    where
         T: Clone,
     {
-        unsafe { super::CellObjectNode::prepend(self, target, allocator) };
+        self.objects.push(target.clone());
     }
+    /// The targets in native list order, newest first.
     pub(in crate::ncollection::cell_filter) fn targets(&self) -> impl Iterator<Item = &T> {
-        std::iter::successors((!self.objects.is_null()).then_some(self.objects), |node| {
-            let next = unsafe { (**node).next };
-            (!next.is_null()).then_some(next)
-        })
-        .map(|node| unsafe { &*std::ptr::addr_of!((*node).object).cast::<T>() })
+        self.objects.iter().rev()
     }
 }

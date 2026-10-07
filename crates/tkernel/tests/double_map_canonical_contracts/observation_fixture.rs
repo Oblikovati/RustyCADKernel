@@ -1,4 +1,4 @@
-use rustycad_tkernel::ncollection::{BaseAllocator, DoubleMap, DoubleMapObserver, HashPolicy};
+use rustycad_tkernel::ncollection::{DoubleMap, HashPolicy};
 use std::{
     cell::{Cell, RefCell},
     rc::Rc,
@@ -7,9 +7,7 @@ use std::{
 pub struct CallbackTrace(pub Rc<TraceState>);
 pub struct TraceState {
     pub events: RefCell<String>,
-    pub mode: Cell<u8>,
-    pub arena: BaseAllocator,
-    pub observer: RefCell<Option<DoubleMapObserver>>,
+    pub recording: Cell<&'static str>,
     pub reject_clone: Cell<char>,
     pub reject_drop: Cell<char>,
     pub reject_hash: Cell<char>,
@@ -20,9 +18,7 @@ impl CallbackTrace {
     pub fn new() -> Self {
         Self(Rc::new(TraceState {
             events: RefCell::new(String::new()),
-            mode: Cell::new(0),
-            arena: BaseAllocator::incremental(512),
-            observer: RefCell::new(None),
+            recording: Cell::new(""),
             reject_clone: Cell::new('\0'),
             reject_drop: Cell::new('\0'),
             reject_hash: Cell::new('\0'),
@@ -37,38 +33,33 @@ impl CallbackTrace {
             trace: self.clone(),
         }
     }
-    pub fn map(&self, arena: BaseAllocator) -> ObservedMap {
+    pub fn map(&self) -> ObservedMap {
         DoubleMap::with_allocator(
             CallbackHash(self.clone()),
             CallbackHash(self.clone()),
             1,
-            arena,
+            Default::default(),
         )
     }
-    pub fn watch(&self, map: &ObservedMap, mode: u8) {
-        *self.0.observer.borrow_mut() = Some(map.observer());
-        self.0.mode.set(mode);
+    /// Starts recording the named callbacks, copy (C), hash (H) and destructor (D), from an
+    /// empty trace; `trace.watch("C")` records copies only.
+    pub fn watch(&self, events: &'static str) {
+        self.0.recording.set(events);
         self.0.events.borrow_mut().clear();
+    }
+    pub fn stop(&self) {
+        self.0.recording.set("");
     }
     pub fn events(&self) -> String {
         self.0.events.borrow().clone()
     }
-    pub fn live(&self) -> bool {
-        self.0.arena.reset(false).is_err()
-    }
     pub fn record(&self, event: char, kind: char) {
-        let suffix = match self.0.mode.get() {
-            1 if event == 'C' => u8::from(self.live()).to_string(),
-            2 if event == 'D' || event == 'H' => {
-                snapshot(&self.0.observer.borrow().as_ref().unwrap().snapshot())
-            }
-            3 => u8::from(self.live()).to_string(),
-            _ => return,
-        };
-        self.0
-            .events
-            .borrow_mut()
-            .push_str(&format!("{event}{kind}@{suffix},"));
+        if self.0.recording.get().contains(event) {
+            self.0
+                .events
+                .borrow_mut()
+                .push_str(&format!("{event}{kind},"));
+        }
     }
 }
 pub struct CallbackKey {
@@ -129,13 +120,26 @@ impl HashPolicy<CallbackKey> for CallbackHash {
     }
 }
 pub type ObservedMap = DoubleMap<CallbackKey, CallbackKey, CallbackHash, CallbackHash>;
-pub fn snapshot(s: &rustycad_tkernel::ncollection::DoubleMapObservation) -> String {
-    format!(
-        "{}:{}:{}",
-        s.size,
-        u8::from(s.first_buckets.get(1).is_some_and(|p| *p != 0)),
-        u8::from(s.second_buckets.get(1).is_some_and(|p| *p != 0))
-    )
+/// Everything public about the map: size, modulus, table identity, the first-key chains in
+/// native order and the second-key index of every pair.
+pub fn state(map: &ObservedMap) -> String {
+    let mut text = format!("{} {} ", map.len(), map.bucket_count());
+    let Some(table) = map.buckets() else {
+        return text + "null";
+    };
+    text += &format!("{:p} ", table.identity());
+    for bucket in 0..table.len() {
+        for (first, second) in table.chain(bucket).unwrap() {
+            let back = map.seek2(second).map(|key| key.value);
+            text += &format!("{bucket}:{}>{}<{back:?},", first.value, second.value);
+        }
+    }
+    text
+}
+/// True when the allocated first table holds no chain.
+pub fn heads_empty(map: &ObservedMap) -> bool {
+    let table = map.buckets().unwrap();
+    (0..table.len()).all(|bucket| table.chain(bucket).unwrap().next().is_none())
 }
 pub fn caught(call: impl FnOnce()) -> bool {
     std::panic::catch_unwind(std::panic::AssertUnwindSafe(call)).is_err()

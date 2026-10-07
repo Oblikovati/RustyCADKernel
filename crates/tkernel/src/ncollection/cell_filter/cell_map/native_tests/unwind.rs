@@ -1,7 +1,7 @@
 use super::*;
 use std::panic::{AssertUnwindSafe, catch_unwind};
 #[test]
-fn failed_target_copy_keeps_previous_chain_and_releases_unpublished_lease() {
+fn failed_target_copy_keeps_the_previous_list() {
     let (mut filter, probe) = filled(0);
     probe.borrow_mut().fail_clone = Some(4);
     assert!(
@@ -10,14 +10,13 @@ fn failed_target_copy_keeps_previous_chain_and_releases_unpublished_lease() {
         ))
         .is_err()
     );
-    probe.borrow_mut().cell = None;
+    probe.borrow_mut().recording = false;
     let mut row = String::new();
     remaining(&mut row, &filter);
     assert_eq!(row, " R3,2,1, cells1");
-    assert_eq!(probe.borrow().live_leases(), 4);
 }
 #[test]
-fn destructor_panic_unlinks_destroyed_object_before_resuming() {
+fn destructor_panic_leaves_the_destroyed_target_unlinked() {
     let (mut filter, probe) = filled(0);
     probe.borrow_mut().fail_drop = Some(3);
     assert!(
@@ -29,5 +28,5 @@ fn destructor_panic_unlinks_destroyed_object_before_resuming() {
     let mut row = String::new();
     remaining(&mut row, &filter);
     assert_eq!(row, " R2,1, cells1");
-    probe.borrow_mut().cell = None;
+    probe.borrow_mut().recording = false;
 }

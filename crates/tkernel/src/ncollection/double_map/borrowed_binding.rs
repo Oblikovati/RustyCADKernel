@@ -18,7 +18,7 @@ impl<A: Debug + Clone, B: Debug + Clone, H1: HashPolicy<A>, H2: HashPolicy<B>>
             return false;
         };
         self.storage
-            .insert(one, two, || first.clone(), || second.clone());
+            .insert((one, two), || first.clone(), || second.clone());
         true
     }
 }
@@ -28,7 +28,7 @@ impl<A: Debug + Clone, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap
         let Some((one, two)) = self.prepare_binding(first, &second) else {
             return Err(duplicate_pair(first, &second));
         };
-        self.storage.insert(one, two, || first.clone(), || second);
+        self.storage.insert((one, two), || first.clone(), || second);
         Ok(())
     }
     /// Copies only the first key on successful insertion; `map.try_bind_key1_ref(&1,5)`.
@@ -36,7 +36,7 @@ impl<A: Debug + Clone, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap
         let Some((one, two)) = self.prepare_binding(first, &second) else {
             return false;
         };
-        self.storage.insert(one, two, || first.clone(), || second);
+        self.storage.insert((one, two), || first.clone(), || second);
         true
     }
 }
@@ -46,7 +46,7 @@ impl<A: Debug, B: Debug + Clone, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap
         let Some((one, two)) = self.prepare_binding(&first, second) else {
             return Err(duplicate_pair(&first, second));
         };
-        self.storage.insert(one, two, || first, || second.clone());
+        self.storage.insert((one, two), || first, || second.clone());
         Ok(())
     }
     /// Copies only the second key on successful insertion; `map.try_bind_key2_ref(1,&5)`.
@@ -54,7 +54,7 @@ impl<A: Debug, B: Debug + Clone, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap
         let Some((one, two)) = self.prepare_binding(&first, second) else {
             return false;
         };
-        self.storage.insert(one, two, || first, || second.clone());
+        self.storage.insert((one, two), || first, || second.clone());
         true
     }
 }

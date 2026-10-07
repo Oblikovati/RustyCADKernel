@@ -21,8 +21,7 @@ impl<A: Debug + Clone, B: Debug + Clone, H1: HashPolicy<A>, H2: HashPolicy<B>>
         let first_bucket = self.first_policy.hash(&local_first) % self.bucket_count() + 1;
         let second_bucket = self.second_policy.hash(&local_second) % self.bucket_count() + 1;
         self.storage.insert(
-            first_bucket,
-            second_bucket,
+            (first_bucket, second_bucket),
             || local_first.clone(),
             || local_second.clone(),
         );

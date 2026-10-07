@@ -1,5 +1,5 @@
 use super::{fixture::*, scenarios::*};
-use rustycad_tkernel::ncollection::{BaseAllocator, BasicMapIteratorSource, OrderedMap};
+use rustycad_tkernel::ncollection::{BaseAllocator, OrderedMap};
 fn fill_integer(map: &mut OrderedMap<i32, EmplacePolicy<'_>>, count: usize) {
     if count == 3 {
         for key in [4, 1, 7] {
@@ -16,7 +16,8 @@ fn integer_case(operation: Operation, test: EmplaceCase) {
     let trace = EmplaceTrace::new(&arena);
     let mut map = OrderedMap::with_allocator(EmplacePolicy(&trace), 0, arena.clone());
     fill_integer(&mut map, test.count);
-    let first = map.basic_first_node();
+    // The first entry is compared by key: slot growth may move it (plan D1 class B5).
+    let first = map.first_node().map(|node| node.key().display());
     trace.configure(&test);
     let result = invoke(&mut map, operation, || trace.construct(test.key));
     snapshot(
@@ -24,7 +25,7 @@ fn integer_case(operation: Operation, test: EmplaceCase) {
         &result,
         &map,
         &trace,
-        map.basic_first_node() == first,
+        map.first_node().map(|node| node.key().display()) == first,
     );
 }
 fn tracked_case(operation: Operation, test: EmplaceCase) {
@@ -32,7 +33,8 @@ fn tracked_case(operation: Operation, test: EmplaceCase) {
     let trace = EmplaceTrace::new(&arena);
     let mut map = OrderedMap::with_allocator(EmplacePolicy(&trace), 0, arena.clone());
     map.add(make_key(&trace, 7, 10));
-    let first = map.basic_first_node();
+    // The first entry is compared by key: slot growth may move it (plan D1 class B5).
+    let first = map.first_node().map(|node| node.key().display());
     trace.configure(&test);
     let result = invoke(&mut map, operation, || make_key(&trace, test.key, 20));
     snapshot(
@@ -40,7 +42,7 @@ fn tracked_case(operation: Operation, test: EmplaceCase) {
         &result,
         &map,
         &trace,
-        map.basic_first_node() == first,
+        map.first_node().map(|node| node.key().display()) == first,
     );
 }
 macro_rules! emplace_suite {

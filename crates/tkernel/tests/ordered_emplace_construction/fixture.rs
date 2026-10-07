@@ -115,7 +115,12 @@ fn native_row(label: &str, actual: String) {
             .lines()
             .find(|line| line.starts_with(&format!("{label} ")))
             .unwrap();
-    assert_eq!(actual, expected);
+    // Column 5 and the `a` event suffixes are arena node counts (see native_node_counts).
+    let comparable = |row: &str| {
+        let row = super::native_node_counts::mask_column(row, 5);
+        super::native_node_counts::without_node_counts(&row)
+    };
+    assert_eq!(comparable(&actual), comparable(expected));
 }
 pub fn snapshot<K: KeyIdentity>(
     label: &str,
@@ -152,7 +157,7 @@ fn statistics<K: KeyIdentity>(
         "{} {} {} {} {}",
         map.len(),
         map.bucket_count(),
-        usize::from(!map.buckets().is_null()),
+        usize::from(!map.buckets().is_none()),
         trace.active(),
         usize::from(same_first)
     )

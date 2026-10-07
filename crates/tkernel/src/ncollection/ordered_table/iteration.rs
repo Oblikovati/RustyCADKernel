@@ -1,43 +1,92 @@
-//! Borrowed native order traversal; field projections never reborrow an entire node.
-use super::*;
-pub(in crate::ncollection) struct OrderedItems<'a, K, V> {
-    pub current: Option<*mut MapLinkNode>,
-    first: Option<*mut MapLinkNode>,
-    pub(super) key: unsafe fn(*mut MapLinkNode) -> *const K,
-    pub(super) value: unsafe fn(*mut MapLinkNode) -> *const V,
-    next: unsafe fn(*mut MapLinkNode) -> *mut *mut MapLinkNode,
-    borrow: PhantomData<(&'a K, &'a V)>,
+//! Borrowed traversal along the insertion-order links.
+use super::{OrderSlot, OrderedTable};
+use crate::ncollection::slot_chains::{SlotLink, SlotRangeMut};
+
+/// The order links and payload of one table, without its policy.
+pub(in crate::ncollection) struct OrderView<'a, K, V> {
+    order: &'a [OrderSlot],
+    keys: &'a [K],
+    values: &'a [V],
+    first: SlotLink,
 }
-impl<K, V, H, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
+
+impl<K, V> Clone for OrderView<'_, K, V> {
+    fn clone(&self) -> Self {
+        *self
+    }
+}
+
+impl<K, V> Copy for OrderView<'_, K, V> {}
+
+/// Shared traversal in insertion order; cursors compare by entry identity, as native nodes do.
+pub(in crate::ncollection) struct OrderedItems<'a, K, V> {
+    view: Option<OrderView<'a, K, V>>,
+    current: SlotLink,
+}
+
+/// Exclusive traversal in insertion order, lending each value once.
+pub(in crate::ncollection) type OrderedItemsMut<'a, K, V> = SlotRangeMut<'a, K, V>;
+
+impl<K, V, H> OrderedTable<K, V, H> {
     pub fn items(&self) -> OrderedItems<'_, K, V> {
-        let first = self.first.map(|slot| self.node_pointer(slot));
+        let view = OrderView {
+            order: &self.order,
+            keys: self.storage.payload().keys(),
+            values: self.storage.payload().values(),
+            first: self.first,
+        };
         OrderedItems {
-            current: first,
-            first,
-            key: project_key::<K, V, N>,
-            value: project_value::<K, V, N>,
-            next: N::next,
-            borrow: PhantomData,
+            view: Some(view),
+            current: self.first,
         }
     }
+    pub fn items_mut(&mut self) -> OrderedItemsMut<'_, K, V> {
+        let order = self.order_slots();
+        SlotRangeMut::new(order, self.storage.payload_mut())
+    }
+    // Every slot from the head along `myOrderNext`.
+    fn order_slots(&self) -> Vec<usize> {
+        let mut slots = Vec::with_capacity(self.order.len());
+        let mut link = self.first;
+        while let Some(slot) = link {
+            slots.push(slot);
+            link = self.order[slot].next;
+        }
+        slots
+    }
 }
+
 impl<'a, K, V> OrderedItems<'a, K, V> {
+    /// Native `More()`: the cursor is on an entry.
+    pub fn more(&self) -> bool {
+        self.current.is_some()
+    }
     pub fn current_pair(&self) -> Option<(&'a K, &'a V)> {
-        let node = self.current?;
-        // SAFETY: the map borrow keeps the current node live; the callbacks project only fields.
-        Some(unsafe { (&*(self.key)(node), &*(self.value)(node)) })
+        let (view, slot) = (self.view?, self.current?);
+        Some((&view.keys[slot], &view.values[slot]))
     }
+    /// Native `Reset`: back to the head the cursor was created on; a default cursor stays empty.
     pub fn restart(&mut self) {
-        self.current = self.first;
+        self.current = self.view.and_then(|view| view.first);
     }
+    /// Native `Next()`: follow `myOrderNext`.
     pub fn advance(&mut self) {
-        self.current = self.current.and_then(|node| {
-            // SAFETY: current belongs to the borrowed map; reading this link never borrows payloads.
-            let next = unsafe { *(self.next)(node) };
-            (!next.is_null()).then_some(next)
-        });
+        if let (Some(view), Some(slot)) = (self.view, self.current) {
+            self.current = view.order[slot].next;
+        }
+    }
+    /// Native `myOrderPrev`: step back to the entry inserted before the current one.
+    pub fn retreat(&mut self) {
+        if let (Some(view), Some(slot)) = (self.view, self.current) {
+            self.current = view.order[slot].previous;
+        }
+    }
+    // Native node identity: the owning table plus the slot, or nothing once exhausted.
+    fn identity(&self) -> Option<(*const OrderSlot, usize)> {
+        Some((self.view?.order.as_ptr(), self.current?))
     }
 }
+
 impl<'a, K, V> Iterator for OrderedItems<'a, K, V> {
     type Item = (&'a K, &'a V);
     fn next(&mut self) -> Option<Self::Item> {
@@ -46,46 +95,29 @@ impl<'a, K, V> Iterator for OrderedItems<'a, K, V> {
         Some(pair)
     }
 }
+
 impl<K, V> Clone for OrderedItems<'_, K, V> {
     fn clone(&self) -> Self {
         Self {
+            view: self.view,
             current: self.current,
-            first: self.first,
-            key: self.key,
-            value: self.value,
-            next: self.next,
-            borrow: PhantomData,
         }
     }
 }
+
 impl<K, V> Default for OrderedItems<'_, K, V> {
     fn default() -> Self {
         Self {
+            view: None,
             current: None,
-            first: None,
-            key: project_key::<K, V, OrderedDataMapNode<K, V>>,
-            value: project_value::<K, V, OrderedDataMapNode<K, V>>,
-            next: <OrderedDataMapNode<K, V> as StorageNode<K, V>>::next,
-            borrow: PhantomData,
         }
     }
 }
+
 impl<K, V> PartialEq for OrderedItems<'_, K, V> {
     fn eq(&self, other: &Self) -> bool {
-        self.current == other.current
+        self.identity() == other.identity()
     }
 }
-impl<K, V> Eq for OrderedItems<'_, K, V> {}
-// SAFETY: shared map lifetime prevents mutation; payload synchronization controls cross-thread reads.
-unsafe impl<K: Sync, V: Sync> Send for OrderedItems<'_, K, V> {}
-// SAFETY: only shared payload references and immutable links are observable.
-unsafe impl<K: Sync, V: Sync> Sync for OrderedItems<'_, K, V> {}
 
-unsafe fn project_key<K, V, N: StorageNode<K, V>>(node: *mut MapLinkNode) -> *const K {
-    // SAFETY: caller supplies the live concrete node selected by this callback.
-    unsafe { N::key(node).cast_const() }
-}
-unsafe fn project_value<K, V, N: StorageNode<K, V>>(node: *mut MapLinkNode) -> *const V {
-    // SAFETY: caller supplies the live concrete node selected by this callback.
-    unsafe { N::value(node).cast_const() }
-}
+impl<K, V> Eq for OrderedItems<'_, K, V> {}

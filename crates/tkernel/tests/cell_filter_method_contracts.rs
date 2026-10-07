@@ -2,27 +2,19 @@
 use rustycad_tkernel::ncollection::{BaseAllocator, CellAction, CellFilter, CellInspector, List};
 use std::cell::RefCell;
 use std::rc::Rc;
+/// Records each copy. Native also shows the list node allocated before the copy; per-target
+/// node allocation is protected allocator state (plan D1 class B6).
 #[derive(Debug)]
 struct Target {
     number: i32,
-    arena: BaseAllocator,
-    copy_allocations: Rc<RefCell<Vec<usize>>>,
+    copies: Rc<RefCell<Vec<i32>>>,
 }
 impl Clone for Target {
     fn clone(&self) -> Self {
-        let failure = self.arena.reset(false).unwrap_err();
-        let count = failure
-            .message()
-            .split_whitespace()
-            .next()
-            .unwrap()
-            .parse()
-            .unwrap();
-        self.copy_allocations.borrow_mut().push(count);
+        self.copies.borrow_mut().push(self.number);
         Self {
             number: self.number,
-            arena: self.arena.clone(),
-            copy_allocations: Rc::clone(&self.copy_allocations),
+            copies: Rc::clone(&self.copies),
         }
     }
 }
@@ -46,19 +38,18 @@ impl CellInspector for Inspector {
     }
 }
 #[test]
-fn target_copy_observes_preallocated_native_list_node() {
+fn each_add_copies_its_target_once_and_inspection_is_newest_first() {
     let arena = BaseAllocator::incremental(1024);
     let copied = Rc::new(RefCell::new(Vec::new()));
     let mut target = Target {
         number: 7,
-        arena: arena.clone(),
-        copy_allocations: Rc::clone(&copied),
+        copies: Rc::clone(&copied),
     };
     let mut filter = CellFilter::<Inspector>::with_allocator(1.0, Some(arena));
     filter.add(&target, &[0.0]);
     target.number = 8;
     filter.add(&target, &[0.0]);
-    assert_eq!(&*copied.borrow(), &[2, 3]);
+    assert_eq!(&*copied.borrow(), &[7, 8]);
     let mut inspector = Inspector::default();
     filter.inspect(&[0.0], &mut inspector);
     assert_eq!(inspector.visited, [8, 7]);
@@ -122,8 +113,7 @@ fn default_constructor_can_be_initialized_before_use() {
     filter.reset(1.0, Some(arena.clone())).unwrap();
     let target = Target {
         number: 7,
-        arena,
-        copy_allocations: Rc::new(RefCell::new(Vec::new())),
+        copies: Rc::new(RefCell::new(Vec::new())),
     };
     filter.add(&target, &[0.0]);
     let mut inspector = Inspector::default();

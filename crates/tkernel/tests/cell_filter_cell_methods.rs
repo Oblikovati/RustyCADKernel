@@ -92,17 +92,25 @@ fn equality_row(point: &CellFilterCell<i32>, equal: &CellFilterCell<i32>) {
     );
 }
 #[test]
-fn native_discard_retains_incremental_bytes_while_rust_releases_reset_leases() {
+fn native_discard_forgets_targets_without_their_destructors() {
+    // Native row 29 measures the arena bytes the discarded list node keeps; per-target nodes
+    // are protected allocator state (plan D1 class B6). The class-A part is that the discarded
+    // target's destructor never runs (the temporary source copy drops once).
     let arena = BaseAllocator::incremental(1024);
-    let before = arena.allocate_raw(8).unwrap();
-    let mut cell = CellFilterCell::from_indices(&[0], arena.clone());
-    cell.prepend_target(&7);
-    let object = std::ptr::from_ref(cell.targets().next().unwrap()).addr();
+    let drops = std::cell::Cell::new(0);
+    let mut cell = CellFilterCell::from_indices(&[0], arena);
+    cell.prepend_target(&CountedDrop(&drops));
+    assert_eq!(drops.get(), 1);
     cell.move_self_discard();
-    let after = arena.allocate_raw(8).unwrap();
-    let delta = after.as_ptr().addr() - before.as_ptr().addr();
-    let node_bytes = after.as_ptr().addr() - object;
-    assert_row(29, format!("retained delta {delta} node {node_bytes}"));
+    assert!(cell.targets().next().is_none());
     drop(cell);
-    assert!(arena.reset(false).is_ok());
+    assert_eq!(drops.get(), 1);
+}
+/// Counts destructor calls without owning heap memory, so a discarded copy leaks nothing.
+#[derive(Clone)]
+struct CountedDrop<'a>(&'a std::cell::Cell<u32>);
+impl Drop for CountedDrop<'_> {
+    fn drop(&mut self) {
+        self.0.set(self.0.get() + 1);
+    }
 }

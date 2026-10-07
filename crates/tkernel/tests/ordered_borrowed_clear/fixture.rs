@@ -6,7 +6,9 @@ use std::{
 // Common allocator handle counts are process-global, so the entire oracle target shares this gate.
 static CLEAR_ORACLE_SERIAL: Mutex<()> = Mutex::new(());
 pub fn oracle_guard() -> MutexGuard<'static, ()> {
-    CLEAR_ORACLE_SERIAL.lock().unwrap()
+    CLEAR_ORACLE_SERIAL
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner)
 }
 pub struct ClearTrace<'a> {
     pub old: &'a BaseAllocator,
@@ -64,7 +66,12 @@ impl<'a> ClearTrace<'a> {
         let events = self.events.borrow();
         let events = if events.is_empty() { "-" } else { &events };
         let stats = stats.map(|value| value.to_string()).join(" ");
-        assert_eq!(format!("{label} {stats} {events}"), native_line(label));
+        let actual = format!("{label} {stats} {events}");
+        // Handle counts (`o`, `n`) stay compared; arena node counts are plan D1 class B6.
+        assert_eq!(
+            super::native_node_counts::without_node_counts(&actual),
+            super::native_node_counts::without_node_counts(native_line(label))
+        );
     }
 }
 pub fn active_allocations(arena: &BaseAllocator) -> i32 {
