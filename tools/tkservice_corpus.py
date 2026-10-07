@@ -41,3 +41,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_tpers').append_tpers_requests(requests)
     # Graphic3d_RenderingParams, Graphic3d_ZLayerSettings, Graphic3d_PresentationAttributes (tkservice_corpus_params.py)
     __import__('tkservice_corpus_params').append_params_requests(requests)
+    # Font_FontMgr, Font_FTFont, Font_TextFormatter (tkservice_corpus_font.py)
+    __import__('tkservice_corpus_font').append_font_requests(requests)

@@ -38,6 +38,7 @@
 #include "tkservice_probe_light.cxx"
 #include "tkservice_probe_tpers.cxx"
 #include "tkservice_probe_params.cxx"
+#include "tkservice_probe_font.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -83,6 +84,10 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sv_tutils", sv_tutils_case},
  // Graphic3d_RenderingParams, Graphic3d_ZLayerSettings, Graphic3d_PresentationAttributes (tkservice_probe_params.cxx)
  {"sv_params", sv_params_case},
+ // Font_FontMgr, Font_FTFont, Font_TextFormatter (tkservice_probe_font.cxx)
+ {"sv_fontmgr", sv_fontmgr_case},
+ {"sv_ftfont", sv_ftfont_case},
+ {"sv_textfmt", sv_textfmt_case},
 };
 int main() {
  std::string line;

@@ -448155,6 +448155,1772 @@
       "notes": "Font mapping (docs/visualization-design.md section 1): value structs keep public fields; the overloads that fill a vector reference return the vector."
     },
     {
+      "upstream_id": "Font_FTLibrary",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTLibrary",
+      "status": "implemented",
+      "notes": "Font_FTLibrary mapping (visualization-design.md section 2): FreeType is loaded at run time with dlopen (font::freetype_ffi binds only the entry points the Font package calls; the record layouts follow the FreeType 2 public headers); a missing library or a failed FT_Init_FreeType leaves the library invalid, as natively; the library is released on drop. Exercised by every sv_ftfont native probe request."
+    },
+    {
+      "upstream_id": "Font_FTLibrary::Font_FTLibrary",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTLibrary.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTLibrary::new",
+      "status": "implemented",
+      "notes": "Font_FTLibrary mapping (visualization-design.md section 2): FreeType is loaded at run time with dlopen (font::freetype_ffi binds only the entry points the Font package calls; the record layouts follow the FreeType 2 public headers); a missing library or a failed FT_Init_FreeType leaves the library invalid, as natively; the library is released on drop. Exercised by every sv_ftfont native probe request."
+    },
+    {
+      "upstream_id": "Font_FTLibrary::IsValid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTLibrary.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTLibrary::is_valid",
+      "status": "implemented",
+      "notes": "Font_FTLibrary mapping (visualization-design.md section 2): FreeType is loaded at run time with dlopen (font::freetype_ffi binds only the entry points the Font package calls; the record layouts follow the FreeType 2 public headers); a missing library or a failed FT_Init_FreeType leaves the library invalid, as natively; the library is released on drop. Exercised by every sv_ftfont native probe request."
+    },
+    {
+      "upstream_id": "Font_FTLibrary::Instance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTLibrary.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTLibrary::instance",
+      "status": "implemented",
+      "notes": "Font_FTLibrary mapping (visualization-design.md section 2): FreeType is loaded at run time with dlopen (font::freetype_ffi binds only the entry points the Font package calls; the record layouts follow the FreeType 2 public headers); a missing library or a failed FT_Init_FreeType leaves the library invalid, as natively; the library is released on drop. Exercised by every sv_ftfont native probe request. The FT_Library handle as a raw pointer (null when invalid)."
+    },
+    {
+      "upstream_id": "FT_LibraryRec_",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTLibrary.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTLibrary::instance",
+      "status": "implemented",
+      "notes": "Font_FTLibrary mapping (visualization-design.md section 2): FreeType is loaded at run time with dlopen (font::freetype_ffi binds only the entry points the Font package calls; the record layouts follow the FreeType 2 public headers); a missing library or a failed FT_Init_FreeType leaves the library invalid, as natively; the library is released on drop. Exercised by every sv_ftfont native probe request. The opaque FreeType library record behind the raw handle."
+    },
+    {
+      "upstream_id": "FT_Library",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTLibrary.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTLibrary::instance",
+      "status": "implemented",
+      "notes": "Font_FTLibrary mapping (visualization-design.md section 2): FreeType is loaded at run time with dlopen (font::freetype_ffi binds only the entry points the Font package calls; the record layouts follow the FreeType 2 public headers); a missing library or a failed FT_Init_FreeType leaves the library invalid, as natively; the library is released on drop. Exercised by every sv_ftfont native probe request. The raw FreeType library handle."
+    },
+    {
+      "upstream_id": "Font_SystemFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::Font_SystemFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::new",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::FontKey",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::font_key",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::FontName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::font_name",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::FontPath",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::font_path",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::FontFaceId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::font_face_id",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::SetFontPath",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::set_font_path",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::HasFontAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::has_font_aspect",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::FontPathAny",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::font_path_any",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe. The italic flag is only ever set (never cleared), as natively."
+    },
+    {
+      "upstream_id": "Font_SystemFont::IsEqual",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::is_equal",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe. A null other font returns Standard_ProgramError (natively a null dereference)."
+    },
+    {
+      "upstream_id": "Font_SystemFont::IsSingleStrokeFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::is_single_stroke_font",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::SetSingleStrokeFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::set_single_stroke_font",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::ToString",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::to_string_desc",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_SystemFont::operator==",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::same_key",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization"
+      },
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::handle_hash",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "std::hash<opencascade::handle<Font_SystemFont>>::operator()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_SystemFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontSystemFont::handle_hash",
+      "status": "implemented",
+      "notes": "Font_SystemFont mapping: the per-aspect paths, face ids and single-stroke flag are behind the handle's shared lock (Font_FontMgr::RegisterFont merges into registered fonts); the empty-name and UNDEFINED-aspect exceptions return Standard_ProgramError; compared through ToString of every system font by the sv_fontmgr native probe."
+    },
+    {
+      "upstream_id": "Font_FontMgr",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::GetInstance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::get_instance",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::FontAspectToString",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::font_aspect_to_string",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::ToUseUnicodeSubsetFallback",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::to_use_unicode_subset_fallback",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::SetUseUnicodeSubsetFallback",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::set_use_unicode_subset_fallback",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::GetAvailableFonts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::get_available_fonts",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::GetAvailableFontsNames",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::get_available_fonts_names",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::FindFallbackFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::find_fallback_font",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::RegisterFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::register_font",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::RegisterFonts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::register_fonts",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::ToTraceAliases",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::to_trace_aliases",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::SetTraceAliases",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::set_trace_aliases",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::ToPrintErrors",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::to_print_errors",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::SetPrintErrors",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::set_print_errors",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::GetAllAliases",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::get_all_aliases",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::GetFontAliases",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::get_font_aliases",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::AddFontAlias",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::add_font_alias",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::RemoveFontAlias",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::remove_font_alias",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::InitFontDataBase",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::init_font_data_base",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::ClearFontDataBase",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::clear_font_data_base",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::EmbedFallbackFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::embed_fallback_font",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::AvailableFonts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::get_available_fonts",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated. The fonts are returned instead of appended to a list."
+    },
+    {
+      "upstream_id": "Font_FontMgr::GetFont(const occ::handle<TCollection_HAsciiString> &,const Font_FontAspect,const int) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::get_font_with",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::GetFont(const TCollection_AsciiString &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::get_font",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::FindFont(const TCollection_AsciiString &,Font_StrictLevel,Font_FontAspect &,bool) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::find_font",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::FindFont(const TCollection_AsciiString &,Font_FontAspect &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::find_font_any",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::CheckFont(NCollection_Sequence<occ::handle<Font_SystemFont>> &,const TCollection_AsciiString &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::check_font_into",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FontMgr::CheckFont(const char *const) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFontMgr::check_font",
+      "status": "implemented",
+      "notes": "Font_FontMgr mapping: the process-wide registry with the X11 (fontconfig) build of InitFontDataBase: fontconfig (loaded at run time) or the X font server configuration give the font directories, then the default directories, scanned recursively in the native NCollection_Map order, with fonts.dir entries and their XLFD aliases; the alias table of the X11 branch; aliases share their sequences as natively (AddFontAlias keeps the quirk of comparing entries with the alias name); the embedded DejaVu Sans Latin WOFF (with its Bitstream Vera license) is the fallback font. The database, aliases, FindFont over names, strict levels and aspects and FindFallbackFont are compared by the sv_fontmgr native probe; the GoogleTest suite Font_FontMgr_Test is translated."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutline",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Glyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyph",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Glyph::Identity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyphIdentity",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Glyph::Identity::Identity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyphIdentity",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Glyph::Owner",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyph::owner",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe. The shared identity is an Arc compared by address."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Glyph::Revision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyph::revision",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Glyph::Face",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyph::face",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Glyph::Index",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyph::index",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Glyph::Hasher",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyphHasher",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Glyph::Hasher::operator()(const Font_GlyphOutline::Glyph &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyphHasher::hash",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Glyph::Hasher::operator()(const Font_GlyphOutline::Glyph &,const Font_GlyphOutline::Glyph &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyphHasher::equal",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "operator==",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyph",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe. PartialEq: same owner object, revision, face and index."
+    },
+    {
+      "upstream_id": "operator!=",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineGlyph",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe. PartialEq (ne)."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::FillRule",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineFillRule",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::FillRule::NonZero",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineFillRule::NonZero",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::FillRule::EvenOdd",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineFillRule::EvenOdd",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegment",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Kind",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegmentKind",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Kind::Line",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegmentKind::Line",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Kind::QuadraticBezier",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegmentKind::QuadraticBezier",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Kind::CubicBezier",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegmentKind::CubicBezier",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Segment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegment",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe. Default."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Line",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegment::line",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Quadratic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegment::quadratic",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Cubic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegment::cubic",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Type",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegment::kind",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Start",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegment::start",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Control1",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegment::control1",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::Control2",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegment::control2",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segment::End",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineSegment::end",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Contour",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineContour",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Contour::Contour()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineContour",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe. Default."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Contour::Contour(const uint32_t,const uint32_t)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineContour::new",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Contour::FirstSegment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineContour::first_segment",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Contour::NbSegments",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutlineContour::nb_segments",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Create",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutline::create",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::UnitsPerEm",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutline::units_per_em",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Rule",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutline::rule",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::HasPossibleOverlaps",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutline::has_possible_overlaps",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::IsSingleStroke",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutline::is_single_stroke",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::IsEmpty",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutline::is_empty",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Segments",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutline::segments",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_GlyphOutline::Contours",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_GlyphOutline.hxx",
+      "rust_item": "rustycad_tkservice::font::FontGlyphOutline::contours",
+      "status": "implemented",
+      "notes": "Font_GlyphOutline mapping: value types (segments and contours in vectors); the GoogleTest suites Font_GlyphOutline_Test and Font_UnicodeSubset_Test are translated; outlines of system and embedded fonts are compared segment by segment by the sv_ftfont native probe."
+    },
+    {
+      "upstream_id": "Font_FTFont::Params",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFontParams",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Params::IsValid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFontParams::is_valid",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Params::PointSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFontParams::point_size",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Params::Resolution",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFontParams::resolution",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Params::FontHinting",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFontParams::font_hinting",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Params::ToSynthesizeItalic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFontParams::to_synthesize_italic",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Params::IsSingleStrokeFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFontParams::is_single_stroke_font",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Font_FTFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::new",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::GlyphImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::glyph_image",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated. The rendered bitmap is copied out of the FreeType slot (natively the image wraps the slot memory)."
+    },
+    {
+      "upstream_id": "Font_FTFont::Init(const TCollection_AsciiString &,const Font_FTFont::Params &,const int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::init",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Init(const occ::handle<NCollection_Buffer> &,const TCollection_AsciiString &,const Font_FTFont::Params &,const int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::init_from",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Init(const NCollection_String &,uint32_t,uint32_t)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::init_with_size",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Init(const NCollection_String &,Font_FontAspect,uint32_t,uint32_t)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::init_by_name",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::LoadGlyphOutline(char32_t)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::load_glyph_outline_char",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::LoadGlyphOutline(const Font_GlyphOutline::Glyph &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::load_glyph_outline",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::AdvanceX(char32_t) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::advance_x",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::AdvanceX(char32_t,char32_t)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::advance_x_of",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::AdvanceY(char32_t) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::advance_y",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::AdvanceY(char32_t,char32_t)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::advance_y_of",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Release",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::release",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated. Virtual natively (for the OpenGL driver font); a plain method here."
+    },
+    {
+      "upstream_id": "Font_FTFont::BoundingBox",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::bounding_box",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated. The Standard_OutOfRange of a text without printable symbol (NCollection_DynamicArray::Last) is returned."
+    },
+    {
+      "upstream_id": "Font_FTFont::CharSubset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::char_subset",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::IsCharFromCJK",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::is_char_from_cjk",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "FT_Face",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated. The raw FT_Face handle is the private face address of the font state."
+    },
+    {
+      "upstream_id": "FT_FaceRec_",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated. Read through the #[repr(C)] FtFaceRec mirror of font::freetype_ffi."
+    },
+    {
+      "upstream_id": "FT_Vector",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated. The #[repr(C)] FtVector of font::freetype_ffi (kerning)."
+    },
+    {
+      "upstream_id": "FT_Vector_",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated. The #[repr(C)] FtVector of font::freetype_ffi (kerning)."
+    },
+    {
+      "upstream_id": "Font_FTLibrary",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "cpp_selector": {
+        "kind": "CXXRecord"
+      },
+      "rust_item": "rustycad_tkservice::font::FontFTLibrary",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated. Forward declaration."
+    },
+    {
+      "upstream_id": "Font_FTFont::FindAndCreate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::find_and_create",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::IsCharFromHiragana",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::is_char_from_hiragana",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::IsCharFromKatakana",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::is_char_from_katakana",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::IsCharFromKorean",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::is_char_from_korean",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::IsCharFromArabic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::is_char_from_arabic",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::IsCharRightToLeft",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::is_char_right_to_left",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::IsValid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::is_valid",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::FindAndInit",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::find_and_init",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::ToUseUnicodeSubsetFallback",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::to_use_unicode_subset_fallback",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::SetUseUnicodeSubsetFallback",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::set_use_unicode_subset_fallback",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::IsSingleStrokeFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::is_single_stroke_font",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::SetSingleStrokeFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::set_single_stroke_font",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::ToSynthesizeItalic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::to_synthesize_italic",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::RenderGlyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::render_glyph",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::GlyphMaxSizeX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::glyph_max_size_x",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::GlyphMaxSizeY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::glyph_max_size_y",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Ascender",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::ascender",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::Descender",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::descender",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::LineSpacing",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::line_spacing",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::PointSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::point_size",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::WidthScaling",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::width_scaling",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::SetWidthScaling",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::set_width_scaling",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::HasSymbol",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::has_symbol",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::ResolveGlyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::resolve_glyph",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::IsGlyphValid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::is_glyph_valid",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::GlyphsNumber",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::glyphs_number",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_FTFont::GlyphRect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "rust_item": "rustycad_tkservice::font::FontFTFont::glyph_rect",
+      "status": "implemented",
+      "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::IterationFilter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterationFilter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::IterationFilter_None",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterationFilter::None",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::IterationFilter_ExcludeInvisible",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterationFilter::ExcludeInvisible",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::Iterator",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator::new",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. The iterator walks a snapshot of the decoded code points."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::readNextSymbol",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Private read_next_symbol."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Font_TextFormatter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::default",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Append",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::append",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Quirk kept: the whole text (not only the new string) is laid out again; a text without printable symbol returns the Standard_OutOfRange of NCollection_DynamicArray::Last."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Format",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::format",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::TopLeft",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::top_left",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::BottomLeft",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::bottom_left",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. An index out of range returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::String",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::string",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::newLine",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Private new_line of the format module."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::More",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator::more",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::HasNext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator::has_next",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::Symbol",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator::symbol",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::SymbolNext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator::symbol_next",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::SymbolPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator::symbol_position",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::SymbolPositionNext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator::symbol_position_next",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::Next",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator::next",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::myFilter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private iterator state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::myIter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private iterator state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::mySymbolPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private iterator state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::mySymbolChar",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private iterator state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::mySymbolNext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private iterator state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Iterator::mySymbolCharNext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatterIterator",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private iterator state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::SetupAlignment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::setup_alignment",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Reset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::reset",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::GlyphBoundingBox",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::glyph_bounding_box",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::LineHeight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::line_height",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::LineWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::line_width",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::IsLFSymbol",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::is_lf_symbol",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::FirstPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::first_position",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::LinePositionIndex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::line_position_index",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::LineIndex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::line_index",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::TabSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::tab_size",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::HorizontalTextAlignment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::horizontal_text_alignment",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::VerticalTextAlignment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::vertical_text_alignment",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::SetWrapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::set_wrapping",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::HasWrapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::has_wrapping",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Wrapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::wrapping",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::WordWrapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::word_wrapping",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::SetWordWrapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::set_word_wrapping",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::ResultWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::result_width",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::ResultHeight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::result_height",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::MaximumSymbolWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::maximum_symbol_width",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::BndBox",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::bnd_box",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::Corners",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::corners",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::NewLines",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::new_lines",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::IsCommandSymbol",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::is_command_symbol",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::IsSeparatorSymbol",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::is_separator_symbol",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myAlignX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myAlignY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myTabSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myWrappingWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myIsWordWrapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myLastSymbolWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myMaxSymbolWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myString",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myPen",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myCorners",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myNewLines",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myLineSpacing",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myAscender",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myIsFormatted",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myLinesNb",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myRectLineStart",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myNewLineNb",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myPenCurrLine",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myBndTop",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myBndWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Font_TextFormatter::myMoveVec",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter",
+      "status": "implemented",
+      "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe. Protected field, private shared state."
+    },
+    {
       "upstream_id": "Graphic3d_AlphaMode",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_AlphaMode.hxx",
@@ -570592,20 +572358,6 @@
       ]
     },
     {
-      "upstream_id": "Font_UnicodeSubsetTest.CountIncludesEveryDeclaredSubset",
-      "toolkit": "TKService",
-      "source": "src/Visualization/TKService/GTests/Font_UnicodeSubset_Test.cxx",
-      "source_sha256": "851694073d8f5559924deeca1c38062333944a05b0ddc17af797a8dc629ee747",
-      "rust_package": "rustycad-tkservice",
-      "rust_target": "font_unicode_subset_test",
-      "rust_test": "Font_UnicodeSubsetTest__CountIncludesEveryDeclaredSubset",
-      "rust_source": "crates/tkservice/tests/font_unicode_subset_test.rs",
-      "status": "translated",
-      "profiles": [
-        "linux-gcc-c-locale"
-      ]
-    },
-    {
       "upstream_id": "Graphic3d_AspectsTest.ShadingModel_Default",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/GTests/Graphic3d_Aspects_Test.cxx",
@@ -571062,6 +572814,258 @@
       "rust_target": "graphic3d_flipper_test",
       "rust_test": "Graphic3d_FlipperTest__SetRefPlane_RoundTrip",
       "rust_source": "crates/tkservice/tests/graphic3d_flipper_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_UnicodeSubsetTest.CountIncludesEveryDeclaredSubset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_UnicodeSubset_Test.cxx",
+      "source_sha256": "851694073d8f5559924deeca1c38062333944a05b0ddc17af797a8dc629ee747",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_UnicodeSubsetTest__CountIncludesEveryDeclaredSubset",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_GlyphOutlineTest.CreatesOutline",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_GlyphOutline_Test.cxx",
+      "source_sha256": "751f74d1cf2d9af1b80488a56ee69575b700835bfa518139d850b28a516685a9",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_GlyphOutlineTest__CreatesOutline",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FontMgrTest.EmbeddedFallbackDataIsAvailable",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FontMgr_Test.cxx",
+      "source_sha256": "945751732ccdf61e3e8e1bce79b2f52a2b56f53c01c7dfac599ddef8b35fd9c9",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FontMgrTest__EmbeddedFallbackDataIsAvailable",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FontMgrTest.StrictMissingFamilyIsNotResolved",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FontMgr_Test.cxx",
+      "source_sha256": "945751732ccdf61e3e8e1bce79b2f52a2b56f53c01c7dfac599ddef8b35fd9c9",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FontMgrTest__StrictMissingFamilyIsNotResolved",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FontMgrTest.ResolvedFontProvidesUsablePath",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FontMgr_Test.cxx",
+      "source_sha256": "945751732ccdf61e3e8e1bce79b2f52a2b56f53c01c7dfac599ddef8b35fd9c9",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FontMgrTest__ResolvedFontProvidesUsablePath",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.UninitializedAccessorsReturnEmptyValues",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__UninitializedAccessorsReturnEmptyValues",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.LoadsResolvedGlyphOutline",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__LoadsResolvedGlyphOutline",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.WidthScalingInvalidatesResolvedGlyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__WidthScalingInvalidatesResolvedGlyph",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.IndependentFontsRejectForeignGlyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__IndependentFontsRejectForeignGlyph",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.InvalidWidthScalingPreservesResolvedGlyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__InvalidWidthScalingPreservesResolvedGlyph",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.SingleStrokeModeInvalidatesResolvedGlyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__SingleStrokeModeInvalidatesResolvedGlyph",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.FindAndInitPreservesExplicitSingleStrokeMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__FindAndInitPreservesExplicitSingleStrokeMode",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.FallbackPolicyInvalidatesResolvedGlyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__FallbackPolicyInvalidatesResolvedGlyph",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.OutlineLoadingClearsBitmapState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__OutlineLoadingClearsBitmapState",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.ReleaseInvalidatesResolvedGlyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__ReleaseInvalidatesResolvedGlyph",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.FailedReinitializationPreservesLoadedFace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__FailedReinitializationPreservesLoadedFace",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.ZeroCharacterHasNoResolvedGlyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__ZeroCharacterHasNoResolvedGlyph",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Font_FTFontTest.ParamsValidationIsBackendIndependent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Font_FTFont_Test.cxx",
+      "source_sha256": "ea36a1e276af226baea0600dbd1cef245c47ff88b787afebcddaa57b40206964",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "font_test",
+      "rust_test": "Font_FTFontTest__ParamsValidationIsBackendIndependent",
+      "rust_source": "crates/tkservice/tests/font_test.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

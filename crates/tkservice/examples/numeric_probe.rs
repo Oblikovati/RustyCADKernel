@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod sv_probe;
 use sv_probe::{
-    array, aspects, camera, clip_plane, grid, hid, light, marker, material, params, pbr, pixel,
-    shader, texture, tpers,
+    array, aspects, camera, clip_plane, font, grid, hid, light, marker, material, params, pbr,
+    pixel, shader, texture, tpers,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -57,6 +57,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sv_tutils", tpers::tutils_case),
     // Graphic3d_RenderingParams, Graphic3d_ZLayerSettings, Graphic3d_PresentationAttributes (sv_probe/params.rs)
     ("sv_params", params::params_case),
+    // Font_FontMgr, Font_FTFont, Font_TextFormatter (sv_probe/font.rs)
+    ("sv_fontmgr", font::fontmgr_case),
+    ("sv_ftfont", font::ftfont_case),
+    ("sv_textfmt", font::textfmt_case),
 ];
 
 fn main() {

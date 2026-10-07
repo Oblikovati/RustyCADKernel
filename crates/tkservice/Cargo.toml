@@ -15,6 +15,9 @@ rustycad-tkmath = { path = "../tkmath" }
 [target.'cfg(target_os = "linux")'.dependencies]
 x11-dl = "2.21"
 
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
 [[example]]
 name = "rustycad-tkservice-numeric-probe"
 path = "examples/numeric_probe.rs"
