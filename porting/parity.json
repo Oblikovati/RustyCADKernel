@@ -12528,7 +12528,7 @@
       "upstream_id": "gp_XY::Divide(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
-      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::DivAssign<f64>>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -12536,7 +12536,7 @@
       "upstream_id": "gp_XY::operator/=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
-      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::DivAssign<f64>>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -12544,7 +12544,7 @@
       "upstream_id": "gp_XY::Divided(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
-      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Div>::div",
+      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Div<f64>>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -12552,7 +12552,7 @@
       "upstream_id": "gp_XY::operator/(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
-      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Div>::div",
+      "rust_item": "rustycad_tkmath::gp::Xy::<core::ops::arith::Div<f64>>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -12771,15 +12771,15 @@
       "source_sha256": "04c2c0d3e18c530b2d7f6a8607c5c1913355c547945383abbd86aa32de1e59d0"
     },
     {
-      "upstream_id": "gp_XY::operator*(const gp_Mat2d&,const gp_XY&)",
+      "upstream_id": "operator*(const gp_Mat2d&,const gp_XY&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Matrix2 as Mul<rustycad_tkmath::gp::Xy>>::mul",
+      "rust_item": "rustycad_tkmath::gp::Matrix2::<core::ops::arith::Mul<rustycad_tkmath::gp::planar::coordinates::Xy>>::mul",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XY::operator*(double,const gp_XY&)",
+      "upstream_id": "operator*(double,const gp_XY&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XY.hxx",
       "rust_item": "<f64 as Mul<rustycad_tkmath::gp::Xy>>::mul",
@@ -12991,7 +12991,7 @@
       "upstream_id": "gp_Mat2d::operator/=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
-      "rust_item": "rustycad_tkmath::gp::Matrix2::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Matrix2::<core::ops::arith::DivAssign<f64>>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -13007,7 +13007,7 @@
       "upstream_id": "gp_Mat2d::operator/(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
-      "rust_item": "rustycad_tkmath::gp::Matrix2::<core::ops::arith::Div>::div",
+      "rust_item": "rustycad_tkmath::gp::Matrix2::<core::ops::arith::Div<f64>>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -13089,7 +13089,7 @@
       "upstream_id": "gp_Mat2d::operator*=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
-      "rust_item": "rustycad_tkmath::gp::Matrix2::<core::ops::arith::MulAssign>::mul_assign",
+      "rust_item": "rustycad_tkmath::gp::Matrix2::<core::ops::arith::MulAssign<f64>>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -13159,7 +13159,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Mat2d::operator*(double,const gp_Mat2d&)",
+      "upstream_id": "operator*(double,const gp_Mat2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat2d.hxx",
       "rust_item": "<f64 as Mul<rustycad_tkmath::gp::Matrix2>>::mul",
@@ -14145,7 +14145,7 @@
       "upstream_id": "gp_Vec2d::Divide",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::DivAssign<f64>>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -14153,7 +14153,7 @@
       "upstream_id": "gp_Vec2d::operator/=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::DivAssign<f64>>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -14161,7 +14161,7 @@
       "upstream_id": "gp_Vec2d::Divided",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::Div>::div",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::Div<f64>>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -14169,7 +14169,7 @@
       "upstream_id": "gp_Vec2d::operator/(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::Div>::div",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::Div<f64>>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -14201,7 +14201,7 @@
       "upstream_id": "gp_Vec2d::Multiply",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::MulAssign>::mul_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::MulAssign<f64>>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -14209,7 +14209,7 @@
       "upstream_id": "gp_Vec2d::operator*=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::MulAssign>::mul_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector2::<core::ops::arith::MulAssign<f64>>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -14414,7 +14414,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Vec2d::operator*(double,const gp_Vec2d&)",
+      "upstream_id": "operator*(double,const gp_Vec2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec2d.hxx",
       "rust_item": "<f64 as Mul<rustycad_tkmath::gp::Vector2>>::mul",
@@ -17677,7 +17677,7 @@
       "upstream_id": "gp_XYZ::Divide(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
-      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::DivAssign<f64>>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -17685,7 +17685,7 @@
       "upstream_id": "gp_XYZ::operator/=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
-      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::DivAssign<f64>>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -17693,7 +17693,7 @@
       "upstream_id": "gp_XYZ::Divided(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
-      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::Div>::div",
+      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::Div<f64>>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -17701,7 +17701,7 @@
       "upstream_id": "gp_XYZ::operator/(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
-      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::Div>::div",
+      "rust_item": "rustycad_tkmath::gp::Xyz::<core::ops::arith::Div<f64>>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -18356,7 +18356,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Mat::operator*(double,const gp_Mat&)",
+      "upstream_id": "operator*(double,const gp_Mat&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Mat.hxx",
       "rust_item": "<f64 as Mul<rustycad_tkmath::gp::Matrix3>>::mul",
@@ -20663,17 +20663,17 @@
       "upstream_id": "gp_Dir::operator=(const gp_Dir&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Direction3 as Clone>::clone_from",
-      "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending. Rust values are Copy: copy/move construction and assignment are bitwise copies."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ copy/move assignment of a trivially copyable value. Rust gp::Direction3 is Copy, so `=` copies the coordinates; there is no callable counterpart to map."
     },
     {
       "upstream_id": "gp_Dir::operator=(gp_Dir&&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Direction3 as Clone>::clone_from",
-      "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending. Rust values are Copy: copy/move construction and assignment are bitwise copies."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ copy/move assignment of a trivially copyable value. Rust gp::Direction3 is Copy, so `=` copies the coordinates; there is no callable counterpart to map."
     },
     {
       "upstream_id": "gp_Dir::SetCoord(int,double)",
@@ -21978,7 +21978,7 @@
       "upstream_id": "std::hash<gp_Pnt>::operator()(const gp_Pnt&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Point3 as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "rust_item": "rustycad_tkmath::gp::Point3::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending. libstdc++ std::hash<double> of the native int-word sum (linux-gcc profile)."
     },
@@ -21986,7 +21986,7 @@
       "upstream_id": "std::equal_to<gp_Pnt>::operator()(const gp_Pnt&,const gp_Pnt&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
-      "rust_item": "<rustycad_tkmath::gp::PointHashPolicy as rustycad_tkernel::ncollection::HashPolicy<Point3>>::equal",
+      "rust_item": "rustycad_tkmath::gp::PointHashPolicy::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkmath::gp::point::Point3>>::equal",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending. Paired with the hash as one NCollection hash policy."
     },
@@ -21999,7 +21999,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "NCollection_Lerp<gp_Trsf>()",
+      "upstream_id": "NCollection_Lerp<gp_Trsf>::NCollection_Lerp()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_TrsfNLerp.hxx",
       "rust_item": "rustycad_tkmath::gp::TransformNLerp::<core::default::Default>::default",
@@ -22007,7 +22007,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending. gp_TrsfNLerp.hxx specializes NCollection_Lerp<gp_Trsf>; Rust names the specialization TransformNLerp."
     },
     {
-      "upstream_id": "NCollection_Lerp<gp_Trsf>(const gp_Trsf&,const gp_Trsf&)",
+      "upstream_id": "NCollection_Lerp<gp_Trsf>::NCollection_Lerp(const gp_Trsf&,const gp_Trsf&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_TrsfNLerp.hxx",
       "rust_item": "rustycad_tkmath::gp::TransformNLerp::new",
@@ -22291,7 +22291,7 @@
       "upstream_id": "gp_Vec::Multiply",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::MulAssign>::mul_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::MulAssign<f64>>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -22299,7 +22299,7 @@
       "upstream_id": "gp_Vec::operator*=",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::MulAssign>::mul_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::MulAssign<f64>>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -22323,7 +22323,7 @@
       "upstream_id": "gp_Vec::Divide",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::DivAssign<f64>>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -22331,7 +22331,7 @@
       "upstream_id": "gp_Vec::operator/=",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::DivAssign<f64>>::div_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -22339,7 +22339,7 @@
       "upstream_id": "gp_Vec::Divided",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::Div>::div",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::Div<f64>>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -22347,7 +22347,7 @@
       "upstream_id": "gp_Vec::operator/",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
-      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::Div>::div",
+      "rust_item": "rustycad_tkmath::gp::Vector3::<core::ops::arith::Div<f64>>::div",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
@@ -22635,7 +22635,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_Vec::operator*(double,const gp_Vec&)",
+      "upstream_id": "operator*(double,const gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
       "rust_item": "<f64 as Mul<rustycad_tkmath::gp::Vector3>>::mul",
@@ -22651,15 +22651,15 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending. The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its type name."
     },
     {
-      "upstream_id": "gp_XYZ::operator*(const gp_Mat&,const gp_XYZ&)",
+      "upstream_id": "operator*(const gp_Mat&,const gp_XYZ&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
-      "rust_item": "<rustycad_tkmath::gp::Matrix3 as Mul<Xyz>>::mul",
+      "rust_item": "rustycad_tkmath::gp::Matrix3::<core::ops::arith::Mul<rustycad_tkmath::gp::xyz::Xyz>>::mul",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "gp_XYZ::operator*(double,const gp_XYZ&)",
+      "upstream_id": "operator*(double,const gp_XYZ&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
       "rust_item": "<f64 as Mul<rustycad_tkmath::gp::Xyz>>::mul",
@@ -70039,7 +70039,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::from_buffer",
       "status": "implemented",
-      "notes": "Non-owning zero-based row-major view over the required prefix of a mutable slice. Native records only pointer and rows\u00d7columns; Rust rejects a short slice safely, accepts extra capacity, and leaves its suffix untouched. Supplemental native/Rust probe: porting/audits/ncollection-array2-buffer-prefix.json."
+      "notes": "Non-owning zero-based row-major view over the required prefix of a mutable slice. Native records only pointer and rows×columns; Rust rejects a short slice safely, accepts extra capacity, and leaves its suffix untouched. Supplemental native/Rust probe: porting/audits/ncollection-array2-buffer-prefix.json."
     },
     {
       "upstream_id": "NCollection_Array2::Size() const noexcept",
@@ -94930,7 +94930,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -94962,7 +94962,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -217799,7 +217799,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
@@ -236169,6 +236169,374 @@
       "rust_item": "rustycad_tkmath::gp::Transform2::orthogonalize",
       "status": "implemented",
       "notes": "Protected nonvirtual Gram-Schmidt hook made callable. Reuses the native-order SetValues implementation; matrix assignment occurs only after both passes succeed. Native success/repeat/zero-column/dependent-column probes preserve scale, form and translation. Clang candidate f87c53bca687d2a0e2c00b83d85934e7ad23f74e4f5a3128e0bd7e5b31867da5. See porting/audits/tkmath-orthogonalize-hooks.json."
+    },
+    {
+      "upstream_id": "gp_Identity",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_TrsfForm.hxx",
+      "rust_item": "rustycad_tkmath::gp::TransformForm::Identity",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Rotation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_TrsfForm.hxx",
+      "rust_item": "rustycad_tkmath::gp::TransformForm::Rotation",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Translation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_TrsfForm.hxx",
+      "rust_item": "rustycad_tkmath::gp::TransformForm::Translation",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_PntMirror",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_TrsfForm.hxx",
+      "rust_item": "rustycad_tkmath::gp::TransformForm::PointMirror",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Ax1Mirror",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_TrsfForm.hxx",
+      "rust_item": "rustycad_tkmath::gp::TransformForm::AxisMirror",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Ax2Mirror",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_TrsfForm.hxx",
+      "rust_item": "rustycad_tkmath::gp::TransformForm::PlaneMirror",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Scale",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_TrsfForm.hxx",
+      "rust_item": "rustycad_tkmath::gp::TransformForm::Scale",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_CompoundTrsf",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_TrsfForm.hxx",
+      "rust_item": "rustycad_tkmath::gp::TransformForm::Compound",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Other",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_TrsfForm.hxx",
+      "rust_item": "rustycad_tkmath::gp::TransformForm::Other",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_EulerAngles",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::EulerAngles",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_YawPitchRoll",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::YawPitchRoll",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_XYZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicXyz",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_XZY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicXzy",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_YZX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicYzx",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_YXZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicYxz",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_ZXY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicZxy",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_ZYX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicZyx",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_XYX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicXyx",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_XZX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicXzx",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_YZY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicYzy",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_YXY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicYxy",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_ZXZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicZxz",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Extrinsic_ZYZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::ExtrinsicZyz",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_XYZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicXyz",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_XZY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicXzy",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_YZX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicYzx",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_YXZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicYxz",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_ZXY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicZxy",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_ZYX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicZyx",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_XYX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicXyx",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_XZX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicXzx",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_YZY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicYzy",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_YXY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicYxy",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_ZXZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicZxz",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Intrinsic_ZYZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_EulerSequence.hxx",
+      "rust_item": "rustycad_tkmath::gp::EulerSequence::IntrinsicZyz",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Dir::D::X",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection3::X",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Dir::D::NX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection3::NegX",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Dir::D::Y",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection3::Y",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Dir::D::NY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection3::NegY",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Dir::D::Z",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection3::Z",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Dir::D::NZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection3::NegZ",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Dir2d::D::X",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir2d.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection2::X",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Dir2d::D::NX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir2d.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection2::NegX",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Dir2d::D::Y",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir2d.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection2::Y",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "gp_Dir2d::D::NY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir2d.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection2::NegY",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same discriminant order."
+    },
+    {
+      "upstream_id": "NCollection_Lerp",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_TrsfNLerp.hxx",
+      "rust_item": "rustycad_tkmath::gp::TransformNLerp",
+      "status": "implemented",
+      "notes": "NCollection_Lerp<gp_Trsf> specialization is the Rust struct gp::TransformNLerp."
     },
     {
       "upstream_id": "PLib_JacobiPolynomial::D0123(int,double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
