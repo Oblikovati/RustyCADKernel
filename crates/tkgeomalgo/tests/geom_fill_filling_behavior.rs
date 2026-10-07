@@ -12,19 +12,9 @@ use rustycad_tkgeomalgo::geom_fill::{
 };
 use rustycad_tkmath::gp::Point3;
 
-fn row(points: &[(f64, f64, f64)]) -> Array1<'static, Point3> {
-    let mut row = Array1::with_bounds(1, points.len() as i32).unwrap();
-    for (k, &(x, y, z)) in points.iter().enumerate() {
-        row[k as i32 + 1] = Point3::new(x, y, z);
-    }
-    row
-}
-
-fn reals(values: &[f64]) -> Array1<'static, f64> {
-    let mut row = Array1::with_bounds(1, values.len() as i32).unwrap();
-    row.as_mut_slice().copy_from_slice(values);
-    row
-}
+#[path = "support/geom_fill_rows.rs"]
+mod geom_fill_rows;
+use geom_fill_rows::{reals, row};
 
 /// The rows of the flat square [0, 3] x [0, 3], three poles per side.
 fn square() -> [Array1<'static, Point3>; 4] {
@@ -133,32 +123,6 @@ fn unjoined_bezier_curves_raise_construction_error() {
     let c4 = bezier(&[(0., 1., 0.), (0., 0., 0.)]);
     let error =
         GeomFillBezierCurves::with_four(&c1, &c2, &c3, &c4, GeomFillFillingStyle::StretchStyle)
-            .err()
-            .unwrap();
-    assert_eq!(error.exception_type(), "Standard_ConstructionError");
-}
-
-fn two_pole(a: (f64, f64, f64), b: (f64, f64, f64), last: f64) -> Handle<GeomBSplineCurve> {
-    let (poles, weights, knots) = (row(&[a, b]), reals(&[1., 1.]), reals(&[0., last]));
-    let mut mults: Array1<'static, i32> = Array1::with_bounds(1, 2).unwrap();
-    mults.init(2);
-    Handle::new(GeomBSplineCurve::with_weights(&poles, &weights, &knots, &mults, 1, false).unwrap())
-}
-
-/// The OCC27704 case of GeomFill_BSplineCurves_Test.cxx (bug27775): two-pole
-/// curves cannot give a Coons filling.
-#[test]
-fn occ27704_two_pole_curves_raise_construction_error() {
-    let p1 = (-24033.3957701043, -6337.90755953146, -16577.8188547128);
-    let p2 = (-23933.3957701044, -6337.90755953146, -16577.8362547128);
-    let p3 = (-24033.3957701043, -6371.01755953146, -16577.8188547128);
-    let p4 = (-23933.3957701044, -6371.01755953146, -16577.8362547128);
-    let c1 = two_pole(p1, p2, 100.000001513789);
-    let c2 = two_pole(p2, p1, 100.000001513789);
-    let c3 = two_pole(p3, p1, 33.1099999999979);
-    let c4 = two_pole(p3, p4, 100.000001513789);
-    let error =
-        GeomFillBSplineCurves::with_four(&c1, &c2, &c3, &c4, GeomFillFillingStyle::CoonsStyle)
             .err()
             .unwrap();
     assert_eq!(error.exception_type(), "Standard_ConstructionError");

@@ -68,3 +68,15 @@ fn bnd_b3_compare_dist_d_uses_double_coordinates_for_float_boxes() {
         Xyz::new(0.0, f64::NAN, 0.0)
     ));
 }
+
+#[test]
+fn bnd_b2_b3_real_last_is_the_void_sentinel_in_storage_precision() {
+    // THE_RealLast = RealType(1e30): the float instantiation rounds the double literal.
+    assert_eq!(CompactBox2::<f64>::real_last(), 1e30);
+    assert_eq!(CompactBox3::<f64>::real_last(), 1e30);
+    assert_eq!(CompactBox2::<f32>::real_last(), 1e30_f64 as f32);
+    assert_eq!(CompactBox3::<f32>::real_last(), 1e30_f64 as f32);
+    let void = CompactBox3::<f32>::default();
+    assert_eq!(void.center(), &[CompactBox3::<f32>::real_last(); 3]);
+    assert_eq!(void.half_size(), &[-CompactBox3::<f32>::real_last(); 3]);
+}

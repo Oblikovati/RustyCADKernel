@@ -8,12 +8,23 @@ pub struct CompactBounds<T: BoxReal, const N: usize> {
 impl<T: BoxReal, const N: usize> Default for CompactBounds<T, N> {
     fn default() -> Self {
         Self {
-            center: [T::from_double(1e30); N],
-            half: [T::from_double(-1e30); N],
+            center: [Self::real_last(); N],
+            half: [-Self::real_last(); N],
         }
     }
 }
 impl<T: BoxReal, const N: usize> CompactBounds<T, N> {
+    /// Native `THE_RealLast` void sentinel: `RealType(1e30)` converted to the storage
+    /// scalar (so `f32` storage rounds it exactly like the C++ cast).
+    ///
+    /// ```
+    /// use rustycad_tkmath::bnd::CompactBox2;
+    /// assert_eq!(CompactBox2::<f64>::real_last(), 1e30);
+    /// ```
+    pub fn real_last() -> T {
+        T::from_double(1e30)
+    }
+
     /// Tests whether any signed distance exceeds its half size.
     ///
     /// ```

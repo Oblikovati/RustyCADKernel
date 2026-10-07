@@ -10,6 +10,7 @@ import json
 import pathlib
 from collections import Counter, defaultdict
 from api_inventory.inputs import JSONValue, JSONObject, object_rows, text_field
+from legacy_pending_dependency import PENDING_DEPENDENCY, is_pending_dependency
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 INVENTORY_DEFAULT = ROOT / "porting/inventory.json"
@@ -148,7 +149,10 @@ def mapping_state(matches: list[JSONObject], declaration_count: int) -> str:
         return "duplicate_declaration_identity"
     if len(matches) > 1:
         return "duplicate_parity_mapping"
-    return "mapped" if matches else "unmapped"
+    if not matches:
+        return "unmapped"
+    # A test waiting for an unported class has no Rust side: it is never counted as mapped.
+    return PENDING_DEPENDENCY if is_pending_dependency(matches[0]) else "mapped"
 
 
 def make_gtest_record(
@@ -161,6 +165,7 @@ def make_gtest_record(
     row["declaration_id"] = declaration_id(declaration, ordinal)
     row["mapping_status"] = state
     row["mapped_rust_test"] = matches[0] if state == "mapped" else None
+    row["blocked_by"] = matches[0]["blocked_by"] if state == PENDING_DEPENDENCY else []
     row["duplicate_mapping_rows"] = matches if len(matches) > 1 else []
     row["runtime_status"] = "unverified"
     return row
@@ -248,6 +253,7 @@ def toolkit_summary(
             "declared": len(owned),
             "mapped": count_state(owned, "mapped"),
             "unmapped": count_state(owned, "unmapped"),
+            "pending_dependency": count_state(owned, PENDING_DEPENDENCY),
             "duplicate_mappings": count_state(owned, "duplicate_parity_mapping"),
             "duplicate_declarations": count_state(
                 owned, "duplicate_declaration_identity"
@@ -295,7 +301,8 @@ def summary_document(
         "by_toolkit": toolkit_summary(inventory, gtests, anomalies),
         "runtime_proof": False,
         "mapping_inventory_complete": not anomalies
-        and not count_state(gtests, "unmapped"),
+        and not count_state(gtests, "unmapped")
+        and not count_state(gtests, PENDING_DEPENDENCY),
     }
 
 
@@ -307,6 +314,7 @@ def gtest_summary(
         "declared": len(gtests),
         "mapped": count_state(gtests, "mapped"),
         "unmapped": count_state(gtests, "unmapped"),
+        "pending_dependency": count_state(gtests, PENDING_DEPENDENCY),
         "duplicate_parity_mappings": count_state(gtests, "duplicate_parity_mapping"),
         "duplicate_declaration_identities": count_state(
             gtests, "duplicate_declaration_identity"
@@ -356,7 +364,8 @@ def main() -> None:
     draw = object_field(summary, "draw_cases")
     regressions = object_field(summary, "regression_files")
     print(
-        f"Legacy tests: {int_field(gtest, 'mapped')}/{int_field(gtest, 'declared')} mapped; "
+        f"Legacy tests: {int_field(gtest, 'mapped')}/{int_field(gtest, 'declared')} mapped, "
+        f"{int_field(gtest, 'pending_dependency')} pending dependency; "
         f"{int_field(draw, 'discovered')} DRAW candidates and "
         f"{int_field(regressions, 'discovered')} regression files discovered; runtime proof false"
     )

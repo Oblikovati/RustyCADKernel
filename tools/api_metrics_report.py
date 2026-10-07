@@ -117,6 +117,12 @@ def gtest_counts(path: pathlib.Path) -> dict[str, Counter]:
     return counts
 
 
+def unmapped_gtests(tests: Counter) -> int:
+    """Every declaration without a Rust translation: unmapped, pending_dependency (waiting for an
+    unported class) and duplicate mappings alike; unmapped_gtests(Counter(mapped=2, unmapped=1)) == 1."""
+    return sum(number for status, number in tests.items() if status != "mapped")
+
+
 def scope_index(scope: Record) -> dict[str, dict[str, str]]:
     """Toolkit -> {scope, reason} from `porting/scope.json`."""
     index: dict[str, dict[str, str]] = {}
@@ -170,7 +176,7 @@ def toolkit_metrics(toolkit: str, inputs: Mapping[str, Mapping]) -> dict[str, ob
         "open_gap_by_category": open_gap(tally, boilerplate=False),
         "open_boilerplate_by_category": open_gap(tally, boilerplate=True),
         "ledger_defects": dict(inputs["defects"].get(toolkit, Counter())),
-        "gtests": {"mapped": tests["mapped"], "unmapped": tests["unmapped"]},
+        "gtests": {"mapped": tests["mapped"], "unmapped": unmapped_gtests(tests)},
     }
 
 

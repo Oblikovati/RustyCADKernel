@@ -19,6 +19,7 @@ DIRECT_HELPERS = (
     "tools/porting.py",
     "tools/tkernel_native_baseline.py",
     "tools/tkernel_mapping.py",
+    "tools/legacy_pending_dependency.py",
     "tools/legacy_toolkit_sources.py",
     "tools/legacy_runtime_evidence.py",
     "tools/tkmath_native_provenance.py",
