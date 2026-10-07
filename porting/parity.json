@@ -429972,30 +429972,6 @@
       "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
     },
     {
-      "upstream_id": "BRepFill_SectionLaw",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw",
-      "status": "implemented",
-      "notes": "Class record: ported as a trait reached as Handle<dyn Trait>, rustycad_tkbool::brep_fill::BRepFillSectionLaw; each member is mapped by its own row."
-    },
-    {
-      "upstream_id": "BRepFill_ShapeLaw",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillShapeLaw; each member is mapped by its own row."
-    },
-    {
-      "upstream_id": "BRepFill_NSections",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillNSections; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_SectionLaw::base_type",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
@@ -430292,28 +430268,12 @@
       "notes": "BRepFill location-law mapping: BRepFill_LocationLaw is the trait BRepFillLocationLaw reached through Handle<dyn ...> (its protected data and protected members in BRepFillLocationLawBase), the four subclasses are transient structs implementing it; translated with the native operation order (the native Abscissa quirk of starting from the end of the edge when the lengths are unknown is kept) and compared with OCCT by tools/verify_tkbool_numeric.py (bf_location_law requests). Output references become returned values; members that compute lengths or holes on demand keep them behind locks."
     },
     {
-      "upstream_id": "BRepFill_LocationLaw",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillLocationLaw",
-      "status": "implemented",
-      "notes": "Class record: ported as a trait reached as Handle<dyn Trait>, rustycad_tkbool::brep_fill::BRepFillLocationLaw; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_LocationLaw::base_type",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_LocationLaw.hxx",
       "rust_item": null,
       "status": "excluded",
       "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(BRepFill_LocationLaw, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
-    },
-    {
-      "upstream_id": "BRepFill_Edge3DLaw",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Edge3DLaw.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdge3DLaw",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillEdge3DLaw; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepFill_Edge3DLaw::base_type",
@@ -430324,14 +430284,6 @@
       "notes": "Typedef base_type = BRepFill_LocationLaw that DEFINE_STANDARD_RTTIEXT(BRepFill_Edge3DLaw, BRepFill_LocationLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
-      "upstream_id": "BRepFill_DraftLaw",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_DraftLaw.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraftLaw",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillDraftLaw; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_DraftLaw::base_type",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_DraftLaw.hxx",
@@ -430340,28 +430292,12 @@
       "notes": "Typedef base_type = BRepFill_Edge3DLaw that DEFINE_STANDARD_RTTIEXT(BRepFill_DraftLaw, BRepFill_Edge3DLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
-      "upstream_id": "BRepFill_EdgeOnSurfLaw",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeOnSurfLaw.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdgeOnSurfLaw",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillEdgeOnSurfLaw; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_EdgeOnSurfLaw::base_type",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeOnSurfLaw.hxx",
       "rust_item": null,
       "status": "excluded",
       "notes": "Typedef base_type = BRepFill_LocationLaw that DEFINE_STANDARD_RTTIEXT(BRepFill_EdgeOnSurfLaw, BRepFill_LocationLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
-    },
-    {
-      "upstream_id": "BRepFill_ACRLaw",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ACRLaw.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillACRLaw",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillACRLaw; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepFill_ACRLaw::base_type",
@@ -430604,14 +430540,6 @@
       "notes": "Translated from BRepFill_TrimShellCorner.cxx with the native operation order (the pave filler of the two shells, the split u-edges, the section chains found from the u-edges then along the bound edge by pairs and continuously); exercised and compared with OCCT through the right and round corners of the sweep by tools/verify_tkbool_numeric.py (bf_sweep requests). Native quirks kept: HasSection is never raised; the common vertices of the u-edges are the last edge/edge interference examined even when its direction test fails; the face history keys the face as given, the result of ReShape::Apply is dropped; Modified copies the history list. Handle tables are copied on input; output lists are returned."
     },
     {
-      "upstream_id": "BRepFill_TrimShellCorner",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimShellCorner.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimShellCorner",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillTrimShellCorner; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_Sweep::BRepFill_Sweep(const occ::handle<BRepFill_SectionLaw>&,const occ::handle<BRepFill_LocationLaw>&,bool)",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
@@ -430778,14 +430706,6 @@
       "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::rebuild_top_or_bottom_edge",
       "status": "implemented",
       "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
-    },
-    {
-      "upstream_id": "BRepFill_Sweep",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillSweep; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepFill_PipeShell::BRepFill_PipeShell(const TopoDS_Wire&)",
@@ -431036,14 +430956,6 @@
       "notes": "Translated from BRepFill_PipeShell.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe_shell requests) and the GTests BRepFill_PipeShell_Test.cxx (crates/tkbool/tests/brep_fill_pipe_shell.rs). The Set overloads are named by their argument (set_frenet, set_axe, set_bi_normal, set_spine_support, set_auxiliary_spine), the vertex overloads of Add and SetLaw are add_at and set_law_at; output lists are returned. Native quirks kept: Set(false) also records the Frenet trihedron; the angular control is 0 until SetTransition (uninitialized natively); the real indices of the sections accumulate over Prepare calls; exchanging a repeated end section past the index sequence is Standard_OutOfRange."
     },
     {
-      "upstream_id": "BRepFill_PipeShell",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_PipeShell.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipeShell",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillPipeShell; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_PipeShell::base_type",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_PipeShell.hxx",
@@ -431164,14 +431076,6 @@
       "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
     },
     {
-      "upstream_id": "BRepFill_Pipe",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillPipe; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_Draft::BRepFill_Draft(const TopoDS_Shape&,const gp_Dir&,double)",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
@@ -431250,22 +431154,6 @@
       "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::shape",
       "status": "implemented",
       "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
-    },
-    {
-      "upstream_id": "BRepFill_Draft",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillDraft; each member is mapped by its own row."
-    },
-    {
-      "upstream_id": "BRepFill_Filling",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Filling.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFilling",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillFilling; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepFill_Filling::BRepFill_Filling(int,int,int,bool,double,double,double,double,int,int)",
@@ -431428,14 +431316,6 @@
       "notes": "Translated from BRepFill_Filling.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_filling requests). The Add overloads are add_edge, add_edge_on_face, add_face, add_point and add_point_on_face; G0Error/G1Error/G2Error(Index) are g0_error_of, g1_error_of and g2_error_of; before Build the error queries are Standard_NullObject (a null builder natively). Native quirks kept: the GeomAbs_Shape order is passed to the plate constraints as its integer value (C1 is the G2 order 2 and G2, 3, is refused by BRepFill_CurveConstraint); the free constraints close the first hole whose two ends project on their face within Precision::Confusion(); the vertex tolerance of the new edges is 1.1 * G0Error. G0Error(Index) is not probed: GeomPlate_BuildPlateSurface::EcartContraintesMil leaves entries of the array it takes the maximum of uninitialized natively."
     },
     {
-      "upstream_id": "BRepFill_CurveConstraint",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CurveConstraint.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillCurveConstraint",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillCurveConstraint; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_CurveConstraint::BRepFill_CurveConstraint(const occ::handle<Adaptor3d_CurveOnSurface>&,int,int,double,double,double)",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_CurveConstraint.hxx",
@@ -431460,14 +431340,6 @@
       "notes": "Typedef base_type = GeomPlate_CurveConstraint that DEFINE_STANDARD_RTTIEXT(BRepFill_CurveConstraint, GeomPlate_CurveConstraint) expands: Rust has no class inheritance to name; the constructors return the GeomPlate_CurveConstraint itself, so there is no public item to port."
     },
     {
-      "upstream_id": "BRepFill_EdgeFaceAndOrder",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeFaceAndOrder.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillEdgeFaceAndOrder",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillEdgeFaceAndOrder; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_EdgeFaceAndOrder::BRepFill_EdgeFaceAndOrder()",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_EdgeFaceAndOrder.hxx",
@@ -431484,14 +431356,6 @@
       "notes": "Translated from BRepFill_EdgeFaceAndOrder.cxx; the fields are private (friend BRepFill_Filling) and read by the filling only. The uninitialized native order of the default constructor is C0."
     },
     {
-      "upstream_id": "BRepFill_FaceAndOrder",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_FaceAndOrder.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillFaceAndOrder",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillFaceAndOrder; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_FaceAndOrder::BRepFill_FaceAndOrder()",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_FaceAndOrder.hxx",
@@ -431506,14 +431370,6 @@
       "rust_item": "rustycad_tkbool::brep_fill::BRepFillFaceAndOrder::with_face",
       "status": "implemented",
       "notes": "Translated from BRepFill_FaceAndOrder.cxx; the fields are private (friend BRepFill_Filling) and read by the filling only. The uninitialized native order of the default constructor is C0."
-    },
-    {
-      "upstream_id": "BRepFill_OffsetWire",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillOffsetWire; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepFill_OffsetWire::BRepFill_OffsetWire()",
@@ -431596,14 +431452,6 @@
       "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
     },
     {
-      "upstream_id": "BRepFill_TrimEdgeTool",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimEdgeTool.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimEdgeTool",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillTrimEdgeTool; each member is mapped by its own row."
-    },
-    {
       "upstream_id": "BRepFill_TrimEdgeTool::BRepFill_TrimEdgeTool()",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimEdgeTool.hxx",
@@ -431642,14 +431490,6 @@
       "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimEdgeTool::is_inside",
       "status": "implemented",
       "notes": "Translated from BRepFill_TrimEdgeTool.cxx; exercised through BRepFill_OffsetWire by the bf_offset_wire requests of tools/verify_tkbool_numeric.py. Native quirks kept: the retries with tolerances growing tenfold from 1e-9 (1e-8 off lines and circles), the completion of a single intersection by the nearer end within half the offset, the common intersections within 400 * PConfusion, the StdFail_NotDone message naming BRepFill_TrimSurfaceTool; a null bisector is refused by its adaptor (Standard_NullObject)."
-    },
-    {
-      "upstream_id": "BRepFill_OffsetAncestors",
-      "toolkit": "TKBool",
-      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetAncestors.hxx",
-      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetAncestors",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillOffsetAncestors; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepFill_OffsetAncestors::BRepFill_OffsetAncestors()",
@@ -431698,6 +431538,326 @@
       "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetAncestors::ancestor",
       "status": "implemented",
       "notes": "Translated from BRepFill_OffsetAncestors.cxx; exercised by the bf_offset_wire requests of tools/verify_tkbool_numeric.py (the ancestor of every edge of the result). Ancestor before Perform is StdFail_NotDone (StdFail_NotDone_Raise_if) and of another edge Standard_NoSuchObject."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::BRepFill_MultiLine()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::BRepFill_MultiLine(const TopoDS_Face&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Edge&,bool,bool,const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::IsParticularCase() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::is_particular_case",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::Continuity() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::continuity",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::Curves(occ::handle<Geom_Curve>&,occ::handle<Geom2d_Curve>&,occ::handle<Geom2d_Curve>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::curves",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::FirstParameter() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::<rustycad_tkgeombase::app_cont::Function>::first_parameter",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::LastParameter() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::<rustycad_tkgeombase::app_cont::Function>::last_parameter",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::Value(double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::value_3d",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::ValueOnF1(double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::value_on_f1",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::ValueOnF2(double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::value_on_f2",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::Value3dOnF1OnF2(double,gp_Pnt&,gp_Pnt2d&,gp_Pnt2d&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::value_3d_on_f1_on_f2",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::Value(double,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<gp_Pnt>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::<rustycad_tkgeombase::app_cont::Function>::value",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_MultiLine::D1(double,NCollection_Array1<gp_Vec2d>&,NCollection_Array1<gp_Vec>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_MultiLine.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillMultiLine::<rustycad_tkgeombase::app_cont::Function>::d1",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_MultiLine.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_multi_line requests: two slanted planes over a square corner, line and Bezier bisectors, inverted edges). Native quirks kept: the isos at the minimal parameters (the maximal ones for an inverted or degenerated edge, swapped for a degenerated circle iso), the projection replaced by an end at the same or a smaller distance, Standard_ConstructionError for equal ends off a circle, the origin when the intersection with the transverse iso fails. The AppCont_Function overrides cannot raise: the first exception of Value is recorded (take_error) and Value returns false."
+    },
+    {
+      "upstream_id": "BRepFill_ApproxSeewing::BRepFill_ApproxSeewing()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ApproxSeewing.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillApproxSeewing::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_ApproxSeewing.cxx; compared with OCCT by the bf_multi_line requests of tools/verify_tkbool_numeric.py. Native quirks kept: 50 points at about equal chords of a 100-point length table, AppDef_Compute with its default parameters, the degree-1 polygons on the multi-line parameters when the fit gives no curve; StdFail_NotDone before Perform (Raise_if, active in the RelWithDebInfo oracle). The out-of-table read of a null first chord is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepFill_ApproxSeewing::BRepFill_ApproxSeewing(const BRepFill_MultiLine&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ApproxSeewing.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillApproxSeewing::with_multi_line",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_ApproxSeewing.cxx; compared with OCCT by the bf_multi_line requests of tools/verify_tkbool_numeric.py. Native quirks kept: 50 points at about equal chords of a 100-point length table, AppDef_Compute with its default parameters, the degree-1 polygons on the multi-line parameters when the fit gives no curve; StdFail_NotDone before Perform (Raise_if, active in the RelWithDebInfo oracle). The out-of-table read of a null first chord is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepFill_ApproxSeewing::Perform(const BRepFill_MultiLine&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ApproxSeewing.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillApproxSeewing::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_ApproxSeewing.cxx; compared with OCCT by the bf_multi_line requests of tools/verify_tkbool_numeric.py. Native quirks kept: 50 points at about equal chords of a 100-point length table, AppDef_Compute with its default parameters, the degree-1 polygons on the multi-line parameters when the fit gives no curve; StdFail_NotDone before Perform (Raise_if, active in the RelWithDebInfo oracle). The out-of-table read of a null first chord is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepFill_ApproxSeewing::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ApproxSeewing.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillApproxSeewing::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_ApproxSeewing.cxx; compared with OCCT by the bf_multi_line requests of tools/verify_tkbool_numeric.py. Native quirks kept: 50 points at about equal chords of a 100-point length table, AppDef_Compute with its default parameters, the degree-1 polygons on the multi-line parameters when the fit gives no curve; StdFail_NotDone before Perform (Raise_if, active in the RelWithDebInfo oracle). The out-of-table read of a null first chord is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepFill_ApproxSeewing::Curve() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ApproxSeewing.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillApproxSeewing::curve",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_ApproxSeewing.cxx; compared with OCCT by the bf_multi_line requests of tools/verify_tkbool_numeric.py. Native quirks kept: 50 points at about equal chords of a 100-point length table, AppDef_Compute with its default parameters, the degree-1 polygons on the multi-line parameters when the fit gives no curve; StdFail_NotDone before Perform (Raise_if, active in the RelWithDebInfo oracle). The out-of-table read of a null first chord is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepFill_ApproxSeewing::CurveOnF1() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ApproxSeewing.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillApproxSeewing::curve_on_f1",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_ApproxSeewing.cxx; compared with OCCT by the bf_multi_line requests of tools/verify_tkbool_numeric.py. Native quirks kept: 50 points at about equal chords of a 100-point length table, AppDef_Compute with its default parameters, the degree-1 polygons on the multi-line parameters when the fit gives no curve; StdFail_NotDone before Perform (Raise_if, active in the RelWithDebInfo oracle). The out-of-table read of a null first chord is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepFill_ApproxSeewing::CurveOnF2() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ApproxSeewing.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillApproxSeewing::curve_on_f2",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_ApproxSeewing.cxx; compared with OCCT by the bf_multi_line requests of tools/verify_tkbool_numeric.py. Native quirks kept: 50 points at about equal chords of a 100-point length table, AppDef_Compute with its default parameters, the degree-1 polygons on the multi-line parameters when the fit gives no curve; StdFail_NotDone before Perform (Raise_if, active in the RelWithDebInfo oracle). The out-of-table read of a null first chord is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepFill_TrimSurfaceTool::BRepFill_TrimSurfaceTool(const occ::handle<Geom2d_Curve>&,const TopoDS_Face&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Edge&,bool,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimSurfaceTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimSurfaceTool::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimSurfaceTool.cxx; compared with OCCT by the bf_trim_surface requests of tools/verify_tkbool_numeric.py. Native quirks kept: the intersection tolerance 1e-6 retried at 1e-5 on curves extended in place by the tolerance (the bisector trim changes), the double points removed over the point count only, the angle of the bisector around the axis of a sphere, cone, torus, cylinder or revolution for a degenerated edge (Standard_NotImplemented otherwise), StdFail_NotDone for an incoherent intersection."
+    },
+    {
+      "upstream_id": "BRepFill_TrimSurfaceTool::IntersectWith(const TopoDS_Edge&,const TopoDS_Edge&,NCollection_Sequence<gp_Pnt>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimSurfaceTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimSurfaceTool::intersect_with",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimSurfaceTool.cxx; compared with OCCT by the bf_trim_surface requests of tools/verify_tkbool_numeric.py. Native quirks kept: the intersection tolerance 1e-6 retried at 1e-5 on curves extended in place by the tolerance (the bisector trim changes), the double points removed over the point count only, the angle of the bisector around the axis of a sphere, cone, torus, cylinder or revolution for a degenerated edge (Standard_NotImplemented otherwise), StdFail_NotDone for an incoherent intersection."
+    },
+    {
+      "upstream_id": "BRepFill_TrimSurfaceTool::IsOnFace(const gp_Pnt2d&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimSurfaceTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimSurfaceTool::is_on_face",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimSurfaceTool.cxx; compared with OCCT by the bf_trim_surface requests of tools/verify_tkbool_numeric.py. Native quirks kept: the intersection tolerance 1e-6 retried at 1e-5 on curves extended in place by the tolerance (the bisector trim changes), the double points removed over the point count only, the angle of the bisector around the axis of a sphere, cone, torus, cylinder or revolution for a degenerated edge (Standard_NotImplemented otherwise), StdFail_NotDone for an incoherent intersection."
+    },
+    {
+      "upstream_id": "BRepFill_TrimSurfaceTool::ProjOn(const gp_Pnt2d&,const TopoDS_Edge&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimSurfaceTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimSurfaceTool::proj_on",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimSurfaceTool.cxx; compared with OCCT by the bf_trim_surface requests of tools/verify_tkbool_numeric.py. Native quirks kept: the intersection tolerance 1e-6 retried at 1e-5 on curves extended in place by the tolerance (the bisector trim changes), the double points removed over the point count only, the angle of the bisector around the axis of a sphere, cone, torus, cylinder or revolution for a degenerated edge (Standard_NotImplemented otherwise), StdFail_NotDone for an incoherent intersection."
+    },
+    {
+      "upstream_id": "BRepFill_TrimSurfaceTool::Project(double,double,occ::handle<Geom_Curve>&,occ::handle<Geom2d_Curve>&,occ::handle<Geom2d_Curve>&,GeomAbs_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimSurfaceTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimSurfaceTool::project",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimSurfaceTool.cxx; compared with OCCT by the bf_trim_surface requests of tools/verify_tkbool_numeric.py. Native quirks kept: the intersection tolerance 1e-6 retried at 1e-5 on curves extended in place by the tolerance (the bisector trim changes), the double points removed over the point count only, the angle of the bisector around the axis of a sphere, cone, torus, cylinder or revolution for a degenerated edge (Standard_NotImplemented otherwise), StdFail_NotDone for an incoherent intersection."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::BRepFill_ComputeCLine(const BRepFill_MultiLine&,int,int,double,double,bool,AppParCurves_Constraint,AppParCurves_Constraint)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::with_line",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::BRepFill_ComputeCLine(int,int,double,double,bool,AppParCurves_Constraint,AppParCurves_Constraint)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::new",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::Perform(const BRepFill_MultiLine&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::perform",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::SetDegrees(int,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_degrees",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::SetTolerances(double,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_tolerances",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::SetConstraints(AppParCurves_Constraint,AppParCurves_Constraint)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_constraints",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::SetMaxSegments(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_max_segments",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::SetInvOrder(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_inv_order",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::SetHangChecking(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_hang_checking",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::IsAllApproximated() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::is_all_approximated",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::IsToleranceReached() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::is_tolerance_reached",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::Error(int,double&,double&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::error",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::NbMultiCurves() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::nb_multi_curves",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::Value(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::value",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
+    },
+    {
+      "upstream_id": "BRepFill_ComputeCLine::Parameters(int,double&,double&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ComputeCLine.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::parameters",
+      "status": "implemented",
+      "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
     },
     {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
