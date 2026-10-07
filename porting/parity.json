@@ -101095,6 +101095,38 @@
       "notes": "Required trait method (pure virtual); the int64_t* output becomes Option<&mut i64>. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
     {
+      "upstream_id": "OSD_FileSystem::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for OSD_FileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::get_type_name",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for OSD_FileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::get_type_descriptor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for OSD_FileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for OSD_FileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
       "upstream_id": "OSD_LocalFileSystem::DEFINE_STANDARD_RTTIEXT(OSD_LocalFileSystem,OSD_FileSystem)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
@@ -101151,6 +101183,38 @@
       "notes": "Class record: ported as a type, rustycad_tkernel::osd::LocalFileSystem (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "aad536eec7e82f5167513d13da6e436b5c27aa80f228f25bdc217593b6007ff1",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "OSD_LocalFileSystem::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for OSD_LocalFileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_LocalFileSystem::get_type_name",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for OSD_LocalFileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_LocalFileSystem::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for OSD_LocalFileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_LocalFileSystem::get_type_descriptor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for OSD_LocalFileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
     },
     {
       "upstream_id": "OSD_CachedFileSystem::DEFINE_STANDARD_RTTIEXT(OSD_CachedFileSystem,OSD_FileSystem)",
@@ -108757,6 +108821,34 @@
       "notes": "Class record: ported as a type, rustycad_tkernel::fsd::CmpFile (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "28b8df61032d91b31a93d1c115fa978345c87037b0062c120f54cb5517beec86",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "FSD_CmpFile::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for FSD_CmpFile. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_CmpFile::get_type_descriptor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for FSD_CmpFile. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_CmpFile::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for FSD_CmpFile. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_CmpFile::get_type_name",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for FSD_CmpFile. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
     },
     {
       "upstream_id": "FSD_File::DEFINE_STANDARD_RTTIEXT(FSD_File,Storage_BaseDriver)",
@@ -234512,6 +234604,38 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "MAT_ListOfBisector::base_type",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfBisector.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatListOfBisector",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Standard_Transient base_type` of MAT_ListOfBisector for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tktopalgo::mat::MatListOfBisector names the parent descriptor \"Standard_Transient\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "MAT_ListOfBisector::get_type_name",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfBisector.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatListOfBisector",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatBisector::LIST_NAME = \"MAT_ListOfBisector\", parent StandardTransient) registers descriptor \"MAT_ListOfBisector\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_ListOfBisector::DynamicType",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfBisector.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatListOfBisector",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatBisector::LIST_NAME = \"MAT_ListOfBisector\", parent StandardTransient) registers descriptor \"MAT_ListOfBisector\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_ListOfBisector::get_type_descriptor",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfBisector.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatListOfBisector",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatBisector::LIST_NAME = \"MAT_ListOfBisector\", parent StandardTransient) registers descriptor \"MAT_ListOfBisector\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
       "upstream_id": "MAT_ListOfEdge()",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
@@ -234756,6 +234880,38 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "MAT_ListOfEdge::DynamicType",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatListOfEdge",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatEdge::LIST_NAME = \"MAT_ListOfEdge\", parent StandardTransient) registers descriptor \"MAT_ListOfEdge\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_ListOfEdge::base_type",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatListOfEdge",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Standard_Transient base_type` of MAT_ListOfEdge for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tktopalgo::mat::MatListOfEdge names the parent descriptor \"Standard_Transient\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "MAT_ListOfEdge::get_type_name",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatListOfEdge",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatEdge::LIST_NAME = \"MAT_ListOfEdge\", parent StandardTransient) registers descriptor \"MAT_ListOfEdge\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_ListOfEdge::get_type_descriptor",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatListOfEdge",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatEdge::LIST_NAME = \"MAT_ListOfEdge\", parent StandardTransient) registers descriptor \"MAT_ListOfEdge\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
       "upstream_id": "MAT_Node::MAT_Node(int,const occ::handle<MAT_Arc>&,double)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_Node.hxx",
@@ -234972,6 +235128,38 @@
       "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests). The runtime type is registered once per list item type (MatTListItem::LIST_NAME)."
     },
     {
+      "upstream_id": "MAT_TListNodeOfListOfBisector::get_type_name",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfBisector.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfBisector",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatBisector::NODE_NAME = \"MAT_TListNodeOfListOfBisector\", parent StandardTransient) registers descriptor \"MAT_TListNodeOfListOfBisector\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_TListNodeOfListOfBisector::get_type_descriptor",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfBisector.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfBisector",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatBisector::NODE_NAME = \"MAT_TListNodeOfListOfBisector\", parent StandardTransient) registers descriptor \"MAT_TListNodeOfListOfBisector\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_TListNodeOfListOfBisector::DynamicType",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfBisector.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfBisector",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatBisector::NODE_NAME = \"MAT_TListNodeOfListOfBisector\", parent StandardTransient) registers descriptor \"MAT_TListNodeOfListOfBisector\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_TListNodeOfListOfBisector::base_type",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfBisector.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfBisector",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Standard_Transient base_type` of MAT_TListNodeOfListOfBisector for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tktopalgo::mat::MatTListNodeOfListOfBisector names the parent descriptor \"Standard_Transient\", which RuntimeType::parent() returns."
+    },
+    {
       "upstream_id": "MAT_TListNodeOfListOfEdge()",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfEdge.hxx",
@@ -235050,6 +235238,38 @@
       "rust_item": "<rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests). The runtime type is registered once per list item type (MatTListItem::LIST_NAME)."
+    },
+    {
+      "upstream_id": "MAT_TListNodeOfListOfEdge::DynamicType",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatEdge::NODE_NAME = \"MAT_TListNodeOfListOfEdge\", parent StandardTransient) registers descriptor \"MAT_TListNodeOfListOfEdge\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_TListNodeOfListOfEdge::get_type_descriptor",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatEdge::NODE_NAME = \"MAT_TListNodeOfListOfEdge\", parent StandardTransient) registers descriptor \"MAT_TListNodeOfListOfEdge\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_TListNodeOfListOfEdge::get_type_name",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatEdge::NODE_NAME = \"MAT_TListNodeOfListOfEdge\", parent StandardTransient) registers descriptor \"MAT_TListNodeOfListOfEdge\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_TListNodeOfListOfEdge::base_type",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Standard_Transient base_type` of MAT_TListNodeOfListOfEdge for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge names the parent descriptor \"Standard_Transient\", which RuntimeType::parent() returns."
     },
     {
       "upstream_id": "MAT_Zone::MAT_Zone()",
@@ -243213,6 +243433,17 @@
       "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::append_segment",
       "status": "implemented",
       "notes": "C++ protected member of the result base: public in Rust, since the intersector structs embed Intersection."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::IntRes2d_Intersection",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::<core::clone::Clone>::clone",
+      "status": "implemented",
+      "notes": "The user-written C++ copy constructor copies the point and segment lists and resets done and reverse to false (IntRes2d_Intersection.lxx:32); the hand-written Rust Clone does the same.",
+      "cpp_selector": {
+        "usr": "c:@S@IntRes2d_Intersection@F@IntRes2d_Intersection#&1$@S@IntRes2d_Intersection#"
+      }
     },
     {
       "upstream_id": "operator<<(std::ostream&,IntRes2d_Transition&)",
@@ -263692,6 +263923,14 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(BRepExtremaTriangleSet, \"BRepExtrema_TriangleSet\", StandardTransient) at crates/tktopalgo/src/brep_extrema/triangle_set.rs:250 registers descriptor \"BRepExtrema_TriangleSet\"; C++ base_type is BVH_PrimitiveSet<double, 3>. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Not proven: the Rust registration names parent Standard_Transient.",
       "cpp_declaration_id": "23ad498dbb8161f0cb3e4fbcf2bd100f04f1896b00de3872f66566c633947f2e",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepExtrema_TriangleSet::base_type",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT declares `typedef BVH_PrimitiveSet<double, 3> base_type`. The template has no descriptor of its own, so the native parent descriptor is the inherited BVH_ObjectTransient one; Rust does not register BVH_ObjectTransient (BVH objects are never Handle<dyn Transient>), so the Rust registration names Standard_Transient, the next ancestor. No alias exists in Rust; the get_type_* rows record the same parent difference as partial."
     },
     {
       "upstream_id": "HelixGeom_BuilderApproxCurve::SetApproxParameters(GeomAbs_Shape,int,int)",
@@ -328876,6 +329115,34 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "FSD_BinaryFile::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for FSD_BinaryFile. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for FSD_BinaryFile. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile::get_type_name",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for FSD_BinaryFile. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile::get_type_descriptor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for FSD_BinaryFile. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
       "upstream_id": "Storage_Schema::TypeBinding(const TCollection_AsciiString &) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Schema.hxx",
@@ -351513,6 +351780,30 @@
       "notes": "Class record: FEmTool_LinearFlexion is ported as the type alias rustycad_tkgeombase::fem_tool::LinearFlexion; each member is mapped by its own row."
     },
     {
+      "upstream_id": "FEmTool_LinearFlexion::DynamicType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearFlexion",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(LinearFlexion, \"FEmTool_LinearFlexion\", dyn ElementaryCriterion) in crates/tkgeombase/src/fem_tool/linear_kinds.rs registers descriptor \"FEmTool_LinearFlexion\" with parent \"FEmTool_ElementaryCriterion\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "FEmTool_LinearFlexion::get_type_descriptor",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearFlexion",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(LinearFlexion, \"FEmTool_LinearFlexion\", dyn ElementaryCriterion) in crates/tkgeombase/src/fem_tool/linear_kinds.rs registers descriptor \"FEmTool_LinearFlexion\" with parent \"FEmTool_ElementaryCriterion\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "FEmTool_LinearFlexion::get_type_name",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearFlexion",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(LinearFlexion, \"FEmTool_LinearFlexion\", dyn ElementaryCriterion) in crates/tkgeombase/src/fem_tool/linear_kinds.rs registers descriptor \"FEmTool_LinearFlexion\" with parent \"FEmTool_ElementaryCriterion\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
       "upstream_id": "FEmTool_LinearJerk::base_type",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
@@ -351529,6 +351820,30 @@
       "notes": "Class record: FEmTool_LinearJerk is ported as the type alias rustycad_tkgeombase::fem_tool::LinearJerk; each member is mapped by its own row."
     },
     {
+      "upstream_id": "FEmTool_LinearJerk::get_type_descriptor",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearJerk",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(LinearJerk, \"FEmTool_LinearJerk\", dyn ElementaryCriterion) in crates/tkgeombase/src/fem_tool/linear_kinds.rs registers descriptor \"FEmTool_LinearJerk\" with parent \"FEmTool_ElementaryCriterion\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "FEmTool_LinearJerk::get_type_name",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearJerk",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(LinearJerk, \"FEmTool_LinearJerk\", dyn ElementaryCriterion) in crates/tkgeombase/src/fem_tool/linear_kinds.rs registers descriptor \"FEmTool_LinearJerk\" with parent \"FEmTool_ElementaryCriterion\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "FEmTool_LinearJerk::DynamicType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearJerk",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(LinearJerk, \"FEmTool_LinearJerk\", dyn ElementaryCriterion) in crates/tkgeombase/src/fem_tool/linear_kinds.rs registers descriptor \"FEmTool_LinearJerk\" with parent \"FEmTool_ElementaryCriterion\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
       "upstream_id": "FEmTool_LinearTension::base_type",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
@@ -351543,6 +351858,30 @@
       "rust_item": "rustycad_tkgeombase::fem_tool::LinearTension",
       "status": "implemented",
       "notes": "Class record: FEmTool_LinearTension is ported as the type alias rustycad_tkgeombase::fem_tool::LinearTension; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "FEmTool_LinearTension::get_type_descriptor",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearTension",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(LinearTension, \"FEmTool_LinearTension\", dyn ElementaryCriterion) in crates/tkgeombase/src/fem_tool/linear_kinds.rs registers descriptor \"FEmTool_LinearTension\" with parent \"FEmTool_ElementaryCriterion\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "FEmTool_LinearTension::DynamicType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearTension",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(LinearTension, \"FEmTool_LinearTension\", dyn ElementaryCriterion) in crates/tkgeombase/src/fem_tool/linear_kinds.rs registers descriptor \"FEmTool_LinearTension\" with parent \"FEmTool_ElementaryCriterion\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "FEmTool_LinearTension::get_type_name",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearTension",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(LinearTension, \"FEmTool_LinearTension\", dyn ElementaryCriterion) in crates/tkgeombase/src/fem_tool/linear_kinds.rs registers descriptor \"FEmTool_LinearTension\" with parent \"FEmTool_ElementaryCriterion\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
     },
     {
       "upstream_id": "AppParCurves_TangencyPoint",
@@ -356506,6 +356845,134 @@
       "notes": "Class record: GeomEval_RepCurveDesc::Mapped is ported as the type rustycad_tkg3d::geom_eval::RepCurveDescMapped; each member is mapped by its own row."
     },
     {
+      "upstream_id": "GeomEval_RepCurveDesc::Base::base_type",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDesc",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Standard_Transient base_type` of GeomEval_RepCurveDesc::Base for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg3d::geom_eval::RepCurveDesc names the parent descriptor \"Standard_Transient\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Base::DynamicType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDesc",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient_interface!(dyn RepCurveDesc, \"Base\", StandardTransient) registers descriptor \"Base\" with parent \"Standard_Transient\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Base\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Base::get_type_descriptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDesc",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient_interface!(dyn RepCurveDesc, \"Base\", StandardTransient) registers descriptor \"Base\" with parent \"Standard_Transient\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Base\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Base::get_type_name",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDesc",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient_interface!(dyn RepCurveDesc, \"Base\", StandardTransient) registers descriptor \"Base\" with parent \"Standard_Transient\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Base\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Full::DynamicType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescFull::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(RepCurveDescFull, \"Full\", dyn RepCurveDesc) registers descriptor \"Full\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Full\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Full::base_type",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescFull",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef GeomEval_RepCurveDesc::Base base_type` of GeomEval_RepCurveDesc::Full for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg3d::geom_eval::RepCurveDescFull names the parent descriptor \"Base\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Full::get_type_descriptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescFull::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(RepCurveDescFull, \"Full\", dyn RepCurveDesc) registers descriptor \"Full\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Full\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Full::get_type_name",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescFull::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(RepCurveDescFull, \"Full\", dyn RepCurveDesc) registers descriptor \"Full\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Full\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::DerivBounded::DynamicType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescDerivBounded::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(RepCurveDescDerivBounded, \"DerivBounded\", dyn RepCurveDesc) registers descriptor \"DerivBounded\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"DerivBounded\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::DerivBounded::base_type",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescDerivBounded",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef GeomEval_RepCurveDesc::Base base_type` of GeomEval_RepCurveDesc::DerivBounded for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg3d::geom_eval::RepCurveDescDerivBounded names the parent descriptor \"Base\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::DerivBounded::get_type_name",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescDerivBounded::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(RepCurveDescDerivBounded, \"DerivBounded\", dyn RepCurveDesc) registers descriptor \"DerivBounded\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"DerivBounded\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::DerivBounded::get_type_descriptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescDerivBounded::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(RepCurveDescDerivBounded, \"DerivBounded\", dyn RepCurveDesc) registers descriptor \"DerivBounded\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"DerivBounded\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Mapped::get_type_name",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescMapped::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(RepCurveDescMapped, \"Mapped\", dyn RepCurveDesc) registers descriptor \"Mapped\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Mapped\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Mapped::DynamicType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescMapped::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(RepCurveDescMapped, \"Mapped\", dyn RepCurveDesc) registers descriptor \"Mapped\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Mapped\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Mapped::get_type_descriptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescMapped::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(RepCurveDescMapped, \"Mapped\", dyn RepCurveDesc) registers descriptor \"Mapped\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Mapped\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Mapped::base_type",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescMapped",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef GeomEval_RepCurveDesc::Base base_type` of GeomEval_RepCurveDesc::Mapped for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg3d::geom_eval::RepCurveDescMapped names the parent descriptor \"Base\", which RuntimeType::parent() returns."
+    },
+    {
       "upstream_id": "GeomEval_RepSurfaceDesc",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
@@ -356696,6 +357163,134 @@
       "rust_item": "rustycad_tkg3d::geom_eval::Map2d",
       "status": "implemented",
       "notes": "Class record: GeomEval_RepSurfaceDesc::Map2d is ported as the type rustycad_tkg3d::geom_eval::Map2d; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Base::get_type_name",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDesc",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient_interface!(dyn RepSurfaceDesc, \"Base\", StandardTransient) registers descriptor \"Base\" with parent \"Standard_Transient\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Base\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Base::DynamicType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDesc",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient_interface!(dyn RepSurfaceDesc, \"Base\", StandardTransient) registers descriptor \"Base\" with parent \"Standard_Transient\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Base\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Base::base_type",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDesc",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Standard_Transient base_type` of GeomEval_RepSurfaceDesc::Base for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg3d::geom_eval::RepSurfaceDesc names the parent descriptor \"Standard_Transient\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Base::get_type_descriptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDesc",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient_interface!(dyn RepSurfaceDesc, \"Base\", StandardTransient) registers descriptor \"Base\" with parent \"Standard_Transient\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Base\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Full::get_type_name",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescFull::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(RepSurfaceDescFull, \"Full\", dyn RepSurfaceDesc) registers descriptor \"Full\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Full\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Full::base_type",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescFull",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef GeomEval_RepSurfaceDesc::Base base_type` of GeomEval_RepSurfaceDesc::Full for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg3d::geom_eval::RepSurfaceDescFull names the parent descriptor \"Base\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Full::DynamicType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescFull::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(RepSurfaceDescFull, \"Full\", dyn RepSurfaceDesc) registers descriptor \"Full\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Full\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Full::get_type_descriptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescFull::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(RepSurfaceDescFull, \"Full\", dyn RepSurfaceDesc) registers descriptor \"Full\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Full\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::DerivBounded::base_type",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescDerivBounded",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef GeomEval_RepSurfaceDesc::Base base_type` of GeomEval_RepSurfaceDesc::DerivBounded for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg3d::geom_eval::RepSurfaceDescDerivBounded names the parent descriptor \"Base\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::DerivBounded::get_type_name",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescDerivBounded::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(RepSurfaceDescDerivBounded, \"DerivBounded\", dyn RepSurfaceDesc) registers descriptor \"DerivBounded\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"DerivBounded\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::DerivBounded::DynamicType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescDerivBounded::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(RepSurfaceDescDerivBounded, \"DerivBounded\", dyn RepSurfaceDesc) registers descriptor \"DerivBounded\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"DerivBounded\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::DerivBounded::get_type_descriptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescDerivBounded::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(RepSurfaceDescDerivBounded, \"DerivBounded\", dyn RepSurfaceDesc) registers descriptor \"DerivBounded\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"DerivBounded\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Mapped::get_type_descriptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescMapped::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(RepSurfaceDescMapped, \"Mapped\", dyn RepSurfaceDesc) registers descriptor \"Mapped\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Mapped\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Mapped::DynamicType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescMapped::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(RepSurfaceDescMapped, \"Mapped\", dyn RepSurfaceDesc) registers descriptor \"Mapped\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Mapped\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Mapped::get_type_name",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescMapped::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(RepSurfaceDescMapped, \"Mapped\", dyn RepSurfaceDesc) registers descriptor \"Mapped\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Mapped\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Mapped::base_type",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescMapped",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef GeomEval_RepSurfaceDesc::Base base_type` of GeomEval_RepSurfaceDesc::Mapped for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg3d::geom_eval::RepSurfaceDescMapped names the parent descriptor \"Base\", which RuntimeType::parent() returns."
     },
     {
       "upstream_id": "Geom_OsculatingSurface",
@@ -359195,6 +359790,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Message_CompositeAlerts::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): message_runtime_type!(CompositeAlerts, \"Message_CompositeAlerts\", StandardTransient) registers the descriptor. Rust has no subclass of CompositeAlerts (it is shared as Arc<CompositeAlerts>), so the most-derived descriptor of every CompositeAlerts is CompositeAlerts::static_type(), which is what the C++ virtual returns for a native object of this class."
+    },
+    {
       "upstream_id": "Message_ConsoleColor_Black",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_ConsoleColor.hxx",
@@ -359445,6 +360048,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Message_Messenger::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): message_runtime_type!(Messenger, \"Message_Messenger\", StandardTransient) registers the descriptor. Rust has no subclass of Messenger (it is shared as Arc<Messenger>), so the most-derived descriptor of every Messenger is Messenger::static_type(), which is what the C++ virtual returns for a native object of this class."
+    },
+    {
       "upstream_id": "Message_MetricType_MemHeapUsage",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_MetricType.hxx",
@@ -359669,6 +360280,14 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): message_runtime_type!(PrinterType, \"Message_Printer\", StandardTransient) at crates/tkernel/src/message/printer.rs:40 registers descriptor \"Message_Printer\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "b2637183722f012cb5146708208b63f023281edf37cbe42643e958973327e7bf",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Message_Printer::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "rust_item": "rustycad_tkernel::message::Printer::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): the virtual is the Printer trait method dynamic_type, which every printer implements to return its most-derived descriptor (Message_Printer is PrinterType)."
     },
     {
       "upstream_id": "Message_PrinterOStream::send(const TCollection_AsciiString&,const Message_Gravity) const",
@@ -360755,6 +361374,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "OSD_Parallel::UniversalIterator::operator=",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
+      "rust_item": "rustycad_tkernel::osd::Parallel",
+      "status": "excluded",
+      "notes": "Excluded: copy assignment of the type-erased UniversalIterator wrapper (clones the wrapped iterator). The Rust OSD_Parallel takes ordinary Rust iterators and ranges, so the wrapper class (excluded by its own row) and its assignment have no counterpart."
+    },
+    {
       "upstream_id": "OSD_Thread(const OSD_Thread&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
@@ -361109,6 +361736,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "OSD_ThreadPool::EnumeratedThread::operator=",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool",
+      "status": "excluded",
+      "notes": "Excluded: copy assignment of the pool-internal thread record (OSD_Thread::Assign plus the pool, job and index fields). The Rust pool keeps its workers as shared Arc<Worker> values that are never copied, so no assignment of a thread record exists."
+    },
+    {
       "upstream_id": "OSD_CachedFileSystem::myLinkedFS",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
@@ -361175,6 +361810,38 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "OSD_CachedFileSystem::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for OSD_CachedFileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::get_type_descriptor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for OSD_CachedFileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::get_type_name",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for OSD_CachedFileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for OSD_CachedFileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
       "upstream_id": "OSD_FileSystemSelector::myProtocols",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
@@ -361191,6 +361858,38 @@
       "notes": "Class record: ported as a type, rustycad_tkernel::osd::FileSystemSelector (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "7a347d37ad0d7fe067c88233fc5f00d6ba16c58ee8e44f711e3deb8cd8836dfa",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for OSD_FileSystemSelector. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for OSD_FileSystemSelector. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::get_type_descriptor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for OSD_FileSystemSelector. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::get_type_name",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for OSD_FileSystemSelector. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
     },
     {
       "upstream_id": "OSD_StreamBuffer",
@@ -361981,6 +362680,34 @@
       "notes": "protected constructor of the abstract driver (empty name, Storage_VSNone); every Rust driver embeds a DriverBase whose Default is that state."
     },
     {
+      "upstream_id": "Storage_BaseDriver::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_BaseDriver.hxx",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for Storage_BaseDriver. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "Storage_BaseDriver::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_BaseDriver.hxx",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for Storage_BaseDriver. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "Storage_BaseDriver::get_type_name",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_BaseDriver.hxx",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for Storage_BaseDriver. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "Storage_BaseDriver::get_type_descriptor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage_BaseDriver.hxx",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for Storage_BaseDriver. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
       "upstream_id": "Storage_VSAlreadyOpen",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Storage/Storage_Error.hxx",
@@ -362165,6 +362892,34 @@
       "notes": "Class record: ported as a type, rustycad_tkernel::fsd::File (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "86cc580d0b1d0df207500a8e3fc5e11b5a5cb0984130a4cec7d47122ad69cd48",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "FSD_File::get_type_name",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for FSD_File. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_File::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for FSD_File. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_File::get_type_descriptor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for FSD_File. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_File::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for FSD_File. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
     },
     {
       "upstream_id": "opencascade::handle::operator const opencascade::handle<type-parameter-1-0> &",
@@ -362453,6 +363208,134 @@
       "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDesc",
       "status": "excluded",
       "notes": "protected defaulted constructor of the abstract descriptor base; the Rust base is the object-safe trait RepCurveDesc, which has no constructor; each concrete descriptor (RepCurveDescFull::new, RepCurveDescDerivBounded::new, RepCurveDescMapped::new) builds its own state."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Base::DynamicType",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDesc",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient_interface!(dyn RepCurveDesc, \"Base\", StandardTransient) registers descriptor \"Base\" with parent \"Standard_Transient\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Base\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Base::get_type_descriptor",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDesc",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient_interface!(dyn RepCurveDesc, \"Base\", StandardTransient) registers descriptor \"Base\" with parent \"Standard_Transient\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Base\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Base::get_type_name",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDesc",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient_interface!(dyn RepCurveDesc, \"Base\", StandardTransient) registers descriptor \"Base\" with parent \"Standard_Transient\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Base\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. Abstract class: the trait is the Rust target because rustdoc does not index impls on `dyn` types. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Base::base_type",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDesc",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Standard_Transient base_type` of Geom2dEval_RepCurveDesc::Base for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg2d::geom2d_eval::RepCurveDesc names the parent descriptor \"Standard_Transient\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Full::get_type_descriptor",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescFull::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(RepCurveDescFull, \"Full\", dyn RepCurveDesc) registers descriptor \"Full\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Full\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Full::get_type_name",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescFull::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(RepCurveDescFull, \"Full\", dyn RepCurveDesc) registers descriptor \"Full\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Full\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Full::base_type",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescFull",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Geom2dEval_RepCurveDesc::Base base_type` of Geom2dEval_RepCurveDesc::Full for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg2d::geom2d_eval::RepCurveDescFull names the parent descriptor \"Base\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Full::DynamicType",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescFull::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(RepCurveDescFull, \"Full\", dyn RepCurveDesc) registers descriptor \"Full\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Full\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::DerivBounded::DynamicType",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescDerivBounded::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(RepCurveDescDerivBounded, \"DerivBounded\", dyn RepCurveDesc) registers descriptor \"DerivBounded\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"DerivBounded\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::DerivBounded::get_type_name",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescDerivBounded::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(RepCurveDescDerivBounded, \"DerivBounded\", dyn RepCurveDesc) registers descriptor \"DerivBounded\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"DerivBounded\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::DerivBounded::get_type_descriptor",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescDerivBounded::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(RepCurveDescDerivBounded, \"DerivBounded\", dyn RepCurveDesc) registers descriptor \"DerivBounded\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"DerivBounded\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::DerivBounded::base_type",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescDerivBounded",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Geom2dEval_RepCurveDesc::Base base_type` of Geom2dEval_RepCurveDesc::DerivBounded for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg2d::geom2d_eval::RepCurveDescDerivBounded names the parent descriptor \"Base\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Mapped::base_type",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescMapped",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTI declares `typedef Geom2dEval_RepCurveDesc::Base base_type` of Geom2dEval_RepCurveDesc::Mapped for its own descriptor wiring. Rust has no alias for it; the registration of rustycad_tkg2d::geom2d_eval::RepCurveDescMapped names the parent descriptor \"Base\", which RuntimeType::parent() returns."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Mapped::get_type_name",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescMapped::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(RepCurveDescMapped, \"Mapped\", dyn RepCurveDesc) registers descriptor \"Mapped\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Mapped\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Mapped::DynamicType",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescMapped::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(RepCurveDescMapped, \"Mapped\", dyn RepCurveDesc) registers descriptor \"Mapped\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Mapped\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Mapped::get_type_descriptor",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescMapped::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(RepCurveDescMapped, \"Mapped\", dyn RepCurveDesc) registers descriptor \"Mapped\" with parent \"Base\", as the C++ macro does. The native macro stringifies the unqualified class token, so get_type_name() of this nested class returns \"Mapped\", the name Rust registers; the generator cannot match an unqualified name to the nested C++ class. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
     },
     {
       "upstream_id": "Geom2dGridEval",
@@ -363171,6 +364054,14 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): message_runtime_type!(Report, \"Message_Report\", StandardTransient) at crates/tkernel/src/message/report.rs:29 registers descriptor \"Message_Report\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "c047d817b85b1c499f308399467e4ea1a878422487ce8aea60faad23295178f6",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Message_Report::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): message_runtime_type!(Report, \"Message_Report\", StandardTransient) registers the descriptor. Rust has no subclass of Report (it is shared as Arc<Report>), so the most-derived descriptor of every Report is Report::static_type(), which is what the C++ virtual returns for a native object of this class."
     },
     {
       "upstream_id": "Message_PrinterToReport::send(const TCollection_AsciiString&,const Message_Gravity) const",
@@ -364252,6 +365143,13 @@
       "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. A Rust port of the class needs no callable counterpart.",
       "cpp_declaration_id": "39ff909098e4f0fc9852a13dab48d4d52581c36d08e9105401f8f3478ac5bf78",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "yyFlexLexer::~yyFlexLexer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FlexLexer/FlexLexer.h",
+      "status": "excluded",
+      "notes": "Excluded: FlexLexer is the third-party flex scanner base class (FlexLexer.h), not OCCT API."
     },
     {
       "upstream_id": "CSLib_Class2d::Result_Inside",
@@ -367345,12 +368243,28 @@
       "notes": "Class template BVH_DistanceField is the generic Rust struct bvh::BvhDistanceField over the BvhVector/scalar parameters."
     },
     {
+      "upstream_id": "BVH_DistanceField::~BVH_DistanceField<T, N>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor body only releases storage the object owns (delete[] of the voxel array). Rust bvh::BvhDistanceField owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
+    },
+    {
       "upstream_id": "BVH_Geometry",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhGeometry",
       "status": "implemented",
       "notes": "Class template BVH_Geometry is the generic Rust struct bvh::BvhGeometry over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Geometry::~BVH_Geometry<T, N>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor body only releases storage the object owns (Nullify of the tree and builder handles). Rust bvh::BvhGeometry owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
     },
     {
       "upstream_id": "BVH_IndexedBoxSet",
@@ -367367,6 +368281,14 @@
       "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder",
       "status": "implemented",
       "notes": "Class template BVH_LinearBuilder is the generic Rust struct bvh::BvhLinearBuilder over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_LinearBuilder::~BVH_LinearBuilder<T, N>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder",
+      "status": "excluded",
+      "notes": "Excluded: the destructor is defined out of line as `= default` (BVH_LinearBuilder.hxx:82), so destruction only releases the members, which Rust drop glue does for bvh::BvhLinearBuilder."
     },
     {
       "upstream_id": "BVH_Object",
@@ -367417,6 +368339,13 @@
       "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSet",
       "status": "implemented",
       "notes": "Class template BVH_PrimitiveSet is the generic Rust struct bvh::BvhPrimitiveSet over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_PrimitiveSet::~BVH_PrimitiveSet<T, N>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor body only releases storage the object owns (Nullify of the tree and builder handles). Rust bvh primitive-set state (BvhPrimitiveSetAccess) owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
     },
     {
       "upstream_id": "BVH_QueueBuilder",
@@ -367601,6 +368530,38 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BVH_BuilderTransient::DynamicType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhQueueBuilder",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for BVH_BuilderTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_BuilderTransient::base_type",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhQueueBuilder",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for BVH_BuilderTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_BuilderTransient::get_type_name",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhQueueBuilder",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for BVH_BuilderTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_BuilderTransient::get_type_descriptor",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhQueueBuilder",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for BVH_BuilderTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
       "upstream_id": "BVH_ObjectTransient::BVH_ObjectTransient()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
@@ -367629,6 +368590,38 @@
       "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkmath::bvh::BvhObject needs no callable counterpart.",
       "cpp_declaration_id": "8afca207accd091216306f6c38b9a3a228c2a68da05652f6ade1b7b64859f69f",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BVH_ObjectTransient::DynamicType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectTransient",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for BVH_ObjectTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_ObjectTransient::base_type",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectTransient",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for BVH_ObjectTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_ObjectTransient::get_type_name",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectTransient",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for BVH_ObjectTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_ObjectTransient::get_type_descriptor",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectTransient",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for BVH_ObjectTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
     },
     {
       "upstream_id": "BVH_TreeBaseTransient::BVH_TreeBaseTransient()",
@@ -367689,6 +368682,46 @@
       "notes": "Class record: ported as a trait reached as Handle<dyn Trait>, rustycad_tkmath::bvh::BvhBuildTool (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "7d9f8b47d111f1217856402004a9fc39e29b77bd7cb47e1c05c19d94c1ad0061",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BVH_BuildThread::get_type_descriptor",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBuildThread",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for BVH_BuildThread. The Rust BvhBuildThread borrows its build tool and queue for one build (a lifetime-bound worker), so it can never be a shared Handle<dyn Transient> object and no runtime descriptor is observable."
+    },
+    {
+      "upstream_id": "BVH_BuildThread::DynamicType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBuildThread",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for BVH_BuildThread. The Rust BvhBuildThread borrows its build tool and queue for one build (a lifetime-bound worker), so it can never be a shared Handle<dyn Transient> object and no runtime descriptor is observable."
+    },
+    {
+      "upstream_id": "BVH_BuildThread::base_type",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBuildThread",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for BVH_BuildThread. The Rust BvhBuildThread borrows its build tool and queue for one build (a lifetime-bound worker), so it can never be a shared Handle<dyn Transient> object and no runtime descriptor is observable."
+    },
+    {
+      "upstream_id": "BVH_BuildThread::get_type_name",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBuildThread",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for BVH_BuildThread. The Rust BvhBuildThread borrows its build tool and queue for one build (a lifetime-bound worker), so it can never be a shared Handle<dyn Transient> object and no runtime descriptor is observable."
+    },
+    {
+      "upstream_id": "BVH_BuildThread::operator=",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBuildThread",
+      "status": "excluded",
+      "notes": "Excluded: declared without a definition (the C++03 non-copyable idiom), so no caller can use it. The Rust BvhBuildThread borrows its tool and queue and does not implement Clone either."
     },
     {
       "upstream_id": "BVH::RadixSorter::perform(BVH::RadixSorter::LinkIterator,BVH::RadixSorter::LinkIterator,int)",
@@ -368109,6 +369142,38 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BVH_Properties::get_type_descriptor",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhProperties",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for BVH_Properties. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_Properties::base_type",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhProperties",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for BVH_Properties. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_Properties::get_type_name",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhProperties",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for BVH_Properties. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_Properties::DynamicType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhProperties",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for BVH_Properties. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
       "upstream_id": "BVH::VecComp<type-parameter-0-0, 2>::BVH_Vec2t",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
@@ -368267,6 +369332,38 @@
       "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkmath::bvh::BvhTree needs no callable counterpart.",
       "cpp_declaration_id": "328d2208e5b8d08bf562fded16fef8e2d7d2cd3816f9034d12bd653da831aa39",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BVH_TreeBaseTransient::get_type_descriptor",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree",
+      "status": "excluded",
+      "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for BVH_TreeBaseTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_TreeBaseTransient::base_type",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree",
+      "status": "excluded",
+      "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for BVH_TreeBaseTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_TreeBaseTransient::DynamicType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree",
+      "status": "excluded",
+      "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for BVH_TreeBaseTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_TreeBaseTransient::get_type_name",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree",
+      "status": "excluded",
+      "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for BVH_TreeBaseTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
     },
     {
       "upstream_id": "BVH_Tree",
@@ -386193,6 +387290,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "NCollection_CellFilter::Cell::~Cell",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor body only releases storage the object owns (the destructor call of every target in the cell list; the nodes stay in the incremental allocator). Rust ncollection::CellFilter owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
+    },
+    {
       "upstream_id": "NCollection_AccAllocator::Align",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
@@ -388920,6 +390025,17 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::operator=",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray",
+      "status": "excluded",
+      "notes": "Excluded: SFINAE-enabled converting assignment from the mutable to the const iterator of the sparse array. Rust iteration (SparseArray::entries/iter versus entries_mut/iter_mut) borrows shared or exclusive and needs no conversion (a C++ type trait mechanism, plan D1 class B4).",
+      "cpp_selector": {
+        "usr": "c:@S@NCollection_SparseArrayBase@ST>3#T#T#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-1-0, int>:::typeoperator=#&1>@S@NCollection_SparseArrayBase@ST>3#T#T#Nb@BasicIterator3t0.0t0.1Vb0#&>@S@NCollection_SparseArrayBase@ST>3#T#T#Nb@BasicIterator3S3_S4_#"
+      }
+    },
+    {
       "upstream_id": "NCollection_BaseMap::BasicIterator::pointer",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
@@ -389256,6 +390372,25 @@
       "notes": "Excluded: C++ declares the copy assignment `= delete`, so no caller can use it. Rust rustycad_tkernel::ncollection::BaseMap does not implement Clone either.",
       "cpp_declaration_id": "8d5304d7117bae49b2215cd03b6add7369c3da1a296ac2184fee4469a8a06de6",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BasicIterator::operator=",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
+      "status": "excluded",
+      "notes": "Excluded: SFINAE-enabled converting assignment from the mutable to the const iterator of the same map. Rust iterators borrow the map shared or exclusive; a shared iterator is created directly and no mutable-to-const conversion exists (a C++ type trait mechanism, plan D1 class B4).",
+      "cpp_selector": {
+        "usr": "c:@S@NCollection_BaseMap@ST>7#T#T#T#T#Nb#Nb#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-1-0, int>:::typeoperator=#&1>@S@NCollection_BaseMap@ST>7#T#T#T#T#Nb#Nb#Nb@BasicIterator7t0.0t0.1t0.2t0.3Vb0#&>@S@NCollection_BaseMap@ST>7#T#T#T#T#Nb#Nb#Nb@BasicIterator7S3_S4_S5_S6_#"
+      }
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::~NCollection_BaseMap",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor body only releases storage the object owns (Standard::Free of the bucket array). Rust ncollection::BaseMapStorage owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
     },
     {
       "upstream_id": "NCollection_HArray1::value_type",
@@ -389828,6 +390963,14 @@
       "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::index_buckets",
       "status": "implemented",
       "notes": "Protected index table pointer; read through index_buckets() (index_buckets_mut/index_slots for writes)."
+    },
+    {
+      "upstream_id": "NCollection_BaseIndexedMap::~NCollection_BaseIndexedMap",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor body only releases storage the object owns (Standard::Free of the index-to-node table). Rust ncollection::BaseMapStorage owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
     },
     {
       "upstream_id": "NCollection_BaseDoubleMap",
