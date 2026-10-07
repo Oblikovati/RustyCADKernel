@@ -78,6 +78,24 @@ class LegacyTestInventoryTest(unittest.TestCase):
         self.assertFalse(summary["runtime_proof"])
 
 
+    def test_pending_dependency_is_neither_mapped_nor_unmapped(self) -> None:
+        # BRepTools_Test cuts faces with TKBO's BRepAlgoAPI_Cut, which is not ported yet.
+        source = "src/A/TKA/GTests/A_Test.cxx"
+        row = {"toolkit": "TKA", "source": source, "upstream_id": "A.Case",
+               "status": "pending_dependency", "blocked_by": ["BRepAlgoAPI_Cut"]}
+        records, summary = report_document(
+            fixture_inventory([declaration(source, "A.Case")]), {"tests": [row]}, "i", "p"
+        )
+        result = by_kind(records, "gtest_declaration")[0]
+        self.assertEqual(result["mapping_status"], "pending_dependency")
+        self.assertIsNone(result["mapped_rust_test"])
+        self.assertEqual(result["blocked_by"], ["BRepAlgoAPI_Cut"])
+        self.assertEqual(summary["gtest"]["mapped"], 0)
+        self.assertEqual(summary["gtest"]["pending_dependency"], 1)
+        self.assertEqual(summary["by_toolkit"]["TKA"]["pending_dependency"], 1)
+        self.assertFalse(summary["mapping_inventory_complete"])
+
+
 def fixture_inventory(candidates: list[dict]) -> dict:
     return {
         "schema_version": 1,

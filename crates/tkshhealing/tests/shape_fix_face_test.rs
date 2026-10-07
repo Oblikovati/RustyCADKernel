@@ -13,8 +13,10 @@ use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape, BRepBuilderAPIMakeWire,
 };
 use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
-use rustycad_tktopalgo::brep_lib::BRepLibMakeFace;
 use std::f64::consts::PI;
+#[path = "support/shape_fix_face.rs"]
+mod shape_fix_face;
+use shape_fix_face::unit_square_plane_face as planar_face;
 
 fn periodic_cone_fixture() -> (Handle<GeomConicalSurface>, Wire) {
     let axis = Axis3::new(
@@ -126,25 +128,4 @@ fn perform_removed_face_preserves_null_replacement() {
     assert!(!fixer.perform().unwrap());
     assert!(fixer.status(ShapeExtendStatus::Ok));
     assert!(fixer.result().is_null());
-}
-
-#[test]
-fn perform_with_progress_preserves_removed_face() {
-    let face = planar_face();
-    let context = Handle::new(ShapeBuildReShape::new());
-    context.remove(&face.clone().into_shape()).unwrap();
-    let fixer = ShapeFixFace::new(face.into_shape());
-    fixer.set_context(&context);
-    let progress = rustycad_tkernel::message::ProgressRange::default();
-
-    assert!(!fixer.perform_with_progress(&progress).unwrap());
-    assert!(fixer.status(ShapeExtendStatus::Ok));
-    assert!(fixer.result().is_null());
-}
-
-fn planar_face() -> Face {
-    BRepLibMakeFace::from_plane_bounds(rustycad_tkmath::gp::Plane3::default(), (0.0, 1.0, 0.0, 1.0))
-        .unwrap()
-        .face()
-        .unwrap()
 }

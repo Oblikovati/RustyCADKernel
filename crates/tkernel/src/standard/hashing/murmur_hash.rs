@@ -8,23 +8,14 @@
 //! The C++ `int theLen` is the slice length here; lengths beyond `INT_MAX` cannot be
 //! expressed natively.
 
+pub mod murmur_hash_utils;
+
 use super::{HashWord, object_bytes};
 use bytemuck::NoUninit;
+use murmur_hash_utils::{little_endian_word, shift_mix};
 
 const MUL_64: u64 = 0xc6a4_a793_5bd1_e995;
 const MUL_32: u32 = 0x5bd1_e995;
-
-/// `MurmurHashUtils::shift_mix`.
-fn shift_mix(value: u64) -> u64 {
-    value ^ (value >> 47)
-}
-
-/// `MurmurHashUtils::load_bytes`: 1..7 bytes little-endian, independent of the platform.
-fn load_tail_64(tail: &[u8]) -> u64 {
-    tail.iter()
-        .rev()
-        .fold(0_u64, |word, &byte| (word << 8) | u64::from(byte))
-}
 
 /// `MurmurHash64A(const void*, int, uint64_t)`: the 64-bit Murmur2 variant.
 ///
@@ -40,7 +31,7 @@ pub fn murmur_hash_64a(key: &[u8], seed: u64) -> u64 {
         hash = (hash ^ mixed.wrapping_mul(MUL_64)).wrapping_mul(MUL_64);
     }
     if !tail.is_empty() {
-        hash = (hash ^ load_tail_64(tail)).wrapping_mul(MUL_64);
+        hash = (hash ^ little_endian_word(tail)).wrapping_mul(MUL_64);
     }
     shift_mix(shift_mix(hash).wrapping_mul(MUL_64))
 }

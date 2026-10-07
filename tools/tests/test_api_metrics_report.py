@@ -45,6 +45,7 @@ def fixture_files(folder: Path) -> dict[str, Path]:
     legacy = [
         {"kind": "gtest_declaration", "toolkit": "TKG2d", "mapping_status": "mapped"},
         {"kind": "gtest_declaration", "toolkit": "TKV3d", "mapping_status": "unmapped"},
+        {"kind": "gtest_declaration", "toolkit": "TKG2d", "mapping_status": "pending_dependency"},
         {"kind": "draw_case_candidate", "toolkit": None},
     ]
     scope = {"decisions": [{"scope": "replaced", "reason": "Vulkan renderer", "toolkits": ["TKV3d"]}]}
@@ -89,6 +90,11 @@ class MetricsReportTest(unittest.TestCase):
         self.assertEqual(view["scope"], "replaced")
         self.assertEqual(view["gtests"], {"mapped": 0, "unmapped": 1})
         self.assertEqual(self.metrics["totals_by_scope"]["port"]["gtests_mapped"], 1)
+
+    def test_pending_dependency_tests_count_as_unmapped(self) -> None:
+        # A test waiting for an unported class has no Rust translation, so it is never mapped.
+        self.assertEqual(self.metrics["toolkits"]["TKG2d"]["gtests"], {"mapped": 1, "unmapped": 1})
+        self.assertEqual(self.metrics["totals_by_scope"]["port"]["gtests_unmapped"], 1)
 
     def test_markdown_lists_each_scope(self) -> None:
         text = metrics_markdown(self.metrics)
