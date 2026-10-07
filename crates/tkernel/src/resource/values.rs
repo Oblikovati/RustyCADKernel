@@ -105,11 +105,7 @@ impl ResourceManager {
     }
 }
 fn no_such_resource(name: &AsciiString) -> Failure {
-    Failure::with_type(
-        "Resource_NoSuchResource",
-        &String::from_utf8_lossy(name.as_bytes()),
-        "",
-    )
+    super::no_such_resource(&String::from_utf8_lossy(name.as_bytes()))
 }
 fn type_mismatch(name: &str, expected: &str) -> Failure {
     let name = name.split('\0').next().unwrap_or_default();

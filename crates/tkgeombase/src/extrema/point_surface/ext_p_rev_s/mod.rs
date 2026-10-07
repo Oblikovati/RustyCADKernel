@@ -12,7 +12,8 @@ use crate::extrema::failures::{extremum_index, not_done, null_object};
 use crate::extrema::pon::POnSurf;
 use crate::extrema::surface_ref::SurfaceRef;
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution;
 use rustycad_tkmath::elclib;
@@ -22,6 +23,8 @@ use std::f64::consts::PI;
 
 /// `Extrema_ExtPRevS`; `ExtPRevS::with_surface(point, &revolution, 1e-9, 1e-9)?.nb_ext()?`.
 pub struct ExtPRevS {
+    // Standard_Transient base: Extrema_ExtPS holds the native object by handle.
+    parent: StandardTransient,
     s: Handle<GeomAdaptorSurfaceOfRevolution>,
     vinf: f64,
     vsup: f64,
@@ -35,9 +38,12 @@ pub struct ExtPRevS {
     points: [POnSurf; 8],
 }
 
+impl_transient!(ExtPRevS, "Extrema_ExtPRevS", StandardTransient, parent);
+
 impl Default for ExtPRevS {
     fn default() -> Self {
         Self {
+            parent: StandardTransient::default(),
             s: Handle::default(),
             vinf: 0.0,
             vsup: 0.0,
