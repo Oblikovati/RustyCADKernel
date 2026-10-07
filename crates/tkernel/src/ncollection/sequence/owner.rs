@@ -26,6 +26,17 @@ impl<T> SequenceNodeOwner<T> {
         }
     }
 }
+impl<T> SequenceNodeOwner<T> {
+    pub(super) fn abandon(self) {
+        let owner = std::mem::ManuallyDrop::new(self);
+        // Native failed sequence construction does not destroy completed nodes. No item
+        // reference escapes this incomplete owner; reset may now reclaim its raw bytes.
+        unsafe { owner.allocator.relinquish_typed_to_raw() };
+        // SAFETY: the suppressed owner will not drop this field again. Its allocation and
+        // payload are intentionally left alive, while the allocator handle is released.
+        drop(unsafe { std::ptr::read(&owner.allocator) });
+    }
+}
 impl<T> Drop for SequenceNodeOwner<T> {
     fn drop(&mut self) {
         // SAFETY: this owner uniquely retains the original typed node allocation.

@@ -2,9 +2,14 @@
 use super::{BaseAllocator, BoundingVolume, DynamicArray, UBTree};
 mod balance;
 mod insertion;
+mod native_insertion;
+mod owned_policy;
 mod payload;
+mod queue;
 use crate::stl::MersenneTwister;
 pub use insertion::BoundingTreeInsertion;
+pub use native_insertion::NativeBoundingTree;
+pub use owned_policy::UBTreeFillerWithSelfAssignment;
 
 /// A pending object with its bound (native `ObjBnd`, public fields `myObj`/`myBnd`).
 pub struct ObjBnd<T, B> {
@@ -54,13 +59,22 @@ impl<'t, T: Clone + Default, B: BoundingVolume, Tree: BoundingTreeInsertion<T, B
     /// Add every queued object to the tree in random order and empty the queue.
     /// Returns the number of objects added; `filler.fill()`.
     pub fn fill(&mut self) -> i32 {
+        self.fill_with_self_assignment(|_| {})
+    }
+    /// Fills with explicit identical-slot assignment, avoiding aliased Clone references.
+    /// Example: `filler.fill_with_self_assignment(|pair| pair.assign_self_with(assign_object, assign_bounds))`.
+    /// Automatic Drop retains the existing default policy; Reset after a caught callback failure.
+    pub fn fill_with_self_assignment(
+        &mut self,
+        mut assign_self: impl FnMut(&mut ObjBnd<T, B>),
+    ) -> i32 {
         let count: i32 = self.pending.length();
         for remaining in (1..=count).rev() {
             let index: i32 = self.draw_index(remaining);
             let item = self.pending.value(index).unwrap();
             self.tree.insert_bound_ref(&item.object, &item.bounds);
             // The drawn slot takes the last live item, shrinking the pool by one.
-            self.assign_pending_slot(index, remaining - 1);
+            self.assign_pending_slot_with(index, remaining - 1, &mut assign_self);
         }
         self.pending.clear(false);
         count
@@ -69,8 +83,14 @@ impl<'t, T: Clone + Default, B: BoundingVolume, Tree: BoundingTreeInsertion<T, B
     pub fn reset(&mut self) {
         self.pending.clear(false);
     }
-    fn assign_pending_slot(&mut self, selected: i32, last: i32) {
+    fn assign_pending_slot_with(
+        &mut self,
+        selected: i32,
+        last: i32,
+        assign_self: &mut impl FnMut(&mut ObjBnd<T, B>),
+    ) {
         if selected == last {
+            assign_self(self.pending.change_value(selected).unwrap());
             return;
         }
         let mut entries = self.pending.iter_mut();

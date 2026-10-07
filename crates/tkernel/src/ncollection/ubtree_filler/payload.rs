@@ -5,6 +5,17 @@ impl<T, B> ObjBnd<T, B> {
     pub fn new(object: T, bounds: B) -> Self {
         Self { object, bounds }
     }
+    /// Executes native self-assignment phases without borrowing the same payload twice.
+    /// Object assignment precedes bounds assignment; a failure skips the remaining phase.
+    /// Example: `pair.assign_self_with(|object| object.assign_self(), |bounds| bounds.assign_self())`.
+    pub fn assign_self_with(
+        &mut self,
+        assign_object: impl FnOnce(&mut T),
+        assign_bounds: impl FnOnce(&mut B),
+    ) {
+        assign_object(&mut self.object);
+        assign_bounds(&mut self.bounds);
+    }
 }
 impl<T: Clone, B: Clone> ObjBnd<T, B> {
     /// Copies the object before its bounds, as native ObjBnd does; `ObjBnd::new_ref(&1, &bounds)`.

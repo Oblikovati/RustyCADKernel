@@ -50,7 +50,7 @@ impl<T> LinearVector<T> {
         self.elements = replacement.elements;
     }
 
-    fn relocate_unpublished_into(
+    pub(super) fn relocate_unpublished_into(
         &mut self,
         destination: &mut Self,
         mut relocate: impl FnMut(&mut T) -> T,

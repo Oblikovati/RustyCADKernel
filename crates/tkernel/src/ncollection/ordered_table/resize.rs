@@ -19,15 +19,7 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
         self.bucket_count = plan.bucket_count();
         self.base.end_resize(plan);
     }
-    fn restore_bucket_links(links: &[(*mut MapLinkNode, *mut MapLinkNode)]) {
-        // SAFETY: every snapshot node remains owned; restore only its bucket pointer.
-        for &(node, next) in links {
-            unsafe {
-                *(*node).next_mut() = next;
-            }
-        }
-    }
-    fn original_links(&self) -> Vec<(*mut MapLinkNode, *mut MapLinkNode)> {
+    pub(super) fn original_links(&self) -> Vec<(*mut MapLinkNode, *mut MapLinkNode)> {
         let mut links = Vec::with_capacity(self.count);
         for &head in self.base.bucket_slots() {
             let mut node = head;
@@ -40,7 +32,7 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
         }
         links
     }
-    fn relink(
+    pub(super) fn relink(
         &self,
         links: &[(*mut MapLinkNode, *mut MapLinkNode)],
         plan: &mut crate::ncollection::BaseMapResize,
@@ -53,6 +45,17 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
                 *(*node).next_mut() = *head;
             }
             *head = node;
+        }
+    }
+}
+
+impl<K, V, H, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
+    pub(super) fn restore_bucket_links(links: &[(*mut MapLinkNode, *mut MapLinkNode)]) {
+        // SAFETY: every snapshot node remains owned; restore only its bucket pointer.
+        for &(node, next) in links {
+            unsafe {
+                *(*node).next_mut() = next;
+            }
         }
     }
 }
