@@ -1,9 +1,10 @@
-# OCAF design notes (TKCDF, TKLCAF)
+# OCAF design notes (TKCDF, TKLCAF, TKCAF)
 
-This note fixes how the OCAF base toolkits map to Rust: TKCDF (`crates/tkcdf`,
+This note fixes how the OCAF toolkits map to Rust: TKCDF (`crates/tkcdf`,
 `rustycad-tkcdf`: packages CDM, PCDM, CDF, LDOM) and TKLCAF (`crates/tklcaf`,
-`rustycad-tklcaf`: packages TDF, TDataStd, TFunction, TDocStd). Both depend only on
-TKernel. The rules of [geom-design.md](geom-design.md) sections 1 to 4 (abstract class as
+`rustycad-tklcaf`: packages TDF, TDataStd, TFunction, TDocStd), which depend only on
+TKernel, and TKCAF (`crates/tkcaf`, `rustycad-tkcaf`: packages TNaming, TDataXtd, AppStd),
+which adds the modeling toolkits (section 10). The rules of [geom-design.md](geom-design.md) sections 1 to 4 (abstract class as
 trait, `Handle<dyn Trait>`, `SharedState`, exceptions as `Failure`) apply; this note covers
 what they do not. Code comments and ledger notes cite it as "ocaf-design.md section N".
 
@@ -219,3 +220,52 @@ other code (the QABugs DRAW commands) parses XML with it.
   record `>` after a CDATA section and the attribute search of `getAttributeNode` that
   starts after the first attribute; `tests/ldom_native_oracle.rs` compares the port with
   the output of a native program.
+
+## 10. TNaming: the evolution graph
+
+TNaming records how shapes evolve. A `TNaming_NamedShape` holds a list of `TNaming_Node`s,
+one per (old shape, new shape) pair; the root attribute `TNaming_UsedShapes` maps each
+shape (`TopTools_ShapeMapHasher`, so orientation is ignored) to a `TNaming_RefShape`, the
+head of the chain of nodes that use that shape. Natively all of this is raw pointers with
+explicit `new`/`delete`.
+
+- **Nodes and ref shapes** are `Arc<TNamingNode>` and `Arc<TNamingRefShape>` with their
+  fields in one `SharedState`; a native pointer is `Option<Arc<_>>` (`TNamingNodePtr`,
+  `TNamingRefShapePtr`) and pointer equality is `Arc::ptr_eq` (two null pointers are
+  equal, as natively). The chain links (`nextSameAttribute`, `nextSameOld`,
+  `nextSameNew`, `myOld`, `myNew`, `FirstUse`) are strong, so a walk never meets a freed
+  node. The native `delete` of a node or ref shape is `release`, which drops every link and
+  so breaks the reference cycles (a ref shape's first use points back to it). `myAtt` is a
+  `WeakHandle<TNamingNamedShape>`: `BackupCopy` and `Restore` move the nodes from one
+  attribute to the other and re-point it, as natively.
+- **Clear on destruction.** `~TNaming_NamedShape` calls `Clear`, which unlinks the nodes
+  from the shape chains through the root's map. The Rust `Drop` does the same. An attribute
+  with a null label (a removed attribute, a backup after `RemoveBackup`, a label freed by
+  `TDF_Data::Destroy`) is left alone, as natively. `TDF_LabelNode::Destroy` therefore drops
+  the old node state after releasing the node's lock, so that the destructor sees the reset
+  node instead of deadlocking on it.
+- **The map** is a `DataMap<Shape, Arc<TNamingRefShape>, ShapeMapHasher>` in the
+  attribute's `SharedState`; `Map()` returns its write guard, which a caller drops before it
+  calls back into the framework. Native quirks kept: `Delete` binds a new null-shape ref
+  shape each time (the previous one stays reachable from its nodes only), and `RemoveNode`
+  unbinds the key of the shape, whichever ref shape is bound to it.
+- **Iterators.** `TNaming_Iterator`, `TNaming_NewShapeIterator`, `TNaming_OldShapeIterator`
+  and `TNaming_SameShapeIterator` keep the current node. The constructors from a label whose
+  root has no `TNaming_UsedShapes` leave the native iterator uninitialized; the port starts
+  at the end. The copy constructors of the new- and old-shape iterators descend (or ascend)
+  to the evolutions of the current shape; they are `from_new_shape_iterator` and
+  `from_old_shape_iterator`, and the structs do not implement `Clone`. `Next` and the
+  accessors at the end are `Standard_NoMoreObject`/`Standard_NoSuchObject` errors (some are
+  crashes natively), and a node whose attribute is gone is `Standard_NullObject`.
+- **Overloads.** `TNaming_Builder::Generated(new)` is `generated`, `Generated(old, new)` is
+  `generated_from`; the iterator constructors are `new` (a named shape), `from_label`,
+  `from_label_in_transaction`, `from_used_shapes`, `from_used_shapes_in_transaction` and
+  `from_iterator`. `TNaming_NamedShape::Get` is an inherent method that a `Handle` hides
+  (`Handle::get`); call it as `TNamingNamedShape::get(&named)`.
+- **DumpJson** of a node or a ref shape with a negative depth recurses without end natively
+  (a ref shape's first use points back to it) and overflows the stack; the port returns an
+  error for a graph link dumped at a negative depth.
+- **TNaming_Name** is a value (`Clone`); `TNaming_Naming::GetName` returns a copy and
+  `ChangeName` the write guard of the name. The native constructor leaves the shape type and
+  the orientation uninitialized; the OCCT allocator clears memory, so they read
+  `TopAbs_COMPOUND` and `TopAbs_FORWARD`, which the port uses.

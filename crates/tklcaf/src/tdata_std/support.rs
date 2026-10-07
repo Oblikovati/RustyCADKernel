@@ -7,7 +7,7 @@ use rustycad_tkernel::standard::{Failure, Guid, Handle, RuntimeTyped, SharedStat
 
 /// The native `SetAttr`: the attribute of `id` on the label, created with `make` (and given
 /// the ID through `SetID` when `with_id`) and added when absent.
-pub(crate) fn find_or_add<T>(
+pub fn find_or_add<T>(
     label: &TdfLabel,
     id: &Guid,
     with_id: bool,
@@ -29,7 +29,7 @@ where
 }
 
 /// `SetID(guid)` of the attributes with a user ID: backed up when it changes.
-pub(crate) fn set_user_id<A: TdfAttribute + ?Sized>(
+pub fn set_user_id<A: TdfAttribute + ?Sized>(
     attribute: &A,
     id: &SharedState<Guid>,
     guid: &Guid,
@@ -38,7 +38,7 @@ pub(crate) fn set_user_id<A: TdfAttribute + ?Sized>(
 }
 
 /// `SetID()` of the attributes with a user ID: back up, then the default ID.
-pub(crate) fn reset_user_id<A: TdfAttribute + ?Sized>(
+pub fn reset_user_id<A: TdfAttribute + ?Sized>(
     attribute: &A,
     id: &SharedState<Guid>,
     default: Guid,
@@ -50,7 +50,7 @@ pub(crate) fn reset_user_id<A: TdfAttribute + ?Sized>(
 
 /// The `occ::down_cast<T>(with)` of `Restore` and `Paste`; `Standard_NullObject` when the
 /// attribute is not a `T` (a null dereference natively).
-pub(crate) fn cast_attribute<T: RuntimeTyped + ?Sized>(
+pub fn cast_attribute<T: RuntimeTyped + ?Sized>(
     attribute: &Handle<dyn TdfAttribute>,
     who: &str,
 ) -> Result<Handle<T>, Failure> {
@@ -60,7 +60,7 @@ pub(crate) fn cast_attribute<T: RuntimeTyped + ?Sized>(
 }
 
 /// Assigns a value through a backup unless it is unchanged (the native OCC2932 pattern).
-pub(crate) fn set_backed_up<A: TdfAttribute + ?Sized, V: PartialEq + Clone>(
+pub fn set_backed_up<A: TdfAttribute + ?Sized, V: PartialEq + Clone>(
     attribute: &A,
     slot: &SharedState<V>,
     value: &V,
@@ -74,6 +74,6 @@ pub(crate) fn set_backed_up<A: TdfAttribute + ?Sized, V: PartialEq + Clone>(
 }
 
 /// The `this` pointer of a native `Dump` (`anOS << this`).
-pub(crate) fn address_of<T>(value: &T) -> String {
+pub fn address_of<T>(value: &T) -> String {
     format!("{:p}", std::ptr::from_ref(value))
 }
