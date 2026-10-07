@@ -164968,7 +164968,6 @@
       "upstream_id": "IntPolyh_MaillageAffinage::GetFinTE(int) const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage",
       "status": "excluded",
       "notes": "Excluded: declared in IntPolyh_MaillageAffinage.hxx but defined nowhere at the pinned commit (a call fails to link); there is no behaviour to port."
     },
@@ -164976,7 +164975,6 @@
       "upstream_id": "IntPolyh_MaillageAffinage::GetFinTT(int) const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_MaillageAffinage.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhMaillageAffinage",
       "status": "excluded",
       "notes": "Excluded: declared in IntPolyh_MaillageAffinage.hxx but defined nowhere at the pinned commit (a call fails to link); there is no behaviour to port."
     },
@@ -169096,7 +169094,6 @@
       "upstream_id": "IntPatch_RLine::SetParamOnS1(double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_RLine.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchRLine::set_param_on_s1",
       "status": "excluded",
       "notes": "Declared in IntPatch_RLine.hxx but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -169104,7 +169101,6 @@
       "upstream_id": "IntPatch_RLine::SetParamOnS2(double&,double&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_RLine.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchRLine::set_param_on_s2",
       "status": "excluded",
       "notes": "Declared in IntPatch_RLine.hxx but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -171328,9 +171324,9 @@
       "upstream_id": "GeomFill_Darboux::IsOnlyBy3dCurve() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Darboux.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillDarboux::is_only_by_3d_curve",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedronLaw::is_only_by_3d_curve",
       "status": "implemented",
-      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests). The native override has the same body as the base member (a constant result, or the base member myGuide), so the struct does not override the trait member and the trait's provided method is the implementation."
     },
     {
       "upstream_id": "GeomFill_Darboux::DEFINE_STANDARD_RTTIEXT(GeomFill_Darboux,GeomFill_TrihedronLaw)",
@@ -171576,9 +171572,9 @@
       "upstream_id": "GeomFill_EvolvedSection::BSplineSurface() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_EvolvedSection.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillEvolvedSection::bspline_surface",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillSectionLaw::bspline_surface",
       "status": "implemented",
-      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests). The native override has the same body as the base member (a constant result, or the base member myGuide), so the struct does not override the trait member and the trait's provided method is the implementation."
     },
     {
       "upstream_id": "GeomFill_EvolvedSection::SectionShape(int&,int&,int&) const",
@@ -172056,7 +172052,6 @@
       "upstream_id": "GeomFill_FunctionGuide::Deriv2T(const gp_XYZ&,const gp_XYZ&,math_Vector&,math_Vector&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_FunctionGuide.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFunctionGuide::deriv2_t",
       "status": "excluded",
       "notes": "Declared in GeomFill_FunctionGuide.hxx but defined nowhere (its body is commented out in the .cxx); a call does not link natively."
     },
@@ -172088,9 +172083,9 @@
       "upstream_id": "GeomFill_GuideTrihedronAC::Guide() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_GuideTrihedronAC.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGuideTrihedronAC::guide",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedronWithGuide::guide",
       "status": "implemented",
-      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests). The native override has the same body as the base member (a constant result, or the base member myGuide), so the struct does not override the trait member and the trait's provided method is the implementation."
     },
     {
       "upstream_id": "GeomFill_GuideTrihedronAC::D0(double,gp_Vec&,gp_Vec&,gp_Vec&)",
@@ -172152,17 +172147,17 @@
       "upstream_id": "GeomFill_GuideTrihedronAC::IsConstant() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_GuideTrihedronAC.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGuideTrihedronAC::is_constant",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedronLaw::is_constant",
       "status": "implemented",
-      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests). The native override has the same body as the base member (a constant result, or the base member myGuide), so the struct does not override the trait member and the trait's provided method is the implementation."
     },
     {
       "upstream_id": "GeomFill_GuideTrihedronAC::IsOnlyBy3dCurve() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_GuideTrihedronAC.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGuideTrihedronAC::is_only_by_3d_curve",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedronLaw::is_only_by_3d_curve",
       "status": "implemented",
-      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests). The native override has the same body as the base member (a constant result, or the base member myGuide), so the struct does not override the trait member and the trait's provided method is the implementation."
     },
     {
       "upstream_id": "GeomFill_GuideTrihedronAC::Origine(double,double)",
@@ -172216,9 +172211,9 @@
       "upstream_id": "GeomFill_GuideTrihedronPlan::Guide() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_GuideTrihedronPlan.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGuideTrihedronPlan::guide",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedronWithGuide::guide",
       "status": "implemented",
-      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests). The native override has the same body as the base member (a constant result, or the base member myGuide), so the struct does not override the trait member and the trait's provided method is the implementation."
     },
     {
       "upstream_id": "GeomFill_GuideTrihedronPlan::D0(double,gp_Vec&,gp_Vec&,gp_Vec&)",
@@ -172288,9 +172283,9 @@
       "upstream_id": "GeomFill_GuideTrihedronPlan::IsOnlyBy3dCurve() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_GuideTrihedronPlan.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGuideTrihedronPlan::is_only_by_3d_curve",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedronLaw::is_only_by_3d_curve",
       "status": "implemented",
-      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests). The native override has the same body as the base member (a constant result, or the base member myGuide), so the struct does not override the trait member and the trait's provided method is the implementation."
     },
     {
       "upstream_id": "GeomFill_GuideTrihedronPlan::Origine(double,double)",
@@ -172664,25 +172659,25 @@
       "upstream_id": "GeomFill_LocationGuide::HasFirstRestriction() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationGuide.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillLocationGuide::has_first_restriction",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillLocationLaw::has_first_restriction",
       "status": "implemented",
-      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests). The native override has the same body as the base member (a constant result, or the base member myGuide), so the struct does not override the trait member and the trait's provided method is the implementation."
     },
     {
       "upstream_id": "GeomFill_LocationGuide::HasLastRestriction() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationGuide.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillLocationGuide::has_last_restriction",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillLocationLaw::has_last_restriction",
       "status": "implemented",
-      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests). The native override has the same body as the base member (a constant result, or the base member myGuide), so the struct does not override the trait member and the trait's provided method is the implementation."
     },
     {
       "upstream_id": "GeomFill_LocationGuide::TraceNumber() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationGuide.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillLocationGuide::trace_number",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillLocationLaw::trace_number",
       "status": "implemented",
-      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+      "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests). The native override has the same body as the base member (a constant result, or the base member myGuide), so the struct does not override the trait member and the trait's provided method is the implementation."
     },
     {
       "upstream_id": "GeomFill_LocationGuide::ErrorStatus() const",
@@ -174408,7 +174403,6 @@
       "upstream_id": "GeomFill_SweepSectionGenerator(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SweepSectionGenerator.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillSweepSectionGenerator::new",
       "status": "excluded",
       "notes": "Declared in GeomFill_SweepSectionGenerator.hxx but defined nowhere; a call does not link natively."
     },
@@ -174448,7 +174442,6 @@
       "upstream_id": "GeomFill_SweepSectionGenerator::Init(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SweepSectionGenerator.hxx",
-      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillSweepSectionGenerator::init",
       "status": "excluded",
       "notes": "Declared in GeomFill_SweepSectionGenerator.hxx but defined nowhere; a call does not link natively."
     },
@@ -174944,7 +174937,6 @@
       "upstream_id": "IntPatch_BVHTraversal::~IntPatch_BVHTraversal()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchBVHTraversal::~int_patch_bvh_traversal",
       "status": "excluded",
       "notes": "C++ destructor: Rust drops the object; nothing to port."
     },
@@ -175400,7 +175392,6 @@
       "upstream_id": "IntPatch_Polyhedron::~IntPatch_Polyhedron()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::~int_patch_polyhedron",
       "status": "excluded",
       "notes": "C++ destructor calling Destroy(): Rust drops the point arrays with the polyhedron; nothing to port."
     },
@@ -175408,7 +175399,6 @@
       "upstream_id": "IntPatch_Polyhedron::Perform(const occ::handle<Adaptor3d_Surface>&,int,int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::perform",
       "status": "excluded",
       "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -175424,7 +175414,6 @@
       "upstream_id": "IntPatch_Polyhedron::UMinSingularity(bool)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::u_min_singularity",
       "status": "excluded",
       "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -175432,7 +175421,6 @@
       "upstream_id": "IntPatch_Polyhedron::UMaxSingularity(bool)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::u_max_singularity",
       "status": "excluded",
       "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -175440,7 +175428,6 @@
       "upstream_id": "IntPatch_Polyhedron::VMinSingularity(bool)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::v_min_singularity",
       "status": "excluded",
       "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -175448,7 +175435,6 @@
       "upstream_id": "IntPatch_Polyhedron::VMaxSingularity(bool)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::v_max_singularity",
       "status": "excluded",
       "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -175560,7 +175546,6 @@
       "upstream_id": "IntPatch_Polyhedron::HasUMinSingularity() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::has_u_min_singularity",
       "status": "excluded",
       "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -175568,7 +175553,6 @@
       "upstream_id": "IntPatch_Polyhedron::HasUMaxSingularity() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::has_u_max_singularity",
       "status": "excluded",
       "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -175576,7 +175560,6 @@
       "upstream_id": "IntPatch_Polyhedron::HasVMinSingularity() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::has_v_min_singularity",
       "status": "excluded",
       "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -175584,7 +175567,6 @@
       "upstream_id": "IntPatch_Polyhedron::HasVMaxSingularity() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedron::has_v_max_singularity",
       "status": "excluded",
       "notes": "Declared in the header but defined nowhere in OCCT (a call does not link); nothing to port."
     },
@@ -175640,7 +175622,6 @@
       "upstream_id": "IntPatch_PolyhedronBVH::~IntPatch_PolyhedronBVH()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyhedronBVH.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH::~int_patch_polyhedron_bvh",
       "status": "excluded",
       "notes": "C++ destructor: Rust drops the object; nothing to port."
     },
@@ -175776,7 +175757,6 @@
       "upstream_id": "IntPatch_PrmPrmIntersection_T3Bits::~IntPatch_PrmPrmIntersection_T3Bits()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PrmPrmIntersection_T3Bits.hxx",
-      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPrmPrmIntersectionT3Bits::~int_patch_prm_prm_intersection_t3_bits",
       "status": "excluded",
       "notes": "C++ destructor: Rust drops the object; nothing to port."
     },
@@ -184232,7 +184212,6 @@
       "upstream_id": "GeomInt_ResConstraintOfMyGradientOfTheComputeLineBezierOfWLApprox::Error() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ResConstraintOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
-      "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: declared in the pinned header but defined nowhere in OCCT 3d097a0 (no inline body or .cxx/.gxx definition), so any native call fails to link; there is no behaviour to port."
     },
@@ -184288,7 +184267,6 @@
       "upstream_id": "GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox::Error() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
-      "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: declared in the pinned header but defined nowhere in OCCT 3d097a0 (no inline body or .cxx/.gxx definition), so any native call fails to link; there is no behaviour to port."
     },
