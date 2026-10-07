@@ -77,8 +77,9 @@ pub trait Drawable3D: Any {
     /// `DynamicType()->Name()`: the C++ class name (`Draw_Number`, ...).
     fn type_name(&self) -> &'static str;
 
-    /// `DrawOn`: draws the object on `display`.
-    fn draw_on(&self, display: &mut DrawDisplay<'_>);
+    /// `DrawOn`: draws the object on `display`. The C++ may throw while it evaluates
+    /// geometry; the failure aborts the drawing and reaches the command.
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure>;
 
     /// `PickReject`: true when the pick point `(x, y)` with tolerance `prec` is outside
     /// the screen bounds.

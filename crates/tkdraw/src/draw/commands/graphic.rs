@@ -63,7 +63,7 @@ pub(super) fn zoom(
         for id in views_of_kind(session, a[0].eq_ignore_ascii_case("2dzoom")) {
             session.viewer().set_zoom(id, z);
             set_title(session, id);
-            session.viewer().repaint_view(id);
+            session.viewer().repaint_view(id)?;
         }
         return Ok(0);
     }
@@ -75,7 +75,7 @@ pub(super) fn zoom(
     };
     let z = session.atof(a[2]);
     session.viewer().set_zoom(id, z);
-    session.viewer().repaint_view(id);
+    session.viewer().repaint_view(id)?;
     set_title(session, id);
     Ok(0)
 }
@@ -96,7 +96,7 @@ pub(super) fn view(
         return Ok(1);
     }
     if a.len() == 4 {
-        session.viewer().make_view_on(id, a[2], a[3]);
+        session.viewer().make_view_on(id, a[2], a[3])?;
     } else {
         let previous = session.viewer().pos_size(id).unwrap_or((0, 0, 500, 500));
         let field =
@@ -107,7 +107,7 @@ pub(super) fn view(
             field(5, previous.2),
             field(6, previous.3),
         );
-        session.viewer().make_view(id, a[2], x, y, w, h);
+        session.viewer().make_view(id, a[2], x, y, w, h)?;
     }
     if !session.viewer().has_view(id) {
         di.append("View creation failed\n")?;
@@ -146,20 +146,20 @@ pub(super) fn fit(
         let Some(id) = view_id(session, a[1]) else {
             return Ok(1);
         };
-        session.viewer().fit_view(id, FRAME as i32);
-        session.viewer().repaint_view(id);
+        session.viewer().fit_view(id, FRAME as i32)?;
+        session.viewer().repaint_view(id)?;
         set_title(session, id);
         return Ok(0);
     }
     let views = views_of_kind(session, a[0].eq_ignore_ascii_case("2dfit"));
     let mut zoom = f64::MAX;
     for id in &views {
-        session.viewer().fit_view(*id, FRAME as i32);
+        session.viewer().fit_view(*id, FRAME as i32)?;
         zoom = zoom.min(session.viewer().zoom(*id));
     }
     for id in views {
         session.viewer().set_zoom(id, zoom);
-        session.viewer().repaint_view(id);
+        session.viewer().repaint_view(id)?;
         set_title(session, id);
     }
     Ok(0)
@@ -198,7 +198,7 @@ pub(super) fn wzoom(
     let Some((id, x1, y1, x2, y2)) = rectangle else {
         return Ok(if a.len() == 1 { 0 } else { 1 });
     };
-    zoom_on_rectangle(session, id, (x1, y1, x2, y2));
+    zoom_on_rectangle(session, id, (x1, y1, x2, y2))?;
     Ok(0)
 }
 
@@ -249,12 +249,12 @@ fn zoom_on_rectangle(
     session: &DrawSession,
     id: i32,
     (mut x1, mut y1, x2, y2): (i32, i32, i32, i32),
-) {
+) -> Result<(), Failure> {
     let Some((_, _, w, h)) = session.viewer().pos_size(id) else {
-        return;
+        return Ok(());
     };
     if x1 == x2 || y1 == y2 {
-        return;
+        return Ok(());
     }
     let mut ratio = (x2 - x1).abs() as f64 / w as f64;
     let ratio_y = (y2 - y1).abs() as f64 / h as f64;
@@ -268,8 +268,9 @@ fn zoom_on_rectangle(
     let zoom = ratio * session.viewer().zoom(id);
     session.viewer().set_zoom(id, zoom);
     session.viewer().set_pan(id, -x1, -y1);
-    session.viewer().repaint_view(id);
+    session.viewer().repaint_view(id)?;
     set_title(session, id);
+    Ok(())
 }
 
 /// One `Select` of the rubber band; `(view, x, y, button)`, zeros in batch mode.

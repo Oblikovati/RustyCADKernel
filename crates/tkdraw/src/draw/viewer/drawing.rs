@@ -8,6 +8,7 @@ use crate::draw::display::{
 use crate::draw::drawable::DrawableHandle;
 use crate::draw::ostream::DrawOStream;
 use crate::draw::view::DrawView;
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::Point3;
 use std::rc::Rc;
 
@@ -79,27 +80,28 @@ impl DrawViewer {
     }
 
     /// `operator<<`: displays `drawable` and draws it in every view.
-    pub fn display(&mut self, drawable: &DrawableHandle) {
+    pub fn display(&mut self, drawable: &DrawableHandle) -> Result<(), Failure> {
         if self.is_batch() {
-            return;
+            return Ok(());
         }
         self.add_drawable(drawable);
         for id in 0..MAXVIEW as i32 {
-            self.draw_on_view(id, drawable);
+            self.draw_on_view(id, drawable)?;
         }
+        Ok(())
     }
 
     /// `DrawOnView`: draws `drawable` in view `id` when their dimensions match, and in
     /// draw mode records the screen bounds it covered.
-    pub fn draw_on_view(&mut self, id: i32, drawable: &DrawableHandle) {
+    pub fn draw_on_view(&mut self, id: i32, drawable: &DrawableHandle) -> Result<(), Failure> {
         if self.is_batch() {
-            return;
+            return Ok(());
         }
         let Some(Some(view)) = usize::try_from(id)
             .ok()
             .and_then(|index| self.views.get_mut(index))
         else {
-            return;
+            return Ok(());
         };
         // The display is made (switching the window to white, copy mode) before the
         // dimension test, as upstream; the bounds and frame resets do not depend on it.
@@ -108,72 +110,84 @@ impl DrawViewer {
         let is_2d = view.is_2d();
         let mut display = display_on(id, view, &mut self.state);
         if drawable.is_3d() == is_2d {
-            return;
+            return Ok(());
         }
-        drawable.draw_on(&mut display);
+        drawable.draw_on(&mut display)?;
         display.flush();
         if self.state.mode == DrawingMode::Draw {
             let bounds = self.state.bounds;
             drawable.set_bounds(bounds.x_min, bounds.x_max, bounds.y_min, bounds.y_max);
         }
+        Ok(())
     }
 
     /// `HighlightOnView`: draws `drawable` in `color`.
-    pub fn highlight_on_view(&mut self, id: i32, drawable: &DrawableHandle, color: DrawColorKind) {
+    ///
+    /// A failure while drawing leaves the highlight on, as the C++ exception does.
+    pub fn highlight_on_view(
+        &mut self,
+        id: i32,
+        drawable: &DrawableHandle,
+        color: DrawColorKind,
+    ) -> Result<(), Failure> {
         if self.is_batch() {
-            return;
+            return Ok(());
         }
         self.state.highlight = Some(color);
-        self.draw_on_view(id, drawable);
+        self.draw_on_view(id, drawable)?;
         self.state.highlight = None;
+        Ok(())
     }
 
     /// `RepaintView`: clears view `id` and draws every displayed object.
-    pub fn repaint_view(&mut self, id: i32) {
+    pub fn repaint_view(&mut self, id: i32) -> Result<(), Failure> {
         if self.active_view(id).is_none() {
-            return;
+            return Ok(());
         }
         self.clear_view(id);
         for drawable in self.drawables.clone() {
-            self.draw_on_view(id, &drawable);
+            self.draw_on_view(id, &drawable)?;
         }
+        Ok(())
     }
 
     /// `Draw_View::WExpose`: forgets the cached frame of view `id` and repaints it (the
     /// window system calls it when the window is exposed).
-    pub fn expose_view(&mut self, id: i32) {
+    pub fn expose_view(&mut self, id: i32) -> Result<(), Failure> {
         if let Some(view) = self.view_mut(id) {
             view.reset_frame();
         }
-        self.repaint_view(id);
+        self.repaint_view(id)
     }
 
     /// `RepaintAll`.
-    pub fn repaint_all(&mut self) {
+    pub fn repaint_all(&mut self) -> Result<(), Failure> {
         for id in self.view_ids() {
-            self.repaint_view(id);
+            self.repaint_view(id)?;
         }
+        Ok(())
     }
 
     /// `Repaint2D`: repaints the 2D views.
-    pub fn repaint_2d(&mut self) {
-        self.repaint_where(true);
+    pub fn repaint_2d(&mut self) -> Result<(), Failure> {
+        self.repaint_where(true)
     }
 
     /// `Repaint3D`: repaints the 3D views.
-    pub fn repaint_3d(&mut self) {
-        self.repaint_where(false);
+    pub fn repaint_3d(&mut self) -> Result<(), Failure> {
+        self.repaint_where(false)
     }
 
-    fn repaint_where(&mut self, is_2d: bool) {
+    fn repaint_where(&mut self, is_2d: bool) -> Result<(), Failure> {
         if self.is_batch() {
-            return;
+            return Ok(());
         }
         for id in self.view_ids() {
             if self.view(id).is_some_and(|view| view.is_2d() == is_2d) {
-                self.repaint_view(id);
+                self.repaint_view(id)?;
             }
         }
+        Ok(())
     }
 
     /// `Clear`: hides every displayed object and clears every view.
@@ -240,39 +254,45 @@ impl DrawViewer {
 
     /// `PostScriptView`: draws view `id` as PostScript into `output`, mapping the view
     /// rectangle `view` (`[xmin, ymin, xmax, ymax]`) onto the paper rectangle `paper`.
+    ///
+    /// When an object fails to draw, the failure is returned after the output stream
+    /// and the draw mode are restored (the C++ exception leaves the PostScript mode on
+    /// and the global stream pointing at the caller's stream).
     pub fn postscript_view(
         &mut self,
         id: i32,
         view: [i32; 4],
         paper: [i32; 4],
         output: &mut DrawOStream,
-    ) {
+    ) -> Result<(), Failure> {
         if self.active_view(id).is_none() {
-            return;
+            return Ok(());
         }
         let ps = &mut self.state.postscript;
         (ps.vx, ps.vy, ps.px, ps.py) = (view[0], view[1], paper[0], paper[1]);
         ps.kx = (paper[2] - paper[0]) as f64 / (view[2] - view[0]) as f64;
         ps.ky = (paper[3] - paper[1]) as f64 / (view[3] - view[1]) as f64;
         if self.drawables.is_empty() {
-            return;
+            return Ok(());
         }
         std::mem::swap(&mut self.state.postscript.stream, output);
         self.state.mode = DrawingMode::PostScript;
-        self.draw_postscript(id);
+        let drawn = self.draw_postscript(id);
         std::mem::swap(&mut self.state.postscript.stream, output);
-        output.put_str("stroke\n");
         self.state.mode = DrawingMode::Draw;
+        drawn?;
+        output.put_str("stroke\n");
+        Ok(())
     }
 
     /// Draws every object of the view's dimension on one display.
-    fn draw_postscript(&mut self, id: i32) {
+    fn draw_postscript(&mut self, id: i32) -> Result<(), Failure> {
         let drawables = self.drawables.clone();
         let Some(Some(view)) = usize::try_from(id)
             .ok()
             .and_then(|index| self.views.get_mut(index))
         else {
-            return;
+            return Ok(());
         };
         let is_2d = view.is_2d();
         let mut display = display_on(id, view, &mut self.state);
@@ -280,42 +300,44 @@ impl DrawViewer {
             .iter()
             .filter(|drawable| drawable.is_3d() != is_2d)
         {
-            drawable.draw_on(&mut display);
+            drawable.draw_on(&mut display)?;
         }
+        Ok(())
     }
 
     /// `FitView`: zooms and pans view `id` so that the objects of its dimension fill
     /// the window less `frame` pixels on each side.
-    pub fn fit_view(&mut self, id: i32, frame: i32) {
+    pub fn fit_view(&mut self, id: i32, frame: i32) -> Result<(), Failure> {
         let Some(is_2d) = self.active_view(id).map(DrawView::is_2d) else {
-            return;
+            return Ok(());
         };
         // The count starts at view 1 upstream, so view 0 is never counted.
         let same_kind = (1..MAXVIEW as i32)
             .filter(|i| self.view(*i).is_some_and(|v| v.is_2d() == is_2d))
             .count();
         let Some((_, _, width, height)) = self.pos_size(id) else {
-            return;
+            return Ok(());
         };
         if self.drawables.is_empty() {
-            return;
+            return Ok(());
         }
-        let extent = self.extent_of_kind(id, is_2d, same_kind == 1);
+        let extent = self.extent_of_kind(id, is_2d, same_kind == 1)?;
         if let Some(view) = self.view_mut(id) {
             fit_extent(view, extent, (width, height), frame);
         }
+        Ok(())
     }
 
     /// The union of the screen bounds of the objects of one dimension (redrawn first
     /// when other views of that dimension exist, since their bounds may be stale).
-    fn extent_of_kind(&mut self, id: i32, is_2d: bool, only: bool) -> [f64; 4] {
+    fn extent_of_kind(&mut self, id: i32, is_2d: bool, only: bool) -> Result<[f64; 4], Failure> {
         let mut extent = [DRAWINFINITE, -DRAWINFINITE, DRAWINFINITE, -DRAWINFINITE];
         for drawable in self.drawables.clone() {
             if drawable.is_3d() == is_2d {
                 continue;
             }
             if !only {
-                self.draw_on_view(id, &drawable);
+                self.draw_on_view(id, &drawable)?;
             }
             let [u1, u2, v1, v2] = drawable.bounds();
             extent = [
@@ -325,7 +347,7 @@ impl DrawViewer {
                 extent[3].max_c(v2),
             ];
         }
-        extent
+        Ok(extent)
     }
 }
 

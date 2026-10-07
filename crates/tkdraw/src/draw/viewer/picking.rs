@@ -4,6 +4,7 @@ use super::{DrawViewer, MAXVIEW};
 use crate::draw::display::{DisplaySurface, DrawingMode, PickState};
 use crate::draw::drawable::DrawableHandle;
 use crate::draw::window::{BUTTON_PRESS, MOTION_NOTIFY};
+use rustycad_tkernel::standard::Failure;
 
 /// The result of `Select`: view, pointer position in view coordinates, button.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
@@ -100,7 +101,8 @@ impl DrawViewer {
     /// `Pick`: the 1-based index and the object of the first displayed object after
     /// `first` drawn within `precision` pixels of `(x, y)` in view `id`; `(0, None)`
     /// when none. When the view is the only one of its dimension, objects whose stored
-    /// bounds miss the point are skipped without drawing.
+    /// bounds miss the point are skipped without drawing. A failure while drawing ends
+    /// the pick mode and is returned.
     pub fn pick(
         &mut self,
         id: i32,
@@ -108,9 +110,9 @@ impl DrawViewer {
         y: i32,
         precision: i32,
         first: usize,
-    ) -> (usize, Option<DrawableHandle>) {
+    ) -> Result<(usize, Option<DrawableHandle>), Failure> {
         let Some(is_2d) = self.active_view(id).map(|view| view.is_2d()) else {
-            return (0, None);
+            return Ok((0, None));
         };
         let same_kind = (0..MAXVIEW as i32)
             .filter(|i| self.view(*i).is_some_and(|v| v.is_2d() == is_2d))
@@ -126,14 +128,14 @@ impl DrawViewer {
         let hit = self.first_hit(id, first, same_kind == 1);
         self.state.mode = DrawingMode::Draw;
         self.state.pick.found = false;
-        match hit {
+        Ok(match hit? {
             Some(index) => (index + 1, Some(self.drawables[index].clone())),
             None => (0, None),
-        }
+        })
     }
 
     /// Draws the candidates in pick mode until one is hit; returns its 0-based index.
-    fn first_hit(&mut self, id: i32, first: usize, only: bool) -> Option<usize> {
+    fn first_hit(&mut self, id: i32, first: usize, only: bool) -> Result<Option<usize>, Failure> {
         let pick = self.state.pick;
         for index in first..self.drawables.len() {
             let drawable = self.drawables[index].clone();
@@ -144,11 +146,11 @@ impl DrawViewer {
             {
                 continue;
             }
-            self.draw_on_view(id, &drawable);
+            self.draw_on_view(id, &drawable)?;
             if self.state.pick.found {
-                return Some(index);
+                return Ok(Some(index));
             }
         }
-        None
+        Ok(None)
     }
 }

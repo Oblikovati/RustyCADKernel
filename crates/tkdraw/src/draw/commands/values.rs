@@ -134,10 +134,10 @@ pub(super) fn copy(
         let target = if make_copy {
             drawable.copy(&drawable)
         } else {
-            session.set_drawable_auto(from, None);
+            session.set_drawable_auto(from, None)?;
             drawable
         };
-        session.set_drawable_auto(to, Some(target));
+        session.set_drawable_auto(to, Some(target))?;
     }
     Ok(0)
 }

@@ -59,9 +59,10 @@ impl DrawSegment3D {
 impl Drawable3D for DrawSegment3D {
     drawable_identity!("Draw_Segment3D");
 
-    fn draw_on(&self, display: &mut DrawDisplay<'_>) {
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
         display.set_color(self.color);
         display.draw_3d(self.first(), self.last());
+        Ok(())
     }
 }
 
@@ -116,9 +117,10 @@ impl DrawSegment2D {
 impl Drawable3D for DrawSegment2D {
     drawable_identity!("Draw_Segment2D");
 
-    fn draw_on(&self, display: &mut DrawDisplay<'_>) {
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
         display.set_color(self.color);
         display.draw(self.first(), self.last());
+        Ok(())
     }
 
     fn is_3d(&self) -> bool {

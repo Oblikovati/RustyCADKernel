@@ -2,6 +2,7 @@
 use crate::draw::color::{DrawColor, DrawMarkerShape};
 use crate::draw::display::DrawDisplay;
 use crate::draw::drawable::{Drawable3D, Drawable3DBase, drawable_identity};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Point2, Point3};
 use std::cell::Cell;
 
@@ -62,7 +63,7 @@ impl DrawMarker3D {
 impl Drawable3D for DrawMarker3D {
     drawable_identity!("Draw_Marker3D");
 
-    fn draw_on(&self, display: &mut DrawDisplay<'_>) {
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
         display.set_color(self.color);
         match self.size {
             MarkerSize::Scaled(radius) => {
@@ -72,6 +73,7 @@ impl Drawable3D for DrawMarker3D {
                 display.draw_marker_3d(self.position(), self.shape, pixels)
             }
         }
+        Ok(())
     }
 
     /// Always false: a marker is always a pick candidate.
@@ -133,9 +135,10 @@ impl DrawMarker2D {
 impl Drawable3D for DrawMarker2D {
     drawable_identity!("Draw_Marker2D");
 
-    fn draw_on(&self, display: &mut DrawDisplay<'_>) {
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
         display.set_color(self.color);
         display.draw_marker(self.position(), self.shape, self.size);
+        Ok(())
     }
 
     fn is_3d(&self) -> bool {

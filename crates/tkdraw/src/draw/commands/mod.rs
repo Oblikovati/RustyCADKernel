@@ -270,7 +270,7 @@ pub fn variable_commands(session: &DrawSession) -> Result<(), Failure> {
     }
     session.command_hooks.set(true);
     DrawNumber::register_factory(session);
-    standard_variables(session);
+    standard_variables(session)?;
     register(
         session,
         "DRAW Numeric functions",
@@ -294,13 +294,13 @@ pub fn variable_commands(session: &DrawSession) -> Result<(), Failure> {
 }
 
 /// The protected standard variables.
-fn standard_variables(session: &DrawSession) {
+fn standard_variables(session: &DrawSession) -> Result<(), Failure> {
     let blue = DrawColor::new(DrawColorKind::Bleu);
     let axes: DrawableHandle = Rc::new(DrawAxis3D::at_point(Point3::new(0.0, 0.0, 0.0), blue, 20));
-    session.set_drawable_auto("axes", Some(axes.clone()));
+    session.set_drawable_auto("axes", Some(axes.clone()))?;
     axes.set_protected(true);
     let axes_2d: DrawableHandle = Rc::new(DrawAxis2D::at_point(Point2::new(0.0, 0.0), blue, 20));
-    session.set_drawable_auto("axes2d", Some(axes_2d.clone()));
+    session.set_drawable_auto("axes2d", Some(axes_2d.clone()))?;
     axes_2d.set_protected(true);
     for (name, value) in [
         ("pi", std::f64::consts::PI),
@@ -313,8 +313,9 @@ fn standard_variables(session: &DrawSession) {
         }
     }
     let grid: DrawableHandle = Rc::new(DrawGrid::new());
-    session.set_drawable_auto("grid", Some(grid.clone()));
+    session.set_drawable_auto("grid", Some(grid.clone()))?;
     grid.set_protected(true);
+    Ok(())
 }
 
 /// The `DRAW Variables management` group.

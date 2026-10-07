@@ -66,7 +66,9 @@ impl Drawable3D for DrawNumber {
     }
 
     /// Does nothing.
-    fn draw_on(&self, _display: &mut DrawDisplay<'_>) {}
+    fn draw_on(&self, _display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
+        Ok(())
+    }
 
     fn is_displayable(&self) -> bool {
         false
@@ -128,7 +130,9 @@ impl Drawable3D for DrawChronometer {
     }
 
     /// Does nothing.
-    fn draw_on(&self, _display: &mut DrawDisplay<'_>) {}
+    fn draw_on(&self, _display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
+        Ok(())
+    }
 
     /// A new, stopped chronometer (the timer state is not copied, as upstream).
     fn copy(&self, _this: &DrawableHandle) -> DrawableHandle {

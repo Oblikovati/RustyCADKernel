@@ -2,6 +2,7 @@
 use crate::draw::color::{DrawColor, DrawColorKind};
 use crate::draw::display::DrawDisplay;
 use crate::draw::drawable::{Drawable3D, Drawable3DBase, drawable_identity};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::bnd::OrientedBoundingBox;
 use rustycad_tkmath::gp::{Point3, Transform3, Xyz};
 use std::cell::Cell;
@@ -69,9 +70,9 @@ impl Drawable3D for DrawBox {
     drawable_identity!("Draw_Box");
 
     /// The bottom and top rectangles, then the four vertical edges; nothing for a void box.
-    fn draw_on(&self, display: &mut DrawDisplay<'_>) {
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
         if self.obb.is_void() {
-            return;
+            return Ok(());
         }
         display.set_color(self.color);
         let (hx, hy, hz) = (
@@ -92,6 +93,7 @@ impl Drawable3D for DrawBox {
             display.move_to_3d(bottom);
             display.draw_to_3d(self.move_z(2.0 * hz, bottom));
         }
+        Ok(())
     }
 }
 
@@ -186,17 +188,17 @@ impl Drawable3D for DrawGrid {
 
     /// The view type's second and fourth characters name the screen axes (`+X+Y`), which
     /// select the steps; draws a cross at every node of the visible frame.
-    fn draw_on(&self, display: &mut DrawDisplay<'_>) {
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
         if !self.is_active() {
-            return;
+            return Ok(());
         }
         let Some(view) = display.view_query() else {
-            return;
+            return Ok(());
         };
         let step_x = self.step_for(view.view_type.chars().nth(1));
         let step_y = self.step_for(view.view_type.chars().nth(3));
         if !(step_x > MINIMUM_STEP && step_y > MINIMUM_STEP) {
-            return;
+            return Ok(());
         }
         let mut inverse = view.matrix;
         // A view matrix is a rigid motion and always invertible.
@@ -214,6 +216,7 @@ impl Drawable3D for DrawGrid {
                 draw_cross(display, inverse, (x, y), offset);
             }
         }
+        Ok(())
     }
 }
 

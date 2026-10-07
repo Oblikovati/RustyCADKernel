@@ -59,7 +59,8 @@ fn named_chronometer(session: &DrawSession, name: &str) -> Rc<DrawChronometer> {
         return existing;
     }
     let chronometer = Rc::new(DrawChronometer::new());
-    session.set_drawable(name, Some(chronometer.clone()), false);
+    // Not displayed, so nothing is drawn and nothing can fail.
+    let _ = session.set_drawable(name, Some(chronometer.clone()), false);
     chronometer
 }
 

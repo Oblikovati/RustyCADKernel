@@ -24,7 +24,7 @@ pub(super) fn display(
         if let Some(drawable) = session.get(name)
             && !drawable.visible()
         {
-            session.viewer().display(&drawable);
+            session.viewer().display(&drawable)?;
             di.append(*name)?.append(" ")?;
         }
     }
@@ -89,7 +89,7 @@ fn clear_display(
         show_names(session, di, &a[1..])?;
     }
     for drawable in &kept {
-        session.viewer().display(drawable);
+        session.viewer().display(drawable)?;
     }
     Ok(true)
 }
@@ -103,7 +103,7 @@ fn show_names(session: &DrawSession, di: &DrawInterpretor, names: &[&str]) -> Re
         if drawable.visible() {
             continue;
         }
-        session.viewer().display(&drawable);
+        session.viewer().display(&drawable)?;
         if !ERASE_MUTE.with(Cell::get) {
             di.append(*name)?.append(" ")?;
         }
@@ -126,8 +126,8 @@ fn erase_named(session: &DrawSession, di: &DrawInterpretor, names: &[&str]) -> R
                 .append(" ")?;
         }
     }
-    session.viewer().repaint_2d();
-    session.viewer().repaint_3d();
+    session.viewer().repaint_2d()?;
+    session.viewer().repaint_3d()?;
     Ok(())
 }
 
@@ -154,7 +154,7 @@ pub(super) fn draw(
     let mut display = viewer.make_display(view);
     display.set_mode(mode);
     for drawable in &drawables {
-        drawable.draw_on(&mut display);
+        drawable.draw_on(&mut display)?;
     }
     display.flush();
     Ok(0)
@@ -167,10 +167,10 @@ pub(super) fn repaint(
     _a: &[&str],
 ) -> Result<i32, Failure> {
     if session.repaint_2d.replace(false) {
-        session.viewer().repaint_2d();
+        session.viewer().repaint_2d()?;
     }
     if session.repaint_3d.replace(false) {
-        session.viewer().repaint_3d();
+        session.viewer().repaint_3d()?;
     }
     session.viewer().flush();
     Ok(0)

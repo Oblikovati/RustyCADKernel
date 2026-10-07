@@ -3,6 +3,7 @@ use crate::draw::color::DrawColor;
 use crate::draw::display::DrawDisplay;
 use crate::draw::drawable::{Drawable3D, Drawable3DBase, drawable_identity};
 use crate::draw::interpretor::c_text;
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Point2, Point3};
 use std::cell::Cell;
 
@@ -52,9 +53,10 @@ impl DrawText3D {
 impl Drawable3D for DrawText3D {
     drawable_identity!("Draw_Text3D");
 
-    fn draw_on(&self, display: &mut DrawDisplay<'_>) {
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
         display.set_color(self.color);
         display.draw_string_moved_3d(self.point.get(), &self.text, self.move_x, self.move_y);
+        Ok(())
     }
 }
 
@@ -104,7 +106,7 @@ impl DrawText2D {
 impl Drawable3D for DrawText2D {
     drawable_identity!("Draw_Text2D");
 
-    fn draw_on(&self, display: &mut DrawDisplay<'_>) {
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
         display.set_color(self.color);
         display.draw_string_moved(
             self.point.get(),
@@ -112,6 +114,7 @@ impl Drawable3D for DrawText2D {
             self.move_x as f64,
             self.move_y as f64,
         );
+        Ok(())
     }
 
     fn is_3d(&self) -> bool {

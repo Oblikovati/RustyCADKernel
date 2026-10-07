@@ -48,7 +48,7 @@ pub(super) fn focal(
         if session.viewer().view_type(id).eq_ignore_ascii_case("PERS") {
             let distance = session.viewer().focal(id) * factor;
             session.viewer().set_focal(id, distance);
-            session.viewer().repaint_view(id);
+            session.viewer().repaint_view(id)?;
         }
     }
     Ok(0)
@@ -75,7 +75,7 @@ pub(super) fn setfocal(
     perspective
         .iter()
         .for_each(|id| session.viewer().set_focal(*id, distance));
-    session.viewer().repaint_all();
+    session.viewer().repaint_all()?;
     Ok(0)
 }
 
@@ -100,7 +100,7 @@ pub(super) fn magnify(
         let zoom = session.viewer().zoom(id) * factor;
         session.viewer().set_zoom(id, zoom);
         set_title(session, id);
-        session.viewer().repaint_view(id);
+        session.viewer().repaint_view(id)?;
     }
     Ok(0)
 }
@@ -129,7 +129,7 @@ pub(super) fn rotate(
         let view_type = session.viewer().view_type(id);
         if view_type.eq_ignore_ascii_case("AXON") || view_type.eq_ignore_ascii_case("PERS") {
             session.viewer().rotate_view_2d(id, direction, angle);
-            session.viewer().repaint_view(id);
+            session.viewer().repaint_view(id)?;
         }
     }
     Ok(0)
@@ -160,7 +160,7 @@ pub(super) fn panning(
         };
         let shift = |size: i32, step: i32| (size as f64 * step as f64 * STEP_PAN) as i32;
         session.viewer().pan_view(id, shift(w, dx), shift(h, dy));
-        session.viewer().repaint_view(id);
+        session.viewer().repaint_view(id)?;
     }
     Ok(0)
 }
@@ -222,7 +222,7 @@ fn translate_views(
         session
             .viewer()
             .set_trsf(id, matrix * back_translation(vector));
-        session.viewer().repaint_view(id);
+        session.viewer().repaint_view(id)?;
     }
     Ok(0)
 }
@@ -293,12 +293,14 @@ pub(super) fn hardcopy(
         .viewer()
         .frame(id)
         .filter(|_| session.viewer().has_view(id));
-    if let Some(frame) = frame {
-        write_postscript(session, id, frame, paper, &mut output);
-    }
-    // `std::ofstream` failures go unreported upstream.
+    let drawn = match frame {
+        Some(frame) => write_postscript(session, id, frame, paper, &mut output),
+        None => Ok(()),
+    };
+    // `std::ofstream` failures go unreported upstream; when a drawing fails, the file
+    // keeps what was written before the failure, as the closed stream does.
     let _ = std::fs::write(file, output.text());
-    Ok(0)
+    drawn.map(|()| 0)
 }
 
 /// The EPS header, frame, view drawing and trailer of `hardcopy`.
@@ -308,7 +310,7 @@ fn write_postscript(
     (vx0, vy0, vx1, vy1): (i32, i32, i32, i32),
     paper: [i32; 4],
     out: &mut DrawOStream,
-) {
+) -> Result<(), Failure> {
     let [px0, py0, mut px1, mut py1] = paper;
     let kx = (px1 - px0) as f64 / (vx1 - vx0) as f64;
     let ky = (py1 - py0) as f64 / (vy1 - vy0) as f64;
@@ -331,8 +333,9 @@ fn write_postscript(
         .put_str("closepath\nclip\n");
     session
         .viewer()
-        .postscript_view(id, [vx0, vy0, vx1, vy1], [px0, py0, px1, py1], out);
+        .postscript_view(id, [vx0, vy0, vx1, vy1], [px0, py0, px1, py1], out)?;
     out.put_str("showpage\n%%EOF\n");
+    Ok(())
 }
 
 /// `dfont [name [size]]`: sets the PostScript font, or resets it without arguments.
@@ -383,7 +386,7 @@ pub(super) fn xwd(
     if a.len() < 2 {
         return Ok(1);
     }
-    session.repaint_now_if_necessary();
+    session.repaint_now_if_necessary()?;
     let (id, file) = if a.len() > 2 {
         (session.atoi(a[1]), a[2])
     } else {
@@ -423,7 +426,7 @@ pub(super) fn grid(
         )
     })?;
     grid.set_steps(x, y, z);
-    session.viewer().repaint_all();
+    session.viewer().repaint_all()?;
     Ok(0)
 }
 
@@ -471,7 +474,7 @@ pub(super) fn dtext(
             0,
         ))
     };
-    session.viewer().display(&drawable);
+    session.viewer().display(&drawable)?;
     Ok(0)
 }
 

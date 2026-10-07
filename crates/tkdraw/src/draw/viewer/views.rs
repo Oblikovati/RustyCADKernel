@@ -2,17 +2,26 @@
 use super::{DrawViewer, MAXVIEW};
 use crate::draw::display::DisplaySurface;
 use crate::draw::view::DrawView;
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Axis1, Direction2, Direction3, Point3, Transform3};
 
 impl DrawViewer {
     /// `MakeView(id, type, X, Y, W, H)`: a new window view, centred, initialized with
     /// `view_type` (removed again when the type is unknown), then painted.
-    pub fn make_view(&mut self, id: i32, view_type: &str, x: i32, y: i32, width: i32, height: i32) {
+    pub fn make_view(
+        &mut self,
+        id: i32,
+        view_type: &str,
+        x: i32,
+        y: i32,
+        width: i32,
+        height: i32,
+    ) -> Result<(), Failure> {
         let Some(system) = self.system.clone() else {
-            return;
+            return Ok(());
         };
         if !(0..MAXVIEW as i32).contains(&id) {
-            return;
+            return Ok(());
         }
         self.delete_view(id);
         let window = system.create_window("Win", (x, y), (width, height), 0);
@@ -21,27 +30,33 @@ impl DrawViewer {
             DrawView::new(window),
             view_type,
             (width / 2, -height / 2),
-        );
+        )
     }
 
     /// `MakeView(id, type, window)`: a view on an existing native window given by its
     /// hexadecimal X11 id (`%lx`), or on a new 50x50 window titled `window`.
-    pub fn make_view_on(&mut self, id: i32, view_type: &str, window: &str) {
+    pub fn make_view_on(&mut self, id: i32, view_type: &str, window: &str) -> Result<(), Failure> {
         let Some(system) = self.system.clone() else {
-            return;
+            return Ok(());
         };
         if !(0..MAXVIEW as i32).contains(&id) {
-            return;
+            return Ok(());
         }
         self.delete_view(id);
         let existing = parse_window_id(window);
         let view = DrawView::new(system.create_window(window, (0, 0), (50, 50), existing));
         let centre = (view.window().width() / 2, -view.window().height() / 2);
-        self.install_view(id, view, view_type, centre);
+        self.install_view(id, view, view_type, centre)
     }
 
     /// Stores `view` in slot `id` with its pan, initializes it, then repaints it.
-    fn install_view(&mut self, id: i32, mut view: DrawView, view_type: &str, (dx, dy): (i32, i32)) {
+    fn install_view(
+        &mut self,
+        id: i32,
+        mut view: DrawView,
+        view_type: &str,
+        (dx, dy): (i32, i32),
+    ) -> Result<(), Failure> {
         view.set_dx(dx);
         view.set_dy(dy);
         let initialized = view.init(view_type);
@@ -49,7 +64,7 @@ impl DrawViewer {
         if !initialized {
             self.delete_view(id);
         }
-        self.repaint_view(id);
+        self.repaint_view(id)
     }
 
     /// `SetTitle`.

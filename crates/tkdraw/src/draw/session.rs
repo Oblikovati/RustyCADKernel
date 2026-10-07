@@ -267,13 +267,14 @@ impl DrawSession {
     }
 
     /// `Draw_RepaintNowIfNecessary`, also the `after` hook of every command.
-    pub fn repaint_now_if_necessary(&self) {
+    pub fn repaint_now_if_necessary(&self) -> Result<(), Failure> {
         if self.repaint_2d.replace(false) {
-            self.viewer().repaint_2d();
+            self.viewer().repaint_2d()?;
         }
         if self.repaint_3d.replace(false) {
-            self.viewer().repaint_3d();
+            self.viewer().repaint_3d()?;
         }
+        Ok(())
     }
 
     /// The `before` hook of every command: forget pending repaints.

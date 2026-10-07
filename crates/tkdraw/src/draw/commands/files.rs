@@ -86,7 +86,7 @@ pub(super) fn restore(
         return Ok(1);
     };
     let display = drawable.is_displayable() && session.autodisplay.get();
-    session.set_drawable(variable, Some(drawable), display);
+    session.set_drawable(variable, Some(drawable), display)?;
     session.set_progress_bar(None);
     di.append(variable)?;
     Ok(0)

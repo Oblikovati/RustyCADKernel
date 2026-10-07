@@ -2,6 +2,7 @@
 use crate::draw::color::DrawColor;
 use crate::draw::display::DrawDisplay;
 use crate::draw::drawable::{Drawable3D, Drawable3DBase, drawable_identity};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Axis3, Axis22d, Point2, Point3, StandardDirection3, Vector2, Vector3};
 
 /// The default axis length in pixels.
@@ -54,7 +55,7 @@ impl Drawable3D for DrawAxis3D {
     drawable_identity!("Draw_Axis3D");
 
     /// Draws and labels each axis, without growing the drawing bounds.
-    fn draw_on(&self, display: &mut DrawDisplay<'_>) {
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
         display.set_draw_bounds(false);
         display.set_color(self.color);
         let length = self.size as f64 / display.zoom();
@@ -70,6 +71,7 @@ impl Drawable3D for DrawAxis3D {
             display.draw_string_3d(tip, label);
         }
         display.set_draw_bounds(true);
+        Ok(())
     }
 }
 
@@ -121,7 +123,7 @@ impl DrawAxis2D {
 impl Drawable3D for DrawAxis2D {
     drawable_identity!("Draw_Axis2D");
 
-    fn draw_on(&self, display: &mut DrawDisplay<'_>) {
+    fn draw_on(&self, display: &mut DrawDisplay<'_>) -> Result<(), Failure> {
         display.set_draw_bounds(false);
         display.set_color(self.color);
         let length = self.size as f64 / display.zoom();
@@ -135,6 +137,7 @@ impl Drawable3D for DrawAxis2D {
             display.draw_string(tip, label);
         }
         display.set_draw_bounds(true);
+        Ok(())
     }
 
     fn is_3d(&self) -> bool {

@@ -155,8 +155,12 @@ pub fn interprete(session: &DrawSession, command: &str) -> bool {
         .interpretor()
         .record_and_eval(&script, 0)
         .unwrap_or(1);
-    if session.command_hooks.get() {
-        session.repaint_now_if_necessary();
+    // Deviation: a repaint failure is reported on the error console; the C++
+    // exception would leave the command loop (it cannot occur in batch mode).
+    if session.command_hooks.get()
+        && let Err(failure) = session.repaint_now_if_necessary()
+    {
+        session.console().write_err(&format!("{failure}\n"));
     }
     if was_spying {
         spy(session, code, &script);

@@ -10,6 +10,7 @@ use super::drawable::DrawableHandle;
 use super::number::DrawNumber;
 use super::session::DrawSession;
 use rustycad_tcl::{InterpHandle, TraceEvent, TraceTag, sys};
+use rustycad_tkernel::standard::Failure;
 use std::rc::{Rc, Weak};
 
 /// The trace class standing for the C++ `tracevar` procedure pointer.
@@ -19,34 +20,43 @@ const TRACE_EVENTS: i32 = sys::TCL_TRACE_UNSETS | sys::TCL_TRACE_WRITES;
 
 impl DrawSession {
     /// `Draw::Set(name, D)`: displayed when autodisplay is on.
-    pub fn set_drawable_auto(&self, name: &str, drawable: Option<DrawableHandle>) {
-        self.set_drawable(name, drawable, self.autodisplay.get());
+    pub fn set_drawable_auto(
+        &self,
+        name: &str,
+        drawable: Option<DrawableHandle>,
+    ) -> Result<(), Failure> {
+        self.set_drawable(name, drawable, self.autodisplay.get())
     }
 
     /// `Draw::Set(name, D, Disp)`: stores `drawable` in variable `name` (`None` clears
     /// it) and displays or erases it. `.` designates the drawable itself: it is only
-    /// re-displayed. A protected variable is left alone with a message.
-    pub fn set_drawable(&self, name: &str, drawable: Option<DrawableHandle>, display: bool) {
+    /// re-displayed. A protected variable is left alone with a message. The failure of
+    /// a drawable that cannot draw itself is returned after the variable is set.
+    pub fn set_drawable(
+        &self,
+        name: &str,
+        drawable: Option<DrawableHandle>,
+        display: bool,
+    ) -> Result<(), Failure> {
         if name == "." {
-            self.redisplay(drawable, display);
-            return;
+            return self.redisplay(drawable, display);
         }
         if let Some(old) = self.traced_drawable(name)
             && old.protected()
         {
             self.console().write_out("variable is protected\n");
-            return;
+            return Ok(());
         }
         let Some(interp) = self.interp_handle() else {
-            return;
+            return Ok(());
         };
         // Unsetting fires `tracevar`, which forgets the previous drawable.
         let _ = interp.unset_var(name, 0);
         let Some(drawable) = drawable else {
-            return;
+            return Ok(());
         };
         self.attach(&interp, name, &drawable);
-        self.show(&drawable, display);
+        self.show(&drawable, display)
     }
 
     /// `Draw::Set(name, double)`: updates a numeric variable or creates one (never
@@ -59,7 +69,8 @@ impl DrawSession {
             number.set_value(value);
             return;
         }
-        self.set_drawable(name, Some(Rc::new(DrawNumber::new(value))), false);
+        // A number is never displayed, so nothing is drawn and nothing can fail.
+        let _ = self.set_drawable(name, Some(Rc::new(DrawNumber::new(value))), false);
     }
 
     /// `Draw::Set(name, const char*)`: a plain Tcl variable.
@@ -139,28 +150,34 @@ impl DrawSession {
     }
 
     /// Displays a new value (unless already visible) or erases it.
-    fn show(&self, drawable: &DrawableHandle, display: bool) {
+    fn show(&self, drawable: &DrawableHandle, display: bool) -> Result<(), Failure> {
         let mut viewer = self.viewer();
         if display && !drawable.visible() {
-            viewer.display(drawable);
+            viewer.display(drawable)?;
         } else if !display && drawable.visible() {
             viewer.remove_drawable(drawable);
         }
+        Ok(())
     }
 
     /// The `.` case of `Draw::Set`.
-    fn redisplay(&self, drawable: Option<DrawableHandle>, display: bool) {
+    fn redisplay(&self, drawable: Option<DrawableHandle>, display: bool) -> Result<(), Failure> {
         let Some(drawable) = drawable else {
-            return;
+            return Ok(());
         };
         let mut viewer = self.viewer();
         viewer.remove_drawable(&drawable);
         if display {
-            viewer.display(&drawable);
+            viewer.display(&drawable)?;
         }
+        Ok(())
     }
 
     /// The pick of `getDrawable`: waits for a click, then picks within 5 pixels.
+    ///
+    /// Deviation: an object that fails to draw during the pick ends it with the failure
+    /// message on the error console and nothing picked; the C++ exception would leave
+    /// `Draw::Get`, which every command calls without a failure path.
     fn pick_drawable(&self) -> Option<DrawableHandle> {
         self.console().write_out("Pick an object\n");
         let mut errors = String::new();
@@ -171,7 +188,13 @@ impl DrawSession {
             (last.view, last.x, last.y, last.button) =
                 (selection.view, selection.x, selection.y, selection.button);
         }
-        let (_, picked) = self.viewer().pick(last.view, last.x, last.y, 5, 0);
+        let picked = match self.viewer().pick(last.view, last.x, last.y, 5, 0) {
+            Ok((_, picked)) => picked,
+            Err(failure) => {
+                self.console().write_err(&format!("{failure}\n"));
+                None
+            }
+        };
         if let Some(name) = picked.as_ref().and_then(|drawable| drawable.name()) {
             last.name = name;
         }
@@ -247,7 +270,9 @@ mod tests {
     fn a_drawable_variable_holds_its_name_and_is_found_again() {
         let (session, _) = session();
         let number: DrawableHandle = Rc::new(DrawNumber::new(4.0));
-        session.set_drawable("v", Some(number.clone()), false);
+        session
+            .set_drawable("v", Some(number.clone()), false)
+            .unwrap();
         assert!(Rc::ptr_eq(&session.get("v").unwrap(), &number));
         assert_eq!(number.name().as_deref(), Some("v"));
         assert!(session.get_drawable("v", false).is_some());
@@ -262,7 +287,7 @@ mod tests {
         session.get("p").unwrap().set_protected(true);
         session.set_number("p", 2.0);
         assert_eq!(session.get_number("p"), Some(2.0));
-        session.set_drawable("p", None, false);
+        session.set_drawable("p", None, false).unwrap();
         assert_eq!(console.take_output(), "variable is protected\n");
         session.get("p").unwrap().set_protected(false);
         session.set_string("p", "text");
