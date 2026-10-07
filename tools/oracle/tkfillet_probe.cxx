@@ -26,6 +26,7 @@
 #include "tkfillet_probe_chfids.cxx"
 #include "tkfillet_probe_blendfunc.cxx"
 #include "tkfillet_probe_brepblend.cxx"
+#include "tkfillet_probe_walking.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // ChFiDS (tkfillet_probe_chfids.cxx)
  {"fl_spine", fl_spine_case},
@@ -44,6 +45,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_surf_rst", fl_surf_rst_case},
  {"fl_rst_rst", fl_rst_rst_case},
  {"fl_app_func", fl_app_func_case},
+ {"fl_walking", fl_walking_case},
 };
 int main() {
  std::string line;

@@ -20,6 +20,7 @@ mod rst_rst;
 mod surf_curv_inv;
 mod surf_point_inv;
 pub(crate) mod surf_rst;
+mod walking;
 
 pub use app_func::{
     BRepBlendAppFunc, BRepBlendAppFuncRoot, BRepBlendAppFuncRst, BRepBlendAppFuncRstRst,
@@ -38,6 +39,7 @@ pub use rst_rst::{BRepBlendRstRstConstRad, BRepBlendRstRstEvolRad, RstRstInputs}
 pub use surf_curv_inv::{BRepBlendSurfCurvConstRadInv, BRepBlendSurfCurvEvolRadInv};
 pub use surf_point_inv::{BRepBlendSurfPointConstRadInv, BRepBlendSurfPointEvolRadInv};
 pub use surf_rst::{BRepBlendSurfRstConstRad, BRepBlendSurfRstEvolRad, SurfRstInputs};
+pub use walking::{BRepBlendWalking, WalkingDomain, WalkingTolerances};
 
 /// `BRepBlend_ChAsym`: the typedef of `BlendFunc_ChAsym`.
 pub type BRepBlendChAsym = crate::blend_func::ChAsym;

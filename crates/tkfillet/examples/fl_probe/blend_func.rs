@@ -32,26 +32,37 @@ fn vec2(v: Vector2) {
 
 /// `fl_surface`: 12 numbers.
 pub(super) fn surface(r: &mut Reader<'_>) -> Handle<dyn Adaptor3dSurface> {
+    let geom = geom_surface(r);
+    Handle::new(GeomAdaptorSurface::with_surface(&geom).expect("adaptor")).cast()
+}
+
+/// The surface of `fl_surface`.
+pub(super) fn geom_surface(r: &mut Reader<'_>) -> Handle<dyn GeomSurface> {
     let kind = r.integer();
     let (p, n, x) = (r.pnt(), r.dir(), r.dir());
     let (a, b) = (r.real(), r.real());
     let frame = Axis3::new(p, n, x).expect("probe frame");
-    let geom: Handle<dyn GeomSurface> = match kind {
+    match kind {
         0 => Handle::new(GeomPlane::new(frame)).cast(),
         1 => Handle::new(GeomCylindricalSurface::new(frame, a).expect("cylinder")).cast(),
         2 => Handle::new(GeomSphericalSurface::new(frame, a).expect("sphere")).cast(),
         3 => Handle::new(GeomConicalSurface::new(frame, a, b).expect("cone")).cast(),
         _ => Handle::new(GeomToroidalSurface::new(frame, a, b).expect("torus")).cast(),
-    };
-    Handle::new(GeomAdaptorSurface::with_surface(&geom).expect("adaptor")).cast()
+    }
 }
 
 /// `fl_guide`: 11 numbers.
 pub(super) fn guide(r: &mut Reader<'_>) -> Handle<dyn Adaptor3dCurve> {
+    let geom = geom_guide(r);
+    Handle::new(GeomAdaptorCurve::with_curve(&geom).expect("adaptor")).cast()
+}
+
+/// The curve of `fl_guide`.
+pub(super) fn geom_guide(r: &mut Reader<'_>) -> Handle<dyn GeomCurve> {
     let kind = r.integer();
     let (p, n, x) = (r.pnt(), r.dir(), r.dir());
     let a = r.real();
-    let geom: Handle<dyn GeomCurve> = if kind == 0 {
+    if kind == 0 {
         Handle::new(GeomLine::from_point(p, n)).cast()
     } else {
         let frame = Axis2::with_x_direction(p, n, x).expect("frame");
@@ -59,8 +70,7 @@ pub(super) fn guide(r: &mut Reader<'_>) -> Handle<dyn Adaptor3dCurve> {
             Circle3::new(frame, a).expect("circle"),
         ))
         .cast()
-    };
-    Handle::new(GeomAdaptorCurve::with_curve(&geom).expect("adaptor")).cast()
+    }
 }
 
 pub fn vector(v: &Vector<'_>) {

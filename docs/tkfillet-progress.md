@@ -54,6 +54,17 @@ FilletSurf.
 - `BRepBlend_AppSurface` implements `AppBlend_Approx`, whose `TolCurveOnSurf` has no
   failure in the Rust trait: a native exception there reads NaN through the trait, and
   `tol_curve_on_surf_checked` returns it.
+- `BRepBlend_Walking` (and the line builders) call the 4-argument
+  `BRepBlend_Extremity::SetValue(P, U, V, Tol)` and constructor, which are the curve
+  overloads `(P, W, Param, Tol)`: `V` lands in the guide parameter and the old `V` stays.
+- `BRepBlend_Walking`: `ToCorrectOnRst1/2` are set by the first section on the
+  restrictions and never reset, and `CorrectedParam` is written by
+  `CorrectExtremityOnOneRst` even when it fails; `Transition` passes the derivatives of
+  the surface where `CSLib::Normal` expects those of the normal; the control of a
+  reframing on the second restriction uses `min(tolerance(1), tolerance(1))`;
+  `Continu(OnS1)` removes the old last point with the new ones; a stop on the guide
+  deflection does not set the line ends; `CorrectExtremityOnOneRst` reads the current arc
+  of the domain iterator.
 
 ## Verification
 
@@ -65,4 +76,4 @@ FilletSurf.
 | --- | --- |
 | ChFiDS | `fl_spine`, `fl_arc_spine`, `fl_fil_law` |
 | BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad`, `fl_evol_rad_inv`, `fl_chamfer`, `fl_chamfer_inv` |
-| BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func` |
+| BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func`, `fl_walking` |

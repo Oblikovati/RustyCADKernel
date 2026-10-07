@@ -37,10 +37,11 @@ pub(crate) enum LineKind {
     Restrictions,
 }
 
-/// The function as a math function set for the solver.
-pub(crate) struct DynFunctionSet<'a>(pub(crate) &'a mut dyn BlendAppFunction);
+/// A blend function (or an inverse one) behind a reference, as a sized math function set
+/// for the solver: `DynFunctionSet(&mut *function)`.
+pub(crate) struct DynFunctionSet<'a, T: ?Sized>(pub(crate) &'a mut T);
 
-impl FunctionSet for DynFunctionSet<'_> {
+impl<T: FunctionSetWithDerivatives + ?Sized> FunctionSet for DynFunctionSet<'_, T> {
     fn variables(&self) -> i32 {
         self.0.variables()
     }
@@ -52,7 +53,7 @@ impl FunctionSet for DynFunctionSet<'_> {
     }
 }
 
-impl FunctionSetWithDerivatives for DynFunctionSet<'_> {
+impl<T: FunctionSetWithDerivatives + ?Sized> FunctionSetWithDerivatives for DynFunctionSet<'_, T> {
     fn derivatives(&mut self, x: &Vector<'_>, d: &mut Matrix<'_>) -> bool {
         self.0.derivatives(x, d)
     }
