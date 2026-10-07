@@ -38,7 +38,8 @@ fn settings(r: &mut Reader<'_>, tol: f64) -> ShapeConstructApproxSettings {
     }
 }
 
-fn bspline_surface(handle: &Handle<GeomBSplineSurface>) {
+/// `scp_bspline_surface`: the B-spline data of a surface.
+pub fn bspline_surface(handle: &Handle<GeomBSplineSurface>) {
     let Some(s) = handle.get() else { return };
     [s.u_degree(), s.v_degree(), s.nb_u_poles(), s.nb_v_poles()]
         .into_iter()
@@ -67,8 +68,10 @@ fn bspline_surface(handle: &Handle<GeomBSplineSurface>) {
     }
 }
 
-fn probe_surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
-    match r.integer() {
+/// `scp_surface`: the surface of one record.
+pub fn probe_surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
+    let kind = r.integer();
+    match kind {
         0 => tp_surface(r),
         1 => {
             let c = geom_curve(r)?;
@@ -82,9 +85,17 @@ fn probe_surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure>
         _ => {
             let basis = probe_surface(r)?;
             let (u1, u2, v1, v2) = (r.real(), r.real(), r.real(), r.real());
-            let trimmed =
-                GeomRectangularTrimmedSurface::new(&basis, (u1, u2), (v1, v2), (true, true))?;
-            Ok(Handle::new(trimmed).cast())
+            let trimmed: Handle<dyn GeomSurface> = Handle::new(GeomRectangularTrimmedSurface::new(
+                &basis,
+                (u1, u2),
+                (v1, v2),
+                (true, true),
+            )?)
+            .cast();
+            if kind == 3 {
+                return Ok(trimmed);
+            }
+            Ok(rustycad_tkgeombase::geom_convert::surface_to_bspline_surface(&trimmed)?.cast())
         }
     }
 }

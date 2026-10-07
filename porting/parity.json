@@ -274262,6 +274262,60 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeCustom_Surface::ShapeCustom_Surface()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Surface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSurface::new",
+      "status": "implemented",
+      "notes": "No surface, gap 0. Compared with OCCT by the sc_surface requests (tkshhealing_probe_custom_surface.cxx).",
+      "cpp_declaration_id": "4363a3cfc71016e6c161f004d799ea9789cebed69a164d8f78475aec00301a0e"
+    },
+    {
+      "upstream_id": "ShapeCustom_Surface::ShapeCustom_Surface(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Surface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSurface::with_surface",
+      "status": "implemented",
+      "notes": "Gap 0, then Init(S). Compared with OCCT by the sc_surface requests (tkshhealing_probe_custom_surface.cxx).",
+      "cpp_declaration_id": "b5422dfa76f1dafa9bd92a30ab915adc72e0c2f797fcb1bf2581a4c8e5df5b2f"
+    },
+    {
+      "upstream_id": "ShapeCustom_Surface::Init(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Surface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSurface::init",
+      "status": "implemented",
+      "notes": "Replaces mySurf. Compared with OCCT by the sc_surface requests (tkshhealing_probe_custom_surface.cxx).",
+      "cpp_declaration_id": "be2ee90fa6366476a6e94dc98e469bfc556d3c9db7e1812908f40345bff0338e"
+    },
+    {
+      "upstream_id": "ShapeCustom_Surface::Gap() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Surface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSurface::gap",
+      "status": "implemented",
+      "notes": "Inline Gap(). Compared with OCCT by the sc_surface requests (tkshhealing_probe_custom_surface.cxx).",
+      "cpp_declaration_id": "4382cc027a856999819174deed3102e75c3317012152fe3d6b26b13e25ab0107"
+    },
+    {
+      "upstream_id": "ShapeCustom_Surface::ConvertToAnalytical(const double,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Surface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSurface::convert_to_analytical",
+      "status": "implemented",
+      "notes": "Plane, cylinder/sphere/cone and torus recognizers and the 21x21 verification, line by line; native quirks kept: the torus pass on V isos keeps the swapped bounds for the verification, and a rejected candidate still replaces the surface when substitute is set. Compared with OCCT by the sc_surface requests (tkshhealing_probe_custom_surface.cxx).",
+      "cpp_declaration_id": "d2cb5909a1edf499d7662e888a1b1348cc94cf1226e134031faa98b29e17c57c"
+    },
+    {
+      "upstream_id": "ShapeCustom_Surface::ConvertToPeriodic(const bool,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_Surface.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSurface::convert_to_periodic",
+      "status": "implemented",
+      "notes": "Clamped ends reopened by one knot, then SetUPeriodic/SetVPeriodic; native quirk kept: without the reopening the stored surface itself is made periodic. Compared with OCCT by the sc_surface requests (tkshhealing_probe_custom_surface.cxx).",
+      "cpp_declaration_id": "d1c5084582a3c1d5a8cb15252457bcaa0b7c797895f0ceabace9bf79e484ab43"
+    },
+    {
       "upstream_id": "ShapeCustom_ConvertToBSpline::NewSurface(const TopoDS_Face&,occ::handle<Geom_Surface>&,TopLoc_Location&,double&,bool&,bool&)",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_ConvertToBSpline.hxx",

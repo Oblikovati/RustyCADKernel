@@ -100,6 +100,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "sh_construct_pkg",
         sh_probe::construct_package::construct_package_case,
     ),
+    ("sc_surface", sh_probe::custom_surface::custom_surface_case),
     (
         "sh_analysis_surface",
         sh_probe::analysis_surface::analysis_surface_case,

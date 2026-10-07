@@ -6,13 +6,15 @@
 //  1 (2d curve record) first last tol continuity maxseg maxdeg: ConvertCurveToBSpline (2D);
 //  2 (surface) uf ul vf vl tol continuity maxseg maxdeg: ConvertSurfaceToBSpline, where a
 //    surface is `0 (tp_surface record)`, `1 (curve record) direction` (an extrusion),
-//    `2 (curve record) P D` (a revolution) or `3 (surface) u1 u2 v1 v2` (a trimmed one);
+//    `2 (curve record) P D` (a revolution), `3 (surface) u1 u2 v1 v2` (a trimmed one) or
+//    `4 (surface) u1 u2 v1 v2` (GeomConvert::SurfaceToBSplineSurface of the trimmed one);
 //  3 (tp_face record) n (edge index, orientation)...: JoinPCurves of the chain on the face
 //    into a new edge, then the flags, ranges and p-curves stored on it.
 // Every result prints whether it is the input handle, its digest and its B-spline data.
 #include <Geom_SurfaceOfLinearExtrusion.hxx>
 #include <Geom_SurfaceOfRevolution.hxx>
 #include <NCollection_HSequence.hxx>
+#include <GeomConvert.hxx>
 #include <ShapeConstruct.hxx>
 
 void scp_bspline_surface(const occ::handle<Geom_BSplineSurface>& s){
@@ -28,7 +30,9 @@ occ::handle<Geom_Surface> scp_surface(GaReader& r){
  if(kind==1){occ::handle<Geom_Curve> c=tp_geom_curve(r);return new Geom_SurfaceOfLinearExtrusion(c,r.dir());}
  if(kind==2){occ::handle<Geom_Curve> c=tp_geom_curve(r);gp_Pnt p=r.pnt();return new Geom_SurfaceOfRevolution(c,gp_Ax1(p,r.dir()));}
  occ::handle<Geom_Surface> basis=scp_surface(r);double u1=r.real(),u2=r.real(),v1=r.real();
- return new Geom_RectangularTrimmedSurface(basis,u1,u2,v1,r.real());}
+ occ::handle<Geom_Surface> trimmed=new Geom_RectangularTrimmedSurface(basis,u1,u2,v1,r.real());
+ if(kind==3)return trimmed;
+ return GeomConvert::SurfaceToBSplineSurface(trimmed);}
 void scp_curve(GaReader& r){
  occ::handle<Geom_Curve> c=tp_geom_curve(r);double first=r.real(),last=r.real(),tol=r.real();
  GeomAbs_Shape cont=GeomAbs_Shape(r.integer());int seg=r.integer(),deg=r.integer();

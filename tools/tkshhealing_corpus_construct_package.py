@@ -9,6 +9,9 @@ and B-spline surfaces and trimmed wrappers, at tolerances that pass and fail the
 approximation. `3` joins p-curve chains: on a plane (the early return), on a cylinder with
 collinear, reversed and kinked segments, with a seam pair (both seam p-curves joined), a
 chain mixing a seam with a non-seam edge and a chain with an edge without p-curve.
+`sc_surface` (tools/oracle/tkshhealing_probe_custom_surface.cxx) runs ShapeCustom_Surface
+ConvertToAnalytical and ConvertToPeriodic sequences on exact B-spline forms of analytic
+surfaces, flat and twisted bilinear patches, clamped rings closed in U or V and a plane.
 """
 from __future__ import annotations
 import math
@@ -143,8 +146,50 @@ def join_requests() -> list[str]:
     return requests
 
 
+def ring_bspline(closed_v: bool) -> list[float]:
+    """A clamped quadratic B-spline whose first and last U rows coincide (V when asked)."""
+    ring = [(2.0, 0.0), (2.0, 2.0), (-2.0, 2.0), (-2.0, -2.0), (2.0, -2.0), (2.0, 0.0)]
+    rows = [[(x, y, z) for z in (0.0, 1.0, 2.0)] for x, y in ring]
+    uknots = [(0.0, 3), (1.0, 1), (2.0, 1), (3.0, 1), (4.0, 3)]
+    vknots = [(0.0, 3), (1.0, 3)]
+    if closed_v:
+        rows = [list(column) for column in zip(*rows)]
+        return [0, *bspline_surface(2, 2, rows, vknots, uknots)]
+    return [0, *bspline_surface(2, 2, rows, uknots, vknots)]
+
+
+def custom_surface_requests() -> list[str]:
+    """ShapeCustom_Surface on analytic B-splines, bilinear patches and closed rings."""
+    two_pi = 2.0 * math.pi
+    flat = [[(0.0, 0.0, 0.0), (0.0, 1.0, 0.0)], [(1.0, 0.0, 0.0), (1.0, 1.0, 0.0)]]
+    twisted = [[(0.0, 0.0, 0.0), (0.0, 1.0, 0.0)], [(1.0, 0.0, 0.0), (1.0, 1.0, 0.3)]]
+    surfaces = [
+        [4, 0, *cylinder(radius=2.0), 0.0, two_pi, 0.0, 3.0],
+        [4, 0, *cylinder(radius=2.0), 0.0, math.pi, 0.0, 3.0],
+        [4, 0, *sphere(radius=1.5), 0.0, two_pi, -1.5, 1.5],
+        [4, 0, *cone(), 0.0, two_pi, 0.0, 2.0],
+        [4, 0, *torus(), 0.0, two_pi, 0.0, two_pi],
+        [0, *bezier_surface(flat)], [0, *bezier_surface(twisted)],
+        ring_bspline(False), ring_bspline(True), [0, *plane()],
+    ]
+    op_lists = [
+        [0, 1e-6, 0], [0, 1e-2, 1, 0, 1e-6, 0], [0, 1e-9, 1, 1, 1, -1.0],
+        [1, 0, -1.0], [1, 1, 1e-3, 0, 1e-6, 0], [1, 1, -1.0, 1, 0, -1.0],
+    ]
+    requests = []
+    for surface, ops in product(surfaces, op_lists):
+        requests.append('sc_surface ' + numbers([*surface, count_ops(ops), *ops]))
+    return requests
+
+
+def count_ops(ops: list[float]) -> int:
+    """The number of ops in an op list (each op has two fields)."""
+    return len(ops) // 3
+
+
 def append_construct_package_requests(requests: list[str]) -> None:
     """Append the ShapeConstruct package requests."""
     requests.extend(curve_requests())
     requests.extend(surface_requests())
     requests.extend(join_requests())
+    requests.extend(custom_surface_requests())
