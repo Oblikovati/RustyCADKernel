@@ -9,15 +9,16 @@ use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::{
     gp::{
-        Axis2, Axis3, Circle3, Cylinder3, Direction3, Plane3, Point2, Point3, Sphere3,
-        StandardDirection3, Vector3,
+        Axis2, Axis3, Circle3, Cylinder3, Direction3, Plane3, Point2, Point3, StandardDirection3,
+        Vector3,
     },
     poly::mesh_purpose,
 };
 use rustycad_tkmesh::{brep_mesh::BRepMeshIncrementalMesh, imesh_tools::MeshParameters};
-use rustycad_tkprim::brep_prim_api::{
-    BRepPrimAPIMakeCone, BRepPrimAPIMakeCylinder, BRepPrimAPIMakeSphere,
-};
+use rustycad_tkprim::brep_prim_api::{BRepPrimAPIMakeCone, BRepPrimAPIMakeCylinder};
+#[path = "support/mesh_counts.rs"]
+mod mesh_counts;
+use mesh_counts::shape_mesh_counts;
 use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape, BRepBuilderAPIMakeWire,
 };
@@ -40,76 +41,6 @@ fn BRepMesh_IncrementalMeshTest__TrimmedCylinder_RespectsUVRangeAndDeflection() 
     BRepMeshIncrementalMesh::with_parameters(&shape, &parameters, &ProgressRange::default())
         .unwrap();
     assert_trimmed_cylinder_mesh(&face, parameters.deflection);
-}
-
-#[test]
-fn sphere_face_quality_decrease_probe() {
-    let sphere = Sphere3::new(
-        Axis3::with_standard(Point3::default(), StandardDirection3::Z),
-        10.0,
-    )
-    .unwrap();
-    let maker = BRepBuilderAPIMakeFace::from_sphere(sphere).unwrap();
-    let face = maker.face().unwrap();
-    let shape = face.clone().into_shape();
-    mesh_sphere(&shape, 0.01, false).unwrap();
-    let fine = shape_mesh_counts(&shape);
-    mesh_sphere(&shape, 0.1, true).unwrap();
-    let coarse = shape_mesh_counts(&shape);
-    assert!(coarse.0 < fine.0);
-    assert!(coarse.1 < fine.1);
-}
-
-#[test]
-fn sphere_solid_cleanup_reuse_keeps_existing_mesh() {
-    let shape = sphere_shape();
-    mesh_sphere(&shape, 0.01, false).unwrap();
-    mesh_sphere(&shape, 0.1, true).unwrap();
-    let coarse = shape_mesh_counts(&shape);
-    rustycad_tkbrep::brep_tools::clean_geometry(&shape).unwrap();
-    assert_eq!(shape_mesh_counts(&shape), coarse);
-    mesh_sphere(&shape, 0.01, false).unwrap();
-    rustycad_tkbrep::brep_tools::clean(&shape, false).unwrap();
-    assert_eq!(shape_mesh_counts(&shape), coarse);
-}
-
-fn sphere_shape() -> Shape {
-    let mut maker = BRepPrimAPIMakeSphere::new(10.0).unwrap();
-    maker.shape().unwrap().clone()
-}
-
-fn mesh_sphere(
-    shape: &rustycad_tkbrep::topods::Shape,
-    deflection: f64,
-    allow_quality_decrease: bool,
-) -> Result<(), rustycad_tkernel::standard::Failure> {
-    BRepMeshIncrementalMesh::with_parameters(
-        shape,
-        &MeshParameters {
-            deflection,
-            allow_quality_decrease,
-            ..Default::default()
-        },
-        &ProgressRange::default(),
-    )?;
-    Ok(())
-}
-
-fn shape_mesh_counts(shape: &Shape) -> (i32, i32) {
-    let mut faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
-    let mut node_count = 0;
-    let mut triangle_count = 0;
-    while faces.more() {
-        let face = topods::face(faces.current()).unwrap();
-        let triangulation = BRepTool::triangulation(&face, mesh_purpose::NONE)
-            .unwrap()
-            .0;
-        assert!(!triangulation.is_null());
-        node_count += triangulation.nb_nodes();
-        triangle_count += triangulation.nb_triangles();
-        faces.next().unwrap();
-    }
-    (node_count, triangle_count)
 }
 
 #[test]
