@@ -151541,7 +151541,7 @@
       "notes": "IntImpParGen mapping (docs/tkgeomalgo-progress.md): the static members of IntImpParGen and the free functions of IntImpParGen_Tool.hxx are free functions (in-out gp_Vec2d and IntRes2d_Transition arguments as &mut through TransitionSide); domain exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (imppar_transition, imppar_domain)."
     },
     {
-      "upstream_id": "IntImpParGen_Tool::NormalizeOnDomain(double&,const IntRes2d_Domain&)",
+      "upstream_id": "NormalizeOnDomain(double&,const IntRes2d_Domain&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen_Tool.hxx",
       "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::tool::normalize_on_domain",
@@ -151549,7 +151549,7 @@
       "notes": "IntImpParGen mapping (docs/tkgeomalgo-progress.md): the static members of IntImpParGen and the free functions of IntImpParGen_Tool.hxx are free functions (in-out gp_Vec2d and IntRes2d_Transition arguments as &mut through TransitionSide); domain exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (imppar_transition, imppar_domain)."
     },
     {
-      "upstream_id": "IntImpParGen_Tool::Determine_Position(IntRes2d_Position&,const IntRes2d_Domain&,const gp_Pnt2d&,double)",
+      "upstream_id": "Determine_Position(IntRes2d_Position&,const IntRes2d_Domain&,const gp_Pnt2d&,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen_Tool.hxx",
       "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::tool::determine_position",
@@ -151557,7 +151557,7 @@
       "notes": "IntImpParGen mapping (docs/tkgeomalgo-progress.md): the static members of IntImpParGen and the free functions of IntImpParGen_Tool.hxx are free functions (in-out gp_Vec2d and IntRes2d_Transition arguments as &mut through TransitionSide); domain exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (imppar_transition, imppar_domain)."
     },
     {
-      "upstream_id": "IntImpParGen_Tool::Determine_Transition(IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,double)",
+      "upstream_id": "Determine_Transition(IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen_Tool.hxx",
       "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::tool::determine_transition",
@@ -151933,7 +151933,7 @@
       "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
     },
     {
-      "upstream_id": "IntCurve_IntConicConic_Tool::Determine_Transition_LC(IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,double)",
+      "upstream_id": "Determine_Transition_LC(IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
       "rust_item": "rustycad_tkgeomalgo::int_curve::determine_transition_lc",
@@ -151941,7 +151941,7 @@
       "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
     },
     {
-      "upstream_id": "IntCurve_IntConicConic_Tool::NormalizeOnCircleDomain(double,const IntRes2d_Domain&)",
+      "upstream_id": "NormalizeOnCircleDomain(double,const IntRes2d_Domain&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
       "rust_item": "rustycad_tkgeomalgo::int_curve::normalize_on_circle_domain",
@@ -152973,7 +152973,7 @@
       "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
     },
     {
-      "upstream_id": "Geom2dAPI_Interpolate::operator occ::handle<Geom2d_BSplineCurve>() const",
+      "upstream_id": "Geom2dAPI_Interpolate::operator handle() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_Interpolate.hxx",
       "rust_item": "rustycad_tkgeomalgo::geom2d_api::Interpolate::as_curve",
@@ -153085,7 +153085,7 @@
       "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_*)."
     },
     {
-      "upstream_id": "Geom2dAPI_PointsToBSpline::operator occ::handle<Geom2d_BSplineCurve>() const",
+      "upstream_id": "Geom2dAPI_PointsToBSpline::operator handle() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dAPI/Geom2dAPI_PointsToBSpline.hxx",
       "rust_item": "rustycad_tkgeomalgo::geom2d_api::PointsToBSpline::as_curve",
@@ -157301,7 +157301,7 @@
       "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
     },
     {
-      "upstream_id": "IntImp_ComputeTangence::ChoixRef(int)",
+      "upstream_id": "ChoixRef(int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ComputeTangence.hxx",
       "rust_item": "rustycad_tkgeomalgo::int_imp::choix_ref",
@@ -157883,54 +157883,6 @@
       "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::<rustycad_tkgeomalgo::hatch_gen::IntersectionPointDump>::dump",
       "status": "implemented",
       "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
-    },
-    {
-      "upstream_id": "TopClass_Classifier2d::Reset",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_Classifier2d.pxx",
-      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::reset",
-      "status": "implemented",
-      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
-    },
-    {
-      "upstream_id": "TopClass_Classifier2d::Compare",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_Classifier2d.pxx",
-      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::compare",
-      "status": "implemented",
-      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
-    },
-    {
-      "upstream_id": "TopClass_FaceClassifier::Perform",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_FaceClassifier.pxx",
-      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::perform",
-      "status": "implemented",
-      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
-    },
-    {
-      "upstream_id": "TopClass_FaceClassifier::State",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_FaceClassifier.pxx",
-      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::state",
-      "status": "implemented",
-      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
-    },
-    {
-      "upstream_id": "TopClass_FaceClassifier::Edge",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_FaceClassifier.pxx",
-      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::edge",
-      "status": "implemented",
-      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
-    },
-    {
-      "upstream_id": "TopClass_FaceClassifier::EdgeParameter",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_FaceClassifier.pxx",
-      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::edge_parameter",
-      "status": "implemented",
-      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
     },
     {
       "upstream_id": "Geom2dHatch_Classifier::Geom2dHatch_Classifier()",
@@ -164245,126 +164197,6 @@
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
     },
     {
-      "upstream_id": "IntStart_SearchOnBoundaries()",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.gxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::new",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
-    },
-    {
-      "upstream_id": "IntStart_SearchOnBoundaries::Perform(TheFunction&,const occ::handle<TheTopolTool>&,double,double,bool)",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.gxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::perform",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
-    },
-    {
-      "upstream_id": "IntStart_SearchOnBoundaries::IsDone() const",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::is_done",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
-    },
-    {
-      "upstream_id": "IntStart_SearchOnBoundaries::AllArcSolution() const",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::all_arc_solution",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
-    },
-    {
-      "upstream_id": "IntStart_SearchOnBoundaries::NbPoints() const",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::nb_points",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
-    },
-    {
-      "upstream_id": "IntStart_SearchOnBoundaries::Point(int) const",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::point",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
-    },
-    {
-      "upstream_id": "IntStart_SearchOnBoundaries::NbSegments() const",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::nb_segments",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
-    },
-    {
-      "upstream_id": "IntStart_SearchOnBoundaries::Segment(int) const",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchOnBoundaries.lxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::segment",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_sob)."
-    },
-    {
-      "upstream_id": "IntStart_SearchInside()",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.gxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::new",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
-    },
-    {
-      "upstream_id": "IntStart_SearchInside(TheFunction&,const ThePSurface&,const occ::handle<TheTopolTool>&,double)",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.gxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::with_domain",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
-    },
-    {
-      "upstream_id": "IntStart_SearchInside::Perform(TheFunction&,const ThePSurface&,const occ::handle<TheTopolTool>&,double)",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.gxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::perform",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
-    },
-    {
-      "upstream_id": "IntStart_SearchInside::Perform(TheFunction&,const ThePSurface&,double,double)",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.gxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::perform_from",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
-    },
-    {
-      "upstream_id": "IntStart_SearchInside::IsDone() const",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.lxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::is_done",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
-    },
-    {
-      "upstream_id": "IntStart_SearchInside::NbPoints() const",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.lxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::nb_points",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
-    },
-    {
-      "upstream_id": "IntStart_SearchInside::Value(int) const",
-      "toolkit": "TKGeomAlgo",
-      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntStart/IntStart_SearchInside.lxx",
-      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::value",
-      "status": "implemented",
-      "notes": "IntStart mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): the package has no header; the .gxx/.lxx template is one Rust generic over the tool traits of int_start::tools, instantiated by IntPatch and Contap as aliases; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (is_inside)."
-    },
-    {
       "upstream_id": "IntPolyh_Array(int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
@@ -164381,7 +164213,7 @@
       "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
     },
     {
-      "upstream_id": "IntPolyh_Array::operator=(const IntPolyh_Array&)",
+      "upstream_id": "IntPolyh_Array::operator=(const IntPolyh_Array<Type>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
       "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::copy_from",
@@ -164389,7 +164221,7 @@
       "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
     },
     {
-      "upstream_id": "IntPolyh_Array::Copy(const IntPolyh_Array&)",
+      "upstream_id": "IntPolyh_Array::Copy(const IntPolyh_Array<Type>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
       "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::copy_from",
@@ -166555,7 +166387,7 @@
       "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
     },
     {
-      "upstream_id": "GeomAPI_Interpolate::operator occ::handle<Geom_BSplineCurve>() const",
+      "upstream_id": "GeomAPI_Interpolate::operator handle() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_Interpolate.hxx",
       "rust_item": "rustycad_tkgeomalgo::geom_api::Interpolate::as_curve",
@@ -166651,7 +166483,7 @@
       "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
     },
     {
-      "upstream_id": "GeomAPI_PointsToBSpline::operator occ::handle<Geom_BSplineCurve>() const",
+      "upstream_id": "GeomAPI_PointsToBSpline::operator handle() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSpline.hxx",
       "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSpline::as_curve",
@@ -166771,7 +166603,7 @@
       "notes": "GeomAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, conversion operators as as_* methods, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gapi_*)."
     },
     {
-      "upstream_id": "GeomAPI_PointsToBSplineSurface::operator occ::handle<Geom_BSplineSurface>() const",
+      "upstream_id": "GeomAPI_PointsToBSplineSurface::operator handle() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_PointsToBSplineSurface.hxx",
       "rust_item": "rustycad_tkgeomalgo::geom_api::PointsToBSplineSurface::as_surface",
@@ -167203,7 +167035,7 @@
       "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
     },
     {
-      "upstream_id": "GeomFill_Gordon::SetApproximationMode(ApproximationMode)",
+      "upstream_id": "GeomFill_Gordon::SetApproximationMode(GeomFill_Gordon::ApproximationMode)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
       "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillGordon::set_approximation_mode",
@@ -170385,7 +170217,7 @@
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
     },
     {
-      "upstream_id": "IntPatch_WLine::SetCreatingWayInfo(IntPatch_WLType)",
+      "upstream_id": "IntPatch_WLine::SetCreatingWayInfo(IntPatch_WLine::IntPatch_WLType)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_WLine.hxx",
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchWLine::set_creating_way_info",
