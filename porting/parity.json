@@ -320710,6 +320710,198 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_HLRToShape::RgNLineVCompound(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::rgn_line_v_compound_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::RgNLineVCompound()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::rgn_line_v_compound",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::Rg1LineHCompound(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::rg1_line_h_compound_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::Rg1LineHCompound()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::rg1_line_h_compound",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::OutLineHCompound(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::out_line_h_compound_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::OutLineHCompound()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::out_line_h_compound",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape(const occ::handle<HLRBRep_Algo>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::OutLineVCompound(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::out_line_v_compound_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::OutLineVCompound()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::out_line_v_compound",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::HCompound()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::h_compound",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::HCompound(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::h_compound_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::OutLineVCompound3d()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::out_line_v_compound_3d",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::IsoLineVCompound()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::iso_line_v_compound",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::IsoLineVCompound(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::iso_line_v_compound_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::IsoLineHCompound()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::iso_line_h_compound",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::IsoLineHCompound(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::iso_line_h_compound_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::VCompound(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::v_compound_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::VCompound()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::v_compound",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::CompoundOfEdges(HLRBRep_TypeOfResultingEdge,bool,bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::compound_of_edges",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::CompoundOfEdges(const TopoDS_Shape&,HLRBRep_TypeOfResultingEdge,bool,bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::compound_of_edges_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::RgNLineHCompound()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::rgn_line_h_compound",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::RgNLineHCompound(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::rgn_line_h_compound_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::Rg1LineVCompound(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::rg1_line_v_compound_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_HLRToShape::Rg1LineVCompound()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_HLRToShape.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::HLRToShape::rg1_line_v_compound",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_HLRToShape.hxx/.lxx/.cxx with the private InternalCompound, DrawFace and DrawEdge; the overloads on a shape take the suffix _of; the projector is scaled through Data::change_projector. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
       "upstream_id": "HLRBRep_Hider::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Hider.hxx",
@@ -321944,6 +322136,62 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "776a22dcfb0d217e17f5e1ac16eb559a87745572df1eca249f4d4ef1c321b4c3",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds(const occ::handle<HLRTopoBRep_OutLiner>&,int,int,int,int,int,int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::with_shape",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds(const occ::handle<HLRTopoBRep_OutLiner>&,const occ::handle<Standard_Transient>&,int,int,int,int,int,int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::with_data",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::Bounds(int&,int&,int&,int&,int&,int&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::bounds",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::UpdateMinMax(const HLRAlgo_EdgesBlock::MinMaxIndices&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::update_min_max",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::Translate(int,int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::translate",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::MinMax()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::min_max_mut",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::Sizes(int&,int&,int&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::sizes",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
     },
     {
       "upstream_id": "HLRBRep_ShapeToHLR::operator delete(void*) noexcept",
@@ -326404,6 +326652,326 @@
       "rust_item": "rustycad_tkhlr::hlr_brep::Data::edge_map",
       "status": "implemented",
       "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::ShapeData(const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::set_shape_data",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::ShapeData() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::shape_data",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::NbOfIso(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::set_nb_of_iso",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::NbOfIso() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::nb_of_iso",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::Shape() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::shape",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds::Shape(const occ::handle<HLRTopoBRep_OutLiner>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::set_shape",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_ShapeBounds()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeBounds.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeBounds::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeBounds.hxx/.lxx/.cxx; Bounds and Sizes return tuples. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Load(const occ::handle<HLRTopoBRep_OutLiner>&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::load",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Load(const occ::handle<HLRTopoBRep_OutLiner>&,const occ::handle<Standard_Transient>&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::load_with_data",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo(const occ::handle<HLRBRep_InternalAlgo>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::from_algo",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Projector(const HLRAlgo_Projector&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::set_projector",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Projector()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::projector",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::NbShapes() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::nb_shapes",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::SelectEdge(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::select_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::ShowAll(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::show_all_shape",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::ShowAll()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::show_all",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Hide(int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::hide_shapes",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Hide()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::hide",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Hide(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::hide_shape",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::ShapeData(int,const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::set_shape_data",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::PartialHide()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::partial_hide",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::HideAll()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::hide_all",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::HideAll(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::hide_all_shape",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::SelectFace(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::select_face",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Remove(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::remove",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::InitEdgeStatus()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::init_edge_status",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::ShapeBounds(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::shape_bounds",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Update()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::update",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::SeqOfShapeBounds()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::seq_of_shape_bounds",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Select(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::select_shape",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Select()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::select",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::DataStructure() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::data_structure",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgo::Index(const occ::handle<HLRTopoBRep_OutLiner>&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InternalAlgo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::InternalAlgo::index",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_InternalAlgo.hxx/.cxx with the private HideSelected and its heap sort. A transient whose data structure, projector, shapes and surface tools sit behind locks; Projector() and ShapeBounds(I) return copies, SeqOfShapeBounds() a write guard; the overloads take the suffixes _shape, _shapes and _with_data. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_Algo::Add(const TopoDS_Shape&,const occ::handle<Standard_Transient>&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Algo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Algo::add_with_data",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Algo.hxx/.cxx; the internal algorithm is reached through Deref. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_Algo::Add(const TopoDS_Shape&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Algo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Algo::add",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Algo.hxx/.cxx; the internal algorithm is reached through Deref. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_Algo()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Algo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Algo::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Algo.hxx/.cxx; the internal algorithm is reached through Deref. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_Algo(const occ::handle<HLRBRep_Algo>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Algo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Algo::from_algo",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Algo.hxx/.cxx; the internal algorithm is reached through Deref. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_Algo::Index(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Algo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Algo::index",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Algo.hxx/.cxx; the internal algorithm is reached through Deref. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
+    },
+    {
+      "upstream_id": "HLRBRep_Algo::OutLinedShapeNullify()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Algo.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Algo::out_lined_shape_nullify",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Algo.hxx/.cxx; the internal algorithm is reached through Deref. hb_algo (360 numeric requests: HLRBRep_Algo on one to three primitives, faces or compounds, parallel and perspective, with 0 and 2 isolines; Update, the shape bounds, boxes and indices, then Hide, PartialHide or Hide(1) with Hide(1, 2), and every HLRToShape compound of the five edge types visible and hidden, the 3D outlines and the compounds of the first shape) compares every edge of every result bit for bit; the four TKHLR GTests are translated (crates/tkhlr/tests/hlrbrep_*_test.rs)."
     },
     {
       "upstream_id": "BOPAlgo_PaveFiller::PerformFF(const Message_ProgressRange &)",
@@ -391253,6 +391821,46 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "648ffb68734c4fad756513fb27371b746861e4ef08fe0070b9a12afdb4bd2d0d",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRAppli_ReflectLines::Perform()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAppli/HLRAppli_ReflectLines.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_appli::ReflectLines::perform",
+      "status": "implemented",
+      "notes": "Ported from HLRAppli_ReflectLines.hxx/.cxx. hb_reflect (120 numeric requests on primitives, faces and compounds along random view directions) compares GetResult and the visible and hidden 3D sharp edges bit for bit."
+    },
+    {
+      "upstream_id": "HLRAppli_ReflectLines::GetCompoundOf3dEdges(HLRBRep_TypeOfResultingEdge,bool,bool) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAppli/HLRAppli_ReflectLines.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_appli::ReflectLines::get_compound_of_3d_edges",
+      "status": "implemented",
+      "notes": "Ported from HLRAppli_ReflectLines.hxx/.cxx. hb_reflect (120 numeric requests on primitives, faces and compounds along random view directions) compares GetResult and the visible and hidden 3D sharp edges bit for bit."
+    },
+    {
+      "upstream_id": "HLRAppli_ReflectLines(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAppli/HLRAppli_ReflectLines.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_appli::ReflectLines::new",
+      "status": "implemented",
+      "notes": "Ported from HLRAppli_ReflectLines.hxx/.cxx. hb_reflect (120 numeric requests on primitives, faces and compounds along random view directions) compares GetResult and the visible and hidden 3D sharp edges bit for bit."
+    },
+    {
+      "upstream_id": "HLRAppli_ReflectLines::SetAxes(double,double,double,double,double,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAppli/HLRAppli_ReflectLines.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_appli::ReflectLines::set_axes",
+      "status": "implemented",
+      "notes": "Ported from HLRAppli_ReflectLines.hxx/.cxx. hb_reflect (120 numeric requests on primitives, faces and compounds along random view directions) compares GetResult and the visible and hidden 3D sharp edges bit for bit."
+    },
+    {
+      "upstream_id": "HLRAppli_ReflectLines::GetResult() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAppli/HLRAppli_ReflectLines.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_appli::ReflectLines::get_result",
+      "status": "implemented",
+      "notes": "Ported from HLRAppli_ReflectLines.hxx/.cxx. hb_reflect (120 numeric requests on primitives, faces and compounds along random view directions) compares GetResult and the visible and hidden 3D sharp edges bit for bit."
     },
     {
       "upstream_id": "Contap_Contour",
@@ -508721,6 +509329,62 @@
       "blocked_by": [
         "BRepAlgoAPI_Splitter"
       ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HLRBRep_DataTest.ZeroSizedStorageCanBeDestroyedRepeatedly",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/GTests/HLRBRep_Data_Test.cxx",
+      "source_sha256": "e0e5ddaa97386589bcbe9f478e6743508c75c55bf5378db7a08deb6667c2d456",
+      "rust_package": "rustycad-tkhlr",
+      "rust_target": "hlrbrep_data_test",
+      "rust_test": "HLRBRep_DataTest__ZeroSizedStorageCanBeDestroyedRepeatedly",
+      "rust_source": "crates/tkhlr/tests/hlrbrep_data_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HLRBRep_DataTest.IntersectionCacheIsStableAcrossEdgeOrdering",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/GTests/HLRBRep_Data_Test.cxx",
+      "source_sha256": "e0e5ddaa97386589bcbe9f478e6743508c75c55bf5378db7a08deb6667c2d456",
+      "rust_package": "rustycad-tkhlr",
+      "rust_target": "hlrbrep_data_test",
+      "rust_test": "HLRBRep_DataTest__IntersectionCacheIsStableAcrossEdgeOrdering",
+      "rust_source": "crates/tkhlr/tests/hlrbrep_data_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HLRBRep_DataTest.RejectionBitsCrossWordBoundary",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/GTests/HLRBRep_Data_Test.cxx",
+      "source_sha256": "e0e5ddaa97386589bcbe9f478e6743508c75c55bf5378db7a08deb6667c2d456",
+      "rust_package": "rustycad-tkhlr",
+      "rust_target": "hlrbrep_data_test",
+      "rust_test": "HLRBRep_DataTest__RejectionBitsCrossWordBoundary",
+      "rust_source": "crates/tkhlr/tests/hlrbrep_data_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HLRBRep_InternalAlgoTest.EmptyAlgorithmOperationsAreNoOps",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/GTests/HLRBRep_InternalAlgo_Test.cxx",
+      "source_sha256": "d3cd24a5172dea762b665a8ca6f70e6113bc23812aed0392518a73d37c7b96c7",
+      "rust_package": "rustycad-tkhlr",
+      "rust_target": "hlrbrep_internalalgo_test",
+      "rust_test": "HLRBRep_InternalAlgoTest__EmptyAlgorithmOperationsAreNoOps",
+      "rust_source": "crates/tkhlr/tests/hlrbrep_internalalgo_test.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ]

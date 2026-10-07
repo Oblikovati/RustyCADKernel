@@ -299,6 +299,33 @@ def hider_requests(rng: random.Random) -> list[str]:
     return requests
 
 
+def algo_requests(rng: random.Random) -> list[str]:
+    """hb_algo: HLRBRep_Algo on one to three shapes (Update, Hide, PartialHide or the
+    shape-by-shape Hide) and every HLRToShape result."""
+    requests = []
+    for index in range(360):
+        proj = projector(rng, rng.choice((0, 0, 1)))
+        if proj[0] == 1:
+            proj[-1] = rng.choice((30.0, 60.0))
+        n = rng.choice((1, 1, 2, 3))
+        fields: list[float] = [n]
+        for k in range(n):
+            fields += shape(rng, (index + k) % 8)
+        fields += [rng.choice((0, 0, 2)), rng.choice((0, 0, 1, 2))]
+        requests.append('hb_algo ' + numbers(proj + fields))
+    return requests
+
+
+def reflect_requests(rng: random.Random) -> list[str]:
+    """hb_reflect: HLRAppli_ReflectLines along a view direction."""
+    requests = []
+    for index in range(120):
+        n = unit(rng.choice(VIEW_DIRS))
+        up = x_direction(n)
+        requests.append('hb_reflect ' + numbers(shape(rng, index % 8) + [*n, *point(rng, 1.0), *up]))
+    return requests
+
+
 def append_hlrbrep_requests(requests: list[str]) -> None:
     """Append every HLRBRep request family in a fixed order."""
     rng = random.Random(0x41B12E9)
@@ -312,3 +339,5 @@ def append_hlrbrep_requests(requests: list[str]) -> None:
     requests.extend(intersector_requests(rng))
     requests.extend(data_requests(rng))
     requests.extend(hider_requests(rng))
+    requests.extend(algo_requests(rng))
+    requests.extend(reflect_requests(rng))

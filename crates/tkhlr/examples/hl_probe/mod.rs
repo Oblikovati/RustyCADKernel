@@ -44,6 +44,7 @@ pub mod contap_search_boundary;
 
 pub mod contap_walking;
 
+pub mod hlrbrep_algo;
 pub mod hlrbrep_curve;
 pub mod hlrbrep_data;
 pub mod hlrbrep_faces;

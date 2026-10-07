@@ -235,3 +235,12 @@ and 17.
   where the native code takes it as the `ED` argument (it is that record at every
   caller). The recursion of `NextEdge` over skipped edges is a loop that keeps the
   native order of the hide counts.
+- **The algorithm.** `HLRBRep_InternalAlgo` (and `HLRBRep_Algo`, which reaches it
+  through `Deref`) is a transient whose data structure handle, projector, shape
+  bounds and surface tools sit behind locks. `Projector()` and `ShapeBounds(I)`
+  return copies, `SeqOfShapeBounds()` a write guard. The overloads take suffixes:
+  `select_shape`, `hide_shape`, `hide_shapes`, `show_all_shape`, `hide_all_shape`,
+  `load_with_data`, `add_with_data`, and `_of` for the `HLRBRep_HLRToShape`
+  compounds of one shape. `HLRToShape` scales the projector of the data structure
+  through `Data::change_projector`; a failure while it draws leaves the projector
+  scaled, as the native exception does.
