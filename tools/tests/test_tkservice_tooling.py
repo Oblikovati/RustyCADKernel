@@ -1,6 +1,7 @@
 """The TKService verifier wiring: its numeric oracle entry, the visualization closure it
 links and builds, and a deterministic corpus that reaches every probe operation of both
 twins with purely numeric requests."""
+import math
 import re
 import unittest
 from pathlib import Path
@@ -54,7 +55,8 @@ class ServiceCorpusTests(unittest.TestCase):
         self.assertEqual(corpus(), '\n'.join(first)+'\n')
         for request in first:
             for value in request.split()[1:]:
-                float(value)
+                # std::istream cannot read nan or inf.
+                self.assertTrue(math.isfinite(float(value)), request)
 
     def test_corpus_reaches_every_operation_of_both_probes(self):
         operations = {request.split()[0] for request in corpus_requests()}

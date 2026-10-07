@@ -15,3 +15,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_grid').append_grid_requests(requests)
     # WNT_HIDSpaceMouse (tkservice_corpus_hid.py)
     __import__('tkservice_corpus_hid').append_hid_requests(requests)
+    # Image_PixMap pixel conversions (tkservice_corpus_pixel.py)
+    __import__('tkservice_corpus_pixel').append_pixel_requests(requests)

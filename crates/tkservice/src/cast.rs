@@ -13,6 +13,12 @@ pub(crate) fn int_from_f64(value: f64) -> i32 {
     truncated as i32
 }
 
+/// `static_cast<int>(float)` as compiled for x86-64 (`cvttss2si`), with the same
+/// `INT_MIN` result for NaN and out-of-range values; `int_from_f32(254.9) == 254`.
+pub(crate) fn int_from_f32(value: f32) -> i32 {
+    int_from_f64(f64::from(value))
+}
+
 #[cfg(test)]
 mod tests {
     use super::int_from_f64;

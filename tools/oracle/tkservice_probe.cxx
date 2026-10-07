@@ -25,12 +25,17 @@
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkservice_probe_grid.cxx"
 #include "tkservice_probe_hid.cxx"
+#include "tkservice_probe_pixel.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
  {"sv_cgrid", sv_cgrid_case},
  // WNT_HIDSpaceMouse (tkservice_probe_hid.cxx)
  {"sv_hid", sv_hid_case},
+ // Image_PixMap pixel conversions (tkservice_probe_pixel.cxx)
+ {"sv_pixel", sv_pixel_case},
+ {"sv_rawpixel", sv_rawpixel_case},
+ {"sv_half", sv_half_case},
 };
 int main() {
  std::string line;

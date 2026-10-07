@@ -444527,6 +444527,2051 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "WNT mapping (docs/visualization-design.md section 4): the platform-neutral part of WNT is ported; the HID chunk is a borrowed byte slice whose length is the native size; the mutable raw range is a Cell; output references are returned tuples. Excluded: pointer typedef of the Windows-only WNT_Window, which the Linux library does not build (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Image_Format",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_UNKNOWN",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Unknown",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_Gray",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Gray",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_Alpha",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Alpha",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_RGB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Rgb",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_BGR",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Bgr",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_RGB32",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Rgb32",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_BGR32",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Bgr32",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_RGBA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Rgba",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_BGRA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Bgra",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_GrayF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::GrayF",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_AlphaF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::AlphaF",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_RGF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Rgf",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_RGBF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Rgbf",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_BGRF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Bgrf",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_RGBAF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Rgbaf",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_BGRAF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Bgraf",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_GrayF_half",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::GrayFHalf",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_RGF_half",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::RgfHalf",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_RGBAF_half",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::RgbafHalf",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "Image_Format_Gray16",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageFormat::Gray16",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values."
+    },
+    {
+      "upstream_id": "(unnamed enum at src/Visualization/TKService/Image/Image_Format.hxx:43:1)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; the anonymous count enums are constants. The anonymous enum is the IMAGE_FORMAT_NB constant of the module."
+    },
+    {
+      "upstream_id": "Image_Format_NB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Format.hxx",
+      "rust_item": "rustycad_tkservice::image::IMAGE_FORMAT_NB",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; the anonymous count enums are constants."
+    },
+    {
+      "upstream_id": "Image_CompressedFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedFormat.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedFormat",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; the anonymous count enums are constants."
+    },
+    {
+      "upstream_id": "Image_CompressedFormat_UNKNOWN",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedFormat.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedFormat::Unknown",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; the anonymous count enums are constants."
+    },
+    {
+      "upstream_id": "Image_CompressedFormat_RGB_S3TC_DXT1",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedFormat.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedFormat::RgbS3tcDxt1",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; the anonymous count enums are constants."
+    },
+    {
+      "upstream_id": "Image_CompressedFormat_RGBA_S3TC_DXT1",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedFormat.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedFormat::RgbaS3tcDxt1",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; the anonymous count enums are constants."
+    },
+    {
+      "upstream_id": "Image_CompressedFormat_RGBA_S3TC_DXT3",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedFormat.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedFormat::RgbaS3tcDxt3",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; the anonymous count enums are constants."
+    },
+    {
+      "upstream_id": "Image_CompressedFormat_RGBA_S3TC_DXT5",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedFormat.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedFormat::RgbaS3tcDxt5",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; the anonymous count enums are constants."
+    },
+    {
+      "upstream_id": "(unnamed enum at src/Visualization/TKService/Image/Image_CompressedFormat.hxx:30:1)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedFormat.hxx",
+      "rust_item": "rustycad_tkservice::image",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; the anonymous count enums are constants. The anonymous enum is the IMAGE_COMPRESSED_FORMAT_NB constant of the module."
+    },
+    {
+      "upstream_id": "Image_CompressedFormat_NB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_CompressedFormat.hxx",
+      "rust_item": "rustycad_tkservice::image::IMAGE_COMPRESSED_FORMAT_NB",
+      "status": "implemented",
+      "notes": "Image enumeration (docs/visualization-design.md section 1): C++ enums are #[repr(i32)] Rust enums with the native values; the anonymous count enums are constants."
+    },
+    {
+      "upstream_id": "Image_PixMap::Image_PixMap()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::IsBigEndianHost",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::is_big_endian_host",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SizePixelBytes(const Image_Format)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::size_pixel_bytes_of",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SizePixelBytes() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::size_pixel_bytes",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SwapRgbaBgra",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::swap_rgba_bgra",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ToBlackWhite",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::to_black_white",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Returns the Standard_OutOfRange that the generic branch raises for float pixels outside [0, 1]."
+    },
+    {
+      "upstream_id": "Image_PixMap::FlipY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::flip_y",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::DefaultAllocator",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Excluded: the 16-byte aligned NCollection allocator of native pixel buffers; rustycad_tkservice::image::ImagePixMapData keeps its pixels in a Vec<u8> (the allocator owns no state callers can use), and max_row_aligment_bytes reports the actual alignment."
+    },
+    {
+      "upstream_id": "Image_PixMap::ImageFormatToString(Image_Format)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::image_format_to_string",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ImageFormatToString(Image_CompressedFormat)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::image_compressed_format_to_string",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ColorFromRawPixel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::image_color_from_raw_pixel",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Compared bit for bit by the sv_pixel and sv_rawpixel native probes."
+    },
+    {
+      "upstream_id": "Image_PixMap::ColorToRawPixel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::image_color_to_raw_pixel",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Compared bit for bit by the sv_pixel native probe (x86-64 float-to-byte truncation kept)."
+    },
+    {
+      "upstream_id": "Image_PixMap::Format",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::format",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SetFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::set_format",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::Width",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::width",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::Height",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::height",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::Depth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::depth",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SizeX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::width",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SizeY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::height",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SizeZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::depth",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SizeXYZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::size_xyz",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::Ratio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::ratio",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::IsEmpty",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::is_empty",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::PixelColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::pixel_color",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SetPixelColor(const int,const int,const Quantity_Color &,const bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::set_pixel_color",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SetPixelColor(const int,const int,const Quantity_ColorRGBA &,const bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::set_pixel_color_rgba",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::InitWrapper",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::init_wrapper",
+      "status": "partial",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Partial: the image adopts the caller's bytes (ImagePixMapData::take_bytes gives them back) instead of aliasing caller memory."
+    },
+    {
+      "upstream_id": "Image_PixMap::InitWrapper3D",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::init_wrapper_3d",
+      "status": "partial",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Partial: the image adopts the caller's bytes (ImagePixMapData::take_bytes gives them back) instead of aliasing caller memory."
+    },
+    {
+      "upstream_id": "Image_PixMap::InitTrash",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::init_trash",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. The native storage is uninitialised; the port's is zeroed."
+    },
+    {
+      "upstream_id": "Image_PixMap::InitTrash3D",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::init_trash_3d",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. The native storage is uninitialised; the port's is zeroed."
+    },
+    {
+      "upstream_id": "Image_PixMap::InitCopy",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::init_copy",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::InitZero",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::init_zero",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::InitZero3D",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::init_zero_3d",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::Clear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::clear",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::IsTopDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::is_top_down",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SetTopDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::set_top_down",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::TopDownInc",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::top_down_inc",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::Data",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::data",
+      "rust_items": [
+        "rustycad_tkservice::image::ImagePixMapData::data",
+        "rustycad_tkservice::image::ImagePixMap::data"
+      ],
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_data",
+      "rust_items": [
+        "rustycad_tkservice::image::ImagePixMapData::change_data",
+        "rustycad_tkservice::image::ImagePixMap::change_data"
+      ],
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::Row",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::row",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeRow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_row",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::Slice",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::slice",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeSlice",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_slice",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SliceRow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::slice_row",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeSliceRow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_slice_row",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SizeRowBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::size_row_bytes",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::RowExtraBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::row_extra_bytes",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::MaxRowAligmentBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::max_row_aligment_bytes",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SizeSliceBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::size_slice_bytes",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::SizeBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMap::size_bytes",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::Value",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "cpp_selector": {
+        "kind": "FunctionTemplate"
+      },
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "cpp_selector": {
+        "kind": "FunctionTemplate"
+      },
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. The mutable reference is a typed write."
+    },
+    {
+      "upstream_id": "Image_PixMap::RawValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::value",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeRawValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_value",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ValueXY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "cpp_selector": {
+        "kind": "FunctionTemplate"
+      },
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row)."
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeValueXY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "cpp_selector": {
+        "kind": "FunctionTemplate"
+      },
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row)."
+    },
+    {
+      "upstream_id": "Image_PixMap::RawValueXY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::value_xy",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeRawValueXY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_value_xy",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ValueXYZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "cpp_selector": {
+        "kind": "FunctionTemplate"
+      },
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::value_xyz",
+      "status": "partial",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Partial: the typed 3D read is the byte accessor plus ImagePixel::read_pixel."
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeValueXYZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "cpp_selector": {
+        "kind": "FunctionTemplate"
+      },
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_value_xyz",
+      "status": "partial",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Partial: the typed 3D write is the byte accessor plus ImagePixel::write_pixel."
+    },
+    {
+      "upstream_id": "Image_PixMap::RawValueXYZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::value_xyz",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeRawValueXYZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_value_xyz",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::ConvertFromHalfFloat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::image_convert_from_half_float",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Compared bit for bit by the sv_half native probe."
+    },
+    {
+      "upstream_id": "Image_PixMap::ConvertToHalfFloat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::image_convert_to_half_float",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Compared bit for bit by the sv_half native probe."
+    },
+    {
+      "upstream_id": "Image_PixMap::myData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapState::data",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMap::myImgFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapState::format",
+      "status": "implemented",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+    },
+    {
+      "upstream_id": "Image_PixMapData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::Image_PixMapData()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::Init(const occ::handle<NCollection_BaseAllocator> &,const size_t,const size_t,const size_t,const size_t,uint8_t *)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::init",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The allocator argument has no counterpart: a null data pointer allocates zeroed storage."
+    },
+    {
+      "upstream_id": "Image_PixMapData::Init(const occ::handle<NCollection_BaseAllocator> &,const size_t,const NCollection_Vec3<size_t> &,const size_t,uint8_t *)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::init_3d",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The allocator argument has no counterpart: a null data pointer allocates zeroed storage."
+    },
+    {
+      "upstream_id": "Image_PixMapData::ZeroData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::zero_data",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::Row",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::row",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::ChangeRow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_row",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::Value",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::value",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::ChangeValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_value",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::ValueXY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::value_xy",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::ChangeValueXY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_value_xy",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::Slice",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::slice",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::ChangeSlice",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_slice",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::SliceRow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::slice_row",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::ChangeSliceRow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_slice_row",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::ValueXYZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::value_xyz",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::ChangeValueXYZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_value_xyz",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::MaxRowAligmentBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::max_row_aligment_bytes",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::SetTopDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_top_down",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::myTopRowPtr",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). Excluded: protected pointer to the topmost row; rustycad_tkservice::image::ImagePixMapData keeps it as a private offset that set_top_down and init_3d maintain and row/value read."
+    },
+    {
+      "upstream_id": "Image_PixMapData::SizeBPP",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::size_bpp",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::SizeX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::size_x",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::SizeY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::size_y",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::SizeZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::size_z",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::SizeRowBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::size_row_bytes",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::SizeSliceBytes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::size_slice_bytes",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapData::TopToDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::top_to_down",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplate"
+      },
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The class template is ImagePixMapData with generic typed accessors over ImagePixel."
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData::Image_PixMapTypedData<PixelType_t>()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData::Init(const occ::handle<NCollection_BaseAllocator> &,size_t,size_t,size_t,uint8_t *)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::init",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The bytes per pixel is ImagePixel::SIZE of the pixel type."
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData::Init(const PixelType_t &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::fill_typed",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData::Row",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::row",
+      "status": "partial",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). Partial: the typed row pointer is the byte row; pixels are read with ImagePixel."
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData::ChangeRow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_row",
+      "status": "partial",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). Partial: the typed row pointer is the byte row; pixels are written with ImagePixel."
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData::Value",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData::ChangeValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+      "status": "implemented",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The mutable reference is a typed write."
+    },
+    {
+      "upstream_id": "Image_ColorRGB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (u8); Rust spells u8 in the field type of rustycad_tkservice::image::ImageColorRgb::v."
+    },
+    {
+      "upstream_id": "Image_ColorRGB::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB::b() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb::b",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB::b()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb::b_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (u8); Rust spells u8 in the field type of rustycad_tkservice::image::ImageColorRgb32::v."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::b() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32::b",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::b()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32::b_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::a_() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32::pad",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGB32::a_()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgb32::pad_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (u8); Rust spells u8 in the field type of rustycad_tkservice::image::ImageColorRgba::v."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::b() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba::b",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::b()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba::b_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::a() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba::a",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBA::a()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgba::a_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (u8); Rust spells u8 in the field type of rustycad_tkservice::image::ImageColorBgr::v."
+    },
+    {
+      "upstream_id": "Image_ColorBGR::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR::b() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr::b",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR::b()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr::b_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (u8); Rust spells u8 in the field type of rustycad_tkservice::image::ImageColorBgr32::v."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::b() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32::b",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::b()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32::b_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::a_() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32::pad",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGR32::a_()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgr32::pad_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (u8); Rust spells u8 in the field type of rustycad_tkservice::image::ImageColorBgra::v."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::b() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra::b",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::b()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra::b_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::a() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra::a",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRA::a()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgra::a_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgf",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGF::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (f32); Rust spells f32 in the field type of rustycad_tkservice::image::ImageColorRgf::v."
+    },
+    {
+      "upstream_id": "Image_ColorRGF::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgf::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGF::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgf::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGF::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgf::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGF::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgf::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGF::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgf::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGF::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgf::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbf",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBF::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (f32); Rust spells f32 in the field type of rustycad_tkservice::image::ImageColorRgbf::v."
+    },
+    {
+      "upstream_id": "Image_ColorRGBF::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbf::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBF::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbf::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBF::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbf::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBF::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbf::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBF::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbf::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBF::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbf::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBF::b() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbf::b",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBF::b()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbf::b_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgrf",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRF::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (f32); Rust spells f32 in the field type of rustycad_tkservice::image::ImageColorBgrf::v."
+    },
+    {
+      "upstream_id": "Image_ColorBGRF::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgrf::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRF::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgrf::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRF::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgrf::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRF::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgrf::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRF::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgrf::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRF::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgrf::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRF::b() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgrf::b",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRF::b()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgrf::b_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (f32); Rust spells f32 in the field type of rustycad_tkservice::image::ImageColorRgbaf::v."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::b() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf::b",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::b()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf::b_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::a() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf::a",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorRGBAF::a()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorRgbaf::a_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::ComponentType_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad. Excluded: member typedef naming the component type (f32); Rust spells f32 in the field type of rustycad_tkservice::image::ImageColorBgraf::v."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::Length",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf::length",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::v",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf::v",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::r() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf::r",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::r()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf::r_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::g() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf::g",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::g()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf::g_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::b() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf::b",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::b()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf::b_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::a() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf::a",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
+    },
+    {
+      "upstream_id": "Image_ColorBGRAF::a()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Image/Image_Color.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageColorBgraf::a_mut",
+      "status": "implemented",
+      "notes": "Image color mapping (docs/visualization-design.md section 1): each pixel structure is a #[repr(C)] struct with the public component array v; the const channel getters return copies and the non-const reference overloads are the *_mut accessors; the RGB32/BGR32 padding accessor a_ is pad."
     }
   ],
   "tests": [
