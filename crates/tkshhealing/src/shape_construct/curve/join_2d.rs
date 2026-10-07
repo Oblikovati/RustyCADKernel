@@ -1,16 +1,17 @@
-use super::{ShapeConstructCurve, join_math::endpoint_reversals};
+use super::ShapeConstructCurve;
+use super::join_math::{endpoint_reversals, segment_curve};
 use rustycad_tkernel::{
-    ncollection::Array1,
     precision,
     standard::{Failure, Handle},
 };
 use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dCurve};
-use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomBoundedCurve, GeomCurve};
+use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomBoundedCurve};
 use rustycad_tkg3d::top_abs::Orientation;
+use rustycad_tkgeomalgo::geom_api;
 use rustycad_tkgeombase::geom_convert::CompCurveToBSplineCurve;
 use rustycad_tkmath::{
     convert::ParameterisationType,
-    gp::{Point2, Point3},
+    gp::{Direction3, Plane3, Point2, Point3},
 };
 
 /// Inputs to native `ShapeConstruct::JoinCurves` for two p-curves.
@@ -31,23 +32,26 @@ pub struct ShapeConstructCurveJoin2dRequest {
     pub is_error: bool,
 }
 
-/// Joined 2D curve and the native endpoint-reversal decisions.
+/// Joined 2D curve and the native endpoint-reversal decisions (`C2dOut`, `isRev1`, `isRev2`).
 pub struct ShapeConstructCurveJoin2d {
-    /// Composite output p-curve.
-    pub curve: Handle<Geom2dBSplineCurve>,
-    /// Whether native endpoint matching reverses the first input.
+    /// Composite output p-curve (GeomAPI::To2d of the 3D join); `None` when the native
+    /// call returns false.
+    pub curve: Option<Handle<dyn Geom2dCurve>>,
+    /// Whether native endpoint matching reverses the first input; also set when the
+    /// crossing guard or the composition fails, false when a conversion fails first.
     pub reversed_first: bool,
-    /// Whether native endpoint matching reverses the second input.
+    /// Whether native endpoint matching reverses the second input (as `reversed_first`).
     pub reversed_second: bool,
 }
 
 impl ShapeConstructCurve {
-    /// Join two oriented p-curves; `is_error` enables OCCT's invalid-topology crossing guard.
+    /// Join two oriented p-curves; `is_error` enables OCCT's invalid-topology crossing guard
+    /// and `joined.curve` is `None` where the native call returns false.
     /// `let joined = tool.join_curves_2d(&mut request)?;`.
     pub fn join_curves_2d(
         &self,
         request: &mut ShapeConstructCurveJoin2dRequest,
-    ) -> Result<Option<ShapeConstructCurveJoin2d>, Failure> {
+    ) -> Result<ShapeConstructCurveJoin2d, Failure> {
         let first = oriented_copy(
             &request.first,
             request.first_orientation,
@@ -99,7 +103,7 @@ fn join_oriented_curves(
     first_range: &(f64, f64),
     second_range: &(f64, f64),
     is_error: bool,
-) -> Result<Option<ShapeConstructCurveJoin2d>, Failure> {
+) -> Result<ShapeConstructCurveJoin2d, Failure> {
     let first =
         tool.convert_to_bspline_2d(first, first_range.0, first_range.1, precision::confusion())?;
     let second = tool.convert_to_bspline_2d(
@@ -108,17 +112,27 @@ fn join_oriented_curves(
         second_range.1,
         precision::confusion(),
     )?;
+    if first.is_null() || second.is_null() {
+        return Ok(not_joined((false, false)));
+    }
+    segment_curve(&*first, first_range.0, first_range.1)?;
+    segment_curve(&*second, second_range.0, second_range.1)?;
     join_bspline_curves(&first, &second, is_error)
+}
+
+fn not_joined(reversals: (bool, bool)) -> ShapeConstructCurveJoin2d {
+    ShapeConstructCurveJoin2d {
+        curve: None,
+        reversed_first: reversals.0,
+        reversed_second: reversals.1,
+    }
 }
 
 fn join_bspline_curves(
     first: &Handle<Geom2dBSplineCurve>,
     second: &Handle<Geom2dBSplineCurve>,
     is_error: bool,
-) -> Result<Option<ShapeConstructCurveJoin2d>, Failure> {
-    if first.is_null() || second.is_null() {
-        return Ok(None);
-    }
+) -> Result<ShapeConstructCurveJoin2d, Failure> {
     let reversals = curve_endpoint_reversals(first, second)?;
     reverse_bspline_if(first, reversals.0)?;
     reverse_bspline_if(second, reversals.1)?;
@@ -170,9 +184,9 @@ fn join_reversed_curves(
     second: &Handle<Geom2dBSplineCurve>,
     reversals: (bool, bool),
     is_error: bool,
-) -> Result<Option<ShapeConstructCurveJoin2d>, Failure> {
+) -> Result<ShapeConstructCurveJoin2d, Failure> {
     if is_error && crossing_segments(first, second)? {
-        return Ok(None);
+        return Ok(not_joined(reversals));
     }
     adjust_join_endpoint(first, second)?;
     append_composite_curve(first, second, reversals)
@@ -219,88 +233,34 @@ fn pole_midpoint(
     ))
 }
 
+// abv 01 Sep 99: Geom2dConvert always reparametrises the second curve, so both curves
+// go to 3D on the XOY plane (GeomAPI::To3d), are joined there and come back (To2d).
 fn append_composite_curve(
     first: &Handle<Geom2dBSplineCurve>,
     second: &Handle<Geom2dBSplineCurve>,
     reversals: (bool, bool),
-) -> Result<Option<ShapeConstructCurveJoin2d>, Failure> {
-    let first_3d = to_3d(first)?;
-    let second_3d = to_3d(second)?;
+) -> Result<ShapeConstructCurveJoin2d, Failure> {
+    let plane = Plane3::new(Point3::new(0., 0., 0.), Direction3::new(0., 0., 1.)?)?;
+    let first_3d = geom_api::to_3d(&first.cast(), &plane)?.cast::<GeomBSplineCurve>();
+    let second_3d = geom_api::to_3d(&second.cast(), &plane)?.cast::<GeomBSplineCurve>();
     let mut composite = composite_builder(&first_3d)?;
-    if !composite.add(
+    let added = composite.add(
         &second_3d.cast::<dyn GeomBoundedCurve>(),
         precision::p_confusion(),
         true,
         false,
         0,
-    )? {
-        return Ok(None);
-    }
-    Ok(Some(ShapeConstructCurveJoin2d {
-        curve: to_2d(&composite.bspline_curve())?,
+    )?;
+    let curve = if added {
+        Some(geom_api::to_2d(&composite.bspline_curve().cast(), &plane)?)
+    } else {
+        None
+    };
+    Ok(ShapeConstructCurveJoin2d {
+        curve,
         reversed_first: reversals.0,
         reversed_second: reversals.1,
-    }))
-}
-
-fn to_3d(curve: &Geom2dBSplineCurve) -> Result<Handle<GeomBSplineCurve>, Failure> {
-    let points = points_3d(curve)?;
-    let poles = Array1::from_shared(&points, 1);
-    let knots = curve.knots();
-    let mults = curve.multiplicities();
-    let converted = match curve.weights() {
-        Some(weights) => GeomBSplineCurve::with_weights(
-            &poles,
-            &weights,
-            &knots,
-            &mults,
-            curve.degree(),
-            curve.is_periodic(),
-        )?,
-        None => GeomBSplineCurve::new(&poles, &knots, &mults, curve.degree(), curve.is_periodic())?,
-    };
-    Ok(Handle::new(converted))
-}
-
-fn points_3d(curve: &Geom2dBSplineCurve) -> Result<Vec<Point3>, Failure> {
-    (1..=curve.nb_poles())
-        .map(|index| {
-            curve
-                .pole(index)
-                .map(|point| Point3::new(point.x(), point.y(), 0.0))
-        })
-        .collect()
-}
-
-fn to_2d(curve: &GeomBSplineCurve) -> Result<Handle<Geom2dBSplineCurve>, Failure> {
-    let points = points_2d(curve)?;
-    let poles = Array1::from_shared(&points, 1);
-    let knots = curve.knots();
-    let mults = curve.multiplicities();
-    let converted = match curve.weights() {
-        Some(weights) => Geom2dBSplineCurve::with_weights(
-            &poles,
-            &weights,
-            &knots,
-            &mults,
-            curve.degree(),
-            curve.is_periodic(),
-        )?,
-        None => {
-            Geom2dBSplineCurve::new(&poles, &knots, &mults, curve.degree(), curve.is_periodic())?
-        }
-    };
-    Ok(Handle::new(converted))
-}
-
-fn points_2d(curve: &GeomBSplineCurve) -> Result<Vec<Point2>, Failure> {
-    (1..=curve.nb_poles())
-        .map(|index| {
-            curve
-                .pole(index)
-                .map(|point| Point2::new(point.x(), point.y()))
-        })
-        .collect()
+    })
 }
 
 fn composite_builder(first: &Handle<GeomBSplineCurve>) -> Result<CompCurveToBSplineCurve, Failure> {
@@ -325,8 +285,9 @@ mod tests {
             (joined.reversed_first, joined.reversed_second),
             (false, false)
         );
-        assert_eq!(joined.curve.value(0.).unwrap(), Point2::new(0., 0.));
-        assert_eq!(joined.curve.value(2.).unwrap(), Point2::new(2., 0.));
+        let curve = joined.curve.unwrap();
+        assert_eq!(curve.value(0.).unwrap(), Point2::new(0., 0.));
+        assert_eq!(curve.value(2.).unwrap(), Point2::new(2., 0.));
     }
 
     fn adjacent_line_result() -> super::ShapeConstructCurveJoin2d {
@@ -340,10 +301,7 @@ mod tests {
             second_range: (1., 2.),
             is_error: true,
         };
-        ShapeConstructCurve
-            .join_curves_2d(&mut request)
-            .unwrap()
-            .unwrap()
+        ShapeConstructCurve.join_curves_2d(&mut request).unwrap()
     }
 
     fn line() -> Handle<dyn Geom2dCurve> {
