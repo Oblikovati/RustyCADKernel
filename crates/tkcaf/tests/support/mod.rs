@@ -54,6 +54,16 @@ pub fn make_box_between(first: [f64; 3], second: [f64; 3]) -> Shape {
         .into_shape()
 }
 
+/// `BRepPrimAPI_MakeBox(P, dx, dy, dz).Shape()`.
+pub fn make_box_at(corner: [f64; 3], dx: f64, dy: f64, dz: f64) -> Shape {
+    let corner = Point3::new(corner[0], corner[1], corner[2]);
+    BRepPrimAPIMakeBox::at_point(corner, dx, dy, dz)
+        .unwrap()
+        .solid()
+        .unwrap()
+        .into_shape()
+}
+
 /// `label.FindAttribute(TNaming_NamedShape::GetID(), aNS)`.
 pub fn find_named_shape(label: &TdfLabel) -> Option<Handle<TNamingNamedShape>> {
     let mut named: Handle<TNamingNamedShape> = Handle::default();

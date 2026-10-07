@@ -1,5 +1,6 @@
 //! Port-only tests of TDocStd_XLinkTool with TDataStd attributes (the upstream
-//! TDocStd_XLink_Test needs TNaming and BRepPrimAPI, which other toolkits port).
+//! TDocStd_XLink_Test needs TNaming and BRepPrimAPI: its translation is
+//! crates/tkcaf/tests/lcaf_tdoc_std_xlink.rs).
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkernel::tcollection::ExtendedString;
 use rustycad_tklcaf::tdata_std::{TDataStdInteger, TDataStdTreeNode};
