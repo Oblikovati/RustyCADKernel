@@ -9,16 +9,7 @@ struct InspectedSequence : Sequence {
   size_t cached_index() const { return myCurrentIndex; }
 };
 static std::string trace() { return events.empty() ? "-" : events; }
-static std::string state(const Sequence& source)
-{
-  std::string values, reads;
-  for (Sequence::Iterator cursor(source); cursor.More(); cursor.Next()) {
-    if (!values.empty()) { values += ','; reads += ','; }
-    values += std::to_string(cursor.Value().number);
-    reads += std::to_string(cursor.Value().reads);
-  }
-  return source.IsEmpty() ? "- -" : values + " " + reads;
-}
+#include "tkernel_sequence_copy_state.hxx"
 static void fill(InspectedSequence& sequence, int first, int length)
 {
   for (int item = first; item < first + length; ++item) sequence.EmplaceAppend(item);
