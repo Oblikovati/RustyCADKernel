@@ -5,9 +5,10 @@ use super::{
     BRepMeshVertex, DegreeOfFreedom,
 };
 use rustycad_tkernel::{
-    ncollection::{DynamicArray, IncrementalAllocatorObject, Map},
+    ncollection::{DynamicArray, IncrementalAllocatorObject, PackedMap},
     standard::{Failure, Handle},
 };
+mod api;
 mod batch_insertion;
 mod check_intersection;
 mod circles;
@@ -65,6 +66,11 @@ impl BRepMeshDelaun {
     pub fn circles(&self) -> &BRepMeshCircleTool {
         &self.circles
     }
+    /// The circle tool, mutable: the deflection control selects circles through a
+    /// `const_cast` of `Circles()` natively; `triangulator.circles_mut()`.
+    pub fn circles_mut(&mut self) -> &mut BRepMeshCircleTool {
+        &mut self.circles
+    }
     /// Read a native node; `triangulator.get_vertex(1)?`.
     pub fn get_vertex(&self, index: i32) -> Result<BRepMeshVertex, Failure> {
         self.mesh_ref()?.get_node(index)
@@ -86,15 +92,15 @@ impl BRepMeshDelaun {
         self.auxiliary = indices.clone();
     }
     /// Collect frontier edges in native hash order; `triangulator.frontier()?`.
-    pub fn frontier(&self) -> Result<Map<i32>, Failure> {
+    pub fn frontier(&self) -> Result<PackedMap<i32>, Failure> {
         self.edges_by_type(DegreeOfFreedom::Frontier)
     }
     /// Collect fixed internal edges; `triangulator.internal_edges()?`.
-    pub fn internal_edges(&self) -> Result<Map<i32>, Failure> {
+    pub fn internal_edges(&self) -> Result<PackedMap<i32>, Failure> {
         self.edges_by_type(DegreeOfFreedom::Fixed)
     }
     /// Native free-edge query selects every edge used at most once, regardless of movability; `triangulator.free_edges()?`.
-    pub fn free_edges(&self) -> Result<Map<i32>, Failure> {
+    pub fn free_edges(&self) -> Result<PackedMap<i32>, Failure> {
         self.edges_by_type(DegreeOfFreedom::Free)
     }
     fn mesh_ref(&self) -> Result<&BRepMeshDataStructureOfDelaun, Failure> {
@@ -106,17 +112,17 @@ impl BRepMeshDelaun {
             )
         })
     }
-    fn edges_by_type(&self, kind: DegreeOfFreedom) -> Result<Map<i32>, Failure> {
+    fn edges_by_type(&self, kind: DegreeOfFreedom) -> Result<PackedMap<i32>, Failure> {
         let mesh = self.mesh_ref()?;
-        let mut result = Map::default();
+        let mut result = PackedMap::default();
         for index in mesh.links_of_domain().iter() {
             let add = if kind == DegreeOfFreedom::Free {
-                mesh.elements_connected_to(*index)?.extent() <= 1
+                mesh.elements_connected_to(index)?.extent() <= 1
             } else {
-                self.get_edge(*index)?.movability() == kind
+                self.get_edge(index)?.movability() == kind
             };
             if add {
-                result.add(*index);
+                result.add(index);
             }
         }
         Ok(result)

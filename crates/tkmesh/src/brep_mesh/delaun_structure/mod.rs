@@ -7,7 +7,8 @@ use crate::brep_mesh_data::MeshAllocator;
 use rustycad_tkernel::{
     impl_transient,
     ncollection::{
-        BaseAllocator, DataMap, DefaultHashPolicy, DynamicArray, HashKey, IndexedDataMap, List, Map,
+        BaseAllocator, DataMap, DefaultHashPolicy, DynamicArray, HashKey, IndexedDataMap, List,
+        PackedMap,
     },
     standard::{Failure, Handle, SharedState, StandardTransient},
 };
@@ -36,8 +37,10 @@ struct DelaunConnectivity {
     links: IndexedDataMap<MeshLinkKey, PairOfIndex>,
     deleted_links: List<i32>,
     elements: DynamicArray<BRepMeshTriangle>,
-    element_domain: Map<i32>,
-    link_domain: Map<i32>,
+    // IMeshData::MapOfInteger is TColStd_PackedMapOfInteger: its block/bucket
+    // iteration order drives triangle and link enumeration downstream.
+    element_domain: PackedMap<i32>,
+    link_domain: PackedMap<i32>,
 }
 /// Shared mesh topology with native one-based indices; `BRepMeshDataStructureOfDelaun::new(&allocator,100)`.
 pub struct BRepMeshDataStructureOfDelaun {
@@ -127,8 +130,8 @@ impl DelaunConnectivity {
                 reserved.wrapping_mul(2).max(1) as usize,
                 Some(arena),
             ),
-            element_domain: Map::default(),
-            link_domain: Map::default(),
+            element_domain: PackedMap::default(),
+            link_domain: PackedMap::default(),
         }
     }
 }

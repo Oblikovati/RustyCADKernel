@@ -2,7 +2,7 @@ use super::super::{flag, int};
 use super::elements::report_vertex;
 use super::vertex_inspector::{report_index, report_unit};
 use rustycad_tkernel::{
-    ncollection::Map,
+    ncollection::PackedMap,
     standard::{Failure, Handle},
 };
 use rustycad_tkmesh::brep_mesh::{
@@ -111,10 +111,10 @@ fn alter_replacements(mesh: &Mesh, operation: i32) -> Result<(), Failure> {
     }
     Ok(())
 }
-fn report_map(indices: &Map<i32>) {
-    int(indices.extent() as i32);
+fn report_map(indices: &PackedMap<i32>) {
+    int(indices.extent());
     for index in indices.iter() {
-        int(*index);
+        int(index);
     }
 }
 fn snapshot(mesh: &Mesh) {

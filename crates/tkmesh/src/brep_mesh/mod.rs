@@ -5,14 +5,14 @@ pub use shape_tool::ShapeTool;
 mod incremental_mesh;
 pub use incremental_mesh::BRepMeshIncrementalMesh;
 
+mod discret_root;
+pub use discret_root::{BRepMeshDiscretRoot, DiscretRootBase};
+
 mod discret_factory;
 pub use discret_factory::{
-    BRepMeshDiscretAlgoFactory, BRepMeshDiscretFactory, BRepMeshDiscretRoot,
-    BRepMeshIncrementalMeshFactory, default_factory, factories, find_factory, register_factory,
-    unregister_factory,
+    BRepMeshDiscretAlgoFactory, BRepMeshDiscretFactory, BRepMeshIncrementalMeshFactory,
+    default_factory, factories, find_factory, register_factory, unregister_factory,
 };
-
-mod planar_face_discret;
 
 mod model_builder;
 mod shape_visitor;
@@ -38,7 +38,12 @@ mod edge_discret;
 pub use edge_discret::BRepMeshEdgeDiscret;
 
 mod range_splitter;
-pub use range_splitter::{ConeRangeSplitter, DefaultRangeSplitter, RangeSplitter, SurfaceNodes};
+pub use range_splitter::{
+    BoundaryParamsRangeSplitter, ConeRangeSplitter, CylinderRangeSplitter, DefaultRangeSplitter,
+    ExtrusionRangeSplitter, IMapOfReal, NURBSRangeSplitter, NurbsRangeSplitterHooks, RangeSplitter,
+    SphereRangeSplitter, SurfaceNodes, TorusRangeSplitter, UVParamRangeSplitter,
+    UndefinedRangeSplitter, nurbs_adjust_range, nurbs_generate_surface_nodes,
+};
 
 mod pre_processor;
 pub use pre_processor::BRepMeshModelPreProcessor;
@@ -82,3 +87,18 @@ pub use circle_tool::{
 
 mod delaun;
 pub use delaun::BRepMeshDelaun;
+
+mod classifier;
+pub use classifier::BRepMeshClassifier;
+
+mod mesh_tool;
+pub use mesh_tool::{BRepMeshMeshTool, MapOfIntegerInteger, NodeClassifier};
+
+mod face_discret;
+pub use face_discret::BRepMeshFaceDiscret;
+
+mod context;
+pub use context::BRepMeshContext;
+
+pub mod mesh_algo;
+pub use mesh_algo::{BRepMeshDelaunayBaseMeshAlgo, BRepMeshMeshAlgoFactory};

@@ -72,7 +72,7 @@ impl DelaunConnectivity {
         let pair = *self.links.find_from_index(last as usize)?;
         self.links.remove_last()?;
         self.replace_link(index, edge, pair)?;
-        self.link_domain.remove(&last);
+        self.link_domain.remove(last);
         self.link_domain.add(index);
         self.replace_adjacent_link(edge.first_node(), last, index)?;
         self.replace_adjacent_link(edge.last_node(), last, index)?;
