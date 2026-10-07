@@ -187029,6 +187029,62 @@
       "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
     },
     {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter() (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicCurveGen.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::new",
+      "status": "implemented",
+      "notes": "Inline definition from IntCurve_IntConicCurveGen.lxx of the TKHLR instance HLRBRep_TheIntConicCurveOfCInter: the Rust instance is IntConicCurveGen over the HLRBRep_CurveTool intersector types (hlr_brep::c_inter), so the member is the method of the generic, whose body follows the .lxx line for line (default constructor: an empty, not done intersection). hb_cinter in the TKHLR numeric probe drives it through HLRBRep_CInter and matches OCCT bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter(const gp_Lin2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double) (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicCurveGen.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::line",
+      "status": "implemented",
+      "notes": "Inline definition from IntCurve_IntConicCurveGen.lxx of the TKHLR instance HLRBRep_TheIntConicCurveOfCInter: the Rust instance is IntConicCurveGen over the HLRBRep_CurveTool intersector types (hlr_brep::c_inter), so the member is the method of the generic, whose body follows the .lxx line for line (Perform(IntCurve_IConicTool(L), D1, PCurve, D2, TolConf, Tol)). hb_cinter in the TKHLR numeric probe drives it through HLRBRep_CInter and matches OCCT bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter::Perform(const gp_Lin2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double) (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicCurveGen.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::perform_line",
+      "status": "implemented",
+      "notes": "Inline definition from IntCurve_IntConicCurveGen.lxx of the TKHLR instance HLRBRep_TheIntConicCurveOfCInter: the Rust instance is IntConicCurveGen over the HLRBRep_CurveTool intersector types (hlr_brep::c_inter), so the member is the method of the generic, whose body follows the .lxx line for line (a fresh IntImpParGen intersector on IntCurve_IConicTool(L) with this reversed flag, then SetValues). hb_cinter in the TKHLR numeric probe drives it through HLRBRep_CInter and matches OCCT bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter::Perform(const gp_Circ2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double) (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicCurveGen.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::perform_circle",
+      "status": "implemented",
+      "notes": "Inline definition from IntCurve_IntConicCurveGen.lxx of the TKHLR instance HLRBRep_TheIntConicCurveOfCInter: the Rust instance is IntConicCurveGen over the HLRBRep_CurveTool intersector types (hlr_brep::c_inter), so the member is the method of the generic, whose body follows the .lxx line for line (an open D1 is closed on [First, First + PI + PI] by SetEquivalentParameters before the IConicTool Perform). hb_cinter in the TKHLR numeric probe drives it through HLRBRep_CInter and matches OCCT bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter::Perform(const gp_Elips2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double) (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicCurveGen.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::perform_ellipse",
+      "status": "implemented",
+      "notes": "Inline definition from IntCurve_IntConicCurveGen.lxx of the TKHLR instance HLRBRep_TheIntConicCurveOfCInter: the Rust instance is IntConicCurveGen over the HLRBRep_CurveTool intersector types (hlr_brep::c_inter), so the member is the method of the generic, whose body follows the .lxx line for line (an open D1 is closed on [First, First + PI + PI] by SetEquivalentParameters before the IConicTool Perform). hb_cinter in the TKHLR numeric probe drives it through HLRBRep_CInter and matches OCCT bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter::Perform(const gp_Parab2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double) (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicCurveGen.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::perform_parabola",
+      "status": "implemented",
+      "notes": "Inline definition from IntCurve_IntConicCurveGen.lxx of the TKHLR instance HLRBRep_TheIntConicCurveOfCInter: the Rust instance is IntConicCurveGen over the HLRBRep_CurveTool intersector types (hlr_brep::c_inter), so the member is the method of the generic, whose body follows the .lxx line for line (Perform(IntCurve_IConicTool(Prb), D1, PCurve, D2, TolConf, Tol)). hb_cinter in the TKHLR numeric probe drives it through HLRBRep_CInter and matches OCCT bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter::Perform(const gp_Hypr2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double) (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicCurveGen.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::perform_hyperbola",
+      "status": "implemented",
+      "notes": "Inline definition from IntCurve_IntConicCurveGen.lxx of the TKHLR instance HLRBRep_TheIntConicCurveOfCInter: the Rust instance is IntConicCurveGen over the HLRBRep_CurveTool intersector types (hlr_brep::c_inter), so the member is the method of the generic, whose body follows the .lxx line for line (Perform(IntCurve_IConicTool(H), D1, PCurve, D2, TolConf, Tol)). hb_cinter in the TKHLR numeric probe drives it through HLRBRep_CInter and matches OCCT bit for bit."
+    },
+    {
       "upstream_id": "IntCurve_IntConicConic",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
