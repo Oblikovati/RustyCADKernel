@@ -450852,6 +450852,2966 @@
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2d::<rustycad_tkshhealing::shape_upgrade::SplitCurve>::build",
       "status": "implemented",
       "notes": "Reviewed line by line against the C++ (2026-10-07). As SplitCurve3d, without OCC966 clamping and with the native single-spline Segment even for Segment = false. The 70 offset Build(false) requests crash natively (Geom2d_OffsetCurve on null pieces) and return a named Rust failure (D3); tools/verify_split_curve2d.py replays all 600 candidates (530 exact)."
+    },
+    {
+      "upstream_id": "Draw::Atof(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::atof",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::Atoi(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::atoi",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::BasicCommands(Draw_Interpretor &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::basic_commands",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::Commands(Draw_Interpretor &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::commands",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::Drawables()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::drawables",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::Get(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives. The C++ in/out name (set to the picked name) is the drawable name in Rust."
+    },
+    {
+      "upstream_id": "Draw::Get(const char *const,double &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_number",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::GetExisting(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_existing",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::GetInterpretor()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::interpretor",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::GetProgressBar()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::progress_bar",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::GraphicCommands(Draw_Interpretor &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::graphic_commands",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::LastPick(int &,int &,int &,int &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::last_pick",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::Load(Draw_Interpretor &,const TCollection_AsciiString &,const TCollection_AsciiString &,const TCollection_AsciiString &,const TCollection_AsciiString &,const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::load_plugin",
+      "status": "implemented",
+      "notes": "Plugins are static libraries registered in DrawPluginLibraries (the OCCT_NO_PLUGINS model); resource lookup and messages follow Draw::Load."
+    },
+    {
+      "upstream_id": "Draw::MessageCommands(Draw_Interpretor &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::message_commands",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::ParseColor(const int,const char *const *const,Quantity_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::parse_color_rgb",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::ParseColor(const int,const char *const *const,Quantity_ColorRGBA &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::parse_color_rgba",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::ParseInteger(const char *const,int &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::parse_integer",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::ParseOnOff(const char *,bool &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::parse_on_off",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::ParseOnOffIterator(int,const char **,int &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::parse_on_off_iterator",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::ParseOnOffNoIterator(int,const char **,int &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::parse_on_off_no_iterator",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::ParseReal(const char *const,double &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::parse_real",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::PloadCommands(Draw_Interpretor &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::pload_commands",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::Repaint()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::repaint",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::Set(const char *const,const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_string",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::Set(const char *const,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_number",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::Set(const char *const,const occ::handle<Draw_Drawable3D> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_drawable_auto",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::Set(const char *const,const occ::handle<Draw_Drawable3D> &,const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_drawable",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::SetProgressBar(const occ::handle<Draw_ProgressIndicator> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_progress_bar",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::UnitCommands(Draw_Interpretor &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::unit_commands",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::VariableCommands(Draw_Interpretor &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::variable_commands",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw::getDrawable(const char *&,bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_drawable",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw::parseColor(int,const char *const *,Quantity_ColorRGBA &,bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::parse_color",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Appli(int,char **,const FDraw_InitAppli)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Appli.hxx",
+      "rust_item": "rustycad_tkdraw::draw::draw_appli",
+      "status": "implemented",
+      "notes": "Without the X11 backend every session runs as batch (-b); see docs/draw-design.md."
+    },
+    {
+      "upstream_id": "Draw_Axis2D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Axis2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawAxis2D::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Axis2D::Draw_Axis2D(const Draw_Color &,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Axis2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawAxis2D::standard",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Axis2D::Draw_Axis2D(const gp_Ax22d &,const Draw_Color &,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Axis2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawAxis2D::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Axis2D::Draw_Axis2D(const gp_Pnt2d &,const Draw_Color &,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Axis2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawAxis2D::at_point",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Axis3D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Axis3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawAxis3D::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Axis3D::Draw_Axis3D(const Draw_Color &,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Axis3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawAxis3D::standard",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Axis3D::Draw_Axis3D(const gp_Ax3 &,const Draw_Color &,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Axis3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawAxis3D::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Axis3D::Draw_Axis3D(const gp_Pnt &,const Draw_Color &,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Axis3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawAxis3D::at_point",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Batch",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Appli.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::is_batch",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "Draw_Box::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Box.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawBox::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Box::Draw_Box(const Bnd_OBB &,const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Box.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawBox::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Box::MoveX(const double,gp_Pnt &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Box.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawBox::move_x",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Box::MoveY(const double,gp_Pnt &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Box.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawBox::move_y",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Box::MoveZ(const double,gp_Pnt &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Box.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawBox::move_z",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Box::ToWCS(const double,const double,const double,gp_Pnt &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Box.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawBox::to_wcs",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Chronometer::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Chronometer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawChronometer::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Chronometer::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Chronometer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawChronometer::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Chronometer::Draw_Chronometer()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Chronometer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawChronometer::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Chronometer::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Chronometer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawChronometer::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Chronometer::Timer()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Chronometer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawChronometer::timer",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Chronometer::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Chronometer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawChronometer::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Circle",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_MarkerShape.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarkerShape::Circle",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_CircleZoom",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_MarkerShape.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarkerShape::CircleZoom",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Color::Draw_Color()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Color.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColor",
+      "status": "implemented",
+      "notes": "Default impl (Draw_blanc)."
+    },
+    {
+      "upstream_id": "Draw_Color::Draw_Color(const Draw_ColorKind)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Color.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColor::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Color::ID() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Color.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColor::id",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_ColorKind",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::Draw(const gp_Circ &,const double,const double,const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_circle_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::Draw(const gp_Circ2d &,const double,const double,const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_circle",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::Draw(const gp_Pnt &,const gp_Pnt &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::Draw(const gp_Pnt2d &,const gp_Pnt2d &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::DrawMarker(const gp_Pnt &,const Draw_MarkerShape,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_marker_3d_scaled",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::DrawMarker(const gp_Pnt &,const Draw_MarkerShape,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_marker_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::DrawMarker(const gp_Pnt2d &,const Draw_MarkerShape,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_marker_scaled",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::DrawMarker(const gp_Pnt2d &,const Draw_MarkerShape,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_marker",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::DrawString(const gp_Pnt &,const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_string_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::DrawString(const gp_Pnt &,const char *const,const double,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_string_moved_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::DrawString(const gp_Pnt2d &,const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_string",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::DrawString(const gp_Pnt2d &,const char *const,const double,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_string_moved",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::DrawTo(const gp_Pnt &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_to_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::DrawTo(const gp_Pnt2d &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::draw_to",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::Draw_Display()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::new",
+      "status": "implemented",
+      "notes": "The display borrows the shared DisplayState and the current view instead of reading globals."
+    },
+    {
+      "upstream_id": "Draw_Display::Flush() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::flush",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::HasPicked() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::has_picked",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::MoveTo(const gp_Pnt &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::move_to_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::MoveTo(const gp_Pnt2d &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::move_to",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::Project(const gp_Pnt &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::project",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::Project(const gp_Pnt &,gp_Pnt2d &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::project",
+      "status": "implemented",
+      "notes": "The out-parameter overload returns the projected point."
+    },
+    {
+      "upstream_id": "Draw_Display::SetColor(const Draw_Color &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::set_color",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::SetMode(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::set_mode",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::ViewId() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::view_id",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Display::Zoom() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Display.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawDisplay::zoom",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable2D::Is3D() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::is_3d",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Drawable2D only overrides Is3D() to return false; the Rust 2D drawables (DrawSegment2D, DrawMarker2D, DrawText2D, DrawAxis2D) implement Drawable3D::is_3d that way."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Bounds(double &,double &,double &,double &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::bounds",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::copy",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Draw_Drawable3D()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3DBase::new",
+      "status": "implemented",
+      "notes": "The protected constructor builds the shared state that every drawable embeds."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::dump",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::FactoryFunction_t",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawableFactory",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Is3D() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::is_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::IsDisplayable() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::is_displayable",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Name() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::name",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Name(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::set_name",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::PickReject(const double,const double,const double) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::pick_reject",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Protected() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::protected",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Protected(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::set_protected",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::RegisterFactory(const char *const,const Draw_Drawable3D::FactoryFunction_t &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::register_factory",
+      "status": "implemented",
+      "notes": "The factory map is per session instead of a static."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Restore(const char *const,Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::restore",
+      "status": "implemented",
+      "notes": "The factory map is per session instead of a static."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Save(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::save",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::SetBounds(const double,const double,const double,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::set_bounds",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Visible() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::visible",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Visible(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::set_visible",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Drawable3D::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Drawable3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::whatis",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Grid::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Grid.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawGrid::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Grid::Draw_Grid()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Grid.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawGrid::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Grid::IsActive() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Grid.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawGrid::is_active",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Grid::StepX() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Grid.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawGrid::step_x",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Grid::StepY() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Grid.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawGrid::step_y",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Grid::StepZ() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Grid.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawGrid::step_z",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Grid::Steps(const double,const double,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Grid.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawGrid::set_steps",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Add(const char *,const char *,Draw_Interpretor::CommandFunction,const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::add",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Add(const char *,const char *,const char *,Draw_Interpretor::CommandFunction,const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::add_with_file",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Add(const char *,const char *,const char *,const theHandleType &,typename Draw_Interpretor::CallBackDataMethod<theHandleType>::methodType,const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::add_with_file",
+      "status": "implemented",
+      "notes": "The object-method overload is a closure that captures the handle, passed as any DrawCommand."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::AddLog(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::add_log",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Append(const Standard_SStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "One generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Append(const TCollection_AsciiString &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "One generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Append(const TCollection_ExtendedString &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "One generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Append(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "One generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Append(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "One generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Append(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "One generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Append(const size_t)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "One generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::AppendElement(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append_element",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackData::CallBackData(Draw_Interpretor *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackData::Invoke(Draw_Interpretor &,int,const char **)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackData::myDI",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataFunc::CallBackDataFunc(Draw_Interpretor *,Draw_Interpretor::CommandFunction)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataFunc::Invoke(Draw_Interpretor &,int,const char **)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataFunc::myFunc",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataMethod",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataMethod::CallBackDataMethod<theObjHandle>(Draw_Interpretor *,const theObjHandle &,Draw_Interpretor::CallBackDataMethod::methodType)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataMethod::Invoke(Draw_Interpretor &,int,const char **)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataMethod::element_type",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataMethod::methodType",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataMethod::myMethod",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CallBackDataMethod::myObjPtr",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: Draw_Interpretor::CallBackData* are the C++ closure objects behind Tcl commands; Rust stores any DrawCommand (closure or fn) in an Rc that the Tcl trampoline invokes (rustycad_tkdraw::draw::DrawInterpretor::add_with_file)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::CommandFunction",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawCommand",
+      "status": "excluded",
+      "notes": "Excluded: the C++ function-pointer type; Rust commands are any type that implements rustycad_tkdraw::draw::DrawCommand."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Complete(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::complete",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Draw_Interpretor()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::new",
+      "status": "implemented",
+      "notes": "The console that receives the echo and log output is a constructor parameter."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Draw_Interpretor(Tcl_Interp *const &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::with_interp",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Eval(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::eval",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::EvalFile(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::eval_file",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::GetDoEcho() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::get_do_echo",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::GetDoLog() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::get_do_log",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::GetLog()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::get_log",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::GetLogFileDescriptor()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::log_file_descriptor",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Init()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::init",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Interp() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::interp",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::PrintHelp(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::print_help",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::RecordAndEval(const char *const,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::record_and_eval",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Remove(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::remove",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Reset()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::reset",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::ResetLog()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::reset_log",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Result() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::result",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::Set(Tcl_Interp *const &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::set",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::SetDoEcho(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::set_do_echo",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::SetDoLog(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::set_do_log",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::SetToColorize(bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::set_to_colorize",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::ToColorize() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::to_colorize",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::add(const char *const,const char *const,const char *const,Draw_Interpretor::CallBackData *,const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::add_with_file",
+      "status": "implemented",
+      "notes": "The protected registration takes the command object directly."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::operator<<(const Standard_SStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "operator<< is Append; one generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::operator<<(const TCollection_AsciiString &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "operator<< is Append; one generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::operator<<(const TCollection_ExtendedString &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "operator<< is Append; one generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::operator<<(const char *const)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "operator<< is Append; one generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::operator<<(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "operator<< is Append; one generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::operator<<(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "operator<< is Append; one generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Interpretor::operator<<(const size_t)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Interpretor.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawInterpretor::append",
+      "status": "implemented",
+      "notes": "operator<< is Append; one generic append over DrawAppend replaces the overloads."
+    },
+    {
+      "upstream_id": "Draw_Losange",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_MarkerShape.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarkerShape::Losange",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Main(int,Standard_PCharacter *,const FDraw_InitAppli)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Main.hxx",
+      "rust_item": "rustycad_tkdraw::draw::draw_main",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Marker2D::ChangePos()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Marker2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarker2D::set_position",
+      "status": "implemented",
+      "notes": "The mutable reference becomes a setter (drawables are shared Rc handles)."
+    },
+    {
+      "upstream_id": "Draw_Marker2D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Marker2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarker2D::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Marker2D::Draw_Marker2D(const gp_Pnt2d &,const Draw_MarkerShape,const Draw_Color &,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Marker2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarker2D::new",
+      "status": "implemented",
+      "notes": "MarkerSize::Scale selects the real-size overload."
+    },
+    {
+      "upstream_id": "Draw_Marker2D::Draw_Marker2D(const gp_Pnt2d &,const Draw_MarkerShape,const Draw_Color &,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Marker2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarker2D::new",
+      "status": "implemented",
+      "notes": "MarkerSize::Pixels selects the integer-size overload."
+    },
+    {
+      "upstream_id": "Draw_Marker2D::PickReject(const double,const double,const double) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Marker2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarker2D::<rustycad_tkdraw::draw::Drawable3D>::pick_reject",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Marker3D::ChangePos()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Marker3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarker3D::set_position",
+      "status": "implemented",
+      "notes": "The mutable reference becomes a setter (drawables are shared Rc handles)."
+    },
+    {
+      "upstream_id": "Draw_Marker3D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Marker3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarker3D::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Marker3D::Draw_Marker3D(const gp_Pnt &,const Draw_MarkerShape,const Draw_Color &,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Marker3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarker3D::new",
+      "status": "implemented",
+      "notes": "MarkerSize::Scale selects the real-size overload."
+    },
+    {
+      "upstream_id": "Draw_Marker3D::Draw_Marker3D(const gp_Pnt &,const Draw_MarkerShape,const Draw_Color &,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Marker3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarker3D::new",
+      "status": "implemented",
+      "notes": "MarkerSize::Pixels selects the integer-size overload."
+    },
+    {
+      "upstream_id": "Draw_Marker3D::PickReject(const double,const double,const double) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Marker3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarker3D::<rustycad_tkdraw::draw::Drawable3D>::pick_reject",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_MarkerShape",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_MarkerShape.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarkerShape",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::Draw_Number(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::IsDisplayable() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::<rustycad_tkdraw::draw::Drawable3D>::is_displayable",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::register_factory",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::restore",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::Save(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::<rustycad_tkdraw::draw::Drawable3D>::save",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::Value() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::value",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::Value(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::set_value",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Number::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Number.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawNumber::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Plus",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_MarkerShape.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarkerShape::Plus",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Printer::Draw_Printer(Draw_Interpretor &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Printer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawPrinter::new",
+      "status": "implemented",
+      "notes": "The printer reaches the interpreter through an InterpretorLink (messages from other threads wait for the owner thread)."
+    },
+    {
+      "upstream_id": "Draw_Printer::send(const TCollection_AsciiString &,const Message_Gravity) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Printer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawPrinter::<rustycad_tkernel::message::Printer>::send",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::DefaultConsoleMode()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::default_console_mode",
+      "status": "implemented",
+      "notes": "The static reference becomes a getter and set_default_console_mode."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::DefaultGraphMode()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::default_graph_mode",
+      "status": "implemented",
+      "notes": "The static reference becomes a getter and set_default_graph_mode."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::DefaultTclMode()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::default_tcl_mode",
+      "status": "implemented",
+      "notes": "The static reference becomes a getter and set_default_tcl_mode."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::Draw_ProgressIndicator(const Draw_Interpretor &,double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawProgressIndicator::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::GetConsoleMode() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawProgressIndicator::console_mode",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::GetGraphMode() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawProgressIndicator::graph_mode",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::GetTclMode() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawProgressIndicator::tcl_mode",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::Reset()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawProgressIndicator::reset",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::SetConsoleMode(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawProgressIndicator::set_console_mode",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::SetGraphMode(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawProgressIndicator::set_graph_mode",
+      "status": "partial",
+      "notes": "The graph mode is stored, but the Tk progress window it opens needs the window backend (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::SetTclMode(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawProgressIndicator::set_tcl_mode",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::Show(const Message_ProgressScope &,const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawProgressIndicator::show",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::StopIndicator()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::stop_indicator",
+      "status": "implemented",
+      "notes": "The static reference becomes a getter and set_stop_indicator."
+    },
+    {
+      "upstream_id": "Draw_ProgressIndicator::UserBreak()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawProgressIndicator::user_break",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment2D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment2D::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment2D::Draw_Segment2D(const gp_Pnt2d &,const gp_Pnt2d &,const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment2D::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment2D::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment2D::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment2D::First() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment2D::first",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment2D::First(const gp_Pnt2d &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment2D::set_first",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment2D::Last() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment2D::last",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment2D::Last(const gp_Pnt2d &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment2D::set_last",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment2D::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment2D::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment3D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment3D::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment3D::Draw_Segment3D(const gp_Pnt &,const gp_Pnt &,const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment3D::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment3D::First() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment3D::first",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment3D::First(const gp_Pnt &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment3D::set_first",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment3D::Last() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment3D::last",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Segment3D::Last(const gp_Pnt &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Segment3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSegment3D::set_last",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Square",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_MarkerShape.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarkerShape::Square",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Text2D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Text2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawText2D::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Text2D::Draw_Text2D(const gp_Pnt2d &,const char *const,const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Text2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawText2D::new",
+      "status": "implemented",
+      "notes": "The overload without offsets is new(..., 0, 0)."
+    },
+    {
+      "upstream_id": "Draw_Text2D::Draw_Text2D(const gp_Pnt2d &,const char *const,const Draw_Color &,const int,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Text2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawText2D::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Text2D::SetPnt2d(const gp_Pnt2d &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Text2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawText2D::set_point",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Text3D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Text3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawText3D::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Text3D::Draw_Text3D(const gp_Pnt &,const char *const,const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Text3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawText3D::new",
+      "status": "implemented",
+      "notes": "The overload without offsets is new(..., 0.0, 0.0)."
+    },
+    {
+      "upstream_id": "Draw_Text3D::Draw_Text3D(const gp_Pnt &,const char *const,const Draw_Color &,const double,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Text3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawText3D::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Text3D::SetPnt(const gp_Pnt &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Text3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawText3D::set_point",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::Draw_View(int,Draw_Viewer *,const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::new",
+      "status": "partial",
+      "notes": "DrawViewer::make_view_on creates the window through DrawWindowSystem and passes it in; only the batch window system exists until the X11 backend lands."
+    },
+    {
+      "upstream_id": "Draw_View::Draw_View(int,Draw_Viewer *,int,int,int,int,Aspect_Drawable)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::new",
+      "status": "partial",
+      "notes": "DrawViewer::make_view creates the window through DrawWindowSystem and passes it in; only the batch window system exists until the X11 backend lands."
+    },
+    {
+      "upstream_id": "Draw_View::GetDx() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::<rustycad_tkdraw::draw::DisplaySurface>::dx",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::GetDy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::<rustycad_tkdraw::draw::DisplaySurface>::dy",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::GetFocalDistance() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::<rustycad_tkdraw::draw::DisplaySurface>::focal_distance",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::GetFrame(int &,int &,int &,int &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::<rustycad_tkdraw::draw::DisplaySurface>::frame",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::GetMatrix() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::<rustycad_tkdraw::draw::DisplaySurface>::matrix",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::GetZoom() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::<rustycad_tkdraw::draw::DisplaySurface>::zoom",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::Init(const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::init",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::Is2D() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::is_2d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::IsPerspective() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::<rustycad_tkdraw::draw::DisplaySurface>::is_perspective",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::ResetFrame()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::reset_frame",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::SetDx(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::set_dx",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::SetDy(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::set_dy",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::SetFocalDistance(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::set_focal_distance",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::SetMatrix(const gp_Trsf &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::set_matrix",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::SetZoom(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::set_zoom",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::Transform(const gp_Trsf &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::transform",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::Type()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView::view_type",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_View::WExpose()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::expose_view",
+      "status": "implemented",
+      "notes": "The expose handler needs the viewer, so it is a viewer method keyed by view id."
+    },
+    {
+      "upstream_id": "Draw_View::myDx",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myDy",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myFocalDistance",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myFrameX0",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myFrameX1",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myFrameY0",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myFrameY1",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myId",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myIs2D",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myIsPers",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myMatrix",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myType",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myViewer",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_View::myZoom",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_View.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawView",
+      "status": "excluded",
+      "notes": "Excluded: protected Draw_View state; DrawView keeps it in private fields read through rustycad_tkdraw::draw::DisplaySurface and the DrawView setters."
+    },
+    {
+      "upstream_id": "Draw_Viewer::AddDrawable(const occ::handle<Draw_Drawable3D> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::add_drawable",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Clear()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::clear",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Clear2D()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::clear_2d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Clear3D()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::clear_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::ClearView(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::clear_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::ConfigView(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::config_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::DefineColor(const int,const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::define_color",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::DeleteView(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::delete_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::DisplayView(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::display_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::DrawOnView(const int,const occ::handle<Draw_Drawable3D> &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::draw_on_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Draw_Viewer()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::with_window_system",
+      "status": "implemented",
+      "notes": "The window system is a constructor parameter; DrawViewer::batch builds the windowless viewer."
+    },
+    {
+      "upstream_id": "Draw_Viewer::FitView(const int,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::fit_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Flush()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::flush",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Focal(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::focal",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::GetDrawables()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::drawables",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::GetFrame(const int,int &,int &,int &,int &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::frame",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::GetPan(const int,int &,int &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::pan",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::GetPosSize(const int,int &,int &,int &,int &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::pos_size",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::GetTrsf(const int,gp_Trsf &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::trsf",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::GetType(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::view_type",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::HasView(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::has_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::HideView(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::hide_view",
+      "status": "implemented",
+      "notes": "The upstream body is empty."
+    },
+    {
+      "upstream_id": "Draw_Viewer::HighlightOnView(const int,const occ::handle<Draw_Drawable3D> &,const Draw_ColorKind) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::highlight_on_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Is3D(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::is_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::LastPick(gp_Pnt &,gp_Pnt &,double &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::last_pick",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::MakeDisplay(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::make_display",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::MakeView(const int,const char *,const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::make_view_on",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::MakeView(const int,const char *,const int,const int,const int,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::make_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::PanView(const int,const int,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::pan_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Pick(const int,const int,const int,const int,occ::handle<Draw_Drawable3D> &,const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::pick",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::PostColor(const int,const int,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::post_color",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::PostScriptView(const int,const int,const int,const int,const int,const int,const int,const int,const int,std::ostream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::postscript_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::RemoveDrawable(const occ::handle<Draw_Drawable3D> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::remove_drawable",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::RemoveView(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::remove_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Repaint2D() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::repaint_2d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Repaint3D() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::repaint_3d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::RepaintAll() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::repaint_all",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::RepaintView(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::repaint_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::ResetView(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::reset_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::RotateView(const int,const gp_Dir2d &,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::rotate_view_2d",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::RotateView(const int,const gp_Pnt &,const gp_Dir &,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::rotate_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::SaveView(const int,const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::save_view",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Select(int &,int &,int &,int &,bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::select",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::SetFocal(const int,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::set_focal",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::SetPan(const int,const int,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::set_pan",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::SetTitle(const int,const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::set_title",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::SetTrsf(const int,gp_Trsf &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::set_trsf",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::SetZoom(const int,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::set_zoom",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::Zoom(const int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::zoom",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Viewer::operator<<(const occ::handle<Draw_Drawable3D> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawViewer::display",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Window::Clear()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::clear",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::DefineColor(const int,const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindowSystem::define_color",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::DisplayWindow()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::display",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::DrawSegments(const Draw_XSegment *,int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::draw_segments",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::DrawString(int,int,const char *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::draw_string",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::Draw_Window(const char *,const NCollection_Vec2<int> &,const NCollection_Vec2<int> &,Aspect_Drawable,Aspect_Drawable)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindowSystem::create_window",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::Draw_XEvent::button",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindowEvent::button",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Window::Draw_XEvent::type",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindowEvent::kind",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Window::Draw_XEvent::window",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindowEvent::window",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Window::Draw_XEvent::x",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindowEvent::x",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Window::Draw_XEvent::y",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindowEvent::y",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_Window::Flush()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindowSystem::flush",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::GetNextEvent(Draw_Window::Draw_XEvent &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindowSystem::next_event",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::GetPosition(int &,int &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::position",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::GetTitle() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::title",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::HeightWin() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::height",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::Hide()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::hide",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::IsEqualWindows(Window)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::is_window",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::IsMapped() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::is_mapped",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::Redraw()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::redraw",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::Save(const char *) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::save",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::SetColor(int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::set_color",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::SetDimension(int,int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::set_dimension",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::SetMode(int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::set_mode",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::SetPosition(int,int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::set_position",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::SetTitle(const TCollection_AsciiString &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::set_title",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::Wait(bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::wait",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_Window::WidthWin() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawWindow::width",
+      "status": "partial",
+      "notes": "The DrawWindow trait carries this member and DrawViewer calls it; only the batch (windowless) behavior exists, the X11 backend waits for the TKService window layer (docs/draw-design.md)."
+    },
+    {
+      "upstream_id": "Draw_X",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_MarkerShape.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawMarkerShape::X",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_XSegment::Init(int,int,int,int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawXSegment::new",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_XSegment::Points",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawXSegment::points",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_XSegment::operator[](int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawXSegment::point_mut",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_XSegment::operator[](int) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawXSegment::point",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_blanc",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Blanc",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_bleu",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Bleu",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_corail",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Corail",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_cyan",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Cyan",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_jaune",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Jaune",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_kaki",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Kaki",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_magenta",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Magenta",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_marron",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Marron",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_or",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Or",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_orange",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Orange",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_rose",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Rose",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_rouge",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Rouge",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_saumon",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Saumon",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_vert",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Vert",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Draw_violet",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_ColorKind.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawColorKind::Violet",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "FDraw_InitAppli",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Appli.hxx",
+      "rust_item": "rustycad_tkdraw::draw::InitAppli",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "MAXCOLOR",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tkdraw::draw::MAXCOLOR",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "MAXVIEW",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Viewer.hxx",
+      "rust_item": "rustycad_tkdraw::draw::MAXVIEW",
+      "status": "implemented",
+      "notes": "Draw package port (rustycad-tkdraw)."
+    },
+    {
+      "upstream_id": "Window",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tcl::sys::Window",
+      "status": "implemented",
+      "notes": "The Xlib XID type of the Tcl/Tk binding."
+    },
+    {
+      "upstream_id": "dout",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Appli.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::viewer",
+      "status": "implemented",
+      "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
     }
   ],
   "tests": [
