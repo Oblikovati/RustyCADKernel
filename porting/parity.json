@@ -456596,14 +456596,6 @@
       "notes": "Graphic3d shader data model mapping (visualization-design.md section 3): the shader program, stage and uniform classes are ported as transients; their GLSL text is assembled exactly as natively but only the OpenGL driver compiles it, the Vulkan driver reads the same description and writes its own shaders; protected fields are read through their accessors; the declaration generator is compared text for text by the sv_shader_decl native probe."
     },
     {
-      "upstream_id": "Graphic3d_ShaderProgram",
-      "toolkit": "TKService",
-      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dShaderProgram",
-      "status": "implemented",
-      "notes": "Graphic3d shader data model mapping (visualization-design.md section 3): the shader program, stage and uniform classes are ported as transients; their GLSL text is assembled exactly as natively but only the OpenGL driver compiles it, the Vulkan driver reads the same description and writes its own shaders; protected fields are read through their accessors; the declaration generator is compared text for text by the sv_shader_decl native probe."
-    },
-    {
       "upstream_id": "Graphic3d_ShaderProgram::THE_MAX_LIGHTS_DEFAULT",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderProgram.hxx",
@@ -472383,6 +472375,342 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dGraduatedTrihedronAxisAspect::name_offset",
       "status": "implemented",
       "notes": "Graphic3d_GraduatedTrihedron mapping: plain value structs with public fields (the getters and setters are the field accesses); the axis index checks raise Standard_OutOfRange; the cubic axes callback is an optional fn of the view; covered by tests/graphic3d_driver_model_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs. The forward declaration of Graphic3d_MediaTexture.hxx."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTexture",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTexture",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTexture::GetImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRoot::get_image",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs. The override of Graphic3dMediaTexture."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTexture::Frame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTexture::frame",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTexture::SetFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTexture::set_frame",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTexture::GenerateNewId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTexture::generate_new_id",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTexture::myMutex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaFrameLock",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs. The private shared lock of the texture."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTexture::myFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTexture::frame",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs. Private state behind the accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTexture::myPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTexture::plane",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTexture::myPixMapWrapper",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTexture",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs. Private state (never filled without FFmpeg)."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTexture.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Media_PlayerContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs. The forward declaration of Graphic3d_MediaTextureSet.hxx."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::CallbackOnUpdate_t",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSetCallback",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs. The function and its user pointer become one shared closure."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::Graphic3d_MediaTextureSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::new",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::SetCallback",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::set_callback",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::Notify",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::notify",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::Input",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::input",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::OpenInput",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::open_input",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::PlayerContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::player_context",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::SwapFrames",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::swap_frames",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::FrameSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::frame_size",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::ShaderProgram",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::shader_program",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::IsPlanarYUV",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::is_planar_yuv",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::IsFullRangeYUV",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::is_full_range_yuv",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::Duration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::duration",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::Progress",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::progress",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myPlayerCtx",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSetFields::player_ctx",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myFramePair",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::frame_queue",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs. The frames of the shared frame queue."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myShaderYUV",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::shader_yuv",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myShaderYUVJ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::shader_yuvj",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myMutex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaFrameLock",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myInput",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSetFields::input",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myCallbackFunction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::set_callback",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs. The callback of the shared frame queue."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myCallbackUserPtr",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSet::set_callback",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs. Captured by the callback closure."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myFrameSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSetFields::frame_size",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myProgress",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSetFields::progress",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myDuration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSetFields::duration",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myFront",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaFrameSwap::front",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myToPresentFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaFrameSwap::to_present_frame",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myIsPlanarYUV",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSetFields::is_planar_yuv",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_MediaTextureSet::myIsFullRangeYUV",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMediaTextureSetFields::is_full_range_yuv",
+      "status": "implemented",
+      "notes": "Graphic3d_MediaTexture mapping: the build without FFmpeg (frames stay empty, so GetImage gives no image); the texture and the set share the front/back state behind one mutex (Graphic3dMediaFrameLock, the std::mutex& natively); the set embeds Graphic3dTextureSet (Deref) and its frame queue part is a shared object handed to the player thread; checked by the sv_mtex oracle (textures, YUV programs text for text, frame queue) and tests/graphic3d_media_texture_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderProgram",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MediaTextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dShaderProgram",
+      "status": "implemented",
+      "notes": "Graphic3d shader data model mapping (visualization-design.md section 3): the shader program, stage and uniform classes are ported as transients; their GLSL text is assembled exactly as natively but only the OpenGL driver compiles it, the Vulkan driver reads the same description and writes its own shaders; protected fields are read through their accessors; the declaration generator is compared text for text by the sv_shader_decl native probe."
     },
     {
       "upstream_id": "AVBufferPool",

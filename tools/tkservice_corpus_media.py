@@ -3,6 +3,8 @@
 `sv_media` compares the time texts (FormatTime and FormatTimeProgress, with the unsigned
 wrap of negative times), the error text, a stopped playback timer, a buffer pool through a
 sequence of sizes, and the FFmpeg-free answers of the frame, packet, scaler and contexts.
+`sv_mtex` compares the media texture set: its plane textures, the YUV programs (text for
+text) and the front/back frame queue.
 """
 from __future__ import annotations
 import random
@@ -21,3 +23,6 @@ def append_media_requests(requests: list[str]) -> None:
         t = TIMES[index % len(TIMES)] if index < len(TIMES) else rng.choice(TIMES)
         sizes = [rng.choice([0, 0, 64, 100, 1024]) for _ in range(rng.randrange(0, 5))]
         requests.append('sv_media ' + numbers([t, rng.choice(DURATIONS), rng.choice(CODES), len(sizes)] + sizes))
+    # sv_mtex: a media texture set with its frame queue locked and released 0..5 times.
+    for nb_locks in range(6):
+        requests.append('sv_mtex ' + numbers([nb_locks]))

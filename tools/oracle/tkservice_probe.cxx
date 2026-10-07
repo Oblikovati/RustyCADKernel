@@ -43,6 +43,7 @@
 #include "tkservice_probe_stats.cxx"
 #include "tkservice_probe_driver.cxx"
 #include "tkservice_probe_media.cxx"
+#include "tkservice_probe_mtex.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -100,6 +101,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sv_scene", sv_scene_case},
  // Media without FFmpeg (tkservice_probe_media.cxx)
  {"sv_media", sv_media_case},
+ // Graphic3d_MediaTexture and Graphic3d_MediaTextureSet (tkservice_probe_mtex.cxx)
+ {"sv_mtex", sv_mtex_case},
 };
 int main() {
  std::string line;

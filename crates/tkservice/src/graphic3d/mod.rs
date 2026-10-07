@@ -75,6 +75,8 @@ mod material_aspect;
 mod material_enums;
 mod material_specs;
 mod material_table;
+mod media_texture;
+mod media_texture_shaders;
 mod pbr_material;
 mod presentation_attributes;
 mod render_enums;
@@ -220,6 +222,10 @@ pub use light_set::{
 pub use marker_image::Graphic3dMarkerImage;
 pub use material_aspect::Graphic3dMaterialAspect;
 pub use material_enums::*;
+pub use media_texture::{
+    Graphic3dMediaFrameLock, Graphic3dMediaFrameSwap, Graphic3dMediaTexture,
+    Graphic3dMediaTextureSet, Graphic3dMediaTextureSetCallback, Graphic3dMediaTextureSetFields,
+};
 pub use pbr_material::{Graphic3dPbrMaterial, material_definition_error};
 pub use presentation_attributes::{
     Graphic3dPresentationAttributes, Graphic3dPresentationAttributesBase,
