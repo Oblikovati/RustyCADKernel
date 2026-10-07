@@ -32885,7 +32885,7 @@
       "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     },
     {
-      "upstream_id": "MathUtils::Domain2D(const Domain1D&,const Domain1D&)",
+      "upstream_id": "MathUtils::Domain2D::Domain2D(const MathUtils::Domain1D&,const MathUtils::Domain1D&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
       "rust_item": "rustycad_tkmath::math_utils::Domain2D::from_domains",
@@ -33744,7 +33744,7 @@
       "upstream_id": "MathUtils::ScalarLambda::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::ScalarLambda<F> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::ScalarLambda::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -33768,7 +33768,7 @@
       "upstream_id": "MathUtils::ScalarLambdaWithDerivative::Values(double,double&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::ScalarLambdaWithDerivative<F> as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::ScalarLambdaWithDerivative::<rustycad_tkmath::math::FunctionWithDerivative>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -33776,7 +33776,7 @@
       "upstream_id": "MathUtils::ScalarLambdaWithDerivative::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::ScalarLambdaWithDerivative<F> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::ScalarLambdaWithDerivative::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -33824,7 +33824,7 @@
       "upstream_id": "MathUtils::Polynomial::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Polynomial as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Polynomial::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -33832,7 +33832,7 @@
       "upstream_id": "MathUtils::Polynomial::Values(double,double&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Polynomial as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Polynomial::<rustycad_tkmath::math::FunctionWithDerivative>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -33880,7 +33880,7 @@
       "upstream_id": "MathUtils::Rational::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Rational as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Rational::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -33904,7 +33904,7 @@
       "upstream_id": "MathUtils::Composite::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Composite<F, G> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Composite::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -33936,7 +33936,7 @@
       "upstream_id": "MathUtils::Sum::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Sum<F, G> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Sum::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -33968,7 +33968,7 @@
       "upstream_id": "MathUtils::Difference::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Difference<F, G> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Difference::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34000,7 +34000,7 @@
       "upstream_id": "MathUtils::Product::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Product<F, G> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Product::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34032,7 +34032,7 @@
       "upstream_id": "MathUtils::Quotient::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Quotient<F, G> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Quotient::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34064,7 +34064,7 @@
       "upstream_id": "MathUtils::Scaled::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Scaled<F> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Scaled::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34096,7 +34096,7 @@
       "upstream_id": "MathUtils::Shifted::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Shifted<F> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Shifted::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34128,7 +34128,7 @@
       "upstream_id": "MathUtils::Negated::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Negated<F> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Negated::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34160,7 +34160,7 @@
       "upstream_id": "MathUtils::Constant::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Constant as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Constant::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34168,7 +34168,7 @@
       "upstream_id": "MathUtils::Constant::Values(double,double&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Constant as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Constant::<rustycad_tkmath::math::FunctionWithDerivative>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34192,7 +34192,7 @@
       "upstream_id": "MathUtils::Linear::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Linear as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Linear::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34200,7 +34200,7 @@
       "upstream_id": "MathUtils::Linear::Values(double,double&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Linear as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Linear::<rustycad_tkmath::math::FunctionWithDerivative>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34224,7 +34224,7 @@
       "upstream_id": "MathUtils::Sine::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Sine as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Sine::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34232,7 +34232,7 @@
       "upstream_id": "MathUtils::Sine::Values(double,double&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Sine as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Sine::<rustycad_tkmath::math::FunctionWithDerivative>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34256,7 +34256,7 @@
       "upstream_id": "MathUtils::Cosine::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Cosine as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Cosine::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34264,7 +34264,7 @@
       "upstream_id": "MathUtils::Cosine::Values(double,double&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Cosine as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Cosine::<rustycad_tkmath::math::FunctionWithDerivative>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34288,7 +34288,7 @@
       "upstream_id": "MathUtils::Exponential::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Exponential as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Exponential::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34296,7 +34296,7 @@
       "upstream_id": "MathUtils::Exponential::Values(double,double&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Exponential as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Exponential::<rustycad_tkmath::math::FunctionWithDerivative>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34320,7 +34320,7 @@
       "upstream_id": "MathUtils::Power::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Power as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Power::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34328,7 +34328,7 @@
       "upstream_id": "MathUtils::Power::Values(double,double&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Power as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Power::<rustycad_tkmath::math::FunctionWithDerivative>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34352,7 +34352,7 @@
       "upstream_id": "MathUtils::Gaussian::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Gaussian as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Gaussian::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34360,7 +34360,7 @@
       "upstream_id": "MathUtils::Gaussian::Values(double,double&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorScalar.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::scalar::Gaussian as rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "rust_item": "rustycad_tkmath::math_utils::scalar::Gaussian::<rustycad_tkmath::math::FunctionWithDerivative>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorScalar mapping: the header-only templates are Rust generics in math_utils::scalar; Value/Values are the math::Function / math::FunctionWithDerivative trait methods; native default arguments become Default impls where every parameter has one (Sine, Cosine, Exponential, Gaussian) and explicit arguments otherwise (the trait also requires a derivative-only method, which evaluates Values and keeps the derivative); initializer_list constructors take slices and math_Vector constructors copy Vector::values() in offset order, as the native At(index) does. Evaluation order, short-circuiting and finiteness tests follow the header; the MathUtils_Functor suite and the scalar_functor and mathutils_functor_{poly,arith,lambda} probes compare bits."
     },
@@ -34384,7 +34384,7 @@
       "upstream_id": "MathUtils::VectorLambda::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::VectorLambda<F> as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::VectorLambda::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34408,7 +34408,7 @@
       "upstream_id": "MathUtils::VectorLambdaWithGradient::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::VectorLambdaWithGradient<F, G> as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::VectorLambdaWithGradient::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34416,7 +34416,7 @@
       "upstream_id": "MathUtils::VectorLambdaWithGradient::Gradient(const math_Vector&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::VectorLambdaWithGradient<F, G> as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
+      "rust_item": "rustycad_tkmath::math_utils::VectorLambdaWithGradient::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34424,7 +34424,7 @@
       "upstream_id": "MathUtils::VectorLambdaWithGradient::Values(const math_Vector&,double&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::VectorLambdaWithGradient<F, G> as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
+      "rust_item": "rustycad_tkmath::math_utils::VectorLambdaWithGradient::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34464,7 +34464,7 @@
       "upstream_id": "MathUtils::QuadraticForm::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::QuadraticForm as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::vector::QuadraticForm::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34472,7 +34472,7 @@
       "upstream_id": "MathUtils::QuadraticForm::Gradient(const math_Vector&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::QuadraticForm as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
+      "rust_item": "rustycad_tkmath::math_utils::vector::QuadraticForm::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34480,7 +34480,7 @@
       "upstream_id": "MathUtils::QuadraticForm::Values(const math_Vector&,double&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::QuadraticForm as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
+      "rust_item": "rustycad_tkmath::math_utils::vector::QuadraticForm::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34504,7 +34504,7 @@
       "upstream_id": "MathUtils::Rosenbrock::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Rosenbrock as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Rosenbrock::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34512,7 +34512,7 @@
       "upstream_id": "MathUtils::Rosenbrock::Gradient(const math_Vector&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Rosenbrock as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Rosenbrock::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34520,7 +34520,7 @@
       "upstream_id": "MathUtils::Rosenbrock::Values(const math_Vector&,double&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Rosenbrock as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Rosenbrock::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34536,7 +34536,7 @@
       "upstream_id": "MathUtils::Sphere::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Sphere as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Sphere::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34544,7 +34544,7 @@
       "upstream_id": "MathUtils::Sphere::Gradient(const math_Vector&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Sphere as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Sphere::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34552,7 +34552,7 @@
       "upstream_id": "MathUtils::Sphere::Values(const math_Vector&,double&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Sphere as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Sphere::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34568,7 +34568,7 @@
       "upstream_id": "MathUtils::Booth::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Booth as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Booth::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34576,7 +34576,7 @@
       "upstream_id": "MathUtils::Booth::Gradient(const math_Vector&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Booth as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Booth::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34584,7 +34584,7 @@
       "upstream_id": "MathUtils::Booth::Values(const math_Vector&,double&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Booth as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Booth::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34600,7 +34600,7 @@
       "upstream_id": "MathUtils::Beale::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Beale as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Beale::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34608,7 +34608,7 @@
       "upstream_id": "MathUtils::Beale::Gradient(const math_Vector&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Beale as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Beale::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34616,7 +34616,7 @@
       "upstream_id": "MathUtils::Beale::Values(const math_Vector&,double&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Beale as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Beale::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34632,7 +34632,7 @@
       "upstream_id": "MathUtils::Himmelblau::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Himmelblau as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Himmelblau::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34640,7 +34640,7 @@
       "upstream_id": "MathUtils::Himmelblau::Gradient(const math_Vector&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Himmelblau as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Himmelblau::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34648,7 +34648,7 @@
       "upstream_id": "MathUtils::Himmelblau::Values(const math_Vector&,double&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Himmelblau as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Himmelblau::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34672,7 +34672,7 @@
       "upstream_id": "MathUtils::Rastrigin::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Rastrigin as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Rastrigin::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34680,7 +34680,7 @@
       "upstream_id": "MathUtils::Rastrigin::Gradient(const math_Vector&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Rastrigin as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Rastrigin::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34688,7 +34688,7 @@
       "upstream_id": "MathUtils::Rastrigin::Values(const math_Vector&,double&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Rastrigin as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Rastrigin::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34712,7 +34712,7 @@
       "upstream_id": "MathUtils::Ackley::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::Ackley as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::vector::Ackley::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34736,7 +34736,7 @@
       "upstream_id": "MathUtils::LinearResidual::Value(const math_Vector&,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::LinearResidual as rustycad_tkmath::math::MultipleVarFunction>::value",
+      "rust_item": "rustycad_tkmath::math_utils::vector::LinearResidual::<rustycad_tkmath::math::MultipleVarFunction>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34744,7 +34744,7 @@
       "upstream_id": "MathUtils::LinearResidual::Gradient(const math_Vector&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::LinearResidual as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
+      "rust_item": "rustycad_tkmath::math_utils::vector::LinearResidual::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::gradient",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34752,7 +34752,7 @@
       "upstream_id": "MathUtils::LinearResidual::Values(const math_Vector&,double&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::LinearResidual as rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
+      "rust_item": "rustycad_tkmath::math_utils::vector::LinearResidual::<rustycad_tkmath::math::MultipleVarFunctionWithGradient>::values",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34784,7 +34784,7 @@
       "upstream_id": "MathUtils::SystemLambda::Value(const math_Vector&,math_Vector&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_FunctorVector.hxx",
-      "rust_item": "<rustycad_tkmath::math_utils::vector::SystemLambda<F> as rustycad_tkmath::math::FunctionSet>::value",
+      "rust_item": "rustycad_tkmath::math_utils::vector::SystemLambda::<rustycad_tkmath::math::FunctionSet>::value",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
     },
@@ -34795,6 +34795,150 @@
       "rust_item": "rustycad_tkmath::math_utils::vector::make_system",
       "status": "implemented",
       "notes": "Explicit MathUtils_FunctorVector mapping: Value/Gradient/Values are the math::MultipleVarFunction / MultipleVarFunctionWithGradient trait methods and SystemLambda::Value is math::FunctionSet::value. Deliberate deviation: those traits report the variable count, so VectorLambda, VectorLambdaWithGradient, Sphere, Rastrigin, Ackley and SystemLambda constructors take an extra leading dimension argument that the native classes do not have; evaluation never reads it. Rosenbrock::default() supplies the native a=1, b=100 defaults; Rastrigin and Ackley defaults are passed explicitly because of the dimension argument. Loops, operand order and failure paths follow the header; the vector_functor and mathutils_functor_{vlambda,nd} probes compare bits."
+    },
+    {
+      "upstream_id": "MathUtils",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils",
+      "status": "implemented",
+      "notes": "C++ namespace MathUtils is the Rust module math_utils."
+    },
+    {
+      "upstream_id": "MathUtils::Utils",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::utils",
+      "status": "implemented",
+      "notes": "C++ helper namespace MathUtils::Utils is the Rust module math_utils::utils."
+    },
+    {
+      "upstream_id": "MathUtils::Status::OK",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::Ok",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::Status::NotConverged",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::NotConverged",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::Status::MaxIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::MaxIterations",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::Status::NumericalError",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::NumericalError",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::Status::InvalidInput",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::InvalidInput",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::Status::InfiniteSolutions",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::InfiniteSolutions",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::Status::NoSolution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::NoSolution",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::Status::NotPositiveDefinite",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::NotPositiveDefinite",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::Status::Singular",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::Singular",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::Status::NonDescentDirection",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::NonDescentDirection",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::Status::CallbackError",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status::CallbackError",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "MathUtils::LineSearchResult::Alpha",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LineSearchResult::alpha",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathUtils::LineSearchResult::FNew",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LineSearchResult::f_new",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathUtils::LineSearchResult::IsValid",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LineSearchResult::is_valid",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathUtils::LineSearchResult::NbEvals",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LineSearchResult::evaluations",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathUtils::LineSearchResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LineSearchResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
     },
     {
       "upstream_id": "MathInteg::THE_DOUBLE_EXP_DEFAULT_MAX_POINTS_PER_LEVEL",
