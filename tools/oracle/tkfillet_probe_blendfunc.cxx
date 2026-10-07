@@ -4,6 +4,11 @@
 #include <BlendFunc.hxx>
 #include <BlendFunc_ConstRad.hxx>
 #include <BlendFunc_ConstRadInv.hxx>
+#include <BlendFunc_EvolRad.hxx>
+#include <Law_Constant.hxx>
+#include <Law_Interpol.hxx>
+#include <Law_Linear.hxx>
+#include <Law_S.hxx>
 #include <Geom2dAdaptor_Curve.hxx>
 #include <Geom2d_Line.hxx>
 #include <Blend_Point.hxx>
@@ -93,15 +98,8 @@ void fl_app_queries(Blend_AppFunction& f,double tol){
  GA_TRY(double u,v;f.Resolution(2,tol,u,v);ga_real(u);ga_real(v));
  GA_TRY(ga_real(f.GetMinimalDistance()));GA_TRY(ga_real(f.GetSectionSize()));GA_TRY(ga_flag(f.IsRational()));}
 
-// `fl_const_rad S1 S2 C radius choix shape t trim first last X1..X4 tol`.
-void fl_const_rad_case(std::istream& in){
- GaReader r{in};
- occ::handle<Adaptor3d_Surface> s1=fl_surface(r),s2=fl_surface(r);occ::handle<Adaptor3d_Curve> c=fl_guide(r);
- double radius=r.real();int choix=r.integer(),shape=r.integer();double t=r.real();bool trim=r.flag();
- double first=r.real(),last=r.real();math_Vector x(1,4);for(int i=1;i<=4;++i)x(i)=r.real();double tol=r.real();
- BlendFunc_ConstRad f(s1,s2,c);f.Set(radius,choix);f.Set(BlendFunc_SectionShape(shape));
- if(trim)GA_TRY(f.Set(first,last));
- f.Set(t);
+// The members a two-surface fillet function shares, after Set(t), at the point X.
+template<class F> void fl_fillet_members(F& f,const math_Vector& x,double t,double tol){
  math_Vector fv(1,4);math_Matrix d(1,4,1,4);fv.Init(0);d.Init(0);
  GA_TRY(ga_flag(f.Value(x,fv));fl_vector(fv));
  GA_TRY(ga_flag(f.Derivatives(x,d));fl_matrix(d));
@@ -111,8 +109,42 @@ void fl_const_rad_case(std::istream& in){
  GA_TRY(double pd,pf;gp_Circ k;f.Section(t,x(1),x(2),x(3),x(4),pd,pf,k);ga_real(pd);ga_real(pf);
         ga_pnt(k.Location());ga_dir(k.Axis().Direction());ga_dir(k.XAxis().Direction());ga_real(k.Radius()));
  fl_sections(f,x,t);
- fl_app_queries(f,tol);
+ fl_app_queries(f,tol);}
+
+// `fl_const_rad S1 S2 C radius choix shape t trim first last X1..X4 tol`.
+void fl_const_rad_case(std::istream& in){
+ GaReader r{in};
+ occ::handle<Adaptor3d_Surface> s1=fl_surface(r),s2=fl_surface(r);occ::handle<Adaptor3d_Curve> c=fl_guide(r);
+ double radius=r.real();int choix=r.integer(),shape=r.integer();double t=r.real();bool trim=r.flag();
+ double first=r.real(),last=r.real();math_Vector x(1,4);for(int i=1;i<=4;++i)x(i)=r.real();double tol=r.real();
+ BlendFunc_ConstRad f(s1,s2,c);f.Set(radius,choix);f.Set(BlendFunc_SectionShape(shape));
+ if(trim)GA_TRY(f.Set(first,last));
+ f.Set(t);
+ fl_fillet_members(f,x,t,tol);
  GA_TRY(gp_Ax1 ax=f.AxeRot(t);ga_pnt(ax.Location());ga_dir(ax.Direction()));
+ ga_end();}
+
+// A radius law: kind (0 constant r1 on [p1, p2], 1 linear, 2 S, 3 interpolation through
+// (p1, r1), ((p1 + p2) / 2, r3), (p2, r2)) then p1 r1 p2 r2 r3 and one unused real; 7 numbers.
+occ::handle<Law_Function> fl_law(GaReader& r){
+ int kind=r.integer();double p1=r.real(),r1=r.real(),p2=r.real(),r2=r.real(),r3=r.real();r.real();
+ if(kind==0){occ::handle<Law_Constant> l=new Law_Constant();l->Set(r1,p1,p2);return l;}
+ if(kind==1){occ::handle<Law_Linear> l=new Law_Linear();l->Set(p1,r1,p2,r2);return l;}
+ if(kind==2){occ::handle<Law_S> l=new Law_S();l->Set(p1,r1,p2,r2);return l;}
+ NCollection_Array1<gp_Pnt2d> pts(1,3);pts(1)=gp_Pnt2d(p1,r1);pts(2)=gp_Pnt2d((p1+p2)/2,r3);pts(3)=gp_Pnt2d(p2,r2);
+ occ::handle<Law_Interpol> l=new Law_Interpol();l->Set(pts,false);return l;}
+
+// `fl_evol_rad S1 S2 C Law choix shape t trim first last X1..X4 tol`.
+void fl_evol_rad_case(std::istream& in){
+ GaReader r{in};
+ occ::handle<Adaptor3d_Surface> s1=fl_surface(r),s2=fl_surface(r);occ::handle<Adaptor3d_Curve> c=fl_guide(r);
+ occ::handle<Law_Function> law=fl_law(r);
+ int choix=r.integer(),shape=r.integer();double t=r.real();bool trim=r.flag();
+ double first=r.real(),last=r.real();math_Vector x(1,4);for(int i=1;i<=4;++i)x(i)=r.real();double tol=r.real();
+ BlendFunc_EvolRad f(s1,s2,c,law);f.Set(choix);f.Set(BlendFunc_SectionShape(shape));
+ if(trim)GA_TRY(f.Set(first,last));
+ f.Set(t);
+ fl_fillet_members(f,x,t,tol);
  ga_end();}
 
 // A curve on surface: the line of the parametric plane through (u, v) along (du, dv).

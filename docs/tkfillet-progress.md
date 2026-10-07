@@ -39,4 +39,4 @@ FilletSurf.
 | Package | Probe operations |
 | --- | --- |
 | ChFiDS | `fl_spine`, `fl_arc_spine`, `fl_fil_law` |
-| BlendFunc | `fl_const_rad`, `fl_const_rad_inv` |
+| BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad` |

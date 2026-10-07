@@ -60,6 +60,20 @@ pub(crate) fn solve_tangents(solve: &TangentSolve<'_>) -> Result<Option<[f64; 4]
 
 /// The equations of a two-surface blend function and their derivatives that
 /// `ComputeValues` stores (`E`, `DEDX`, `DEDT`, `D2EDX2`, `D2EDXDT`, `D2EDT2`).
+/// The `IsSolution` tangent computation of BlendFunc_EvolRad with its successful Gauss
+/// decomposition: `None` when the residual is out of tolerance.
+pub(crate) fn solve_tangents_gauss(
+    gauss: &Gauss,
+    solve: &TangentSolve<'_>,
+) -> Result<Option<[f64; 4]>, Failure> {
+    let mut solution = vector(4)?;
+    gauss.solve_into(&solve.dedt.opposite(), &mut solution)?;
+    if residual_ok(solve, &solution)? {
+        return values(&solution).map(Some);
+    }
+    Ok(None)
+}
+
 /// The first and second derivatives of the section variables along the guide.
 pub(crate) type SecondDerivatives = ([f64; 4], [f64; 4]);
 

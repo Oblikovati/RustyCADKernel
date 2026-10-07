@@ -1,15 +1,15 @@
-//! The second derivatives of the `BlendFunc_ConstRad` equations (the "positioning of
-//! order 2" block of `ComputeValues`): `D2EDX2` and, by parameter, `D2EDXDT`, `D2EDT2`.
+//! The second derivatives of the fillet equations (the "positioning of order 2" block of
+//! `ComputeValues`): `D2EDX2` and, by parameter, `D2EDXDT`, `D2EDT2`.
 use super::super::linalg::{mset, vset};
 use super::super::normal_terms::{Projection, SurfaceJet};
 use super::super::tensor::Tensor;
-use super::compute::ConstRadScratch;
-use super::equations::{middle_from_guide, set_tail};
-use super::{ConstRad, SurfacePoint};
+use super::compute::SurfaceScratch;
+use super::equations::{middle_from_guide, set_column, set_tail};
+use super::{NormalDerivatives, Radii, SurfacePoint, TwoSurfaceCore};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::Vector3;
 
-/// Writes `value` to `D2EDX2(2..4, j, k)` and, when `j != k`, to `D2EDX2(2..4, k, j)`.
+/// Writes `value` to `D2EDX2(2..4, j, k)` and `D2EDX2(2..4, k, j)`.
 fn set_tensor(tensor: &mut Tensor, j: i32, k: i32, value: Vector3) -> Result<(), Failure> {
     for (row, coordinate) in [(2, value.x()), (3, value.y()), (4, value.z())] {
         *tensor.change_value(row, j, k)? = coordinate;
@@ -37,37 +37,61 @@ fn combine(ray: f64, second: bool, normal_term: Vector3, surface_term: Vector3) 
     resul
 }
 
-impl ConstRad {
+/// The `D2EDXDT` columns: `ray1 * d2ndtu1` (constant radius) or with the law derivative
+/// term `sg1 * dray * dndu1` (evolutive radius).
+fn guide_columns(radii: Radii, n1: &NormalDerivatives, n2: &NormalDerivatives) -> [Vector3; 4] {
+    let (ray1, ray2) = (radii.ray1(), radii.ray2());
+    match radii {
+        Radii::Constant { .. } => [
+            ray1 * n1.d2ndtu,
+            ray1 * n1.d2ndtv,
+            -ray2 * n2.d2ndtu,
+            -ray2 * n2.d2ndtv,
+        ],
+        Radii::Evolutive { sg1, sg2, dray, .. } => {
+            let form = |a: f64, x: Vector3, b: f64, y: Vector3| {
+                let mut resul = Vector3::default();
+                resul.set_linear_form(a, x, b, y);
+                resul
+            };
+            [
+                form(ray1, n1.d2ndtu, sg1 * dray, n1.dndu),
+                form(ray1, n1.d2ndtv, sg1 * dray, n1.dndv),
+                form(-ray2, n2.d2ndtu, -sg2 * dray, n2.dndu),
+                form(-ray2, n2.d2ndtv, -sg2 * dray, n2.dndv),
+            ]
+        }
+    }
+}
+
+impl TwoSurfaceCore {
     /// The positioning of order 2.
     pub(super) fn equations_order2(
         &mut self,
-        scratch: &ConstRadScratch,
+        scratch: &SurfaceScratch,
         by_param: bool,
+        radii: Radii,
     ) -> Result<(), Failure> {
         let nplan = self.plane.nplan;
         let tensor = &mut self.eq.d2edx2;
         tensor.init(0.);
-        for (j, k, d) in [
+        let entries = [
             (1, 1, self.s1.jet.d2u),
             (2, 1, self.s1.jet.d2uv),
             (2, 2, self.s1.jet.d2v),
-        ] {
-            *tensor.change_value(1, j, k)? = nplan.dot(d) / 2.;
-            *tensor.change_value(1, k, j)? = nplan.dot(d) / 2.;
-        }
-        for (j, k, d) in [
             (3, 3, self.s2.jet.d2u),
             (4, 3, self.s2.jet.d2uv),
             (4, 4, self.s2.jet.d2v),
-        ] {
+        ];
+        for (j, k, d) in entries {
             *tensor.change_value(1, j, k)? = nplan.dot(d) / 2.;
             *tensor.change_value(1, k, j)? = nplan.dot(d) / 2.;
         }
         let (p1, p2) = self.projections();
-        self.surface_second(&p1, scratch.d3[0], false)?;
-        self.surface_second(&p2, scratch.d3[1], true)?;
+        self.surface_second(&p1, scratch.d3[0], radii.ray1(), false)?;
+        self.surface_second(&p2, scratch.d3[1], radii.ray2(), true)?;
         if by_param {
-            self.parameter_second(scratch, (p1, p2))?;
+            self.parameter_second(scratch, (p1, p2), radii)?;
         }
         Ok(())
     }
@@ -77,12 +101,13 @@ impl ConstRad {
         &mut self,
         projection: &Projection,
         d3: [Vector3; 4],
+        ray: f64,
         second: bool,
     ) -> Result<(), Failure> {
-        let (point, ray, base) = if second {
-            (&mut self.s2, self.ray2, 3)
+        let (point, base) = if second {
+            (&mut self.s2, 3)
         } else {
-            (&mut self.s1, self.ray1, 1)
+            (&mut self.s1, 1)
         };
         let jet = jet_with(point, d3);
         point.normal.d2ndu = projection.second_derivative(point.dnsu, jet.d2ns_u());
@@ -113,8 +138,9 @@ impl ConstRad {
     /// The double derivation in `t` and `X` and in `t`.
     fn parameter_second(
         &mut self,
-        scratch: &ConstRadScratch,
+        scratch: &SurfaceScratch,
         (p1, p2): (Projection, Projection),
+        radii: Radii,
     ) -> Result<(), Failure> {
         let (dnplan, d2nplan) = (self.plane.dnplan, self.plane.d2nplan);
         let jets = [self.s1.jet, self.s2.jet];
@@ -125,15 +151,8 @@ impl ConstRad {
         self.s1.normal.d2ndtv = p1.guide_cross_derivative(dnplan, self.s1.dnsv, true);
         self.s2.normal.d2ndtu = p2.guide_cross_derivative(dnplan, self.s2.dnsu, false);
         self.s2.normal.d2ndtv = p2.guide_cross_derivative(dnplan, self.s2.dnsv, false);
-        let (n1, n2) = (self.s1.normal, self.s2.normal);
-        let columns = [
-            self.ray1 * n1.d2ndtu,
-            self.ray1 * n1.d2ndtv,
-            -self.ray2 * n2.d2ndtu,
-            -self.ray2 * n2.d2ndtv,
-        ];
-        for (col, resul) in (1..).zip(columns) {
-            super::equations::set_column(&mut self.eq.d2edxdt, col, resul)?;
+        for (col, resul) in (1..).zip(guide_columns(radii, &self.s1.normal, &self.s2.normal)) {
+            set_column(&mut self.eq.d2edxdt, col, resul)?;
         }
         self.s1.normal.d2nw = p1.guide_second_derivative(dnplan, d2nplan);
         self.s2.normal.d2nw = p2.guide_second_derivative(dnplan, d2nplan);
@@ -142,15 +161,40 @@ impl ConstRad {
         let first =
             d2nplan.dot(temp) - 2. * dnplan.dot(guide.d1gui) - self.plane.nplan.dot(guide.d2gui);
         vset(&mut self.eq.d2edt2, 1, first)?;
-        let (d2n1w, d2n2w) = (self.s1.normal.d2nw, self.s2.normal.d2nw);
-        let (ray1, ray2) = (self.ray1, self.ray2);
-        set_tail(
-            &mut self.eq.d2edt2,
-            Vector3::new(
-                ray1 * d2n1w.x() - ray2 * d2n2w.x(),
-                ray1 * d2n1w.y() - ray2 * d2n2w.y(),
-                ray1 * d2n1w.z() - ray2 * d2n2w.z(),
+        let tail = self.guide_second_tail(radii, (p1, p2));
+        set_tail(&mut self.eq.d2edt2, tail)
+    }
+
+    /// `D2EDT2(2..4)`.
+    fn guide_second_tail(&self, radii: Radii, (p1, p2): (Projection, Projection)) -> Vector3 {
+        let (n1, n2) = (self.s1.normal, self.s2.normal);
+        let (ray1, ray2) = (radii.ray1(), radii.ray2());
+        match radii {
+            Radii::Constant { .. } => Vector3::new(
+                ray1 * n1.d2nw.x() - ray2 * n2.d2nw.x(),
+                ray1 * n1.d2nw.y() - ray2 * n2.d2nw.y(),
+                ray1 * n1.d2nw.z() - ray2 * n2.d2nw.z(),
             ),
-        )
+            Radii::Evolutive {
+                sg1,
+                sg2,
+                dray,
+                d2ray,
+                ..
+            } => {
+                let mut resul = Vector3::default();
+                resul.set_linear_form_three(
+                    [ray1, 2. * sg1 * dray, sg1 * d2ray],
+                    [n1.d2nw, n1.dnw, p1.unit_normal()],
+                );
+                let mut temp = Vector3::default();
+                temp.set_linear_form_three(
+                    [ray2, 2. * sg2 * dray, sg2 * d2ray],
+                    [n2.d2nw, n2.dnw, p2.unit_normal()],
+                );
+                resul -= temp;
+                resul
+            }
+        }
     }
 }
