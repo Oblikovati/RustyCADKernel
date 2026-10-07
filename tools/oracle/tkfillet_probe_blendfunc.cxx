@@ -6,6 +6,16 @@
 #include <BlendFunc_ConstRadInv.hxx>
 #include <BlendFunc_EvolRad.hxx>
 #include <BlendFunc_EvolRadInv.hxx>
+#include <BlendFunc_ChAsym.hxx>
+#include <BlendFunc_ChAsymInv.hxx>
+#include <BlendFunc_ChamfInv.hxx>
+#include <BlendFunc_Chamfer.hxx>
+#include <BlendFunc_ConstThroat.hxx>
+#include <BlendFunc_ConstThroatInv.hxx>
+#include <BlendFunc_ConstThroatWithPenetration.hxx>
+#include <BlendFunc_ConstThroatWithPenetrationInv.hxx>
+#include <gp_Lin.hxx>
+#include <memory>
 #include <Law_Constant.hxx>
 #include <Law_Interpol.hxx>
 #include <Law_Linear.hxx>
@@ -99,18 +109,23 @@ void fl_app_queries(Blend_AppFunction& f,double tol){
  GA_TRY(double u,v;f.Resolution(2,tol,u,v);ga_real(u);ga_real(v));
  GA_TRY(ga_real(f.GetMinimalDistance()));GA_TRY(ga_real(f.GetSectionSize()));GA_TRY(ga_flag(f.IsRational()));}
 
-// The members a two-surface fillet function shares, after Set(t), at the point X.
-template<class F> void fl_fillet_members(F& f,const math_Vector& x,double t,double tol){
+// The members a two-surface blend function shares, after Set(t), at the point X; `section`
+// prints the section of the class (a circle for the fillets, a line for the chamfers).
+template<class F,class S> void fl_blend_members(F& f,const math_Vector& x,double t,double tol,S section){
  math_Vector fv(1,4);math_Matrix d(1,4,1,4);fv.Init(0);d.Init(0);
  GA_TRY(ga_flag(f.Value(x,fv));fl_vector(fv));
  GA_TRY(ga_flag(f.Derivatives(x,d));fl_matrix(d));
  GA_TRY(ga_flag(f.Values(x,fv,d));fl_vector(fv);fl_matrix(d));
  GA_TRY(ga_flag(f.IsSolution(x,tol)));fl_tangents(f);
  GA_TRY(gp_Vec a,b,cc,dd;f.Tangent(x(1),x(2),x(3),x(4),a,b,cc,dd);fl_vec(a);fl_vec(b);fl_vec(cc);fl_vec(dd));
- GA_TRY(double pd,pf;gp_Circ k;f.Section(t,x(1),x(2),x(3),x(4),pd,pf,k);ga_real(pd);ga_real(pf);
-        ga_pnt(k.Location());ga_dir(k.Axis().Direction());ga_dir(k.XAxis().Direction());ga_real(k.Radius()));
+ GA_TRY(section());
  fl_sections(f,x,t);
  fl_app_queries(f,tol);}
+
+// The circular section of a fillet function.
+template<class F> void fl_fillet_members(F& f,const math_Vector& x,double t,double tol){
+ fl_blend_members(f,x,t,tol,[&]{double pd,pf;gp_Circ k;f.Section(t,x(1),x(2),x(3),x(4),pd,pf,k);ga_real(pd);ga_real(pf);
+        ga_pnt(k.Location());ga_dir(k.Axis().Direction());ga_dir(k.XAxis().Direction());ga_real(k.Radius());});}
 
 // `fl_const_rad S1 S2 C radius choix shape t trim first last X1..X4 tol`.
 void fl_const_rad_case(std::istream& in){
@@ -184,4 +199,47 @@ void fl_evol_rad_inv_case(std::istream& in){
  math_Vector x(1,4);for(int i=1;i<=4;++i)x(i)=r.real();double tol=r.real();
  BlendFunc_EvolRadInv f(s1,s2,c,law);f.Set(choix);f.Set(first,cs);
  fl_inverse(f,x,tol);
+ ga_end();}
+
+// The linear section of a chamfer function.
+template<class F> void fl_chamfer_members(F& f,const math_Vector& x,double t,double tol){
+ fl_blend_members(f,x,t,tol,[&]{double pd,pf;gp_Lin l;f.Section(t,x(1),x(2),x(3),x(4),pd,pf,l);ga_real(pd);ga_real(pf);
+        ga_pnt(l.Location());ga_dir(l.Direction());});}
+
+template<class F> void fl_chamfer_run(F& f,double t,bool trim,double first,double last,const math_Vector& x,double tol){
+ if(trim)GA_TRY(f.Set(first,last));
+ f.Set(t);
+ fl_chamfer_members(f,x,t,tol);}
+
+// `fl_chamfer S1 S2 C kind d1 d2 choix t trim first last X1..X4 tol`: kind 0 Chamfer,
+// 1 ConstThroat, 2 ConstThroatWithPenetration, 3 ChAsym (d2 is the angle).
+void fl_chamfer_case(std::istream& in){
+ GaReader r{in};
+ occ::handle<Adaptor3d_Surface> s1=fl_surface(r),s2=fl_surface(r);occ::handle<Adaptor3d_Curve> c=fl_guide(r);
+ int kind=r.integer();double d1=r.real(),d2=r.real();int choix=r.integer();double t=r.real();bool trim=r.flag();
+ double first=r.real(),last=r.real();math_Vector x(1,4);for(int i=1;i<=4;++i)x(i)=r.real();double tol=r.real();
+ if(kind==3){BlendFunc_ChAsym f(s1,s2,c);f.Set(d1,d2,choix);fl_chamfer_run(f,t,trim,first,last,x,tol);ga_end();return;}
+ std::unique_ptr<BlendFunc_GenChamfer> f;
+ if(kind==0)f.reset(new BlendFunc_Chamfer(s1,s2,c));
+ else if(kind==1)f.reset(new BlendFunc_ConstThroat(s1,s2,c));
+ else f.reset(new BlendFunc_ConstThroatWithPenetration(s1,s2,c));
+ f->Set(d1,d2,choix);
+ fl_chamfer_run(*f,t,trim,first,last,x,tol);
+ ga_end();}
+
+// `fl_chamfer_inv S1 S2 C P2d D2d kind d1 d2 choix first X1..X4 tol`: kind 0 ChamfInv,
+// 1 ConstThroatInv, 2 ConstThroatWithPenetrationInv, 3 ChAsymInv (d2 is the angle).
+void fl_chamfer_inv_case(std::istream& in){
+ GaReader r{in};
+ occ::handle<Adaptor3d_Surface> s1=fl_surface(r),s2=fl_surface(r);occ::handle<Adaptor3d_Curve> c=fl_guide(r);
+ occ::handle<Adaptor2d_Curve2d> cs=fl_curve2d(r);
+ int kind=r.integer();double d1=r.real(),d2=r.real();int choix=r.integer();bool first=r.flag();
+ math_Vector x(1,4);for(int i=1;i<=4;++i)x(i)=r.real();double tol=r.real();
+ if(kind==3){BlendFunc_ChAsymInv f(s1,s2,c);f.Set(d1,d2,choix);f.Set(first,cs);fl_inverse(f,x,tol);ga_end();return;}
+ std::unique_ptr<BlendFunc_GenChamfInv> f;
+ if(kind==0)f.reset(new BlendFunc_ChamfInv(s1,s2,c));
+ else if(kind==1)f.reset(new BlendFunc_ConstThroatInv(s1,s2,c));
+ else f.reset(new BlendFunc_ConstThroatWithPenetrationInv(s1,s2,c));
+ f->Set(d1,d2,choix);f->Set(first,cs);
+ fl_inverse(*f,x,tol);
  ga_end();}

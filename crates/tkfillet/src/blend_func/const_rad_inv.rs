@@ -3,7 +3,8 @@
 //! The inverse of the constant-radius fillet function: the section that ends on a curve on
 //! one of the surfaces.
 use super::choice::signed_radii;
-use super::fillet_inverse::{InverseCore, InverseRadius, PlaneDerivative, impl_fillet_inverse};
+use super::fillet_inverse::{InverseCore, InverseRadius, PlaneDerivative, residual_is_solution};
+use super::inverse_macro::impl_blend_inverse;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkgeombase::failure_capture::FailureCapture;
@@ -54,6 +55,12 @@ impl ConstRadInv {
         }
     }
 
+    /// `IsSolution(Sol, Tol)`: `Value` at `sol`, then `|F(1)| <= tol` and
+    /// `|F(2..4)|^2 <= tol^2`.
+    fn is_solution_impl(&mut self, sol: &Vector<'_>, tol: f64) -> Result<bool, Failure> {
+        residual_is_solution(|valsol| self.try_value(sol, valsol), tol)
+    }
+
     fn try_value(&mut self, x: &Vector<'_>, f: &mut Vector<'_>) -> Result<bool, Failure> {
         self.core.value(x, f, self.radius())
     }
@@ -74,7 +81,7 @@ impl ConstRadInv {
     }
 }
 
-impl_fillet_inverse!(ConstRadInv);
+impl_blend_inverse!(ConstRadInv);
 
 #[cfg(test)]
 mod tests {

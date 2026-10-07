@@ -19,6 +19,13 @@ FilletSurf.
   `SpineObject` trait (the virtual members) plus `Deref` to the `Spine` part.
 - Output references become returned values, overloads take distinct names, and the
   native exceptions become `Failure` values with the native exception type.
+- The BlendFunc classes implement the Blend traits (`BlendAppFunction`, `BlendFunction`,
+  `BlendFuncInv`) and `math::FunctionSetWithDerivatives`. Classes that share their text
+  share one implementation: `two_surfaces` (ConstRad, EvolRad), `fillet_inverse`
+  (ConstRadInv, EvolRadInv), `gen_chamfer` and `chamfer_macro` (the BlendFunc_GenChamfer
+  subclasses and ChAsym), `const_throat` and `const_throat_inv` (the throat chamfers with
+  and without penetration). The abstract `BlendFunc_GenChamfer` and
+  `BlendFunc_GenChamfInv` are the `GenChamferFunction` and `GenChamfInvFunction` traits.
 
 ## Native quirks kept
 
@@ -29,6 +36,17 @@ FilletSurf.
 - `ChFiDS_FilSpine::IsConstant(IE)` is true and `Radius(IE)` is 0 when no radius is set.
 - `ChFiDS_SurfData::Vertex(First, OnS)` and `Get2dPoints(First, OnS)` select the last
   point on the second face for an `OnS` other than 1 and 2.
+- BlendFunc keeps the `static thread_local` scratch of `ComputeValues` (one per class),
+  `BlendFunc_ConstRadInv::Derivatives` derives the plane normal with `theD` where
+  `Values` uses `-nplan.d2cur`, and the order-2 positioning of `BlendFunc_EvolRad` keeps
+  the normal derivatives of the previous call.
+- `BlendFunc_Chamfer::Set(Dist1, Dist2, Choix)` keeps the distances unsigned while
+  `BlendFunc_ChamfInv` signs them by the choice.
+- `BlendFunc_ConstThroatInv::Derivatives` (and the penetration variant) takes the
+  differences to the points of the previous evaluation before it evaluates the surfaces.
+- The first-order `BlendFunc_ChAsym::Section` writes the poles of the previous evaluation;
+  `BlendFunc_ChAsymInv::ComputeValues` uses the reversed `2 nps1` in the guide derivative
+  when the curve lies on the second surface.
 
 ## Verification
 
@@ -39,4 +57,4 @@ FilletSurf.
 | Package | Probe operations |
 | --- | --- |
 | ChFiDS | `fl_spine`, `fl_arc_spine`, `fl_fil_law` |
-| BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad`, `fl_evol_rad_inv` |
+| BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad`, `fl_evol_rad_inv`, `fl_chamfer`, `fl_chamfer_inv` |

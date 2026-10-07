@@ -1,35 +1,10 @@
 use super::*;
 use crate::blend::{BlendAppFunction, BlendFunction};
-use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane, GeomSurface};
-use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
-use rustycad_tkmath::gp::{Axis3, Direction3};
 use rustycad_tkmath::math::FunctionSet;
 
-/// Two planes meeting at a right angle along the X axis: z = 0 (normal +Z) and y = 0
-/// (normal +Y), with the X axis as guide.
+/// The right-angled planes of [`super::super::test_fixtures::right_angle`].
 fn right_angle() -> ConstRad {
-    let plane = |normal: Direction3, x: Direction3| -> Handle<dyn Adaptor3dSurface> {
-        let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(
-            Axis3::new(Point3::default(), normal, x).unwrap(),
-        ))
-        .cast();
-        Handle::new(GeomAdaptorSurface::with_surface(&surface).unwrap()).cast()
-    };
-    let s1 = plane(
-        Direction3::new(0., 0., 1.).unwrap(),
-        Direction3::new(1., 0., 0.).unwrap(),
-    );
-    let s2 = plane(
-        Direction3::new(0., 1., 0.).unwrap(),
-        Direction3::new(1., 0., 0.).unwrap(),
-    );
-    let line: Handle<dyn GeomCurve> = Handle::new(GeomLine::from_point(
-        Point3::default(),
-        Direction3::new(1., 0., 0.).unwrap(),
-    ))
-    .cast();
-    let guide: Handle<dyn Adaptor3dCurve> =
-        Handle::new(GeomAdaptorCurve::with_curve(&line).unwrap()).cast();
+    let (s1, s2, guide) = super::super::test_fixtures::right_angle();
     ConstRad::new(&s1, &s2, &guide).unwrap()
 }
 

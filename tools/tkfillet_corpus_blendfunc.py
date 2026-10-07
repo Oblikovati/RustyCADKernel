@@ -180,3 +180,4 @@ def append_blendfunc_requests(requests: list[str]) -> None:
     random_requests(requests)
     evol_rad_requests(requests)
     evol_rad_inv_requests(requests)
+    __import__('tkfillet_corpus_chamfer').append_chamfer_requests(requests)

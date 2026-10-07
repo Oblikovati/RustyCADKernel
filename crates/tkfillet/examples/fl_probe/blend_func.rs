@@ -295,14 +295,14 @@ pub(super) fn shape_of(code: i32) -> SectionShape {
 }
 
 /// `fl_curve2d`: the line through `(u, v)` along `(du, dv)`.
-fn curve2d(r: &mut Reader<'_>) -> Handle<dyn Adaptor2dCurve2d> {
+pub(super) fn curve2d(r: &mut Reader<'_>) -> Handle<dyn Adaptor2dCurve2d> {
     let (p, d) = (r.pnt2d(), r.dir2d());
     let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::from_point(p, d)).cast();
     Handle::new(Geom2dAdaptorCurve::with_curve(&line).expect("adaptor")).cast()
 }
 
 /// `fl_inverse`: the math members and the bounds of an inverse function at `x`.
-fn inverse(f: &mut dyn BlendInverseBounds, x: &Vector<'_>, tol: f64) {
+pub(super) fn inverse(f: &mut dyn BlendInverseBounds, x: &Vector<'_>, tol: f64) {
     int(f.variables());
     int(f.equations());
     let mut fv = Vector::filled(1, 4, 0.0).expect("vector");

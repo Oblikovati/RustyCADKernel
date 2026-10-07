@@ -3,7 +3,8 @@
 //! The inverse of the evolutive-radius fillet function: the section that ends on a curve
 //! on one of the surfaces, the radius being a law of the guide parameter.
 use super::choice::{choice_signs, live_law};
-use super::fillet_inverse::{InverseCore, InverseRadius, impl_fillet_inverse};
+use super::fillet_inverse::{InverseCore, InverseRadius, residual_is_solution};
+use super::inverse_macro::impl_blend_inverse;
 use super::linalg::{vector, vget};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
@@ -65,6 +66,12 @@ impl EvolRadInv {
     }
 
     /// `Value(X, F)`: the law is evaluated at `X(2)` first.
+    /// `IsSolution(Sol, Tol)`: `Value` at `sol`, then `|F(1)| <= tol` and
+    /// `|F(2..4)|^2 <= tol^2`.
+    fn is_solution_impl(&mut self, sol: &Vector<'_>, tol: f64) -> Result<bool, Failure> {
+        residual_is_solution(|valsol| self.try_value(sol, valsol), tol)
+    }
+
     fn try_value(&mut self, x: &Vector<'_>, f: &mut Vector<'_>) -> Result<bool, Failure> {
         let ray = live_law(&self.fevol, CLASS)?.value(vget(x, 2)?)?;
         self.core.value(x, f, self.radius(ray, 0.))
@@ -88,7 +95,7 @@ impl EvolRadInv {
     }
 }
 
-impl_fillet_inverse!(EvolRadInv);
+impl_blend_inverse!(EvolRadInv);
 
 #[cfg(test)]
 mod tests {

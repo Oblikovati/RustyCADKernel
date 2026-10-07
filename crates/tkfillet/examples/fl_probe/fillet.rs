@@ -11,13 +11,14 @@ use rustycad_tkfillet::blend_func::{ConstRad, EvolRad};
 use rustycad_tkgeomalgo::law::{LawConstant, LawFunction, LawInterpol, LawLinear, LawS};
 use rustycad_tkmath::gp::{Circle3, Point2};
 
-/// `fl_fillet_members`: the members both fillet functions share, at `x`.
-fn fillet_members<F: BlendFunction>(
+/// `fl_blend_members`: the members a two-surface blend function shares, at `x`;
+/// `section` prints the section of the class.
+pub(super) fn blend_members<F: BlendFunction>(
     f: &mut F,
     x: [f64; 4],
     t: f64,
     tol: f64,
-    circle: impl FnOnce(&mut F) -> Result<(f64, f64, Circle3), Failure>,
+    section: impl FnOnce(&mut F) -> Result<(), Failure>,
 ) {
     let xv = to_vector(x);
     equations(f, &xv);
@@ -35,7 +36,7 @@ fn fillet_members<F: BlendFunction>(
         .for_each(vec3);
         Ok(())
     });
-    attempt(|| print_circle_section(circle(f)?));
+    attempt(|| section(f));
     sections(f, x, t);
     app_queries(f, tol);
 }
@@ -54,7 +55,9 @@ pub fn const_rad_case(values: &[f64]) {
         attempt(|| f.set_interval(first, last));
     }
     let _ = f.set_param(t);
-    fillet_members(&mut f, x, t, tol, |f| f.section_circle(t, x));
+    blend_members(&mut f, x, t, tol, |f| {
+        print_circle_section(f.section_circle(t, x)?)
+    });
     attempt(|| {
         let axis = f.axe_rot(t)?;
         pnt(axis.location());
@@ -114,7 +117,9 @@ pub fn evol_rad_case(values: &[f64]) {
         attempt(|| f.set_interval(first, last));
     }
     let _ = f.set_param(t);
-    fillet_members(&mut f, x, t, tol, |f| f.section_circle(t, x));
+    blend_members(&mut f, x, t, tol, |f| {
+        print_circle_section(f.section_circle(t, x)?)
+    });
     end();
 }
 
