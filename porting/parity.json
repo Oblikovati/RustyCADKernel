@@ -69648,7 +69648,7 @@
       "notes": "Manual NCollection member mapping; a non-owning zero-based view over a mutable slice (IsDeletable false)."
     },
     {
-      "upstream_id": "NCollection_Array1(const NCollection_Array1&)",
+      "upstream_id": "NCollection_Array1(const NCollection_Array1<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array1::<core::clone::Clone>::clone",
@@ -69656,7 +69656,7 @@
       "notes": "Manual NCollection member mapping; the copy always owns its storage and keeps the lower bound, as natively."
     },
     {
-      "upstream_id": "NCollection_Array1(NCollection_Array1&&)",
+      "upstream_id": "NCollection_Array1(NCollection_Array1<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array1::move_from",
@@ -69664,7 +69664,7 @@
       "notes": "Native move leaves the source as the empty default (lower 1, no storage); Rust spells it `move_from`, which leaves the source as `Array1::default()` (same as `std::mem::take`)."
     },
     {
-      "upstream_id": "NCollection_Array1::~NCollection_Array1()",
+      "upstream_id": "NCollection_Array1::~NCollection_Array1<TheItemType>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
       "rust_item": null,
@@ -69682,7 +69682,7 @@
       "source_sha256": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6"
     },
     {
-      "upstream_id": "NCollection_Array1::Assign(const NCollection_Array1&)",
+      "upstream_id": "NCollection_Array1::Assign(const NCollection_Array1<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array1::assign",
@@ -69690,7 +69690,7 @@
       "notes": "Manual NCollection member mapping; same-size storage is reused, otherwise reallocated; the lower bound is copied."
     },
     {
-      "upstream_id": "NCollection_Array1::CopyValues(const NCollection_Array1&)",
+      "upstream_id": "NCollection_Array1::CopyValues(const NCollection_Array1<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array1::copy_values",
@@ -69698,7 +69698,7 @@
       "notes": "Manual NCollection member mapping; Standard_DimensionMismatch becomes ArrayError::DimensionMismatch; bounds are kept."
     },
     {
-      "upstream_id": "NCollection_Array1::Move(NCollection_Array1&&)",
+      "upstream_id": "NCollection_Array1::Move(NCollection_Array1<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array1::move_from",
@@ -69706,7 +69706,7 @@
       "notes": "Native move leaves the source as the empty default (lower 1, no storage); Rust spells it `move_from`, which leaves the source as `Array1::default()` (same as `std::mem::take`)."
     },
     {
-      "upstream_id": "NCollection_Array1::Move(NCollection_Array1&)",
+      "upstream_id": "NCollection_Array1::Move(NCollection_Array1<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array1::move_from",
@@ -69714,7 +69714,7 @@
       "notes": "Native move leaves the source as the empty default (lower 1, no storage); Rust spells it `move_from`, which leaves the source as `Array1::default()` (same as `std::mem::take`)."
     },
     {
-      "upstream_id": "NCollection_Array1::operator=(const NCollection_Array1&)",
+      "upstream_id": "NCollection_Array1::operator=(const NCollection_Array1<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array1::assign",
@@ -69722,7 +69722,7 @@
       "notes": "Manual NCollection member mapping; copy assignment is Assign."
     },
     {
-      "upstream_id": "NCollection_Array1::operator=(NCollection_Array1&&)",
+      "upstream_id": "NCollection_Array1::operator=(NCollection_Array1<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array1::move_from",
@@ -69842,7 +69842,7 @@
       "notes": "Manual NCollection member mapping; Rust passes the value by move for both native overloads."
     },
     {
-      "upstream_id": "NCollection_Array1::EmplaceValue(int,Args&&)",
+      "upstream_id": "NCollection_Array1::EmplaceValue(const int,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array1::emplace_value",
@@ -70002,7 +70002,7 @@
       "notes": "Manual NCollection member mapping; as natively an `upper == lower - 1` dimension is empty and the underlying Array1 is rebased at BeginPosition; a negative extent (undefined natively) is ArrayError::Bounds."
     },
     {
-      "upstream_id": "NCollection_Array2(const NCollection_Array2&)",
+      "upstream_id": "NCollection_Array2(const NCollection_Array2<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::<core::clone::Clone>::clone",
@@ -70010,7 +70010,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
     },
     {
-      "upstream_id": "NCollection_Array2(NCollection_Array2&&)",
+      "upstream_id": "NCollection_Array2(NCollection_Array2<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::move_from",
@@ -70242,7 +70242,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
     },
     {
-      "upstream_id": "NCollection_Array2::Assign(const NCollection_Array2&)",
+      "upstream_id": "NCollection_Array2::Assign(const NCollection_Array2<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::assign",
@@ -70250,7 +70250,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
     },
     {
-      "upstream_id": "NCollection_Array2::CopyValues(const NCollection_Array2&)",
+      "upstream_id": "NCollection_Array2::CopyValues(const NCollection_Array2<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::copy_values",
@@ -70258,7 +70258,7 @@
       "notes": "Manual NCollection member mapping; Standard_DimensionMismatch becomes ArrayError::ShapeMismatch naming both shapes."
     },
     {
-      "upstream_id": "NCollection_Array2::Move(NCollection_Array2&&)",
+      "upstream_id": "NCollection_Array2::Move(NCollection_Array2<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::move_from",
@@ -70266,7 +70266,7 @@
       "notes": "Native move leaves the source empty with lower row/column 1; Rust `move_from` leaves `Array2::default()`, the same state."
     },
     {
-      "upstream_id": "NCollection_Array2::Move(NCollection_Array2&)",
+      "upstream_id": "NCollection_Array2::Move(NCollection_Array2<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::move_from",
@@ -70274,7 +70274,7 @@
       "notes": "Native move leaves the source empty with lower row/column 1; Rust `move_from` leaves `Array2::default()`, the same state."
     },
     {
-      "upstream_id": "NCollection_Array2::operator=(const NCollection_Array2&)",
+      "upstream_id": "NCollection_Array2::operator=(const NCollection_Array2<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::assign",
@@ -70282,7 +70282,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
     },
     {
-      "upstream_id": "NCollection_Array2::operator=(NCollection_Array2&&)",
+      "upstream_id": "NCollection_Array2::operator=(NCollection_Array2<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::move_from",
@@ -70370,7 +70370,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
     },
     {
-      "upstream_id": "NCollection_Array2::EmplaceValue(int,int,Args&&)",
+      "upstream_id": "NCollection_Array2::EmplaceValue(const int,const int,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::emplace_value",
@@ -70482,7 +70482,7 @@
       "notes": "Manual NCollection member mapping; NCollection_LocalArray<T, MAX_ARRAY_SIZE> is LocalArray<T, N> with the same inline capacity default (1024)."
     },
     {
-      "upstream_id": "NCollection_LocalArray::~NCollection_LocalArray()",
+      "upstream_id": "NCollection_LocalArray::~NCollection_LocalArray<theItem, MAX_ARRAY_SIZE>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
       "rust_item": null,
@@ -70588,7 +70588,7 @@
       "notes": "Manual NCollection member mapping; the const pointer conversion becomes a slice."
     },
     {
-      "upstream_id": "NCollection_LocalArray(NCollection_LocalArray&&)",
+      "upstream_id": "NCollection_LocalArray(NCollection_LocalArray<theItem,NCollection_LocalArray::MAX_ARRAY_SIZE>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LocalArray::move_from",
@@ -70596,7 +70596,7 @@
       "notes": "Native move transfers inline or heap storage and leaves the source empty; Rust `move_from` does the same (source becomes `LocalArray::default()`)."
     },
     {
-      "upstream_id": "NCollection_LocalArray::operator=(NCollection_LocalArray&&)",
+      "upstream_id": "NCollection_LocalArray::operator=(NCollection_LocalArray<theItem,NCollection_LocalArray::MAX_ARRAY_SIZE>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LocalArray::move_from",
@@ -70664,7 +70664,7 @@
       "notes": "Native move steals the buffer and leaves the source with no data and zero capacity; Rust `move_from` leaves `LinearVector::default()`, the same state."
     },
     {
-      "upstream_id": "NCollection_LinearVector::~NCollection_LinearVector()",
+      "upstream_id": "NCollection_LinearVector::~NCollection_LinearVector<TheItemType>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
       "rust_item": null,
@@ -71766,7 +71766,7 @@
       "notes": "Manual NCollection member mapping; the int length must be positive (native Standard_RangeError); pass it as usize."
     },
     {
-      "upstream_id": "NCollection_AliasedArray(const NCollection_AliasedArray&)",
+      "upstream_id": "NCollection_AliasedArray(const NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::AliasedArray::<core::clone::Clone>::clone",
@@ -71774,7 +71774,7 @@
       "notes": "Manual NCollection member mapping; the copy owns its storage; an empty source copies to an empty non-owning array, as natively."
     },
     {
-      "upstream_id": "NCollection_AliasedArray(NCollection_AliasedArray&&)",
+      "upstream_id": "NCollection_AliasedArray(NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::AliasedArray::move_from",
@@ -71870,7 +71870,7 @@
       "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
     },
     {
-      "upstream_id": "NCollection_AliasedArray::Assign(const NCollection_AliasedArray&)",
+      "upstream_id": "NCollection_AliasedArray::Assign(const NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::AliasedArray::assign",
@@ -71878,7 +71878,7 @@
       "notes": "Manual NCollection member mapping; a different stride or length is Standard_DimensionMismatch."
     },
     {
-      "upstream_id": "NCollection_AliasedArray::Move(NCollection_AliasedArray&)",
+      "upstream_id": "NCollection_AliasedArray::Move(NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::AliasedArray::move_from",
@@ -71886,7 +71886,7 @@
       "notes": "Manual NCollection member mapping; the destination takes storage, stride and length. Natively the source keeps a non-owning alias of the moved bytes; Rust leaves it empty with its stride instead, since that alias would dangle once the destination frees the storage."
     },
     {
-      "upstream_id": "NCollection_AliasedArray::operator=(const NCollection_AliasedArray&)",
+      "upstream_id": "NCollection_AliasedArray::operator=(const NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::AliasedArray::assign",
@@ -71894,7 +71894,7 @@
       "notes": "Manual NCollection member mapping; copy assignment is Assign."
     },
     {
-      "upstream_id": "NCollection_AliasedArray::operator=(NCollection_AliasedArray&&)",
+      "upstream_id": "NCollection_AliasedArray::operator=(NCollection_AliasedArray<NCollection_AliasedArray::MyAlignSize>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::AliasedArray::move_from",
@@ -71918,7 +71918,7 @@
       "notes": "Manual NCollection member mapping; the int length must be positive; pass it as usize."
     },
     {
-      "upstream_id": "NCollection_AliasedArray::~NCollection_AliasedArray()",
+      "upstream_id": "NCollection_AliasedArray::~NCollection_AliasedArray<MyAlignSize>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
       "rust_item": null,
@@ -72118,7 +72118,7 @@
       "notes": "Manual NCollection member mapping; a zero increment (a native division by zero) panics with the value."
     },
     {
-      "upstream_id": "NCollection_SparseArray::Assign(const NCollection_SparseArray&)",
+      "upstream_id": "NCollection_SparseArray::Assign(const NCollection_SparseArray<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::SparseArray::assign",
@@ -72126,7 +72126,7 @@
       "notes": "Manual NCollection member mapping; a different increment clears first; existing blocks are reused slot by slot and the block table grows with the native allocData rule; probed."
     },
     {
-      "upstream_id": "NCollection_SparseArray::Exchange(NCollection_SparseArray&)",
+      "upstream_id": "NCollection_SparseArray::Exchange(NCollection_SparseArray<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::SparseArray::exchange",
@@ -72302,7 +72302,7 @@
       "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
     },
     {
-      "upstream_id": "NCollection_SparseArray::ConstIterator(const NCollection_SparseArray&)",
+      "upstream_id": "NCollection_SparseArray::ConstIterator::ConstIterator(const NCollection_SparseArray<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
       "rust_item": null,
@@ -72310,7 +72310,7 @@
       "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
     },
     {
-      "upstream_id": "NCollection_SparseArray::ConstIterator::Init(const NCollection_SparseArray&)",
+      "upstream_id": "NCollection_SparseArray::ConstIterator::Init(const NCollection_SparseArray<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
       "rust_item": null,
@@ -72374,7 +72374,7 @@
       "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
     },
     {
-      "upstream_id": "NCollection_SparseArray::Iterator(NCollection_SparseArray&)",
+      "upstream_id": "NCollection_SparseArray::Iterator::Iterator(NCollection_SparseArray<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
       "rust_item": null,
@@ -72382,7 +72382,7 @@
       "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
     },
     {
-      "upstream_id": "NCollection_SparseArray::Iterator::Init(NCollection_SparseArray&)",
+      "upstream_id": "NCollection_SparseArray::Iterator::Init(NCollection_SparseArray<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
       "rust_item": null,
@@ -72554,7 +72554,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_List::Iterator(NCollection_List&)",
+      "upstream_id": "NCollection_List::Iterator::Iterator(NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::cursor",
@@ -72562,7 +72562,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Iterator(const NCollection_List&)",
+      "upstream_id": "NCollection_List::Iterator::Iterator(const NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::cursor",
@@ -72570,7 +72570,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Iterator(const const_iterator&)",
+      "upstream_id": "NCollection_List::Iterator::Iterator(const NCollection_List::const_iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::ListCursor::<core::clone::Clone>::clone",
@@ -72578,7 +72578,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. One Copy cursor type serves const and mutable iteration, so the const-to-mutable conversion is a copy."
     },
     {
-      "upstream_id": "NCollection_List::Iterator::operator=(const const_iterator&)",
+      "upstream_id": "NCollection_List::Iterator::operator=(const NCollection_List::const_iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::ListCursor::<core::clone::Clone>::clone",
@@ -72586,7 +72586,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. One Copy cursor type serves const and mutable iteration, so the conversion assignment is a copy."
     },
     {
-      "upstream_id": "NCollection_List::Iterator::Init(NCollection_List&)",
+      "upstream_id": "NCollection_List::Iterator::Init(NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
@@ -72594,7 +72594,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Iterator::Init(const NCollection_List&)",
+      "upstream_id": "NCollection_List::Iterator::Init(const NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
@@ -72602,7 +72602,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Iterator::Initialize(NCollection_List&)",
+      "upstream_id": "NCollection_List::Iterator::Initialize(NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
@@ -72610,7 +72610,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Iterator::Initialize(const NCollection_List&)",
+      "upstream_id": "NCollection_List::Iterator::Initialize(const NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
@@ -72618,7 +72618,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_List::Iterator::IsEqual(const NCollection_List::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::ListCursor::<core::cmp::PartialEq>::eq",
@@ -72690,7 +72690,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List(const NCollection_List&)",
+      "upstream_id": "NCollection_List(const NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::<core::clone::Clone>::clone",
@@ -72698,7 +72698,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List(NCollection_List&&)",
+      "upstream_id": "NCollection_List(NCollection_List<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::move_from",
@@ -72714,7 +72714,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Assign(const NCollection_List&)",
+      "upstream_id": "NCollection_List::Assign(const NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::assign",
@@ -72722,7 +72722,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::operator=(const NCollection_List&)",
+      "upstream_id": "NCollection_List::operator=(const NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::assign",
@@ -72730,7 +72730,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::operator=(NCollection_List&&)",
+      "upstream_id": "NCollection_List::operator=(NCollection_List<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::move_assign",
@@ -72794,7 +72794,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Append(const TheItemType&,Iterator&)",
+      "upstream_id": "NCollection_List::Append(const TheItemType&,NCollection_List::Iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::append_at",
@@ -72802,7 +72802,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Append(TheItemType&&,Iterator&)",
+      "upstream_id": "NCollection_List::Append(TheItemType&&,NCollection_List::Iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::append_at",
@@ -72810,7 +72810,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Append(NCollection_List&)",
+      "upstream_id": "NCollection_List::Append(NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::append_list",
@@ -72834,7 +72834,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Prepend(NCollection_List&)",
+      "upstream_id": "NCollection_List::Prepend(NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::prepend_list",
@@ -72850,7 +72850,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Remove(Iterator&)",
+      "upstream_id": "NCollection_List::Remove(NCollection_List::Iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::remove",
@@ -72866,7 +72866,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::InsertBefore(const TheItemType&,Iterator&)",
+      "upstream_id": "NCollection_List::InsertBefore(const TheItemType&,NCollection_List::Iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::insert_before",
@@ -72874,7 +72874,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::InsertBefore(TheItemType&&,Iterator&)",
+      "upstream_id": "NCollection_List::InsertBefore(TheItemType&&,NCollection_List::Iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::insert_before",
@@ -72882,7 +72882,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::InsertBefore(NCollection_List&,Iterator&)",
+      "upstream_id": "NCollection_List::InsertBefore(NCollection_List<TheItemType>&,NCollection_List::Iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::insert_list_before",
@@ -72890,7 +72890,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Quirk preserved: an empty source bound to another allocator is copied without the iterator check, so an end cursor does not raise then."
     },
     {
-      "upstream_id": "NCollection_List::InsertAfter(const TheItemType&,Iterator&)",
+      "upstream_id": "NCollection_List::InsertAfter(const TheItemType&,NCollection_List::Iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::insert_after",
@@ -72898,7 +72898,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::InsertAfter(TheItemType&&,Iterator&)",
+      "upstream_id": "NCollection_List::InsertAfter(TheItemType&&,NCollection_List::Iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::insert_after",
@@ -72906,7 +72906,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::InsertAfter(NCollection_List&,Iterator&)",
+      "upstream_id": "NCollection_List::InsertAfter(NCollection_List<TheItemType>&,NCollection_List::Iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::insert_list_after",
@@ -72914,7 +72914,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. An end cursor appends the source, as natively."
     },
     {
-      "upstream_id": "NCollection_List::EmplaceAppend(Args&&)",
+      "upstream_id": "NCollection_List::EmplaceAppend(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::emplace_append",
@@ -72922,7 +72922,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Constructor arguments are captured by a closure."
     },
     {
-      "upstream_id": "NCollection_List::EmplacePrepend(Args&&)",
+      "upstream_id": "NCollection_List::EmplacePrepend(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::emplace_prepend",
@@ -72930,7 +72930,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Constructor arguments are captured by a closure."
     },
     {
-      "upstream_id": "NCollection_List::EmplaceBefore(Iterator&,Args&&)",
+      "upstream_id": "NCollection_List::EmplaceBefore(NCollection_List::Iterator&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::emplace_before",
@@ -72938,7 +72938,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Constructor arguments are captured by a closure, which runs only for a valid position."
     },
     {
-      "upstream_id": "NCollection_List::EmplaceAfter(Iterator&,Args&&)",
+      "upstream_id": "NCollection_List::EmplaceAfter(NCollection_List::Iterator&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::emplace_after",
@@ -72954,7 +72954,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::Exchange(NCollection_List&)",
+      "upstream_id": "NCollection_List::Exchange(NCollection_List<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": "rustycad_tkernel::ncollection::List::exchange",
@@ -72970,7 +72970,7 @@
       "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
     },
     {
-      "upstream_id": "NCollection_List::~NCollection_List()",
+      "upstream_id": "NCollection_List::~NCollection_List<TheItemType>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
       "rust_item": null,
@@ -73170,7 +73170,7 @@
       "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
     },
     {
-      "upstream_id": "NCollection_TListNode(std::in_place_t,NCollection_ListNode*,Args&&)",
+      "upstream_id": "NCollection_TListNode(std::in_place_t,NCollection_ListNode*,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
       "rust_item": null,
@@ -73218,7 +73218,7 @@
       "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
     },
     {
-      "upstream_id": "NCollection_Sequence::Node(std::in_place_t,Args&&)",
+      "upstream_id": "NCollection_Sequence::Node::Node(std::in_place_t,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": null,
@@ -73250,7 +73250,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_Sequence::Iterator(NCollection_Sequence&,bool)",
+      "upstream_id": "NCollection_Sequence::Iterator::Iterator(NCollection_Sequence<TheItemType>&,const bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::new",
@@ -73258,7 +73258,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence::Iterator(const NCollection_Sequence&,bool)",
+      "upstream_id": "NCollection_Sequence::Iterator::Iterator(const NCollection_Sequence<TheItemType>&,const bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::new",
@@ -73298,7 +73298,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_Sequence::Iterator::Init(NCollection_Sequence&,bool)",
+      "upstream_id": "NCollection_Sequence::Iterator::Init(NCollection_Sequence<TheItemType>&,const bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::init",
@@ -73306,7 +73306,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence::Iterator::Init(const NCollection_Sequence&,bool)",
+      "upstream_id": "NCollection_Sequence::Iterator::Init(const NCollection_Sequence<TheItemType>&,const bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::init",
@@ -73314,7 +73314,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence::Iterator::Initialize(NCollection_Sequence&,bool)",
+      "upstream_id": "NCollection_Sequence::Iterator::Initialize(NCollection_Sequence<TheItemType>&,const bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::init",
@@ -73322,7 +73322,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence::Iterator::Initialize(const NCollection_Sequence&,bool)",
+      "upstream_id": "NCollection_Sequence::Iterator::Initialize(const NCollection_Sequence<TheItemType>&,const bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::init",
@@ -73330,7 +73330,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_Sequence::Iterator::IsEqual(const NCollection_Sequence::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::<core::cmp::PartialEq>::eq",
@@ -73402,7 +73402,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence(NCollection_Sequence&&)",
+      "upstream_id": "NCollection_Sequence(NCollection_Sequence<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::move_from",
@@ -73458,7 +73458,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The nullable allocator handle is an Option."
     },
     {
-      "upstream_id": "NCollection_Sequence::operator=(NCollection_Sequence&&)",
+      "upstream_id": "NCollection_Sequence::operator=(NCollection_Sequence<TheItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::move_assign",
@@ -73466,7 +73466,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence::Remove(Iterator&)",
+      "upstream_id": "NCollection_Sequence::Remove(NCollection_Sequence::Iterator&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::remove_cursor",
@@ -73490,7 +73490,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence::Append(NCollection_Sequence&)",
+      "upstream_id": "NCollection_Sequence::Append(NCollection_Sequence<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::append_sequence",
@@ -73514,7 +73514,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence::Prepend(NCollection_Sequence&)",
+      "upstream_id": "NCollection_Sequence::Prepend(NCollection_Sequence<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::prepend_sequence",
@@ -73522,7 +73522,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence::InsertAfter(Iterator&,const TheItemType&)",
+      "upstream_id": "NCollection_Sequence::InsertAfter(NCollection_Sequence::Iterator&,const TheItemType&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_after_cursor",
@@ -73530,7 +73530,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). An end cursor prepends, as natively."
     },
     {
-      "upstream_id": "NCollection_Sequence::InsertAfter(Iterator&,TheItemType&&)",
+      "upstream_id": "NCollection_Sequence::InsertAfter(NCollection_Sequence::Iterator&,TheItemType&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_after_cursor",
@@ -73538,7 +73538,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). An end cursor prepends, as natively."
     },
     {
-      "upstream_id": "NCollection_Sequence::EmplaceAppend(Args&&)",
+      "upstream_id": "NCollection_Sequence::EmplaceAppend(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_append",
@@ -73546,7 +73546,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure."
     },
     {
-      "upstream_id": "NCollection_Sequence::EmplacePrepend(Args&&)",
+      "upstream_id": "NCollection_Sequence::EmplacePrepend(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_prepend",
@@ -73554,7 +73554,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure."
     },
     {
-      "upstream_id": "NCollection_Sequence::EmplaceAfter(Iterator&,Args&&)",
+      "upstream_id": "NCollection_Sequence::EmplaceAfter(NCollection_Sequence::Iterator&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_after_cursor",
@@ -73610,7 +73610,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
     },
     {
-      "upstream_id": "NCollection_Sequence::~NCollection_Sequence()",
+      "upstream_id": "NCollection_Sequence::~NCollection_Sequence<TheItemType>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": null,
@@ -73698,7 +73698,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
     },
     {
-      "upstream_id": "NCollection_Sequence::InsertBefore(size_t,NCollection_Sequence&)",
+      "upstream_id": "NCollection_Sequence::InsertBefore(const size_t,NCollection_Sequence<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_before",
@@ -73706,7 +73706,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Index 0 raises even for an empty source, as natively."
     },
     {
-      "upstream_id": "NCollection_Sequence::InsertBefore(int,NCollection_Sequence&)",
+      "upstream_id": "NCollection_Sequence::InsertBefore(const int,NCollection_Sequence<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_before",
@@ -73746,7 +73746,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
     },
     {
-      "upstream_id": "NCollection_Sequence::EmplaceAfter(size_t,Args&&)",
+      "upstream_id": "NCollection_Sequence::EmplaceAfter(const size_t,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_after",
@@ -73754,7 +73754,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure, run after the index check as natively."
     },
     {
-      "upstream_id": "NCollection_Sequence::EmplaceAfter(int,Args&&)",
+      "upstream_id": "NCollection_Sequence::EmplaceAfter(const int,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_after",
@@ -73762,7 +73762,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure, run after the index check as natively. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
     },
     {
-      "upstream_id": "NCollection_Sequence::EmplaceBefore(size_t,Args&&)",
+      "upstream_id": "NCollection_Sequence::EmplaceBefore(const size_t,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_before",
@@ -73770,7 +73770,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure, run after the index check as natively."
     },
     {
-      "upstream_id": "NCollection_Sequence::EmplaceBefore(int,Args&&)",
+      "upstream_id": "NCollection_Sequence::EmplaceBefore(const int,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_before",
@@ -73778,7 +73778,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure, run after the index check as natively. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
     },
     {
-      "upstream_id": "NCollection_Sequence::Split(size_t,NCollection_Sequence&)",
+      "upstream_id": "NCollection_Sequence::Split(const size_t,NCollection_Sequence<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::split",
@@ -73786,7 +73786,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Quirk preserved: the destination is cleared and rebound to this allocator before the index is checked."
     },
     {
-      "upstream_id": "NCollection_Sequence::Split(int,NCollection_Sequence&)",
+      "upstream_id": "NCollection_Sequence::Split(const int,NCollection_Sequence<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Sequence::split",
@@ -74236,7 +74236,7 @@
       ]
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::~NCollection_FlatDataMap()",
+      "upstream_id": "NCollection_FlatDataMap::~NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": null,
@@ -74573,7 +74573,7 @@
       "notes": "Manual NCollection member mapping; FlatDataMap<K, V, H: HashPolicy<K>> is NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher>. Robin Hood insertion, growth, removal and slot order match native (probe ncoll_flat_maps_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; Standard_NoSuchObject becomes a Failure error; Extent's int is the usize count."
     },
     {
-      "upstream_id": "NCollection_FlatDataMap::Exchange(NCollection_FlatDataMap&)",
+      "upstream_id": "NCollection_FlatDataMap::Exchange(NCollection_FlatDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::exchange",
@@ -74791,7 +74791,7 @@
       ]
     },
     {
-      "upstream_id": "NCollection_FlatMap::~NCollection_FlatMap()",
+      "upstream_id": "NCollection_FlatMap::~NCollection_FlatMap<TheKeyType, Hasher>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": null,
@@ -74988,7 +74988,7 @@
       "notes": "Manual NCollection member mapping; FlatMap<K, H: HashPolicy<K>> is NCollection_FlatMap<TheKeyType, Hasher>. Robin Hood insertion, 13/16 load growth, backward-shift removal and slot iteration order match native bit-for-bit (differential probe ncoll_flat_maps_set). const&/&& overloads collapse into one by-value Rust function; pointer and optional-reference returns become Option."
     },
     {
-      "upstream_id": "NCollection_FlatMap::Exchange(NCollection_FlatMap&)",
+      "upstream_id": "NCollection_FlatMap::Exchange(NCollection_FlatMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::FlatMap::exchange",
@@ -75100,7 +75100,7 @@
       "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode(K&&,std::in_place_t,NCollection_ListNode*,Args&&)",
+      "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode::OrderedDataMapNode(K&&,std::in_place_t,NCollection_ListNode*,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": null,
@@ -75148,7 +75148,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::Iterator(NCollection_OrderedDataMap&)",
+      "upstream_id": "NCollection_OrderedDataMap::Iterator::Iterator(NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::cursor",
@@ -75156,7 +75156,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::Iterator(const NCollection_OrderedDataMap&)",
+      "upstream_id": "NCollection_OrderedDataMap::Iterator::Iterator(const NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::cursor",
@@ -75204,7 +75204,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_OrderedDataMap::Iterator::IsEqual(const NCollection_OrderedDataMap::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataCursor::<core::cmp::PartialEq>::eq",
@@ -75212,7 +75212,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::Iterator::Initialize(NCollection_OrderedDataMap&)",
+      "upstream_id": "NCollection_OrderedDataMap::Iterator::Initialize(NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataCursor::initialize",
@@ -75220,7 +75220,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::Iterator::Initialize(const NCollection_OrderedDataMap&)",
+      "upstream_id": "NCollection_OrderedDataMap::Iterator::Initialize(const NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataCursor::initialize",
@@ -75372,7 +75372,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap(const NCollection_OrderedDataMap&)",
+      "upstream_id": "NCollection_OrderedDataMap(const NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::<core::clone::Clone>::clone",
@@ -75380,7 +75380,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap(NCollection_OrderedDataMap&&)",
+      "upstream_id": "NCollection_OrderedDataMap(NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::move_from",
@@ -75388,7 +75388,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::Exchange(NCollection_OrderedDataMap&)",
+      "upstream_id": "NCollection_OrderedDataMap::Exchange(NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::exchange",
@@ -75404,7 +75404,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::Assign(const NCollection_OrderedDataMap&)",
+      "upstream_id": "NCollection_OrderedDataMap::Assign(const NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::assign",
@@ -75412,7 +75412,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::operator=(const NCollection_OrderedDataMap&)",
+      "upstream_id": "NCollection_OrderedDataMap::operator=(const NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::assign",
@@ -75420,7 +75420,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::operator=(NCollection_OrderedDataMap&&)",
+      "upstream_id": "NCollection_OrderedDataMap::operator=(NCollection_OrderedDataMap<TheKeyType,TheItemType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::move_assign",
@@ -75572,7 +75572,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::Emplace(K&&,Args&&)",
+      "upstream_id": "NCollection_OrderedDataMap::Emplace(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::emplace",
@@ -75580,7 +75580,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::Emplaced(K&&,Args&&)",
+      "upstream_id": "NCollection_OrderedDataMap::Emplaced(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::emplaced",
@@ -75588,7 +75588,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::TryEmplace(K&&,Args&&)",
+      "upstream_id": "NCollection_OrderedDataMap::TryEmplace(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::try_emplace",
@@ -75596,7 +75596,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::TryEmplaced(K&&,Args&&)",
+      "upstream_id": "NCollection_OrderedDataMap::TryEmplaced(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedDataMap::try_emplaced",
@@ -75708,7 +75708,7 @@
       "notes": "Manual NCollection member mapping; OrderedDataMap<K, V, H: HashPolicy<K>> is NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>. Bucket growth, insertion order, value replacement rules and the swapping move assignment match native (probe ncoll_flat_maps_ordered_data). const&/&& overloads collapse into one by-value function; emplace arguments become a value constructor closure; exceptions become Failure errors. The legacy Iterator is the detached OrderedDataCursor, which takes the map on each access."
     },
     {
-      "upstream_id": "NCollection_OrderedDataMap::~NCollection_OrderedDataMap()",
+      "upstream_id": "NCollection_OrderedDataMap::~NCollection_OrderedDataMap<TheKeyType, TheItemType, Hasher>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": null,
@@ -75780,7 +75780,7 @@
       "notes": "Excluded: node construction/destruction plumbing. The native map allocates nodes with placement new on its allocator and frees them through delNode; the Rust map owns each node as an AllocatedBox slot of its table, created by bind/add and dropped by unbind/remove/clear, so a node cannot be built or freed outside the map. Traversal of live nodes is covered by first_node()/OrderedNodeRef::order_next."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::OrderedMapNode(std::in_place_t,NCollection_ListNode*,Args&&)",
+      "upstream_id": "NCollection_OrderedMap::OrderedMapNode::OrderedMapNode(std::in_place_t,NCollection_ListNode*,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": null,
@@ -75836,7 +75836,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::Iterator(const NCollection_OrderedMap&)",
+      "upstream_id": "NCollection_OrderedMap::Iterator::Iterator(const NCollection_OrderedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::iter",
@@ -75876,7 +75876,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_OrderedMap::Iterator::IsEqual(const NCollection_OrderedMap::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMapIter::<core::cmp::PartialEq>::eq",
@@ -75884,7 +75884,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::Iterator::Initialize(const NCollection_OrderedMap&)",
+      "upstream_id": "NCollection_OrderedMap::Iterator::Initialize(const NCollection_OrderedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMapIter::initialize",
@@ -76020,7 +76020,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap(const NCollection_OrderedMap&)",
+      "upstream_id": "NCollection_OrderedMap(const NCollection_OrderedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::<core::clone::Clone>::clone",
@@ -76028,7 +76028,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap(NCollection_OrderedMap&&)",
+      "upstream_id": "NCollection_OrderedMap(NCollection_OrderedMap<TheKeyType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::move_from",
@@ -76036,7 +76036,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::Exchange(NCollection_OrderedMap&)",
+      "upstream_id": "NCollection_OrderedMap::Exchange(NCollection_OrderedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::exchange",
@@ -76052,7 +76052,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::Assign(const NCollection_OrderedMap&)",
+      "upstream_id": "NCollection_OrderedMap::Assign(const NCollection_OrderedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::assign",
@@ -76060,7 +76060,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::operator=(const NCollection_OrderedMap&)",
+      "upstream_id": "NCollection_OrderedMap::operator=(const NCollection_OrderedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::assign",
@@ -76068,7 +76068,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::operator=(NCollection_OrderedMap&&)",
+      "upstream_id": "NCollection_OrderedMap::operator=(NCollection_OrderedMap<TheKeyType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::move_assign",
@@ -76124,7 +76124,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::Emplace(Args&&)",
+      "upstream_id": "NCollection_OrderedMap::Emplace(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::emplace",
@@ -76132,7 +76132,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::Emplaced(Args&&)",
+      "upstream_id": "NCollection_OrderedMap::Emplaced(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::emplaced",
@@ -76140,7 +76140,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::TryEmplace(Args&&)",
+      "upstream_id": "NCollection_OrderedMap::TryEmplace(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::try_emplace",
@@ -76148,7 +76148,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::TryEmplaced(Args&&)",
+      "upstream_id": "NCollection_OrderedMap::TryEmplaced(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedMap::try_emplaced",
@@ -76196,7 +76196,7 @@
       "notes": "Manual NCollection member mapping; OrderedMap<K, H: HashPolicy<K>> is NCollection_OrderedMap<TheKeyType, Hasher>. Prime bucket growth (including a kept zero request), chain order, insertion-order links and the swapping move assignment match native (probe ncoll_flat_maps_ordered). const&/&& overloads collapse into one by-value function; exceptions become Failure errors."
     },
     {
-      "upstream_id": "NCollection_OrderedMap::~NCollection_OrderedMap()",
+      "upstream_id": "NCollection_OrderedMap::~NCollection_OrderedMap<TheKeyType, Hasher>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": null,
@@ -76228,7 +76228,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed). Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Iterator(const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Iterator::Iterator(const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::iter",
@@ -76236,7 +76236,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Iterator::Initialize(const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Iterator::Initialize(const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMapIter::initialize",
@@ -76276,7 +76276,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed). Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_PackedMap::Iterator::IsEqual(const NCollection_PackedMap::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMapIter::<core::cmp::PartialEq>::eq",
@@ -76356,7 +76356,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap(const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap(const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::<core::clone::Clone>::clone",
@@ -76364,7 +76364,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::operator=(const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::operator=(const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::assign",
@@ -76372,7 +76372,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap(NCollection_PackedMap&&)",
+      "upstream_id": "NCollection_PackedMap(NCollection_PackedMap<IntType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::move_from",
@@ -76380,7 +76380,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::operator=(NCollection_PackedMap&&)",
+      "upstream_id": "NCollection_PackedMap::operator=(NCollection_PackedMap<IntType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::move_assign",
@@ -76388,7 +76388,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Assign(const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Assign(const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::assign",
@@ -76420,7 +76420,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::~NCollection_PackedMap()",
+      "upstream_id": "NCollection_PackedMap::~NCollection_PackedMap<IntType>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": null,
@@ -76508,7 +76508,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Union(const NCollection_PackedMap&,const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Union(const NCollection_PackedMap<IntType>&,const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::union",
@@ -76516,7 +76516,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Unite(const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Unite(const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::unite",
@@ -76524,7 +76524,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Intersection(const NCollection_PackedMap&,const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Intersection(const NCollection_PackedMap<IntType>&,const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::intersection",
@@ -76532,7 +76532,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Intersect(const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Intersect(const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::intersect",
@@ -76540,7 +76540,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Subtraction(const NCollection_PackedMap&,const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Subtraction(const NCollection_PackedMap<IntType>&,const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::subtraction",
@@ -76548,7 +76548,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Subtract(const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Subtract(const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::subtract",
@@ -76556,7 +76556,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Difference(const NCollection_PackedMap&,const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Difference(const NCollection_PackedMap<IntType>&,const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::difference",
@@ -76564,7 +76564,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Differ(const NCollection_PackedMap&)",
+      "upstream_id": "NCollection_PackedMap::Differ(const NCollection_PackedMap<IntType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::differ",
@@ -76572,7 +76572,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::IsEqual(const NCollection_PackedMap&) const",
+      "upstream_id": "NCollection_PackedMap::IsEqual(const NCollection_PackedMap<IntType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::is_equal",
@@ -76580,7 +76580,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::IsSubset(const NCollection_PackedMap&) const",
+      "upstream_id": "NCollection_PackedMap::IsSubset(const NCollection_PackedMap<IntType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::is_subset",
@@ -76588,7 +76588,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::HasIntersection(const NCollection_PackedMap&) const",
+      "upstream_id": "NCollection_PackedMap::HasIntersection(const NCollection_PackedMap<IntType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::has_intersection",
@@ -76596,7 +76596,7 @@
       "notes": "Manual NCollection member mapping; PackedMap<T: PackedInteger> is NCollection_PackedMap<IntType> for i32/u32/i64/u64/usize with native 32/64-bit blocks. Bucket selection, chain order, bit-order iteration and min/max selection match native (probe ncoll_flat_maps_packed)."
     },
     {
-      "upstream_id": "NCollection_PackedMap::Contains(const NCollection_PackedMap&) const",
+      "upstream_id": "NCollection_PackedMap::Contains(const NCollection_PackedMap<IntType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::PackedMap::contains_map",
@@ -76732,7 +76732,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
     },
     {
-      "upstream_id": "NCollection_UtfIterator::operator==(const NCollection_UtfIterator&) const",
+      "upstream_id": "NCollection_UtfIterator::operator==(const NCollection_UtfIterator<Type>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfIterator::<core::cmp::PartialEq>::eq",
@@ -76924,7 +76924,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
     },
     {
-      "upstream_id": "NCollection_UtfString(const NCollection_UtfString&)",
+      "upstream_id": "NCollection_UtfString(const NCollection_UtfString<Type>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfString::<core::clone::Clone>::clone",
@@ -76932,7 +76932,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
     },
     {
-      "upstream_id": "NCollection_UtfString(NCollection_UtfString&&)",
+      "upstream_id": "NCollection_UtfString(NCollection_UtfString<Type>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": null,
@@ -76988,7 +76988,7 @@
       "notes": "Unix delegates to the active C locale through a project-owned libc adapter, preserving the first-character mblen byte count as the mbstowcs wide-character limit. Android follows its direct FromUnicode path. Windows now uses CP_ACP MultiByteToWideChar(MB_PRECOMPOSED) through the project-owned Windows locale adapter; fake-codepage tests and an x86_64-pc-windows-gnu compile validate the path. Native Windows runtime evidence is still absent. Embedded NUL terminates input. Native uninitialized storage after a later invalid Unix multibyte sequence is zero-initialized for Rust safety; mapping remains partial. See tools/oracle/tkernel-utf-string-windows-locale.md."
     },
     {
-      "upstream_id": "NCollection_UtfString::~NCollection_UtfString()",
+      "upstream_id": "NCollection_UtfString::~NCollection_UtfString<Type>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": null,
@@ -76996,7 +76996,7 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "NCollection_UtfString::IsEqual(const NCollection_UtfString&) const",
+      "upstream_id": "NCollection_UtfString::IsEqual(const NCollection_UtfString<Type>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfString::is_equal",
@@ -77108,7 +77108,7 @@
       "notes": "Unix follows active-locale wcstombs and the native zero-result check. Windows now uses CP_ACP WideCharToMultiByte(flags=0); fake-codepage tests and a Windows GNU target compile cover the adapter, but native Windows runtime evidence is absent, so this mapping stays partial. Input is a wide-unit slice that may include its NUL terminator. The tool is absent on Android, matching upstream. See tools/oracle/tkernel-utf-string-windows-locale.md."
     },
     {
-      "upstream_id": "NCollection_UtfString::Assign(const NCollection_UtfString&)",
+      "upstream_id": "NCollection_UtfString::Assign(const NCollection_UtfString<Type>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfString::assign",
@@ -77116,7 +77116,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
     },
     {
-      "upstream_id": "NCollection_UtfString::Swap(NCollection_UtfString&)",
+      "upstream_id": "NCollection_UtfString::Swap(NCollection_UtfString<Type>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfString::swap",
@@ -77124,7 +77124,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
     },
     {
-      "upstream_id": "NCollection_UtfString::operator=(const NCollection_UtfString&)",
+      "upstream_id": "NCollection_UtfString::operator=(const NCollection_UtfString<Type>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfString::assign",
@@ -77132,7 +77132,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
     },
     {
-      "upstream_id": "NCollection_UtfString::operator=(NCollection_UtfString&&)",
+      "upstream_id": "NCollection_UtfString::operator=(NCollection_UtfString<Type>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UtfString::swap",
@@ -77188,7 +77188,7 @@
       "notes": "The native NCollection_String typedef is NCollection_UtfString<char>; Rust exposes the same byte-string specialization as the public String8 alias to UtfString<u8>. The TKernel unit and conversion tests cover this specialization."
     },
     {
-      "upstream_id": "NCollection_UtfString::operator!=(const NCollection_UtfString&) const",
+      "upstream_id": "NCollection_UtfString::operator!=(const NCollection_UtfString<Type>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
       "rust_item": "<rustycad_tkernel::ncollection::UtfString as PartialEq>::ne",
@@ -77324,7 +77324,7 @@
       "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
     },
     {
-      "upstream_id": "NCollection_ForwardRange(NCollection_ForwardRange&&)",
+      "upstream_id": "NCollection_ForwardRange(NCollection_ForwardRange<HostType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
       "rust_item": null,
@@ -77332,7 +77332,7 @@
       "notes": "Excluded: C++ move constructor. Rust moves the value itself (`let b = a;` / `b = a;`); ownership transfer has no callable counterpart."
     },
     {
-      "upstream_id": "NCollection_ForwardRange::operator=(NCollection_ForwardRange&&)",
+      "upstream_id": "NCollection_ForwardRange::operator=(NCollection_ForwardRange<HostType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
       "rust_item": null,
@@ -77436,7 +77436,7 @@
       "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
     },
     {
-      "upstream_id": "NCollection_ItemsView::Iterator::operator==(const Iterator&) const",
+      "upstream_id": "NCollection_ItemsView::Iterator::operator==(const Iterator<BaseIterator,RefType,Extractor>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
       "rust_item": null,
@@ -77444,7 +77444,7 @@
       "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
     },
     {
-      "upstream_id": "NCollection_ItemsView::Iterator::operator!=(const Iterator&) const",
+      "upstream_id": "NCollection_ItemsView::Iterator::operator!=(const Iterator<BaseIterator,RefType,Extractor>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
       "rust_item": null,
@@ -77516,7 +77516,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. Both cursors implement Default with no items (More() is false)."
     },
     {
-      "upstream_id": "NCollection_Iterator(const NCollection_Iterator&)",
+      "upstream_id": "NCollection_Iterator(const NCollection_Iterator<Container,NCollection_Iterator::IsConstant>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::<core::clone::Clone>::clone",
@@ -77524,7 +77524,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. CollectionCursor is Copy; the mutable cursor holds an exclusive borrow and cannot be duplicated, so copies go through CollectionCursorMut::as_const."
     },
     {
-      "upstream_id": "NCollection_Iterator(NCollection_Iterator&&)",
+      "upstream_id": "NCollection_Iterator(NCollection_Iterator<Container,NCollection_Iterator::IsConstant>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
       "rust_item": null,
@@ -77532,7 +77532,7 @@
       "notes": "Excluded: C++ move constructor. Rust moves the value itself (`let b = a;` / `b = a;`); ownership transfer has no callable counterpart."
     },
     {
-      "upstream_id": "NCollection_Iterator::operator=(const NCollection_Iterator&)",
+      "upstream_id": "NCollection_Iterator::operator=(const NCollection_Iterator<Container,NCollection_Iterator::IsConstant>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::<core::clone::Clone>::clone",
@@ -77540,7 +77540,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
     },
     {
-      "upstream_id": "NCollection_Iterator::operator=(NCollection_Iterator&&)",
+      "upstream_id": "NCollection_Iterator::operator=(NCollection_Iterator<Container,NCollection_Iterator::IsConstant>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
       "rust_item": null,
@@ -77548,7 +77548,7 @@
       "notes": "Excluded: C++ move assignment. Rust moves the value itself (`let b = a;` / `b = a;`); ownership transfer has no callable counterpart."
     },
     {
-      "upstream_id": "NCollection_Iterator::~NCollection_Iterator()",
+      "upstream_id": "NCollection_Iterator::~NCollection_Iterator<Container, IsConstant>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
       "rust_item": null,
@@ -77748,7 +77748,7 @@
       "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
     },
     {
-      "upstream_id": "NCollection_DataMap::DataMapNode(K&&,std::in_place_t,NCollection_ListNode*,Args&&)",
+      "upstream_id": "NCollection_DataMap::DataMapNode::DataMapNode(K&&,std::in_place_t,NCollection_ListNode*,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": null,
@@ -77780,7 +77780,7 @@
       "notes": "Manual NCollection member mapping; A cursor attached to no map; More() is false. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_DataMap::Iterator(NCollection_DataMap&)",
+      "upstream_id": "NCollection_DataMap::Iterator::Iterator(NCollection_DataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::cursor_mut",
@@ -77788,7 +77788,7 @@
       "notes": "Manual NCollection member mapping; The non-const constructor allows ChangeValue. The cursor borrows its map; Value/Key past the end return the native Standard_NoSuchObject as a Failure."
     },
     {
-      "upstream_id": "NCollection_DataMap::Iterator(const NCollection_DataMap&)",
+      "upstream_id": "NCollection_DataMap::Iterator::Iterator(const NCollection_DataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::cursor",
@@ -77812,7 +77812,7 @@
       "notes": "Manual NCollection member mapping;"
     },
     {
-      "upstream_id": "NCollection_DataMap::Iterator::Initialize(NCollection_DataMap&)",
+      "upstream_id": "NCollection_DataMap::Iterator::Initialize(NCollection_DataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMapIteratorMut::initialize",
@@ -77820,7 +77820,7 @@
       "notes": "Manual NCollection member mapping;"
     },
     {
-      "upstream_id": "NCollection_DataMap::Iterator::Initialize(const NCollection_DataMap&)",
+      "upstream_id": "NCollection_DataMap::Iterator::Initialize(const NCollection_DataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMapIterator::initialize",
@@ -77836,7 +77836,7 @@
       "notes": "Manual NCollection member mapping; Restarts on the map given at construction; a default cursor stays past the end."
     },
     {
-      "upstream_id": "NCollection_DataMap::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_DataMap::Iterator::IsEqual(const NCollection_DataMap::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMapIterator::is_equal",
@@ -77988,7 +77988,7 @@
       "notes": "Manual NCollection member mapping; The hasher is moved or cloned into the map by the caller. The int bucket-count overload raises Standard_OutOfRange for a negative count (nbBucketsFromInt); the Rust count is usize, and `buckets_from_int` performs that native check."
     },
     {
-      "upstream_id": "NCollection_DataMap(const NCollection_DataMap&)",
+      "upstream_id": "NCollection_DataMap(const NCollection_DataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::<core::clone::Clone>::clone",
@@ -77996,7 +77996,7 @@
       "notes": "Manual NCollection member mapping; Copies the bucket count, allocator and hasher, then re-adds every entry in source order as the native copy constructor does."
     },
     {
-      "upstream_id": "NCollection_DataMap(NCollection_DataMap&&)",
+      "upstream_id": "NCollection_DataMap(NCollection_DataMap<TheKeyType,TheItemType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": null,
@@ -78004,7 +78004,7 @@
       "notes": "Excluded: C++ move constructor. Rust moves the value itself (`let b = a;`); ownership transfer has no callable counterpart, and the native moved-from map (zero buckets, empty) is inaccessible in Rust."
     },
     {
-      "upstream_id": "NCollection_DataMap::Exchange(NCollection_DataMap&)",
+      "upstream_id": "NCollection_DataMap::Exchange(NCollection_DataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::exchange",
@@ -78200,7 +78200,7 @@
       "notes": "Manual NCollection member mapping; The const&/&& overloads collapse into one Rust function that takes the key and item by value (callers clone to copy)."
     },
     {
-      "upstream_id": "NCollection_DataMap::Emplace(K&&,Args&&)",
+      "upstream_id": "NCollection_DataMap::Emplace(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::emplace",
@@ -78208,7 +78208,7 @@
       "notes": "Manual NCollection member mapping; An existing item is replaced; the key is kept. Variadic constructor arguments become a closure that builds the item only when the native code would construct it."
     },
     {
-      "upstream_id": "NCollection_DataMap::Emplaced(K&&,Args&&)",
+      "upstream_id": "NCollection_DataMap::Emplaced(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::emplaced",
@@ -78216,7 +78216,7 @@
       "notes": "Manual NCollection member mapping; Variadic constructor arguments become a closure that builds the item only when the native code would construct it."
     },
     {
-      "upstream_id": "NCollection_DataMap::TryEmplace(K&&,Args&&)",
+      "upstream_id": "NCollection_DataMap::TryEmplace(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::try_emplace",
@@ -78224,7 +78224,7 @@
       "notes": "Manual NCollection member mapping; Variadic constructor arguments become a closure that builds the item only when the native code would construct it."
     },
     {
-      "upstream_id": "NCollection_DataMap::TryEmplaced(K&&,Args&&)",
+      "upstream_id": "NCollection_DataMap::TryEmplaced(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::try_emplaced",
@@ -78336,7 +78336,7 @@
       "notes": "Manual NCollection member mapping; Buckets are released only when the allocator changes; None stands for the null handle and selects the common allocator."
     },
     {
-      "upstream_id": "NCollection_DataMap::~NCollection_DataMap()",
+      "upstream_id": "NCollection_DataMap::~NCollection_DataMap<TheKeyType, TheItemType, Hasher>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": null,
@@ -78648,7 +78648,7 @@
       "notes": "Excluded: DoubleMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DoubleMapIterator)."
     },
     {
-      "upstream_id": "NCollection_DoubleMap::DoubleMapNode(K1&&,std::in_place_t,NCollection_ListNode*,NCollection_ListNode*,Args2&&)",
+      "upstream_id": "NCollection_DoubleMap::DoubleMapNode::DoubleMapNode(K1&&,std::in_place_t,NCollection_ListNode*,NCollection_ListNode*,Args2&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
@@ -78856,7 +78856,7 @@
       "notes": "Manual NCollection member mapping; Copies the bucket count, allocator and hashers, then re-binds every pair in first-key bucket order."
     },
     {
-      "upstream_id": "NCollection_DoubleMap(NCollection_DoubleMap&&)",
+      "upstream_id": "NCollection_DoubleMap(NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
@@ -78888,7 +78888,7 @@
       "notes": "Manual NCollection member mapping; operator= forwards to Assign."
     },
     {
-      "upstream_id": "NCollection_DoubleMap::operator=(NCollection_DoubleMap&&)",
+      "upstream_id": "NCollection_DoubleMap::operator=(NCollection_DoubleMap<TheKey1Type,TheKey2Type,Hasher1,Hasher2>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
@@ -79088,7 +79088,7 @@
       "notes": "Manual NCollection member mapping; Native quirk preserved: DoubleMap always releases its buckets here, whatever the allocator; None stands for the null handle."
     },
     {
-      "upstream_id": "NCollection_DoubleMap::~NCollection_DoubleMap()",
+      "upstream_id": "NCollection_DoubleMap::~NCollection_DoubleMap<TheKey1Type, TheKey2Type, Hasher1, Hasher2>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
       "rust_item": null,
@@ -79104,7 +79104,7 @@
       "notes": "Manual NCollection member mapping; A cursor attached to no map; More() is false. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::Iterator(NCollection_IndexedDataMap&)",
+      "upstream_id": "NCollection_IndexedDataMap::Iterator::Iterator(NCollection_IndexedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::cursor_mut",
@@ -79112,7 +79112,7 @@
       "notes": "Manual NCollection member mapping; The non-const constructor allows ChangeValue. The cursor borrows its map; Value/Key past the end return the native Standard_NoSuchObject as a Failure."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::Iterator(const NCollection_IndexedDataMap&)",
+      "upstream_id": "NCollection_IndexedDataMap::Iterator::Iterator(const NCollection_IndexedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::cursor",
@@ -79160,7 +79160,7 @@
       "notes": "Manual NCollection member mapping; The cursor borrows its map; Value/Key past the end return the native Standard_NoSuchObject as a Failure."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_IndexedDataMap::Iterator::IsEqual(const NCollection_IndexedDataMap::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMapIterator::is_equal",
@@ -79312,7 +79312,7 @@
       "notes": "Manual NCollection member mapping; The hasher is moved or cloned into the map by the caller. The int bucket-count overload raises Standard_OutOfRange for a negative count (nbBucketsFromInt); the Rust count is usize, and `buckets_from_int` performs that native check."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap(const NCollection_IndexedDataMap&)",
+      "upstream_id": "NCollection_IndexedDataMap(const NCollection_IndexedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::<core::clone::Clone>::clone",
@@ -79320,7 +79320,7 @@
       "notes": "Manual NCollection member mapping; Copies the bucket count, allocator and hasher, then re-adds every entry in source order as the native copy constructor does."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap(NCollection_IndexedDataMap&&)",
+      "upstream_id": "NCollection_IndexedDataMap(NCollection_IndexedDataMap<TheKeyType,TheItemType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": null,
@@ -79328,7 +79328,7 @@
       "notes": "Excluded: C++ move constructor. Rust moves the value itself (`let b = a;`); ownership transfer has no callable counterpart, and the native moved-from map (zero buckets, empty) is inaccessible in Rust."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::Exchange(NCollection_IndexedDataMap&)",
+      "upstream_id": "NCollection_IndexedDataMap::Exchange(NCollection_IndexedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::exchange",
@@ -79344,7 +79344,7 @@
       "notes": "Manual NCollection member mapping; Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::Assign(const NCollection_IndexedDataMap&)",
+      "upstream_id": "NCollection_IndexedDataMap::Assign(const NCollection_IndexedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::assign",
@@ -79352,7 +79352,7 @@
       "notes": "Manual NCollection member mapping; Keeps the destination hasher and allocator; self-assignment is impossible under Rust borrowing."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::operator=(const NCollection_IndexedDataMap&)",
+      "upstream_id": "NCollection_IndexedDataMap::operator=(const NCollection_IndexedDataMap<TheKeyType,TheItemType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::assign",
@@ -79360,7 +79360,7 @@
       "notes": "Manual NCollection member mapping; operator= forwards to Assign."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::operator=(NCollection_IndexedDataMap&&)",
+      "upstream_id": "NCollection_IndexedDataMap::operator=(NCollection_IndexedDataMap<TheKeyType,TheItemType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::exchange",
@@ -79544,7 +79544,7 @@
       "notes": "Manual NCollection member mapping; The native TheItemType* is never null and becomes &mut V. The const&/&& overloads collapse into one Rust function that takes the key and item by value (callers clone to copy)."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::Emplace(K&&,Args&&)",
+      "upstream_id": "NCollection_IndexedDataMap::Emplace(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::emplace",
@@ -79552,7 +79552,7 @@
       "notes": "Manual NCollection member mapping; Returns the index; an existing item is replaced. Variadic constructor arguments become a closure that builds the item only when the native code would construct it."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::Emplaced(K&&,Args&&)",
+      "upstream_id": "NCollection_IndexedDataMap::Emplaced(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::emplaced",
@@ -79560,7 +79560,7 @@
       "notes": "Manual NCollection member mapping; Variadic constructor arguments become a closure that builds the item only when the native code would construct it."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::TryEmplace(K&&,Args&&)",
+      "upstream_id": "NCollection_IndexedDataMap::TryEmplace(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::try_emplace",
@@ -79568,7 +79568,7 @@
       "notes": "Manual NCollection member mapping; Returns the index. Variadic constructor arguments become a closure that builds the item only when the native code would construct it."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::TryEmplaced(K&&,Args&&)",
+      "upstream_id": "NCollection_IndexedDataMap::TryEmplaced(K&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::try_emplaced",
@@ -79808,7 +79808,7 @@
       "notes": "Manual NCollection member mapping; Buckets are released only when the allocator changes; None stands for the null handle and selects the common allocator."
     },
     {
-      "upstream_id": "NCollection_IndexedDataMap::~NCollection_IndexedDataMap()",
+      "upstream_id": "NCollection_IndexedDataMap::~NCollection_IndexedDataMap<TheKeyType, TheItemType, Hasher>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
       "rust_item": null,
@@ -79824,7 +79824,7 @@
       "notes": "Manual NCollection member mapping; A cursor attached to no map; More() is false. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::Iterator(const NCollection_IndexedMap&)",
+      "upstream_id": "NCollection_IndexedMap::Iterator::Iterator(const NCollection_IndexedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::cursor",
@@ -79856,7 +79856,7 @@
       "notes": "Manual NCollection member mapping; The cursor borrows its map; Value/Key past the end return the native Standard_NoSuchObject as a Failure."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_IndexedMap::Iterator::IsEqual(const NCollection_IndexedMap::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMapIterator::is_equal",
@@ -79984,7 +79984,7 @@
       "notes": "Manual NCollection member mapping; The hasher is moved or cloned into the map by the caller. The int bucket-count overload raises Standard_OutOfRange for a negative count (nbBucketsFromInt); the Rust count is usize, and `buckets_from_int` performs that native check."
     },
     {
-      "upstream_id": "NCollection_IndexedMap(const NCollection_IndexedMap&)",
+      "upstream_id": "NCollection_IndexedMap(const NCollection_IndexedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::<core::clone::Clone>::clone",
@@ -79992,7 +79992,7 @@
       "notes": "Manual NCollection member mapping; Copies the bucket count, allocator and hasher, then re-adds every entry in source order as the native copy constructor does."
     },
     {
-      "upstream_id": "NCollection_IndexedMap(NCollection_IndexedMap&&)",
+      "upstream_id": "NCollection_IndexedMap(NCollection_IndexedMap<TheKeyType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": null,
@@ -80000,7 +80000,7 @@
       "notes": "Excluded: C++ move constructor. Rust moves the value itself (`let b = a;`); ownership transfer has no callable counterpart, and the native moved-from map (zero buckets, empty) is inaccessible in Rust."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::Exchange(NCollection_IndexedMap&)",
+      "upstream_id": "NCollection_IndexedMap::Exchange(NCollection_IndexedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::exchange",
@@ -80016,7 +80016,7 @@
       "notes": "Manual NCollection member mapping; Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::Assign(const NCollection_IndexedMap&)",
+      "upstream_id": "NCollection_IndexedMap::Assign(const NCollection_IndexedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::assign",
@@ -80024,7 +80024,7 @@
       "notes": "Manual NCollection member mapping; Keeps the destination hasher and allocator; self-assignment is impossible under Rust borrowing."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::operator=(const NCollection_IndexedMap&)",
+      "upstream_id": "NCollection_IndexedMap::operator=(const NCollection_IndexedMap<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::assign",
@@ -80032,7 +80032,7 @@
       "notes": "Manual NCollection member mapping; operator= forwards to Assign."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::operator=(NCollection_IndexedMap&&)",
+      "upstream_id": "NCollection_IndexedMap::operator=(NCollection_IndexedMap<TheKeyType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::exchange",
@@ -80088,7 +80088,7 @@
       "notes": "Manual NCollection member mapping; The const&/&& overloads collapse into one Rust function that takes the key and item by value (callers clone to copy)."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::Emplace(Args&&)",
+      "upstream_id": "NCollection_IndexedMap::Emplace(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::emplace",
@@ -80096,7 +80096,7 @@
       "notes": "Manual NCollection member mapping; The key is constructed by the caller; an equivalent stored key is replaced."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::Emplaced(Args&&)",
+      "upstream_id": "NCollection_IndexedMap::Emplaced(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::emplaced",
@@ -80104,7 +80104,7 @@
       "notes": "Manual NCollection member mapping; The key is constructed by the caller; an equivalent stored key is replaced."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::TryEmplace(Args&&)",
+      "upstream_id": "NCollection_IndexedMap::TryEmplace(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::try_emplace",
@@ -80112,7 +80112,7 @@
       "notes": "Manual NCollection member mapping; The key is constructed by the caller; an equivalent stored key is kept."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::TryEmplaced(Args&&)",
+      "upstream_id": "NCollection_IndexedMap::TryEmplaced(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::try_emplaced",
@@ -80256,7 +80256,7 @@
       "notes": "Manual NCollection member mapping; Buckets are released only when the allocator changes; None stands for the null handle and selects the common allocator."
     },
     {
-      "upstream_id": "NCollection_IndexedMap::~NCollection_IndexedMap()",
+      "upstream_id": "NCollection_IndexedMap::~NCollection_IndexedMap<TheKeyType, Hasher>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": null,
@@ -80280,7 +80280,7 @@
       "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
     },
     {
-      "upstream_id": "NCollection_Map::MapNode(std::in_place_t,NCollection_ListNode*,Args&&)",
+      "upstream_id": "NCollection_Map::MapNode::MapNode(std::in_place_t,NCollection_ListNode*,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": null,
@@ -80312,7 +80312,7 @@
       "notes": "Manual NCollection member mapping; A cursor attached to no map; More() is false. Rust target spelling corrected to the existing compiler-inventoried Default/Clone implementation; see porting/audits/base-default-clone-paths.jsonl. No behavior or legacy-test claim added."
     },
     {
-      "upstream_id": "NCollection_Map::Iterator(const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Iterator::Iterator(const NCollection_Map<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::cursor",
@@ -80336,7 +80336,7 @@
       "notes": "Manual NCollection member mapping;"
     },
     {
-      "upstream_id": "NCollection_Map::Iterator::Initialize(const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Iterator::Initialize(const NCollection_Map<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::MapIterator::initialize",
@@ -80352,7 +80352,7 @@
       "notes": "Manual NCollection member mapping; Restarts on the map given at construction; a default cursor stays past the end."
     },
     {
-      "upstream_id": "NCollection_Map::Iterator::IsEqual(const Iterator&) const",
+      "upstream_id": "NCollection_Map::Iterator::IsEqual(const NCollection_Map::Iterator&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::MapIterator::is_equal",
@@ -80480,7 +80480,7 @@
       "notes": "Manual NCollection member mapping; The hasher is moved or cloned into the map by the caller. The int bucket-count overload raises Standard_OutOfRange for a negative count (nbBucketsFromInt); the Rust count is usize, and `buckets_from_int` performs that native check."
     },
     {
-      "upstream_id": "NCollection_Map(const NCollection_Map&)",
+      "upstream_id": "NCollection_Map(const NCollection_Map<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::<core::clone::Clone>::clone",
@@ -80488,7 +80488,7 @@
       "notes": "Manual NCollection member mapping; Copies the bucket count, allocator and hasher, then re-adds every entry in source order as the native copy constructor does."
     },
     {
-      "upstream_id": "NCollection_Map(NCollection_Map&&)",
+      "upstream_id": "NCollection_Map(NCollection_Map<TheKeyType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": null,
@@ -80496,7 +80496,7 @@
       "notes": "Excluded: C++ move constructor. Rust moves the value itself (`let b = a;`); ownership transfer has no callable counterpart, and the native moved-from map (zero buckets, empty) is inaccessible in Rust."
     },
     {
-      "upstream_id": "NCollection_Map::Exchange(NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Exchange(NCollection_Map<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::exchange",
@@ -80512,7 +80512,7 @@
       "notes": "Manual NCollection member mapping; Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_Map::Assign(const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::Assign(const NCollection_Map<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::assign",
@@ -80520,7 +80520,7 @@
       "notes": "Manual NCollection member mapping; Keeps the destination hasher and allocator; self-assignment is impossible under Rust borrowing."
     },
     {
-      "upstream_id": "NCollection_Map::operator=(const NCollection_Map&)",
+      "upstream_id": "NCollection_Map::operator=(const NCollection_Map<TheKeyType,Hasher>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::assign",
@@ -80528,7 +80528,7 @@
       "notes": "Manual NCollection member mapping; operator= forwards to Assign."
     },
     {
-      "upstream_id": "NCollection_Map::operator=(NCollection_Map&&)",
+      "upstream_id": "NCollection_Map::operator=(NCollection_Map<TheKeyType,Hasher>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::exchange",
@@ -80584,7 +80584,7 @@
       "notes": "Manual NCollection member mapping; The const&/&& overloads collapse into one Rust function that takes the key and item by value (callers clone to copy)."
     },
     {
-      "upstream_id": "NCollection_Map::Emplace(Args&&)",
+      "upstream_id": "NCollection_Map::Emplace(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::emplace",
@@ -80592,7 +80592,7 @@
       "notes": "Manual NCollection member mapping; The key is constructed by the caller; an equivalent stored key is replaced in place."
     },
     {
-      "upstream_id": "NCollection_Map::Emplaced(Args&&)",
+      "upstream_id": "NCollection_Map::Emplaced(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::emplaced",
@@ -80600,7 +80600,7 @@
       "notes": "Manual NCollection member mapping; The key is constructed by the caller; an equivalent stored key is replaced in place."
     },
     {
-      "upstream_id": "NCollection_Map::TryEmplace(Args&&)",
+      "upstream_id": "NCollection_Map::TryEmplace(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::try_emplace",
@@ -80608,7 +80608,7 @@
       "notes": "Manual NCollection member mapping; The key is constructed by the caller; an equivalent stored key is kept."
     },
     {
-      "upstream_id": "NCollection_Map::TryEmplaced(Args&&)",
+      "upstream_id": "NCollection_Map::TryEmplaced(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::try_emplaced",
@@ -80656,7 +80656,7 @@
       "notes": "Manual NCollection member mapping; Buckets are released only when the allocator changes; None stands for the null handle and selects the common allocator."
     },
     {
-      "upstream_id": "NCollection_Map::~NCollection_Map()",
+      "upstream_id": "NCollection_Map::~NCollection_Map<TheKeyType, Hasher>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": null,
@@ -80664,7 +80664,7 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "NCollection_Map::IsEqual(const NCollection_Map&) const",
+      "upstream_id": "NCollection_Map::IsEqual(const NCollection_Map<TheKeyType,Hasher>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::is_equal",
@@ -80672,7 +80672,7 @@
       "notes": "Manual NCollection member mapping; Deprecated member forwarding to NCollection_MapAlgo::IsEqual with *this as the first map."
     },
     {
-      "upstream_id": "NCollection_Map::Contains(const NCollection_Map&) const",
+      "upstream_id": "NCollection_Map::Contains(const NCollection_Map<TheKeyType,Hasher>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::contains",
@@ -80698,7 +80698,7 @@
       "source_sha256": "47cc7e07f113dd21acab6b66ff7839d16cb3b452bea2126552a1726d581b6162"
     },
     {
-      "upstream_id": "NCollection_Map::HasIntersection(const NCollection_Map&) const",
+      "upstream_id": "NCollection_Map::HasIntersection(const NCollection_Map<TheKeyType,Hasher>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::map_algo::has_intersection",
@@ -81000,7 +81000,7 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "NCollection_UBTree::TreeNode::delNode(TreeNode*,const occ::handle<NCollection_BaseAllocator>&)",
+      "upstream_id": "NCollection_UBTree::TreeNode::delNode(NCollection_UBTree::TreeNode*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
       "rust_item": null,
@@ -81024,7 +81024,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None. A null native handle selects the common allocator; Rust passes BaseAllocator::common() explicitly."
     },
     {
-      "upstream_id": "NCollection_UBTree(NCollection_UBTree&&)",
+      "upstream_id": "NCollection_UBTree(NCollection_UBTree<TheObjType,TheBndType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UBTree::move_from",
@@ -81032,7 +81032,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None. The source is left empty; natively its allocator handle is moved out too, while Rust keeps a clone so the emptied source stays usable."
     },
     {
-      "upstream_id": "NCollection_UBTree::operator=(NCollection_UBTree&&)",
+      "upstream_id": "NCollection_UBTree::operator=(NCollection_UBTree<TheObjType,TheBndType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UBTree::move_assign",
@@ -81048,7 +81048,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
     },
     {
-      "upstream_id": "NCollection_UBTree::Select(Selector&) const",
+      "upstream_id": "NCollection_UBTree::Select(NCollection_UBTree::Selector&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UBTree::select",
@@ -81080,7 +81080,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_UBTree::~NCollection_UBTree()",
+      "upstream_id": "NCollection_UBTree::~NCollection_UBTree<TheObjType, TheBndType>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
       "rust_item": null,
@@ -81104,7 +81104,7 @@
       "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
     },
     {
-      "upstream_id": "NCollection_EBTree(NCollection_EBTree&&)",
+      "upstream_id": "NCollection_EBTree(NCollection_EBTree<TheObjType,TheBndType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
       "rust_item": "rustycad_tkernel::ncollection::EBTree::move_from",
@@ -81112,7 +81112,7 @@
       "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
     },
     {
-      "upstream_id": "NCollection_EBTree::operator=(NCollection_EBTree&&)",
+      "upstream_id": "NCollection_EBTree::operator=(NCollection_EBTree<TheObjType,TheBndType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
       "rust_item": "rustycad_tkernel::ncollection::EBTree::move_assign",
@@ -81440,7 +81440,7 @@
       "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
     },
     {
-      "upstream_id": "NCollection_KDTree(const NCollection_KDTree&)",
+      "upstream_id": "NCollection_KDTree(const NCollection_KDTree<ThePointType,NCollection_KDTree::TheDimension,NCollection_KDTree::HasRadii>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
       "rust_item": "rustycad_tkernel::ncollection::KDTree::<core::clone::Clone>::clone",
@@ -81448,7 +81448,7 @@
       "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
     },
     {
-      "upstream_id": "NCollection_KDTree(NCollection_KDTree&&)",
+      "upstream_id": "NCollection_KDTree(NCollection_KDTree<ThePointType,NCollection_KDTree::TheDimension,NCollection_KDTree::HasRadii>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
       "rust_item": "rustycad_tkernel::ncollection::KDTree::move_from",
@@ -81456,7 +81456,7 @@
       "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
     },
     {
-      "upstream_id": "NCollection_KDTree::operator=(const NCollection_KDTree&)",
+      "upstream_id": "NCollection_KDTree::operator=(const NCollection_KDTree<ThePointType,NCollection_KDTree::TheDimension,NCollection_KDTree::HasRadii>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
       "rust_item": "<rustycad_tkernel::ncollection::KDTree as Clone>::clone_from",
@@ -81464,7 +81464,7 @@
       "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
     },
     {
-      "upstream_id": "NCollection_KDTree::operator=(NCollection_KDTree&&)",
+      "upstream_id": "NCollection_KDTree::operator=(NCollection_KDTree<ThePointType,NCollection_KDTree::TheDimension,NCollection_KDTree::HasRadii>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
       "rust_item": "rustycad_tkernel::ncollection::KDTree::move_assign",
@@ -81768,7 +81768,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
     },
     {
-      "upstream_id": "NCollection_Allocator::address(reference) const",
+      "upstream_id": "NCollection_Allocator::address(NCollection_Allocator::reference) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
       "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as AllocatorTypes>::address_mut",
@@ -81808,7 +81808,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
     },
     {
-      "upstream_id": "NCollection_Allocator::construct(_Objty*,_Types&&)",
+      "upstream_id": "NCollection_Allocator::construct(_Objty*,_Types&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
       "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as AllocatorTypes>::construct",
@@ -81824,7 +81824,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
     },
     {
-      "upstream_id": "NCollection_Allocator::operator==(const NCollection_Allocator&) const",
+      "upstream_id": "NCollection_Allocator::operator==(const NCollection_Allocator<ItemType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::<core::cmp::PartialEq>::eq",
@@ -81840,7 +81840,7 @@
       "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
     },
     {
-      "upstream_id": "NCollection_Allocator::operator!=(const NCollection_Allocator&) const",
+      "upstream_id": "NCollection_Allocator::operator!=(const NCollection_Allocator<ItemType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
       "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as PartialEq>::ne",
@@ -81888,7 +81888,7 @@
       "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
     },
     {
-      "upstream_id": "NCollection_OccAllocator(const NCollection_OccAllocator&)",
+      "upstream_id": "NCollection_OccAllocator(const NCollection_OccAllocator<ItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<core::clone::Clone>::clone",
@@ -81896,7 +81896,7 @@
       "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
     },
     {
-      "upstream_id": "NCollection_OccAllocator(NCollection_OccAllocator&&)",
+      "upstream_id": "NCollection_OccAllocator(NCollection_OccAllocator<ItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
       "rust_item": null,
@@ -81904,7 +81904,7 @@
       "notes": "Excluded: C++ move constructor. Rust moves the value itself; ownership transfer has no callable counterpart (upstream copies the handle, leaving the source usable; clone/clone_from cover that)."
     },
     {
-      "upstream_id": "NCollection_OccAllocator::operator=(const NCollection_OccAllocator&)",
+      "upstream_id": "NCollection_OccAllocator::operator=(const NCollection_OccAllocator<ItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
       "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as Clone>::clone_from",
@@ -81912,7 +81912,7 @@
       "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
     },
     {
-      "upstream_id": "NCollection_OccAllocator::operator=(NCollection_OccAllocator&&)",
+      "upstream_id": "NCollection_OccAllocator::operator=(NCollection_OccAllocator<ItemType>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
       "rust_item": null,
@@ -81960,7 +81960,7 @@
       "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. The unused hint parameter is dropped."
     },
     {
-      "upstream_id": "NCollection_OccAllocator::deallocate(T*,size_type)",
+      "upstream_id": "NCollection_OccAllocator::deallocate(T*,NCollection_OccAllocator::size_type)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OccAllocator::deallocate",
@@ -81976,7 +81976,7 @@
       "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
     },
     {
-      "upstream_id": "NCollection_OccAllocator::construct(_Objty*,_Types&&)",
+      "upstream_id": "NCollection_OccAllocator::construct(_Objty*,_Types&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
       "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as AllocatorTypes>::construct",
@@ -81984,7 +81984,7 @@
       "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
     },
     {
-      "upstream_id": "NCollection_OccAllocator::address(reference) const",
+      "upstream_id": "NCollection_OccAllocator::address(NCollection_OccAllocator::reference) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
       "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as AllocatorTypes>::address_mut",
@@ -82016,7 +82016,7 @@
       "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. size_t(-1) / sizeof(T); zero-sized Rust types, which C++ cannot have, report usize::MAX. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
-      "upstream_id": "NCollection_OccAllocator::operator==(const NCollection_OccAllocator&) const",
+      "upstream_id": "NCollection_OccAllocator::operator==(const NCollection_OccAllocator<ItemType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OccAllocator::<core::cmp::PartialEq>::eq",
@@ -82032,7 +82032,7 @@
       "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
     },
     {
-      "upstream_id": "NCollection_OccAllocator::operator!=(const NCollection_OccAllocator&) const",
+      "upstream_id": "NCollection_OccAllocator::operator!=(const NCollection_OccAllocator<ItemType>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
       "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as PartialEq>::ne",
@@ -214027,7 +214027,7 @@
       "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe. Native virtual Add dispatch retained for UBTree and EBTree via BoundingTreeInsertion; editable index survives Fill and destructor flushing."
     },
     {
-      "upstream_id": "NCollection_UBTreeFiller::~NCollection_UBTreeFiller()",
+      "upstream_id": "NCollection_UBTreeFiller::~NCollection_UBTreeFiller<TheObjType, TheBndType>()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
       "rust_item": "rustycad_tkernel::ncollection::UBTreeFiller::<core::ops::drop::Drop>::drop",
