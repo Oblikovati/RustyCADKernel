@@ -45,6 +45,8 @@ mod method_tail;
 mod moving;
 #[allow(unsafe_code)]
 mod replacement_policy;
+#[allow(unsafe_code)]
+mod retained_zero;
 mod slots;
 mod storage_extension;
 pub use legacy_cursor::{DynamicArrayCachedIterator, DynamicArrayIterator};
@@ -54,7 +56,7 @@ impl<T> DynamicArray<T> {
     pub fn with_increment(increment: usize) -> Self {
         Self::with_allocator(increment, None)
     }
-    /// Unsigned rounding overflow preserves a zero stride; reset with SetIncrement before element operations.
+    /// Unsigned rounding overflow preserves zero stride; only a fitting retained first-slot append is supported before reset.
     /// Selects the allocator that owns every element block; `DynamicArray::<i32>::with_allocator(256,Some(alloc))`.
     pub fn with_allocator(increment: usize, allocator: Option<BaseAllocator>) -> Self {
         Self::with_rounded_increment(
@@ -108,13 +110,7 @@ impl<T> DynamicArray<T> {
         self.append_constructed_with(|_| construct())
     }
     fn append_constructed_with(&mut self, construct: impl FnOnce(&mut Self) -> T) -> &mut T {
-        self.require_element_stride();
-        let index = self.used;
-        let block = index / self.increment;
-        let offset = index % self.increment;
-        if block == self.blocks.len() {
-            self.add_block();
-        }
+        let (block, offset) = self.prepare_append_location();
         let value = construct(self);
         if offset < self.blocks[block].len() {
             self.blocks[block][offset] = value;
@@ -122,6 +118,7 @@ impl<T> DynamicArray<T> {
             self.blocks[block].push(value);
         }
         self.used += 1;
+        self.needs_tail_scan |= self.increment == 0;
         &mut self.blocks[block][offset]
     }
     fn ensure_storage_for_index(&mut self, index: usize) {
@@ -131,11 +128,11 @@ impl<T> DynamicArray<T> {
     /// Reads an initialized slot with either i32 or usize indexing; `array.value(0_usize)?`.
     pub fn value<I: TryInto<usize> + Copy + Debug>(&self, index: I) -> Result<&T, ArrayError> {
         let index = checked_index(index)?;
-        self.validate_element_index(index)?;
+        let (block_index, offset) = self.element_coordinates(index);
         self.blocks
             .as_slice()
-            .get(index / self.increment)
-            .and_then(|block| block.get(index % self.increment))
+            .get(block_index)
+            .and_then(|block| block.get(offset))
             .ok_or_else(|| self.index_error(index))
     }
     /// Mutates an initialized slot; `*array.change_value(0)? = 42`.
@@ -144,12 +141,12 @@ impl<T> DynamicArray<T> {
         index: I,
     ) -> Result<&mut T, ArrayError> {
         let index = checked_index(index)?;
-        self.validate_element_index(index)?;
+        let (block_index, offset) = self.element_coordinates(index);
         let error = self.index_error(index);
         self.blocks
             .as_mut_slice()
-            .get_mut(index / self.increment)
-            .and_then(|block| block.get_mut(index % self.increment))
+            .get_mut(block_index)
+            .and_then(|block| block.get_mut(offset))
             .ok_or(error)
     }
     /// Reads the first value; `array.first()?`.
@@ -173,19 +170,20 @@ impl<T> DynamicArray<T> {
         if self.used == 0 {
             return;
         }
+        self.require_retained_erasure();
         let previous_scan = self.needs_tail_scan;
         self.needs_tail_scan = true;
         self.used -= 1;
-        self.blocks[self.used / self.increment].truncate(self.used % self.increment);
+        let (block, offset) = self.element_coordinates(self.used);
+        self.blocks[block].truncate(offset);
         self.needs_tail_scan = previous_scan;
     }
-    /// Drops logical elements, optionally releasing blocks; `array.clear(false)`.
+    /// Clears the native logical range, optionally releasing blocks; `array.clear(false)`.
+    /// OCCT 3d097a0 skips payload destruction at zero stride, abandoning those cleanup obligations.
     pub fn clear(&mut self, release: bool) {
         self.needs_tail_scan = true;
-        // Native Clear destroys every logical element before clearBlocks frees any block.
-        for block in &mut self.blocks {
-            block.clear();
-        }
+        // Native Clear completes its destruction pass before clearBlocks frees any block.
+        self.clear_payload_prefixes();
         if release {
             self.blocks.clear(true);
         }
