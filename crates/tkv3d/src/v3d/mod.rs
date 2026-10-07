@@ -1,0 +1,56 @@
+//! The V3d package: the viewer and its views over the Graphic3d driver interfaces, the lights,
+//! the grids, the clipping plane and the view trihedron.
+//!
+//! V3d talks to the graphic driver only through the TKService traits (v3d-design.md section 1);
+//! the tests run it on the TKService null driver.
+mod circular_grid;
+mod computed_structure;
+mod enums;
+mod grid_common;
+mod lights;
+mod package;
+mod plane;
+mod rectangular_grid;
+mod trihedron;
+mod trihedron_compute;
+mod view;
+mod view_camera;
+mod view_convert;
+mod view_dump;
+mod view_grid;
+mod view_interact;
+mod view_mapping;
+mod view_redraw;
+mod view_render;
+mod view_subviews;
+mod viewer;
+mod viewer_dump;
+mod viewer_grid;
+mod viewer_iter;
+mod viewer_lights;
+mod viewer_plane;
+
+pub use circular_grid::V3dCircularGrid;
+pub use computed_structure::{V3dComputedStructure, V3dStructureComputer};
+pub use enums::*;
+pub use lights::{
+    V3dAmbientLight, V3dDirectionalLight, V3dPositionLight, V3dPositionalLight, V3dSpotLight,
+};
+pub use package::V3d;
+pub use plane::V3dPlane;
+pub use rectangular_grid::V3dRectangularGrid;
+pub use trihedron::V3dTrihedron;
+pub use view::V3dView;
+pub use viewer::V3dViewer;
+
+use rustycad_tkernel::standard::Failure;
+
+/// `V3d_BadValue` (a `Standard_OutOfRange`); `v3d_bad_value("bad size 0")`.
+pub fn v3d_bad_value(message: &str) -> Failure {
+    Failure::with_type("V3d_BadValue", message, "")
+}
+
+/// `V3d_UnMapped` (a `Standard_DomainError`): the view has no window; `v3d_un_mapped("view has no window")`.
+pub fn v3d_un_mapped(message: &str) -> Failure {
+    Failure::with_type("V3d_UnMapped", message, "")
+}

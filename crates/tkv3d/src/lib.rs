@@ -4,9 +4,11 @@
 //! - [`prs3d`]: the aspects and the drawer of presentations and the presentation tools.
 //! - [`select_basics`]: the pick result and the abstract selecting volume.
 //! - [`select_mgr`]: selection modes, owners, selecting volumes and the selectors.
+//! - [`v3d`]: the viewer, its views, lights, grids and trihedron.
 //!
 //! The design rules, including how the viewer reaches the Vulkan 1.3 driver through the
 //! Graphic3d interfaces only, are in `docs/v3d-design.md`.
 pub mod prs3d;
 pub mod select_basics;
 pub mod select_mgr;
+pub mod v3d;
