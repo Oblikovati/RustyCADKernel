@@ -459984,6 +459984,486 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFlipper::dump_json",
       "status": "implemented",
       "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipState",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipState_Out",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipState::Out",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipState_In",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipState::In",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipState_On",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipState::On",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::Equation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlaneEquation",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::Graphic3d_ClipPlane()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::default",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. The plane is gp_Pln(0, 0, 1, 0) (origin z = -0) and the reversed equation the literal (0, 0, -1, 0), as natively."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::Graphic3d_ClipPlane(const Graphic3d_ClipPlane &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::copy_of",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. A fresh id, a copy of the capping aspect fields, no chain and zero counters, as natively."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::Graphic3d_ClipPlane(const NCollection_Vec4<double> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::from_equation",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. A null normal raises Standard_ConstructionError from gp_Pln."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::Graphic3d_ClipPlane(const gp_Pln &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::from_plane",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetEquation(const gp_Pln &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_plane",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetEquation(const NCollection_Vec4<double> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_equation",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. A null normal raises before any field changes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::GetEquation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::get_equation",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ReversedEquation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::reversed_equation",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::IsOn",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::is_on",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetOn",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_on",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. A plane with a previous plane raises Standard_ProgramError naming its id."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetCapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_capping",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::IsCapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::is_capping",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ToPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::to_plane",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::Clone",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::clone_plane",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::IsChain",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::is_chain",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ChainPreviousPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::chain_previous_plane",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ChainNextPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::chain_next_plane",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::NbChainNextPlanes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::nb_chain_next_planes",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetChainNextPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_chain_next_plane",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. An associated function taking the plane's own handle (the native `this` stored as the next plane's back pointer). A link that closes a loop recurses endlessly natively; it raises Standard_ProgramError here before anything changes. The chain lengths are updated iteratively."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::CappingColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::capping_color",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetCappingColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_capping_color",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetCappingMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_capping_material",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::CappingMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::capping_material",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetCappingTexture",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_capping_texture",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::CappingTexture",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::capping_texture",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetCappingHatch",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_capping_hatch",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::CappingHatch",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::capping_hatch",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. Natively a missing hatch style (after SetCappingHatch(Aspect_HS_SOLID)) is a null dereference and a custom style an out-of-range enumeration cast; both raise Standard_ProgramError with the hatch type here."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetCappingCustomHatch",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_capping_custom_hatch",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::CappingCustomHatch",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::capping_custom_hatch",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetCappingHatchOn",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_capping_hatch_on",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetCappingHatchOff",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_capping_hatch_off",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::IsHatchOn",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::is_hatch_on",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::GetId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::get_id",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::CappingAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::capping_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetCappingAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_capping_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. Natively a null aspect is stored and the next capping call dereferences it; a null aspect raises Standard_ProgramError here and the plane keeps its aspect."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ToUseObjectMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::to_use_object_material",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetUseObjectMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_use_object_material",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ToUseObjectTexture",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::to_use_object_texture",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetUseObjectTexture",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_use_object_texture",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ToUseObjectShader",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::to_use_object_shader",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::SetUseObjectShader",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_use_object_shader",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ToUseObjectProperties",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::to_use_object_properties",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ProbePoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::probe_point",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ProbeBox",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::probe_box",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ProbeBoxTouch",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::probe_box_touch",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. Quirk kept: a partially cut plane of the chain re-tests the maximum box point against the first plane (this), not the iterated one."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ProbePointHalfspace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::probe_point_halfspace",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ProbeBoxHalfspace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::probe_box_halfspace",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::IsPointOutHalfspace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::is_point_out_halfspace",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::IsBoxFullOutHalfspace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::is_box_full_out_halfspace",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::ProbeBoxMaxPointHalfspace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::probe_box_max_point_halfspace",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::IsBoxFullInHalfspace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::is_box_full_in_halfspace",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. The pointer fields print Rust addresses."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::MCountEquation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::m_count_equation",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ClipPlane::MCountAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::m_count_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
     }
   ],
   "tests": [

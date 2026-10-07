@@ -33,3 +33,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_array').append_array_requests(requests)
     # Graphic3d_Camera (tkservice_corpus_camera.py)
     __import__('tkservice_corpus_camera').append_camera_requests(requests)
+    # Graphic3d_ClipPlane (tkservice_corpus_clip.py)
+    __import__('tkservice_corpus_clip').append_clip_requests(requests)

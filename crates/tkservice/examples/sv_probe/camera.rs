@@ -1,7 +1,7 @@
 //! Graphic3d_Camera, the twin of tools/oracle/tkservice_probe_camera.cxx.
 use super::common::{Reader, dir, end, flag, pnt, real, xyz};
+use super::tried;
 use rustycad_tkernel::ncollection::{Mat4, Vec2};
-use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::Direction3;
 use rustycad_tkservice::graphic3d::{
@@ -14,13 +14,6 @@ fn mat4<T: Copy + Into<f64>>(matrix: &Mat4<T>) {
         for column in 0..4 {
             real(matrix.get_value(row, column).into());
         }
-    }
-}
-
-/// Prints the exception type of a failed call, as `GA_TRY`.
-fn tried(result: Result<(), Failure>) {
-    if let Err(error) = result {
-        print!("{} ", error.exception_type());
     }
 }
 

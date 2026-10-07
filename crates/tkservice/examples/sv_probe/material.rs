@@ -1,6 +1,7 @@
 //! Graphic3d_MaterialAspect, the twin of tools/oracle/tkservice_probe_material.cxx.
 use super::common::{Reader, end, flag, int, real, text};
 use super::pbr::{print_bsdf, vec3, vec4};
+use super::tried;
 use rustycad_tkernel::quantity::{Color, ColorSpace};
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkservice::graphic3d::{
@@ -9,7 +10,7 @@ use rustycad_tkservice::graphic3d::{
 };
 
 /// The material of a `Graphic3d_NameOfMaterial` value from the corpus (always in range).
-fn material_name(value: i32) -> Graphic3dNameOfMaterial {
+pub fn material_name(value: i32) -> Graphic3dNameOfMaterial {
     const NAMES: [Graphic3dNameOfMaterial; 26] = {
         use Graphic3dNameOfMaterial as N;
         [
@@ -94,13 +95,6 @@ pub fn rank_case(values: &[f64]) {
         Err(error) => print!("{} ", error.exception_type()),
     }
     end();
-}
-
-/// Prints the exception type of a failed setter, as `GA_TRY` does.
-fn tried(result: Result<(), rustycad_tkernel::standard::Failure>) {
-    if let Err(error) = result {
-        print!("{} ", error.exception_type());
-    }
 }
 
 /// `sv_material_edit Name R G B Delta Shine Transparency Index`.

@@ -1,6 +1,7 @@
 //! Graphic3d_ArrayOfPrimitives and its buffers, the twin of
 //! tools/oracle/tkservice_probe_array.cxx.
 use super::common::{Reader, end, flag, int, real, text};
+use super::tried;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkservice::graphic3d::{
     Graphic3dArrayOfPrimitives, Graphic3dBufferMembers, Graphic3dIndexBufferMembers,
@@ -36,13 +37,6 @@ fn shown(result: Result<i32, Failure>) {
         Err(error) => print!("{} ", error.exception_type()),
     }
 }
-/// Prints the exception type of a failed call, as `GA_TRY(call)`.
-fn tried(result: Result<(), Failure>) {
-    if let Err(error) = result {
-        print!("{} ", error.exception_type());
-    }
-}
-
 fn reals<const N: usize>(r: &mut Reader<'_>) -> [f64; N] {
     std::array::from_fn(|_| r.real())
 }

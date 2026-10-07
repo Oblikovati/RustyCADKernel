@@ -27,6 +27,10 @@ mod camera_matrices;
 mod camera_orientation;
 mod camera_projection;
 mod camera_values;
+mod clip_plane;
+mod clip_plane_capping;
+mod clip_plane_chain;
+mod clip_plane_probe;
 mod cube_map;
 mod cube_map_order;
 mod cube_map_packed;
@@ -96,6 +100,7 @@ pub use camera::{
 pub use camera_fit::*;
 pub use camera_projection::Graphic3dCameraScalar;
 pub use camera_values::{Graphic3dCameraTile, Graphic3dWorldViewProjState};
+pub use clip_plane::{Graphic3dClipPlane, Graphic3dClipPlaneEquation, Graphic3dClipState};
 pub use cube_map::{
     Graphic3dCubeMap, Graphic3dCubeMapBase, Graphic3dCubeMapIteration, Graphic3dCubeMapMembers,
 };

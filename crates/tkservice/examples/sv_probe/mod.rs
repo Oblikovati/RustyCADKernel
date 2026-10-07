@@ -2,6 +2,7 @@
 pub mod array;
 pub mod aspects;
 pub mod camera;
+pub mod clip_plane;
 pub mod grid;
 pub mod hid;
 pub mod marker;
@@ -19,3 +20,8 @@ pub mod common;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;
+
+/// Prints the exception type of a failed call, as `GA_TRY(call)` does.
+pub fn tried(result: Result<(), rustycad_tkernel::standard::Failure>) {
+    print::show(result, |()| ());
+}
