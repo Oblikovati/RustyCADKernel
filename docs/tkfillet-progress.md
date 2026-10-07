@@ -96,3 +96,21 @@ FilletSurf.
 | BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad`, `fl_evol_rad_inv`, `fl_chamfer`, `fl_chamfer_inv` |
 | BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func`, `fl_walking`, `fl_surf_rst_walk`, `fl_rst_rst_walk` |
 | ChFi2d | `fl_chfi2d_fillet`, `fl_chfi2d_chamfer`, `fl_chfi2d_builder` |
+| ChFi3d | `fl_hatching_domains` (`ChFi3d_ComputeHatchingDomains`) |
+| BRepFilletAPI | `fl_chfi2d_builder` (`BRepFilletAPI_MakeFillet2d` on the edited face) |
+
+The GTests of `ChFi3d_Hatching_Test.cxx` are translated in
+`crates/tkfillet/tests/chfi3d_hatching.rs`.
+
+## Blocked on TKBool
+
+ChFiKPart, the ChFi3d builders (`ChFi3d_Builder`, `ChFi3d_FilBuilder`,
+`ChFi3d_ChBuilder` and the `ChFi3d_Builder_*` functions), `BRepFilletAPI_MakeFillet`,
+`BRepFilletAPI_MakeChamfer` and FilletSurf write their surfaces and curves into
+`TopOpeBRepDS_DataStructure` and rebuild the solid with `TopOpeBRepBuild_HBuilder`.
+These TKBool classes are not ported yet (the `tkbool` scope ports them), so these
+packages wait for them. Their GTests (`BRepFilletAPI_MakeFillet_Test.cxx`,
+`BRepFilletAPI_MakeChamfer_Test.cxx`) and the `BFuseSimpleTest.BlendBoxWithCylinder*`
+GTests of TKBO are `pending_dependency` rows in `porting/parity.json`.
+`BRepFilletAPI_LocalOperation`, the interface of the two 3d algorithms, is ported as the
+`BRepFilletAPILocalOperation` trait.

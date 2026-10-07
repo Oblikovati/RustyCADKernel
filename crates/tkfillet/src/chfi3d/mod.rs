@@ -1,5 +1,7 @@
 //! Face-connection geometry shared by fillet construction and offset analysis.
 mod connection;
+mod hatching;
+pub use hatching::compute_hatching_domains;
 mod point_correction;
 pub use connection::define_connect_type;
 mod orientation;

@@ -311488,6 +311488,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ChFi3d_ComputeHatchingDomains",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::compute_hatching_domains",
+      "status": "implemented",
+      "notes": "ChFi3d_ComputeHatchingDomains is a free function over the Geom2dHatch hatcher; Compared with OCCT by the fl_hatching_domains probe of tools/verify_tkfillet_numeric.py and the ChFi3d_Hatching_Test GTests (crates/tkfillet/tests/chfi3d_hatching.rs)."
+    },
+    {
       "upstream_id": "BRepOffset_Analyse",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
@@ -458527,6 +458535,366 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepFilletAPI_LocalOperation",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::Abscissa(int,const TopoDS_Vertex&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::abscissa",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::Add(const TopoDS_Edge&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::add",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::Closed(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::closed",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::ClosedAndTangent(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::closed_and_tangent",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::Contour(const TopoDS_Edge&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::contour",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::Edge(int,int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::edge",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::FirstVertex(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::first_vertex",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::LastVertex(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::last_vertex",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::Length(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::length",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::NbContours() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::nb_contours",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::NbEdges(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::nb_edges",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::NbSurf(int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::nb_surf",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::RelativeAbscissa(int,const TopoDS_Vertex&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::relative_abscissa",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::Remove(const TopoDS_Edge&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::remove",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::Reset()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::reset",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::ResetContour(int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::reset_contour",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::Sect(int,int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::sect",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_LocalOperation::Simulate(int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPILocalOperation::simulate",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::AddChamfer(const TopoDS_Edge&,const TopoDS_Edge&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::add_chamfer",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::AddChamfer(const TopoDS_Edge&,const TopoDS_Vertex&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::add_chamfer_angle",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::AddFillet(const TopoDS_Vertex&,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::add_fillet",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::BRepFilletAPI_MakeFillet2d()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::new",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::BRepFilletAPI_MakeFillet2d(const TopoDS_Face&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::with_face",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::BasisEdge(const TopoDS_Edge&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::basis_edge",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::Build(const Message_ProgressRange&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::ChamferEdges() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::chamfer_edges",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::DescendantEdge(const TopoDS_Edge&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::descendant_edge",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::FilletEdges() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::fillet_edges",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::HasDescendant(const TopoDS_Edge&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::has_descendant",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::Init(const TopoDS_Face&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::init",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::Init(const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::init_modified",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::IsModified(const TopoDS_Edge&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::is_modified",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::Modified(const TopoDS_Shape&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::modified",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::ModifyChamfer(const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Edge&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::modify_chamfer",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::ModifyChamfer(const TopoDS_Edge&,const TopoDS_Edge&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::modify_chamfer_angle",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::ModifyFillet(const TopoDS_Edge&,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::modify_fillet",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::NbChamfer() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::nb_chamfer",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::NbCurves() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::nb_curves",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::NbFillet() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::nb_fillet",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::NewEdges(int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::new_edges",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::RemoveChamfer(const TopoDS_Edge&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::remove_chamfer",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::RemoveFillet(const TopoDS_Edge&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::remove_fillet",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFillet2d::Status() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_MakeFillet2d.hxx",
+      "rust_item": "rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d::status",
+      "status": "implemented",
+      "notes": "BRepFilletAPI mapping (docs/tkfillet-progress.md): BRepFilletAPI_MakeFillet2d is a BRepBuilderAPIMakeShape over ChFi2dBuilder (overloads take distinct names, the sequences are slices, native exceptions become Failure values) and BRepFilletAPI_LocalOperation is the BRepFilletAPILocalOperation trait. Compared with OCCT by the fl_chfi2d_builder probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
       "upstream_id": "Blend_AppFunction::operator delete(void*) noexcept",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_AppFunction.hxx",
@@ -577584,6 +577952,281 @@
         "DESTEP_ConfigurationNode",
         "DESTL_ConfigurationNode",
         "DEBREP_ConfigurationNode"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ChFi3d_HatchingTest.CoincidentSegmentFormsLimitingDomain",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/ChFi3d_Hatching_Test.cxx",
+      "source_sha256": "3e64b50d10b4366044083768649411effdcb51901a5273fd8b791973bfde489b",
+      "rust_package": "rustycad-tkfillet",
+      "rust_target": "chfi3d_hatching",
+      "rust_test": "ChFi3d_HatchingTest__CoincidentSegmentFormsLimitingDomain",
+      "rust_source": "crates/tkfillet/tests/chfi3d_hatching.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ChFi3d_HatchingTest.BoundaryOverlapDoesNotDuplicateInteriorDomain",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/ChFi3d_Hatching_Test.cxx",
+      "source_sha256": "3e64b50d10b4366044083768649411effdcb51901a5273fd8b791973bfde489b",
+      "rust_package": "rustycad-tkfillet",
+      "rust_target": "chfi3d_hatching",
+      "rust_test": "ChFi3d_HatchingTest__BoundaryOverlapDoesNotDuplicateInteriorDomain",
+      "rust_source": "crates/tkfillet/tests/chfi3d_hatching.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeChamferTest.SymmetricChamfer",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeChamfer_Test.cxx",
+      "source_sha256": "2e974be8ae72e6e995702a4f6996d03c4b4b3c7e097e2021b79d1f21b671ade4",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeChamfer"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeChamferTest.AsymmetricChamfer",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeChamfer_Test.cxx",
+      "source_sha256": "2e974be8ae72e6e995702a4f6996d03c4b4b3c7e097e2021b79d1f21b671ade4",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeChamfer"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeChamferTest.Issue1177_ChamferAllEdgesFlatBox_SucceedsWithoutCrash",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeChamfer_Test.cxx",
+      "source_sha256": "2e974be8ae72e6e995702a4f6996d03c4b4b3c7e097e2021b79d1f21b671ade4",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeChamfer"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeChamferTest.ChamferMoreFaces",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeChamfer_Test.cxx",
+      "source_sha256": "2e974be8ae72e6e995702a4f6996d03c4b4b3c7e097e2021b79d1f21b671ade4",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeChamfer"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeChamferTest.ChamferAfterBooleanFusion",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeChamfer_Test.cxx",
+      "source_sha256": "2e974be8ae72e6e995702a4f6996d03c4b4b3c7e097e2021b79d1f21b671ade4",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeChamfer"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeChamferTest.SequentialChamferNoCrash",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeChamfer_Test.cxx",
+      "source_sha256": "2e974be8ae72e6e995702a4f6996d03c4b4b3c7e097e2021b79d1f21b671ade4",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeChamfer"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.Issue1177_FilletToOpposingEdge_SucceedsWithoutCrash",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.Issue1177_HistoryReferencesResultTopology",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.Issue1177_OpposingFilletsMeet_SucceedsWithoutCrash",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.Issue1177_ConcaveFilletsMeet_SucceedsWithoutCrash",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.Issue1177_FilletAllEdgesFlatBox_SucceedsWithoutCrash",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.FilletOneEdge",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.FilletAllEdges",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.FilletMoreFaces",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.FilletVariableRadius",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.OCC570_MixedVariableConstantRadius",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.Bug828_FilletOnComplexPrism",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.OCC1077_BooleanCutFillet",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepFilletAPI_MakeFilletTest.OCC426_RevolveFuseUnifyFillet",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/GTests/BRepFilletAPI_MakeFillet_Test.cxx",
+      "source_sha256": "d8662a7cf9cc712683cb2ef51581114269dab733490fce5368b7f46cbba72f50",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BRepFilletAPI_MakeFillet"
       ],
       "profiles": [
         "linux-gcc-c-locale"

@@ -29,6 +29,7 @@
 #include "tkfillet_probe_walking.cxx"
 #include "tkfillet_probe_linebuilders.cxx"
 #include "tkfillet_probe_chfi2d.cxx"
+#include "tkfillet_probe_chfi3d.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // ChFiDS (tkfillet_probe_chfids.cxx)
  {"fl_spine", fl_spine_case},
@@ -54,6 +55,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_chfi2d_fillet", fl_chfi2d_fillet_case},
  {"fl_chfi2d_chamfer", fl_chfi2d_chamfer_case},
  {"fl_chfi2d_builder", fl_chfi2d_builder_case},
+ // ChFi3d (tkfillet_probe_chfi3d.cxx)
+ {"fl_hatching_domains", fl_hatching_domains_case},
 };
 int main() {
  std::string line;
