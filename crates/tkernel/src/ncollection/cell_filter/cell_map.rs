@@ -1,4 +1,4 @@
-//! Canonical Map<Cell> and Object-first list nodes, without duplicate order/owner registries.
+//! Canonical `Map<Cell>` and Object-first list nodes, without duplicate order/owner registries.
 #![allow(unsafe_code)]
 use super::{CellHash, CellIndex};
 #[cfg(test)]

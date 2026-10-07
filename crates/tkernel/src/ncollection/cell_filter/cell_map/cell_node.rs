@@ -1,4 +1,4 @@
-//! Map<Cell> destruction receives its allocator from the canonical node owner.
+//! `Map<Cell>` destruction receives its allocator from the canonical node owner.
 use super::{CellIndex, CellObjectNode, MapNode};
 use crate::ncollection::destructor_unwind::DeferredDestructorPanic;
 use crate::ncollection::owned_bucket_chains::{CanonicalMapNode, node_contract::sealed};

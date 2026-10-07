@@ -23,7 +23,7 @@ impl<T> Array1<'_, T> {
     /// The caller must track the visited prefix when recovering, then destroy only
     /// surviving slots. Dead slots must not later be read or dropped as live `T`.
     /// Use raw/MaybeUninit backing or otherwise remove automatic drop ownership
-    /// before calling; a live Vec<T> must not subsequently drop the same slots.
+    /// before calling; a live `Vec<T>` must not subsequently drop the same slots.
     /// Empty or reversed ranges accept null pointers and perform no accesses.
     ///
     /// # Panics
