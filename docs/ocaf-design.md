@@ -181,3 +181,41 @@ a null handle would give natively.
   exceptions (`Standard_NoSuchObject` for a missing function, driver or graph node) are
   `Failure` errors, and the native null dereferences (`GetMaxNbThreads` walks the next
   functions without a scope) are `Standard_NullObject`.
+
+## 9. LDOM (the light XML DOM of TKCDF)
+
+LDOM is a general XML reader, DOM and writer. The native XML storage drivers (TKXml*) and
+the XML header reader of PCDM build on it, and those are not ported; LDOM itself is, since
+other code (the QABugs DRAW commands) parses XML with it.
+
+- **Memory.** `LDOM_MemManager` owns every node of a document in one arena: a node is a
+  `LdomNodeId` (an index), and the native `LDOM_BasicNode*` links (`mySibling`, `myFirstChild`,
+  `myRootElement`) are `Option<NodeId>`. The native memory blocks hold raw bytes; the port
+  keeps the strings as reference-counted byte strings, so `Allocate` has no untyped
+  counterpart. The hash table of tag and attribute names keeps the native 256 buckets and
+  CRC-16 hash, and a hashed name carries its hash index (natively the byte before it).
+- **Strings.** `LDOMBasicString` is an enum over the native string types. Its `operator==`
+  compares the type and the pointer (an `Arc` identity), `equals` compares the contents, and
+  copying an `LDOM_AsciiFree` string allocates a new copy, as natively.
+- **Basic nodes.** `LDOM_BasicNode`, `LDOM_BasicElement`, `LDOM_BasicAttribute` and
+  `LDOM_BasicText` are views (document, node id) over the arena; their members, including
+  the protected ones `LDOM_Element` and the parser use, keep the native list surgery
+  (attributes after the children in one sibling chain, `GetSibling` skipping and unlinking
+  null nodes, `RemoveAttribute` finding but not removing an attribute).
+- **DOM values.** `LDOM_Node` and its value subclasses (`LDOM_Element`, `LDOM_Attr`,
+  `LDOM_CharacterData`, `LDOM_Text`, `LDOM_Comment`, `LDOM_CDATASection`) are structs that
+  embed the node and dereference to it; the cached last child (`myLastChild`, written by
+  `const` members natively) is a `Cell`.
+- **Streams.** `Standard_IStream` is `std::io::Read` behind `LdomIStream`, which keeps the
+  C++ eof and fail flags and `gcount`, so a short `read` or a full `getline` ends the input
+  as natively. `Standard_OStream` is `std::io::Write`; `LDOM_OSStream` is the chunked string
+  buffer of `LDOM_SBuffer`.
+- **Parser callbacks.** The virtual `LDOMParser::startElement`/`endElement` are the trait
+  `LdomParserHooks`; `parse` uses the default hooks.
+- **Native crashes.** Where the native code dereferences a null result, the port reports an
+  error instead: an invalid character reference (`Decode` returns null) fails the record or
+  the parse with a message, and an embedded NUL byte at the end of the input, on which the
+  native reader loops forever, is skipped. Every other quirk is kept, including the text
+  record `>` after a CDATA section and the attribute search of `getAttributeNode` that
+  starts after the first attribute; `tests/ldom_native_oracle.rs` compares the port with
+  the output of a native program.

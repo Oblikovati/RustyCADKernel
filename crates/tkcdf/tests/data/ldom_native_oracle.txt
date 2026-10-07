@@ -1,0 +1,95 @@
+doc.err|0||
+doc.out0|<?xml version="1.0" encoding="UTF-8"?>\n<root a="1" b="x&amp;y" c="007" d="-1294967296" e="" f="q&quot;t"><child n="-5">text &lt;here&gt; AB</child><empty/><!-- inner --><num>42</num><z>0</z><w>012</w><cd><![CDATA[raw &lt;x&gt; &amp; y]]>&gt;</cd></root>
+doc.out2|<?xml version="1.0" encoding="UTF-8"?>\n<root a="1" b="x&amp;y" c="007" d="-1294967296" e="" f="q&quot;t">\n  <child n="-5">text &lt;here&gt; AB</child>\n  <empty/>\n<!-- inner -->  <num>42</num>\n  <z>0</z>\n  <w>012</w>\n  <cd><![CDATA[raw &lt;x&gt; &amp; y]]>&gt;</cd>\n</root>\n
+doc.bom|0
+step.err|1|Unexpected data beyond the Document Element|
+step.bom|0
+noroot.err|1|Inexpected end of file|
+noroot.bom|0
+bom.err|0||
+bom.out0|<?xml version="1.0" encoding="UTF-8"?>\n<r x="1"/>
+bom.out2|<?xml version="1.0" encoding="UTF-8"?>\n<r x="1"/>\n
+bom.bom|1
+mismatch.err|1|Expected end tag 'b'|a
+mismatch.bom|0
+eof.err|1|Inexpected end of file|
+eof.bom|0
+trunc.err|1|Unexpected end of file|
+trunc.bom|0
+hdr_late.err|1|Unexpected XML declaration|xml version="1.0"
+hdr_late.bom|0
+text_after.err|1|Unexpected data beyond the Document Element|
+text_after.bom|0
+doctype.err|0||
+doctype.out0|<?xml version="1.0" encoding="UTF-8"?>\n<r/>
+doctype.out2|<?xml version="1.0" encoding="UTF-8"?>\n<r/>\n
+doctype.bom|0
+doctype2.err|0||
+doctype2.out0|<?xml version="1.0" encoding="UTF-8"?>\n<r/>
+doctype2.out2|<?xml version="1.0" encoding="UTF-8"?>\n<r/>\n
+doctype2.bom|0
+badname.err|1|Invalid attribute name|
+badname.bom|0
+noeq.err|1|Equal sign expected in attribute definition|
+noeq.bom|0
+noquote.err|1|Expected an attribute value|
+noquote.bom|0
+badslash.err|1|Improper element tag termination|
+badslash.bom|0
+cdata_single.err|1|Characters ']]' are expected in the end of CDATA|
+cdata_single.bom|0
+comment_dd.err|1|Character '>' is expected in the end of comment|
+comment_dd.bom|0
+unknown.err|1|Unknown XML object: <!X></a>|
+unknown.bom|0
+dup_attr.err|0||
+dup_attr.out0|<?xml version="1.0" encoding="UTF-8"?>\n<a x="2" y="3"/>
+dup_attr.out2|<?xml version="1.0" encoding="UTF-8"?>\n<a x="2" y="3"/>\n
+dup_attr.bom|0
+ws_value.err|0||
+ws_value.out0|<?xml version="1.0" encoding="UTF-8"?>\n<a x="1" y="2"/>
+ws_value.out2|<?xml version="1.0" encoding="UTF-8"?>\n<a x="1" y="2"/>\n
+ws_value.bom|0
+ctrl.err|0||
+ctrl.out0|<?xml version="1.0" encoding="UTF-8"?>\n<a x="&#x01;	">&#x02;</a>
+ctrl.out2|<?xml version="1.0" encoding="UTF-8"?>\n<a x="&#x01;	">&#x02;</a>\n
+ctrl.bom|0
+empty.err|0||
+empty.out0|<?xml version="1.0" encoding="UTF-8"?>\n
+empty.out2|<?xml version="1.0" encoding="UTF-8"?>\n
+empty.bom|0
+only_ws.err|0||
+only_ws.out0|<?xml version="1.0" encoding="UTF-8"?>\n
+only_ws.out2|<?xml version="1.0" encoding="UTF-8"?>\n
+only_ws.bom|0
+big.err|0
+big.len|122716|">v2998</item><item idx="2999" name="n2999">v2999</item></r>
+big.items|3000
+attrnode.first|0
+attrnode.third|1
+attr.first|1
+removed.first|1
+attrs.count|3
+dom.out|<?xml version="1.0" encoding="UTF-8"?>\n<root first="1" second="two" third="3"><c/></root>
+dom.out2|<?xml version="1.0" encoding="UTF-8"?>\n<root first="1" second="two" third="3">\n  <c/>\n  <c2/>\nt&amp;t<!--cm--><![CDATA[cd<]]></root>\n
+removed.child|1|<?xml version="1.0" encoding="UTF-8"?>\n<root first="1" second="two" third="3"><c2/>t&amp;t<!--cm--><![CDATA[cd<]]></root>
+child.by.tag|0|1
+has.children|1|0
+text.len|5
+replace.other|<?xml version="1.0" encoding="UTF-8"?>\n<root first="1" second="two" third="3"><c2/>t&amp;t<!--cm--><![CDATA[cd<]]><src k="v" n="7"><s1>inner</s1></src></root>
+replace.same|<?xml version="1.0" encoding="UTF-8"?>\n<root first="1" second="two" third="3"><c2/>t&amp;t<!--cm--><![CDATA[cd<]]><src k="v" n="7"><s1>inner</s1></src><c2/></root>
+os.len|9|ab\0cdefgh
+decode|a&lt;b&#x41;&#66;&amp;&quot;&apos;&gt;|a<bAB&"'>|9
+decode|x&unknown;y&|x&unknown;y&|12
+decode|&#300;|NULL|-1
+decode|&#0;|NULL|-1
+decode|&#x4G;|NULL|-1
+decode|&# 65;|A|1
+decode|&#x0x41;|A|1
+decode|q&amp|q&amp|5
+encode|0|plain|5
+encode|1|plain|5
+encode|0|a&lt;b&gt;&amp;"c'|18
+encode|1|a&lt;b&gt;&amp;&quot;c'|23
+encode|0|&#x01;&#x80;&#xff;	\n|22
+encode|1|&#x01;&#x80;&#xff;	\n|22
