@@ -3,7 +3,7 @@
 //! `Extrema_GFuncExtPC`: `F(u) = (C(u) - P).C'(u) / |C'(u)|`, whose roots are the
 //! extrema of the distance between a point and a curve, with the singular cases of a
 //! vanishing first derivative (higher derivatives, then finite differences).
-use crate::extrema::curve_tool::ExtremaCurveTool;
+use crate::extrema::curve_tool::ExtremaCurveAccess;
 use crate::extrema::failures::{sequence_value, type_mismatch};
 use crate::extrema::gp_space::{GpPoint, GpVector};
 use crate::extrema::point_curve::curve_reference::CurveReference;
@@ -18,12 +18,12 @@ use rustycad_tkmath::math::{Function, FunctionWithDerivative};
 
 use crate::extrema::singular::{MAX_ORDER, MIN_TOL, TOL_FACTOR};
 
-/// `Extrema_GFuncExtPC<TheCurve, TheCurveTool, ...>` over one [`ExtremaCurveTool`]:
+/// `Extrema_GFuncExtPC<TheCurve, TheCurveTool, ...>` over one [`ExtremaCurveAccess`]:
 /// the math function of the point-curve extrema. The native members raise; here
 /// they return `Result`, and the math callbacks keep the first failure for the
 /// algorithm that runs them ([`GFuncExtPC::take_failure`]);
 /// `GFuncExtPC::<CurveTool>::with_point_curve(point, &adaptor)?`.
-pub struct GFuncExtPC<'a, T: ExtremaCurveTool> {
+pub struct GFuncExtPC<'a, T: ExtremaCurveAccess> {
     p: T::Point,
     curve: Option<CurveReference<'a, T::Curve>>,
     u: f64,
@@ -42,7 +42,7 @@ pub struct GFuncExtPC<'a, T: ExtremaCurveTool> {
     failure: FailureCapture,
 }
 
-impl<T: ExtremaCurveTool> Default for GFuncExtPC<'_, T> {
+impl<T: ExtremaCurveAccess> Default for GFuncExtPC<'_, T> {
     fn default() -> Self {
         Self {
             p: T::Point::default(),
@@ -65,7 +65,7 @@ impl<T: ExtremaCurveTool> Default for GFuncExtPC<'_, T> {
     }
 }
 
-impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
+impl<'a, T: ExtremaCurveAccess> GFuncExtPC<'a, T> {
     /// `Extrema_GFuncExtPC()`: neither point nor curve; `GFuncExtPC::<CurveTool>::new()`.
     pub fn new() -> Self {
         Self::default()
@@ -172,7 +172,7 @@ fn is_infinite_xy<V: GpVector>(vector: &V) -> bool {
     precision::is_infinite(vector.coordinate(0)) || precision::is_infinite(vector.coordinate(1))
 }
 
-impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
+impl<'a, T: ExtremaCurveAccess> GFuncExtPC<'a, T> {
     /// `Value(U, F)`: false (F unchanged) when the derivative vanishes; F is
     /// Precision::Infinite() when it is infinite; Standard_TypeMismatch without a point
     /// or curve; `function.value(0.5, &mut f)?`.
@@ -211,7 +211,7 @@ impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
     }
 }
 
-impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
+impl<'a, T: ExtremaCurveAccess> GFuncExtPC<'a, T> {
     /// `Derivative(U, DF)`; `function.derivative(0.5, &mut df)?`.
     pub fn derivative(&mut self, u: f64, df: &mut f64) -> Result<bool, Failure> {
         self.check_init("Derivative")?;
@@ -311,7 +311,7 @@ impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
     }
 }
 
-impl<T: ExtremaCurveTool> Function for GFuncExtPC<'_, T> {
+impl<T: ExtremaCurveAccess> Function for GFuncExtPC<'_, T> {
     fn value(&mut self, x: f64, result: &mut f64) -> bool {
         let value = GFuncExtPC::value(self, x, result);
         self.failure.keep(value).unwrap_or(false)
@@ -322,7 +322,7 @@ impl<T: ExtremaCurveTool> Function for GFuncExtPC<'_, T> {
     }
 }
 
-impl<T: ExtremaCurveTool> FunctionWithDerivative for GFuncExtPC<'_, T> {
+impl<T: ExtremaCurveAccess> FunctionWithDerivative for GFuncExtPC<'_, T> {
     fn derivative(&mut self, x: f64, derivative: &mut f64) -> bool {
         let value = GFuncExtPC::derivative(self, x, derivative);
         self.failure.keep(value).unwrap_or(false)

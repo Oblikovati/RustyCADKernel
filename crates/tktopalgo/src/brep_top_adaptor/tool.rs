@@ -17,6 +17,9 @@ use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 /// assert!(tool.get_surface().is_null());
 /// assert!(!tool.get_topol_tool().is_null());
 /// ```
+// Clone is the native copy: the handles are shared (HLRTopoBRep_OutLiner binds a
+// copy of a face's tool to the rebuilt face).
+#[derive(Clone)]
 pub struct BRepTopAdaptorTool {
     myloaded: bool,
     my_topol_tool: Handle<BRepTopAdaptorTopolTool>,

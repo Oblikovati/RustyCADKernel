@@ -190,3 +190,68 @@ and 17.
 - **The box constants.** The seven directions of `HLRAlgo::UpdateMinMax` are the bit
   patterns of the pinned build's `cos(k*PI/14)` and `sin(k*PI/14)`, so no platform
   `cos` can change them.
+
+## 6. HLRBRep: curves, surfaces and the shared projector
+
+- **The projector.** `HLRBRep_Curve` and `HLRBRep_Surface` keep a raw pointer to the
+  `HLRAlgo_Projector` of their `HLRBRep_Data`, which `HLRBRep_HLRToShape` scales in place
+  (`DS->Projector().Scaled(true)`) while the curves read it. The port gives each curve
+  and surface an `Option<Arc<Projector>>`; the data structure owns the reference copy
+  and replaces the `Arc` in every curve and surface whenever it changes the projector,
+  so every reader sees the value the native pointer would show. A curve or surface
+  without projector returns Standard_NullObject where the native code dereferences
+  null.
+- **`void*` template arguments.** The templates reach curves and surfaces as
+  `HLRBRep_CurvePtr`/`HLRBRep_SurfacePtr` (`void*`); the port passes `&Curve` and
+  `&Surface`, and the tool classes (`HLRBRep_CurveTool`, `HLRBRep_SurfaceTool`,
+  `HLRBRep_CLPropsATool`, `HLRBRep_SLPropsATool`) implement the template traits on them.
+- **Out parameters.** Native members that may leave an output unchanged keep the
+  `&mut` output (`HLRBRep_Curve::D0` under the type-0 standard view, whose
+  `HLRAlgo_Projector::Project` never stores the point; the empty `D3`); the overloads
+  on 3D outputs take a `_3d` suffix (`d0_3d`, `d1_3d`), the overloads that take a
+  B-spline an `_of` suffix (`poles_of`).
+- **Uninitialized members.** The line data of a default `HLRBRep_Curve` (`myOX` ...
+  `myOF`) and its type are uninitialized natively until `Update`; the port starts them
+  at 0 and OtherCurve.
+- **The loaded surface of the intersector.** `HLRBRep_Intersector::Load` keeps a
+  pointer to the surface of the face under test and `Perform(L, P)` reads it. The port
+  keeps no reference: `load` forgets the cached polyhedron and `perform_line` takes the
+  surface again, so the borrow lasts one call. The polyhedron of a non-elementary
+  surface is built on the first sight line after `load` and kept until the next one,
+  as the native `myPolyhedron`.
+- **The data structure.** `HLRBRep_Data` is shared by handles (the algorithm, the
+  Hider and the edge interference tool hold it) and edited through all of them. The
+  port makes it a transient with four locks: the edge records, the face records, the
+  two shape maps and the walk state (the native scalar members, the face iterators,
+  the intersector, the classifier and the intersection cache). `EDataArray()`,
+  `FDataArray()`, `EdgeMap()` and `FaceMap()` return write guards; every other member
+  locks what it needs for the call, so a caller drops its guards before it calls
+  another member. The native pointers into the records (`iFaceData`, `iFaceGeom`,
+  `myLEData`, `myLEGeom`, `myLEMinMax`, `myFEData`, `myFEGeom`) are record indices,
+  kept apart where the native members set them apart (`myFEGeom` lags `myFE` in
+  `Update`, `InitBoundSort` moves `myLEMinMax` alone). The `CLProps` and `SLProps`
+  members are made per call on the curve or surface the native member was given.
+  `Compare`, `Classify`, `SimplClassify` and `HidingStartLevel` read the record `E`
+  where the native code takes it as the `ED` argument (it is that record at every
+  caller). The recursion of `NextEdge` over skipped edges is a loop that keeps the
+  native order of the hide counts.
+- **The algorithm.** `HLRBRep_InternalAlgo` (and `HLRBRep_Algo`, which reaches it
+  through `Deref`) is a transient whose data structure handle, projector, shape
+  bounds and surface tools sit behind locks. `Projector()` and `ShapeBounds(I)`
+  return copies, `SeqOfShapeBounds()` a write guard. The overloads take suffixes:
+  `select_shape`, `hide_shape`, `hide_shapes`, `show_all_shape`, `hide_all_shape`,
+  `load_with_data`, `add_with_data`, and `_of` for the `HLRBRep_HLRToShape`
+  compounds of one shape. `HLRToShape` scales the projector of the data structure
+  through `Data::change_projector`; a failure while it draws leaves the projector
+  scaled, as the native exception does.
+- **The polyhedral algorithm.** `HLRBRep_PolyAlgo` passes references to the indices
+  and data of the internal nodes (`Nod11Indices`, `Nod11RValues`, ...), and two of
+  them may name one node (a closed edge, a seam face on both sides, a degenerated
+  segment). The port passes the node handles and reads or writes each field through a
+  short lock in the native order, so a write through one name is seen through the
+  other. The native array pointers that `AddNode`, `IncTData` and `UpdateLinks`
+  redirect are the `Handle<HArray1>` of a `Side` (one face along the edge); the three
+  `MoveOrInsertPoint` members share one body for one or two faces and keep the native
+  order of the node moves (`P2 ---> P4` moves the nodes of face 2 first). The probes
+  mesh the shapes with one deterministic grid and fan mesher written twice
+  (`hb_mesh`, `crates/tkhlr/tests/support/grid_mesh.rs`) instead of BRepMesh.

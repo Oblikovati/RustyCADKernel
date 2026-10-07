@@ -32,3 +32,5 @@ def append_tkhlr_requests(requests: list[str]) -> None:
     __import__('tkhlr_corpus_search_inside').append_search_inside_requests(requests)
     __import__('tkhlr_corpus_search_boundary').append_boundary_requests(requests)
     __import__('tkhlr_corpus_walking').append_walking_requests(requests)
+    # HLRBRep (tkhlr_corpus_hlrbrep.py)
+    __import__('tkhlr_corpus_hlrbrep').append_hlrbrep_requests(requests)

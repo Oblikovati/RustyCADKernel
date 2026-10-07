@@ -21,7 +21,7 @@ def corpus() -> str:
 
 
 ORACLE = NumericOracle('TKHLR', 'tools/oracle/tkhlr_probe.cxx',
-                       ['TKHLR', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase', 'TKG3d', 'TKG2d',
+                       ['TKHLR', 'TKPrim', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase', 'TKG3d', 'TKG2d',
                         'TKMath', 'TKernel'],
                        'rustycad-tkhlr', corpus)
 

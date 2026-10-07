@@ -61,6 +61,23 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ha_polyalgo", hlr_algo_poly::polyalgo_case),
     ("ha_internal", hlr_algo_internal::internal_case),
     ("ha_grow", hlr_algo_internal::grow_case),
+    // HLRBRep (hl_probe/hlrbrep_*.rs)
+    ("hb_curve", hl_probe::hlrbrep_curve::curve_case),
+    ("hb_cinter", hl_probe::hlrbrep_curve::cinter_case),
+    ("hb_surface", hl_probe::hlrbrep_surface::surface_case),
+    ("hb_edgedata", hl_probe::hlrbrep_records::edgedata_case),
+    ("hb_facedata", hl_probe::hlrbrep_records::facedata_case),
+    ("hb_edgeface", hl_probe::hlrbrep_records::edgeface_case),
+    ("hb_data", hl_probe::hlrbrep_data::data_case),
+    ("hb_hider", hl_probe::hlrbrep_hider::hider_case),
+    ("hb_algo", hl_probe::hlrbrep_algo::algo_case),
+    ("hb_reflect", hl_probe::hlrbrep_algo::reflect_case),
+    ("hb_poly", hl_probe::hlrbrep_poly::poly_case),
+    (
+        "hb_intersector",
+        hl_probe::hlrbrep_intersector::intersector_case,
+    ),
+    ("ht_outliner", hl_probe::hlrtopobrep::outliner_case),
 ];
 
 fn main() {

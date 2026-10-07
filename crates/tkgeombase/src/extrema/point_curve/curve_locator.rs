@@ -1,7 +1,7 @@
 // Rust translation of Extrema_GCurveLocator.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Extrema_GCurveLocator`: the nearest of a regular sampling of a curve.
-use crate::extrema::curve_tool::ExtremaCurveTool;
+use crate::extrema::curve_tool::ExtremaCurveAccess;
 use crate::extrema::failures::out_of_range;
 use crate::extrema::gp_space::GpPoint;
 use crate::extrema::pon::POnCurve;
@@ -9,12 +9,12 @@ use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use std::marker::PhantomData;
 
-/// `Extrema_GCurveLocator` over one [`ExtremaCurveTool`]: two static members. The
+/// `Extrema_GCurveLocator` over one [`ExtremaCurveAccess`]: two static members. The
 /// native loop runs `NbU - 1` samples, so the last parameter is never evaluated;
 /// `GCurveLocator::<CurveTool>::locate(point, &adaptor, 10)?`.
-pub struct GCurveLocator<T: ExtremaCurveTool>(PhantomData<T>);
+pub struct GCurveLocator<T: ExtremaCurveAccess>(PhantomData<T>);
 
-impl<T: ExtremaCurveTool> GCurveLocator<T> {
+impl<T: ExtremaCurveAccess> GCurveLocator<T> {
     /// `Locate(P, C, NbU, Papp)`: the nearest of `C(ui)`, `ui` from FirstParameter by
     /// `(Last - First) / (NbU - 1)`; Standard_OutOfRange when `NbU < 2`;
     /// `GCurveLocator::<CurveTool>::locate(point, &adaptor, 10)?`.
@@ -62,7 +62,7 @@ fn check_samples(nb_u: i32) -> Result<(), Failure> {
 
 // The nearest of the `NbU - 1` samples from `start` by `step` (accumulated, as the
 // native `aU += aPasU`).
-fn nearest_sample<T: ExtremaCurveTool>(
+fn nearest_sample<T: ExtremaCurveAccess>(
     point: T::Point,
     curve: &T::Curve,
     nb_u: i32,

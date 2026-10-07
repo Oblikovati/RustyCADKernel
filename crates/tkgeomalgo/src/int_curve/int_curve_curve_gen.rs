@@ -11,6 +11,7 @@ use crate::int_res2d::{Domain, Intersection};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkmath::geom_abs::CurveType;
 use std::f64::consts::PI;
 use std::ops::{Deref, DerefMut};
 
@@ -215,7 +216,7 @@ where
     pub fn perform_self(&mut self, c: &CurveOf<T>, tol_conf: f64, tol: f64) -> Result<(), Failure> {
         let mut d1: Domain = Domain::new();
         let tol_domain: f64 = if tol < tol_conf { tol_conf } else { tol };
-        if GpConic::of_curve::<T::Par>(c)?.is_some() {
+        if is_conic_type(<T::Par as PCurveTool>::get_type(c)?) {
             self.base.reset_fields();
             self.base.done = true;
             return Ok(());
@@ -239,7 +240,7 @@ where
         tol_conf: f64,
         tol: f64,
     ) -> Result<(), Failure> {
-        if GpConic::of_curve::<T::Par>(c)?.is_some() {
+        if is_conic_type(<T::Par as PCurveTool>::get_type(c)?) {
             self.base.reset_fields();
             self.base.done = true;
             return Ok(());
@@ -268,9 +269,11 @@ where
     /// unbounded end is left open. `inter.compute_domain(&adaptor, 1e-9)?`.
     pub fn compute_domain(&self, c1: &CurveOf<T>, tol_domain: f64) -> Result<Domain, Failure> {
         let mut d1: Domain = Domain::new();
+        // The native switch reads only the type: no conic is built here (a curve
+        // tool may raise while building it, as HLRBRep_Curve::Line on a point).
         let closed: bool = matches!(
-            GpConic::of_curve::<T::Par>(c1)?,
-            Some(GpConic::Circle(_) | GpConic::Ellipse(_))
+            <T::Par as PCurveTool>::get_type(c1)?,
+            CurveType::Circle | CurveType::Ellipse
         );
         let firstparameter: f64 = <T::Par as PCurveTool>::first_parameter(c1)?;
         let lastparameter: f64 = <T::Par as PCurveTool>::last_parameter(c1)?;
@@ -560,4 +563,17 @@ where
         param_sup,
         d.last_tolerance()?,
     )))
+}
+
+// The conic types of the self-intersection switch (`Perform(C, ...)`), read from the
+// type alone as natively.
+fn is_conic_type(typ: CurveType) -> bool {
+    matches!(
+        typ,
+        CurveType::Ellipse
+            | CurveType::Circle
+            | CurveType::Parabola
+            | CurveType::Hyperbola
+            | CurveType::Line
+    )
 }

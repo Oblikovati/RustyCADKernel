@@ -4,7 +4,7 @@
 //! The replacement of a vanishing first derivative in the extrema functions: the
 //! first higher derivative above the tolerance, oriented along the curve, or a
 //! three-point difference when every derivative up to the maximal order vanishes.
-use super::curve_tool::ExtremaCurveTool;
+use super::curve_tool::ExtremaCurveAccess;
 use super::gp_space::{GpPoint, GpVector};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::native::{std_max, std_min};
@@ -38,7 +38,7 @@ pub(crate) fn singular_step(uinf: f64, usup: f64, factor: f64) -> f64 {
 }
 
 /// The derivative at `u` of the singular case (division factor 1e-3).
-pub(crate) fn singular_derivative<T: ExtremaCurveTool>(
+pub(crate) fn singular_derivative<T: ExtremaCurveAccess>(
     curve: &T::Curve,
     u: f64,
     search: &SingularSearch,
@@ -71,7 +71,7 @@ pub(crate) fn singular_derivative<T: ExtremaCurveTool>(
 /// The derivative approximated by three points `delta` apart, forward near the
 /// start of the interval and backward elsewhere, from vectors to the origin
 /// (`TheVector V1(Ptemp, P1)` with a default `Ptemp`).
-pub(crate) fn three_point_derivative<T: ExtremaCurveTool>(
+pub(crate) fn three_point_derivative<T: ExtremaCurveAccess>(
     curve: &T::Curve,
     u: f64,
     uinf: f64,

@@ -43,6 +43,16 @@
 #include "tkhlr_probe_contap_search_inside.cxx"
 #include "tkhlr_probe_contap_search_boundary.cxx"
 #include "tkhlr_probe_contap_walking.cxx"
+#include "tkgeomalgo_probe_intres2d.cxx"
+#include "tkhlr_probe_hlrbrep_fixtures.cxx"
+#include "tkhlr_probe_hlrbrep_curve.cxx"
+#include "tkhlr_probe_hlrbrep_surface.cxx"
+#include "tkhlr_probe_hlrbrep_records.cxx"
+#include "tkhlr_probe_hlrbrep_intersector.cxx"
+#include "tkhlr_probe_hlrbrep_data.cxx"
+#include "tkhlr_probe_hlrbrep_algo.cxx"
+#include "tkhlr_probe_hlrbrep_poly.cxx"
+#include "tkhlr_probe_hlrtopobrep.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ct_walking",ct_walking_case},
  {"ct_boundary",ct_boundary_case},
@@ -83,6 +93,20 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ha_polyalgo", hl_ha_polyalgo_case},
  {"ha_internal", hl_ha_internal_case},
  {"ha_grow", hl_ha_grow_case},
+ // HLRBRep (tkhlr_probe_hlrbrep_*.cxx)
+ {"hb_curve", hb_curve_case},
+ {"hb_cinter", hb_cinter_case},
+ {"hb_surface", hb_surface_case},
+ {"hb_edgedata", hb_edgedata_case},
+ {"hb_facedata", hb_facedata_case},
+ {"hb_edgeface", hb_edgeface_case},
+ {"hb_intersector", hb_intersector_case},
+ {"hb_data", hb_data_case},
+ {"hb_hider", hb_hider_case},
+ {"hb_algo", hb_algo_case},
+ {"hb_reflect", hb_reflect_case},
+ {"hb_poly", hb_poly_case},
+ {"ht_outliner", ht_outliner_case},
 };
 int main() {
  std::string line;
