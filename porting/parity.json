@@ -311496,6 +311496,62 @@
       "notes": "ChFi3d_ComputeHatchingDomains is a free function over the Geom2dHatch hatcher; Compared with OCCT by the fl_hatching_domains probe of tools/verify_tkfillet_numeric.py and the ChFi3d_Hatching_Test GTests (crates/tkfillet/tests/chfi3d_hatching.rs)."
     },
     {
+      "upstream_id": "ChFi3d::ConcaveSide(const BRepAdaptor_Surface&,const BRepAdaptor_Surface&,const TopoDS_Edge&,TopAbs_Orientation&,TopAbs_Orientation&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::concave_side",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the free functions of ChFi3d and ChFi3d_Builder_0 are functions of the chfi3d module, output references become returned values and native exceptions become Failure values; ChFi3d_SearchSing implements math::FunctionWithDerivative and keeps a curve failure for take_failure. Compared with OCCT by the fl_concave_side and fl_search_sing probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_Coefficient",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::coefficient",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the free functions of ChFi3d and ChFi3d_Builder_0 are functions of the chfi3d module, output references become returned values and native exceptions become Failure values; ChFi3d_SearchSing implements math::FunctionWithDerivative and keeps a curve failure for take_failure. Compared with OCCT by the fl_concave_side and fl_search_sing probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_SearchSing",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_SearchSing.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dSearchSing",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the free functions of ChFi3d and ChFi3d_Builder_0 are functions of the chfi3d module, output references become returned values and native exceptions become Failure values; ChFi3d_SearchSing implements math::FunctionWithDerivative and keeps a curve failure for take_failure. Compared with OCCT by the fl_concave_side and fl_search_sing probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_SearchSing::ChFi3d_SearchSing(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_SearchSing.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dSearchSing::new",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the free functions of ChFi3d and ChFi3d_Builder_0 are functions of the chfi3d module, output references become returned values and native exceptions become Failure values; ChFi3d_SearchSing implements math::FunctionWithDerivative and keeps a curve failure for take_failure. Compared with OCCT by the fl_concave_side and fl_search_sing probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_SearchSing::Derivative(double,double&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_SearchSing.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dSearchSing::<rustycad_tkmath::math::FunctionWithDerivative>::derivative",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the free functions of ChFi3d and ChFi3d_Builder_0 are functions of the chfi3d module, output references become returned values and native exceptions become Failure values; ChFi3d_SearchSing implements math::FunctionWithDerivative and keeps a curve failure for take_failure. Compared with OCCT by the fl_concave_side and fl_search_sing probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_SearchSing::Value(double,double&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_SearchSing.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dSearchSing::<rustycad_tkmath::math::Function>::value",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the free functions of ChFi3d and ChFi3d_Builder_0 are functions of the chfi3d module, output references become returned values and native exceptions become Failure values; ChFi3d_SearchSing implements math::FunctionWithDerivative and keeps a curve failure for take_failure. Compared with OCCT by the fl_concave_side and fl_search_sing probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_SearchSing::Values(double,double&,double&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_SearchSing.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::ChFi3dSearchSing::<rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "status": "implemented",
+      "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the free functions of ChFi3d and ChFi3d_Builder_0 are functions of the chfi3d module, output references become returned values and native exceptions become Failure values; ChFi3d_SearchSing implements math::FunctionWithDerivative and keeps a curve failure for take_failure. Compared with OCCT by the fl_concave_side and fl_search_sing probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
       "upstream_id": "BRepOffset_Analyse",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",

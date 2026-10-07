@@ -21,7 +21,7 @@ def corpus() -> str:
 
 
 ORACLE = NumericOracle('TKFillet', 'tools/oracle/tkfillet_probe.cxx',
-                       ['TKFillet', 'TKBO', 'TKShHealing', 'TKTopAlgo', 'TKGeomAlgo',
+                       ['TKFillet', 'TKBO', 'TKPrim', 'TKShHealing', 'TKTopAlgo', 'TKGeomAlgo',
                         'TKBRep', 'TKGeomBase', 'TKG3d', 'TKG2d', 'TKMath', 'TKernel'],
                        'rustycad-tkfillet', corpus)
 

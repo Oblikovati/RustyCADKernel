@@ -76,6 +76,9 @@ FilletSurf.
   restriction takes the tangent on the first one; the end point reframings read the
   restriction parameter of the last vertex examined even when none matched (as do those
   of the surface-restriction builder).
+- `ChFi3d::ConcaveSide` moves the point on the second face by the inward direction of
+  the first face (`ChFi3d_Coefficient(dint1, DU2, DV2)`) when the faces are tangent
+  without turning back.
 - `ChFi2d_AnaFilletAlgo`: both neighbours of the fillet take the orientation of the
   first edge; the cut of two crossing edges is found by `GeomAPI_ExtremaCurveCurve`.
 - `ChFi2d_FilletAlgo`: the shifted point is filled up to `delta * 999` (not shifted);
@@ -96,7 +99,7 @@ FilletSurf.
 | BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad`, `fl_evol_rad_inv`, `fl_chamfer`, `fl_chamfer_inv` |
 | BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func`, `fl_walking`, `fl_surf_rst_walk`, `fl_rst_rst_walk` |
 | ChFi2d | `fl_chfi2d_fillet`, `fl_chfi2d_chamfer`, `fl_chfi2d_builder` |
-| ChFi3d | `fl_hatching_domains` (`ChFi3d_ComputeHatchingDomains`) |
+| ChFi3d | `fl_hatching_domains` (`ChFi3d_ComputeHatchingDomains`), `fl_concave_side` (`ChFi3d::ConcaveSide` on every edge of box, prism, cylinder, cone, sphere, torus and revolved solids), `fl_search_sing` (`ChFi3d_SearchSing` and its `math_FunctionRoot`) |
 | BRepFilletAPI | `fl_chfi2d_builder` (`BRepFilletAPI_MakeFillet2d` on the edited face) |
 
 The GTests of `ChFi3d_Hatching_Test.cxx` are translated in

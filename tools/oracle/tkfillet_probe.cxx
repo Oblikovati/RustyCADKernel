@@ -57,6 +57,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_chfi2d_builder", fl_chfi2d_builder_case},
  // ChFi3d (tkfillet_probe_chfi3d.cxx)
  {"fl_hatching_domains", fl_hatching_domains_case},
+ {"fl_concave_side", fl_concave_side_case},
+ {"fl_search_sing", fl_search_sing_case},
 };
 int main() {
  std::string line;

@@ -38,6 +38,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_chfi2d_builder", chfi2d::builder_case),
     // ChFi3d (fl_probe/chfi3d.rs)
     ("fl_hatching_domains", chfi3d::hatching_domains_case),
+    ("fl_concave_side", chfi3d::concave_side_case),
+    ("fl_search_sing", chfi3d::search_sing_case),
 ];
 
 fn main() {
