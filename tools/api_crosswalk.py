@@ -300,7 +300,18 @@ def row_cpp_candidates(
     if error is not None:
         return INVALID_PIN, []
     identity, toolkit = row.get("upstream_id", ""), row.get("toolkit", "")
-    return cpp_candidates(identity, toolkit, by_name, pin)
+    status, candidates = cpp_candidates(identity, toolkit, by_name, pin)
+    return narrow_by_declaring_header(status, candidates, row.get("source"))
+
+
+def narrow_by_declaring_header(
+    status: str, candidates: list[dict[str, JSONValue]], source: JSONValue
+) -> tuple[str, list[dict[str, JSONValue]]]:
+    """Split same-name declarations by the row's header; e.g. one std::hash per header."""
+    if status != "ambiguous" or not isinstance(source, str):
+        return status, candidates
+    local = [row for row in candidates if row.get("source") == source]
+    return ("unique", local) if len(local) == 1 else (status, candidates)
 
 
 CPP_FAILURES = {
