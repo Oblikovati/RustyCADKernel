@@ -32,6 +32,12 @@ pub fn field_integer(stream: &mut DumpStream, field: &str, value: i32) -> io::Re
     stream.write_fragment(format!("\"{name}\": {value}").as_bytes())
 }
 
+/// `OCCT_DUMP_FIELD_VALUE_NUMERICAL` of a double, with the default stream precision;
+/// `field_real(&mut stream, "myValue", 1.5)?`.
+pub fn field_real(stream: &mut DumpStream, field: &str, value: f64) -> io::Result<()> {
+    rustycad_tkernel::standard::dump::dump_real(stream, &key(field)?, value)
+}
+
 /// `OCCT_DUMP_FIELD_VALUE_GUID`: the 36-character GUID text; `field_guid(&mut s, "ID", id)?`.
 pub fn field_guid(stream: &mut DumpStream, name: &str, value: Guid) -> io::Result<()> {
     field_string(stream, name, &value.to_string())

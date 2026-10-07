@@ -24,9 +24,13 @@ pub trait TdfAttribute: Transient {
     /// `ID` (pure virtual): the attribute identifier.
     fn id(&self) -> Guid;
     /// `SetID(theGuid)`: does nothing by default (attributes with a user ID override it).
-    fn set_id(&self, _guid: &Guid) {}
+    fn set_id(&self, _guid: &Guid) -> Result<(), Failure> {
+        Ok(())
+    }
     /// `SetID()`: does nothing by default.
-    fn set_default_id(&self) {}
+    fn set_default_id(&self) -> Result<(), Failure> {
+        Ok(())
+    }
     /// `Restore` (pure virtual): takes the backed-up contents of `attribute`.
     fn restore(&self, attribute: &Handle<dyn TdfAttribute>) -> Result<(), Failure>;
     /// `NewEmpty` (pure virtual): a new empty attribute of the same end type.

@@ -168,7 +168,7 @@ fn copy_attributes(
             let created = source_attribute.new_empty();
             let created_attribute = live(&created, "TDF_CopyTool::CopyAttributes")?;
             if created_attribute.id() != id {
-                created_attribute.set_id(&id);
+                created_attribute.set_id(&id)?;
             }
             target.add_attribute(&created, true)?;
             attributes.bind(attribute.clone(), created);
