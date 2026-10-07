@@ -1,355 +1,327 @@
 # TKernel refactoring with Rust ownership and standard types
 
-Research date: 2026-10-03. Rust source snapshot: `65fed4cd`.
-OCCT oracle: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
-This is a plan for later execution; no implementation or dependency changes are included.
+First research: 2026-10-03 at Rust `65fed4cd`. Reviewed and revised: 2026-10-07 at Rust
+`7fd0a511`. OCCT oracle: `3d097a0328e71b826377d4814ab05ec3c3d23871`.
+This is a plan; it changes no code. Decisions D1–D6 bind new TKernel work from the review date.
 
-## Recommendation
+## Review summary (2026-10-07)
 
-Keep the mapped OCCT compatibility interface while simplifying implementations and offering
-an opt-in Rust interface built around borrowed slices, owned values, iterators, `Option`, and
-`Result`. Prefer standard types for new private storage. Deprecate redundant **Rust usage
-patterns**, then selected convenience wrappers after a consumer migration; do not remove
-an OCCT obligation from the inventory because its original motivation was C++.
+The first version was a careful survey of what must be **kept**. Its analysis of handles,
+identity, strings, callbacks and allocator contracts is sound and stays below. It had four
+defects that the review corrects:
 
-The port already uses Rust facilities extensively. `Array1` owns `Vec<T>` or borrows slices;
-`LinearVector` owns `Vec<T>`; `LocalArray` uses `SmallVec`; `Handle` owns an `Arc`; parallel
-execution uses `std::thread`. A wholesale rewrite would duplicate existing modernization.
-The opportunity is chiefly less conversion and cloning at callers, bounded lock lifetimes,
-and selective removal of compatibility storage from private algorithms. See
-[Array1](../crates/tkernel/src/ncollection/array1.rs),
-[LinearVector](../crates/tkernel/src/ncollection/linear_vector.rs),
-[LocalArray](../crates/tkernel/src/ncollection/local_array.rs),
-[Handle](../crates/tkernel/src/standard/handle.rs), and
-[parallel execution](../crates/tkernel/src/osd/parallel.rs).
+1. **No rule for what is not an obligation.** It said "do not remove an OCCT obligation from
+   the inventory because its original motivation was C++" and decided *Retain* for almost every
+   surface, with no bound on depth. In the four days after it, `crates/tkernel/src/ncollection`
+   grew from 15,744 to 45,516 lines (+29,772), mostly to emulate C++ exception-safety and
+   destructor-unwind states inside Rust collections: 24 production files call `catch_unwind`,
+   and NCollection production code has 1,273 `unsafe` sites. Some of the emulated behaviour has
+   no native counterpart: a C++11 destructor is implicitly `noexcept`, so an element destructor
+   that throws calls `std::terminate`, but `ncollection/destructor_unwind.rs` "completes native
+   destructor callbacks before resuming the first Rust panic". Decision D1 adds the missing rule.
+2. **It did not apply the project rules to TKernel itself.** AGENTS.md forbids panics as library
+   failure transport; production TKernel code still has about 500 `panic!`/`unwrap`/`expect`/
+   `assert!` sites outside comments and tests (373 in NCollection). Some are internal invariants;
+   others fire on caller input, for example `Array1` indexing panics on an out-of-range index
+   where OCCT raises `Standard_OutOfRange`. Decision D3 covers this.
+3. **Stale, hand-made numbers.** Its counts were a one-time snapshot (477 files, 60,133 lines,
+   4,511 ledger rows). They are now 923 files, 96,442 lines and 7,215 rows. Measurements must come
+   from a repeatable command at a stated revision (section "Measured state").
+4. **No acceptance criteria and no owner.** Every pilot ended in "measure", with no target and no
+   stop rule, and the plan stated it asserts no deletion count or completion percentage. A plan
+   that cannot fail cannot steer. Each phase below now has an exit condition.
 
-The seam is the existing compatibility interface: a deep module should keep indexing,
-errors, ownership, and traversal behavior local to one implementation. Do not expose a
-new generic storage-policy parameter to every caller merely to make replacement possible.
-Introduce an internal adapter only when a second implementation is actually evaluated.
+The recommendation itself still holds: keep the mapped OCCT compatibility interface, simplify
+implementations behind it, and offer an opt-in Rust interface (borrowed slices, owned values,
+iterators, `Option`, `Result`) where callers benefit.
 
-## Measured scope and confidence
+## Decisions
 
-These counts are physical source measurements, not semantic coverage or performance results.
-At the snapshot, `crates/tkernel/src/**/*.rs` contains **477 files / 60,133 lines**, including
-comments and inline tests; `crates/tkernel/tests/**/*.rs` contains **286 files**.
-Fifteen other workspace Cargo manifests directly mention `rustycad-tkernel`.
+- **D1 — Obligation rule.** A native behaviour is a parity obligation when a Rust caller of the
+  mapped API can observe it under conditions that Rust can produce. It is **not** an obligation
+  when it is reachable only through a C++ mechanism Rust does not have (see the next section).
+  Such behaviour gets an `excluded` API row, or a `not_applicable_to_rust` test row, with a
+  written reason — never silent removal. The original sentence "do not remove an obligation
+  because its motivation was C++" stays true for *observable* behaviour only.
+- **D2 — Stop the growth.** No new TKernel work that emulates a C++-only mechanism (D1) until the
+  Phase 1 audit has classified the existing sites. The base-toolkit API gap work continues.
+- **D3 — No panic on caller input.** Library code returns a named failure for any input a caller
+  can pass (index, bound, key, state). A panic is allowed only for a documented internal
+  invariant that no caller input can break. Operator traits that cannot return `Result`
+  (`Index`, `Add`, ...) either become unreachable by construction or are removed in favour of the
+  `Result` methods that the parity rows already claim; the TKMath operator fix sets the pattern.
+- **D4 — `unsafe` must earn its place.** Each `unsafe` block names the native contract it serves
+  (D1 class A) and the invariant that makes it sound; Miri covers it. Code that is `unsafe` only to
+  model a class-B state is removed with that state.
+- **D5 — Keep the compatibility seam** (unchanged): one deep implementation behind the mapped
+  interface; no public storage-policy parameter; an internal adapter only when a second
+  implementation is actually evaluated.
+- **D6 — Evidence stays small.** Audits are short JSON or Markdown files in `porting/audits/`;
+  no raw rustdoc tarballs or log bundles per batch. Parity proof comes from the verifiers and the
+  published snapshot (`porting/api-inventory/METRICS.md`), regenerated by the coordinator.
 
-| Rust source directory | Files | Lines | API ledger rows by corresponding native package |
+## What D1 classifies as C++-only
+
+| Class | Native behaviour | Rust counterpart | Decision |
+| --- | --- | --- | --- |
+| A | Results, bounds, order, identity, counts, errors raised to the caller, allocator statistics a public API returns (`Standard_MMgrOpt::Purge` count, `IncAllocator::Reset`) | Same observable result | Obligation |
+| B1 | An element **destructor** that throws | C++11 destructors are `noexcept`: `std::terminate`. A Rust `Drop` panic during unwinding aborts | Not an obligation: no recoverable native state exists to reproduce |
+| B2 | A throwing element **copy/move constructor or assignment** and the partial "failure prefix" a container keeps afterwards | A panicking `Clone` is a caller bug, not an error channel (AGENTS.md) | Not an obligation; containers need only memory safety (no double drop, no leak of initialised slots) |
+| B3 | `operator new`/`delete`, placement new, an allocator that throws or returns null mid-operation | Rust aborts on OOM; fallible reservation exists where a contract requires it | Not an obligation, except a public API that reports failure (then class A) |
+| B4 | Type traits: move/copy constructibility, triviality, layout | All Rust values move; `Copy`/`Clone` are explicit | `not_applicable_to_rust` test rows (user decision 2026-10-07) |
+| B5 | Raw node addresses and pointer identity of internal storage | Identity is a handle, index or key | Not an obligation unless a public API exposes the address (then class A through the handle) |
+
+The audit decides each site; the table only defines the vocabulary. When a class-B decision would
+change what a mapped test checks, the test and its native run decide: a translated upstream test
+must still pass.
+
+## Measured state at `7fd0a511`
+
+Production files only (paths matching `tests`/`_tests` excluded for `catch_unwind`, `unsafe` and
+panic counts; comment lines excluded for panic counts).
+
+| Module | Files | Lines (2026-10-03 → now) | `unsafe` | `catch_unwind` files (prod) | Panic sites (prod) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `ncollection` | 524 | 15,744 → 45,516 | 1,315 (1,273 prod) | 22 | 373 |
+| `standard` | 93 | 6,957 → 10,783 | 51 | 0 | 46 |
+| `osd` | 77 | 9,815 → 10,817 | 108 | 2 | 30 |
+| `message` | 43 | 4,688 → 4,901 | 12 | 0 | 11 |
+| `units` + `units_api` | 33 | 4,668 → 4,668 | 0 | 0 | 17 |
+| `storage` + `fsd` | 45 | 6,843 → 7,224 | 2 | 0 | 6 |
+| others | 108 | — | 0 | 0 | 17 |
+| **TKernel** | **923** | **60,133 → 96,442** | **1,488** | **24** | **≈500** |
+
+Ledger: 7,215 TKernel API rows (5,273 implemented, 600 partial, 1,342 excluded); METRICS reports
+TKernel API 90.4 % done, boilerplate 83.6 %, and 1,316 of 1,316 GTests mapped; `verify_tkernel.py`
+passed at `fe9251f1` (1,316 declarations, 201,892 differential cases). No file exceeds 500 lines.
+
+Consumers (`crates/*/src`, excluding tkernel; literal substring counts, a prioritisation signal):
+
+| Pattern | Occurrences | Files | Crates |
 | --- | ---: | ---: | ---: |
-| `ncollection` | 128 | 15,744 | 1,966 |
-| `standard` | 68 | 6,957 | 360 |
-| `tcollection` | 34 | 3,078 | 435 |
-| `osd` | 70 | 9,815 | 393 |
-| `message` | 41 | 4,688 | 429 |
-| `quantity` | 27 | 5,008 | 130 |
-| `storage` + `fsd` | 42 | 6,843 | 462 |
-| `units` + `units_api` | 33 | 4,668 | 251 |
-| `resource` | 15 | 1,754 | 42 |
-| `plugin` + `tcol_std` | 3 | 238 | 8 |
-
-Root-level modules and `c_format`/`stl` account for the remainder. The native package list
-also contains `StdFail`, `TShort`, `UnitsMethods`, `FlexLexer`, and `Precision`; lack of a
-same-named Rust directory or ledger row is not proof that a package is unnecessary.
-Source: pinned `src/FoundationClasses/TKernel/PACKAGES.cmake`; Rust
-[exports](../crates/tkernel/src/lib.rs) and [ledger](../porting/parity.json).
-
-The TKernel ledger has **4,511 rows: 4,073 implemented claims, 57 partial, 381 excluded**.
-These are claims, not 4,073 proven unique compiler declarations. Existing exclusions include
-C++ destructors represented by Rust drop behavior and begin/end overloads represented by
-Rust iterators; each exclusion needs semantic accounting in the compiler crosswalk.
-The ledger maps **1,316 legacy declarations**. Historical paired evidence records 1,521
-native passes and the single approved OCC23497 skip; translated runtime expansion and
-compatibility regression accounting are explained in [TKernel progress](tkernel-progress.md)
-and [proof archive](../porting/api-inventory/README.md). A new refactor requires fresh
-receipts; historical green results do not establish current-tree parity.
-
-Counts were computed by summing `splitlines()` over the source glob, counting matching
-`toolkit == "TKernel"` rows in `porting/parity.json`, and scanning Cargo manifest text.
-Repeat at a new revision before using them as planning estimates.
-
-A reproducible consumer screen: scan `crates/*/src/**/*.rs`, excluding `tkernel`, count literal
-substring occurrences and files containing each substring. Comments and aliases are included;
-this is a prioritization signal, not an exhaustive compiler call graph.
-
-| Pattern | Occurrences | Files | Consumer crates |
-| --- | ---: | ---: | ---: |
-| `Handle<` | 7,056 | 1,291 | 14 |
-| `SharedState<` | 286 | 228 | 12 |
-| `Array1<` | 4,509 | 639 | 12 |
-| `Sequence<` | 292 | 79 | 8 |
-| `DataMap<` | 167 | 74 | 9 |
-| `AsciiString` | 184 | 48 | 9 |
+| `Handle<` | 8,280 | 1,529 | 15 |
+| `Array1<` | 4,558 | 655 | 12 |
+| `Sequence<` | 493 | 124 | 9 |
+| `SharedState<` | 332 | 245 | 12 |
+| `AsciiString` | 222 | 67 | 9 |
+| `DataMap<` | 209 | 96 | 10 |
+| `BaseAllocator` | 101 | 27 | 5 |
 | `ExtendedString` | 0 | 0 | 0 |
-| `BaseAllocator` | 58 | 19 | 4 |
 
-Zero external text matches for `ExtendedString` do not justify removal: TKernel itself uses
-it in persistence and messages, and future application/data-exchange ports are incomplete.
-For example, [Storage header fields](../crates/tkernel/src/storage/header_data.rs) expose
-extended strings and lists of comments.
+Repeat before each phase, from `crates/tkernel/src` (production = paths without `tests` or
+`_tests`; the panic scan skips `//` lines and code after `#[cfg(test)]`):
 
-## Classification and replacement inventory
+```sh
+find . -name '*.rs' | xargs cat | wc -l
+grep -rhoE '\bunsafe\b' . | wc -l
+grep -rl catch_unwind . | grep -vE 'tests?(/|\.rs$)|_tests'
+python3 - <<'PY'
+import pathlib, re
+sites = 0
+for path in pathlib.Path('.').rglob('*.rs'):
+    if re.search(r'tests?(/|\.rs$)|_tests', str(path)):
+        continue
+    code = path.read_text().split('#[cfg(test)]')[0]
+    lines = [l for l in code.splitlines() if not l.strip().startswith('//')]
+    sites += sum(len(re.findall(r'\bpanic!\(|\.unwrap\(\)|\.expect\(|unreachable!\(|assert(_eq)?!\(', l)) for l in lines)
+print(sites)
+PY
+```
 
-**Retain** means preserve the compatibility behavior and mapped interface. **Replace internally**
-means consider changing storage only after its observable constraints are proven. **Facade**
-means add an opt-in idiomatic interface without silently changing the mapped one. **Deprecate
-usage** means discourage a redundant pattern in new internal code; it is not API deletion.
+Ledger figures come from `python3 tools/api_metrics_report.py`. A number without a revision is not
+planning input.
+
+## Ordered work
+
+Each phase has an exit condition. A phase that misses it stops and reports; it does not widen.
+
+0. **Freeze (D2).** Exit: no merged TKernel commit adds a class-B mechanism after 2026-10-07.
+1. **Audit the C++-only machinery.** For each of the 24 production `catch_unwind` files and each
+   `unsafe` cluster in NCollection (`linear_vector/*ownership*`, `sequence/copy_construction`,
+   `ordered_table/resize*`, `packed_map/*contracts*`, `ubtree*/failed*`, `allocator/owned*`,
+   `destructor_unwind.rs`, `local_array.rs`, `sparse_array/storage/lifecycle.rs`, ...) record the
+   native contract it serves, its D1 class, the API rows and tests that depend on it, and a
+   removal plan. Output: one table, `porting/audits/tkernel-cpp-only-contracts.json`.
+   Exit: every site classified; class-A sites name their mapped test.
+2. **Remove class-B machinery.** Replace it with plain ownership (`Vec`, `Box`, `Drop`, safe
+   slices), module by module, one commit per module. Rows that only described class-B behaviour
+   become `excluded` with the D1 reason. Exit per module: `verify_tkernel.py` passes with the same
+   1,316 declarations and differential count; METRICS "done" does not fall; `unsafe` and line
+   counts fall; Miri passes on the remaining `unsafe`.
+3. **Panic to `Result` (D3).** Start with caller-reachable sites: `Index`/`IndexMut` of `Array1`,
+   `Array2`, `IndexedMap`, `HArray*`, then string slicing and parsing in `units`/`strtod`.
+   Every caller in the workspace moves to the `Result` methods in the same commit.
+   Exit: no production panic reachable from caller input; each remaining one has an invariant
+   comment.
+4. **Ownership pilots (from the first version).** (a) One private `Array1` consumer with fixed
+   bounds moves its loop to a slice-taking function; (b) one private append-only
+   `Sequence`/`LinearVector` workload uses `Vec`. Exit: identical geometry output on its tests
+   and probes, fewer allocations or clones measured, or the pilot is reverted.
+5. **Callback and lock audit.** Enumerate `SharedState` guards that live across trait calls,
+   printers, allocators, `Drop` and nested handle operations; shorten lock scopes; make poison
+   handling explicit. Exit: no guard held across a foreign callback.
+6. **Idiomatic facade and targeted deprecation.** Borrowed views, fallible text conversions,
+   owned results, with index units documented (native bound vs offset, byte vs UTF-16 unit).
+   Rust-only extensions (for example `UBTree::try_select`) are listed as Rust-only in the
+   inventory and never count as OCCT parity. `#[deprecated]` only with a supported replacement.
+7. **Optional experiments** (`indexmap`, `slotmap`, `bumpalo`, `rayon`), each with its own
+   behaviour and performance report; never combined with ownership or numeric rewrites.
+8. **Rebuild proof.** Regenerate the crosswalk, METRICS and runtime evidence; no lost
+   declaration, no new unexplained skip.
+
+## Classification of surfaces
+
+**Retain** keeps the compatibility behaviour and mapped interface. **Replace internally** changes
+storage only after the observable (class-A) constraints are proven. **Facade** adds an opt-in
+idiomatic interface. **Deprecate usage** discourages a redundant pattern in new internal code; it
+is not API deletion. Every *Retain* below is bounded by D1: it keeps class-A behaviour, not
+class-B states.
 
 | Surface | Decision | Rust resources and conditions |
 | --- | --- | --- |
-| Primitive Standard scalar spellings, C++ typedef/macro syntax | Deprecate usage | Use `bool`, `i32`, `f32`, `f64`, references and generics internally. Preserve signed widths, constants, numeric rounding and macro functionality; do not globally turn indices into `usize`. |
-| `Array1`, `Array2`, HArray wrappers | Retain + facade | Existing Vec/slice storage is appropriate. Borrow `&[T]`/`&mut [T]` in private algorithms; retain lower bounds, row/column bounds, ownership queries, resize/copy semantics and shared HArray identity. |
-| `LinearVector` | Deprecate usage + retain | Use `Vec<T>` for new private growable arrays. Keep wrapper operations and capacity/error behavior accessible. Audit each conversion for allocation and index changes. |
-| `LocalArray` | Retain | Already uses SmallVec. Profile stack size and spill behavior before changing default inline capacity; stack allocation is not always cheaper. |
-| `DynamicArray`, sparse arrays | Retain; conditional internal replacement | Block allocation and stability are distinct from Vec. Dense Vec/`Vec<Option<T>>` can serve new private workloads only where sparse-index and lifetime behavior are absent. |
-| `List`, `Sequence`, detached cursors | Retain | Native node identity, splice/transfer and mutation across cursors prevent a blanket Vec/VecDeque replacement. Private append-only temporary sequences can use Vec after proving no escaped cursor/reference/allocator contract. |
-| Map/DataMap/DoubleMap/FlatMap variants | Retain | Bucket growth, hash/equality policies, collision traversal, replacement and removal are observable. std HashMap does not reproduce the native ordering. A private membership-only set may use HashSet after proving iteration cannot affect geometry/output. |
-| Indexed maps | Retain + facade | Preserve 1-based indices and reindexing/removal/substitution. `indexmap` is an experiment for private index-stable workloads, not a drop-in replacement. |
-| Ordered maps | Retain; conditional internal replacement | Native insertion order is useful, but stable node views and allocator identity add constraints beyond indexmap. BTreeMap key order is a different contract. |
-| Packed integer sets | Retain | Preserve signed key domain, ordered/bit traversal and set operations; consider native Rust bitset crates only for private finite nonnegative domains with measured benefit. |
-| KDTree/UBTree/CellFilter/math vectors | Retain algorithms | Tree tie-breaking, selector callbacks and floating-point operation order need oracle evidence. `[T; N]` is suitable private fixed storage; generic math or spatial crates require separate numeric equivalence work. |
-| `AsciiString` / `ExtendedString` | Retain + fallible facade | Keep byte and UTF-16 units respectively. Provide explicit validated UTF-8 conversions; never implicitly normalize or replace invalid sequences. |
-| HAsciiString/HExtendedString | Retain | Shared mutable identity and dynamic types remain capabilities; new exclusively owned Rust text may simply use String/Vec. |
-| Handle/Transient/RuntimeType | Retain + borrowed facade | Arc already owns lifetime. Borrow `&T`/HandleView for non-owning calls. Keep null handles, native counts, projection, ancestry and identity. |
-| SharedState | Retain; refactor access patterns | Short std lock scopes, snapshot only the required fields, invoke foreign/virtual callbacks unlocked, and preserve incremental state visibility. |
-| Standard allocation / NCollection allocators | Retain compatibility; isolate unsafe storage | RAII owners, checked Layout, existing allocator-api2 bridge. Private single-owner memory may use Vec/Box; arena reset/statistics/alignment are separate contracts. |
-| Failure/StdFail/ErrorHandler | Retain + Result facade | Use typed `Result`, `?`, and RAII in new code. Preserve native exception class, stack/message and catch boundaries; do not use panic as ordinary native failure transport. |
-| OSD path/files/timing/parallel | Retain + std-backed adapters | std I/O, Path/OsStr, Instant and threads for private operations; preserve native syntax/error/worker numbering and platform-dependent behavior. |
-| Message/Resource/Plugin | Retain + injected adapters | Owned printer/resource/module interfaces over std streams and platform loader services. Keep printer order, filtering, formatting, identity and resource lookup semantics. |
-| Quantity/Precision/Units/UnitsAPI/UnitsMethods | Retain | Domain rules, tolerances, formatting and legacy parsing are not obsolete C++ scaffolding. New unit-safe Rust types may be a separate facade. Preserve OCC23497 current behavior. |
-| Storage/FSD/TColStd/TShort/FlexLexer | Retain obligations | Rust aliases/generics can replace template spelling; binary persistence, generated lexical behavior and typed collection contracts require explicit mapping. Do not substitute Serde or another lexer and assume format parity. |
+| Primitive Standard scalar spellings, typedef/macro syntax | Deprecate usage | `bool`, `i32`, `f32`, `f64`, references and generics internally. Keep signed widths, constants and rounding; do not turn native indices into `usize` globally. |
+| `Array1`, `Array2`, HArray | Retain + facade | Vec/slice storage is right. Keep lower bounds, row/column bounds, ownership queries, resize/copy results and shared HArray identity. Indexing returns a named failure (D3). |
+| `LinearVector` | Deprecate usage + retain | `Vec<T>` for new private growable arrays; keep wrapper operations and capacity/error results. Growth-failure ownership tokens are class B2/B3. |
+| `LocalArray` | Retain | Already `SmallVec`; profile inline capacity before changing it. |
+| `DynamicArray`, sparse arrays | Retain; conditional internal replacement | Block allocation and element stability are observable; destructor-unwind states are not (B1). |
+| `List`, `Sequence`, detached cursors | Retain | Node identity, splice/transfer and cursor survival are class A; copy-construction failure prefixes are B2. |
+| Map/DataMap/DoubleMap/FlatMap | Retain | Bucket growth, hash/equality policy, collision traversal and removal order are observable; std `HashMap` does not reproduce the native order. Rehash-guard unwind states are B2/B3. |
+| Indexed maps | Retain + facade | 1-based indices, reindexing on removal, substitution. `indexmap` is an experiment, not a drop-in. |
+| Ordered maps | Retain; conditional internal replacement | Insertion order is observable; resize-interruption states are B3. `BTreeMap` order is a different contract. |
+| Packed integer sets | Retain | Signed key domain, ordered/bit traversal, set operations. |
+| KDTree/UBTree/CellFilter/math vectors | Retain algorithms | Tie-breaking, selector callbacks and floating-point order need oracle evidence; `[T; N]` for private fixed storage. |
+| `AsciiString` / `ExtendedString` | Retain + fallible facade | Byte and UTF-16 units; explicit validated UTF-8 conversions; no implicit normalisation. |
+| HAsciiString/HExtendedString | Retain | Shared mutable identity and dynamic type; exclusively owned new text uses `String`/`Vec`. |
+| Handle/Transient/RuntimeType | Retain + borrowed facade | `Arc` owns lifetime; keep null handles, native counts, projection, ancestry and identity. |
+| SharedState | Retain; refactor access | Short lock scopes, snapshots, callbacks unlocked (Phase 5). |
+| Standard allocation / NCollection allocators | Retain public results; isolate unsafe | RAII owners, checked `Layout`, `allocator-api2`. Public statistics and reset are class A; per-operation throw states are B3. |
+| Failure/StdFail/ErrorHandler | Retain + `Result` facade | Exception class, message and catch boundary as named failures; panic is not failure transport. |
+| OSD path/files/timing/parallel | Retain + std-backed adapters | Native syntax, error codes and worker numbering kept; std I/O, `Path`, `Instant`, threads underneath. |
+| Message/Resource/Plugin | Retain + injected adapters | Printer order, filtering, formatting, resource lookup. |
+| Quantity/Precision/Units | Retain | Domain rules, tolerances, legacy parsing; OCC23497 current behaviour kept. |
+| Storage/FSD/TColStd/TShort/FlexLexer | Retain existing code only | Native file formats are not ported further (user decision 2026-09); FlexLexer rows are excluded. |
 
-Evidence for the storage distinctions is in
-[Sequence](../crates/tkernel/src/ncollection/sequence.rs),
+Evidence for the storage distinctions: [Sequence](../crates/tkernel/src/ncollection/sequence.rs),
 [List](../crates/tkernel/src/ncollection/list.rs),
 [DynamicArray](../crates/tkernel/src/ncollection/dynamic_array.rs),
 [DataMap](../crates/tkernel/src/ncollection/data_map.rs),
 [IndexedMap](../crates/tkernel/src/ncollection/indexed_map.rs),
-[OrderedMap](../crates/tkernel/src/ncollection/ordered_map.rs), and
-[FlatMap](../crates/tkernel/src/ncollection/flat_map.rs).
-Native anchors, all under pinned `src/FoundationClasses/TKernel/NCollection/`:
-`NCollection_Array1.hxx:127` (Lower), `:133` (IsDeletable), `:416` (Resize), and
-`NCollection_IndexedMap.hxx:110` (iterator), `:446` (Substitute).
-Rust's collection documentation explicitly distinguishes sequence, key-sorted and arbitrary
-hash iteration order. [Official collections documentation](https://doc.rust-lang.org/std/collections/).
+[OrderedMap](../crates/tkernel/src/ncollection/ordered_map.rs),
+[FlatMap](../crates/tkernel/src/ncollection/flat_map.rs). Native anchors under the pinned
+`src/FoundationClasses/TKernel/NCollection/`: `NCollection_Array1.hxx:127` (Lower), `:133`
+(IsDeletable), `:416` (Resize); `NCollection_IndexedMap.hxx:110` (iterator), `:446` (Substitute).
 
 ## Ownership, identity and callbacks
 
-`Handle<T>` stores `Option<Arc<dyn Transient>>`, increments the embedded StandardTransient
-counter on adoption and decrements it on drop. `Transient: Any + Send + Sync`; RuntimeType
-contains projectors for concrete embedded bases and trait interfaces. Native
-`Standard_Transient.hxx:101,107,112,123` exposes `This`, `GetRefCount`, increment and decrement.
-Consequently replacing the wrapper with bare Arc, or deriving visible counts from
-`Arc::strong_count`, needs proof covering owner references, casts, weak upgrades and manual
-counter operations. Redundant-looking counters have an observable purpose.
-[Current runtime implementation](../crates/tkernel/src/standard/runtime_type.rs),
-[counter implementation](../crates/tkernel/src/standard/transient.rs),
-[weak handles](../crates/tkernel/src/standard/handle/weak.rs).
+`Handle<T>` stores `Option<Arc<dyn Transient>>`, increments the embedded StandardTransient counter
+on adoption and decrements it on drop; RuntimeType holds projectors for embedded bases and trait
+interfaces. Native `Standard_Transient.hxx:101,107,112,123` exposes `This`, `GetRefCount`,
+increment and decrement, so visible counts are class A: replacing the wrapper with a bare `Arc`
+or deriving counts from `Arc::strong_count` needs proof over owner references, casts, weak
+upgrades and manual counter calls. `Any` identifies concrete types but not the OCCT named
+inheritance graph; keep that graph. A closed enum may simplify a private algorithm, never a public
+extension point. `Rc` would remove `Send`/`Sync` and break parallel consumers.
 
-Rust `Any` identifies concrete types; it does not provide the OCCT named inheritance graph
-or arbitrary embedded-base projection. Preserve that graph. A closed enum may simplify a
-private algorithm with a closed set of cases, but cannot replace public subclass extension
-points. Arc already provides shared ownership and Weak breaks non-owning cycles; converting
-all handles to Rc would remove Send/Sync capability and disrupt parallel consumers.
-[Official Any](https://doc.rust-lang.org/std/any/trait.Any.html),
-[official Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html).
+First ownership experiment: replace temporary handle clones with borrowed views where lifetimes
+permit, then measure. Keep a clone that is part of an observable reference count. Do not turn a
+shared native setter into `&mut self` unless a separate facade owns the object exclusively.
 
-The first ownership experiment should replace temporary handle clones with borrowed views
-where lifetimes permit, then measure. Do not replace a clone that is itself part of observable
-native reference-count behavior. Do not turn shared native setters into `&mut self` methods
-unless a separate facade explicitly owns the object exclusively.
+`SharedState` documents that no other handle may be called while a guard is held, but its guards
+and poison recovery do not enforce it, and its claim that no panic happens under a guard needs the
+Phase 5 audit, above all around user callbacks. `RwLock` has no priority guarantee and recursive
+acquisition may deadlock; another lock crate does not fix re-entrancy. Pattern: read inputs,
+release the guard, call callbacks, reacquire and apply the native next mutation. A
+snapshot-and-commit is valid only if native observers cannot see the intermediate state.
+`Messenger` already snapshots printer handles before delivery.
 
-`SharedState` documents the rule against calling other handles while a guard is held, but
-its public guards and poison recovery do not enforce that rule. Its comment that a panic
-cannot happen while holding a guard is an assumption requiring audit, particularly around
-user-defined callbacks. std RwLock does not guarantee a locking priority and recursive
-acquisition may deadlock. Switching to another lock crate does not fix callback reentrancy.
-[SharedState](../crates/tkernel/src/standard/shared_state.rs),
-[official RwLock behavior](https://doc.rust-lang.org/std/sync/struct.RwLock.html).
-
-Use an explicit sequence: read required inputs; release guard; invoke callbacks; reacquire
-and apply the native next mutation. A snapshot-and-commit transaction is only valid if
-native observers cannot see intermediate changes. Preserve callback count/order, errors and
-partial outputs. Messenger already snapshots printer handles before delivery, a useful
-existing pattern, but its semantics cannot simply be imposed on every algorithm.
-[Messenger](../crates/tkernel/src/message/messenger.rs).
-
-A concrete consumer constraint is `SurfaceSplitValues = Handle<HSequence<f64>>` in
-[SplitSurface](../crates/tkshhealing/src/shape_upgrade/split_surface/mod.rs): returned sequence
-identity is shared and mutations are observable. Its build implementation already wraps
-borrowed arrays with `Array1::from_shared`. Replacing every such value with a fresh Vec
-would lose shared identity even when numeric contents initially match.
+Consumer constraint: `SurfaceSplitValues = Handle<HSequence<f64>>` in
+[SplitSurface](../crates/tkshhealing/src/shape_upgrade/split_surface/mod.rs) shares the returned
+sequence; replacing it with a fresh `Vec` loses identity even when contents match.
 
 ## Strings, errors and allocation
 
-`AsciiString` keeps arbitrary bytes, a final NUL and potentially embedded NULs; explicit-span
-and C-string constructors intentionally differ. `CString` disallows interior NUL; String
-requires valid UTF-8. Neither is its general replacement.
-[AsciiString](../crates/tkernel/src/tcollection/ascii_string.rs),
-[official CString](https://doc.rust-lang.org/std/ffi/struct.CString.html),
-[official String](https://doc.rust-lang.org/std/string/struct.String.html).
-`ExtendedString` uses UTF-16 code-unit lengths and may split surrogate pairs in native edits;
-retain Vec<u16> semantics. Native `TCollection_ExtendedString.hxx:47-53` explicitly documents
-this. Use `TryFrom`-style conversions for valid Unicode and explicitly named lossy conversions
-only when the caller chooses that behavior. OS filenames should use OsStr/Path at host I/O
-seams, while OSD_Path retains its own parsed syntax and byte rules.
-[ExtendedString](../crates/tkernel/src/tcollection/extended_string.rs),
-[OSD path behavior](../crates/tkernel/src/osd/path/relative.rs).
+`AsciiString` keeps arbitrary bytes, a final NUL and possibly embedded NULs; `CString` forbids
+interior NUL and `String` requires UTF-8, so neither replaces it. `ExtendedString` counts UTF-16
+units and may split surrogate pairs in native edits (`TCollection_ExtendedString.hxx:47-53`); keep
+`Vec<u16>` semantics, add `TryFrom` conversions and explicitly named lossy ones. OS file names use
+`OsStr`/`Path` at host seams; `OSD_Path` keeps its own syntax.
 
-Do not collapse all errors to Option or a string: Failure retains class and message, while
-some native missing-value operations already map to Option. Keep each mapping explicit.
-A new facade can return tuples instead of out-parameters, but must preserve partial writes
-before an error when exposing the native operation. [Failure](../crates/tkernel/src/standard/failure.rs).
+Do not collapse errors to `Option` or a string: `Failure` keeps class and message. A facade may
+return tuples instead of out-parameters, but must keep partial writes before an error where the
+native operation exposes them (class A).
 
-`BaseAllocator` already has owned RAII blocks and an allocator-api2 implementation, with
-common/heap/incremental/accumulating/aligned policies. Allocation identity, alignment,
-zero-fill, per-allocation release, reset, statistics, callbacks, failure and destruction
-order must be profiled separately. Native `NCollection_IncAllocator.hxx:78` makes Free a
-no-op; `:93` exposes Reset; `:136` warns about invalidated allocations.
-[Allocator](../crates/tkernel/src/ncollection/allocator.rs),
-[owned blocks](../crates/tkernel/src/ncollection/allocator/owned.rs),
-[raw allocation](../crates/tkernel/src/ncollection/allocator/raw_heap.rs).
-
-For new private buffers, prefer Vec/Box and fallible reservation where allocation failure
-is part of the contract. Do not promise recoverable out-of-memory from every ordinary Vec
-operation. Arena allocation is appropriate only when lifetimes share a proven region;
-reset must not invalidate live safe references, and destructors must still run when required.
-Runtime-stride `AliasedArray` also has alignment and POD restrictions; substituting `Vec<u8>`
-would not supply its current 16-byte storage guarantee.
-[AliasedArray](../crates/tkernel/src/ncollection/aliased_array.rs).
+`BaseAllocator` already has RAII blocks and an `allocator-api2` implementation with common, heap,
+incremental, accumulating and aligned policies. Public results — identity, alignment, zero-fill,
+reset (`NCollection_IncAllocator.hxx:93`), the no-op `Free` (`:78`), statistics — are class A.
+For new private buffers prefer `Vec`/`Box` and fallible reservation where a contract needs it; do
+not promise recoverable OOM from every `Vec` operation. Runtime-stride `AliasedArray` keeps its
+16-byte alignment and POD restrictions; `Vec<u8>` does not provide them.
 
 ## Cargo candidates and selection gates
 
-Prefer std first. These are alternatives for targeted experiments, not approved additions.
-Package documentation was checked on the research date; recheck MSRV, features, licenses,
-maintenance and versions against the locked workspace toolchain before execution.
+Prefer std. These are experiment candidates, not approved additions; recheck MSRV (pinned 1.98.1),
+features, licence (the port is GPL-2.0-only) and maintenance before use.
 
-| Candidate | Suitable experiment | Constraint / source |
+| Candidate | Experiment | Constraint |
 | --- | --- | --- |
-| std Vec/slices/Box/Option/Result/iterators | First choice for private ownership and traversal | No dependency; retain compatibility bounds and failure semantics. [std collections](https://doc.rust-lang.org/std/collections/) |
-| Existing `smallvec` 1.16.2 | Profile LocalArray and small private scratch buffers | Already declared; validate spill and stack footprint. [workspace manifest](../crates/tkernel/Cargo.toml) |
-| Existing `allocator-api2` =0.4.0 | Keep injected allocator interface with stable Rust | std Allocator remains marked nightly-only in the checked official docs; do not migrate production to nightly just to remove this dependency. [std Allocator](https://doc.rust-lang.org/std/alloc/trait.Allocator.html) |
-| Existing `bytemuck` =1.25.2 | Retain checked POD adapter for aliased storage | Project-owned ArrayValue interface already wraps it; no new dependency needed. [ArrayValue](../crates/tkernel/src/ncollection/aliased_array.rs) |
-| `indexmap` | Private insertion-ordered membership/index experiment | Ordered storage does not establish native cursor/address or removal parity. [crate documentation](https://docs.rs/indexmap/latest/indexmap/) |
-| `slotmap` | New private graph with generational identifiers | Keys replace addresses only in a new internal contract; native address identity/serialization must not change. [crate documentation](https://docs.rs/slotmap/latest/slotmap/) |
-| `bumpalo` | Algorithm-local temporary allocation region | Plain bump allocations do not run Drop; use a destruction strategy and compare peak retained memory. Not a BaseAllocator substitute. [crate documentation](https://docs.rs/bumpalo/latest/bumpalo/) |
-| `rayon` | Independent new parallel loops behind a project adapter | Work scheduling/reductions can change order, worker IDs and failure handling. Keep OSD ThreadPool semantics unless proven equivalent. [crate documentation](https://docs.rs/rayon/latest/rayon/) |
+| std Vec/slices/Box/Option/Result/iterators | First choice for private ownership and traversal | Keep compatibility bounds and failure semantics. |
+| `smallvec` (existing) | LocalArray and small scratch buffers | Validate spill and stack footprint. |
+| `allocator-api2` (existing) | Injected allocator interface on stable Rust | std `Allocator` is nightly-only; do not move production to nightly for it. |
+| `bytemuck` (existing) | Checked POD adapter for aliased storage | Already wrapped by `ArrayValue`. |
+| `indexmap` | Private insertion-ordered index workloads | No native cursor/removal parity. |
+| `slotmap` | New private graphs with generational ids | Keys replace addresses only in a new internal contract. |
+| `bumpalo` | Algorithm-local temporary regions | Does not run `Drop`; not a BaseAllocator substitute. |
+| `rayon` | New independent parallel loops behind an adapter | May change order, worker ids and failure handling; keep OSD ThreadPool semantics. |
 
-All optional candidates above are Rust implementations, not native-library wrappers. No
-version upgrade is recommended by this report. The platform/native dependency replacement
-work remains separately planned in [external dependency migration](external-dependency-migration-plan.md).
+Platform and native-dependency replacement is planned separately in
+[external dependency migration](external-dependency-migration-plan.md).
 
-## Ordered execution plan
+## Validation before landing an implementation
 
-1. **Baseline and inventory gate.** Freeze a clean implementation revision; rerun paired
-   TKernel verification and all direct/transitive consumer tests. Attach compiler inventory
-   and declaration-to-test receipts. Enumerate actual call sites for each proposed change,
-   separating public/protected compatibility methods from private helpers. Review the 57
-   partial claims and 381 exclusions; do not use them to reduce the denominator silently.
-2. **First pilot: borrowed numeric slices.** Select one private Array1 consumer whose bounds
-   are fixed and no view escapes. Move its loop into a slice-taking private function; keep
-   the mapped wrapper translating bounds. Compare geometry results and measure removed
-   allocations/clones. Reject a generic policy framework for this small change.
-3. **Second pilot: temporary ownership.** Select one private append-only Sequence/LinearVector
-   workload with no allocator/cursor observers. Use Vec inside that algorithm, retain its
-   public outputs. Compare insertion/error order and memory usage. This validates the
-   largest plausible collection simplification without changing every collection class.
-4. **Callback and lock audit.** Enumerate guard lifetimes crossing trait calls, printers,
-   allocators, Drop and nested handle operations. Add named reentrant observers; shorten
-   lock scopes while preserving partial native state. Review poison handling explicitly.
-5. **Allocation pilot.** Instrument allocation count, total bytes, peak live/retained bytes,
-   alignment and drops for a bounded operation. Compare current allocator against ordinary
-   Vec/Box first; evaluate an arena only if measurements support it. Keep public allocation
-   operations and native callbacks on their compatible implementation.
-6. **Idiomatic facade.** Add borrowed views, fallible text conversions and owned result
-   values where callers benefit. Keep native mapping aliases available. Document index
-   units (offset vs native bound; byte vs UTF-16 unit) in each interface.
-7. **Targeted deprecation.** After migrating all intended internal users and proving API
-   reachability, discourage redundant wrapper construction in new Rust-only code. Any
-   formal `#[deprecated]` must have a supported replacement and preserve compilation of
-   the compatibility path; blanket warnings over translated legacy tests are unhelpful.
-8. **Optional deeper experiments.** Evaluate indexmap, slotmap, bumpalo or Rayon separately
-   with their own behavior/performance report. Never combine ownership, ordering and
-   numeric algorithm rewrites in one parity review.
-9. **Rebuild proof.** Regenerate Rust/compiler crosswalk, exact test mapping and runtime
-   evidence at the new revision; require no lost declarations or new unexplained skips.
-   Record accepted implementation substitutions without recategorizing them as exclusions.
-
-Each pilot is independently reversible. Proceed only with a demonstrated simplification,
-measurable resource improvement, or fixed correctness problem; this research asserts no
-speedup, memory saving, deletion count, or refactor completion percentage.
-
-## Validation required before landing an implementation
-
-- Run the existing single-command Rust suite (`cargo test --locked -p rustycad-tkernel`),
-  the paired oracle (`python3 tools/verify_tkernel.py --source <pinned-OCCT> --jobs 2`),
-  and affected consumer suites. Retain all 1,316 legacy declarations and explicit
-  OCC23497 skip/current-behavior distinction. Supplemental tests do not replace legacy tests.
-- Differential sequences: arbitrary/negative array bounds, empty ranges, borrowed ownership,
-  resize aliases, map collisions/rehash/removal order, detached cursor survival, allocator
-  identity, destruction order, weak expiry, cast counts and shared state seen through bases.
+- `cargo test --locked -p rustycad-tkernel`, `python3 tools/verify_tkernel.py --source
+  <pinned-OCCT> --jobs 4` (all 1,316 declarations, the OCC23497 skip, the differential count), the
+  affected consumer suites, and `python3 tools/run_tool_tests.py --jobs 2`.
+- Differential cases for class-A behaviour: arbitrary/negative bounds, empty ranges, borrowed
+  ownership, resize aliases, map collisions/rehash/removal order, detached cursor survival,
+  allocator identity, weak expiry, cast counts, shared state seen through bases.
 - Strings: all byte values, embedded NUL, invalid UTF-8, lone surrogates, surrogate pairs,
-  one-based slicing/editing and native formatting/locale. No normalization in parity tests.
-- Errors/callbacks: exact exception class and catch boundary, partial outputs, callbacks
-  that reenter the same object, mutate a related object, fail, or panic. Mock external I/O
-  using named fake types; do not fake OCCT numerical results.
-- Memory: zero-sized and over-aligned types, reset with live owners, allocation failure
-  injection, destructor counters, grow/shrink and raw-pointer provenance. Use Miri for
-  supported pure Rust unsafe paths and native sanitizers where applicable; neither proves
-  all platform behavior. Isolate potentially blocking reentrancy probes in a timed process.
-- Performance: release builds with identical compiler/options and fixed hardware; report
-  input scale, distributions, allocation counts, peak memory, code size and clone/lock
-  counts. Include small, large, sparse, collision-heavy and shared workloads. Numerical
-  result/tolerance and deterministic output gates take priority over throughput.
-- Platform matrix: Linux, Windows, macOS host behavior and enabled feature configurations.
-  std-backed I/O does not erase native path, timing, threading or error differences.
-
-Remaining uncertainty: this is a source-level investigation with targeted consumer examples,
-not a whole-program ownership analysis or benchmark run. Public API completeness is still
-unproven, consumer ports are evolving, and no existing TKernel wrapper has been demonstrated
-removable wholesale. The safest first work is the two bounded private-storage pilots plus
-callback lock auditing while the main API/test port continues.
+  one-based slicing and native formatting; no normalisation in parity tests.
+- Errors and callbacks: exception class and catch boundary as named failures, partial outputs,
+  re-entrant and failing callbacks. Mock external I/O with named fake types.
+- Memory: zero-sized and over-aligned types, reset with live owners, destructor counters,
+  grow/shrink, raw-pointer provenance under Miri; for removed class-B code, a test that no element
+  is dropped twice or leaked when `Clone` panics (memory safety, not a native state).
+- Performance, when a phase claims it: release builds, fixed hardware, input scale, allocation
+  counts, peak memory, clone and lock counts. Numerical results and deterministic output come first.
+- Platform matrix (Linux, Windows, macOS) for OSD behaviour.
 
 ## Pinned native source references
 
-The local source anchors above refer to the immutable OCCT revision, available directly at:
+- [TKernel package list](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/PACKAGES.cmake)
+- [Standard_Transient reference count and This](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx#L101)
+- [NCollection_Array1 bounds and ownership](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx#L127)
+- [NCollection_IndexedMap substitution](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx#L446)
+- [ExtendedString UTF-16 indexing](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx#L47)
+- [IncAllocator lifetime and reset](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx#L78)
+- [Standard_MMgrOpt Purge](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx#L92)
 
-- [TKernel package list](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/PACKAGES.cmake).
-- [Standard_Transient reference-count and This contract](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx#L101).
-- [NCollection_Array1 bounds and ownership](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx#L127).
-- [NCollection_IndexedMap substitution](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx#L446).
-- [ExtendedString UTF-16 indexing](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx#L47).
-- [IncAllocator lifetime/reset contract](https://github.com/Open-Cascade-SAS/OCCT/blob/3d097a0328e71b826377d4814ab05ec3c3d23871/src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx#L78).
+Relative Rust links refer to `7fd0a511` and may move. Language guarantees cited: C++11 implicit
+`noexcept` destructors ([cppreference](https://en.cppreference.com/w/cpp/language/noexcept_spec)),
+Rust panic-in-drop during unwinding aborts ([std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)),
+[std collections](https://doc.rust-lang.org/std/collections/), [Any](https://doc.rust-lang.org/std/any/trait.Any.html),
+[Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html), [RwLock](https://doc.rust-lang.org/std/sync/struct.RwLock.html).
 
-These native contents were read from the pinned sibling checkout. Relative Rust links refer
-to the report's snapshot and may move as the port advances. Official web documentation was
-consulted for language/library guarantees; latest documentation may describe a newer Rust
-release than the workspace's pinned 1.98.1, so implementation must check availability on that
-pinned toolchain. No compiler, benchmark, Miri, or implementation test was run for this
-research-only change; relative document links and `git diff --check` were checked.
+## Appendix: fallible UBTree selection (dated review 2026-10-04)
 
-## Dated implementation review: fallible UBTree selection (2026-10-04)
+Commit `e3fdf4ab` adds the Rust-only `FallibleTreeSelector` trait and `UBTree::try_select`. The
+adapter routes the existing traversal through an infallible `TreeSelector` (no second traversal);
+its `accept` returns `Result<bool, E>`, and an error stops later leaf acceptance and keeps the
+error. `TreeSelector` and `UBTree::select` remain.
 
-The report snapshot `65fed4cd` predates TKernel commit `e3fdf4ab`, which adds the Rust-only
-`FallibleTreeSelector` trait and `UBTree::try_select`. The adapter routes the existing tree
-traversal through an infallible `TreeSelector`; it does not duplicate traversal. Its
-`accept` callback returns `Result<bool, E>`, and an error stops later leaf acceptance while
-preserving the error value. The existing `TreeSelector` and `UBTree::select` remain available.
-
-This is an idiomatic Rust extension, not an OCCT declaration mapping. Keep both extension
-paths visible in the Rust API inventory as Rust-only; they must not satisfy or reduce the
-native declaration denominator. The mapped compatibility obligation remains the original
-infallible selector API and its source order, branch rejection, count and stop behavior.
-
-The new `ubtree_fallible` tests exercise callback order, rejection, stopping and an `i32`
-error on a toy bound. Before treating the adapter as behaviorally established, add a native
-selector exception probe and compare it with direct `select` plus `try_select`: verify the
-exact exception/error boundary, error identity, that no later leaf is accepted, and that
-there is no second traversal. The current trait only makes `accept` fallible; `reject` and
-`stop` still cannot return errors, so exceptions from those callbacks remain a separate
-compatibility gap. Reentrant and panic behavior also remain under the existing callback
-audit and should not be inferred from the toy tests.
-
-This new API does not change the earlier collection-replacement recommendations or measured
-source totals. Refresh compiler/Rust API capture at the new source revision before publishing
-coverage claims; these two Rust-only paths are not OCCT parity credit.
+This is a Rust extension, not an OCCT mapping: list it as Rust-only in the inventory; it never
+reduces the native denominator. The obligation stays the infallible selector API with its source
+order, branch rejection, count and stop behaviour. Before calling the adapter established, add a
+native selector exception probe and compare it with `select` and `try_select` (error boundary and
+identity, no later leaf accepted, no second traversal). `reject` and `stop` cannot fail yet, so
+exceptions from those callbacks remain an open compatibility gap; re-entrancy and panics stay
+under the Phase 5 audit.
