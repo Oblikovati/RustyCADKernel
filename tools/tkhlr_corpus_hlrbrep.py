@@ -20,6 +20,10 @@ degree 2 B-splines.
   HLRBRep::MakeEdge and MakeEdge3d, HLRBRep_FaceData with HLRBRep_FaceIterator, and
   HLRBRep_EdgeFaceTool (curvature, UVPoint by p-curve and by projection) with
   PolyHLRAngleAndDeflection.
+- `ht_outliner`: HLRTopoBRep_OutLiner::Fill (DSFiller with Contap contours, FaceIsoLiner,
+  Data, ProcessFace) on boxes, cylinders, cones, spheres, tori, faces and compounds:
+  the outlined topology, every edge (vertices, range, type, points) and the data
+  structure queries.
 """
 from __future__ import annotations
 import math
@@ -216,6 +220,43 @@ def edgeface_requests(rng: random.Random) -> list[str]:
     return requests
 
 
+def solid(rng: random.Random, kind: int) -> list[float]:
+    """`hk ...` of a primitive: box, cylinder, cone, sphere or torus on a random frame."""
+    n = unit(rng.choice(VIEW_DIRS))
+    head = [kind, *point(rng, 2.0), *n, *x_direction(n)]
+    sizes = {0: [rng.choice((1.0, 2.0)), rng.choice((1.5, 3.0)), rng.choice((1.0, 2.5))],
+             1: [rng.choice((1.0, 2.0)), rng.choice((1.0, 3.0))],
+             2: [rng.choice((1.0, 2.0)), rng.choice((0.0, 0.5)), rng.choice((1.0, 3.0))],
+             3: [rng.choice((1.0, 2.5))],
+             4: [3.0, rng.choice((0.5, 1.0))]}
+    return head + sizes[kind]
+
+
+def shape(rng: random.Random, kind: int) -> list[float]:
+    """`hk ...`: a primitive, a face, or a compound of faces or primitives."""
+    if kind < 5:
+        return solid(rng, kind)
+    if kind == 6:
+        return [6, *surface(rng, rng.randrange(9), (0.0, 0.0, 1.0))]
+    if kind == 5:
+        fields: list[float] = [5, 2]
+        for _ in range(2):
+            fields += surface(rng, rng.randrange(9), (0.0, 0.0, 1.0))
+        return fields
+    return [7, 2, *solid(rng, rng.randrange(5)), *solid(rng, rng.randrange(5))]
+
+
+def outliner_requests(rng: random.Random) -> list[str]:
+    """ht_outliner: HLRTopoBRep_OutLiner::Fill on primitives, faces and compounds."""
+    requests = []
+    for index in range(240):
+        proj = projector(rng, rng.choice((0, 0, 1)))
+        if proj[0] == 1:
+            proj[-1] = rng.choice((30.0, 60.0))
+        requests.append('ht_outliner ' + numbers(proj + shape(rng, index % 8) + [rng.choice((0, 0, 2, 3))]))
+    return requests
+
+
 def append_hlrbrep_requests(requests: list[str]) -> None:
     """Append every HLRBRep request family in a fixed order."""
     rng = random.Random(0x41B12E9)
@@ -225,3 +266,4 @@ def append_hlrbrep_requests(requests: list[str]) -> None:
     requests.extend(edgedata_requests(rng))
     requests.extend(facedata_requests(rng))
     requests.extend(edgeface_requests(rng))
+    requests.extend(outliner_requests(rng))

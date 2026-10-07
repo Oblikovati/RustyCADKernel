@@ -25,7 +25,7 @@ pub fn edge_v(r: &mut Reader) -> Result<Edge, Failure> {
     BRepBuilderAPIMakeEdge::from_curve_params(&c, u1, u2)?.edge()
 }
 
-fn edge_summary(e: &Edge) -> Result<(), Failure> {
+pub fn edge_summary(e: &Edge) -> Result<(), Failure> {
     flag(e.is_null());
     if e.is_null() {
         return Ok(());

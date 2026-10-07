@@ -48,7 +48,9 @@ pub mod hlrbrep_curve;
 pub mod hlrbrep_faces;
 pub mod hlrbrep_fixtures;
 pub mod hlrbrep_records;
+pub mod hlrbrep_shapes;
 pub mod hlrbrep_surface;
+pub mod hlrtopobrep;
 #[allow(dead_code)]
 #[path = "../../../tkgeomalgo/examples/ga_probe/int_res2d.rs"]
 pub mod int_res2d;

@@ -98,3 +98,23 @@ TopoDS_Face hb_face(GaReader& r){
  return BRepBuilderAPI_MakeFace(s,u1,u2,v1,v2,1e-7).Face();}
 void hb_ics_point(const IntCurveSurface_IntersectionPoint& p){
  ga_pnt(p.Pnt());ga_real(p.U());ga_real(p.V());ga_real(p.W());ga_int(p.Transition());}
+#include <BRepPrimAPI_MakeBox.hxx>
+#include <BRepPrimAPI_MakeCone.hxx>
+#include <BRepPrimAPI_MakeCylinder.hxx>
+#include <BRepPrimAPI_MakeSphere.hxx>
+#include <BRepPrimAPI_MakeTorus.hxx>
+#include <TopoDS_Compound.hxx>
+// `hk ...`: 0 box `loc n x dx dy dz`, 1 cylinder `.. r h`, 2 cone `.. r1 r2 h`, 3 sphere
+// `.. r`, 4 torus `.. R r`, 5 compound of `n` faces, 6 one face, 7 compound of `n` shapes.
+TopoDS_Shape hb_shape(GaReader& r){
+ int kind=r.integer();
+ if(kind==6)return hb_face(r);
+ if(kind==5||kind==7){TopoDS_Compound c;BRep_Builder b;b.MakeCompound(c);
+  for(int n=r.integer();n>0;--n)b.Add(c,kind==5?TopoDS_Shape(hb_face(r)):hb_shape(r));return c;}
+ gp_Pnt l=r.pnt();gp_Dir n=r.dir();gp_Dir x=r.dir();gp_Ax2 a(l,n,x);
+ switch(kind){
+  case 0:{double dx=r.real(),dy=r.real();return BRepPrimAPI_MakeBox(a,dx,dy,r.real()).Shape();}
+  case 1:{double rr=r.real();return BRepPrimAPI_MakeCylinder(a,rr,r.real()).Shape();}
+  case 2:{double r1=r.real(),r2=r.real();return BRepPrimAPI_MakeCone(a,r1,r2,r.real()).Shape();}
+  case 3:return BRepPrimAPI_MakeSphere(a,r.real()).Shape();
+  default:{double r1=r.real();return BRepPrimAPI_MakeTorus(a,r1,r.real()).Shape();}}}

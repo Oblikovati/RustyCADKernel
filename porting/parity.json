@@ -390543,6 +390543,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRTopoBRep_DSFiller::Insert(const TopoDS_Shape&,Contap_Contour&,HLRTopoBRep_Data&,NCollection_DataMap<TopoDS_Shape, BRepTopAdaptor_Tool, TopTools_ShapeMapHasher>&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_DSFiller.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::DSFiller::insert",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_DSFiller.cxx: InsertFace (outlines on restrictions, line, circle and walking contours with the polyline or BRepApprox curve and the GeomProjLib p-curve, the union of coinciding outline vertices), MakeVertex, InsertVertex and ProcessEdges; the private members are ported too). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
       "upstream_id": "HLRTopoBRep_Data::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
@@ -390601,6 +390609,294 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "9e1ce169f9fba30162293b6396215abf44c59159cbb1f455d8aa4ea344093235",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::FaceHasIsoL(const TopoDS_Face&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::face_has_iso_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::NextEdge()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::next_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::IsOutV(const TopoDS_Vertex&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::is_out_v",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::AddOldS(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::add_old_s",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::IsSplEEdgeEdge(const TopoDS_Edge&,const TopoDS_Edge&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::is_spl_e_edge_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::InsertBefore(const TopoDS_Vertex&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::insert_before",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::MoreVertex() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::more_vertex",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::NextVertex()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::next_vertex",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::EdgeSplE(const TopoDS_Edge&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::edge_spl_e",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::AddIsoL(const TopoDS_Face&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::add_iso_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::InitVertex(const TopoDS_Edge&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::init_vertex",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::IsIntLFaceEdge(const TopoDS_Face&,const TopoDS_Edge&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::is_int_l_face_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::AddOutV(const TopoDS_Vertex&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::add_out_v",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::NewSOldS(const TopoDS_Shape&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::new_s_old_s",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::Append(const TopoDS_Vertex&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::append",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::IsIntV(const TopoDS_Vertex&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::is_int_v",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::FaceHasOutL(const TopoDS_Face&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::face_has_out_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::AddIntL(const TopoDS_Face&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::add_int_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::Vertex() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::vertex",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::MoreEdge() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::more_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::FaceIntL(const TopoDS_Face&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::face_int_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::new",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::Clear()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::clear",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::AddOutL(const TopoDS_Face&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::add_out_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::EdgeHasSplE(const TopoDS_Edge&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::edge_has_spl_e",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::IsIsoLFaceEdge(const TopoDS_Face&,const TopoDS_Edge&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::is_iso_l_face_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::AddIntV(const TopoDS_Vertex&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::add_int_v",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::InitEdge()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::init_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::FaceIsoL(const TopoDS_Face&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::face_iso_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::Edge() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::edge",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::IsOutLFaceEdge(const TopoDS_Face&,const TopoDS_Edge&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::is_out_l_face_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::AddSplE(const TopoDS_Edge&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::add_spl_e",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::FaceOutL(const TopoDS_Face&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::face_out_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::Parameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::FaceHasIntL(const TopoDS_Face&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::face_has_int_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_Data::Clean()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::Data::clean",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_Data.hxx/.lxx/.cxx: the maps of split edges, face outlines and isolines, outline and internal vertices, new-to-old shapes and the vertices inserted on edges. The edge walk keeps the keys of InitEdge and the vertex walk an index that InsertBefore moves to stay on the same vertex, as the native iterators; the edge order is the TShape address order of the map on both sides (docs/topology-design.md section 7) and the split result does not depend on it. Unbound keys give Standard_NoSuchObject). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
     },
     {
       "upstream_id": "HLRTopoBRep_FaceData::operator delete(void*) noexcept",
@@ -390663,6 +390959,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRTopoBRep_FaceData()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::FaceData::new",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_FaceData.hxx/.lxx/.cxx: three shape lists per face). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
       "upstream_id": "HLRTopoBRep_FaceIsoLiner::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceIsoLiner.hxx",
@@ -390723,6 +391027,30 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRTopoBRep_FaceIsoLiner::MakeVertex(const TopoDS_Edge&,const gp_Pnt&,double,double,HLRTopoBRep_Data&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceIsoLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::FaceIsoLiner::make_vertex",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_FaceIsoLiner.cxx: the U and V isolines cut by a Geom2dHatch hatcher, keeping the native end vertices across domains and the retried parameter of an iso the hatcher fails on). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_FaceIsoLiner::Perform(int,const TopoDS_Face&,HLRTopoBRep_Data&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceIsoLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::FaceIsoLiner::perform",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_FaceIsoLiner.cxx: the U and V isolines cut by a Geom2dHatch hatcher, keeping the native end vertices across domains and the retried parameter of an iso the hatcher fails on). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_FaceIsoLiner::MakeIsoLine(const TopoDS_Face&,const occ::handle<Geom2d_Line>&,TopoDS_Vertex&,TopoDS_Vertex&,double,double,double,HLRTopoBRep_Data&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceIsoLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::FaceIsoLiner::make_iso_line",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_FaceIsoLiner.cxx: the U and V isolines cut by a Geom2dHatch hatcher, keeping the native end vertices across domains and the retried parameter of an iso the hatcher fails on). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
       "upstream_id": "HLRTopoBRep_VData::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_VData.hxx",
@@ -390781,6 +391109,158 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "93e5cd5442b443ff466f542ecb1703fc59ac43edd522b1d48f6208cc885f38c9",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRTopoBRep_VData(double,const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_VData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::VData::with_vertex",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_VData.hxx/.lxx/.cxx: a vertex with its parameter on an edge). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_FaceData::FaceOutL() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::FaceData::face_out_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_FaceData.hxx/.lxx/.cxx: three shape lists per face). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_FaceData::FaceIntL() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::FaceData::face_int_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_FaceData.hxx/.lxx/.cxx: three shape lists per face). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_FaceData::AddIsoL()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::FaceData::add_iso_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_FaceData.hxx/.lxx/.cxx: three shape lists per face). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_FaceData::AddOutL()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::FaceData::add_out_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_FaceData.hxx/.lxx/.cxx: three shape lists per face). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_FaceData::AddIntL()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::FaceData::add_int_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_FaceData.hxx/.lxx/.cxx: three shape lists per face). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_FaceData::FaceIsoL() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::FaceData::face_iso_l",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_FaceData.hxx/.lxx/.cxx: three shape lists per face). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_VData()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_VData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::VData::new",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_VData.hxx/.lxx/.cxx: a vertex with its parameter on an edge). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_VData::Vertex() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_VData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::VData::vertex",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_VData.hxx/.lxx/.cxx: a vertex with its parameter on an edge). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_VData::Parameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_VData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::VData::parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_VData.hxx/.lxx/.cxx: a vertex with its parameter on an edge). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_OutLiner()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_OutLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::OutLiner::new",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_OutLiner.hxx/.lxx/.cxx: Fill and the outlined shape rebuilt face by face. A registered transient whose fields sit behind locks; OriginalShape() and OutLinedShape() return copies and DataStructure() a write guard where the native members return references (docs/hlr-design.md section 5)). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_OutLiner(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_OutLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::OutLiner::with_shapes",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_OutLiner.hxx/.lxx/.cxx: Fill and the outlined shape rebuilt face by face. A registered transient whose fields sit behind locks; OriginalShape() and OutLinedShape() return copies and DataStructure() a write guard where the native members return references (docs/hlr-design.md section 5)). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_OutLiner(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_OutLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::OutLiner::with_original",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_OutLiner.hxx/.lxx/.cxx: Fill and the outlined shape rebuilt face by face. A registered transient whose fields sit behind locks; OriginalShape() and OutLinedShape() return copies and DataStructure() a write guard where the native members return references (docs/hlr-design.md section 5)). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_OutLiner::OutLinedShape()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_OutLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::OutLiner::out_lined_shape",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_OutLiner.hxx/.lxx/.cxx: Fill and the outlined shape rebuilt face by face. A registered transient whose fields sit behind locks; OriginalShape() and OutLinedShape() return copies and DataStructure() a write guard where the native members return references (docs/hlr-design.md section 5)). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_OutLiner::OutLinedShape(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_OutLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::OutLiner::set_out_lined_shape",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_OutLiner.hxx/.lxx/.cxx: Fill and the outlined shape rebuilt face by face. A registered transient whose fields sit behind locks; OriginalShape() and OutLinedShape() return copies and DataStructure() a write guard where the native members return references (docs/hlr-design.md section 5)). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_OutLiner::OriginalShape()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_OutLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::OutLiner::original_shape",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_OutLiner.hxx/.lxx/.cxx: Fill and the outlined shape rebuilt face by face. A registered transient whose fields sit behind locks; OriginalShape() and OutLinedShape() return copies and DataStructure() a write guard where the native members return references (docs/hlr-design.md section 5)). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_OutLiner::OriginalShape(const TopoDS_Shape&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_OutLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::OutLiner::set_original_shape",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_OutLiner.hxx/.lxx/.cxx: Fill and the outlined shape rebuilt face by face. A registered transient whose fields sit behind locks; OriginalShape() and OutLinedShape() return copies and DataStructure() a write guard where the native members return references (docs/hlr-design.md section 5)). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_OutLiner::DataStructure()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_OutLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::OutLiner::data_structure",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_OutLiner.hxx/.lxx/.cxx: Fill and the outlined shape rebuilt face by face. A registered transient whose fields sit behind locks; OriginalShape() and OutLinedShape() return copies and DataStructure() a write guard where the native members return references (docs/hlr-design.md section 5)). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
+    },
+    {
+      "upstream_id": "HLRTopoBRep_OutLiner::Fill(const HLRAlgo_Projector&,NCollection_DataMap<TopoDS_Shape, BRepTopAdaptor_Tool, TopTools_ShapeMapHasher>&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRTopoBRep/HLRTopoBRep_OutLiner.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_topo_brep::OutLiner::fill",
+      "status": "implemented",
+      "notes": "Ported from HLRTopoBRep (HLRTopoBRep_OutLiner.hxx/.lxx/.cxx: Fill and the outlined shape rebuilt face by face. A registered transient whose fields sit behind locks; OriginalShape() and OutLinedShape() return copies and DataStructure() a write guard where the native members return references (docs/hlr-design.md section 5)). ht_outliner (240 numeric requests: OutLiner::Fill with DSFiller on boxes, cylinders, cones, spheres, tori, every face kind and compounds, parallel and perspective, with 0, 2 and 3 isolines) compares the outlined shape (faces, wires, every edge with its vertices, range, type and points) and the data structure queries bit for bit."
     },
     {
       "upstream_id": "BiTgte_Blend::operator delete(void*) noexcept",
