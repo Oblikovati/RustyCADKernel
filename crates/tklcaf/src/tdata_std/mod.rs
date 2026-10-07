@@ -6,6 +6,7 @@ mod array_delta;
 mod arrays;
 mod ascii_string;
 mod boolean_array;
+mod child_node_iterator;
 mod generic_empty;
 mod generic_ext_string;
 mod h_data_maps;
@@ -21,6 +22,8 @@ mod package;
 mod real;
 mod reference_array;
 pub(crate) mod support;
+mod tree_node;
+mod tree_node_attribute;
 mod u_attribute;
 pub use array_delta::{
     TDataStdDeltaOnModificationOfByteArray, TDataStdDeltaOnModificationOfExtStringArray,
@@ -31,6 +34,7 @@ pub use arrays::{
 };
 pub use ascii_string::TDataStdAsciiString;
 pub use boolean_array::TDataStdBooleanArray;
+pub use child_node_iterator::TDataStdChildNodeIterator;
 pub use generic_empty::{
     TDataStdDirectory, TDataStdGenericEmpty, TDataStdNoteBook, TDataStdTick, dump_generic_empty,
 };
@@ -53,6 +57,7 @@ pub use named_data::TDataStdNamedData;
 pub use package::TDataStd;
 pub use real::{TDataStdReal, TDataStdRealEnum};
 pub use reference_array::TDataStdReferenceArray;
+pub use tree_node::TDataStdTreeNode;
 pub use u_attribute::{TDataStdCurrent, TDataStdUAttribute};
 
 use rustycad_tkernel::standard::Guid;
