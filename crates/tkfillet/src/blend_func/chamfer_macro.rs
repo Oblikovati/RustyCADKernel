@@ -168,7 +168,7 @@ macro_rules! impl_chamfer_function {
             fn section(
                 &mut self,
                 point: &$crate::blend::BlendPoint,
-                values: $crate::blend::SectionPoles<'_, '_>,
+                values: $crate::blend::SectionPoles<'_, '_, '_, '_>,
             ) -> Result<(), rustycad_tkernel::standard::Failure> {
                 $crate::blend_func::gen_chamfer::section_d0(self, point, values)
             }

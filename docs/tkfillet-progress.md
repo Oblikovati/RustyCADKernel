@@ -51,6 +51,9 @@ FilletSurf.
   meets a non-linear shape (the port starts at `TgtThetaOver2`), and
   `BRepBlend_SurfRstEvolRad` leaves the restriction parameter uninitialized until a
   solution; the probes set the first and read the second only after a solution.
+- `BRepBlend_AppSurface` implements `AppBlend_Approx`, whose `TolCurveOnSurf` has no
+  failure in the Rust trait: a native exception there reads NaN through the trait, and
+  `tol_curve_on_surf_checked` returns it.
 
 ## Verification
 
@@ -62,4 +65,4 @@ FilletSurf.
 | --- | --- |
 | ChFiDS | `fl_spine`, `fl_arc_spine`, `fl_fil_law` |
 | BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad`, `fl_evol_rad_inv`, `fl_chamfer`, `fl_chamfer_inv` |
-| BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst` |
+| BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func` |

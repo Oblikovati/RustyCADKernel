@@ -43,6 +43,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_blend_tool", fl_blend_tool_case},
  {"fl_surf_rst", fl_surf_rst_case},
  {"fl_rst_rst", fl_rst_rst_case},
+ {"fl_app_func", fl_app_func_case},
 };
 int main() {
  std::string line;

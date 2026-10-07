@@ -1,7 +1,12 @@
 // BRepBlend probes of tools/oracle/tkfillet_probe.cxx (included after the BlendFunc
 // probes, whose readers they use); the Rust twin is
 // crates/tkfillet/examples/fl_probe/brep_blend.rs.
+#include <BRepBlend_AppFunc.hxx>
+#include <BRepBlend_AppSurf.hxx>
+#include <BRepBlend_AppSurface.hxx>
 #include <BRepBlend_BlendTool.hxx>
+#include <BRepBlend_Line.hxx>
+#include <BlendFunc_ConstRad.hxx>
 #include <BRepBlend_CurvPointRadInv.hxx>
 #include <BRepBlend_HCurve2dTool.hxx>
 #include <BRepBlend_HCurveTool.hxx>
@@ -131,4 +136,46 @@ void fl_rst_rst_case(std::istream& in){
  double first=r.real(),last=r.real();math_Vector x(1,2);x(1)=r.real();x(2)=r.real();double tol=r.real();
  if(kind==0){BRepBlend_RstRstConstRad f(s[0],rst[0],s[1],rst[1],c);f.Set(radius,choix);fl_rst_rst_run(f,s,rst,shape,t,trim,first,last,x,tol);}
  else{BRepBlend_RstRstEvolRad f(s[0],rst[0],s[1],rst[1],c,law);f.Set(choix);fl_rst_rst_run(f,s,rst,shape,t,trim,first,last,x,tol);}
+ ga_end();}
+
+// The surface of an approximation: its shape, poles, weights, knots and errors.
+template<class A> void fl_approx(const A& a){
+ ga_flag(a.IsDone());if(!a.IsDone())return;
+ GA_TRY(int ud,vd,nu,nv,ku,kv;a.SurfShape(ud,vd,nu,nv,ku,kv);ga_int(ud);ga_int(vd);ga_int(nu);ga_int(nv);ga_int(ku);ga_int(kv));
+ GA_TRY(const NCollection_Array2<gp_Pnt>& p=a.SurfPoles();for(int i=p.LowerRow();i<=p.UpperRow();++i)for(int j=p.LowerCol();j<=p.UpperCol();++j)ga_pnt(p(i,j)));
+ GA_TRY(const NCollection_Array2<double>& w=a.SurfWeights();for(int i=w.LowerRow();i<=w.UpperRow();++i)for(int j=w.LowerCol();j<=w.UpperCol();++j)ga_real(w(i,j)));
+ GA_TRY(fl_reals(a.SurfUKnots()));GA_TRY(fl_reals(a.SurfVKnots()));GA_TRY(fl_reals(a.SurfUMults()));GA_TRY(fl_reals(a.SurfVMults()));
+ GA_TRY(ga_int(a.NbCurves2d()));
+ GA_TRY(for(int k=1;k<=a.NbCurves2d();++k)fl_pnt2ds(a.Curve2dPoles(k)));
+ GA_TRY(double t3,t2;a.TolReached(t3,t2);ga_real(t3);ga_real(t2));}
+
+// `fl_app_func radius choix shape npts t0 dt tparam tol3d tol2d continuity`: the
+// constant-radius fillet of the right-angled planes z = 0 and y = 0 along the X axis, its
+// exact line of npts points (t, R, t, -R), the sweep function at tparam, the sweep
+// approximation (BRepBlend_AppSurface) and the AppBlend one (BRepBlend_AppSurf).
+void fl_app_func_case(std::istream& in){
+ GaReader r{in};
+ double radius=r.real();int choix=r.integer(),shape=r.integer(),npts=r.integer();
+ double t0=r.real(),dt=r.real(),tparam=r.real(),tol3d=r.real(),tol2d=r.real();int cont=r.integer();
+ occ::handle<Adaptor3d_Surface> s1=new GeomAdaptor_Surface(new Geom_Plane(gp_Ax3(gp_Pnt(0,0,0),gp_Dir(0,0,1),gp_Dir(1,0,0))));
+ occ::handle<Adaptor3d_Surface> s2=new GeomAdaptor_Surface(new Geom_Plane(gp_Ax3(gp_Pnt(0,0,0),gp_Dir(0,1,0),gp_Dir(1,0,0))));
+ occ::handle<Adaptor3d_Curve> c=new GeomAdaptor_Curve(new Geom_Line(gp_Pnt(0,0,0),gp_Dir(1,0,0)));
+ BlendFunc_ConstRad f(s1,s2,c);f.Set(radius,choix);f.Set(BlendFunc_SectionShape(shape));
+ occ::handle<BRepBlend_Line> line=new BRepBlend_Line();
+ for(int i=0;i<npts;++i){double t=t0+i*dt;line->Append(Blend_Point(gp_Pnt(t,radius,0),gp_Pnt(t,0,radius),t,t,radius,t,-radius));}
+ GA_TRY({
+  occ::handle<BRepBlend_AppFunc> af=new BRepBlend_AppFunc(line,f,tol3d,tol2d);
+  int np=0,nk=0,deg=0;af->SectionShape(np,nk,deg);int n2=af->Nb2dCurves();
+  ga_int(np);ga_int(nk);ga_int(deg);ga_int(n2);ga_flag(af->IsRational());ga_pnt(af->BarycentreOfSurf());
+  GA_TRY(ga_real(af->MaximalSection()));GA_TRY(ga_int(af->NbIntervals(GeomAbs_C1)));
+  NCollection_Array1<gp_Pnt> poles(1,np);NCollection_Array1<gp_Pnt2d> p2(1,n2);NCollection_Array1<double> w(1,np),dw(1,np);
+  NCollection_Array1<gp_Vec> dp(1,np);NCollection_Array1<gp_Vec2d> dp2(1,n2);w.Init(0);dw.Init(0);
+  GA_TRY(ga_flag(af->D0(tparam,t0,t0,poles,p2,w));fl_pnts(poles);fl_pnt2ds(p2);fl_reals(w));
+  GA_TRY(ga_flag(af->D1(tparam,t0,t0,poles,dp,p2,dp2,w,dw));fl_pnts(poles);fl_vecs(dp);fl_pnt2ds(p2);fl_vec2ds(dp2);fl_reals(w);fl_reals(dw));
+  ga_int(line->NbPoints());
+  NCollection_Array1<double> tol(1,np);tol.Init(0);GA_TRY(af->GetTolerance(1.e-4,1.e-5,1.e-3,tol);fl_reals(tol));
+  double first=t0,last=t0+(npts-1)*dt;
+  GA_TRY(const GeomAbs_Shape conts[3]={GeomAbs_C0,GeomAbs_C1,GeomAbs_C2};BRepBlend_AppSurface app(af,first,last,tol3d,tol2d,1.e-2,conts[cont],11,50);fl_approx(app));
+ });
+ GA_TRY(BRepBlend_AppSurf app(3,8,tol3d,tol2d,5);app.Perform(line,f,true);fl_approx(app));
  ga_end();}

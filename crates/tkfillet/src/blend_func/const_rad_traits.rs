@@ -207,7 +207,7 @@ macro_rules! impl_two_surface_app_function {
             fn section(
                 &mut self,
                 point: &$crate::blend::BlendPoint,
-                values: $crate::blend::SectionPoles<'_, '_>,
+                values: $crate::blend::SectionPoles<'_, '_, '_, '_>,
             ) -> Result<(), rustycad_tkernel::standard::Failure> {
                 let x = $crate::blend_func::two_surfaces::point_parameters(point)?;
                 self.compute_values(&x, 0, true, point.parameter())?;

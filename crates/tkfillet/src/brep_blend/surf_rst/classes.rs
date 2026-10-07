@@ -219,7 +219,7 @@ macro_rules! impl_surf_rst_function {
             fn section(
                 &mut self,
                 point: &BlendPoint,
-                values: SectionPoles<'_, '_>,
+                values: SectionPoles<'_, '_, '_, '_>,
             ) -> Result<(), Failure> {
                 self.core.section_d0(point, values)
             }

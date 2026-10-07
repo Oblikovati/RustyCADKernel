@@ -128,7 +128,7 @@ impl TwoSurfaceCore {
     pub(crate) fn section_d0(
         &mut self,
         x: &Vector<'_>,
-        out: SectionPoles<'_, '_>,
+        out: SectionPoles<'_, '_, '_, '_>,
         radii: Radii,
     ) -> Result<(), Failure> {
         self.record_distance();

@@ -139,6 +139,17 @@ def rst_rst_requests(requests: list[str]) -> None:
                                 LAWS[2], 0.9, 1, 0, 0.3, [0.35, 0.25]))
 
 
+def app_func_requests(requests: list[str]) -> None:
+    """The sweep function and both approximations of the right-angled constant fillet on
+    lines of 3 to 9 points: at a line point, between points, outside the line, every
+    section shape and the three continuities."""
+    for npts, tparam in ((3, 0.5), (5, 1.0), (9, 2.3), (4, -1.0), (4, 9.0)):
+        for shape in (0, 1, 2, 3):
+            for cont in (0, 1, 2):
+                requests.append('fl_app_func ' + numbers([1.0, 1, shape, npts, 0.0, 0.75, tparam, 1e-4, 1e-5, cont]))
+    requests.append('fl_app_func ' + numbers([2.5, 6, 0, 6, -1.0, 0.4, 0.13, 1e-6, 1e-7, 2]))
+
+
 def append_brepblend_requests(requests: list[str]) -> None:
     """Append the BRepBlend request families."""
     plane_requests(requests)
@@ -147,3 +158,4 @@ def append_brepblend_requests(requests: list[str]) -> None:
     blend_tool_requests(requests)
     surf_rst_requests(requests)
     rst_rst_requests(requests)
+    app_func_requests(requests)

@@ -172,7 +172,7 @@ pub(crate) fn linear_mults(mults: &mut Array1<'_, i32>) -> Result<(), Failure> {
 pub(crate) fn section_d0<F: ChamferEquations>(
     function: &mut F,
     point: &BlendPoint,
-    values: SectionPoles<'_, '_>,
+    values: SectionPoles<'_, '_, '_, '_>,
 ) -> Result<(), Failure> {
     let x = point_parameters(point)?;
     let uv = uv_of(&x)?;

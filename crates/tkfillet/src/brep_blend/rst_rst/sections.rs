@@ -98,7 +98,7 @@ impl RstRstCore {
     pub(crate) fn section_d0(
         &mut self,
         point: &BlendPoint,
-        values: SectionPoles<'_, '_>,
+        values: SectionPoles<'_, '_, '_, '_>,
     ) -> Result<(), Failure> {
         let prm = point.parameter();
         (self.ptgui, self.d1gui) = live_curve(&self.tguide)?.d1(prm)?;

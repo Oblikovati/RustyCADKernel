@@ -12,13 +12,13 @@ use rustycad_tkmath::math::{FunctionSetWithDerivatives, Vector};
 
 /// The poles, 2d poles and weights of one section (the `Section(P, Poles, Poles2d,
 /// Weigths)` output arrays).
-pub struct SectionPoles<'a, 'b> {
+pub struct SectionPoles<'a, 'p, 'q, 'w> {
     /// `Poles`.
-    pub poles: &'a mut Array1<'b, Point3>,
+    pub poles: &'a mut Array1<'p, Point3>,
     /// `Poles2d`.
-    pub poles2d: &'a mut Array1<'b, Point2>,
+    pub poles2d: &'a mut Array1<'q, Point2>,
     /// `Weigths`.
-    pub weights: &'a mut Array1<'b, f64>,
+    pub weights: &'a mut Array1<'w, f64>,
 }
 
 /// `Blend_AppFunction`: a blend function seen by the walking and the approximation.
@@ -79,7 +79,11 @@ pub trait BlendAppFunction: FunctionSetWithDerivatives + Send {
     /// `point` with its first derivatives; false when they are not computed.
     fn section_d1(&mut self, point: &BlendPoint, values: SweepD1<'_, '_>) -> Result<bool, Failure>;
     /// `Section(P, Poles, Poles2d, Weigths)`: the section at `point`.
-    fn section(&mut self, point: &BlendPoint, values: SectionPoles<'_, '_>) -> Result<(), Failure>;
+    fn section(
+        &mut self,
+        point: &BlendPoint,
+        values: SectionPoles<'_, '_, '_, '_>,
+    ) -> Result<(), Failure>;
     /// `Section(P, ..., D2Weigths)`: the section with its second derivatives; false when
     /// they are not computed.
     fn section_d2(&mut self, point: &BlendPoint, values: SweepD2<'_, '_>) -> Result<bool, Failure>;

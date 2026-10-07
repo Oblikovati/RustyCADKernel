@@ -4,6 +4,9 @@
 //! Blend generics on `Adaptor3d_Surface`, `Adaptor2d_Curve2d` restrictions and
 //! `Adaptor3d_HVertex` vertices), the blend lines, the functions between a surface and a
 //! restriction or two restrictions, and the approximation of the blend surfaces.
+mod app_func;
+mod app_surf;
+mod app_surface;
 mod blend_tool;
 mod curv_point_rad_inv;
 mod extremity;
@@ -18,6 +21,12 @@ mod surf_curv_inv;
 mod surf_point_inv;
 pub(crate) mod surf_rst;
 
+pub use app_func::{
+    BRepBlendAppFunc, BRepBlendAppFuncRoot, BRepBlendAppFuncRst, BRepBlendAppFuncRstRst,
+    SharedAppFunction,
+};
+pub use app_surf::{BRepBlendAppSurf, BlendSectionGenerator};
+pub use app_surface::{AppSurfaceOptions, BRepBlendAppSurface};
 pub use blend_tool::BRepBlendBlendTool;
 pub use curv_point_rad_inv::BRepBlendCurvPointRadInv;
 pub use extremity::BRepBlendExtremity;
