@@ -11,6 +11,8 @@ workspace = true
 [dependencies]
 rustycad-tkernel = { path = "../tkernel" }
 rustycad-tkbrep = { path = "../tkbrep" }
+# TopAbs (TopAbs_ShapeEnum of DE_ShapeFixParameters) lives in TKG3d, below TKBRep.
+rustycad-tkg3d = { path = "../tkg3d" }
 # DE_Provider names TDocStd_Document (TKLCAF) through a forward declaration natively; the
 # Rust signatures need the type itself (docs/de-design.md section 2).
 rustycad-tklcaf = { path = "../tklcaf" }
