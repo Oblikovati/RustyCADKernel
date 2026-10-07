@@ -318,7 +318,7 @@ pub(super) fn add_twin(shape: &Shape, twin: &Shape, twins: &mut TwinMap) {
 }
 
 /// A compound of the shapes (`AddToShape`).
-pub(super) fn compound_of(shapes: &[Shape]) -> Result<Shape, Failure> {
+pub(crate) fn compound_of(shapes: &[Shape]) -> Result<Shape, Failure> {
     let builder = BRepBuilder::default();
     let mut compound = Compound::default();
     builder.make_compound(&mut compound);

@@ -328353,6 +328353,285 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPAlgo_MakeConnected()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::new",
+      "status": "implemented",
+      "notes": "Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::SetArguments(const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::set_arguments",
+      "status": "implemented",
+      "notes": "Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::AddArgument(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::add_argument",
+      "status": "implemented",
+      "notes": "Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::Arguments() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::arguments",
+      "status": "implemented",
+      "notes": "Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::Perform()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::perform",
+      "status": "implemented",
+      "notes": "Returns Result: a history merge failure is reported instead of raised. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::MakePeriodic(const BOPAlgo_MakePeriodic::PeriodicityParams&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::make_periodic",
+      "status": "implemented",
+      "notes": "Returns Result: a history merge failure is reported instead of raised. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::RepeatShape(int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::repeat_shape",
+      "status": "implemented",
+      "notes": "Returns Result: a history merge failure is reported instead of raised. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::ClearRepetitions()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::clear_repetitions",
+      "status": "implemented",
+      "notes": "Returns Result: a history merge failure is reported instead of raised. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::PeriodicityTool() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::periodicity_tool",
+      "status": "implemented",
+      "notes": "Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::MaterialsOnPositiveSide(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::materials_on_positive_side",
+      "status": "implemented",
+      "notes": "Takes &self: the native method is non-const only to reach its static empty list. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::MaterialsOnNegativeSide(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::materials_on_negative_side",
+      "status": "implemented",
+      "notes": "Takes &self: the native method is non-const only to reach its static empty list. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::History() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::history",
+      "status": "implemented",
+      "notes": "Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::GetModified(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::get_modified",
+      "status": "implemented",
+      "notes": "Returns an owned Vec (empty before Perform) and the failure of the history query. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::GetOrigins(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::get_origins",
+      "status": "implemented",
+      "notes": "Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::Shape() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::shape",
+      "status": "implemented",
+      "notes": "Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::PeriodicShape() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::periodic_shape",
+      "status": "implemented",
+      "notes": "Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::clear",
+      "status": "implemented",
+      "notes": "An inherent method that also clears the options; Rust has no virtual BOPAlgo_Options::Clear. Returns Result: a history merge failure is reported instead of raised. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::CheckData()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `check_data` run by `BOPAlgoMakeConnected::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::MakeConnected()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `make_connected` run by `BOPAlgoMakeConnected::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::AssociateMaterials()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `associate_materials` run by `BOPAlgoMakeConnected::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::FillOrigins()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `fill_origins` run by `BOPAlgoMakeConnected::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::Update()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected::make_periodic",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `update` run by make_periodic, repeat_shape and clear_repetitions; a null history (no Perform yet) is a Standard_NullObject failure instead of a null dereference. Verified bit for bit (glued, periodic, repeated and cleared shapes, materials, origins, history, alerts) by the native replay tools/oracle/tkbo_make_connected.cxx (crates/tkbo/tests/bop_algo_make_connected.rs), list members compared sorted because the native history order follows TShape addresses; the GTests BOPAlgo_MakePeriodicTest.MakeConnected_* pass."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::myArguments",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakeConnected, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::myAllInputsMap",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakeConnected, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::myPeriodicityMaker",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakeConnected, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::myMaterials",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakeConnected, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::myOrigins",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakeConnected, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::myGlueHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakeConnected, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::myHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakeConnected, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::myGlued",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakeConnected, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakeConnected::myShape",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakeConnected.hxx",
+      "source_sha256": "eef17b977c4a84d18a1416d1ae36147f11c41964c4e244fc4cb3c24f123b74c0",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakeConnected",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakeConnected, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
       "upstream_id": "BOPAlgo_MakePeriodic::operator delete(void*) noexcept",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
@@ -515447,6 +515726,132 @@
       "blocked_by": [
         "BOPAlgo_CellsBuilder"
       ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodicTest.A1_BoxWithTrimmedPeriodicity_RepeatsWithExpectedTopology",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_MakePeriodic_Test.cxx",
+      "source_sha256": "d9da23f4c86b534b1b8e729f4c5c82e7b5a23c5659ff21a7b05fae30a5df7b74",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_make_periodic_legacy",
+      "rust_test": "BOPAlgo_MakePeriodicTest__A1_BoxWithTrimmedPeriodicity_RepeatsWithExpectedTopology",
+      "rust_source": "crates/tkbo/tests/bop_algo_make_periodic_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodicTest.A2_ProfilePeriodicity_HistoryAndRepetitionAreConsistent",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_MakePeriodic_Test.cxx",
+      "source_sha256": "d9da23f4c86b534b1b8e729f4c5c82e7b5a23c5659ff21a7b05fae30a5df7b74",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_make_periodic_legacy",
+      "rust_test": "BOPAlgo_MakePeriodicTest__A2_ProfilePeriodicity_HistoryAndRepetitionAreConsistent",
+      "rust_source": "crates/tkbo/tests/bop_algo_make_periodic_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodicTest.A3_PeriodicCylinderCut_RepeatedCutHasExpectedTopology",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_MakePeriodic_Test.cxx",
+      "source_sha256": "d9da23f4c86b534b1b8e729f4c5c82e7b5a23c5659ff21a7b05fae30a5df7b74",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_make_periodic_legacy",
+      "rust_test": "BOPAlgo_MakePeriodicTest__A3_PeriodicCylinderCut_RepeatedCutHasExpectedTopology",
+      "rust_source": "crates/tkbo/tests/bop_algo_make_periodic_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodicTest.A4_PeriodicCutResult_RepeatsInBothDirections",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_MakePeriodic_Test.cxx",
+      "source_sha256": "d9da23f4c86b534b1b8e729f4c5c82e7b5a23c5659ff21a7b05fae30a5df7b74",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_make_periodic_legacy",
+      "rust_test": "BOPAlgo_MakePeriodicTest__A4_PeriodicCutResult_RepeatsInBothDirections",
+      "rust_source": "crates/tkbo/tests/bop_algo_make_periodic_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodicTest.A5_NurbsEdges_PeriodicTwinsPreserveCurveType",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_MakePeriodic_Test.cxx",
+      "source_sha256": "d9da23f4c86b534b1b8e729f4c5c82e7b5a23c5659ff21a7b05fae30a5df7b74",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_make_periodic_legacy",
+      "rust_test": "BOPAlgo_MakePeriodicTest__A5_NurbsEdges_PeriodicTwinsPreserveCurveType",
+      "rust_source": "crates/tkbo/tests/bop_algo_make_periodic_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodicTest.A6_NurbsFaces_PeriodicTwinsPreserveGeometryTypes",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_MakePeriodic_Test.cxx",
+      "source_sha256": "d9da23f4c86b534b1b8e729f4c5c82e7b5a23c5659ff21a7b05fae30a5df7b74",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_make_periodic_legacy",
+      "rust_test": "BOPAlgo_MakePeriodicTest__A6_NurbsFaces_PeriodicTwinsPreserveGeometryTypes",
+      "rust_source": "crates/tkbo/tests/bop_algo_make_periodic_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodicTest.MakeConnected_A1_PeriodicConnectedSolids",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_MakePeriodic_Test.cxx",
+      "source_sha256": "d9da23f4c86b534b1b8e729f4c5c82e7b5a23c5659ff21a7b05fae30a5df7b74",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_make_periodic_legacy",
+      "rust_test": "connected::BOPAlgo_MakePeriodicTest__MakeConnected_A1_PeriodicConnectedSolids",
+      "rust_source": "crates/tkbo/tests/bop_algo_make_periodic_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodicTest.MakeConnected_A2_PeriodicAndRepeatedConnectedSolids",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_MakePeriodic_Test.cxx",
+      "source_sha256": "d9da23f4c86b534b1b8e729f4c5c82e7b5a23c5659ff21a7b05fae30a5df7b74",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_make_periodic_legacy",
+      "rust_test": "connected::BOPAlgo_MakePeriodicTest__MakeConnected_A2_PeriodicAndRepeatedConnectedSolids",
+      "rust_source": "crates/tkbo/tests/bop_algo_make_periodic_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodicTest.MakeConnected_A5_PeriodicRepetitionCanBeCleared",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_MakePeriodic_Test.cxx",
+      "source_sha256": "d9da23f4c86b534b1b8e729f4c5c82e7b5a23c5659ff21a7b05fae30a5df7b74",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_make_periodic_legacy",
+      "rust_test": "connected::BOPAlgo_MakePeriodicTest__MakeConnected_A5_PeriodicRepetitionCanBeCleared",
+      "rust_source": "crates/tkbo/tests/bop_algo_make_periodic_legacy.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ]

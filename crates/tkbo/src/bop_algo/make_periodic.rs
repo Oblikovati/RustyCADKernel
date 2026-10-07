@@ -5,6 +5,7 @@ mod identical;
 #[path = "make_periodic/repeat.rs"]
 mod repeat;
 use super::Options;
+pub(crate) use identical::compound_of;
 use rustycad_tkbrep::brep_tools::History;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkbrep::toptools::ShapeMapHasher;
