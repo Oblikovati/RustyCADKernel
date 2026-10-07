@@ -1,0 +1,1411 @@
+{
+  "api_parity_complete": false,
+  "attested_files": [
+    {
+      "path": "crates/tkernel/src/ncollection/mod.rs",
+      "sha256": "8c5fa27e09e8da7ef9b111d4fdca0936dfeb718fc7a576565ddd713b0e84388a"
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/sparse_array/storage/layout.rs",
+      "sha256": "c56efc49fd3bc7aeb2b9b23ff076064dab7ed64d073495b2918dd431d1f3f619"
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/sparse_array_base.rs",
+      "sha256": "aa112b6e71be97f99a0287edd232e8c9a804f25d85ac293769b9e8e52dc4e40c"
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/sparse_array_base/allocation.rs",
+      "sha256": "7252f005e4c95bd5b144e458df2079684b2a85ec9d38727f775cadd6826259e1"
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+      "sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0"
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/sparse_array_base/editing.rs",
+      "sha256": "85d78e30559696111a1450c56fdedfb8b0e9678cf46d53ae1133ef14620a601f"
+    },
+    {
+      "path": "crates/tkernel/tests/sparse_block_native_surface.rs",
+      "sha256": "ddf100b97d98979cd717f548b298dafba5e7b2f09009daa9d90d20c0a4c1b524"
+    },
+    {
+      "path": "porting/audits/sparse-base-exchange-and-resources.json",
+      "sha256": "911b1ea581fb9a5f22e543dbb4bd71abf8caaa135791586e9e26d53783ccafe0"
+    },
+    {
+      "path": "porting/audits/sparse-base-ledger-records.jsonl",
+      "sha256": "76c3aba204e30469bc7a550ee917f0e0937e2c6a1d99893a169c940c1a0d66dc"
+    },
+    {
+      "path": "porting/audits/sparse-base-remaining-bindings.jsonl",
+      "sha256": "8ca1d19e78044ff240eb58ddfa3e1a8ea940e412057ee9b3c516ff0857d1f1a0"
+    },
+    {
+      "path": "porting/audits/sparse-base-remaining-methods.json",
+      "sha256": "8909bd8515725ddecc64a6d79ca11d9ff0db36d54e2605729b96ea807d6719f7"
+    },
+    {
+      "path": "porting/audits/sparse-base-remaining-rust-bodies.jsonl",
+      "sha256": "58940ef40a14db306cbeaac0ac18d2241139eb3dc927ad0085d901ecfc798412"
+    },
+    {
+      "path": "porting/audits/sparse-block-refreshed-base-bindings-v1.jsonl",
+      "sha256": "1e49f8a6b7cc9c400a55b2cee398a0d74045e2f55277377a6cae867f69df4525"
+    },
+    {
+      "path": "porting/audits/sparse-block-surface-bindings-v1.jsonl",
+      "sha256": "6fc0d6dcabd7e282cd871201960f592d0d80d13127fef7544a7e0aa22ec7ffe4"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-base-remaining-normalized.json.gz",
+      "sha256": "a797bc02b24b4f01eb4410f2a676d07c5c67b9a771480387c3a49527997d4c0d"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-binding-tests-v1.log.gz",
+      "sha256": "1132bd305185ecaf63e9cd36f65dbdbec6e7bfc27afddbb1c83780f4f078518f"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-clippy-v1.log.gz",
+      "sha256": "8fcf8c3a79292692a069783d702356a20116cdc446ddfaacf358cf9796533653"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-layout-unit-v1.log.gz",
+      "sha256": "0e5d5acaaff934712ed282a88769bc5c6fe44728774587d7caccf265d94800f3"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-miri-v1.log.gz",
+      "sha256": "a7cbb106ea27288fc4ff0efcf25328a249ebb98983e2d97c282520947ab68c03"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-native-build-v1.gz",
+      "sha256": "63d3dc9ed50600490b81e7cfb792008f58361147cf747a3b1439f858ec100fc9"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-native-stdout-v1.gz",
+      "sha256": "0eef2cd1008840338de5f4dee40ea15547824d1b6e98e38d0739c8ac3d0351bb"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-normalized-v1.json.gz",
+      "sha256": "fded0a22bccd8be29e5b4172a5c1538b590b2ed79808a866c36c03bbc5eaf53b"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-release-v1.log.gz",
+      "sha256": "3629cf62534d1c2d64faf304bbffb0033da8f00188bdb6120f332cd041783173"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-replay-v1.log.gz",
+      "sha256": "5a7aa5f2f6b5ec321d3773767febe250d9f7970d1c6909de9d79b3f75ec3e86e"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-rust-v1.log.gz",
+      "sha256": "087b5bb3f5fc1054ae66f1bd259097b12abb5767ce96c10f8843a3c483881afd"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-rustdoc-v1.json.gz",
+      "sha256": "5cd841a1769b9a63aff82b4710607382196362c30e35fe4a1390463c4117c59e"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-rustdoc-v1.log.gz",
+      "sha256": "9fe46fec6fbe9962f7576239cdb9ab47fff024210948ffbfffb8bc505bb43e60"
+    },
+    {
+      "path": "porting/runtime-evidence/sparse-block-surface-size-red-v1.log.gz",
+      "sha256": "45ac3e1f8bd6d1a93647ef21514d656a23fe0e1fc0f6d92a2d880ad0d5489f7e"
+    },
+    {
+      "path": "tools/oracle/tkernel_sparse_block_native_surface.cxx",
+      "sha256": "1bbd2de5907ae0882d2b3dddc9ed2da83ec236f7cac107a3a534a5c38d8c270a"
+    },
+    {
+      "path": "tools/oracle/tkernel_sparse_block_native_surface.expected",
+      "sha256": "cae4ddb76dbd097b510cabdcb9607c8d1bfd310ffe0fa2a7ecb459151b629ace"
+    },
+    {
+      "path": "tools/tests/test_sparse_base_bindings.py",
+      "sha256": "b93a753b2364c47ba630bc574875badb1fc0bfc1c1971bfbe5079cda367e3383"
+    },
+    {
+      "path": "tools/tests/test_sparse_block_surface_bindings.py",
+      "sha256": "c0f077cf652612d2a8198a6e8a38a1bdf9ba4869307bfbe7d87115784d340884"
+    },
+    {
+      "path": "tools/verify_sparse_block_surface.py",
+      "sha256": "5d586d991474c1038eeb573777b7b5c98da1a7345b1fa4c689ac77dc9dd50206"
+    },
+    {
+      "path": "porting/runtime-evidence/foundation-construction-corrections-sparse-normalized.json.gz",
+      "sha256": "f104499d5a3ab7664e96cb1eabf96474b82b93884fea09d81a776ad834634a4d"
+    },
+    {
+      "path": "porting/audits/foundation-construction-corrections-sparse-bindings.jsonl",
+      "sha256": "301bfdef1cfbe9173ed13846d6cfa2b2ce84787510729e5b5d8794945b991b65"
+    },
+    {
+      "path": "porting/audits/sparse-block-native-surface-v1.json",
+      "sha256": "b664e077d9d6120a2bd09ee4fce1c4219d643f8951719fa2589a23a742eea962"
+    }
+  ],
+  "baseline_main": "2d4c5f08ed113c184d33f7df271db0c0bcb6b369",
+  "behavior_corrections": [
+    "Block::Cell has public SparseArrayBlockCell = u8 alias; fields and cell-valued method results use the alias.",
+    "Block::Size is const and exactly wraps each native unsigned arithmetic contribution; no impossible allocation is attempted by arithmetic probes.",
+    "Block::ToArray has a faithful address/items/stride adapter returning c_char pointer; extreme dimensions are ignored and old one-argument convenience method remains.",
+    "Typed and erased actual allocations share checked mathematical size calculation and addressable-span checks. Erased pointer tables reject overflowing pointer counts before allocation."
+  ],
+  "bindings_path": "porting/audits/sparse-block-refreshed-base-bindings-v1.jsonl",
+  "bindings_sha256": "1e49f8a6b7cc9c400a55b2cee398a0d74045e2f55277377a6cae867f69df4525",
+  "block_bindings_path": "porting/audits/foundation-construction-corrections-sparse-bindings.jsonl",
+  "block_bindings_sha256": "301bfdef1cfbe9173ed13846d6cfa2b2ce84787510729e5b5d8794945b991b65",
+  "checks": {
+    "checked_layout_unit_tests": 1,
+    "clippy_warnings_denied": true,
+    "native_constexpr_assertions": 2,
+    "native_fixture_rows": 15,
+    "native_size_boundary_cases": 13,
+    "rust_debug_tests": 83,
+    "rust_release_tests": 7,
+    "rustdoc_preexisting_documentation_warnings": 9,
+    "strict_provenance_miri_tests": 73,
+    "tooling_validator_tests": 23
+  },
+  "expected_block_bindings": 12,
+  "historical_artifacts_unchanged": {
+    "porting/audits/sparse-base-exchange-and-resources.json": "911b1ea581fb9a5f22e543dbb4bd71abf8caaa135791586e9e26d53783ccafe0",
+    "porting/audits/sparse-base-ledger-records.jsonl": "76c3aba204e30469bc7a550ee917f0e0937e2c6a1d99893a169c940c1a0d66dc",
+    "porting/audits/sparse-base-remaining-bindings.jsonl": "8ca1d19e78044ff240eb58ddfa3e1a8ea940e412057ee9b3c516ff0857d1f1a0",
+    "porting/audits/sparse-base-remaining-methods.json": "8909bd8515725ddecc64a6d79ca11d9ff0db36d54e2605729b96ea807d6719f7",
+    "porting/audits/sparse-base-remaining-rust-bodies.jsonl": "58940ef40a14db306cbeaac0ac18d2241139eb3dc927ad0085d901ecfc798412",
+    "porting/runtime-evidence/sparse-base-remaining-normalized.json.gz": "a797bc02b24b4f01eb4410f2a676d07c5c67b9a771480387c3a49527997d4c0d"
+  },
+  "implemented_credit_added": 0,
+  "ledger_modified": false,
+  "legacy_native_tests_evidence": "Unchanged pinned native original results retained by sparse-base-remaining-methods.json; current Rust ncollection_sparse_array reran all ten original declarations.",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "original_test_joins": [
+    {
+      "native_passed": true,
+      "rust_passed": true,
+      "rust_test": "NCollection_SparseArrayTest__BasicFunctions",
+      "upstream_id": "NCollection_SparseArrayTest.BasicFunctions"
+    },
+    {
+      "native_passed": true,
+      "rust_passed": true,
+      "rust_test": "NCollection_SparseArrayTest__LargeIndices",
+      "upstream_id": "NCollection_SparseArrayTest.LargeIndices"
+    },
+    {
+      "native_passed": true,
+      "rust_passed": true,
+      "rust_test": "NCollection_SparseArrayTest__SparseDistribution",
+      "upstream_id": "NCollection_SparseArrayTest.SparseDistribution"
+    },
+    {
+      "native_passed": true,
+      "rust_passed": true,
+      "rust_test": "NCollection_SparseArrayTest__IteratorFunctions",
+      "upstream_id": "NCollection_SparseArrayTest.IteratorFunctions"
+    },
+    {
+      "native_passed": true,
+      "rust_passed": true,
+      "rust_test": "NCollection_SparseArrayTest__STLIterators",
+      "upstream_id": "NCollection_SparseArrayTest.STLIterators"
+    },
+    {
+      "native_passed": true,
+      "rust_passed": true,
+      "rust_test": "NCollection_SparseArrayTest__ComplexType",
+      "upstream_id": "NCollection_SparseArrayTest.ComplexType"
+    },
+    {
+      "native_passed": true,
+      "rust_passed": true,
+      "rust_test": "NCollection_SparseArrayTest__Clear",
+      "upstream_id": "NCollection_SparseArrayTest.Clear"
+    },
+    {
+      "native_passed": true,
+      "rust_passed": true,
+      "rust_test": "NCollection_SparseArrayTest__DataMapInterface",
+      "upstream_id": "NCollection_SparseArrayTest.DataMapInterface"
+    },
+    {
+      "native_passed": true,
+      "rust_passed": true,
+      "rust_test": "NCollection_SparseArrayTest__AssignAndExchange",
+      "upstream_id": "NCollection_SparseArrayTest.AssignAndExchange"
+    },
+    {
+      "native_passed": true,
+      "rust_passed": true,
+      "rust_test": "NCollection_SparseArrayTest__AssignClearsUnsetItemsInSharedBlock",
+      "upstream_id": "NCollection_SparseArrayTest.AssignClearsUnsetItemsInSharedBlock"
+    }
+  ],
+  "original_test_rows_unchanged": true,
+  "published_inventory_modified": false,
+  "red_provenance": {
+    "native_size_for_same_arguments": 8,
+    "old_rust_size_for_max_items_zero_stride": 2305843009213693960,
+    "scope": "Pinned 64-bit host arithmetic only; no large allocation attempted."
+  },
+  "remaining_limits": [
+    "All bindings stay partial: Rust naming, raw pointer safety, native class layout/inheritance/special members, noexcept/ABI and cross-platform closure are not certified.",
+    "Native Linux x86_64 fixture and constexpr results do not certify other size_t/char configurations.",
+    "Existing primary native visibility remains false for inferred private Block declarations; effective union is staged and incomplete.",
+    "The five OSD IteratorInterface record/member surfaces remain the next independent class slice."
+  ],
+  "replay_command": "PYTHONPATH=tools python3 tools/verify_sparse_block_surface.py --receipt porting/audits/foundation-construction-corrections-sparse.json",
+  "rust_inventory_path": "porting/runtime-evidence/foundation-construction-corrections-sparse-normalized.json.gz",
+  "rust_inventory_sha256": "f104499d5a3ab7664e96cb1eabf96474b82b93884fea09d81a776ad834634a4d",
+  "safety_validation": [
+    "Overflowing or unaddressable erased dimensions invoke no item callbacks and publish no table/block or allocator slots.",
+    "Safe typed overflowing dimensions retain empty storage and drop the incoming borrowed value exactly once.",
+    "Checked allocator layout remains aligned and arena leases remain covered by existing resource tests and Miri.",
+    "Initial Miri run caught a reborrow mistake in the newly written test fixture; expected pointer now derives from the existing raw pointer. Kernel adapter was unchanged by that harness fix."
+  ],
+  "schema": "rustycad.sparse-block-native-surface.v1",
+  "scope": "Port inferred Block Cell alias, constexpr wrapping Size and exact three-argument ToArray adapter; centralize checked actual allocation sizing; refresh all twelve Block declarations and prior twenty base/raw-iterator bodies.",
+  "status": "branch_validated_pending_main_integration",
+  "supersedes": {
+    "receipt": "porting/audits/sparse-block-native-surface-v1.json",
+    "sha256": "b664e077d9d6120a2bd09ee4fce1c4219d643f8951719fa2589a23a742eea962",
+    "scope": "Current compiler recapture after unrelated PackedWordReader re-export and relocation of cfg(test) module below unchanged SparseArrayBlock impl. Production impl text verified identical; 20 ledger bindings unchanged. Historical receipt retained."
+  },
+  "integration_recapture": {
+    "source_revision": "0cf20945ea5d6fd8d915c7574a5cce677e6c20a1",
+    "changed_files": [
+      {
+        "path": "crates/tkernel/src/ncollection/mod.rs",
+        "sha256": "859a9bad9e9b2af762d4d4ae8588f72725872f88eb673b8ab9b5342cb11e027c",
+        "current_sha256": "8c5fa27e09e8da7ef9b111d4fdca0936dfeb718fc7a576565ddd713b0e84388a"
+      },
+      {
+        "path": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+        "sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+        "current_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0"
+      }
+    ],
+    "changed_declarations": [
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock",
+        "old": {
+          "canonical_type_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock",
+          "declaration_sha256": "1915e63f908a13d3f2db9bdd0ad5dd1674085b7fd2e3e2db00077e3939223997",
+          "kind": "struct",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock",
+          "reexport": {
+            "canonical_target_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock",
+            "is_glob": false,
+            "source": "sparse_array_base::SparseArrayBlock",
+            "source_file": "crates/tkernel/src/ncollection/mod.rs",
+            "source_sha256": "859a9bad9e9b2af762d4d4ae8588f72725872f88eb673b8ab9b5342cb11e027c",
+            "source_status": null
+          },
+          "signature": {
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "shape": {
+              "field_count": 3,
+              "has_stripped_fields": false,
+              "kind": "plain"
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock",
+          "kind": "struct",
+          "signature": {
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "shape": {
+              "kind": "plain",
+              "field_count": 3,
+              "has_stripped_fields": false
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "canonical_type_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock",
+          "declaration_sha256": "85099ed01e93326a3479eefacc5923b3a304bde7748fa858a19e477e14aad675",
+          "reexport": {
+            "source": "sparse_array_base::SparseArrayBlock",
+            "is_glob": false,
+            "source_file": "crates/tkernel/src/ncollection/mod.rs",
+            "source_sha256": "8c5fa27e09e8da7ef9b111d4fdca0936dfeb718fc7a576565ddd713b0e84388a",
+            "source_status": null,
+            "canonical_target_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock"
+          }
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlockCell",
+        "old": {
+          "canonical_type_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell",
+          "declaration_sha256": "42b2c144ed57a0c89b7f8597571d9d4740b7c52bdac0286ed89a6f0e164078f5",
+          "kind": "type_alias",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlockCell",
+          "reexport": {
+            "canonical_target_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell",
+            "is_glob": false,
+            "source": "sparse_array_base::SparseArrayBlockCell",
+            "source_file": "crates/tkernel/src/ncollection/mod.rs",
+            "source_sha256": "859a9bad9e9b2af762d4d4ae8588f72725872f88eb673b8ab9b5342cb11e027c",
+            "source_status": null
+          },
+          "signature": {
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "type": {
+              "primitive": "u8"
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlockCell",
+          "kind": "type_alias",
+          "signature": {
+            "type": {
+              "primitive": "u8"
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "canonical_type_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell",
+          "declaration_sha256": "d67df25c4720807ec98bb98e5f53ca539430f674f83710e6994c34088e424676",
+          "reexport": {
+            "source": "sparse_array_base::SparseArrayBlockCell",
+            "is_glob": false,
+            "source_file": "crates/tkernel/src/ncollection/mod.rs",
+            "source_sha256": "8c5fa27e09e8da7ef9b111d4fdca0936dfeb718fc7a576565ddd713b0e84388a",
+            "source_status": null,
+            "canonical_target_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell"
+          }
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::new",
+        "old": {
+          "declaration_sha256": "d7057d26f5d3a384e51b656188594be48d7e2b757c42ce366bc0213aae701b44",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::new",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": true
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "address",
+                  {
+                    "raw_pointer": {
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "c_void",
+                          "resolved_item_path": "core::ffi::c_void"
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "items",
+                  {
+                    "primitive": "usize"
+                  }
+                ],
+                [
+                  "stride",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "generic": "Self"
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::new",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "address",
+                  {
+                    "raw_pointer": {
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "path": "c_void",
+                          "resolved_item_path": "core::ffi::c_void",
+                          "args": null
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "items",
+                  {
+                    "primitive": "usize"
+                  }
+                ],
+                [
+                  "stride",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "generic": "Self"
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "0260dc8ab2a4c0b57e19720d0cc1dca8c3d02f455463a655789e1218098a23be"
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::bits_per_cell",
+        "old": {
+          "declaration_sha256": "4a11ad2fc4faaf9c5a026ceb46d3da5bf9ff1533ee89acf6bc14bdb06896e312",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::bits_per_cell",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": true,
+              "is_unsafe": false
+            },
+            "sig": {
+              "inputs": [],
+              "is_c_variadic": false,
+              "output": {
+                "primitive": "usize"
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::bits_per_cell",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [],
+              "output": {
+                "primitive": "usize"
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": true,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "4463ae7bbde013d24071fd7638c78831ec0d87b9b628b08d76729a3101747567"
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::size",
+        "old": {
+          "declaration_sha256": "88f86edafc46da50962bece98f587aa15065adad1bfdf0515deb19aa9f4d45e7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::size",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": true,
+              "is_unsafe": false
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "items",
+                  {
+                    "primitive": "usize"
+                  }
+                ],
+                [
+                  "stride",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "primitive": "usize"
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::size",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "items",
+                  {
+                    "primitive": "usize"
+                  }
+                ],
+                [
+                  "stride",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "primitive": "usize"
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": true,
+              "is_unsafe": false,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "afe23277a8d13b456dc8deae4362d76075d0080134b7a73662b487f966c4987c"
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::native_to_array",
+        "old": {
+          "declaration_sha256": "f79610ce436982e25c74b94576a733d88a6fd4996c429b7399755fe9dadb63ad",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::native_to_array",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": true
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "address",
+                  {
+                    "raw_pointer": {
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "c_void",
+                          "resolved_item_path": "core::ffi::c_void"
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "_items",
+                  {
+                    "primitive": "usize"
+                  }
+                ],
+                [
+                  "_stride",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "resolved_path": {
+                      "args": null,
+                      "path": "std::ffi::c_char",
+                      "resolved_item_path": "core::ffi::primitives::c_char"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::native_to_array",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "address",
+                  {
+                    "raw_pointer": {
+                      "is_mutable": true,
+                      "type": {
+                        "resolved_path": {
+                          "path": "c_void",
+                          "resolved_item_path": "core::ffi::c_void",
+                          "args": null
+                        }
+                      }
+                    }
+                  }
+                ],
+                [
+                  "_items",
+                  {
+                    "primitive": "usize"
+                  }
+                ],
+                [
+                  "_stride",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "resolved_path": {
+                      "path": "std::ffi::c_char",
+                      "resolved_item_path": "core::ffi::primitives::c_char",
+                      "args": null
+                    }
+                  }
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "7b8534d45bdde3008e64d1eae181a9610574b15a670e257a3ba27961ea377933"
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::set",
+        "old": {
+          "declaration_sha256": "4d7c8da62b2dc3971a3cca9025cc275f786dcb34efb4ddccba209a27eb61fd44",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::set",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": true
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "resolved_path": {
+                  "args": null,
+                  "path": "SparseArrayBlockCell",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::set",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "SparseArrayBlockCell",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell",
+                  "args": null
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "8625df5323d58cc71edecb09f16901d9d2ba9a9023817cf7336e04d04eb2ee79"
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::is_set",
+        "old": {
+          "declaration_sha256": "6861ddec0432d63117018a6bb1c7c811fc985fead0759c247774e329fc437f9d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::is_set",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": true
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "resolved_path": {
+                  "args": null,
+                  "path": "SparseArrayBlockCell",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::is_set",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "SparseArrayBlockCell",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell",
+                  "args": null
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "2a1424b85116d96d6b0a7a37a8b45877f32309234452145f49f4a60fc5a915ef"
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::unset",
+        "old": {
+          "declaration_sha256": "4e1e4970f5894b7575c225fe772cc3f687d6a034e48242fbfb09544fd47deb69",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "kind": "function",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::unset",
+          "signature": {
+            "default_unstable": null,
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "has_body": true,
+            "header": {
+              "abi": "Rust",
+              "is_async": false,
+              "is_const": false,
+              "is_unsafe": true
+            },
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "is_c_variadic": false,
+              "output": {
+                "resolved_path": {
+                  "args": null,
+                  "path": "SparseArrayBlockCell",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::unset",
+          "kind": "function",
+          "signature": {
+            "sig": {
+              "inputs": [
+                [
+                  "self",
+                  {
+                    "generic": "Self"
+                  }
+                ],
+                [
+                  "index",
+                  {
+                    "primitive": "usize"
+                  }
+                ]
+              ],
+              "output": {
+                "resolved_path": {
+                  "path": "SparseArrayBlockCell",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell",
+                  "args": null
+                }
+              },
+              "is_c_variadic": false
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "header": {
+              "is_const": false,
+              "is_unsafe": true,
+              "is_async": false,
+              "abi": "Rust"
+            },
+            "has_body": true,
+            "default_unstable": null
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SparseArrayBlock",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlock",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          },
+          "declaration_sha256": "685673f69344956f4da6d14e2c242c063c5ece2117df4139b839655ec1c3b65b"
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::count",
+        "old": {
+          "declaration_sha256": "10d216db24b0c2f62dba33377dd7fb6d7ee75ece6d956ae2209fca6b5d1c0382",
+          "kind": "struct_field",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::count",
+          "signature": {
+            "raw_pointer": {
+              "is_mutable": true,
+              "type": {
+                "primitive": "usize"
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::count",
+          "kind": "struct_field",
+          "signature": {
+            "raw_pointer": {
+              "is_mutable": true,
+              "type": {
+                "primitive": "usize"
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "declaration_sha256": "e508e5faea491096c3efdecdd572a3877b87ba3c4e27e9a2e4d0d1c35d91e280"
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::array",
+        "old": {
+          "declaration_sha256": "1ed47cfb320e47de78042557c9fbc58f1781e458c853d3112686deb70deb07e5",
+          "kind": "struct_field",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::array",
+          "signature": {
+            "raw_pointer": {
+              "is_mutable": true,
+              "type": {
+                "resolved_path": {
+                  "args": null,
+                  "path": "std::ffi::c_void",
+                  "resolved_item_path": "core::ffi::c_void"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::array",
+          "kind": "struct_field",
+          "signature": {
+            "raw_pointer": {
+              "is_mutable": true,
+              "type": {
+                "resolved_path": {
+                  "path": "std::ffi::c_void",
+                  "resolved_item_path": "core::ffi::c_void",
+                  "args": null
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "declaration_sha256": "ffa8c8bd64d89a2f62ad332434bc5cae83bafe71478a5efa5fcc46ae73c0795c"
+        }
+      },
+      {
+        "path": "rustycad_tkernel::ncollection::SparseArrayBlock::bits",
+        "old": {
+          "declaration_sha256": "f009271328e982f8e6b6b7a22c5eba49f667b5752c5ae5a5583d98cc6cd3c70c",
+          "kind": "struct_field",
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::bits",
+          "signature": {
+            "raw_pointer": {
+              "is_mutable": true,
+              "type": {
+                "resolved_path": {
+                  "args": null,
+                  "path": "SparseArrayBlockCell",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell"
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "c4088ef2b8a1cdc94ee5db0f0a872e7f70c042b82cd0875152619ca402bb7755",
+          "source_status": null
+        },
+        "current": {
+          "path": "rustycad_tkernel::ncollection::SparseArrayBlock::bits",
+          "kind": "struct_field",
+          "signature": {
+            "raw_pointer": {
+              "is_mutable": true,
+              "type": {
+                "resolved_path": {
+                  "path": "SparseArrayBlockCell",
+                  "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::block::SparseArrayBlockCell",
+                  "args": null
+                }
+              }
+            }
+          },
+          "source_file": "crates/tkernel/src/ncollection/sparse_array_base/block.rs",
+          "source_sha256": "8ed751bf3e9951ce3a24d4bee9c4ddefc78217e238f3c39a372feddae08b9fe0",
+          "source_status": null,
+          "declaration_sha256": "65c6e1df37e246630fe8f68cb4f77e71dd1489687a24027c003d578d2a22ed7a"
+        }
+      }
+    ],
+    "new_implementation_credit": 0
+  }
+}
