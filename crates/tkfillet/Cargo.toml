@@ -19,5 +19,14 @@ rustycad-tkbrep = { path = "../tkbrep" }
 rustycad-tkbo = { path = "../tkbo" }
 rustycad-tkbool = { path = "../tkbool" }
 rustycad-tkgeomalgo = { path = "../tkgeomalgo" }
+rustycad-tkgeombase = { path = "../tkgeombase" }
 
 rustycad-tktopalgo = { path = "../tktopalgo" }
+rustycad-tkshhealing = { path = "../tkshhealing" }
+
+[dev-dependencies]
+rustycad-tkprim = { path = "../tkprim" }
+
+[[example]]
+name = "rustycad-tkfillet-numeric-probe"
+path = "examples/numeric_probe.rs"
