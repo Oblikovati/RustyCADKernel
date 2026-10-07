@@ -447659,6 +447659,1286 @@
       "notes": "Aspect mapping (docs/visualization-design.md section 1): abstract classes are traits over embedded bases with extension traits for the non-virtual members."
     },
     {
+      "upstream_id": "Aspect_XRAction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAction",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAction::Aspect_XRAction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAction::new",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAction::Type",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAction::action_type",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAction::Id",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAction::id",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAction::IsValid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAction::is_valid",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAction::RawHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAction::raw_handle",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAction::SetRawHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAction::set_raw_handle",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAction::myId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAction",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Protected field, private state."
+    },
+    {
+      "upstream_id": "Aspect_XRAction::myRawHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAction",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Protected field, private state."
+    },
+    {
+      "upstream_id": "Aspect_XRAction::myType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAction",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Protected field, private state."
+    },
+    {
+      "upstream_id": "Aspect_XRActionSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRActionSet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRActionSet",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRActionSet::Aspect_XRActionSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRActionSet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRActionSet::new",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRActionSet::AddAction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRActionSet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRActionSet::add_action",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. A null action is ignored (natively a null dereference)."
+    },
+    {
+      "upstream_id": "Aspect_XRActionSet::Id",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRActionSet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRActionSet::id",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRActionSet::RawHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRActionSet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRActionSet::raw_handle",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRActionSet::SetRawHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRActionSet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRActionSet::set_raw_handle",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRActionSet::Actions",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRActionSet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRActionSet::actions",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRActionSet::myId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRActionSet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRActionSet",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Protected field, private state."
+    },
+    {
+      "upstream_id": "Aspect_XRActionSet::myRawHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRActionSet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRActionSet",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Protected field, private state."
+    },
+    {
+      "upstream_id": "Aspect_XRActionSet::myActions",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRActionSet.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRActionSet",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Protected field, private state."
+    },
+    {
+      "upstream_id": "Aspect_XRAnalogActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAnalogActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAnalogActionData",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAnalogActionData::Aspect_XRAnalogActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAnalogActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAnalogActionData::default",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAnalogActionData::ActiveOrigin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAnalogActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAnalogActionData::active_origin",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAnalogActionData::UpdateTime",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAnalogActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAnalogActionData::update_time",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAnalogActionData::VecXYZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAnalogActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAnalogActionData::vec_xyz",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAnalogActionData::DeltaXYZ",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAnalogActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAnalogActionData::delta_xyz",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAnalogActionData::IsActive",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAnalogActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAnalogActionData::is_active",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRAnalogActionData::IsChanged",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRAnalogActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAnalogActionData::is_changed",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRDigitalActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRDigitalActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRDigitalActionData",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRDigitalActionData::Aspect_XRDigitalActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRDigitalActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRDigitalActionData::default",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRDigitalActionData::ActiveOrigin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRDigitalActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRDigitalActionData::active_origin",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRDigitalActionData::UpdateTime",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRDigitalActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRDigitalActionData::update_time",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRDigitalActionData::IsActive",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRDigitalActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRDigitalActionData::is_active",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRDigitalActionData::IsPressed",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRDigitalActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRDigitalActionData::is_pressed",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRDigitalActionData::IsChanged",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRDigitalActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRDigitalActionData::is_changed",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRHapticActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRHapticActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRHapticActionData",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRHapticActionData::Aspect_XRHapticActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRHapticActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRHapticActionData::default",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRHapticActionData::Delay",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRHapticActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRHapticActionData::delay",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRHapticActionData::Duration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRHapticActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRHapticActionData::duration",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRHapticActionData::Frequency",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRHapticActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRHapticActionData::frequency",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRHapticActionData::Amplitude",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRHapticActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRHapticActionData::amplitude",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRHapticActionData::IsValid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRHapticActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRHapticActionData::is_valid",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRPoseActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRPoseActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRPoseActionData",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRPoseActionData::Aspect_XRPoseActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRPoseActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRPoseActionData::default",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRPoseActionData::Pose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRPoseActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRPoseActionData::pose",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRPoseActionData::ActiveOrigin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRPoseActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRPoseActionData::active_origin",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRPoseActionData::IsActive",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRPoseActionData.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRPoseActionData::is_active",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_IsHeadsetOn",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::IsHeadsetOn",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputAppMenu",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputAppMenu",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputSysMenu",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputSysMenu",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputTriggerPull",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputTriggerPull",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputTriggerClick",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputTriggerClick",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputGripClick",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputGripClick",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputTrackPadPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputTrackPadPosition",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputTrackPadTouch",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputTrackPadTouch",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputTrackPadClick",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputTrackPadClick",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputThumbstickPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputThumbstickPosition",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputThumbstickTouch",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputThumbstickTouch",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputThumbstickClick",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputThumbstickClick",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputPoseBase",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputPoseBase",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputPoseFront",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputPoseFront",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputPoseHandGrip",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputPoseHandGrip",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_InputPoseFingerTip",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::InputPoseFingerTip",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_OutputHaptic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRGenericAction::OutputHaptic",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "(unnamed enum at src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx:40:1)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::ASPECT_XR_GENERIC_ACTION_NB",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRGenericAction_NB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRGenericAction.hxx",
+      "rust_item": "rustycad_tkservice::aspect::ASPECT_XR_GENERIC_ACTION_NB",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "(unnamed enum at src/Visualization/TKService/Aspect/Aspect_XRTrackedDeviceRole.hxx:26:1)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRTrackedDeviceRole.hxx",
+      "rust_item": "rustycad_tkservice::aspect::ASPECT_XR_TRACKED_DEVICE_ROLE_NB",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRTrackedDeviceRole_NB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRTrackedDeviceRole.hxx",
+      "rust_item": "rustycad_tkservice::aspect::ASPECT_XR_TRACKED_DEVICE_ROLE_NB",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::Aspect_XRSession",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionBase::default",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::TrackingUniverseOrigin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionTrackingUniverseOrigin",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::TrackingUniverseOrigin_Seated",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionTrackingUniverseOrigin::Seated",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::TrackingUniverseOrigin_Standing",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionTrackingUniverseOrigin::Standing",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::InfoString",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionInfoString",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::InfoString_Vendor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionInfoString::Vendor",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::InfoString_Device",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionInfoString::Device",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::InfoString_Tracker",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionInfoString::Tracker",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::InfoString_SerialNumber",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionInfoString::SerialNumber",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::IsOpen",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::is_open",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::Open",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::open",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::Close",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::close",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::WaitPoses",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::wait_poses",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::RecommendedViewport",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::recommended_viewport",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::EyeToHeadTransform",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::eye_to_head_transform",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::ProjectionMatrix",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::projection_matrix",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::HasProjectionFrustums",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::has_projection_frustums",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::ProcessEvents",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::process_events",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::SubmitEye",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::submit_eye",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::NamedTrackedDevice",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::named_tracked_device",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::GetDigitalActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::get_digital_action_data",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::GetAnalogActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::get_analog_action_data",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::GetPoseActionDataForNextFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::get_pose_action_data_for_next_frame",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::SetTrackingOrigin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::set_tracking_origin",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::GetString",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::get_string",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::loadRenderModel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::load_render_model_impl",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::triggerHapticVibrationAction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession::trigger_haptic_vibration_action_impl",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::IOD",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::iod",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::LoadRenderModel(int,occ::handle<Image_Texture> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::load_render_model",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::LoadRenderModel(int,bool,occ::handle<Image_Texture> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::load_render_model_scaled",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::HasTrackedPose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::has_tracked_pose",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. A device out of range returns Standard_OutOfRange (the NCollection_Array1 check)."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::LeftHandPose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::left_hand_pose",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::RightHandPose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::right_hand_pose",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::HeadToEyeTransform",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::head_to_eye_transform",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::UnitFactor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::unit_factor",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::SetUnitFactor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::set_unit_factor",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::Aspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::aspect",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::FieldOfView",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::field_of_view",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::DisplayFrequency",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::display_frequency",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::ProjectionFrustum",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::projection_frustum",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::HeadPose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::head_pose",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::TrackedPoses",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::tracked_poses",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::TriggerHapticVibrationAction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::trigger_haptic_vibration_action",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::AbortHapticVibrationAction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::abort_haptic_vibration_action",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::TrackingOrigin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::tracking_origin",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::GenericAction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::generic_action",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myRoleActions",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::role_actions",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myActionSets",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::action_sets",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myTrackOrigin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::track_origin",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myTrackedPoses",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::tracked_poses",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myHeadPose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::head_pose",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myRendSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::rend_size",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myFrustumL",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::frustum_l",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myFrustumR",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::frustum_r",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myUnitFactor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::unit_factor",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::aspect",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myFieldOfView",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::field_of_view",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myIod",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::iod",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myDispFreq",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::disp_freq",
+      "status": "implemented",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::Aspect_OpenVRSession",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::default",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::IsHmdPresent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::is_hmd_present",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::IsOpen",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::is_open implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::Open",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::open implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::Close",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::close implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::WaitPoses",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::wait_poses implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::RecommendedViewport",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::recommended_viewport implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::EyeToHeadTransform",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::eye_to_head_transform implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::ProjectionMatrix",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::projection_matrix implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::HasProjectionFrustums",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::has_projection_frustums implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::ProcessEvents",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::process_events implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::SubmitEye",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::submit_eye implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::GetString",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::get_string implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::NamedTrackedDevice",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::named_tracked_device implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::GetDigitalActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::get_digital_action_data implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::GetAnalogActionData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::get_analog_action_data implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::GetPoseActionDataForNextFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::get_pose_action_data_for_next_frame implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::SetTrackingOrigin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::set_tracking_origin implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::triggerHapticVibrationAction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::trigger_haptic_vibration_action_impl implementation."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::loadRenderModel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The AspectXRSession::load_render_model_impl implementation (always null without OpenVR)."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::defaultActionsManifest",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::default_actions_manifest",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::closeVR",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::close_vr",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::updateProjectionFrustums",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::update_projection_frustums",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::initInput",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::init_input",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::onTrackedDeviceActivated",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::on_tracked_device_activated",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::onTrackedDeviceDeactivated",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::on_tracked_device_deactivated",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::onTrackedDeviceUpdated",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::on_tracked_device_updated",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::getVRSystem",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::get_vr_system",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::myContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs. The VRContext is empty without OpenVR; no field."
+    },
+    {
+      "upstream_id": "Aspect_OpenVRSession::myActionsManifest",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::actions_manifest",
+      "status": "implemented",
+      "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
+    },
+    {
       "upstream_id": "WNT_HIDSpaceMouse::(unnamed enum at src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx:94:3)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx",

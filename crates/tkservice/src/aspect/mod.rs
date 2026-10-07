@@ -12,6 +12,7 @@ mod grid_params;
 mod input_values;
 mod native_types;
 mod neutral_window;
+mod openvr_session;
 mod rectangular_grid;
 mod skydome_background;
 mod style_enums;
@@ -20,6 +21,8 @@ mod vkey;
 mod vkey_set;
 mod window;
 mod window_input_listener;
+mod xr_action;
+mod xr_session;
 
 pub use background::{AspectBackground, AspectGradientBackground};
 pub use circular_grid::{AspectCircularGrid, AspectCircularGridBase, AspectCircularGridMembers};
@@ -34,6 +37,7 @@ pub use native_types::{
     AspectDisplay, AspectDrawable, AspectFbConfig, AspectHandle, AspectRenderingContext,
 };
 pub use neutral_window::AspectNeutralWindow;
+pub use openvr_session::AspectOpenVRSession;
 pub use rectangular_grid::{
     AspectRectangularGrid, AspectRectangularGridBase, AspectRectangularGridMembers,
 };
@@ -46,4 +50,13 @@ pub use window::{AspectWindow, AspectWindowBase, AspectWindowFields, AspectWindo
 pub use window_input_listener::{
     ASPECT_TOUCH_ID_ALL, AspectWindowInputListener, AspectWindowInputListenerBase,
     AspectWindowInputListenerMembers,
+};
+pub use xr_action::{
+    ASPECT_XR_GENERIC_ACTION_NB, AspectXRAction, AspectXRActionSet, AspectXRAnalogActionData,
+    AspectXRDigitalActionData, AspectXRGenericAction, AspectXRHapticActionData,
+    AspectXRPoseActionData,
+};
+pub use xr_session::{
+    ASPECT_XR_TRACKED_DEVICE_ROLE_NB, AspectXRSession, AspectXRSessionBase, AspectXRSessionFields,
+    AspectXRSessionInfoString, AspectXRSessionMembers, AspectXRSessionTrackingUniverseOrigin,
 };
