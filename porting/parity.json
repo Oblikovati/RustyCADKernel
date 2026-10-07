@@ -22707,6 +22707,14 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "NCollection_Lerp",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Lerp.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Lerp",
+      "status": "implemented",
+      "notes": "Class template NCollection_Lerp is the generic Rust type Lerp; its members are mapped row by row."
+    },
+    {
       "upstream_id": "Geom2d_AxisPlacement::Geom2d_AxisPlacement(const gp_Ax2d&)",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_AxisPlacement.hxx",
@@ -68821,6 +68829,14 @@
       "source_sha256": "a6e8f11773efab41789dedd45e55d05f556f420c7073f3fd01c96d0e079afa51"
     },
     {
+      "upstream_id": "NCollection_Mat3",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat3.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Mat3",
+      "status": "implemented",
+      "notes": "Class template NCollection_Mat3 is the generic Rust type Mat3; its members are mapped row by row."
+    },
+    {
       "upstream_id": "NCollection_Mat4::SetRow(size_t,const NCollection_Vec3<Element_t>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
@@ -69025,6 +69041,14 @@
       "source_sha256": "1b2e16e62d4c520c3939ee6916a9607bd8d128d83850fbca2b52f0b8498e2df0"
     },
     {
+      "upstream_id": "NCollection_Mat4",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Mat4.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4",
+      "status": "implemented",
+      "notes": "Class template NCollection_Mat4 is the generic Rust type Mat4; its members are mapped row by row."
+    },
+    {
       "upstream_id": "NCollection_Vec2::operator/(Element_t) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
@@ -69120,36 +69144,380 @@
       "selector_id": "887e0cc382b7d82fb7742593e2a1feb271acaa4bfcce4c53c6b3c0cfe11878a5"
     },
     {
-      "upstream_id": "NCollection_Vec2::operator/(const NCollection_Vec2&,const NCollection_Vec2&)",
+      "upstream_id": "operator/(const NCollection_Vec2<Element_t>&,const NCollection_Vec2<Element_t>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec2 as Div>::div",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Div>::div",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Div>::div",
+          "declaration_sha256": "3ff29ca213d6f99f7c8465400212a1f79d60c2de3f67c88d3ac8b635fe1629ab",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec2",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec2"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [],
+                                  "constraints": [
+                                    {
+                                      "args": null,
+                                      "binding": {
+                                        "equality": {
+                                          "type": {
+                                            "generic": "T"
+                                          }
+                                        }
+                                      },
+                                      "name": "Output"
+                                    }
+                                  ]
+                                }
+                              },
+                              "path": "Div",
+                              "resolved_item_path": "core::ops::arith::Div"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Div",
+              "resolved_item_path": "core::ops::arith::Div"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator/ on two vectors; the generic Vec2<T> Div impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
-      "upstream_id": "NCollection_Vec2::operator-(const NCollection_Vec2&,const NCollection_Vec2&)",
+      "upstream_id": "operator-(const NCollection_Vec2<Element_t>&,const NCollection_Vec2<Element_t>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Sub>::sub",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Sub>::sub",
+          "declaration_sha256": "3a82709554f8b68a5e32c6e8567e7893497416100add9c2946c1a967b98fe417",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec2",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec2"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [],
+                                  "constraints": [
+                                    {
+                                      "args": null,
+                                      "binding": {
+                                        "equality": {
+                                          "type": {
+                                            "generic": "T"
+                                          }
+                                        }
+                                      },
+                                      "name": "Output"
+                                    }
+                                  ]
+                                }
+                              },
+                              "path": "Sub",
+                              "resolved_item_path": "core::ops::arith::Sub"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Sub",
+              "resolved_item_path": "core::ops::arith::Sub"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator- on two vectors; the generic Vec2<T> Sub impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
-      "upstream_id": "NCollection_Vec2::operator*(const NCollection_Vec2&,const NCollection_Vec2&)",
+      "upstream_id": "operator*(const NCollection_Vec2<Element_t>&,const NCollection_Vec2<Element_t>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec2 as Mul>::mul",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Mul>::mul",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Mul>::mul",
+          "declaration_sha256": "98948282faf685a62100a5632e66dfd811bbd9d26455f1613329cbf808578ddd",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec2",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec2"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [],
+                                  "constraints": [
+                                    {
+                                      "args": null,
+                                      "binding": {
+                                        "equality": {
+                                          "type": {
+                                            "generic": "T"
+                                          }
+                                        }
+                                      },
+                                      "name": "Output"
+                                    }
+                                  ]
+                                }
+                              },
+                              "path": "Mul",
+                              "resolved_item_path": "core::ops::arith::Mul"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Mul",
+              "resolved_item_path": "core::ops::arith::Mul"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator* on two vectors; the generic Vec2<T> Mul impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
-      "upstream_id": "NCollection_Vec2::operator+(const NCollection_Vec2&,const NCollection_Vec2&)",
+      "upstream_id": "operator+(const NCollection_Vec2<Element_t>&,const NCollection_Vec2<Element_t>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Add>::add",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec2::<core::ops::arith::Add>::add",
+          "declaration_sha256": "564dc0e0e445e90f22b80831b15af55af69fa80f8a02fc3c64f0f40cc2d93d9a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec2",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec2"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [],
+                                  "constraints": [
+                                    {
+                                      "args": null,
+                                      "binding": {
+                                        "equality": {
+                                          "type": {
+                                            "generic": "T"
+                                          }
+                                        }
+                                      },
+                                      "name": "Output"
+                                    }
+                                  ]
+                                }
+                              },
+                              "path": "Add",
+                              "resolved_item_path": "core::ops::arith::Add"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Add",
+              "resolved_item_path": "core::ops::arith::Add"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator+ on two vectors; the generic Vec2<T> Add impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
       "upstream_id": "NCollection_Vec3::operator/(Element_t) const",
@@ -69273,36 +69641,312 @@
       "selector_id": "dc0f9a5eabba6a797f7ca639b1f3dad8d9474b3cf251becede1ecb976e08d1ec"
     },
     {
-      "upstream_id": "NCollection_Vec3::operator/(const NCollection_Vec3&,const NCollection_Vec3&)",
+      "upstream_id": "operator/(const NCollection_Vec3<Element_t>&,const NCollection_Vec3<Element_t>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec3 as Div>::div",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Div>::div",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Div>::div",
+          "declaration_sha256": "cb5d3ac2b2ab6427c7a41a64ff07fa01d5ae6776da4078c5bbb1a14a5f7b8639",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec3",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec3"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "DivAssign",
+                              "resolved_item_path": "core::ops::arith::DivAssign"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Div",
+              "resolved_item_path": "core::ops::arith::Div"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator/ on two vectors; the generic Vec3<T> Div impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
-      "upstream_id": "NCollection_Vec3::operator-(const NCollection_Vec3&,const NCollection_Vec3&)",
+      "upstream_id": "operator-(const NCollection_Vec3<Element_t>&,const NCollection_Vec3<Element_t>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Sub>::sub",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Sub>::sub",
+          "declaration_sha256": "a48dd4054131a43520908112692718ce45ad32adce19f7c1aa634e1585784f78",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec3",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec3"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "SubAssign",
+                              "resolved_item_path": "core::ops::arith::SubAssign"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Sub",
+              "resolved_item_path": "core::ops::arith::Sub"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator- on two vectors; the generic Vec3<T> Sub impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
-      "upstream_id": "NCollection_Vec3::operator*(const NCollection_Vec3&,const NCollection_Vec3&)",
+      "upstream_id": "operator*(const NCollection_Vec3<Element_t>&,const NCollection_Vec3<Element_t>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec3 as Mul>::mul",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Mul>::mul",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Mul>::mul",
+          "declaration_sha256": "1483f71af6dd4bf49b753b60646f236cb9285bd2a6977359d8e543a2534f202e",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec3",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec3"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "MulAssign",
+                              "resolved_item_path": "core::ops::arith::MulAssign"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Mul",
+              "resolved_item_path": "core::ops::arith::Mul"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator* on two vectors; the generic Vec3<T> Mul impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
-      "upstream_id": "NCollection_Vec3::operator+(const NCollection_Vec3&,const NCollection_Vec3&)",
+      "upstream_id": "operator+(const NCollection_Vec3<Element_t>&,const NCollection_Vec3<Element_t>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Add>::add",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec3::<core::ops::arith::Add>::add",
+          "declaration_sha256": "17d1cb5c7eed14cf0f72ea90be827ed30647be85585474e57919fb02105a5455",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec3",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec3"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "AddAssign",
+                              "resolved_item_path": "core::ops::arith::AddAssign"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Add",
+              "resolved_item_path": "core::ops::arith::Add"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator+ on two vectors; the generic Vec3<T> Add impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
       "upstream_id": "NCollection_Vec4::operator/(Element_t) const",
@@ -69408,36 +70052,312 @@
       "selector_id": "dd4017badec63d41c5551ce7662979813b21b4af473153cef5f4440b2827739f"
     },
     {
-      "upstream_id": "NCollection_Vec4::operator/(const NCollection_Vec4&,const NCollection_Vec4&)",
+      "upstream_id": "operator/(const NCollection_Vec4<Element_t>&,const NCollection_Vec4<Element_t>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec4 as Div>::div",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Div>::div",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Div>::div",
+          "declaration_sha256": "1796e533b30c4084c13f11c4a5dff73fe2379f6302a635fd80bbacb199abde82",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec4",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec4"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "DivAssign",
+                              "resolved_item_path": "core::ops::arith::DivAssign"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Div",
+              "resolved_item_path": "core::ops::arith::Div"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator/ on two vectors; the generic Vec4<T> Div impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
-      "upstream_id": "NCollection_Vec4::operator-(const NCollection_Vec4&,const NCollection_Vec4&)",
+      "upstream_id": "operator-(const NCollection_Vec4<Element_t>&,const NCollection_Vec4<Element_t>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Sub>::sub",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Sub>::sub",
+          "declaration_sha256": "099800b75116082cec1b390711cbc017dfce3242b91d7390e0c07cfd954c59d1",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec4",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec4"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "SubAssign",
+                              "resolved_item_path": "core::ops::arith::SubAssign"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Sub",
+              "resolved_item_path": "core::ops::arith::Sub"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator- on two vectors; the generic Vec4<T> Sub impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
-      "upstream_id": "NCollection_Vec4::operator*(const NCollection_Vec4&,const NCollection_Vec4&)",
+      "upstream_id": "operator*(const NCollection_Vec4<Element_t>&,const NCollection_Vec4<Element_t>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Vec4 as Mul>::mul",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Mul>::mul",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Mul>::mul",
+          "declaration_sha256": "e6f78687e9f520f229e5d4630e943defbe9b577d5f3052a9d8391242c18cbf33",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec4",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec4"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "MulAssign",
+                              "resolved_item_path": "core::ops::arith::MulAssign"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Mul",
+              "resolved_item_path": "core::ops::arith::Mul"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator* on two vectors; the generic Vec4<T> Mul impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
-      "upstream_id": "NCollection_Vec4::operator+(const NCollection_Vec4&,const NCollection_Vec4&)",
+      "upstream_id": "operator+(const NCollection_Vec4<Element_t>&,const NCollection_Vec4<Element_t>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Add>::add",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::Vec4::<core::ops::arith::Add>::add",
+          "declaration_sha256": "03a59781d6f6dc514d4ebb202344d36f02a80f53caae72a2862f85a95b524cfe",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::Vec4",
+                "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec4"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "VectorArithmeticComponent",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::vector::arithmetic_component::VectorArithmeticComponent"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "AddAssign",
+                              "resolved_item_path": "core::ops::arith::AddAssign"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "Add",
+              "resolved_item_path": "core::ops::arith::Add"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; float/double/int element types, native evaluation order, operator quirks and tie rules preserved. Public fields replace the non-const component references, ChangeData returns component references, and x86-64 cvttsd2si semantics define out-of-range float-to-int static_cast. API inventory completeness remains pending. The header defines this operator as a hidden friend taking both operands; Rust spells it as the by-value operator trait on the vector."
+      "notes": "Component-wise free operator+ on two vectors; the generic Vec4<T> Add impl in vector/arithmetic.rs evaluates each component in native order (bool element vectors use the boolean.rs impl)."
     },
     {
       "upstream_id": "math_Gauss::math_Gauss(const math_Matrix&,double,const Message_ProgressRange&)",
@@ -70381,9 +71301,9 @@
       "upstream_id": "NCollection_Array2::operator()(int,int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Array2 as Index<(i32, i32)>>::index",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::value",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; out-of-range (row, col) pairs panic with the ArrayError text, as the native operator raises."
+      "notes": "operator()(row, col) is Value(row, col); Rust also implements Index<(i32, i32)> (array2.rs), which panics where Value returns an out-of-range error."
     },
     {
       "upstream_id": "NCollection_Array2::ChangeValue(int,int)",
@@ -70397,9 +71317,9 @@
       "upstream_id": "NCollection_Array2::operator()(int,int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Array2 as IndexMut<(i32, i32)>>::index_mut",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::change_value",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; out-of-range (row, col) pairs panic with the ArrayError text, as the native operator raises."
+      "notes": "operator()(row, col) is ChangeValue(row, col); Rust also implements IndexMut<(i32, i32)> (array2.rs)."
     },
     {
       "upstream_id": "NCollection_Array2::SetValue(int,int,const TheItemType&)",
@@ -71345,6 +72265,14 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef const_pointer (const type-parameter-0-0 *) of NCollection_LinearVector. Rust LinearVector spells &T / *const T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector",
+      "status": "implemented",
+      "notes": "Class template NCollection_LinearVector is the generic Rust type LinearVector; its members are mapped row by row."
     },
     {
       "upstream_id": "NCollection_DynamicArray::Iterator()",
@@ -72838,6 +73766,14 @@
       "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_SparseArray. Rust SparseArray spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_SparseArray",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray",
+      "status": "implemented",
+      "notes": "Class template NCollection_SparseArray is the generic Rust type SparseArray; its members are mapped row by row."
+    },
+    {
       "upstream_id": "NCollection_SparseArrayBase::Size() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
@@ -73434,6 +74370,14 @@
       "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseList::BasicIterator<NCollection_TListNode<type-parameter-0-0>, type-parameter-0-0, false>) of NCollection_List. Rust List spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_List::ListNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of NCollection_TListNode<T>; Rust names ListValueNode<T> directly."
+    },
+    {
       "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
       "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::<core::default::Default>::default",
       "rust_items": [
@@ -73613,49 +74557,65 @@
       "upstream_id": "NCollection_TListNode(const TheItemType&,NCollection_ListNode*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+      "rust_item": "rustycad_tkernel::ncollection::ListValueNode::from_ref",
+      "status": "implemented",
+      "notes": "TListNode rows: NCollection_TListNode<T> is ListValueNode<T>, a value node after the shared ListLinkNode prefix. Copies the borrowed value."
     },
     {
       "upstream_id": "NCollection_TListNode(TheItemType&&,NCollection_ListNode*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+      "rust_item": "rustycad_tkernel::ncollection::ListValueNode::new",
+      "status": "implemented",
+      "notes": "TListNode rows: NCollection_TListNode<T> is ListValueNode<T>, a value node after the shared ListLinkNode prefix. Moves the owned value."
     },
     {
       "upstream_id": "NCollection_TListNode(std::in_place_t,NCollection_ListNode*,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+      "rust_item": "rustycad_tkernel::ncollection::ListValueNode::construct",
+      "status": "implemented",
+      "notes": "TListNode rows: NCollection_TListNode<T> is ListValueNode<T>, a value node after the shared ListLinkNode prefix. In-place construction takes the constructor as a closure, run after the link prefix is set."
     },
     {
       "upstream_id": "NCollection_TListNode::Value() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+      "rust_item": "rustycad_tkernel::ncollection::ListValueNode::value",
+      "status": "implemented",
+      "notes": "TListNode rows: NCollection_TListNode<T> is ListValueNode<T>, a value node after the shared ListLinkNode prefix."
     },
     {
       "upstream_id": "NCollection_TListNode::ChangeValue()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+      "rust_item": "rustycad_tkernel::ncollection::ListValueNode::change_value",
+      "status": "implemented",
+      "notes": "TListNode rows: NCollection_TListNode<T> is ListValueNode<T>, a value node after the shared ListLinkNode prefix."
     },
     {
       "upstream_id": "NCollection_TListNode::delNode(NCollection_ListNode*,occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ListValueNode::del_node",
+      "status": "implemented",
+      "notes": "TListNode rows: NCollection_TListNode<T> is ListValueNode<T>, a value node after the shared ListLinkNode prefix. Unsafe: destroys the value and frees the node through the allocator returned by into_raw."
+    },
+    {
+      "upstream_id": "NCollection_TListNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ListValueNode",
+      "status": "implemented",
+      "notes": "Class template NCollection_TListNode is the generic Rust type ListValueNode; its members are mapped row by row."
+    },
+    {
+      "upstream_id": "NCollection_TListNode::myValue",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+      "notes": "Protected stored value; private field of ListValueNode<T>, read through value()/change_value()."
     },
     {
       "upstream_id": "NCollection_Sequence::Node(const TheItemType&)",
@@ -75237,6 +76197,14 @@
       "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
     },
     {
+      "upstream_id": "NCollection_FlatDataMap",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap",
+      "status": "implemented",
+      "notes": "Class template NCollection_FlatDataMap is the generic Rust type FlatDataMap; its members are mapped row by row."
+    },
+    {
       "upstream_id": "NCollection_FlatMap::Iterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
@@ -75714,6 +76682,14 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef pointer (const type-parameter-0-0 *) of NCollection_FlatMap. Rust FlatMap spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_FlatMap",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap",
+      "status": "implemented",
+      "notes": "Class template NCollection_FlatMap is the generic Rust type FlatMap; its members are mapped row by row."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode(const TheKeyType&,const TheItemType&,NCollection_ListNode*)",
@@ -77620,6 +78596,14 @@
       "notes": "Manual NCollection member mapping; the NCollection_PackedMapAlgo namespace is the packed_map_algo module. Early-return branches, smaller-map scanning and the move of the intersected copy match native (probe ncoll_flat_maps_algebra32/64). Rust borrowing makes the native self-aliased calls (theMap == theOtherMap) unrepresentable, so those branches have no counterpart."
     },
     {
+      "upstream_id": "NCollection_PackedMapAlgo",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMapAlgo.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ namespace of packed-map set algorithms; the Rust module rustycad_tkernel::ncollection::packed_map_algo holds them."
+    },
+    {
       "upstream_id": "NCollection_UtfIterator(const Type*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
@@ -77786,6 +78770,14 @@
       "rust_item": "rustycad_tkernel::ncollection::UtfIterator::get_utf",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator",
+      "status": "implemented",
+      "notes": "Class template NCollection_UtfIterator is the generic Rust type UtfIterator; its members are mapped row by row."
     },
     {
       "upstream_id": "NCollection_UtfString::Iterator() const",
@@ -78078,18 +79070,18 @@
     {
       "upstream_id": "NCollection_UtfString::operator+=(const NCollection_UtfString<Type>&)",
       "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::UtfString::<core::ops::arith::AddAssign>::add_assign",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.lxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::<core::ops::arith::AddAssign<&rustycad_tkernel::ncollection::utf_string::UtfString<T>>>::add_assign",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. The Rust AddAssign<&UtfString<T>> trait implementation is the unique normalized public rustdoc item. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. Quirk preserved: an empty right side is skipped, so its cached length is not added."
+      "notes": "In-place concatenation; AddAssign<&UtfString<T>>."
     },
     {
-      "upstream_id": "NCollection_UtfString::operator+(const NCollection_UtfString&,const NCollection_UtfString&)",
+      "upstream_id": "operator+(const NCollection_UtfString<Type>&,const NCollection_UtfString<Type>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
-      "rust_item": "<&rustycad_tkernel::ncollection::UtfString as Add<&UtfString>>::add",
+      "rust_item": "<&rustycad_tkernel::ncollection::UtfString as core::ops::arith::Add<&rustycad_tkernel::ncollection::utf_string::UtfString<T>>>::add",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The hidden friend always sums both cached lengths."
+      "notes": "Concatenation of two strings into a new string; Add is implemented on &UtfString<T> so neither operand is consumed."
     },
     {
       "upstream_id": "NCollection_UtfString::operator==(const NCollection_UtfString<Type>&) const noexcept",
@@ -78110,10 +79102,18 @@
     {
       "upstream_id": "NCollection_UtfString::operator!=(const NCollection_UtfString<Type>&) const",
       "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::UtfString as PartialEq>::ne",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.lxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::<core::cmp::PartialEq>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+      "notes": "Native !IsEqual; PartialEq::ne is the provided negation of the IsEqual-based eq."
+    },
+    {
+      "upstream_id": "NCollection_UtfString",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString",
+      "status": "implemented",
+      "notes": "Class template NCollection_UtfString is the generic Rust type UtfString; its members are mapped row by row."
     },
     {
       "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<type-parameter-0-0, std::enable_if<NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value, void>::type>::Get(const T&)",
@@ -80009,9 +81009,9 @@
       "upstream_id": "NCollection_Iterator::operator!=(const NCollection_Iterator<Container,theOtherIsConstant>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::CollectionCursor as PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::<core::cmp::PartialEq>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. PartialEq is implemented for every const/mutable pairing."
+      "notes": "Native compares the wrapped iterators; PartialEq::ne is the provided negation of the eq impl."
     },
     {
       "upstream_id": "NCollection_Iterator::iterator_type",
@@ -80028,6 +81028,14 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef owner_type (std::conditional<value-parameter-0-1, const type-parameter-0-0, type-parameter-0-0>::type) of NCollection_Iterator. Rust CollectionCursor spells the borrowed owner type directly; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor",
+      "status": "implemented",
+      "notes": "Class template NCollection_Iterator is the generic Rust type CollectionCursor; its members are mapped row by row."
     },
     {
       "upstream_id": "NCollection_DataMap::DataMapNode(const TheKeyType&,const TheItemType&,NCollection_ListNode*)",
@@ -83698,12 +84706,28 @@
       "notes": "Manual NCollection member mapping; MapType is NCollection_Map; the native address comparisons for aliased operands are replaced by the in-place two-operand functions, since Rust borrowing forbids a destination alias.  Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
     },
     {
+      "upstream_id": "NCollection_MapAlgo",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_MapAlgo.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ namespace of map set algorithms; the Rust module rustycad_tkernel::ncollection::map_algo holds them."
+    },
+    {
       "upstream_id": "NCollection_Primes::NextPrimeForMap(size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Primes.hxx",
       "rust_item": "rustycad_tkernel::ncollection::next_map_prime",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; Native quirk preserved: theN + 1 wraps in size_t, so SIZE_MAX yields the first table entry, 101. Bucket order, results and exception classes are compared with OCCT by the hash_maps probe."
+    },
+    {
+      "upstream_id": "NCollection_Primes",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Primes.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ namespace holding NextPrimeForMap; the Rust function is rustycad_tkernel::ncollection::next_map_prime."
     },
     {
       "upstream_id": "NCollection_UBTree::Selector()",
@@ -83946,6 +84970,38 @@
       "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
     },
     {
+      "upstream_id": "NCollection_UBTree",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree",
+      "status": "implemented",
+      "notes": "Class template NCollection_UBTree is the generic Rust type UBTree; its members are mapped row by row."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::ChangeLastNode() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::change_last_node",
+      "status": "implemented",
+      "notes": "Protected accessor of the last inserted node; Rust returns Option<&mut BoundingNode> (None for an empty tree, where native dereferences null)."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Select(const NCollection_UBTree::TreeNode&,NCollection_UBTree::Selector&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::select_branch",
+      "status": "implemented",
+      "notes": "Protected recursive branch selection; Rust select_branch takes the node id and returns Standard_NoSuchObject as an error for a dead id."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Selector::myStop",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected stop flag of the abstract selector; Rust TreeSelector implementors keep their own state and report it through TreeSelector::stop()."
+    },
+    {
       "upstream_id": "NCollection_EBTree(const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
@@ -84008,6 +85064,30 @@
       "rust_item": "rustycad_tkernel::ncollection::EBTree::clear_with_allocator",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
+    },
+    {
+      "upstream_id": "NCollection_EBTree",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::EBTree",
+      "status": "implemented",
+      "notes": "Class template NCollection_EBTree is the generic Rust type EBTree; its members are mapped row by row."
+    },
+    {
+      "upstream_id": "NCollection_EBTree::UBTree",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the NCollection_UBTree<T, B> base; Rust EBTree wraps a UBTree<T, B> named directly."
+    },
+    {
+      "upstream_id": "NCollection_EBTree::TreeNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of UBTree::TreeNode; the Rust node type is BoundingNode<T, B>."
     },
     {
       "upstream_id": "NCollection_UBTreeFiller::ObjBnd(const TheObjType&,const TheBndType&)",
@@ -84309,9 +85389,9 @@
       "upstream_id": "NCollection_KDTree::operator=(const NCollection_KDTree<ThePointType,NCollection_KDTree::TheDimension,NCollection_KDTree::HasRadii>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::KDTree as Clone>::clone_from",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::<core::clone::Clone>::clone",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+      "notes": "Copy assignment is `tree = source.clone()` (Clone::clone_from default); the clone copies points, radii and the built index."
     },
     {
       "upstream_id": "NCollection_KDTree::operator=(NCollection_KDTree<ThePointType,NCollection_KDTree::TheDimension,NCollection_KDTree::HasRadii>&&)",
@@ -84320,6 +85400,14 @@
       "rust_item": "rustycad_tkernel::ncollection::KDTree::move_assign",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree",
+      "status": "implemented",
+      "notes": "Class template NCollection_KDTree is the generic Rust type KDTree; its members are mapped row by row."
     },
     {
       "upstream_id": "NCollection_BaseAllocator::Allocate(size_t)",
@@ -84536,6 +85624,14 @@
       "rust_item": "<rustycad_tkernel::ncollection::AlignedAllocatorObject as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; the allocator's DEFINE_STANDARD_RTTIEXT descriptor is the runtime type of its transient allocator object (impl_transient!), chained to NCollection_BaseAllocator as natively."
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator::myAlignment",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AlignedAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected alignment value; private state of the aligned BaseAllocator variant (AlignedAllocatorObject)."
     },
     {
       "upstream_id": "NCollection_AccAllocator::NCollection_AccAllocator(size_t)",
@@ -85290,6 +86386,30 @@
       "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_Buffer. Rust Buffer spells usize for sizes and indices; there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_Buffer::myData",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected data pointer; private storage of Buffer, exposed through the data accessors (data_ptr/data_mut_ptr and slices)."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::mySize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected byte count; private state of Buffer, read through size()."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::myAllocator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected allocator handle; private state of Buffer, read through allocator()."
+    },
+    {
       "upstream_id": "NCollection_Handle()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
@@ -85370,6 +86490,14 @@
       "notes": "C++ STL-protocol member typedef element_type (type-parameter-0-0) of NCollection_Handle. Rust ObjectHandle spells the element type parameter T directly; there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_Handle",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle",
+      "status": "implemented",
+      "notes": "Class template NCollection_Handle is the generic Rust type ObjectHandle; its members are mapped row by row."
+    },
+    {
       "upstream_id": "NCollection_Shared()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Shared.hxx",
@@ -85424,6 +86552,14 @@
       "rust_item": "rustycad_tkernel::ncollection::Shared::new",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_Shared<T> is Shared<T>, a transient embedding T (Deref/DerefMut to it) with Standard_Transient as dynamic type, as the class declares no RTTI. The native forwarding constructors build T from their arguments; in Rust the caller builds T and passes it to Shared::new."
+    },
+    {
+      "upstream_id": "NCollection_Shared",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Shared.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Shared",
+      "status": "implemented",
+      "notes": "Class template NCollection_Shared is the generic Rust type Shared; its members are mapped row by row."
     },
     {
       "upstream_id": "ACos(double)",
@@ -217133,6 +218269,46 @@
       "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe. The destructor has an observable effect (it fills pending items), so it maps to the Drop implementation. Native virtual Add dispatch retained for UBTree and EBTree via BoundingTreeInsertion; editable index survives Fill and destructor flushing."
     },
     {
+      "upstream_id": "NCollection_UBTreeFiller",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTreeFiller",
+      "status": "implemented",
+      "notes": "Class template NCollection_UBTreeFiller is the generic Rust type UBTreeFiller; its members are mapped row by row."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::UBTree",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of NCollection_UBTree<T, B>; Rust UBTreeFiller borrows UBTree<T, B> by name."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::UBTreeNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of UBTree::TreeNode; the Rust node type is BoundingNode<T, B>."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::ObjBnd::myObj",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjBnd::object",
+      "status": "implemented",
+      "notes": "Public object member of the pending pair is the public field object."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::ObjBnd::myBnd",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjBnd::bounds",
+      "status": "implemented",
+      "notes": "Public bounding-box member of the pending pair is the public field bounds."
+    },
+    {
       "upstream_id": "BRepMesh_FaceChecker",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FaceChecker.hxx",
@@ -240427,6 +241603,14 @@
       "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json."
     },
     {
+      "upstream_id": "NCollection_Vec3",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3",
+      "status": "implemented",
+      "notes": "Class template NCollection_Vec3 is the generic Rust type Vec3; its members are mapped row by row."
+    },
+    {
       "upstream_id": "NCollection_Vec4<float>::operator/=(float)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
@@ -240443,6 +241627,14 @@
       "status": "partial",
       "selector_id": "982a2700dcfa395aba36bc793839cf487fe59cb4b7ac655d0570f8a08ceed294",
       "notes": "Returning scalar adapter preserves destination identity, primitive assignment order and native float reciprocal specialization. Arbitrary C++ element lifetime/copy side effects and floating environment traps remain unproven. See porting/audits/vector-scalar-return-contracts.json."
+    },
+    {
+      "upstream_id": "NCollection_Vec4",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4",
+      "status": "implemented",
+      "notes": "Class template NCollection_Vec4 is the generic Rust type Vec4; its members are mapped row by row."
     },
     {
       "upstream_id": "NCollection_DynamicArray::allocateBlock(const size_t) const",
@@ -240769,6 +241961,22 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_DynamicArray. Rust DynamicArray spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray",
+      "status": "implemented",
+      "notes": "Class template NCollection_DynamicArray is the generic Rust type DynamicArray; its members are mapped row by row."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::vector",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the block-pointer container NCollection_LinearVector<T*>; Rust DynamicArray keeps its block table as private state."
     },
     {
       "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
@@ -249412,6 +250620,22 @@
       "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_HArray1. Rust HArray1 spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_HArray1",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1",
+      "status": "implemented",
+      "notes": "Class template NCollection_HArray1 is the generic Rust type HArray1; its members are mapped row by row."
+    },
+    {
+      "upstream_id": "NCollection_HArray1::Array1Type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of NCollection_Array1<T>; Rust HArray1<T> exposes its Array1<T> through array1/change_array1 and names the type directly."
+    },
+    {
       "notes": "Exact partial const-Array2 constructor domain. Explicit from_array_trivial selects the native trivially-copyable policy through existing Array2::assign_trivial and bypasses Clone hooks, preserving rectangle metadata independently of inherited flat bounds/length, empty-source metadata and ownership-independent copied values. The unchanged ordinary from_array path remains a Clone policy and is not automatically equivalent to arbitrary C++ trivial/nontrivial copy construction. Tests prove ordinary Clone still dispatches and explicit trivial copy bypasses it. Allocation/default-copy failure, custom C++ lifetime/address effects, zero-sized Rust types, locking and Send+Sync+static restrictions remain outside full parity. See porting/audits/harray2-trivial-copy.json.",
       "rust_declaration_selectors": [
         {
@@ -249586,6 +250810,22 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_HArray2. Rust HArray2 spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_HArray2",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray2",
+      "status": "implemented",
+      "notes": "Class template NCollection_HArray2 is the generic Rust type HArray2; its members are mapped row by row."
+    },
+    {
+      "upstream_id": "NCollection_HArray2::Array2Type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of NCollection_Array2<T>; Rust HArray2<T> exposes its Array2<T> through array2/change_array2."
     },
     {
       "upstream_id": "NCollection_Sequence::NCollection_Sequence<TheItemType>(const NCollection_Sequence<TheItemType> &)",
@@ -249810,6 +251050,22 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_HSequence. Rust HSequence spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_HSequence",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence",
+      "status": "implemented",
+      "notes": "Class template NCollection_HSequence is the generic Rust type HSequence; its members are mapped row by row."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::SequenceType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of NCollection_Sequence<T>; Rust HSequence<T> exposes its Sequence<T> through sequence/change_sequence."
     },
     {
       "upstream_id": "NCollection_Sequence::Assign(const NCollection_Sequence<TheItemType> &)",
@@ -250457,6 +251713,14 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_Sequence. Rust Sequence spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_Sequence",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence",
+      "status": "implemented",
+      "notes": "Class template NCollection_Sequence is the generic Rust type Sequence; its members are mapped row by row."
     }
   ],
   "tests": [
