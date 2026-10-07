@@ -1,6 +1,6 @@
 //! Port-only sphere probes of AllowQualityDecrease and of the BRepTools cleanup/reuse
-//! order. The upstream OCC31461 declaration stays unmapped: Rust meshes the radius-10
-//! sphere at deflection 0.01 with 102 nodes where OCCT gives 5106 (docs/tkmesh-progress.md).
+//! order on a sphere face and solid; the upstream OCC31461 declaration itself is mirrored in
+//! brep_mesh_incremental_mesh_suite.rs.
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkmath::gp::{Axis3, Point3, Sphere3, StandardDirection3};

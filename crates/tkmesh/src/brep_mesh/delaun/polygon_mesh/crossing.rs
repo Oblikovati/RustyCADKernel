@@ -1,4 +1,4 @@
-use super::{BRepMeshDelaun, Failure, Map, PolygonEdge, PolygonEdit, PolygonLoop};
+use super::{BRepMeshDelaun, Failure, PackedMap, PolygonEdge, PolygonEdit, PolygonLoop};
 use crate::brep_mesh::IntersectionFlag;
 use rustycad_tkmath::gp::{Point2, Xy};
 impl BRepMeshDelaun {
@@ -8,7 +8,7 @@ impl BRepMeshDelaun {
         current: &mut PolygonEdge,
         next: PolygonEdge,
         small: f64,
-        skipped: &mut Option<&mut Map<i32>>,
+        skipped: &mut Option<&mut PackedMap<i32>>,
     ) -> Result<Option<PolygonEdit>, Failure> {
         let mut point = Point2::default();
         let flag = self.edge_intersection(
@@ -60,7 +60,7 @@ impl BRepMeshDelaun {
         mut next: PolygonEdge,
         point: Xy,
         small: f64,
-        skipped: &mut Option<&mut Map<i32>>,
+        skipped: &mut Option<&mut PackedMap<i32>>,
         edit: &mut PolygonEdit,
     ) -> Result<(), Failure> {
         let mut area = self.polygon_area(

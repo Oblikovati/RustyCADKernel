@@ -243,7 +243,7 @@ impl BRepMeshDelaun {
         for (slot, point) in nodes.iter_mut().zip(points) {
             *slot = self
                 .mesh_ref()?
-                .add_node(&BRepMeshVertex::new(point, 0, DegreeOfFreedom::Free), true)?;
+                .add_node(&BRepMeshVertex::new(point, 0, DegreeOfFreedom::Free), false)?;
             self.auxiliary.append(*slot);
         }
         Ok(nodes)

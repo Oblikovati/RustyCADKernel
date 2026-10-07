@@ -18,7 +18,7 @@ fn MathVectorTest__FriendOperators() {
     assert_eq!(aResult2[3], 15.0);
 
     // Test vector / scalar
-    let mut aResult3 = &aVec / 2.0;
+    let mut aResult3 = aVec.divided(2.0).unwrap();
     assert_eq!(aResult3[1], 1.0);
     assert_eq!(aResult3[2], 2.0);
     assert_eq!(aResult3[3], 3.0);

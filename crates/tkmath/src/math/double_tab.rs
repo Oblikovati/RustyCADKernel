@@ -156,16 +156,36 @@ impl Clone for DoubleTab<'_> {
         }
     }
 }
+// Why `Index`/`IndexMut` stay although library code never panics (2026-10 audit):
+// the fallible arithmetic operators were removed (their only caller used the Result
+// methods instead), but indexing has 943 call sites in rustycad-tkmath alone and more in
+// every geometry crate. The index is a caller precondition, as for slices and as for the
+// native `operator()` (bounds checked only by Standard_OutOfRange_Raise_if in debug
+// builds): every library caller iterates within `the row and column bounds`, so the panic below
+// is unreachable there. Code holding an index it has not bounded uses the Result
+// accessors `value`/`change_value`, which return Standard_OutOfRange with the index.
+/// `operator()(int, int)` const with caller-guaranteed indices; `table[(1, 1)]`. Panics
+/// with the ArrayError (indices and bounds) outside the table.
 impl std::ops::Index<(i32, i32)> for DoubleTab<'_> {
     type Output = f64;
+    #[track_caller]
     fn index(&self, (row, col): (i32, i32)) -> &f64 {
         self.value(row, col)
-            .unwrap_or_else(|error| panic!("{error}"))
+            .unwrap_or_else(|error| cell_out_of_bounds(&error))
     }
 }
+/// `operator()(int, int)` with caller-guaranteed indices; `table[(1, 1)] = 2.0`. Panics
+/// with the ArrayError (indices and bounds) outside the table.
 impl std::ops::IndexMut<(i32, i32)> for DoubleTab<'_> {
+    #[track_caller]
     fn index_mut(&mut self, (row, col): (i32, i32)) -> &mut f64 {
         self.change_value(row, col)
-            .unwrap_or_else(|error| panic!("{error}"))
+            .unwrap_or_else(|error| cell_out_of_bounds(&error))
     }
+}
+/// The precondition failure of table indexing.
+#[cold]
+#[track_caller]
+fn cell_out_of_bounds(error: &ArrayError) -> ! {
+    panic!("math_DoubleTab {error}; use value()/change_value() for unchecked indices")
 }

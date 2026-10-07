@@ -1,7 +1,7 @@
 //! Boundary-walk neighbor selection used while recovering constraint loops.
 use super::{BRepMeshDelaun, BRepMeshVertex, DegreeOfFreedom};
 use rustycad_tkernel::{
-    ncollection::{Map, Sequence},
+    ncollection::{PackedMap, Sequence},
     standard::Failure,
 };
 use rustycad_tkmath::{bnd::CompactBox2, gp::Vector2};
@@ -18,10 +18,10 @@ impl BRepMeshDelaun {
         reference_direction: Vector2,
         boxes: &Sequence<CompactBox2>,
         polygon: &Sequence<i32>,
-        skipped: Option<&Map<i32>>,
+        skipped: Option<&PackedMap<i32>>,
         skip_leprous: bool,
-        leprous_links: &mut Map<i32>,
-        dead_links: &mut Map<i32>,
+        leprous_links: &mut PackedMap<i32>,
+        dead_links: &mut PackedMap<i32>,
         next_pivot_node: &mut i32,
         next_link_direction: &mut Vector2,
         next_link_bounds: &mut CompactBox2,
@@ -60,10 +60,10 @@ impl BRepMeshDelaun {
         reference_direction: Vector2,
         boxes: &Sequence<CompactBox2>,
         polygon: &Sequence<i32>,
-        skipped: Option<&Map<i32>>,
+        skipped: Option<&PackedMap<i32>>,
         skip_leprous: bool,
-        leprous_links: &mut Map<i32>,
-        dead_links: &mut Map<i32>,
+        leprous_links: &mut PackedMap<i32>,
+        dead_links: &mut PackedMap<i32>,
         selection: &mut CandidateSelection,
     ) -> Result<(), Failure> {
         let link_index = neighbor.wrapping_abs();
@@ -96,8 +96,8 @@ impl BRepMeshDelaun {
         reference_direction: Vector2,
         boxes: &Sequence<CompactBox2>,
         polygon: &Sequence<i32>,
-        leprous_links: &mut Map<i32>,
-        dead_links: &mut Map<i32>,
+        leprous_links: &mut PackedMap<i32>,
+        dead_links: &mut PackedMap<i32>,
         selection: &mut CandidateSelection,
     ) -> Result<(), Failure> {
         let edge = self.get_edge(link_index)?;
@@ -146,8 +146,8 @@ impl BRepMeshDelaun {
         reference_direction: Vector2,
         boxes: &Sequence<CompactBox2>,
         polygon: &Sequence<i32>,
-        leprous_links: &mut Map<i32>,
-        dead_links: &mut Map<i32>,
+        leprous_links: &mut PackedMap<i32>,
+        dead_links: &mut PackedMap<i32>,
         selection: &mut CandidateSelection,
     ) -> Result<(), Failure> {
         if direction.square_magnitude() < rustycad_tkernel::precision::square_p_confusion() {
@@ -259,14 +259,14 @@ impl CandidateSelection {
 
 fn unavailable_link(
     index: i32,
-    skipped: Option<&Map<i32>>,
-    dead: &Map<i32>,
-    leprous: &Map<i32>,
+    skipped: Option<&PackedMap<i32>>,
+    dead: &PackedMap<i32>,
+    leprous: &PackedMap<i32>,
     skip: bool,
 ) -> bool {
-    dead.contains(&index)
-        || skipped.is_some_and(|map| map.contains(&index))
-        || (skip && leprous.contains(&index))
+    dead.contains(index)
+        || skipped.is_some_and(|map| map.contains(index))
+        || (skip && leprous.contains(index))
 }
 
 fn other_endpoint(edge: &super::BRepMeshEdge, pivot: i32) -> i32 {

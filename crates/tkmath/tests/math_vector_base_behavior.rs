@@ -106,9 +106,9 @@ fn matrix_dump_and_scalar_operators() {
     assert_eq!((-&m)[(1, 4)], 2.5);
     assert_eq!((2.0 * &m)[(1, 4)], -5.0);
     assert_eq!(m.t_multiplied(2.0)[(1, 3)], 2.0);
-    assert_eq!((&m / 2.0)[(1, 3)], 0.5);
-    assert_eq!((&m + &m)[(1, 3)], 2.0);
-    assert_eq!((&m - &m)[(1, 3)], 0.0);
+    assert_eq!(m.divided(2.0).unwrap()[(1, 3)], 0.5);
+    assert_eq!(m.added(&m).unwrap()[(1, 3)], 2.0);
+    assert_eq!(m.subtracted(&m).unwrap()[(1, 3)], 0.0);
     assert_eq!((m.row_size(), m.col_size()), (1, 2));
     assert_eq!(Matrix::with_size_filled(2, 3, 1.5)[(1, 2)], 1.5);
 }

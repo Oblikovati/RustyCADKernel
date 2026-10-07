@@ -75,7 +75,7 @@ fn AppCont_ContMatricesTest__InvMMatrix_IsInverse() {
         AppCont_ContMatrices::m_matrix(aClasse, &mut aMat).unwrap();
         AppCont_ContMatrices::inv_m_matrix(aClasse, &mut anInvMat).unwrap();
 
-        let aProduct = &anInvMat * &aMat;
+        let aProduct = anInvMat.multiplied_matrix(&aMat).unwrap();
         for i in 1..=aClasse {
             for j in 1..=aClasse {
                 let anExpected = if i == j { 1.0 } else { 0.0 };

@@ -1,7 +1,7 @@
 //! Cleanup pass over free edges and triangles before auxiliary-node removal.
 use super::triangle_build::loop_edges;
 use super::{BRepMeshDelaun, DegreeOfFreedom};
-use rustycad_tkernel::{ncollection::Map, standard::Failure};
+use rustycad_tkernel::{ncollection::PackedMap, standard::Failure};
 
 impl BRepMeshDelaun {
     /// Remove free triangles unconnected to frontier constraints; `delaun.cleanup_mesh()?`.
@@ -13,7 +13,7 @@ impl BRepMeshDelaun {
 
     fn cleanup_free_triangle_pass(&mut self) -> Result<usize, Failure> {
         let mut dangling_links = loop_edges();
-        let mut triangles = Map::default();
+        let mut triangles = PackedMap::default();
         self.collect_free_triangle_removals(&mut dangling_links, &mut triangles)?;
         let deleted = self.delete_free_triangles(&triangles, &mut dangling_links)?;
         self.remove_dangling_links(&dangling_links)?;
@@ -23,10 +23,10 @@ impl BRepMeshDelaun {
     fn collect_free_triangle_removals(
         &self,
         dangling_links: &mut super::triangle_build::LoopEdges,
-        triangles: &mut Map<i32>,
+        triangles: &mut PackedMap<i32>,
     ) -> Result<(), Failure> {
         for index in self.free_edges()?.iter() {
-            self.collect_free_edge_removal(*index, dangling_links, triangles)?;
+            self.collect_free_edge_removal(index, dangling_links, triangles)?;
         }
         Ok(())
     }
@@ -35,7 +35,7 @@ impl BRepMeshDelaun {
         &self,
         link: i32,
         dangling_links: &mut super::triangle_build::LoopEdges,
-        triangles: &mut Map<i32>,
+        triangles: &mut PackedMap<i32>,
     ) -> Result<(), Failure> {
         let edge = self.get_edge(link)?;
         if edge.movability() == DegreeOfFreedom::Frontier {
@@ -97,7 +97,7 @@ impl BRepMeshDelaun {
         triangle: i32,
         link: i32,
         edge: &super::BRepMeshEdge,
-        triangles: &mut Map<i32>,
+        triangles: &mut PackedMap<i32>,
     ) -> Result<(), Failure> {
         let first = self.is_bound_to_frontier(edge.first_node(), link)?;
         let last = self.is_bound_to_frontier(edge.last_node(), link)?;
@@ -109,12 +109,12 @@ impl BRepMeshDelaun {
 
     fn delete_free_triangles(
         &mut self,
-        triangles: &Map<i32>,
+        triangles: &PackedMap<i32>,
         dangling_links: &mut super::triangle_build::LoopEdges,
     ) -> Result<usize, Failure> {
         let mut deleted = 0;
         for index in triangles.iter() {
-            self.delete_triangle(*index, dangling_links)?;
+            self.delete_triangle(index, dangling_links)?;
             deleted += 1;
         }
         Ok(deleted)

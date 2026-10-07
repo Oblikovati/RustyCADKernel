@@ -95,6 +95,22 @@ class LegacyTestInventoryTest(unittest.TestCase):
         self.assertEqual(summary["by_toolkit"]["TKA"]["pending_dependency"], 1)
         self.assertFalse(summary["mapping_inventory_complete"])
 
+    def test_not_applicable_is_accounted_apart_and_keeps_its_reason(self) -> None:
+        # BRepAlgoAPI_BuilderAlgoTest.NotMoveConstructible checks a C++-only type trait.
+        source = "src/A/TKA/GTests/A_Test.cxx"
+        row = {"toolkit": "TKA", "source": source, "upstream_id": "A.Case",
+               "status": "not_applicable_to_rust", "reason": "C++ is_move_constructible is false"}
+        records, summary = report_document(
+            fixture_inventory([declaration(source, "A.Case")]), {"tests": [row]}, "i", "p"
+        )
+        result = by_kind(records, "gtest_declaration")[0]
+        self.assertEqual(result["mapping_status"], "not_applicable_to_rust")
+        self.assertIsNone(result["mapped_rust_test"])
+        self.assertEqual(result["not_applicable_reason"], "C++ is_move_constructible is false")
+        self.assertEqual(summary["gtest"]["mapped"], 0)
+        self.assertEqual(summary["gtest"]["not_applicable_to_rust"], 1)
+        self.assertEqual(summary["by_toolkit"]["TKA"]["not_applicable_to_rust"], 1)
+
 
 def fixture_inventory(candidates: list[dict]) -> dict:
     return {

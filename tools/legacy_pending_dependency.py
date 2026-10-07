@@ -15,6 +15,9 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 
 PENDING_DEPENDENCY = "pending_dependency"
+# A GTest of a C++-only language property (see legacy_not_applicable); it has no Rust side either.
+NOT_APPLICABLE_TO_RUST = "not_applicable_to_rust"
+WITHOUT_RUST_SIDE = frozenset({PENDING_DEPENDENCY, NOT_APPLICABLE_TO_RUST})
 # A pending row has no Rust side; any of these fields would claim one.
 RUST_SIDE_FIELDS = ("rust_package", "rust_target", "rust_test", "rust_source", "rust_reference", "runtime_cases")
 # Native-side approvals belong to translated rows only; a pending test must pass unchanged.
@@ -48,15 +51,22 @@ def blocking_classes(row: Mapping[str, object]) -> tuple[str, ...]:
     return tuple(value)
 
 
-def pending_dependency_case(row: Mapping[str, object]) -> PendingDependencyCase:
-    """Validate one pending row; pending_dependency_case(ledger_row).blocked_by == ('BRepAlgoAPI_Cut',)."""
+def require_native_only_row(row: Mapping[str, object]) -> str:
+    """Check a row without a Rust side: no Rust or native-approval fields and a pinned source;
+    returns its identity; require_native_only_row(ledger_row) == 'Suite.Case'."""
     identity = str(row.get("upstream_id"))
     claimed = [field for field in (*RUST_SIDE_FIELDS, *NATIVE_APPROVAL_FIELDS) if field in row]
     if claimed:
-        raise ValueError(f"{identity!r} carries {claimed!r}; expected a pending_dependency row without Rust or native-approval fields")
+        raise ValueError(f"{identity!r} carries {claimed!r}; expected a {row.get('status')} row without Rust or native-approval fields")
     digest = row.get("source_sha256")
     if not isinstance(digest, str) or not re.fullmatch("[0-9a-f]{64}", digest):
         raise ValueError(f"{identity!r} source_sha256={digest!r}; expected a pinned source SHA256")
+    return identity
+
+
+def pending_dependency_case(row: Mapping[str, object]) -> PendingDependencyCase:
+    """Validate one pending row; pending_dependency_case(ledger_row).blocked_by == ('BRepAlgoAPI_Cut',)."""
+    identity = require_native_only_row(row)
     return PendingDependencyCase(identity, str(row.get("source")), blocking_classes(row))
 
 
@@ -72,8 +82,9 @@ def pending_dependency_rows(rows: Sequence[Mapping[str, object]], implemented: s
 
 
 def runnable_rows(rows: Sequence[Mapping[str, object]]) -> list[Mapping[str, object]]:
-    """Rows that have a Rust side (every status except pending_dependency); runnable_rows(rows)."""
-    return [row for row in rows if not is_pending_dependency(row)]
+    """Rows that have a Rust side (every status except pending_dependency and
+    not_applicable_to_rust); runnable_rows(rows)."""
+    return [row for row in rows if row.get("status") not in WITHOUT_RUST_SIDE]
 
 
 def implemented_classes(api_rows: Sequence[Mapping[str, object]]) -> set[str]:

@@ -25,6 +25,7 @@ from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
 from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
                                        require_blockers_in_source, runnable_rows)
+from legacy_not_applicable import not_applicable_rows
 
 # The whole numeric verifier of one toolkit (both probes over its full corpus) may run this
 # long. It is a hang guard, not a budget: a corpus must never be trimmed to fit it. The
@@ -62,6 +63,8 @@ def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
     source_disabled_rows(runnable_rows(rows))
     # A pending row lapses (and the gate fails) once a class it waits for is ported.
     pending_dependency_rows(rows, implemented_classes(ledger['api']))
+    # A C++-only property (move/copy traits) runs natively only and must state its reason.
+    not_applicable_rows(rows)
     if {row['upstream_id'] for row in rows} - candidates: raise ValueError('Mappings outside selected toolkit inventory')
     return rows
 
@@ -229,6 +232,7 @@ def mapped_suites(source: Path, output: Path, build: Path, rows: list[dict], job
     paths = verify_sources(source,rows); runnable = runnable_rows(rows)
     native,rust = mapped_runtime_sets(runnable)
     native |= set(pending_native_cases(source, rows))
+    native |= set(not_applicable_rows(rows))
     approved = approved_native_failures(runnable)
     disabled = source_disabled_rows(runnable)
     libraries = native_tests(source,output,build,paths,jobs,native,environment,approved,disabled)
@@ -253,10 +257,12 @@ def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict],
     inputs += [ROOT/NUMERIC_VERIFIERS[toolkit][0], ROOT/'Cargo.toml',ROOT/'Cargo.lock',ROOT/'rust-toolchain.toml',ROOT/'porting/parity.json',Path(__file__),ROOT/'tools/tkernel_mapping.py',ROOT/'tools/tkernel_native_baseline.py',ROOT/'tools/verify_tkernel.py',ROOT/'tools/native_build.py']
     disabled = source_disabled_rows(runnable_rows(rows))
     pending = pending_dependency_rows(rows, set())
+    inapplicable = not_applicable_rows(rows)
     observations = json.loads((output/'source-disabled.json').read_text()) if disabled else []
     report = {'revision':inventory['revision'],'profile':'linux-gcc-c-locale','toolkit':toolkit,
-              'numeric_report':numeric,'declarations_mapped':len(rows)-len(pending),
-              'rust_pending_dependency':{name:list(case.blocked_by) for name,case in sorted(pending.items())},'legacy_runtime_cases_passed':len(native)-len(approved)-len(disabled),
+              'numeric_report':numeric,'declarations_mapped':len(rows)-len(pending)-len(inapplicable),
+              'rust_pending_dependency':{name:list(case.blocked_by) for name,case in sorted(pending.items())},
+              'rust_not_applicable':{name:case.reason for name,case in sorted(inapplicable.items())},'legacy_runtime_cases_passed':len(native)-len(approved)-len(disabled),
               'rust_runtime_cases_passed':len(rust),'toolkit_complete':False,
               'native_expected_failures':approved, 'source_disabled_cases':observations,
               'scope':'Mapped GoogleTest suites only; full toolkit API and test inventories pending',

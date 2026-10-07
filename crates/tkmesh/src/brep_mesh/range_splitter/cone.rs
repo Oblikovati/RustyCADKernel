@@ -1,6 +1,4 @@
 use super::*;
-use crate::imesh_data::MEMORY_BLOCK_SIZE_HUGE;
-use rustycad_tkernel::ncollection::IncrementalAllocatorObject;
 use rustycad_tkgeombase::gcpnts::TangentialDeflection;
 use rustycad_tkmath::bvh::BvhScalar;
 /// Conical interior-node distribution; `ConeRangeSplitter::default()`.
@@ -60,19 +58,8 @@ impl ConeRangeSplitter {
         parameters: &MeshParameters,
     ) -> Result<SurfaceNodes, Failure> {
         let steps = self.get_split_steps(parameters, &mut (0, 0))?;
-        let allocator = IncrementalAllocatorObject::new(MEMORY_BLOCK_SIZE_HUGE);
-        let mut nodes = List::with_allocator(allocator.resource().clone());
-        let max_v = self.range_v.1 - steps.1 * 0.5;
-        let max_u = self.range_u.1 - steps.0 * 0.5;
-        let mut v = self.range_v.0 + steps.1;
-        while v < max_v {
-            let mut u = self.range_u.0 + steps.0;
-            while u < max_u {
-                nodes.append(Point2::new(u, v));
-                u += steps.0;
-            }
-            v += steps.1;
-        }
+        let mut nodes = new_surface_nodes();
+        append_regular_grid(&mut nodes, self.range_u, self.range_v, steps);
         Ok(Handle::new(Shared::new(nodes)))
     }
 }

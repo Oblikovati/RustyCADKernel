@@ -1,28 +1,46 @@
 //! Port-only checks of the discret-algorithm factory registry name rules and of the
 //! incremental-mesh factory constructor, beyond the upstream GTest mirrors.
 use rustycad_tkbrep::topods::Shape;
+use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::message::ProgressRange;
+use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkmesh::brep_mesh::{
-    BRepMeshDiscretAlgoFactory, BRepMeshIncrementalMeshFactory, factories, find_factory,
-    register_factory, unregister_factory,
+    BRepMeshDiscretAlgoFactory, BRepMeshDiscretRoot, BRepMeshIncrementalMeshFactory,
+    DiscretRootBase, factories, find_factory, register_factory, unregister_factory,
 };
-use std::sync::Arc;
+
+fn name_of(factory: &Handle<dyn BRepMeshDiscretAlgoFactory>) -> String {
+    factory
+        .get()
+        .map(|f| f.name().to_owned())
+        .unwrap_or_default()
+}
 
 #[test]
 fn registry_custom_factory_registration_and_removal_match_name_rules() {
-    let custom = Arc::new(TestFactory("FactoryProbe"));
-    register_factory(custom.clone(), false);
-    register_factory(custom, false);
-    assert_eq!(find_factory("factoryprobe").unwrap().name(), "FactoryProbe");
-    assert_eq!(factories().last().unwrap().name(), "FactoryProbe");
+    let custom: Handle<dyn BRepMeshDiscretAlgoFactory> =
+        Handle::new(FakeDiscretFactory::default()).cast();
+    register_factory(&custom, false);
+    register_factory(&custom, false);
+    assert_eq!(name_of(&find_factory("factoryprobe")), "FactoryProbe");
+    assert_eq!(name_of(factories().last().unwrap()), "FactoryProbe");
+    let algorithm = custom.create_algorithm(&Shape::default(), 0.1, 0.5);
+    algorithm.perform(&ProgressRange::default()).unwrap();
+    assert!(!algorithm.is_done());
     unregister_factory("FACTORYPROBE");
-    assert!(find_factory("FactoryProbe").is_none());
+    assert!(find_factory("FactoryProbe").is_null());
 }
 
-struct TestFactory(&'static str);
+/// A named fake factory registered by the test.
+#[derive(Default)]
+struct FakeDiscretFactory {
+    transient: StandardTransient,
+}
+impl_transient!(FakeDiscretFactory, "FakeDiscretFactory", dyn BRepMeshDiscretAlgoFactory, transient, interfaces: [dyn BRepMeshDiscretAlgoFactory]);
 
-impl BRepMeshDiscretAlgoFactory for TestFactory {
+impl BRepMeshDiscretAlgoFactory for FakeDiscretFactory {
     fn name(&self) -> &str {
-        self.0
+        "FactoryProbe"
     }
 
     fn create_algorithm(
@@ -30,39 +48,43 @@ impl BRepMeshDiscretAlgoFactory for TestFactory {
         _shape: &Shape,
         _linear_deflection: f64,
         _angular_deflection: f64,
-    ) -> Box<dyn rustycad_tkmesh::brep_mesh::BRepMeshDiscretRoot> {
-        Box::new(TestAlgorithm)
+    ) -> Handle<dyn BRepMeshDiscretRoot> {
+        Handle::new(FakeDiscretAlgorithm::default()).cast()
     }
 }
 
-struct TestAlgorithm;
+/// A fake algorithm whose Perform never succeeds.
+#[derive(Default)]
+struct FakeDiscretAlgorithm {
+    transient: StandardTransient,
+    base: DiscretRootBase,
+}
+impl_transient!(FakeDiscretAlgorithm, "FakeDiscretAlgorithm", dyn BRepMeshDiscretRoot, transient, interfaces: [dyn BRepMeshDiscretRoot]);
 
-impl rustycad_tkmesh::brep_mesh::BRepMeshDiscretRoot for TestAlgorithm {
-    fn perform(&mut self) {}
+impl BRepMeshDiscretRoot for FakeDiscretAlgorithm {
+    fn discret_root_base(&self) -> &DiscretRootBase {
+        &self.base
+    }
 
-    fn is_done(&self) -> bool {
-        false
+    fn perform(&self, _range: &ProgressRange<'_>) -> Result<(), Failure> {
+        self.set_not_done();
+        Ok(())
     }
 }
 
 #[test]
 fn incremental_factory_constructor_restores_preferred_name_without_duplicates() {
-    let prior_count = factories()
-        .iter()
-        .filter(|factory| factory.name() == "FastDiscret")
-        .count();
-    let _factory = BRepMeshIncrementalMeshFactory::new();
-    assert_eq!(
+    let count = || {
         factories()
             .iter()
-            .filter(|factory| factory.name() == "FastDiscret")
-            .count(),
-        prior_count
-    );
+            .filter(|factory| name_of(factory) == "FastDiscret")
+            .count()
+    };
+    let prior_count = count();
+    let _factory = BRepMeshIncrementalMeshFactory::new();
+    assert_eq!(count(), prior_count);
     assert_eq!(
-        rustycad_tkmesh::brep_mesh::default_factory()
-            .unwrap()
-            .name(),
+        name_of(&rustycad_tkmesh::brep_mesh::default_factory()),
         "FastDiscret"
     );
 }
