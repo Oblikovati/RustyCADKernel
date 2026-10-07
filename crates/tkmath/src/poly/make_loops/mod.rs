@@ -121,8 +121,10 @@ impl HashPolicy<Link> for LinkHasher {
         first == second
     }
 }
-/// `Poly_MakeLoops::ListOfLink` and `Loop`; `ListOfLink::default()`.
+/// `Poly_MakeLoops::ListOfLink`; `ListOfLink::default()`.
 pub type ListOfLink = List<Link>;
+/// `Poly_MakeLoops::Loop`, the same link list type that `GetLoop` returns; `Loop::default()`.
+pub type Loop = ListOfLink;
 /// The indexed link set of the algorithm, readable by a [`LoopWay`].
 pub type LinkTable = IndexedMap<Link, LinkHasher>;
 /// `Poly_MakeLoops::Helper`: the links incident to a node.

@@ -398,8 +398,9 @@ def match_api_row(
     rust: dict[str, dict[str, list[dict[str, JSONValue]]]],
     known_sources: set[str],
 ) -> dict[str, JSONValue]:
-    cpp_status, cpp = cpp_candidates(
-        row.get("upstream_id", ""), row.get("toolkit", ""), by_name
+    cpp_status, cpp = narrow_by_declaring_header(
+        *cpp_candidates(row.get("upstream_id", ""), row.get("toolkit", ""), by_name),
+        row.get("source"),
     )
     rust_status, rust_rows = row_rust_candidates(row, rust)
     source_status = row.get("status", "missing_status")
@@ -422,6 +423,16 @@ def match_api_row(
         "rust_matches": [rust_summary(item) for item in rust_rows],
         "source": row.get("source"),
     }
+
+
+def narrow_by_declaring_header(
+    status: str, candidates: list[dict[str, JSONValue]], source: JSONValue
+) -> tuple[str, list[dict[str, JSONValue]]]:
+    """Split same-name declarations by the row's header; e.g. one std::hash per header."""
+    if status != "ambiguous" or not isinstance(source, str):
+        return status, candidates
+    local = [row for row in candidates if row.get("source") == source]
+    return ("unique", local) if len(local) == 1 else (status, candidates)
 
 
 def resolve_status(parity: str, cpp: str, rust: str, source_known: bool = True) -> str:
