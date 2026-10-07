@@ -18,7 +18,9 @@ fn surface_poles(r: &mut Reader) -> Array2<'static, Point3> {
     let mut poles = Array2::with_bounds(1, nu, 1, nv).expect("probe poles");
     for i in 1..=nu {
         for j in 1..=nv {
-            poles[(i, j)] = r.pnt();
+            poles
+                .set_value(i, j, r.pnt())
+                .expect("probe pole inside bounds");
         }
     }
     poles

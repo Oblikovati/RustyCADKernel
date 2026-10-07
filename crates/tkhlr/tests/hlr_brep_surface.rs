@@ -28,10 +28,10 @@ fn sphere_face(radius: f64) -> Face {
 #[test]
 fn a_bilinear_bezier_is_a_plane_through_its_middle() {
     let mut poles = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = Point3::new(0., 0., 1.);
-    poles[(1, 2)] = Point3::new(0., 2., 1.);
-    poles[(2, 1)] = Point3::new(2., 0., 1.);
-    poles[(2, 2)] = Point3::new(2., 2., 1.);
+    poles.set_value(1, 1, Point3::new(0., 0., 1.)).unwrap();
+    poles.set_value(1, 2, Point3::new(0., 2., 1.)).unwrap();
+    poles.set_value(2, 1, Point3::new(2., 0., 1.)).unwrap();
+    poles.set_value(2, 2, Point3::new(2., 2., 1.)).unwrap();
     let bezier: Handle<dyn GeomSurface> =
         Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast();
     let face = BRepBuilderAPIMakeFace::from_surface_bounds(&bezier, (0., 1., 0., 1.), 1e-7)
