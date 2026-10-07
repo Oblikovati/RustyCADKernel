@@ -220890,7 +220890,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
       "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::from_point",
       "status": "implemented",
-      "notes": "Cell containing a point for the given per-axis sizes (native floor of coordinate / size)."
+      "notes": "Cell containing a point for the given per-axis sizes: coordinate / size converted to int by truncation, wrapped with fmod by INT_MAX/INT_MIN beyond the int range (cell_filter/indices.rs)."
     },
     {
       "upstream_id": "NCollection_CellFilter::Cell::Cell(NCollection_CellFilter::Cell&&) noexcept",
