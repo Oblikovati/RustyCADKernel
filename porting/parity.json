@@ -506092,10 +506092,11 @@
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/GTests/BRepMesh_IncrementalMesh_Test.cxx",
       "source_sha256": "e7ce09c59af7082bb43fc2f99ce72b746f260b15d098d57baeff019885e22986",
-      "status": "pending_dependency",
-      "blocked_by": [
-        "BRepAlgoAPI_Fuse"
-      ],
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_mesh_bo_legacy",
+      "rust_test": "BRepMesh_IncrementalMeshTest__BooleanTrimmedTorus_CrossingSeamProducesDenseMesh",
+      "rust_source": "crates/tkbo/tests/brep_mesh_bo_legacy.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ]
