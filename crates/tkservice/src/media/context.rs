@@ -140,7 +140,7 @@ rustycad_tkernel::impl_transient!(
 );
 
 impl MediaFormatContext {
-    /// `FormatAVErrorDescription`: "AVError #<code>" without FFmpeg;
+    /// `FormatAVErrorDescription`: `"AVError #<code>"` without FFmpeg;
     /// `MediaFormatContext::format_av_error_description(-2)`.
     pub fn format_av_error_description(error_code: i32) -> AsciiString {
         AsciiString::from(format!("AVError #{error_code}").as_str())
@@ -175,7 +175,7 @@ impl MediaFormatContext {
         let _ = time_seconds;
         match *stream {}
     }
-    /// `FormatTime`: "hh:mm:ss", "mm:ss", "s s" or "<ms> ms" (`%g` milliseconds);
+    /// `FormatTime`: `"hh:mm:ss"`, `"mm:ss"`, `"s s"` or `"<ms> ms"` (`%g` milliseconds);
     /// `MediaFormatContext::format_time(75.0)` is "01:15".
     pub fn format_time(seconds: f64) -> AsciiString {
         let (hours, minutes, whole, millis) = split_time(seconds);

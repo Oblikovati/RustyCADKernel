@@ -274,7 +274,7 @@ pub fn graphic3d_structure_accept_connection(
         .any(|known| known.object_address() == first.object_address())
 }
 
-/// `PrintNetwork`: the identification lines of the network ("\tIdent <id>\n", in the set
+/// `PrintNetwork`: the identification lines of the network (`"\tIdent <id>\n"`, in the set
 /// order); `graphic3d_structure_print_network(&s, Graphic3dTypeOfConnection::Descendant)`.
 pub fn graphic3d_structure_print_network(
     structure: &Handle<dyn Graphic3dStructureSource>,
