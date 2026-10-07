@@ -52,6 +52,7 @@
 #include "tkbool_probe_brepfill_multi_line.cxx"
 #include "tkbool_probe_brepfill_advanced_evolved.cxx"
 #include "tkbool_probe_brepalgo.cxx"
+#include "tkbool_probe_brepproj.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFill (tkbool_probe_brepfill_generator.cxx, tkbool_probe_brepfill_package.cxx,
  // tkbool_probe_brepfill_compatible.cxx, tkbool_probe_brepfill_section_law.cxx,
@@ -87,6 +88,9 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ba_concat_c0", bl_ba_concat_c0_case},
  {"ba_convert", bl_ba_convert_case},
  {"ba_valid", bl_ba_valid_case},
+ // BRepAlgo_NormalProjection and BRepProj (tkbool_probe_brepproj.cxx)
+ {"ba_normal_projection", bl_ba_normal_projection_case},
+ {"bp_projection", bl_bp_projection_case},
 };
 int main() {
  std::string line;

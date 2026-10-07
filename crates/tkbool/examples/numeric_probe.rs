@@ -6,7 +6,7 @@ use bl_probe::{
     brep_algo, brep_fill_advanced_evolved, brep_fill_compatible, brep_fill_draft,
     brep_fill_filling, brep_fill_generator, brep_fill_location_law, brep_fill_multi_line,
     brep_fill_offset_wire, brep_fill_package, brep_fill_pipe, brep_fill_pipe_shell,
-    brep_fill_section, brep_fill_section_law, brep_fill_sweep,
+    brep_fill_section, brep_fill_section_law, brep_fill_sweep, brep_proj,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -55,6 +55,9 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ba_concat_c0", brep_algo::concat_c0_case),
     ("ba_convert", brep_algo::convert_case),
     ("ba_valid", brep_algo::valid_case),
+    // BRepAlgo_NormalProjection and BRepProj (bl_probe/brep_proj.rs)
+    ("ba_normal_projection", brep_proj::normal_projection_case),
+    ("bp_projection", brep_proj::projection_case),
 ];
 
 fn main() {

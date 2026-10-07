@@ -41,3 +41,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_brepfill_advanced_evolved').append_advanced_evolved_requests(requests)
     # BRepAlgo (tkbool_corpus_brepalgo.py)
     __import__('tkbool_corpus_brepalgo').append_brepalgo_requests(requests)
+    # BRepAlgo_NormalProjection and BRepProj (tkbool_corpus_brepproj.py)
+    __import__('tkbool_corpus_brepproj').append_brepproj_requests(requests)

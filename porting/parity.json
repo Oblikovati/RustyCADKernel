@@ -317254,6 +317254,142 @@
       "notes": "The defaulted native constructor: no root and empty image maps (BRepAlgo_Image.cxx)."
     },
     {
+      "upstream_id": "BRepAlgo_NormalProjection::BRepAlgo_NormalProjection()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::new",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::BRepAlgo_NormalProjection(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::with_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::Init(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::init",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::Add(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::add",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::SetParams(double,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::set_params",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::SetDefaultParams()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::set_default_params",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::SetMaxDistance(double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::set_max_distance",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::Compute3d(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::compute3d",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::SetLimit(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::set_limit",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::Build()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::build",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::Projection() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::projection",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::Ancestor(const TopoDS_Edge&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::ancestor",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::Couple(const TopoDS_Edge&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::couple",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::IsElementary(const Adaptor3d_Curve&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::is_elementary",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
+      "upstream_id": "BRepAlgo_NormalProjection::BuildWire(NCollection_List<TopoDS_Shape>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_NormalProjection.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoNormalProjection::build_wire",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
+    },
+    {
       "upstream_id": "BRepOffset_Inter3d",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
@@ -432110,6 +432246,70 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "0fcdffd5982eab9520bda7863bb9e927643423d288f5a49d7b0f23f42a1f0719",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepProj_Projection::BRepProj_Projection(const TopoDS_Shape&,const TopoDS_Shape&,const gp_Dir&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
+      "rust_item": "rustycad_tkbool::brep_proj::BRepProjProjection::along",
+      "status": "implemented",
+      "notes": "Translated from BRepProj_Projection.cxx/.lxx; compared with OCCT by tools/verify_tkbool_numeric.py (bp_projection requests: a square wire and a segment on a square face and a cube shell, along -Z and from a point). The two constructors are along (gp_Dir) and from_point (gp_Pnt). Native quirks kept: the swept tool over the sum of the box diagonals and the box distance, the section approximated with p-curves on both shapes and oriented boxes, the edges connected into wires within Precision::Confusion(); the unused native myLsh is not ported; Current past the end is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepProj_Projection::BRepProj_Projection(const TopoDS_Shape&,const TopoDS_Shape&,const gp_Pnt&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
+      "rust_item": "rustycad_tkbool::brep_proj::BRepProjProjection::from_point",
+      "status": "implemented",
+      "notes": "Translated from BRepProj_Projection.cxx/.lxx; compared with OCCT by tools/verify_tkbool_numeric.py (bp_projection requests: a square wire and a segment on a square face and a cube shell, along -Z and from a point). The two constructors are along (gp_Dir) and from_point (gp_Pnt). Native quirks kept: the swept tool over the sum of the box diagonals and the box distance, the section approximated with p-curves on both shapes and oriented boxes, the edges connected into wires within Precision::Confusion(); the unused native myLsh is not ported; Current past the end is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepProj_Projection::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
+      "rust_item": "rustycad_tkbool::brep_proj::BRepProjProjection::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepProj_Projection.cxx/.lxx; compared with OCCT by tools/verify_tkbool_numeric.py (bp_projection requests: a square wire and a segment on a square face and a cube shell, along -Z and from a point). The two constructors are along (gp_Dir) and from_point (gp_Pnt). Native quirks kept: the swept tool over the sum of the box diagonals and the box distance, the section approximated with p-curves on both shapes and oriented boxes, the edges connected into wires within Precision::Confusion(); the unused native myLsh is not ported; Current past the end is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepProj_Projection::Init()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
+      "rust_item": "rustycad_tkbool::brep_proj::BRepProjProjection::init",
+      "status": "implemented",
+      "notes": "Translated from BRepProj_Projection.cxx/.lxx; compared with OCCT by tools/verify_tkbool_numeric.py (bp_projection requests: a square wire and a segment on a square face and a cube shell, along -Z and from a point). The two constructors are along (gp_Dir) and from_point (gp_Pnt). Native quirks kept: the swept tool over the sum of the box diagonals and the box distance, the section approximated with p-curves on both shapes and oriented boxes, the edges connected into wires within Precision::Confusion(); the unused native myLsh is not ported; Current past the end is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepProj_Projection::More() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
+      "rust_item": "rustycad_tkbool::brep_proj::BRepProjProjection::more",
+      "status": "implemented",
+      "notes": "Translated from BRepProj_Projection.cxx/.lxx; compared with OCCT by tools/verify_tkbool_numeric.py (bp_projection requests: a square wire and a segment on a square face and a cube shell, along -Z and from a point). The two constructors are along (gp_Dir) and from_point (gp_Pnt). Native quirks kept: the swept tool over the sum of the box diagonals and the box distance, the section approximated with p-curves on both shapes and oriented boxes, the edges connected into wires within Precision::Confusion(); the unused native myLsh is not ported; Current past the end is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepProj_Projection::Next()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
+      "rust_item": "rustycad_tkbool::brep_proj::BRepProjProjection::next",
+      "status": "implemented",
+      "notes": "Translated from BRepProj_Projection.cxx/.lxx; compared with OCCT by tools/verify_tkbool_numeric.py (bp_projection requests: a square wire and a segment on a square face and a cube shell, along -Z and from a point). The two constructors are along (gp_Dir) and from_point (gp_Pnt). Native quirks kept: the swept tool over the sum of the box diagonals and the box distance, the section approximated with p-curves on both shapes and oriented boxes, the edges connected into wires within Precision::Confusion(); the unused native myLsh is not ported; Current past the end is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepProj_Projection::Current() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
+      "rust_item": "rustycad_tkbool::brep_proj::BRepProjProjection::current",
+      "status": "implemented",
+      "notes": "Translated from BRepProj_Projection.cxx/.lxx; compared with OCCT by tools/verify_tkbool_numeric.py (bp_projection requests: a square wire and a segment on a square face and a cube shell, along -Z and from a point). The two constructors are along (gp_Dir) and from_point (gp_Pnt). Native quirks kept: the swept tool over the sum of the box diagonals and the box distance, the section approximated with p-curves on both shapes and oriented boxes, the edges connected into wires within Precision::Confusion(); the unused native myLsh is not ported; Current past the end is Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "BRepProj_Projection::Shape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
+      "rust_item": "rustycad_tkbool::brep_proj::BRepProjProjection::shape",
+      "status": "implemented",
+      "notes": "Translated from BRepProj_Projection.cxx/.lxx; compared with OCCT by tools/verify_tkbool_numeric.py (bp_projection requests: a square wire and a segment on a square face and a cube shell, along -Z and from a point). The two constructors are along (gp_Dir) and from_point (gp_Pnt). Native quirks kept: the swept tool over the sum of the box diagonals and the box distance, the section approximated with p-curves on both shapes and oriented boxes, the edges connected into wires within Precision::Confusion(); the unused native myLsh is not ported; Current past the end is Standard_OutOfRange."
     },
     {
       "upstream_id": "TopOpeBRep::operator delete(void*) noexcept",
