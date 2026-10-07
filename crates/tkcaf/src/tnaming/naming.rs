@@ -15,8 +15,8 @@ use rustycad_tklcaf::json::{AttributeIndexMap, dump_attribute_json_base};
 use rustycad_tklcaf::live;
 use rustycad_tklcaf::tdata_std::support::cast_attribute;
 use rustycad_tklcaf::tdf::{
-    TdfAttribute, TdfAttributeBase, TdfDataSet, TdfIdFilter, TdfLabel, TdfRelocationTable,
-    TdfTagSource,
+    TdfAttribute, TdfAttributeBase, TdfChildIterator, TdfDataSet, TdfIdFilter, TdfLabel,
+    TdfLabelMap, TdfRelocationTable, TdfTagSource,
 };
 use std::io;
 use std::sync::RwLockWriteGuard;
@@ -78,6 +78,35 @@ impl TNamingNaming {
     /// framework.
     pub fn change_name(&self) -> RwLockWriteGuard<'_, TNamingName> {
         self.name.write()
+    }
+    /// `Regenerate(scope)`: solves this naming's name only (`TNaming_Name::Solve` on a copy
+    /// of the name, which an algorithm may change meanwhile, as natively through
+    /// `ChangeName`).
+    pub fn regenerate(&self, valid: &TdfLabelMap) -> bool {
+        self.get_name().solve(&self.base.label(), valid)
+    }
+    /// `Solve(scope)`: solves the namings of the child labels first (stopping at the first
+    /// failure), then this one; a solved naming adds its label to a non-empty scope.
+    pub fn solve(&self, valid: &mut TdfLabelMap) -> Result<bool, Failure> {
+        let label = self.base.label();
+        let mut children = TdfChildIterator::new(&label, false)?;
+        while children.more() {
+            let mut child: Handle<TNamingNaming> = Handle::default();
+            if children.value().find_attribute_as(&NAMING_ID, &mut child)?
+                && !live(&child, "TNaming_Naming::Solve")?.solve(valid)?
+            {
+                // Not necessary to continue.
+                return Ok(false);
+            }
+            children.next();
+        }
+        if !self.regenerate(valid) {
+            return Ok(false);
+        }
+        if !valid.is_empty() {
+            valid.add(label);
+        }
+        Ok(true)
     }
 }
 
