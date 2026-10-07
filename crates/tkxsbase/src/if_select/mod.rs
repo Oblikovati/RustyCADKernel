@@ -13,6 +13,7 @@ mod int_param;
 #[cfg(test)]
 mod modifier_tests;
 mod modifiers;
+mod packet_list;
 mod select_bases;
 mod select_chains;
 mod select_combine;
@@ -26,6 +27,10 @@ mod selection;
 mod selection_more_tests;
 #[cfg(test)]
 mod selection_tests;
+mod share_out;
+mod share_out_result;
+#[cfg(test)]
+mod share_out_tests;
 mod sign_counter;
 mod signature;
 mod signature_list;
@@ -45,9 +50,10 @@ pub use enums::{
 };
 pub use int_param::IFSelectIntParam;
 pub use modifiers::{
-    IFSelectAppliedModifiers, IFSelectGeneralModifier, IFSelectGeneralModifierBase,
-    IFSelectModifReorder, IFSelectModifier,
+    IFSelectAppliedItem, IFSelectAppliedModifiers, IFSelectGeneralModifier,
+    IFSelectGeneralModifierBase, IFSelectModifReorder, IFSelectModifier,
 };
+pub use packet_list::IFSelectPacketList;
 pub use select_bases::{
     IFSelectSelectEntityNumber, IFSelectSelectModelEntities, IFSelectSelectModelRoots,
     IFSelectSelectShared, IFSelectSelectSharing,
@@ -81,6 +87,8 @@ pub use selection::{
     IFSelectSelectBase, IFSelectSelection, IFSelectSelectionIterator, IFSelectTransformer,
     select_base_fill_iterator, selection_complete_result,
 };
+pub use share_out::IFSelectShareOut;
+pub use share_out_result::IFSelectShareOutResult;
 pub use sign_counter::{
     IFSelectCheckCounter, IFSelectGraphCounter, IFSelectSignCounter, IFSelectSignCounterOps,
 };
