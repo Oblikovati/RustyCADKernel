@@ -3,11 +3,12 @@ use crate::shape_extend::{ShapeExtend, ShapeExtendStatus};
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkbrep::topods::Face;
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkg3d::geom::{GeomElementarySurface, GeomSurface};
+use rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface;
 use rustycad_tkmath::gp::Vector3;
 
 const GRID_INTERVALS: usize = 5;
-const DEFAULT_PRECISION: f64 = 1.0e-4;
 
 impl ShapeAnalysisCheckSmallFace {
     /// Finds a 90-degree normal reversal across the native 5-by-5 support samples;
@@ -22,7 +23,8 @@ impl ShapeAnalysisCheckSmallFace {
         if is_elementary(&surface) {
             return Ok(false);
         }
-        let _tolerance = self.twisted_precision()?;
+        // The native code reads myPrecision into a local it never uses, so an unset
+        // tolerance does not change the result.
         let Some(parameters) = locate_twist(&surface)? else {
             return Ok(false);
         };
@@ -31,27 +33,16 @@ impl ShapeAnalysisCheckSmallFace {
         self.twisted_status = ShapeExtend::encode_status(ShapeExtendStatus::Done);
         Ok(true)
     }
-
-    fn twisted_precision(&self) -> Result<f64, Failure> {
-        let Some(tolerance) = self.tolerance else {
-            return Err(Failure::with_message(
-                "Standard_ConstructionError",
-                "ShapeAnalysis_CheckSmallFace::CheckTwisted requires SetTolerance before reading native myPrecision",
-            ));
-        };
-        Ok(if tolerance < 0.0 {
-            DEFAULT_PRECISION
-        } else {
-            tolerance
-        })
-    }
 }
 
 fn locate_twist(
     surface: &rustycad_tkernel::standard::Handle<dyn GeomSurface>,
 ) -> Result<Option<(f64, f64)>, Failure> {
     let bounds = surface.bounds();
-    let grid = sample_normal_grid(surface, bounds)?;
+    // The native normals come from GeomAdaptor_Surface::D1, whose B-spline and Bezier
+    // evaluation goes through the span cache.
+    let adaptor = GeomAdaptorSurface::with_surface(surface)?;
+    let grid = sample_normal_grid(&adaptor, bounds)?;
     Ok(first_reversing_pair(&grid).map(|indices| twisted_parameters(bounds, indices)))
 }
 
@@ -60,7 +51,7 @@ fn is_elementary(surface: &rustycad_tkernel::standard::Handle<dyn GeomSurface>) 
 }
 
 fn sample_normal_grid(
-    surface: &rustycad_tkernel::standard::Handle<dyn GeomSurface>,
+    surface: &GeomAdaptorSurface,
     bounds: (f64, f64, f64, f64),
 ) -> Result<Vec<Vec<Vector3>>, Failure> {
     let (u_min, u_max, v_min, _) = bounds;
@@ -70,7 +61,7 @@ fn sample_normal_grid(
 }
 
 fn collect_normal_rows(
-    surface: &rustycad_tkernel::standard::Handle<dyn GeomSurface>,
+    surface: &GeomAdaptorSurface,
     start: (f64, f64),
     step: (f64, f64),
 ) -> Result<Vec<Vec<Vector3>>, Failure> {
@@ -84,7 +75,7 @@ fn collect_normal_rows(
 }
 
 fn collect_normal_row(
-    surface: &rustycad_tkernel::standard::Handle<dyn GeomSurface>,
+    surface: &GeomAdaptorSurface,
     u: f64,
     v_start: f64,
     v_step: f64,
@@ -98,11 +89,7 @@ fn collect_normal_row(
     Ok(normals)
 }
 
-fn sample_normal(
-    surface: &rustycad_tkernel::standard::Handle<dyn GeomSurface>,
-    u: f64,
-    v: f64,
-) -> Result<Vector3, Failure> {
+fn sample_normal(surface: &GeomAdaptorSurface, u: f64, v: f64) -> Result<Vector3, Failure> {
     let derivatives = surface.d1(u, v)?;
     Ok(derivatives.d1u.crossed(derivatives.d1v))
 }
@@ -120,7 +107,12 @@ fn first_reversing_pair(grid: &[Vec<Vector3>]) -> Option<(usize, usize)> {
 
 fn pair_reverses(grid: &[Vec<Vector3>], u: usize, v: usize) -> bool {
     let normal = grid[u][v];
-    normal.dot(grid[u][v + 1]) < 0.0 || normal.dot(grid[u + 1][v]) < 0.0
+    twisted_norm(normal, grid[u][v + 1]) < 0.0 || twisted_norm(normal, grid[u + 1][v]) < 0.0
+}
+
+// TwistedNorm: `(x1 * x2) + (y1 * y2) + (z1 * z2)`.
+fn twisted_norm(first: Vector3, second: Vector3) -> f64 {
+    (first.x() * second.x()) + (first.y() * second.y()) + (first.z() * second.z())
 }
 
 fn twisted_parameters(bounds: (f64, f64, f64, f64), indices: (usize, usize)) -> (f64, f64) {

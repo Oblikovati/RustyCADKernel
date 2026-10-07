@@ -20,8 +20,10 @@ fn twisted_support_sampling_matches_native_first_reversal() {
     assert_case("twisted", bezier(true));
 }
 
+// The native code reads the unset precision into a local it never uses, so the scan needs
+// no SetTolerance and finds the same reversal.
 #[test]
-fn twisted_scan_requires_precision_only_after_elementary_fast_path() {
+fn twisted_scan_ignores_an_unset_precision() {
     let mut analyzer = ShapeAnalysisCheckSmallFace::new();
     let mut parameter_u = 17.0;
     let mut parameter_v = 18.0;
@@ -34,10 +36,13 @@ fn twisted_scan_requires_precision_only_after_elementary_fast_path() {
             )
             .unwrap()
     );
-    let failure = analyzer
+    let found = analyzer
         .check_twisted(&face(bezier(true)), &mut parameter_u, &mut parameter_v)
-        .unwrap_err();
-    assert_eq!(failure.exception_type(), "Standard_ConstructionError");
+        .unwrap();
+    let expected = oracle_row("twisted");
+    assert_eq!(found as i32, expected[0] as i32);
+    assert_parameter("twisted", "U", parameter_u, expected[1]);
+    assert_parameter("twisted", "V", parameter_v, expected[2]);
 }
 
 fn assert_case(name: &str, surface: Handle<dyn GeomSurface>) {

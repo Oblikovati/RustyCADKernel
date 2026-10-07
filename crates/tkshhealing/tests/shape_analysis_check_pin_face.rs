@@ -38,7 +38,9 @@ fn pin_face_without_a_wire_returns_a_shape_specific_failure() {
     let failure = ShapeAnalysisCheckSmallFace::new()
         .check_pin_face(&face, &mut PinFaceEdgeMap::default(), 0.02)
         .unwrap_err();
-    assert_eq!(failure.exception_type(), "Standard_NoSuchObject");
+    // Natively TopoDS::Wire rejects the face that the exhausted explorer returns
+    // (sh_fix_shape op 16 on a wireless face).
+    assert_eq!(failure.exception_type(), "Standard_TypeMismatch");
 }
 
 fn face() -> Face {

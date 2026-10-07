@@ -6,6 +6,7 @@ use rustycad_tkbrep::topods::{Edge, Face, edge};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::geom::GeomCurve;
 use rustycad_tkg3d::top_abs::ShapeEnum;
+use rustycad_tkmath::gp::Point3;
 
 impl ShapeAnalysisCheckSmallFace {
     /// Finds the only two non-null-length edges and checks that their curves form a strip.
@@ -73,7 +74,8 @@ fn is_repeated_seam(found: i32, current: &Edge, first_edge: &Edge) -> bool {
 }
 
 fn is_null_length_edge(edge: &Edge, tolerance: f64) -> Result<bool, Failure> {
-    let (start, end) = vertices(edge, true);
+    // TopExp::Vertices with its default CumOri = false.
+    let (start, end) = vertices(edge, false);
     let start_point = BRepTool::pnt(&start)?;
     let end_point = BRepTool::pnt(&end)?;
     let local_tolerance = if tolerance <= 0.0 {
@@ -82,33 +84,23 @@ fn is_null_length_edge(edge: &Edge, tolerance: f64) -> Result<bool, Failure> {
         tolerance
     };
     let endpoint_distance = start_point.distance(&end_point);
-    let Some(curve) = edge_curve(edge)? else {
+    let (curve, first, last) = BRepTool::curve(edge)?;
+    let Some(curve) = curve.get() else {
         return Ok(endpoint_distance <= local_tolerance);
     };
-    midpoint_is_collapsed(&curve, start_point, end_point, local_tolerance)
+    // The middle point of the edge range, not of the curve's own domain.
+    let ends = (start_point, end_point);
+    midpoint_is_collapsed(curve, (first + last) / 2.0, ends, local_tolerance)
 }
 
 fn midpoint_is_collapsed(
-    curve: &rustycad_tkernel::standard::Handle<dyn GeomCurve>,
-    start: rustycad_tkmath::gp::Point3,
-    end: rustycad_tkmath::gp::Point3,
+    curve: &dyn GeomCurve,
+    middle: f64,
+    (start, end): (Point3, Point3),
     tolerance: f64,
 ) -> Result<bool, Failure> {
-    let midpoint = curve.value((curve.first_parameter() + curve.last_parameter()) / 2.0)?;
-    if midpoint.distance(&start) < tolerance && midpoint.distance(&end) < tolerance {
-        return Ok(true);
-    }
-    Ok(false)
-}
-
-fn edge_curve(
-    edge: &Edge,
-) -> Result<Option<rustycad_tkernel::standard::Handle<dyn GeomCurve>>, Failure> {
-    let (curve, _, _) = BRepTool::curve(edge)?;
-    if curve.get().is_some() {
-        return Ok(Some(curve));
-    }
-    Ok(None)
+    let midpoint = curve.value(middle)?;
+    Ok(midpoint.distance(&start) < tolerance && midpoint.distance(&end) < tolerance)
 }
 
 fn assign_candidate(count: i32, current: &Edge, first_edge: &mut Edge, second_edge: &mut Edge) {

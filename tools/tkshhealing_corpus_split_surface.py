@@ -1,7 +1,7 @@
 """Surface splitter histories retain wrapper geometry and partial state."""
 
 from itertools import product
-from tktopalgo_corpus_breplib_records import numbers
+from tktopalgo_corpus_breplib_records import geom_bspline, numbers
 from tkshhealing_corpus_analysis_surface import analysis_surfaces
 
 
@@ -84,6 +84,22 @@ def append_split_surface_boundaries(requests: list[str]) -> None:
     append_surface_knot_thresholds(requests)
     append_surface_mutations(requests)
     append_surface_periodic_ranges(requests)
+    append_surface_extrusion_ends(requests)
+
+
+def append_surface_extrusion_ends(requests: list[str]) -> None:
+    """Trim extrusion pieces with the U ends read before the basis split snaps them.
+
+    The first U value lies within PConfusion of the first knot of the B-spline basis (and
+    of the curve start), or before the curve domain: the basis split snaps or clamps the
+    shared U values, while the V trim of each piece uses the original ends."""
+    poles = [(0.0, 0.0, 0.0), (1.0, 2.0, 0.5), (3.0, 0.0, 1.0), (4.0, 1.0, 0.0)]
+    spline = [2, *geom_bspline(3, False, poles, [(0.0, 4), (1.0, 4)])]
+    for first, segment in product([5e-10, -5e-10, -0.25, 0.0], [1]):
+        for values in ([first, 0.5, 1.0], [first, 1.0]):
+            operations = [[0, 1, len(values), *values], [1, segment]]
+            bounds = (first, 1.0, 0.2, 0.8)
+            requests.append(split_surface_record(spline, False, bounds, 0.0, operations))
 
 
 def append_surface_knot_thresholds(requests: list[str]) -> None:

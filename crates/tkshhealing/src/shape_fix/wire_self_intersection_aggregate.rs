@@ -13,8 +13,10 @@ impl ShapeFixWire {
         if !self.is_ready() {
             return Ok(false);
         }
-        self.fix_single_edge_intersections()?;
-        self.fix_adjacent_intersections()?;
+        // The native passes share one edge count that only the loop-removal pass and an
+        // adjacent removal refresh; FixClosed and the other repairs leave it stale.
+        let count = self.fix_single_edge_intersections(self.wire_data()?.nb_edges())?;
+        self.fix_adjacent_intersections(count)?;
         self.fix_nonadjacent_intersections()?;
         Ok(self.status_self_intersection(ShapeExtendStatus::Done))
     }
@@ -67,40 +69,41 @@ impl ShapeFixWire {
         Ok(changed)
     }
 
-    fn fix_single_edge_intersections(&self) -> Result<(), Failure> {
+    fn fix_single_edge_intersections(&self, count: i32) -> Result<i32, Failure> {
         if !is_enabled(self.state.read().fix_self_intersecting_edge_mode, true) {
-            return Ok(());
+            return Ok(count);
         }
         let mode = self.remove_loop_mode();
         if mode > 1 {
-            return Ok(());
+            return Ok(count);
         }
-        let mut count = self.wire_data()?.nb_edges();
+        let mut count = count;
         let mut index = 1;
         while index <= count {
             let _ = self.fix_self_intersecting_edge(index)?;
             self.merge_last_intersection_status();
-            if mode == 1 && count > self.wire_data()?.nb_edges() {
-                index -= 1;
+            if mode == 1 {
+                let current = self.wire_data()?.nb_edges();
+                index -= i32::from(count < current);
+                count = current;
             }
-            count = self.wire_data()?.nb_edges();
             index += 1;
         }
         if mode == 1 {
             let _ = self.fix_closed(self.precision())?;
         }
-        Ok(())
+        Ok(count)
     }
 
-    fn fix_adjacent_intersections(&self) -> Result<(), Failure> {
+    fn fix_adjacent_intersections(&self, count: i32) -> Result<(), Failure> {
         if !is_enabled(self.state.read().fix_intersecting_edges_mode, true) {
             return Ok(());
         }
-        let mut walk = AdjacentIntersectionWalk::new(self);
-        while walk.has_edge_pair(self.wire_data()?.nb_edges()) {
-            if self.repair_adjacent_pair(&mut walk)? {
-                continue;
-            }
+        let mut walk = AdjacentIntersectionWalk::new(self, count);
+        // Every native iteration ends in `num++`, also after a removal reset the index
+        // to the first pair.
+        while walk.has_edge_pair() {
+            self.repair_adjacent_pair(&mut walk)?;
             walk.advance();
         }
         if !self.context().is_null() {
@@ -109,28 +112,24 @@ impl ShapeFixWire {
         Ok(())
     }
 
-    fn repair_adjacent_pair(&self, walk: &mut AdjacentIntersectionWalk) -> Result<bool, Failure> {
+    fn repair_adjacent_pair(&self, walk: &mut AdjacentIntersectionWalk) -> Result<(), Failure> {
         let _ = self.fix_intersecting_edges_at(walk.index)?;
         walk.collect_failure_flags(self);
         if !self.last_fix_status(ShapeExtendStatus::Done) {
-            return Ok(false);
+            return Ok(());
         }
         walk.collect_done_flags(self);
-        let count = self.wire_data()?.nb_edges();
-        if count < 3 {
+        if walk.count < 3 {
             if self.last_fix_status(ShapeExtendStatus::Done7) {
                 let _ = self.fix_intersecting_edges_at(walk.index)?;
             }
-            return Ok(false);
+            return Ok(());
         }
-        self.remove_crossing_edges(walk, count)
+        self.remove_crossing_edges(walk)
     }
 
-    fn remove_crossing_edges(
-        &self,
-        walk: &mut AdjacentIntersectionWalk,
-        count: i32,
-    ) -> Result<bool, Failure> {
+    fn remove_crossing_edges(&self, walk: &mut AdjacentIntersectionWalk) -> Result<(), Failure> {
+        let count = walk.count;
         let mut removed = false;
         if self.last_fix_status(ShapeExtendStatus::Done4) {
             self.wire_data()?.remove(walk.index)?;
@@ -147,11 +146,11 @@ impl ShapeFixWire {
         }
         if removed {
             self.or_intersection_status(ShapeExtendStatus::Done3);
-            walk.reset(self.closed_mode());
-            return Ok(true);
+            walk.reset(self.closed_mode(), self.wire_data()?.nb_edges());
+            return Ok(());
         }
         let _ = self.fix_intersecting_edges_at(walk.index)?;
-        Ok(false)
+        Ok(())
     }
 
     fn fix_nonadjacent_intersections(&self) -> Result<(), Failure> {
@@ -209,29 +208,28 @@ impl ShapeFixWire {
 
 struct AdjacentIntersectionWalk {
     index: i32,
-    start: i32,
+    count: i32,
 }
 
 impl AdjacentIntersectionWalk {
-    fn new(fixer: &ShapeFixWire) -> Self {
-        let start = if fixer.closed_mode() { 1 } else { 2 };
+    fn new(fixer: &ShapeFixWire, count: i32) -> Self {
         Self {
-            index: start,
-            start,
+            index: if fixer.closed_mode() { 1 } else { 2 },
+            count,
         }
     }
 
-    fn has_edge_pair(&self, count: i32) -> bool {
-        count > 1 && self.index <= count
+    fn has_edge_pair(&self) -> bool {
+        self.count > 1 && self.index <= self.count
     }
 
     fn advance(&mut self) {
         self.index += 1;
     }
 
-    fn reset(&mut self, closed: bool) {
-        self.start = if closed { 1 } else { 2 };
-        self.index = self.start;
+    fn reset(&mut self, closed: bool, count: i32) {
+        self.index = if closed { 1 } else { 2 };
+        self.count = count;
     }
 
     fn collect_failure_flags(&self, fixer: &ShapeFixWire) {

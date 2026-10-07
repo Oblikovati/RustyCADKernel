@@ -154,12 +154,18 @@ impl ShapeFixWire {
         while index <= *count {
             let edge = data.edge(index)?;
             self.edge_fixer.fix_add_curve_3d(&edge)?;
-            if self.edge_fixer.status_flag(ShapeExtendStatus::Fail)
-                && self.handle_incomplete_edge(data, index, count, &edge)?
-            {
-                index -= 1;
+            // Both flags are read before the removal, whose FixClosed or FixConnected may
+            // change the edge tool status.
+            let failed = self.edge_fixer.status_flag(ShapeExtendStatus::Fail);
+            if self.edge_fixer.status_flag(ShapeExtendStatus::Done) {
+                self.add_edge_curves_status(ShapeExtendStatus::Done5);
             }
-            self.record_edge_tool_status(ShapeExtendStatus::Done5, ShapeExtendStatus::Fail5);
+            if failed {
+                if self.handle_incomplete_edge(data, index, count, &edge)? {
+                    index -= 1;
+                }
+                self.add_edge_curves_status(ShapeExtendStatus::Fail5);
+            }
             index += 1;
         }
         Ok(())
@@ -188,7 +194,10 @@ impl ShapeFixWire {
             self.fix_closed(self.precision())?;
             return Ok(());
         }
-        self.fix_connected_after_removal(index, self.precision())
+        // A plain FixConnected(i + 1, Precision()): unlike FixSmall, the status it leaves
+        // is not restored.
+        self.fix_connected_at(index, self.precision(), true)?;
+        Ok(())
     }
 
     fn run_seams(&self, count: &i32, ready: bool) -> Result<(), Failure> {

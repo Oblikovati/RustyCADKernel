@@ -71,6 +71,12 @@ impl ShapeFixIntersectionTool {
         if split_rejected(edge, parameter, vertex, face, precision)? {
             return Ok(false);
         }
+        // A SameParameter edge without 3D curve refuses the split, as natively.
+        let Some(point) = super::wire_split_tool::split_point_on(edge, face, parameter, true)?
+        else {
+            return Ok(false);
+        };
+        raise_vertex_tolerance(vertex, point, precision)?;
         let replacements = split_replacements(edge, parameter, vertex, face, precision)?;
         *first = replacements.0;
         *second = replacements.1;
@@ -105,8 +111,11 @@ impl ShapeFixIntersectionTool {
 
     /// Repairs point crossings and supported overlaps between direct face wires.
     ///
-    /// Example: `tool.fix_intersecting_wires(&mut face)?`. Contained overlaps and one partial
-    /// endpoint-insertion path are covered; other long-overlap layouts remain incomplete.
+    /// Each pair of direct wires is scanned edge by edge: point crossings split the edges or
+    /// join their vertices, overlaps cut an edge end, split both edges, or share one middle
+    /// edge between the wires; the face is then rebuilt from the repaired wires.
+    ///
+    /// Example: `tool.fix_intersecting_wires(&mut face)?`.
     pub fn fix_intersecting_wires(&self, face: &mut Face) -> Result<bool, Failure> {
         wire_pairs::fix_intersecting_wires(self, face)
     }
@@ -235,10 +244,13 @@ fn point_on_edge(
     pcurve: &Handle<dyn Geom2dCurve>,
     face: &Face,
 ) -> Result<rustycad_tkmath::gp::Point3, Failure> {
+    // GetPointOnEdge: the unlocated 3D curve, then the edge location's transformation.
     if BRepTool::same_parameter(edge)? {
-        let (curve, _, _) = BRepTool::curve(edge)?;
-        if !curve.is_null() {
-            return curve.value(parameter);
+        let found = BRepTool::curve_with_location(edge)?;
+        if let Some(curve) = found.curve.get() {
+            return Ok(curve
+                .value(parameter)?
+                .transformed(found.location.transformation()));
         }
     }
     let uv = pcurve.value(parameter)?;
@@ -347,7 +359,6 @@ fn split_replacements(
     face: &Face,
     precision: f64,
 ) -> Result<(Edge, Edge), Failure> {
-    raise_vertex_to_split_point(edge, parameter, vertex, face, precision)?;
     let (_, pcurve_first, pcurve_last) =
         ShapeAnalysisEdge::new().pcurve_on_face(edge, face, true)?;
     let mut transfer = ShapeAnalysisTransferParametersProj::from_edge(edge, face)?;
@@ -361,37 +372,17 @@ fn split_replacements(
     )
 }
 
-fn raise_vertex_to_split_point(
-    edge: &Edge,
-    parameter: f64,
+// `B.UpdateVertex(vert, P1.Distance(P2))`: only the tolerance grows, the point stays.
+fn raise_vertex_tolerance(
     vertex: &Vertex,
-    face: &Face,
+    point: rustycad_tkmath::gp::Point3,
     precision: f64,
 ) -> Result<(), Failure> {
-    let point = split_point(edge, parameter, face)?;
     let distance = point.distance(&BRepTool::pnt(vertex)?);
     if distance > precision {
-        BRepBuilder::default().update_vertex_point(vertex, point, distance)?;
+        BRepBuilder::default().update_vertex_tolerance(vertex, distance)?;
     }
     Ok(())
-}
-
-fn split_point(
-    edge: &Edge,
-    parameter: f64,
-    face: &Face,
-) -> Result<rustycad_tkmath::gp::Point3, Failure> {
-    if BRepTool::same_parameter(edge)? && !BRepTool::degenerated(edge)? {
-        let (curve, _, _) = BRepTool::curve(edge)?;
-        return curve.value(parameter);
-    }
-    let (curve, _, _) = ShapeAnalysisEdge::new().pcurve_on_face(edge, face, true)?;
-    let uv = curve
-        .get()
-        .ok_or_else(|| Failure::new("ShapeFix_IntersectionTool::SplitEdge has no p-curve"))?
-        .value(parameter)?;
-    let surface = BRepTool::surface(face)?;
-    ShapeAnalysisSurface::new(&surface)?.value(uv.x(), uv.y())
 }
 
 fn build_split_edges(
