@@ -127,3 +127,14 @@ pub type Tree = UBTree<Payload<'O'>, Payload<'B'>>;
 pub fn record_key_phase(phase: char, value: i32) {
     record(phase, 'O', value);
 }
+
+/// Records an explicit payload constructor phase; `record_payload_phase('M', 'O', 1)`.
+pub fn record_payload_phase(phase: char, kind: char, value: i32) {
+    record(phase, kind, value);
+}
+impl<const KIND: char> Payload<KIND> {
+    /// Performs observable native self-assignment; `payload.assign_self()`.
+    pub fn assign_self(&mut self) {
+        record('A', KIND, self.0);
+    }
+}
