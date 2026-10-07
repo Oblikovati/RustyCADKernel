@@ -268969,7 +268969,7 @@
       "upstream_id": "Sweep_NumShape()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/Sweep/Sweep_NumShape.hxx",
-      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::default",
+      "rust_item": "rustycad_tkprim::sweep::SweepNumShape::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Sweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 1): plain value types; C++ default arguments become the new/with_flags pair, Standard_ConstructionError is a Failure error; compared with OCCT by tools/verify_tkprim_numeric.py (sw_* requests)."
     },
@@ -269876,6 +269876,54 @@
       "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
     },
     {
+      "upstream_id": "BRepPrim_XMin",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Direction.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimDirection::XMin",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests). Enumerator 0 of BRepPrim_Direction; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepPrim_XMax",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Direction.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimDirection::XMax",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests). Enumerator 1 of BRepPrim_Direction; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepPrim_YMin",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Direction.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimDirection::YMin",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests). Enumerator 2 of BRepPrim_Direction; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepPrim_YMax",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Direction.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimDirection::YMax",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests). Enumerator 3 of BRepPrim_Direction; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepPrim_ZMin",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Direction.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimDirection::ZMin",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests). Enumerator 4 of BRepPrim_Direction; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepPrim_ZMax",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Direction.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimDirection::ZMax",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests). Enumerator 5 of BRepPrim_Direction; the Rust variant keeps the native i32 discriminant."
+    },
+    {
       "upstream_id": "BRepPrim_GWedge::BRepPrim_GWedge()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_GWedge.hxx",
@@ -270672,6 +270720,22 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepPrim_OneAxis::myBuilder",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxisBase::my_builder",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests). Protected data member: the public field my_builder of the embedded BRepPrimOneAxisBase."
+    },
+    {
+      "upstream_id": "BRepPrim_OneAxis::BRepPrim_OneAxis(const BRepPrim_Builder&,const gp_Ax2&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_OneAxis.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimOneAxisBase::new",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests). Protected constructor of the abstract class: builds the embedded BRepPrimOneAxisBase (angle 2*PI, offset 0, nothing built)."
+    },
+    {
       "upstream_id": "BRepPrim_Revolution::BRepPrim_Revolution(const gp_Ax2&,double,double,const occ::handle<Geom_Curve>&,const occ::handle<Geom2d_Curve>&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
@@ -270683,7 +270747,7 @@
       "upstream_id": "BRepPrim_Revolution::MakeEmptyLateralFace() const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::make_empty_lateral_face",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::<rustycad_tkprim::brep_prim::BRepPrimOneAxis>::make_empty_lateral_face",
       "status": "implemented",
       "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
     },
@@ -270691,7 +270755,7 @@
       "upstream_id": "BRepPrim_Revolution::MakeEmptyMeridianEdge(double) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::make_empty_meridian_edge",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::<rustycad_tkprim::brep_prim::BRepPrimOneAxis>::make_empty_meridian_edge",
       "status": "implemented",
       "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
     },
@@ -270699,7 +270763,7 @@
       "upstream_id": "BRepPrim_Revolution::MeridianValue(double) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::meridian_value",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::<rustycad_tkprim::brep_prim::BRepPrimOneAxis>::meridian_value",
       "status": "implemented",
       "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
     },
@@ -270707,7 +270771,7 @@
       "upstream_id": "BRepPrim_Revolution::SetMeridianPCurve(TopoDS_Edge&,const TopoDS_Face&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::set_meridian_pcurve",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::<rustycad_tkprim::brep_prim::BRepPrimOneAxis>::set_meridian_pcurve",
       "status": "implemented",
       "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests)."
     },
@@ -270780,6 +270844,22 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkprim::brep_prim::BRepPrimRevolution needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "a5c94cb6e2d127305b56f11df07cfdf767f8e6056f6ddc8e0aa59e3bf9581e5a",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepPrim_Revolution::BRepPrim_Revolution(const gp_Ax2&,double,double)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::without_meridian",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests). Protected constructor without meridian; the derived primitives set it with set_meridian."
+    },
+    {
+      "upstream_id": "BRepPrim_Revolution::Meridian(const occ::handle<Geom_Curve>&,const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrim/BRepPrim_Revolution.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim::BRepPrimRevolution::set_meridian",
+      "status": "implemented",
+      "notes": "BRepPrim mapping (docs/tkprim-progress.md, docs/prim-design.md section 2): the wedge as a struct with its built arrays, BRepPrim_OneAxis as a trait over BRepPrimOneAxisBase with the pure virtual members required and the topology builders provided, the revolution-derived primitives through BRepPrimRevolutionDerived; overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bp_* requests). Protected setter of the two meridian curves."
     },
     {
       "upstream_id": "BRepPrim_Sphere::BRepPrim_Sphere(double)",
@@ -271630,6 +271710,78 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepSweep_NumLinearRegularSweep::myBuilder",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase::my_builder",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected data member: the public field of the embedded BRepSweepNumLinearRegularSweepBase."
+    },
+    {
+      "upstream_id": "BRepSweep_NumLinearRegularSweep::myBuiltShapes",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase::my_built_shapes",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected data member: the public field of the embedded BRepSweepNumLinearRegularSweepBase (Array2<bool> with the native 1-based bounds)."
+    },
+    {
+      "upstream_id": "BRepSweep_NumLinearRegularSweep::myDirShapeTool",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase::my_dir_shape_tool",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected data member: the public field of the embedded BRepSweepNumLinearRegularSweepBase."
+    },
+    {
+      "upstream_id": "BRepSweep_NumLinearRegularSweep::myDirWire",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase::my_dir_wire",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected data member: the public field of the embedded BRepSweepNumLinearRegularSweepBase."
+    },
+    {
+      "upstream_id": "BRepSweep_NumLinearRegularSweep::myGenShape",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase::my_gen_shape",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected data member: the public field of the embedded BRepSweepNumLinearRegularSweepBase."
+    },
+    {
+      "upstream_id": "BRepSweep_NumLinearRegularSweep::myGenShapeTool",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase::my_gen_shape_tool",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected data member: the public field of the embedded BRepSweepNumLinearRegularSweepBase."
+    },
+    {
+      "upstream_id": "BRepSweep_NumLinearRegularSweep::myShapes",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase::my_shapes",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected data member: the public field of the embedded BRepSweepNumLinearRegularSweepBase (Array2<Shape> with the native 1-based bounds)."
+    },
+    {
+      "upstream_id": "BRepSweep_NumLinearRegularSweep::myUsedShapes",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase::my_used_shapes",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected data member: the public field of the embedded BRepSweepNumLinearRegularSweepBase (Array2<bool> with the native 1-based bounds)."
+    },
+    {
+      "upstream_id": "BRepSweep_NumLinearRegularSweep::BRepSweep_NumLinearRegularSweep(const BRepSweep_Builder&,const TopoDS_Shape&,const Sweep_NumShape&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_NumLinearRegularSweep.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweepBase::new",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected constructor of the abstract class: builds the embedded base with the NbShapes(gen) x NbShapes(dir) grids; an array allocation failure is a Failure."
+    },
+    {
       "upstream_id": "BRepSweep_Prism::BRepSweep_Prism(const TopoDS_Shape&,const gp_Vec&,bool,bool)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Prism.hxx",
@@ -271967,7 +272119,7 @@
       "upstream_id": "BRepSweep_Rotation::MakeEmptyVertex(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::make_empty_vertex",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::make_empty_vertex",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -271975,7 +272127,7 @@
       "upstream_id": "BRepSweep_Rotation::MakeEmptyDirectingEdge(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::make_empty_directing_edge",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::make_empty_directing_edge",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -271983,7 +272135,7 @@
       "upstream_id": "BRepSweep_Rotation::MakeEmptyGeneratingEdge(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::make_empty_generating_edge",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::make_empty_generating_edge",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -271991,7 +272143,7 @@
       "upstream_id": "BRepSweep_Rotation::SetParameters(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::set_parameters",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_parameters",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -271999,7 +272151,7 @@
       "upstream_id": "BRepSweep_Rotation::SetDirectingParameter(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::set_directing_parameter",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_directing_parameter",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272007,7 +272159,7 @@
       "upstream_id": "BRepSweep_Rotation::SetGeneratingParameter(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::set_generating_parameter",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_generating_parameter",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272015,7 +272167,7 @@
       "upstream_id": "BRepSweep_Rotation::MakeEmptyFace(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::make_empty_face",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::make_empty_face",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272023,7 +272175,7 @@
       "upstream_id": "BRepSweep_Rotation::SetPCurve(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,TopAbs_Orientation)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::set_pcurve",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_pcurve",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272031,7 +272183,7 @@
       "upstream_id": "BRepSweep_Rotation::SetGeneratingPCurve(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,const Sweep_NumShape&,TopAbs_Orientation)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::set_generating_pcurve",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_generating_pcurve",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272039,7 +272191,7 @@
       "upstream_id": "BRepSweep_Rotation::SetDirectingPCurve(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,TopAbs_Orientation)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::set_directing_pcurve",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_directing_pcurve",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272047,7 +272199,7 @@
       "upstream_id": "BRepSweep_Rotation::DirectSolid(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::direct_solid",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::direct_solid",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272055,7 +272207,7 @@
       "upstream_id": "BRepSweep_Rotation::GGDShapeIsToAdd(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::ggd_shape_is_to_add",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::ggd_shape_is_to_add",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272063,7 +272215,7 @@
       "upstream_id": "BRepSweep_Rotation::GDDShapeIsToAdd(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::gdd_shape_is_to_add",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::gdd_shape_is_to_add",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272071,7 +272223,7 @@
       "upstream_id": "BRepSweep_Rotation::SeparatedWires(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::separated_wires",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::separated_wires",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272079,7 +272231,7 @@
       "upstream_id": "BRepSweep_Rotation::SplitShell(const TopoDS_Shape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::split_shell",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::split_shell",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272087,7 +272239,7 @@
       "upstream_id": "BRepSweep_Rotation::HasShape(const TopoDS_Shape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::has_shape",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::has_shape",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272095,7 +272247,7 @@
       "upstream_id": "BRepSweep_Rotation::IsInvariant(const TopoDS_Shape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Rotation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::is_invariant",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepRotation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::is_invariant",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272323,7 +272475,7 @@
       "upstream_id": "BRepSweep_Translation::MakeEmptyVertex(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::make_empty_vertex",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::make_empty_vertex",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272331,7 +272483,7 @@
       "upstream_id": "BRepSweep_Translation::MakeEmptyDirectingEdge(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::make_empty_directing_edge",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::make_empty_directing_edge",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272339,7 +272491,7 @@
       "upstream_id": "BRepSweep_Translation::MakeEmptyGeneratingEdge(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::make_empty_generating_edge",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::make_empty_generating_edge",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272347,7 +272499,7 @@
       "upstream_id": "BRepSweep_Translation::SetParameters(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::set_parameters",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_parameters",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272355,7 +272507,7 @@
       "upstream_id": "BRepSweep_Translation::SetDirectingParameter(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::set_directing_parameter",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_directing_parameter",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272363,7 +272515,7 @@
       "upstream_id": "BRepSweep_Translation::SetGeneratingParameter(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::set_generating_parameter",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_generating_parameter",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272371,7 +272523,7 @@
       "upstream_id": "BRepSweep_Translation::MakeEmptyFace(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::make_empty_face",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::make_empty_face",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272379,7 +272531,7 @@
       "upstream_id": "BRepSweep_Translation::SetPCurve(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,TopAbs_Orientation)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::set_pcurve",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_pcurve",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272387,7 +272539,7 @@
       "upstream_id": "BRepSweep_Translation::SetGeneratingPCurve(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,const Sweep_NumShape&,TopAbs_Orientation)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::set_generating_pcurve",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_generating_pcurve",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272395,7 +272547,7 @@
       "upstream_id": "BRepSweep_Translation::SetDirectingPCurve(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,TopAbs_Orientation)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::set_directing_pcurve",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::set_directing_pcurve",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272403,7 +272555,7 @@
       "upstream_id": "BRepSweep_Translation::DirectSolid(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::direct_solid",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::direct_solid",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272411,7 +272563,7 @@
       "upstream_id": "BRepSweep_Translation::GGDShapeIsToAdd(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::ggd_shape_is_to_add",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::ggd_shape_is_to_add",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272419,7 +272571,7 @@
       "upstream_id": "BRepSweep_Translation::GDDShapeIsToAdd(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::gdd_shape_is_to_add",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::gdd_shape_is_to_add",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272427,7 +272579,7 @@
       "upstream_id": "BRepSweep_Translation::SeparatedWires(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::separated_wires",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::separated_wires",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272435,7 +272587,7 @@
       "upstream_id": "BRepSweep_Translation::HasShape(const TopoDS_Shape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::has_shape",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::has_shape",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272443,7 +272595,7 @@
       "upstream_id": "BRepSweep_Translation::IsInvariant(const TopoDS_Shape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Translation.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::is_invariant",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTranslation::<rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep>::is_invariant",
       "status": "implemented",
       "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
     },
@@ -272545,121 +272697,121 @@
       "upstream_id": "BRepSweep_Trsf::MakeEmptyVertex(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::make_empty_vertex",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::make_empty_vertex",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::MakeEmptyDirectingEdge(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::make_empty_directing_edge",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::make_empty_directing_edge",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::MakeEmptyGeneratingEdge(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::make_empty_generating_edge",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::make_empty_generating_edge",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::SetParameters(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::set_parameters",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::set_parameters",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::SetDirectingParameter(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::set_directing_parameter",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::set_directing_parameter",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::SetGeneratingParameter(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::set_generating_parameter",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::set_generating_parameter",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::MakeEmptyFace(const TopoDS_Shape&,const Sweep_NumShape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::make_empty_face",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::make_empty_face",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::SetPCurve(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,TopAbs_Orientation)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::set_pcurve",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::set_pcurve",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::SetGeneratingPCurve(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,const Sweep_NumShape&,TopAbs_Orientation)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::set_generating_pcurve",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::set_generating_pcurve",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::SetDirectingPCurve(const TopoDS_Shape&,TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,TopAbs_Orientation)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::set_directing_pcurve",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::set_directing_pcurve",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::GGDShapeIsToAdd(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::ggd_shape_is_to_add",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::ggd_shape_is_to_add",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::GDDShapeIsToAdd(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::gdd_shape_is_to_add",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::gdd_shape_is_to_add",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::SeparatedWires(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::separated_wires",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::separated_wires",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::HasShape(const TopoDS_Shape&,const Sweep_NumShape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::has_shape",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::has_shape",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::IsInvariant(const TopoDS_Shape&) const",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
-      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsf::is_invariant",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepNumLinearRegularSweep::is_invariant",
       "status": "implemented",
-      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests)."
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). BRepSweep_Trsf redeclares this pure virtual member; Rust declares it once as the required method of the supertrait BRepSweepNumLinearRegularSweep, which BRepSweepRotation and BRepSweepTranslation implement."
     },
     {
       "upstream_id": "BRepSweep_Trsf::SetContinuity(const TopoDS_Shape&,const Sweep_NumShape&)",
@@ -272750,6 +272902,30 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepSweep_Trsf::myCopy",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsfBase::my_copy",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected data member: the public field of the embedded BRepSweepTrsfBase."
+    },
+    {
+      "upstream_id": "BRepSweep_Trsf::myLocation",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsfBase::my_location",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected data member: the public field of the embedded BRepSweepTrsfBase."
+    },
+    {
+      "upstream_id": "BRepSweep_Trsf::BRepSweep_Trsf(const BRep_Builder&,const TopoDS_Shape&,const Sweep_NumShape&,const TopLoc_Location&,bool)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepSweep/BRepSweep_Trsf.hxx",
+      "rust_item": "rustycad_tkprim::brep_sweep::BRepSweepTrsfBase::new",
+      "status": "implemented",
+      "notes": "BRepSweep mapping (docs/tkprim-progress.md, docs/prim-design.md section 3): the generic sweep as the trait BRepSweepNumLinearRegularSweep over its base struct, BRepSweep_Trsf as the sub-trait BRepSweepTrsf, the translation and rotation as structs implementing both; overloads take distinct Rust names, grouped shape arguments are tuples, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (bs_* requests). Protected constructor of the abstract class: the C++ base-class initializer BRepSweep_NumLinearRegularSweep(aBuilder, aGenShape, aDirWire) is BRepSweepNumLinearRegularSweepBase::new, and myLocation/myCopy are BRepSweepTrsfBase::new; BRepSweepRotation::new and BRepSweepTranslation::new build both, as the native derived constructors do."
+    },
+    {
       "upstream_id": "BRepPrimAPI_MakeBox::BRepPrimAPI_MakeBox()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
@@ -272833,7 +273009,7 @@
       "upstream_id": "BRepPrimAPI_MakeBox::Build(const Message_ProgressRange&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::build",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -272978,6 +273154,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepPrimAPI_MakeBox::myWedge",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeBox.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeBox::my_wedge",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests). Protected data member: the public field my_wedge of BRepPrimAPIMakeBox (the derived BRepPreviewAPIMakeBox reaches it through wedge_mut)."
+    },
+    {
       "upstream_id": "BRepPrimAPI_MakeCone::BRepPrimAPI_MakeCone(double,double,double)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCone.hxx",
@@ -273013,7 +273197,7 @@
       "upstream_id": "BRepPrimAPI_MakeCone::OneAxis()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCone.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCone::one_axis",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCone::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis>::one_axis",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273131,7 +273315,7 @@
       "upstream_id": "BRepPrimAPI_MakeCylinder::OneAxis()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeCylinder.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCylinder::one_axis",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeCylinder::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis>::one_axis",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273467,7 +273651,7 @@
       "upstream_id": "BRepPrimAPI_MakePrism::Build(const Message_ProgressRange&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::build",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273475,7 +273659,7 @@
       "upstream_id": "BRepPrimAPI_MakePrism::FirstShape()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::first_shape",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSweep>::first_shape",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273483,7 +273667,7 @@
       "upstream_id": "BRepPrimAPI_MakePrism::LastShape()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::last_shape",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSweep>::last_shape",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273491,7 +273675,7 @@
       "upstream_id": "BRepPrimAPI_MakePrism::Generated(const TopoDS_Shape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::generated",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::generated",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273499,7 +273683,7 @@
       "upstream_id": "BRepPrimAPI_MakePrism::IsDeleted(const TopoDS_Shape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakePrism.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::is_deleted",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakePrism::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::is_deleted",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273607,7 +273791,7 @@
       "upstream_id": "BRepPrimAPI_MakeRevol::Build(const Message_ProgressRange&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::build",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273615,7 +273799,7 @@
       "upstream_id": "BRepPrimAPI_MakeRevol::FirstShape()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::first_shape",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSweep>::first_shape",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273623,7 +273807,7 @@
       "upstream_id": "BRepPrimAPI_MakeRevol::LastShape()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::last_shape",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSweep>::last_shape",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273631,7 +273815,7 @@
       "upstream_id": "BRepPrimAPI_MakeRevol::Generated(const TopoDS_Shape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::generated",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::generated",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273639,7 +273823,7 @@
       "upstream_id": "BRepPrimAPI_MakeRevol::IsDeleted(const TopoDS_Shape&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::is_deleted",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::is_deleted",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273736,6 +273920,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepPrimAPI_MakeRevol::CheckValidity(const TopoDS_Shape&,const gp_Ax1&)",
+      "toolkit": "TKPrim",
+      "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevol.hxx",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevol::check_validity",
+      "status": "implemented",
+      "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests). Protected member, public in Rust: the edge loop, the trimmed and moved curve copy, the 99-ratio axis-coincidence test and IsIntersect follow the native order; a missing 3d curve is a Standard_NullObject Failure (a crash natively)."
+    },
+    {
       "upstream_id": "BRepPrimAPI_MakeRevolution::BRepPrimAPI_MakeRevolution(const occ::handle<Geom_Curve>&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
@@ -273803,7 +273995,7 @@
       "upstream_id": "BRepPrimAPI_MakeRevolution::OneAxis()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeRevolution.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::one_axis",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeRevolution::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis>::one_axis",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -273985,7 +274177,7 @@
       "upstream_id": "BRepPrimAPI_MakeSphere::OneAxis()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeSphere.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::one_axis",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeSphere::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis>::one_axis",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -274211,7 +274403,7 @@
       "upstream_id": "BRepPrimAPI_MakeTorus::OneAxis()",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::one_axis",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeTorus::<rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeOneAxis>::one_axis",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -274337,7 +274529,7 @@
       "upstream_id": "BRepPrimAPI_MakeWedge::Build(const Message_ProgressRange&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPrimAPI/BRepPrimAPI_MakeWedge.hxx",
-      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::build",
+      "rust_item": "rustycad_tkprim::brep_prim_api::BRepPrimAPIMakeWedge::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
       "status": "implemented",
       "notes": "BRepPrimAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 4): each maker is a struct over BRepBuilderAPIMakeShapeBase implementing BRepBuilderAPIMakeShape; BRepPrimAPI_MakeOneAxis and BRepPrimAPI_MakeSweep are sub-traits; overloads take distinct Rust names, conversion operators map to the accessor they call, native exceptions are Failure errors; compared with OCCT by tools/verify_tkprim_numeric.py (pa_* requests)."
     },
@@ -274455,7 +274647,7 @@
       "upstream_id": "BRepPreviewAPI_MakeBox::Build(const Message_ProgressRange&)",
       "toolkit": "TKPrim",
       "source": "src/ModelingAlgorithms/TKPrim/BRepPreviewAPI/BRepPreviewAPI_MakeBox.hxx",
-      "rust_item": "rustycad_tkprim::brep_preview_api::BRepPreviewAPIMakeBox::build",
+      "rust_item": "rustycad_tkprim::brep_preview_api::BRepPreviewAPIMakeBox::<rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape>::build",
       "status": "implemented",
       "notes": "BRepPreviewAPI mapping (docs/tkprim-progress.md, docs/prim-design.md section 5): BRepPreviewAPIMakeBox holds a BRepPrimAPIMakeBox, dereferences to it and overrides build of BRepBuilderAPIMakeShape; compared with OCCT by tools/verify_tkprim_numeric.py (pv_* requests)."
     },
