@@ -3,6 +3,7 @@
 //! The evolutive-radius fillet function between two surfaces along a guide: the radius is
 //! a law of the guide parameter.
 use super::SectionShape;
+use super::choice::{choice_signs, live_law};
 use super::guide::position_on_guide;
 use super::linalg::vector;
 use super::package::{live_curve, next_shape};
@@ -51,11 +52,8 @@ pub struct EvolRad {
     pub(super) capture: FailureCapture,
 }
 
-fn live_law(law: &Handle<dyn LawFunction>) -> Result<&dyn LawFunction, Failure> {
-    law.get().ok_or_else(|| {
-        Failure::with_message("Standard_NullObject", "BlendFunc_EvolRad: null radius law")
-    })
-}
+/// The class name of the null-law failures.
+const CLASS: &str = "BlendFunc_EvolRad";
 
 impl EvolRad {
     /// `BlendFunc_EvolRad(S1, S2, C, Law)`; `EvolRad::new(&s1, &s2, &c, &law)?`.
@@ -86,13 +84,7 @@ impl EvolRad {
     /// `function.set_choix(1)`.
     pub fn set_choix(&mut self, choix: i32) {
         self.core.choix = choix;
-        (self.sg1, self.sg2) = match choix {
-            1 | 2 => (-1., -1.),
-            3 | 4 => (1., -1.),
-            5 | 6 => (1., 1.),
-            7 | 8 => (-1., 1.),
-            _ => (-1., -1.),
-        };
+        (self.sg1, self.sg2) = choice_signs(choix);
     }
 
     /// `Set(TypeSection)`; `function.set_shape(SectionShape::Linear)`.
@@ -168,7 +160,7 @@ impl EvolRad {
         )? {
             return Ok(false);
         }
-        let law = live_law(&self.tevol)?;
+        let law = live_law(&self.tevol, CLASS)?;
         match t_order {
             0 => self.ray = law.value(t)?,
             1 => (self.ray, self.dray) = law.d1(t)?,
@@ -232,7 +224,7 @@ impl EvolRad {
     /// `Set(First, Last)`: the useful parts of the guide and of the law.
     pub(super) fn set_interval_impl(&mut self, first: f64, last: f64) -> Result<(), Failure> {
         self.tcurv = live_curve(&self.curv)?.trim(first, last, 1.0e-12)?;
-        self.tevol = live_law(&self.fevol)?.trim(first, last, 1.0e-12)?;
+        self.tevol = live_law(&self.fevol, CLASS)?.trim(first, last, 1.0e-12)?;
         Ok(())
     }
 
@@ -255,7 +247,7 @@ impl EvolRad {
     /// The intervals of the guide (continuity `S + 1`) merged with those of the law.
     fn merged_intervals(&self, shape: Shape) -> Result<Option<Vec<f64>>, Failure> {
         let curve = live_curve(&self.curv)?;
-        let law = live_law(&self.fevol)?;
+        let law = live_law(&self.fevol, CLASS)?;
         let nb_curve = curve.nb_intervals(next_shape(shape))?;
         let nb_law = law.nb_intervals(shape)?;
         if nb_law == 1 {

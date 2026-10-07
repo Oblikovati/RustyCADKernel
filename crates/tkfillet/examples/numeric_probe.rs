@@ -18,6 +18,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_const_rad", fillet::const_rad_case),
     ("fl_const_rad_inv", blend_func::const_rad_inv_case),
     ("fl_evol_rad", fillet::evol_rad_case),
+    ("fl_evol_rad_inv", blend_func::evol_rad_inv_case),
 ];
 
 fn main() {

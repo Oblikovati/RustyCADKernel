@@ -2,6 +2,7 @@
 
 //! The constant-radius fillet function between two surfaces along a guide.
 use super::SectionShape;
+use super::choice::signed_radii;
 use super::guide::position_on_guide;
 use super::linalg::vector;
 use super::package::live_curve;
@@ -209,17 +210,6 @@ impl ConstRad {
     /// `GetSectionSize()`.
     pub(super) fn section_size(&self) -> f64 {
         self.core.maxang * self.ray1.abs()
-    }
-}
-
-/// The signed radii `(ray1, ray2)` of a choice, as `Set(Radius, Choix)` assigns them.
-pub(crate) fn signed_radii(radius: f64, choix: i32) -> (f64, f64) {
-    match choix {
-        1 | 2 => (-radius, -radius),
-        3 | 4 => (radius, -radius),
-        5 | 6 => (radius, radius),
-        7 | 8 => (-radius, radius),
-        _ => (-radius, -radius),
     }
 }
 

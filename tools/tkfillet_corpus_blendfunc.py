@@ -5,7 +5,8 @@ cylinders, spheres, cones, tori) along a line or a circle: exact fillet solution
 right-angled planes, a plane and a cylinder, a sphere cut by a plane), points off the
 solution, every section shape and choice of the solution, trimmed guides, and points
 where a surface normal degenerates (the apex of a cone, the pole of a sphere).
-`fl_evol_rad` evaluates BlendFunc_EvolRad on the same cases with radius laws.
+`fl_evol_rad` and `fl_evol_rad_inv` evaluate BlendFunc_EvolRad and its inverse on the
+same cases with radius laws.
 """
 from __future__ import annotations
 import math
@@ -142,6 +143,35 @@ def evol_rad_requests(requests: list[str]) -> None:
     requests.append(evol_rad(sphere, cut, circle, law, 1, 1, 0.0, [0.0, math.pi / 2, 1.0, 0.0]))
 
 
+def evol_rad_inv(s1, s2, c, curve2d, law, choix, first, x4, tol=1e-7) -> str:
+    """One `fl_evol_rad_inv` request; `curve2d` is (u, v, du, dv), `law` as `evol_rad`."""
+    return 'fl_evol_rad_inv ' + numbers([*s1, *s2, *c, *curve2d, *law, 0.0, choix, int(first), *x4, tol])
+
+
+def evol_rad_inv_requests(requests: list[str]) -> None:
+    """The right-angled planes with every radius law, the fillet ending on an iso line of
+    either plane, exact (constant law) and perturbed; a sphere cut by a plane."""
+    s1, s2 = surface(0, n=Z, x=X), surface(0, n=Y, x=X)
+    c = guide(0, n=X, x=Y)
+    laws = ((0, -3.0, 1.0, 3.0, 1.0, 1.0), (1, -3.0, 0.5, 3.0, 2.0, 0.0),
+            (2, -3.0, 0.5, 3.0, 2.0, 0.0), (3, -3.0, 0.5, 3.0, 1.5, 2.0))
+    for law in laws:
+        for first in (True, False):
+            line = (0.0, 1.0, 1.0, 0.0) if first else (0.0, -1.0, 1.0, 0.0)
+            for w in (0.0, 0.7, -1.2):
+                exact = [w, w, w, -1.0 if first else 1.0]
+                for choix in (1, 3, 6, 7):
+                    requests.append(evol_rad_inv(s1, s2, c, line, law, choix, first, exact))
+                requests.append(evol_rad_inv(s1, s2, c, line, law, 1, first, [w + 0.1, w - 0.2, w, 0.3]))
+    sphere = surface(2, n=Z, x=X, a=2.0)
+    cut = surface(0, p=(0.0, 0.0, 1.0), n=Z, x=X)
+    circle = guide(1, p=(0.0, 0.0, 1.0), n=Z, x=X, a=math.sqrt(3.0))
+    law = (1, 0.0, 0.2, 2.0 * math.pi, 0.4, 0.0)
+    for first in (True, False):
+        requests.append(evol_rad_inv(sphere, cut, circle, (0.0, 0.4, 1.0, 0.0), law, 2, first, [0.5, 0.5, 1.2, 0.4]))
+        requests.append(evol_rad_inv(sphere, cut, circle, (0.0, math.pi / 2, 1.0, 0.0), law, 1, first, [0.0, 0.1, 1.0, 0.0]))
+
+
 def append_blendfunc_requests(requests: list[str]) -> None:
     """Append the BlendFunc request families."""
     inverse_requests(requests)
@@ -149,3 +179,4 @@ def append_blendfunc_requests(requests: list[str]) -> None:
     curved_requests(requests)
     random_requests(requests)
     evol_rad_requests(requests)
+    evol_rad_inv_requests(requests)

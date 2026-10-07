@@ -34,6 +34,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_const_rad", fl_const_rad_case},
  {"fl_const_rad_inv", fl_const_rad_inv_case},
  {"fl_evol_rad", fl_evol_rad_case},
+ {"fl_evol_rad_inv", fl_evol_rad_inv_case},
 };
 int main() {
  std::string line;

@@ -5,6 +5,7 @@
 #include <BlendFunc_ConstRad.hxx>
 #include <BlendFunc_ConstRadInv.hxx>
 #include <BlendFunc_EvolRad.hxx>
+#include <BlendFunc_EvolRadInv.hxx>
 #include <Law_Constant.hxx>
 #include <Law_Interpol.hxx>
 #include <Law_Linear.hxx>
@@ -171,5 +172,16 @@ void fl_const_rad_inv_case(std::istream& in){
  double radius=r.real();int choix=r.integer();bool first=r.flag();
  math_Vector x(1,4);for(int i=1;i<=4;++i)x(i)=r.real();double tol=r.real();
  BlendFunc_ConstRadInv f(s1,s2,c);f.Set(radius,choix);f.Set(first,cs);
+ fl_inverse(f,x,tol);
+ ga_end();}
+
+// `fl_evol_rad_inv S1 S2 C P2d D2d Law choix first X1..X4 tol`.
+void fl_evol_rad_inv_case(std::istream& in){
+ GaReader r{in};
+ occ::handle<Adaptor3d_Surface> s1=fl_surface(r),s2=fl_surface(r);occ::handle<Adaptor3d_Curve> c=fl_guide(r);
+ occ::handle<Adaptor2d_Curve2d> cs=fl_curve2d(r);occ::handle<Law_Function> law=fl_law(r);
+ int choix=r.integer();bool first=r.flag();
+ math_Vector x(1,4);for(int i=1;i<=4;++i)x(i)=r.real();double tol=r.real();
+ BlendFunc_EvolRadInv f(s1,s2,c,law);f.Set(choix);f.Set(first,cs);
  fl_inverse(f,x,tol);
  ga_end();}

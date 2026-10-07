@@ -5,7 +5,7 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkfillet::blend::{
     BlendAppFunction, BlendFuncInv, BlendFunction, BlendInverseBounds, BlendPoint, SectionPoles,
 };
-use rustycad_tkfillet::blend_func::{ConstRadInv, SectionShape};
+use rustycad_tkfillet::blend_func::{ConstRadInv, EvolRadInv, SectionShape};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
@@ -351,6 +351,20 @@ pub fn const_rad_inv_case(values: &[f64]) {
     let (x, tol) = (read_x(&mut r), r.real());
     let mut f = ConstRadInv::new(&s1, &s2, &c);
     f.set_radius(radius, choix);
+    let _ = f.set_curve(first, &cs);
+    inverse(&mut f, &to_vector(x), tol);
+    end();
+}
+
+/// `fl_evol_rad_inv S1 S2 C P2d D2d Law choix first X1..X4 tol`.
+pub fn evol_rad_inv_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let (s1, s2, c) = (surface(&mut r), surface(&mut r), guide(&mut r));
+    let (cs, radius_law) = (curve2d(&mut r), super::fillet::law(&mut r));
+    let (choix, first) = (r.integer(), r.flag());
+    let (x, tol) = (read_x(&mut r), r.real());
+    let mut f = EvolRadInv::new(&s1, &s2, &c, &radius_law);
+    f.set_choix(choix);
     let _ = f.set_curve(first, &cs);
     inverse(&mut f, &to_vector(x), tol);
     end();

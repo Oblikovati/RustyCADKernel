@@ -34,15 +34,6 @@ fn right_angle() -> ConstRad {
 }
 
 #[test]
-fn signed_radii_follow_the_choice() {
-    assert_eq!(signed_radii(2., 1), (-2., -2.));
-    assert_eq!(signed_radii(2., 4), (2., -2.));
-    assert_eq!(signed_radii(2., 6), (2., 2.));
-    assert_eq!(signed_radii(2., 8), (-2., 2.));
-    assert_eq!(signed_radii(2., 0), (-2., -2.));
-}
-
-#[test]
 fn equations_vanish_at_the_tangency_points_of_the_fillet() {
     let mut function = right_angle();
     function.set_radius(1., 1);

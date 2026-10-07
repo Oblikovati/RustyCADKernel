@@ -65,7 +65,7 @@ pub fn const_rad_case(values: &[f64]) {
 }
 
 /// `fl_law`: 7 numbers.
-fn law(r: &mut Reader<'_>) -> Handle<dyn LawFunction> {
+pub(super) fn law(r: &mut Reader<'_>) -> Handle<dyn LawFunction> {
     let kind = r.integer();
     let (p1, r1, p2, r2, r3) = (r.real(), r.real(), r.real(), r.real(), r.real());
     r.real();
