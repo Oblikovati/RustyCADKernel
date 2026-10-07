@@ -9,11 +9,9 @@ pub fn unite<T: PackedInteger>(map: &mut PackedMap<T>, other: &PackedMap<T>) -> 
         map.assign(other);
         return true;
     }
-    let old: usize = map.len();
-    for value in other {
-        map.add(value);
-    }
-    old != map.len()
+    let old: i32 = map.extent();
+    add_keys_in_order(map, other);
+    old != map.extent()
 }
 /// Replace with union using native left-then-right traversal; `union(&mut result, &left, &right)`.
 pub fn union<T: PackedInteger>(map: &mut PackedMap<T>, left: &PackedMap<T>, right: &PackedMap<T>) {
@@ -26,9 +24,8 @@ pub fn union<T: PackedInteger>(map: &mut PackedMap<T>, left: &PackedMap<T>, righ
         return;
     }
     map.clear();
-    for value in left.into_iter().chain(right) {
-        map.add(value);
-    }
+    add_keys_in_order(map, left);
+    add_keys_in_order(map, right);
 }
 /// Keep common keys, rebuilding storage like OCCT; `intersect(&mut left, &right)`.
 pub fn intersect<T: PackedInteger>(map: &mut PackedMap<T>, other: &PackedMap<T>) -> bool {
@@ -39,13 +36,11 @@ pub fn intersect<T: PackedInteger>(map: &mut PackedMap<T>, other: &PackedMap<T>)
         map.clear();
         return true;
     }
-    let old: usize = map.len();
+    let old: i32 = map.extent();
     let mut copy: PackedMap<T> = PackedMap::default();
-    for value in map.iter().filter(|value| other.contains(*value)) {
-        copy.add(value);
-    }
+    copy_selected_keys(&mut copy, map, other, true);
     *map = copy;
-    old != map.len()
+    old != map.extent()
 }
 /// Visit the smaller operand first, choosing left on ties; `intersection(&mut result, &left, &right)`.
 pub fn intersection<T: PackedInteger>(
@@ -54,22 +49,26 @@ pub fn intersection<T: PackedInteger>(
     right: &PackedMap<T>,
 ) {
     map.clear();
-    let (smaller, larger) = if left.len() > right.len() {
+    if left.is_empty() || right.is_empty() {
+        return;
+    }
+    let (smaller, larger) = if left.extent() > right.extent() {
         (right, left)
     } else {
         (left, right)
     };
-    for value in smaller.into_iter().filter(|value| larger.contains(*value)) {
-        map.add(value);
-    }
+    copy_selected_keys(map, smaller, larger, true);
 }
 /// Remove all keys in the other set; `subtract(&mut left, &right)`.
 pub fn subtract<T: PackedInteger>(map: &mut PackedMap<T>, other: &PackedMap<T>) -> bool {
-    let old: usize = map.len();
-    for value in other {
-        map.remove(value);
+    if map.is_empty() || other.is_empty() {
+        return false;
     }
-    old != map.len()
+    let old: i32 = map.extent();
+    visit_keys_in_order(other, |value| {
+        map.remove(value);
+    });
+    old != map.extent()
 }
 /// Copy left then remove right; `subtraction(&mut result, &left, &right)`.
 pub fn subtraction<T: PackedInteger>(
@@ -90,13 +89,9 @@ pub fn differ<T: PackedInteger>(map: &mut PackedMap<T>, other: &PackedMap<T>) ->
         map.assign(other);
         return true;
     }
-    let old: usize = map.len();
-    for value in other {
-        if !map.remove(value) {
-            map.add(value);
-        }
-    }
-    old != map.len()
+    let old: i32 = map.extent();
+    visit_keys_in_order(other, |value| toggle_native_key(map, value));
+    old != map.extent()
 }
 /// Retain keys exclusive to each operand; `difference(&mut result, &left, &right)`.
 pub fn difference<T: PackedInteger>(
@@ -108,12 +103,8 @@ pub fn difference<T: PackedInteger>(
     if std::ptr::eq(left, right) {
         return;
     }
-    for value in left.into_iter().filter(|value| !right.contains(*value)) {
-        map.add(value);
-    }
-    for value in right.into_iter().filter(|value| !left.contains(*value)) {
-        map.add(value);
-    }
+    copy_selected_keys(map, left, right, false);
+    copy_selected_keys(map, right, left, false);
 }
 /// Check a common key, visiting the smaller operand; `has_intersection(&left, &right)`.
 pub fn has_intersection<T: PackedInteger>(left: &PackedMap<T>, right: &PackedMap<T>) -> bool {
@@ -135,4 +126,37 @@ pub fn is_subset<T: PackedInteger>(map: &PackedMap<T>, other: &PackedMap<T>) -> 
 /// Compare contents independent of bucket order; `is_equal(&first, &second)`.
 pub fn is_equal<T: PackedInteger>(map: &PackedMap<T>, other: &PackedMap<T>) -> bool {
     map.len() == other.len() && contains(map, other)
+}
+
+// OCCT 3d097a0 performs each mutation before Next(); Rust Iterator::next pre-advances.
+fn visit_keys_in_order<T: PackedInteger>(source: &PackedMap<T>, mut apply: impl FnMut(T)) {
+    let mut cursor = source.iter();
+    while let Some(value) = cursor.key().copied() {
+        apply(value);
+        cursor.advance();
+    }
+}
+fn add_keys_in_order<T: PackedInteger>(map: &mut PackedMap<T>, source: &PackedMap<T>) {
+    visit_keys_in_order(source, |value| {
+        map.add(value);
+    });
+}
+fn copy_selected_keys<T: PackedInteger>(
+    map: &mut PackedMap<T>,
+    source: &PackedMap<T>,
+    other: &PackedMap<T>,
+    keep_common: bool,
+) {
+    visit_keys_in_order(source, |value| {
+        if other.contains(value) == keep_common {
+            map.add(value);
+        }
+    });
+}
+fn toggle_native_key<T: PackedInteger>(map: &mut PackedMap<T>, value: T) {
+    if map.contains(value) {
+        map.remove(value);
+        return;
+    }
+    map.add(value);
 }
