@@ -11,12 +11,19 @@ mod select_combine;
 mod select_deduct;
 mod select_extracts;
 mod select_pointed;
+mod select_signature;
 mod select_types;
 mod selection;
 #[cfg(test)]
 mod selection_more_tests;
 #[cfg(test)]
 mod selection_tests;
+mod sign_counter;
+mod signature;
+mod signature_list;
+#[cfg(test)]
+mod signature_tests;
+mod signatures;
 
 pub use enums::{
     IFSelectEditValue, IFSelectPrintCount, IFSelectPrintFail, IFSelectRemainMode,
@@ -47,6 +54,7 @@ pub use select_extracts::{
     IFSelectSelectRootComps, IFSelectSelectRoots,
 };
 pub use select_pointed::IFSelectSelectPointed;
+pub use select_signature::IFSelectSelectSignature;
 pub use select_types::{
     IFSelectSelectAnyType, IFSelectSelectErrorEntities, IFSelectSelectType,
     IFSelectSelectUnknownEntities, any_type_sort,
@@ -54,4 +62,17 @@ pub use select_types::{
 pub use selection::{
     IFSelectSelectBase, IFSelectSelection, IFSelectSelectionIterator, IFSelectTransformer,
     select_base_fill_iterator, selection_complete_result,
+};
+pub use sign_counter::{
+    IFSelectCheckCounter, IFSelectGraphCounter, IFSelectSignCounter, IFSelectSignCounterOps,
+};
+pub(crate) use signature::impl_signature_text;
+pub use signature::{IFSelectSignature, IFSelectSignatureBase, signature_name};
+pub use signature_list::{
+    IFSelectSignatureCounts, IFSelectSignatureEntities, IFSelectSignatureList,
+    IFSelectSignatureListOps,
+};
+pub use signatures::{
+    IFSelectSignAncestor, IFSelectSignCategory, IFSelectSignMultiple, IFSelectSignType,
+    IFSelectSignValidity,
 };

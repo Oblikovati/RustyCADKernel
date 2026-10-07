@@ -99865,6 +99865,606 @@
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
     },
     {
+      "upstream_id": "IFSelect_Signature::IFSelect_Signature",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Signature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureBase::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. The protected constructor of the embedded base."
+    },
+    {
+      "upstream_id": "IFSelect_Signature::SetIntCase",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Signature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignature::set_int_case",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Signature::IsIntCase",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Signature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignature::is_int_case",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. The outputs are the returned tuple (None for the native false)."
+    },
+    {
+      "upstream_id": "IFSelect_Signature::AddCase",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Signature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignature::add_case",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Signature::CaseList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Signature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignature::case_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. None for the native null sequence."
+    },
+    {
+      "upstream_id": "IFSelect_Signature::Name",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Signature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::signature_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. The override of MoniTool_SignText::Name the signatures call."
+    },
+    {
+      "upstream_id": "IFSelect_Signature::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Signature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignature::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Signature::Matches",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Signature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignature::matches",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_Signature::MatchValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Signature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureBase::match_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. Standard_OutOfRange for an empty text not exact (its first character is read natively)."
+    },
+    {
+      "upstream_id": "IFSelect_Signature::IntValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_Signature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureBase::int_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignType::IFSelect_SignType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignType.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignType::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignType::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignType.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignType::<rustycad_tkxsbase::interface::InterfaceSignType>::value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignAncestor::IFSelect_SignAncestor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignAncestor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignAncestor::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignAncestor::Matches",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignAncestor.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignAncestor::<rustycad_tkxsbase::if_select::IFSelectSignature>::matches",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCategory::IFSelect_SignCategory",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCategory.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCategory::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCategory::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCategory.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCategory::<rustycad_tkxsbase::interface::InterfaceSignType>::value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignValidity::IFSelect_SignValidity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignValidity.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignValidity::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignValidity::CVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignValidity.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignValidity::c_val",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignValidity::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignValidity.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignValidity::<rustycad_tkxsbase::interface::InterfaceSignType>::value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignMultiple::IFSelect_SignMultiple",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignMultiple.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignMultiple::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignMultiple::Add",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignMultiple.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignMultiple::add",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignMultiple::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignMultiple.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignMultiple::<rustycad_tkxsbase::interface::InterfaceSignType>::value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. Native defect kept as its loop computes it: a value longer than a maximal width is not truncated (Remove gets a negative count, a buffer overrun natively) and its last character becomes '.'."
+    },
+    {
+      "upstream_id": "IFSelect_SignMultiple::Matches",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignMultiple.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignMultiple::<rustycad_tkxsbase::if_select::IFSelectSignature>::matches",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::IFSelect_SignatureList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::SetList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::set_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::ModeSignOnly",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::mode_sign_only",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. The modifiable reference is mode_sign_only and set_mode_sign_only."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureListOps::clear",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::Add",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::add",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::LastValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::last_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::Init",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::init",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. The lists are vectors of entities (natively HSequence handles)."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::List",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::HasEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::has_entities",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::NbNulls",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::nb_nulls",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::NbTimes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::nb_times",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::Entities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::entities",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. None without lists (the native null handle); a copy of the list."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::SetName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureList::set_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::Name",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureListOps::name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::PrintCount",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureListOps::print_count",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::PrintList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureListOps::print_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. Native quirk kept: an entity numbered 2 (the value of IFSelect_ShortByItem) prints \"??\"."
+    },
+    {
+      "upstream_id": "IFSelect_SignatureList::PrintSum",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignatureList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignatureListOps::print_sum",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::IFSelect_SignCounter(const bool,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounter::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::IFSelect_SignCounter(const occ::handle<IFSelect_Signature>&,const bool,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounter::with_signature",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. Standard_NullObject for a null signature."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::Signature",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounter::signature",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::SetMap",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounter::set_map",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::AddEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounterOps::add_entity",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::AddSign",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounterOps::add_sign",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::AddList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounterOps::add_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::AddWithGraph",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounterOps::add_with_graph",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::AddModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounterOps::add_model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::AddFromSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounterOps::add_from_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::SetSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounter::set_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::Selection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounter::selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::SetSelMode",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounter::set_sel_mode",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::SelMode",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounter::sel_mode",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::ComputeSelected",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounterOps::compute_selected",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::Sign",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounterOps::sign",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SignCounter::ComputedSign",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SignCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSignCounterOps::computed_sign",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_GraphCounter::IFSelect_GraphCounter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_GraphCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectGraphCounter::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_GraphCounter::Applied",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_GraphCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectGraphCounter::applied",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_GraphCounter::SetApplied",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_GraphCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectGraphCounter::set_applied",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_GraphCounter::AddWithGraph",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_GraphCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectGraphCounter::<rustycad_tkxsbase::if_select::IFSelectSignCounterOps>::add_with_graph",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_CheckCounter::IFSelect_CheckCounter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_CheckCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectCheckCounter::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_CheckCounter::SetSignature",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_CheckCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectCheckCounter::set_signature",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_CheckCounter::Signature",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_CheckCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectCheckCounter::signature",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_CheckCounter::Analyse",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_CheckCounter.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectCheckCounter::analyse",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSignature::IFSelect_SelectSignature(const occ::handle<IFSelect_Signature>&,const char* const,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSignature::with_signature",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSignature::IFSelect_SelectSignature(const occ::handle<IFSelect_Signature>&,const TCollection_AsciiString&,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSignature::with_signature",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSignature::IFSelect_SelectSignature(const occ::handle<IFSelect_SignCounter>&,const char* const,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSignature::with_counter",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. The counter is the counter trait object (its AddWithGraph is virtual)."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSignature::Signature",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSignature::signature",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSignature::Counter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSignature::counter",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSignature::SortInGraph",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSignature::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::sort_in_graph",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors. Native quirk kept: a text ending with '"
+    },
+    {
+      "upstream_id": "IFSelect_SelectSignature::Sort",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSignature::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::sort",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSignature::SignatureText",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSignature::signature_text",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSignature::IsExact",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSignature::is_exact",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSignature::ExtractLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSignature.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSignature::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::extract_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the virtual members of concrete classes with subclasses are *Ops traits; the overrides many classes inherit are named functions; const char* results are owned texts; HSequence arguments are slices (None for null) and results Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
