@@ -19,3 +19,6 @@ pub use check::BRepAlgoAPICheck;
 
 mod splitter;
 pub use splitter::BRepAlgoAPISplitter;
+
+mod defeaturing;
+pub use defeaturing::BRepAlgoAPIDefeaturing;

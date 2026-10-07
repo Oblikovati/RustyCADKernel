@@ -303300,6 +303300,195 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepAlgoAPI_Defeaturing()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::new",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::SetShape(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::set_shape",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::InputShape() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::input_shape",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::AddFaceToRemove(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::add_face_to_remove",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::AddFacesToRemove(const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::add_faces_to_remove",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::FacesToRemove() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::faces_to_remove",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::Build(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::build",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange: the Rust Boolean pipeline runs without progress reporting.  Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::SetToFillHistory(bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::set_to_fill_history",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::HasHistory() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::has_history",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::Modified(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::modified",
+      "status": "implemented",
+      "notes": "Returns an owned Vec and the failure of the history query. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::generated",
+      "status": "implemented",
+      "notes": "Returns an owned Vec and the failure of the history query. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::IsDeleted(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::is_deleted",
+      "status": "implemented",
+      "notes": "Returns the failure of the history query. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::HasModified() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::has_modified",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::HasGenerated() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::has_generated",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::HasDeleted() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::has_deleted",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::History()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::history",
+      "status": "implemented",
+      "notes": "None while the history is not filled (the native null handle). Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing::build",
+      "status": "implemented",
+      "notes": "Protected override ported as the private `clear` run by `BRepAlgoAPIDefeaturing::build`. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::myInputShape",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPIDefeaturing, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::myFacesToRemove",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPIDefeaturing, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::myFillHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPIDefeaturing, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Defeaturing::myFeatureRemovalTool",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Defeaturing.hxx",
+      "source_sha256": "7704bfd05c1c931512e76ab44755708db6e6fc088ae030036dbe32ee7069757a",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIDefeaturing",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPIDefeaturing, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
       "upstream_id": "BRepAlgoAPI_Fuse::operator delete(void*) noexcept",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Fuse.hxx",
@@ -320264,6 +320453,186 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "8b0631de39b9b404926c1f6c2db2d5a008c285ae59f91424adc27fb9c8c5784d",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::new",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::SetShape(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::set_shape",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::InputShape() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::input_shape",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::AddFaceToRemove(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::add_face_to_remove",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::AddFacesToRemove(const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::add_faces_to_remove",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::FacesToRemove() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::faces_to_remove",
+      "status": "implemented",
+      "notes": "Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::Perform(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::perform",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange: the Rust Boolean pipeline runs without progress reporting. A failure of a step is the error AlertRemoveFeaturesFailed, as the native catch of Standard_Failure. The FillGap tools run in sequence: BOPTools_Parallel gives the same results. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::clear",
+      "status": "implemented",
+      "notes": "An inherent method; Rust has no virtual BOPAlgo_BuilderShape::Clear. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::CheckData()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `check_data` run by `BOPAlgoRemoveFeatures::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::PrepareFeatures(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::perform",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange: the Rust Boolean pipeline runs without progress reporting. Protected step ported as the private `prepare_features` run by `BOPAlgoRemoveFeatures::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::RemoveFeatures(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::perform",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange: the Rust Boolean pipeline runs without progress reporting. Protected step ported as the private `remove_features` run by `BOPAlgoRemoveFeatures::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::RemoveFeature(const TopoDS_Shape&,const NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&,const NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&,bool,const NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,const occ::handle<BRepTools_History>&,bool,const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::perform",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange: the Rust Boolean pipeline runs without progress reporting. The feature, solids, faces and history arrive as the FillGap result. Protected step ported as the private `remove_feature` run by `BOPAlgoRemoveFeatures::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::UpdateHistory(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::perform",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange: the Rust Boolean pipeline runs without progress reporting. Protected step ported as the private `update_history` run by `BOPAlgoRemoveFeatures::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::SimplifyResult(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::perform",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange: the Rust Boolean pipeline runs without progress reporting. Protected step ported as the private `simplify_result` run by `BOPAlgoRemoveFeatures::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::PostTreat()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures::perform",
+      "status": "implemented",
+      "notes": "A solid input with a result without solid is a Standard_NoSuchObject failure, as the native exhausted TopExp_Explorer::Current raises. Protected step ported as the private `post_treat` run by `BOPAlgoRemoveFeatures::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (result, alerts, history of every input face, edge and solid) by the native replay tools/oracle/tkbo_defeaturing.cxx (crates/tkbo/tests/brep_algo_api_defeaturing.rs): a boss, a hole (with and without history), a pocket, a through slot, two features at once, a compound with a face, two solids, a box on a cylinder, and the refused inputs; history lists are compared sorted because the native merge order follows TShape addresses."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::fillPIConstants(double,BOPAlgo_PISteps&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step weights. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::myInputShape",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoRemoveFeatures, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::myFacesToRemove",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoRemoveFeatures, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::myFeatures",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoRemoveFeatures, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_RemoveFeatures::myInputsMap",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_RemoveFeatures.hxx",
+      "source_sha256": "dec4d435cb60883908fab3dd65bc1212d70c9bea90925b63bebc299685ae37b1",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoRemoveFeatures",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoRemoveFeatures, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
     },
     {
       "upstream_id": "BOPAlgo_Section::operator delete(void*) noexcept",
