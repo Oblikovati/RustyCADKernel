@@ -2,7 +2,7 @@
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
-       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF)
+       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF, TKService)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -21,7 +21,8 @@ from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases
 from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
 from native_build import (CLOSURE_TARGETS, LINKED_TOOLKITS, OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS,
-                          OCAF_TOOLKITS, closure_flags, locked_cmake)
+                          OCAF_TOOLKITS, VISUALIZATION_CLOSURE_TARGETS, VISUALIZATION_LINKED_TOOLKITS,
+                          VISUALIZATION_TOOLKITS, closure_flags, locked_cmake)
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
 from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
@@ -48,6 +49,7 @@ NUMERIC_VERIFIERS = {
     'TKShHealing': ('tools/verify_tkshhealing_numeric.py', 'target/oracle-tkshhealing/numeric'),
     'TKPrim': ('tools/verify_tkprim_numeric.py', 'target/oracle-tkprim/numeric'),
     'TKHLR': ('tools/verify_tkhlr_numeric.py', 'target/oracle-tkhlr/numeric'),
+    'TKService': ('tools/verify_tkservice_numeric.py', 'target/oracle-tkservice/numeric'),
 }
 
 
@@ -59,9 +61,15 @@ PROFILES_WITHOUT_NUMERIC: dict[str, tuple[str, ...]] = {
 }
 
 
+# The numeric profiles that link their own closure instead of the geometry one.
+OWN_CLOSURE_PROFILES: dict[str, tuple[str, ...]] = {
+    'TKService': VISUALIZATION_LINKED_TOOLKITS,
+}
+
+
 def linked_toolkits(toolkit: str) -> tuple[str, ...]:
     """The native libraries a profile links, dependants first; linked_toolkits('TKMath') == LINKED_TOOLKITS."""
-    return PROFILES_WITHOUT_NUMERIC.get(toolkit, LINKED_TOOLKITS)
+    return PROFILES_WITHOUT_NUMERIC.get(toolkit, OWN_CLOSURE_PROFILES.get(toolkit, LINKED_TOOLKITS))
 
 
 def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
@@ -116,6 +124,9 @@ def prepare_build(source: Path, output: Path, inventory: dict, jobs: int, enviro
     if toolkit in PROFILES_WITHOUT_NUMERIC:
         flags = closure_flags(inventory['modules'], OCAF_TOOLKITS)
         return locked_cmake(source,ROOT/'target/occt-ocaf-full',flags,OCAF_CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
+    if toolkit in OWN_CLOSURE_PROFILES:
+        flags = closure_flags(inventory['modules'], VISUALIZATION_TOOLKITS)
+        return locked_cmake(source,ROOT/'target/occt-visualization-full',flags,VISUALIZATION_CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
     build = ROOT/'target/occt-tkernel-full'
     return locked_cmake(source,build,closure_flags(inventory['modules']),CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
 

@@ -63,6 +63,7 @@ Use `python` instead of `python3` if that is your Python launcher.
 | `crates/tkhlr` | TKHLR hidden line removal (interval sets, contour lines, polyhedral and exact HLR), in progress |
 | `crates/tkcdf` | TKCDF OCAF document and application framework (CDM, PCDM interfaces, CDF), in progress |
 | `crates/tklcaf` | TKLCAF OCAF data framework (TDF labels and transactions, TDataStd attributes, TFunction, TDocStd documents), in progress |
+| `crates/tkservice` | TKService visualization services (Aspect, Image, Font, Graphic3d data model and driver interfaces, Media, Xw), in progress |
 | `crates/parity` | Numerical assertions for future differential tests |
 | `porting` | Pinned upstream identity, source inventory, API/test mapping ledger |
 | `tools` | Reproducible developer setup and inventory commands |

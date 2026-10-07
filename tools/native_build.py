@@ -55,6 +55,14 @@ OCAF_LINKED_TOOLKITS: tuple[str, ...] = ('TKBin', 'TKBinL', 'TKCAF', 'TKBO', 'TK
 OCAF_CLOSURE_TARGETS: list[str] = [*OCAF_TOOLKITS, 'gtest_main']
 
 
+# The visualization oracle closure (TKService suites and numeric oracle) lives in its own
+# build tree too: TKService needs FreeType, fontconfig and Xlib, which the geometry and
+# OCAF closures must not require. The shared all-modules build can be reused instead.
+VISUALIZATION_TOOLKITS: tuple[str, ...] = ('TKService',)
+VISUALIZATION_LINKED_TOOLKITS: tuple[str, ...] = ('TKService', 'TKMath', 'TKernel')
+VISUALIZATION_CLOSURE_TARGETS: list[str] = [*VISUALIZATION_TOOLKITS, 'gtest_main']
+
+
 def closure_flags(modules: list[str], toolkits: tuple[str, ...] = ADDITIONAL_TOOLKITS) -> list[str]:
     """CMake flags of a shared oracle closure (the geometry one by default); one spelling for
     every tool, so the tools never reconfigure the tree back and forth;

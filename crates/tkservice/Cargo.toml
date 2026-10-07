@@ -1,0 +1,20 @@
+[package]
+name = "rustycad-tkservice"
+description = "OCCT TKService toolkit: visualization services (Aspect, Image, Font, Graphic3d, Media, Xw)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkmath = { path = "../tkmath" }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+x11-dl = "2.21"
+
+[[example]]
+name = "rustycad-tkservice-numeric-probe"
+path = "examples/numeric_probe.rs"
