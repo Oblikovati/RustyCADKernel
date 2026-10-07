@@ -1,4 +1,5 @@
 //! The TKFillet probe operations, one module per C++ probe file under tools/oracle.
+pub mod blend_func;
 pub mod chfi_ds;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that both toolkits
 // print the same token stream (tools/oracle/tkfillet_probe.cxx includes

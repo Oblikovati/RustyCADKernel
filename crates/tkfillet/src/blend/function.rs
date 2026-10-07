@@ -45,13 +45,13 @@ pub trait BlendFunction: BlendAppFunction {
     /// `Tangent(U1, V1, U2, V2, TgFirst, TgLast, NormFirst, NormLast)`: the tangents of
     /// the section at both ends and the normals of the surfaces there.
     fn tangent(&self, u1: f64, v1: f64, u2: f64, v2: f64) -> Result<SectionEndFrames, Failure>;
-    /// `TwistOnS1()`: false unless overridden; `function.twist_on_s1()`.
-    fn twist_on_s1(&self) -> bool {
-        false
+    /// `TwistOnS1()`: false unless overridden; `function.twist_on_s1()?`.
+    fn twist_on_s1(&self) -> Result<bool, Failure> {
+        Ok(false)
     }
-    /// `TwistOnS2()`: false unless overridden; `function.twist_on_s2()`.
-    fn twist_on_s2(&self) -> bool {
-        false
+    /// `TwistOnS2()`: false unless overridden; `function.twist_on_s2()?`.
+    fn twist_on_s2(&self) -> Result<bool, Failure> {
+        Ok(false)
     }
 }
 

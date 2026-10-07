@@ -439343,6 +439343,486 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BlendFunc",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc::ComputeDNormal(const occ::handle<Adaptor3d_Surface>&,const gp_Pnt2d&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::compute_d_normal",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc::ComputeNormal(const occ::handle<Adaptor3d_Surface>&,const gp_Pnt2d&,gp_Vec&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::compute_normal",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc::GetMinimalWeights(BlendFunc_SectionShape,Convert_ParameterisationType,double,double,NCollection_Array1<double>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::get_minimal_weights",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc::GetShape(BlendFunc_SectionShape,double,int&,int&,int&,Convert_ParameterisationType&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::get_shape",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc::Knots(BlendFunc_SectionShape,NCollection_Array1<double>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: declared in BlendFunc.hxx but never defined in the pinned sources, so a call does not link natively; there is no behaviour to port."
+    },
+    {
+      "upstream_id": "BlendFunc::Mults(BlendFunc_SectionShape,NCollection_Array1<int>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: declared in BlendFunc.hxx but never defined in the pinned sources, so a call does not link natively; there is no behaviour to port."
+    },
+    {
+      "upstream_id": "BlendFunc::NextShape(GeomAbs_Shape)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::next_shape",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::AxeRot(double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::axe_rot",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::BlendFunc_ConstRad(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::new",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Derivatives(const math_Vector&,math_Matrix&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkmath::math::FunctionSetWithDerivatives>::derivatives",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::GetBounds(math_Vector&,math_Vector&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::get_bounds",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::GetMinimalDistance() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::get_minimal_distance",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::GetMinimalWeight(NCollection_Array1<double>&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::get_minimal_weight",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::GetSectionSize() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::get_section_size",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::GetShape(int&,int&,int&,int&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::get_shape",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::GetTolerance(double,double,double,math_Vector&,math_Vector&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::get_tolerance_3d",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::GetTolerance(math_Vector&,double) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::get_tolerance",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::intervals",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::IsRational() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::is_rational",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::IsSolution(const math_Vector&,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::is_solution",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::IsTangencyPoint() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendFunction>::is_tangency_point",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Knots(NCollection_Array1<double>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::knots",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Mults(NCollection_Array1<int>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::mults",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::NbEquations() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkmath::math::FunctionSet>::equations",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::NbIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::nb_intervals",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::PointOnS1() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendFunction>::point_on_s1",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::PointOnS2() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendFunction>::point_on_s2",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Resolution(int,double,double&,double&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::resolution",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Section(const Blend_Point&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::section",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Section(const Blend_Point&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<gp_Vec>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<gp_Vec2d>&,NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::section_d1",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Section(const Blend_Point&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<gp_Vec>&,NCollection_Array1<gp_Vec>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<gp_Vec2d>&,NCollection_Array1<gp_Vec2d>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::section_d2",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Section(double,double,double,double,double,double&,double&,gp_Circ&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::section_circle",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Set(BlendFunc_SectionShape)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::set_shape",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Set(double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::set_param",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Set(double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendAppFunction>::set_interval",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Set(double,int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::set_radius",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Tangent(double,double,double,double,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendFunction>::tangent",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Tangent2dOnS1() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendFunction>::tangent2d_on_s1",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Tangent2dOnS2() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendFunction>::tangent2d_on_s2",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::TangentOnS1() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendFunction>::tangent_on_s1",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::TangentOnS2() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendFunction>::tangent_on_s2",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::TwistOnS1() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendFunction>::twist_on_s1",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::TwistOnS2() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkfillet::blend::BlendFunction>::twist_on_s2",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkmath::math::FunctionSet>::value",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_ConstRad::Values(const math_Vector&,math_Vector&,math_Matrix&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_ConstRad.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::ConstRad::<rustycad_tkmath::math::FunctionSetWithDerivatives>::values",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_Linear",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_SectionShape.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::SectionShape::Linear",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_Polynomial",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_SectionShape.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::SectionShape::Polynomial",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_QuasiAngular",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_SectionShape.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::SectionShape::QuasiAngular",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_Rational",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_SectionShape.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::SectionShape::Rational",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_SectionShape",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_SectionShape.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::SectionShape",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_Tensor",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_Tensor.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::Tensor",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_Tensor::BlendFunc_Tensor(int,int,int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_Tensor.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::Tensor::new",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_Tensor::ChangeValue(int,int,int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_Tensor.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::Tensor::change_value",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_Tensor::Init(double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_Tensor.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::Tensor::init",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_Tensor::Multiply(const math_Vector&,math_Matrix&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_Tensor.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::Tensor::multiply",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_Tensor::Value(int,int,int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_Tensor.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::Tensor::value",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BlendFunc_Tensor::operator()(int,int,int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_Tensor.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::Tensor::change_value",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py. operator() is ChangeValue."
+    },
+    {
+      "upstream_id": "BlendFunc_Tensor::operator()(int,int,int) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_Tensor.hxx",
+      "rust_item": "rustycad_tkfillet::blend_func::Tensor::value",
+      "status": "implemented",
+      "notes": "BlendFunc mapping (docs/tkfillet-progress.md): each function implements the blend traits (BlendAppFunction, BlendFunction, ...) and math::FunctionSetWithDerivatives; the ComputeValues caches and the native static thread_local scratch shared by the objects of a class in a thread are kept; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py. operator() is Value."
+    },
+    {
       "upstream_id": "ChFi2d::operator delete(void*) noexcept",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d.hxx",

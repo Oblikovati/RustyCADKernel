@@ -13,3 +13,5 @@ def append_tkfillet_requests(requests: list[str]) -> None:
     """Append every TKFillet request family in a fixed order."""
     # ChFiDS (tkfillet_corpus_chfids.py)
     __import__('tkfillet_corpus_chfids').append_chfids_requests(requests)
+    # BlendFunc (tkfillet_corpus_blendfunc.py)
+    __import__('tkfillet_corpus_blendfunc').append_blendfunc_requests(requests)

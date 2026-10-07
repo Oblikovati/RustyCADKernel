@@ -24,11 +24,14 @@
 // token stream; the Rust twin includes crates/tkgeomalgo/examples/ga_probe/common.rs.
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkfillet_probe_chfids.cxx"
+#include "tkfillet_probe_blendfunc.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // ChFiDS (tkfillet_probe_chfids.cxx)
  {"fl_spine", fl_spine_case},
  {"fl_arc_spine", fl_arc_spine_case},
  {"fl_fil_law", fl_fil_law_case},
+ // BlendFunc (tkfillet_probe_blendfunc.cxx)
+ {"fl_const_rad", fl_const_rad_case},
 };
 int main() {
  std::string line;
