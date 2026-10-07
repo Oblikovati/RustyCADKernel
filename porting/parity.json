@@ -455600,6 +455600,102 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture3D::slice_paths",
       "status": "implemented",
       "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::StandardMarker",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::standard_marker",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe. A ring scale below 1 has no image (a null dereference natively) and is Standard_NullObject; the \"Color out\" failure of HlsRgb for a NaN ball color (std::terminate under noexcept natively) is returned."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::Graphic3d_MarkerImage(const occ::handle<Image_PixMap> &,const occ::handle<Image_PixMap> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::from_images",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::Graphic3d_MarkerImage(const occ::handle<NCollection_HArray1<uint8_t>> &,const int,const int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::from_bitmap",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::Graphic3d_MarkerImage(const TCollection_AsciiString &,const TCollection_AsciiString &,const occ::handle<Image_PixMap> &,const occ::handle<Image_PixMap> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::with_ids",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::GetImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::get_image",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::GetImageAlpha",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::get_image_alpha",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::GetImageId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::get_image_id",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::GetImageAlphaId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::get_image_alpha_id",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::GetTextureSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::get_texture_size",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe. The out-parameters are returned."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::IsColoredImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::is_colored_image",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_MarkerImage::GetBitMapArray",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MarkerImage.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMarkerImage::get_bit_map_array",
+      "status": "implemented",
+      "notes": "Graphic3d_MarkerImage mapping: the marker bitmap tables of Graphic3d_MarkerImage.pxx are generated data (marker_tables.rs); the lazily built images sit behind the handle's shared lock and are returned as handles; a null image, which the native constructors dereference, is Standard_NullObject; every standard marker (ids, bitmaps, images and alpha images) is compared byte for byte by the sv_marker native probe."
     }
   ],
   "tests": [

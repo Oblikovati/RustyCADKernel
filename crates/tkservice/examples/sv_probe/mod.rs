@@ -1,6 +1,7 @@
 //! The TKService probe operations, one module per C++ probe file under tools/oracle.
 pub mod grid;
 pub mod hid;
+pub mod marker;
 pub mod material;
 pub mod pbr;
 pub mod pixel;

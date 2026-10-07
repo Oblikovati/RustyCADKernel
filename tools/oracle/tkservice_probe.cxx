@@ -30,6 +30,7 @@
 #include "tkservice_probe_material.cxx"
 #include "tkservice_probe_shader.cxx"
 #include "tkservice_probe_texture.cxx"
+#include "tkservice_probe_marker.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -54,6 +55,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Graphic3d textures (tkservice_probe_texture.cxx)
  {"sv_cubemap", sv_cubemap_case},
  {"sv_segment", sv_segment_case},
+ // Graphic3d_MarkerImage (tkservice_probe_marker.cxx)
+ {"sv_marker", sv_marker_case},
 };
 int main() {
  std::string line;

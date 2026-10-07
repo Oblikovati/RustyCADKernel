@@ -25,3 +25,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_shader').append_shader_requests(requests)
     # Graphic3d textures (tkservice_corpus_texture.py)
     __import__('tkservice_corpus_texture').append_texture_requests(requests)
+    # Graphic3d_MarkerImage (tkservice_corpus_marker.py)
+    __import__('tkservice_corpus_marker').append_marker_requests(requests)
