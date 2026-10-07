@@ -343,3 +343,22 @@ void fl_compute_curves_case(std::istream& in){
  GA_TRY(ga_flag(ChFi3d_ComputeCurves(s1,s2,deb,fin,c,p1,p2,tol3d,tol2d,t,whole)));
  ga_real(t);fl_curve3d(c);fl_curve2d(p1);fl_curve2d(p2);
  ga_end();}
+
+// A trace pcurve: a 2d line or circle spec, trimmed to [a, b] when asked.
+occ::handle<Geom2d_Curve> fl_trace_curve(GaReader& r){
+ occ::handle<Geom2d_Curve> c=occ::down_cast<Geom2dAdaptor_Curve>(fl_curve2d_kind(r))->Curve();
+ bool trim=r.flag();double a=r.real(),b=r.real();if(trim)c=new Geom2d_TrimmedCurve(c,a,b);return c;}
+// A fillet whose interference jf has the pcurve on the face on [f, l].
+occ::handle<ChFiDS_SurfData> fl_trace_data(const occ::handle<Geom2d_Curve>& c,int jf,double f,double l){
+ occ::handle<ChFiDS_SurfData> fd=new ChFiDS_SurfData();ChFiDS_FaceInterference& fi=fd->ChangeInterference(jf);
+ fi.SetInterference(0,TopAbs_FORWARD,c,occ::handle<Geom2d_Curve>());fi.SetFirstParameter(f);fi.SetLastParameter(l);return fd;}
+
+// `fl_int_traces C1 f1 l1 jf1 pref1 sens1 same C2 f2 l2 jf2 pref2 sens2 RefP2d check enlarge`:
+// ChFi3d_IntTraces of the two fillet traces (the same pcurve when asked).
+void fl_int_traces_case(std::istream& in){
+ GaReader r{in};occ::handle<Geom2d_Curve> c1=fl_trace_curve(r);double f1=r.real(),l1=r.real();int jf1=r.integer();double pref1=r.real();int sens1=r.integer();
+ bool same=r.flag();occ::handle<Geom2d_Curve> c2=fl_trace_curve(r);if(same)c2=c1;double f2=r.real(),l2=r.real();int jf2=r.integer();double pref2=r.real();int sens2=r.integer();
+ gp_Pnt2d ref=r.pnt2d();bool check=r.flag(),enlarge=r.flag();
+ occ::handle<ChFiDS_SurfData> fd1=fl_trace_data(c1,jf1,f1,l1),fd2=fl_trace_data(c2,jf2,f2,l2);
+ GA_TRY(double p1=-7,p2=-7;ga_flag(ChFi3d_IntTraces(fd1,pref1,p1,jf1,sens1,fd2,pref2,p2,jf2,sens2,ref,check,enlarge));ga_real(p1);ga_real(p2));
+ ga_end();}

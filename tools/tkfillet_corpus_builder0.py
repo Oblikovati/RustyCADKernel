@@ -218,6 +218,29 @@ def intersection_curves(requests: list[str]) -> None:
         requests.append('fl_compute_curves ' + numbers([*s1, *s2, *deb, *fin, 1e-4, 1e-5, 0, 1]))
 
 
+def traces(requests: list[str]) -> None:
+    """Fillet traces on a face: crossing lines, a line through a circle (whole and
+    trimmed, periodic), two circles, the same pcurve twice."""
+    line_x = [0, 0, 0, 1, 0]
+    line_d = [0, 0, -2, 1, 1]
+    circle = [1, 1, 0, 2, 0]
+    other = [1, 3, 0, 1.5, 0]
+    pairs = (
+        (line_x, (0, 0, 0), -1, 5, line_d, (0, 0, 0), 0, 5),
+        (line_x, (0, 0, 0), -2, 6, circle, (0, 0, 0), 0, 2 * PI),
+        (circle, (1, 0.5, 5.5), 0.5, 5.5, line_x, (0, 0, 0), -2, 6),
+        (circle, (0, 0, 0), 0, 2 * PI, other, (0, 0, 0), 0, 2 * PI),
+        (line_x, (0, 0, 0), 4, 6, line_d, (0, 0, 0), 0, 5),
+        (line_x, (0, 0, 0), 2, 2, line_d, (0, 0, 0), 0, 5),
+    )
+    for c1, t1, f1, l1, c2, t2, f2, l2 in pairs:
+        for (pref1, sens1, pref2, sens2) in ((0.0, 1, 0.0, 1), (4.0, -1, 3.0, -1), (1.0, 1, 5.0, -1)):
+            for check, enlarge in ((0, 1), (1, 0), (1, 1)):
+                requests.append('fl_int_traces ' + numbers([*c1, *t1, f1, l1, 1, pref1, sens1, 0, *c2, *t2, f2, l2, 2, pref2, sens2,
+                                                            1.5, 0.5, check, enlarge]))
+    requests.append('fl_int_traces ' + numbers([*circle, 0, 0, 0, 0, 2 * PI, 1, 1.0, 1, 1, *circle, 0, 0, 0, 0, 2 * PI, 2, 4.0, -1, 0, 0, 1, 1]))
+
+
 def append_builder0_requests(requests: list[str]) -> None:
     """Append the ChFi3d_Builder_0 request families."""
     scalars(requests)
@@ -233,3 +256,4 @@ def append_builder0_requests(requests: list[str]) -> None:
     meetings(requests)
     topology(requests)
     intersection_curves(requests)
+    traces(requests)

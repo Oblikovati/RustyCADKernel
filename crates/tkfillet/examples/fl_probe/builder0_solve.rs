@@ -15,10 +15,12 @@ use rustycad_tkbrep::topods::{self, Edge, Face};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkfillet::brep_blend::BRepBlendExtremity;
-use rustycad_tkfillet::chfi_ds::{CommonPoint, FaceInterference, Spine, Stripe, SurfData, shared};
+use rustycad_tkfillet::chfi_ds::{
+    CommonPoint, FaceInterference, Spine, Stripe, SurfData, SurfDataHandle, shared,
+};
 use rustycad_tkfillet::chfi3d as b0;
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
-use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine, Geom2dTrimmedCurve};
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dHVertex, Adaptor3dSurface};
 use rustycad_tkg3d::geom::{
@@ -381,6 +383,53 @@ pub fn inter2d_case(values: &[f64]) {
         )?);
         flag(s1);
         flag(s2);
+        Ok(())
+    });
+    end();
+}
+
+/// `fl_trace_curve`.
+fn trace_curve(r: &mut Reader<'_>) -> Handle<dyn Geom2dCurve> {
+    let c = geom_curve2d_kind(r);
+    let (trim, a, b) = (r.flag(), r.real(), r.real());
+    if !trim {
+        return c;
+    }
+    Handle::new(Geom2dTrimmedCurve::new(&c, a, b, true, true).expect("trimmed trace")).cast()
+}
+
+/// `fl_trace_data`.
+fn trace_data(c: &Handle<dyn Geom2dCurve>, jf: i32, f: f64, l: f64) -> SurfDataHandle {
+    let mut fd = SurfData::new();
+    let fi = fd.change_interference(jf);
+    fi.set_interference(0, Orientation::Forward, c, &Handle::default());
+    fi.set_first_parameter(f);
+    fi.set_last_parameter(l);
+    shared(fd)
+}
+
+/// `fl_int_traces`: see tools/oracle/tkfillet_probe_builder0.cxx.
+pub fn int_traces_case(values: &[f64]) {
+    let r = &mut Reader::new(values);
+    let c1 = trace_curve(r);
+    let (f1, l1, jf1, pref1, sens1) = (r.real(), r.real(), r.integer(), r.real(), r.integer());
+    let same = r.flag();
+    let c2 = trace_curve(r);
+    let c2 = if same { c1.clone() } else { c2 };
+    let (f2, l2, jf2, pref2, sens2) = (r.real(), r.real(), r.integer(), r.real(), r.integer());
+    let (reference, check, enlarge) = (r.pnt2d(), r.flag(), r.flag());
+    let (fd1, fd2) = (trace_data(&c1, jf1, f1, l1), trace_data(&c2, jf2, f2, l2));
+    attempt(|| {
+        let found = b0::int_traces(
+            (&fd1, jf1, pref1, sens1),
+            (&fd2, jf2, pref2, sens2),
+            (reference, check),
+            enlarge,
+        )?;
+        flag(found.is_some());
+        let (p1, p2) = found.unwrap_or((-7.0, -7.0));
+        real(p1);
+        real(p2);
         Ok(())
     });
     end();

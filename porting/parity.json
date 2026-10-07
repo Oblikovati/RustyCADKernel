@@ -312064,6 +312064,22 @@
       "notes": "ChFi3d_ComputeCurves fills an IntersectionCurves (written as natively also on failure); analytic plane-plane and plane-cylinder cases, GeomInt_IntSS on the trimmed surfaces, then IntWalk_PWalking with GeomInt_WLApprox. Compared with OCCT by the fl_compute_curves probe of tools/verify_tkfillet_numeric.py."
     },
     {
+      "upstream_id": "ChFi3d_EnlargeFace",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Declared in ChFi3d_Builder_0.hxx but never defined anywhere in OCCT 3d097a0 (no inline body or .cxx definition), so any native call fails to link; there is no behaviour to port."
+    },
+    {
+      "upstream_id": "ChFi3d_IntTraces",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::int_traces",
+      "status": "implemented",
+      "notes": "ChFi3d_IntTraces returns the parameters on both traces (None when they do not meet, the caller keeping its values as natively). Compared with OCCT by the fl_int_traces probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
       "upstream_id": "BRepOffset_Analyse",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",

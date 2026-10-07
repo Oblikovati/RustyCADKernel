@@ -16,6 +16,7 @@ mod solve;
 mod spines;
 mod stripes;
 mod topology;
+mod traces;
 
 pub use arete::{Arete, compute_arete, fil_common_point, trsf_trans};
 pub use boundaries::{
@@ -44,3 +45,4 @@ pub use topology::{
     couture, couture_on_vertex, edge_common_faces, is_pseudo_seam, nb_not_degenerated_edges,
     nbface, number_of_edges, number_of_sharp_edges,
 };
+pub use traces::{TraceOf, int_traces};

@@ -1,13 +1,15 @@
 //! The ChFi3d_Builder_0 edges of fillets, stripe ends, tolerances and solved points.
 use rustycad_tkbrep::topexp;
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkfillet::chfi_ds::{CommonPoint, Spine, Stripe, SurfData, shared};
+use rustycad_tkfillet::chfi_ds::{CommonPoint, Spine, Stripe, SurfData, SurfDataHandle, shared};
 use rustycad_tkfillet::chfi3d as b0;
+use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane, GeomSurface};
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkgeomalgo::int_surf::IntSurfTypeTrans;
+use rustycad_tkmath::gp::Direction2;
 use rustycad_tkmath::gp::{Axis1, Axis3, Direction3, Point2, Point3};
 use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 use std::sync::{Arc, Mutex};
@@ -147,4 +149,30 @@ fn parameters_and_trim_curve_on_elementary_geometry() {
     let s: Handle<dyn Adaptor3dSurface> =
         Handle::new(GeomAdaptorSurface::with_surface(&plane_xy()).unwrap()).cast();
     assert!((b0::conv_tol2d_to_tol3d(&s, 1e-9).unwrap() - 1e-9).abs() < 1e-24);
+}
+
+/// A fillet whose interference `jf` lies on the face along the 2d line on [f, l].
+fn trace_on_face(p: Point2, d: (f64, f64), jf: i32, (f, l): (f64, f64)) -> SurfDataHandle {
+    let direction = Direction2::new(d.0, d.1).unwrap();
+    let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::from_point(p, direction)).cast();
+    let mut fd = SurfData::new();
+    let fi = fd.change_interference(jf);
+    fi.set_interference(0, Orientation::Forward, &line, &Handle::default());
+    fi.set_first_parameter(f);
+    fi.set_last_parameter(l);
+    shared(fd)
+}
+
+#[test]
+fn int_traces_meets_crossing_traces_only() {
+    let fd1 = trace_on_face(Point2::new(0.0, 0.0), (1.0, 0.0), 1, (-1.0, 5.0));
+    let fd2 = trace_on_face(Point2::new(2.0, -1.0), (0.0, 1.0), 2, (0.0, 3.0));
+    let origin = (Point2::new(0.0, 0.0), false);
+    let (p1, p2) = b0::int_traces((&fd1, 1, 0.0, 1), (&fd2, 2, 0.0, 1), origin, true)
+        .unwrap()
+        .expect("a meeting");
+    assert!((p1 - 2.0).abs() < 1e-9 && (p2 - 1.0).abs() < 1e-9);
+    let parallel = trace_on_face(Point2::new(0.0, 1.0), (1.0, 0.0), 2, (0.0, 3.0));
+    let found = b0::int_traces((&fd1, 1, 0.0, 1), (&parallel, 2, 0.0, 1), origin, true).unwrap();
+    assert!(found.is_none(), "parallel traces do not meet");
 }
