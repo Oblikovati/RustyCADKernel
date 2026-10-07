@@ -51,7 +51,10 @@ mod material_enums;
 mod material_specs;
 mod material_table;
 mod pbr_material;
+mod presentation_attributes;
 mod render_enums;
+mod rendering_params;
+mod rendering_params_dump;
 mod shader_object;
 mod shader_program;
 mod shader_variable;
@@ -71,6 +74,7 @@ mod transform_pers_apply;
 mod transform_pers_scaled;
 pub mod transform_utils;
 mod view_affinity;
+mod z_layer_settings;
 
 pub use array_classes::{
     Graphic3dArrayOfPoints, Graphic3dArrayOfPolygons, Graphic3dArrayOfPolylines,
@@ -137,7 +141,17 @@ pub use marker_image::Graphic3dMarkerImage;
 pub use material_aspect::Graphic3dMaterialAspect;
 pub use material_enums::*;
 pub use pbr_material::{Graphic3dPbrMaterial, material_definition_error};
+pub use presentation_attributes::{
+    Graphic3dPresentationAttributes, Graphic3dPresentationAttributesBase,
+    Graphic3dPresentationAttributesFields, Graphic3dPresentationAttributesMembers,
+    Graphic3dPresentationAttributesSource, graphic3d_presentation_attributes_dump_json,
+};
 pub use render_enums::*;
+pub use rendering_params::{
+    Graphic3dRayTracingParams, Graphic3dRenderingParams, Graphic3dRenderingParamsAnaglyph,
+    Graphic3dRenderingParamsFrustumCulling, Graphic3dRenderingParamsPerfCounters,
+    Graphic3dStatsParams, Graphic3dStereoParams,
+};
 pub use shader_object::{
     Graphic3dShaderObject, Graphic3dShaderObjectVariable, Graphic3dShaderVariableList,
 };
@@ -180,3 +194,4 @@ pub use transform_pers_apply::{
 pub use transform_pers_scaled::Graphic3dTransformPersScaledAbove;
 pub use transform_utils::Graphic3dTransformScalar;
 pub use view_affinity::Graphic3dViewAffinity;
+pub use z_layer_settings::Graphic3dZLayerSettings;

@@ -8,6 +8,7 @@ pub mod hid;
 pub mod light;
 pub mod marker;
 pub mod material;
+pub mod params;
 pub mod pbr;
 pub mod pixel;
 pub mod shader;

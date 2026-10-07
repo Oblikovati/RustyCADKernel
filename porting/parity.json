@@ -461998,6 +461998,1318 @@
       "rust_item": "rustycad_tkservice::graphic3d::transform_utils::scale_factor",
       "status": "implemented",
       "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::THE_DEFAULT_RESOLUTION",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::THE_DEFAULT_RESOLUTION",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::THE_DEFAULT_DEPTH",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::THE_DEFAULT_DEPTH",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Anaglyph",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsAnaglyph",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Anaglyph_RedCyan_Simple",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsAnaglyph::RedCyanSimple",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Anaglyph_RedCyan_Optimized",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsAnaglyph::RedCyanOptimized",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Anaglyph_YellowBlue_Simple",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsAnaglyph::YellowBlueSimple",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Anaglyph_YellowBlue_Optimized",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsAnaglyph::YellowBlueOptimized",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Anaglyph_GreenMagenta_Simple",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsAnaglyph::GreenMagentaSimple",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Anaglyph_UserDefined",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsAnaglyph::UserDefined",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_NONE",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::NONE",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_FrameRate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::FRAME_RATE",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_CPU",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::CPU",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_Layers",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::LAYERS",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_Structures",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::STRUCTURES",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_Groups",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::GROUPS",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_GroupArrays",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::GROUP_ARRAYS",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_Triangles",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::TRIANGLES",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_Points",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::POINTS",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_Lines",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::LINES",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_EstimMem",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::ESTIM_MEM",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_FrameTime",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::FRAME_TIME",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_FrameTimeMax",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::FRAME_TIME_MAX",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_SkipImmediate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::SKIP_IMMEDIATE",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_Basic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::BASIC",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_Extended",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::EXTENDED",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PerfCounters_All",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsPerfCounters::ALL",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::FrustumCulling",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsFrustumCulling",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::FrustumCulling_Off",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsFrustumCulling::Off",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::FrustumCulling_On",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsFrustumCulling::On",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::FrustumCulling_NoUpdate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParamsFrustumCulling::NoUpdate",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Graphic3d_RenderingParams",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::new",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ResolutionRatio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::resolution_ratio",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Method",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::method",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ShadingModel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::shading_model",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::TransparencyMethod",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::transparency_method",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Resolution",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::resolution",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::FontHinting",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::font_hinting",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::LineFeather",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::line_feather",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PbrEnvPow2Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::pbr_env_pow2_size",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PbrEnvSpecMapNbLevels",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::pbr_env_spec_map_nb_levels",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PbrEnvBakingDiffNbSamples",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::pbr_env_baking_diff_nb_samples",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PbrEnvBakingSpecNbSamples",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::pbr_env_baking_spec_nb_samples",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::PbrEnvBakingProbability",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::pbr_env_baking_probability",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::OitDepthFactor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::oit_depth_factor",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::NbOitDepthPeelingLayers",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::nb_oit_depth_peeling_layers",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::NbMsaaSamples",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::nb_msaa_samples",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::RenderResolutionScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::render_resolution_scale",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ShadowMapResolution",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::shadow_map_resolution",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ShadowMapBias",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::shadow_map_bias",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ToEnableDepthPrepass",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::to_enable_depth_prepass",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ToEnableAlphaToCoverage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRenderingParams::to_enable_alpha_to_coverage",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::IsGlobalIlluminationEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::is_global_illumination_enabled",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::SamplesPerPixel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::samples_per_pixel",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::RaytracingDepth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::raytracing_depth",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::IsShadowEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::is_shadow_enabled",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::IsReflectionEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::is_reflection_enabled",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::IsAntialiasingEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::is_antialiasing_enabled",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::IsTransparentShadowEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::is_transparent_shadow_enabled",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::UseEnvironmentMapBackground",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::use_environment_map_background",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ToIgnoreNormalMapInRayTracing",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::to_ignore_normal_map_in_ray_tracing",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::CoherentPathTracingMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::coherent_path_tracing_mode",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::AdaptiveScreenSampling",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::adaptive_screen_sampling",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::AdaptiveScreenSamplingAtomic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::adaptive_screen_sampling_atomic",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ShowSamplingTiles",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::show_sampling_tiles",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::TwoSidedBsdfModels",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::two_sided_bsdf_models",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::RadianceClampingValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::radiance_clamping_value",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::RebuildRayTracingShaders",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::rebuild_ray_tracing_shaders",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::RayTracingTileSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::ray_tracing_tile_size",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::NbRayTracingTiles",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::nb_ray_tracing_tiles",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::CameraApertureRadius",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::camera_aperture_radius",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::CameraFocalPlaneDist",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::camera_focal_plane_dist",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::FrustumCullingState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::frustum_culling_state",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ToneMappingMethod",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::tone_mapping_method",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::Exposure",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::exposure",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::WhitePoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dRayTracingParams::white_point",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::StereoMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStereoParams::stereo_mode",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::HmdFov2d",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStereoParams::hmd_fov_2d",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::AnaglyphFilter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStereoParams::anaglyph_filter",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::AnaglyphLeft",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStereoParams::anaglyph_left",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::AnaglyphRight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStereoParams::anaglyph_right",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ToReverseStereo",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStereoParams::to_reverse_stereo",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ToSmoothInterlacing",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStereoParams::to_smooth_interlacing",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ToMirrorComposer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStereoParams::to_mirror_composer",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::StatsPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStatsParams::stats_position",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ChartPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStatsParams::chart_position",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ChartSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStatsParams::chart_size",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::StatsTextAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStatsParams::stats_text_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::StatsUpdateInterval",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStatsParams::stats_update_interval",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::StatsTextHeight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStatsParams::stats_text_height",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::StatsNbFrames",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStatsParams::stats_nb_frames",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::StatsMaxChartTime",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStatsParams::stats_max_chart_time",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::CollectedStats",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStatsParams::collected_stats",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_RenderingParams::ToShowStats",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_RenderingParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dStatsParams::to_show_stats",
+      "status": "implemented",
+      "notes": "Graphic3d_RenderingParams mapping: a value class with public fields like the native one, grouped as the native sections (general fields on Graphic3dRenderingParams, the ray-tracing, stereo and statistics sections in Graphic3dRayTracingParams, Graphic3dStereoParams and Graphic3dStatsParams); the nested enumerations are Graphic3dRenderingParamsAnaglyph, Graphic3dRenderingParamsPerfCounters (flags) and Graphic3dRenderingParamsFrustumCulling; the defaults and DumpJson are compared through the dump by the sv_params native probe (the chart size and the unused union bytes of the 2D positions read uninitialised memory natively and are masked)."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::Graphic3d_ZLayerSettings",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::default",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::Name",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::name",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_name",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::Lights",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::lights",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetLights",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_lights",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::Origin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::origin",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::OriginTransformation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::origin_transformation",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetOrigin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_origin",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::HasCullingDistance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::has_culling_distance",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::CullingDistance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::culling_distance",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetCullingDistance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_culling_distance",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::HasCullingSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::has_culling_size",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::CullingSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::culling_size",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetCullingSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_culling_size",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::IsImmediate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::is_immediate",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetImmediate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_immediate",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::IsRaytracable",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::is_raytracable",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetRaytracable",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_raytracable",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::UseEnvironmentTexture",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::use_environment_texture",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetEnvironmentTexture",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_environment_texture",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::ToEnableDepthTest",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::to_enable_depth_test",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetEnableDepthTest",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_enable_depth_test",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::ToEnableDepthWrite",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::to_enable_depth_write",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetEnableDepthWrite",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_enable_depth_write",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::ToClearDepth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::to_clear_depth",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetClearDepth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_clear_depth",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::ToRenderInDepthPrepass",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::to_render_in_depth_prepass",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetRenderInDepthPrepass",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_render_in_depth_prepass",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::PolygonOffset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::polygon_offset",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetPolygonOffset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_polygon_offset",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::ChangePolygonOffset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::change_polygon_offset",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetDepthOffsetPositive",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_depth_offset_positive",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::SetDepthOffsetNegative",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::set_depth_offset_negative",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::name",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myLights",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::lights",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myOriginTrsf",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::origin_transformation",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myOrigin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::origin",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myCullingDistance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::culling_distance",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myCullingSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::culling_size",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myPolygonOffset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::polygon_offset",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myIsImmediate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::is_immediate",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myToRaytrace",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::is_raytracable",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myUseEnvironmentTexture",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::use_environment_texture",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myToEnableDepthTest",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::to_enable_depth_test",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myToEnableDepthWrite",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::to_enable_depth_write",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myToClearDepth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::to_clear_depth",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_ZLayerSettings::myToRenderInDepthPrepass",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::to_render_in_depth_prepass",
+      "status": "implemented",
+      "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe. Protected field, private behind its accessor."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::Graphic3d_PresentationAttributes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributes::default",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::Method",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesMembers::method",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::ColorRGBA",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesMembers::color_rgba",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::Color",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesMembers::color",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::Transparency",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesMembers::transparency",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::ZLayer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesMembers::z_layer",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::DisplayMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesMembers::display_mode",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::BasicFillAreaAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesMembers::basic_fill_area_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::SetMethod",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesSource::set_method",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::SetColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesSource::set_color",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::SetTransparency",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesSource::set_transparency",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::SetZLayer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesSource::set_z_layer",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::SetDisplayMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesSource::set_display_mode",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::SetBasicFillAreaAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesSource::set_basic_fill_area_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesSource::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::myBasicFillAreaAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesFields::basic_fill_area_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::myBasicColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesFields::basic_color",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::myHiMethod",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesFields::hi_method",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::myZLayer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesFields::z_layer",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_PresentationAttributes::myDispMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesFields::disp_mode",
+      "status": "implemented",
+      "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
     }
   ],
   "tests": [

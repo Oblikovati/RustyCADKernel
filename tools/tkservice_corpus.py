@@ -39,3 +39,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_light').append_light_requests(requests)
     # Graphic3d_TransformPers and Graphic3d_TransformUtils (tkservice_corpus_tpers.py)
     __import__('tkservice_corpus_tpers').append_tpers_requests(requests)
+    # Graphic3d_RenderingParams, Graphic3d_ZLayerSettings, Graphic3d_PresentationAttributes (tkservice_corpus_params.py)
+    __import__('tkservice_corpus_params').append_params_requests(requests)
