@@ -73,8 +73,9 @@ impl CdmApplicationBase {
 pub trait CdmApplication: Transient {
     /// The embedded base with the native private fields.
     fn application_base(&self) -> &CdmApplicationBase;
-    /// `Resources` (pure virtual): the manager searched for `<format>.*` resources.
-    fn resources(&self) -> SharedResourceManager;
+    /// `Resources` (pure virtual): the manager searched for `<format>.*` resources
+    /// (`Result`, because an implementation may load a resource file).
+    fn resources(&self) -> Result<SharedResourceManager, Failure>;
     /// `MessageDriver`: the default messenger (`occ::handle<Message_Messenger>` is an
     /// `Arc<Messenger>` in the TKernel port).
     fn message_driver(&self) -> Arc<Messenger> {

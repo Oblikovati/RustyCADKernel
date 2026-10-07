@@ -22,8 +22,8 @@ impl_transient!(CdfTestApplication, "CDF_TestApplication", dyn CdfApplication, t
     interfaces: [dyn CdmApplication, dyn CdfApplication]);
 impl CdmApplication for CdfTestApplication {
     cdf_application_cdm_members!();
-    fn resources(&self) -> SharedResourceManager {
-        self.resources.clone()
+    fn resources(&self) -> Result<SharedResourceManager, rustycad_tkernel::standard::Failure> {
+        Ok(self.resources.clone())
     }
 }
 impl CdfApplication for CdfTestApplication {
@@ -50,6 +50,7 @@ fn CDF_ApplicationTest__FormatFromExtensionResource() {
     let application = new_application();
     application
         .resources()
+        .unwrap()
         .write()
         .set_resource("MiXeD.FileFormat", b"Test format");
     let mut format = ExtendedString::default();
@@ -66,6 +67,7 @@ fn CDF_ApplicationTest__ExtensionlessFileHasNoFormat() {
     let application = new_application();
     application
         .resources()
+        .unwrap()
         .write()
         .set_resource(".FileFormat", b"Invalid fallback");
     let mut format = ExtendedString::default();

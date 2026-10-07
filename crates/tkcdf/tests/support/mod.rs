@@ -30,8 +30,14 @@ impl CdmDocument for FakeDocument {
     fn storage_format(&self) -> ExtendedString {
         ExtendedString::new("TestFormat")
     }
-    fn update_reference(&self, _to: &Handle<dyn CdmDocument>, id: i32, _context: *const ()) {
+    fn update_reference(
+        &self,
+        _to: &Handle<dyn CdmDocument>,
+        id: i32,
+        _context: rustycad_tkcdf::cdm::ModifContext<'_>,
+    ) -> Result<(), Failure> {
         self.updates.lock().unwrap().push(id);
+        Ok(())
     }
     fn can_close_reference(&self, _document: &Handle<dyn CdmDocument>, _id: i32) -> bool {
         !*self.refuse_close.lock().unwrap()
@@ -59,8 +65,8 @@ impl CdmApplication for FakeApplication {
     fn application_base(&self) -> &CdmApplicationBase {
         &self.base
     }
-    fn resources(&self) -> SharedResourceManager {
-        self.resources.clone()
+    fn resources(&self) -> Result<SharedResourceManager, Failure> {
+        Ok(self.resources.clone())
     }
     fn retrieve(
         &self,

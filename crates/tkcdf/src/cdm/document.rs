@@ -15,9 +15,10 @@ use rustycad_tkernel::{
 };
 use std::sync::{OnceLock, RwLockReadGuard, RwLockWriteGuard};
 
-/// The native `void* const aModifContext` of the update protocol: an opaque address that
-/// the framework passes through without reading it.
-pub type ModifContext = *const ();
+/// The native `void* const aModifContext` of the update protocol: an opaque object that
+/// the framework passes through and an `Update` override may down cast (`TDocStd_Context`);
+/// `None` is the null pointer.
+pub type ModifContext<'a> = Option<&'a (dyn std::any::Any + Send + Sync)>;
 
 /// `CDM_Document`'s virtual members; a concrete document embeds a [`CdmDocumentBase`].
 ///
@@ -48,8 +49,9 @@ pub trait CdmDocument: Transient {
         &self,
         _to_document: &Handle<dyn CdmDocument>,
         _reference_identifier: i32,
-        _modif_context: ModifContext,
-    ) {
+        _modif_context: ModifContext<'_>,
+    ) -> Result<(), Failure> {
+        Ok(())
     }
     /// `Update(ErrorString)`: clears the error, calls [`CdmDocument::update`], succeeds.
     fn update_with_error(&self, error_string: &mut ExtendedString) -> bool {

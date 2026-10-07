@@ -143,7 +143,7 @@ pub trait CdfApplication: CdmApplication {
     ) -> Result<Handle<dyn PcdmReader>, Failure> {
         super::application_drivers::reader_from_format(
             self.cdf_application_base(),
-            &self.resources(),
+            &self.resources()?,
             format,
         )
     }
@@ -154,7 +154,7 @@ pub trait CdfApplication: CdmApplication {
     ) -> Result<Handle<dyn PcdmStorageDriver>, Failure> {
         super::application_drivers::writer_from_format(
             self.cdf_application_base(),
-            &self.resources(),
+            &self.resources()?,
             format,
         )
     }

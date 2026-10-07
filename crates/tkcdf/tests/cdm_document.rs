@@ -64,11 +64,11 @@ fn update_from_documents_calls_every_referencing_document() {
     let (to, _) = new_document();
     from.open(&application);
     let id = from.create_reference(&to).unwrap();
-    to.update_from_documents(std::ptr::null()).unwrap();
+    to.update_from_documents(None).unwrap();
     assert_eq!(*concrete.updates.lock().unwrap(), vec![id]);
     let (unopened, _) = new_document();
     unopened.create_reference(&to).unwrap();
-    assert!(to.update_from_documents(std::ptr::null()).is_err());
+    assert!(to.update_from_documents(None).is_err());
 }
 
 #[test]

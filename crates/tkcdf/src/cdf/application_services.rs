@@ -151,7 +151,7 @@ pub trait CdfApplicationServices: CdfApplication {
                 "{}.FileFormat",
                 String::from_utf8_lossy(extension.as_bytes())
             );
-            match resource_value(&self.resources(), &resource)? {
+            match resource_value(&self.resources()?, &resource)? {
                 Some(value) => file_format = value,
                 None => return Ok(PcdmReaderStatus::UnrecognizedFileFormat),
             }
@@ -189,7 +189,7 @@ pub trait CdfApplicationServices: CdfApplication {
         file_name: &ExtendedString,
         found: &mut ExtendedString,
     ) -> Result<bool, Failure> {
-        format(&self.resources(), file_name, found)
+        format(&self.resources()?, file_name, found)
     }
     /// `DefaultFolder`: the driver's default folder, kept once read.
     fn default_folder(&self) -> Result<ExtendedString, Failure> {

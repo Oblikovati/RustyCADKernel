@@ -398255,7 +398255,7 @@
       "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
       "rust_item": "rustycad_tkcdf::cdm::CdmApplication::resources",
       "status": "implemented",
-      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. occ::handle<Resource_Manager> is SharedResourceManager (Arc<SharedState<ResourceManager>>)."
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. occ::handle<Resource_Manager> is SharedResourceManager (Arc<SharedState<ResourceManager>>); the virtual returns Result because an implementation may load a resource file."
     },
     {
       "upstream_id": "CDM_Application::MessageDriver",
@@ -398359,7 +398359,7 @@
       "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
       "rust_item": "rustycad_tkcdf::cdm::CdmDocument::update_reference",
       "status": "implemented",
-      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. void* is the opaque ModifContext address."
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. void* is ModifContext, an optional reference to Any that an override may down cast (TDocStd_Context); the virtual returns Result because overrides can fail."
     },
     {
       "upstream_id": "CDM_Document::Update(TCollection_ExtendedString&)",

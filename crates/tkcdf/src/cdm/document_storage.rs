@@ -229,7 +229,7 @@ fn storage_resource<D: CdmDocument + ?Sized>(
 ) -> Result<SharedResourceManager, Failure> {
     let application = document.document_base().read().application.clone();
     match application.get() {
-        Some(application) => Ok(application.resources()),
+        Some(application) => application.resources(),
         None => Err(Failure::new(&format!(
             "this document of format {} has not yet been opened by any application. \n",
             document.storage_format().to_utf8()

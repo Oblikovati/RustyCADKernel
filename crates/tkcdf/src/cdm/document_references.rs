@@ -124,7 +124,7 @@ pub trait CdmDocumentReferences: CdmDocument {
     /// Native quirk kept: the list of documents to update is a fresh local, so every call
     /// starts an update cycle and the ordering loop never runs; every referencing document
     /// is appended once per reference.
-    fn update_from_documents(&self, modif_context: ModifContext) -> Result<(), Failure> {
+    fn update_from_documents(&self, modif_context: ModifContext<'_>) -> Result<(), Failure> {
         let this = self.document_base().this()?;
         let mut to_update: Vec<Handle<dyn CdmDocument>> = Vec::new();
         for reference in self.document_base().references_to_this() {
@@ -132,7 +132,7 @@ pub trait CdmDocumentReferences: CdmDocument {
             let from_document = reference.from_document();
             let from = live(&from_document, "CDM_Document::UpdateFromDocuments")?;
             to_update.push(from_document.clone());
-            from.update_reference(&this, reference.reference_identifier(), modif_context);
+            from.update_reference(&this, reference.reference_identifier(), modif_context)?;
         }
         to_update.iter().try_for_each(update_one_document)
     }
