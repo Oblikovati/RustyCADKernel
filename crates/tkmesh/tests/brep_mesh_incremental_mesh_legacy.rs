@@ -1,7 +1,10 @@
 //! Exact Rust port of the selected BRepMesh incremental-mesh legacy declaration.
 use rustycad_tkbrep::topods::{Builder, Compound, Shape, Wire};
 use rustycad_tkernel::message::ProgressRange;
-use rustycad_tkmesh::{brep_mesh::BRepMeshIncrementalMesh, imesh_tools::MeshParameters};
+use rustycad_tkmesh::{
+    brep_mesh::{BRepMeshDiscretRoot, BRepMeshIncrementalMesh},
+    imesh_tools::MeshParameters,
+};
 
 #[test]
 #[allow(non_snake_case)]
@@ -41,18 +44,18 @@ fn invalid_linear_deflection_returns_native_numeric_error() {
 }
 
 #[test]
-fn nonempty_shapes_report_the_unported_meshing_stage() {
+fn empty_wire_meshes_as_native_done_without_status() {
+    // Native BRepMesh_IncrementalMesh on an empty wire: done, status 0 (measured with
+    // the pinned OCCT build).
     let mut wire = Wire::default();
     Builder.make_wire(&mut wire);
     let parameters = MeshParameters::default();
-    let result = BRepMeshIncrementalMesh::with_parameters(
+    let mesher = BRepMeshIncrementalMesh::with_parameters(
         &Shape::from(wire),
         &parameters,
         &ProgressRange::default(),
-    );
-    let failure = match result {
-        Ok(_) => panic!("wire meshing requires the unported face discretizer"),
-        Err(failure) => failure,
-    };
-    assert_eq!(failure.exception_type(), "Standard_NotImplemented");
+    )
+    .unwrap();
+    assert!(mesher.is_done());
+    assert_eq!(mesher.get_status_flags(), 0);
 }

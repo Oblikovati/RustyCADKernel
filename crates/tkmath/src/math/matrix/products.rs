@@ -192,17 +192,6 @@ fn dimension(operation: &str, message: &str) -> Failure {
         "",
     )
 }
-impl std::ops::MulAssign<&Self> for Matrix<'_> {
-    fn mul_assign(&mut self, right: &Self) {
-        self.multiply_matrix(right).unwrap();
-    }
-}
-impl std::ops::Mul<&Vector<'_>> for &Matrix<'_> {
-    type Output = Vector<'static>;
-    fn mul(self, right: &Vector<'_>) -> Self::Output {
-        self.multiplied_vector(right).unwrap()
-    }
-}
 /// Column `row` of `t_left` dotted with column `col` of `right`, by position.
 fn transpose_dot(t_left: &Matrix<'_>, right: &Matrix<'_>, row: i32, col: i32) -> f64 {
     let mut sum = 0.0;

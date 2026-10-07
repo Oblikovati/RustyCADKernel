@@ -2,7 +2,7 @@
 use super::polygon_state::PolygonLoop;
 use super::triangle_build::{LoopEdges, loop_edges};
 use super::{BRepMeshDelaun, DegreeOfFreedom};
-use rustycad_tkernel::ncollection::{DynamicArray, Map, Sequence};
+use rustycad_tkernel::ncollection::{DynamicArray, PackedMap, Sequence};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::bnd::CompactBox2;
 
@@ -35,8 +35,8 @@ impl BRepMeshDelaun {
         polygon: &PolygonLoop,
     ) -> Result<PolygonBoundary, Failure> {
         let mut vertices = DynamicArray::with_increment(256);
-        let mut vertex_set = Map::default();
-        let mut ignored = Map::default();
+        let mut vertex_set = PackedMap::default();
+        let mut ignored = PackedMap::default();
         let mut boundary = loop_edges();
         for (offset, link) in polygon.links.iter().enumerate() {
             let link_id = link.wrapping_abs();
@@ -81,7 +81,7 @@ impl BRepMeshDelaun {
         &self,
         signed_link: i32,
         vertices: &mut DynamicArray<i32>,
-        vertex_set: &mut Map<i32>,
+        vertex_set: &mut PackedMap<i32>,
     ) -> Result<(), Failure> {
         let edge = self.get_edge(signed_link.wrapping_abs())?;
         let endpoints = oriented_endpoints(&edge, signed_link > 0);
@@ -95,9 +95,9 @@ impl BRepMeshDelaun {
     fn remove_polygon_cavity(
         &mut self,
         vertices: &DynamicArray<i32>,
-        vertex_set: &Map<i32>,
+        vertex_set: &PackedMap<i32>,
         polygon: &PolygonLoop,
-        survivors: &mut Map<i32>,
+        survivors: &mut PackedMap<i32>,
         boundary: &mut LoopEdges,
     ) -> Result<(), Failure> {
         let mut pending_victims = Vec::new();
@@ -126,9 +126,9 @@ impl BRepMeshDelaun {
     fn process_victim_frames(
         &mut self,
         vertices: &DynamicArray<i32>,
-        vertex_set: &Map<i32>,
+        vertex_set: &PackedMap<i32>,
         polygon: &PolygonLoop,
-        survivors: &mut Map<i32>,
+        survivors: &mut PackedMap<i32>,
         boundary: &mut LoopEdges,
         victims: &mut Vec<i32>,
     ) -> Result<(), Failure> {
@@ -158,15 +158,15 @@ impl BRepMeshDelaun {
         &mut self,
         zombie: i32,
         vertices: &DynamicArray<i32>,
-        vertex_set: &Map<i32>,
+        vertex_set: &PackedMap<i32>,
         polygon: &PolygonLoop,
-        survivors: &mut Map<i32>,
+        survivors: &mut PackedMap<i32>,
         boundary: &mut LoopEdges,
         victims: &mut Vec<i32>,
     ) -> Result<(), Failure> {
         let neighbors = self.mesh_ref()?.links_connected_to(zombie)?;
         for link_id in neighbors.iter().copied() {
-            if survivors.contains(&link_id) {
+            if survivors.contains(link_id) {
                 continue;
             }
             self.process_zombie_neighbor(
@@ -183,9 +183,9 @@ impl BRepMeshDelaun {
         zombie: i32,
         link_id: i32,
         vertices: &DynamicArray<i32>,
-        vertex_set: &Map<i32>,
+        vertex_set: &PackedMap<i32>,
         polygon: &PolygonLoop,
-        survivors: &mut Map<i32>,
+        survivors: &mut PackedMap<i32>,
         boundary: &mut LoopEdges,
         victims: &mut Vec<i32>,
     ) -> Result<(), Failure> {
@@ -196,9 +196,9 @@ impl BRepMeshDelaun {
         }
         if edge.movability() != DegreeOfFreedom::Frontier {
             let other = other_node(&edge, zombie);
-            if !vertex_set.contains(&other) && self.polygon_contains_vertex(other, vertices)? {
+            if !vertex_set.contains(other) && self.polygon_contains_vertex(other, vertices)? {
                 victims.push(other);
-            } else if !vertex_set.contains(&other) {
+            } else if !vertex_set.contains(other) {
                 return self.kill_intersecting_link(link_id, other, polygon, survivors, boundary);
             }
         }
@@ -222,10 +222,10 @@ impl BRepMeshDelaun {
         link: i32,
         endpoint: i32,
         polygon: &PolygonLoop,
-        survivors: &mut Map<i32>,
+        survivors: &mut PackedMap<i32>,
         boundary: &mut LoopEdges,
     ) -> Result<(), Failure> {
-        if survivors.contains(&link)
+        if survivors.contains(link)
             || self.link_is_outside_polygon(&self.get_edge(link)?, polygon, false, false)?
         {
             survivors.add(link);
@@ -279,13 +279,12 @@ impl BRepMeshDelaun {
 
     fn remove_unattached_loop_edges(
         &self,
-        ignored: &Map<i32>,
+        ignored: &PackedMap<i32>,
         boundary: &LoopEdges,
     ) -> Result<(), Failure> {
         let links = boundary.items().map(|(link, _)| *link).collect::<Vec<_>>();
         for link in links {
-            if !ignored.contains(&link) && self.mesh_ref()?.elements_connected_to(link)?.is_empty()
-            {
+            if !ignored.contains(link) && self.mesh_ref()?.elements_connected_to(link)?.is_empty() {
                 self.mesh_ref()?.remove_link(link, false)?;
             }
         }
@@ -295,15 +294,15 @@ impl BRepMeshDelaun {
 
 struct PolygonBoundary {
     vertices: DynamicArray<i32>,
-    vertex_set: Map<i32>,
-    ignored: Map<i32>,
+    vertex_set: PackedMap<i32>,
+    ignored: PackedMap<i32>,
     links: LoopEdges,
 }
 
-fn copy_integer_set(source: &Map<i32>) -> Map<i32> {
-    let mut copy = Map::default();
+fn copy_integer_set(source: &PackedMap<i32>) -> PackedMap<i32> {
+    let mut copy = PackedMap::default();
     for key in source.iter() {
-        copy.add(*key);
+        copy.add(key);
     }
     copy
 }

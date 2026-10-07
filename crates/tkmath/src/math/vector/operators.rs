@@ -1,55 +1,47 @@
 use super::{VectorBase, VectorItem};
-use crate::math::Matrix;
 use std::fmt;
-use std::ops::{
-    Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign,
-};
+use std::ops::{Index, IndexMut, Mul, MulAssign, Neg};
+// Why `Index`/`IndexMut` stay although library code never panics (2026-10 audit):
+// the fallible arithmetic operators were removed (their only caller used the Result
+// methods instead), but indexing has 943 call sites in rustycad-tkmath alone and more in
+// every geometry crate. The index is a caller precondition, as for slices and as for the
+// native `operator()` (bounds checked only by Standard_OutOfRange_Raise_if in debug
+// builds): every library caller iterates within `lower()..=upper()`, so the panic below
+// is unreachable there. Code holding an index it has not bounded uses the Result
+// accessors `value`/`change_value`, which return Standard_OutOfRange with the index.
+/// `operator()(int)` const with the caller-guaranteed index of a bounded loop;
+/// `vector[vector.lower()]`. Panics (naming the index and bounds) outside the bounds.
 impl<T: VectorItem> Index<i32> for VectorBase<'_, T> {
     type Output = T;
+    #[track_caller]
     fn index(&self, index: i32) -> &T {
-        self.value(index).unwrap()
+        let (lower, upper) = (self.lower(), self.upper());
+        self.value(index)
+            .unwrap_or_else(|_| index_out_of_bounds(index, lower, upper))
     }
 }
+/// `operator()(int)` with the caller-guaranteed index of a bounded loop;
+/// `vector[vector.lower()] = 1.0`. Panics (naming the index and bounds) outside them.
 impl<T: VectorItem> IndexMut<i32> for VectorBase<'_, T> {
+    #[track_caller]
     fn index_mut(&mut self, index: i32) -> &mut T {
-        self.change_value(index).unwrap()
+        let (lower, upper) = (self.lower(), self.upper());
+        self.change_value(index)
+            .unwrap_or_else(|_| index_out_of_bounds(index, lower, upper))
     }
 }
-impl<'a, T: VectorItem> Add<&VectorBase<'a, T>> for &VectorBase<'a, T> {
-    type Output = VectorBase<'a, T>;
-    fn add(self, right: &VectorBase<'a, T>) -> Self::Output {
-        self.added(right).unwrap()
-    }
-}
-impl<'a, T: VectorItem> Sub<&VectorBase<'a, T>> for &VectorBase<'a, T> {
-    type Output = VectorBase<'a, T>;
-    fn sub(self, right: &VectorBase<'a, T>) -> Self::Output {
-        self.subtracted(right).unwrap()
-    }
+/// The precondition failure of vector indexing: the index and the bounds it missed.
+#[cold]
+#[track_caller]
+fn index_out_of_bounds(index: i32, lower: i32, upper: i32) -> ! {
+    panic!(
+        "math_VectorBase index {index} outside [{lower}, {upper}]; use value()/change_value() for an unchecked index"
+    )
 }
 impl<'a, T: VectorItem> Mul<T> for &VectorBase<'a, T> {
     type Output = VectorBase<'a, T>;
     fn mul(self, right: T) -> Self::Output {
         self.multiplied(right)
-    }
-}
-impl<T: VectorItem> Mul<&VectorBase<'_, T>> for &VectorBase<'_, T> {
-    type Output = T;
-    fn mul(self, right: &VectorBase<'_, T>) -> T {
-        self.dot(right).unwrap()
-    }
-}
-/// Row vector times matrix, bounded by the matrix columns; `&row * &matrix`.
-impl<'a, T: VectorItem> Mul<&Matrix<'_>> for &VectorBase<'a, T> {
-    type Output = VectorBase<'a, T>;
-    fn mul(self, right: &Matrix<'_>) -> Self::Output {
-        self.multiplied_matrix(right).unwrap()
-    }
-}
-impl<'a, T: VectorItem> Div<T> for &VectorBase<'a, T> {
-    type Output = VectorBase<'a, T>;
-    fn div(self, right: T) -> Self::Output {
-        self.divided(right).unwrap()
     }
 }
 impl<'a, T: VectorItem> Neg for &VectorBase<'a, T> {
@@ -58,24 +50,9 @@ impl<'a, T: VectorItem> Neg for &VectorBase<'a, T> {
         self.opposite()
     }
 }
-impl<T: VectorItem> AddAssign<&Self> for VectorBase<'_, T> {
-    fn add_assign(&mut self, right: &Self) {
-        self.add(right).unwrap();
-    }
-}
-impl<T: VectorItem> SubAssign<&Self> for VectorBase<'_, T> {
-    fn sub_assign(&mut self, right: &Self) {
-        self.subtract(right).unwrap();
-    }
-}
 impl<T: VectorItem> MulAssign<T> for VectorBase<'_, T> {
     fn mul_assign(&mut self, right: T) {
         self.multiply(right);
-    }
-}
-impl<T: VectorItem> DivAssign<T> for VectorBase<'_, T> {
-    fn div_assign(&mut self, right: T) {
-        self.divide(right).unwrap();
     }
 }
 /// The friend `operator<<`, which forwards to `Dump`; `format!("{vector}")`.

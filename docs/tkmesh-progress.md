@@ -224,3 +224,19 @@ the native `is_done()` transition. The matching pinned native CTest passes 9/9 a
 the Rust target passes all nine source mirrors plus two focused registry checks
 (11/11). TKMesh now maps 27/29 declarations; the IncrementalMesh source has seven of
 nine declarations mapped, with torus Boolean fusion and sphere cleanup/reuse still open.
+
+### Native face algorithms (2026-10)
+
+The Rust-only planar face strategy is gone. Faces now go through the native pipeline:
+`BRepMesh_Context`, `BRepMesh_FaceDiscret` over `BRepMesh_MeshAlgoFactory`, the
+`BaseMeshAlgo` hierarchy with the `NodeInsertion`, `DelaunayNodeInsertion` and
+`DelaunayDeflectionControl` templates, every range splitter (cylinder, sphere, torus,
+UV-parameter, NURBS, boundary-parameter, extrusion, undefined), `BRepMesh_Classifier`,
+`BRepMesh_MeshTool` and `BRepMesh_Triangulator`. `BRepMesh_IncrementalMesh` derives
+`BRepMesh_DiscretRoot` and runs `IMeshTools_MeshBuilder`. The Delaunay domain and
+selection maps are packed maps, as `IMeshData::MapOfInteger` is natively. The OCC31461
+sphere declaration is mapped (5106 nodes, 10108 triangles), and the numeric oracle adds
+64 `mesh_incremental_shape` requests (all factory surface types, four parameter modes)
+and six `mesh_triangulator` requests, all equal to the pinned native build. Delabella
+is not ported (third-party MIT library). TKMesh maps 28/29 declarations; torus Boolean
+fusion waits for `BRepAlgoAPI_Fuse`.

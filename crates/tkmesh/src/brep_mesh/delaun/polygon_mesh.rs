@@ -2,7 +2,7 @@
 use super::polygon_state::PolygonLoop;
 use super::{BRepMeshDelaun, DegreeOfFreedom};
 use rustycad_tkernel::{
-    ncollection::{Map, Sequence},
+    ncollection::{PackedMap, Sequence},
     standard::Failure,
 };
 mod crossing;
@@ -33,7 +33,7 @@ impl BRepMeshDelaun {
     pub(super) fn mesh_polygon(
         &mut self,
         polygon: &mut PolygonLoop,
-        mut skipped: Option<&mut Map<i32>>,
+        mut skipped: Option<&mut PackedMap<i32>>,
     ) -> Result<(), Failure> {
         if self.mesh_elementary_polygon(polygon)? {
             return Ok(());
@@ -82,7 +82,7 @@ impl BRepMeshDelaun {
         &mut self,
         polygon: &mut PolygonLoop,
         small_area: f64,
-        skipped: &mut Option<&mut Map<i32>>,
+        skipped: &mut Option<&mut PackedMap<i32>>,
     ) -> Result<bool, Failure> {
         let mut index = 1;
         while index < polygon.len() {
@@ -107,7 +107,7 @@ impl BRepMeshDelaun {
         polygon: &mut PolygonLoop,
         current: &mut PolygonEdge,
         small_area: f64,
-        skipped: &mut Option<&mut Map<i32>>,
+        skipped: &mut Option<&mut PackedMap<i32>>,
     ) -> Result<(bool, bool), Failure> {
         let mut next_index = current.index + 1;
         while next_index <= polygon.len() {

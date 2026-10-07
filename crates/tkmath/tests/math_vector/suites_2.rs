@@ -17,7 +17,7 @@ fn MathVectorTest__VectorAdditionSubtraction() {
     assert_eq!(anAddResult[3], 9.0);
 
     // Test operator+
-    let mut anAddResult2 = &aVec1 + &aVec2;
+    let mut anAddResult2 = aVec1.added(&aVec2).unwrap();
     check_vectors_equal(&anAddResult, &anAddResult2);
 
     // Test Subtracted
@@ -27,7 +27,7 @@ fn MathVectorTest__VectorAdditionSubtraction() {
     assert_eq!(aSubResult[3], -3.0);
 
     // Test operator-
-    let mut aSubResult2 = &aVec1 - &aVec2;
+    let mut aSubResult2 = aVec1.subtracted(&aVec2).unwrap();
     check_vectors_equal(&aSubResult, &aSubResult2);
 
     // Test in-place Add
@@ -37,7 +37,7 @@ fn MathVectorTest__VectorAdditionSubtraction() {
 
     // Test operator+=
     let mut aVecCopy2 = aVec1.clone();
-    aVecCopy2 += &aVec2;
+    aVecCopy2.add(&aVec2).unwrap();
     check_vectors_equal(&aVecCopy2, &anAddResult);
 
     // Test in-place Subtract
@@ -47,7 +47,7 @@ fn MathVectorTest__VectorAdditionSubtraction() {
 
     // Test operator-=
     let mut aVecCopy4 = aVec1.clone();
-    aVecCopy4 -= &aVec2;
+    aVecCopy4.subtract(&aVec2).unwrap();
     check_vectors_equal(&aVecCopy4, &aSubResult);
 }
 
@@ -91,7 +91,7 @@ fn MathVectorTest__DotProduct() {
     assert_eq!(aDotProduct, 32.0);
 
     // Test operator*
-    let mut aDotProduct2 = &aVec1 * &aVec2;
+    let mut aDotProduct2 = aVec1.dot(&aVec2).unwrap();
     assert_eq!(aDotProduct, aDotProduct2);
 }
 

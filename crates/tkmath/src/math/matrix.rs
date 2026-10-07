@@ -111,13 +111,19 @@ impl Matrix<'_> {
         self.table.cells_mut()
     }
 }
+/// `operator()(int, int)` const with caller-guaranteed indices; `matrix[(1, 1)]`. The
+/// bounds are the precondition documented on the DoubleTab indexing it delegates to;
+/// `value`/`change_value` return Standard_OutOfRange instead.
 impl std::ops::Index<(i32, i32)> for Matrix<'_> {
     type Output = f64;
+    #[track_caller]
     fn index(&self, index: (i32, i32)) -> &f64 {
         &self.table[index]
     }
 }
+/// `operator()(int, int)` with caller-guaranteed indices; `matrix[(1, 1)] = 2.0`.
 impl std::ops::IndexMut<(i32, i32)> for Matrix<'_> {
+    #[track_caller]
     fn index_mut(&mut self, index: (i32, i32)) -> &mut f64 {
         &mut self.table[index]
     }
