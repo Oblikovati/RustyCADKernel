@@ -1,6 +1,11 @@
 //! Supplemental borrowed Add/Added and shared owned lookup regressions.
+//!
+//! The native probe (tools/oracle/ncollection_map_borrowed_add.cxx) also traces the node
+//! allocation `A` through an injected C++ allocator subclass. Rust allocators are a closed set
+//! and map entries take no allocator lease, so that event is not observable here (plan D1
+//! class B6); the hash, equality and key-copy order is.
 use rustycad_tkernel::ncollection::{BaseAllocator, HashPolicy, Map};
-use std::cell::{Cell, RefCell};
+use std::cell::RefCell;
 use std::rc::Rc;
 
 type KeyEvents = Rc<RefCell<Vec<char>>>;
@@ -10,23 +15,17 @@ type BorrowedFixture = (BaseAllocator, KeyEvents, BorrowedKey, BorrowedMap);
 #[derive(Debug)]
 struct BorrowedKey {
     number: usize,
-    allocator: BaseAllocator,
     events: KeyEvents,
-    allocation_seen: Rc<Cell<bool>>,
     fail_copy: bool,
 }
 
 impl Clone for BorrowedKey {
     fn clone(&self) -> Self {
         self.events.borrow_mut().push('K');
-        self.allocation_seen
-            .set(self.allocator.reset(false).is_err());
         assert!(!self.fail_copy, "injected key {} clone panic", self.number);
         Self {
             number: self.number,
-            allocator: self.allocator.clone(),
             events: Rc::clone(&self.events),
-            allocation_seen: Rc::clone(&self.allocation_seen),
             fail_copy: false,
         }
     }
@@ -49,9 +48,7 @@ fn borrowed_fixture(fail_copy: bool) -> BorrowedFixture {
     let events: KeyEvents = Rc::new(RefCell::new(Vec::new()));
     let key = BorrowedKey {
         number: 4,
-        allocator: arena.clone(),
         events: Rc::clone(&events),
-        allocation_seen: Rc::new(Cell::new(false)),
         fail_copy,
     };
     let keys = Map::with_allocator(KeyHash(Rc::clone(&events)), 101, arena.clone());
@@ -59,19 +56,17 @@ fn borrowed_fixture(fail_copy: bool) -> BorrowedFixture {
 }
 
 #[test]
-fn borrowed_add_hashes_once_and_allocates_before_copy_without_copying_on_hit() {
+fn borrowed_add_hashes_once_and_copies_without_copying_on_hit() {
     let (arena, events, mut key, mut keys) = borrowed_fixture(false);
+    // Native miss: H A K; native hit: H E.
     assert!(keys.add_ref(&key));
     assert_eq!(*events.borrow(), ['H', 'K']);
-    assert!(key.allocation_seen.get());
-    let live = arena.reset(false).unwrap_err().message().to_owned();
     key.fail_copy = true;
     events.borrow_mut().clear();
     assert!(!keys.add_ref(&key));
     assert_eq!(*events.borrow(), ['H', 'E']);
-    assert_eq!(arena.reset(false).unwrap_err().message(), live);
     assert_eq!(key.number, 4);
-    assert_eq!(keys.len(), 1);
+    assert_eq!((keys.len(), keys.allocator()), (1, &arena));
 }
 
 #[test]
@@ -88,14 +83,13 @@ fn borrowed_added_returns_the_same_stored_key_without_an_extra_lookup() {
 }
 
 #[test]
-fn borrowed_key_copy_failure_releases_node_without_publishing_a_key() {
-    let (arena, events, key, mut keys) = borrowed_fixture(true);
+fn borrowed_key_copy_failure_publishes_no_key() {
+    let (_, events, key, mut keys) = borrowed_fixture(true);
     let failure = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| keys.add_ref(&key)));
     assert!(failure.is_err());
+    // Native: H A K F with extent 0.
     assert_eq!(*events.borrow(), ['H', 'K']);
-    assert!(key.allocation_seen.get());
     assert!(keys.is_empty());
-    arena.reset(false).unwrap();
 }
 
 #[test]

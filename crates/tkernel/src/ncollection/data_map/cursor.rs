@@ -1,8 +1,8 @@
-//! `NCollection_DataMap::Iterator`: More/Next/Value over the actual native bucket topology.
+//! `NCollection_DataMap::Iterator`: More/Next/Value over the map's bucket chains in native order.
 use super::super::base_map::exhausted_iterator;
-use super::{DataMap, DataMapItems, Debug, HashPolicy, storage::DataMapStorage};
+use super::{DataMap, DataMapItems, DataMapStorage, Debug, HashPolicy};
 use crate::{
-    ncollection::{DataMapNode, owned_bucket_chains::BucketChainPosition},
+    ncollection::chained_slots::{ChainPosition, ChainSlot},
     standard::Failure,
 };
 /// Read-only OCCT cursor; `let mut cursor=map.cursor(); while cursor.more() { cursor.next(); }`.
@@ -12,11 +12,8 @@ pub struct DataMapIterator<'a, K, V> {
 /// Exclusive OCCT cursor; `*map.cursor_mut().change_value()?=7`.
 pub struct DataMapIteratorMut<'a, K, V> {
     source: Option<&'a mut DataMapStorage<K, V>>,
-    position: BucketChainPosition,
+    position: ChainPosition,
 }
-// SAFETY: the cursor retains the exclusive graph borrow; each value follows K,V ownership.
-unsafe impl<K: Send, V: Send> Send for DataMapIteratorMut<'_, K, V> {}
-unsafe impl<K: Sync, V: Sync> Sync for DataMapIteratorMut<'_, K, V> {}
 impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// `Iterator(const NCollection_DataMap&)`: a cursor on the first binding in bucket order.
     ///
@@ -43,7 +40,7 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// ```
     pub fn cursor_mut(&mut self) -> DataMapIteratorMut<'_, K, V> {
         DataMapIteratorMut {
-            position: BucketChainPosition::new(&self.storage.base),
+            position: ChainPosition::first(&self.storage),
             source: Some(&mut self.storage),
         }
     }
@@ -80,7 +77,7 @@ impl<'a, K, V> DataMapIterator<'a, K, V> {
     pub fn is_equal(&self, other: &Self) -> bool {
         self.items == other.items
     }
-    fn entry(&self, method: &str) -> Result<&'a DataMapNode<K, V>, Failure> {
+    fn entry(&self, method: &str) -> Result<&'a ChainSlot<K, V>, Failure> {
         self.items
             .current()
             .ok_or_else(|| exhausted_iterator(method))
@@ -116,12 +113,12 @@ impl<K, V> DataMapIterator<'_, K, V> {
 impl<'a, K, V> DataMapIteratorMut<'a, K, V> {
     /// Reports native More; `cursor.more()`.
     pub fn more(&self) -> bool {
-        !self.position.node.is_null()
+        self.position.slot().is_some()
     }
     /// Advances native Next; `cursor.next()`.
     pub fn next(&mut self) {
-        if let Some(source) = self.source.as_ref() {
-            self.position.advance(&source.base);
+        if let Some(source) = self.source.as_deref() {
+            self.position.advance(source);
         }
     }
     /// Borrows native Value without permitting changes; `cursor.value()?`.
@@ -130,13 +127,12 @@ impl<'a, K, V> DataMapIteratorMut<'a, K, V> {
     }
     /// Borrows native ChangeValue exclusively; `*cursor.change_value()?=8`.
     pub fn change_value(&mut self) -> Result<&mut V, Failure> {
-        if !self.more() {
+        let (Some(source), Some(slot)) = (self.source.as_deref_mut(), self.position.slot()) else {
             return Err(exhausted_iterator(
                 "NCollection_DataMap::Iterator::ChangeValue",
             ));
-        }
-        let source = self.source.as_mut().unwrap();
-        Ok(unsafe { source.node_mut(self.position.node).change_value() })
+        };
+        Ok(source.slot_mut(slot).key_value_mut().1)
     }
     /// Borrows native Key; `cursor.key()?`.
     pub fn key(&self) -> Result<&K, Failure> {
@@ -151,32 +147,29 @@ impl<'a, K, V> DataMapIteratorMut<'a, K, V> {
     }
     /// Restarts on this map's first node; `cursor.reset()`.
     pub fn reset(&mut self) {
-        self.position = self
-            .source
-            .as_ref()
-            .map_or_else(BucketChainPosition::default, |source| {
-                BucketChainPosition::new(&source.base)
-            });
-    }
-    fn entry(&self, method: &str) -> Result<&DataMapNode<K, V>, Failure> {
-        if !self.more() {
-            return Err(exhausted_iterator(method));
+        if let Some(source) = self.source.as_deref() {
+            self.position = ChainPosition::first(source);
         }
-        Ok(unsafe { self.source.as_ref().unwrap().node(self.position.node) })
+    }
+    fn entry(&self, method: &str) -> Result<&ChainSlot<K, V>, Failure> {
+        let (Some(source), Some(slot)) = (self.source.as_deref(), self.position.slot()) else {
+            return Err(exhausted_iterator(method));
+        };
+        Ok(source.slot(slot))
     }
 }
 impl<K, V> Default for DataMapIteratorMut<'_, K, V> {
     fn default() -> Self {
         Self {
             source: None,
-            position: BucketChainPosition::default(),
+            position: ChainPosition::default(),
         }
     }
 }
 impl<K, V> DataMapIteratorMut<'_, K, V> {
     /// Compares native node identity, with all exhausted cursors equal; `first.is_equal(&second)`.
     pub fn is_equal(&self, other: &Self) -> bool {
-        self.position.node == other.position.node
+        self.identity() == other.identity()
     }
     /// Advances and returns the writable cursor; `cursor.advance().change_value()`.
     pub fn advance(&mut self) -> &mut Self {
@@ -191,5 +184,10 @@ impl<K, V> DataMapIteratorMut<'_, K, V> {
         DataMapIterator {
             items: DataMapItems::from_position(self.source.as_deref(), position),
         }
+    }
+    // Native node identity: the owning map plus the slot, or nothing once exhausted.
+    fn identity(&self) -> Option<(*const DataMapStorage<K, V>, usize)> {
+        let source = self.source.as_deref()?;
+        Some((std::ptr::from_ref(source), self.position.slot()?))
     }
 }

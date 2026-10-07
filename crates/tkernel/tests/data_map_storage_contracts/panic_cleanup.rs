@@ -1,4 +1,4 @@
-use super::fixture::{CollisionHash, DropTrace, DropValue, caught, keys, populated};
+use super::fixture::{CollisionHash, DropTrace, DropValue, caught, keys, populated, table_of};
 use rustycad_tkernel::ncollection::{BaseAllocator, DataMap, HashPolicy};
 fn dropping_map(
     trace: &DropTrace,
@@ -13,8 +13,7 @@ fn dropping_map(
 #[test]
 fn hash_panic_leaves_old_canonical_chains_intact() {
     let mut map = populated(1);
-    let table = map.buckets();
-    let pointer = std::ptr::from_ref(map.find(&2).unwrap());
+    let table = table_of(&map);
     map.hasher().rejected.set(Some(2));
     assert!(caught(|| map.resize(200)));
     map.hasher().rejected.set(None);
@@ -22,8 +21,8 @@ fn hash_panic_leaves_old_canonical_chains_intact() {
         (keys(&map), map.len(), map.bucket_count()),
         ("3,2,1,".into(), 3, 101)
     );
-    assert_eq!(table, map.buckets());
-    assert_eq!(unsafe { *pointer }, 20);
+    assert_eq!(table, table_of(&map));
+    assert_eq!(map.find(&2), Ok(&20));
     map.resize(200);
     assert_eq!(keys(&map), "1,2,3,");
 }
@@ -71,13 +70,13 @@ fn allocator_replacement_clears_with_old_resource_and_preserves_modulus() {
     map.bind(1, 7);
     map.clear_with_allocator(Some(second.clone()));
     assert_eq!((map.len(), map.bucket_count()), (0, 2003));
-    assert!(map.buckets().is_null());
+    assert!(table_of(&map).is_none());
     assert_eq!(map.allocator(), &second);
     assert!(first.reset(false).is_ok());
     map.bind(2, 8);
-    assert!(second.reset(false).is_err());
-    map.clear(true);
+    // Native IncAllocator::Reset never refuses; entries hold no arena lease (plan D1 B6).
     assert!(second.reset(false).is_ok());
+    assert_eq!(map.find(&2), Ok(&8));
 }
 struct NonCloneHash;
 impl HashPolicy<i32> for NonCloneHash {

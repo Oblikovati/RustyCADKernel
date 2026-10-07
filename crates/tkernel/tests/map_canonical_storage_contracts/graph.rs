@@ -1,65 +1,62 @@
-use super::fixture::{native_row, populated};
-use rustycad_tkernel::ncollection::{
-    BaseMapBasicIterator, BasicMapIteratorSource, HashPolicy, ListValueNode, Map, MapNode,
-};
+use super::fixture::{native_row, populated, table_of};
+use rustycad_tkernel::ncollection::{HashPolicy, Map};
 #[test]
-fn facade_owns_actual_map_nodes_with_real_list_value_prefix() {
-    let mut map = populated(1);
-    assert_eq!(map.buckets(), map.buckets_mut().cast_const());
-    let first = unsafe { *map.buckets().add(1) }.cast::<MapNode<i32>>();
-    let cursor = BaseMapBasicIterator::<MapNode<i32>, false, true>::new(&map);
-    let node = unsafe { &*first };
-    let same_key = unsafe { std::ptr::from_ref(node.key()) == cursor.value_ptr() };
+fn bucket_table_head_is_the_first_cursor_entry() {
+    let map = populated(1);
+    let table = map.buckets().unwrap();
+    // The collision hash places every key in bucket 1; its head is the native first node.
+    let (head, unit) = table.chain(1).unwrap().next().unwrap();
+    let cursor = map.cursor();
+    let same_entry = std::ptr::eq(head, cursor.key().unwrap());
+    let same_key = std::ptr::eq(cursor.key().unwrap(), cursor.value().unwrap());
     native_row(
         "actual_node",
         format!(
-            "actual_node {} {} {}",
-            u8::from(first.cast_const() == cursor.node()),
-            u8::from(same_key),
-            node.key()
+            "actual_node {} {} {head}",
+            u8::from(same_entry),
+            u8::from(same_key)
         ),
     );
-    assert_eq!(unsafe { &*first.cast::<ListValueNode<i32>>() }.value(), &3);
+    assert_eq!(unit, &());
 }
 #[test]
-fn real_map_generic_mutable_specialization_returns_readonly_keys() {
-    let mut map = populated(1);
-    let mut cursor = BaseMapBasicIterator::<MapNode<i32>, true, true>::new(&mut map);
-    let old = unsafe { cursor.advance_post() };
-    let same = unsafe { old.value_ptr() == std::ptr::from_ref(old.key()) };
-    native_row("key_iterator", unsafe {
+fn key_only_cursor_postfix_advance_returns_readonly_keys() {
+    let map = populated(1);
+    let mut cursor = map.cursor();
+    let old = cursor.advance_post();
+    let same = std::ptr::eq(old.value().unwrap(), old.key().unwrap());
+    native_row(
+        "key_iterator",
         format!(
             "key_iterator {} {} {} {}",
-            old.value(),
-            old.key(),
-            cursor.value(),
+            old.value().unwrap(),
+            old.key().unwrap(),
+            cursor.value().unwrap(),
             u8::from(same)
-        )
-    });
+        ),
+    );
 }
 #[test]
-fn duplicate_add_and_rehash_preserve_key_pointer_provenance() {
+fn duplicate_add_and_rehash_keep_the_stored_key() {
     let mut map = populated(1);
-    let key = std::ptr::from_ref(map.contained(&2).unwrap());
     map.add(2);
     map.add(4);
     map.resize(2000);
     map.remove(&3);
-    assert_eq!(unsafe { *key }, 2);
-    assert_eq!(key, std::ptr::from_ref(map.contained(&2).unwrap()));
+    assert_eq!(map.contained(&2), Some(&2));
+    assert_eq!(map.len(), 3);
 }
 #[test]
-fn actual_map_source_preserves_empty_table_states() {
+fn bucket_table_preserves_empty_table_states() {
     let mut map = Map::<i32>::new(0);
-    assert!(map.basic_bucket_slots().is_none());
-    assert!(map.basic_first_node().is_null());
+    assert!(table_of(&map).is_none());
     map.add(7);
-    let table = map.buckets();
+    let table = table_of(&map);
     map.clear(false);
-    assert_eq!(map.basic_bucket_slots().unwrap().as_ptr(), table);
-    assert!(!BaseMapBasicIterator::<MapNode<i32>, false, true>::new(&map).more());
+    assert_eq!(table_of(&map), table);
+    assert!(!map.cursor().more());
     map.clear(true);
-    assert!(map.basic_bucket_slots().is_none());
+    assert!(table_of(&map).is_none());
 }
 #[derive(Clone, Debug)]
 #[repr(align(256))]
@@ -74,13 +71,13 @@ impl HashPolicy<AlignedKey> for AlignedHash {
     }
 }
 #[test]
-fn aligned_keys_keep_addresses_through_growth() {
+fn aligned_keys_stay_aligned_through_growth() {
     let mut map = Map::with_hasher(AlignedHash, 1);
     map.add(AlignedKey(7));
     let key = std::ptr::from_ref(map.contained(&AlignedKey(7)).unwrap());
     assert_eq!(key.addr() % 256, 0);
     map.resize(2000);
-    assert_eq!(unsafe { (*key).0 }, 7);
+    assert_eq!(map.contained(&AlignedKey(7)).unwrap().0, 7);
     assert!(map.remove(&AlignedKey(7)));
 }
 struct ZeroHash;
@@ -93,12 +90,11 @@ impl HashPolicy<()> for ZeroHash {
     }
 }
 #[test]
-fn zero_sized_keys_use_real_map_node_storage() {
+fn zero_sized_keys_are_stored_once() {
     let mut map = Map::with_hasher(ZeroHash, 1);
     assert!(map.add(()));
     assert!(!map.add(()));
     assert_eq!(map.iter().count(), 1);
-    let cursor = BaseMapBasicIterator::<MapNode<()>, false, true>::new(&map);
-    assert_eq!(unsafe { cursor.key() }, &());
+    assert_eq!(map.cursor().key(), Ok(&()));
     assert!(map.remove(&()));
 }

@@ -1,4 +1,4 @@
-//! Real key-only MapNode and canonical DataMap generic iterator adapter contracts.
+//! Real key-only MapNode contracts and the DataMap public cursor rows of the native generic iterator.
 #![allow(unsafe_code)]
 #[path = "map_node_bridge_contracts/fixture.rs"]
 mod fixture;

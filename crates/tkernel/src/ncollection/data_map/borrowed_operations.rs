@@ -27,15 +27,11 @@ impl<K: Debug + Clone, V, H: HashPolicy<K>> DataMap<K, V, H> {
         if self.is_empty() || self.len() > self.bucket_count() {
             self.resize(self.len());
         }
-        let (bucket, index) = self.lookup_with_bucket(key);
-        if let Some(index) = index {
-            let value = unsafe { self.storage.node_mut(index).change_value() };
-            if replace {
-                *value = construct();
-            }
-            return (false, value);
+        let (bucket, slot) = self.lookup_with_bucket(key);
+        match slot {
+            Some(slot) => (false, self.update_slot(slot, construct, replace)),
+            None => self.insert_with(bucket, || key.clone(), construct),
         }
-        self.insert_with(bucket, || key.clone(), construct)
     }
 }
 

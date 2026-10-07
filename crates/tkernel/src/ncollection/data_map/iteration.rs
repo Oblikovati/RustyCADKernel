@@ -1,90 +1,59 @@
-//! Safe ranges borrow the sole graph owner while following native links.
-use super::storage::DataMapStorage;
-use crate::ncollection::{
-    DataMapNode,
-    owned_bucket_chains::{BucketChainPosition, BucketNodeRange},
-};
-use std::{marker::PhantomData, panic::RefUnwindSafe};
+//! Safe ranges borrow the map and follow its bucket chains in native order.
+use super::DataMapStorage;
+use crate::ncollection::chained_slots::{ChainPosition, ChainSlot, SlotRange, SlotRangeMut};
 /// Shared key/value traversal in native bucket order; `map.items()`.
 pub struct DataMapItems<'a, K, V> {
-    nodes: BucketNodeRange<'a, DataMapNode<K, V>>,
+    entries: SlotRange<'a, K, V>,
 }
 impl<'a, K, V> DataMapItems<'a, K, V> {
     pub(super) fn new(source: &'a DataMapStorage<K, V>) -> Self {
         Self {
-            nodes: BucketNodeRange::new(source),
+            entries: SlotRange::new(source),
         }
     }
     pub(super) fn from_position(
         source: Option<&'a DataMapStorage<K, V>>,
-        position: BucketChainPosition,
+        position: ChainPosition,
     ) -> Self {
         Self {
-            nodes: BucketNodeRange::from_position(source, position),
+            entries: SlotRange::from_position(source, position),
         }
     }
-    pub(super) fn current(&self) -> Option<&'a DataMapNode<K, V>> {
-        self.nodes.current()
+    pub(super) fn current(&self) -> Option<&'a ChainSlot<K, V>> {
+        self.entries.current()
     }
     pub(super) fn reset(&mut self) {
-        self.nodes.reset();
+        self.entries.reset();
     }
 }
 impl<'a, K, V> Iterator for DataMapItems<'a, K, V> {
     type Item = (&'a K, &'a V);
     fn next(&mut self) -> Option<Self::Item> {
-        self.nodes.next().map(|node| (node.key(), node.value()))
+        self.entries
+            .next()
+            .map(|entry| (entry.key(), entry.value()))
     }
 }
 impl<K, V> Default for DataMapItems<'_, K, V> {
     fn default() -> Self {
         Self {
-            nodes: BucketNodeRange::default(),
+            entries: SlotRange::default(),
         }
     }
 }
 impl<K, V> Clone for DataMapItems<'_, K, V> {
     fn clone(&self) -> Self {
         Self {
-            nodes: self.nodes.clone(),
+            entries: self.entries.clone(),
         }
     }
 }
 impl<K, V> PartialEq for DataMapItems<'_, K, V> {
     fn eq(&self, other: &Self) -> bool {
-        self.nodes == other.nodes
+        self.entries == other.entries
     }
 }
 impl<K, V> Eq for DataMapItems<'_, K, V> {}
 
-pub(super) struct DataMapItemsMut<'a, K, V> {
-    source: &'a DataMapStorage<K, V>,
-    position: BucketChainPosition,
-    exclusive: PhantomData<&'a mut (K, V)>,
-}
-impl<'a, K, V> DataMapItemsMut<'a, K, V> {
-    pub(super) fn new(source: &'a mut DataMapStorage<K, V>) -> Self {
-        Self {
-            position: BucketChainPosition::new(&source.base),
-            source,
-            exclusive: PhantomData,
-        }
-    }
-}
-// SAFETY: an exclusive owner borrow freezes topology; next yields each disjoint value once.
-unsafe impl<K: Send, V: Send> Send for DataMapItemsMut<'_, K, V> {}
-unsafe impl<K: Sync, V: Sync> Sync for DataMapItemsMut<'_, K, V> {}
-impl<K: RefUnwindSafe, V: RefUnwindSafe> RefUnwindSafe for DataMapItemsMut<'_, K, V> {}
-impl<K, V> Unpin for DataMapItemsMut<'_, K, V> {}
-impl<'a, K, V> Iterator for DataMapItemsMut<'a, K, V> {
-    type Item = (&'a K, &'a mut V);
-    fn next(&mut self) -> Option<Self::Item> {
-        let node = self.position.node;
-        if node.is_null() {
-            return None;
-        }
-        // Read the current link before lending its value, never reborrow a previously yielded node.
-        self.position.advance(&self.source.base);
-        Some(unsafe { (&mut *node.cast::<DataMapNode<K, V>>()).key_value_mut() })
-    }
-}
+/// Exclusive traversal lending each value once in native order; `map.items_mut()`.
+pub(super) type DataMapItemsMut<'a, K, V> = SlotRangeMut<'a, K, V>;

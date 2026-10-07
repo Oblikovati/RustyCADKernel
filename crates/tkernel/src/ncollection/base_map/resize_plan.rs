@@ -17,14 +17,12 @@ impl BaseMapResize {
         allocated: bool,
         tables: usize,
     ) -> Result<Self, Failure> {
-        let bucket_count = next_map_prime(extent);
-        if bucket_count <= current && allocated {
+        let Some(bucket_count) = planned_bucket_count(extent, current, allocated) else {
             return Ok(Self {
-                bucket_count,
+                bucket_count: next_map_prime(extent),
                 replacement: None,
             });
-        }
-        let bucket_count = next_resize_count(extent, current, allocated);
+        };
         let count = table_slot_count(bucket_count, tables)?;
         Ok(Self {
             bucket_count,
@@ -63,12 +61,28 @@ impl BaseMapResize {
     }
 }
 
-pub(super) fn table_slot_count(buckets: usize, tables: usize) -> Result<usize, Failure> {
+pub(in crate::ncollection) fn table_slot_count(
+    buckets: usize,
+    tables: usize,
+) -> Result<usize, Failure> {
     buckets.checked_add(1).and_then(|count| count.checked_mul(tables)).ok_or_else(|| {
         Failure::with_message("Standard_OutOfMemory", &format!(
             "BaseMap modulus {buckets} with {tables} tables overflowed; expected addressable bucket storage"
         ))
     })
+}
+
+/// Native `beginResize` decision: `None` when the allocated table already has enough buckets,
+/// otherwise the modulus of the replacement table (the current one when no table exists yet).
+pub(in crate::ncollection) fn planned_bucket_count(
+    extent: usize,
+    current: usize,
+    allocated: bool,
+) -> Option<usize> {
+    if next_map_prime(extent) <= current && allocated {
+        return None;
+    }
+    Some(next_resize_count(extent, current, allocated))
 }
 
 pub(super) fn next_resize_count(extent: usize, current: usize, allocated: bool) -> usize {

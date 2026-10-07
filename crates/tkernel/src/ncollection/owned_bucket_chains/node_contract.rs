@@ -1,5 +1,5 @@
 //! Prefix casts and payload-derived thread bounds apply only to these audited native node layouts.
-use crate::ncollection::{BaseAllocator, BasicMapNode, DataMapNode, MapNode};
+use crate::ncollection::{BaseAllocator, BasicMapNode};
 pub(in crate::ncollection) mod sealed {
     pub trait Sealed {}
 }
@@ -17,8 +17,3 @@ pub(in crate::ncollection) unsafe trait CanonicalMapNode:
         unsafe { crate::ncollection::node_release::release_typed_node(pointer, allocator) };
     }
 }
-impl<K, V> sealed::Sealed for DataMapNode<K, V> {}
-impl<K> sealed::Sealed for MapNode<K> {}
-// SAFETY: both repr(C) classes have a real MapLinkNode prefix; their only payloads are K/V.
-unsafe impl<K, V> CanonicalMapNode for DataMapNode<K, V> {}
-unsafe impl<K> CanonicalMapNode for MapNode<K> {}

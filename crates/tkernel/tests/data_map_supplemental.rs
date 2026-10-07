@@ -27,13 +27,13 @@ fn assignment_keeps_destination_hash_policy_and_allocator() {
 fn resize_preserves_values_and_try_emplace_does_not_construct_existing_values() {
     let mut map = DataMap::<i32, i32>::default();
     map.bind(1, 42);
-    let pointer = map.find(&1).unwrap() as *const i32;
     assert_eq!(map.bucket_count(), 101);
     for i in 2..=103 {
         map.bind(i, i);
     }
     assert_eq!(map.bucket_count(), 1009);
-    assert_eq!(map.find(&1).unwrap() as *const i32, pointer);
+    // Entry addresses are not part of the contract (plan D1 B5); the value is.
+    assert_eq!(map.find(&1), Ok(&42));
     assert!(!map.try_emplace(1, || panic!("existing key must not invoke constructor")));
     assert_eq!(map.find(&1), Ok(&42));
     map.resize(2000);

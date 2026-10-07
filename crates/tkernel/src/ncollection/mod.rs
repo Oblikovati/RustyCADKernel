@@ -109,10 +109,10 @@ pub use base_map::{
     BaseMapStorage, BasicMapIteratorSource, BasicMapNode, BasicMapNodeMut, IndexedCursorSource,
     IndexedCursorSourceMut, MapLinkNode,
 };
-mod data_map_node;
-mod native_noexcept;
-pub use data_map_node::{DataMapNode, DataMapNodeOwner};
+mod chained_slots;
+pub use chained_slots::{HashBucketChain, HashBucketTable};
 mod double_map_node;
+mod native_noexcept;
 pub use double_map_node::{DoubleMapNode, DoubleMapNodeOwner};
 mod data_map;
 pub use data_map::{DataMap, DataMapItems, DataMapIterator, DataMapIteratorMut};

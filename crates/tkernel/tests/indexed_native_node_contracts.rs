@@ -2,7 +2,7 @@
 #![allow(unsafe_code)]
 // Reuse the established item/copy/Drop trace; its non-indexed convenience constructors are unused here.
 #[allow(dead_code)]
-#[path = "data_map_node_contracts/fixture.rs"]
+#[path = "fixtures/native_map_node_trace.rs"]
 mod fixture;
 #[path = "indexed_native_node_contracts/lifetime.rs"]
 mod lifetime;
