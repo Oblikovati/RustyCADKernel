@@ -204,7 +204,7 @@ impl BOPAlgoBuilder {
 }
 
 /// The states of the groups for an operation (`BuildBOP(..., theOperation, ...)`).
-fn operation_states(operation: Operation) -> (State, State) {
+pub(crate) fn operation_states(operation: Operation) -> (State, State) {
     match operation {
         Operation::Common => (State::In, State::In),
         Operation::Fuse => (State::Out, State::Out),

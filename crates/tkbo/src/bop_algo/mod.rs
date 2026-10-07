@@ -12,7 +12,9 @@ pub use section_attribute::SectionAttribute;
 
 mod alerts;
 pub use alerts::*;
+mod bop;
 mod builder;
+pub use bop::BOPAlgoBOP;
 mod pave_filler;
 pub mod tools;
 mod tools_provider;

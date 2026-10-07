@@ -11,7 +11,7 @@ use std::ops::{Deref, DerefMut};
 /// assert!(BOPAlgoToolsProvider::new().tools().is_empty());
 /// ```
 pub struct BOPAlgoToolsProvider {
-    builder: BOPAlgoBuilder,
+    pub(super) builder: BOPAlgoBuilder,
     tools: List<Shape>,
     tool_fence: rustycad_tkbrep::toptools::MapOfShape,
 }

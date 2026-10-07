@@ -25,13 +25,14 @@ mod images_edges;
 #[path = "builder/internal_shapes.rs"]
 mod internal_shapes;
 #[path = "builder/perform.rs"]
-mod perform;
+pub(super) mod perform;
 #[path = "builder/same_domain_faces.rs"]
 mod same_domain_faces;
 #[path = "builder/solids.rs"]
 mod solids;
 #[path = "builder/split_solids.rs"]
 mod split_solids;
+pub(crate) use bop::operation_states;
 pub use perform::BuilderHooks;
 
 /// Shapes and their image, origin or IN-part lists (`myImages`, `myOrigins`, `myInParts`).
