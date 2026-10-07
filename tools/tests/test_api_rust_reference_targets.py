@@ -6,7 +6,7 @@ import json
 import unittest
 from pathlib import Path
 
-from api_crosswalk import rust_candidates, rust_crates, rust_target_prefix
+from api_rust_candidates import rust_candidates, rust_crates, rust_target_prefix
 from api_rust_reference_targets import nominal_reference_owner
 from api_inventory_json import JSONValue, object_value, array_value
 

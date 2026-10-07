@@ -49,7 +49,16 @@ def display_generic_argument(
     kind, body = next(iter(value.items()))
     if kind == "const":
         return display_named_const_argument(body)
+    if kind == "lifetime":
+        return display_lifetime_argument(body)
     return display_type(body, paths) if kind == "type" else None
+
+
+def display_lifetime_argument(value: JSONValue) -> str | None:
+    """Keep a compiler lifetime argument; e.g. `display_lifetime_argument("'_") == "'_"`."""
+    if not isinstance(value, str) or not value.startswith("'"):
+        return None
+    return value if value[1:].isidentifier() or value == "'_" else None
 
 
 def display_named_const_argument(value: JSONValue) -> str | None:
@@ -80,6 +89,14 @@ def display_type(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None
         return None if element is None else f"[{element}]"
     if kind == "array":
         return display_array_type(body, paths)
+    if kind == "raw_pointer":
+        return display_raw_pointer(body, paths)
+    if kind == "qualified_path":
+        return display_qualified_path(body, paths)
+    if kind == "tuple":
+        return display_tuple(body, paths)
+    if kind == "dyn_trait":
+        return display_dyn_trait(body, paths)
     if kind in {"generic", "primitive"} and isinstance(body, str):
         return body
     return None
@@ -128,3 +145,75 @@ def display_borrowed_ref(
     lifetime_text = f"{lifetime} " if isinstance(lifetime, str) else ""
     mutability = "mut " if value["is_mutable"] else ""
     return f"&{lifetime_text}{mutability}{inner}"
+
+
+def display_raw_pointer(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None:
+    """Spell a raw pointer as Rust does; e.g. `*const T` or `*mut rustycad_x::Y`."""
+    if not isinstance(value, dict) or set(value) != {"is_mutable", "type"}:
+        return None
+    if not isinstance(value["is_mutable"], bool):
+        return None
+    pointee = display_type(value["type"], paths)
+    if pointee is None:
+        return None
+    return f"*{'mut' if value['is_mutable'] else 'const'} {pointee}"
+
+
+def display_qualified_path(
+    value: JSONValue, paths: Mapping[str, JSONValue]
+) -> str | None:
+    """Spell an associated-type projection fully qualified; e.g. `<V as a::Tr>::Scalar`.
+
+    Rust source may write `V::Scalar`; the trait is spelled out so the identity never
+    depends on which bound the compiler resolved the shorthand through. A projection
+    without a trait (an inherent associated type) has no stable spelling: None.
+    """
+    if not isinstance(value, dict) or set(value) != {"name", "args", "self_type", "trait"}:
+        return None
+    name, trait = value["name"], value["trait"]
+    if not isinstance(name, str) or not name.isidentifier() or not isinstance(trait, dict):
+        return None
+    self_type = display_type(value["self_type"], paths)
+    trait_path = display_resolved_path(trait, paths)
+    arguments = trait_arguments(value["args"], paths)
+    if self_type is None or trait_path is None or arguments is None:
+        return None
+    return f"<{self_type} as {trait_path}>::{name}{arguments}"
+
+
+def display_tuple(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None:
+    """Spell a tuple as Rust does; e.g. `(i32, i32)`, `(T,)` and the unit type `()`."""
+    if not isinstance(value, list):
+        return None
+    elements = [display_type(element, paths) for element in value]
+    if any(element is None for element in elements):
+        return None
+    if len(elements) == 1:
+        return f"({elements[0]},)"
+    return "(" + ", ".join(str(element) for element in elements) + ")"
+
+
+def display_dyn_trait(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None:
+    """Spell a trait object; e.g. `dyn krate::Curve` or `dyn krate::Curve + 'a`.
+
+    Higher-ranked bounds (`for<'a>`) have no captured spelling policy yet: None.
+    """
+    if not isinstance(value, dict) or set(value) != {"traits", "lifetime"}:
+        return None
+    traits, lifetime = value["traits"], value["lifetime"]
+    if not isinstance(traits, list) or not traits:
+        return None
+    bounds = [dyn_bound(bound, paths) for bound in traits]
+    if any(bound is None for bound in bounds):
+        return None
+    if lifetime is not None and display_lifetime_argument(lifetime) is None:
+        return None
+    suffix = f" + {lifetime}" if isinstance(lifetime, str) else ""
+    return "dyn " + " + ".join(str(bound) for bound in bounds) + suffix
+
+
+def dyn_bound(value: JSONValue, paths: Mapping[str, JSONValue]) -> str | None:
+    """One trait-object bound without higher-ranked parameters."""
+    if not isinstance(value, dict) or value.get("generic_params") != []:
+        return None
+    return display_resolved_path(value.get("trait"), paths)

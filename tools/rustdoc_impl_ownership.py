@@ -7,12 +7,17 @@ from pathlib import Path
 from typing import Protocol
 
 from api_inventory_json import JSONValue, array_value, integer_value
-from rustdoc_declarations import file_hash, span_filename, stable_path
+from rustdoc_declarations import file_hash, span_filename, stable_path, trait_impl_path
 from rustdoc_bool_foreign_impls import bool_foreign_impl_members
 from rustdoc_foreign_impls import foreign_impl_members
 from rustdoc_const_aliases import const_specialized_alias_members, eligible_impl_body
 from rustdoc_type_aliases import specialized_type_alias_members
 from rustdoc_reference_impls import reference_self_target
+from rustdoc_pointer_impls import (
+    pointer_anchor_status,
+    pointer_impl_entries,
+    pointer_self_text,
+)
 
 
 class ImplState(Protocol):
@@ -92,6 +97,8 @@ def render_linked_impl(
 ) -> list[dict[str, JSONValue]]:
     if impl.get("for") == {"primitive": "bool"}:
         return linked_bool_impl_entries(impl_id, owner_id, path, impl, state)
+    if pointer_self_text(impl, state.paths) is not None:
+        return linked_pointer_impl_entries(impl_id, owner_id, path, impl, state, render_impl)
     impl_owner, owner_error = resolved_impl_owner(impl, state.items)
     if impl_owner is None:
         state.unresolved.append(f"impl:{impl_id}:{owner_error}")
@@ -103,6 +110,31 @@ def render_linked_impl(
     return render_impl(
         impl, path, state.items, state.paths, state.source_root, state.unresolved
     )
+
+
+def linked_pointer_impl_entries(
+    impl_id: JSONValue,
+    owner_id: str,
+    path: str,
+    impl: Mapping[str, JSONValue],
+    state: ImplState,
+    render_impl: ImplRenderer,
+) -> list[dict[str, JSONValue]]:
+    """Render a raw-pointer-Self impl once, from the crate that defines its anchor."""
+    status = pointer_anchor_status(impl, owner_id, state.paths)
+    if status == "skip":
+        return []
+    trait_path = trait_impl_path(impl.get("trait"), state.paths, state.unresolved)
+    self_text = pointer_self_text(impl, state.paths)
+    if status != "emit" or trait_path is None or self_text is None:
+        reason = status if status != "emit" else "pointer-self-trait"
+        state.unresolved.append(f"impl:{impl_id}:{reason}")
+        return []
+    state.owned_impl_ids.add(str(impl_id))
+    rendered = render_impl(
+        impl, path, state.items, state.paths, state.source_root, state.unresolved
+    )
+    return pointer_impl_entries(rendered, self_text, trait_path)
 
 
 def linked_bool_impl_entries(
