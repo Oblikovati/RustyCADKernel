@@ -106521,6 +106521,358 @@
       "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
     },
     {
+      "upstream_id": "XSControl_Reader",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. A value class; its virtual members and the members calling them are XSControlReaderOps methods, which XSControlReader implements with the native bodies."
+    },
+    {
+      "upstream_id": "XSControl_Reader::XSControl_Reader()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::new",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::XSControl_Reader(const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::with_norm",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::XSControl_Reader(const occ::handle<XSControl_WorkSession>&,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::with_session",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. Standard_NullObject for a null session."
+    },
+    {
+      "upstream_id": "XSControl_Reader::SetNorm",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::set_norm",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::SetWS",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::set_ws",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. Standard_NullObject for a null session (a native null dereference)."
+    },
+    {
+      "upstream_id": "XSControl_Reader::WS",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::ws",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::ReadFile",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::read_file",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::ReadStream",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::read_stream",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::Model",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::model",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::GiveList(const char* const,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::give_list",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::GiveList(const char* const,const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::give_list_from",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::NbRootsForTransfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::nb_roots_for_transfer",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::RootForTransfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::root_for_transfer",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::TransferOneRoot",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::transfer_one_root",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::TransferOne",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::transfer_one",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::TransferEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::transfer_entity",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::TransferList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::transfer_list",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::TransferRoots",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::transfer_roots",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::ClearShapes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::clear_shapes",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::NbShapes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::nb_shapes",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::Shapes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::shapes",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::Shape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::shape",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. Standard_OutOfRange out of the shapes."
+    },
+    {
+      "upstream_id": "XSControl_Reader::OneShape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::one_shape",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::PrintCheckLoad(const bool,const IFSelect_PrintCount) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::print_check_load",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::PrintCheckLoad(Standard_OStream&,const bool,const IFSelect_PrintCount) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::print_check_load_to",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::PrintCheckTransfer(const bool,const IFSelect_PrintCount) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::print_check_transfer",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::PrintCheckTransfer(Standard_OStream&,const bool,const IFSelect_PrintCount) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::print_check_transfer_to",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::PrintStatsTransfer(const int,const int) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::print_stats_transfer",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::PrintStatsTransfer(Standard_OStream&,const int,const int) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::print_stats_transfer_to",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::GetStatsTransfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::get_stats_transfer",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. The three counts are returned as XSControlTransferStats; Standard_NullObject without transient process."
+    },
+    {
+      "upstream_id": "XSControl_Reader::SetShapeFixParameters(const XSAlgo_ShapeProcessor::ParameterMap&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::set_shape_fix_parameters",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::SetShapeFixParameters(XSAlgo_ShapeProcessor::ParameterMap&&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::set_shape_fix_parameters",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::SetShapeFixParameters(const DE_ShapeFixParameters&,const XSAlgo_ShapeProcessor::ParameterMap&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::set_shape_fix_parameters_from",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::GetShapeFixParameters",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::shape_fix_parameters",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. A copy of the parameters."
+    },
+    {
+      "upstream_id": "XSControl_Reader::SetShapeProcessFlags",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::set_shape_process_flags",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::GetShapeProcessFlags",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::shape_process_flags",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::GetDefaultShapeFixParameters",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::default_shape_fix_parameters",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::GetDefaultShapeProcessFlags",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReaderOps::default_shape_process_flags",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl_Reader::therootsta",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::therootsta",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. The protected field is a public field (the norm readers set it)."
+    },
+    {
+      "upstream_id": "XSControl_Reader::theroots",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Reader.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlReader::theroots",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. The protected field is a public field (the norm readers fill it)."
+    },
+    {
+      "upstream_id": "XSControl",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControl",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base."
+    },
+    {
+      "upstream_id": "XSControl::Session",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControl::session",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. Standard_NullObject for a null pilot (a native null dereference)."
+    },
+    {
+      "upstream_id": "XSControl::Vars",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControl::vars",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. Standard_NullObject for a null pilot (a native null dereference)."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",

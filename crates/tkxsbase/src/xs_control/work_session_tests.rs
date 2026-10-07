@@ -183,3 +183,17 @@ fn new_model_needs_a_controller() {
     let model = ws.new_model().unwrap();
     assert!(model.is_some() && model.nb_entities() == 0);
 }
+
+#[test]
+fn package_session_and_vars_of_a_pilot() {
+    use crate::if_select::{IFSelectSessionPilot, IFSelectWorkSession};
+    let pilot = IFSelectSessionPilot::new("xs>").unwrap();
+    pilot.set_session(&Handle::new(IFSelectWorkSession::new()));
+    assert!(XSControl::session(&pilot).unwrap().is_null());
+    assert!(XSControl::vars(&pilot).unwrap().is_null());
+    let ws = XSControlWorkSession::new();
+    pilot.set_session(&ws.clone().cast());
+    assert!(XSControl::session(&pilot).unwrap() == ws);
+    assert!(XSControl::vars(&pilot).unwrap() == ws.vars());
+    assert!(XSControl::session(&Handle::default()).is_err());
+}
