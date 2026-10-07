@@ -125,6 +125,10 @@ impl<T> DynamicArray<T> {
         &mut self.blocks[block][offset]
     }
     fn ensure_storage_for_index(&mut self, index: usize) {
+        if self.increment == 0 {
+            self.require_retained_first_index(index);
+            return;
+        }
         self.require_element_stride();
         self.reserve_block_count(index / self.increment + 1);
     }

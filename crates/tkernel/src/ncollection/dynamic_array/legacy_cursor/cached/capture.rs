@@ -58,11 +58,8 @@ pub(super) fn capture_mutable<T>(
     ))
 }
 fn live_coordinates<T>(array: &DynamicArray<T>, index: usize) -> Result<(usize, usize), Failure> {
-    if array.increment == 0 || size_of::<T>() == 0 {
-        return Err(capture_failure(index, 0, 0, 0));
-    }
-    let block_index = index / array.increment;
-    let offset = index % array.increment;
+    validate_capture_shape(array, index)?;
+    let (block_index, offset) = array.element_coordinates(index);
     let Some(block) = array.blocks.as_slice().get(block_index) else {
         return Err(capture_failure(index, array.increment, 0, 0));
     };
@@ -76,9 +73,35 @@ fn live_coordinates<T>(array: &DynamicArray<T>, index: usize) -> Result<(usize, 
     }
     Ok((block_index, offset))
 }
+fn validate_capture_shape<T>(array: &DynamicArray<T>, index: usize) -> Result<(), Failure> {
+    let unsupported_zero =
+        array.increment == 0 && (index != 0 || array.validate_retained_erasure().is_err());
+    if size_of::<T>() == 0 || unsupported_zero {
+        return Err(capture_failure(index, array.increment, 0, 0));
+    }
+    Ok(())
+}
 fn capture_failure(index: usize, stride: usize, initialized: usize, capacity: usize) -> Failure {
     let reason = format!(
-        "cached index {index}, stride {stride}, initialized {initialized}, capacity {capacity}: expected a nonzero-sized live initialized slot and fitting nonzero-stride block end"
+        "cached index {index}, stride {stride}, initialized {initialized}, capacity {capacity}: expected a nonzero-sized live initialized slot and fitting block end (zero stride permits only the registered retained first slot)"
     );
     Failure::with_type("Standard_DomainError", &reason, "")
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn zero_stride_cache_records_native_empty_block_extent_for_live_first_slot() {
+        let mut array = DynamicArray::with_increment(2);
+        array.append(1);
+        array.clear(false);
+        array.set_increment(usize::MAX);
+        array.emplace_value(0_usize, || 7).unwrap();
+        let cursor = DynamicArrayCachedIterator::from_shared(&array, 0).unwrap();
+        assert_eq!(cursor.current, cursor.block_end);
+        assert!(!cursor.current.is_null());
+        let end = DynamicArrayCachedIterator::from_shared(&array, 1).unwrap();
+        assert!(end.current.is_null());
+        assert!(end.block_end.is_null());
+    }
 }

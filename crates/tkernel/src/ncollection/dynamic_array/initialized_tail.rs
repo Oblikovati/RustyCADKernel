@@ -7,7 +7,19 @@ impl<T> DynamicArray<T> {
         index: usize,
         construct: impl FnMut() -> T,
     ) -> &mut T {
-        self.require_element_stride();
+        if self.increment == 0 {
+            self.require_retained_first_index(index);
+            return self
+                .change_value(index)
+                .expect("zero-stride index 0: expected an initialized first slot");
+        }
+        self.allocated_positive_slot_with(index, construct)
+    }
+    fn allocated_positive_slot_with(
+        &mut self,
+        index: usize,
+        construct: impl FnMut() -> T,
+    ) -> &mut T {
         let block = index / self.increment;
         let offset = index % self.increment;
         assert!(
