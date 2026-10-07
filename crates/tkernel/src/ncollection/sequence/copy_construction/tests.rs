@@ -5,7 +5,7 @@ use std::cell::Cell;
 use std::marker::PhantomPinned;
 use std::panic::{AssertUnwindSafe, catch_unwind};
 use std::ptr::NonNull;
-mod fixture;
+pub(in crate::ncollection::sequence) mod fixture;
 mod native_rows;
 #[allow(unsafe_code)]
 mod safety;

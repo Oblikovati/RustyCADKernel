@@ -44,14 +44,6 @@ impl<T> Sequence<T> {
     }
 }
 impl<T: Clone> Sequence<T> {
-    /// Copies elements into this allocator; `sequence.assign(&source)`.
-    pub fn assign(&mut self, source: &Self) -> &mut Self {
-        self.clear(None);
-        for value in source.iter() {
-            self.append_ref(value);
-        }
-        self
-    }
     /// Appends and empties a source sequence; `sequence.append_sequence(&mut source)`.
     pub fn append_sequence(&mut self, source: &mut Self) {
         self.splice_sequence(self.len(), source);
@@ -112,5 +104,8 @@ impl<T: Clone> Sequence<T> {
 impl<T: Clone> Clone for Sequence<T> {
     fn clone(&self) -> Self {
         Self::from_copied_with(self, T::clone)
+    }
+    fn clone_from(&mut self, source: &Self) {
+        self.assign(source);
     }
 }
