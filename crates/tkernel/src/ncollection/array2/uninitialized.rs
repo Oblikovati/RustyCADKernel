@@ -54,3 +54,44 @@ impl<'a, T: Copy> Array2<'a, MaybeUninit<T>> {
         }
     }
 }
+
+#[allow(unsafe_code)]
+impl<'a, T> Array2<'a, MaybeUninit<T>> {
+    /// Transfers exclusive initialized backing while retaining all rectangle metadata.
+    /// Shared backing returns the original matrix unchanged in `Err`.
+    /// ```
+    /// use rustycad_tkernel::ncollection::Array2;
+    /// let mut slots = Array2::<String>::with_uninit_size(1, 1);
+    /// slots.as_mut_slice()[0].write("ready".into());
+    /// let values = unsafe { slots.try_assume_init_exclusive() }.unwrap_or_else(|_| panic!("shared"));
+    /// assert_eq!(values.as_slice(), ["ready"]);
+    /// ```
+    ///
+    /// # Safety
+    /// Every actual base-array slot must contain a valid initialized `T` for owned
+    /// or exclusively borrowed backing, even if its length differs from rows times
+    /// columns. Spare capacity and unborrowed tails are excluded. Owned payloads drop
+    /// with the result; borrowed payloads remain the donor's responsibility. Retained
+    /// pointers must obey the resulting borrow. Shared slots are neither read nor
+    /// converted, so rejected shared backing may remain uninitialized.
+    pub unsafe fn try_assume_init_exclusive(self) -> Result<Array2<'a, T>, Self> {
+        let rectangle = (self.row_lower, self.col_lower, self.rows, self.cols);
+        // SAFETY: the caller's obligation covers every actual inherited storage slot.
+        unsafe { self.elements.try_assume_init_exclusive() }
+            .map(|elements| initialization_rectangle(elements, rectangle))
+            .map_err(|elements| initialization_rectangle(elements, rectangle))
+    }
+}
+
+fn initialization_rectangle<T>(
+    elements: Array1<'_, T>,
+    rectangle: (i32, i32, usize, usize),
+) -> Array2<'_, T> {
+    Array2 {
+        elements,
+        row_lower: rectangle.0,
+        col_lower: rectangle.1,
+        rows: rectangle.2,
+        cols: rectangle.3,
+    }
+}

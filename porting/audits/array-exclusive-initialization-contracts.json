@@ -1,0 +1,1494 @@
+{
+  "schema": 1,
+  "title": "Exclusive Array1/Array2 initialization ownership transition for non-Copy payloads",
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "main_base": "4be8ba8c0fab63a2f1ec72693cd96a669f55b221",
+  "dependency_commit": "8d4fd14a695f1ac54a4e0f23f9e210a6424a6d9c",
+  "status": "rust_adaptation_only",
+  "native_declaration_bindings": [],
+  "global_coverage_credit_added": 0,
+  "rust_adaptations": [
+    {
+      "compiler_body": {
+        "path": "rustycad_tkernel::ncollection::Array1::try_assume_init_exclusive",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "generic": "Self"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Array1",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "lifetime": "'a"
+                                  },
+                                  {
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "Self"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": true,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/array1/uninitialized.rs",
+        "source_sha256": "ef7c2e1366f4c2ec6ea1d4891464fa8826b557f121c86737854696aa41d20aac",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::Array1",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'a"
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "path": "std::mem::MaybeUninit",
+                          "resolved_item_path": "core::mem::maybe_uninit::MaybeUninit",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "'a",
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                }
+              },
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "cfa4510846060c690df87522a8975964bb7ad104a4817ac13cd1bb865df2a927"
+      },
+      "native_declaration_id": null,
+      "status": "rust_only_ownership_transition"
+    },
+    {
+      "compiler_body": {
+        "path": "rustycad_tkernel::ncollection::Array2::try_assume_init_exclusive",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "generic": "Self"
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Array2",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::array2::Array2",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "lifetime": "'a"
+                                  },
+                                  {
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "Self"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": true,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/array2/uninitialized.rs",
+        "source_sha256": "6f6dff84acaa61a6cbfb8ff91ddb4a1c130b7e58517aabb16d0588279c6d88ed",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::Array2",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array2::Array2",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'a"
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "path": "std::mem::MaybeUninit",
+                          "resolved_item_path": "core::mem::maybe_uninit::MaybeUninit",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "'a",
+                "kind": {
+                  "lifetime": {
+                    "outlives": []
+                  }
+                }
+              },
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "4f9983cf23c45aff9738911409ffdcaf3186d554ea2f30b37bbf7c5b80260b09"
+      },
+      "native_declaration_id": null,
+      "status": "rust_only_ownership_transition"
+    }
+  ],
+  "internal_compiler_helpers": [
+    {
+      "id": 3951,
+      "crate_id": 0,
+      "name": "initialized_vector",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/array1/uninitialized.rs",
+        "begin": [
+          108,
+          1
+        ],
+        "end": [
+          113,
+          2
+        ]
+      },
+      "visibility": {
+        "restricted": {
+          "parent": 3949,
+          "path": "::ncollection::array1::uninitialized"
+        }
+      },
+      "docs": null,
+      "links": {},
+      "attrs": [
+        {
+          "other": "#[allow(unsafe_code)]"
+        }
+      ],
+      "deprecation": null,
+      "stability": null,
+      "const_stability": null,
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "slots",
+                {
+                  "resolved_path": {
+                    "path": "Vec",
+                    "id": 4,
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "resolved_path": {
+                                "path": "std::mem::MaybeUninit",
+                                "id": 3948,
+                                "args": {
+                                  "angle_bracketed": {
+                                    "args": [
+                                      {
+                                        "type": {
+                                          "generic": "T"
+                                        }
+                                      }
+                                    ],
+                                    "constraints": []
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Vec",
+                "id": 4,
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": true,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "id": 4349,
+      "crate_id": 0,
+      "name": "initialization_rectangle",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/array2/uninitialized.rs",
+        "begin": [
+          86,
+          1
+        ],
+        "end": [
+          97,
+          2
+        ]
+      },
+      "visibility": {
+        "restricted": {
+          "parent": 4350,
+          "path": "::ncollection::array2::uninitialized"
+        }
+      },
+      "docs": null,
+      "links": {},
+      "attrs": [],
+      "deprecation": null,
+      "stability": null,
+      "const_stability": null,
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "elements",
+                {
+                  "resolved_path": {
+                    "path": "crate::ncollection::Array1",
+                    "id": 3954,
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "lifetime": "'_"
+                          },
+                          {
+                            "type": {
+                              "generic": "T"
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "rectangle",
+                {
+                  "tuple": [
+                    {
+                      "primitive": "i32"
+                    },
+                    {
+                      "primitive": "i32"
+                    },
+                    {
+                      "primitive": "usize"
+                    },
+                    {
+                      "primitive": "usize"
+                    }
+                  ]
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "super::Array2",
+                "id": 4282,
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "id": 3950,
+      "crate_id": 0,
+      "name": "initialized_storage",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/array1/uninitialized.rs",
+        "begin": [
+          95,
+          1
+        ],
+        "end": [
+          105,
+          2
+        ]
+      },
+      "visibility": {
+        "restricted": {
+          "parent": 3949,
+          "path": "::ncollection::array1::uninitialized"
+        }
+      },
+      "docs": null,
+      "links": {},
+      "attrs": [
+        {
+          "other": "#[allow(unsafe_code)]"
+        }
+      ],
+      "deprecation": null,
+      "stability": null,
+      "const_stability": null,
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "storage",
+                {
+                  "resolved_path": {
+                    "path": "super::Storage",
+                    "id": 3947,
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "lifetime": "'_"
+                          },
+                          {
+                            "type": {
+                              "resolved_path": {
+                                "path": "std::mem::MaybeUninit",
+                                "id": 3948,
+                                "args": {
+                                  "angle_bracketed": {
+                                    "args": [
+                                      {
+                                        "type": {
+                                          "generic": "T"
+                                        }
+                                      }
+                                    ],
+                                    "constraints": []
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "super::Storage",
+                "id": 3947,
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "T"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "Copy",
+                            "id": 129,
+                            "args": null
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": true,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    },
+    {
+      "id": 3946,
+      "crate_id": 0,
+      "name": "initialized_exclusive_storage",
+      "span": {
+        "filename": "crates/tkernel/src/ncollection/array1/uninitialized.rs",
+        "begin": [
+          80,
+          1
+        ],
+        "end": [
+          92,
+          2
+        ]
+      },
+      "visibility": {
+        "restricted": {
+          "parent": 3949,
+          "path": "::ncollection::array1::uninitialized"
+        }
+      },
+      "docs": null,
+      "links": {},
+      "attrs": [
+        {
+          "other": "#[allow(unsafe_code)]"
+        }
+      ],
+      "deprecation": null,
+      "stability": null,
+      "const_stability": null,
+      "inner": {
+        "function": {
+          "sig": {
+            "inputs": [
+              [
+                "storage",
+                {
+                  "resolved_path": {
+                    "path": "super::Storage",
+                    "id": 3947,
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "lifetime": "'_"
+                          },
+                          {
+                            "type": {
+                              "resolved_path": {
+                                "path": "std::mem::MaybeUninit",
+                                "id": 3948,
+                                "args": {
+                                  "angle_bracketed": {
+                                    "args": [
+                                      {
+                                        "type": {
+                                          "generic": "T"
+                                        }
+                                      }
+                                    ],
+                                    "constraints": []
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "id": 33,
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "super::Storage",
+                            "id": 3947,
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "lifetime": "'_"
+                                  },
+                                  {
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "super::Storage",
+                            "id": 3947,
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "lifetime": "'_"
+                                  },
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "path": "std::mem::MaybeUninit",
+                                        "id": 3948,
+                                        "args": {
+                                          "angle_bracketed": {
+                                            "args": [
+                                              {
+                                                "type": {
+                                                  "generic": "T"
+                                                }
+                                              }
+                                            ],
+                                            "constraints": []
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": true,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        }
+      }
+    }
+  ],
+  "baseline": {
+    "diagnostic": "Both previous assume_init methods reject String because String: Copy is not satisfied. The new exclusive transition compiles and destroys non-Copy owned values exactly once.",
+    "negative_compile_source": "baseline-source",
+    "negative_lifetime_source": "lifetime-source",
+    "lifetime_diagnostics": "Both Array1 and Array2 borrowed transitions reject attempted returns with a static lifetime."
+  },
+  "ownership_policy": {
+    "Owned": "Transfers the complete Vec length, capacity, pointer and allocation layout without copying, constructing or dropping elements. Result owns every actual initialized slot.",
+    "Borrowed": "Reinterprets only the exclusive slice, preserving length, pointer and lifetime. Dropping the result does not drop donor payloads; donor must later move or destroy each initialized slot.",
+    "Shared": "Always returns Err with original storage, metadata, pointer and detach function, including empty shared views. No slot is read, so rejected shared backing may be uninitialized.",
+    "Array2": "Carries every rectangle and base lower-bound field unchanged on both outcomes; initialization covers actual flat backing even when its length is zero, shortened or extended relative to rows times columns.",
+    "Existing_Copy_transition": "Original Copy-bound assume_init keeps shared view support; its exclusive cases share the new conversion engine."
+  },
+  "validation": {
+    "counts": {
+      "rust": {
+        "passed": 303,
+        "failed": 0,
+        "ignored": 0
+      },
+      "unit": {
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      "miri": {
+        "passed": 195,
+        "failed": 0,
+        "ignored": 0
+      },
+      "miri-unit": {
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      "docs": {
+        "passed": 276,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    "new_integration_tests": 9,
+    "new_unit_tests": 1,
+    "native_original_names": [
+      "NCollection_Array1Test.AssignmentOperator",
+      "NCollection_Array1Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+      "NCollection_Array1Test.AssignmentOperatorDifferentSize",
+      "NCollection_Array1Test.AssignmentOperatorEmptySource",
+      "NCollection_Array1Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+      "NCollection_Array1Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+      "NCollection_Array1Test.AssignmentValue",
+      "NCollection_Array1Test.ChangeValue",
+      "NCollection_Array1Test.ChangeValueAccess",
+      "NCollection_Array1Test.ConstructorWithBounds",
+      "NCollection_Array1Test.ConstructorWithNegativeBounds",
+      "NCollection_Array1Test.ConstructorWithSizeTUpperUsesBounds",
+      "NCollection_Array1Test.CopyConstructor",
+      "NCollection_Array1Test.CopyValuesDifferentSize",
+      "NCollection_Array1Test.CopyValuesPreservesBounds",
+      "NCollection_Array1Test.DefaultConstructor",
+      "NCollection_Array1Test.EmplaceValue",
+      "NCollection_Array1Test.EmplaceValue_ReplacesExisting",
+      "NCollection_Array1Test.EmptyRangesAndDefaultIterators",
+      "NCollection_Array1Test.FirstLast",
+      "NCollection_Array1Test.Init",
+      "NCollection_Array1Test.IteratorAccess",
+      "NCollection_Array1Test.Move",
+      "NCollection_Array1Test.ReferenceSizeConstructorRequiresExplicitBufferPolicy",
+      "NCollection_Array1Test.Resize",
+      "NCollection_Array1Test.STLAlgorithmCompatibility_MinMax",
+      "NCollection_Array1Test.STLAlgorithmCompatibility_Replace",
+      "NCollection_Array1Test.STLAlgorithmCompatibility_Sort",
+      "NCollection_Array1Test.STLIteration",
+      "NCollection_Array1Test.SetValue",
+      "NCollection_Array1Test.SizeConstructor_AllocatesCorrectly",
+      "NCollection_Array1Test.SizeConstructor_AtAccess",
+      "NCollection_Array1Test.SizeConstructor_BufferReuse_DataPreserved",
+      "NCollection_Array1Test.SizeConstructor_BufferReuse_NotOwner",
+      "NCollection_Array1Test.SizeConstructor_BufferReuse_WritesGoToBuffer",
+      "NCollection_Array1Test.SizeConstructor_IteratorAccess",
+      "NCollection_Array1Test.SizeConstructor_LegacyValueOperator",
+      "NCollection_Array1Test.SizeConstructor_MoveSemantics",
+      "NCollection_Array1Test.SizeConstructor_Resize_Grow",
+      "NCollection_Array1Test.SizeConstructor_Resize_NoData",
+      "NCollection_Array1Test.SizeConstructor_Resize_Shrink",
+      "NCollection_Array1Test.SizeConstructor_StdVectorBufferReuse",
+      "NCollection_Array1Test.SizeConstructor_ZeroSize",
+      "NCollection_Array1Test.ValueAccess",
+      "NCollection_Array2Test.AssignmentOperator",
+      "NCollection_Array2Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+      "NCollection_Array2Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+      "NCollection_Array2Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+      "NCollection_Array2Test.ChangeValueAccess",
+      "NCollection_Array2Test.ConstructorWithBounds",
+      "NCollection_Array2Test.ConstructorWithNegativeBounds",
+      "NCollection_Array2Test.CopyConstructor",
+      "NCollection_Array2Test.CopyValuesDifferentDimensions",
+      "NCollection_Array2Test.CopyValuesPreservesBounds",
+      "NCollection_Array2Test.DefaultConstructor",
+      "NCollection_Array2Test.EmplaceValue",
+      "NCollection_Array2Test.EmplaceValue_ReplacesExisting",
+      "NCollection_Array2Test.Init",
+      "NCollection_Array2Test.MoveAssignment",
+      "NCollection_Array2Test.MoveConstructor",
+      "NCollection_Array2Test.ReIndex_Interference",
+      "NCollection_Array2Test.ReIndex_UpdateBounds",
+      "NCollection_Array2Test.Resize",
+      "NCollection_Array2Test.ResizeWithTrim_GrowPreservesOldRegion",
+      "NCollection_Array2Test.ResizeWithTrim_NonUnitLowerBounds",
+      "NCollection_Array2Test.ResizeWithTrim_PreservesElementPositions",
+      "NCollection_Array2Test.Resize_ChangeShapeSameSize",
+      "NCollection_Array2Test.Resize_FromEmpty",
+      "NCollection_Array2Test.Resize_NoCopy",
+      "NCollection_Array2Test.Resize_SameSizeNewBounds",
+      "NCollection_Array2Test.Resize_SameSizeNewBounds_Linear",
+      "NCollection_Array2Test.STLIteration",
+      "NCollection_Array2Test.SizeConstructor_AllocatesCorrectly",
+      "NCollection_Array2Test.SizeConstructor_AtAccess",
+      "NCollection_Array2Test.SizeConstructor_BufferReuse_DataPreserved",
+      "NCollection_Array2Test.SizeConstructor_BufferReuse_NotOwner",
+      "NCollection_Array2Test.SizeConstructor_LegacyOperatorZeroBased",
+      "NCollection_Array2Test.SizeConstructor_ResizeWithTrim_GrowPreserves",
+      "NCollection_Array2Test.SizeConstructor_Resize_Grow",
+      "NCollection_Array2Test.SizeConstructor_Resize_NoData",
+      "NCollection_Array2Test.ValueAccess"
+    ],
+    "native_original_count": 81,
+    "original_case_names_match": true,
+    "checks": {
+      "targets": [
+        "ncollection_array1",
+        "ncollection_array2",
+        "ncollection_arrays_api_behavior",
+        "array1_assignment_pointer_contracts",
+        "array2_assignment_pointer_contracts",
+        "array1_borrowed_init",
+        "ncollection_array2_buffer_prefix",
+        "ncollection_array_set_value_ref",
+        "array_raw_copy_contracts",
+        "array_raw_copy_validation",
+        "array_buffer_constructors",
+        "array_buffer_validation",
+        "array2_resize_assignment",
+        "array2_resize_validation",
+        "array_emplace_assignment",
+        "array_set_value_assignment",
+        "array_const_assignment",
+        "array_copy_values_assignment",
+        "array_internal_set_value",
+        "array_internal_init",
+        "array_internal_emplace",
+        "array_uninitialized",
+        "array_raw_construction",
+        "array2_index_limits",
+        "array_exact_surface",
+        "array_exclusive_initialization"
+      ],
+      "results": {
+        "unit": {
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--lib",
+            "ncollection::array1::uninitialized::tests"
+          ],
+          "exit": 0
+        },
+        "rust": {
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--test",
+            "ncollection_array1",
+            "--test",
+            "ncollection_array2",
+            "--test",
+            "ncollection_arrays_api_behavior",
+            "--test",
+            "array1_assignment_pointer_contracts",
+            "--test",
+            "array2_assignment_pointer_contracts",
+            "--test",
+            "array1_borrowed_init",
+            "--test",
+            "ncollection_array2_buffer_prefix",
+            "--test",
+            "ncollection_array_set_value_ref",
+            "--test",
+            "array_raw_copy_contracts",
+            "--test",
+            "array_raw_copy_validation",
+            "--test",
+            "array_buffer_constructors",
+            "--test",
+            "array_buffer_validation",
+            "--test",
+            "array2_resize_assignment",
+            "--test",
+            "array2_resize_validation",
+            "--test",
+            "array_emplace_assignment",
+            "--test",
+            "array_set_value_assignment",
+            "--test",
+            "array_const_assignment",
+            "--test",
+            "array_copy_values_assignment",
+            "--test",
+            "array_internal_set_value",
+            "--test",
+            "array_internal_init",
+            "--test",
+            "array_internal_emplace",
+            "--test",
+            "array_uninitialized",
+            "--test",
+            "array_raw_construction",
+            "--test",
+            "array2_index_limits",
+            "--test",
+            "array_exact_surface",
+            "--test",
+            "array_exclusive_initialization"
+          ],
+          "exit": 0
+        },
+        "clippy": {
+          "command": [
+            "cargo",
+            "clippy",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--test",
+            "ncollection_array1",
+            "--test",
+            "ncollection_array2",
+            "--test",
+            "ncollection_arrays_api_behavior",
+            "--test",
+            "array1_assignment_pointer_contracts",
+            "--test",
+            "array2_assignment_pointer_contracts",
+            "--test",
+            "array1_borrowed_init",
+            "--test",
+            "ncollection_array2_buffer_prefix",
+            "--test",
+            "ncollection_array_set_value_ref",
+            "--test",
+            "array_raw_copy_contracts",
+            "--test",
+            "array_raw_copy_validation",
+            "--test",
+            "array_buffer_constructors",
+            "--test",
+            "array_buffer_validation",
+            "--test",
+            "array2_resize_assignment",
+            "--test",
+            "array2_resize_validation",
+            "--test",
+            "array_emplace_assignment",
+            "--test",
+            "array_set_value_assignment",
+            "--test",
+            "array_const_assignment",
+            "--test",
+            "array_copy_values_assignment",
+            "--test",
+            "array_internal_set_value",
+            "--test",
+            "array_internal_init",
+            "--test",
+            "array_internal_emplace",
+            "--test",
+            "array_uninitialized",
+            "--test",
+            "array_raw_construction",
+            "--test",
+            "array2_index_limits",
+            "--test",
+            "array_exact_surface",
+            "--test",
+            "array_exclusive_initialization",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exit": 0
+        },
+        "fmt": {
+          "command": [
+            "cargo",
+            "fmt",
+            "--all",
+            "--",
+            "--check"
+          ],
+          "exit": 0
+        },
+        "docs": {
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--doc"
+          ],
+          "exit": 0
+        },
+        "compiler": {
+          "command": [
+            "cargo",
+            "+nightly-2026-09-25",
+            "rustdoc",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--lib",
+            "--",
+            "-Z",
+            "unstable-options",
+            "--output-format",
+            "json",
+            "--document-private-items"
+          ],
+          "exit": 0
+        }
+      }
+    },
+    "miri": {
+      "targets": [
+        "array_exclusive_initialization",
+        "array_raw_construction",
+        "array2_index_limits",
+        "array_exact_surface",
+        "array_internal_emplace",
+        "array_uninitialized",
+        "array_internal_set_value",
+        "array_internal_init",
+        "array_copy_values_assignment",
+        "array_const_assignment",
+        "array_set_value_assignment",
+        "array_emplace_assignment",
+        "array2_resize_assignment",
+        "array2_resize_validation",
+        "array_buffer_constructors",
+        "array_buffer_validation",
+        "array_raw_copy_contracts",
+        "array_raw_copy_validation",
+        "array1_assignment_pointer_contracts",
+        "array2_assignment_pointer_contracts"
+      ],
+      "command": [
+        "cargo",
+        "+nightly-2026-09-25",
+        "miri",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--test",
+        "array_exclusive_initialization",
+        "--test",
+        "array_raw_construction",
+        "--test",
+        "array2_index_limits",
+        "--test",
+        "array_exact_surface",
+        "--test",
+        "array_internal_emplace",
+        "--test",
+        "array_uninitialized",
+        "--test",
+        "array_internal_set_value",
+        "--test",
+        "array_internal_init",
+        "--test",
+        "array_copy_values_assignment",
+        "--test",
+        "array_const_assignment",
+        "--test",
+        "array_set_value_assignment",
+        "--test",
+        "array_emplace_assignment",
+        "--test",
+        "array2_resize_assignment",
+        "--test",
+        "array2_resize_validation",
+        "--test",
+        "array_buffer_constructors",
+        "--test",
+        "array_buffer_validation",
+        "--test",
+        "array_raw_copy_contracts",
+        "--test",
+        "array_raw_copy_validation",
+        "--test",
+        "array1_assignment_pointer_contracts",
+        "--test",
+        "array2_assignment_pointer_contracts"
+      ],
+      "exit": 0
+    },
+    "miri_unit": {
+      "command": [
+        "cargo",
+        "+nightly-2026-09-25",
+        "miri",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--lib",
+        "ncollection::array1::uninitialized::tests"
+      ],
+      "exit": 0
+    },
+    "lifetime": {
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--test",
+        "array_exclusive_lifetime_rejection"
+      ],
+      "exit": 101,
+      "expected_diagnostics": 2
+    }
+  },
+  "native_dependency_regression": {
+    "receipt": "porting/audits/array-raw-construction-contracts.json",
+    "sha256": "221f0527c973520c054d468a166697d9b4d8c7f9187045bced58d78b85d1e8f0",
+    "rows": 5,
+    "probe": "tools/oracle/tkernel_array_raw_construction.cxx",
+    "compiler": "c++ -std=c++17 -fsanitize=undefined -fno-sanitize-recover=all",
+    "note": "Inherited raw construction rows rerun unchanged; they do not create a native declaration for this Rust ownership transition. Linked TKernel binary is not fully instrumented."
+  },
+  "remaining_limits": [
+    "Unsafe callers must initialize every actual exclusive backing slot before transition; initialization is not dynamically checked.",
+    "Partial raw construction failure requires explicit prefix recovery or completion before this transition; it cannot safely convert a partially initialized array.",
+    "Shared non-Copy extraction/detachment and native writable alias protocols are not introduced.",
+    "Raw placement construction address/failing-byte effects, native constructor-failure allocation leaks and allocator hooks remain open.",
+    "No native assume_init method is invented, and no API parity credit is assigned."
+  ],
+  "inputs": {
+    "crates/tkernel/src/ncollection/array1.rs": "b0f3ce335320e3342175b1a0f8ff13db06bcecbad02ec2bdb636863ecd5c7c51",
+    "crates/tkernel/src/ncollection/array2_resize.rs": "183b12552edc76e4a70dd819fc235ddcfe9fbfb79ba60932b822fdc4dd8acfdf",
+    "crates/tkernel/src/ncollection/array_error.rs": "064d8ff5e8be92c59e9d55529b211fffa6a86ab10b50804889da83536c7f7fa6",
+    "crates/tkernel/src/ncollection/array2_layout.rs": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f",
+    "crates/tkernel/src/ncollection/array2.rs": "fc8f0031c024eda055e0c5389050e4f3a0bb26cbca0d599ff344e4fe8daf18cc",
+    "crates/tkernel/src/ncollection/array1/assignment_policy.rs": "95473067ddc963054a0f0865533025e6ff70d05fd18a305ac808078e2868445b",
+    "crates/tkernel/src/ncollection/array1/trivial_copy.rs": "0bb4ef9b8b6d2fb2e60de781a9de39b5eb2bb3ded20c2c932adc19a730da6638",
+    "crates/tkernel/src/ncollection/array1/copy_assignment_policy.rs": "30d1c2d598f53f724aa7cadfee156c5383c47c2c49649ed961b9d0f28c55abba",
+    "crates/tkernel/src/ncollection/array1/uninitialized.rs": "ef7c2e1366f4c2ec6ea1d4891464fa8826b557f121c86737854696aa41d20aac",
+    "crates/tkernel/src/ncollection/array1/emplace_policy.rs": "8fc3bb4d3320365098ee355e83b81ff3d94ec7c128bb5b14a33b198c2f6f102d",
+    "crates/tkernel/src/ncollection/array1/buffer_constructors.rs": "24a7e0100535055c08a3b4e4d5b2b606686bb492b532bd327411fe8f14220a4d",
+    "crates/tkernel/src/ncollection/array1/internal_init.rs": "01a3e96e6585895268c47dcfa17b306b77aa8367f286b940f3dcb9f0955cdd3a",
+    "crates/tkernel/src/ncollection/array1/raw_construction.rs": "3f157f85fa487acab060457bf0ce59725eb464b841e1537dbb3553c53fdb3d35",
+    "crates/tkernel/src/ncollection/array1/raw_copy.rs": "ccfd252c64698a515552dfb23d41baebd3c99ab1d78b4b0c3d2253884086263f",
+    "crates/tkernel/src/ncollection/array1/returning.rs": "ae77aeae6406e3e0320a41b6c580e7a2ab3035d93dd9db363b39e0cd49b90078",
+    "crates/tkernel/src/ncollection/array1/pointers.rs": "fb5a797f4b184937d450ffadc72b12f710a2f33bb89e03c4e28b5943b3498964",
+    "crates/tkernel/src/ncollection/array1/resize_storage.rs": "098bfcc476955f9e802eec235fed8048a4d660c9082d86762b94438e426d6475",
+    "crates/tkernel/src/ncollection/array2/assignment_policy.rs": "0b578dd32aba999254ebe311b68ac4d67adbe6dd9770e90186b5cca1bea33b53",
+    "crates/tkernel/src/ncollection/array2/copy_assignment_policy.rs": "109989aad5bb05679e6749780d05a886a7a084cbb2b2fdde1b3db6800c449e93",
+    "crates/tkernel/src/ncollection/array2/uninitialized.rs": "6f6dff84acaa61a6cbfb8ff91ddb4a1c130b7e58517aabb16d0588279c6d88ed",
+    "crates/tkernel/src/ncollection/array2/emplace_policy.rs": "399b75178f4b4371b872448a9f8994e011790a9064638a36da8da10e4cebd4dd",
+    "crates/tkernel/src/ncollection/array2/buffer_constructors.rs": "00624b3e4636478cee9e40651a21efb62912c56e78bf7b94745dce72d0f66dab",
+    "crates/tkernel/src/ncollection/array2/internal_init.rs": "651bf9bd8644bcb187ecbbbbc8fa322992239f15cef858b65436e4735e1e3885",
+    "crates/tkernel/src/ncollection/array2/method_contracts.rs": "1d65b65116cd2b938b53dcae956647df1252ab0815cdebe58835ed0c97a0a1a4",
+    "crates/tkernel/src/ncollection/array2/raw_copy.rs": "6f6777170c8fb10c1432fc176e6dffdc98e5bb010d7356230035be6db7d81379",
+    "crates/tkernel/src/ncollection/array2/resize_policy.rs": "00af82c5e5ce72e35553f440ba2dd778e1e500d2c9ae68d961c8b9a7f0735e8b",
+    "crates/tkernel/src/ncollection/array2/resize_policy/assignment.rs": "95477196755d1174e1357d4e213e035ad6754ad1e9240baf6868a231d3942ec1",
+    "tools/oracle/tkernel_array_raw_construction.cxx": "05b65e4df5e2cfa41ad85fbecaade9d4b99d91bae87e782db4755c749f0227ec",
+    "tools/oracle/tkernel_array_raw_construction.expected": "b80bde6a16bfa291763b3ff46d947d91876d10d4dffbe4229f6b1a7bd756099e",
+    "crates/tkernel/tests/ncollection_array1.rs": "ff7370d1dbf40fea3bffb5a84ac3de28dc8328ca6475cc0346715c24dbf2611a",
+    "crates/tkernel/tests/ncollection_array1/assignment.rs": "fa4aa737a7732e71e0a9a15529c1333ac0dd4448297109e9e9c6ae9147759a02",
+    "crates/tkernel/tests/ncollection_array1/constructors.rs": "ba1e0e403958f75f07462464d06f824db09415c76e68f8a82b0d77880de34255",
+    "crates/tkernel/tests/ncollection_array1/access.rs": "c70938b9a5386cffb5e300bae193acc3542ef8e6ceed9e852746b638511df911",
+    "crates/tkernel/tests/ncollection_array1/algorithms.rs": "e34e09c569672ba04badf68c379639884e9b9f43d002e01b297e4eeb59261b8c",
+    "crates/tkernel/tests/ncollection_array1/size.rs": "0e0eeea57d8a2dd51496971fa4f45b662f8af52b6c79e66dc1a44d25f377c2b1",
+    "crates/tkernel/tests/ncollection_array2.rs": "7a4cfb4b6f12a0cda4ad983bfa0239c005783d2f2209194e5d5069af8e16c12a",
+    "crates/tkernel/tests/ncollection_array2/assignment.rs": "fbed273fd4a67e8d55cedf0853f7b69ea50a6525bfeceb4441a65627b7e6ef30",
+    "crates/tkernel/tests/ncollection_array2/resize.rs": "f3204ba6db0f3ed709e494839c3f86aa098f7ca71468e2c73113f734842654b1",
+    "crates/tkernel/tests/ncollection_array2/access.rs": "3e5068ea3b9a0eef49096a2776246896e48a2242b474ca9206f4c9ca90af877c",
+    "crates/tkernel/tests/ncollection_array2/construction.rs": "e65c0d48da10452caf97c5badab2db24ebb07b7867dc6a9aebcbbeb2b34fdda3",
+    "crates/tkernel/tests/ncollection_arrays_api_behavior.rs": "1682097b1f16081eef4b190a4b075f51a0f4a84d184e17d09db5bec6f51cf504",
+    "crates/tkernel/tests/array1_assignment_pointer_contracts.rs": "b2f45ffda1320246fb995f1a3cbaabc0faab3f1e4e39434dbbb789de02791607",
+    "crates/tkernel/tests/array2_assignment_pointer_contracts.rs": "50a5ef062599536e0b30fabbfc626af3088ed63c35a4d6f751fdc136fd9dc394",
+    "crates/tkernel/tests/array1_borrowed_init.rs": "4ba8f8691642c1ff772babadfff8e1ef609654909df9c21fe4ba8b19267e9b1a",
+    "crates/tkernel/tests/ncollection_array2_buffer_prefix.rs": "801e1c084e979b30a251c4dffc3f120fdfeb381ed6c25187dccec5d66228ddb6",
+    "crates/tkernel/tests/ncollection_array_set_value_ref.rs": "426104e32b37166444a55478093c17c50561988ad5be68e0a7832446ca3495ed",
+    "crates/tkernel/tests/array_raw_copy_contracts.rs": "64fa266670b4297f666a41bc9e644372918e75765d689237d042bb056926cd11",
+    "crates/tkernel/tests/array_raw_copy_validation.rs": "ebdd8c5ef09069e6d0c20c751499d8e3e9eac553980c45dce4c071eabd790d33",
+    "crates/tkernel/tests/array_buffer_constructors.rs": "cf0c15adccce8a8d70c13f753b9a16ef793238dd8c720fed0ecd17c7d39c7bc1",
+    "crates/tkernel/tests/array_buffer_constructors/support.rs": "e15d1c44331e87864cc426573dac5494000ceec0edee9a646d6247dbfd0306c1",
+    "crates/tkernel/tests/array_buffer_validation.rs": "b71813e6875a3f44b269e91ab65a50f2e3d99fe095b42ff7b94ed368bc45d257",
+    "crates/tkernel/tests/array2_resize_assignment.rs": "d978a897356011b500ce2d581bb9d7b39ef53809127d7c803d51465429eb7efa",
+    "crates/tkernel/tests/array2_resize_assignment/support.rs": "b4d7e39db0a1618f966eac7ad50c42f5d11e9cb62f2c23cddac2b15ca04b98c7",
+    "crates/tkernel/tests/array2_resize_validation.rs": "8217d6d6411604519412e166c0f8545c2785372082efb4046b0b321be9476f22",
+    "crates/tkernel/tests/array_emplace_assignment.rs": "ef075786addde15ef6089b7dd11bf4388bace660e64414a931ad66391f44fa66",
+    "crates/tkernel/tests/array_emplace_assignment/support.rs": "4f58e39643e0e47a6790ee4bcf002cde0caf275cb174f0c0e07ea9992ce7a1ed",
+    "crates/tkernel/tests/array_set_value_assignment.rs": "02bed0fcf2a1d1757f6438d89f313541d161fce146e83b8f8ba4cd4e3cf6d2c7",
+    "crates/tkernel/tests/array_set_value_assignment/support.rs": "3e4d770878f2ab3f303a91cf9bc7da7ec7787248fcd27fc74d222e8f83f8e2bf",
+    "crates/tkernel/tests/array_const_assignment.rs": "a9e91b0e1cd0097ba9eb566cfe75a0d1aae07a0e0e0b3bb728ef9b8445a6ea88",
+    "crates/tkernel/tests/array_const_assignment/support.rs": "163136bf665b857eb9631e0ca431b442d6c48b3f98ef22e24c6e28443373b2c0",
+    "crates/tkernel/tests/array_copy_values_assignment.rs": "4335699d3ce25ac8e51ae75d81dd8b1f125bf2c69804cd22a352e84ee319317d",
+    "crates/tkernel/tests/array_copy_values_assignment/support.rs": "1b24b3a7fd81cfcf0c6f947b878062a1f8a8022fa5ab97b0056a1fe65f5a13f7",
+    "crates/tkernel/tests/array_internal_set_value.rs": "c48d2bad381321630f2782e233acf838a0f74f869c814fa956f60ac7200d23e7",
+    "crates/tkernel/tests/array_internal_set_value/support.rs": "d90515f6d610369fd8fc9b4166f229255e8292b15c7ecd40f2b97a0168baa71a",
+    "crates/tkernel/tests/array_internal_init.rs": "63675cd25763c40d3fe09d97ca1ba735854ebe76dbfaefd3f24312012da859b6",
+    "crates/tkernel/tests/array_internal_init/support.rs": "f9ccabf17493b2d4395bc4681d107358f6b0ab2741c6a5e1fdb171b4bf6b7e87",
+    "crates/tkernel/tests/array_internal_emplace.rs": "704169299a6d7dfe3c51a754d541b23820c56f7014098ea87310b5eb4f574db3",
+    "crates/tkernel/tests/array_internal_emplace/support.rs": "f2ae64a0700ca8614dcb1a8d53b990e03fe283ac2664eb2e88d0cb8c3446f26d",
+    "crates/tkernel/tests/array_uninitialized.rs": "060815af5e809cb2e3d4371006b87aece6078bd7fb7e0877311db6e482c7b332",
+    "crates/tkernel/tests/array_uninitialized/support.rs": "4ce3e3ad6ab7d07da721ca1612fa545ec461bdee5cfbb064536f8705cce1e947",
+    "crates/tkernel/tests/array_raw_construction.rs": "5c72d132bb166958d5ff0aa5975d76ff79c0212b7c322797488f0e0529ccd3f5",
+    "crates/tkernel/tests/array2_index_limits.rs": "3952a7a6c98bd14b4cbcaa1d38182ca97121903525af19952fde27e9f5eeb65c",
+    "crates/tkernel/tests/array2_index_limits/support.rs": "fdb4d563d22dc5c71a817d524e3283e97fec556da3766bbec7409ff4e205f185",
+    "crates/tkernel/tests/array_exact_surface.rs": "f8923c0eed03d9eaaba70b18ba4cea5dd3c3eaae28985b08f678a062dfa55436",
+    "crates/tkernel/tests/array_exact_surface/support.rs": "111026e14052998e92635bea0e6f62e1af7050da3253f739f9dcfd26e8bfed67",
+    "crates/tkernel/tests/array_exclusive_initialization.rs": "808ea25fa0a3248d8a2ef3b7a51f30633818a15da69230ef283e828bfa01c848",
+    "crates/tkernel/tests/array_exclusive_initialization/support.rs": "ff7fad0aaa104719a86f3ac67a098716698536db51a9b9fa6b396d4fd99dd9ca"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-rust.gz",
+      "sha256": "122e6cc426b417344515c945e9f509f3d2092c2cb2494f37f82e5c069bb13fc9",
+      "uncompressed_sha256": "7b58720ef56f0d3f897b7ab38054865da4127873ad2d80e6f49c175e60310e66"
+    },
+    "unit": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-unit.gz",
+      "sha256": "12c8a81c8b02925a955282b45cf83bba3b599f851aec92c7873e7302adc98cf1",
+      "uncompressed_sha256": "3d73ff89ba55cbb162f015abd87cf44da061e7108d05ce5d00ebba5a0088e2eb"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-miri.gz",
+      "sha256": "d634c57aadd16468e7a853362a641baf75faec9ffcda595cee809445fc475380",
+      "uncompressed_sha256": "033011dc5c48b1442c00ebc164a63899029c50f6c58c78596eebc4b5f522bb19"
+    },
+    "miri-unit": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-miri-unit.gz",
+      "sha256": "0dcca171afd0ec6f0ab6d917a70f2630a0cba1e7290087adb00b46b1746eb614",
+      "uncompressed_sha256": "58c0a7ff438cf786b9ab227e249c540eb2e63d401e8e3bf003ee0e30ee83c2fe"
+    },
+    "docs": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-docs.gz",
+      "sha256": "4df91a4b5152d5ce2d6b6dbfd02014bae10863bf7cc2cc371981192a6b694e61",
+      "uncompressed_sha256": "85eb8862becb42c9a918d9dea1d56472573ec290362ca1e26fe3782ff1de5379"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-clippy.gz",
+      "sha256": "0c67637ebd653de0bd270e6427e5bdfb67050646d005c911320092ff7b760987",
+      "uncompressed_sha256": "bfd257894a71765f2d543ff53bf3e18bc783b9a4511014bd2ee962c0aeb27a33"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-native-original.gz",
+      "sha256": "33c26764f657b23b9dd1a1b93b61bddacc2a6a8e843f0651595e71453ed427eb",
+      "uncompressed_sha256": "9e843f85e244ec7147432ea3585f709b736b8ef778f4af5539450de4c02ec2fe"
+    },
+    "red": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-red.gz",
+      "sha256": "4bb43e9e20d9f0ea8b4f187361670b8a2a252f0ce7da7a06f37a15f22223edab",
+      "uncompressed_sha256": "a193f403971165de51820678aa8284cf9e3598a4bbab18159d60b346eceee115"
+    },
+    "lifetime": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-lifetime.gz",
+      "sha256": "fe511e145aa180bb2594abfa03edba25114f151346ec0b3535d6d67bb9692269",
+      "uncompressed_sha256": "2731a47958b7d4fb8825ec2bbcfd71fa0946e6370228ad31200fc3b1f56c8df0"
+    },
+    "ubsan": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-ubsan.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-compiler.gz",
+      "sha256": "70241228ed47a5067c18710bb9aacb86d672f822b5ea984b78216e42675a3d18",
+      "uncompressed_sha256": "c1dbd44e11972906c2bc653b9cfe634f25be7cf4069ac88e34d0186d3a562cf1"
+    },
+    "compiler-json": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-compiler-json.gz",
+      "sha256": "7ad9448e04196949aca693429a876466c499a7905faa4873a4da2e9cd5468eb3",
+      "uncompressed_sha256": "61cfa53a4e9ad4393bb3806cee1cb0ec7981a97d810221b2f25c76b0e81381c7"
+    },
+    "normalized": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-normalized.gz",
+      "sha256": "df0344b0ef6e407822c09c638c81f182a9b016aba1c3167461c1d9a762314dfd",
+      "uncompressed_sha256": "0fd172cebc0af6118727d10cb14e5d42fde8918009dcea7d0308b362e63bb62e"
+    },
+    "checks": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-checks.gz",
+      "sha256": "20a1221c8289408d5544c80752dcf25c10620cd140f895917628e684506fabd8",
+      "uncompressed_sha256": "20fbeb00b7fbec112827fd206a1b84b41cee010ed27e80147e3cd3797212f9ec"
+    },
+    "miri-command": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-miri-command.gz",
+      "sha256": "8fe802f0442f280e97b17d78c1dc81a9e3043d194807d9c7d43caac27a6cb9f4",
+      "uncompressed_sha256": "1efbba20846341a376687123598955db1a1910d55614385b57a4edc5969bdeb2"
+    },
+    "miri-unit-command": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-miri-unit-command.gz",
+      "sha256": "239fda93a15ac38e9a10ad1a20ac4515793e4503d7d1ba40483b84f65a0b43f9",
+      "uncompressed_sha256": "481585be499876777d8893ceb75a54a1ca3317870949ebae8fcad9852a60d68a"
+    },
+    "lifetime-command": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-lifetime-command.gz",
+      "sha256": "431bdd906c8f1d550972d9de6c77cf69f84b67797f9b097159462220b9674811",
+      "uncompressed_sha256": "a2c870ce078168babdfe999236aef44c34380038180311a92710eee35d2636e5"
+    },
+    "lifetime-source": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-lifetime-source.gz",
+      "sha256": "82d2f4e06b153c9a3c568f971de19d18bf7ad616e15bdebd2254f7f79f3f0ba3",
+      "uncompressed_sha256": "b54d0c8d1050efffd6d77fd45a44fb44552626d0ee9b4f779c6942444ee6f963"
+    },
+    "baseline-source": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-baseline-source.gz",
+      "sha256": "dbc5d18fbe196465185fe75458bc0191925e17e8bc905bdfd00623aa694b28bb",
+      "uncompressed_sha256": "9b404036b872db8a27f7bb999e38438465be024e45701b0aaba6ea124f7d566a"
+    },
+    "native-output": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-native-output.gz",
+      "sha256": "0de699614b8e8b26de5aff43c77ab6233383a6de40fedc70935aa438b044fd67",
+      "uncompressed_sha256": "b80bde6a16bfa291763b3ff46d947d91876d10d4dffbe4229f6b1a7bd756099e"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/array-exclusive-initialization-source.tar.gz",
+      "sha256": "19135cb02b39190b0cba979e48e71f2255c005772020c33ad258367438814ffd"
+    }
+  }
+}

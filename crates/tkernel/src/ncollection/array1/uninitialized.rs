@@ -48,19 +48,59 @@ impl<'a, T: Copy> Array1<'a, MaybeUninit<T>> {
 }
 
 #[allow(unsafe_code)]
-unsafe fn initialized_storage<T: Copy>(storage: Storage<'_, MaybeUninit<T>>) -> Storage<'_, T> {
+impl<'a, T> Array1<'a, MaybeUninit<T>> {
+    /// Transfers exclusively initialized storage without requiring `Copy` or `Clone`.
+    /// Shared views return unchanged in `Err`, preserving their existing detach policy.
+    /// ```
+    /// use rustycad_tkernel::ncollection::Array1;
+    /// let mut slots = Array1::<String>::with_uninit_size(1);
+    /// slots.as_mut_slice()[0].write("ready".into());
+    /// let values = unsafe { slots.try_assume_init_exclusive() }.unwrap();
+    /// assert_eq!(values.as_slice(), ["ready"]);
+    /// ```
+    ///
+    /// # Safety
+    /// For owned or exclusively borrowed storage, every actual length slot must
+    /// contain a valid initialized `T`, including slots beyond matrix bounds after
+    /// backing replacement or resize. Spare capacity and unborrowed tails are excluded.
+    /// Owned payloads will drop with the result; borrowed payloads remain the donor's
+    /// responsibility after the result's borrow ends. Retained pointers must obey
+    /// the resulting borrows. Shared storage is rejected without reading its slots,
+    /// and may still be uninitialized. Ownership transfers without element operations.
+    pub unsafe fn try_assume_init_exclusive(self) -> Result<Array1<'a, T>, Self> {
+        let lower = self.lower;
+        // SAFETY: the caller initializes every actual exclusive slot before conversion.
+        unsafe { initialized_exclusive_storage(self.storage) }
+            .map(|storage| Array1 { lower, storage })
+            .map_err(|storage| Self { lower, storage })
+    }
+}
+
+#[allow(unsafe_code)]
+unsafe fn initialized_exclusive_storage<T>(
+    storage: Storage<'_, MaybeUninit<T>>,
+) -> Result<Storage<'_, T>, Storage<'_, MaybeUninit<T>>> {
     match storage {
-        // SAFETY: ownership and allocation layout are retained; all elements are initialized.
-        Storage::Owned(slots) => Storage::Owned(unsafe { initialized_vector(slots) }),
-        // SAFETY: MaybeUninit<T> has T's layout and the exclusive lifetime is unchanged.
-        Storage::Borrowed(slots) => Storage::Borrowed(unsafe {
+        // SAFETY: layout and allocation ownership transfer with every live slot initialized.
+        Storage::Owned(slots) => Ok(Storage::Owned(unsafe { initialized_vector(slots) })),
+        // SAFETY: the exclusive slice retains its complete length and original lifetime.
+        Storage::Borrowed(slots) => Ok(Storage::Borrowed(unsafe {
             std::slice::from_raw_parts_mut(slots.as_mut_ptr().cast::<T>(), slots.len())
-        }),
+        })),
+        shared @ Storage::Shared(..) => Err(shared),
+    }
+}
+
+#[allow(unsafe_code)]
+unsafe fn initialized_storage<T: Copy>(storage: Storage<'_, MaybeUninit<T>>) -> Storage<'_, T> {
+    match unsafe { initialized_exclusive_storage(storage) } {
+        Ok(storage) => storage,
         // SAFETY: the caller guarantees initialized values for the full shared lifetime.
-        Storage::Shared(slots, _) => Storage::Shared(
+        Err(Storage::Shared(slots, _)) => Storage::Shared(
             unsafe { std::slice::from_raw_parts(slots.as_ptr().cast::<T>(), slots.len()) },
             <[T]>::to_vec,
         ),
+        Err(_) => unreachable!("exclusive storage always converts without rejection"),
     }
 }
 
@@ -89,5 +129,19 @@ mod tests {
         assert_eq!(values.as_ptr(), pointer);
         assert_eq!(values.capacity(), capacity);
         assert_eq!(values, [7, 9]);
+    }
+    #[test]
+    #[allow(unsafe_code)]
+    fn exclusive_noncopy_vector_retains_spare_capacity_and_allocation() {
+        let mut slots = Vec::with_capacity(8);
+        slots.push(MaybeUninit::new(String::from("owned")));
+        let (pointer, capacity) = (slots.as_ptr().cast::<String>(), slots.capacity());
+        let storage = super::Storage::Owned(slots);
+        let values = unsafe { super::initialized_exclusive_storage(storage) };
+        let Ok(super::Storage::Owned(values)) = values else {
+            panic!("owned conversion")
+        };
+        assert_eq!((values.as_ptr(), values.capacity()), (pointer, capacity));
+        assert_eq!(values, ["owned"]);
     }
 }
