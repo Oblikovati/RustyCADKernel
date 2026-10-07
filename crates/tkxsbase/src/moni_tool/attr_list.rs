@@ -4,15 +4,43 @@
 //! `MoniTool_AttrList`: a list of named attributes (integers, reals, texts or any
 //! object).
 use super::{MoniToolIntVal, MoniToolRealVal, MoniToolValueType};
+use crate::attr_core::{self, AttributeBoxes, AttributeKind, AttributeMap};
 use rustycad_tkernel::{
-    ncollection::DataMap,
     standard::{Handle, RuntimeType, RuntimeTyped, StandardTransient},
     tcollection::{AsciiString, HAsciiString},
 };
 
 /// The native `NCollection_DataMap<TCollection_AsciiString, occ::handle<Standard_Transient>>`
 /// of the attributes.
-pub type MoniToolAttrMap = DataMap<AsciiString, Handle<StandardTransient>>;
+pub type MoniToolAttrMap = AttributeMap;
+
+/// The MoniTool boxes of integer and real attributes.
+struct MoniToolBoxes;
+
+impl AttributeBoxes for MoniToolBoxes {
+    fn new_integer(value: i32) -> Handle<StandardTransient> {
+        Handle::new(MoniToolIntVal::new(value)).cast()
+    }
+    fn integer_of(atr: &Handle<StandardTransient>) -> Option<i32> {
+        atr.cast::<MoniToolIntVal>()
+            .get()
+            .map(MoniToolIntVal::value)
+    }
+    fn integer_type() -> &'static RuntimeType {
+        MoniToolIntVal::static_type()
+    }
+    fn new_real(value: f64) -> Handle<StandardTransient> {
+        Handle::new(MoniToolRealVal::new(value)).cast()
+    }
+    fn real_of(atr: &Handle<StandardTransient>) -> Option<f64> {
+        atr.cast::<MoniToolRealVal>()
+            .get()
+            .map(MoniToolRealVal::value)
+    }
+    fn real_type() -> &'static RuntimeType {
+        MoniToolRealVal::static_type()
+    }
+}
 
 /// `MoniTool_AttrList`: attributes by name. An integer is recorded as a
 /// [`MoniToolIntVal`], a real as a [`MoniToolRealVal`], a text as an [`HAsciiString`].
@@ -41,10 +69,7 @@ impl MoniToolAttrList {
     }
     /// `RemoveAttribute`: true when the attribute existed.
     pub fn remove_attribute(&mut self, name: &str) -> bool {
-        if self.theattrib.is_empty() {
-            return false;
-        }
-        self.theattrib.unbind(&AsciiString::new(name))
+        attr_core::remove_attribute(&mut self.theattrib, name)
     }
     /// `GetAttribute`: the attribute `name` when it is kind of `atype`, else null and false.
     pub fn get_attribute(
@@ -53,68 +78,50 @@ impl MoniToolAttrList {
         atype: &RuntimeType,
         val: &mut Handle<StandardTransient>,
     ) -> bool {
-        *val = self.attribute(name);
-        if val.is_null() || !val.is_kind(atype) {
-            val.nullify();
-            return false;
-        }
-        true
+        attr_core::get_attribute(&self.theattrib, name, atype, val)
     }
     /// `Attribute`: the attribute `name`, null when not recorded.
     pub fn attribute(&self, name: &str) -> Handle<StandardTransient> {
-        if self.theattrib.is_empty() {
-            return Handle::default();
-        }
-        let found = self.theattrib.seek(&AsciiString::new(name));
-        found.cloned().unwrap_or_default()
+        attr_core::attribute(&self.theattrib, name)
     }
     /// `AttributeType`: integer, real, text, ident (any other object) or void (not
     /// recorded); the exact dynamic type decides, as natively.
     pub fn attribute_type(&self, name: &str) -> MoniToolValueType {
-        let atr = self.attribute(name);
-        let Some(kind) = atr.dynamic_type() else {
-            return MoniToolValueType::ValueVoid;
-        };
-        if std::ptr::eq(kind, MoniToolIntVal::static_type()) {
-            return MoniToolValueType::ValueInteger;
+        match attr_core::attribute_kind::<MoniToolBoxes>(&self.theattrib, name) {
+            AttributeKind::Void => MoniToolValueType::ValueVoid,
+            AttributeKind::Integer => MoniToolValueType::ValueInteger,
+            AttributeKind::Real => MoniToolValueType::ValueReal,
+            AttributeKind::Text => MoniToolValueType::ValueText,
+            AttributeKind::Ident => MoniToolValueType::ValueIdent,
         }
-        if std::ptr::eq(kind, MoniToolRealVal::static_type()) {
-            return MoniToolValueType::ValueReal;
-        }
-        if std::ptr::eq(kind, HAsciiString::static_type()) {
-            return MoniToolValueType::ValueText;
-        }
-        MoniToolValueType::ValueIdent
     }
     /// `SetIntegerAttribute`.
     pub fn set_integer_attribute(&mut self, name: &str, val: i32) {
-        self.set_attribute(name, &Handle::new(MoniToolIntVal::new(val)).cast());
+        self.set_attribute(name, &MoniToolBoxes::new_integer(val));
     }
     /// `GetIntegerAttribute`: false and 0 when absent or not an integer.
     pub fn get_integer_attribute(&self, name: &str, val: &mut i32) -> bool {
-        let ival = self.attribute(name).cast::<MoniToolIntVal>();
-        *val = ival.get().map_or(0, MoniToolIntVal::value);
-        ival.is_some()
+        let found = MoniToolBoxes::integer_of(&self.attribute(name));
+        *val = found.unwrap_or(0);
+        found.is_some()
     }
     /// `IntegerAttribute`: 0 when absent.
     pub fn integer_attribute(&self, name: &str) -> i32 {
-        let ival = self.attribute(name).cast::<MoniToolIntVal>();
-        ival.get().map_or(0, MoniToolIntVal::value)
+        MoniToolBoxes::integer_of(&self.attribute(name)).unwrap_or(0)
     }
     /// `SetRealAttribute`.
     pub fn set_real_attribute(&mut self, name: &str, val: f64) {
-        self.set_attribute(name, &Handle::new(MoniToolRealVal::new(val)).cast());
+        self.set_attribute(name, &MoniToolBoxes::new_real(val));
     }
     /// `GetRealAttribute`: false and 0.0 when absent or not a real.
     pub fn get_real_attribute(&self, name: &str, val: &mut f64) -> bool {
-        let rval = self.attribute(name).cast::<MoniToolRealVal>();
-        *val = rval.get().map_or(0.0, MoniToolRealVal::value);
-        rval.is_some()
+        let found = MoniToolBoxes::real_of(&self.attribute(name));
+        *val = found.unwrap_or(0.0);
+        found.is_some()
     }
     /// `RealAttribute`: 0.0 when absent.
     pub fn real_attribute(&self, name: &str) -> f64 {
-        let rval = self.attribute(name).cast::<MoniToolRealVal>();
-        rval.get().map_or(0.0, MoniToolRealVal::value)
+        MoniToolBoxes::real_of(&self.attribute(name)).unwrap_or(0.0)
     }
     /// `SetStringAttribute`.
     pub fn set_string_attribute(&mut self, name: &str, val: &str) {
@@ -122,17 +129,13 @@ impl MoniToolAttrList {
     }
     /// `GetStringAttribute`: false and "" when absent or not a text.
     pub fn get_string_attribute(&self, name: &str, val: &mut AsciiString) -> bool {
-        let hval = self.attribute(name).cast::<HAsciiString>();
-        *val = hval
-            .get()
-            .map_or_else(AsciiString::default, |h| h.string().clone());
-        hval.is_some()
+        let found = attr_core::string_attribute(&self.theattrib, name);
+        *val = found.clone().unwrap_or_default();
+        found.is_some()
     }
     /// `StringAttribute`: "" when absent (natively the C string of the shared text).
     pub fn string_attribute(&self, name: &str) -> AsciiString {
-        let hval = self.attribute(name).cast::<HAsciiString>();
-        hval.get()
-            .map_or_else(AsciiString::default, |h| h.string().clone())
+        attr_core::string_attribute(&self.theattrib, name).unwrap_or_default()
     }
     /// `AttrList`: the map of every attribute.
     pub fn attr_list(&self) -> &MoniToolAttrMap {
@@ -146,28 +149,13 @@ impl MoniToolAttrList {
     /// `GetAttributes(other, fromname, copied)`: adds the attributes of `other` whose name
     /// starts with `fromname`; with `copied`, integers, reals and texts are new objects.
     pub fn get_attributes(&mut self, other: &MoniToolAttrList, fromname: &str, copied: bool) {
-        for (name, atr) in other.theattrib.items() {
-            if !name.starts_with(fromname) {
-                continue;
-            }
-            let newatr = if copied { copy_basic(atr) } else { atr.clone() };
-            self.theattrib.bind(name.clone(), newatr);
-        }
+        attr_core::get_attributes::<MoniToolBoxes>(
+            &mut self.theattrib,
+            &other.theattrib,
+            fromname,
+            copied,
+        );
     }
-}
-
-/// A new object for an integer, real or text attribute, else the attribute itself.
-fn copy_basic(atr: &Handle<StandardTransient>) -> Handle<StandardTransient> {
-    if let Some(ival) = atr.cast::<MoniToolIntVal>().get() {
-        return Handle::new(MoniToolIntVal::new(ival.value())).cast();
-    }
-    if let Some(rval) = atr.cast::<MoniToolRealVal>().get() {
-        return Handle::new(MoniToolRealVal::new(rval.value())).cast();
-    }
-    if let Some(hval) = atr.cast::<HAsciiString>().get() {
-        return Handle::new(HAsciiString::copied(hval)).cast();
-    }
-    atr.clone()
 }
 
 #[cfg(test)]

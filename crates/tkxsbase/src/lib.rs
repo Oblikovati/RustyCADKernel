@@ -11,6 +11,7 @@
 //! `moni_tool`, `IFSelect` is `if_select`, `XSControl` is `xs_control`), declared here up
 //! front; a module whose package is not ported yet holds only its documentation.
 //! docs/xsbase-design.md fixes how the C++ constructs of the packages map to Rust.
+mod attr_core;
 mod c_text;
 pub mod interface;
 pub mod lib_ctl;
