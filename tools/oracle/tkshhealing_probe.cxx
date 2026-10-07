@@ -47,6 +47,7 @@
 #include "tkshhealing_probe_edge_outputs.cxx"
 #include "tkshhealing_probe_canonical.cxx"
 #include "tkshhealing_probe_shapeconstruct.cxx"
+#include "tkshhealing_probe_construct_package.cxx"
 #include "tkshhealing_probe_analysiscurve.cxx"
 #include "tkshhealing_probe_analysis_surface.cxx"
 #include "tkshhealing_probe_project_curve.cxx"
@@ -86,6 +87,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sh_shell_sewing", sh_shell_sewing_case},
  {"sh_project_curve", sh_project_curve_case},
  {"sh_construct", sh_construct_case},
+ // ShapeConstruct package functions (tkshhealing_probe_construct_package.cxx)
+ {"sh_construct_pkg", sh_construct_pkg_case},
  {"sh_analysis_surface", sh_analysis_surface_case},
  {"sh_canonical", sh_canonical_case},
  {"sh_edgeoutputs", sh_edgeoutputs_case},
