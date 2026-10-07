@@ -72,6 +72,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("hb_hider", hl_probe::hlrbrep_hider::hider_case),
     ("hb_algo", hl_probe::hlrbrep_algo::algo_case),
     ("hb_reflect", hl_probe::hlrbrep_algo::reflect_case),
+    ("hb_poly", hl_probe::hlrbrep_poly::poly_case),
     (
         "hb_intersector",
         hl_probe::hlrbrep_intersector::intersector_case,

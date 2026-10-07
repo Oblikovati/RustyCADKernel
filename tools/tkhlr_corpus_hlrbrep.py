@@ -326,6 +326,30 @@ def reflect_requests(rng: random.Random) -> list[str]:
     return requests
 
 
+def poly_solid(rng: random.Random) -> list[float]:
+    """A box, cylinder, cone frustum or torus for the polyhedral probe (no apex, no pole:
+    the probe mesher grids the UV rectangle of each face)."""
+    kind = rng.choice((0, 1, 2, 4))
+    fields = solid(rng, kind)
+    if kind == 2 and fields[-2] == 0.0:
+        fields[-2] = 0.5
+    return fields
+
+
+def poly_requests(rng: random.Random) -> list[str]:
+    """hb_poly: HLRBRep_PolyAlgo on meshed primitives and pairs of them, the hidden and
+    shown segments and the PolyHLRToShape compounds."""
+    requests = []
+    for index in range(300):
+        proj = projector(rng, rng.choice((0, 0, 1)))
+        if proj[0] == 1:
+            proj[-1] = rng.choice((30.0, 60.0))
+        shape_fields = poly_solid(rng) if index % 3 else [7, 2, *poly_solid(rng), *poly_solid(rng)]
+        n, m = rng.choice((6, 8, 12)), rng.choice((2, 3, 4))
+        requests.append('hb_poly ' + numbers(proj + shape_fields + [n, m, rng.choice((0.1, 0.1, 0.2))]))
+    return requests
+
+
 def append_hlrbrep_requests(requests: list[str]) -> None:
     """Append every HLRBRep request family in a fixed order."""
     rng = random.Random(0x41B12E9)
@@ -341,3 +365,4 @@ def append_hlrbrep_requests(requests: list[str]) -> None:
     requests.extend(hider_requests(rng))
     requests.extend(algo_requests(rng))
     requests.extend(reflect_requests(rng))
+    requests.extend(poly_requests(rng))

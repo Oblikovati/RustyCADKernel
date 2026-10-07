@@ -51,6 +51,7 @@ pub mod hlrbrep_faces;
 pub mod hlrbrep_fixtures;
 pub mod hlrbrep_hider;
 pub mod hlrbrep_intersector;
+pub mod hlrbrep_poly;
 pub mod hlrbrep_records;
 pub mod hlrbrep_shapes;
 pub mod hlrbrep_surface;

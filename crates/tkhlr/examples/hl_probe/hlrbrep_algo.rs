@@ -17,7 +17,7 @@ fn minmax(m: &MinMaxIndices) {
 }
 
 /// `hb_compound`: the edges of a result compound.
-fn compound(c: &Shape) -> Result<(), Failure> {
+pub fn compound(c: &Shape) -> Result<(), Failure> {
     flag(c.is_null());
     if c.is_null() {
         return Ok(());

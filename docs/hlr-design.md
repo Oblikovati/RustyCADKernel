@@ -244,3 +244,14 @@ and 17.
   compounds of one shape. `HLRToShape` scales the projector of the data structure
   through `Data::change_projector`; a failure while it draws leaves the projector
   scaled, as the native exception does.
+- **The polyhedral algorithm.** `HLRBRep_PolyAlgo` passes references to the indices
+  and data of the internal nodes (`Nod11Indices`, `Nod11RValues`, ...), and two of
+  them may name one node (a closed edge, a seam face on both sides, a degenerated
+  segment). The port passes the node handles and reads or writes each field through a
+  short lock in the native order, so a write through one name is seen through the
+  other. The native array pointers that `AddNode`, `IncTData` and `UpdateLinks`
+  redirect are the `Handle<HArray1>` of a `Side` (one face along the edge); the three
+  `MoveOrInsertPoint` members share one body for one or two faces and keep the native
+  order of the node moves (`P2 ---> P4` moves the nodes of face 2 first). The probes
+  mesh the shapes with one deterministic grid and fan mesher written twice
+  (`hb_mesh`, `crates/tkhlr/tests/support/grid_mesh.rs`) instead of BRepMesh.
