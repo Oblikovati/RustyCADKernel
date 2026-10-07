@@ -24299,6 +24299,14 @@
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
+      "upstream_id": "Geom2d_Conic::pos",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Conic.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dConic",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of each concrete conic (Geom2dCircle, Geom2dEllipse, Geom2dHyperbola, Geom2dParabola) and is reached through Geom2dConic::position and the SetPosition/SetAxis setters."
+    },
+    {
       "upstream_id": "Geom2d_Curve::Reverse",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
@@ -26585,6 +26593,14 @@
       "rust_item": "rustycad_tkg2d::geom2d::Geom2dVector::static_type",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom2d_Vector::gpVec2d",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Vector.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dVector",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of each concrete vector (Geom2dDirection, Geom2dVectorWithMagnitude) and is reached through Geom2dVector::vec2d and the coordinate accessors."
     },
     {
       "upstream_id": "Geom2d_VectorWithMagnitude::Geom2d_VectorWithMagnitude(const gp_Vec2d&)",
@@ -38293,6 +38309,14 @@
       "notes": "Geom2dHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed curve hashers take the object instead of a handle they dereference; the point, direction, axis and curve hashers also implement ncollection::HashPolicy. Hash values match OCCT bit for bit (docs/tkg2d-progress.md). Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Geom2dHash_CurveHasher(double,double)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dHash/Geom2dHash_CurveHasher.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_hash::Geom2dHashCurveHasher::new",
+      "status": "implemented",
+      "notes": "constructor storing CompTolerance and HashTolerance; the C++ default arguments (Precision::Angular(), Precision::Confusion()) are Geom2dHashCurveHasher::default()."
+    },
+    {
       "upstream_id": "Poly::Write(const occ::handle<Poly_Triangulation>&,Standard_OStream&,bool)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly.hxx",
@@ -46217,6 +46241,14 @@
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
+      "upstream_id": "Geom_Vector::gpVec",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Vector.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomVector",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of each concrete vector (GeomDirection, GeomVectorWithMagnitude) and is reached through GeomVector::vec."
+    },
+    {
       "upstream_id": "Geom_Direction::Geom_Direction(double,double,double)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Geom/Geom_Direction.hxx",
@@ -46615,6 +46647,14 @@
       "rust_item": "rustycad_tkg3d::geom::GeomAxisPlacement::static_type",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_AxisPlacement::axis",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_AxisPlacement.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomAxisPlacement",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAxis1Placement and GeomAxis2Placement and is reached through GeomAxisPlacement::axis."
     },
     {
       "upstream_id": "Geom_Axis1Placement::Geom_Axis1Placement(const gp_Ax1&)",
@@ -47335,6 +47375,14 @@
       "rust_item": "rustycad_tkg3d::geom::GeomConic::static_type",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_Conic::pos",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Conic.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConic",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of each concrete conic (GeomCircle, GeomEllipse, GeomHyperbola, GeomParabola) and is reached through GeomConic::position."
     },
     {
       "upstream_id": "Geom_Line::Geom_Line(const gp_Ax1&)",
@@ -49025,6 +49073,14 @@
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
+      "upstream_id": "Geom_ElementarySurface::pos",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ElementarySurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomElementarySurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of each concrete elementary surface and is reached through GeomElementarySurface::position."
+    },
+    {
       "upstream_id": "Geom_SweptSurface::Continuity",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Geom/Geom_SweptSurface.hxx",
@@ -49063,6 +49119,30 @@
       "rust_item": "rustycad_tkg3d::geom::GeomSweptSurface::static_type",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_SweptSurface::basisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SweptSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSweptSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomSurfaceOfLinearExtrusion and GeomSurfaceOfRevolution and is reached through GeomSweptSurface::basis_curve."
+    },
+    {
+      "upstream_id": "Geom_SweptSurface::direction",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SweptSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSweptSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomSurfaceOfLinearExtrusion and GeomSurfaceOfRevolution and is reached through GeomSweptSurface::direction."
+    },
+    {
+      "upstream_id": "Geom_SweptSurface::smooth",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SweptSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSweptSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomSurfaceOfLinearExtrusion and GeomSurfaceOfRevolution and is reached through GeomSurface::continuity."
     },
     {
       "upstream_id": "GeomEval_RepCurveDesc::Map1d::IsIdentity",
@@ -49169,6 +49249,118 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "GeomEval_RepCurveDesc",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval",
+      "status": "implemented",
+      "notes": "C++ namespace grouping the curve evaluation-representation descriptors; the Rust module geom_eval holds the same members (Map1d, Domain1d, RepCurveKind, RepCurveDesc and RepCurveDescFull, RepCurveDescDerivBounded, RepCurveDescMapped)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Base::Kind::Full",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveKind::Full",
+      "status": "implemented",
+      "notes": "enumerator of the descriptor Kind enum; the surface descriptors use the same three-valued enum (RepSurfaceKind aliases RepCurveKind)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Base::Kind::DerivBounded",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveKind::DerivBounded",
+      "status": "implemented",
+      "notes": "enumerator of the descriptor Kind enum; the surface descriptors use the same three-valued enum (RepSurfaceKind aliases RepCurveKind)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Base::Kind::Mapped",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveKind::Mapped",
+      "status": "implemented",
+      "notes": "enumerator of the descriptor Kind enum; the surface descriptors use the same three-valued enum (RepSurfaceKind aliases RepCurveKind)."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Base::Representation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDesc::representation",
+      "status": "implemented",
+      "notes": "public field of the descriptor; Rust keeps descriptor state behind a lock: the trait getter (representation, max_deriv_order, mapping) reads it and the named setter writes it."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::DerivBounded::MaxDerivOrder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescDerivBounded::set_max_deriv_order",
+      "status": "implemented",
+      "notes": "public field of the descriptor; Rust keeps descriptor state behind a lock: the trait getter (representation, max_deriv_order, mapping) reads it and the named setter writes it."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Mapped::MaxDerivOrder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescMapped::set_max_deriv_order",
+      "status": "implemented",
+      "notes": "public field of the descriptor; Rust keeps descriptor state behind a lock: the trait getter (representation, max_deriv_order, mapping) reads it and the named setter writes it."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Mapped::Domain",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescMapped::set_domain",
+      "status": "implemented",
+      "notes": "public field of the descriptor; Rust keeps descriptor state behind a lock: the trait getter (representation, max_deriv_order, mapping) reads it and the named setter writes it."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Mapped::ParamMap",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescMapped::set_param_map",
+      "status": "implemented",
+      "notes": "public field of the descriptor; Rust keeps descriptor state behind a lock: the trait getter (representation, max_deriv_order, mapping) reads it and the named setter writes it."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Base::Base()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDesc",
+      "status": "excluded",
+      "notes": "protected defaulted constructor of the abstract descriptor base; the Rust base is the object-safe trait RepCurveDesc, which has no constructor; each concrete descriptor (RepCurveDescFull::new, RepCurveDescDerivBounded::new, RepCurveDescMapped::new) builds its own state."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Domain1d::First",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Domain1d::first",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Domain1d::Last",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Domain1d::last",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Map1d::Scale",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Map1d::scale",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Map1d::Offset",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Map1d::offset",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
       "upstream_id": "GeomEval_RepSurfaceDesc::Map2d::IsIdentity",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
@@ -49271,6 +49463,158 @@
       "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescMapped::<rustycad_tkg3d::geom_eval::RepSurfaceDesc>::kind",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval",
+      "status": "implemented",
+      "notes": "C++ namespace grouping the surface evaluation-representation descriptors; the Rust module geom_eval holds the same members (Map2d, Domain2d, RepSurfaceKind, RepSurfaceDesc and RepSurfaceDescFull, RepSurfaceDescDerivBounded, RepSurfaceDescMapped)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Base::Kind::Full",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveKind::Full",
+      "status": "implemented",
+      "notes": "enumerator of the descriptor Kind enum; the surface descriptors use the same three-valued enum (RepSurfaceKind aliases RepCurveKind)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Base::Kind::DerivBounded",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveKind::DerivBounded",
+      "status": "implemented",
+      "notes": "enumerator of the descriptor Kind enum; the surface descriptors use the same three-valued enum (RepSurfaceKind aliases RepCurveKind)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Base::Kind::Mapped",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveKind::Mapped",
+      "status": "implemented",
+      "notes": "enumerator of the descriptor Kind enum; the surface descriptors use the same three-valued enum (RepSurfaceKind aliases RepCurveKind)."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Base::Representation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDesc::representation",
+      "status": "implemented",
+      "notes": "public field of the descriptor; Rust keeps descriptor state behind a lock: the trait getter (representation, max_deriv_order, mapping) reads it and the named setter writes it."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::DerivBounded::MaxDerivOrder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescDerivBounded::set_max_deriv_order",
+      "status": "implemented",
+      "notes": "public field of the descriptor; Rust keeps descriptor state behind a lock: the trait getter (representation, max_deriv_order, mapping) reads it and the named setter writes it."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Mapped::MaxDerivOrder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescMapped::set_max_deriv_order",
+      "status": "implemented",
+      "notes": "public field of the descriptor; Rust keeps descriptor state behind a lock: the trait getter (representation, max_deriv_order, mapping) reads it and the named setter writes it."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Mapped::Domain",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescMapped::set_domain",
+      "status": "implemented",
+      "notes": "public field of the descriptor; Rust keeps descriptor state behind a lock: the trait getter (representation, max_deriv_order, mapping) reads it and the named setter writes it."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Mapped::ParamMap",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescMapped::set_param_map",
+      "status": "implemented",
+      "notes": "public field of the descriptor; Rust keeps descriptor state behind a lock: the trait getter (representation, max_deriv_order, mapping) reads it and the named setter writes it."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Base::Base()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDesc",
+      "status": "excluded",
+      "notes": "protected defaulted constructor of the abstract descriptor base; the Rust base is the object-safe trait RepSurfaceDesc, which has no constructor; each concrete descriptor (RepSurfaceDescFull::new, RepSurfaceDescDerivBounded::new, RepSurfaceDescMapped::new) builds its own state."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Domain2d::UFirst",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Domain2d::u_first",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Domain2d::ULast",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Domain2d::u_last",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Domain2d::VFirst",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Domain2d::v_first",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Domain2d::VLast",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Domain2d::v_last",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Map2d::ScaleU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Map2d::scale_u",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Map2d::ScaleV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Map2d::scale_v",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Map2d::OffsetU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Map2d::offset_u",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Map2d::OffsetV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Map2d::offset_v",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Map2d::SwapUV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Map2d::swap_uv",
+      "status": "implemented",
+      "notes": "public field of the value record, a public field of the Rust struct."
     },
     {
       "upstream_id": "Geom_UndefinedDerivative",
@@ -55185,6 +55529,14 @@
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
+      "upstream_id": "Geom_OsculatingSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface",
+      "status": "implemented",
+      "notes": "class forward-declared by Geom_OffsetSurface.hxx and defined in the private Geom_OsculatingSurface.pxx; GeomOsculatingSurface ports it member by member."
+    },
+    {
       "upstream_id": "Geom_OffsetSurfaceUtils::OsculatingInfo::Sign",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
@@ -57401,14 +57753,6 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): a Geom_ElementarySurface class with its state behind one lock; C++ output references become returned values and exceptions become Failure errors. The reversal, iso and Transform members raise Standard_NotImplemented as natively."
     },
     {
-      "upstream_id": "GeomEval_HyperboloidSurface(const gp_Ax3&,double,double,SheetMode)",
-      "toolkit": "TKG3d",
-      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_HyperboloidSurface.hxx",
-      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalHyperboloidSurface::new",
-      "status": "implemented",
-      "notes": "Manual explicit member mapping (docs/geom-design.md): a Geom_ElementarySurface class with its state behind one lock; C++ output references become returned values and exceptions become Failure errors. The reversal, iso and Transform members raise Standard_NotImplemented as natively."
-    },
-    {
       "upstream_id": "GeomEval_HyperboloidSurface::R1",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_HyperboloidSurface.hxx",
@@ -57623,6 +57967,30 @@
       "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalHyperboloidSurface::static_type",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomEval_HyperboloidSurface::SheetMode::OneSheet",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_HyperboloidSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::HyperboloidSheetMode::OneSheet",
+      "status": "implemented",
+      "notes": "enumerator of the scoped SheetMode enum, same order."
+    },
+    {
+      "upstream_id": "GeomEval_HyperboloidSurface::SheetMode::TwoSheets",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_HyperboloidSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::HyperboloidSheetMode::TwoSheets",
+      "status": "implemented",
+      "notes": "enumerator of the scoped SheetMode enum, same order."
+    },
+    {
+      "upstream_id": "GeomEval_HyperboloidSurface(const gp_Ax3&,double,double,GeomEval_HyperboloidSurface::SheetMode)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_HyperboloidSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalHyperboloidSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): the C++ default theMode = SheetMode::OneSheet is HyperboloidSheetMode::default(); radii <= 0 return a Failure where C++ raises Standard_ConstructionError."
     },
     {
       "upstream_id": "GeomEval_ParaboloidSurface::GeomEval_ParaboloidSurface(const gp_Ax3&,double)",
@@ -59113,6 +59481,38 @@
       "notes": "Enumeration with native declaration order as i32 discriminants."
     },
     {
+      "upstream_id": "TopAbs_FORWARD",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_Orientation.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::Orientation::Forward",
+      "status": "implemented",
+      "notes": "enumerator 0 of TopAbs_Orientation; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_REVERSED",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_Orientation.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::Orientation::Reversed",
+      "status": "implemented",
+      "notes": "enumerator 1 of TopAbs_Orientation; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_INTERNAL",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_Orientation.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::Orientation::Internal",
+      "status": "implemented",
+      "notes": "enumerator 2 of TopAbs_Orientation; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_EXTERNAL",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_Orientation.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::Orientation::External",
+      "status": "implemented",
+      "notes": "enumerator 3 of TopAbs_Orientation; the Rust variant keeps the native i32 discriminant."
+    },
+    {
       "upstream_id": "TopAbs_ShapeEnum",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
@@ -59121,12 +59521,116 @@
       "notes": "Enumeration with native declaration order as i32 discriminants."
     },
     {
+      "upstream_id": "TopAbs_COMPOUND",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::ShapeEnum::Compound",
+      "status": "implemented",
+      "notes": "enumerator 0 of TopAbs_ShapeEnum; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_COMPSOLID",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::ShapeEnum::CompSolid",
+      "status": "implemented",
+      "notes": "enumerator 1 of TopAbs_ShapeEnum; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_SOLID",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::ShapeEnum::Solid",
+      "status": "implemented",
+      "notes": "enumerator 2 of TopAbs_ShapeEnum; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_SHELL",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::ShapeEnum::Shell",
+      "status": "implemented",
+      "notes": "enumerator 3 of TopAbs_ShapeEnum; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_FACE",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::ShapeEnum::Face",
+      "status": "implemented",
+      "notes": "enumerator 4 of TopAbs_ShapeEnum; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_WIRE",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::ShapeEnum::Wire",
+      "status": "implemented",
+      "notes": "enumerator 5 of TopAbs_ShapeEnum; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_EDGE",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::ShapeEnum::Edge",
+      "status": "implemented",
+      "notes": "enumerator 6 of TopAbs_ShapeEnum; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_VERTEX",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::ShapeEnum::Vertex",
+      "status": "implemented",
+      "notes": "enumerator 7 of TopAbs_ShapeEnum; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_SHAPE",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::ShapeEnum::Shape",
+      "status": "implemented",
+      "notes": "enumerator 8 of TopAbs_ShapeEnum; the Rust variant keeps the native i32 discriminant."
+    },
+    {
       "upstream_id": "TopAbs_State",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_State.hxx",
       "rust_item": "rustycad_tkg3d::top_abs::State",
       "status": "implemented",
       "notes": "Enumeration with native declaration order as i32 discriminants."
+    },
+    {
+      "upstream_id": "TopAbs_IN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_State.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::State::In",
+      "status": "implemented",
+      "notes": "enumerator 0 of TopAbs_State; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_OUT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_State.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::State::Out",
+      "status": "implemented",
+      "notes": "enumerator 1 of TopAbs_State; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_ON",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_State.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::State::On",
+      "status": "implemented",
+      "notes": "enumerator 2 of TopAbs_State; the Rust variant keeps the native i32 discriminant."
+    },
+    {
+      "upstream_id": "TopAbs_UNKNOWN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_State.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::State::Unknown",
+      "status": "implemented",
+      "notes": "enumerator 3 of TopAbs_State; the Rust variant keeps the native i32 discriminant."
     },
     {
       "upstream_id": "GeomEval_AHTBezierCurve::GeomEval_AHTBezierCurve(const NCollection_Array1<gp_Pnt>&,int,double,double)",
@@ -68289,6 +68793,46 @@
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
+      "upstream_id": "Adaptor3d_TopolTool::myS",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Adaptor3dTopolTool and is reached through Adaptor3dTopolTool::initialize_surface."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::myNbSamplesU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Adaptor3dTopolTool and is reached through Adaptor3dTopolTool::nb_samples_u."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::myNbSamplesV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Adaptor3dTopolTool and is reached through Adaptor3dTopolTool::nb_samples_v."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::myUPars",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Adaptor3dTopolTool and is reached through Adaptor3dTopolTool::u_parameters."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::myVPars",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Adaptor3dTopolTool and is reached through Adaptor3dTopolTool::v_parameters."
+    },
+    {
       "upstream_id": "GeomAdaptor_TransformedCurve::DEFINE_STANDARD_RTTIEXT",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
@@ -68639,6 +69183,30 @@
       "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::offset_curve",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::myCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorTransformedCurve and is reached through GeomAdaptorTransformedCurve::curve and change_curve."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::myConSurf",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorTransformedCurve and is reached through GeomAdaptorTransformedCurve::curve_on_surface."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::myTrsf",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorTransformedCurve and is reached through GeomAdaptorTransformedCurve::trsf and set_trsf."
     },
     {
       "upstream_id": "NCollection_Mat3::SetRow(size_t,const NCollection_Vec3<Element_t>&)",
@@ -70039,7 +70607,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Array2::from_buffer",
       "status": "implemented",
-      "notes": "Non-owning zero-based row-major view over the required prefix of a mutable slice. Native records only pointer and rows\u00d7columns; Rust rejects a short slice safely, accepts extra capacity, and leaves its suffix untouched. Supplemental native/Rust probe: porting/audits/ncollection-array2-buffer-prefix.json."
+      "notes": "Non-owning zero-based row-major view over the required prefix of a mutable slice. Native records only pointer and rows×columns; Rust rejects a short slice safely, accepts extra capacity, and leaves its suffix untouched. Supplemental native/Rust probe: porting/audits/ncollection-array2-buffer-prefix.json."
     },
     {
       "upstream_id": "NCollection_Array2::Size() const noexcept",
@@ -94930,7 +95498,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -94962,7 +95530,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -102841,6 +103409,62 @@
       "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
     },
     {
+      "upstream_id": "GeomGridEval",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval",
+      "status": "implemented",
+      "notes": "C++ namespace of the grid-evaluation result aliases and helpers; the Rust module geom_grid_eval holds the GeomGridEvalCurveD1..SurfD3 aliases and the evaluate_grid*_helper functions."
+    },
+    {
+      "upstream_id": "GeomGridEval::CurveD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurveD1",
+      "status": "implemented",
+      "notes": "type alias of Geom_Curve::ResD1; the Rust type alias names the same result record."
+    },
+    {
+      "upstream_id": "GeomGridEval::CurveD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurveD2",
+      "status": "implemented",
+      "notes": "type alias of Geom_Curve::ResD2; the Rust type alias names the same result record."
+    },
+    {
+      "upstream_id": "GeomGridEval::CurveD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurveD3",
+      "status": "implemented",
+      "notes": "type alias of Geom_Curve::ResD3; the Rust type alias names the same result record."
+    },
+    {
+      "upstream_id": "GeomGridEval::SurfD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfD1",
+      "status": "implemented",
+      "notes": "type alias of Geom_Surface::ResD1; the Rust type alias names the same result record."
+    },
+    {
+      "upstream_id": "GeomGridEval::SurfD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfD2",
+      "status": "implemented",
+      "notes": "type alias of Geom_Surface::ResD2; the Rust type alias names the same result record."
+    },
+    {
+      "upstream_id": "GeomGridEval::SurfD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfD3",
+      "status": "implemented",
+      "notes": "type alias of Geom_Surface::ResD3; the Rust type alias names the same result record."
+    },
+    {
       "upstream_id": "GeomGridEval_BSplineCurve::GeomGridEval_BSplineCurve(const occ::handle<Geom_BSplineCurve>&)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineCurve.hxx",
@@ -103259,6 +103883,14 @@
       "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::get_type",
       "status": "implemented",
       "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Curve::EvaluatorVariant",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurveEvaluator",
+      "status": "implemented",
+      "notes": "std::variant of the specialized curve evaluators; the Rust enum has one variant per alternative in the same order, Uninitialized standing for std::monostate."
     },
     {
       "upstream_id": "GeomGridEval_Cylinder::GeomGridEval_Cylinder(const occ::handle<Geom_CylindricalSurface>&)",
@@ -217799,7 +218431,7 @@
       "source_sha256": "0a0e5e646fa56772b4bfbc2fa292d19324a9981b7b40d80fe48d248406e5a0fe",
       "rust_item": "rustycad_tkbo::int_tools::IntTools::get_radius",
       "status": "partial",
-      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build\u2019s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
+      "notes": "Port of native scalar algorithms, libstdc++ root ordering, forward-only removal index, staged argument arrays, radius construction and elementary/spline parameters. 2,736 candidates: 2,560 exact defined-domain requests and 176 separately replayed native uninitialized-status cases (all 176 pinned outputs match; 32 return -1 with radius retained). Eight direct Rust regressions. No standalone original GoogleTest declarations. Partial: coincident samples reach gce_MakeCirc without assigning its native status. GetRadius reproduces this pinned build’s 32 -1 results with radius output retained for spline-offset bases; the other captured statuses also match. These calls remain outside defined-domain parity because the native status is uninitialized. The shared GCE constructor retains its deterministic zero-radius behavior."
     },
     {
       "upstream_id": "IntTools::PrepareArgs(BRepAdaptor_Curve&,double,double,int,double,NCollection_Array1<double>&)",
@@ -230867,6 +231499,22 @@
       "notes": "enum variant. Existing implementation audited in porting/audits/tkg2d_rep_curve_desc_records.proposed.json; no new behavior or legacy tests claimed."
     },
     {
+      "upstream_id": "Geom2dEval_RepCurveDesc",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval",
+      "status": "implemented",
+      "notes": "C++ namespace grouping the evaluation-representation descriptors; the Rust module geom2d_eval holds the same members (Map1d, Domain1d, RepCurveKind, RepCurveDesc and the Full, DerivBounded and Mapped descriptors)."
+    },
+    {
+      "upstream_id": "Geom2dEval_RepCurveDesc::Base::Base()",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDesc",
+      "status": "excluded",
+      "notes": "protected defaulted constructor of the abstract descriptor base; the Rust base is the object-safe trait RepCurveDesc, which has no constructor; each concrete descriptor (RepCurveDescFull::new, RepCurveDescDerivBounded::new, RepCurveDescMapped::new) builds its own state."
+    },
+    {
       "upstream_id": "Geom2dGridEval::CurveD1::Point",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
@@ -230946,6 +231594,14 @@
       "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurveD3::d3",
       "status": "implemented",
       "notes": "field of the existing Geom2dGridEvalCurveD1/D2/D3 type alias; the alias resolves to the corresponding Geom2dCurveD1/D2/D3 record. Existing implementation audited in porting/audits/tkg2d_grid_eval_result_fields.proposed.json; no new behavior or legacy tests claimed."
+    },
+    {
+      "upstream_id": "Geom2dGridEval",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval",
+      "status": "implemented",
+      "notes": "C++ namespace of the grid-evaluation result records; the Rust module geom2d_grid_eval holds Geom2dGridEvalCurveD1/D2/D3 and the grid evaluators."
     },
     {
       "upstream_id": "math_VectorBase::SetLower(int)",
@@ -231090,6 +231746,46 @@
       "rust_item": "rustycad_tkg2d::geom2d_adaptor::CurveDataVariant",
       "status": "implemented",
       "notes": "Public adaptor aggregate/variant surface. Native defaults and shared curve/cache copy-mutation behavior verified in tools/oracle/tkg2d_adaptor_public_data.md. Private adaptor evaluation remains independently represented. Cache inherited RTTI remains a separate open obligation; no original legacy test mapping added."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::myCurve",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Geom2dAdaptorCurve (AdaptorState behind its lock) and is reached through Geom2dAdaptorCurve::curve."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::myCurveData",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Geom2dAdaptorCurve (AdaptorState behind its lock) and is reached through the private CurveData enum of the adaptor state (public view: CurveDataVariant)."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::myFirst",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Geom2dAdaptorCurve (AdaptorState behind its lock) and is reached through Adaptor2dCurve2d::first_parameter."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::myLast",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Geom2dAdaptorCurve (AdaptorState behind its lock) and is reached through Adaptor2dCurve2d::last_parameter."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::myTypeCurve",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Geom2dAdaptorCurve (AdaptorState behind its lock) and is reached through Adaptor2dCurve2d::get_type."
     },
     {
       "upstream_id": "GeomAdaptor_Curve::OffsetData",
@@ -231423,6 +232119,78 @@
       "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceDataVariant",
       "status": "implemented",
       "notes": "Public surface-adaptor aggregate/variant surface with native defaults and shared cache identity/mutation evidence in tools/oracle/tkg3d_adaptor_public_surface_data.md. Inherited BSplSLib cache RTTI remains a separate open obligation; no original legacy test claim added."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::mySurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorSurface (its state behind a lock) and is reached through GeomAdaptorSurface::surface."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::myUFirst",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorSurface (its state behind a lock) and is reached through Adaptor3dSurface::first_u_parameter."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::myULast",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorSurface (its state behind a lock) and is reached through Adaptor3dSurface::last_u_parameter."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::myVFirst",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorSurface (its state behind a lock) and is reached through Adaptor3dSurface::first_v_parameter."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::myVLast",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorSurface (its state behind a lock) and is reached through Adaptor3dSurface::last_v_parameter."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::myTolU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorSurface (its state behind a lock) and is reached through GeomAdaptorSurface::tolerance_u."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::myTolV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorSurface (its state behind a lock) and is reached through GeomAdaptorSurface::tolerance_v."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::mySurfaceType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorSurface (its state behind a lock) and is reached through Adaptor3dSurface::get_type."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::mySurfaceData",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorSurface (its state behind a lock) and is reached through the private surface-data enum of the adaptor state (public view: SurfaceDataVariant)."
     },
     {
       "upstream_id": "BSplCLib_Cache::calculateDerivative(double,int,double*) const",
@@ -236075,6 +236843,14 @@
       "notes": "Protected native hook exposed for Rust reuse. Adaptor initialization clears transformation before fallible queries; handle initialization retains it, including null. Supplemental native fixture covers replacement, clearing, exception side effects, restoring transformed/plain adaptors, and stripped trimming. Raw subclass ABI is not reproduced; borrowed adaptor lifetime is explicit. See porting/audits/tkg3d-surface-reinitialization.json."
     },
     {
+      "upstream_id": "GeomGridEval_Surface::EvaluatorVariant",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceEvaluator",
+      "status": "implemented",
+      "notes": "std::variant of the specialized surface evaluators; the Rust enum has one variant per alternative in the same order, Uninitialized standing for std::monostate."
+    },
+    {
       "upstream_id": "FSD_BinaryFile::WriteExtendedString(Standard_OStream &,const TCollection_ExtendedString &,const bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
@@ -236384,6 +237160,30 @@
       "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::transformed_adaptor",
       "status": "implemented",
       "notes": "Protected cache operation. Native probe covers empty, identity, repeated initialization, invalidation, original adaptor geometry cache retention, handle identity, bounds and tolerances; see porting/audits/transformed-surface-cache.json."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::mySurf",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorTransformedSurface and is reached through GeomAdaptorTransformedSurface::surface and adaptor_surface_original."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::myTrsf",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorTransformedSurface and is reached through GeomAdaptorTransformedSurface::trsf and set_trsf."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::myTransformedAdaptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of GeomAdaptorTransformedSurface and is reached through GeomAdaptorTransformedSurface::transformed_adaptor and the cache methods."
     },
     {
       "upstream_id": "Geom_BSplineSurface::updateUKnots()",
