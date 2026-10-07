@@ -83976,6 +83976,132 @@
       "notes": "OCCT typedefs Standard_WideChar to wchar_t. Rust WideChar is cfg-selected as u32 on Unix and u16 on Windows, following the native wchar_t width on those supported profiles."
     },
     {
+      "upstream_id": "Standard_True",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "legacy constant for true; Rust uses the literal true."
+    },
+    {
+      "upstream_id": "Standard_False",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "legacy constant for false; Rust uses the literal false."
+    },
+    {
+      "upstream_id": "Standard_Address",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin void*; Rust spells the primitive *mut c_void / references directly."
+    },
+    {
+      "upstream_id": "Standard_Boolean",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin bool; Rust spells the primitive bool directly."
+    },
+    {
+      "upstream_id": "Standard_Byte",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin unsigned char; Rust spells the primitive u8 directly."
+    },
+    {
+      "upstream_id": "Standard_CString",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin const char*; Rust spells the primitive &str / &[u8] directly."
+    },
+    {
+      "upstream_id": "Standard_Character",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin char; Rust spells the primitive u8 directly."
+    },
+    {
+      "upstream_id": "Standard_ExtCharacter",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin char16_t; Rust spells the primitive u16 directly."
+    },
+    {
+      "upstream_id": "Standard_ExtString",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin const char16_t*; Rust spells the primitive &[u16] directly."
+    },
+    {
+      "upstream_id": "Standard_Integer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin int; Rust spells the primitive i32 directly."
+    },
+    {
+      "upstream_id": "Standard_Real",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin double; Rust spells the primitive f64 directly."
+    },
+    {
+      "upstream_id": "Standard_ShortReal",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin float; Rust spells the primitive f32 directly."
+    },
+    {
+      "upstream_id": "Standard_Size",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin size_t; Rust spells the primitive usize directly."
+    },
+    {
+      "upstream_id": "Standard_UInteger",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin unsigned int; Rust spells the primitive u32 directly."
+    },
+    {
+      "upstream_id": "Standard_Utf16Char",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin char16_t; Rust spells the primitive u16 directly."
+    },
+    {
+      "upstream_id": "Standard_Utf32Char",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin char32_t; Rust spells the primitive u32 / char directly."
+    },
+    {
+      "upstream_id": "Standard_Utf8Char",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin char; Rust spells the primitive u8 directly."
+    },
+    {
+      "upstream_id": "Standard_Utf8UChar",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin unsigned char; Rust spells the primitive u8 directly."
+    },
+    {
       "upstream_id": "Standard_Atomic_Increment(volatile int*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
@@ -84288,7 +84414,119 @@
       "notes": "Process-wide callback like the native file-static pointer; OptCallBack receives (is_alloc, storage, round_size, size). The differential probe (services_ operations) compares it with the native kernel."
     },
     {
-      "upstream_id": "opencascade::make_shared(Args&&)",
+      "upstream_id": "Standard_MMgrOpt::TPCallBackFunc",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::OptCallBack",
+      "status": "implemented",
+      "notes": "typedef of the allocation callback signature; the Rust alias names the same callback type."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myAllocList",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myCellSize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myClear",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myEndBlock",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myFreeList",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myFreeListMax",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myMMap",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myMutex",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myMutexPools",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myNbPages",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myNextAddr",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myPageSize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::myThreshold",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of MMgrOpt and is reached through MMgrOpt::cell_size, page_size, nb_pages, threshold and the allocate/free members."
+    },
+    {
+      "upstream_id": "opencascade::make_shared(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
       "rust_item": "rustycad_tkernel::standard::memory_utils::make_shared",
@@ -84296,7 +84534,7 @@
       "notes": "std::shared_ptr from NCollection_Allocator becomes Arc<T> on the global allocator. C++ forwards constructor arguments; Rust callers construct the value and move it in."
     },
     {
-      "upstream_id": "opencascade::make_oshared(const occ::handle<NCollection_BaseAllocator>&,Args&&)",
+      "upstream_id": "opencascade::make_oshared(const occ::handle<NCollection_BaseAllocator>&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
       "rust_item": "rustycad_tkernel::standard::memory_utils::make_oshared",
@@ -84304,7 +84542,7 @@
       "notes": "Arc<AllocatedBox<T>>: the value lives in the BaseAllocator, the count in the global heap. C++ forwards constructor arguments; Rust callers construct the value and move it in."
     },
     {
-      "upstream_id": "opencascade::make_oshared(const NCollection_OccAllocator<T>&,Args&&)",
+      "upstream_id": "opencascade::make_oshared(const NCollection_OccAllocator<T>&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
       "rust_item": "rustycad_tkernel::standard::memory_utils::make_oshared_in",
@@ -84312,7 +84550,7 @@
       "notes": "Both NCollection_OccAllocator<T> overloads (const reference and rvalue) map to make_oshared_in: a borrowed typed allocator is enough because Rust clones or moves it the same way. The value is stored in allocator-owned storage behind a shared OcctShared<T>. C++ forwards constructor arguments; Rust callers construct the value and move it in."
     },
     {
-      "upstream_id": "opencascade::make_oshared(NCollection_OccAllocator<T>&&,Args&&)",
+      "upstream_id": "opencascade::make_oshared(NCollection_OccAllocator<T>&&,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
       "rust_item": "rustycad_tkernel::standard::memory_utils::make_oshared_in",
@@ -84320,7 +84558,7 @@
       "notes": "Both NCollection_OccAllocator<T> overloads (const reference and rvalue) map to make_oshared_in: a borrowed typed allocator is enough because Rust clones or moves it the same way. The value is stored in allocator-owned storage behind a shared OcctShared<T>. C++ forwards constructor arguments; Rust callers construct the value and move it in."
     },
     {
-      "upstream_id": "opencascade::make_unique(Args&&)",
+      "upstream_id": "opencascade::make_unique(Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
       "rust_item": "rustycad_tkernel::standard::memory_utils::make_unique",
@@ -84398,6 +84636,14 @@
       "rust_item": "rustycad_tkernel::standard::StandardMutex::unlock",
       "status": "implemented",
       "notes": "Releases one level; a non-owner changes nothing (pthread EPERM). The implementation creates a PTHREAD_MUTEX_RECURSIVE mutex (a critical section on Windows), unlike the header's comment, so the owner may re-lock and must unlock as often; the port keeps an owner and a depth under std::sync. Deprecated upstream; ported with its behavior. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_HMutex",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "rust_item": "rustycad_tkernel::standard::mutex::StandardMutex",
+      "status": "excluded",
+      "notes": "typedef of NCollection_Shared<Standard_Mutex>; Rust shares a StandardMutex through Arc."
     },
     {
       "upstream_id": "Standard_Condition::Standard_Condition(bool)",
@@ -84486,6 +84732,14 @@
       "rust_item": "rustycad_tkernel::standard::c_locale_sentry::CLocaleSentry::get_c_locale",
       "status": "implemented",
       "notes": "Returns the one static CLocale (name \"C\", radix '.', empty group separator), like the native static locale_t. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_CLocaleSentry::clocale_t",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CLocaleSentry.hxx",
+      "rust_item": "rustycad_tkernel::standard::c_locale_sentry",
+      "status": "excluded",
+      "notes": "typedef of the platform locale handle; the Rust sentry keeps it private."
     },
     {
       "upstream_id": "Standard_ReadBuffer::Standard_ReadBuffer(int64_t,size_t,bool)",
@@ -84634,6 +84888,62 @@
       "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::set_multiline_mode",
       "status": "implemented",
       "notes": "The gap argument's default (true) is passed explicitly in Rust. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::myBufferPos",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ReadLineBuffer and is reached through ReadLineBuffer::read_line, is_multiline_mode and set_multiline_mode."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::myBytesLastRead",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ReadLineBuffer and is reached through ReadLineBuffer::read_line, is_multiline_mode and set_multiline_mode."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::myIsMultilineMode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ReadLineBuffer and is reached through ReadLineBuffer::read_line, is_multiline_mode and set_multiline_mode."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::myReadBuffer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ReadLineBuffer and is reached through ReadLineBuffer::read_line, is_multiline_mode and set_multiline_mode."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::myReadBufferLastStr",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ReadLineBuffer and is reached through ReadLineBuffer::read_line, is_multiline_mode and set_multiline_mode."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::myToPutGapInMultiline",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ReadLineBuffer and is reached through ReadLineBuffer::read_line, is_multiline_mode and set_multiline_mode."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::myUseReadBufferLastStr",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ReadLineBuffer and is reached through ReadLineBuffer::read_line, is_multiline_mode and set_multiline_mode."
     },
     {
       "upstream_id": "Standard_ArrayStreamBuffer::Standard_ArrayStreamBuffer(const char*,size_t)",
@@ -84908,6 +85218,22 @@
       "rust_item": "rustycad_tkernel::standard::dump::JsonKey::SeparatorValueToValue",
       "status": "implemented",
       "notes": "enumerator of Standard_JsonKey; the Rust JsonKey keeps the native value."
+    },
+    {
+      "upstream_id": "Standard_DumpValue::myValue",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::DumpValue::value",
+      "status": "implemented",
+      "notes": "public field of Standard_DumpValue, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "Standard_DumpValue::myStartPosition",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::DumpValue::start_position",
+      "status": "implemented",
+      "notes": "public field of Standard_DumpValue, a public field of the Rust struct."
     },
     {
       "upstream_id": "Plugin::Load(const Standard_GUID&,bool)",
@@ -85190,7 +85516,7 @@
       "notes": "A raw pointer to an object a handle owns is a HandleView in Rust; rustycad_tkernel::standard::Handle::from_view adds one reference (or gives null), as handle(const T*) on an owned object. A fresh object is rustycad_tkernel::standard::Handle::new; Rust cannot adopt an unowned pointer. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
     {
-      "upstream_id": "opencascade::handle(const handle&)",
+      "upstream_id": "opencascade::handle::handle(const handle<T>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::<core::clone::Clone>::clone",
@@ -85198,15 +85524,14 @@
       "notes": "Copy adds one reference. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
     {
-      "upstream_id": "opencascade::handle(handle&&)",
+      "upstream_id": "opencascade::handle::handle(handle<T>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "rust_item": null,
       "status": "excluded",
       "notes": "Rust moves the handle; the moved-from value cannot be used, so there is nothing to port. The C++ move leaves the source null."
     },
     {
-      "upstream_id": "opencascade::handle::~handle()",
+      "upstream_id": "opencascade::handle::~handle<T>",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::<core::ops::drop::Drop>::drop",
@@ -85238,7 +85563,7 @@
       "notes": "reset(new U) owns a fresh object of T or a derived class; reset(nullptr) is nullify. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
     {
-      "upstream_id": "opencascade::handle::operator=(const handle&)",
+      "upstream_id": "opencascade::handle::operator=(const handle<T>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::<core::clone::Clone>::clone_from",
@@ -85254,10 +85579,9 @@
       "notes": "A raw pointer to an object a handle owns is a HandleView in Rust; rustycad_tkernel::standard::Handle::from_view adds one reference (or gives null), as handle(const T*) on an owned object. A fresh object is rustycad_tkernel::standard::Handle::new; Rust cannot adopt an unowned pointer. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
     {
-      "upstream_id": "opencascade::handle::operator=(handle&&)",
+      "upstream_id": "opencascade::handle::operator=(handle<T>&&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "rust_item": null,
       "status": "excluded",
       "notes": "Rust moves the handle. The C++ move assignment swaps the two handles, so the source receives the old target; std::mem::swap is the Rust counterpart when the source is kept, and the probe compares that swap."
     },
@@ -85270,7 +85594,7 @@
       "notes": "Borrows the projected object, None for null; rustycad_tkernel::standard::Handle::as_ptr gives the raw address."
     },
     {
-      "upstream_id": "opencascade::handle::operator->() const",
+      "upstream_id": "opencascade::handle::operator->",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::<core::ops::deref::Deref>::deref",
@@ -85286,10 +85610,10 @@
       "notes": "Dereferencing a null handle is undefined in C++; Rust panics with a message."
     },
     {
-      "upstream_id": "opencascade::handle::operator==(const handle<T2>&) const",
+      "upstream_id": "opencascade::handle::operator==(const opencascade::handle<T2>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "rust_item": "<rustycad_tkernel::standard::Handle as PartialEq<Handle<U>>>::eq",
+      "rust_item": "rustycad_tkernel::standard::Handle::<core::cmp::PartialEq<rustycad_tkernel::standard::handle::Handle<U>>>::eq",
       "status": "implemented",
       "notes": "Object identity across handle types. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
@@ -85302,10 +85626,10 @@
       "notes": "Compares the projected address with a raw pointer; the reverse friend operator is <*const T as PartialEq<Handle<T>>>::eq. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
     {
-      "upstream_id": "opencascade::handle::operator!=(const handle<T2>&) const",
+      "upstream_id": "opencascade::handle::operator!=(const opencascade::handle<T2>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "rust_item": "<rustycad_tkernel::standard::Handle as PartialEq<Handle<U>>>::ne",
+      "rust_item": "rustycad_tkernel::standard::Handle::<core::cmp::PartialEq<rustycad_tkernel::standard::handle::Handle<U>>>::eq",
       "status": "implemented",
       "notes": "Negation of ==. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
@@ -85318,15 +85642,15 @@
       "notes": "Negation of ==. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
     {
-      "upstream_id": "opencascade::handle::operator<(const handle<T2>&) const",
+      "upstream_id": "opencascade::handle::operator<(const opencascade::handle<T2>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "rust_item": "<rustycad_tkernel::standard::Handle as PartialOrd<Handle<U>>>::lt",
+      "rust_item": "rustycad_tkernel::standard::Handle::<core::cmp::PartialOrd<rustycad_tkernel::standard::handle::Handle<U>>>::partial_cmp",
       "status": "implemented",
       "notes": "Orders by object address, null first; Ord is implemented too. Addresses differ between runs, so the probe does not compare it."
     },
     {
-      "upstream_id": "opencascade::handle::DownCast(const handle<T2>&)",
+      "upstream_id": "opencascade::handle::DownCast(const opencascade::handle<T2>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::down_cast",
@@ -85342,7 +85666,7 @@
       "notes": "All DownCast overloads are one runtime check: rustycad_tkernel::standard::Handle::from_view (the pointer is a view) shares the object when it is a T and returns null otherwise, as dynamic_cast."
     },
     {
-      "upstream_id": "opencascade::handle::DownCast(const handle<T2>&,opencascade::std::enable_if<!is_base_but_not_same<T2,T>::value,void*>::type)",
+      "upstream_id": "opencascade::handle::DownCast(const opencascade::handle<T2>&,typename std::enable_if<!opencascade::is_base_but_not_same<T2, T>::value, void*>::type)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::down_cast",
@@ -85350,7 +85674,7 @@
       "notes": "The deprecated same- or unrelated-type overload. All DownCast overloads are one runtime check: rustycad_tkernel::standard::Handle::down_cast shares the object when it is a T and returns null otherwise, as dynamic_cast. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
     {
-      "upstream_id": "opencascade::handle::DownCast(const T2*,opencascade::std::enable_if<!is_base_but_not_same<T2,T>::value,void*>::type)",
+      "upstream_id": "opencascade::handle::DownCast(const T2*,typename std::enable_if<!opencascade::is_base_but_not_same<T2, T>::value, void*>::type)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::from_view",
@@ -85414,7 +85738,7 @@
       "notes": "Fallback spelling for old compilers. rustycad_tkernel::standard::Handle::into_cast moves the reference without touching the count, as the C++ converting move; a non-base target (a C++ compile error) gives null and releases the reference."
     },
     {
-      "upstream_id": "occ::down_cast(const handle<TBase>&)",
+      "upstream_id": "occ::down_cast(const occ::handle<TBase>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::occ::down_cast",
@@ -85430,7 +85754,7 @@
       "notes": "The pointer is a view; All DownCast overloads are one runtime check: rustycad_tkernel::standard::Handle::from_view shares the object when it is a T and returns null otherwise, as dynamic_cast."
     },
     {
-      "upstream_id": "std::hash<opencascade::handle<TheTransientType>>::operator()(const opencascade::handle<TheTransientType>&) const",
+      "upstream_id": "std::hash<opencascade::handle<type-parameter-0-0>>::operator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::hash_code",
@@ -85702,7 +86026,7 @@
       "notes": "RTTI macro; RuntimeType is registered as the transient class Standard_Type by impl_transient!."
     },
     {
-      "upstream_id": "Standard_Type::operator<<(Standard_OStream&,const occ::handle<Standard_Type>&)",
+      "upstream_id": "operator<<(Standard_OStream&,const occ::handle<Standard_Type>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
       "rust_item": "rustycad_tkernel::standard::RuntimeType::<core::fmt::Display>::fmt",
@@ -85718,7 +86042,7 @@
       "notes": "The pointer is an Option<&dyn Transient>; None is nullptr and gives false. Compared by the runtime_object probe."
     },
     {
-      "upstream_id": "occ::is_kind(const handle<TBase>&)",
+      "upstream_id": "occ::is_kind(const occ::handle<TBase>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
       "rust_item": "rustycad_tkernel::standard::occ::is_kind_handle",
@@ -85734,7 +86058,7 @@
       "notes": "The pointer is an Option<&dyn Transient>; None is nullptr and gives false. Compared by the runtime_object probe."
     },
     {
-      "upstream_id": "occ::is_instance(const handle<TBase>&)",
+      "upstream_id": "occ::is_instance(const occ::handle<TBase>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
       "rust_item": "rustycad_tkernel::standard::occ::is_instance_handle",
@@ -85748,6 +86072,14 @@
       "rust_item": "rustycad_tkernel::standard::occ::type_of",
       "status": "implemented",
       "notes": "Same descriptor as STANDARD_TYPE(T)."
+    },
+    {
+      "upstream_id": "Handle_Standard_Type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType",
+      "status": "excluded",
+      "notes": "legacy Handle_ typedef of handle<Standard_Type>; Rust spells Handle<RuntimeType>."
     },
     {
       "upstream_id": "Standard_Persistent()",
@@ -86018,7 +86350,31 @@
       "notes": "The subclass override is the closure given to ErrorHandlerCallback::new; the handler runs it when it unlinks with the callback registered. Compared by the runtime_handler_script probe."
     },
     {
-      "upstream_id": "Standard_Assert::Standard_ASSERT_DO_NOTHING()",
+      "upstream_id": "Standard_ErrorHandler::Callback::Callback()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandlerCallback::new",
+      "status": "implemented",
+      "notes": "protected constructor of the abstract callback; ErrorHandlerCallback::new takes the DestroyCallback override as a closure."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandlerCallback",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandlerCallback",
+      "status": "implemented",
+      "notes": "typedef of Standard_ErrorHandler::Callback; the Rust struct is that class."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::SignalException",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::error_handler::SIGNAL_EXCEPTION_TYPES",
+      "status": "excluded",
+      "notes": "std::variant of the signal exception classes caught across longjmp; Rust stores the caught signal as a Failure restricted to SIGNAL_EXCEPTION_TYPES."
+    },
+    {
+      "upstream_id": "Standard_ASSERT_DO_NOTHING",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Assert.hxx",
       "rust_item": "rustycad_tkernel::standard::assert::standard_assert_do_nothing",
@@ -86088,6 +86444,14 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "RTTI macro; impl_transient! registers TColStd_HPackedMapOfInteger under Standard_Transient."
+    },
+    {
+      "upstream_id": "TColStd_PackedMapOfInteger",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TColStd/TColStd_PackedMapOfInteger.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::PackedMap",
+      "status": "excluded",
+      "notes": "typedef of the template instance NCollection_PackedMap<int>; Rust spells the integer packed map ncollection::PackedMap directly."
     },
     {
       "upstream_id": "TCollection_ExtendedString()",
@@ -86218,7 +86582,7 @@
       "notes": "The std::u16string_view overload is the explicit-length slice form, zero units included. Assignment is the named copy method."
     },
     {
-      "upstream_id": "TCollection_ExtendedString::operator std::u16string_view() const",
+      "upstream_id": "TCollection_ExtendedString::operator basic_string_view",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::ExtendedString::as_utf16",
@@ -87163,6 +87527,14 @@
       "notes": "The std::hash specialization is the NCollection HashKey impl returning hash_code()."
     },
     {
+      "upstream_id": "operator<<(Standard_OStream&,const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::print",
+      "status": "implemented",
+      "notes": "stream insertion is the Print member."
+    },
+    {
       "upstream_id": "TCollection_HExtendedString()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
@@ -87443,18 +87815,18 @@
       "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members. The Rust descriptor comes from impl_transient! (RuntimeTyped::static_type and Transient::dynamic_type, named TCollection_HExtendedString)."
     },
     {
-      "upstream_id": "std::hash<occ::handle<TCollection_HExtendedString>>::operator()(const occ::handle<TCollection_HExtendedString>&) const",
+      "upstream_id": "std::hash<opencascade::handle<TCollection_HExtendedString>>::operator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::HExtendedStringHasher as rustycad_tkernel::ncollection::HashPolicy<Handle<rustycad_tkernel::tcollection::HExtendedString>>>::hash",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_extended_string::HExtendedString>>>::hash",
       "status": "implemented",
       "notes": "0 for a null handle, else the string's hash_code()."
     },
     {
-      "upstream_id": "std::equal_to<occ::handle<TCollection_HExtendedString>>::operator()(const occ::handle<TCollection_HExtendedString>&,const occ::handle<TCollection_HExtendedString>&) const",
+      "upstream_id": "std::equal_to<opencascade::handle<TCollection_HExtendedString>>::operator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::HExtendedStringHasher as rustycad_tkernel::ncollection::HashPolicy<Handle<rustycad_tkernel::tcollection::HExtendedString>>>::equal",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_extended_string::HExtendedString>>>::equal",
       "status": "implemented",
       "notes": "Equal when both handles share an object (two null handles included) or both are non-null with equal strings."
     },
@@ -87585,14 +87957,6 @@
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::from_wide",
       "status": "implemented",
       "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. wchar_t is 32-bit on the Linux profile: &[u32] read through its first zero, encoded as UTF-8 by NCollection_UtfIterator's rules (surrogates and values above U+10FFFF, including negative wchar_t, are dropped)."
-    },
-    {
-      "upstream_id": "TCollection_AsciiString(const char(&)[N])",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::AsciiString::from_bytes",
-      "status": "implemented",
-      "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The literal constructor uses strlen, so it is the C-string constructor."
     },
     {
       "upstream_id": "TCollection_AsciiString::AssignCat(char)",
@@ -88014,7 +88378,7 @@
       "upstream_id": "TCollection_AsciiString::operator=(const TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as Clone>::clone_from",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::clone::Clone>::clone_from",
       "status": "implemented",
       "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel."
     },
@@ -88342,7 +88706,7 @@
       "upstream_id": "TCollection_AsciiString::operator!=(const TCollection_AsciiString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as PartialEq>::ne",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_different",
       "status": "implemented",
       "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
     },
@@ -88414,7 +88778,7 @@
       "upstream_id": "TCollection_AsciiString::operator<(const TCollection_AsciiString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as PartialOrd>::lt",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_less",
       "status": "implemented",
       "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
     },
@@ -88486,7 +88850,7 @@
       "upstream_id": "TCollection_AsciiString::operator>(const TCollection_AsciiString&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
-      "rust_item": "<rustycad_tkernel::tcollection::AsciiString as PartialOrd>::gt",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_greater",
       "status": "implemented",
       "notes": "Line-by-line port of TCollection_AsciiString.cxx/.lxx: int positions stay i32, OCCT's exceptions become Failure errors of the same class, and the differential probe compares results and exception classes with the native kernel. The pointer/length, const char*, std::string_view, const char(&)[N] and TCollection_AsciiString overloads collapse to one item taking impl AsRef<[u8]>: a view, a pointer/length pair or an AsciiString passes its exact span, a C string passes the bytes before its NUL (a Rust slice is never null, so OCCT's nullptr branches have no counterpart). Bytes compare as unsigned values (memcmp), then the shorter string orders first."
     },
@@ -89603,7 +89967,7 @@
       "notes": "RTTI macro: impl_transient!(HAsciiString, \"TCollection_HAsciiString\", StandardTransient, parent) registers the same type name and base."
     },
     {
-      "upstream_id": "opencascade::handle::operator==(const T2*,const handle&)",
+      "upstream_id": "opencascade::operator==(const T2*,const handle<T>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "<*const T as PartialEq<rustycad_tkernel::standard::Handle<T>>>::eq",
@@ -89611,7 +89975,7 @@
       "notes": "Friend form with the raw pointer on the left; compares the pointer with the projected address, as the member form does. Rust takes the pointer of the handle's own projection type T; a pointer to another type is projected first with Handle::cast."
     },
     {
-      "upstream_id": "opencascade::handle::operator!=(const T2*,const handle&)",
+      "upstream_id": "opencascade::operator!=(const T2*,const handle<T>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "<*const T as PartialEq<rustycad_tkernel::standard::Handle<T>>>::ne",
@@ -90300,7 +90664,7 @@
       "upstream_id": "Quantity_Date::operator-(const Quantity_Period&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Date::<core::ops::arith::Sub>::sub",
+      "rust_item": "rustycad_tkernel::quantity::Date::<core::ops::arith::Sub<rustycad_tkernel::quantity::period::Period>>::sub",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Result like Subtract."
     },
@@ -90308,7 +90672,7 @@
       "upstream_id": "Quantity_Date::operator+(const Quantity_Period&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Date::<core::ops::arith::Add>::add",
+      "rust_item": "rustycad_tkernel::quantity::Date::<core::ops::arith::Add<rustycad_tkernel::quantity::period::Period>>::add",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Result like Add."
     },
@@ -90324,7 +90688,7 @@
       "upstream_id": "Quantity_Date::operator<(const Quantity_Date&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "<rustycad_tkernel::quantity::Date as PartialOrd>::lt",
+      "rust_item": "rustycad_tkernel::quantity::Date::is_earlier",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Derived lexicographic order equals IsEarlier."
     },
@@ -90332,7 +90696,7 @@
       "upstream_id": "Quantity_Date::operator>(const Quantity_Date&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
-      "rust_item": "<rustycad_tkernel::quantity::Date as PartialOrd>::gt",
+      "rust_item": "rustycad_tkernel::quantity::Date::is_later",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Derived lexicographic order equals IsLater."
     },
@@ -90412,7 +90776,7 @@
       "upstream_id": "Quantity_Period::operator<(const Quantity_Period&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
-      "rust_item": "<rustycad_tkernel::quantity::Period as PartialOrd>::lt",
+      "rust_item": "rustycad_tkernel::quantity::Period::is_shorter",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Derived lexicographic order equals IsShorter."
     },
@@ -90420,7 +90784,7 @@
       "upstream_id": "Quantity_Period::operator>(const Quantity_Period&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
-      "rust_item": "<rustycad_tkernel::quantity::Period as PartialOrd>::gt",
+      "rust_item": "rustycad_tkernel::quantity::Period::is_longer",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Derived lexicographic order equals IsLonger."
     },
@@ -99908,7 +100272,7 @@
       "upstream_id": "Units_Measurement::operator+(const Units_Measurement&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
-      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Add>::add",
+      "rust_item": "<&rustycad_tkernel::units::Measurement as core::ops::arith::Add>::add",
       "status": "implemented",
       "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
@@ -99924,7 +100288,7 @@
       "upstream_id": "Units_Measurement::operator-(const Units_Measurement&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
-      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Sub>::sub",
+      "rust_item": "<&rustycad_tkernel::units::Measurement as core::ops::arith::Sub>::sub",
       "status": "implemented",
       "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
@@ -99940,7 +100304,7 @@
       "upstream_id": "Units_Measurement::operator*(const Units_Measurement&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
-      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Mul>::mul",
+      "rust_item": "<&rustycad_tkernel::units::Measurement as core::ops::arith::Mul>::mul",
       "status": "implemented",
       "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
@@ -99956,7 +100320,7 @@
       "upstream_id": "Units_Measurement::operator*(double) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
-      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Mul<f64>>::mul",
+      "rust_item": "<&rustycad_tkernel::units::Measurement as core::ops::arith::Mul<f64>>::mul",
       "status": "implemented",
       "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
@@ -99972,7 +100336,7 @@
       "upstream_id": "Units_Measurement::operator/(const Units_Measurement&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
-      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Div>::div",
+      "rust_item": "<&rustycad_tkernel::units::Measurement as core::ops::arith::Div>::div",
       "status": "implemented",
       "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
@@ -99988,7 +100352,7 @@
       "upstream_id": "Units_Measurement::operator/(double) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
-      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Div<f64>>::div",
+      "rust_item": "<&rustycad_tkernel::units::Measurement as core::ops::arith::Div<f64>>::div",
       "status": "implemented",
       "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
@@ -100033,7 +100397,7 @@
       "notes": "Manual Units mapping; declared with define_standard_exceptions! (UNITS_HIERARCHY) so Failure::is_kind(\"Standard_NoSuchObject\") holds; the message is the offending unit. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator==(const occ::handle<Units_Quantity>&,const char* const)",
+      "upstream_id": "operator==(const occ::handle<Units_Quantity>&,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::quantity_equals",
@@ -100041,7 +100405,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator==(const occ::handle<Units_Token>&,const char* const)",
+      "upstream_id": "operator==(const occ::handle<Units_Token>&,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_equals",
@@ -100049,7 +100413,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator==(const occ::handle<Units_Unit>&,const char* const)",
+      "upstream_id": "operator==(const occ::handle<Units_Unit>&,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::unit_equals",
@@ -100057,7 +100421,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator*(const occ::handle<Units_Dimensions>&,const occ::handle<Units_Dimensions>&)",
+      "upstream_id": "operator*(const occ::handle<Units_Dimensions>&,const occ::handle<Units_Dimensions>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::dimensions_multiply",
@@ -100065,7 +100429,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator/(const occ::handle<Units_Dimensions>&,const occ::handle<Units_Dimensions>&)",
+      "upstream_id": "operator/(const occ::handle<Units_Dimensions>&,const occ::handle<Units_Dimensions>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::dimensions_divide",
@@ -100073,7 +100437,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::pow(const occ::handle<Units_Dimensions>&,double)",
+      "upstream_id": "pow(const occ::handle<Units_Dimensions>&,double)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::dimensions_pow",
@@ -100081,7 +100445,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::pow(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "upstream_id": "pow(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_pow_token",
@@ -100089,7 +100453,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::pow(const occ::handle<Units_Token>&,double)",
+      "upstream_id": "pow(const occ::handle<Units_Token>&,double)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_pow",
@@ -100097,7 +100461,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator+(const occ::handle<Units_Token>&,int)",
+      "upstream_id": "operator+(const occ::handle<Units_Token>&,int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_add_integer",
@@ -100105,7 +100469,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator+(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "upstream_id": "operator+(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_add",
@@ -100113,7 +100477,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator-(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "upstream_id": "operator-(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_subtract",
@@ -100121,7 +100485,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator*(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "upstream_id": "operator*(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_multiply",
@@ -100129,7 +100493,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator/(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "upstream_id": "operator/(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_divide",
@@ -100137,7 +100501,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator!=(const occ::handle<Units_Token>&,const char* const)",
+      "upstream_id": "operator!=(const occ::handle<Units_Token>&,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_not_equals",
@@ -100145,7 +100509,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator<=(const occ::handle<Units_Token>&,const char* const)",
+      "upstream_id": "operator<=(const occ::handle<Units_Token>&,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_less_or_equal",
@@ -100153,7 +100517,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator>(const occ::handle<Units_Token>&,const char* const)",
+      "upstream_id": "operator>(const occ::handle<Units_Token>&,const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_greater",
@@ -100161,7 +100525,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator>(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "upstream_id": "operator>(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_greater_token",
@@ -100169,7 +100533,7 @@
       "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
     },
     {
-      "upstream_id": "Units_Operators::operator>=(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "upstream_id": "operator>=(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
       "rust_item": "rustycad_tkernel::units::operators::token_greater_or_equal",
@@ -100807,6 +101171,22 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "Units_Unit::thevalue",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Unit and is reached through Unit::value."
+    },
+    {
+      "upstream_id": "Units_Unit::thesymbolssequence",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of Unit and is reached through Unit::symbols_sequence."
     },
     {
       "upstream_id": "Units_UnitSentence::Units_UnitSentence(const char* const)",
@@ -105521,7 +105901,7 @@
       "notes": "The reinterpret_cast view of RGB plus alpha as one Vec4 is the explicit to_vec4 copy; Rust has no implicit conversion operators."
     },
     {
-      "upstream_id": "opencascade::handle::operator const handle<T2>&() const",
+      "upstream_id": "opencascade::handle::operator const opencascade::handle<type-parameter-1-0> &",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::view",
@@ -105529,12 +105909,42 @@
       "notes": "The upcast to a const reference of a base handle, without a count change, is Handle::view::<Base>(); both preprocessor branches (SFINAE and legacy) declare it."
     },
     {
-      "upstream_id": "opencascade::handle::operator handle<T2>&()",
+      "upstream_id": "opencascade::handle::operator opencascade::handle<type-parameter-1-0> &",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "rust_item": null,
       "status": "excluded",
       "notes": "Deprecated upcast to a non-const reference of a base handle (#26377): assigning through it would store a base-typed object in a derived handle. Safe Rust cannot alias one handle as another handle type mutably; callers assign Handle::cast or Handle::into_cast results instead."
+    },
+    {
+      "upstream_id": "opencascade::handle",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle",
+      "status": "implemented",
+      "notes": "intrusive smart pointer class template; Rust Handle<T> keeps the same shared reference count, null state and identity comparisons."
+    },
+    {
+      "upstream_id": "occ",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::occ",
+      "status": "implemented",
+      "notes": "C++ namespace; its members live in the Rust module standard::occ."
+    },
+    {
+      "upstream_id": "opencascade",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard",
+      "status": "implemented",
+      "notes": "C++ namespace; its members live in the Rust module standard."
+    },
+    {
+      "upstream_id": "opencascade::handle::element_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "status": "excluded",
+      "notes": "member typedef naming T; Rust spells the type parameter T of Handle<T>."
     },
     {
       "upstream_id": "GeomGridEval::EvaluateGridHelper(const NCollection_Array1<double>&,const NCollection_Array1<double>&,Evaluator)",
@@ -238979,6 +239389,30 @@
       "notes": "Selector uses the exact written parameter types from the pinned header. The hook adapts a bounded absolute position and its default implementation dispatches through seekoff, verified by the derived hook count receipt. Rust does not model fpos state or the ignored openmode parameter; invalid native pointer domains remain unsupported."
     },
     {
+      "upstream_id": "Standard_ArrayStreamBuffer::myBegin",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBufferState",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ArrayStreamBufferState (owned by ArrayStreamBuffer) and is reached through ArrayStreamBufferState::position, bytes and remaining."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::myCurrent",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBufferState",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ArrayStreamBufferState (owned by ArrayStreamBuffer) and is reached through ArrayStreamBufferState::position, bytes and remaining."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::myEnd",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBufferState",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ArrayStreamBufferState (owned by ArrayStreamBuffer) and is reached through ArrayStreamBufferState::position, bytes and remaining."
+    },
+    {
       "upstream_id": "Geom2dGridEval_Curve::initialization(const Adaptor2d_Curve2d&)",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
@@ -239709,6 +240143,61 @@
       "rust_item": "rustycad_tkernel::tcollection::AsciiString::<core::convert::From<&[u8; N]>>::from",
       "status": "implemented",
       "notes": "Native char-array constructor stops at its first NUL. Rust const-generic array From implementation delegates to the same bounded C-string-prefix constructor. Exact compiler-derived array trait path now resolves after lossless slice/array rendering; native behavior evidence: tools/oracle/tkernel_ascii_string_view_surface.cxx. See porting/audits/rustdoc-array-trait-paths.json."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::print",
+      "status": "implemented",
+      "notes": "stream insertion is the Print member."
+    },
+    {
+      "upstream_id": "operator>>(Standard_IStream&,TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::read",
+      "status": "implemented",
+      "notes": "stream extraction is the Read member."
+    },
+    {
+      "upstream_id": "std",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.lxx",
+      "status": "excluded",
+      "notes": "the std namespace reopened only to specialize std::hash and std::equal_to; Rust implements Hash and HashPolicy instead."
+    },
+    {
+      "upstream_id": "IsEqual(const TCollection_AsciiString&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.lxx",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::is_equal",
+      "status": "implemented",
+      "notes": "free IsEqual overload for map hashers; the member is_equal compares the same way."
+    },
+    {
+      "upstream_id": "std::hash<TCollection_AsciiString>::operator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.lxx",
+      "rust_item": "rustycad_tkernel::tcollection::AsciiString::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "the std::hash specialization is the NCollection HashKey impl returning hash_code()."
+    },
+    {
+      "upstream_id": "std::hash<opencascade::handle<TCollection_HAsciiString>>::operator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HAsciiString.lxx",
+      "rust_item": "rustycad_tkernel::tcollection::HAsciiStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_ascii_string::HAsciiString>>>::hash",
+      "status": "implemented",
+      "notes": "std specialization for handles of HAsciiString; HAsciiStringHasher is the same policy."
+    },
+    {
+      "upstream_id": "std::equal_to<opencascade::handle<TCollection_HAsciiString>>::operator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HAsciiString.lxx",
+      "rust_item": "rustycad_tkernel::tcollection::HAsciiStringHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<rustycad_tkernel::tcollection::h_ascii_string::HAsciiString>>>::equal",
+      "status": "implemented",
+      "notes": "std specialization for handles of HAsciiString; HAsciiStringHasher is the same policy."
     },
     {
       "upstream_id": "Standard_AbortiveTransaction::Standard_AbortiveTransaction(const char*)",
@@ -240477,6 +240966,172 @@
       "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
       "status": "implemented",
       "notes": "The macro override returns the declared exception class name. Rust Failure::exception_type returns the identity installed by the corresponding named constructor. Native output for all 38 generated classes and supplemental byte/stack constructor tests validate these names; see porting/audits/exception-type-bindings.json."
+    },
+    {
+      "upstream_id": "Standard_UUID",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_UUID.hxx",
+      "rust_item": "rustycad_tkernel::standard::Uuid",
+      "status": "implemented",
+      "notes": "plain UUID record; the Rust struct has the same four fields."
+    },
+    {
+      "upstream_id": "Standard_UUID::Data1",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_UUID.hxx",
+      "rust_item": "rustycad_tkernel::standard::Uuid::data1",
+      "status": "implemented",
+      "notes": "public field of Standard_UUID, a public field of the Rust struct with the same width."
+    },
+    {
+      "upstream_id": "Standard_UUID::Data2",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_UUID.hxx",
+      "rust_item": "rustycad_tkernel::standard::Uuid::data2",
+      "status": "implemented",
+      "notes": "public field of Standard_UUID, a public field of the Rust struct with the same width."
+    },
+    {
+      "upstream_id": "Standard_UUID::Data3",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_UUID.hxx",
+      "rust_item": "rustycad_tkernel::standard::Uuid::data3",
+      "status": "implemented",
+      "notes": "public field of Standard_UUID, a public field of the Rust struct with the same width."
+    },
+    {
+      "upstream_id": "Standard_UUID::Data4",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_UUID.hxx",
+      "rust_item": "rustycad_tkernel::standard::Uuid::data4",
+      "status": "implemented",
+      "notes": "public field of Standard_UUID, a public field of the Rust struct with the same width."
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::MurmurHashUtils::load_bytes",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.lxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::murmur_hash_utils::load_bytes",
+      "status": "implemented",
+      "notes": "little-endian load of 1..7 bytes; a count outside the switch cases returns 0 as natively; a slice shorter than the count is a Standard_OutOfRange failure where C++ reads past the buffer."
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::MurmurHashUtils::shift_mix",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.lxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::murmur_hash_utils::shift_mix",
+      "status": "implemented",
+      "notes": "v ^ (v >> 47), bit for bit."
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::MurmurHashUtils::unaligned_load",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.lxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::murmur_hash_utils::unaligned_load",
+      "status": "implemented",
+      "notes": "memcpy of sizeof(T) bytes into a T; a short slice is a Standard_OutOfRange failure."
+    },
+    {
+      "upstream_id": "opencascade::FNVHash",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.lxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::fnv_hash",
+      "status": "implemented",
+      "notes": "C++ namespace; its members live in the Rust module standard::hashing::fnv_hash."
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.lxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash",
+      "status": "implemented",
+      "notes": "C++ namespace; its members live in the Rust module standard::hashing::murmur_hash."
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::MurmurHashUtils",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.lxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::murmur_hash_utils",
+      "status": "implemented",
+      "notes": "C++ namespace; its members live in the Rust module standard::hashing::murmur_hash::murmur_hash_utils."
+    },
+    {
+      "upstream_id": "opencascade::std",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Std.hxx",
+      "status": "excluded",
+      "notes": "namespace alias that re-exports std inside opencascade; Rust uses std directly."
+    },
+    {
+      "upstream_id": "opencascade::std::<using-directive>",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Std.hxx",
+      "status": "excluded",
+      "notes": "using-directive that pulls std into opencascade::std; no Rust counterpart."
+    },
+    {
+      "upstream_id": "opencascade::is_integer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Std.hxx",
+      "status": "excluded",
+      "notes": "SFINAE trait selecting integer overloads; Rust overloads by trait bounds."
+    },
+    {
+      "upstream_id": "opencascade::disable_deduction",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Std.hxx",
+      "status": "excluded",
+      "notes": "template-deduction blocker; Rust generics need no such helper."
+    },
+    {
+      "upstream_id": "opencascade::disable_deduction::type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Std.hxx",
+      "status": "excluded",
+      "notes": "member typedef of the deduction blocker; Rust generics need no such helper."
+    },
+    {
+      "upstream_id": "Standard_PCharacter",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_PCharacter.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin char*; Rust spells the primitive &mut [u8] directly."
+    },
+    {
+      "upstream_id": "Standard_PExtCharacter",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_PExtCharacter.hxx",
+      "status": "excluded",
+      "notes": "C++ typedef of the builtin char16_t*; Rust spells the primitive &mut [u16] directly."
+    },
+    {
+      "upstream_id": "Standard_OStream",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_OStream.hxx",
+      "status": "excluded",
+      "notes": "typedef of std::ostream; Rust writes through std::fmt::Write / std::io::Write."
+    },
+    {
+      "upstream_id": "Standard_IStream",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_IStream.hxx",
+      "status": "excluded",
+      "notes": "typedef of std::istream; Rust reads through std::io::Read / BufRead."
+    },
+    {
+      "upstream_id": "Standard_SStream",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_SStream.hxx",
+      "status": "excluded",
+      "notes": "typedef of std::stringstream; Rust formats into String."
+    },
+    {
+      "upstream_id": "Standard_ThreadId",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ThreadId.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::current",
+      "status": "excluded",
+      "notes": "typedef of the native thread id integer; Rust returns the id from OsdThread::current."
     },
     {
       "upstream_id": "StdFail_InfiniteSolutions::ExceptionType() const noexcept",
