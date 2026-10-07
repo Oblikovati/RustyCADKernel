@@ -76,9 +76,7 @@ mod tests {
         assert_eq!(unsafe { from_c_pointer(std::ptr::null()) }, None);
         let text = CString::new("value").unwrap();
         // SAFETY: `text` is a live NUL-terminated string.
-        assert_eq!(
-            unsafe { from_c_pointer(text.as_ptr()) }.as_deref(),
-            Some("value")
-        );
+        let decoded = unsafe { from_c_pointer(text.as_ptr()) };
+        assert_eq!(decoded.as_deref(), Some("value"));
     }
 }

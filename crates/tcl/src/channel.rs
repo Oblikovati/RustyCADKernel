@@ -126,9 +126,10 @@ impl Channel {
 
 impl Clone for Channel {
     fn clone(&self) -> Self {
-        // SAFETY: the channel is live while `open` is set; a closed one gets a handle
-        // that reports the close too (the handler is not registered on freed memory).
+        // A closed channel gets a handle that reports the close too: no close handler
+        // may be registered on freed memory.
         if self.open.get() {
+            // SAFETY: the channel is live while `open` is set.
             unsafe { Self::watch(self.raw) }
         } else {
             Self {

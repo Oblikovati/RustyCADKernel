@@ -11,3 +11,5 @@ workspace = true
 [dependencies]
 rustycad-tcl = { path = "../tcl" }
 rustycad-tkernel = { path = "../tkernel" }
+# The stream capture of the command log redirects descriptors with dup/dup2 (C library).
+libc = "=0.2.189"
