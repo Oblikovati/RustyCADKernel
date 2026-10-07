@@ -19,6 +19,8 @@ mod general_fuse;
 mod section;
 pub use general_fuse::GeneralFuseAlgorithm;
 pub use section::BOPAlgoSection;
+mod splitter;
+pub use splitter::BOPAlgoSplitter;
 mod pave_filler;
 pub mod tools;
 mod tools_provider;

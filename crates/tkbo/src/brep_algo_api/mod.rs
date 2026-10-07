@@ -13,3 +13,6 @@ pub use operations::{BRepAlgoAPICommon, BRepAlgoAPICut, BRepAlgoAPIFuse};
 
 mod section;
 pub use section::BRepAlgoAPISection;
+
+mod splitter;
+pub use splitter::BRepAlgoAPISplitter;
