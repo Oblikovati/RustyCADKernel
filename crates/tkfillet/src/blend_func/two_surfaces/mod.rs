@@ -8,6 +8,7 @@
 mod compute;
 mod equations;
 mod queries;
+pub(crate) use queries::arc_tolerances;
 mod second_order;
 mod sections;
 mod sections_d2;

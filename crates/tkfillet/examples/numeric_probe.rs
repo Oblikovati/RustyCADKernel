@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod fl_probe;
-use fl_probe::{blend_func, brep_blend, chamfer, chfi_ds, fillet};
+use fl_probe::{blend_func, brep_blend, chamfer, chfi_ds, fillet, surf_rst};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -23,6 +23,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_chamfer_inv", chamfer::chamfer_inv_case),
     ("fl_rad_inv", brep_blend::rad_inv_case),
     ("fl_blend_tool", brep_blend::blend_tool_case),
+    ("fl_surf_rst", surf_rst::surf_rst_case),
 ];
 
 fn main() {

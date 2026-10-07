@@ -41,6 +41,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepBlend (tkfillet_probe_brepblend.cxx)
  {"fl_rad_inv", fl_rad_inv_case},
  {"fl_blend_tool", fl_blend_tool_case},
+ {"fl_surf_rst", fl_surf_rst_case},
 };
 int main() {
  std::string line;

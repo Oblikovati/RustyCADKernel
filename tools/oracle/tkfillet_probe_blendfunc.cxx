@@ -78,8 +78,8 @@ void fl_tangents(Blend_Function& f){
  GA_TRY(fl_vec(f.TangentOnS2()));GA_TRY(fl_vec2d(f.Tangent2dOnS2()));
  GA_TRY(ga_flag(f.TwistOnS1()));GA_TRY(ga_flag(f.TwistOnS2()));}
 
-// The sections of every order at the point X of parameter t, arrays sized by GetShape.
-void fl_sections(Blend_AppFunction& f,const math_Vector& x,double t){
+// The sections of every order at the blend point P, arrays sized by GetShape.
+void fl_sections_at(Blend_AppFunction& f,const Blend_Point& p){
  int np=0,nk=0,deg=0,np2=0;GA_TRY(f.GetShape(np,nk,deg,np2);ga_int(np);ga_int(nk);ga_int(deg);ga_int(np2));
  if(np<1||np>64||nk<1||nk>64)return;
  NCollection_Array1<double> knots(1,nk),weights(1,np),dw(1,np),d2w(1,np);
@@ -89,7 +89,6 @@ void fl_sections(Blend_AppFunction& f,const math_Vector& x,double t){
  GA_TRY(f.GetMinimalWeight(weights);fl_reals(weights));
  math_Vector tol3d(1,np),tol1d(1,np2);tol3d.Init(0);tol1d.Init(0);
  GA_TRY(f.GetTolerance(1.e-4,1.e-5,1.e-3,tol3d,tol1d);fl_vector(tol3d);fl_vector(tol1d));
- Blend_Point p(gp_Pnt(),gp_Pnt(),t,x(1),x(2),x(3),x(4));
  NCollection_Array1<gp_Pnt> poles(1,np);NCollection_Array1<gp_Vec> dp(1,np),d2p(1,np);
  NCollection_Array1<gp_Pnt2d> p2(1,np2);NCollection_Array1<gp_Vec2d> dp2(1,np2),d2p2(1,np2);
  weights.Init(0);
@@ -98,6 +97,10 @@ void fl_sections(Blend_AppFunction& f,const math_Vector& x,double t){
         fl_vec2ds(dp2);fl_reals(weights);fl_reals(dw));
  GA_TRY(ga_flag(f.Section(p,poles,dp,d2p,p2,dp2,d2p2,weights,dw,d2w));fl_pnts(poles);fl_vecs(dp);fl_vecs(d2p);
         fl_pnt2ds(p2);fl_vec2ds(dp2);fl_vec2ds(d2p2);fl_reals(weights);fl_reals(dw);fl_reals(d2w));}
+
+// The sections at the point X of parameter t on two surfaces.
+void fl_sections(Blend_AppFunction& f,const math_Vector& x,double t){
+ fl_sections_at(f,Blend_Point(gp_Pnt(),gp_Pnt(),t,x(1),x(2),x(3),x(4)));}
 
 // The bounds, tolerances, intervals and resolutions of a Blend_AppFunction.
 void fl_app_queries(Blend_AppFunction& f,double tol){

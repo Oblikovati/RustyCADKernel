@@ -4,7 +4,8 @@
 a restriction ending on a point or a curve, and the restriction-restriction point
 inverse) on the plane z = 0 along the X axis, with the second curve the line
 (t, 0, 1): exact solutions for the radius 1, perturbed points, every choice and radius
-law, and curved surfaces. `fl_blend_tool` projects points on 2d lines and circles and
+law, and curved surfaces. `fl_surf_rst` evaluates the surface-restriction fillets.
+`fl_blend_tool` projects points on 2d lines and circles and
 intersects segments with them.
 """
 from __future__ import annotations
@@ -77,9 +78,41 @@ def blend_tool_requests(requests: list[str]) -> None:
                 requests.append(blend_tool(curve2d, p1, p2, c, 0.0, 1.0))
 
 
+def surf_rst(kind, s, srst, rst, c, law, radius, choix, shape, t, x3, tol=1e-7, trim=None) -> str:
+    """One `fl_surf_rst` request; `rst` is (u, v, du, dv) in the parameters of `srst`."""
+    trim_fields = [1, *trim] if trim else [0, 0.0, 0.0]
+    return 'fl_surf_rst ' + numbers([kind, *s, *srst, *rst, *c, *law, 0.0, radius, choix, shape, t,
+                                     *trim_fields, *x3, tol])
+
+
+def surf_rst_requests(requests: list[str]) -> None:
+    """The plane z = 0 and the line (w, 0, 1) of the plane y = 0: the fillet of radius
+    0.625 touches the plane at (t, 0.5, 0); perturbed points, every shape and choice, trims,
+    and a cylinder against a sphere along a circle."""
+    plane, wall = surface(0, n=Z, x=X), surface(0, n=Y, x=X)
+    rst, c = (0.0, -1.0, 1.0, 0.0), guide(0, n=X, x=Y)
+    exact_law = (0, -3.0, 0.625, 3.0, 0.625, 0.625)
+    for kind in (0, 1):
+        for t in (0.0, 1.25, -2.0):
+            exact = [t, 0.5, t]
+            for choix in (1, 2, 3, 4):
+                for shape in (0, 3):
+                    requests.append(surf_rst(kind, plane, wall, rst, c, exact_law, 0.625, choix, shape, t, exact))
+            requests.append(surf_rst(kind, plane, wall, rst, c, LAWS[1], 0.625, 1, 1, t, [t + 0.1, 0.55, t - 0.05]))
+        requests.append(surf_rst(kind, plane, wall, rst, c, LAWS[3], 0.625, 1, 2, 0.5, [0.5, 0.5, 0.5], trim=(-1.0, 2.0)))
+    cylinder = surface(1, n=Z, x=X, a=1.5)
+    sphere = surface(2, n=Z, x=X, a=2.0)
+    circle = guide(1, p=(0.0, 0.0, 1.0), n=Z, x=X, a=math.sqrt(3.0))
+    for kind in (0, 1):
+        for law in (LAWS[0], LAWS[2]):
+            requests.append(surf_rst(kind, cylinder, sphere, (0.2, 0.5, 1.0, 0.1), circle, law, 0.3, 3, 0, 0.4,
+                                     [0.4, 0.8, 0.3]))
+
+
 def append_brepblend_requests(requests: list[str]) -> None:
     """Append the BRepBlend request families."""
     plane_requests(requests)
     curved_requests(requests)
     random_requests(requests)
     blend_tool_requests(requests)
+    surf_rst_requests(requests)

@@ -15,6 +15,7 @@ mod rad_inv_macro;
 mod rad_inv_terms;
 mod surf_curv_inv;
 mod surf_point_inv;
+mod surf_rst;
 
 pub use blend_tool::BRepBlendBlendTool;
 pub use curv_point_rad_inv::BRepBlendCurvPointRadInv;
@@ -25,6 +26,7 @@ pub use line::{BRepBlendLine, BRepBlendLineHandle};
 pub use point_on_rst::BRepBlendPointOnRst;
 pub use surf_curv_inv::{BRepBlendSurfCurvConstRadInv, BRepBlendSurfCurvEvolRadInv};
 pub use surf_point_inv::{BRepBlendSurfPointConstRadInv, BRepBlendSurfPointEvolRadInv};
+pub use surf_rst::{BRepBlendSurfRstConstRad, BRepBlendSurfRstEvolRad, SurfRstInputs};
 
 /// `BRepBlend_ChAsym`: the typedef of `BlendFunc_ChAsym`.
 pub type BRepBlendChAsym = crate::blend_func::ChAsym;

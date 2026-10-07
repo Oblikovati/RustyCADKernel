@@ -68,7 +68,7 @@ pub fn vector(v: &Vector<'_>) {
         real(v[i]);
     }
 }
-fn matrix(m: &Matrix<'_>) {
+pub(super) fn matrix(m: &Matrix<'_>) {
     for i in m.lower_row()..=m.upper_row() {
         for j in m.lower_col()..=m.upper_col() {
             real(m[(i, j)]);
@@ -99,6 +99,14 @@ fn filled<T: Clone + Default>(n: i32, value: T) -> Array1<'static, T> {
 
 /// `fl_sections`.
 pub(super) fn sections(f: &mut dyn BlendAppFunction, x: [f64; 4], t: f64) {
+    sections_at(
+        f,
+        &BlendPoint::on_surfaces(Point3::default(), Point3::default(), t, x),
+    );
+}
+
+/// `fl_sections_at`: the sections of every order at `point`.
+pub(super) fn sections_at(f: &mut dyn BlendAppFunction, point: &BlendPoint) {
     let mut shape = (0, 0, 0, 0);
     attempt(|| {
         shape = f.get_shape()?;
@@ -130,8 +138,7 @@ pub(super) fn sections(f: &mut dyn BlendAppFunction, x: [f64; 4], t: f64) {
         vector(&tol1d);
         Ok(())
     });
-    let point = BlendPoint::on_surfaces(Point3::default(), Point3::default(), t, x);
-    section_arrays(f, &point, np, np2);
+    section_arrays(f, point, np, np2);
 }
 
 fn section_arrays(f: &mut dyn BlendAppFunction, point: &BlendPoint, np: i32, np2: i32) {

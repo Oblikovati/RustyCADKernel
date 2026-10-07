@@ -25,6 +25,7 @@ mod gen_chamf_inv;
 pub(crate) mod gen_chamfer;
 mod guide;
 mod inverse_macro;
+pub(crate) mod law_intervals;
 pub(crate) mod linalg;
 mod normal_terms;
 pub(crate) mod package;

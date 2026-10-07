@@ -47,6 +47,10 @@ FilletSurf.
 - The first-order `BlendFunc_ChAsym::Section` writes the poles of the previous evaluation;
   `BlendFunc_ChAsymInv::ComputeValues` uses the reversed `2 nps1` in the guide derivative
   when the curve lies on the second surface.
+- The `myTConv` of the restriction functions is uninitialized natively until `GetShape`
+  meets a non-linear shape (the port starts at `TgtThetaOver2`), and
+  `BRepBlend_SurfRstEvolRad` leaves the restriction parameter uninitialized until a
+  solution; the probes set the first and read the second only after a solution.
 
 ## Verification
 
@@ -58,4 +62,4 @@ FilletSurf.
 | --- | --- |
 | ChFiDS | `fl_spine`, `fl_arc_spine`, `fl_fil_law` |
 | BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad`, `fl_evol_rad_inv`, `fl_chamfer`, `fl_chamfer_inv` |
-| BRepBlend | `fl_rad_inv`, `fl_blend_tool` |
+| BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst` |

@@ -182,21 +182,7 @@ impl TwoSurfaceCore {
         tol3d: &mut Vector<'_>,
         tol1d: &mut Vector<'_>,
     ) -> Result<(), Failure> {
-        let [bound_tol, surf_tol, angle_tol] = tols;
-        let (low, up) = (tol3d.lower(), tol3d.upper());
-        let tol = geom_fill::get_tolerance(
-            self.tconv,
-            angle_radius.0,
-            angle_radius.1,
-            angle_tol,
-            surf_tol,
-        )?;
-        tol1d.init(surf_tol);
-        tol3d.init(surf_tol);
-        vset(tol3d, low + 1, std_min(tol, surf_tol))?;
-        vset(tol3d, up - 1, std_min(tol, surf_tol))?;
-        vset(tol3d, low, std_min(tol, bound_tol))?;
-        vset(tol3d, up, std_min(tol, bound_tol))
+        arc_tolerances(self.tconv, angle_radius, tols, (tol3d, tol1d))
     }
 
     /// `Resolution(IC2d, Tol, TolU, TolV)`: the resolutions of the first surface for
@@ -219,4 +205,24 @@ fn project_with_inverse(nplan: Vector3, ns1: Vector3) -> Vector3 {
     let mut out = Vector3::default();
     out.set_linear_form(nplan.dot(ns1) * invnorm1, nplan, -invnorm1, ns1);
     out
+}
+
+/// The approximation tolerances of a circular section: `Tol1d` and `Tol3d` at `SurfTol`,
+/// the poles next to the ends at `min(Tol, SurfTol)` and the ends at `min(Tol, BoundTol)`,
+/// `Tol` from `GeomFill::GetTolerance(TConv, angle, radius, AngleTol, SurfTol)`;
+/// `arc_tolerances(tconv, (minang, ray), [bound, surf, angle], (&mut t3, &mut t1))?`.
+pub(crate) fn arc_tolerances(
+    tconv: rustycad_tkmath::convert::ParameterisationType,
+    (angle, radius): (f64, f64),
+    [bound_tol, surf_tol, angle_tol]: [f64; 3],
+    (tol3d, tol1d): (&mut Vector<'_>, &mut Vector<'_>),
+) -> Result<(), Failure> {
+    let (low, up) = (tol3d.lower(), tol3d.upper());
+    let tol = geom_fill::get_tolerance(tconv, angle, radius, angle_tol, surf_tol)?;
+    tol1d.init(surf_tol);
+    tol3d.init(surf_tol);
+    vset(tol3d, low + 1, std_min(tol, surf_tol))?;
+    vset(tol3d, up - 1, std_min(tol, surf_tol))?;
+    vset(tol3d, low, std_min(tol, bound_tol))?;
+    vset(tol3d, up, std_min(tol, bound_tol))
 }
