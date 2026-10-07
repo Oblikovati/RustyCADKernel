@@ -188949,7 +188949,7 @@
       "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
     },
     {
-      "upstream_id": "BRepGProp_Gauss(GaussType)",
+      "upstream_id": "BRepGProp_Gauss(BRepGProp_Gauss::GaussType)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Gauss.hxx",
       "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropGauss::new",
@@ -189045,7 +189045,7 @@
       "notes": "BRepGProp mapping (docs/tktopalgo-progress.md, docs/topalgo-design.md section 9): the GProp_GProps frameworks embed the TKGeomBase GProps (public protected members) and reach it through Deref; the face tool shares its surface adaptor and copies its boundary curve; overloads take distinct Rust names, output references become returned tuples or &mut values, native exceptions are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bgp_* requests)."
     },
     {
-      "upstream_id": "BRepGProp_MeshProps(BRepGProp_MeshObjType)",
+      "upstream_id": "BRepGProp_MeshProps(BRepGProp_MeshProps::BRepGProp_MeshObjType)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
       "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps::new",
@@ -192198,27 +192198,27 @@
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Set(const BRepAdaptor_Surface&)",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::set_surface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_surface",
       "status": "implemented",
-      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::SetImplicitSurface(const IntSurf_Quadric&)",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::set_implicit_surface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_implicit_surface",
       "status": "implemented",
-      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Set(double)",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::set_tolerance",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_tolerance",
       "status": "implemented",
-      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::NbVariables() const",
@@ -192262,27 +192262,27 @@
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Root() const",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::root",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::root",
       "status": "implemented",
-      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Tolerance() const",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::tolerance",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::tolerance",
       "status": "implemented",
-      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Point() const",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::point",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::point",
       "status": "implemented",
-      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::IsTangent()",
@@ -192294,35 +192294,35 @@
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction3d()",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::direction3d",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::direction3d",
       "status": "implemented",
-      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction2d()",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::direction2d",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::direction2d",
       "status": "implemented",
-      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::PSurface() const",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::p_surface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::p_surface",
       "status": "implemented",
-      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
     },
     {
       "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::ISurface() const",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepApprox/BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::i_surface",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::i_surface",
       "status": "implemented",
-      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests)."
+      "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
     },
     {
       "upstream_id": "BRepIntCurveSurface_Inter::BRepIntCurveSurface_Inter()",
@@ -195941,22 +195941,6 @@
       "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
     },
     {
-      "upstream_id": "BRepExtrema_OverlapTool::OverlapTriangles1() const",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Declared only under #ifdef OVERLAP_TOOL_OUTPUT_TRIANGLES, a debug macro that no OCCT build defines (the member and its set are not compiled); nothing to port."
-    },
-    {
-      "upstream_id": "BRepExtrema_OverlapTool::OverlapTriangles2() const",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Declared only under #ifdef OVERLAP_TOOL_OUTPUT_TRIANGLES, a debug macro that no OCCT build defines (the member and its set are not compiled); nothing to port."
-    },
-    {
       "upstream_id": "BRepExtrema_OverlapTool::SetElementFilter(BRepExtrema_ElementFilter*)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
@@ -196005,7 +195989,7 @@
       "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
     },
     {
-      "upstream_id": "BRepExtrema_ProximityDistTool::PrjState(int,BVH_PrjState,int,int)",
+      "upstream_id": "BRepExtrema_ProximityDistTool::PrjState(int,BRepExtrema_ProximityDistTool::BVH_PrjState,int,int)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaPrjState::new",
@@ -196053,7 +196037,7 @@
       "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
     },
     {
-      "upstream_id": "BRepExtrema_ProximityDistTool(const occ::handle<BRepExtrema_TriangleSet>&,int,const BVH_Array3d&,const NCollection_DynamicArray<ProxPnt_Status>&,const occ::handle<BRepExtrema_TriangleSet>&,const NCollection_DynamicArray<TopoDS_Shape>&,const NCollection_DynamicArray<TopoDS_Shape>&)",
+      "upstream_id": "BRepExtrema_ProximityDistTool(const occ::handle<BRepExtrema_TriangleSet>&,int,const BVH_Array3d&,const NCollection_DynamicArray<BRepExtrema_ProximityDistTool::ProxPnt_Status>&,const occ::handle<BRepExtrema_TriangleSet>&,const NCollection_DynamicArray<TopoDS_Shape>&,const NCollection_DynamicArray<TopoDS_Shape>&)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::with_inputs",
@@ -196077,7 +196061,7 @@
       "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
     },
     {
-      "upstream_id": "BRepExtrema_ProximityDistTool::LoadAdditionalPointsFirstSet(const BVH_Array3d&,const NCollection_DynamicArray<ProxPnt_Status>&)",
+      "upstream_id": "BRepExtrema_ProximityDistTool::LoadAdditionalPointsFirstSet(const BVH_Array3d&,const NCollection_DynamicArray<BRepExtrema_ProximityDistTool::ProxPnt_Status>&)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::load_additional_points_first_set",
@@ -196133,7 +196117,7 @@
       "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
     },
     {
-      "upstream_id": "BRepExtrema_ProximityDistTool::ProximityPointsStatus(ProxPnt_Status&,ProxPnt_Status&) const",
+      "upstream_id": "BRepExtrema_ProximityDistTool::ProximityPointsStatus(BRepExtrema_ProximityDistTool::ProxPnt_Status&,BRepExtrema_ProximityDistTool::ProxPnt_Status&) const",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
       "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool::proximity_points_status",
@@ -196379,14 +196363,6 @@
       "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaSelfIntersection::element_set",
       "status": "implemented",
       "notes": "BRepExtrema proximity group (docs/topalgo-design.md section 13): TriangleSet is a transient shared by Handle whose state implements the BVH set traits, the tools traverse its tree (taken out for the traversal), the element filter is a trait object owned by the overlap tool, output references become returned values, unchecked native reads raise Standard_OutOfRange and C++ exceptions become Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (bxp_* requests)."
-    },
-    {
-      "upstream_id": "BRepExtrema_SelfIntersection::OverlapTriangles() const",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_SelfIntersection.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Declared only under #ifdef OVERLAP_TOOL_OUTPUT_TRIANGLES, a debug macro that no OCCT build defines (the member and its set are not compiled); nothing to port."
     },
     {
       "upstream_id": "BRepExtrema_ShapeProximity::BRepExtrema_ShapeProximity(double)",
