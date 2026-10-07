@@ -266488,6 +266488,78 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::myErrorStatus",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase::error_status",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderApproxCurveBase, reached through approx_curve_base/approx_curve_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::myWarningStatus",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase::warning_status",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderApproxCurveBase, reached through approx_curve_base/approx_curve_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::myTolerance",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase::tolerance",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderApproxCurveBase, reached through approx_curve_base/approx_curve_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::myCont",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase::cont",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderApproxCurveBase, reached through approx_curve_base/approx_curve_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::myMaxDegree",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase::max_degree",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderApproxCurveBase, reached through approx_curve_base/approx_curve_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::myMaxSeg",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase::max_seg",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderApproxCurveBase, reached through approx_curve_base/approx_curve_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::myTolReached",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase::tol_reached",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderApproxCurveBase, reached through approx_curve_base/approx_curve_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::myCurves",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase::curves",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderApproxCurveBase, reached through approx_curve_base/approx_curve_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderApproxCurve::HelixGeom_BuilderApproxCurve()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderApproxCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurveBase::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected constructor of the abstract class: Default of the embedded base gives the native initial values (tolerance 1e-4, C2, degree 8, 150 segments, reached tolerance 99, both statuses 0, no curve)."
+    },
+    {
       "upstream_id": "HelixGeom_BuilderHelix::HelixGeom_BuilderHelix()",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelix.hxx",
@@ -266523,7 +266595,7 @@
       "upstream_id": "HelixGeom_BuilderHelix::Perform()",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelix.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomBuilderHelix as rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve>::perform",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelix::<rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve>::perform",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266598,6 +266670,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HelixGeom_BuilderHelix::myPosition",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: private state of HelixGeomBuilderHelix, read and written through position/set_position."
+    },
+    {
       "upstream_id": "HelixGeom_BuilderHelixCoil::HelixGeom_BuilderHelixCoil()",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixCoil.hxx",
@@ -266617,7 +266697,7 @@
       "upstream_id": "HelixGeom_BuilderHelixCoil::Perform()",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixCoil.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixCoil as rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve>::perform",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixCoil::<rustycad_tkhelix::helix_geom::HelixGeomBuilderApproxCurve>::perform",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266778,6 +266858,62 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HelixGeom_BuilderHelixGen::myT1",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixGen.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGenBase::t1",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderHelixGenBase, reached through helix_gen_base/helix_gen_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixGen::myT2",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixGen.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGenBase::t2",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderHelixGenBase, reached through helix_gen_base/helix_gen_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixGen::myPitch",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixGen.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGenBase::pitch",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderHelixGenBase, reached through helix_gen_base/helix_gen_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixGen::myRStart",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixGen.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGenBase::r_start",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderHelixGenBase, reached through helix_gen_base/helix_gen_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixGen::myTaperAngle",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixGen.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGenBase::taper_angle",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderHelixGenBase, reached through helix_gen_base/helix_gen_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixGen::myIsClockWise",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixGen.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGenBase::is_clock_wise",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: the public field of the embedded HelixGeomBuilderHelixGenBase, reached through helix_gen_base/helix_gen_base_mut."
+    },
+    {
+      "upstream_id": "HelixGeom_BuilderHelixGen::HelixGeom_BuilderHelixGen()",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_BuilderHelixGen.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomBuilderHelixGenBase::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected constructor of the abstract class: Default of the embedded base gives the native initial values (T1 0, T2 2*PI, pitch 1, start radius 1, no taper, clockwise) over the default approximation base."
+    },
+    {
       "upstream_id": "HelixGeom_HelixCurve::HelixGeom_HelixCurve()",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
@@ -266805,7 +266941,7 @@
       "upstream_id": "HelixGeom_HelixCurve::FirstParameter() const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::first_parameter",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::first_parameter",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266813,7 +266949,7 @@
       "upstream_id": "HelixGeom_HelixCurve::LastParameter() const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::last_parameter",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::last_parameter",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266821,7 +266957,7 @@
       "upstream_id": "HelixGeom_HelixCurve::Continuity() const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::continuity",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::continuity",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266829,7 +266965,7 @@
       "upstream_id": "HelixGeom_HelixCurve::NbIntervals(GeomAbs_Shape) const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::nb_intervals",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::nb_intervals",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266837,7 +266973,7 @@
       "upstream_id": "HelixGeom_HelixCurve::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::intervals",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::intervals",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266845,7 +266981,7 @@
       "upstream_id": "HelixGeom_HelixCurve::Resolution(double) const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::resolution",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::resolution",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266853,7 +266989,7 @@
       "upstream_id": "HelixGeom_HelixCurve::IsClosed() const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::is_closed",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::is_closed",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266861,7 +266997,7 @@
       "upstream_id": "HelixGeom_HelixCurve::IsPeriodic() const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::is_periodic",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::is_periodic",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266869,7 +267005,7 @@
       "upstream_id": "HelixGeom_HelixCurve::Period() const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::period",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::period",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266877,7 +267013,7 @@
       "upstream_id": "HelixGeom_HelixCurve::EvalD0(double) const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d0",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d0",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266885,7 +267021,7 @@
       "upstream_id": "HelixGeom_HelixCurve::EvalD1(double) const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d1",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d1",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266893,7 +267029,7 @@
       "upstream_id": "HelixGeom_HelixCurve::EvalD2(double) const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d2",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_d2",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266901,7 +267037,7 @@
       "upstream_id": "HelixGeom_HelixCurve::EvalDN(double,int) const",
       "toolkit": "TKHelix",
       "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
-      "rust_item": "<rustycad_tkhelix::helix_geom::HelixGeomHelixCurve as rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_dn",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve::<rustycad_tkg3d::adaptor3d::Adaptor3dCurve>::eval_dn",
       "status": "implemented",
       "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests)."
     },
@@ -266954,6 +267090,78 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(HelixGeomHelixCurve, \"HelixGeom_HelixCurve\", dyn Adaptor3dCurve) at crates/tkhelix/src/helix_geom/helix_curve.rs:83 registers descriptor \"HelixGeom_HelixCurve\"; C++ base_type is Adaptor3d_Curve. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "7868fe09679c00423c009e84ffdc11bd108d42120e93bcc20d17be9f57ca0262",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::myFirst",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve",
+      "status": "excluded",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: private state of HelixGeomHelixCurve (behind its shared-state lock), set by first_parameter and used by the Adaptor3dCurve evaluators."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::myLast",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve",
+      "status": "excluded",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: private state of HelixGeomHelixCurve (behind its shared-state lock), set by last_parameter and used by the Adaptor3dCurve evaluators."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::myPitch",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve",
+      "status": "excluded",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: private state of HelixGeomHelixCurve (behind its shared-state lock), set by load and used by the Adaptor3dCurve evaluators."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::myRStart",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve",
+      "status": "excluded",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: private state of HelixGeomHelixCurve (behind its shared-state lock), set by load and used by the Adaptor3dCurve evaluators."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::myTaperAngle",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve",
+      "status": "excluded",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: private state of HelixGeomHelixCurve (behind its shared-state lock), set by load and used by the Adaptor3dCurve evaluators."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::myIsClockWise",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve",
+      "status": "excluded",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: private state of HelixGeomHelixCurve (behind its shared-state lock), set by load and used by the Adaptor3dCurve evaluators."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::myC1",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve",
+      "status": "excluded",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: private state of HelixGeomHelixCurve (behind its shared-state lock), set by load (derived from the pitch) and used by the Adaptor3dCurve evaluators."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::myTgBeta",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve",
+      "status": "excluded",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: private state of HelixGeomHelixCurve (behind its shared-state lock), set by load (derived from the taper angle) and used by the Adaptor3dCurve evaluators."
+    },
+    {
+      "upstream_id": "HelixGeom_HelixCurve::myTolAngle",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixGeom/HelixGeom_HelixCurve.hxx",
+      "rust_item": "rustycad_tkhelix::helix_geom::HelixGeomHelixCurve",
+      "status": "excluded",
+      "notes": "HelixGeom mapping (docs/helix-design.md sections 1-3, docs/tkhelix-progress.md): HelixGeom_HelixCurve is the transient adaptor HelixGeomHelixCurve (state behind a lock, copy constructor as Clone); the abstract builders are the traits HelixGeomBuilderApproxCurve and HelixGeomBuilderHelixGen over embedded base structs; output references become returned values or &mut outputs; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hx_* requests). Protected data member: private state of HelixGeomHelixCurve (behind its shared-state lock), set by load and used by the Adaptor3dCurve evaluators."
     },
     {
       "upstream_id": "HelixGeom_Tools::ApprHelix(double,double,double,double,double,bool,double,occ::handle<Geom_BSplineCurve>&,double&)",
@@ -267222,6 +267430,110 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "bdb9a0873784aa7dd688b2697204b8f3141dcb48a30e5a6cad67b257b195c20f",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myAxis3",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through set_parameters*."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myDiams",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through set_parameters*."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myHeights",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through set_parameters*."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myPitches",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through set_parameters*."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myIsPitches",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through set_parameters*."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myTolerance",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through set_approx_parameters."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myContinuity",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through set_approx_parameters."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myMaxDegree",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through set_approx_parameters."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myMaxSegments",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through set_approx_parameters."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myTolReached",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through tolerance_reached."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myErrorStatus",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through error_status."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myWarningStatus",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through warning_status."
+    },
+    {
+      "upstream_id": "HelixBRep_BuilderHelix::myShape",
+      "toolkit": "TKHelix",
+      "source": "src/ModelingAlgorithms/TKHelix/HelixBRep/HelixBRep_BuilderHelix.hxx",
+      "rust_item": "rustycad_tkhelix::helix_brep::HelixBRepBuilderHelix",
+      "status": "excluded",
+      "notes": "HelixBRep mapping (docs/helix-design.md sections 3 and 4, docs/tkhelix-progress.md): HelixBRep_BuilderHelix is the struct HelixBRepBuilderHelix; the null-able parameter arrays are Option<Array1> copied with their bounds; the SetParameters overloads take distinct Rust names; native exceptions are Failure errors; compared with OCCT by tools/verify_tkhelix_numeric.py (hxb_* requests). Protected data member: private state of HelixBRepBuilderHelix, written by perform and the setters and read through shape."
     },
     {
       "upstream_id": "ShapeExtend::EncodeStatus(ShapeExtend_Status)",
