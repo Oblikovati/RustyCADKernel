@@ -4,6 +4,7 @@ pub mod brep_fill_draft;
 pub mod brep_fill_filling;
 pub mod brep_fill_generator;
 pub mod brep_fill_location_law;
+pub mod brep_fill_offset_wire;
 pub mod brep_fill_package;
 pub mod brep_fill_pipe;
 pub mod brep_fill_pipe_shell;

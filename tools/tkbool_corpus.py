@@ -33,3 +33,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_brepfill_draft').append_draft_requests(requests)
     # BRepFill_Filling (tkbool_corpus_brepfill_filling.py)
     __import__('tkbool_corpus_brepfill_filling').append_filling_requests(requests)
+    # BRepFill_OffsetWire (tkbool_corpus_brepfill_offset_wire.py)
+    __import__('tkbool_corpus_brepfill_offset_wire').append_offset_wire_requests(requests)

@@ -431508,6 +431508,198 @@
       "notes": "Translated from BRepFill_FaceAndOrder.cxx; the fields are private (friend BRepFill_Filling) and read by the filling only. The uninitialized native order of the default constructor is C0."
     },
     {
+      "upstream_id": "BRepFill_OffsetWire",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillOffsetWire; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetWire::BRepFill_OffsetWire()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetWire::BRepFill_OffsetWire(const TopoDS_Face&,GeomAbs_JoinType,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetWire::Init(const TopoDS_Face&,GeomAbs_JoinType,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire::init",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetWire::Perform(double,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetWire::PerformWithBiLo(const TopoDS_Face&,double,const BRepMAT2d_BisectingLocus&,BRepMAT2d_LinkTopoBilo&,GeomAbs_JoinType,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire::perform_with_bilo",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetWire::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetWire::Spine() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire::spine",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetWire::Shape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire::shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetWire::GeneratedShapes(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire::generated_shapes",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetWire::JoinType() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetWire.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetWire::join_type",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetWire.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_offset_wire requests: polygons, a holed square, a disc, a stadium, a Bezier edge, open polylines; arc and intersection joins, null and lifted offsets). Perform catches every failure as not done (the native try block) and returns Standard_ConstructionError when a wire of a closed result is open. Native quirks kept: the parallels map is keyed by the orientation-sensitive default hasher; GeneratedShapes merges the parallels of cut parts in the iteration order of a map hashed on the shape addresses (the probe compares them as sorted sets); a failed new locus returns before the work spine is restored; vertices are set directly at the ends of the first edge curve (BRep_TVertex::Pnt)."
+    },
+    {
+      "upstream_id": "BRepFill_TrimEdgeTool",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimEdgeTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimEdgeTool",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillTrimEdgeTool; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_TrimEdgeTool::BRepFill_TrimEdgeTool()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimEdgeTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimEdgeTool::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimEdgeTool.cxx; exercised through BRepFill_OffsetWire by the bf_offset_wire requests of tools/verify_tkbool_numeric.py. Native quirks kept: the retries with tolerances growing tenfold from 1e-9 (1e-8 off lines and circles), the completion of a single intersection by the nearer end within half the offset, the common intersections within 400 * PConfusion, the StdFail_NotDone message naming BRepFill_TrimSurfaceTool; a null bisector is refused by its adaptor (Standard_NullObject)."
+    },
+    {
+      "upstream_id": "BRepFill_TrimEdgeTool::BRepFill_TrimEdgeTool(const Bisector_Bisec&,const occ::handle<Geom2d_Geometry>&,const occ::handle<Geom2d_Geometry>&,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimEdgeTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimEdgeTool::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimEdgeTool.cxx; exercised through BRepFill_OffsetWire by the bf_offset_wire requests of tools/verify_tkbool_numeric.py. Native quirks kept: the retries with tolerances growing tenfold from 1e-9 (1e-8 off lines and circles), the completion of a single intersection by the nearer end within half the offset, the common intersections within 400 * PConfusion, the StdFail_NotDone message naming BRepFill_TrimSurfaceTool; a null bisector is refused by its adaptor (Standard_NullObject)."
+    },
+    {
+      "upstream_id": "BRepFill_TrimEdgeTool::IntersectWith(const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Vertex&,const TopoDS_Vertex&,GeomAbs_JoinType,bool,NCollection_Sequence<gp_Pnt>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimEdgeTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimEdgeTool::intersect_with",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimEdgeTool.cxx; exercised through BRepFill_OffsetWire by the bf_offset_wire requests of tools/verify_tkbool_numeric.py. Native quirks kept: the retries with tolerances growing tenfold from 1e-9 (1e-8 off lines and circles), the completion of a single intersection by the nearer end within half the offset, the common intersections within 400 * PConfusion, the StdFail_NotDone message naming BRepFill_TrimSurfaceTool; a null bisector is refused by its adaptor (Standard_NullObject)."
+    },
+    {
+      "upstream_id": "BRepFill_TrimEdgeTool::AddOrConfuse(bool,const TopoDS_Edge&,const TopoDS_Edge&,NCollection_Sequence<gp_Pnt>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimEdgeTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimEdgeTool::add_or_confuse",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimEdgeTool.cxx; exercised through BRepFill_OffsetWire by the bf_offset_wire requests of tools/verify_tkbool_numeric.py. Native quirks kept: the retries with tolerances growing tenfold from 1e-9 (1e-8 off lines and circles), the completion of a single intersection by the nearer end within half the offset, the common intersections within 400 * PConfusion, the StdFail_NotDone message naming BRepFill_TrimSurfaceTool; a null bisector is refused by its adaptor (Standard_NullObject)."
+    },
+    {
+      "upstream_id": "BRepFill_TrimEdgeTool::IsInside(const gp_Pnt2d&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimEdgeTool.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimEdgeTool::is_inside",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimEdgeTool.cxx; exercised through BRepFill_OffsetWire by the bf_offset_wire requests of tools/verify_tkbool_numeric.py. Native quirks kept: the retries with tolerances growing tenfold from 1e-9 (1e-8 off lines and circles), the completion of a single intersection by the nearer end within half the offset, the common intersections within 400 * PConfusion, the StdFail_NotDone message naming BRepFill_TrimSurfaceTool; a null bisector is refused by its adaptor (Standard_NullObject)."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetAncestors",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetAncestors.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetAncestors",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillOffsetAncestors; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetAncestors::BRepFill_OffsetAncestors()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetAncestors.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetAncestors::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetAncestors.cxx; exercised by the bf_offset_wire requests of tools/verify_tkbool_numeric.py (the ancestor of every edge of the result). Ancestor before Perform is StdFail_NotDone (StdFail_NotDone_Raise_if) and of another edge Standard_NoSuchObject."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetAncestors::BRepFill_OffsetAncestors(BRepFill_OffsetWire&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetAncestors.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetAncestors::with_offset",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetAncestors.cxx; exercised by the bf_offset_wire requests of tools/verify_tkbool_numeric.py (the ancestor of every edge of the result). Ancestor before Perform is StdFail_NotDone (StdFail_NotDone_Raise_if) and of another edge Standard_NoSuchObject."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetAncestors::Perform(BRepFill_OffsetWire&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetAncestors.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetAncestors::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetAncestors.cxx; exercised by the bf_offset_wire requests of tools/verify_tkbool_numeric.py (the ancestor of every edge of the result). Ancestor before Perform is StdFail_NotDone (StdFail_NotDone_Raise_if) and of another edge Standard_NoSuchObject."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetAncestors::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetAncestors.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetAncestors::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetAncestors.cxx; exercised by the bf_offset_wire requests of tools/verify_tkbool_numeric.py (the ancestor of every edge of the result). Ancestor before Perform is StdFail_NotDone (StdFail_NotDone_Raise_if) and of another edge Standard_NoSuchObject."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetAncestors::HasAncestor(const TopoDS_Edge&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetAncestors.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetAncestors::has_ancestor",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetAncestors.cxx; exercised by the bf_offset_wire requests of tools/verify_tkbool_numeric.py (the ancestor of every edge of the result). Ancestor before Perform is StdFail_NotDone (StdFail_NotDone_Raise_if) and of another edge Standard_NoSuchObject."
+    },
+    {
+      "upstream_id": "BRepFill_OffsetAncestors::Ancestor(const TopoDS_Edge&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_OffsetAncestors.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillOffsetAncestors::ancestor",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_OffsetAncestors.cxx; exercised by the bf_offset_wire requests of tools/verify_tkbool_numeric.py (the ancestor of every edge of the result). Ancestor before Perform is StdFail_NotDone (StdFail_NotDone_Raise_if) and of another edge Standard_NoSuchObject."
+    },
+    {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
