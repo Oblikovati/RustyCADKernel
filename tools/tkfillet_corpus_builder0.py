@@ -241,6 +241,21 @@ def traces(requests: list[str]) -> None:
     requests.append('fl_int_traces ' + numbers([*circle, 0, 0, 0, 0, 2 * PI, 1, 1.0, 1, 1, *circle, 0, 0, 0, 0, 2 * PI, 2, 4.0, -1, 0, 0, 1, 1]))
 
 
+def el_spines(requests: list[str]) -> None:
+    """Elementary spines on polylines (open, closed), inside the spine, past its ends,
+    across several edges, periodic, C2 and C3."""
+    open3 = [4, 0, 0, 0, 3, 0, 0, 3, 4, 0, 6, 4, 2]
+    square = [5, 0, 0, 0, 4, 0, 0, 4, 4, 0, 0, 4, 0, 0, 0, 0]
+    bent = [3, 0, 0, 0, 5, 0, 0, 7, 2, 1]
+    for pts, closed, ranges in ((open3, 0, ((0.5, 2.5), (-1.0, 4.0), (1.0, 11.0), (-0.5, 12.0), (2.0, 7.5), (3.0, 3.0))),
+                                (bent, 0, ((0.0, 8.0), (-2.0, 10.0), (4.9, 5.1))),
+                                (square, 1, ((0.0, 16.0), (2.0, 6.0), (14.0, 18.0)))):
+        for rev in (0, 2):
+            for wf, wl in ranges:
+                for per, c3 in ((0, 0), (0, 1), (closed, 0)):
+                    requests.append('fl_el_spine ' + numbers([*pts, rev, closed, wf, wl, per, c3, 1e-4, 8]))
+
+
 def append_builder0_requests(requests: list[str]) -> None:
     """Append the ChFi3d_Builder_0 request families."""
     scalars(requests)
@@ -257,3 +272,4 @@ def append_builder0_requests(requests: list[str]) -> None:
     topology(requests)
     intersection_curves(requests)
     traces(requests)
+    el_spines(requests)

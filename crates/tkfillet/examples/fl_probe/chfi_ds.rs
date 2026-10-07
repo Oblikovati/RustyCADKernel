@@ -27,7 +27,7 @@ pub(super) fn segment(a: Point3, b: Point3, reversed: bool) -> Result<Edge, Fail
 }
 
 /// `fl_load`: the closed state, Load, the length and the tolerance.
-fn load(spine: &mut Spine, closed: bool) {
+pub(super) fn load(spine: &mut Spine, closed: bool) {
     if closed {
         spine.set_first_status(State::Closed);
     }

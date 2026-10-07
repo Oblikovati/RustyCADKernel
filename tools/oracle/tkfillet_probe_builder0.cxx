@@ -362,3 +362,23 @@ void fl_int_traces_case(std::istream& in){
  occ::handle<ChFiDS_SurfData> fd1=fl_trace_data(c1,jf1,f1,l1),fd2=fl_trace_data(c2,jf2,f2,l2);
  GA_TRY(double p1=-7,p2=-7;ga_flag(ChFi3d_IntTraces(fd1,pref1,p1,jf1,sens1,fd2,pref2,p2,jf2,sens2,ref,check,enlarge));ga_real(p1);ga_real(p2));
  ga_end();}
+
+// `fl_el_spine n P1..Pn rev closed wf wl periodic c3 tol nsamples`: ChFi3d_PerformElSpine
+// of the elementary spine [wf, wl] (ends set from the spine) on the spine of the
+// segments (reversed by the bits of rev), then the elementary spine: its range, its
+// vertices with tangents, its B-spline and points.
+void fl_el_spine_case(std::istream& in){
+ GaReader r{in};int n=r.integer();std::vector<gp_Pnt> pts;for(int i=0;i<n;++i)pts.push_back(r.pnt());
+ int rev=r.integer();bool closed=r.flag();double wf=r.real(),wl=r.real();bool per=r.flag(),c3=r.flag();double tol=r.real();int ns=r.integer();
+ occ::handle<ChFiDS_Spine> spine=new ChFiDS_Spine();
+ for(int i=0;i+1<n;++i)spine->SetEdges(fl_segment(pts[i],pts[i+1],(rev>>i)&1));
+ fl_load(spine,closed);
+ occ::handle<ChFiDS_ElSpine> es=new ChFiDS_ElSpine();es->FirstParameter(wf);es->LastParameter(wl);es->SetPeriodic(per);
+ GA_TRY(gp_Pnt p;gp_Vec v;spine->D1(wf,p,v);es->SetFirstPointAndTgt(p,v);spine->D1(wl,p,v);es->SetLastPointAndTgt(p,v));
+ GA_TRY(ChFi3d_PerformElSpine(es,spine,c3?GeomAbs_C3:GeomAbs_C2,tol,false);
+  ga_real(es->FirstParameter());ga_real(es->LastParameter());ga_int(es->NbVertices());
+  for(int i=1;i<=es->NbVertices();++i){ga_pnt(es->VertexWithTangent(i).Location());ga_dir(es->VertexWithTangent(i).Direction());}
+  ga_int(int(es->GetType()));
+  if(es->GetType()==GeomAbs_BSplineCurve){occ::handle<Geom_BSplineCurve> b=es->BSpline();ga_int(b->Degree());ga_int(b->NbKnots());ga_int(b->NbPoles());ga_flag(b->IsPeriodic());}
+  double f=es->FirstParameter(),l=es->LastParameter();for(int i=0;i<=ns;++i)ga_pnt(es->Value(f+(l-f)*i/ns)));
+ ga_end();}

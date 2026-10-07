@@ -8,7 +8,10 @@ mod arete;
 mod boundaries;
 mod bounds;
 mod curves;
+mod curves_geomint;
 mod curves_walk;
+mod elspine;
+mod elspine_ends;
 mod faces;
 mod pcurves;
 mod smooth;
@@ -28,6 +31,7 @@ pub use bounds::{
     in_period,
 };
 pub use curves::{IntersectionCurves, compute_curves};
+pub use elspine::perform_el_spine;
 pub use faces::{conexfaces, edge_state, evalconti, kparticular};
 pub use pcurves::{
     check_same_parameter, compute_pcurv, compute_pcurv_geom, compute_pcurv_on, project_pcurv,

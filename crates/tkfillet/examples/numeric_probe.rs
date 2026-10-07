@@ -63,6 +63,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_b0_smooth", builder0_topo::smooth_case),
     ("fl_compute_curves", builder0_topo::compute_curves_case),
     ("fl_int_traces", builder0_solve::int_traces_case),
+    ("fl_el_spine", builder0_topo::el_spine_case),
 ];
 
 fn main() {

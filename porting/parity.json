@@ -312080,6 +312080,14 @@
       "notes": "ChFi3d_IntTraces returns the parameters on both traces (None when they do not meet, the caller keeping its values as natively). Compared with OCCT by the fl_int_traces probe of tools/verify_tkfillet_numeric.py."
     },
     {
+      "upstream_id": "ChFi3d_PerformElSpine",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::perform_el_spine",
+      "status": "implemented",
+      "notes": "ChFi3d_PerformElSpine sets the curve of the elementary spine (a Handle<ElSpine>) from the locked spine; native exceptions become Failure values. Compared with OCCT by the fl_el_spine probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
       "upstream_id": "BRepOffset_Analyse",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
