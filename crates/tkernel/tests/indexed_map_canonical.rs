@@ -1,4 +1,4 @@
-//! Actual native nodes, links, stored indices and callback-visible canonical metadata.
+//! Bucket chains, stored indices and destructor order of IndexedMap against native rows.
 #[path = "indexed_map_canonical/lifetime.rs"]
 mod lifetime;
 #[path = "indexed_map_canonical/observers.rs"]
@@ -9,6 +9,9 @@ mod topology;
 mod unwind;
 fn native_row(label: &str, actual: &str) {
     assert_eq!(Some(actual), native_rows().get(label).copied());
+}
+fn native_row_text(label: &str) -> &'static str {
+    native_rows().get(label).copied().unwrap()
 }
 fn native_rows() -> &'static std::collections::BTreeMap<&'static str, &'static str> {
     static ROWS: std::sync::OnceLock<std::collections::BTreeMap<&str, &str>> =

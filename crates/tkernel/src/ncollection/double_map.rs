@@ -97,11 +97,11 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
     }
     /// Optionally borrows the second key; `map.seek1(&1)`.
     pub fn seek1(&self, key: &A) -> Option<&B> {
-        Some(self.storage.slot(self.lookup1(key)?).value())
+        Some(self.storage.payload().value(self.lookup1(key)?))
     }
     /// Optionally borrows the first key; `map.seek2(&42)`.
     pub fn seek2(&self, key: &B) -> Option<&A> {
-        Some(self.storage.slot(self.lookup2(key)?).key())
+        Some(self.storage.payload().key(self.lookup2(key)?))
     }
     /// Removes both indices through the first key; `map.unbind1(&1)`.
     pub fn unbind1(&mut self, key: &A) -> bool {
@@ -111,7 +111,7 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
         // Native UnBind1 hashes Key2 to reach the second chain. The slot already records that
         // bucket, so the call keeps only the native hasher sequence; a key changed through
         // interior mutability still unlinks safely (native behaviour is undefined there).
-        let _ = self.second_policy.hash(self.storage.slot(slot).value());
+        let _ = self.second_policy.hash(self.storage.payload().value(slot));
         drop(self.storage.remove(slot));
         true
     }
@@ -121,7 +121,7 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
             return false;
         };
         // Native UnBind2 hashes Key1 to reach the first chain (see `unbind1`).
-        let _ = self.first_policy.hash(self.storage.slot(slot).key());
+        let _ = self.first_policy.hash(self.storage.payload().key(slot));
         drop(self.storage.remove(slot));
         true
     }

@@ -11,9 +11,12 @@ mod bucket_view;
 mod entry;
 mod position;
 mod range;
-use crate::{ncollection::base_map::table_slot_count, standard::Failure};
+use crate::{
+    ncollection::base_map::{planned_bucket_count, table_slot_count},
+    standard::Failure,
+};
 pub use bucket_view::{HashBucketChain, HashBucketTable};
-pub(super) use entry::{ChainSlot, drop_in_order};
+pub(super) use entry::SlotPayload;
 pub(super) use position::ChainPosition;
 pub(super) use range::{ChainView, SlotRange, SlotRangeMut};
 
@@ -131,16 +134,64 @@ impl SlotChains {
     // Replaces the link that names `target` in `bucket` (its head or a predecessor's next).
     // Invariant: every linked slot is in the chain of its stored bucket.
     fn set_link(&mut self, bucket: usize, target: usize, value: SlotLink) {
-        let mut previous: SlotLink = None;
+        let place = self.place_of(bucket, target);
+        self.write(place, value);
+    }
+    // The link that names `target` in `bucket`: its head or a predecessor's next.
+    fn place_of(&self, bucket: usize, target: usize) -> LinkPlace {
+        let mut place = LinkPlace::Head(bucket);
         let mut link = self.head(bucket);
         while let Some(slot) = link.filter(|&slot| slot != target) {
-            previous = Some(slot);
+            place = LinkPlace::Next(slot);
             link = self.next(slot);
         }
-        match previous {
-            Some(slot) => self.links[slot].next = value,
-            None => *self.head_mut(bucket) = value,
+        place
+    }
+    fn write(&mut self, place: LinkPlace, value: SlotLink) {
+        match place {
+            LinkPlace::Head(bucket) => *self.head_mut(bucket) = value,
+            LinkPlace::Next(slot) => self.links[slot].next = value,
         }
+    }
+}
+
+/// Where a link to a slot is stored: a bucket head or the `next` of a predecessor slot.
+#[derive(Clone, Copy)]
+enum LinkPlace {
+    Head(usize),
+    Next(usize),
+}
+
+impl SlotChains {
+    /// Two linked slots trade their payloads (native `Swap` of two indices): each chain place
+    /// that named one now names the other, and the slots trade their successors. Writing the
+    /// places before trading the link records keeps adjacent slots of one chain correct.
+    pub(super) fn swap_slots(&mut self, first: usize, second: usize) {
+        let first_place = self.place_of(self.links[first].bucket, first);
+        let second_place = self.place_of(self.links[second].bucket, second);
+        self.write(first_place, Some(second));
+        self.write(second_place, Some(first));
+        self.links.swap(first, second);
+    }
+    /// Native `ReSize` of one table: grows `bucket_count` to the prime step for `extent` and
+    /// relinks every slot to `hash(slot) % count + 1`, hashing all slots in traversal order
+    /// before any link changes. A no-op keeps the table and calls no hasher.
+    pub(super) fn rehash(
+        &mut self,
+        extent: usize,
+        bucket_count: &mut usize,
+        hash: impl Fn(usize) -> usize,
+    ) {
+        let Some(count) = planned_bucket_count(extent, *bucket_count, self.is_allocated()) else {
+            return;
+        };
+        let routes: Vec<(usize, usize)> = self
+            .order()
+            .into_iter()
+            .map(|slot| (slot, hash(slot) % count + 1))
+            .collect();
+        self.rebuild(count, &routes);
+        *bucket_count = count;
     }
 }
 

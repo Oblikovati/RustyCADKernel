@@ -1,24 +1,30 @@
 //! Ranges borrow a map and lend its entries in native bucket/chain order.
-use super::{ChainPosition, ChainSlot, SlotChains};
+use super::{ChainPosition, SlotChains, SlotPayload};
 
-/// One bucket table together with the slots its chains index; the shared view of a map.
+/// One bucket table together with the payload its chains index; the shared view of a map.
 pub(in crate::ncollection) struct ChainView<'a, K, V> {
     chains: &'a SlotChains,
-    slots: &'a [ChainSlot<K, V>],
+    keys: &'a [K],
+    values: &'a [V],
 }
 
 impl<'a, K, V> ChainView<'a, K, V> {
     pub(in crate::ncollection) fn new(
         chains: &'a SlotChains,
-        slots: &'a [ChainSlot<K, V>],
+        payload: &'a SlotPayload<K, V>,
     ) -> Self {
-        Self { chains, slots }
+        Self {
+            chains,
+            keys: payload.keys(),
+            values: payload.values(),
+        }
     }
     pub(in crate::ncollection) fn chains(&self) -> &'a SlotChains {
         self.chains
     }
-    pub(in crate::ncollection) fn slot(&self, index: usize) -> &'a ChainSlot<K, V> {
-        &self.slots[index]
+    /// The key and value stored in `slot`.
+    pub(in crate::ncollection) fn entry(&self, slot: usize) -> (&'a K, &'a V) {
+        (&self.keys[slot], &self.values[slot])
     }
 }
 
@@ -47,8 +53,8 @@ impl<'a, K, V> SlotRange<'a, K, V> {
         Self { view, position }
     }
     /// The entry under the cursor; `None` when exhausted or unbound.
-    pub(in crate::ncollection) fn current(&self) -> Option<&'a ChainSlot<K, V>> {
-        Some(self.view?.slot(self.position.slot()?))
+    pub(in crate::ncollection) fn current(&self) -> Option<(&'a K, &'a V)> {
+        Some(self.view?.entry(self.position.slot()?))
     }
     /// Restarts on the bound map; an unbound cursor stays exhausted.
     pub(in crate::ncollection) fn reset(&mut self) {
@@ -63,7 +69,7 @@ impl<'a, K, V> SlotRange<'a, K, V> {
 }
 
 impl<'a, K, V> Iterator for SlotRange<'a, K, V> {
-    type Item = &'a ChainSlot<K, V>;
+    type Item = (&'a K, &'a V);
     fn next(&mut self) -> Option<Self::Item> {
         let entry = self.current()?;
         self.position.advance(self.view?.chains);
@@ -93,15 +99,19 @@ impl<K, V> Eq for SlotRange<'_, K, V> {}
 
 /// Exclusive traversal lending each value once; the order is fixed when the range starts.
 pub(in crate::ncollection) struct SlotRangeMut<'a, K, V> {
-    entries: Vec<Option<&'a mut ChainSlot<K, V>>>,
+    entries: Vec<Option<(&'a K, &'a mut V)>>,
     order: std::vec::IntoIter<usize>,
 }
 
 impl<'a, K, V> SlotRangeMut<'a, K, V> {
-    /// Lends `slots` in `order` (a permutation of their indices).
-    pub(in crate::ncollection) fn new(order: Vec<usize>, slots: &'a mut [ChainSlot<K, V>]) -> Self {
+    /// Lends the pairs of `payload` in `order` (a permutation of their slots).
+    pub(in crate::ncollection) fn new(
+        order: Vec<usize>,
+        payload: &'a mut SlotPayload<K, V>,
+    ) -> Self {
+        let (keys, values) = payload.split_mut();
         Self {
-            entries: slots.iter_mut().map(Some).collect(),
+            entries: keys.iter().zip(values.iter_mut()).map(Some).collect(),
             order: order.into_iter(),
         }
     }
@@ -111,6 +121,6 @@ impl<'a, K, V> Iterator for SlotRangeMut<'a, K, V> {
     type Item = (&'a K, &'a mut V);
     fn next(&mut self) -> Option<Self::Item> {
         let slot = self.order.next()?;
-        self.entries[slot].take().map(ChainSlot::key_value_mut)
+        self.entries[slot].take()
     }
 }

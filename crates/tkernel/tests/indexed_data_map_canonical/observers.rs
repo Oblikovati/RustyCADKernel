@@ -1,26 +1,14 @@
-use rustycad_tkernel::ncollection::{
-    BaseAllocator, HashPolicy, IndexedDataMap, IndexedMapObserver,
-};
+//! Copy and destructor order of IndexedDataMap against the native rows. The probe also printed,
+//! inside each callback, the map metadata and the arena's live allocation count; those are
+//! protected native state (plan D1 class B6) that slot storage does not model, so they are
+//! stripped from the native row and the remaining order and final state are compared.
+use rustycad_tkernel::ncollection::{BaseAllocator, HashPolicy, IndexedDataMap};
 use std::{cell::RefCell, fmt::Write, rc::Rc};
-struct Trace {
-    arena: BaseAllocator,
-    observer: Option<IndexedMapObserver>,
-    events: String,
-}
-impl Trace {
-    fn live(&self) -> i32 {
-        self.arena
-            .accumulating_chain()
-            .iter()
-            .map(|block| block.alloc_count)
-            .sum()
-    }
-}
 struct Item {
     kind: char,
     value: i32,
     tracked: bool,
-    trace: Rc<RefCell<Trace>>,
+    events: Rc<RefCell<String>>,
 }
 impl std::fmt::Debug for Item {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -29,37 +17,20 @@ impl std::fmt::Debug for Item {
 }
 impl Clone for Item {
     fn clone(&self) -> Self {
-        let mut trace = self.trace.borrow_mut();
-        let live = trace.live();
-        write!(trace.events, "C{}{live};", self.kind).unwrap();
+        write!(self.events.borrow_mut(), "C{};", self.kind).unwrap();
         Self {
             kind: self.kind,
             value: self.value,
             tracked: true,
-            trace: self.trace.clone(),
+            events: self.events.clone(),
         }
     }
 }
 impl Drop for Item {
     fn drop(&mut self) {
-        if !self.tracked {
-            return;
+        if self.tracked {
+            write!(self.events.borrow_mut(), "D{}{};", self.kind, self.value).unwrap();
         }
-        let mut trace = self.trace.borrow_mut();
-        let Some(observer) = &trace.observer else {
-            return;
-        };
-        let state = observer.snapshot();
-        let live = trace.live();
-        let slots = state.indices.iter().filter(|p| **p != 0).count();
-        let heads = state.buckets.iter().filter(|p| **p != 0).count();
-        let old = u8::from(state.allocator == trace.arena.identity().addr());
-        write!(
-            trace.events,
-            "D{}{},{},{slots},{heads},{live},{old};",
-            self.kind, self.value, state.size
-        )
-        .unwrap();
     }
 }
 struct Policy;
@@ -71,71 +42,74 @@ impl HashPolicy<Item> for Policy {
         a.value == b.value
     }
 }
-fn setup() -> (IndexedDataMap<Item, Item, Policy>, Rc<RefCell<Trace>>) {
-    let arena = BaseAllocator::accumulating(4096).unwrap();
-    let map = IndexedDataMap::with_allocator(Policy, 1, arena.clone());
-    let trace = Rc::new(RefCell::new(Trace {
-        arena,
-        observer: Some(map.observer()),
-        events: String::new(),
-    }));
-    (map, trace)
+type ItemMap = IndexedDataMap<Item, Item, Policy>;
+fn source_item(kind: char, value: i32, events: &Rc<RefCell<String>>) -> Item {
+    Item {
+        kind,
+        value,
+        tracked: false,
+        events: events.clone(),
+    }
 }
-fn fill(mode: usize, map: &mut IndexedDataMap<Item, Item, Policy>, trace: &Rc<RefCell<Trace>>) {
+/// The native row without its B6 fields: copy events lose the live count after the kind,
+/// destructor events keep kind and value, and of the trailing fields only `Extent()` and the
+/// allocator identity flag remain.
+fn native_order(label: &str) -> String {
+    let row = super::native_row_text(label);
+    let fields: Vec<&str> = row.split(' ').collect();
+    let events: String = fields[1]
+        .split_terminator(';')
+        .map(|event| event.split(',').next().unwrap())
+        .map(|event| match event.starts_with('C') {
+            true => {
+                event
+                    .trim_end_matches(|c: char| c.is_ascii_digit())
+                    .to_owned()
+                    + ";"
+            }
+            false => event.to_owned() + ";",
+        })
+        .collect();
+    match fields.len() {
+        3 => format!("{label} {events}"),
+        _ => format!("{label} {events} {} {}", fields[2], fields[4]),
+    }
+}
+fn fill(mode: usize, map: &mut ItemMap, events: &Rc<RefCell<String>>) {
     for value in 1..=3 {
-        let key = source_item('K', value, trace);
-        let item = source_item('V', value, trace);
-        trace.borrow_mut().events.clear();
+        let key = source_item('K', value, events);
+        let item = source_item('V', value, events);
+        events.borrow_mut().clear();
         map.add_ref(&key, &item);
-        let observed = trace.borrow();
         let label = format!("construct{mode}-{value}");
-        super::native_row(
-            &label,
-            &format!("{label} {} {}", observed.events, observed.live()),
-        );
+        assert_eq!(format!("{label} {}", events.borrow()), native_order(&label));
     }
 }
 fn observed(mode: usize) {
-    let (mut map, trace) = setup();
-    fill(mode, &mut map, &trace);
-    trace.borrow_mut().events.clear();
+    let arena = BaseAllocator::accumulating(4096).unwrap();
+    let mut map = ItemMap::with_allocator(Policy, 1, arena.clone());
+    let events = Rc::new(RefCell::new(String::new()));
+    fill(mode, &mut map, &events);
+    events.borrow_mut().clear();
     match mode {
         0 => map.remove_last().unwrap(),
         1 => map.clear(false),
         _ => map.clear_with_allocator(Some(BaseAllocator::fresh_common())),
     }
-    compare_observation(mode, &map, &trace.borrow());
-    trace.borrow_mut().observer = None;
+    let old = u8::from(map.allocator() == &arena);
+    let label = format!("observer{mode}");
+    let row = format!("{label} {} {} {old}", events.borrow(), map.len());
+    assert_eq!(row, native_order(&label));
 }
 #[test]
-fn native_remove_last_drops_key_then_value_before_free_and_decrement() {
+fn native_remove_last_drops_key_then_value() {
     observed(0);
 }
 #[test]
-fn native_clear_preserves_each_node_key_value_callback_phase() {
+fn native_clear_drops_each_key_then_value_in_bucket_order() {
     observed(1);
 }
 #[test]
 fn native_allocator_replacement_follows_all_key_value_drops() {
     observed(2);
-}
-
-fn source_item(kind: char, value: i32, trace: &Rc<RefCell<Trace>>) -> Item {
-    Item {
-        kind,
-        value,
-        tracked: false,
-        trace: trace.clone(),
-    }
-}
-fn compare_observation(mode: usize, map: &IndexedDataMap<Item, Item, Policy>, trace: &Trace) {
-    let old = u8::from(map.allocator().identity().addr() == trace.arena.identity().addr());
-    let label = format!("observer{mode}");
-    let row = format!(
-        "{label} {} {} {} {old}",
-        trace.events,
-        map.len(),
-        trace.live()
-    );
-    super::native_row(&label, &row);
 }

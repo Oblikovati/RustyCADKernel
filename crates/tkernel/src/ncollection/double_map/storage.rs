@@ -7,7 +7,7 @@ use crate::ncollection::{
     BaseAllocator, HashBucketTable,
     base_map::planned_bucket_count,
     map_payload::construct_value_then_key,
-    slot_chains::{ChainSlot, ChainView, SlotChains, SlotLink, drop_in_order},
+    slot_chains::{ChainView, SlotChains, SlotLink, SlotPayload},
 };
 
 /// Shared modulus, the two chain tables, the slots and the allocator identity of a DoubleMap.
@@ -16,7 +16,7 @@ pub(super) struct DoubleStorage<A, B> {
     bucket_count: usize,
     first: SlotChains,
     second: SlotChains,
-    slots: Vec<ChainSlot<A, B>>,
+    payload: SlotPayload<A, B>,
 }
 
 impl<A, B> DoubleStorage<A, B> {
@@ -26,11 +26,11 @@ impl<A, B> DoubleStorage<A, B> {
             bucket_count,
             first: SlotChains::default(),
             second: SlotChains::default(),
-            slots: Vec::new(),
+            payload: SlotPayload::default(),
         }
     }
     pub(super) fn len(&self) -> usize {
-        self.slots.len()
+        self.payload.len()
     }
     pub(super) fn bucket_count(&self) -> usize {
         self.bucket_count
@@ -38,12 +38,12 @@ impl<A, B> DoubleStorage<A, B> {
     pub(super) fn allocator(&self) -> &BaseAllocator {
         &self.allocator
     }
-    pub(super) fn slot(&self, index: usize) -> &ChainSlot<A, B> {
-        &self.slots[index]
+    pub(super) fn payload(&self) -> &SlotPayload<A, B> {
+        &self.payload
     }
     /// The first table with the slots: native iteration order and the public `Buckets()`.
     pub(super) fn view(&self) -> ChainView<'_, A, B> {
-        ChainView::new(&self.first, &self.slots)
+        ChainView::new(&self.first, &self.payload)
     }
     pub(super) fn buckets(&self) -> Option<HashBucketTable<'_, A, B>> {
         HashBucketTable::of(self.view())
@@ -55,12 +55,12 @@ impl<A, B> DoubleStorage<A, B> {
     /// The first `Key1` chain match in `bucket`.
     pub(super) fn find1(&self, bucket: usize, accept: impl Fn(&A) -> bool) -> SlotLink {
         self.first
-            .find(bucket, |slot| accept(self.slots[slot].key()))
+            .find(bucket, |slot| accept(self.payload.key(slot)))
     }
     /// The first `Key2` chain match in `bucket`, following `Next2()`.
     pub(super) fn find2(&self, bucket: usize, accept: impl Fn(&B) -> bool) -> SlotLink {
         self.second
-            .find(bucket, |slot| accept(self.slots[slot].value()))
+            .find(bucket, |slot| accept(self.payload.value(slot)))
     }
     /// Native `AreBound` second walk: the second table's head of `bucket`, then `Next()` links
     /// of the first chains (upstream quirk, reproduced exactly).
@@ -71,7 +71,7 @@ impl<A, B> DoubleStorage<A, B> {
     ) -> SlotLink {
         let mut link = self.second.head(bucket);
         while let Some(slot) = link {
-            if accept(self.slots[slot].value()) {
+            if accept(self.payload.value(slot)) {
                 return Some(slot);
             }
             link = self.first.next(slot);
@@ -94,8 +94,7 @@ impl<A, B> DoubleStorage<A, B> {
         };
         let (mut firsts, mut seconds) = (Vec::new(), Vec::new());
         for slot in self.first.order() {
-            let entry = &self.slots[slot];
-            let (one, two) = route(entry.key(), entry.value(), count);
+            let (one, two) = route(self.payload.key(slot), self.payload.value(slot), count);
             firsts.push((slot, one));
             seconds.push((slot, two));
         }
@@ -112,26 +111,26 @@ impl<A, B> DoubleStorage<A, B> {
         key2: impl FnOnce() -> B,
     ) {
         let (value, key) = construct_value_then_key(key2, key1);
-        self.slots.push(ChainSlot::new(key, value));
+        self.payload.push(key, value);
         self.first.push_front(first);
         self.second.push_front(second);
     }
     /// Unlinks a pair from both chains and returns it for the caller to drop afterwards, so the
     /// map is consistent when the destructor runs (native `UnBind` order).
-    pub(super) fn remove(&mut self, slot: usize) -> ChainSlot<A, B> {
+    pub(super) fn remove(&mut self, slot: usize) -> (A, B) {
         self.first.unlink(slot);
         self.second.unlink(slot);
         self.first.swap_remove(slot);
         self.second.swap_remove(slot);
-        self.slots.swap_remove(slot)
+        self.payload.swap_remove(slot)
     }
     /// Native `destroy`: drops pairs in first-table bucket/chain order; `release` frees both.
     pub(super) fn clear(&mut self, release: bool) {
         let order = self.first.order();
-        let slots = std::mem::take(&mut self.slots);
+        let payload = std::mem::take(&mut self.payload);
         self.first.reset(release);
         self.second.reset(release);
-        drop_in_order(slots, order);
+        payload.drop_in_order(order);
     }
     /// Native `Clear(theAllocator)`: always releases both tables, even for the same allocator;
     /// `None` (a null handle) selects the common allocator.

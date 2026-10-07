@@ -24,7 +24,7 @@ impl<K, V> ChainedSlots<K, V> {
         let bucket = hasher.hash(key) % self.bucket_count + 1;
         let slot = self
             .chains
-            .find(bucket, |slot| hasher.equal(self.slots[slot].key(), key));
+            .find(bucket, |slot| hasher.equal(self.payload.key(slot), key));
         (bucket, slot)
     }
 }

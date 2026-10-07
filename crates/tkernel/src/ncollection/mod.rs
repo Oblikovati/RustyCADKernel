@@ -121,11 +121,7 @@ pub use map::{Map, MapIter, MapIterator};
 pub mod map_algo;
 
 mod indexed_map;
-mod indexed_storage;
-pub use indexed_map::{
-    IndexedMap, IndexedMapItems, IndexedMapIter, IndexedMapIterator, IndexedMapObservation,
-    IndexedMapObserver,
-};
+pub use indexed_map::{IndexedMap, IndexedMapItems, IndexedMapIter, IndexedMapIterator};
 
 mod indexed_data_map;
 pub use indexed_data_map::{
@@ -219,15 +215,9 @@ mod map_node;
 mod node_owner;
 pub use map_node::{MapNode, MapNodeOwner};
 
-mod indexed_data_map_node;
-mod indexed_map_node;
-mod indexed_node_owner;
-pub use indexed_data_map_node::{IndexedDataMapNode, IndexedDataMapNodeOwner};
-pub use indexed_map_node::{IndexedMapNode, IndexedMapNodeOwner};
 mod owned_bucket_chains;
 
 mod map_payload;
-mod map_topology;
 
 mod ordered_data_map_node;
 mod ordered_map_node;

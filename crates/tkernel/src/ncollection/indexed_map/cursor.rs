@@ -31,7 +31,7 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
     /// ```
     pub fn try_emplaced(&mut self, key: K) -> &K {
         let index = self.place(key, false);
-        self.storage.key(index)
+        self.storage.key_at(index)
     }
 
     /// `Contained`: the stored key equivalent to `key`, if any.
@@ -44,7 +44,7 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
     /// ```
     pub fn contained(&self, key: &K) -> Option<&K> {
         let index = self.find_index(key).checked_sub(1)?;
-        Some(self.storage.key(index + 1))
+        Some(self.storage.key_at(index + 1))
     }
 
     /// `Clear(const Handle(NCollection_BaseAllocator)&)`: clears, releasing storage only when

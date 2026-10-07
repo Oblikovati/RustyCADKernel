@@ -71,8 +71,7 @@ impl<'a, K, V> Iterator for HashBucketChain<'a, K, V> {
     fn next(&mut self) -> Option<Self::Item> {
         let slot = self.link?;
         self.link = self.view.chains().next(slot);
-        let entry = self.view.slot(slot);
-        Some((entry.key(), entry.value()))
+        Some(self.view.entry(slot))
     }
 }
 

@@ -1,4 +1,4 @@
-use super::{Debug, HashPolicy, IndexedDataMap, IndexedDataMapNode};
+use super::{Debug, HashPolicy, IndexedDataMap};
 impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Inserts without replacing existing values, returning the index; `map.add(1,42)`.
     pub fn add(&mut self, key: K, value: V) -> usize {
@@ -22,7 +22,7 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// ```
     pub fn add_ref(&mut self, key: &K, value: &V) -> usize {
         self.prepare_borrowed_add();
-        let (index, bucket) = self.storage.lookup(key, &self.hasher);
+        let (index, bucket) = self.storage.find_index(key, &self.hasher);
         if index != 0 {
             return index;
         }
@@ -34,9 +34,8 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
         }
     }
     pub(super) fn insert_borrowed(&mut self, key: &K, value: &V, bucket: usize) -> usize {
-        self.storage.append(bucket, |index, next| {
-            IndexedDataMapNode::construct_parts(index, next, || key.clone(), || value.clone())
-        })
+        self.storage
+            .append(bucket, || key.clone(), || value.clone())
     }
 }
 impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
@@ -45,15 +44,15 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
         let old_len = self.len();
         self.place(key, || value, true) > old_len
     }
-    /// Inserts or replaces and returns stable value storage; `*map.bound(1,42)=7`.
+    /// Inserts or replaces and borrows the stored value; `*map.bound(1,42)=7`.
     pub fn bound(&mut self, key: K, value: V) -> &mut V {
         let index = self.place(key, || value, true);
-        self.storage.value_mut(index)
+        self.storage.value_at_mut(index)
     }
     /// Returns an existing value or inserts without replacement; `map.try_bound(1,42)`.
     pub fn try_bound(&mut self, key: K, value: V) -> &mut V {
         let index = self.place(key, || value, false);
-        self.storage.value_mut(index)
+        self.storage.value_at_mut(index)
     }
     /// Constructs a replacement value in place, returning the index; `map.emplace(1,||42)`.
     pub fn emplace(&mut self, key: K, construct: impl FnOnce() -> V) -> usize {
@@ -62,7 +61,7 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Constructs and returns a replacement value; `map.emplaced(1,||42)`.
     pub fn emplaced(&mut self, key: K, construct: impl FnOnce() -> V) -> &mut V {
         let index = self.place(key, construct, true);
-        self.storage.value_mut(index)
+        self.storage.value_at_mut(index)
     }
     /// Constructs only for absent keys, returning the index; `map.try_emplace(1,||42)`.
     pub fn try_emplace(&mut self, key: K, construct: impl FnOnce() -> V) -> usize {
@@ -71,21 +70,19 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Borrows an existing value or constructs it lazily; `map.try_emplaced(1,||42)`.
     pub fn try_emplaced(&mut self, key: K, construct: impl FnOnce() -> V) -> &mut V {
         let index = self.place(key, construct, false);
-        self.storage.value_mut(index)
+        self.storage.value_at_mut(index)
     }
     pub(super) fn place(&mut self, key: K, construct: impl FnOnce() -> V, replace: bool) -> usize {
         if self.is_empty() || self.len() > self.bucket_count() {
             self.resize(self.len());
         }
-        let (index, bucket) = self.storage.lookup(&key, &self.hasher);
+        let (index, bucket) = self.storage.find_index(&key, &self.hasher);
         if index != 0 {
             if replace {
-                *self.storage.value_mut(index) = construct();
+                *self.storage.value_at_mut(index) = construct();
             }
             return index;
         }
-        self.storage.append(bucket, |index, next| {
-            IndexedDataMapNode::construct(key, index, next, construct)
-        })
+        self.storage.append(bucket, || key, construct)
     }
 }

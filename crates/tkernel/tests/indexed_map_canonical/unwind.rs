@@ -39,36 +39,32 @@ fn owned_add_hashes_once_swap_never_hashes_empty_lookup_never_hashes() {
     assert_eq!(policy.calls.get(), 2);
 }
 #[test]
-fn resize_hash_panic_restores_links_and_live_nodes() {
+fn resize_hash_panic_keeps_the_table_and_every_index() {
     let policy = policy();
     let mut map = IndexedMap::with_hasher(policy.clone(), 1);
     for key in 1..=3 {
         map.add(key);
     }
-    let before = map.observer().snapshot();
+    let before = map.buckets().unwrap().identity();
     policy.reject.set(policy.calls.get() + 2);
     assert!(caught(|| map.resize(200)));
     policy.reject.set(usize::MAX);
-    assert_eq!(map.observer().snapshot().bucket_table, before.bucket_table);
+    assert_eq!(map.buckets().unwrap().identity(), before);
     for key in 1..=3 {
         assert_eq!(map.find_index(&key), key as usize);
     }
-    assert_eq!(
-        &map.observer().snapshot().indices[..3],
-        &before.indices[..3]
-    );
 }
 #[test]
-fn remove_last_hash_panic_restores_cleared_slot() {
+fn remove_last_hash_panic_leaves_the_map_unchanged() {
     let policy = policy();
     let mut map = IndexedMap::with_hasher(policy.clone(), 1);
     map.add(7);
-    let before = map.observer().snapshot();
     policy.reject.set(policy.calls.get() + 1);
     assert!(caught(|| {
         map.remove_last().unwrap();
     }));
-    assert_eq!(map.observer().snapshot(), before);
+    policy.reject.set(usize::MAX);
+    assert_eq!((map.len(), map.find_index(&7)), (1, 1));
 }
 fn send_sync<T: Send + Sync>() {}
 fn unpin<T: Unpin>() {}
@@ -97,12 +93,9 @@ fn owning_and_borrowed_auto_traits_preserve_payload_bounds() {
     assert_eq!((*first, *second), (7, 8));
 }
 #[test]
-fn native_constructor_adapter_resizes_before_constructing_key() {
+fn native_constructor_adapter_adds_once_then_keeps_the_key() {
     let mut map = IndexedMap::<i32>::default();
-    let observer = map.observer();
-    map.emplace_with(|| {
-        assert_ne!(observer.snapshot().bucket_table, 0);
-        7
-    });
+    assert_eq!(map.emplace_with(|| 7), 1);
+    assert!(map.buckets().is_some());
     assert_eq!(map.try_emplace_with(|| 7), 1);
 }

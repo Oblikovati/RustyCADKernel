@@ -84116,7 +84116,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::IndexedMap::add_ref",
       "status": "partial",
-      "notes": "Manual NCollection member mapping. add_ref searches and hashes the borrowed key before allocation and Clone on a miss; a hit returns the existing index without key cloning or node allocation. Rust allocates node storage before Clone and releases it if Clone panics. Bucket-array allocator callbacks, constructing directly into the native key-subobject address, and arbitrary C++ subobject/destructor behavior remain partial."
+      "notes": "Manual NCollection member mapping. add_ref searches and hashes the borrowed key before allocation and Clone on a miss; a hit returns the existing index without key cloning or node allocation. On a miss Rust clones the key into a new slot; a Clone panic publishes nothing. The native per-node allocator event needs an injected C++ allocator subclass (plan D1 B6). Bucket-array allocator callbacks, constructing directly into the native key-subobject address, and arbitrary C++ subobject/destructor behavior remain partial."
     },
     {
       "upstream_id": "NCollection_IndexedMap::Add(TheKeyType&&)",
@@ -378693,57 +378693,57 @@
       "upstream_id": "NCollection_IndexedMap::IndexedMapNode",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::IndexedMapNode",
-      "status": "implemented",
-      "notes": "Protected node class of the indexed map is the public node type IndexedMapNode<K>."
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): IndexedMapNode is a protected nested class of NCollection_IndexedMap, its bucket-chain node; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps its keys in a private slot vector in index order whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (key, index, chain order) is reachable through find_key/find_index, buckets() and the cursor (IndexedMapIterator)."
     },
     {
       "upstream_id": "NCollection_IndexedMap::IndexedMapNode::IndexedMapNode(const TheKeyType&,const int,NCollection_ListNode*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::IndexedMapNode::from_ref",
-      "status": "implemented",
-      "notes": "Copies the key, stores the one-based index and the bucket successor."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): member of the protected nested node class NCollection_IndexedMap::IndexedMapNode; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps its keys in a private slot vector in index order whose bucket chains are slot indices (safe storage, 2026-10-07); key, index and chain order are reachable through find_key/find_index, buckets() and IndexedMapIterator, and entries are dropped by the map instead of delNode."
     },
     {
       "upstream_id": "NCollection_IndexedMap::IndexedMapNode::IndexedMapNode(TheKeyType&&,const int,NCollection_ListNode*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::IndexedMapNode::new",
-      "status": "implemented",
-      "notes": "Moves the key, stores the one-based index and the bucket successor."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): member of the protected nested node class NCollection_IndexedMap::IndexedMapNode; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps its keys in a private slot vector in index order whose bucket chains are slot indices (safe storage, 2026-10-07); key, index and chain order are reachable through find_key/find_index, buckets() and IndexedMapIterator, and entries are dropped by the map instead of delNode."
     },
     {
       "upstream_id": "NCollection_IndexedMap::IndexedMapNode::IndexedMapNode(std::in_place_t,const int,NCollection_ListNode*,Args&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::IndexedMapNode::construct",
-      "status": "implemented",
-      "notes": "In-place key construction takes the constructor as a closure, run after the links are set."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): member of the protected nested node class NCollection_IndexedMap::IndexedMapNode; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps its keys in a private slot vector in index order whose bucket chains are slot indices (safe storage, 2026-10-07); key, index and chain order are reachable through find_key/find_index, buckets() and IndexedMapIterator, and entries are dropped by the map instead of delNode."
     },
     {
       "upstream_id": "NCollection_IndexedMap::IndexedMapNode::Key1() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::IndexedMapNode::key1",
-      "status": "implemented",
-      "notes": "Mutable key reference of the node."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): member of the protected nested node class NCollection_IndexedMap::IndexedMapNode; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps its keys in a private slot vector in index order whose bucket chains are slot indices (safe storage, 2026-10-07); key, index and chain order are reachable through find_key/find_index, buckets() and IndexedMapIterator, and entries are dropped by the map instead of delNode."
     },
     {
       "upstream_id": "NCollection_IndexedMap::IndexedMapNode::Index() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::IndexedMapNode::index",
-      "status": "implemented",
-      "notes": "Mutable one-based index reference of the node."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): member of the protected nested node class NCollection_IndexedMap::IndexedMapNode; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps its keys in a private slot vector in index order whose bucket chains are slot indices (safe storage, 2026-10-07); key, index and chain order are reachable through find_key/find_index, buckets() and IndexedMapIterator, and entries are dropped by the map instead of delNode."
     },
     {
       "upstream_id": "NCollection_IndexedMap::IndexedMapNode::delNode(NCollection_ListNode*,occ::handle<NCollection_BaseAllocator>&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::IndexedMapNode::del_node",
-      "status": "implemented",
-      "notes": "Unsafe: destroys the key and frees the node through the allocator returned by into_raw."
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): member of the protected nested node class NCollection_IndexedMap::IndexedMapNode; Rust has no subclassing, so a Rust caller cannot reach it. The Rust map keeps its keys in a private slot vector in index order whose bucket chains are slot indices (safe storage, 2026-10-07); key, index and chain order are reachable through find_key/find_index, buckets() and IndexedMapIterator, and entries are dropped by the map instead of delNode."
     },
     {
       "upstream_id": "NCollection_IndexedMap",

@@ -71,12 +71,12 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// Borrows a bound value or reports Standard_NoSuchObject; `map.find(&1)?`.
     pub fn find(&self, key: &K) -> Result<&V, Failure> {
         let (_, slot) = self.lookup(key).ok_or_else(|| missing_key(key))?;
-        Ok(self.storage.slot(slot).value())
+        Ok(self.storage.payload().value(slot))
     }
     /// Borrows a bound value exclusively; `*map.change_find(&1)?=42`.
     pub fn change_find(&mut self, key: &K) -> Result<&mut V, Failure> {
         let (_, slot) = self.lookup(key).ok_or_else(|| missing_key(key))?;
-        Ok(self.storage.slot_mut(slot).key_value_mut().1)
+        Ok(self.storage.payload_mut().value_mut(slot))
     }
     /// Removes a binding, returning whether it existed; `map.unbind(&1)`.
     pub fn unbind(&mut self, key: &K) -> bool {
@@ -125,7 +125,7 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     }
     // Native emplaceImpl on a hit: assign a newly constructed value unless it is a Try variant.
     fn update_slot(&mut self, slot: usize, construct: impl FnOnce() -> V, replace: bool) -> &mut V {
-        let value = self.storage.slot_mut(slot).key_value_mut().1;
+        let value = self.storage.payload_mut().value_mut(slot);
         if replace {
             *value = construct();
         }
@@ -139,7 +139,7 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     ) -> (bool, &mut V) {
         // Native placement new constructs the value base, then its key.
         let slot = self.storage.insert(bucket, construct_key, construct_value);
-        (true, self.storage.slot_mut(slot).key_value_mut().1)
+        (true, self.storage.payload_mut().value_mut(slot))
     }
 }
 impl<K: Debug, V, H: HashPolicy<K> + Default> Default for DataMap<K, V, H> {

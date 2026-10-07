@@ -1,9 +1,6 @@
 //! Shared ranges follow the first-key chains in native bucket order.
 use super::{Debug, DoubleMap, DoubleMapItems, DoubleMapValues, HashPolicy};
-use crate::ncollection::{
-    HashBucketTable,
-    slot_chains::{ChainSlot, SlotRange},
-};
+use crate::ncollection::{HashBucketTable, slot_chains::SlotRange};
 impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H1, H2> {
     /// Borrows both keys in first-key bucket order; `for (first,second) in map.items() {}`.
     pub fn items(&self) -> DoubleMapItems<'_, A, B> {
@@ -42,7 +39,7 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
 }
 
 impl<'a, A, B> DoubleMapItems<'a, A, B> {
-    pub(super) fn current(&self) -> Option<&'a ChainSlot<A, B>> {
+    pub(super) fn current(&self) -> Option<(&'a A, &'a B)> {
         self.entries.current()
     }
     pub(super) fn reset(&mut self) {
@@ -52,8 +49,7 @@ impl<'a, A, B> DoubleMapItems<'a, A, B> {
 impl<'a, A, B> Iterator for DoubleMapItems<'a, A, B> {
     type Item = (&'a A, &'a B);
     fn next(&mut self) -> Option<Self::Item> {
-        let entry = self.entries.next()?;
-        Some((entry.key(), entry.value()))
+        self.entries.next()
     }
 }
 impl<A, B> Clone for DoubleMapItems<'_, A, B> {

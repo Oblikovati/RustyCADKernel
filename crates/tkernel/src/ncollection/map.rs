@@ -62,7 +62,7 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     pub fn contained(&self, key: &K) -> Option<&K> {
         self.storage
             .lookup(key, &self.hasher)
-            .map(|(_, slot)| self.storage.slot(slot).key())
+            .map(|(_, slot)| self.storage.payload().key(slot))
     }
     /// Adds a key, preserving the existing value on duplicates; `map.add(42)`.
     pub fn add(&mut self, key: K) -> bool {
@@ -156,7 +156,7 @@ impl<'a, K: Debug, H: HashPolicy<K>> IntoIterator for &'a Map<K, H> {
 impl<'a, K> Iterator for MapIter<'a, K> {
     type Item = &'a K;
     fn next(&mut self) -> Option<Self::Item> {
-        self.entries.next().map(|entry| entry.key())
+        self.entries.next().map(|(key, _)| key)
     }
 }
 impl<K> Clone for MapIter<'_, K> {

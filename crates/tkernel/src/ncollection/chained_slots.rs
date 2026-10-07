@@ -10,8 +10,9 @@
 //! allocator identity.
 use super::{
     BaseAllocator, BaseMap, HashBucketTable,
-    slot_chains::{ChainSlot, ChainView, SlotChains, SlotRangeMut},
+    slot_chains::{ChainView, SlotChains, SlotPayload, SlotRangeMut},
 };
+mod indexed;
 mod lookup;
 mod resize;
 mod topology;
@@ -21,7 +22,7 @@ pub(super) struct ChainedSlots<K, V> {
     allocator: BaseAllocator,
     bucket_count: usize,
     chains: SlotChains,
-    slots: Vec<ChainSlot<K, V>>,
+    payload: SlotPayload<K, V>,
 }
 
 impl<K, V> ChainedSlots<K, V> {
@@ -31,14 +32,15 @@ impl<K, V> ChainedSlots<K, V> {
             allocator,
             bucket_count,
             chains: SlotChains::default(),
-            slots: Vec::new(),
+            payload: SlotPayload::default(),
         }
     }
-    pub(super) fn slot(&self, index: usize) -> &ChainSlot<K, V> {
-        &self.slots[index]
+    /// The keys and values of every slot.
+    pub(super) fn payload(&self) -> &SlotPayload<K, V> {
+        &self.payload
     }
-    pub(super) fn slot_mut(&mut self, index: usize) -> &mut ChainSlot<K, V> {
-        &mut self.slots[index]
+    pub(super) fn payload_mut(&mut self) -> &mut SlotPayload<K, V> {
+        &mut self.payload
     }
     /// The bucket chains, for cursors that follow native traversal order.
     pub(super) fn chains(&self) -> &SlotChains {
@@ -46,11 +48,11 @@ impl<K, V> ChainedSlots<K, V> {
     }
     /// The table and slots together, for shared ranges.
     pub(super) fn view(&self) -> ChainView<'_, K, V> {
-        ChainView::new(&self.chains, &self.slots)
+        ChainView::new(&self.chains, &self.payload)
     }
     /// Exclusive traversal in native order, lending each value once.
     pub(super) fn range_mut(&mut self) -> SlotRangeMut<'_, K, V> {
-        SlotRangeMut::new(self.chains.order(), &mut self.slots)
+        SlotRangeMut::new(self.chains.order(), &mut self.payload)
     }
     /// The allocated table, or `None` where native `Buckets()` returns null.
     pub(super) fn buckets(&self) -> Option<HashBucketTable<'_, K, V>> {
@@ -72,7 +74,7 @@ impl<K, V> BaseMap for ChainedSlots<K, V> {
         self.bucket_count
     }
     fn size(&self) -> usize {
-        self.slots.len()
+        self.payload.len()
     }
     fn allocator(&self) -> &BaseAllocator {
         &self.allocator
