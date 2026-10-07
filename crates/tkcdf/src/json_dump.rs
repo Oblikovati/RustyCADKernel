@@ -32,6 +32,15 @@ pub fn field_integer(stream: &mut DumpStream, field: &str, value: i32) -> io::Re
     stream.write_fragment(format!("\"{name}\": {value}").as_bytes())
 }
 
+/// `OCCT_DUMP_FIELD_VALUE_NUMERICAL` of a `uint8_t`, which a C++ stream writes as the
+/// character of that code; `field_byte_char(&mut stream, "aValue", b'A')?`.
+pub fn field_byte_char(stream: &mut DumpStream, field: &str, value: u8) -> io::Result<()> {
+    let name = key(field)?;
+    add_values_separator(stream)?;
+    stream.write_fragment(format!("\"{name}\": ").as_bytes())?;
+    stream.write_fragment(&[value])
+}
+
 /// `OCCT_DUMP_FIELD_VALUE_NUMERICAL` of a double, with the default stream precision;
 /// `field_real(&mut stream, "myValue", 1.5)?`.
 pub fn field_real(stream: &mut DumpStream, field: &str, value: f64) -> io::Result<()> {

@@ -130,3 +130,26 @@ a null handle would give natively.
 - **MetaDataLookUpTable** returns a reference to the application's map natively. The Rust
   member returns the write guard of the map; a caller must drop it before it calls back
   into the application.
+
+## 7. TDataStd attributes over collections
+
+- **Shared arrays.** `occ::handle<NCollection_HArray1<T>>` is `Handle<HArray1<T>>`: the
+  attribute and every caller of `Array()` share one storage, as natively. A null native
+  handle is a null `Handle`; the inline accessors (`Lower`, `Upper`, `Length`, `Value`)
+  answer the native neutral values for it (`RealFirst()` for `TDataStd_RealArray::Value`,
+  `-1` for `TDataStd_ByteArray::Upper`).
+- **One array core.** `TDataStd_IntegerArray`, `RealArray`, `ExtStringArray` and
+  `ByteArray` repeat the same code natively. Their state is one `ArrayState<T>` (array,
+  delta flag, user ID) and their members call the generic functions of
+  `tdata_std/array_core.rs`; each class keeps its own struct, RTTI name, GUID and the few
+  native differences, which are explicit parameters (the null guard of
+  `TDataStd_RealArray::ChangeArray`, the order of `SetID` and `Init` in `SetAttr`, the
+  `Dump` text).
+- **Array deltas.** `TDataStd_DeltaOnModificationOf{Int,Real,Byte,ExtString}Array` are
+  four structs over one generic `ArrayDeltaState<T>`: the constructor records the changed
+  indexes and old values and then drops the backup's array (`RemoveArray`), and `Apply`
+  writes them back, as natively.
+- **Unchecked indexes.** `NCollection_Array1::Value` does not check its index in a release
+  build. The port checks it and returns `Standard_OutOfRange`.
+- **Native null dereferences** (`ChangeArray` with a null array, `ChangeArray` of an
+  attribute with no array whose bounds match) are `Standard_NullObject` errors.
