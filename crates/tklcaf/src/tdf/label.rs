@@ -33,16 +33,21 @@ impl TdfLabel {
     pub(crate) fn from_node(node: Option<Arc<TdfLabelNode>>) -> Self {
         Self { node }
     }
-    pub(crate) fn node(&self) -> Option<&Arc<TdfLabelNode>> {
+    /// The designated node (the native private `myLabelNode`), `None` for a null label.
+    pub fn node(&self) -> Option<&Arc<TdfLabelNode>> {
         self.node.as_ref()
     }
     /// The node, or the native `Standard_NullObject` with `message`.
     pub(crate) fn live_node(&self, message: &str) -> Result<&Arc<TdfLabelNode>, Failure> {
-        self.node.as_ref().ok_or_else(|| exceptions::null_object(message))
+        self.node
+            .as_ref()
+            .ok_or_else(|| exceptions::null_object(message))
     }
     /// The node address: the native `myLabelNode` pointer value.
     pub(crate) fn address(&self) -> usize {
-        self.node.as_ref().map_or(0, |node| Arc::as_ptr(node) as usize)
+        self.node
+            .as_ref()
+            .map_or(0, |node| Arc::as_ptr(node) as usize)
     }
     /// `Nullify`; `label.nullify()`.
     pub fn nullify(&mut self) {
@@ -51,7 +56,10 @@ impl TdfLabel {
     /// `Data`: the owning framework; null for a null or detached label (ocaf-design.md
     /// section 3).
     pub fn data(&self) -> Handle<TdfData> {
-        self.node.as_ref().map(|node| node.state.read().data.upgrade()).unwrap_or_default()
+        self.node
+            .as_ref()
+            .map(|node| node.state.read().data.upgrade())
+            .unwrap_or_default()
     }
     /// `Tag`; 0 for a null label (a crash natively).
     pub fn tag(&self) -> i32 {
@@ -100,11 +108,15 @@ impl TdfLabel {
     }
     /// `MayBeModified`; false for a null label.
     pub fn may_be_modified(&self) -> bool {
-        self.node.as_ref().is_some_and(|node| node.may_be_modified())
+        self.node
+            .as_ref()
+            .is_some_and(|node| node.may_be_modified())
     }
     /// `AttributesModified`; false for a null label.
     pub fn attributes_modified(&self) -> bool {
-        self.node.as_ref().is_some_and(|node| node.attributes_modified())
+        self.node
+            .as_ref()
+            .is_some_and(|node| node.attributes_modified())
     }
     /// `Depth`: 0 for a root; `Standard_NullObject` for a null label.
     pub fn depth(&self) -> Result<i32, Failure> {
@@ -132,7 +144,9 @@ impl TdfLabel {
     }
     /// `HasChild`; false for a null label.
     pub fn has_child(&self) -> bool {
-        self.node.as_ref().is_some_and(|node| node.first_child().is_some())
+        self.node
+            .as_ref()
+            .is_some_and(|node| node.first_child().is_some())
     }
     /// `NbChildren`: the direct children; `Standard_NullObject` for a null label.
     pub fn nb_children(&self) -> Result<i32, Failure> {
@@ -156,7 +170,9 @@ impl TdfLabel {
                 node.depth() + 1
             )));
         }
-        Ok(Self::from_node(super::label_children::find_or_add_child(node, tag, create)))
+        Ok(Self::from_node(super::label_children::find_or_add_child(
+            node, tag, create,
+        )))
     }
     /// `NewChild`: a child with the next tag of the label's `TDF_TagSource`.
     pub fn new_child(&self) -> Result<TdfLabel, Failure> {
@@ -202,6 +218,10 @@ impl std::fmt::Debug for TdfLabel {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut entry = rustycad_tkernel::tcollection::AsciiString::default();
         super::TdfTool::entry(self, &mut entry);
-        write!(formatter, "TdfLabel({})", String::from_utf8_lossy(entry.as_bytes()))
+        write!(
+            formatter,
+            "TdfLabel({})",
+            String::from_utf8_lossy(entry.as_bytes())
+        )
     }
 }

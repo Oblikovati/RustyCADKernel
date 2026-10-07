@@ -32,7 +32,7 @@ impl TdfAttributeIterator {
         Ok(iterator)
     }
     /// `TDF_AttributeIterator(aLabelNode, withoutForgotten)`.
-    pub(crate) fn from_node(node: &Arc<TdfLabelNode>, without_forgotten: bool) -> Self {
+    pub fn from_node(node: &Arc<TdfLabelNode>, without_forgotten: bool) -> Self {
         let mut iterator = Self {
             value: Handle::default(),
             without_forgotten,
@@ -68,7 +68,10 @@ impl TdfAttributeIterator {
     fn go_to_next(&mut self, attribute: Handle<dyn TdfAttribute>) {
         let mut current = attribute;
         while self.without_forgotten && current.get().is_some_and(|value| value.is_forgotten()) {
-            current = current.get().map(|value| value.attribute_base().next()).unwrap_or_default();
+            current = current
+                .get()
+                .map(|value| value.attribute_base().next())
+                .unwrap_or_default();
         }
         self.value = current;
     }
@@ -128,7 +131,10 @@ impl TdfChildIterator {
     /// The native `ChildIterator_UpToBrother` macro.
     fn up_to_brother(&mut self) {
         let mut node = self.node.clone();
-        while let Some(current) = node.clone().filter(|n| n.depth() > self.first_level && n.brother().is_none()) {
+        while let Some(current) = node
+            .clone()
+            .filter(|n| n.depth() > self.first_level && n.brother().is_none())
+        {
             node = current.father();
         }
         self.node = node
@@ -156,7 +162,12 @@ impl TdfChildIdIterator {
         Ok(iterator)
     }
     /// `Initialize(aLabel, anID, allLevels)`.
-    pub fn initialize(&mut self, label: &TdfLabel, id: &Guid, all_levels: bool) -> Result<(), Failure> {
+    pub fn initialize(
+        &mut self,
+        label: &TdfLabel,
+        id: &Guid,
+        all_levels: bool,
+    ) -> Result<(), Failure> {
         self.id = *id;
         self.iterator.initialize(label, all_levels)?;
         self.attribute = Handle::default();
@@ -167,6 +178,7 @@ impl TdfChildIdIterator {
         self.attribute.is_some()
     }
     /// `Next`; `iterator.next()?`.
+    #[allow(clippy::should_implement_trait)] // the native name Next, which can fail here
     pub fn next(&mut self) -> Result<(), Failure> {
         self.attribute = Handle::default();
         if !self.iterator.more() {
@@ -190,7 +202,12 @@ impl TdfChildIdIterator {
     }
     /// The native `ChildIDIterator_FindNext` loop with the given step.
     fn find_next(&mut self, step: fn(&mut TdfChildIterator)) -> Result<(), Failure> {
-        while self.iterator.more() && !self.iterator.value().find_attribute(&self.id, &mut self.attribute)? {
+        while self.iterator.more()
+            && !self
+                .iterator
+                .value()
+                .find_attribute(&self.id, &mut self.attribute)?
+        {
             step(&mut self.iterator);
         }
         Ok(())

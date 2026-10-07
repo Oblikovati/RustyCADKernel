@@ -1,0 +1,13 @@
+[package]
+name = "rustycad-tklcaf"
+description = "OCCT TKLCAF toolkit: the OCAF data framework (TDF labels and attributes, TDataStd, TFunction, TDocStd)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkcdf = { path = "../tkcdf" }

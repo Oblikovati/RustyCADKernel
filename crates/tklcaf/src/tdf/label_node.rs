@@ -2,18 +2,18 @@
 // at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `TDF_LabelNode`: one node of the label tree (ocaf-design.md section 3).
-use super::{TdfAttribute, data::DataCore, TdfData};
+use super::{TdfAttribute, TdfData, data::DataCore};
 use rustycad_tkernel::standard::{Handle, SharedState, WeakHandle};
 use std::sync::{Arc, Weak};
 
 /// `TDF_LabelNodeImportMsk` (the sign bit).
-pub(crate) const IMPORT_MASK: i32 = i32::MIN;
+pub const IMPORT_MASK: i32 = i32::MIN;
 /// `TDF_LabelNodeAttModMsk`.
-pub(crate) const ATTRIBUTES_MODIFIED_MASK: i32 = 0x4000_0000;
+pub const ATTRIBUTES_MODIFIED_MASK: i32 = 0x4000_0000;
 /// `TDF_LabelNodeMayModMsk`.
-pub(crate) const MAY_BE_MODIFIED_MASK: i32 = 0x2000_0000;
+pub const MAY_BE_MODIFIED_MASK: i32 = 0x2000_0000;
 /// `TDF_LabelNodeFlagsMsk`: the three flags; the other bits hold the depth.
-pub(crate) const FLAGS_MASK: i32 = IMPORT_MASK | ATTRIBUTES_MODIFIED_MASK | MAY_BE_MODIFIED_MASK;
+pub const FLAGS_MASK: i32 = IMPORT_MASK | ATTRIBUTES_MODIFIED_MASK | MAY_BE_MODIFIED_MASK;
 
 /// The fields of `TDF_LabelNode`. The father and the data are raw pointers natively; the
 /// children are owned through the first-child/brother chain.
@@ -33,9 +33,10 @@ pub(crate) struct NodeState {
     pub(crate) core: Weak<DataCore>,
 }
 
-/// `TDF_LabelNode`, shared by the labels that designate it.
+/// `TDF_LabelNode`, shared by the labels that designate it (reached through
+/// `TdfLabel::node`); the native pointers are `Arc`s and `Weak`s.
 #[derive(Default)]
-pub(crate) struct TdfLabelNode {
+pub struct TdfLabelNode {
     pub(crate) state: SharedState<NodeState>,
 }
 
@@ -55,26 +56,37 @@ impl TdfLabelNode {
             }),
         })
     }
-    pub(crate) fn father(&self) -> Option<Arc<Self>> {
+    /// `Father`: the father node, `None` for a root.
+    pub fn father(&self) -> Option<Arc<Self>> {
         self.state.read().father.as_ref().and_then(Weak::upgrade)
     }
-    pub(crate) fn is_root(&self) -> bool {
+    /// `IsRoot`: no father.
+    pub fn is_root(&self) -> bool {
         self.state.read().father.is_none()
     }
-    pub(crate) fn brother(&self) -> Option<Arc<Self>> {
+    /// `Brother`: the next brother.
+    pub fn brother(&self) -> Option<Arc<Self>> {
         self.state.read().brother.clone()
     }
-    pub(crate) fn first_child(&self) -> Option<Arc<Self>> {
+    /// `FirstChild`.
+    pub fn first_child(&self) -> Option<Arc<Self>> {
         self.state.read().first_child.clone()
     }
-    pub(crate) fn first_attribute(&self) -> Handle<dyn TdfAttribute> {
+    /// `FirstAttribute`: the head of the attribute list.
+    pub fn first_attribute(&self) -> Handle<dyn TdfAttribute> {
         self.state.read().first_attribute.clone()
     }
-    pub(crate) fn tag(&self) -> i32 {
+    /// `Tag`.
+    pub fn tag(&self) -> i32 {
         self.state.read().tag
     }
-    pub(crate) fn depth(&self) -> i32 {
+    /// `Depth`: 0 for a root.
+    pub fn depth(&self) -> i32 {
         self.state.read().flags & !FLAGS_MASK
+    }
+    /// `Data`: the owning framework (null for a detached node).
+    pub fn data(&self) -> Handle<TdfData> {
+        self.state.read().data.upgrade()
     }
     pub(crate) fn core(&self) -> Option<Arc<DataCore>> {
         self.state.read().core.upgrade()
@@ -84,7 +96,11 @@ impl TdfLabelNode {
     }
     fn set_flag(&self, mask: i32, status: bool) {
         let mut state = self.state.write();
-        state.flags = if status { state.flags | mask } else { state.flags & !mask };
+        state.flags = if status {
+            state.flags | mask
+        } else {
+            state.flags & !mask
+        };
     }
     pub(crate) fn is_imported(&self) -> bool {
         self.flag(IMPORT_MASK)
@@ -92,20 +108,23 @@ impl TdfLabelNode {
     pub(crate) fn set_imported(&self, status: bool) {
         self.set_flag(IMPORT_MASK, status);
     }
-    pub(crate) fn attributes_modified(&self) -> bool {
+    /// `AttributesModified()`.
+    pub fn attributes_modified(&self) -> bool {
         self.flag(ATTRIBUTES_MODIFIED_MASK)
     }
     /// `AttributesModified(bool)`: setting it also marks every ancestor `MayBeModified`.
-    pub(crate) fn set_attributes_modified(&self, status: bool) {
+    pub fn set_attributes_modified(&self, status: bool) {
         self.set_flag(ATTRIBUTES_MODIFIED_MASK, status);
         if status {
             self.all_may_be_modified();
         }
     }
-    pub(crate) fn may_be_modified(&self) -> bool {
+    /// `MayBeModified()`.
+    pub fn may_be_modified(&self) -> bool {
         self.flag(MAY_BE_MODIFIED_MASK)
     }
-    pub(crate) fn set_may_be_modified(&self, status: bool) {
+    /// `MayBeModified(bool)`.
+    pub fn set_may_be_modified(&self, status: bool) {
         self.set_flag(MAY_BE_MODIFIED_MASK, status);
     }
     /// `AllMayBeModified`: this node and its ancestors up to the first one already marked.

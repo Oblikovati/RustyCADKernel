@@ -8,11 +8,11 @@ use rustycad_tkernel::standard::{Failure, Handle, SharedState, WeakHandle, excep
 use std::sync::{Arc, OnceLock, Weak};
 
 /// `TDF_AttributeValidMsk`.
-pub(crate) const VALID_MASK: i32 = 1;
+pub const VALID_MASK: i32 = 1;
 /// `TDF_AttributeBackupMsk`.
-pub(crate) const BACKUP_MASK: i32 = 2;
+pub const BACKUP_MASK: i32 = 2;
 /// `TDF_AttributeForgottenMsk`.
-pub(crate) const FORGOTTEN_MASK: i32 = 4;
+pub const FORGOTTEN_MASK: i32 = 4;
 
 #[derive(Clone)]
 pub(crate) struct AttributeState {
@@ -70,9 +70,6 @@ impl TdfAttributeBase {
     pub(crate) fn node(&self) -> Option<Arc<TdfLabelNode>> {
         self.state.read().label_node.upgrade()
     }
-    pub(crate) fn has_node(&self) -> bool {
-        self.state.read().label_node.strong_count() > 0
-    }
     /// What `TDF_LabelNode::AddAttribute` writes: valid flags only, and the node.
     pub(crate) fn attach(&self, node: Weak<TdfLabelNode>) {
         let mut state = self.state.write();
@@ -100,13 +97,21 @@ impl TdfAttributeBase {
     /// Private `Validate`.
     pub(crate) fn validate(&self, status: bool) {
         let mut state = self.state.write();
-        state.flags = if status { state.flags | VALID_MASK } else { state.flags & !VALID_MASK };
+        state.flags = if status {
+            state.flags | VALID_MASK
+        } else {
+            state.flags & !VALID_MASK
+        };
     }
     /// Private `Backup(bool)`: the backup flag, and the valid flag as its opposite.
     pub(crate) fn set_backup_flag(&self, status: bool) {
         {
             let mut state = self.state.write();
-            state.flags = if status { state.flags | BACKUP_MASK } else { state.flags & !BACKUP_MASK };
+            state.flags = if status {
+                state.flags | BACKUP_MASK
+            } else {
+                state.flags & !BACKUP_MASK
+            };
         }
         self.validate(!status);
     }

@@ -3,9 +3,12 @@
 
 //! The attribute members of `TDF_Label`: find, add, forget and resume.
 use super::attribute_state::resume;
-use super::{TdfAttribute, TdfAttributeIterator, TdfAttributeState, TdfChildIterator, TdfLabel, label_node::TdfLabelNode};
+use super::{
+    TdfAttribute, TdfAttributeIterator, TdfAttributeState, TdfChildIterator, TdfLabel,
+    label_node::TdfLabelNode,
+};
 use crate::live;
-use rustycad_tkernel::standard::{exceptions, Failure, Guid, Handle, RuntimeTyped};
+use rustycad_tkernel::standard::{Failure, Guid, Handle, RuntimeTyped, exceptions};
 use std::sync::Arc;
 
 impl TdfLabel {
@@ -16,7 +19,11 @@ impl TdfLabel {
     }
     /// `FindAttribute(anID, anAttribute)`: the valid (not forgotten) attribute of that ID;
     /// `Standard_NullObject` for a null label.
-    pub fn find_attribute(&self, id: &Guid, attribute: &mut Handle<dyn TdfAttribute>) -> Result<bool, Failure> {
+    pub fn find_attribute(
+        &self,
+        id: &Guid,
+        attribute: &mut Handle<dyn TdfAttribute>,
+    ) -> Result<bool, Failure> {
         let node = self.live_node("A null Label has no attribute.")?;
         let mut iterator = TdfAttributeIterator::from_node(node, true);
         while iterator.more() {
@@ -31,7 +38,11 @@ impl TdfLabel {
     }
     /// The template `FindAttribute<T>`: found and of type `T` (the output is the down cast,
     /// null when the type differs).
-    pub fn find_attribute_as<T: RuntimeTyped + ?Sized>(&self, id: &Guid, attribute: &mut Handle<T>) -> Result<bool, Failure> {
+    pub fn find_attribute_as<T: RuntimeTyped + ?Sized>(
+        &self,
+        id: &Guid,
+        attribute: &mut Handle<T>,
+    ) -> Result<bool, Failure> {
         let mut found = Handle::default();
         if !self.find_attribute(id, &mut found)? {
             return Ok(false);
@@ -51,7 +62,10 @@ impl TdfLabel {
         if !self.find_attribute(id, &mut located)? {
             return Ok(false);
         }
-        while let Some(current) = located.get().filter(|current| current.transaction() > transaction) {
+        while let Some(current) = located
+            .get()
+            .filter(|current| current.transaction() > transaction)
+        {
             located = current.attribute_base().backup_attribute();
         }
         if located.is_null() {
@@ -80,8 +94,13 @@ impl TdfLabel {
     /// `append`, else first) in the current transaction and calls `AfterAddition`.
     /// `Standard_ImmutableObject` outside a transaction that allows it,
     /// `Standard_DomainError` for an attached attribute or a duplicate ID.
-    pub fn add_attribute(&self, attribute: &Handle<dyn TdfAttribute>, append: bool) -> Result<(), Failure> {
-        let node = self.live_node("TDF_Label::AddAttribute: a null Label cannot hold an attribute.")?;
+    pub fn add_attribute(
+        &self,
+        attribute: &Handle<dyn TdfAttribute>,
+        append: bool,
+    ) -> Result<(), Failure> {
+        let node =
+            self.live_node("TDF_Label::AddAttribute: a null Label cannot hold an attribute.")?;
         add_to_node(node, attribute, append)
     }
     /// `ForgetAttribute(anAttribute)`: forgets the attribute (removed at once when no
@@ -102,7 +121,8 @@ impl TdfLabel {
     /// `ForgetAllAttributes(clearChildren)`: forgets every attribute (the iterator moves
     /// before each removal, AGV-OCC5031), then the children's when asked.
     pub fn forget_all_attributes(&self, clear_children: bool) -> Result<(), Failure> {
-        let node = self.live_node("TDF_Label::ForgetAllAttributes: a null Label has no attribute.")?;
+        let node =
+            self.live_node("TDF_Label::ForgetAllAttributes: a null Label has no attribute.")?;
         let mut iterator = TdfAttributeIterator::from_node(node, true);
         while iterator.more() {
             let attribute = iterator.value();
@@ -123,15 +143,20 @@ impl TdfLabel {
     /// `Standard_NullObject` for a null or attached attribute, `Standard_DomainError` for
     /// one that is not forgotten.
     pub fn resume_attribute(&self, attribute: &Handle<dyn TdfAttribute>) -> Result<(), Failure> {
-        let node = self.live_node("TDF_Label::ResumeAttribute: a null Label cannot hold an attribute.")?;
+        let node =
+            self.live_node("TDF_Label::ResumeAttribute: a null Label cannot hold an attribute.")?;
         let resumed = attribute
             .get()
             .ok_or_else(|| exceptions::null_object("The attribute is a null handle."))?;
         if !resumed.label().is_null() {
-            return Err(exceptions::null_object("Cannot resume an attribute already attached to a label."));
+            return Err(exceptions::null_object(
+                "Cannot resume an attribute already attached to a label.",
+            ));
         }
         if !resumed.is_forgotten() {
-            return Err(exceptions::domain_error("Cannot resume an unforgotten attribute."));
+            return Err(exceptions::domain_error(
+                "Cannot resume an unforgotten attribute.",
+            ));
         }
         add_to_node(node, attribute, false)?;
         resume(resumed);
@@ -148,8 +173,15 @@ fn node_not_undo_mode(node: &Arc<TdfLabelNode>) -> bool {
 }
 
 /// `Standard_ImmutableObject` unless the framework allows modifications.
-fn check_modification_allowed(node: &Arc<TdfLabelNode>, attribute: &dyn TdfAttribute, action: &str) -> Result<(), Failure> {
-    if node.core().is_none_or(|core| core.is_modification_allowed()) {
+fn check_modification_allowed(
+    node: &Arc<TdfLabelNode>,
+    attribute: &dyn TdfAttribute,
+    action: &str,
+) -> Result<(), Failure> {
+    if node
+        .core()
+        .is_none_or(|core| core.is_modification_allowed())
+    {
         return Ok(());
     }
     Err(exceptions::immutable_object(&format!(
@@ -159,21 +191,33 @@ fn check_modification_allowed(node: &Arc<TdfLabelNode>, attribute: &dyn TdfAttri
 }
 
 /// Private `AddToNode`.
-fn add_to_node(node: &Arc<TdfLabelNode>, attribute: &Handle<dyn TdfAttribute>, append: bool) -> Result<(), Failure> {
+fn add_to_node(
+    node: &Arc<TdfLabelNode>,
+    attribute: &Handle<dyn TdfAttribute>,
+    append: bool,
+) -> Result<(), Failure> {
     let added = live(attribute, "TDF_Label::AddAttribute")?;
     check_modification_allowed(node, added, "added to")?;
     if !added.label().is_null() {
-        return Err(exceptions::domain_error("Attribute to add is already attached to a label."));
+        return Err(exceptions::domain_error(
+            "Attribute to add is already attached to a label.",
+        ));
     }
     let label = TdfLabel::from_node(Some(node.clone()));
     if label.is_attribute(&added.id())? {
-        return Err(exceptions::domain_error("This label has already such an attribute."));
+        return Err(exceptions::domain_error(
+            "This label has already such an attribute.",
+        ));
     }
     added.attribute_base().bind_self(attribute);
     let transaction = node.core().map_or(0, |core| core.transaction());
     added.attribute_base().set_transaction(transaction);
     added.attribute_base().set_saved_transaction(0);
-    let after = if append { last_attribute(node) } else { Handle::default() };
+    let after = if append {
+        last_attribute(node)
+    } else {
+        Handle::default()
+    };
     node.add_attribute(&after, attribute);
     node.set_attributes_modified(transaction != 0);
     if node_not_undo_mode(node) {
@@ -194,17 +238,27 @@ fn last_attribute(node: &Arc<TdfLabelNode>) -> Handle<dyn TdfAttribute> {
 }
 
 /// Private `ForgetFromNode`.
-fn forget_from_node(node: &Arc<TdfLabelNode>, attribute: &Handle<dyn TdfAttribute>) -> Result<(), Failure> {
+fn forget_from_node(
+    node: &Arc<TdfLabelNode>,
+    attribute: &Handle<dyn TdfAttribute>,
+) -> Result<(), Failure> {
     let forgotten = live(attribute, "TDF_Label::ForgetAttribute")?;
     check_modification_allowed(node, forgotten, "removed from")?;
-    if forgotten.attribute_base().node().is_none_or(|own| !Arc::ptr_eq(&own, node)) {
-        return Err(exceptions::domain_error("Attribute to forget not attached to my label."));
+    if forgotten
+        .attribute_base()
+        .node()
+        .is_none_or(|own| !Arc::ptr_eq(&own, node))
+    {
+        return Err(exceptions::domain_error(
+            "Attribute to forget not attached to my label.",
+        ));
     }
     if forgotten.is_forgotten() {
         return Ok(());
     }
     let current = node.core().map_or(0, |core| core.transaction());
-    let created_now = forgotten.transaction() == current && forgotten.attribute_base().backup_attribute().is_null();
+    let created_now = forgotten.transaction() == current
+        && forgotten.attribute_base().backup_attribute().is_null();
     if current == 0 || created_now {
         return remove_from_node(node, attribute, forgotten, current);
     }

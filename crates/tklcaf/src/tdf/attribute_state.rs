@@ -5,7 +5,7 @@
 use super::attribute_base::{BACKUP_MASK, FORGOTTEN_MASK, VALID_MASK};
 use super::{TdfAttribute, TdfLabel};
 use crate::live;
-use rustycad_tkernel::standard::{exceptions, Failure, Guid, Handle, RuntimeTyped};
+use rustycad_tkernel::standard::{Failure, Guid, Handle, RuntimeTyped, exceptions};
 
 /// The non-virtual members of `TDF_Attribute` (ocaf-design.md section 4).
 pub trait TdfAttributeState: TdfAttribute {
@@ -29,10 +29,12 @@ pub trait TdfAttributeState: TdfAttribute {
             let next = base.next();
             return Ok(live(&next, "TDF_Attribute::UntilTransaction")?.transaction() - 1);
         }
-        if self.is_valid() {
-            if let Some(core) = base.node().and_then(|node| node.core()) {
-                return Ok(core.transaction());
-            }
+        if let Some(core) = base
+            .node()
+            .and_then(|node| node.core())
+            .filter(|_| self.is_valid())
+        {
+            return Ok(core.transaction());
         }
         Err(exceptions::domain_error(&format!(
             "The attribute structure is wrong. (flags {})",
@@ -60,11 +62,19 @@ pub trait TdfAttributeState: TdfAttribute {
         self.label().is_attribute(id)
     }
     /// `FindAttribute(anID, anAttribute)`: an attribute of the same label.
-    fn find_attribute(&self, id: &Guid, attribute: &mut Handle<dyn TdfAttribute>) -> Result<bool, Failure> {
+    fn find_attribute(
+        &self,
+        id: &Guid,
+        attribute: &mut Handle<dyn TdfAttribute>,
+    ) -> Result<bool, Failure> {
         self.label().find_attribute(id, attribute)
     }
     /// The template `FindAttribute<T>`: found and of type `T`.
-    fn find_attribute_as<T: RuntimeTyped + ?Sized>(&self, id: &Guid, attribute: &mut Handle<T>) -> Result<bool, Failure>
+    fn find_attribute_as<T: RuntimeTyped + ?Sized>(
+        &self,
+        id: &Guid,
+        attribute: &mut Handle<T>,
+    ) -> Result<bool, Failure>
     where
         Self: Sized,
     {

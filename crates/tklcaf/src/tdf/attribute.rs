@@ -5,14 +5,14 @@
 //! are the trait [`TdfAttribute`]; its non-virtual members are the extension trait
 //! [`super::TdfAttributeState`] (ocaf-design.md section 4).
 use super::{
-    TdfAttributeBase, TdfAttributeDelta, TdfAttributeState, TdfDataSet, TdfDefaultDeltaOnModification,
-    TdfDefaultDeltaOnRemoval, TdfDeltaOnAddition, TdfDeltaOnForget, TdfDeltaOnModification,
-    TdfDeltaOnRemoval, TdfDeltaOnResume, TdfIdFilter, TdfRelocationTable,
+    TdfAttributeBase, TdfAttributeDelta, TdfAttributeState, TdfDataSet,
+    TdfDefaultDeltaOnModification, TdfDefaultDeltaOnRemoval, TdfDeltaOnAddition, TdfDeltaOnForget,
+    TdfDeltaOnModification, TdfDeltaOnRemoval, TdfDeltaOnResume, TdfIdFilter, TdfRelocationTable,
 };
-use crate::json::{attribute_dump_json, AttributeIndexMap};
+use crate::json::{AttributeIndexMap, attribute_dump_json};
 use rustycad_tkernel::{
     impl_transient_interface,
-    standard::{dump::DumpStream, Failure, Guid, Handle, StandardTransient, Transient},
+    standard::{Failure, Guid, Handle, StandardTransient, Transient, dump::DumpStream},
 };
 use std::io;
 
@@ -141,7 +141,10 @@ impl_transient_interface!(dyn TdfAttribute, "TDF_Attribute", StandardTransient);
 
 /// The native `TDF_Attribute::Dump` (non-virtual qualified calls `att->TDF_Attribute::Dump`
 /// use it directly).
-pub fn dump_attribute<A: TdfAttribute + ?Sized>(attribute: &A, stream: &mut dyn io::Write) -> io::Result<()> {
+pub fn dump_attribute<A: TdfAttribute + ?Sized>(
+    attribute: &A,
+    stream: &mut dyn io::Write,
+) -> io::Result<()> {
     let name = attribute.dynamic_type().name().to_owned();
     write!(stream, "\t{name}\tTrans. {};", attribute.transaction())?;
     if attribute.is_valid() {
