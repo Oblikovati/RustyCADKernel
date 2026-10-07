@@ -133,6 +133,14 @@ fn session_selections() {
 #[test]
 fn session_give_lists() {
     let (session, ents, _) = loaded_with(true);
+    let seq = rustycad_tkernel::ncollection::HSequence::<Handle<StandardTransient>>::default();
+    seq.append(ents[1].clone());
+    let as_list = session.give_list(&Handle::new(seq).cast()).unwrap();
+    assert_eq!(
+        as_list,
+        Some(vec![ents[1].clone()]),
+        "a list object is the list"
+    );
     selection(
         &session,
         "roots",

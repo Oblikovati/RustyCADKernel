@@ -7,6 +7,7 @@ use super::{IFSelectTransientList, IFSelectWorkSession};
 use crate::if_select::IFSelectSelection;
 use crate::interface::InterfaceModelEntities;
 use rustycad_tkernel::{
+    ncollection::HSequence,
     standard::{Failure, Handle, StandardTransient, exceptions},
     tcollection::HAsciiString,
 };
@@ -37,13 +38,16 @@ pub(super) fn parenthesized_ids(selname: &str) -> Vec<String> {
 }
 
 impl IFSelectWorkSession {
-    /// `GiveList(obj)`: the result of a selection, all the entities of the model, an
-    /// entity of the model, or the list a text gives; `None` for null. A native list
-    /// object has no counterpart (lists are values here).
+    /// `GiveList(obj)`: a list of transients itself, the result of a selection, all the
+    /// entities of the model, an entity of the model, or the list a text gives; `None`
+    /// for null.
     pub fn give_list(
         &self,
         obj: &Handle<StandardTransient>,
     ) -> Result<IFSelectTransientList, Failure> {
+        if let Some(list) = obj.cast::<HSequence<Handle<StandardTransient>>>().get() {
+            return Ok(Some(list.sequence(|s| s.iter().cloned().collect())));
+        }
         if obj.is_null() {
             return Ok(None);
         }
