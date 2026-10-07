@@ -93,6 +93,13 @@ VISUALIZATION_TOOLKITS: tuple[str, ...] = ('TKService',)
 VISUALIZATION_LINKED_TOOLKITS: tuple[str, ...] = ('TKService', 'TKMath', 'TKernel')
 VISUALIZATION_CLOSURE_TARGETS: list[str] = [*VISUALIZATION_TOOLKITS, 'gtest_main']
 
+# The expression oracle closure (TKExpress suites and numeric oracle): TKExpress sits on
+# TKernel only (its EXTERNLIB), so its tree holds no geometry toolkit. The shared
+# all-modules build can be reused instead.
+EXPRESS_TOOLKITS: tuple[str, ...] = ('TKExpress',)
+EXPRESS_LINKED_TOOLKITS: tuple[str, ...] = ('TKExpress', 'TKernel')
+EXPRESS_CLOSURE_TARGETS: list[str] = [*EXPRESS_TOOLKITS, 'gtest_main']
+
 
 def closure_flags(modules: list[str], toolkits: tuple[str, ...] = ADDITIONAL_TOOLKITS) -> list[str]:
     """CMake flags of a shared oracle closure (the geometry one by default); one spelling for
