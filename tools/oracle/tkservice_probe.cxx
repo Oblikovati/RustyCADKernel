@@ -33,6 +33,7 @@
 #include "tkservice_probe_marker.cxx"
 #include "tkservice_probe_aspects.cxx"
 #include "tkservice_probe_array.cxx"
+#include "tkservice_probe_camera.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -63,6 +64,10 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sv_aspects_dump", sv_aspects_dump_case},
  // Graphic3d_ArrayOfPrimitives (tkservice_probe_array.cxx)
  {"sv_array", sv_array_case},
+ // Graphic3d_Camera (tkservice_probe_camera.cxx)
+ {"sv_camera", sv_camera_case},
+ {"sv_camera_fit", sv_camera_fit_case},
+ {"sv_camera_interp", sv_camera_interp_case},
 };
 int main() {
  std::string line;

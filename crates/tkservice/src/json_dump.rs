@@ -28,6 +28,13 @@ pub(crate) fn field_integer(stream: &mut DumpStream, field: &str, value: i32) ->
     stream.write_fragment(format!("\"{name}\": {value}").as_bytes())
 }
 
+/// `OCCT_DUMP_FIELD_VALUE_NUMERICAL` of an unsigned (`size_t`) value.
+pub(crate) fn field_unsigned(stream: &mut DumpStream, field: &str, value: u64) -> io::Result<()> {
+    let name = key(field)?;
+    add_values_separator(stream)?;
+    stream.write_fragment(format!("\"{name}\": {value}").as_bytes())
+}
+
 /// `OCCT_DUMP_FIELD_VALUE_NUMERICAL` of a double, with the default stream precision.
 pub(crate) fn field_real(stream: &mut DumpStream, field: &str, value: f64) -> io::Result<()> {
     rustycad_tkernel::standard::dump::dump_real(stream, &key(field)?, value)

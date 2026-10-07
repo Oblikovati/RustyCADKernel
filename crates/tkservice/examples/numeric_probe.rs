@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod sv_probe;
-use sv_probe::{array, aspects, grid, hid, marker, material, pbr, pixel, shader, texture};
+use sv_probe::{array, aspects, camera, grid, hid, marker, material, pbr, pixel, shader, texture};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -39,6 +39,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sv_aspects_dump", aspects::dump_case),
     // Graphic3d_ArrayOfPrimitives (sv_probe/array.rs)
     ("sv_array", array::array_case),
+    // Graphic3d_Camera (sv_probe/camera.rs)
+    ("sv_camera", camera::camera_case),
+    ("sv_camera_fit", camera::fit_case),
+    ("sv_camera_interp", camera::interp_case),
 ];
 
 fn main() {

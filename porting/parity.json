@@ -458776,6 +458776,1126 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfTriangles::with_options",
       "status": "implemented",
       "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Projection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraProjection",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Projection_Orthographic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraProjection::Orthographic",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Projection_Perspective",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraProjection::Perspective",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Projection_Stereo",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraProjection::Stereo",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Projection_MonoLeftEye",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraProjection::MonoLeftEye",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Projection_MonoRightEye",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraProjection::MonoRightEye",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FocusType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraFocusType",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FocusType_Absolute",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraFocusType::Absolute",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FocusType_Relative",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraFocusType::Relative",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::IODType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraIodType",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::IODType_Absolute",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraIodType::Absolute",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::IODType_Relative",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraIodType::Relative",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Interpolate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::interpolate",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The output camera is passed by reference instead of a handle out-parameter."
+    },
+    {
+      "upstream_id": "NCollection_Lerp<opencascade::handle<Graphic3d_Camera>>::Interpolate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::interpolate",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The Lerp specialisation of a camera handle is Graphic3d_Camera::Interpolate."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Graphic3d_Camera()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Graphic3d_Camera(const occ::handle<Graphic3d_Camera> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::from_camera",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::CopyMappingData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::copy_mapping_data",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::CopyOrientationData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::copy_orientation_data",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Copy",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::copy",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Direction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::direction",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetDirectionFromEye",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_direction_from_eye",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetDirection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_direction",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Up",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::up",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetUp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_up",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::OrthogonalizeUp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::orthogonalize_up",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::OrthogonalizedUp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::orthogonalized_up",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. An up parallel to the direction raises the gp_Dir construction error, as natively."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SideRight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::side_right",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Eye",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::eye",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::MoveEyeTo",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::move_eye_to",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetEyeAndCenter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_eye_and_center",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetEye",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_eye",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Center",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::center",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetCenter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_center",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. Native quirk: only a changed distance counts as a change."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Distance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::distance",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetDistance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_distance",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Scale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::scale",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_scale",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::AxialScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::axial_scale",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetAxialScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_axial_scale",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetProjectionType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_projection_type",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ProjectionType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::projection_type",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::IsOrthographic",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::is_orthographic",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::IsStereo",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::is_stereo",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetFOVy",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_fov_y",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FOVy",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::fov_y",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FOVx",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::fov_x",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FOV2d",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::fov_2d",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetFOV2d",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_fov_2d",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FitMinMax",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::fit_min_max",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetZRange",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_z_range",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ZNear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::z_near",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ZFar",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::z_far",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::IsZeroToOneDepth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::is_zero_to_one_depth",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetZeroToOneDepth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_zero_to_one_depth",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetAspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_aspect",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Aspect",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::aspect",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetZFocus",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_z_focus",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ZFocus",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::z_focus",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ZFocusType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::z_focus_type",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetIOD",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_iod",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::IOD",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::iod",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::GetIODType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::iod_type",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Tile",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::tile",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetTile",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_tile",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetIdentityOrientation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_identity_orientation",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Transform",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::transform",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ViewDimensions() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::view_dimensions",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ViewDimensions(const double) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::view_dimensions_at",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::NDC2dOffsetX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::ndc_2d_offset_x",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::NDC2dOffsetY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::ndc_2d_offset_y",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Project",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::project",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::UnProject",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::un_project",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ConvertView2Proj",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::convert_view_to_proj",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ConvertProj2View",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::convert_proj_to_view",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ConvertWorld2View",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::convert_world_to_view",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ConvertView2World",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::convert_view_to_world",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::WorldViewProjState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::world_view_proj_state",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ProjectionState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::projection_state",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::WorldViewState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::world_view_state",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::OrientationMatrix",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::orientation_matrix",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::OrientationMatrixF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::orientation_matrix_f",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ProjectionMatrix",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::projection_matrix",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ProjectionMatrixF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::projection_matrix_f",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ProjectionStereoLeft",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::projection_stereo_left",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ProjectionStereoLeftF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::projection_stereo_left_f",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ProjectionStereoRight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::projection_stereo_right",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ProjectionStereoRightF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::projection_stereo_right_f",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::InvalidateProjection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::invalidate_projection",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::InvalidateOrientation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::invalidate_orientation",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ResetCustomProjection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::reset_custom_projection",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::IsCustomStereoFrustum",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::is_custom_stereo_frustum",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetCustomStereoFrustums",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_custom_stereo_frustums",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::IsCustomStereoProjection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::is_custom_stereo_projection",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetCustomStereoProjection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_custom_stereo_projection",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::IsCustomMonoProjection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::is_custom_mono_projection",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::SetCustomMonoProjection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::set_custom_mono_projection",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ZFitAll(const double,const Bnd_Box &,const Bnd_Box &,double &,double &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::z_fit_all_range",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The out-parameters are returned with the result flag."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::ZFitAll(const double,const Bnd_Box &,const Bnd_Box &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::z_fit_all",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::Frustum",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::frustum",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The six planes are returned as an array (left, right, bottom, top, near, far)."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::StereoProjection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::stereo_projection",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The head-to-eye inputs are returned unchanged for a zero IOD, as the native outputs are left untouched."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::StereoProjectionF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::stereo_projection_f",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The head-to-eye inputs are returned unchanged for a zero IOD, as the native outputs are left untouched."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FrustumPoints",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCamera::frustum_points",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The points are returned as an array of FrustumVerticesNB values; the native array is resized when it has another length."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::(unnamed enum at src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx:755:3)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The anonymous enum is module constants, each mapped by its own row."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FrustumVert_LeftBottomNear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::GRAPHIC3D_CAMERA_FRUSTUM_VERT_LEFT_BOTTOM_NEAR",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FrustumVert_LeftBottomFar",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::GRAPHIC3D_CAMERA_FRUSTUM_VERT_LEFT_BOTTOM_FAR",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FrustumVert_LeftTopNear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::GRAPHIC3D_CAMERA_FRUSTUM_VERT_LEFT_TOP_NEAR",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FrustumVert_LeftTopFar",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::GRAPHIC3D_CAMERA_FRUSTUM_VERT_LEFT_TOP_FAR",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FrustumVert_RightBottomNear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::GRAPHIC3D_CAMERA_FRUSTUM_VERT_RIGHT_BOTTOM_NEAR",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FrustumVert_RightBottomFar",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::GRAPHIC3D_CAMERA_FRUSTUM_VERT_RIGHT_BOTTOM_FAR",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FrustumVert_RightTopNear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::GRAPHIC3D_CAMERA_FRUSTUM_VERT_RIGHT_TOP_NEAR",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FrustumVert_RightTopFar",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::GRAPHIC3D_CAMERA_FRUSTUM_VERT_RIGHT_TOP_FAR",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Camera::FrustumVerticesNB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::GRAPHIC3D_CAMERA_FRUSTUM_VERTICES_NB",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile::TotalSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile::total_size",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile::TileSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile::tile_size",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile::Offset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile::offset",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile::IsTopDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile::is_top_down",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile::Graphic3d_CameraTile",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile::IsValid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile::is_valid",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile::OffsetLowerLeft",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile::offset_lower_left",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile::Cropped",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile::cropped",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile::operator==",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile::is_same",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. Equal sizes and lower-left offsets; the derived PartialEq compares every field."
+    },
+    {
+      "upstream_id": "Graphic3d_CameraTile::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CameraTile.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCameraTile::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. Native quirk: the integer vectors go through the double variadic dump macro (undefined natively); here they print as numbers."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The camera pointer is an identity number of the camera state (never dereferenced natively)."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::Graphic3d_WorldViewProjState()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::Graphic3d_WorldViewProjState(const size_t,const size_t,const Standard_Transient *)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::new",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::IsValid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::is_valid",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::Reset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::reset",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::Initialize(const size_t,const size_t,const Standard_Transient *)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::initialize",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::Initialize(const Standard_Transient *)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::initialize_camera",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::IsProjectionChanged",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::is_projection_changed",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::IsWorldViewChanged",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::is_world_view_changed",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::IsChanged",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::is_changed",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::operator==",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::operator!=",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::is_changed",
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. operator!= is !operator==, which is IsChanged."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::ProjectionState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::projection_state",
+      "rust_items": [
+        "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::projection_state",
+        "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::set_projection_state"
+      ],
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The mutable reference is a getter and a setter."
+    },
+    {
+      "upstream_id": "Graphic3d_WorldViewProjState::WorldViewState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_WorldViewProjState.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::world_view_state",
+      "rust_items": [
+        "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::world_view_state",
+        "rustycad_tkservice::graphic3d::Graphic3dWorldViewProjState::set_world_view_state"
+      ],
+      "status": "implemented",
+      "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The mutable reference is a getter and a setter."
     }
   ],
   "tests": [

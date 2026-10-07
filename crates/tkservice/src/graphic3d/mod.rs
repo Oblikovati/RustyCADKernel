@@ -18,6 +18,14 @@ mod bound_buffer;
 mod bsdf;
 mod buffer;
 mod buffer_members;
+mod camera;
+mod camera_fit;
+mod camera_interpolate;
+mod camera_mapping;
+mod camera_matrices;
+mod camera_orientation;
+mod camera_projection;
+mod camera_values;
 mod cube_map;
 mod cube_map_order;
 mod cube_map_packed;
@@ -78,6 +86,13 @@ pub use buffer::{
     graphic3d_buffer_dump_json,
 };
 pub use buffer_members::{Graphic3dBufferMembers, Graphic3dBufferValue};
+pub use camera::{
+    Graphic3dCamera, Graphic3dCameraFocusType, Graphic3dCameraIodType, Graphic3dCameraMatrices,
+    Graphic3dCameraProjection, Graphic3dCameraState,
+};
+pub use camera_fit::*;
+pub use camera_projection::Graphic3dCameraScalar;
+pub use camera_values::{Graphic3dCameraTile, Graphic3dWorldViewProjState};
 pub use cube_map::{
     Graphic3dCubeMap, Graphic3dCubeMapBase, Graphic3dCubeMapIteration, Graphic3dCubeMapMembers,
 };
