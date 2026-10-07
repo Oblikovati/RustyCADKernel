@@ -78,7 +78,7 @@ impl InterfaceFloatWriter {
     pub fn set_zero_suppress(&mut self, mode: bool) {
         self.thezerosup = mode;
     }
-    /// `SetDefaults(chars = 0)`: "%E" and "%f" (or "%<chars+2>.<chars>E/f"), range
+    /// `SetDefaults(chars = 0)`: "%E" and "%f" (or `"%<chars+2>.<chars>E/f"`), range
     /// [0.1, 1000[, zero suppression.
     pub fn set_defaults(&mut self, chars: i32) {
         if chars <= 0 {

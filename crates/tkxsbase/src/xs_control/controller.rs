@@ -296,8 +296,8 @@ pub trait XSControlController: Transient {
             progress,
         )
     }
-    /// `Customise(WS)`: the session prepared for the norm (see
-    /// [`super::controller_customise`]).
+    /// `Customise(WS)`: the session prepared for the norm (the standard items of
+    /// `XSControl_Controller::Customise`).
     fn customise(&self, ws: &Handle<XSControlWorkSession>) -> Result<(), Failure> {
         super::controller_customise::customise_base(self.controller_base(), ws)
     }

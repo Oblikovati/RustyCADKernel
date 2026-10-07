@@ -33,7 +33,7 @@ pub struct XSControlTransferStats {
 }
 
 /// `XSControl_Reader`: a value class (natively with virtual members, see
-/// [`XSControlReaderOps`]).
+/// [`XSControlReaderOps`](super::XSControlReaderOps)).
 ///
 /// ```
 /// use rustycad_tkxsbase::xs_control::XSControlReader;

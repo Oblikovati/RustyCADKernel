@@ -118,7 +118,7 @@ impl InterfaceStatic {
         MoniToolTypedValue::stats().is_bound(&AsciiString::new(name))
     }
     /// `CDef(name, part)`: a part of the definition ("family", "label", "satis", "type",
-    /// "enum <n>", "imin"/"imax", "rmin"/"rmax", "unit"); empty when unknown.
+    /// `"enum <n>"`, "imin"/"imax", "rmin"/"rmax", "unit"); empty when unknown.
     pub fn c_def(name: &str, part: &str) -> String {
         let stat = Self::static_named(name);
         let (Some(live), Some(first)) = (stat.get(), part.bytes().next()) else {
@@ -145,7 +145,7 @@ impl InterfaceStatic {
         }
     }
     /// `IDef(name, part)`: an integer part of the definition ("imin"/"imax", "estart",
-    /// "ecount", "ematch", "eval <text>"); 0 when unknown.
+    /// "ecount", "ematch", `"eval <text>"`); 0 when unknown.
     pub fn i_def(name: &str, part: &str) -> i32 {
         let stat = Self::static_named(name);
         let (Some(live), Some(first)) = (stat.get(), part.bytes().next()) else {

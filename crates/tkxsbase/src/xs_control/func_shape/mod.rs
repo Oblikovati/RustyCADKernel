@@ -125,7 +125,7 @@ impl XSControlFuncShape {
     }
     /// `MoreShapes(session, list, name)`: the shapes `name` gives added to `list`: "*"
     /// the root results of the last transfer, "**" all its results, "nom(n1-n2)" the
-    /// variables nom<n1> to nom<n2>, else the variable `name`; their count.
+    /// variables `nom<n1>` to `nom<n2>`, else the variable `name`; their count.
     pub fn more_shapes(
         session: &Handle<XSControlWorkSession>,
         list: &mut Vec<Shape>,
