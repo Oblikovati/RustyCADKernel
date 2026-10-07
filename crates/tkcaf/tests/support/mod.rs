@@ -1,6 +1,7 @@
 //! Fixtures shared by the TKCAF GTest translations: documents, boxes and attribute lookups.
 #![allow(dead_code)]
 pub mod dnaming;
+pub mod naming;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkbrep::toptools::MapOfShape;
