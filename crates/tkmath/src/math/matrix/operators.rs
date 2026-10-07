@@ -2,7 +2,7 @@
 use super::Matrix;
 use crate::math::vector::stream_real;
 use std::fmt;
-use std::ops::{Add, AddAssign, Div, DivAssign, Mul, Neg, Sub, SubAssign};
+use std::ops::{Mul, Neg};
 impl Matrix<'_> {
     /// Native TMultiplied(double), identical to `multiplied`; `matrix.t_multiplied(2.0)`.
     pub fn t_multiplied(&self, scalar: f64) -> Self {
@@ -40,48 +40,9 @@ impl<'a> Mul<&Matrix<'a>> for f64 {
         right.multiplied(self)
     }
 }
-impl<'a> Mul<&Matrix<'a>> for &Matrix<'a> {
-    type Output = Matrix<'a>;
-    fn mul(self, right: &Matrix<'a>) -> Matrix<'a> {
-        self.multiplied_matrix(right).unwrap()
-    }
-}
-impl<'a> Div<f64> for &Matrix<'a> {
-    type Output = Matrix<'a>;
-    fn div(self, right: f64) -> Matrix<'a> {
-        self.divided(right).unwrap()
-    }
-}
-impl<'a> Add<&Matrix<'a>> for &Matrix<'a> {
-    type Output = Matrix<'a>;
-    fn add(self, right: &Matrix<'a>) -> Matrix<'a> {
-        self.added(right).unwrap()
-    }
-}
-impl<'a> Sub<&Matrix<'a>> for &Matrix<'a> {
-    type Output = Matrix<'a>;
-    fn sub(self, right: &Matrix<'a>) -> Matrix<'a> {
-        self.subtracted(right).unwrap()
-    }
-}
 impl<'a> Neg for &Matrix<'a> {
     type Output = Matrix<'a>;
     fn neg(self) -> Matrix<'a> {
         self.opposite()
-    }
-}
-impl AddAssign<&Matrix<'_>> for Matrix<'_> {
-    fn add_assign(&mut self, right: &Matrix<'_>) {
-        self.add(right).unwrap();
-    }
-}
-impl SubAssign<&Matrix<'_>> for Matrix<'_> {
-    fn sub_assign(&mut self, right: &Matrix<'_>) {
-        self.subtract(right).unwrap();
-    }
-}
-impl DivAssign<f64> for Matrix<'_> {
-    fn div_assign(&mut self, right: f64) {
-        self.divide(right).unwrap();
     }
 }

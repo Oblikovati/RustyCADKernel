@@ -38,7 +38,7 @@ fn MathMatrixTest__InPlaceMatrixMultiplication() {
     assert_near(aMatrix[(2, 2)], aCorrectResult[(2, 2)], 1e-7);
 
     // Also test the operator*= version with self
-    aMatrixCopy *= &aMatrixCopy.clone();
+    aMatrixCopy.multiply_matrix(&aMatrixCopy.clone()).unwrap();
 
     // Verify the operator*= with self gives correct results
     assert_near(aMatrixCopy[(1, 1)], aCorrectResult[(1, 1)], 1e-7);
@@ -83,7 +83,7 @@ fn MathMatrixTest__InPlaceMatrixMultiplication() {
     assert_near(aMatrixA[(2, 2)], aExpectedAB[(2, 2)], 1e-7);
 
     // Test operator*= with different matrices
-    aMatrixACopy *= &aMatrixBCopy;
+    aMatrixACopy.multiply_matrix(&aMatrixBCopy).unwrap();
 
     // Check results match expected values
     assert_near(aMatrixACopy[(1, 1)], aExpectedAB[(1, 1)], 1e-7);

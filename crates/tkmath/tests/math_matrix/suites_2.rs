@@ -73,7 +73,7 @@ fn MathMatrixTest__MatrixMultiplication() {
 
     // Test in-place matrix multiplication using operator*=
     let mut aInPlaceOpMat = aOrigMat.clone();
-    aInPlaceOpMat *= &aInPlaceMulMat2;
+    aInPlaceOpMat.multiply_matrix(&aInPlaceMulMat2).unwrap();
 
     // Check same result as with direct Multiply method
     assert_eq!(aInPlaceOpMat[(1, 1)], (4) as f64);

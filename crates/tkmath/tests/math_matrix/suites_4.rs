@@ -41,7 +41,7 @@ fn MathMatrixTest__VectorMatrixOperations() {
     aVector[3] = 4.0;
 
     // Test matrix * vector
-    let mut aResult = &aMatrix * &aVector;
+    let mut aResult = aMatrix.multiplied_vector(&aVector).unwrap();
 
     assert_eq!(aResult.length(), 3);
     // For row 1: 1*2 + 2*3 + 3*4 = 2 + 6 + 12 = 20
