@@ -162,3 +162,14 @@ pub(super) fn first_pcurve_midpoint(face: &Face, wire: &Wire) -> Point2 {
         .value((pcurve.first + pcurve.last) * 0.5)
         .unwrap()
 }
+
+/// The [0, 1] x [0, 1] face of the default XY plane; `unit_square_plane_face().is_null() == false`.
+pub(super) fn unit_square_plane_face() -> Face {
+    rustycad_tktopalgo::brep_lib::BRepLibMakeFace::from_plane_bounds(
+        rustycad_tkmath::gp::Plane3::default(),
+        (0.0, 1.0, 0.0, 1.0),
+    )
+    .unwrap()
+    .face()
+    .unwrap()
+}

@@ -31,7 +31,7 @@ def operator_angle_span(text: str) -> tuple[int, int] | None:
         return None
     start = offset + len("operator")
     suffix = text[start:]
-    # `->` and `->*` contain `>` but are operator symbols, not template brackets.
+    # `->`/`->*` carry a `>` that is not a template bracket; e.g. `Handle::operator->() const`.
     match = re.match(r"\s*(->\*|->|<=>|<<=|>>=|<=|>=|<<|>>|<|>)", suffix)
     if match is None:
         return None

@@ -23,6 +23,8 @@ from verify_tkernel import run, unique
 from native_build import CLOSURE_TARGETS, LINKED_TOOLKITS, closure_flags, locked_cmake
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
+from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
+                                       require_blockers_in_source, runnable_rows)
 
 # The whole numeric verifier of one toolkit (both probes over its full corpus) may run this
 # long. It is a hang guard, not a budget: a corpus must never be trimmed to fit it. The
@@ -57,7 +59,9 @@ def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
     candidates = {row['name'] for entry in inventory['toolkits'] if entry['name'] == toolkit
                   for row in entry['gtest_declaration_candidates']}
     if len({row['upstream_id'] for row in rows}) != len(rows): raise ValueError('Duplicate declaration mappings')
-    source_disabled_rows(rows)
+    source_disabled_rows(runnable_rows(rows))
+    # A pending row lapses (and the gate fails) once a class it waits for is ported.
+    pending_dependency_rows(rows, implemented_classes(ledger['api']))
     if {row['upstream_id'] for row in rows} - candidates: raise ValueError('Mappings outside selected toolkit inventory')
     return rows
 
@@ -169,8 +173,15 @@ def rust_tests(output: Path, rows: list[dict], expected: set, environment: dict)
     for package,target in targets:
         result = run(['cargo','test','--locked','-p',package,'--test',target,'--','--test-threads=1'],output/f'rust-{target}.log',env=environment)
         passed = set(re.findall(r'^test (\S+) \.\.\. ok$',result,re.M))
-        if passed != {name for owner,mapped,name in expected if (owner,mapped) == (package,target)}:
-            raise ValueError(f'Rust cases missing, skipped, or unmapped: {package}/{target}')
+        require_exact_rust_cases(package, target, passed, {name for owner,mapped,name in expected if (owner,mapped) == (package,target)})
+
+
+def require_exact_rust_cases(package: str, target: str, passed: set[str], mapped: set[str]) -> None:
+    """A mapped target must pass exactly its mapped tests; port-only tests live in other targets
+    (tools/legacy_test_targets.py finds mixed targets); require_exact_rust_cases('p', 't', {'a'}, {'a'})."""
+    if passed != mapped:
+        raise ValueError(f'Rust cases missing, skipped, or unmapped: {package}/{target}: '
+                         f'not passed={sorted(mapped - passed)}, unmapped={sorted(passed - mapped)}')
 
 
 def main() -> None:
@@ -197,7 +208,7 @@ def main() -> None:
     native,rust,approved,libraries = mapped_suites(source,output,build,rows,args.jobs,environment)
     numeric = None
     if args.only:
-        disabled = source_disabled_rows(rows)
+        disabled = source_disabled_rows(runnable_rows(rows))
         print(f'PARTIAL PASS (--only {args.only}): {len(rows)} declarations; '
               f'{len(native)-len(approved)-len(disabled)} native passed, '
               f'{len(disabled)} source-disabled expected failures, {len(rust)} Rust passed; not a toolkit gate')
@@ -215,12 +226,23 @@ def mapped_suites(source: Path, output: Path, build: Path, rows: list[dict], job
     mapped_suites(source, out, build, rows, 4, env)."""
     if not rows:
         return set(), set(), {}, [unique(build,f'lib{name}.so') for name in LINKED_TOOLKITS]
-    paths = verify_sources(source,rows); native,rust = mapped_runtime_sets(rows)
-    approved = approved_native_failures(rows)
-    disabled = source_disabled_rows(rows)
+    paths = verify_sources(source,rows); runnable = runnable_rows(rows)
+    native,rust = mapped_runtime_sets(runnable)
+    native |= set(pending_native_cases(source, rows))
+    approved = approved_native_failures(runnable)
+    disabled = source_disabled_rows(runnable)
     libraries = native_tests(source,output,build,paths,jobs,native,environment,approved,disabled)
-    rust_tests(output,rows,rust,environment)
+    rust_tests(output,runnable,rust,environment)
     return native,rust,approved,libraries
+
+
+def pending_native_cases(source: Path, rows: list[dict]) -> dict[str, PendingDependencyCase]:
+    """Pending-dependency declarations, whose unchanged native test must still run and pass;
+    each blocker must be named by its source; pending_native_cases(occt, rows)."""
+    pending = pending_dependency_rows(rows, set())
+    for case in pending.values():
+        require_blockers_in_source(case, (source/case.source).read_text())
+    return pending
 
 
 def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict], native: set, rust: set, libraries: list[Path], numeric: dict | None, approved: dict[str, str]) -> None:
@@ -229,10 +251,12 @@ def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict],
     inputs += list((ROOT/'tools/oracle').glob('*.cxx'))
     inputs += sorted((ROOT/'tools').rglob('*.py'))
     inputs += [ROOT/NUMERIC_VERIFIERS[toolkit][0], ROOT/'Cargo.toml',ROOT/'Cargo.lock',ROOT/'rust-toolchain.toml',ROOT/'porting/parity.json',Path(__file__),ROOT/'tools/tkernel_mapping.py',ROOT/'tools/tkernel_native_baseline.py',ROOT/'tools/verify_tkernel.py',ROOT/'tools/native_build.py']
-    disabled = source_disabled_rows(rows)
+    disabled = source_disabled_rows(runnable_rows(rows))
+    pending = pending_dependency_rows(rows, set())
     observations = json.loads((output/'source-disabled.json').read_text()) if disabled else []
     report = {'revision':inventory['revision'],'profile':'linux-gcc-c-locale','toolkit':toolkit,
-              'numeric_report':numeric,'declarations_mapped':len(rows),'legacy_runtime_cases_passed':len(native)-len(approved)-len(disabled),
+              'numeric_report':numeric,'declarations_mapped':len(rows)-len(pending),
+              'rust_pending_dependency':{name:list(case.blocked_by) for name,case in sorted(pending.items())},'legacy_runtime_cases_passed':len(native)-len(approved)-len(disabled),
               'rust_runtime_cases_passed':len(rust),'toolkit_complete':False,
               'native_expected_failures':approved, 'source_disabled_cases':observations,
               'scope':'Mapped GoogleTest suites only; full toolkit API and test inventories pending',
@@ -240,7 +264,8 @@ def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict],
               'oracle_libraries_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in libraries}}
     (output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
     failures = f' ({len(approved)} approved native failures)' if approved else ''
-    print(f'PASS: {toolkit}: {len(rows)} mapped declarations, {len(native)-len(approved)-len(disabled)} native and {len(rust)} Rust runtime cases{failures}; {len(disabled)} source-disabled expected failures')
+    print(f'PASS: {toolkit}: {len(rows)-len(pending)} mapped declarations, {len(native)-len(approved)-len(disabled)} native and {len(rust)} Rust runtime cases{failures}; '
+          f'{len(disabled)} source-disabled expected failures; {len(pending)} pending dependency (native passed, Rust pending)')
 
 
 if __name__ == '__main__':
