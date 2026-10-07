@@ -8,6 +8,8 @@ mod display;
 mod drawable;
 mod drawables;
 mod expression;
+#[cfg(test)]
+pub(crate) mod fake_window;
 mod interpretor;
 mod interpretor_link;
 mod istream;

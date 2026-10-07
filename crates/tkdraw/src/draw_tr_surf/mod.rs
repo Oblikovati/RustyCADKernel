@@ -45,3 +45,6 @@ pub use spline_common::{KnotsStyle, PolesStyle, SplineLook};
 pub use style::{CurveLook, CurveStyle};
 pub use surface::{DrawTrSurfSurface, SurfaceLook};
 pub use triangulation::{DrawTrSurfTriangulation, TriangulationEdges};
+
+#[cfg(test)]
+mod tests;
