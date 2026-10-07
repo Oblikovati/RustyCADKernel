@@ -20,7 +20,9 @@ use rustycad_tkmath::{
     poly::mesh_purpose,
 };
 use rustycad_tkmesh::{
-    brep_mesh::BRepMeshDiscretRoot, brep_mesh::BRepMeshIncrementalMesh, imesh_tools::MeshParameters,
+    brep_mesh::BRepMeshDiscretRoot,
+    brep_mesh::BRepMeshIncrementalMesh,
+    imesh_tools::{MeshAlgoType, MeshParameters},
 };
 use rustycad_tkprim::brep_prim_api::{
     BRepPrimAPIMakeBox, BRepPrimAPIMakeCone, BRepPrimAPIMakeCylinder, BRepPrimAPIMakePrism,
@@ -130,9 +132,10 @@ fn face_report(face: &Face) -> Result<(), Failure> {
     Ok(())
 }
 
-fn run(kind: i32, deflection: i32, mode: i32) -> Result<(), Failure> {
+fn run(kind: i32, deflection: i32, mode: i32, mesh_algo: MeshAlgoType) -> Result<(), Failure> {
     let shape = shape(kind)?;
     let parameters = MeshParameters {
+        mesh_algo,
         deflection: if deflection == 0 { 0.5 } else { 0.1 },
         internal_vertices_mode: mode == 1,
         enable_control_surface_deflection_all_surfaces: mode == 2,
@@ -157,7 +160,17 @@ fn run(kind: i32, deflection: i32, mode: i32) -> Result<(), Failure> {
 
 /// `mesh_incremental_shape <kind> <deflection> <mode>`.
 pub fn incremental_shape_case(values: &[i32]) {
-    if let Err(failure) = run(values[0], values[1], values[2]) {
+    shape_case(values, MeshAlgoType::Default);
+}
+
+/// `mesh_delabella_shape <kind> <deflection> <mode>`: the same shapes through
+/// `BRepMesh_Context(IMeshTools_MeshAlgoType_Delabella)`.
+pub fn delabella_shape_case(values: &[i32]) {
+    shape_case(values, MeshAlgoType::Delabella);
+}
+
+fn shape_case(values: &[i32], mesh_algo: MeshAlgoType) {
+    if let Err(failure) = run(values[0], values[1], values[2], mesh_algo) {
         print!("{} ", failure.exception_type());
     }
     println!();

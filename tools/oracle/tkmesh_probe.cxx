@@ -74,6 +74,7 @@ void mesh_pcurve(std::istream& input) {
 #include "tkmesh_probe_circle.cxx"
 #include "tkmesh_probe_delaun_core.cxx"
 #include "tkmesh_probe_incremental.cxx"
+#include "tkmesh_probe_delabella.cxx"
 int main(){
     std::string line;
     while(std::getline(std::cin,line)){
@@ -131,6 +132,8 @@ int main(){
         else if(operation=="mesh_delaun_use_edge")mesh_delaun_use_edge(input);
         else if(operation=="mesh_incremental_shape")mesh_incremental_shape(input);
         else if(operation=="mesh_triangulator")mesh_triangulator(input);
+        else if(operation=="mesh_delabella_points")mesh_delabella_points(input);
+        else if(operation=="mesh_delabella_shape")mesh_delabella_shape(input);
         else if(operation=="mesh_delaun_sort")mesh_delaun_sort(input);
         else if(operation=="mesh_delaun_polygon")mesh_delaun_polygon(input);
         else if(operation=="mesh_delaun_polygon_mesh")mesh_delaun_polygon_mesh(input);

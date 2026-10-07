@@ -74,6 +74,9 @@ def corpus() -> str:
     rows += ['mesh_circle_random']
     rows += ['mesh_incremental_shape ' + ' '.join(map(str, v)) for v in product(range(8), range(2), range(4))]
     rows += [f'mesh_triangulator {kind}' for kind in range(6)]
+    rows += [f'mesh_delabella_points {kind} {count}' for kind in range(6)
+             for count in (1, 2, 3, 4, 5, 6, 8, 10, 16, 33, 50, 100, 200, 500, 1000)]
+    rows += ['mesh_delabella_shape ' + ' '.join(map(str, v)) for v in product(range(8), range(2), range(4))]
     return '\n'.join(rows) + '\n'
 
 
