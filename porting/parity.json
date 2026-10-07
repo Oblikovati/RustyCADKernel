@@ -245920,6 +245920,34 @@
       "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
     },
     {
+      "upstream_id": "RatioTol",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_Approx.gxx",
+      "status": "excluded",
+      "notes": "File-scope constant of ApproxInt_Approx.gxx, expanded in the TKTopAlgo instance BRepApprox_Approx: the private const RATIO_TOL (1.5) of crates/tkgeomalgo/src/approx_int/approx/ (mod.rs), shared by every ApproxInt_Approx instance."
+    },
+    {
+      "upstream_id": "ComputeTrsf3d(const occ::handle<BRepApprox_ApproxLine>&,double&,double&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_Approx.gxx",
+      "status": "excluded",
+      "notes": "File-scope static function of ApproxInt_Approx.gxx, expanded in the TKTopAlgo instance BRepApprox_Approx: the private fn compute_trsf3d of crates/tkgeomalgo/src/approx_int/approx/ (build.rs), shared by every ApproxInt_Approx instance."
+    },
+    {
+      "upstream_id": "ComputeTrsf2d(const occ::handle<BRepApprox_ApproxLine>&,bool,double&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_Approx.gxx",
+      "status": "excluded",
+      "notes": "File-scope static function of ApproxInt_Approx.gxx, expanded in the TKTopAlgo instance BRepApprox_Approx: the private fn compute_trsf2d of crates/tkgeomalgo/src/approx_int/approx/ (build.rs), shared by every ApproxInt_Approx instance."
+    },
+    {
+      "upstream_id": "aMinNbPointsForApprox",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_Approx.gxx",
+      "status": "excluded",
+      "notes": "File-scope constant of ApproxInt_Approx.gxx, expanded in the TKTopAlgo instance BRepApprox_Approx: the private const MIN_NB_POINTS_FOR_APPROX (5) of crates/tkgeomalgo/src/approx_int/approx/ (perform.rs), shared by every ApproxInt_Approx instance."
+    },
+    {
       "upstream_id": "operator<<(Standard_OStream&,const FairCurve_Batten&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.lxx",
@@ -355573,6 +355601,86 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkgeombase::app_par_curves::MultiPoint needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "f0e9b8dab417d9a5c0ebb70905d2880281d2288b9251e43c4efdcf78ae2d2ba6",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "GeomBndLib_InfiniteHelpers",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomBndLib/GeomBndLib_InfiniteHelpers.pxx",
+      "rust_item": "rustycad_tkgeombase::geom_bnd_lib::infinite",
+      "status": "implemented",
+      "notes": "The namespace is the module of the same helpers."
+    },
+    {
+      "upstream_id": "GeomBndLib_InfiniteHelpers::OpenMin(const type-parameter-0-0&,type-parameter-0-1&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomBndLib/GeomBndLib_InfiniteHelpers.pxx",
+      "rust_item": "rustycad_tkgeombase::geom_bnd_lib::infinite::open_min",
+      "status": "implemented",
+      "notes": "Generic over InfiniteDirection."
+    },
+    {
+      "upstream_id": "GeomBndLib_InfiniteHelpers::OpenMax(const type-parameter-0-0&,type-parameter-0-1&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomBndLib/GeomBndLib_InfiniteHelpers.pxx",
+      "rust_item": "rustycad_tkgeombase::geom_bnd_lib::infinite::open_max",
+      "status": "implemented",
+      "notes": "Generic over InfiniteDirection."
+    },
+    {
+      "upstream_id": "GeomBndLib_InfiniteHelpers::OpenMinMax(const type-parameter-0-0&,type-parameter-0-1&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomBndLib/GeomBndLib_InfiniteHelpers.pxx",
+      "rust_item": "rustycad_tkgeombase::geom_bnd_lib::infinite::open_min_max",
+      "status": "implemented",
+      "notes": "Generic over InfiniteDirection."
+    },
+    {
+      "upstream_id": "GeomBndLib_InfiniteHelpers::OpenMin(const gp_Dir&,Bnd_Box&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomBndLib/GeomBndLib_InfiniteHelpers.pxx",
+      "rust_item": "rustycad_tkgeombase::geom_bnd_lib::infinite::open_min",
+      "status": "implemented",
+      "notes": "The gp_Dir/Bnd_Box overload is the InfiniteDirection implementation of Direction3."
+    },
+    {
+      "upstream_id": "GeomBndLib_InfiniteHelpers::OpenMax(const gp_Dir&,Bnd_Box&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomBndLib/GeomBndLib_InfiniteHelpers.pxx",
+      "rust_item": "rustycad_tkgeombase::geom_bnd_lib::infinite::open_max",
+      "status": "implemented",
+      "notes": "The gp_Dir/Bnd_Box overload is the InfiniteDirection implementation of Direction3."
+    },
+    {
+      "upstream_id": "GeomBndLib_InfiniteHelpers::OpenMinMax(const gp_Dir&,Bnd_Box&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomBndLib/GeomBndLib_InfiniteHelpers.pxx",
+      "rust_item": "rustycad_tkgeombase::geom_bnd_lib::infinite::open_min_max",
+      "status": "implemented",
+      "notes": "The gp_Dir/Bnd_Box overload is the InfiniteDirection implementation of Direction3."
+    },
+    {
+      "upstream_id": "GeomBndLib_InfiniteHelpers::OpenMin(const gp_Dir2d&,Bnd_Box2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomBndLib/GeomBndLib_InfiniteHelpers.pxx",
+      "rust_item": "rustycad_tkgeombase::geom_bnd_lib::infinite::open_min",
+      "status": "implemented",
+      "notes": "The gp_Dir2d/Bnd_Box2d overload is the InfiniteDirection implementation of Direction2."
+    },
+    {
+      "upstream_id": "GeomBndLib_InfiniteHelpers::OpenMax(const gp_Dir2d&,Bnd_Box2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomBndLib/GeomBndLib_InfiniteHelpers.pxx",
+      "rust_item": "rustycad_tkgeombase::geom_bnd_lib::infinite::open_max",
+      "status": "implemented",
+      "notes": "The gp_Dir2d/Bnd_Box2d overload is the InfiniteDirection implementation of Direction2."
+    },
+    {
+      "upstream_id": "GeomBndLib_InfiniteHelpers::OpenMinMax(const gp_Dir2d&,Bnd_Box2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomBndLib/GeomBndLib_InfiniteHelpers.pxx",
+      "rust_item": "rustycad_tkgeombase::geom_bnd_lib::infinite::open_min_max",
+      "status": "implemented",
+      "notes": "The gp_Dir2d/Bnd_Box2d overload is the InfiniteDirection implementation of Direction2."
     },
     {
       "upstream_id": "CPnts_RealFunction",

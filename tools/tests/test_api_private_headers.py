@@ -7,7 +7,12 @@ from api_inventory_conflicts import (
     expand_default_arguments,
     material_conflicts,
 )
-from api_private_headers import is_private_header_row, public_header_paths, split_private_header_rows
+from api_private_headers import (
+    inventory_public_sources,
+    is_private_header_row,
+    public_header_paths,
+    split_private_header_rows,
+)
 from remove_private_header_api_rows import removal_report, removed_rows
 
 PUBLIC_LXX = "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.lxx"
@@ -39,9 +44,16 @@ class PrivateHeaderTest(unittest.TestCase):
 
 
 class RemovalScriptTest(unittest.TestCase):
+    def test_private_fragment_with_observed_declarations_is_kept(self) -> None:
+        gxx = "src/ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_Approx.gxx"
+        parity = {"api": [row(gxx, "ApproxInt_Approx::Perform")]}
+        observed = [{"source": gxx, "api_visible": True}, {"source": PRIVATE, "api_visible": False}]
+        self.assertEqual(removed_rows(parity, {"headers": []}, observed), [])
+        self.assertEqual(inventory_public_sources(observed), {gxx})
+
     def test_removes_private_rows_in_place_and_reports_them(self) -> None:
         parity = {"api": [row(HEADER, "keep"), row(PRIVATE, "GeomHash_PointHasher::operator()")]}
-        removed = removed_rows(parity, {"headers": [{"path": HEADER}]})
+        removed = removed_rows(parity, {"headers": [{"path": HEADER}]}, [])
         self.assertEqual([item["upstream_id"] for item in parity["api"]], ["keep"])
         self.assertEqual(
             removal_report(removed),
@@ -50,7 +62,7 @@ class RemovalScriptTest(unittest.TestCase):
 
     def test_malformed_ledger_is_an_error(self) -> None:
         with self.assertRaisesRegex(ValueError, "expected a list of objects"):
-            removed_rows({"api": [1]}, {"headers": []})
+            removed_rows({"api": [1]}, {"headers": []}, [])
 
 
 class SpellingOnlyConflictTest(unittest.TestCase):

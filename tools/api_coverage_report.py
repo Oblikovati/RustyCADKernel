@@ -35,7 +35,7 @@ from api_cpp_configuration import (
     configuration_evidence,
 )
 from api_inventory_conflicts import material_conflicts
-from api_private_headers import split_private_header_rows
+from api_private_headers import inventory_public_sources, split_private_header_rows
 from api_report_inputs import (
     crosswalk_input_hashes,
     mark_conflicted_declarations,
@@ -243,7 +243,7 @@ def report_document(
     rust = rust_crates(rust_doc)
     # Private implementation headers are not public API; their rows count for nothing.
     api_rows, private_rows = split_private_header_rows(
-        row_list(parity, "api"), known_sources
+        row_list(parity, "api"), known_sources | inventory_public_sources(cpp)
     )
     matched = [
         match_api_row(row, by_name, rust, known_sources, configuration)

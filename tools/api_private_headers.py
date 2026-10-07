@@ -14,9 +14,12 @@ PRIVATE_SUFFIXES = (".pxx", ".gxx", ".lxx")
 
 
 def is_private_header_row(row: dict[str, JSONValue], public_headers: set[str]) -> bool:
-    """True for a row whose source is an unlisted private header.
+    """True for a row whose source is a private header outside the public inventory.
 
-    Example: `is_private_header_row({"source": "src/A/B/B_Utils.pxx"}, set())` is True.
+    `public_headers` holds the manifest headers and every source the C++ inventory
+    observed public declarations in: a `.gxx`/`.pxx` that a public header includes (e.g.
+    ApproxInt_Approx.gxx, GeomBndLib_InfiniteHelpers.pxx) is public API. Example:
+    `is_private_header_row({"source": "src/A/B/B_Utils.pxx"}, set())` is True.
     """
     source = row.get("source")
     if not isinstance(source, str):
@@ -39,3 +42,12 @@ def public_header_paths(manifest: dict[str, JSONValue]) -> set[str]:
     if not isinstance(headers, list):
         raise ValueError(f"header manifest field 'headers' {type(headers).__name__}: expected a list")
     return {row["path"] for row in headers if isinstance(row, dict) and isinstance(row.get("path"), str)}
+
+
+def inventory_public_sources(declarations: list[dict[str, JSONValue]]) -> set[str]:
+    """Sources of the public declarations the C++ capture observed."""
+    return {
+        str(row["source"])
+        for row in declarations
+        if row.get("api_visible") is True and isinstance(row.get("source"), str)
+    }
