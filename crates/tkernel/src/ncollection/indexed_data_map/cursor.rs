@@ -40,7 +40,7 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// ```
     pub fn contained(&self, key: &K) -> Option<(&K, &V)> {
         let index = self.find_index(key);
-        (index != 0).then(|| (self.storage.key(index), self.storage.value(index)))
+        (index != 0).then(|| self.storage.payload().entry(index - 1))
     }
 
     /// `Contained()`: the stored key and a mutable item of an equivalent key, if bound.
@@ -54,8 +54,7 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// ```
     pub fn contained_mut(&mut self, key: &K) -> Option<(&K, &mut V)> {
         let index = self.find_index(key);
-        (index != 0)
-            .then(|| unsafe { super::iteration::pair_mut::<K, V>(self.storage.node(index)) })
+        (index != 0).then(|| self.storage.payload_mut().entry_mut(index - 1))
     }
 
     /// `Clear(const Handle(NCollection_BaseAllocator)&)`: clears, releasing storage only when

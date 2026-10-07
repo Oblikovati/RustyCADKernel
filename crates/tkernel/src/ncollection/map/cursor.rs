@@ -73,7 +73,7 @@ impl<'a, K> MapIterator<'a, K> {
         self.keys
             .entries
             .current()
-            .map(|node| node.key())
+            .map(|(key, _)| key)
             .ok_or_else(|| exhausted_iterator(method))
     }
 }

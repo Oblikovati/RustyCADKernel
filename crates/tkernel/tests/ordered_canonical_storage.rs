@@ -122,16 +122,15 @@ fn resize_hash_panic_restores_original_bucket_graph_without_rehashing() {
     assert_eq!(first, std::ptr::from_ref(map.first().unwrap()));
 }
 #[test]
-fn allocator_change_releases_old_native_nodes_and_adopts_new_provenance() {
+fn allocator_change_releases_the_table_and_adopts_the_new_allocator() {
     let old = BaseAllocator::incremental(512);
     let new = BaseAllocator::incremental(512);
     let mut map = OrderedMap::with_allocator(DefaultHashPolicy, 101, old.clone());
     map.add(1);
-    assert!(old.reset(false).is_err());
     map.clear_with_allocator(Some(new.clone()));
-    assert!(old.reset(false).is_ok());
+    assert!(map.is_empty() && map.buckets().is_none());
+    assert_eq!(map.allocator(), &new);
     map.add(2);
-    assert!(new.reset(false).is_err());
     map.clear(false);
     assert!(new.reset(false).is_ok());
     assert_eq!(map.allocator(), &new);

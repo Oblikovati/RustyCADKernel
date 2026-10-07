@@ -1,7 +1,12 @@
 //! Native ReSize relinks every chain in old-bucket order and hashes each key once.
 //! The `_0` rows of tools/oracle/tkernel_ordered_resize_progress.expected are the native
 //! successful rehash; the rows with a throwing hasher are D1 class B3 and are not reproduced.
-#![allow(unsafe_code)]
+//! The rows' live-node count in the map arena is protected allocator state (plan D1 class B6):
+//! slot storage allocates no per-entry node, so that one field is not compared.
+#[allow(dead_code)]
+#[path = "support/native_node_counts.rs"]
+mod native_node_counts;
+use native_node_counts::mask_column;
 use rustycad_tkernel::ncollection::*;
 use std::cell::{Cell, RefCell};
 
@@ -54,46 +59,64 @@ const PATTERNS: [(&str, [usize; 3]); 4] = [
     ("merge", [0, 1009, 2018]),
     ("mixed", [0, 101, 1009]),
 ];
-fn active(arena: &BaseAllocator) -> i32 {
-    arena
-        .accumulating_chain()
-        .iter()
-        .map(|block| block.alloc_count)
-        .sum()
-}
+/// Index of the B6 live-node count among the space-separated fields of a `_0` row.
+const LIVE_NODES_FIELD: usize = 8;
 fn native_line(label: &str) -> &'static str {
     include_str!("../../../tools/oracle/tkernel_ordered_resize_progress.expected")
         .lines()
         .find(|line| line.starts_with(&format!("{label} ")))
         .unwrap_or_else(|| panic!("oracle row {label}; expected a native resize row"))
 }
+/// Every chain of the table head first, as `(bucket, key ids)`.
+fn chains<V>(table: &HashBucketTable<'_, ResizeKey<'_>, V>) -> Vec<(usize, Vec<i32>)> {
+    (0..table.len())
+        .map(|bucket| {
+            (
+                bucket,
+                table
+                    .chain(bucket)
+                    .unwrap()
+                    .map(|(key, _)| key.id)
+                    .collect(),
+            )
+        })
+        .filter(|(_, keys): &(usize, Vec<i32>)| !keys.is_empty())
+        .collect()
+}
 /// Bucket graph text `bucket:key,key,;` as the native probe prints it (`-` when empty).
-unsafe fn graph(
-    buckets: *const *mut MapLinkNode,
-    count: usize,
-    key: unsafe fn(*mut MapLinkNode) -> i32,
-) -> String {
-    let mut text = String::new();
-    for bucket in 0..=count {
-        let mut node = unsafe { *buckets.add(bucket) };
-        if node.is_null() {
-            continue;
-        }
-        text.push_str(&format!("{bucket}:"));
-        while !node.is_null() {
-            text.push_str(&format!("{},", unsafe { key(node) }));
-            node = unsafe { (*node).next() };
-        }
-        text.push(';');
-    }
+fn graph<V>(table: &HashBucketTable<'_, ResizeKey<'_>, V>) -> String {
+    let text: String = chains(table)
+        .iter()
+        .map(|(bucket, keys)| {
+            let keys: String = keys.iter().map(|id| format!("{id},")).collect();
+            format!("{bucket}:{keys};")
+        })
+        .collect();
     if text.is_empty() { "-".into() } else { text }
 }
+/// Each key's chain successor `id:next,` in key order (0 for the chain end).
+fn links<V>(table: &HashBucketTable<'_, ResizeKey<'_>, V>) -> String {
+    let mut successors = Vec::new();
+    for (_, keys) in chains(table) {
+        let nexts = keys.iter().skip(1).copied().chain([0]);
+        successors.extend(keys.iter().copied().zip(nexts));
+    }
+    successors.sort();
+    successors
+        .iter()
+        .map(|(id, next)| format!("{id}:{next},"))
+        .collect()
+}
+fn counts(len: usize, bucket_count: usize) -> String {
+    let bucket_bytes = (bucket_count + 1) * size_of::<*const ()>();
+    let fields = [0, len, bucket_count, 0, 1, 0, bucket_bytes, 0, 1, 3];
+    fields.map(|count| count.to_string()).join(" ")
+}
 macro_rules! resize_suite {
-    ($module:ident, $family:literal, $map:ty, $node:ty, $fill:ident) => {
+    ($module:ident, $family:literal, $map:ty, $fill:ident) => {
         mod $module {
             use super::*;
             type Map<'a> = $map;
-            type Node<'a> = $node;
             fn build<'a>(trace: &'a ResizeTrace, arena: &BaseAllocator) -> Map<'a> {
                 let mut map = Map::with_allocator(ResizePolicy(trace), 101, arena.clone());
                 for id in [1, 2, 3] {
@@ -101,73 +124,30 @@ macro_rules! resize_suite {
                 }
                 map
             }
-            unsafe fn key(node: *mut MapLinkNode) -> i32 {
-                unsafe { (*node.cast::<Node<'_>>()).key().id }
-            }
-            fn map_nodes<'a>(map: &Map<'a>) -> Vec<*mut Node<'a>> {
-                let mut nodes = Vec::new();
-                let mut node = map.basic_first_node();
-                while !node.is_null() {
-                    nodes.push(node);
-                    node = unsafe { (*node).order_next() };
-                }
-                nodes
-            }
-            /// Each node's chain successor `id:next,` in key order (0 for the chain end).
-            fn links(nodes: &[*mut Node<'_>]) -> String {
-                let mut ordered = nodes.to_vec();
-                ordered.sort_by_key(|node| unsafe { (**node).key().id });
-                ordered
-                    .iter()
-                    .map(|&node| unsafe {
-                        let next = (*node).link().next();
-                        let next = if next.is_null() { 0 } else { key(next) };
-                        format!("{}:{next},", (*node).key().id)
-                    })
-                    .collect()
-            }
-            fn counts(map: &Map<'_>) -> String {
-                let bucket_bytes = (map.bucket_count() + 1) * size_of::<*mut MapLinkNode>();
-                let active = active(map.allocator()) as usize;
-                let fields = [
-                    0,
-                    map.len(),
-                    map.bucket_count(),
-                    0,
-                    1,
-                    0,
-                    bucket_bytes,
-                    active,
-                    1,
-                    3,
-                ];
-                fields.map(|count| count.to_string()).join(" ")
-            }
             fn resize_case(pattern: &str, hashes: [usize; 3]) {
                 let arena = BaseAllocator::accumulating(4096).unwrap();
                 let trace = ResizeTrace::new(hashes);
                 let mut map = build(&trace, &arena);
-                let old = map.buckets();
-                let nodes = map_nodes(&map);
+                let old = map.buckets().map(|table| table.identity());
                 trace.start();
                 map.resize(1000);
-                assert_ne!(map.buckets(), old);
+                let table = map.buckets().unwrap();
+                assert_ne!(Some(table.identity()), old);
                 let label = format!("{}_{}_0", $family, pattern);
-                let snapshot = unsafe { graph(map.buckets(), map.bucket_count(), key) };
+                let snapshot = graph(&table);
                 let row = format!(
                     "{label} {} {} {snapshot} {snapshot} {}",
-                    counts(&map),
-                    links(&nodes),
+                    counts(map.len(), map.bucket_count()),
+                    links(&table),
                     trace.events.borrow()
                 );
-                assert_eq!(row, native_line(&label));
+                assert_eq!(
+                    mask_column(&row, LIVE_NODES_FIELD),
+                    mask_column(native_line(&label), LIVE_NODES_FIELD)
+                );
                 trace.events.borrow_mut().clear();
                 map.clear(false);
-                let clear = format!(
-                    "{label}_clear defined {} 0 {}",
-                    active(&arena),
-                    trace.events.borrow()
-                );
+                let clear = format!("{label}_clear defined 0 0 {}", trace.events.borrow());
                 assert_eq!(clear, native_line(&format!("{label}_clear")));
                 trace.active.set(false);
             }
@@ -181,10 +161,10 @@ macro_rules! resize_suite {
             fn no_op_resize_never_invokes_the_hasher() {
                 let trace = ResizeTrace::new([0, 0, 0]);
                 let mut map = build(&trace, &BaseAllocator::fresh_heap());
-                let old = map.buckets();
+                let old = map.buckets().map(|table| table.identity());
                 trace.start();
                 map.resize(0);
-                assert_eq!(map.buckets(), old);
+                assert_eq!(map.buckets().map(|table| table.identity()), old);
                 assert!(trace.events.borrow().is_empty());
                 trace.active.set(false);
             }
@@ -195,7 +175,7 @@ macro_rules! resize_suite {
                 let mut map = Map::with_allocator(ResizePolicy(&trace), 13, arena);
                 trace.start();
                 map.resize(0);
-                assert!(!map.buckets().is_null());
+                assert!(map.buckets().is_some());
                 assert!(trace.events.borrow().is_empty());
                 trace.active.set(false);
             }
@@ -216,13 +196,11 @@ resize_suite!(
     set,
     "set",
     OrderedMap<ResizeKey<'a>, ResizePolicy<'a>>,
-    OrderedMapNode<ResizeKey<'a>>,
     add_set
 );
 resize_suite!(
     data,
     "data",
     OrderedDataMap<ResizeKey<'a>, i32, ResizePolicy<'a>>,
-    OrderedDataMapNode<ResizeKey<'a>, i32>,
     bind_data
 );

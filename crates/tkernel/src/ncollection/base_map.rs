@@ -1,27 +1,14 @@
 //! The public surface `NCollection_BaseMap` gives every hashed map.
 use super::{BaseAllocator, DataMap, DoubleMap, HashPolicy, IndexedDataMap, IndexedMap, Map};
 use std::fmt::Debug;
-mod basic_iterator;
-mod basic_node;
-mod bucket_scan;
-pub use basic_iterator::BaseMapBasicIterator;
-pub use basic_node::{BasicMapIteratorSource, BasicMapNode, BasicMapNodeMut};
-mod bucket_iterator;
-mod bucket_table;
+// The protected NCollection_BaseMap members (bucket table, resize protocol, destroy, the
+// BasicIterator and Iterator bases) are plan D1 class B6: every hashed map keeps that state in
+// its safe slot storage (`slot_chains`). `MapLinkNode` remains the `NCollection_ListNode` of the
+// lists.
 mod link_node;
-mod resize_outputs;
 mod resize_plan;
-use resize_plan::next_resize_count;
-pub(super) use resize_plan::{planned_bucket_count, table_slot_count};
-mod storage;
-pub use bucket_iterator::BaseMapBucketIterator;
 pub use link_node::MapLinkNode;
-pub use resize_plan::BaseMapResize;
-pub use storage::BaseMapStorage;
-mod double_storage;
-mod indexed_storage;
-pub use double_storage::{BaseDoubleMapResize, BaseDoubleMapStorage};
-pub use indexed_storage::BaseIndexedMapStorage;
+pub(super) use resize_plan::{planned_bucket_count, table_slot_count};
 mod indexed_cursor;
 mod indexed_source;
 pub use indexed_cursor::BaseMapIndexedIterator;

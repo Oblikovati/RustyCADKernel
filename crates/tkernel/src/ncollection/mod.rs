@@ -104,17 +104,13 @@ mod hash_policy;
 pub use hash_policy::{DefaultHashPolicy, HashKey, HashPolicy, buckets_from_int, next_map_prime};
 mod base_map;
 pub use base_map::{
-    BaseDoubleMapResize, BaseDoubleMapStorage, BaseIndexedMapStorage, BaseMap,
-    BaseMapBasicIterator, BaseMapBucketIterator, BaseMapIndexedIterator, BaseMapResize,
-    BaseMapStorage, BasicMapIteratorSource, BasicMapNode, BasicMapNodeMut, IndexedCursorSource,
-    IndexedCursorSourceMut, MapLinkNode,
+    BaseMap, BaseMapIndexedIterator, IndexedCursorSource, IndexedCursorSourceMut, MapLinkNode,
 };
 mod chained_slots;
-pub use chained_slots::{HashBucketChain, HashBucketTable};
-mod double_map_node;
-mod native_noexcept;
-pub use double_map_node::{DoubleMapNode, DoubleMapNodeOwner};
+mod slot_chains;
+pub use slot_chains::{HashBucketChain, HashBucketTable};
 mod data_map;
+mod native_noexcept;
 pub use data_map::{DataMap, DataMapItems, DataMapIterator, DataMapIteratorMut};
 
 mod map;
@@ -122,11 +118,7 @@ pub use map::{Map, MapIter, MapIterator};
 pub mod map_algo;
 
 mod indexed_map;
-mod indexed_storage;
-pub use indexed_map::{
-    IndexedMap, IndexedMapItems, IndexedMapIter, IndexedMapIterator, IndexedMapObservation,
-    IndexedMapObserver,
-};
+pub use indexed_map::{IndexedMap, IndexedMapItems, IndexedMapIter, IndexedMapIterator};
 
 mod indexed_data_map;
 pub use indexed_data_map::{
@@ -135,10 +127,7 @@ pub use indexed_data_map::{
 };
 
 mod double_map;
-pub use double_map::{
-    DoubleMap, DoubleMapItems, DoubleMapIterator, DoubleMapObservation, DoubleMapObserver,
-    DoubleMapValues,
-};
+pub use double_map::{DoubleMap, DoubleMapItems, DoubleMapIterator, DoubleMapValues};
 
 mod flat_map;
 mod flat_table;
@@ -219,23 +208,4 @@ pub use sparse_array_base::{
     SparseArrayBlockCell, SparseCopyItemFunc, SparseCreateItemFunc, SparseDestroyItemFunc,
 };
 
-mod map_node;
-mod node_owner;
-pub use map_node::{MapNode, MapNodeOwner};
-
-mod indexed_data_map_node;
-mod indexed_map_node;
-mod indexed_node_owner;
-pub use indexed_data_map_node::{IndexedDataMapNode, IndexedDataMapNodeOwner};
-pub use indexed_map_node::{IndexedMapNode, IndexedMapNodeOwner};
-mod owned_bucket_chains;
-
 mod map_payload;
-mod map_topology;
-
-mod ordered_data_map_node;
-mod ordered_map_node;
-mod ordered_node_links;
-mod ordered_node_owner;
-pub use ordered_data_map_node::{OrderedDataMapNode, OrderedDataMapNodeOwner};
-pub use ordered_map_node::{OrderedMapNode, OrderedMapNodeOwner};

@@ -1,10 +1,10 @@
-//! Hash keys threaded in insertion order, with stable node identity.
+//! Hash keys threaded in insertion order over safe slots.
 use super::ordered_table::{OrderedItems, OrderedNodeRef, OrderedTable, buckets_from_int};
 use super::{BaseAllocator, DefaultHashPolicy, HashPolicy};
 use crate::standard::Failure;
 /// An insertion-ordered set; `OrderedMap::<i32>::default().add(42)`.
 pub struct OrderedMap<K, H = DefaultHashPolicy> {
-    table: OrderedTable<K, (), H, super::OrderedMapNode<K>>,
+    table: OrderedTable<K, (), H>,
 }
 /// Shared key range and legacy cursor; `map.iter().key()?`.
 pub struct OrderedMapIter<'a, K> {
@@ -15,7 +15,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     pub fn with_hasher(hasher: H, buckets: usize) -> Self {
         Self::with_allocator(hasher, buckets, BaseAllocator::common())
     }
-    /// Selects the node allocator; `OrderedMap::with_allocator(policy,10,arena)`.
+    /// Selects the map allocator; `OrderedMap::with_allocator(policy,10,arena)`.
     pub fn with_allocator(hasher: H, buckets: usize, resource: BaseAllocator) -> Self {
         Self {
             table: OrderedTable::new(hasher, buckets, resource),
@@ -44,13 +44,27 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
         self.table.clear_with_allocator(resource);
     }
+    /// Native `Buckets()`: the key table (chains yield `(&key, &())`), or `None` where native
+    /// returns null; the insertion-order links stay private.
+    ///
+    /// ```
+    /// # use rustycad_tkernel::ncollection::OrderedMap;
+    /// let mut map = OrderedMap::<i32>::default();
+    /// assert!(map.buckets().is_none());
+    /// map.add(7);
+    /// assert_eq!(map.buckets().unwrap().chain(8)?.count(), 1);
+    /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
+    /// ```
+    pub fn buckets(&self) -> Option<crate::ncollection::HashBucketTable<'_, K, ()>> {
+        self.table.buckets()
+    }
     /// The head of the insertion order as a node view, `None` when empty; `map.first_node()`.
     pub fn first_node(&self) -> Option<OrderedNodeRef<'_, K, ()>> {
         self.table.first_node()
     }
     /// Counts unique keys; `map.len()==3`.
     pub fn len(&self) -> usize {
-        self.table.count
+        self.table.len()
     }
     /// Returns OCCT's key extent; `map.extent()==3`.
     pub fn extent(&self) -> usize {
@@ -62,7 +76,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     }
     /// Returns the hash modulus; `map.bucket_count()`.
     pub fn bucket_count(&self) -> usize {
-        self.table.bucket_count
+        self.table.bucket_count()
     }
     /// Borrows the retained hash policy; `map.hasher().salt`.
     pub fn hasher(&self) -> &H {
@@ -72,7 +86,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     pub fn allocator(&self) -> &BaseAllocator {
         self.table.resource()
     }
-    /// Rehashes while retaining insertion order and node addresses; `map.resize(200)`.
+    /// Rehashes while retaining insertion order; `map.resize(200)`.
     pub fn resize(&mut self, size: usize) {
         self.table.resize(size);
     }
@@ -97,7 +111,7 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     pub fn emplace(&mut self, key: K) -> bool {
         self.table.place(key, || (), true, false).0
     }
-    /// Reconstructs and returns stable key storage; `map.emplaced(42)`.
+    /// Reconstructs and returns the stored key; `map.emplaced(42)`.
     pub fn emplaced(&mut self, key: K) -> &K {
         let (_, slot) = self.table.place(key, || (), true, false);
         self.table.key(slot)
@@ -120,11 +134,11 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
     }
     /// Borrows the earliest remaining key; `map.first()?`.
     pub fn first(&self) -> Result<&K, Failure> {
-        self.edge(self.table.first)
+        self.edge(self.table.first())
     }
     /// Borrows the latest remaining key; `map.last()?`.
     pub fn last(&self) -> Result<&K, Failure> {
-        self.edge(self.table.last)
+        self.edge(self.table.last())
     }
     /// Swaps storage, order, policies and allocators; `map.exchange(&mut other)`.
     /// Uses Rust policy swapping; use `exchange_with` for native policy callbacks.
@@ -164,7 +178,7 @@ impl<K, H: HashPolicy<K> + Default> OrderedMap<K, H> {
 }
 impl<K, H: HashPolicy<K> + Clone> OrderedMap<K, H> {
     /// Compatibility transfer retaining a cloned source policy; use `move_from_with` for native policy moves.
-    /// Moves nodes, leaving source allocator and bucket selection intact; `OrderedMap::move_from(&mut source)`.
+    /// Moves the entries, leaving source allocator and bucket selection intact; `OrderedMap::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {
         let empty = Self::with_allocator(
             source.hasher().clone(),
@@ -212,7 +226,7 @@ fn empty_ordered() -> Failure {
 impl<'a, K> OrderedMapIter<'a, K> {
     /// Checks whether the cursor has a current key; `cursor.more()`.
     pub fn more(&self) -> bool {
-        self.inner.current.is_some()
+        self.inner.more()
     }
     /// Borrows the current key without advancing; `cursor.key()?`.
     pub fn key(&self) -> Result<&'a K, Failure> {
@@ -296,7 +310,7 @@ impl<'a, K, H: HashPolicy<K>> IntoIterator for &'a OrderedMap<K, H> {
     }
 }
 
-super::ordered_table::ordered_base_bridge!(OrderedMap<K,H>,super::OrderedMapNode<K>);
+super::ordered_table::ordered_base_bridge!(OrderedMap<K,H>);
 
 super::ordered_table::ordered_policy_construction!(OrderedMap<K,H>, H);
 
@@ -306,7 +320,5 @@ super::ordered_table::ordered_policy_exchange!(OrderedMap<K,H>, H);
 mod construction;
 
 super::ordered_table::ordered_default_construction!(OrderedMap<K,H>, H);
-
-super::ordered_table::ordered_protected_lookup!(OrderedMap<K,H>,H,super::OrderedMapNode<K>);
 
 super::ordered_table::ordered_borrowed_clear!(OrderedMap<K,H>);

@@ -1,43 +1,39 @@
-use rustycad_tkernel::ncollection::{
-    BaseAllocator, BaseMapBasicIterator, DoubleMap, DoubleMapNode, HashPolicy,
-};
+use rustycad_tkernel::ncollection::{BaseAllocator, DoubleMap, HashPolicy};
+fn first_chains(map: &super::hash_order::OrderedMap) -> Vec<(usize, i32, i32)> {
+    let table = map.buckets().unwrap();
+    let mut chains = Vec::new();
+    for bucket in 0..table.len() {
+        chains.extend(table.chain(bucket).unwrap().map(|(a, b)| (bucket, *a, *b)));
+    }
+    chains
+}
 #[test]
-fn facade_exposes_actual_dual_chain_nodes_and_native_generic_key2() {
+fn public_table_is_the_key1_table_and_the_cursor_follows_it() {
     let (mut map, _events) = super::hash_order::ordered_map();
     map.bind(1, 5).unwrap();
     map.bind(2, 6).unwrap();
-    let state = map.observer().snapshot();
-    assert_eq!(
-        state.second_table - state.first_table,
-        (state.bucket_count + 1) * size_of::<usize>()
-    );
-    let mut cursor = BaseMapBasicIterator::<DoubleMapNode<i32, i32>, false, true>::new(&map);
-    unsafe {
-        assert_eq!(cursor.key(), &5);
-        assert_eq!((*cursor.node()).key1(), &1);
-        assert_eq!(cursor.value_ptr(), map.seek1_ptr(&1));
-        cursor.advance();
-        assert_eq!(cursor.key(), &6);
-    }
+    assert_eq!(map.buckets().unwrap().len(), map.bucket_count() + 1);
+    assert_eq!(first_chains(&map), [(2, 1, 5), (3, 2, 6)]);
+    let mut cursor = map.cursor();
+    assert_eq!((cursor.key1().unwrap(), cursor.key2().unwrap()), (&1, &5));
+    assert_eq!(cursor.value_ptr(), map.seek1_ptr(&1));
+    cursor.next();
+    assert_eq!((cursor.key1().unwrap(), cursor.value().unwrap()), (&2, &6));
 }
 #[test]
-fn retained_payload_pointers_survive_link_rewrites_resize_and_neighbor_removal() {
+fn bindings_survive_link_rewrites_resize_and_neighbor_removal() {
     let (mut map, _events) = super::hash_order::ordered_map();
     map.bind(1, 5).unwrap();
-    let first = map.seek2_ptr(&5);
-    let second = map.seek1_ptr(&1);
     map.bind(2, 6).unwrap();
     map.bind(3, 7).unwrap();
     map.resize(200);
     assert!(map.unbind2(&6));
-    unsafe {
-        assert_eq!((*first, *second), (1, 5));
-    }
-    assert_eq!(map.seek1_ptr(&1), second);
-    assert_eq!(map.seek2_ptr(&5), first);
+    assert_eq!((map.seek2(&5), map.seek1(&1)), (Some(&1), Some(&5)));
+    assert_eq!((map.seek2(&7), map.seek1(&3)), (Some(&3), Some(&7)));
+    assert_eq!(first_chains(&map), [(2, 1, 5), (4, 3, 7)]);
 }
 #[test]
-fn clear_with_same_allocator_releases_both_tables_and_keeps_observer_identity() {
+fn clear_with_same_allocator_releases_both_tables_and_keeps_the_allocator() {
     let arena = BaseAllocator::incremental(512);
     let mut map = DoubleMap::<i32, i32>::with_allocator(
         Default::default(),
@@ -46,29 +42,23 @@ fn clear_with_same_allocator_releases_both_tables_and_keeps_observer_identity() 
         arena.clone(),
     );
     map.bind(1_i32, 5_i32).unwrap();
-    let observer = map.observer();
     map.clear_with_allocator(Some(arena.clone()));
-    let state = observer.snapshot();
-    assert_eq!(
-        (state.size, state.first_table, state.second_table),
-        (0, 0, 0)
-    );
-    assert_eq!(state.allocator, arena.identity().addr());
+    assert!(map.is_empty() && map.buckets().is_none());
+    assert_eq!(map.allocator(), &arena);
 }
 #[test]
-fn exchange_and_move_keep_observers_attached_to_their_original_containers() {
+fn exchange_and_move_transfer_the_table_with_its_pairs() {
     let mut first = DoubleMap::<i32, i32>::default();
     let mut second = DoubleMap::<i32, i32>::default();
     first.bind(1, 5).unwrap();
-    let a = first.observer();
-    let b = second.observer();
-    let table = a.snapshot().first_table;
+    let table = first.buckets().unwrap().identity();
     first.exchange(&mut second);
-    assert_eq!(a.snapshot().size, 0);
-    assert_eq!(b.snapshot().first_table, table);
+    assert!(first.is_empty() && first.buckets().is_none());
+    assert_eq!(second.buckets().unwrap().identity(), table);
     first.move_assign(&mut second);
-    assert_eq!(a.snapshot().first_table, table);
-    assert_eq!(b.snapshot().size, 0);
+    assert_eq!(first.buckets().unwrap().identity(), table);
+    assert_eq!(first.seek1(&1), Some(&5));
+    assert!(second.is_empty() && second.buckets().is_none());
 }
 #[derive(Debug, Clone, PartialEq, Eq)]
 #[repr(align(64))]
@@ -84,7 +74,7 @@ impl HashPolicy<WideKey> for WideHash {
     }
 }
 #[test]
-fn actual_nodes_support_overaligned_keys_and_zero_sized_pairs() {
+fn slots_support_overaligned_keys_and_zero_sized_pairs() {
     let mut wide = DoubleMap::<WideKey, WideKey, WideHash, WideHash>::default();
     wide.bind(WideKey(1), WideKey(2)).unwrap();
     assert_eq!(wide.seek1_ptr(&WideKey(1)).addr() % 64, 0);

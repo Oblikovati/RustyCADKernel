@@ -1,7 +1,8 @@
-//! Indexed values retain address identity and failure atomicity through edits.
+//! Indexed values keep their bindings and failure atomicity through edits (slot addresses may
+//! move on growth or Swap; plan D1 class B5).
 use rustycad_tkernel::ncollection::{BaseAllocator, DefaultHashPolicy, IndexedDataMap};
 #[test]
-fn existing_values_are_stable_and_try_construction_is_lazy() {
+fn existing_values_survive_edits_and_try_construction_is_lazy() {
     let mut map = IndexedDataMap::<i32, i32>::default();
     let address = map.bound(1, 42) as *const i32;
     assert_eq!(map.try_emplace(1, || panic!("must not construct")), 1);
@@ -10,7 +11,7 @@ fn existing_values_are_stable_and_try_construction_is_lazy() {
     map.add(2, 99);
     map.swap(1, 2).unwrap();
     map.resize(1000);
-    assert_eq!(map.find_from_key(&1).unwrap() as *const i32, address);
+    assert_eq!(map.find_from_key(&1), Ok(&7));
     map.remove_from_index(1).unwrap();
     assert_eq!(map.find_index(&1), 1);
     assert_eq!(map.find_from_index(1), Ok(&7));

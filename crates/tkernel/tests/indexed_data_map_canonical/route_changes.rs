@@ -50,17 +50,12 @@ impl HashPolicy<MutableKey> for MutablePolicy {
     }
 }
 #[test]
-fn interior_key_mutation_keeps_owned_node_reachable_for_safe_removal() {
+fn interior_key_mutation_still_removes_the_binding_from_its_recorded_chain() {
     let mut map = IndexedDataMap::with_hasher(MutablePolicy, 101);
     map.add(MutableKey(Cell::new(1)), 10);
     map.find_key(1).unwrap().0.set(9);
     map.remove_last().unwrap();
     assert!(map.is_empty());
-    assert!(
-        map.observer()
-            .snapshot()
-            .buckets
-            .iter()
-            .all(|head| *head == 0)
-    );
+    let table = map.buckets().unwrap();
+    assert!((0..table.len()).all(|bucket| table.chain(bucket).unwrap().next().is_none()));
 }

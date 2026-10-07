@@ -1,18 +1,14 @@
+//! `NCollection_OrderedDataMap::Iterator` as a detached cursor: it holds the map identity and
+//! the never-reused identity of its current entry, and reborrows the map for every access, so a
+//! cursor whose entry was removed reports Standard_NoSuchObject instead of dangling.
 use super::{Failure, HashPolicy, OrderedDataCursor, OrderedDataMap};
 impl<K, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Creates a detached legacy cursor for explicit reborrowing; `map.cursor()`.
     pub fn cursor(&self) -> OrderedDataCursor {
         OrderedDataCursor {
-            slot: self.table.first,
             owner: std::ptr::from_ref(self).cast(),
-            node: self.cursor_node_identity(self.table.first),
+            entry: self.table.first().map(|slot| self.table.serial(slot)),
         }
-    }
-    fn cursor_node_identity(&self, slot: Option<usize>) -> *const () {
-        self.checked_node_slot(slot)
-            .map_or(std::ptr::null(), |slot| {
-                self.table.node_pointer(slot).cast_const().cast()
-            })
     }
 }
 impl OrderedDataCursor {
@@ -35,25 +31,21 @@ impl OrderedDataCursor {
     }
     /// Checks whether the cursor is exhausted; `cursor.more()`.
     pub fn more(&self) -> bool {
-        self.slot.is_some()
+        self.entry.is_some()
     }
     /// Borrows the current key from its map; `cursor.key(&map)?`.
     pub fn key<'a, K, V, H: HashPolicy<K>>(
         &self,
         map: &'a OrderedDataMap<K, V, H>,
     ) -> Result<&'a K, Failure> {
-        Ok(map
-            .table
-            .key(map.checked_node_slot(self.checked_slot(map)?)?))
+        Ok(map.table.key(self.checked_slot(map)?))
     }
     /// Borrows the current value from its map; `cursor.value(&map)?`.
     pub fn value<'a, K, V, H: HashPolicy<K>>(
         &self,
         map: &'a OrderedDataMap<K, V, H>,
     ) -> Result<&'a V, Failure> {
-        Ok(map
-            .table
-            .value(map.checked_node_slot(self.checked_slot(map)?)?))
+        Ok(map.table.value(self.checked_slot(map)?))
     }
     /// Borrows the current value exclusively; `*cursor.change_value(&mut map)?=42`.
     pub fn change_value<'a, K, V, H: HashPolicy<K>>(
@@ -61,35 +53,37 @@ impl OrderedDataCursor {
         map: &'a mut OrderedDataMap<K, V, H>,
     ) -> Result<&'a mut V, Failure> {
         let slot = self.checked_slot(map)?;
-        let slot = map.checked_node_slot(slot)?;
         Ok(map.table.value_mut(slot))
     }
-    /// Advances through insertion-order links; `cursor.advance(&map)`.
+    /// Advances through insertion-order links; a cursor off its map's live entries becomes
+    /// exhausted; `cursor.advance(&map)`.
     pub fn advance<K, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
-        self.slot = self
+        let next = self
             .checked_slot(map)
             .ok()
-            .and_then(|slot| map.table.next_slot(map.checked_node_slot(slot).ok()?));
-        self.node = map.cursor_node_identity(self.slot);
+            .and_then(|slot| map.table.next_slot(slot));
+        self.entry = next.map(|slot| map.table.serial(slot));
     }
-
+    // The live slot of the current entry of `map`, or Standard_NoSuchObject.
     fn checked_slot<K, V, H: HashPolicy<K>>(
         &self,
         map: &OrderedDataMap<K, V, H>,
-    ) -> Result<Option<usize>, Failure> {
-        let owner = std::ptr::from_ref(map).cast();
-        let node = map.cursor_node_identity(self.slot);
-        if owner == self.owner && !node.is_null() && node == self.node {
-            return Ok(self.slot);
-        }
-        Err(Failure::with_type(
-            "Standard_NoSuchObject",
-            &format!(
-                "OrderedDataCursor owner {owner:p}, node {node:p}; expected owner {:p}, live node {:p}",
-                self.owner, self.node
-            ),
-            "",
-        ))
+    ) -> Result<usize, Failure> {
+        let owner: *const () = std::ptr::from_ref(map).cast();
+        let slot = (owner == self.owner)
+            .then_some(self.entry)
+            .flatten()
+            .and_then(|entry| map.table.slot_of(entry));
+        slot.ok_or_else(|| {
+            Failure::with_type(
+                "Standard_NoSuchObject",
+                &format!(
+                    "OrderedDataCursor owner {owner:p}, entry {:?}; expected owner {:p} and a live entry",
+                    self.entry, self.owner
+                ),
+                "",
+            )
+        })
     }
 
     /// Copies cursor state and returns the destination; `cursor.assign(&other)`.

@@ -1,66 +1,7 @@
-//! A pending resize owns its replacement table until committed or dropped.
-use super::{MapLinkNode, bucket_table::BucketTable};
+//! The native `beginResize` decision and table sizing shared by every hashed map.
 use crate::{ncollection::next_map_prime, standard::Failure};
 
-/// Result of native `beginResize`, retaining the computed modulus even on a no-op.
-/// Example: `let plan = storage.begin_resize(100)?; assert_eq!(plan.bucket_count(), 101);`.
-/// Dropping an uncommitted replacement releases only its table, never its nodes.
-pub struct BaseMapResize {
-    pub(super) bucket_count: usize,
-    pub(super) replacement: Option<BucketTable>,
-}
-
-impl BaseMapResize {
-    pub(super) fn prepare(
-        extent: usize,
-        current: usize,
-        allocated: bool,
-        tables: usize,
-    ) -> Result<Self, Failure> {
-        let Some(bucket_count) = planned_bucket_count(extent, current, allocated) else {
-            return Ok(Self {
-                bucket_count: next_map_prime(extent),
-                replacement: None,
-            });
-        };
-        let count = table_slot_count(bucket_count, tables)?;
-        Ok(Self {
-            bucket_count,
-            replacement: Some(BucketTable::zeroed(count)?),
-        })
-    }
-    /// The native output modulus, including no-op requests; `plan.bucket_count()`.
-    pub fn bucket_count(&self) -> usize {
-        self.bucket_count
-    }
-    /// Whether `beginResize` allocated a replacement; `assert!(plan.is_resize())`.
-    pub fn is_resize(&self) -> bool {
-        self.replacement.is_some()
-    }
-    /// Borrows replacement pointer slots, or an empty slice on a no-op; `plan.bucket_slots()`.
-    pub fn bucket_slots(&self) -> &[*mut MapLinkNode] {
-        self.replacement.as_ref().map_or(&[], BucketTable::as_slice)
-    }
-    /// Allows relinking nodes before commit; `plan.bucket_slots_mut()[0] = node`.
-    pub fn bucket_slots_mut(&mut self) -> &mut [*mut MapLinkNode] {
-        self.replacement
-            .as_mut()
-            .map_or(&mut [], BucketTable::as_mut_slice)
-    }
-    /// Returns pending raw `Buckets`, null for a no-op; `plan.buckets().is_null()`.
-    pub fn buckets(&self) -> *const *mut MapLinkNode {
-        self.replacement
-            .as_ref()
-            .map_or(std::ptr::null(), |table| table.as_ptr().cast_const())
-    }
-    /// Returns writable pending `Buckets`, null for a no-op; `plan.buckets_mut()`.
-    pub fn buckets_mut(&mut self) -> *mut *mut MapLinkNode {
-        self.replacement
-            .as_ref()
-            .map_or(std::ptr::null_mut(), BucketTable::as_ptr)
-    }
-}
-
+/// Heads in `tables` tables of `buckets + 1` heads, or Standard_OutOfMemory on overflow.
 pub(in crate::ncollection) fn table_slot_count(
     buckets: usize,
     tables: usize,
@@ -79,17 +20,35 @@ pub(in crate::ncollection) fn planned_bucket_count(
     current: usize,
     allocated: bool,
 ) -> Option<usize> {
-    if next_map_prime(extent) <= current && allocated {
+    let requested = next_map_prime(extent);
+    if requested <= current && allocated {
         return None;
     }
-    Some(next_resize_count(extent, current, allocated))
+    if requested <= current {
+        return Some(current);
+    }
+    Some(requested)
 }
 
-pub(super) fn next_resize_count(extent: usize, current: usize, allocated: bool) -> usize {
-    let requested = next_map_prime(extent);
-    if requested <= current && !allocated {
-        current
-    } else {
-        requested
+#[cfg(test)]
+mod tests {
+    use super::{planned_bucket_count, table_slot_count};
+
+    #[test]
+    fn allocated_tables_grow_only_past_the_current_prime() {
+        assert_eq!(planned_bucket_count(0, 101, true), None);
+        assert_eq!(planned_bucket_count(200, 101, true), Some(1009));
+    }
+
+    #[test]
+    fn a_missing_table_keeps_a_larger_requested_modulus() {
+        assert_eq!(planned_bucket_count(0, 13, false), Some(101));
+        assert_eq!(planned_bucket_count(0, 2003, false), Some(2003));
+    }
+
+    #[test]
+    fn table_size_overflow_is_a_named_failure() {
+        assert_eq!(table_slot_count(101, 2).ok(), Some(204));
+        assert!(table_slot_count(usize::MAX, 1).is_err());
     }
 }

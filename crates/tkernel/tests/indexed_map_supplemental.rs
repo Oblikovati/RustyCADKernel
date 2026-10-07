@@ -1,4 +1,4 @@
-//! Collisions, stable storage, bounds and allocator ownership beyond the legacy cases.
+//! Collisions, bounds and allocator ownership beyond the legacy cases.
 use rustycad_tkernel::ncollection::{BaseAllocator, HashPolicy, IndexedMap};
 #[derive(Clone)]
 struct CollisionPolicy(usize);
@@ -11,15 +11,15 @@ impl HashPolicy<i32> for CollisionPolicy {
     }
 }
 #[test]
-fn colliding_indices_keep_stable_nodes_across_swap_remove_and_substitute() {
+fn colliding_indices_keep_bindings_across_swap_remove_and_substitute() {
     let mut map = IndexedMap::with_hasher(CollisionPolicy(42), 1);
-    let address = map.added(30) as *const i32;
+    assert_eq!(map.added(30), &30);
     map.add(20);
     map.add(10);
     map.swap(1, 3).unwrap();
-    assert_eq!(map.find_key(3).unwrap() as *const i32, address);
+    assert_eq!(map.find_key(3), Ok(&30));
     map.remove_from_index(1).unwrap();
-    assert_eq!(map.find_key(1).unwrap() as *const i32, address);
+    assert_eq!(map.find_key(1), Ok(&30));
     assert_eq!(map.find_index(&30), 1);
     assert_eq!(map.find_index(&20), 2);
     assert_eq!(map.find_index(&10), 0);
@@ -28,7 +28,7 @@ fn colliding_indices_keep_stable_nodes_across_swap_remove_and_substitute() {
     assert_eq!(map.find_index(&20), 0);
     assert_eq!(map.find_index(&25), 2);
     map.resize(1000);
-    assert_eq!(map.find_key(1).unwrap() as *const i32, address);
+    assert_eq!(map.find_key(1), Ok(&30));
     assert!(map.iter() == map.iter().clone());
     assert!(map.indexed_items() == map.indexed_items().clone());
 }

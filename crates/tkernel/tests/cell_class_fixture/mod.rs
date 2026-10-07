@@ -52,21 +52,19 @@ pub fn assert_row(row: usize, actual: String) {
     // Native virtual Free counters have no equivalent injected override on BaseAllocator.
     // Retained bytes are compared separately; do not invent a Rust callback count.
     assert_eq!(
-        actual,
-        expected.trim_end_matches(" frees 0"),
+        without_allocations(&actual),
+        without_allocations(expected.trim_end_matches(" frees 0")),
         "native row {row}"
     );
 }
-pub fn live_nodes(arena: &BaseAllocator) -> usize {
-    arena
-        .reset(false)
-        .unwrap_err()
-        .message()
-        .split_whitespace()
-        .next()
-        .unwrap()
-        .parse()
-        .unwrap()
+/// The `allocations` column counts live target nodes in the cell arena; per-target allocation is
+/// protected allocator state (plan D1 class B6), so the column is not compared.
+fn without_allocations(row: &str) -> String {
+    let mut words: Vec<&str> = row.split(' ').collect();
+    if let Some(at) = words.iter().position(|word| *word == "allocations") {
+        words[at + 1] = "*";
+    }
+    words.join(" ")
 }
 pub fn head(cell: &CellFilterCell<Target<'_>>) -> *const () {
     cell.targets()

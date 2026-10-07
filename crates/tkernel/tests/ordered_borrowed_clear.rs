@@ -5,3 +5,7 @@ mod contracts;
 mod fixture;
 #[path = "ordered_borrowed_clear/modes.rs"]
 mod modes;
+// Shared support; this target uses only the event-suffix filter.
+#[allow(dead_code)]
+#[path = "support/native_node_counts.rs"]
+mod native_node_counts;

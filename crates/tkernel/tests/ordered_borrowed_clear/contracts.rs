@@ -62,7 +62,7 @@ macro_rules! clear_suite {
                 [
                     map.len() as i64,
                     map.bucket_count() as i64,
-                    i64::from(!map.buckets().is_null()),
+                    i64::from(!map.buckets().is_none()),
                     i64::from(same),
                     i64::from(map.allocator() == trace.old),
                     i64::from(map.allocator() == trace.next),
@@ -82,12 +82,19 @@ macro_rules! clear_suite {
                 let next = BaseAllocator::accumulating(4096).unwrap();
                 let trace = ClearTrace::new(&old, &next, common);
                 let mut map = build(&trace, state);
-                let buckets = map.buckets();
+                let buckets = map.buckets().map(|table| table.identity());
                 trace.active.set(true);
                 invoke(&mut map, mode, &trace);
                 let origin = if common { "common" } else { "custom" };
                 let label = format!("{}_{}_{}_{}", $family, origin, mode.name(), state.name());
-                trace.verify(&label, statistics(&map, &trace, buckets == map.buckets()));
+                trace.verify(
+                    &label,
+                    statistics(
+                        &map,
+                        &trace,
+                        buckets == map.buckets().map(|table| table.identity()),
+                    ),
+                );
             }
             fn normal_modes(common: bool) {
                 for mode in ClearMode::ALL {
@@ -107,12 +114,19 @@ macro_rules! clear_suite {
                 let next = BaseAllocator::accumulating(4096).unwrap();
                 let trace = ClearTrace::new(&old, &next, false);
                 let mut map = build(&trace, ClearState::Filled);
-                let buckets = map.buckets();
+                let buckets = map.buckets().map(|table| table.identity());
                 trace.active.set(true);
                 let replacement = if mode == ClearMode::Same { &old } else { &next };
                 map.clear_with_allocator(Some(replacement.clone()));
                 let label = format!("{}_owned_{}_filled", $family, mode.name());
-                trace.verify(&label, statistics(&map, &trace, buckets == map.buckets()));
+                trace.verify(
+                    &label,
+                    statistics(
+                        &map,
+                        &trace,
+                        buckets == map.buckets().map(|table| table.identity()),
+                    ),
+                );
             }
             #[test]
             fn consuming_convenience_preserves_explicit_owned_argument_counts() {
