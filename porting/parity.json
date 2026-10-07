@@ -31777,28 +31777,12 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_TreeBaseTransient::DEFINE_STANDARD_RTTIEXT(BVH_TreeBaseTransient,Standard_Transient)",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
-    },
-    {
       "upstream_id": "BVH::EstimateSAH(const BVH_Tree<T,N,BVH_BinaryTree>*,int,T,T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::estimate_sah",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
-    },
-    {
-      "upstream_id": "BVH_Properties::DEFINE_STANDARD_RTTIEXT(BVH_Properties,Standard_Transient)",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
     },
     {
       "upstream_id": "BVH_Properties::~BVH_Properties()",
@@ -31815,14 +31799,6 @@
       "rust_item": "rustycad_tkmath::bvh::BvhObject::set_properties",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
-    },
-    {
-      "upstream_id": "BVH_ObjectTransient::DEFINE_STANDARD_RTTIEXT(BVH_ObjectTransient,Standard_Transient)",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
     },
     {
       "upstream_id": "BVH_Set()",
@@ -31855,22 +31831,6 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
-      "upstream_id": "BVH_BuildThread::DEFINE_STANDARD_RTTIEXT(BVH_BuildThread,Standard_Transient)",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
-    },
-    {
-      "upstream_id": "BVH_BuilderTransient::DEFINE_STANDARD_RTTIEXT(BVH_BuilderTransient,Standard_Transient)",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
     },
     {
       "upstream_id": "BVH::SplitPrimitives(BVH_Set<T,N>*,const BVH_Box<T,N>&,int,int,int,int,int)",
@@ -39090,38 +39050,6 @@
       "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveKind",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
-    },
-    {
-      "upstream_id": "Geom2dEval_RepCurveDesc::Base::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG2d",
-      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDesc::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
-      "upstream_id": "Geom2dEval_RepCurveDesc::Full::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG2d",
-      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescFull::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
-      "upstream_id": "Geom2dEval_RepCurveDesc::DerivBounded::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG2d",
-      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescDerivBounded::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
-      "upstream_id": "Geom2dEval_RepCurveDesc::Mapped::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG2d",
-      "source": "src/ModelingData/TKG2d/Geom2dEval/Geom2dEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg2d::geom2d_eval::RepCurveDescMapped::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
       "upstream_id": "Geom2dEval_SineWaveCurve::Geom2dEval_SineWaveCurve(const gp_Ax2d&,double,double,double)",
@@ -52582,38 +52510,6 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "GeomEval_RepCurveDesc::Base::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG3d",
-      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDesc::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
-      "upstream_id": "GeomEval_RepCurveDesc::Full::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG3d",
-      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescFull::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
-      "upstream_id": "GeomEval_RepCurveDesc::DerivBounded::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG3d",
-      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescDerivBounded::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
-      "upstream_id": "GeomEval_RepCurveDesc::Mapped::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG3d",
-      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
-      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescMapped::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
       "upstream_id": "GeomEval_RepCurveDesc::Full::GetKind",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
@@ -52684,38 +52580,6 @@
       "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDesc::kind",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
-    },
-    {
-      "upstream_id": "GeomEval_RepSurfaceDesc::Base::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG3d",
-      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
-      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDesc::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
-      "upstream_id": "GeomEval_RepSurfaceDesc::Full::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG3d",
-      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
-      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescFull::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
-      "upstream_id": "GeomEval_RepSurfaceDesc::DerivBounded::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG3d",
-      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
-      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescDerivBounded::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
-      "upstream_id": "GeomEval_RepSurfaceDesc::Mapped::DEFINE_STANDARD_RTTI_INLINE",
-      "toolkit": "TKG3d",
-      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
-      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescMapped::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
       "upstream_id": "GeomEval_RepSurfaceDesc::Full::GetKind",
@@ -95233,14 +95097,6 @@
       "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
     },
     {
-      "upstream_id": "Message_CompositeAlerts::DEFINE_STANDARD_RTTIEXT(Message_CompositeAlerts,Standard_Transient)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
-      "rust_item": "<rustycad_tkernel::message::CompositeAlerts as rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
-    },
-    {
       "upstream_id": "Message_CompositeAlerts::Message_CompositeAlerts()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
@@ -95577,14 +95433,6 @@
       "notes": "Class record: ported as a type, rustycad_tkernel::message::Level (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "9687b14b55b978c46cbd1fb8b3621128128d057ebe383d8766ae333f59be54fe",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "Message_Messenger::DEFINE_STANDARD_RTTIEXT(Message_Messenger,Standard_Transient)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
-      "rust_item": "<rustycad_tkernel::message::Messenger as rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
     },
     {
       "upstream_id": "Message_Messenger::StreamBuffer::~StreamBuffer()",
@@ -96145,14 +95993,6 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "Message_Printer::DEFINE_STANDARD_RTTIEXT(Message_Printer,Standard_Transient)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
-      "rust_item": "<rustycad_tkernel::message::PrinterType as rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
-    },
-    {
       "upstream_id": "Message_Printer::GetTraceLevel() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
@@ -96511,14 +96351,6 @@
       "rust_item": "rustycad_tkernel::message::Report::dump_json",
       "status": "implemented",
       "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
-    },
-    {
-      "upstream_id": "Message_Report::DEFINE_STANDARD_RTTIEXT(Message_Report,Standard_Transient)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
-      "rust_item": "<rustycad_tkernel::message::Report as rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
     },
     {
       "upstream_id": "Message_Status",
@@ -100999,14 +100831,6 @@
       "notes": "Frees the locked workers; NbThreads becomes 0. Probe osd_launcher. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
     },
     {
-      "upstream_id": "OSD_FileSystem::DEFINE_STANDARD_RTTIEXT(OSD_FileSystem,Standard_Transient)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust file systems are `Arc<dyn FileSystem>` trait objects; `FileSystem: Any` gives the downcast (the default selector is reached as `Arc<dyn Any>` downcast to `FileSystemSelector`)."
-    },
-    {
       "upstream_id": "OSD_FileSystem::~OSD_FileSystem()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
@@ -101127,14 +100951,6 @@
       "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for OSD_FileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
     },
     {
-      "upstream_id": "OSD_LocalFileSystem::DEFINE_STANDARD_RTTIEXT(OSD_LocalFileSystem,OSD_FileSystem)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust file systems are `Arc<dyn FileSystem>` trait objects; `FileSystem: Any` gives the downcast (the default selector is reached as `Arc<dyn Any>` downcast to `FileSystemSelector`)."
-    },
-    {
       "upstream_id": "OSD_LocalFileSystem::OSD_LocalFileSystem()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
@@ -101175,16 +100991,6 @@
       "notes": "Opens a FileBuffer on the URL converted through TCollection_ExtendedString (UTF-8 on Linux); with a size output and in, reports the size and refuses an offset lseek rejects (size 0); otherwise seeks only for offset > 0; a negative offset raises Standard_ProgramError. Probe osd_fs_local_buffer covers all 64 openmode combinations. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
     },
     {
-      "upstream_id": "OSD_LocalFileSystem",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::LocalFileSystem",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkernel::osd::LocalFileSystem (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "aad536eec7e82f5167513d13da6e436b5c27aa80f228f25bdc217593b6007ff1",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "OSD_LocalFileSystem::DynamicType",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
@@ -101217,12 +101023,14 @@
       "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for OSD_LocalFileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
     },
     {
-      "upstream_id": "OSD_CachedFileSystem::DEFINE_STANDARD_RTTIEXT(OSD_CachedFileSystem,OSD_FileSystem)",
+      "upstream_id": "OSD_LocalFileSystem",
       "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust file systems are `Arc<dyn FileSystem>` trait objects; `FileSystem: Any` gives the downcast (the default selector is reached as `Arc<dyn Any>` downcast to `FileSystemSelector`)."
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkernel::osd::LocalFileSystem (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "aad536eec7e82f5167513d13da6e436b5c27aa80f228f25bdc217593b6007ff1",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "OSD_CachedFileSystem::OSD_CachedFileSystem(const occ::handle<OSD_FileSystem>&)",
@@ -101295,14 +101103,6 @@
       "rust_item": "rustycad_tkernel::osd::CachedFileSystem::<rustycad_tkernel::osd::FileSystem>::open_stream_buffer",
       "status": "implemented",
       "notes": "Modes with out pass through; others switch the cache on a new URL and cache the linked buffer. Probe osd_fs_cached. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
-    },
-    {
-      "upstream_id": "OSD_FileSystemSelector::DEFINE_STANDARD_RTTIEXT(OSD_FileSystemSelector,OSD_FileSystem)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust file systems are `Arc<dyn FileSystem>` trait objects; `FileSystem: Any` gives the downcast (the default selector is reached as `Arc<dyn Any>` downcast to `FileSystemSelector`)."
     },
     {
       "upstream_id": "OSD_FileSystemSelector::OSD_FileSystemSelector()",
@@ -105391,14 +105191,6 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "Storage_BaseDriver::DEFINE_STANDARD_RTTIEXT(Storage_BaseDriver,Standard_Transient)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Storage/Storage_BaseDriver.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
-    },
-    {
       "upstream_id": "Storage_BaseDriver::~Storage_BaseDriver()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Storage/Storage_BaseDriver.hxx",
@@ -107813,14 +107605,6 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "FSD_BinaryFile::DEFINE_STANDARD_RTTIEXT(FSD_BinaryFile,Storage_BaseDriver)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
-    },
-    {
       "upstream_id": "FSD_BinaryFile::FSD_BinaryFile()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
@@ -108629,14 +108413,6 @@
       "notes": "The FILE* is a glibc-faithful CFile over an injected DriverFileSystem; calls on a closed driver return Standard_NullObject instead of dereferencing null. Standard_IStream/OStream overloads take IoStream and carry a _stream suffix. ReadCompleteInfo returns Storage_StreamFormatError where the native loop never ends (a position matching no section). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
     },
     {
-      "upstream_id": "FSD_CmpFile::DEFINE_STANDARD_RTTIEXT(FSD_CmpFile,FSD_File)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
-    },
-    {
       "upstream_id": "FSD_CmpFile()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
@@ -108813,16 +108589,6 @@
       "notes": "Reusable Cmp text defaults are selected by TextDialect::USE_CMP_TEXT_DEFAULTS; custom overrides can delegate through read_cmp_*_base/write_cmp_*_base. A native derived class counts each hook, calls the qualified FSD_CmpFile body, and confirms nested virtual FlushEndOfLine-to-ReadLine dispatch; stateful Rust dialect tests cover the same paths. Evidence: tools/oracle/tkernel_fsd_cmp_dialect_dispatch.cxx and .expected; crates/tkernel/tests/fsd_api_behavior/cmp_dialect_inheritance.rs. Clang candidate 216acbbc9615d521fcdd44f29ee86149bf25ab1a26663e502095305ef53a1ea0; FSD_CmpFile.hxx SHA-256 a2d976ce0d4d32429aa3b03b2617c9986ed58e37c69a21dc2f36b046f2e95ee4."
     },
     {
-      "upstream_id": "FSD_CmpFile",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::CmpFile",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkernel::fsd::CmpFile (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "28b8df61032d91b31a93d1c115fa978345c87037b0062c120f54cb5517beec86",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "FSD_CmpFile::DynamicType",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
@@ -108851,12 +108617,14 @@
       "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for FSD_CmpFile. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
     },
     {
-      "upstream_id": "FSD_File::DEFINE_STANDARD_RTTIEXT(FSD_File,Storage_BaseDriver)",
+      "upstream_id": "FSD_CmpFile",
       "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_CmpFile.hxx",
+      "rust_item": "rustycad_tkernel::fsd::CmpFile",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkernel::fsd::CmpFile (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "28b8df61032d91b31a93d1c115fa978345c87037b0062c120f54cb5517beec86",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "FSD_File()",
@@ -132671,14 +132439,6 @@
       "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
     },
     {
-      "upstream_id": "FEmTool_LinearFlexion::DEFINE_STANDARD_RTTIEXT(FEmTool_LinearFlexion,FEmTool_ElementaryCriterion)",
-      "toolkit": "TKGeomBase",
-      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
-      "rust_item": "rustycad_tkgeombase::fem_tool::LinearFlexion::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
       "upstream_id": "FEmTool_LinearJerk(int,GeomAbs_Shape)",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
@@ -132687,28 +132447,12 @@
       "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
     },
     {
-      "upstream_id": "FEmTool_LinearJerk::DEFINE_STANDARD_RTTIEXT(FEmTool_LinearJerk,FEmTool_ElementaryCriterion)",
-      "toolkit": "TKGeomBase",
-      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
-      "rust_item": "rustycad_tkgeombase::fem_tool::LinearJerk::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
-    },
-    {
       "upstream_id": "FEmTool_LinearTension(int,GeomAbs_Shape)",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
       "rust_item": "rustycad_tkgeombase::fem_tool::LinearTension::new",
       "status": "implemented",
       "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
-    },
-    {
-      "upstream_id": "FEmTool_LinearTension::DEFINE_STANDARD_RTTIEXT(FEmTool_LinearTension,FEmTool_ElementaryCriterion)",
-      "toolkit": "TKGeomBase",
-      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
-      "rust_item": "rustycad_tkgeombase::fem_tool::LinearTension::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
       "upstream_id": "AppParCurves::BernsteinMatrix(int,const math_Vector&,math_Matrix&)",
@@ -234586,24 +234330,6 @@
       "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests)."
     },
     {
-      "upstream_id": "MAT_ListOfBisector::DEFINE_STANDARD_RTTI_INLINE(MAT_ListOfBisector,Standard_Transient)",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfBisector.hxx",
-      "rust_item": "<rustycad_tktopalgo::mat::MatListOfBisector as rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests). The runtime type is registered once per list item type (MatTListItem::LIST_NAME)."
-    },
-    {
-      "upstream_id": "MAT_TListNodeOfListOfBisector",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfBisector.hxx",
-      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfBisector",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tktopalgo::mat::MatTListNodeOfListOfBisector (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "57e309f5a710ef21dc7a5ca0b61ea7b9ca4c7beafa3e075da0e8b9b5466d6d4f",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "MAT_ListOfBisector::base_type",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfBisector.hxx",
@@ -234634,6 +234360,16 @@
       "rust_item": "rustycad_tktopalgo::mat::MatListOfBisector",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatBisector::LIST_NAME = \"MAT_ListOfBisector\", parent StandardTransient) registers descriptor \"MAT_ListOfBisector\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_TListNodeOfListOfBisector",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfBisector.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfBisector",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tktopalgo::mat::MatTListNodeOfListOfBisector (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "57e309f5a710ef21dc7a5ca0b61ea7b9ca4c7beafa3e075da0e8b9b5466d6d4f",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "MAT_ListOfEdge()",
@@ -234852,34 +234588,6 @@
       "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests)."
     },
     {
-      "upstream_id": "MAT_ListOfEdge::DEFINE_STANDARD_RTTI_INLINE(MAT_ListOfEdge,Standard_Transient)",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
-      "rust_item": "<rustycad_tktopalgo::mat::MatListOfEdge as rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests). The runtime type is registered once per list item type (MatTListItem::LIST_NAME)."
-    },
-    {
-      "upstream_id": "MAT_ListOfEdge",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
-      "rust_item": "rustycad_tktopalgo::mat::MatListOfEdge",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tktopalgo::mat::MatListOfEdge (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "42d4d7841522a3bb2706b424bd102c947a3418fa547ad8949441f623f59cd101",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "MAT_TListNodeOfListOfEdge",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
-      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "85a5a97c95edf60f54f9f6582df712d06dbc09d8bc0ef8aa2e552887ec3e4484",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "MAT_ListOfEdge::DynamicType",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
@@ -234910,6 +234618,26 @@
       "rust_item": "rustycad_tktopalgo::mat::MatListOfEdge",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): the generic RuntimeTyped impl of crates/tktopalgo/src/mat/tlist (TYPE_NAME = MatEdge::LIST_NAME = \"MAT_ListOfEdge\", parent StandardTransient) registers descriptor \"MAT_ListOfEdge\" with parent \"Standard_Transient\", as the C++ macro does. Rust registers the descriptor on a type alias of a generic instance, whose trait impls rustdoc does not index per instance, so the alias is the Rust target. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type (most-derived descriptor)."
+    },
+    {
+      "upstream_id": "MAT_ListOfEdge",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatListOfEdge",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tktopalgo::mat::MatListOfEdge (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "42d4d7841522a3bb2706b424bd102c947a3418fa547ad8949441f623f59cd101",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "MAT_TListNodeOfListOfEdge",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_ListOfEdge.hxx",
+      "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "85a5a97c95edf60f54f9f6582df712d06dbc09d8bc0ef8aa2e552887ec3e4484",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "MAT_Node::MAT_Node(int,const occ::handle<MAT_Arc>&,double)",
@@ -235120,14 +234848,6 @@
       "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests)."
     },
     {
-      "upstream_id": "MAT_TListNodeOfListOfBisector::DEFINE_STANDARD_RTTI_INLINE(MAT_TListNodeOfListOfBisector,Standard_Transient)",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfBisector.hxx",
-      "rust_item": "<rustycad_tktopalgo::mat::MatTListNodeOfListOfBisector as rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests). The runtime type is registered once per list item type (MatTListItem::LIST_NAME)."
-    },
-    {
       "upstream_id": "MAT_TListNodeOfListOfBisector::get_type_name",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfBisector.hxx",
@@ -235230,14 +234950,6 @@
       "rust_item": "rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge::dummy",
       "status": "implemented",
       "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests)."
-    },
-    {
-      "upstream_id": "MAT_TListNodeOfListOfEdge::DEFINE_STANDARD_RTTI_INLINE(MAT_TListNodeOfListOfEdge,Standard_Transient)",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/MAT/MAT_TListNodeOfListOfEdge.hxx",
-      "rust_item": "<rustycad_tktopalgo::mat::MatTListNodeOfListOfEdge as rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "MAT mapping (docs/topalgo-design.md section 3, docs/tktopalgo-progress.md): the transient classes are structs whose fields sit in one SharedState, MAT_TList is the generic MatTList<I> (the two lists and their nodes are type aliases), native void* back-pointers are WeakHandles, overloads take distinct Rust names and native exceptions or null dereferences are Failure errors; compared with OCCT by tools/verify_tktopalgo_numeric.py (tp_mat_* and tp_mat2d_locus requests). The runtime type is registered once per list item type (MatTListItem::LIST_NAME)."
     },
     {
       "upstream_id": "MAT_TListNodeOfListOfEdge::DynamicType",
@@ -263885,6 +263597,14 @@
       }
     },
     {
+      "upstream_id": "BRepExtrema_TriangleSet::base_type",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet",
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT declares `typedef BVH_PrimitiveSet<double, 3> base_type`. The template has no descriptor of its own, so the native parent descriptor is the inherited BVH_ObjectTransient one; Rust does not register BVH_ObjectTransient (BVH objects are never Handle<dyn Transient>), so the Rust registration names Standard_Transient, the next ancestor. No alias exists in Rust; the get_type_* rows record the same parent difference as partial."
+    },
+    {
       "upstream_id": "BRepExtrema_TriangleSet",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
@@ -263923,14 +263643,6 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(BRepExtremaTriangleSet, \"BRepExtrema_TriangleSet\", StandardTransient) at crates/tktopalgo/src/brep_extrema/triangle_set.rs:250 registers descriptor \"BRepExtrema_TriangleSet\"; C++ base_type is BVH_PrimitiveSet<double, 3>. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Not proven: the Rust registration names parent Standard_Transient.",
       "cpp_declaration_id": "23ad498dbb8161f0cb3e4fbcf2bd100f04f1896b00de3872f66566c633947f2e",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "BRepExtrema_TriangleSet::base_type",
-      "toolkit": "TKTopAlgo",
-      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_TriangleSet.hxx",
-      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaTriangleSet",
-      "status": "excluded",
-      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT declares `typedef BVH_PrimitiveSet<double, 3> base_type`. The template has no descriptor of its own, so the native parent descriptor is the inherited BVH_ObjectTransient one; Rust does not register BVH_ObjectTransient (BVH objects are never Handle<dyn Transient>), so the Rust registration names Standard_Transient, the next ancestor. No alias exists in Rust; the get_type_* rows record the same parent difference as partial."
     },
     {
       "upstream_id": "HelixGeom_BuilderApproxCurve::SetApproxParameters(GeomAbs_Shape,int,int)",
@@ -329095,26 +328807,6 @@
       "notes": "Protected binary string hook exposed through the existing native-order driver/stream implementation. Supplemental native fixture covers NUL truncation, zero/negative lengths, truncated input/output preservation and StreamWriteError, UTF-16 round trip, repeated last byte at ReadChar EOF, and counting-only writes. Rust uses bounded allocation and injected I/O; native allocation-failure/leak behavior and first-byte-uninitialized EOF are outside parity. See porting/audits/tkernel-binary-string-hooks.json."
     },
     {
-      "upstream_id": "FSD_BinaryFile",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::fsd::BinaryFile",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkernel::fsd::BinaryFile (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "05619002100375b1d1e522f7cc24aee7e6a5f963e0a5113c2eb7760f451c10fd",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "Storage_HeaderData",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
-      "rust_item": "rustycad_tkernel::storage::HeaderData",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkernel::storage::HeaderData (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
-      "cpp_declaration_id": "a00e1435f2a33f48ab2da8562df0418fffaa55c48f9c0338868e8749f9c7a405",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "FSD_BinaryFile::base_type",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
@@ -329141,6 +328833,26 @@
       "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
       "status": "excluded",
       "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for FSD_BinaryFile. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_BinaryFile",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "rust_item": "rustycad_tkernel::fsd::BinaryFile",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkernel::fsd::BinaryFile (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "05619002100375b1d1e522f7cc24aee7e6a5f963e0a5113c2eb7760f451c10fd",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Storage_HeaderData",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_BinaryFile.hxx",
+      "rust_item": "rustycad_tkernel::storage::HeaderData",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkernel::storage::HeaderData (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
+      "cpp_declaration_id": "a00e1435f2a33f48ab2da8562df0418fffaa55c48f9c0338868e8749f9c7a405",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "Storage_Schema::TypeBinding(const TCollection_AsciiString &) const",
@@ -359760,6 +359472,14 @@
       "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of CompositeAlerts and is reached through CompositeAlerts::alerts."
     },
     {
+      "upstream_id": "Message_CompositeAlerts::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): message_runtime_type!(CompositeAlerts, \"Message_CompositeAlerts\", StandardTransient) registers the descriptor. Rust has no subclass of CompositeAlerts (it is shared as Arc<CompositeAlerts>), so the most-derived descriptor of every CompositeAlerts is CompositeAlerts::static_type(), which is what the C++ virtual returns for a native object of this class."
+    },
+    {
       "upstream_id": "Message_CompositeAlerts::base_type",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
@@ -359775,7 +359495,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
       "rust_item": "rustycad_tkernel::message::CompositeAlerts::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): message_runtime_type!(CompositeAlerts, \"Message_CompositeAlerts\", StandardTransient) at crates/tkernel/src/message/composite_alerts.rs:36 registers descriptor \"Message_CompositeAlerts\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): message_runtime_type!(CompositeAlerts, \"Message_CompositeAlerts\", StandardTransient) at crates/tkernel/src/message/composite_alerts.rs:36 registers descriptor \"Message_CompositeAlerts\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Supersedes the former Message_CompositeAlerts::DEFINE_STANDARD_RTTIEXT(Message_CompositeAlerts,Standard_Transient) row: RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type().",
       "cpp_declaration_id": "22c09697141c4ed58115f1035ea2c7fa0d5cb276969e5b14cdfd1fb514277736",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
@@ -359788,14 +359508,6 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): message_runtime_type!(CompositeAlerts, \"Message_CompositeAlerts\", StandardTransient) at crates/tkernel/src/message/composite_alerts.rs:36 registers descriptor \"Message_CompositeAlerts\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "6e01c53d3a36b7680989ad99dd69dff224e7232e4fe63af90fd5e32fdc1f2d28",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "Message_CompositeAlerts::DynamicType",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
-      "rust_item": "rustycad_tkernel::message::CompositeAlerts::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI DynamicType(): message_runtime_type!(CompositeAlerts, \"Message_CompositeAlerts\", StandardTransient) registers the descriptor. Rust has no subclass of CompositeAlerts (it is shared as Arc<CompositeAlerts>), so the most-derived descriptor of every CompositeAlerts is CompositeAlerts::static_type(), which is what the C++ virtual returns for a native object of this class."
     },
     {
       "upstream_id": "Message_ConsoleColor_Black",
@@ -360008,6 +359720,14 @@
       "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
     },
     {
+      "upstream_id": "Message_Messenger::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): message_runtime_type!(Messenger, \"Message_Messenger\", StandardTransient) registers the descriptor. Rust has no subclass of Messenger (it is shared as Arc<Messenger>), so the most-derived descriptor of every Messenger is Messenger::static_type(), which is what the C++ virtual returns for a native object of this class."
+    },
+    {
       "upstream_id": "Message_Messenger::StreamBuffer",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
@@ -360033,7 +359753,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
       "rust_item": "rustycad_tkernel::message::Messenger::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): message_runtime_type!(Messenger, \"Message_Messenger\", StandardTransient) at crates/tkernel/src/message/messenger.rs:15 registers descriptor \"Message_Messenger\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): message_runtime_type!(Messenger, \"Message_Messenger\", StandardTransient) at crates/tkernel/src/message/messenger.rs:15 registers descriptor \"Message_Messenger\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Supersedes the former Message_Messenger::DEFINE_STANDARD_RTTIEXT(Message_Messenger,Standard_Transient) row: RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type().",
       "cpp_declaration_id": "8f9cbe7b77e3f2243782755bcf141225eee7f0195c9fe6b2bb5775483786cb18",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
@@ -360046,14 +359766,6 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): message_runtime_type!(Messenger, \"Message_Messenger\", StandardTransient) at crates/tkernel/src/message/messenger.rs:15 registers descriptor \"Message_Messenger\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "0eb929cb6fd434d6e3b16ae9548bf633fb46f9fd168af55286130f1282f3d9d2",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "Message_Messenger::DynamicType",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
-      "rust_item": "rustycad_tkernel::message::Messenger::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI DynamicType(): message_runtime_type!(Messenger, \"Message_Messenger\", StandardTransient) registers the descriptor. Rust has no subclass of Messenger (it is shared as Arc<Messenger>), so the most-derived descriptor of every Messenger is Messenger::static_type(), which is what the C++ virtual returns for a native object of this class."
     },
     {
       "upstream_id": "Message_MetricType_MemHeapUsage",
@@ -360252,6 +359964,14 @@
       "notes": "protected pure virtual output hook; the required Printer trait method."
     },
     {
+      "upstream_id": "Message_Printer::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "rust_item": "rustycad_tkernel::message::Printer::dynamic_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): the virtual is the Printer trait method dynamic_type, which every printer implements to return its most-derived descriptor (Message_Printer is PrinterType)."
+    },
+    {
       "upstream_id": "Message_Printer::base_type",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
@@ -360267,7 +359987,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
       "rust_item": "rustycad_tkernel::message::PrinterType::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): message_runtime_type!(PrinterType, \"Message_Printer\", StandardTransient) at crates/tkernel/src/message/printer.rs:40 registers descriptor \"Message_Printer\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): message_runtime_type!(PrinterType, \"Message_Printer\", StandardTransient) at crates/tkernel/src/message/printer.rs:40 registers descriptor \"Message_Printer\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Supersedes the former Message_Printer::DEFINE_STANDARD_RTTIEXT(Message_Printer,Standard_Transient) row: RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type().",
       "cpp_declaration_id": "fc54589ba5fb31352b0b746e0c5e3b3b3fb9b9c535c36c18bf5fd8f46ef4ba33",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
@@ -360280,14 +360000,6 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): message_runtime_type!(PrinterType, \"Message_Printer\", StandardTransient) at crates/tkernel/src/message/printer.rs:40 registers descriptor \"Message_Printer\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "b2637183722f012cb5146708208b63f023281edf37cbe42643e958973327e7bf",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "Message_Printer::DynamicType",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
-      "rust_item": "rustycad_tkernel::message::Printer::dynamic_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI DynamicType(): the virtual is the Printer trait method dynamic_type, which every printer implements to return its most-derived descriptor (Message_Printer is PrinterType)."
     },
     {
       "upstream_id": "Message_PrinterOStream::send(const TCollection_AsciiString&,const Message_Gravity) const",
@@ -361354,6 +361066,14 @@
       "notes": "protected implementation class of OSD_Parallel (type-erased iterator and functor wrappers); Rust Parallel::for_each and for_range take generic iterators and closures, so no type erasure is needed."
     },
     {
+      "upstream_id": "OSD_Parallel::UniversalIterator::operator=",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
+      "rust_item": "rustycad_tkernel::osd::Parallel",
+      "status": "excluded",
+      "notes": "Excluded: copy assignment of the type-erased UniversalIterator wrapper (clones the wrapped iterator). The Rust OSD_Parallel takes ordinary Rust iterators and ranges, so the wrapper class (excluded by its own row) and its assignment have no counterpart."
+    },
+    {
       "upstream_id": "OSD_Parallel",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
@@ -361372,14 +361092,6 @@
       "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. A Rust port of the class needs no callable counterpart.",
       "cpp_declaration_id": "b5fe59d01bd3836289b9dd210a40df3912f6361d0ed932fefcc43135fdc6af9d",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "OSD_Parallel::UniversalIterator::operator=",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
-      "rust_item": "rustycad_tkernel::osd::Parallel",
-      "status": "excluded",
-      "notes": "Excluded: copy assignment of the type-erased UniversalIterator wrapper (clones the wrapped iterator). The Rust OSD_Parallel takes ordinary Rust iterators and ranges, so the wrapper class (excluded by its own row) and its assignment have no counterpart."
     },
     {
       "upstream_id": "OSD_Thread(const OSD_Thread&)",
@@ -361676,6 +361388,14 @@
       "notes": "protected implementation class of OSD_ThreadPool (job dispatch to the enumerated worker threads); Rust ThreadPool and Launcher keep the workers and jobs private and expose the same behavior through Launcher::perform and perform_iter."
     },
     {
+      "upstream_id": "OSD_ThreadPool::EnumeratedThread::operator=",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool",
+      "status": "excluded",
+      "notes": "Excluded: copy assignment of the pool-internal thread record (OSD_Thread::Assign plus the pool, job and index fields). The Rust pool keeps its workers as shared Arc<Worker> values that are never copied, so no assignment of a thread record exists."
+    },
+    {
       "upstream_id": "OSD_ThreadPool",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
@@ -361736,14 +361456,6 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "OSD_ThreadPool::EnumeratedThread::operator=",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
-      "rust_item": "rustycad_tkernel::osd::ThreadPool",
-      "status": "excluded",
-      "notes": "Excluded: copy assignment of the pool-internal thread record (OSD_Thread::Assign plus the pool, job and index fields). The Rust pool keeps its workers as shared Arc<Worker> values that are never copied, so no assignment of a thread record exists."
-    },
-    {
       "upstream_id": "OSD_CachedFileSystem::myLinkedFS",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
@@ -361800,16 +361512,6 @@
       "notes": "protected helper record of OSD_CachedFileSystem holding the last opened stream for reuse; Rust keeps the cached stream as private state of CachedFileSystem, reused by its open_istream."
     },
     {
-      "upstream_id": "OSD_CachedFileSystem",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
-      "rust_item": "rustycad_tkernel::osd::CachedFileSystem",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkernel::osd::CachedFileSystem (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "f8ad16b8702def90bb8aeb04b4fadd9248c9cd3ad54d7c03d2ce07ad21ebc36c",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "OSD_CachedFileSystem::DynamicType",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
@@ -361842,22 +361544,22 @@
       "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for OSD_CachedFileSystem. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
     },
     {
+      "upstream_id": "OSD_CachedFileSystem",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkernel::osd::CachedFileSystem (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "f8ad16b8702def90bb8aeb04b4fadd9248c9cd3ad54d7c03d2ce07ad21ebc36c",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
       "upstream_id": "OSD_FileSystemSelector::myProtocols",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
       "rust_item": "rustycad_tkernel::osd::FileSystemSelector",
       "status": "excluded",
       "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of FileSystemSelector and is reached through FileSystemSelector::protocols, add_protocol and remove_protocol."
-    },
-    {
-      "upstream_id": "OSD_FileSystemSelector",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
-      "rust_item": "rustycad_tkernel::osd::FileSystemSelector",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkernel::osd::FileSystemSelector (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "7a347d37ad0d7fe067c88233fc5f00d6ba16c58ee8e44f711e3deb8cd8836dfa",
-      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "OSD_FileSystemSelector::base_type",
@@ -361890,6 +361592,16 @@
       "rust_item": "rustycad_tkernel::osd::FileSystemSelector",
       "status": "excluded",
       "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for OSD_FileSystemSelector. Rust file systems are Arc<dyn FileSystem> trait objects whose dynamic type is the Rust type itself (FileSystem: Any downcasts; the default selector is reached as Arc<dyn Any> downcast to FileSystemSelector); no OCCT descriptor is observable from Rust code."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkernel::osd::FileSystemSelector (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "7a347d37ad0d7fe067c88233fc5f00d6ba16c58ee8e44f711e3deb8cd8836dfa",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "OSD_StreamBuffer",
@@ -362884,16 +362596,6 @@
       "notes": "native file format not ported (user decision 2026-09); protected stream of the FSD file driver, private state of fsd::File."
     },
     {
-      "upstream_id": "FSD_File",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
-      "rust_item": "rustycad_tkernel::fsd::File",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkernel::fsd::File (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "86cc580d0b1d0df207500a8e3fc5e11b5a5cb0984130a4cec7d47122ad69cd48",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "FSD_File::get_type_name",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
@@ -362920,6 +362622,16 @@
       "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
       "status": "excluded",
       "notes": "Excluded: base_type of DEFINE_STANDARD_RTTI for FSD_File. native file format not ported (user decision 2026-09): the existing FSD/Storage code is kept as is and not extended with runtime-type registrations."
+    },
+    {
+      "upstream_id": "FSD_File",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FSD/FSD_File.hxx",
+      "rust_item": "rustycad_tkernel::fsd::File",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkernel::fsd::File (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "86cc580d0b1d0df207500a8e3fc5e11b5a5cb0984130a4cec7d47122ad69cd48",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "opencascade::handle::operator const opencascade::handle<type-parameter-1-0> &",
@@ -364026,6 +363738,14 @@
       "notes": "protected helper returning (and optionally creating) the composite alert container; Rust keeps it as the private Report::composite(to_create), used by the public alert members."
     },
     {
+      "upstream_id": "Message_Report::DynamicType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTI DynamicType(): message_runtime_type!(Report, \"Message_Report\", StandardTransient) registers the descriptor. Rust has no subclass of Report (it is shared as Arc<Report>), so the most-derived descriptor of every Report is Report::static_type(), which is what the C++ virtual returns for a native object of this class."
+    },
+    {
       "upstream_id": "Message_Report::base_type",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
@@ -364041,7 +363761,7 @@
       "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
       "rust_item": "rustycad_tkernel::message::Report::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): message_runtime_type!(Report, \"Message_Report\", StandardTransient) at crates/tkernel/src/message/report.rs:29 registers descriptor \"Message_Report\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+      "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): message_runtime_type!(Report, \"Message_Report\", StandardTransient) at crates/tkernel/src/message/report.rs:29 registers descriptor \"Message_Report\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Supersedes the former Message_Report::DEFINE_STANDARD_RTTIEXT(Message_Report,Standard_Transient) row: RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type().",
       "cpp_declaration_id": "e1a7397cd3bf2330966b886be42864b4e59421046d0d56b083c1424e997b99a8",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
@@ -364054,14 +363774,6 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): message_runtime_type!(Report, \"Message_Report\", StandardTransient) at crates/tkernel/src/message/report.rs:29 registers descriptor \"Message_Report\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "c047d817b85b1c499f308399467e4ea1a878422487ce8aea60faad23295178f6",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "Message_Report::DynamicType",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
-      "rust_item": "rustycad_tkernel::message::Report::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
-      "status": "implemented",
-      "notes": "DEFINE_STANDARD_RTTI DynamicType(): message_runtime_type!(Report, \"Message_Report\", StandardTransient) registers the descriptor. Rust has no subclass of Report (it is shared as Arc<Report>), so the most-derived descriptor of every Report is Report::static_type(), which is what the C++ virtual returns for a native object of this class."
     },
     {
       "upstream_id": "Message_PrinterToReport::send(const TCollection_AsciiString&,const Message_Gravity) const",
@@ -365135,6 +364847,13 @@
       "notes": "FlexLexer.h is the third-party flex C++ scanner base class (generated-lexer support for ExprIntrp and others); it is not part of the OCCT API port, Rust lexers are hand-written."
     },
     {
+      "upstream_id": "yyFlexLexer::~yyFlexLexer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/FlexLexer/FlexLexer.h",
+      "status": "excluded",
+      "notes": "Excluded: FlexLexer is the third-party flex scanner base class (FlexLexer.h), not OCCT API."
+    },
+    {
       "upstream_id": "FlexLexer::~FlexLexer() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/FlexLexer/FlexLexer.h",
@@ -365143,13 +364862,6 @@
       "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. A Rust port of the class needs no callable counterpart.",
       "cpp_declaration_id": "39ff909098e4f0fc9852a13dab48d4d52581c36d08e9105401f8f3478ac5bf78",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "yyFlexLexer::~yyFlexLexer",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/FlexLexer/FlexLexer.h",
-      "status": "excluded",
-      "notes": "Excluded: FlexLexer is the third-party flex scanner base class (FlexLexer.h), not OCCT API."
     },
     {
       "upstream_id": "CSLib_Class2d::Result_Inside",
@@ -368520,16 +368232,6 @@
       "notes": "Excluded: protected C++ member of an abstract base used only by derived classes. Rust has no inheritance; bvh::BvhBuilderTransient::new carries the behavior."
     },
     {
-      "upstream_id": "BVH_BuilderTransient",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBuilderTransient",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkmath::bvh::BvhBuilderTransient (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "d7cc34f1e517e49f530943952dff1254086fa9894ac608f9d3bb5b70e8bb3266",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "BVH_BuilderTransient::DynamicType",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
@@ -368562,6 +368264,16 @@
       "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for BVH_BuilderTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
     },
     {
+      "upstream_id": "BVH_BuilderTransient",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBuilderTransient",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkmath::bvh::BvhBuilderTransient (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "d7cc34f1e517e49f530943952dff1254086fa9894ac608f9d3bb5b70e8bb3266",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
       "upstream_id": "BVH_ObjectTransient::BVH_ObjectTransient()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
@@ -368580,16 +368292,6 @@
       ],
       "status": "implemented",
       "notes": "Class record: the C++ class BVH_ObjectTransient is split into trait rustycad_tkmath::bvh::BvhObject (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkmath::bvh::BvhObjectTransient (its shared state); each member is mapped by its own row."
-    },
-    {
-      "upstream_id": "BVH_Object::~BVH_Object<T, N>()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhObject",
-      "status": "excluded",
-      "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkmath::bvh::BvhObject needs no callable counterpart.",
-      "cpp_declaration_id": "8afca207accd091216306f6c38b9a3a228c2a68da05652f6ade1b7b64859f69f",
-      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "BVH_ObjectTransient::DynamicType",
@@ -368622,6 +368324,16 @@
       "rust_item": "rustycad_tkmath::bvh::BvhObjectTransient",
       "status": "excluded",
       "notes": "Excluded: get_type_descriptor() of DEFINE_STANDARD_RTTI for BVH_ObjectTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_Object::~BVH_Object<T, N>()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObject",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkmath::bvh::BvhObject needs no callable counterpart.",
+      "cpp_declaration_id": "8afca207accd091216306f6c38b9a3a228c2a68da05652f6ade1b7b64859f69f",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "BVH_TreeBaseTransient::BVH_TreeBaseTransient()",
@@ -368664,26 +368376,6 @@
       "notes": "Excluded: protected OSD_Thread entry trampoline taking a void*. Rust bvh::BvhBuildThread::run is the thread body; no raw-pointer entry point exists."
     },
     {
-      "upstream_id": "BVH_BuildThread",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBuildThread",
-      "status": "implemented",
-      "notes": "Class record: ported as a type, rustycad_tkmath::bvh::BvhBuildThread (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "a52b9786232aacc1516a14d69c1dba3714555c58cc1cf917f69edf07e0b8c6fe",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "BVH_BuildTool",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBuildTool",
-      "status": "implemented",
-      "notes": "Class record: ported as a trait reached as Handle<dyn Trait>, rustycad_tkmath::bvh::BvhBuildTool (evidence: member row owner); each member is mapped by its own row.",
-      "cpp_declaration_id": "7d9f8b47d111f1217856402004a9fc39e29b77bd7cb47e1c05c19d94c1ad0061",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "BVH_BuildThread::get_type_descriptor",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
@@ -368722,6 +368414,26 @@
       "rust_item": "rustycad_tkmath::bvh::BvhBuildThread",
       "status": "excluded",
       "notes": "Excluded: declared without a definition (the C++03 non-copyable idiom), so no caller can use it. The Rust BvhBuildThread borrows its tool and queue and does not implement Clone either."
+    },
+    {
+      "upstream_id": "BVH_BuildThread",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBuildThread",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkmath::bvh::BvhBuildThread (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "a52b9786232aacc1516a14d69c1dba3714555c58cc1cf917f69edf07e0b8c6fe",
+      "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BVH_BuildTool",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBuildTool",
+      "status": "implemented",
+      "notes": "Class record: ported as a trait reached as Handle<dyn Trait>, rustycad_tkmath::bvh::BvhBuildTool (evidence: member row owner); each member is mapped by its own row.",
+      "cpp_declaration_id": "7d9f8b47d111f1217856402004a9fc39e29b77bd7cb47e1c05c19d94c1ad0061",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "BVH::RadixSorter::perform(BVH::RadixSorter::LinkIterator,BVH::RadixSorter::LinkIterator,int)",
@@ -369132,16 +368844,6 @@
       }
     },
     {
-      "upstream_id": "BVH_Transform::~BVH_Transform<T, N>()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTransform",
-      "status": "excluded",
-      "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkmath::bvh::BvhTransform needs no callable counterpart.",
-      "cpp_declaration_id": "89546eeb6b7129f24511e67d569ead4282ed641a67a280ed637b4be8f1f8095a",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "BVH_Properties::get_type_descriptor",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
@@ -369172,6 +368874,16 @@
       "rust_item": "rustycad_tkmath::bvh::BvhProperties",
       "status": "excluded",
       "notes": "Excluded: DynamicType() of DEFINE_STANDARD_RTTI for BVH_Properties. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_Transform::~BVH_Transform<T, N>()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTransform",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkmath::bvh::BvhTransform needs no callable counterpart.",
+      "cpp_declaration_id": "89546eeb6b7129f24511e67d569ead4282ed641a67a280ed637b4be8f1f8095a",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "BVH::VecComp<type-parameter-0-0, 2>::BVH_Vec2t",
@@ -369324,16 +369036,6 @@
       "notes": "Class template BVH_Tree<T, N, Arity> is the generic Rust struct bvh::BvhTree<V, A>."
     },
     {
-      "upstream_id": "BVH_TreeBase::~BVH_TreeBase<T, N>()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTree",
-      "status": "excluded",
-      "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkmath::bvh::BvhTree needs no callable counterpart.",
-      "cpp_declaration_id": "328d2208e5b8d08bf562fded16fef8e2d7d2cd3816f9034d12bd653da831aa39",
-      "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
       "upstream_id": "BVH_TreeBaseTransient::get_type_descriptor",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
@@ -369364,6 +369066,16 @@
       "rust_item": "rustycad_tkmath::bvh::BvhTree",
       "status": "excluded",
       "notes": "Excluded: get_type_name() of DEFINE_STANDARD_RTTI for BVH_TreeBaseTransient. The C++ descriptor exists so handles to BVH template instances share one typed base; the Rust BVH design holds these values directly or as Box/Arc trait objects (BvhObjectHandle, Arc<dyn BvhProperties> with as_any downcasts), never as Handle<dyn Transient>, so no runtime descriptor is observable from Rust."
+    },
+    {
+      "upstream_id": "BVH_TreeBase::~BVH_TreeBase<T, N>()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkmath::bvh::BvhTree needs no callable counterpart.",
+      "cpp_declaration_id": "328d2208e5b8d08bf562fded16fef8e2d7d2cd3816f9034d12bd653da831aa39",
+      "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
       "upstream_id": "BVH_Tree",
@@ -387280,6 +386992,14 @@
       "notes": "Protected arena replacement clearing all cells while keeping dimension and sizes."
     },
     {
+      "upstream_id": "NCollection_CellFilter::Cell::~Cell",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor body only releases storage the object owns (the destructor call of every target in the cell list; the nodes stay in the incremental allocator). Rust ncollection::CellFilter owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
+    },
+    {
       "upstream_id": "NCollection_CellFilter::Cell::operator=(NCollection_CellFilter::Cell&&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
@@ -387288,14 +387008,6 @@
       "notes": "Excluded: the C++ move assignment is user-written. Every Rust move transfers the value without a callable hook, and the moved-from binding is inaccessible, so the C++ moved-from source state has no Rust counterpart. Rust rustycad_tkernel::ncollection::CellFilterCell needs no method for it.",
       "cpp_declaration_id": "40e2b58d8626eda5e5616c1302e68daeb933a49c6810fd03348fd8e322ae0ff7",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_CellFilter::Cell::~Cell",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
-      "status": "excluded",
-      "notes": "Excluded: the C++ destructor body only releases storage the object owns (the destructor call of every target in the cell list; the nodes stay in the incremental allocator). Rust ncollection::CellFilter owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
     },
     {
       "upstream_id": "NCollection_AccAllocator::Align",
@@ -389995,6 +389707,17 @@
       "notes": "Protected destruction callback; held in the state reached through the unsafe native_state() pointer."
     },
     {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::operator=",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray",
+      "status": "excluded",
+      "notes": "Excluded: SFINAE-enabled converting assignment from the mutable to the const iterator of the sparse array. Rust iteration (SparseArray::entries/iter versus entries_mut/iter_mut) borrows shared or exclusive and needs no conversion (a C++ type trait mechanism, plan D1 class B4).",
+      "cpp_selector": {
+        "usr": "c:@S@NCollection_SparseArrayBase@ST>3#T#T#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-1-0, int>:::typeoperator=#&1>@S@NCollection_SparseArrayBase@ST>3#T#T#Nb@BasicIterator3t0.0t0.1Vb0#&>@S@NCollection_SparseArrayBase@ST>3#T#T#Nb@BasicIterator3S3_S4_#"
+      }
+    },
+    {
       "upstream_id": "NCollection_SparseArrayBase",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
@@ -390023,17 +389746,6 @@
       "notes": "Class record: ported as a type, rustycad_tkernel::ncollection::SparseArrayBase (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "fb04dc258ced7e0a761d17896ffc5243c872bf7c616044dae0010df53b594996",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::operator=",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::SparseArray",
-      "status": "excluded",
-      "notes": "Excluded: SFINAE-enabled converting assignment from the mutable to the const iterator of the sparse array. Rust iteration (SparseArray::entries/iter versus entries_mut/iter_mut) borrows shared or exclusive and needs no conversion (a C++ type trait mechanism, plan D1 class B4).",
-      "cpp_selector": {
-        "usr": "c:@S@NCollection_SparseArrayBase@ST>3#T#T#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-1-0, int>:::typeoperator=#&1>@S@NCollection_SparseArrayBase@ST>3#T#T#Nb@BasicIterator3t0.0t0.1Vb0#&>@S@NCollection_SparseArrayBase@ST>3#T#T#Nb@BasicIterator3S3_S4_#"
-      }
     },
     {
       "upstream_id": "NCollection_BaseMap::BasicIterator::pointer",
@@ -390264,6 +389976,25 @@
       "notes": "Class record: the C++ class NCollection_BaseMap is split into trait rustycad_tkernel::ncollection::BaseMap (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkernel::ncollection::BaseMapStorage (its shared state); each member is mapped by its own row."
     },
     {
+      "upstream_id": "NCollection_BaseMap::BasicIterator::operator=",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
+      "status": "excluded",
+      "notes": "Excluded: SFINAE-enabled converting assignment from the mutable to the const iterator of the same map. Rust iterators borrow the map shared or exclusive; a shared iterator is created directly and no mutable-to-const conversion exists (a C++ type trait mechanism, plan D1 class B4).",
+      "cpp_selector": {
+        "usr": "c:@S@NCollection_BaseMap@ST>7#T#T#T#T#Nb#Nb#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-1-0, int>:::typeoperator=#&1>@S@NCollection_BaseMap@ST>7#T#T#T#T#Nb#Nb#Nb@BasicIterator7t0.0t0.1t0.2t0.3Vb0#&>@S@NCollection_BaseMap@ST>7#T#T#T#T#Nb#Nb#Nb@BasicIterator7S3_S4_S5_S6_#"
+      }
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::~NCollection_BaseMap",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage",
+      "status": "excluded",
+      "notes": "Excluded: the C++ destructor body only releases storage the object owns (Standard::Free of the bucket array). Rust ncollection::BaseMapStorage owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
+    },
+    {
       "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(const NCollection_BaseMap&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
@@ -390372,25 +390103,6 @@
       "notes": "Excluded: C++ declares the copy assignment `= delete`, so no caller can use it. Rust rustycad_tkernel::ncollection::BaseMap does not implement Clone either.",
       "cpp_declaration_id": "8d5304d7117bae49b2215cd03b6add7369c3da1a296ac2184fee4469a8a06de6",
       "generated_by": "tools/generate_api_macro_rows.py"
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::BasicIterator::operator=",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
-      "status": "excluded",
-      "notes": "Excluded: SFINAE-enabled converting assignment from the mutable to the const iterator of the same map. Rust iterators borrow the map shared or exclusive; a shared iterator is created directly and no mutable-to-const conversion exists (a C++ type trait mechanism, plan D1 class B4).",
-      "cpp_selector": {
-        "usr": "c:@S@NCollection_BaseMap@ST>7#T#T#T#T#Nb#Nb#Nb@BasicIterator@FT@>2#Nb#N^std::enable_if<value-parameter-1-0, int>:::typeoperator=#&1>@S@NCollection_BaseMap@ST>7#T#T#T#T#Nb#Nb#Nb@BasicIterator7t0.0t0.1t0.2t0.3Vb0#&>@S@NCollection_BaseMap@ST>7#T#T#T#T#Nb#Nb#Nb@BasicIterator7S3_S4_S5_S6_#"
-      }
-    },
-    {
-      "upstream_id": "NCollection_BaseMap::~NCollection_BaseMap",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage",
-      "status": "excluded",
-      "notes": "Excluded: the C++ destructor body only releases storage the object owns (Standard::Free of the bucket array). Rust ncollection::BaseMapStorage owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
     },
     {
       "upstream_id": "NCollection_HArray1::value_type",
