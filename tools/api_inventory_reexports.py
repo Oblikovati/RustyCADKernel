@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+import re
 
 from api_inventory_json import (
     JSONValue,
@@ -18,8 +19,26 @@ def resolve_cross_crate_reexports(crates: list[dict[str, JSONValue]]) -> None:
     for crate in crates:
         declarations = array_value(crate.get("declarations"), "declarations")
         crate["declarations"] = expand_reexports(crate, declarations, catalog)
-        crate["unresolved_links"] = unresolved_ids(crate["declarations"])
+        crate["unresolved_links"] = sorted(
+            set(structural_gaps(crate.get("unresolved_links", [])))
+            | set(unresolved_ids(crate["declarations"]))
+        )
         crate["source_files"] = source_hashes(crate["declarations"])
+
+
+STRUCTURAL_GAP = re.compile(r"[a-z][a-z-]*:(?!:)")
+
+
+def structural_gaps(values: JSONValue) -> list[str]:
+    """Walk-time gaps that no declaration field records, e.g. `trait-impl:X:...`.
+
+    Re-export resolution recomputes the unresolved item ids from the declarations, which
+    once also discarded these named gaps: an impl dropped for an unsupported generic
+    argument then vanished without a trace. Example:
+    `structural_gaps(["trait-impl:core::cmp::PartialEq:x", "42"]) == ["trait-impl:..."]`.
+    """
+    items = values if isinstance(values, list) else []
+    return [str(item) for item in items if STRUCTURAL_GAP.match(str(item))]
 
 
 def path_catalog(

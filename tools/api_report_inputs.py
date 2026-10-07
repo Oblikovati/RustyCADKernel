@@ -51,13 +51,18 @@ def mark_conflicted_declarations(
 
 def verify_conflict_artifact(manifest: JSONObject, directory: Path) -> Path:
     """Locate the hash-bound conflict table; e.g. `verify_conflict_artifact(manifest, folder)`."""
+    return verify_manifest_artifact(manifest, directory, "unsupported")
+
+
+def verify_manifest_artifact(manifest: JSONObject, directory: Path, key: str) -> Path:
+    """Locate one hash-bound capture artifact; e.g. `verify_manifest_artifact(m, d, "headers")`."""
     artifacts = manifest.get("artifacts")
-    row = artifacts.get("unsupported") if isinstance(artifacts, dict) else None
+    row = artifacts.get(key) if isinstance(artifacts, dict) else None
     if not isinstance(row, dict) or not isinstance(row.get("path"), str):
-        raise ValueError(f"conflict artifact {row!r}: expected path and SHA256")
+        raise ValueError(f"{key} artifact {row!r}: expected path and SHA256")
     path = directory / row["path"]
     if digest(path) != row.get("sha256"):
         raise ValueError(
-            f"conflict artifact {path}: expected recorded hash {row.get('sha256')!r}"
+            f"{key} artifact {path}: expected recorded hash {row.get('sha256')!r}"
         )
     return path
