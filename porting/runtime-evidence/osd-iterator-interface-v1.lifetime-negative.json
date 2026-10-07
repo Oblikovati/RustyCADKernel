@@ -1,0 +1,17 @@
+{
+  "source": "use rustycad_tkernel::osd::ParallelIteratorInterface;\nstruct Borrowed<'a>(&'a str);\nimpl<'a> ParallelIteratorInterface<'a> for Borrowed<'a> {\n    fn is_equal(&self, _: &dyn ParallelIteratorInterface<'a>) -> bool { false }\n    fn increment(&mut self) {}\n    fn clone_box(&self) -> Box<dyn ParallelIteratorInterface<'a> + 'a> {\n        Box::new(Borrowed(self.0))\n    }\n}\nfn escapes() -> Box<dyn ParallelIteratorInterface<'static>> {\n    let text = String::from(\"local\");\n    let source = Borrowed(&text);\n    source.clone_box()\n}\nfn main() {}\n",
+  "argv": [
+    "/home/vmiguel/.cargo/bin/rustc",
+    "--edition=2024",
+    "target/osd-interface-escaping-lifetime.rs",
+    "--extern",
+    "rustycad_tkernel=target/debug/deps/librustycad_tkernel-5ee4dd69ac632c69.rlib",
+    "-L",
+    "dependency=target/debug/deps",
+    "--out-dir",
+    "target"
+  ],
+  "exit_code": 1,
+  "stderr": "error[E0515]: cannot return value referencing local variable `text`\n  --> target/osd-interface-escaping-lifetime.rs:13:5\n   |\n12 |     let source = Borrowed(&text);\n   |                           ----- `text` is borrowed here\n13 |     source.clone_box()\n   |     ^^^^^^^^^^^^^^^^^^ returns a value referencing data owned by the current function\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0515`.\n",
+  "expected_diagnostic": "E0515"
+}
