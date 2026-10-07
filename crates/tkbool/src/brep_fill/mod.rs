@@ -1,4 +1,5 @@
 //! `BRepFill`: sweeps, pipes, thru-sections and fillings of the topological shapes.
+mod advanced_evolved;
 mod approx_seewing;
 mod compatible_wires;
 mod draft;
@@ -22,6 +23,7 @@ mod trim_edge_tool;
 mod trim_shell_corner;
 mod trim_surface_tool;
 
+pub use advanced_evolved::{AdvancedEvolvedStatus, BRepFillAdvancedEvolved};
 pub use approx_seewing::BRepFillApproxSeewing;
 pub use compatible_wires::BRepFillCompatibleWires;
 pub use draft::BRepFillDraft;

@@ -3,10 +3,10 @@
 use std::io::{self, BufRead};
 mod bl_probe;
 use bl_probe::{
-    brep_fill_compatible, brep_fill_draft, brep_fill_filling, brep_fill_generator,
-    brep_fill_location_law, brep_fill_multi_line, brep_fill_offset_wire, brep_fill_package,
-    brep_fill_pipe, brep_fill_pipe_shell, brep_fill_section, brep_fill_section_law,
-    brep_fill_sweep,
+    brep_fill_advanced_evolved, brep_fill_compatible, brep_fill_draft, brep_fill_filling,
+    brep_fill_generator, brep_fill_location_law, brep_fill_multi_line, brep_fill_offset_wire,
+    brep_fill_package, brep_fill_pipe, brep_fill_pipe_shell, brep_fill_section,
+    brep_fill_section_law, brep_fill_sweep,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -21,7 +21,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // bl_probe/brep_fill_sweep.rs, bl_probe/brep_fill_pipe_shell.rs,
     // bl_probe/brep_fill_pipe.rs, bl_probe/brep_fill_draft.rs,
     // bl_probe/brep_fill_filling.rs, bl_probe/brep_fill_offset_wire.rs,
-    // bl_probe/brep_fill_multi_line.rs)
+    // bl_probe/brep_fill_multi_line.rs, bl_probe/brep_fill_advanced_evolved.rs)
     ("bf_generator", brep_fill_generator::generator_case),
     ("bf_face", brep_fill_package::face_case),
     ("bf_shell", brep_fill_package::shell_case),
@@ -46,6 +46,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bf_offset_wire", brep_fill_offset_wire::offset_wire_case),
     ("bf_multi_line", brep_fill_multi_line::multi_line_case),
     ("bf_trim_surface", brep_fill_multi_line::trim_surface_case),
+    (
+        "bf_advanced_evolved",
+        brep_fill_advanced_evolved::advanced_evolved_case,
+    ),
 ];
 
 fn main() {

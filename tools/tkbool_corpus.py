@@ -37,3 +37,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_brepfill_offset_wire').append_offset_wire_requests(requests)
     # BRepFill_MultiLine, ApproxSeewing, TrimSurfaceTool (tkbool_corpus_brepfill_multi_line.py)
     __import__('tkbool_corpus_brepfill_multi_line').append_multi_line_requests(requests)
+    # BRepFill_AdvancedEvolved (tkbool_corpus_brepfill_advanced_evolved.py)
+    __import__('tkbool_corpus_brepfill_advanced_evolved').append_advanced_evolved_requests(requests)

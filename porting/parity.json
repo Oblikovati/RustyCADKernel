@@ -431860,6 +431860,134 @@
       "notes": "BRepFill_ComputeCLine is the Approx_ComputeCLine instantiation over AppCont_Function (BRepFill_ComputeCLine_0.cxx); rustycad_tkbool::brep_fill::BRepFillComputeCLine is an alias of the rustycad_tkgeombase::approx::ComputeCLine port, which fits a BRepFillMultiLine through the Function trait. The constructor defaults are ComputeCLineOptions; the output references are returned values."
     },
     {
+      "upstream_id": "BRepFill_AdvancedEvolved::BRepFill_AdvancedEvolved()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::Perform(const TopoDS_Wire&,const TopoDS_Wire&,double,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::IsDone(unsigned int*) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::Shape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::SetTemporaryDirectory(const char*)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::set_temporary_directory",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::SetParallelMode(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::set_parallel_mode",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::PerformSweep()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::perform_sweep",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::GetLids()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::get_lids",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::BuildSolid()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::build_solid",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::RemoveExcessSolids(const NCollection_List<TopoDS_Shape>&,const TopoDS_Shape&,NCollection_List<TopoDS_Shape>&,BOPAlgo_MakerVolume&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::remove_excess_solids",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::ExtractOuterSolid(TopoDS_Shape&,NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::extract_outer_solid",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::GetSpineAndProfile(const TopoDS_Wire&,const TopoDS_Wire&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::get_spine_and_profile",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::UnifyShape()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::unify_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::PerformBoolean(const NCollection_List<TopoDS_Shape>&,TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::perform_boolean",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::CheckSingularityAndAdd(const TopoDS_Face&,double,NCollection_List<TopoDS_Shape>&,NCollection_List<TopoDS_Shape>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::check_singularity_and_add",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
+      "upstream_id": "BRepFill_AdvancedEvolved::IsLid(const TopoDS_Face&,const NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_AdvancedEvolved.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillAdvancedEvolved::is_lid",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_AdvancedEvolved.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_advanced_evolved requests: square and L-shaped spines with vertical, slanted, bent and closed profiles, solids and shells, parallel or not). Native quirks kept: the profile orientation from the last solution of the spine/profile distance (every Value() is the minimum) and the second tangent at a vertex evaluated on the first edge curve; a single solid read past the end of the explorer (TopoDS::Solid of the explored shape, Standard_TypeMismatch for a compound in the oracle build); every split so far re-appended to the faces after each singular face; the private status enumeration is AdvancedEvolvedStatus and the error code of IsDone an optional output; the debug dumps (BRepFill_AdvancedEvolved_DEBUG) are not ported."
+    },
+    {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",

@@ -50,6 +50,7 @@
 #include "tkbool_probe_brepfill_filling.cxx"
 #include "tkbool_probe_brepfill_offset_wire.cxx"
 #include "tkbool_probe_brepfill_multi_line.cxx"
+#include "tkbool_probe_brepfill_advanced_evolved.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFill (tkbool_probe_brepfill_generator.cxx, tkbool_probe_brepfill_package.cxx,
  // tkbool_probe_brepfill_compatible.cxx, tkbool_probe_brepfill_section_law.cxx,
@@ -57,7 +58,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // tkbool_probe_brepfill_sweep.cxx, tkbool_probe_brepfill_pipe_shell.cxx,
  // tkbool_probe_brepfill_pipe.cxx, tkbool_probe_brepfill_draft.cxx,
  // tkbool_probe_brepfill_filling.cxx, tkbool_probe_brepfill_offset_wire.cxx,
- // tkbool_probe_brepfill_multi_line.cxx)
+ // tkbool_probe_brepfill_multi_line.cxx, tkbool_probe_brepfill_advanced_evolved.cxx)
  {"bf_generator", bl_bf_generator_case},
  {"bf_face", bl_bf_face_case},
  {"bf_shell", bl_bf_shell_case},
@@ -79,6 +80,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"bf_offset_wire", bl_bf_offset_wire_case},
  {"bf_multi_line", bl_bf_multi_line_case},
  {"bf_trim_surface", bl_bf_trim_surface_case},
+ {"bf_advanced_evolved", bl_bf_advanced_evolved_case},
 };
 int main() {
  std::string line;
