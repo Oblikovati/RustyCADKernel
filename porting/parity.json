@@ -319302,6 +319302,206 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_Curve()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Projector(const HLRAlgo_Projector*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::set_projector",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Curve(const TopoDS_Edge&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::set_curve",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Parameter2d(const double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::parameter_2d",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Parameter3d(const double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::parameter_3d",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Update(double*,double*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::update",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::UpdateMinMax(double*,double*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::update_min_max",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Z(const double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::z",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Tangent(const bool,gp_Pnt2d&,gp_Dir2d&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::tangent",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::D0(const double,gp_Pnt2d&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d0",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::D1(const double,gp_Pnt2d&,gp_Vec2d&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d1",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::D2(const double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d2",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::D3(const double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d3",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::DN(const double,const int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::dn",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Line() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::line",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Circle() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::circle",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Ellipse() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::ellipse",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Hyperbola() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::hyperbola",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Parabola() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::parabola",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Poles(NCollection_Array1<gp_Pnt2d>&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::poles",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Poles(const occ::handle<Geom_BSplineCurve>&,NCollection_Array1<gp_Pnt2d>&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::poles_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::PolesAndWeights(NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::poles_and_weights",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::PolesAndWeights(const occ::handle<Geom_BSplineCurve>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::poles_and_weights_of",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Knots(NCollection_Array1<double>&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::knots",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Multiplicities(NCollection_Array1<int>&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::multiplicities",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
       "upstream_id": "HLRBRep_CurveTool::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.hxx",
@@ -321580,6 +321780,230 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "0312fcde259a2f314dbd36b57a1eaa72c706ac3098eab583dfbbab82c9dbfc9e",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Curve()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::curve",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::GetCurve() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::get_curve",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Value3D(const double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::value_3d",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::D0(const double,gp_Pnt&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d0_3d",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::D1(const double,gp_Pnt&,gp_Vec&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d1_3d",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::FirstParameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::first_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::LastParameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::last_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Continuity() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::continuity",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::NbIntervals(const GeomAbs_Shape) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::nb_intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Intervals(NCollection_Array1<double>&,const GeomAbs_Shape) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::IsClosed() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::is_closed",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::IsPeriodic() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::is_periodic",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Period() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::period",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Value(const double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::value",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Resolution(const double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::resolution",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::GetType() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::get_type",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::IsRational() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::is_rational",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::Degree() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::degree",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::NbPoles() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::nb_poles",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Curve::NbKnots() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve::nb_knots",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_CLPropsATool::Value(const HLRBRep_Curve*,const double,gp_Pnt2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::value",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CLPropsATool.lxx: static evaluation of a projected HLRBRep_Curve for GeomLProp_CLPropsBase through LProp ToolAccess (CurveTool impl). Exercised by HLRBRep_Curve::Tangent in the hb_curve numeric family."
+    },
+    {
+      "upstream_id": "HLRBRep_CLPropsATool::D1(const HLRBRep_Curve*,const double,gp_Pnt2d&,gp_Vec2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::d1",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CLPropsATool.lxx: static evaluation of a projected HLRBRep_Curve for GeomLProp_CLPropsBase through LProp ToolAccess (CurveTool impl). Exercised by HLRBRep_Curve::Tangent in the hb_curve numeric family."
+    },
+    {
+      "upstream_id": "HLRBRep_CLPropsATool::D2(const HLRBRep_Curve*,const double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::d2",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CLPropsATool.lxx: static evaluation of a projected HLRBRep_Curve for GeomLProp_CLPropsBase through LProp ToolAccess (CurveTool impl). Exercised by HLRBRep_Curve::Tangent in the hb_curve numeric family."
+    },
+    {
+      "upstream_id": "HLRBRep_CLPropsATool::D3(const HLRBRep_Curve*,const double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::d3",
+      "status": "partial",
+      "notes": "HLRBRep_Curve::D3 is empty natively, so the native tool leaves the caller's point and vectors unchanged; the Rust tool returns its outputs and starts them at the origin and null vectors, so a caller does not see its previous values. No HLR path reaches D3 (Tangent uses order 2)."
+    },
+    {
+      "upstream_id": "HLRBRep_CLPropsATool::Continuity(const HLRBRep_Curve*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::continuity",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CLPropsATool.lxx: static evaluation of a projected HLRBRep_Curve for GeomLProp_CLPropsBase through LProp ToolAccess (CurveTool impl). Exercised by HLRBRep_Curve::Tangent in the hb_curve numeric family."
+    },
+    {
+      "upstream_id": "HLRBRep_CLPropsATool::FirstParameter(const HLRBRep_Curve*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::first_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CLPropsATool.lxx: static evaluation of a projected HLRBRep_Curve for GeomLProp_CLPropsBase through LProp ToolAccess (CurveTool impl). Exercised by HLRBRep_Curve::Tangent in the hb_curve numeric family."
+    },
+    {
+      "upstream_id": "HLRBRep_CLPropsATool::LastParameter(const HLRBRep_Curve*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::last_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CLPropsATool.lxx: static evaluation of a projected HLRBRep_Curve for GeomLProp_CLPropsBase through LProp ToolAccess (CurveTool impl). Exercised by HLRBRep_Curve::Tangent in the hb_curve numeric family."
+    },
+    {
+      "upstream_id": "HLRBRep_CLProps",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLProps.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CLProps",
+      "status": "implemented",
+      "notes": "Alias of GeomLProp_CLPropsBase<Vector2, &Curve, ToolAccess<CLPropsATool>>, the native template instance; exercised through HLRBRep_Curve::Tangent (hb_curve) and tests/hlr_brep_curve.rs."
     },
     {
       "upstream_id": "BOPAlgo_PaveFiller::PerformFF(const Message_ProgressRange &)",

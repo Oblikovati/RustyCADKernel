@@ -190,3 +190,26 @@ and 17.
 - **The box constants.** The seven directions of `HLRAlgo::UpdateMinMax` are the bit
   patterns of the pinned build's `cos(k*PI/14)` and `sin(k*PI/14)`, so no platform
   `cos` can change them.
+
+## 6. HLRBRep: curves, surfaces and the shared projector
+
+- **The projector.** `HLRBRep_Curve` and `HLRBRep_Surface` keep a raw pointer to the
+  `HLRAlgo_Projector` of their `HLRBRep_Data`, which `HLRBRep_HLRToShape` scales in place
+  (`DS->Projector().Scaled(true)`) while the curves read it. The port gives each curve
+  and surface an `Option<Arc<Projector>>`; the data structure owns the reference copy
+  and replaces the `Arc` in every curve and surface whenever it changes the projector,
+  so every reader sees the value the native pointer would show. A curve or surface
+  without projector returns Standard_NullObject where the native code dereferences
+  null.
+- **`void*` template arguments.** The templates reach curves and surfaces as
+  `HLRBRep_CurvePtr`/`HLRBRep_SurfacePtr` (`void*`); the port passes `&Curve` and
+  `&Surface`, and the tool classes (`HLRBRep_CurveTool`, `HLRBRep_SurfaceTool`,
+  `HLRBRep_CLPropsATool`, `HLRBRep_SLPropsATool`) implement the template traits on them.
+- **Out parameters.** Native members that may leave an output unchanged keep the
+  `&mut` output (`HLRBRep_Curve::D0` under the type-0 standard view, whose
+  `HLRAlgo_Projector::Project` never stores the point; the empty `D3`); the overloads
+  on 3D outputs take a `_3d` suffix (`d0_3d`, `d1_3d`), the overloads that take a
+  B-spline an `_of` suffix (`poles_of`).
+- **Uninitialized members.** The line data of a default `HLRBRep_Curve` (`myOX` ...
+  `myOF`) and its type are uninitialized natively until `Update`; the port starts them
+  at 0 and OtherCurve.

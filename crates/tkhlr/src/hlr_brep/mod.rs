@@ -8,6 +8,12 @@ pub use b_curve_tool::BCurveTool;
 mod b_surface_tool;
 pub use b_surface_tool::BSurfaceTool;
 
+mod cl_props;
+pub use cl_props::{CLProps, CLPropsATool};
+mod curve;
+mod curve_2d;
+pub use curve::{Curve, MinMaxBox};
+
 // Consumed by the remaining HLRBRep_Data port; not a public OCCT declaration.
 #[cfg_attr(not(test), expect(dead_code))]
 mod rejection_cache;
