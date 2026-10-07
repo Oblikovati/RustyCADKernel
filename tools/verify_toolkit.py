@@ -2,7 +2,7 @@
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
-       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF, TKCAF)
+       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF, TKCAF, TKDE)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -21,7 +21,8 @@ from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases
 from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
 from native_build import (CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS, CLOSURE_TARGETS,
-                          LINKED_TOOLKITS, OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS, OCAF_TOOLKITS,
+                          DE_CLOSURE_TARGETS, DE_LINKED_TOOLKITS, DE_TOOLKITS, LINKED_TOOLKITS,
+                          OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS, OCAF_TOOLKITS,
                           closure_flags, locked_cmake)
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
@@ -58,6 +59,8 @@ PROFILES_WITHOUT_NUMERIC: dict[str, tuple[str, ...]] = {
     'TKCDF': ('TKCDF', 'TKernel'),
     'TKLCAF': OCAF_LINKED_TOOLKITS,
     'TKCAF': CAF_LINKED_TOOLKITS,
+    # TKDE holds no numeric algorithm; its suite links every DE format toolkit.
+    'TKDE': DE_LINKED_TOOLKITS,
 }
 
 # The native closure tree each profile without numeric probes builds when no prebuilt one is
@@ -66,6 +69,7 @@ PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], list[str], str]] = {
     'TKCDF': (OCAF_TOOLKITS, OCAF_CLOSURE_TARGETS, 'target/occt-ocaf-full'),
     'TKLCAF': (OCAF_TOOLKITS, OCAF_CLOSURE_TARGETS, 'target/occt-ocaf-full'),
     'TKCAF': (CAF_TOOLKITS, CAF_CLOSURE_TARGETS, 'target/occt-caf-full'),
+    'TKDE': (DE_TOOLKITS, DE_CLOSURE_TARGETS, 'target/occt-de-full'),
 }
 
 
