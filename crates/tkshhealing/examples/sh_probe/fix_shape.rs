@@ -3,6 +3,7 @@
 use super::brep_lib_common::shape;
 use super::common::{Reader, attempt, end, flag};
 use super::fix_shape_checks;
+use super::fix_shape_wires;
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Edge, Shape};
@@ -61,7 +62,8 @@ fn input(r: &mut Reader<'_>) -> Result<Shape, Failure> {
         2 => solid(r),
         3 => fix_shape_checks::bezier_face(r),
         4 => fix_shape_checks::raw_face(r),
-        _ => fix_shape_checks::sphere_face(r),
+        5 => fix_shape_checks::sphere_face(r),
+        _ => fix_shape_wires::multi_wire_face(r),
     }
 }
 
@@ -224,6 +226,7 @@ fn run(mut s: Shape, prec: f64, maxtol: f64, op: i32) -> Result<(), Failure> {
         16 => fix_shape_checks::small_face_checks(&s, prec),
         17 | 18 => fix_shape_checks::free_properties(&s, maxtol, op == 18),
         32 => fix_shape_checks::split_tool(&s, prec),
+        33 => fix_shape_wires::intersecting_wires(&s, prec, maxtol),
         19.. => fix_shape_checks::wire_fixes(&s, prec, maxtol, op),
         _ => solids(&s),
     }

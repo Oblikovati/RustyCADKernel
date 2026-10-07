@@ -312053,8 +312053,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_IntersectionTool.hxx",
       "source_sha256": "719d1cccb35128dd497eac9ea13ff5614301353adc845419faf30e199b378bc3",
       "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixIntersectionTool::fix_intersecting_wires",
-      "status": "partial",
-      "notes": "Native fixtures cover points, endpoint reuse/union, short overlaps, full-second-edge long overlap and its reversed direction, and a cut that mutates one edge but returns false. Partial long overlap and remaining continuation combinations are under active porting; no full class or legacy parity claim."
+      "status": "implemented",
+      "notes": "Line-by-line port of the native wire-pair scan (sewd1 kept over the n2 pairs, the stale total box of the first wire, edge1 read once per num1, the point block falling through to the segment block, end cuts, the three-piece shared-segment split and the two-piece split, and the separate sequence entry and context key of each repaired wire). Compared with OCCT by sh_fix_shape op 33 (tkshhealing_probe_fix_shape_wires.cxx) on multi-wire planar faces: crossing squares, big, short and near-end overlaps, touching corners, a vertex on a side, a circle across a side, three crossing wires, disjoint and nested wires and two circles, each with the context applied to every input wire and the face, at two precisions; also by sh_fix_face through ShapeFix_Face."
     },
     {
       "upstream_id": "ShapeFix_IntersectionTool",
