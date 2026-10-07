@@ -84,8 +84,35 @@ def random_requests(requests: list[str]) -> None:
         requests.append(const_rad(s1, s2, c, radius, rng.randint(1, 8), rng.randint(0, 3), t, x4))
 
 
+def const_rad_inv(s1, s2, c, curve2d, radius, choix, first, x4, tol=1e-7) -> str:
+    """One `fl_const_rad_inv` request; `curve2d` is (u, v, du, dv)."""
+    return 'fl_const_rad_inv ' + numbers([*s1, *s2, *c, *curve2d, radius, choix, int(first), *x4, tol])
+
+
+def inverse_requests(requests: list[str]) -> None:
+    """The right-angled planes with the fillet ending on an iso line of either plane,
+    exact and perturbed, and a sphere cut by a plane."""
+    s1, s2 = surface(0, n=Z, x=X), surface(0, n=Y, x=X)
+    c = guide(0, n=X, x=Y)
+    for radius in (1.0, 0.5):
+        for first in (True, False):
+            line = (0.0, radius, 1.0, 0.0) if first else (0.0, -radius, 1.0, 0.0)
+            for w in (0.0, 0.7, -1.2):
+                exact = [w, w, w, -radius if first else radius]
+                for choix in (1, 2, 3, 6):
+                    requests.append(const_rad_inv(s1, s2, c, line, radius, choix, first, exact))
+                requests.append(const_rad_inv(s1, s2, c, line, radius, 1, first, [w + 0.1, w - 0.2, w, 0.3]))
+    sphere = surface(2, n=Z, x=X, a=2.0)
+    cut = surface(0, p=(0.0, 0.0, 1.0), n=Z, x=X)
+    circle = guide(1, p=(0.0, 0.0, 1.0), n=Z, x=X, a=math.sqrt(3.0))
+    for first in (True, False):
+        requests.append(const_rad_inv(sphere, cut, circle, (0.0, 0.4, 1.0, 0.0), 0.3, 2, first, [0.5, 0.5, 1.2, 0.4]))
+        requests.append(const_rad_inv(sphere, cut, circle, (0.0, math.pi / 2, 1.0, 0.0), 0.3, 1, first, [0.0, 0.1, 1.0, 0.0]))
+
+
 def append_blendfunc_requests(requests: list[str]) -> None:
     """Append the BlendFunc request families."""
+    inverse_requests(requests)
     right_angle_requests(requests)
     curved_requests(requests)
     random_requests(requests)

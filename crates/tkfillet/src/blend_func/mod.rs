@@ -7,6 +7,7 @@
 //! `ComputeValues` are kept, including the `static thread_local` scratch variables shared
 //! by all objects of a class in a thread.
 mod const_rad;
+mod const_rad_inv;
 mod guide;
 mod linalg;
 mod normal_terms;
@@ -15,6 +16,7 @@ mod section_solve;
 mod tensor;
 
 pub use const_rad::ConstRad;
+pub use const_rad_inv::ConstRadInv;
 pub use package::{
     SectionCounts, SectionShape, compute_d_normal, compute_normal, get_minimal_weights, get_shape,
     next_shape,

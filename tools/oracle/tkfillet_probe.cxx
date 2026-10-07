@@ -32,6 +32,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_fil_law", fl_fil_law_case},
  // BlendFunc (tkfillet_probe_blendfunc.cxx)
  {"fl_const_rad", fl_const_rad_case},
+ {"fl_const_rad_inv", fl_const_rad_inv_case},
 };
 int main() {
  std::string line;

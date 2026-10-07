@@ -1,8 +1,8 @@
 //! `BlendFunc_ConstRad` as a math function set and a blend function.
 use super::super::linalg::copy_matrix;
 use super::super::linalg::copy_vector;
+use super::super::package::live_curve;
 use super::ConstRad;
-use super::queries::live_curve;
 use crate::blend::{
     BlendAppFunction, BlendFunction, BlendPoint, SectionEndFrames, SectionPoles,
     function_nb_variables, function_pnt1, function_pnt2,

@@ -16,6 +16,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_fil_law", chfi_ds::fil_law_case),
     // BlendFunc (fl_probe/blend_func.rs)
     ("fl_const_rad", blend_func::const_rad_case),
+    ("fl_const_rad_inv", blend_func::const_rad_inv_case),
 ];
 
 fn main() {

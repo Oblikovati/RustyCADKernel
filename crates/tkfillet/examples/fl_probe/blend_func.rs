@@ -2,8 +2,13 @@
 use super::common::{Reader, attempt, dir, end, flag, int, pnt, pnt2d, real};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkfillet::blend::{BlendAppFunction, BlendFunction, BlendPoint, SectionPoles};
-use rustycad_tkfillet::blend_func::{ConstRad, SectionShape};
+use rustycad_tkfillet::blend::{
+    BlendAppFunction, BlendFuncInv, BlendFunction, BlendInverseBounds, BlendPoint, SectionPoles,
+};
+use rustycad_tkfillet::blend_func::{ConstRad, ConstRadInv, SectionShape};
+use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
+use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
+use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::geom::{
     GeomCircle, GeomConicalSurface, GeomCurve, GeomCylindricalSurface, GeomLine, GeomPlane,
@@ -314,7 +319,9 @@ pub fn const_rad_case(values: &[f64]) {
             frames.tg_last,
             frames.norm_first,
             frames.norm_last,
-        ].into_iter().for_each(vec3);
+        ]
+        .into_iter()
+        .for_each(vec3);
         Ok(())
     });
     attempt(|| circle_section(&mut f, t, x));
@@ -339,4 +346,66 @@ fn circle_section(f: &mut ConstRad, t: f64, x: [f64; 4]) -> Result<(), Failure> 
     dir(frame.x_direction());
     real(circle.radius());
     Ok(())
+}
+
+/// `fl_curve2d`: the line through `(u, v)` along `(du, dv)`.
+fn curve2d(r: &mut Reader<'_>) -> Handle<dyn Adaptor2dCurve2d> {
+    let (p, d) = (r.pnt2d(), r.dir2d());
+    let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::from_point(p, d)).cast();
+    Handle::new(Geom2dAdaptorCurve::with_curve(&line).expect("adaptor")).cast()
+}
+
+/// `fl_inverse`: the math members and the bounds of an inverse function at `x`.
+fn inverse(f: &mut dyn BlendInverseBounds, x: &Vector<'_>, tol: f64) {
+    int(f.variables());
+    int(f.equations());
+    let mut fv = Vector::filled(1, 4, 0.0).expect("vector");
+    let mut d = Matrix::filled(1, 4, 1, 4, 0.0).expect("matrix");
+    let ok = f.value(x, &mut fv);
+    attempt(|| {
+        f.take_failure().map(|()| {
+            flag(ok);
+            vector(&fv)
+        })
+    });
+    let ok = f.derivatives(x, &mut d);
+    attempt(|| {
+        f.take_failure().map(|()| {
+            flag(ok);
+            matrix(&d)
+        })
+    });
+    let ok = f.values(x, &mut fv, &mut d);
+    attempt(|| {
+        f.take_failure().map(|()| {
+            flag(ok);
+            vector(&fv);
+            matrix(&d)
+        })
+    });
+    attempt(|| f.is_solution(x, tol).map(flag));
+    let mut tv = Vector::filled(1, 4, 0.0).expect("vector");
+    attempt(|| f.get_tolerance(&mut tv, tol).map(|()| vector(&tv)));
+    let mut inf = Vector::filled(1, 4, 0.0).expect("vector");
+    let mut sup = Vector::filled(1, 4, 0.0).expect("vector");
+    attempt(|| {
+        f.get_bounds(&mut inf, &mut sup)?;
+        vector(&inf);
+        vector(&sup);
+        Ok(())
+    });
+}
+
+/// `fl_const_rad_inv S1 S2 C P2d D2d radius choix first X1..X4 tol`.
+pub fn const_rad_inv_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let (s1, s2, c) = (surface(&mut r), surface(&mut r), guide(&mut r));
+    let cs = curve2d(&mut r);
+    let (radius, choix, first) = (r.real(), r.integer(), r.flag());
+    let (x, tol) = (read_x(&mut r), r.real());
+    let mut f = ConstRadInv::new(&s1, &s2, &c);
+    f.set_radius(radius, choix);
+    let _ = f.set_curve(first, &cs);
+    inverse(&mut f, &to_vector(x), tol);
+    end();
 }

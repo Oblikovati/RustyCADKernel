@@ -235,6 +235,15 @@ pub(crate) fn live_surface(
     })
 }
 
+/// The curve behind a handle; a null handle is dereferenced natively.
+pub(crate) fn live_curve(
+    curve: &Handle<dyn rustycad_tkg3d::adaptor3d::Adaptor3dCurve>,
+) -> Result<&dyn rustycad_tkg3d::adaptor3d::Adaptor3dCurve, Failure> {
+    curve.get().ok_or_else(|| {
+        Failure::with_message("Standard_NullObject", "BlendFunc: null curve adaptor")
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

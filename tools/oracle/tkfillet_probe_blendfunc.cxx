@@ -3,6 +3,9 @@
 // The Rust twin is crates/tkfillet/examples/fl_probe/blend_func.rs.
 #include <BlendFunc.hxx>
 #include <BlendFunc_ConstRad.hxx>
+#include <BlendFunc_ConstRadInv.hxx>
+#include <Geom2dAdaptor_Curve.hxx>
+#include <Geom2d_Line.hxx>
 #include <Blend_Point.hxx>
 #include <GeomAdaptor_Curve.hxx>
 #include <GeomAdaptor_Surface.hxx>
@@ -110,4 +113,31 @@ void fl_const_rad_case(std::istream& in){
  fl_sections(f,x,t);
  fl_app_queries(f,tol);
  GA_TRY(gp_Ax1 ax=f.AxeRot(t);ga_pnt(ax.Location());ga_dir(ax.Direction()));
+ ga_end();}
+
+// A curve on surface: the line of the parametric plane through (u, v) along (du, dv).
+occ::handle<Adaptor2d_Curve2d> fl_curve2d(GaReader& r){
+ gp_Pnt2d p=r.pnt2d();gp_Dir2d d=r.dir2d();return new Geom2dAdaptor_Curve(new Geom2d_Line(p,d));}
+
+// The math members and the bounds of an inverse function at X.
+void fl_inverse(Blend_FuncInv& f,const math_Vector& x,double tol){
+ math_Vector fv(1,4),inf(1,4),sup(1,4),tv(1,4);math_Matrix d(1,4,1,4);
+ fv.Init(0);inf.Init(0);sup.Init(0);tv.Init(0);d.Init(0);
+ ga_int(f.NbVariables());ga_int(f.NbEquations());
+ GA_TRY(ga_flag(f.Value(x,fv));fl_vector(fv));
+ GA_TRY(ga_flag(f.Derivatives(x,d));fl_matrix(d));
+ GA_TRY(ga_flag(f.Values(x,fv,d));fl_vector(fv);fl_matrix(d));
+ GA_TRY(ga_flag(f.IsSolution(x,tol)));
+ GA_TRY(f.GetTolerance(tv,tol);fl_vector(tv));
+ GA_TRY(f.GetBounds(inf,sup);fl_vector(inf);fl_vector(sup));}
+
+// `fl_const_rad_inv S1 S2 C P2d D2d radius choix first X1..X4 tol`.
+void fl_const_rad_inv_case(std::istream& in){
+ GaReader r{in};
+ occ::handle<Adaptor3d_Surface> s1=fl_surface(r),s2=fl_surface(r);occ::handle<Adaptor3d_Curve> c=fl_guide(r);
+ occ::handle<Adaptor2d_Curve2d> cs=fl_curve2d(r);
+ double radius=r.real();int choix=r.integer();bool first=r.flag();
+ math_Vector x(1,4);for(int i=1;i<=4;++i)x(i)=r.real();double tol=r.real();
+ BlendFunc_ConstRadInv f(s1,s2,c);f.Set(radius,choix);f.Set(first,cs);
+ fl_inverse(f,x,tol);
  ga_end();}

@@ -83,3 +83,17 @@ pub(crate) fn point_from(xyz: rustycad_tkmath::gp::Xyz) -> rustycad_tkmath::gp::
     point.set_xyz(xyz);
     point
 }
+
+/// `InfBound(i) -= range; SupBound(i) += range` for finite bounds (the widening of the
+/// `GetBounds` members).
+pub(crate) fn widen(inf: &mut Vector<'_>, sup: &mut Vector<'_>, i: i32) -> Result<(), Failure> {
+    let (low, up) = (vget(inf, i)?, vget(sup, i)?);
+    if !rustycad_tkernel::precision::is_infinite(low)
+        && !rustycad_tkernel::precision::is_infinite(up)
+    {
+        let range = up - low;
+        vset(inf, i, low - range)?;
+        vset(sup, i, up + range)?;
+    }
+    Ok(())
+}

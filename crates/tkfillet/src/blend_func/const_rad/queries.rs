@@ -1,8 +1,8 @@
 //! The queries of `BlendFunc_ConstRad`: bounds and tolerances, the section circle, the
 //! shape of the approximation and the rotation axis of the guide.
-use super::super::linalg::{vector, vget, vset};
+use super::super::linalg::{vector, vget, vset, widen};
 use super::super::package::{
-    SectionCounts, get_minimal_weights, get_shape, live_surface, next_shape,
+    SectionCounts, get_minimal_weights, get_shape, live_curve, live_surface, next_shape,
 };
 use super::ConstRad;
 use super::solution::project_normal;
@@ -10,35 +10,14 @@ use crate::blend::SectionEndFrames;
 use crate::blend_func::linalg::point_from;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::native::std_min;
-use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkgeomalgo::geom_fill;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{self, Axis1, Axis2, Circle3, Direction3, Point3, Vector3};
 use rustycad_tkmath::math::Vector;
 use std::f64::consts::PI;
-
-/// The guide curve behind a handle.
-pub(crate) fn live_curve(
-    curve: &Handle<dyn Adaptor3dCurve>,
-) -> Result<&dyn Adaptor3dCurve, Failure> {
-    curve
-        .get()
-        .ok_or_else(|| Failure::with_message("Standard_NullObject", "BlendFunc: null guide curve"))
-}
-
-/// `InfBound(i) -= range; SupBound(i) += range` for finite bounds.
-pub(crate) fn widen(inf: &mut Vector<'_>, sup: &mut Vector<'_>, i: i32) -> Result<(), Failure> {
-    let (low, up) = (vget(inf, i)?, vget(sup, i)?);
-    if !precision::is_infinite(low) && !precision::is_infinite(up) {
-        let range = up - low;
-        vset(inf, i, low - range)?;
-        vset(sup, i, up + range)?;
-    }
-    Ok(())
-}
 
 impl ConstRad {
     /// `GetTolerance(Tolerance, Tol)`: the U and V resolutions of both surfaces.
