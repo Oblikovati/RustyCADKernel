@@ -6,7 +6,7 @@ use bl_probe::{
     brep_algo, brep_fill_advanced_evolved, brep_fill_compatible, brep_fill_draft,
     brep_fill_filling, brep_fill_generator, brep_fill_location_law, brep_fill_multi_line,
     brep_fill_offset_wire, brep_fill_package, brep_fill_pipe, brep_fill_pipe_shell,
-    brep_fill_section, brep_fill_section_law, brep_fill_sweep, brep_proj,
+    brep_fill_section, brep_fill_section_law, brep_fill_sweep, brep_proj, top_ope_brep_ds,
     top_ope_brep_tool_curve_tool,
 };
 
@@ -68,6 +68,9 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "tt_pcurve_on_face",
         top_ope_brep_tool_curve_tool::pcurve_on_face_case,
     ),
+    // TopOpeBRepDS (bl_probe/top_ope_brep_ds.rs)
+    ("ds_transition", top_ope_brep_ds::transition_case),
+    ("ds_kind", top_ope_brep_ds::kind_case),
 ];
 
 fn main() {

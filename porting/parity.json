@@ -437688,6 +437688,902 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "TopOpeBRepDS_CurvePointInterference::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurvePointInterference.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type that DEFINE_STANDARD_RTTIEXT(TopOpeBRepDS_CurvePointInterference, ...) expands: Rust has no class inheritance to name; the base is embedded and registered as the parent of the runtime type, so there is no public item to port."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeVertexInterference::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeVertexInterference.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type that DEFINE_STANDARD_RTTIEXT(TopOpeBRepDS_EdgeVertexInterference, ...) expands: Rust has no class inheritance to name; the base is embedded and registered as the parent of the runtime type, so there is no public item to port."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceEdgeInterference::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceEdgeInterference.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type that DEFINE_STANDARD_RTTIEXT(TopOpeBRepDS_FaceEdgeInterference, ...) expands: Rust has no class inheritance to name; the base is embedded and registered as the parent of the runtime type, so there is no public item to port."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type that DEFINE_STANDARD_RTTIEXT(TopOpeBRepDS_Interference, ...) expands: Rust has no class inheritance to name; the base is embedded and registered as the parent of the runtime type, so there is no public item to port."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_ShapeShapeInterference::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ShapeShapeInterference.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type that DEFINE_STANDARD_RTTIEXT(TopOpeBRepDS_ShapeShapeInterference, ...) expands: Rust has no class inheritance to name; the base is embedded and registered as the parent of the runtime type, so there is no public item to port."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SolidSurfaceInterference::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_SolidSurfaceInterference.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type that DEFINE_STANDARD_RTTIEXT(TopOpeBRepDS_SolidSurfaceInterference, ...) expands: Rust has no class inheritance to name; the base is embedded and registered as the parent of the runtime type, so there is no public item to port."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SurfaceCurveInterference::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_SurfaceCurveInterference.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type that DEFINE_STANDARD_RTTIEXT(TopOpeBRepDS_SurfaceCurveInterference, ...) expands: Rust has no class inheritance to name; the base is embedded and registered as the parent of the runtime type, so there is no public item to port."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_COMPOUND",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Compound",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_COMPSOLID",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::CompSolid",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_CURVE",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Curve",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_DIFFORIENTED",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Config.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSConfig::DiffOriented",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Config.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EDGE",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FACE",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_NOK",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CheckStatus.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheckStatus::Nok",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_CheckStatus.hxx (same discriminants)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_OK",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CheckStatus.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheckStatus::Ok",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_CheckStatus.hxx (same discriminants)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_POINT",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Point",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SAMEORIENTED",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Config.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSConfig::SameOriented",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Config.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SHELL",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Shell",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SOLID",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Solid",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SURFACE",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Surface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_UNKNOWN",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Unknown",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_UNSHGEOMETRY",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Config.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSConfig::UnshGeometry",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Config.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_VERTEX",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Vertex",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_WIRE",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind::Wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_CurvePointInterference::TopOpeBRepDS_CurvePointInterference(const TopOpeBRepDS_Transition&,TopOpeBRepDS_Kind,int,TopOpeBRepDS_Kind,int,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurvePointInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurvePointInterference::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_CurvePointInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeVertexInterference::TopOpeBRepDS_EdgeVertexInterference(const TopOpeBRepDS_Transition&,TopOpeBRepDS_Kind,int,int,bool,TopOpeBRepDS_Config,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeVertexInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeVertexInterference::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EdgeVertexInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeVertexInterference::TopOpeBRepDS_EdgeVertexInterference(const TopOpeBRepDS_Transition&,int,int,bool,TopOpeBRepDS_Config,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeVertexInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeVertexInterference::on_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EdgeVertexInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceEdgeInterference::TopOpeBRepDS_FaceEdgeInterference(const TopOpeBRepDS_Transition&,int,int,bool,TopOpeBRepDS_Config)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceEdgeInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceEdgeInterference::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_FaceEdgeInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::TopOpeBRepDS_Interference()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::TopOpeBRepDS_Interference(const TopOpeBRepDS_Transition&,TopOpeBRepDS_Kind,int,TopOpeBRepDS_Kind,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::TopOpeBRepDS_Interference(const occ::handle<TopOpeBRepDS_Interference>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::from_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_ShapeShapeInterference::TopOpeBRepDS_ShapeShapeInterference(const TopOpeBRepDS_Transition&,TopOpeBRepDS_Kind,int,TopOpeBRepDS_Kind,int,bool,TopOpeBRepDS_Config)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ShapeShapeInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSShapeShapeInterference::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ShapeShapeInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SolidSurfaceInterference::TopOpeBRepDS_SolidSurfaceInterference(const TopOpeBRepDS_Transition&,TopOpeBRepDS_Kind,int,TopOpeBRepDS_Kind,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_SolidSurfaceInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSSolidSurfaceInterference::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_SolidSurfaceInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SurfaceCurveInterference::TopOpeBRepDS_SurfaceCurveInterference()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_SurfaceCurveInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSSurfaceCurveInterference::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_SurfaceCurveInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SurfaceCurveInterference::TopOpeBRepDS_SurfaceCurveInterference(const TopOpeBRepDS_Transition&,TopOpeBRepDS_Kind,int,TopOpeBRepDS_Kind,int,const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_SurfaceCurveInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSSurfaceCurveInterference::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_SurfaceCurveInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SurfaceCurveInterference::TopOpeBRepDS_SurfaceCurveInterference(const occ::handle<TopOpeBRepDS_Interference>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_SurfaceCurveInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSSurfaceCurveInterference::from_interference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_SurfaceCurveInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::TopOpeBRepDS_Transition()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::TopOpeBRepDS_Transition(TopAbs_Orientation)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::from_orientation",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::TopOpeBRepDS_Transition(TopAbs_State,TopAbs_State,TopAbs_ShapeEnum,TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::IsGeometry(TopOpeBRepDS_Kind)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::is_geometry",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::IsTopology(TopOpeBRepDS_Kind)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::is_topology",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::KindToShape(TopOpeBRepDS_Kind)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::kind_to_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::SPrint(TopAbs_Orientation)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::sprint_orientation",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::SPrint(TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::sprint_shape_type",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::SPrint(TopAbs_ShapeEnum,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::sprint_shape_type_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::SPrint(TopAbs_State)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::sprint_state",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::SPrint(TopOpeBRepDS_Config)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::sprint_config",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::SPrint(TopOpeBRepDS_Kind)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::sprint_kind",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::SPrint(TopOpeBRepDS_Kind,int,const TCollection_AsciiString&,const TCollection_AsciiString&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::sprint_kind_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::ShapeToKind(TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::shape_to_kind",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_CurvePointInterference::Parameter() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurvePointInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurvePointInterference::parameter",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_CurvePointInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_CurvePointInterference::Parameter(double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurvePointInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurvePointInterference::set_parameter",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_CurvePointInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeVertexInterference::Parameter() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeVertexInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeVertexInterference::parameter",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EdgeVertexInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeVertexInterference::Parameter(double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeVertexInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeVertexInterference::set_parameter",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_EdgeVertexInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::ChangeTransition()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::change_transition",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::GKGSKS(TopOpeBRepDS_Kind&,int&,TopOpeBRepDS_Kind&,int&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::gkgsks",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::Geometry() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::geometry",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::Geometry(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::set_geometry",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::GeometryType() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::geometry_type",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::GeometryType(TopOpeBRepDS_Kind)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::set_geometry_type",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::HasSameGeometry(const occ::handle<TopOpeBRepDS_Interference>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::has_same_geometry",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::HasSameSupport(const occ::handle<TopOpeBRepDS_Interference>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::has_same_support",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::SetGeometry(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::set_geometry_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::Support() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::support",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::Support(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::set_support",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::SupportType() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::support_type",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::SupportType(TopOpeBRepDS_Kind)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::set_support_type",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::Transition() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::transition",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference::Transition(const TopOpeBRepDS_Transition&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference::set_transition",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Interference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs. The default constructor leaves the indices and kinds uninitialized natively; they are 0 and POINT here."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_ShapeShapeInterference::Config() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ShapeShapeInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSShapeShapeInterference::config",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ShapeShapeInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_ShapeShapeInterference::GBound() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ShapeShapeInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSShapeShapeInterference::gbound",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ShapeShapeInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_ShapeShapeInterference::SetGBound(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ShapeShapeInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSShapeShapeInterference::set_gbound",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_ShapeShapeInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SurfaceCurveInterference::PCurve() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_SurfaceCurveInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSSurfaceCurveInterference::pcurve",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_SurfaceCurveInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SurfaceCurveInterference::PCurve(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_SurfaceCurveInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSSurfaceCurveInterference::set_pcurve",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_SurfaceCurveInterference.cxx; the interference is shared through handles, so its fields are in a SharedState and every member takes &self; the derived interferences embed their base (reached through Deref), so a handle casts to every base and back as natively. Unit tests in crates/tkbool/tests/top_ope_brep_ds_interference.rs."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::After() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::after",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::After(TopAbs_State,TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set_after",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::Before() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::before",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::Before(TopAbs_State,TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set_before",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::Complement() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::complement",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::Index() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::Index(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::IndexAfter() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::index_after",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::IndexAfter(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set_index_after",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::IndexBefore() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::index_before",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::IndexBefore(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set_index_before",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::IsUnknown() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::is_unknown",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::ONAfter() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::on_after",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::ONBefore() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::on_before",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::Orientation(TopAbs_State,TopAbs_ShapeEnum) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::orientation",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::Set(TopAbs_Orientation)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set_orientation",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::Set(TopAbs_State,TopAbs_State,TopAbs_ShapeEnum,TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::ShapeAfter() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::shape_after",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::ShapeAfter(TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set_shape_after",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::ShapeBefore() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::shape_before",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::ShapeBefore(TopAbs_ShapeEnum)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set_shape_before",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::StateAfter(TopAbs_State)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set_state_after",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Transition::StateBefore(TopAbs_State)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Transition.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSTransition::set_state_before",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Transition.cxx (a Copy value; the setters overloading the getters are named set_*); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). Index() raises Standard_Failure when the indices differ, as natively."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_CheckStatus",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CheckStatus.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCheckStatus",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_CheckStatus.hxx (same discriminants)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Config",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Config.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSConfig",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Config.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Kind",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Kind.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSKind",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS_Kind.hxx (same discriminants); compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices)."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_CurvePointInterference",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurvePointInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurvePointInterference",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurvePointInterference; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_EdgeVertexInterference",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_EdgeVertexInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeVertexInterference",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSEdgeVertexInterference; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_FaceEdgeInterference",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_FaceEdgeInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceEdgeInterference",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSFaceEdgeInterference; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_Interference",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Interference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSInterference; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_ShapeShapeInterference",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_ShapeShapeInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSShapeShapeInterference",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSShapeShapeInterference; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SolidSurfaceInterference",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_SolidSurfaceInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSSolidSurfaceInterference",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSSolidSurfaceInterference; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS_SurfaceCurveInterference",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_SurfaceCurveInterference.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSSurfaceCurveInterference",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSSurfaceCurveInterference; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::Print(TopAbs_ShapeEnum,int,Standard_OStream&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::print_shape_type_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::Print(TopAbs_State,Standard_OStream&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::print_state",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::Print(TopOpeBRepDS_Config,Standard_OStream&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::print_config",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::Print(TopOpeBRepDS_Kind,Standard_OStream&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::print_kind",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
+      "upstream_id": "TopOpeBRepDS::Print(TopOpeBRepDS_Kind,int,Standard_OStream&,const TCollection_AsciiString&,const TCollection_AsciiString&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_ds::print_kind_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepDS.cxx as free functions of rustycad_tkbool::top_ope_brep_ds; compared with OCCT by tools/verify_tkbool_numeric.py (ds_transition: every pair of states on faces and edges, equal and different indices, every orientation; ds_kind: every kind with one-digit, two-digit and negative indices). The Print overloads write the SPrint text to an io::Write; ShapeToKind raises Standard_ProgramError for SHAPE."
+    },
+    {
       "upstream_id": "BRepBlend_AppSurf::operator delete(void*) noexcept",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_AppSurf.hxx",
