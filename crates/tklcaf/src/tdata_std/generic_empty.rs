@@ -7,15 +7,11 @@ use super::support::find_or_add;
 use super::{TDataStdInteger, TDataStdReal};
 use crate::guid_from_text;
 use crate::json::dump_attribute_json_base;
-use crate::tdf::{
-    TdfAttribute, TdfAttributeBase, TdfAttributeState, TdfLabel, TdfRelocationTable, TdfTagSource,
-};
+use crate::tdf::{TdfAttribute, TdfAttributeState, TdfLabel, TdfTagSource};
 use rustycad_tkcdf::json_dump::class_begin;
 use rustycad_tkernel::{
-    impl_transient, impl_transient_interface,
-    standard::{
-        Failure, Guid, Handle, RuntimeTyped, StandardTransient, dump::DumpStream, exceptions,
-    },
+    impl_transient_interface,
+    standard::{Failure, Guid, Handle, RuntimeTyped, dump::DumpStream, exceptions},
 };
 use std::io;
 
@@ -37,21 +33,44 @@ pub fn dump_generic_empty<A: TDataStdGenericEmpty + ?Sized>(
     dump_attribute_json_base(attribute, stream, depth)
 }
 
-/// Declares one content-free attribute with its fixed ID and dump text.
-macro_rules! empty_attribute {
+/// Declares one content-free attribute derived from `TDataStd_GenericEmpty`, with its fixed ID
+/// and dump text; other toolkits (TKCAF's `TDataXtd_Point`...) declare theirs with it. The
+/// optional `on_create` hook runs in the constructor (TKCAF registers its derived attributes
+/// there, since Rust has no library-load initializers).
+///
+/// ```
+/// rustycad_tklcaf::tdata_std_empty_attribute!(
+///     /// A marker attribute.
+///     Marker, "Marker", rustycad_tklcaf::guid_from_text("40DC60CD-30B9-41be-B002-4169EFB34EA6"), "Marker"
+/// );
+/// assert_eq!(Marker::get_id(), rustycad_tklcaf::guid_from_text("40DC60CD-30B9-41be-B002-4169EFB34EA6"));
+/// ```
+#[macro_export]
+macro_rules! tdata_std_empty_attribute {
     ($(#[$doc:meta])* $name:ident, $occt:literal, $id:expr, $text:literal) => {
+        $crate::tdata_std_empty_attribute!($(#[$doc])* $name, $occt, $id, $text, on_create: || {});
+    };
+    ($(#[$doc:meta])* $name:ident, $occt:literal, $id:expr, $text:literal, on_create: $hook:expr) => {
         $(#[$doc])*
-        #[derive(Default)]
         pub struct $name {
-            transient: StandardTransient,
-            base: TdfAttributeBase,
+            transient: ::rustycad_tkernel::standard::StandardTransient,
+            base: $crate::tdf::TdfAttributeBase,
         }
-        impl_transient!($name, $occt, dyn TDataStdGenericEmpty, transient,
-            interfaces: [dyn TdfAttribute, dyn TDataStdGenericEmpty]);
-        impl TDataStdGenericEmpty for $name {}
+        ::rustycad_tkernel::impl_transient!($name, $occt, dyn $crate::tdata_std::TDataStdGenericEmpty, transient,
+            interfaces: [dyn $crate::tdf::TdfAttribute, dyn $crate::tdata_std::TDataStdGenericEmpty]);
+        impl $crate::tdata_std::TDataStdGenericEmpty for $name {}
+        impl ::std::default::Default for $name {
+            fn default() -> Self {
+                ($hook)();
+                Self {
+                    transient: ::rustycad_tkernel::standard::StandardTransient::default(),
+                    base: $crate::tdf::TdfAttributeBase::default(),
+                }
+            }
+        }
         impl $name {
             /// `GetID`: the fixed ID.
-            pub fn get_id() -> Guid {
+            pub fn get_id() -> ::rustycad_tkernel::standard::Guid {
                 $id
             }
             /// The default constructor.
@@ -59,44 +78,55 @@ macro_rules! empty_attribute {
                 Self::default()
             }
         }
-        impl TdfAttribute for $name {
-            fn attribute_base(&self) -> &TdfAttributeBase {
+        impl $crate::tdf::TdfAttribute for $name {
+            fn attribute_base(&self) -> &$crate::tdf::TdfAttributeBase {
                 &self.base
             }
-            fn id(&self) -> Guid {
+            fn id(&self) -> ::rustycad_tkernel::standard::Guid {
                 $id
             }
             /// `Restore` of `TDataStd_GenericEmpty`: nothing to restore.
-            fn restore(&self, _with: &Handle<dyn TdfAttribute>) -> Result<(), Failure> {
+            fn restore(
+                &self,
+                _with: &::rustycad_tkernel::standard::Handle<dyn $crate::tdf::TdfAttribute>,
+            ) -> ::std::result::Result<(), ::rustycad_tkernel::standard::Failure> {
                 Ok(())
             }
             /// `NewEmpty` (from `IMPLEMENT_DERIVED_ATTRIBUTE`).
-            fn new_empty(&self) -> Handle<dyn TdfAttribute> {
-                Handle::new(Self::new()).cast()
+            fn new_empty(&self) -> ::rustycad_tkernel::standard::Handle<dyn $crate::tdf::TdfAttribute> {
+                ::rustycad_tkernel::standard::Handle::new(Self::new()).cast()
             }
             /// `Paste` of `TDataStd_GenericEmpty`: nothing to paste.
-            fn paste(&self, _into: &Handle<dyn TdfAttribute>, _table: &Handle<TdfRelocationTable>) -> Result<(), Failure> {
+            fn paste(
+                &self,
+                _into: &::rustycad_tkernel::standard::Handle<dyn $crate::tdf::TdfAttribute>,
+                _table: &::rustycad_tkernel::standard::Handle<$crate::tdf::TdfRelocationTable>,
+            ) -> ::std::result::Result<(), ::rustycad_tkernel::standard::Failure> {
                 Ok(())
             }
-            fn dump(&self, stream: &mut dyn io::Write) -> io::Result<()> {
+            fn dump(&self, stream: &mut dyn ::std::io::Write) -> ::std::io::Result<()> {
                 write!(stream, $text)
             }
-            fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
-                dump_generic_empty(self, stream, depth)
+            fn dump_json(
+                &self,
+                stream: &mut ::rustycad_tkernel::standard::dump::DumpStream,
+                depth: i32,
+            ) -> ::std::io::Result<()> {
+                $crate::tdata_std::dump_generic_empty(self, stream, depth)
             }
         }
     };
 }
 
-empty_attribute!(
+crate::tdata_std_empty_attribute!(
     /// `TDataStd_Tick`: a boolean flag by presence; `TDataStdTick::set(&label)`.
     TDataStdTick, "TDataStd_Tick", guid_from_text("40DC60CD-30B9-41be-B002-4169EFB34EA5"), "Tick"
 );
-empty_attribute!(
+crate::tdata_std_empty_attribute!(
     /// `TDataStd_Directory`: a label that hands out object labels.
     TDataStdDirectory, "TDataStd_Directory", guid_from_text("2a96b61f-ec8b-11d0-bee7-080009dc3333"), "Directory"
 );
-empty_attribute!(
+crate::tdata_std_empty_attribute!(
     /// `TDataStd_NoteBook`: a label that holds real and integer variables.
     TDataStdNoteBook, "TDataStd_NoteBook", guid_from_text("2a96b609-ec8b-11d0-bee7-080009dc3333"), "NoteBook"
 );

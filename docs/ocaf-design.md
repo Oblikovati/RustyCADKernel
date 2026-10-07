@@ -4,7 +4,7 @@ This note fixes how the OCAF toolkits map to Rust: TKCDF (`crates/tkcdf`,
 `rustycad-tkcdf`: packages CDM, PCDM, CDF, LDOM) and TKLCAF (`crates/tklcaf`,
 `rustycad-tklcaf`: packages TDF, TDataStd, TFunction, TDocStd), which depend only on
 TKernel, and TKCAF (`crates/tkcaf`, `rustycad-tkcaf`: packages TNaming, TDataXtd, AppStd),
-which adds the modeling toolkits (section 10). The rules of [geom-design.md](geom-design.md) sections 1 to 4 (abstract class as
+which adds the modeling toolkits (sections 10 and 11). The rules of [geom-design.md](geom-design.md) sections 1 to 4 (abstract class as
 trait, `Handle<dyn Trait>`, `SharedState`, exceptions as `Failure`) apply; this note covers
 what they do not. Code comments and ledger notes cite it as "ocaf-design.md section N".
 
@@ -274,3 +274,32 @@ explicit `new`/`delete`.
   `ChangeName` the write guard of the name. The native constructor leaves the shape type and
   the orientation uninitialized; the OCCT allocator clears memory, so they read
   `TopAbs_COMPOUND` and `TopAbs_FORWARD`, which the port uses.
+
+## 11. TDataXtd: the extended attributes
+
+- **Construction attributes.** `TDataXtd_Point`, `Axis`, `Plane`, `Placement` and `Shape`
+  derive from `TDataStd_GenericEmpty` and are declared with the
+  `rustycad_tklcaf::tdata_std_empty_attribute!` macro. Their geometry is the
+  `TNaming_NamedShape` of their label; `TDataXtd_Geometry` reads it back. The `Set`
+  overloads are `set` (find or add), `set_point`, `set_line` and `set_plane`.
+- **Derived-attribute registration.** Natively `IMPLEMENT_DERIVED_ATTRIBUTE` registers the
+  five construction attributes when the library loads. Rust has no load-time initializer,
+  so the constructor of each of them calls `TDataXtd::register_derived_attributes`, which
+  registers all five once, in the native link order. The guard is an `AtomicBool`, not a
+  `Once`: the registry builds its prototypes with these constructors, which call back into
+  the registration.
+- **TDataXtd_Pattern** is the trait `TDataXtdPattern` (`PatternID`, `NbTrsfs`,
+  `ComputeTrsfs`); its static `GetID` is `<dyn TDataXtdPattern>::get_id()`, which is also
+  the `ID` of `TDataXtd_PatternStd`. `ComputeTrsfs` fills a slice from its start; a slice
+  shorter than `NbTrsfs` is `Standard_OutOfRange`. `NbTrsfs` multiplies by
+  `NbInstances2` whenever it is set, also for a linear pattern, as natively.
+- **OCC2932 checks.** The setters of `Constraint`, `PatternStd` and `Position` do not back
+  up an unchanged value. Natively they dereference the new handle; the port reads a null
+  new handle as a change. The four-geometry `TDataXtd_Constraint::Set` compares the third
+  stored geometry with the fourth given one, as natively.
+- **TDataXtd_Presentation** holds a `Quantity_NameOfColor` as `NamedColor`. The old-enum
+  conversions are in `presentation_colors`. An old value that gives a negative color is
+  `Standard_OutOfRange` (natively an invalid enumerator).
+- **TDataXtd_Triangulation** covers the `Poly_Triangulation` methods so that each change
+  is backed up. `Restore` and `Paste` install a copy of the mesh. The methods on an
+  attribute without a mesh are `Standard_NullObject` errors (natively a null dereference).
