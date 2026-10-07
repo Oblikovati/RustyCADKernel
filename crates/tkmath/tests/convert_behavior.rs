@@ -172,8 +172,8 @@ fn sphere_lune_weights_its_meridian_middles_with_one_half() {
     let lune =
         Surface::from_sphere_band(&Sphere3::new(z_frame(), 2.0).unwrap(), 0.0, PI, true).unwrap();
     assert_eq!((lune.nb_u_poles(), lune.nb_v_poles()), (5, 5));
-    assert_eq!(lune.weights()[(1, 2)], 0.5);
-    assert_eq!(lune.weights()[(2, 1)], (PI / 4.0).cos());
+    assert_eq!((*lune.weights().value(1, 2).unwrap()), 0.5);
+    assert_eq!((*lune.weights().value(2, 1).unwrap()), (PI / 4.0).cos());
 }
 
 #[test]
@@ -205,7 +205,7 @@ fn periodic_cylinder_keeps_six_of_the_seven_computed_poles() {
     let cylinder =
         Surface::from_cylinder(&Cylinder3::new(z_frame(), 1.0).unwrap(), 0.0, 1.0).unwrap();
     assert_eq!((cylinder.nb_u_poles(), cylinder.poles().nb_rows()), (6, 6));
-    assert_eq!(cylinder.weights()[(2, 1)], 0.5);
+    assert_eq!((*cylinder.weights().value(2, 1).unwrap()), 0.5);
     let error = Surface::from_cylinder(&Cylinder3::new(z_frame(), 1.0).unwrap(), 1.0, 1.0)
         .err()
         .unwrap();

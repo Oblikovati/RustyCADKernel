@@ -76,19 +76,31 @@ impl<K: LinearKind> LinearCriterion<K> {
     }
 
     // J of one dimension row of NewCoeff: sum over i of (R(i,i)/2 c_i + sum_{j<i} R(i,j) c_j) c_i.
-    fn dimension_sum(&self, new_coeff: &Array2<'_, f64>, dim: i32, mut j: f64) -> f64 {
+    fn dimension_sum(
+        &self,
+        new_coeff: &Array2<'_, f64>,
+        dim: i32,
+        mut j: f64,
+    ) -> Result<f64, Failure> {
         let deg: i32 = new_coeff.upper_col();
+        let coefficient = |i: i32| -> Result<f64, Failure> {
+            new_coeff
+                .value(dim, i)
+                .copied()
+                .map_err(|error| array_failure(error, K::NAME))
+        };
         for i in 0..=deg {
-            let mut line: f64 = 0.5 * self.ref_matrix[(i, i)] * new_coeff[(dim, i)];
+            let c_i: f64 = coefficient(i)?;
+            let mut line: f64 = 0.5 * self.ref_matrix[(i, i)] * c_i;
             for jj in 0..i {
-                line += self.ref_matrix[(i, jj)] * new_coeff[(dim, jj)];
+                line += self.ref_matrix[(i, jj)] * coefficient(jj)?;
             }
-            j += line * new_coeff[(dim, i)];
+            j += line * c_i;
             if K::CLAMP == NegativeClamp::EachRow && j < 0.0 {
                 j = 0.0;
             }
         }
-        j
+        Ok(j)
     }
 
     // NewCoeff(dim, i): the element coefficients with the Hermite rows scaled by
@@ -109,7 +121,9 @@ impl<K: LinearKind> LinearCriterion<K> {
                 let value: f64 = *coeff
                     .value(j0 + i, dim)
                     .map_err(|error| array_failure(error, K::NAME))?;
-                scaled[(dim, i)] = factor.map_or(value, |factor| value * factor);
+                scaled
+                    .set_value(dim, i, factor.map_or(value, |factor| value * factor))
+                    .map_err(|error| array_failure(error, K::NAME))?;
             }
         }
         Ok(scaled)
@@ -170,7 +184,10 @@ impl<K: LinearKind> LinearCriterion<K> {
                 K::NAME
             )));
         }
-        if table[(dimension1, dimension2)] == 0 {
+        let linked: i32 = *table
+            .value(dimension1, dimension2)
+            .map_err(|error| array_failure(error, K::NAME))?;
+        if linked == 0 {
             return Err(failure(
                 "Standard_DomainError",
                 &format!(
@@ -260,7 +277,7 @@ where
         let new_coeff: Array2<'static, f64> = self.scaled_coefficients(&coeff, half)?;
         let mut j: f64 = 0.;
         for dim in 1..=new_coeff.upper_row() {
-            j = self.dimension_sum(&new_coeff, dim, j);
+            j = self.dimension_sum(&new_coeff, dim, j)?;
         }
         if K::CLAMP == NegativeClamp::AfterSum && j < 0. {
             j = 0.;

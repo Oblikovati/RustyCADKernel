@@ -232,8 +232,8 @@ fn appsurf_report(s: &GeomFillAppSurf) {
         |(p, w)| {
             for i in p.lower_row()..=p.upper_row() {
                 for j in p.lower_col()..=p.upper_col() {
-                    pnt(p[(i, j)]);
-                    real(w[(i, j)]);
+                    pnt(*p.value(i, j).unwrap());
+                    real(*w.value(i, j).unwrap());
                 }
             }
         },

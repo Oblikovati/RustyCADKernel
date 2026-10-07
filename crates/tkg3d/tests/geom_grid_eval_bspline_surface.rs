@@ -18,10 +18,10 @@ const THE_TOLERANCE: f64 = 1e-10;
 
 fn CreateSimpleBSplineSurface() -> Handle<GeomBSplineSurface> {
     let mut aPoles: Array2<'static, Point3> = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    aPoles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    aPoles[(2, 1)] = Point3::new(1.0, 0.0, 0.0);
-    aPoles[(1, 2)] = Point3::new(0.0, 1.0, 0.0);
-    aPoles[(2, 2)] = Point3::new(1.0, 1.0, 1.0); // Non-planar corner
+    aPoles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    aPoles.set_value(2, 1, Point3::new(1.0, 0.0, 0.0)).unwrap();
+    aPoles.set_value(1, 2, Point3::new(0.0, 1.0, 0.0)).unwrap();
+    aPoles.set_value(2, 2, Point3::new(1.0, 1.0, 1.0)).unwrap(); // Non-planar corner
 
     let mut aUKnots: Array1<'static, f64> = Array1::with_bounds(1, 2).unwrap();
     let mut aVKnots: Array1<'static, f64> = Array1::with_bounds(1, 2).unwrap();
@@ -58,8 +58,10 @@ fn CreateRationalBSplineSurface() -> Handle<GeomBSplineSurface> {
             let x: f64 = f64::from(i - 1) * 1.0;
             let y: f64 = f64::from(j - 1) * 1.0;
             let z: f64 = if i == 2 && j == 2 { 1.0 } else { 0.0 };
-            aPoles[(i, j)] = Point3::new(x, y, z);
-            aWeights[(i, j)] = if i == 2 && j == 2 { 2.0 } else { 1.0 };
+            aPoles.set_value(i, j, Point3::new(x, y, z)).unwrap();
+            aWeights
+                .set_value(i, j, if i == 2 && j == 2 { 2.0 } else { 1.0 })
+                .unwrap();
         }
     }
 
@@ -98,7 +100,7 @@ fn CreateMultiSpanBSplineSurface() -> Handle<GeomBSplineSurface> {
             let x: f64 = f64::from(i - 1) * 1.0;
             let y: f64 = f64::from(j - 1) * 1.0;
             let z: f64 = (f64::from(i - 1) * PI / 4.0).sin() * (f64::from(j - 1) * PI / 4.0).sin();
-            aPoles[(i, j)] = Point3::new(x, y, z);
+            aPoles.set_value(i, j, Point3::new(x, y, z)).unwrap();
         }
     }
 

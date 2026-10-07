@@ -49,7 +49,7 @@ impl ResolConstraint {
                     let v: Vector3 = *tab_v.value(k).map_err(out_of_range)?;
                     (t.t1, t.t2, t.t3) = (v.x(), v.y(), v.z());
                     let (code, tmax) = largest(&t, true);
-                    ibont[(k, i)] = code;
+                    ibont.set_value(k, i, code).map_err(out_of_range)?;
                     second_derivative_bernstein(*parameters.value(npt)?, &mut dda)?;
                     for j in 1..=npol {
                         for (row, block, numerator) in collinearity_cells(code, &t) {
@@ -67,7 +67,9 @@ impl ResolConstraint {
                     ssp.tangency_2d(npt, &mut tab_v2d)?;
                     let v: Vector2 = *tab_v2d.value(k).map_err(out_of_range)?;
                     (t.t1, t.t2) = (v.x(), v.y());
-                    ibont[(k, i)] = largest(&t, false).0;
+                    ibont
+                        .set_value(k, i, largest(&t, false).0)
+                        .map_err(out_of_range)?;
                     for j in 1..=npol {
                         put(&mut self.de_cont, inc3, j + inc_col, dda[j] * t.t2)?;
                         put(&mut self.de_cont, inc3, j + npol + inc_col, -dda[j] * t.t1)?;
@@ -123,7 +125,8 @@ impl ResolConstraint {
             let mut inc_col: i32 = 0;
             for k in 1..nb_cu {
                 inc3 += 1;
-                let (code1, code2) = (ibont[(k, i)], ibont[(k + 1, i)]);
+                let code1: i32 = *ibont.value(k, i).map_err(out_of_range)?;
+                let code2: i32 = *ibont.value(k + 1, i).map_err(out_of_range)?;
                 // The 2D tangents are read at index k (and k + 1), as natively.
                 let read = |tab_v: &mut Array1<'static, Vector3>,
                             tab_v2d: &mut Array1<'static, Vector2>,

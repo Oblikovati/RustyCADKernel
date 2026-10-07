@@ -140,12 +140,12 @@ impl ElementarySurfaceToBSplineSurface {
         (self.u_periodic, self.v_periodic) = (u_periodic, v_periodic);
     }
 
-    /// Mutable pole storage before finalization; `surface.poles_mut()[(1, 1)] = point`.
+    /// Mutable pole storage before finalization; `surface.poles_mut().set_value(1, 1, point)?`.
     pub fn poles_mut(&mut self) -> &mut Array2<'static, Point3> {
         &mut self.poles
     }
 
-    /// Mutable weight storage before finalization; `surface.weights_mut()[(1, 1)] = 1.0`.
+    /// Mutable weight storage before finalization; `surface.weights_mut().set_value(1, 1, 1.0)?`.
     pub fn weights_mut(&mut self) -> &mut Array2<'static, f64> {
         &mut self.weights
     }
@@ -311,12 +311,12 @@ impl ElementarySurfaceToBSplineSurface {
             .map_err(|error| storage_access("VMultiplicity", error))
     }
 
-    /// All poles, rows along U; `surface.poles()[(1, 1)]`.
+    /// All poles, rows along U; `surface.poles().value(1, 1)?`.
     pub fn poles(&self) -> &Array2<'static, Point3> {
         &self.poles
     }
 
-    /// All weights; `surface.weights()[(1, 1)]`.
+    /// All weights; `surface.weights().value(1, 1)?`.
     pub fn weights(&self) -> &Array2<'static, f64> {
         &self.weights
     }

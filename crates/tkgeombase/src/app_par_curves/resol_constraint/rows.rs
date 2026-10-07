@@ -87,7 +87,7 @@ impl ResolConstraint {
                     (tangent.t1, tangent.t2) = (v.x(), v.y());
                 }
                 let (code, tmax) = largest(&tangent, three);
-                ibont[(k, i)] = code;
+                ibont.set_value(k, i, code).map_err(out_of_range)?;
                 inc3 = self.tangency_rows(
                     derivative_bern,
                     [npt, npol, inc3, inc_col],

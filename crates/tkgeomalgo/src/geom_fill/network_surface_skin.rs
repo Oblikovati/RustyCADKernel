@@ -4,6 +4,7 @@
 
 //! The profile skin, the guide skin and the reference surface of a network.
 use super::gordon_params::null_curve;
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomBSplineSurface};
@@ -141,8 +142,12 @@ fn skin_poles(family: &SkinFamily<'_>) -> Result<Option<WeightedGrid>, Failure> 
             return Ok(None);
         }
         for i in 1..=nb_curves as i32 {
-            a_poles[(a_pole_idx, i)] = a_column[i];
-            a_weights[(a_pole_idx, i)] = a_weights_column[i];
+            a_poles
+                .set_value(a_pole_idx, i, a_column[i])
+                .map_err(array2_failure)?;
+            a_weights
+                .set_value(a_pole_idx, i, a_weights_column[i])
+                .map_err(array2_failure)?;
         }
     }
     Ok(Some((a_poles, a_weights)))
@@ -181,8 +186,12 @@ pub(crate) fn make_guide_skin(
     let mut a_weights: Array2<'static, f64> = grid(nb_curves, nb_poles)?;
     for k in 1..=nb_poles {
         for i in 1..=nb_curves {
-            a_poles[(i, k)] = a_poles_t[(k, i)];
-            a_weights[(i, k)] = a_weights_t[(k, i)];
+            a_poles
+                .set_value(i, k, *a_poles_t.value(k, i).map_err(array2_failure)?)
+                .map_err(array2_failure)?;
+            a_weights
+                .set_value(i, k, *a_weights_t.value(k, i).map_err(array2_failure)?)
+                .map_err(array2_failure)?;
         }
     }
     let a_base = family.curves[0].get().ok_or_else(null_curve)?;

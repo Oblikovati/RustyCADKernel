@@ -148,13 +148,9 @@ pub fn outside(obj: &Geom2dAdaptorCurve) -> Result<QualifiedCurve, Failure> {
 
 /// `Geom2dGcc_IsParallel` (a Standard_DomainError natively), raised when the
 /// intersection with a line parallel to the solution is read;
-/// `is_parallel("Geom2dGcc_Lin2dTanOblIter::Intersection2")`.
-pub fn is_parallel(member: &str) -> Failure {
-    Failure::with_type(
-        "Geom2dGcc_IsParallel",
-        &format!("{member}: the solution is parallel to the line; expected a secant line"),
-        "",
-    )
+/// `is_parallel("the solution is parallel to the line")`.
+pub fn is_parallel(message: &str) -> Failure {
+    Failure::with_type("Geom2dGcc_IsParallel", message, "")
 }
 
 // `Geom2dAdaptor_Curve C = Q.Qualified()`: a value copy sharing the curve.

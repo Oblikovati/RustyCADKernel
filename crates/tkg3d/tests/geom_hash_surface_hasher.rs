@@ -57,7 +57,9 @@ fn net<T: Copy + Default>(rows: &[&[T]]) -> Array2<'static, T> {
     let mut anArray: Array2<'static, T> = Array2::with_bounds(1, nu, 1, nv).unwrap();
     for (i, row) in rows.iter().enumerate() {
         for (j, &value) in row.iter().enumerate() {
-            anArray[(i as i32 + 1, j as i32 + 1)] = value;
+            anArray
+                .set_value(i as i32 + 1, j as i32 + 1, value)
+                .unwrap();
         }
     }
     anArray

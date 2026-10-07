@@ -4,6 +4,7 @@
 //! The blocks of the plate systems: the kernel rows of the pinpoint and linear
 //! constraints and the polynomial rows.
 use super::{PlatePinpointConstraint, PlatePlate};
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::Xy;
@@ -28,8 +29,9 @@ impl<C: Copy + 'static> Block<C> {
         self.coef.nb_columns() as i32
     }
 
-    pub(super) fn coeff(&self, row: i32, col: i32) -> C {
-        self.coef[(row, col)]
+    /// `Coeff(row, col)`; Standard_OutOfRange outside the block; `block.coeff(1, 1)?`.
+    pub(super) fn coeff(&self, row: i32, col: i32) -> Result<C, Failure> {
+        self.coef.value(row, col).copied().map_err(array2_failure)
     }
 
     pub(super) fn ppc(&self, index: i32) -> PlatePinpointConstraint {
@@ -116,8 +118,8 @@ pub(super) fn fill_xyz_matrix(
                     for icol in 1..=block.row_length() {
                         for icol2 in 1..=other.row_length() {
                             mat[(i0 + k + irow - 1, j0 + k2 + irow2 - 1)] += block
-                                .coeff(irow, icol)
-                                * other.coeff(irow2, icol2)
+                                .coeff(irow, icol)?
+                                * other.coeff(irow2, icol2)?
                                 * tmp[(icol, icol2)];
                         }
                     }
@@ -152,7 +154,7 @@ fn xyz_rows_against_nodes(
             node_kernels(plate, nodes, kppc, block.row_length(), a_j as usize)?;
         for irow in 1..=block.col_length() {
             for icol in 1..=block.row_length() {
-                mat[(row0 + irow - 1, j0 + a_j)] += block.coeff(irow, icol) * vmat[icol];
+                mat[(row0 + irow - 1, j0 + a_j)] += block.coeff(irow, icol)? * vmat[icol];
             }
         }
     }
@@ -223,7 +225,7 @@ fn xyz_monomial_rows(
             let vmat = node_monomials(plate, nodes, (kppc2, block.row_length()), (iu, iv))?;
             for irow2 in 1..=block.col_length() {
                 for icol2 in 1..=block.row_length() {
-                    mat[(i, j0 + k2 + irow2 - 1)] += block.coeff(irow2, icol2) * vmat[icol2];
+                    mat[(i, j0 + k2 + irow2 - 1)] += block.coeff(irow2, icol2)? * vmat[icol2];
                 }
             }
             k2 += block.col_length();

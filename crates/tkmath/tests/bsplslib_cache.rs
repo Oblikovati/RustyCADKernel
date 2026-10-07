@@ -43,7 +43,7 @@ fn pole_grid(rows: i32, cols: i32, pole: impl Fn(i32, i32) -> [f64; 3]) -> Array
     for i in 1..=rows {
         for j in 1..=cols {
             let [x, y, z] = pole(i, j);
-            result[(i, j)] = Point3::new(x, y, z);
+            result.set_value(i, j, Point3::new(x, y, z)).unwrap();
         }
     }
     result

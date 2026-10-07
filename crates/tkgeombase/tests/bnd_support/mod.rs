@@ -75,7 +75,9 @@ pub fn array2(rows: i32, cols: i32, values: &[Point3]) -> Array2<'static, Point3
     let mut array = Array2::with_bounds(1, rows, 1, cols).unwrap();
     for i in 1..=rows {
         for j in 1..=cols {
-            array[(i, j)] = values[((i - 1) * cols + (j - 1)) as usize];
+            array
+                .set_value(i, j, values[((i - 1) * cols + (j - 1)) as usize])
+                .unwrap();
         }
     }
     array

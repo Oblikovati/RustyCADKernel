@@ -36,10 +36,10 @@ fn createRotationY(theAngle: f64) -> Transform3 {
 
 fn createBSplineSurface() -> Handle<GeomBSplineSurface> {
     let mut aPoles: Array2<'static, Point3> = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    aPoles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    aPoles[(2, 1)] = Point3::new(1.0, 0.0, 0.0);
-    aPoles[(1, 2)] = Point3::new(0.0, 1.0, 0.0);
-    aPoles[(2, 2)] = Point3::new(1.0, 1.0, 1.0);
+    aPoles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    aPoles.set_value(2, 1, Point3::new(1.0, 0.0, 0.0)).unwrap();
+    aPoles.set_value(1, 2, Point3::new(0.0, 1.0, 0.0)).unwrap();
+    aPoles.set_value(2, 2, Point3::new(1.0, 1.0, 1.0)).unwrap();
 
     let mut aUKnots: Array1<'static, f64> = Array1::with_bounds(1, 2).unwrap();
     let mut aVKnots: Array1<'static, f64> = Array1::with_bounds(1, 2).unwrap();
@@ -322,6 +322,6 @@ fn GeomAdaptor_TransformedSurfaceTest__GridEvalUsesTransformedGeometryOnlyOnce()
     aVParams[2] = 1.0;
 
     let aGrid: Array2<Point3> = anEval.evaluate_grid(&aUParams, &aVParams).unwrap();
-    EXPECT_NEAR(aGrid[(1, 1)].z(), 5.0, THE_TOLERANCE);
-    EXPECT_NEAR(aGrid[(2, 2)].z(), 5.0, THE_TOLERANCE);
+    EXPECT_NEAR((*aGrid.value(1, 1).unwrap()).z(), 5.0, THE_TOLERANCE);
+    EXPECT_NEAR((*aGrid.value(2, 2).unwrap()).z(), 5.0, THE_TOLERANCE);
 }

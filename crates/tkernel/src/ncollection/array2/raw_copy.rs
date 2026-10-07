@@ -38,7 +38,7 @@ impl<T: Copy> Array2<'_, T> {
     /// let mut array = Array2::<i32>::default();
     /// let source = [3, 4];
     /// unsafe { array.assign_trivial_from_raw_parts(source.as_ptr(), -1, -1, 3, 4).unwrap(); }
-    /// assert_eq!(array[(-1, 3)], 3);
+    /// assert_eq!(array.value(-1, 3).copied(), Ok(3));
     /// ```
     ///
     /// # Safety

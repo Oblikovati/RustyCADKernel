@@ -8,7 +8,7 @@ pub use h_array1_of_real::HArray1OfReal;
 mod local_array;
 pub use local_array::LocalArray;
 mod array2;
-pub use array2::Array2;
+pub use array2::{Array2, array2_failure};
 mod generic_transient;
 mod harray;
 pub use harray::{HArray1, HArray2};

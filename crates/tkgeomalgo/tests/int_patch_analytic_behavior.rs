@@ -55,10 +55,18 @@ fn sphere(center: Point3, r: f64) -> Adaptor3dSurfaceHandle {
 /// A bilinear Bezier patch of the four corners.
 fn bezier(c: [[f64; 3]; 4]) -> Adaptor3dSurfaceHandle {
     let mut poles: Array2<'static, Point3> = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = Point3::new(c[0][0], c[0][1], c[0][2]);
-    poles[(1, 2)] = Point3::new(c[1][0], c[1][1], c[1][2]);
-    poles[(2, 1)] = Point3::new(c[2][0], c[2][1], c[2][2]);
-    poles[(2, 2)] = Point3::new(c[3][0], c[3][1], c[3][2]);
+    poles
+        .set_value(1, 1, Point3::new(c[0][0], c[0][1], c[0][2]))
+        .unwrap();
+    poles
+        .set_value(1, 2, Point3::new(c[1][0], c[1][1], c[1][2]))
+        .unwrap();
+    poles
+        .set_value(2, 1, Point3::new(c[2][0], c[2][1], c[2][2]))
+        .unwrap();
+    poles
+        .set_value(2, 2, Point3::new(c[3][0], c[3][1], c[3][2]))
+        .unwrap();
     natural(Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast())
 }
 

@@ -67,8 +67,8 @@ fn occ26675_surfaces() -> (Handle<dyn GeomSurface>, Handle<dyn GeomSurface>) {
         aVMult[i as i32 + 1] = *mult;
     }
     for &(i, j, w, x, y, z) in OCC26675_WEIGHTED_POLES.iter() {
-        aWeights[(i, j)] = w;
-        aPoles[(i, j)] = Point3::new(x, y, z);
+        aWeights.set_value(i, j, w).unwrap();
+        aPoles.set_value(i, j, Point3::new(x, y, z)).unwrap();
     }
     let aS1: Handle<dyn GeomSurface> = Handle::new(
         GeomBSplineSurface::with_weights(

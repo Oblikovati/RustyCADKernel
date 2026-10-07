@@ -32,7 +32,8 @@ pub type SurfaceFitSettings = (i32, i32, Shape, f64);
 /// let mut grid: Array2<'static, Point3> = Array2::with_bounds(1, 4, 1, 4).unwrap();
 /// for i in 1..=4 {
 ///     for j in 1..=4 {
-///         grid[(i, j)] = Point3::new(f64::from(i), f64::from(j), f64::from(i * j) / 10.0);
+///         let point = Point3::new(f64::from(i), f64::from(j), f64::from(i * j) / 10.0);
+///         grid.set_value(i, j, point).unwrap();
 ///     }
 /// }
 /// let fit = PointsToBSplineSurface::with_points(&grid, (3, 8, Shape::C2, 1e-3)).unwrap();

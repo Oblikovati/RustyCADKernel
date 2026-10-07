@@ -45,7 +45,7 @@ pub fn read_array2(r: &mut Reader<'_>) -> Array2<'static, f64> {
     let (rl, cl, rows, cols) = (r.integer(), r.integer(), r.integer(), r.integer());
     let mut a = Array2::with_bounds(rl, rl + rows - 1, cl, cl + cols - 1).unwrap();
     for i in 0..rows {
-        (0..cols).for_each(|j| a[(rl + i, cl + j)] = r.real());
+        (0..cols).for_each(|j| a.set_value(rl + i, cl + j, r.real()).unwrap());
     }
     a
 }
@@ -80,7 +80,7 @@ fn criterion_command(r: &mut Reader<'_>, c: &dyn ElementaryCriterion) -> Result<
                 .into_iter()
                 .for_each(p::int);
             for i in t.lower_row()..=t.upper_row() {
-                (t.lower_col()..=t.upper_col()).for_each(|j| p::int(t[(i, j)]));
+                (t.lower_col()..=t.upper_col()).for_each(|j| p::int(*t.value(i, j).unwrap()));
             }
         }
         2 => p::real(c.value()?),

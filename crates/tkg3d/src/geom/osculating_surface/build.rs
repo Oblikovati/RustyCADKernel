@@ -101,7 +101,12 @@ fn reduced_coefficients(
         for m in 0..cols {
             let (a, b) = if along.u { (n, m + 1) } else { (n + 1, m) };
             let (r, c) = if transposed { (b, a) } else { (a, b) };
-            osc[(n as i32 + 1, m as i32 + 1)] = cache[(r as i32 + 1, c as i32 + 1)];
+            let pole = cache
+                .value(r as i32 + 1, c as i32 + 1)
+                .copied()
+                .map_err(errors::array_bounds)?;
+            osc.set_value(n as i32 + 1, m as i32 + 1, pole)
+                .map_err(errors::array_bounds)?;
         }
     }
     if along.u && negated.1 {
@@ -114,7 +119,9 @@ fn reduced_coefficients(
     let mut index: i32 = 1;
     for n in 0..rows {
         for m in 0..cols {
-            let pole: Point3 = osc[(n as i32 + 1, m as i32 + 1)];
+            let pole: Point3 = *osc
+                .value(n as i32 + 1, m as i32 + 1)
+                .map_err(errors::array_bounds)?;
             for value in [pole.x(), pole.y(), pole.z()] {
                 coefficients[index] = value;
                 index += 1;
@@ -143,8 +150,12 @@ pub(super) fn build_osculating_surface(
     let (coefficients, counts) =
         reduced_coefficients(&cache, (u_deg, v_deg), along, (is_u_neg, is_v_neg))?;
     let mut num_coeff = Array2::<i32>::with_bounds(1, 1, 1, 2).map_err(errors::array_bounds)?;
-    num_coeff[(1, 1)] = counts.0;
-    num_coeff[(1, 2)] = counts.1;
+    num_coeff
+        .set_value(1, 1, counts.0)
+        .map_err(errors::array_bounds)?;
+    num_coeff
+        .set_value(1, 2, counts.1)
+        .map_err(errors::array_bounds)?;
     let mut poly_u = array1::<f64>(2)?;
     let mut poly_v = array1::<f64>(2)?;
     let mut true_u = array1::<f64>(2)?;

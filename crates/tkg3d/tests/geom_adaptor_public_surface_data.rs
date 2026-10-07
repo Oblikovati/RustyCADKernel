@@ -14,10 +14,10 @@ fn cache_inputs() -> (Array1<'static, f64>, Array2<'static, Point3>) {
         .as_mut_slice()
         .copy_from_slice(&[0.0, 0.0, 1.0, 1.0]);
     let mut poles = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    poles[(1, 2)] = Point3::new(0.0, 1.0, 0.0);
-    poles[(2, 1)] = Point3::new(1.0, 0.0, 0.0);
-    poles[(2, 2)] = Point3::new(1.0, 1.0, 1.0);
+    poles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    poles.set_value(1, 2, Point3::new(0.0, 1.0, 0.0)).unwrap();
+    poles.set_value(2, 1, Point3::new(1.0, 0.0, 0.0)).unwrap();
+    poles.set_value(2, 2, Point3::new(1.0, 1.0, 1.0)).unwrap();
     (flat_knots, poles)
 }
 

@@ -30,8 +30,8 @@ fn Geom_BezierSurface_Test__RationalSegment() {
     for i in 1..=3 {
         for j in 1..=3 {
             let (x, y) = (f64::from(i), f64::from(j));
-            aPoles[(i, j)] = pnt(x, y, (x + y) * 0.1);
-            aWeights[(i, j)] = 1.0 + 0.3 * (f64::from(i - 1) + f64::from(j - 1));
+            aPoles.set_value(i, j, pnt(x, y, (x + y) * 0.1)).unwrap();
+            aWeights.set_value(i, j, 1.0 + 0.3 * (f64::from(i - 1) + f64::from(j - 1))).unwrap();
         }
     }
 
@@ -170,7 +170,7 @@ fn Geom_BezierSurface_Test__WeightsArray_NonRational_ReturnsUnitWeights() {
         assert!(!aWeights.is_deletable());
         for i in aWeights.lower_row()..=aWeights.upper_row() {
             for j in aWeights.lower_col()..=aWeights.upper_col() {
-                EXPECT_DOUBLE_EQ(aWeights[(i, j)], 1.0);
+                EXPECT_DOUBLE_EQ(*aWeights.value(i, j).unwrap(), 1.0);
             }
         }
         std::ptr::from_ref(aWeights)
@@ -189,8 +189,8 @@ fn Geom_BezierSurface_Test__WeightsArray_Rational_ReturnsOwning() {
     let aAddress = aRational.weights_array(|aWeights| {
         assert_eq!(aWeights.len(), 4);
         assert!(aWeights.is_deletable());
-        EXPECT_DOUBLE_EQ(aWeights[(1, 2)], 2.0);
-        EXPECT_DOUBLE_EQ(aWeights[(1, 1)], 1.0);
+        EXPECT_DOUBLE_EQ(*aWeights.value(1, 2).unwrap(), 2.0);
+        EXPECT_DOUBLE_EQ(*aWeights.value(1, 1).unwrap(), 1.0);
         std::ptr::from_ref(aWeights)
     });
     assert_eq!(aAddress, aRational.weights_array(std::ptr::from_ref));

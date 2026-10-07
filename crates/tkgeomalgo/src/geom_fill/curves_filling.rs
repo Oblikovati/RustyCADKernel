@@ -8,6 +8,7 @@ use super::filling::Rows;
 use super::{
     GeomFillCoons, GeomFillCurved, GeomFillFilling, GeomFillFillingStyle, GeomFillStretch,
 };
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped};
@@ -165,8 +166,10 @@ fn two_columns<T: Copy + Default>(
     let mut grid: Array2<'static, T> =
         Array2::with_bounds(1, n, 1, 2).map_err(errors::array_bounds)?;
     for i in 1..=n {
-        grid[(i, 1)] = at(columns[0], i)?;
-        grid[(i, 2)] = at(columns[1], i)?;
+        grid.set_value(i, 1, at(columns[0], i)?)
+            .map_err(array2_failure)?;
+        grid.set_value(i, 2, at(columns[1], i)?)
+            .map_err(array2_failure)?;
     }
     Ok(grid)
 }

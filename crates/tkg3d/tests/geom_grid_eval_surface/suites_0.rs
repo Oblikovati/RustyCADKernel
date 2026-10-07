@@ -9,7 +9,7 @@ fn CheckPoints(
     for iU in 1..=theCounts.0 {
         for iV in 1..=theCounts.1 {
             EXPECT_NEAR(
-                theGrid[(iU, iV)].distance(&theExpected(iU, iV)),
+                (*theGrid.value(iU, iV).unwrap()).distance(&theExpected(iU, iV)),
                 0.0,
                 THE_TOLERANCE,
             );
@@ -24,7 +24,7 @@ fn CheckD1(
 ) {
     for iU in 1..=theCounts.0 {
         for iV in 1..=theCounts.1 {
-            let (g, r) = (&theGrid[(iU, iV)], theExpected(iU, iV));
+            let (g, r) = (theGrid.value(iU, iV).unwrap(), theExpected(iU, iV));
             EXPECT_NEAR(g.point.distance(&r.point), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1u - r.d1u).magnitude(), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1v - r.d1v).magnitude(), 0.0, THE_TOLERANCE);
@@ -39,7 +39,7 @@ fn CheckD2(
 ) {
     for iU in 1..=theCounts.0 {
         for iV in 1..=theCounts.1 {
-            let (g, r) = (&theGrid[(iU, iV)], theExpected(iU, iV));
+            let (g, r) = (theGrid.value(iU, iV).unwrap(), theExpected(iU, iV));
             EXPECT_NEAR(g.point.distance(&r.point), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1u - r.d1u).magnitude(), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1v - r.d1v).magnitude(), 0.0, THE_TOLERANCE);
@@ -60,7 +60,7 @@ fn CheckD3(
 ) {
     for iU in 1..=theCounts.0 {
         for iV in 1..=theCounts.1 {
-            let (g, r) = (&theGrid[(iU, iV)], theExpected(iU, iV));
+            let (g, r) = (theGrid.value(iU, iV).unwrap(), theExpected(iU, iV));
             EXPECT_NEAR(g.point.distance(&r.point), 0.0, THE_TOLERANCE);
             if theAll {
                 EXPECT_NEAR((g.d1u - r.d1u).magnitude(), 0.0, THE_TOLERANCE);
@@ -100,7 +100,7 @@ fn GeomGridEval_PlaneTest__BasicEvaluation() {
     // Verify that all points are in Z=0 plane
     for iU in 1..=6 {
         for iV in 1..=4 {
-            let aPnt: &Point3 = &aGrid[(iU, iV)];
+            let aPnt: &Point3 = aGrid.value(iU, iV).unwrap();
             EXPECT_NEAR(aPnt.z(), 0.0, THE_TOLERANCE);
             EXPECT_NEAR(aPnt.x(), aUParams[iU], THE_TOLERANCE);
             EXPECT_NEAR(aPnt.y(), aVParams[iV], THE_TOLERANCE);
@@ -122,13 +122,13 @@ fn GeomGridEval_PlaneTest__NonOriginPlane() {
     // All points should be at Z=3
     for iU in 1..=3 {
         for iV in 1..=3 {
-            EXPECT_NEAR(aGrid[(iU, iV)].z(), 3.0, THE_TOLERANCE);
+            EXPECT_NEAR((*aGrid.value(iU, iV).unwrap()).z(), 3.0, THE_TOLERANCE);
         }
     }
 
     // Center point (u=0, v=0) should be at (1, 2, 3)
-    EXPECT_NEAR(aGrid[(2, 2)].x(), 1.0, THE_TOLERANCE);
-    EXPECT_NEAR(aGrid[(2, 2)].y(), 2.0, THE_TOLERANCE);
+    EXPECT_NEAR((*aGrid.value(2, 2).unwrap()).x(), 1.0, THE_TOLERANCE);
+    EXPECT_NEAR((*aGrid.value(2, 2).unwrap()).y(), 2.0, THE_TOLERANCE);
 }
 
 //=================================================================================================
@@ -151,23 +151,23 @@ fn GeomGridEval_SphereTest__BasicEvaluation() {
     // All points should be at distance 1 from origin
     for iU in 1..=9 {
         for iV in 1..=5 {
-            let aDist: f64 = aGrid[(iU, iV)].distance(&Pnt(0.0, 0.0, 0.0));
+            let aDist: f64 = (*aGrid.value(iU, iV).unwrap()).distance(&Pnt(0.0, 0.0, 0.0));
             EXPECT_NEAR(aDist, 1.0, THE_TOLERANCE);
         }
     }
 
     // North pole (v = PI/2) should be at (0, 0, 1)
     for iU in 1..=9 {
-        EXPECT_NEAR(aGrid[(iU, 5)].x(), 0.0, THE_TOLERANCE);
-        EXPECT_NEAR(aGrid[(iU, 5)].y(), 0.0, THE_TOLERANCE);
-        EXPECT_NEAR(aGrid[(iU, 5)].z(), 1.0, THE_TOLERANCE);
+        EXPECT_NEAR((*aGrid.value(iU, 5).unwrap()).x(), 0.0, THE_TOLERANCE);
+        EXPECT_NEAR((*aGrid.value(iU, 5).unwrap()).y(), 0.0, THE_TOLERANCE);
+        EXPECT_NEAR((*aGrid.value(iU, 5).unwrap()).z(), 1.0, THE_TOLERANCE);
     }
 
     // South pole (v = -PI/2) should be at (0, 0, -1)
     for iU in 1..=9 {
-        EXPECT_NEAR(aGrid[(iU, 1)].x(), 0.0, THE_TOLERANCE);
-        EXPECT_NEAR(aGrid[(iU, 1)].y(), 0.0, THE_TOLERANCE);
-        EXPECT_NEAR(aGrid[(iU, 1)].z(), -1.0, THE_TOLERANCE);
+        EXPECT_NEAR((*aGrid.value(iU, 1).unwrap()).x(), 0.0, THE_TOLERANCE);
+        EXPECT_NEAR((*aGrid.value(iU, 1).unwrap()).y(), 0.0, THE_TOLERANCE);
+        EXPECT_NEAR((*aGrid.value(iU, 1).unwrap()).z(), -1.0, THE_TOLERANCE);
     }
 }
 
@@ -186,7 +186,7 @@ fn GeomGridEval_SphereTest__NonUnitSphere() {
     let aCenter = Pnt(1.0, 2.0, 3.0);
     for iU in 1..=17 {
         for iV in 1..=9 {
-            let aDist: f64 = aGrid[(iU, iV)].distance(&aCenter);
+            let aDist: f64 = (*aGrid.value(iU, iV).unwrap()).distance(&aCenter);
             EXPECT_NEAR(aDist, 3.0, THE_TOLERANCE);
         }
     }
@@ -391,7 +391,7 @@ fn GeomGridEval_SurfaceTest__DirectHandleInit() {
     assert!(!aGrid.is_empty());
 
     // Verify value
-    EXPECT_NEAR(aGrid[(1, 1)].z(), 0.0, THE_TOLERANCE);
+    EXPECT_NEAR((*aGrid.value(1, 1).unwrap()).z(), 0.0, THE_TOLERANCE);
 }
 
 #[test]

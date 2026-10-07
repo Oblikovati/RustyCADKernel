@@ -82,12 +82,12 @@ fn network_grids(r: &mut Reader) -> (Array2<'static, Point3>, Array2<'static, f6
     let mut ws: Array2<'static, f64> = Array2::with_bounds(rl, ru, cl, cu).expect("weight grid");
     for i in rl..=ru {
         for j in cl..=cu {
-            pts[(i, j)] = r.pnt();
+            pts.set_value(i, j, r.pnt()).unwrap();
         }
     }
     for i in rl..=ru {
         for j in cl..=cu {
-            ws[(i, j)] = r.real();
+            ws.set_value(i, j, r.real()).unwrap();
         }
     }
     (pts, ws)

@@ -195,10 +195,10 @@ fn which_face_and_history_of_sub_shapes() {
 fn patch(corners: [[f64; 3]; 4]) -> Handle<dyn GeomSurface> {
     let mut poles: Array2<'static, Point3> = Array2::with_bounds(1, 2, 1, 2).unwrap();
     let p = |c: [f64; 3]| Point3::new(c[0], c[1], c[2]);
-    poles[(1, 1)] = p(corners[0]);
-    poles[(1, 2)] = p(corners[1]);
-    poles[(2, 1)] = p(corners[2]);
-    poles[(2, 2)] = p(corners[3]);
+    poles.set_value(1, 1, p(corners[0])).unwrap();
+    poles.set_value(1, 2, p(corners[1])).unwrap();
+    poles.set_value(2, 1, p(corners[2])).unwrap();
+    poles.set_value(2, 2, p(corners[3])).unwrap();
     Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()
 }
 

@@ -5,7 +5,9 @@ use rustycad_tkernel::standard::Handle;
 fn sample_surface() -> GeomBSplineSurface {
     let mut poles = Array2::with_bounds(1, 2, 1, 2).unwrap();
     for (i, j) in [(1, 1), (1, 2), (2, 1), (2, 2)] {
-        poles[(i, j)] = Point3::new(f64::from(i), f64::from(j), 0.0);
+        poles
+            .set_value(i, j, Point3::new(f64::from(i), f64::from(j), 0.0))
+            .unwrap();
     }
     let mut knots: Array1<'static, f64> = Array1::with_bounds(1, 2).unwrap();
     let mut mults: Array1<'static, i32> = Array1::with_bounds(1, 2).unwrap();

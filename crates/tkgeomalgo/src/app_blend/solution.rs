@@ -5,6 +5,7 @@
 //! their weights, the V knots and multiplicities, and the 2d curves.
 use super::AppBlendAppSurf;
 use super::sections::SectionArrays;
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::{arrays::one_based, errors};
@@ -56,11 +57,15 @@ impl AppBlendAppSurf {
             multc.curve_2d(j + nb_u + nb_2d, &mut new_p2d)?;
             for k in 1..=nb_v {
                 let weight: f64 = new_p2d[k].x();
-                self.tab_poles[(j, k)] = Point3::from(new_p[k].xyz() / weight);
+                self.tab_poles
+                    .set_value(j, k, Point3::from(new_p[k].xyz() / weight))
+                    .map_err(array2_failure)?;
                 if weight < gp::resolution() {
                     return Ok(false);
                 }
-                self.tab_weights[(j, k)] = weight;
+                self.tab_weights
+                    .set_value(j, k, weight)
+                    .map_err(array2_failure)?;
             }
         }
         Ok(true)

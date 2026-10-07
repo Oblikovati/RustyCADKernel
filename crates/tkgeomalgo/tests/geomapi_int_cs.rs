@@ -28,15 +28,21 @@ fn expectOCC26979Intersection(theSurface: &Handle<dyn GeomSurface>) {
 
 fn makeOCC26979BezierSurface() -> Handle<dyn GeomSurface> {
     let mut aPoles: Array2<'static, Point3> = Array2::with_bounds(1, 3, 1, 3).unwrap();
-    aPoles[(1, 1)] = Point3::new(-4.0, 0.0, -1.0);
-    aPoles[(2, 1)] = Point3::new(-4.0, 1.0, 0.0);
-    aPoles[(3, 1)] = Point3::new(-4.0, 0.0, 1.0);
-    aPoles[(1, 2)] = Point3::new(-3.0, 1.0, -1.0);
-    aPoles[(2, 2)] = Point3::new(-3.0, 2.0, 0.0);
-    aPoles[(3, 2)] = Point3::new(-3.0, 1.0, 1.0);
-    aPoles[(1, 3)] = Point3::new(-2.0, 0.0, -1.0);
-    aPoles[(2, 3)] = Point3::new(-2.0, 1.0, 0.0);
-    aPoles[(3, 3)] = Point3::new(-2.0, 0.0, 1.0);
+    aPoles
+        .set_value(1, 1, Point3::new(-4.0, 0.0, -1.0))
+        .unwrap();
+    aPoles.set_value(2, 1, Point3::new(-4.0, 1.0, 0.0)).unwrap();
+    aPoles.set_value(3, 1, Point3::new(-4.0, 0.0, 1.0)).unwrap();
+    aPoles
+        .set_value(1, 2, Point3::new(-3.0, 1.0, -1.0))
+        .unwrap();
+    aPoles.set_value(2, 2, Point3::new(-3.0, 2.0, 0.0)).unwrap();
+    aPoles.set_value(3, 2, Point3::new(-3.0, 1.0, 1.0)).unwrap();
+    aPoles
+        .set_value(1, 3, Point3::new(-2.0, 0.0, -1.0))
+        .unwrap();
+    aPoles.set_value(2, 3, Point3::new(-2.0, 1.0, 0.0)).unwrap();
+    aPoles.set_value(3, 3, Point3::new(-2.0, 0.0, 1.0)).unwrap();
     Handle::new(GeomBezierSurface::new(&aPoles).unwrap()).cast()
 }
 
@@ -53,20 +59,26 @@ fn makeOCC26979BSplineSurface() -> Handle<dyn GeomSurface> {
     }
 
     let mut aPoles: Array2<'static, Point3> = Array2::with_bounds(1, 3, 1, 3).unwrap();
-    aPoles[(1, 1)] = Point3::new(-3.0, 0.5, -1.0);
-    aPoles[(2, 1)] = Point3::new(-2.0, 0.5, 0.0);
-    aPoles[(3, 1)] = Point3::new(-3.0, 0.5, 1.0);
-    aPoles[(1, 2)] = Point3::new(-2.0, 1.5, -1.0);
-    aPoles[(2, 2)] = Point3::new(-1.0, 1.5, 0.0);
-    aPoles[(3, 2)] = Point3::new(-2.0, 1.5, 1.0);
-    aPoles[(1, 3)] = Point3::new(-3.0, 2.5, -1.0);
-    aPoles[(2, 3)] = Point3::new(-2.0, 2.5, 0.0);
-    aPoles[(3, 3)] = Point3::new(-3.0, 2.5, 1.0);
+    aPoles
+        .set_value(1, 1, Point3::new(-3.0, 0.5, -1.0))
+        .unwrap();
+    aPoles.set_value(2, 1, Point3::new(-2.0, 0.5, 0.0)).unwrap();
+    aPoles.set_value(3, 1, Point3::new(-3.0, 0.5, 1.0)).unwrap();
+    aPoles
+        .set_value(1, 2, Point3::new(-2.0, 1.5, -1.0))
+        .unwrap();
+    aPoles.set_value(2, 2, Point3::new(-1.0, 1.5, 0.0)).unwrap();
+    aPoles.set_value(3, 2, Point3::new(-2.0, 1.5, 1.0)).unwrap();
+    aPoles
+        .set_value(1, 3, Point3::new(-3.0, 2.5, -1.0))
+        .unwrap();
+    aPoles.set_value(2, 3, Point3::new(-2.0, 2.5, 0.0)).unwrap();
+    aPoles.set_value(3, 3, Point3::new(-3.0, 2.5, 1.0)).unwrap();
 
     let mut aWeights: Array2<'static, f64> = Array2::with_bounds(1, 3, 1, 3).unwrap();
     for aU in 1..=3 {
         for aV in 1..=3 {
-            aWeights[(aU, aV)] = 1.0;
+            aWeights.set_value(aU, aV, 1.0).unwrap();
         }
     }
     let surface = GeomBSplineSurface::with_weights(

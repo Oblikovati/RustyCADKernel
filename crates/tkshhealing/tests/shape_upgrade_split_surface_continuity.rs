@@ -304,7 +304,13 @@ fn smooth_poles() -> Array2<'static, Point3> {
     let mut poles = Array2::with_bounds(1, 3, 1, 3).unwrap();
     for u in 1..=3 {
         for v in 1..=3 {
-            poles[(u, v)] = Point3::new((u - 1) as f64 / 2.0, (v - 1) as f64 / 2.0, 0.0);
+            poles
+                .set_value(
+                    u,
+                    v,
+                    Point3::new((u - 1) as f64 / 2.0, (v - 1) as f64 / 2.0, 0.0),
+                )
+                .unwrap();
         }
     }
     poles
@@ -347,7 +353,13 @@ fn corner_poles(corner_u: bool, corner_v: bool) -> Array2<'static, Point3> {
         for v in 1..=5 {
             let z = if corner_u { (u - 3).max(0) as f64 } else { 0.0 }
                 + if corner_v { (v - 3).max(0) as f64 } else { 0.0 };
-            poles[(u, v)] = Point3::new((u - 1) as f64 / 4.0, (v - 1) as f64 / 4.0, z);
+            poles
+                .set_value(
+                    u,
+                    v,
+                    Point3::new((u - 1) as f64 / 4.0, (v - 1) as f64 / 4.0, z),
+                )
+                .unwrap();
         }
     }
     poles

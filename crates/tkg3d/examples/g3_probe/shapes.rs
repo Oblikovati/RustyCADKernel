@@ -87,8 +87,8 @@ fn bezier_surface(r: &mut Reader) -> Result<Handle<dyn GeomSurface>, Failure> {
     let mut w = Array2::<f64>::with_bounds(1, nu, 1, nv).unwrap();
     for i in 1..=nu {
         for j in 1..=nv {
-            p[(i, j)] = r.pnt();
-            w[(i, j)] = r.real();
+            p.set_value(i, j, r.pnt()).unwrap();
+            w.set_value(i, j, r.real()).unwrap();
         }
     }
     let surface = if rational {

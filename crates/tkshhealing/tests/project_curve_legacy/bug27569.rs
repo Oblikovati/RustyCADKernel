@@ -46,7 +46,7 @@ fn bug27569_surface() -> Handle<dyn GeomSurface> {
     let mut poles = Array2::with_bounds(1, 8, 1, 2).unwrap();
     for (v, row) in BUG27569_SURFACE_ROWS.into_iter().enumerate() {
         for (u, (x, y, z)) in row.into_iter().enumerate() {
-            poles[(u as i32 + 1, v as i32 + 1)] = Point3::new(x, y, z);
+            poles.set_value(u as i32 + 1, v as i32 + 1, Point3::new(x, y, z)).unwrap();
         }
     }
     let knots = Array1::from_shared(&[0., 1.], 1);

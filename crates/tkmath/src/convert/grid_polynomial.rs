@@ -102,8 +102,12 @@ impl GridPolynomialToPoles {
         result.check_degrees(max_u_degree, max_v_degree)?;
         let mut counts: Array2<'static, i32> =
             Array2::with_bounds(1, 1, 1, 2).map_err(|e| domain(&e.to_string()))?;
-        counts[(1, 1)] = num_coeff[1];
-        counts[(1, 2)] = num_coeff[2];
+        counts
+            .set_value(1, 1, num_coeff[1])
+            .map_err(|e| domain(&e.to_string()))?;
+        counts
+            .set_value(1, 2, num_coeff[2])
+            .map_err(|e| domain(&e.to_string()))?;
         let grid = PolynomialGrid {
             nb_u_surfaces: 1,
             nb_v_surfaces: 1,

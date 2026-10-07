@@ -15,7 +15,7 @@ fn GeomGridEval_BSplineSurfaceTest__DerivativeD1() {
     for iU in 1..=5 {
         for iV in 1..=5 {
             let r = aSurf.d1(aUParams[iU], aVParams[iV]).unwrap();
-            let g = &aGrid[(iU, iV)];
+            let g = aGrid.value(iU, iV).unwrap();
             EXPECT_NEAR(g.point.distance(&r.point), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1u - r.d1u).magnitude(), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1v - r.d1v).magnitude(), 0.0, THE_TOLERANCE);
@@ -36,7 +36,7 @@ fn GeomGridEval_BSplineSurfaceTest__DerivativeD2() {
     for iU in 1..=5 {
         for iV in 1..=5 {
             let r = aSurf.d2(aUParams[iU], aVParams[iV]).unwrap();
-            let g = &aGrid[(iU, iV)];
+            let g = aGrid.value(iU, iV).unwrap();
             EXPECT_NEAR(g.point.distance(&r.point), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1u - r.d1u).magnitude(), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1v - r.d1v).magnitude(), 0.0, THE_TOLERANCE);
@@ -62,7 +62,7 @@ fn GeomGridEval_BSplineSurfaceTest__DerivativeD3() {
     for iU in 1..=11 {
         for iV in 1..=11 {
             let r = anAdaptor.d3(aUParams[iU], aVParams[iV]).unwrap();
-            let g = &aGrid[(iU, iV)];
+            let g = aGrid.value(iU, iV).unwrap();
             EXPECT_NEAR(g.point.distance(&r.point), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1u - r.d1u).magnitude(), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1v - r.d1v).magnitude(), 0.0, THE_TOLERANCE);
@@ -99,7 +99,7 @@ fn CheckGridDN(
         for iV in 1..=theNb {
             let aExpected: Vector3 = theSurf.dn(aUParams[iU], aVParams[iV], aNU, aNV).unwrap();
             EXPECT_NEAR(
-                (aGrid[(iU, iV)] - aExpected).magnitude(),
+                ((*aGrid.value(iU, iV).unwrap()) - aExpected).magnitude(),
                 0.0,
                 THE_TOLERANCE,
             );
@@ -140,7 +140,7 @@ fn GeomGridEval_BSplineSurfaceTest__DerivativeDN_BeyondDegree() {
 
     for iU in 1..=5 {
         for iV in 1..=5 {
-            EXPECT_NEAR(aGrid[(iU, iV)].magnitude(), 0.0, THE_TOLERANCE);
+            EXPECT_NEAR((*aGrid.value(iU, iV).unwrap()).magnitude(), 0.0, THE_TOLERANCE);
         }
     }
 }

@@ -26,6 +26,11 @@ fn parameters(count: i32, value: impl Fn(i32) -> f64) -> Result<Array1<'static, 
     Ok(array)
 }
 
+// One grid node, Standard_OutOfRange outside the grid; `grid_point(&points, 1, 1)?`.
+fn grid_point(grid: &Array2<'_, Point3>, row: i32, col: i32) -> Result<Point3, Failure> {
+    grid.value(row, col).copied().map_err(array_failure)
+}
+
 fn array_failure(error: impl std::fmt::Display) -> Failure {
     rustycad_tkernel::standard::exceptions::range_error(&error.to_string())
 }
@@ -81,14 +86,16 @@ fn sweep_grid(surface: &dyn Adaptor3dSurface, patch: Patch) -> Result<SurfaceSwe
     for i in 1..=nu {
         for j in 1..=nv {
             let (fi, fj) = (2 * i - 1, 2 * j - 1);
-            let point: Point3 = fine[(fi, fj)];
-            points[(i, j)] = point;
+            let point: Point3 = grid_point(&fine, fi, fj)?;
+            points.set_value(i, j, point).map_err(array_failure)?;
             sweep.widen(point);
             if i > 1 {
-                sweep.deflect(points[(i - 1, j)], point, fine[(fi - 1, fj)]);
+                let mid: Point3 = grid_point(&fine, fi - 1, fj)?;
+                sweep.deflect(grid_point(&points, i - 1, j)?, point, mid);
             }
             if j > 1 {
-                sweep.deflect(points[(i, j - 1)], point, fine[(fi, fj - 1)]);
+                let mid: Point3 = grid_point(&fine, fi, fj - 1)?;
+                sweep.deflect(grid_point(&points, i, j - 1)?, point, mid);
             }
         }
     }
@@ -123,7 +130,7 @@ impl SurfaceSweep {
         let index: i32 = k as i32 + 1;
         for i in 1..=self.nu {
             for j in 1..=self.nv {
-                let value: f64 = self.points[(i, j)].coordinates()[k];
+                let value: f64 = grid_point(&self.points, i, j)?.coordinates()[k];
                 if value - c_min < difference {
                     let local: f64 =
                         adjust_extr_surf(surface, self.cell(patch, i, j), c_min, index, eps, true)?;

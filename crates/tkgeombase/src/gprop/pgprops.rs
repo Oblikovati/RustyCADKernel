@@ -49,10 +49,12 @@ fn point_inertia(point: Point3) -> Matrix3 {
     )
 }
 
-// The column-major walk of an Array2 (columns outside, rows inside).
+// The column-major walk of an Array2 (columns outside, rows inside) over its row-major
+// storage; the offsets come from the array's own shape, so every one is in range.
 fn column_major<'a, T: Copy>(array: &'a Array2<'_, T>) -> impl Iterator<Item = T> + 'a {
-    (array.lower_col()..=array.upper_col())
-        .flat_map(move |j| (array.lower_row()..=array.upper_row()).map(move |i| array[(i, j)]))
+    let (rows, cols) = (array.nb_rows(), array.nb_columns());
+    let cells: &'a [T] = array.as_slice();
+    (0..cols).flat_map(move |j| (0..rows).map(move |i| cells[i * cols + j]))
 }
 
 // The first element, Standard_OutOfRange for an empty array.

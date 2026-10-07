@@ -47,7 +47,7 @@ fn makeIntersectionGrid(
         for aGuideIdx in 0..theGuideParams.len() as i32 {
             let profile = theProfiles[theProfiles.lower() + aProfileIdx].get().unwrap();
             let param = theGuideParams[theGuideParams.lower() + aGuideIdx];
-            aPoints[(aGuideIdx + 1, aProfileIdx + 1)] = profile.value(param).unwrap();
+            aPoints.set_value(aGuideIdx + 1, aProfileIdx + 1, profile.value(param).unwrap()).unwrap();
         }
     }
     aPoints
