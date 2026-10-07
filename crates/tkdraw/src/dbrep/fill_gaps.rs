@@ -41,8 +41,9 @@ impl DBRepIsoBuilder {
     /// `FillGaps`: for each wire of `face`, each pair of consecutive edges (the last
     /// with the first) sharing a vertex whose tolerance covers both p-curve ends gets
     /// a 2D segment between the ends, unless the p-curves intersect near the vertex,
-    /// in which case they are trimmed at the intersection instead.
-    pub(crate) fn fill_gaps(
+    /// in which case they are trimmed at the intersection instead (called by
+    /// [`DBRepIsoBuilder::new`]; protected in C++).
+    pub fn fill_gaps(
         &mut self,
         face: &Face,
         pcurves: &mut EdgePCurves,

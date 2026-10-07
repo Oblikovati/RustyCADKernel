@@ -456020,6 +456020,646 @@
       "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::<rustycad_tkdraw::draw::Drawable3D>::whatis",
       "status": "implemented",
       "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::BasicCommands(Draw_Interpretor &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::basic_commands",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::Discretisation()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::dbrep_discretisation",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::Get(TCollection_AsciiString &,TopAbs_ShapeEnum,bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_shape",
+      "status": "implemented",
+      "notes": "The picked name is not written back (the Rust name is an input). DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::Get(const char *&,TopAbs_ShapeEnum,bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_shape",
+      "status": "implemented",
+      "notes": "The picked name is not written back (the Rust name is an input). DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::GetExisting(const TCollection_AsciiString &,TopAbs_ShapeEnum,bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_existing_shape",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::HLRAngle()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::dbrep_hlr_angle",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::HLRMode()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::dbrep_hlr_mode",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::HidMode()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::dbrep_hid_mode",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::NbIsos()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::dbrep_nb_isos",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::Parameters()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::parameters",
+      "status": "implemented",
+      "notes": "The function-local static is per session. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::Rg1Mode()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::dbrep_rg1_mode",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::RgNMode()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::dbrep_rgn_mode",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::Set(const char *const,const TopoDS_Shape &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_shape",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep::getShape(const char *&,TopAbs_ShapeEnum,bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_shape",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::ChangeDiscret(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::change_discret",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::ChangeNbIsos(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::change_nb_isos",
+      "status": "implemented",
+      "notes": "The std::cout reports go to a DrawConsole parameter. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::DBRep_DrawableShape(const TopoDS_Shape &,const Draw_Color &,const Draw_Color &,const Draw_Color &,const Draw_Color &,const double,const int,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::new",
+      "status": "implemented",
+      "notes": "The four colors are a ShapeColors. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::Discret() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::discret",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::DisplayHLR(const bool,const bool,const bool,const bool,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::display_hlr",
+      "status": "implemented",
+      "notes": "The flags and angle are an HlrSettings. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::DisplayHiddenLines(Draw_Display &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::display_hidden_lines",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::DisplayOrientation(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::display_orientation",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::DisplayPolygons() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::display_polygons",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::DisplayPolygons(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::set_display_polygons",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::DisplayTriangulation() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::display_triangulation",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::DisplayTriangulation(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::set_display_triangulation",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::GetDisplayHLR(bool &,bool &,bool &,bool &,double &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::hlr_settings",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::LastPick(TopoDS_Shape &,double &,double &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::last_pick",
+      "status": "implemented",
+      "notes": "The file-scope pick statics are thread-local (DrawOn only receives the display). DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::NbIsos() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::nb_isos",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::register_factory",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::restore",
+      "status": "implemented",
+      "notes": "Reads through the existing TKBRep shape set (text persistence kept, not extended). DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::Save(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::<rustycad_tkdraw::draw::Drawable3D>::save",
+      "status": "implemented",
+      "notes": "Writes through the existing TKBRep shape set (text persistence kept, not extended). DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::Shape() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::shape",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::addMeshNormals(NCollection_DataMap<TopoDS_Face, NCollection_DynamicArray<std::pair<gp_Pnt, gp_Pnt>>> &,const TopoDS_Shape &,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::add_shape_mesh_normals",
+      "status": "implemented",
+      "notes": "The map is a MeshNormals list in exploration order. The std::cout reports go to a DrawConsole parameter. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::addMeshNormals(NCollection_DynamicArray<std::pair<gp_Pnt, gp_Pnt>> &,const TopoDS_Face &,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::add_mesh_normals",
+      "status": "implemented",
+      "notes": "The std::cout reports go to a DrawConsole parameter. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::addSurfaceNormals(NCollection_DataMap<TopoDS_Face, NCollection_DynamicArray<std::pair<gp_Pnt, gp_Pnt>>> &,const TopoDS_Shape &,const double,const int,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::add_shape_surface_normals",
+      "status": "implemented",
+      "notes": "The map is a MeshNormals list in exploration order. The std::cout reports go to a DrawConsole parameter. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_DrawableShape::addSurfaceNormals(NCollection_DynamicArray<std::pair<gp_Pnt, gp_Pnt>> &,const TopoDS_Face &,const double,const int,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_DrawableShape.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepDrawableShape::add_surface_normals",
+      "status": "implemented",
+      "notes": "The std::cout reports go to a DrawConsole parameter. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Edge::Color() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Edge.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepEdge::color",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Edge::Color(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Edge.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepEdge::set_color",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Edge::DBRep_Edge(const TopoDS_Edge &,const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Edge.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepEdge::new",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Edge::Edge() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Edge.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepEdge::edge",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Edge::Edge(const TopoDS_Edge &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Edge.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepEdge::set_edge",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Face::Color() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Face.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepFace::color",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Face::Color(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Face.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepFace::set_color",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Face::DBRep_Face(const TopoDS_Face &,const int,const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Face.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepFace::new",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Face::Face() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Face.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepFace::face",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Face::Face(const TopoDS_Face &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Face.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepFace::set_face",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Face::GetIso(const int,GeomAbs_IsoType &,double &,double &,double &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Face.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepFace::iso",
+      "status": "implemented",
+      "notes": "The iso is a FaceIso. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Face::Iso(const int,const GeomAbs_IsoType,const double,const double,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Face.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepFace::set_iso",
+      "status": "implemented",
+      "notes": "The iso is a FaceIso. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Face::NbIsos() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Face.lxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepFace::nb_isos",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_HideData::Angle() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_HideData.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepHideData::angle",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_HideData::DBRep_HideData()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_HideData.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepHideData::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_HideData::DrawOn(Draw_Display &,const bool,const bool,const bool,const Draw_Color &,const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_HideData.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepHideData::draw_on",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_HideData::IsSame(const gp_Trsf &,const double) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_HideData.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepHideData::is_same",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_HideData::LastPick() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_HideData.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepHideData::last_pick",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_HideData::Set(const int,const gp_Trsf &,const double,const TopoDS_Shape &,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_HideData.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepHideData::set",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_HideData::ViewId() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_HideData.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepHideData::view_id",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_IsoBuilder::DBRep_IsoBuilder(const TopoDS_Face &,const double,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_IsoBuilder.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepIsoBuilder::new",
+      "status": "implemented",
+      "notes": "The hatcher base class is a field. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_IsoBuilder::DataMapOfEdgePCurve",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_IsoBuilder.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::EdgePCurves",
+      "status": "implemented",
+      "notes": "An ordered list keyed with IsEqual, as the default hasher of the map. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_IsoBuilder::FillGaps(const TopoDS_Face &,DBRep_IsoBuilder::DataMapOfEdgePCurve &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_IsoBuilder.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepIsoBuilder::fill_gaps",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_IsoBuilder::LoadIsos(const occ::handle<DBRep_Face> &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_IsoBuilder.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepIsoBuilder::load_isos",
+      "status": "implemented",
+      "notes": "The std::cout reports go to a DrawConsole parameter. DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_IsoBuilder::NbDomains() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_IsoBuilder.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepIsoBuilder::nb_domains",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::DBRep_Params()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::Discretization",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::discretization",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::DispTriangles",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::disp_triangles",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::DisplayPolygons",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::display_polygons",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::HAngMax",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::h_ang_max",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::HAngMin",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::h_ang_min",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::HLRAngle",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::hlr_angle",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::NbIsos",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::nb_isos",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::Size",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::size",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::WithHLR",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::with_hlr",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::WithHid",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::with_hid",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::WithRg1",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::with_rg1",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DBRep_Params::WithRgN",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DBRep/DBRep_Params.hxx",
+      "rust_item": "rustycad_tkdraw::dbrep::DBRepParams::with_rgn",
+      "status": "implemented",
+      "notes": "DBRep package port (rustycad-tkdraw); the batch oracle (tests/oracle/09_dbrep.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "Drawable",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tcl::sys::Window",
+      "status": "excluded",
+      "notes": "Excluded: the Xlib XID typedef that Draw_Window.hxx declares for its X11 calls; the Rust window layer identifies windows by u64 ids (rustycad_tkdraw::draw::DrawWindowEvent::window) and the Tcl/Tk binding declares the Xlib Window type (rustycad_tcl::sys::Window)."
+    },
+    {
+      "upstream_id": "Pixmap",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/Draw/Draw_Window.hxx",
+      "rust_item": "rustycad_tcl::sys::Window",
+      "status": "excluded",
+      "notes": "Excluded: the Xlib XID typedef that Draw_Window.hxx declares for its X11 calls; the Rust window layer identifies windows by u64 ids (rustycad_tkdraw::draw::DrawWindowEvent::window) and the Tcl/Tk binding declares the Xlib Window type (rustycad_tcl::sys::Window)."
     }
   ],
   "tests": [
