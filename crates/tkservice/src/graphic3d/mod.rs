@@ -3,17 +3,27 @@
 //!
 //! Each class keeps its package prefix (`Graphic3d_Camera` is `Graphic3dCamera`); abstract
 //! driver classes are traits over embedded bases (visualization-design.md section 1).
+mod array_classes;
+mod array_edges;
+mod array_of_primitives;
+mod array_validity;
+mod array_vertices;
 mod aspect_classes;
 mod aspects;
 mod aspects_equal;
 mod aspects_members;
 mod aspects_style;
+mod attrib_buffer;
+mod bound_buffer;
 mod bsdf;
+mod buffer;
+mod buffer_members;
 mod cube_map;
 mod cube_map_order;
 mod cube_map_packed;
 mod cube_map_separate;
 mod hatch_style;
+mod index_buffer;
 mod marker_image;
 mod marker_standard;
 mod marker_tables;
@@ -38,6 +48,13 @@ mod texture_params;
 mod texture_root;
 mod texture_set;
 
+pub use array_classes::{
+    Graphic3dArrayOfPoints, Graphic3dArrayOfPolygons, Graphic3dArrayOfPolylines,
+    Graphic3dArrayOfQuadrangleStrips, Graphic3dArrayOfQuadrangles, Graphic3dArrayOfSegments,
+    Graphic3dArrayOfTriangleFans, Graphic3dArrayOfTriangleStrips, Graphic3dArrayOfTriangles,
+    Graphic3dArrayOptions,
+};
+pub use array_of_primitives::{Graphic3dArrayOfPrimitives, Graphic3dAttributeSlot};
 pub use aspect_classes::{
     Graphic3dAspectFillArea3d, Graphic3dAspectLine3d, Graphic3dAspectMarker3d,
     Graphic3dAspectText3d,
@@ -52,7 +69,15 @@ pub use aspects_style::{
     Graphic3dAspectsEdgeMembers, Graphic3dAspectsLineMembers, Graphic3dAspectsTextMembers,
     graphic3d_default_line_pattern_for_type, graphic3d_default_line_type_for_pattern,
 };
+pub use attrib_buffer::Graphic3dAttribBuffer;
+pub use bound_buffer::{Graphic3dBoundBuffer, Graphic3dBoundBufferState};
 pub use bsdf::{Graphic3dBsdf, Graphic3dFresnel, Graphic3dFresnelModel};
+pub use buffer::{
+    Graphic3dAttribute, Graphic3dBuffer, Graphic3dBufferBase, Graphic3dBufferSource,
+    Graphic3dBufferState, Graphic3dTypeOfAttribute, Graphic3dTypeOfData,
+    graphic3d_buffer_dump_json,
+};
+pub use buffer_members::{Graphic3dBufferMembers, Graphic3dBufferValue};
 pub use cube_map::{
     Graphic3dCubeMap, Graphic3dCubeMapBase, Graphic3dCubeMapIteration, Graphic3dCubeMapMembers,
 };
@@ -60,6 +85,10 @@ pub use cube_map_order::{Graphic3dCubeMapOrder, Graphic3dValidatedCubeMapOrder};
 pub use cube_map_packed::{Graphic3dCubeMapPacked, graphic3d_cube_map_packed_check_order};
 pub use cube_map_separate::Graphic3dCubeMapSeparate;
 pub use hatch_style::Graphic3dHatchStyle;
+pub use index_buffer::{
+    Graphic3dIndexBuffer, Graphic3dIndexBufferMembers, Graphic3dIndexBufferSource,
+    Graphic3dMutableIndexBuffer,
+};
 pub use marker_image::Graphic3dMarkerImage;
 pub use material_aspect::Graphic3dMaterialAspect;
 pub use material_enums::*;

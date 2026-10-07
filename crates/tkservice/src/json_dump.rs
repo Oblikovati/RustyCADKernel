@@ -42,6 +42,18 @@ pub(crate) fn field_string(stream: &mut DumpStream, field: &str, value: &[u8]) -
     stream.write_fragment(b"\"")
 }
 
+/// `OCCT_DUMP_FIELD_VALUE_POINTER`: the short `GetPointerInfo` text of an address, empty for
+/// null; `field_pointer(&mut s, "Colors", 0)?`.
+pub(crate) fn field_pointer(
+    stream: &mut DumpStream,
+    field: &str,
+    address: usize,
+) -> io::Result<()> {
+    let text = rustycad_tkernel::standard::dump::get_pointer_info(Some(address), true)
+        .map_err(io::Error::other)?;
+    field_string(stream, field, text.as_bytes())
+}
+
 /// `OCCT_DUMP_FIELD_VALUES_DUMPED`: `"<name>": {<child dump>}`, skipped at depth 0; the child
 /// is dumped at `depth - 1`.
 pub(crate) fn field_dumped(

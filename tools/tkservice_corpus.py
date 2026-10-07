@@ -29,3 +29,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_marker').append_marker_requests(requests)
     # Graphic3d_Aspects (tkservice_corpus_aspects.py)
     __import__('tkservice_corpus_aspects').append_aspects_requests(requests)
+    # Graphic3d_ArrayOfPrimitives (tkservice_corpus_array.py)
+    __import__('tkservice_corpus_array').append_array_requests(requests)
