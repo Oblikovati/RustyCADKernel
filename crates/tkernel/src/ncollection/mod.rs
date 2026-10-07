@@ -216,7 +216,7 @@ mod sparse_array_base;
 pub use sparse_array_base::{
     BaseSparseArrayBasicIterator, BasicSparseArraySource, BasicSparseArraySourceMut,
     SparseArrayBase, SparseArrayBaseIterator, SparseArrayBaseState, SparseArrayBlock,
-    SparseCopyItemFunc, SparseCreateItemFunc, SparseDestroyItemFunc,
+    SparseArrayBlockCell, SparseCopyItemFunc, SparseCreateItemFunc, SparseDestroyItemFunc,
 };
 
 mod map_node;

@@ -11,15 +11,23 @@ impl SparseArrayBase {
     }
 
     pub(super) unsafe fn ensure_block(&self, number: usize) {
+        let bytes = self.checked_block_bytes();
         if number >= self.block_slots() {
             unsafe { self.grow_table(number) };
         }
         if !self.block_address(number).is_null() {
             return;
         }
-        let bytes = SparseArrayBlock::size(self.block_size(), self.item_size());
         let address = self.allocate_zeroed(bytes);
         unsafe { *(*self.state.get()).table.add(number) = address.cast() };
+    }
+    pub(super) fn checked_block_bytes(&self) -> usize {
+        let (items, stride) = (self.block_size(), self.item_size());
+        SparseArrayBlock::checked_storage_size(items, stride).unwrap_or_else(|| {
+            panic!(
+                "SparseArray block {items} items of stride {stride}; expected addressable layout"
+            )
+        })
     }
     fn allocate_zeroed(&self, bytes: usize) -> *mut u8 {
         // Injected arenas must honor header alignment and retain reset leases until deallocation.
@@ -35,7 +43,7 @@ impl SparseArrayBase {
         let old_count = self.block_slots();
         let count = self.grown_table_count(number);
         let replacement = self
-            .allocate_zeroed(count * size_of::<*mut c_void>())
+            .allocate_zeroed(checked_sparse_table_bytes(count))
             .cast::<*mut c_void>();
         let old = unsafe { (*self.state.get()).table };
         if old_count != 0 {
@@ -72,6 +80,14 @@ impl SparseArrayBase {
             };
         }
     }
+}
+
+fn checked_sparse_table_bytes(count: usize) -> usize {
+    count
+        .checked_mul(size_of::<*mut c_void>())
+        .unwrap_or_else(|| {
+            panic!("SparseArray table {count} pointer slots; expected addressable pointer span")
+        })
 }
 
 fn sparse_allocation_layout(bytes: usize) -> Layout {

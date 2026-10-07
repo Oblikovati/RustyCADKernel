@@ -53,7 +53,7 @@ class SparseBaseBindingTest(unittest.TestCase):
         for record in self.records:
             self.replay.verify(record)
         self.assertEqual(len(self.records), 8)
-        current = Path("porting/audits/sparse-base-remaining-methods.json")
+        current = Path("porting/audits/sparse-block-native-surface-v1.json")
         self.assertEqual(replay_sparse_base_bindings(ROOT, current), 20)
 
     def test_stale_typed_size_cannot_substitute_for_erased_size(self) -> None:

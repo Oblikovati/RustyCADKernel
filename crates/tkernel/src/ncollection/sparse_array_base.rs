@@ -11,7 +11,7 @@ mod assignment;
 mod block;
 mod cursor;
 mod editing;
-pub use block::SparseArrayBlock;
+pub use block::{SparseArrayBlock, SparseArrayBlockCell};
 pub use cursor::SparseArrayBaseIterator;
 
 /// Native copy-construction callback; `unsafe fn create(dst: *mut c_void, src: *mut c_void)`.
