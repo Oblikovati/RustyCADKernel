@@ -101,18 +101,22 @@ def rtti_base_row(member: SpecialMember, evidence: MacroEvidence) -> BuildResult
     return ledger_row(member, "excluded", member.rust_class.path, notes), None
 
 
+def registration_phrase(registration: TransientRegistration | None, cxx: str) -> str:
+    """Cite the registering macro call, or the inventory TYPE_NAME when none is literal."""
+    if registration is None:
+        return f"RuntimeTyped::TYPE_NAME == \"{cxx}\""
+    return (
+        f"{registration.macro}!({registration.rust_type}, \"{cxx}\", "
+        f"{registration.parent_type}) at {registration.file}:{registration.line}"
+    )
+
+
 def rtti_notes(
     member: SpecialMember, registration: TransientRegistration | None, base: str | None
 ) -> str:
     cxx = declaration_owner(member.declaration)
     _, _, spelling = RTTI_ITEMS[member.kind]
-    where = (
-        f"{registration.macro}!"
-        f"({registration.rust_type}, \"{cxx}\", {registration.parent_type}) at "
-        f"{registration.file}:{registration.line}"
-        if registration
-        else f"RuntimeTyped::TYPE_NAME == \"{cxx}\""
-    )
+    where = registration_phrase(registration, cxx)
     shape = (
         "Abstract class: the trait is the Rust target because rustdoc does not index "
         "impls on `dyn` types; the descriptor is `<dyn Trait as RuntimeTyped>`. "
