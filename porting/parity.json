@@ -42926,7 +42926,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Standard_OStream becomes any std::fmt::Write sink; the text, including OCCT's spacing and %g number formatting, is compared with the native Dump by the differential probe."
     },
     {
-      "upstream_id": "math_DirectPolynomialRoots::operator<<(Standard_OStream&,const math_DirectPolynomialRoots&)",
+      "upstream_id": "operator<<(Standard_OStream&,const math_DirectPolynomialRoots&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DirectPolynomialRoots.hxx",
       "rust_item": "rustycad_tkmath::math::DirectPolynomialRoots::<core::fmt::Display>::fmt",
@@ -43121,17 +43121,17 @@
       "upstream_id": "math_DoubleTab::operator()(int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
-      "rust_item": "rustycad_tkmath::math::DoubleTab::<core::ops::index::Index>::index",
+      "rust_item": "rustycad_tkmath::math::DoubleTab::value",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_DoubleTab::operator()(int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_DoubleTab.hxx",
-      "rust_item": "<rustycad_tkmath::math::DoubleTab as IndexMut<(i32, i32)>>::index_mut",
+      "rust_item": "rustycad_tkmath::math::DoubleTab::change_value",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_DoubleTab::operator=(const math_DoubleTab&)",
@@ -43726,7 +43726,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
     {
-      "upstream_id": "math_FunctionSetRoot::operator<<(Standard_OStream&,const math_FunctionSetRoot&)",
+      "upstream_id": "operator<<(Standard_OStream&,const math_FunctionSetRoot&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_FunctionSetRoot.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetRoot::<core::fmt::Display>::fmt",
@@ -43854,7 +43854,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Standard_OStream becomes any std::fmt::Write sink; the text, including OCCT's spacing and %g number formatting, is compared with the native Dump by the differential probe. Like OCCT it prints the permutation sign D as the determinant."
     },
     {
-      "upstream_id": "math_Gauss::operator<<(Standard_OStream&,const math_Gauss&)",
+      "upstream_id": "operator<<(Standard_OStream&,const math_Gauss&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Gauss.hxx",
       "rust_item": "rustycad_tkmath::math::Gauss::<core::fmt::Display>::fmt",
@@ -44491,7 +44491,7 @@
       "upstream_id": "math_Matrix::operator*(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<&rustycad_tkmath::math::Matrix as Mul<f64>>::mul",
+      "rust_item": "<&rustycad_tkmath::math::Matrix as core::ops::arith::Mul<f64>>::mul",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
@@ -44515,9 +44515,9 @@
       "upstream_id": "math_Matrix::operator/=(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "rustycad_tkmath::math::Matrix::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::math::Matrix::divide",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::Divided(double) const",
@@ -44531,9 +44531,9 @@
       "upstream_id": "math_Matrix::operator/(double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<&rustycad_tkmath::math::Matrix as Div<f64>>::div",
+      "rust_item": "rustycad_tkmath::math::Matrix::divided",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::Add(const math_Matrix&)",
@@ -44547,9 +44547,9 @@
       "upstream_id": "math_Matrix::operator+=(const math_Matrix&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "rustycad_tkmath::math::Matrix::<core::ops::arith::AddAssign>::add_assign",
+      "rust_item": "rustycad_tkmath::math::Matrix::add",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::Added(const math_Matrix&) const",
@@ -44563,9 +44563,9 @@
       "upstream_id": "math_Matrix::operator+(const math_Matrix&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<&rustycad_tkmath::math::Matrix as Add<&Matrix>>::add",
+      "rust_item": "rustycad_tkmath::math::Matrix::added",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::Add(const math_Matrix&,const math_Matrix&)",
@@ -44587,9 +44587,9 @@
       "upstream_id": "math_Matrix::operator-=(const math_Matrix&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "rustycad_tkmath::math::Matrix::<core::ops::arith::SubAssign>::sub_assign",
+      "rust_item": "rustycad_tkmath::math::Matrix::subtract",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::Subtracted(const math_Matrix&) const",
@@ -44603,9 +44603,9 @@
       "upstream_id": "math_Matrix::operator-(const math_Matrix&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<&rustycad_tkmath::math::Matrix as Sub<&Matrix>>::sub",
+      "rust_item": "rustycad_tkmath::math::Matrix::subtracted",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::Set(int,int,int,int,const math_Matrix&)",
@@ -44747,17 +44747,17 @@
       "upstream_id": "math_Matrix::operator()(int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "rustycad_tkmath::math::Matrix::<core::ops::index::Index>::index",
+      "rust_item": "rustycad_tkmath::math::Matrix::value",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::operator()(int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<rustycad_tkmath::math::Matrix as IndexMut<(i32, i32)>>::index_mut",
+      "rust_item": "rustycad_tkmath::math::Matrix::change_value",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::At(size_t,size_t) const",
@@ -44811,9 +44811,9 @@
       "upstream_id": "math_Matrix::operator*=(const math_Matrix&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<rustycad_tkmath::math::Matrix as MulAssign<&Matrix>>::mul_assign",
+      "rust_item": "rustycad_tkmath::math::Matrix::multiply_matrix",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::Multiplied(const math_Matrix&) const",
@@ -44827,9 +44827,9 @@
       "upstream_id": "math_Matrix::operator*(const math_Matrix&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<&rustycad_tkmath::math::Matrix as Mul<&Matrix>>::mul",
+      "rust_item": "rustycad_tkmath::math::Matrix::multiplied_matrix",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::Multiplied(const math_VectorBase<>&) const",
@@ -44843,9 +44843,9 @@
       "upstream_id": "math_Matrix::operator*(const math_VectorBase<>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<&rustycad_tkmath::math::Matrix as Mul<&Vector>>::mul",
+      "rust_item": "rustycad_tkmath::math::Matrix::multiplied_vector",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_Matrix::Opposite() const",
@@ -44859,7 +44859,7 @@
       "upstream_id": "math_Matrix::operator-() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Matrix.hxx",
-      "rust_item": "<&rustycad_tkmath::math::Matrix as Neg>::neg",
+      "rust_item": "<&rustycad_tkmath::math::Matrix as core::ops::arith::Neg>::neg",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
@@ -45808,7 +45808,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors."
     },
     {
-      "upstream_id": "math_ValueAndWeight::operator<(const math_ValueAndWeight&,const math_ValueAndWeight&)",
+      "upstream_id": "operator<(const math_ValueAndWeight&,const math_ValueAndWeight&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_ValueAndWeight.hxx",
       "rust_item": "rustycad_tkmath::math::ValueAndWeight::less",
@@ -45880,7 +45880,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase(const math_VectorBase&)",
+      "upstream_id": "math_VectorBase(const math_VectorBase<TheItemType>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::<core::clone::Clone>::clone",
@@ -45888,7 +45888,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase(math_VectorBase&&)",
+      "upstream_id": "math_VectorBase(math_VectorBase<TheItemType>&&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::move_construct",
@@ -46020,7 +46020,7 @@
       "upstream_id": "math_VectorBase::operator*=(TheItemType)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "rustycad_tkmath::math::VectorBase::<core::ops::arith::MulAssign>::mul_assign",
+      "rust_item": "rustycad_tkmath::math::VectorBase::<core::ops::arith::MulAssign<T>>::mul_assign",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
@@ -46036,7 +46036,7 @@
       "upstream_id": "math_VectorBase::operator*(TheItemType) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<&rustycad_tkmath::math::VectorBase as Mul<T>>::mul",
+      "rust_item": "<&rustycad_tkmath::math::VectorBase as core::ops::arith::Mul<T>>::mul",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
@@ -46060,9 +46060,9 @@
       "upstream_id": "math_VectorBase::operator/=(TheItemType)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "rustycad_tkmath::math::VectorBase::<core::ops::arith::DivAssign>::div_assign",
+      "rust_item": "rustycad_tkmath::math::VectorBase::divide",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_VectorBase::Divided(TheItemType) const",
@@ -46076,9 +46076,9 @@
       "upstream_id": "math_VectorBase::operator/(TheItemType) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<&rustycad_tkmath::math::VectorBase as Div<T>>::div",
+      "rust_item": "rustycad_tkmath::math::VectorBase::divided",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_VectorBase::Add(const math_VectorBase<T>&)",
@@ -46089,12 +46089,12 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::operator+=(const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::operator+=(const math_VectorBase<TheItemType>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<rustycad_tkmath::math::VectorBase as AddAssign<&Self>>::add_assign",
+      "rust_item": "rustycad_tkmath::math::VectorBase::add",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_VectorBase::Added(const math_VectorBase<T>&) const",
@@ -46105,12 +46105,12 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::operator+(const math_VectorBase&) const",
+      "upstream_id": "math_VectorBase::operator+(const math_VectorBase<TheItemType>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<&rustycad_tkmath::math::VectorBase as Add<&VectorBase>>::add",
+      "rust_item": "rustycad_tkmath::math::VectorBase::added",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_VectorBase::Multiply(const math_VectorBase<T>&,const class math_Matrix&)",
@@ -46180,9 +46180,9 @@
       "upstream_id": "math_VectorBase::operator()(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "rustycad_tkmath::math::VectorBase::<core::ops::index::Index>::index",
+      "rust_item": "rustycad_tkmath::math::VectorBase::value",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_VectorBase::operator()(int)",
@@ -46241,7 +46241,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::operator=(math_VectorBase&&)",
+      "upstream_id": "math_VectorBase::operator=(math_VectorBase<TheItemType>&&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::move_assign",
@@ -46257,12 +46257,12 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::operator*(const math_VectorBase&) const",
+      "upstream_id": "math_VectorBase::operator*(const math_VectorBase<TheItemType>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<&rustycad_tkmath::math::VectorBase as Mul<&VectorBase>>::mul",
+      "rust_item": "rustycad_tkmath::math::VectorBase::dot",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_VectorBase::Multiplied(const math_Matrix&) const",
@@ -46276,9 +46276,9 @@
       "upstream_id": "math_VectorBase::operator*(const math_Matrix&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<&rustycad_tkmath::math::VectorBase as Mul<&Matrix>>::mul",
+      "rust_item": "rustycad_tkmath::math::VectorBase::multiplied_matrix",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_VectorBase::Opposite()",
@@ -46292,7 +46292,7 @@
       "upstream_id": "math_VectorBase::operator-()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<&rustycad_tkmath::math::VectorBase as Neg>::neg",
+      "rust_item": "<&rustycad_tkmath::math::VectorBase as core::ops::arith::Neg>::neg",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
@@ -46305,12 +46305,12 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::operator-=(const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::operator-=(const math_VectorBase<TheItemType>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<rustycad_tkmath::math::VectorBase as SubAssign<&Self>>::sub_assign",
+      "rust_item": "rustycad_tkmath::math::VectorBase::subtract",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
       "upstream_id": "math_VectorBase::Subtracted(const math_VectorBase<T>&) const",
@@ -46321,15 +46321,15 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
     },
     {
-      "upstream_id": "math_VectorBase::operator-(const math_VectorBase&) const",
+      "upstream_id": "math_VectorBase::operator-(const math_VectorBase<TheItemType>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<&rustycad_tkmath::math::VectorBase as Sub<&VectorBase>>::sub",
+      "rust_item": "rustycad_tkmath::math::VectorBase::subtracted",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
-      "upstream_id": "math_VectorBase::Multiply(TheItemType,const math_VectorBase&)",
+      "upstream_id": "math_VectorBase::Multiply(TheItemType,const math_VectorBase<TheItemType>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::set_scaled",
@@ -70072,15 +70072,15 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. The Message_ProgressRange argument drives a \"math_Gauss LU_Decompose\" progress scope of n steps: the user break is polled before each column and stops with math_Status_UserAborted; every exit closes the scope, completing the range. The default-range form is lu_decompose_with_scales. Compared bit-for-bit with OCCT (status, factors, Show positions and poll counts under a cancelling indicator) by the progress_lu/progress_gauss numeric probes. Selector corrected to the native global function declared in math_Recipes.hxx; that filename does not define a C++ namespace. See porting/audits/math-protected-and-global-selectors.json."
     },
     {
-      "upstream_id": "math_VectorBase::operator*(TheItemType,const math_VectorBase&)",
+      "upstream_id": "operator*(TheItemType,const math_VectorBase<TheItemType>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
-      "rust_item": "<f64 as Mul<&rustycad_tkmath::math::VectorBase>>::mul",
+      "rust_item": "rustycad_tkmath::math::VectorBase::multiplied",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics. The hidden friend scalar-times-vector forwards to Multiplied; Rust coherence needs one impl per item type (f64 and i32)."
+      "notes": "C++ operator forwards to the named member; the Rust item is that member (same Result failure)."
     },
     {
-      "upstream_id": "math_VectorBase::operator<<(Standard_OStream&,const math_VectorBase&)",
+      "upstream_id": "operator<<(Standard_OStream&,const math_VectorBase<TheItemType>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
       "rust_item": "rustycad_tkmath::math::VectorBase::<core::fmt::Display>::fmt",
@@ -237892,6 +237892,910 @@
       "rust_item": "rustycad_tkmath::math::TrigonometricRoots::perform",
       "status": "implemented",
       "notes": "Existing protected operation exposed through the Rust method; native derived-class probes explicitly call Perform again on existing storage. See tools/oracle/tkmath_trig_probe.cxx and porting/audits/math-protected-and-global-selectors.json. This adds an API declaration binding, not an original legacy test."
+    },
+    {
+      "upstream_id": "math_OK",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Status.hxx",
+      "rust_item": "rustycad_tkmath::math::Status::Ok",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "math_TooManyIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Status.hxx",
+      "rust_item": "rustycad_tkmath::math::Status::TooManyIterations",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "math_FunctionError",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Status.hxx",
+      "rust_item": "rustycad_tkmath::math::Status::FunctionError",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "math_DirectionSearchError",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Status.hxx",
+      "rust_item": "rustycad_tkmath::math::Status::DirectionSearchError",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "math_NotBracketed",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Status.hxx",
+      "rust_item": "rustycad_tkmath::math::Status::NotBracketed",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "math_Status_UserAborted",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Recipes.hxx",
+      "rust_item": "rustycad_tkmath::math::recipes::STATUS_USER_ABORTED",
+      "status": "implemented",
+      "notes": "Integer status code constant with the same value."
+    },
+    {
+      "upstream_id": "math_Status_OK",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Recipes.hxx",
+      "rust_item": "rustycad_tkmath::math::recipes::STATUS_OK",
+      "status": "implemented",
+      "notes": "Integer status code constant with the same value."
+    },
+    {
+      "upstream_id": "math_Status_SingularMatrix",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Recipes.hxx",
+      "rust_item": "rustycad_tkmath::math::recipes::STATUS_SINGULAR_MATRIX",
+      "status": "implemented",
+      "notes": "Integer status code constant with the same value."
+    },
+    {
+      "upstream_id": "math_Status_ArgumentError",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Recipes.hxx",
+      "rust_item": "rustycad_tkmath::math::recipes::STATUS_ARGUMENT_ERROR",
+      "status": "implemented",
+      "notes": "Integer status code constant with the same value."
+    },
+    {
+      "upstream_id": "math_Status_NoConvergence",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Recipes.hxx",
+      "rust_item": "rustycad_tkmath::math::recipes::STATUS_NO_CONVERGENCE",
+      "status": "implemented",
+      "notes": "Integer status code constant with the same value."
+    },
+    {
+      "upstream_id": "math_IntegerVector",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_IntegerVector.hxx",
+      "rust_item": "rustycad_tkmath::math::IntegerVector",
+      "status": "implemented",
+      "notes": "math_IntegerVector = math_VectorBase<int> is the Rust alias math::IntegerVector."
+    },
+    {
+      "upstream_id": "math_VectorBase",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
+      "rust_item": "rustycad_tkmath::math::VectorBase",
+      "status": "implemented",
+      "notes": "Class template math_VectorBase<TheItemType> is the generic Rust struct math::VectorBase<T>."
+    },
+    {
+      "upstream_id": "PSO_Particle::Position",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_PSOParticlesPool.hxx",
+      "rust_item": "rustycad_tkmath::math::PsoParticle::position",
+      "status": "implemented",
+      "notes": "Public PSO_Particle member; the C++ pointer into the pool's block is the Rust field that addresses the same pool slice."
+    },
+    {
+      "upstream_id": "PSO_Particle::Velocity",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_PSOParticlesPool.hxx",
+      "rust_item": "rustycad_tkmath::math::PsoParticle::velocity",
+      "status": "implemented",
+      "notes": "Public PSO_Particle member; the C++ pointer into the pool's block is the Rust field that addresses the same pool slice."
+    },
+    {
+      "upstream_id": "PSO_Particle::BestPosition",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_PSOParticlesPool.hxx",
+      "rust_item": "rustycad_tkmath::math::PsoParticle::best_position",
+      "status": "implemented",
+      "notes": "Public PSO_Particle member; the C++ pointer into the pool's block is the Rust field that addresses the same pool slice."
+    },
+    {
+      "upstream_id": "PSO_Particle::Distance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_PSOParticlesPool.hxx",
+      "rust_item": "rustycad_tkmath::math::PsoParticle::distance",
+      "status": "implemented",
+      "notes": "Public PSO_Particle member; the C++ pointer into the pool's block is the Rust field that addresses the same pool slice."
+    },
+    {
+      "upstream_id": "PSO_Particle::BestDistance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_PSOParticlesPool.hxx",
+      "rust_item": "rustycad_tkmath::math::PsoParticle::best_distance",
+      "status": "implemented",
+      "notes": "Public PSO_Particle member; the C++ pointer into the pool's block is the Rust field that addresses the same pool slice."
+    },
+    {
+      "upstream_id": "math_BFGS::EPSZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BFGS::PreviousMinimum",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BFGS::TheGradient",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BFGS::TheLocation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BFGS::TheMinimum",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BFGS::TheStatus",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BFGS::XTol",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BFGS::myIsBoundsDefined",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BFGS::myLeft",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BFGS::myRight",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BFGS::nbiter",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Bfgs has no subclassing; the value is private state of math::Bfgs, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BissecNewton::TheStatus",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BissecNewton.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BissecNewton has no subclassing; the value is private state of math::BissecNewton, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BissecNewton::XTol",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BissecNewton.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BissecNewton has no subclassing; the value is private state of math::BissecNewton, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BissecNewton::df",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BissecNewton.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BissecNewton has no subclassing; the value is private state of math::BissecNewton, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BissecNewton::dx",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BissecNewton.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BissecNewton has no subclassing; the value is private state of math::BissecNewton, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BissecNewton::f",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BissecNewton.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BissecNewton has no subclassing; the value is private state of math::BissecNewton, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BissecNewton::x",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BissecNewton.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BissecNewton has no subclassing; the value is private state of math::BissecNewton, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BrentMinimum::EPSZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BrentMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BrentMinimum has no subclassing; the value is private state of math::BrentMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BrentMinimum::XTol",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BrentMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BrentMinimum has no subclassing; the value is private state of math::BrentMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BrentMinimum::a",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BrentMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BrentMinimum has no subclassing; the value is private state of math::BrentMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BrentMinimum::b",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BrentMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BrentMinimum has no subclassing; the value is private state of math::BrentMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BrentMinimum::fv",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BrentMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BrentMinimum has no subclassing; the value is private state of math::BrentMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BrentMinimum::fw",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BrentMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BrentMinimum has no subclassing; the value is private state of math::BrentMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BrentMinimum::fx",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BrentMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BrentMinimum has no subclassing; the value is private state of math::BrentMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_BrentMinimum::x",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BrentMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::BrentMinimum has no subclassing; the value is private state of math::BrentMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_FRPR::EPSZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FRPR.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Frpr has no subclassing; the value is private state of math::Frpr, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_FRPR::PreviousMinimum",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FRPR.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Frpr has no subclassing; the value is private state of math::Frpr, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_FRPR::TheGradient",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FRPR.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Frpr has no subclassing; the value is private state of math::Frpr, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_FRPR::TheLocation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FRPR.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Frpr has no subclassing; the value is private state of math::Frpr, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_FRPR::TheMinimum",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FRPR.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Frpr has no subclassing; the value is private state of math::Frpr, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_FRPR::XTol",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FRPR.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Frpr has no subclassing; the value is private state of math::Frpr, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_FunctionSetRoot::DF",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::FunctionSetRoot has no subclassing; the value is private state of math::FunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_FunctionSetRoot::Delta",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::FunctionSetRoot has no subclassing; the value is private state of math::FunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_FunctionSetRoot::Sol",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::FunctionSetRoot has no subclassing; the value is private state of math::FunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_FunctionSetRoot::Tol",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::FunctionSetRoot has no subclassing; the value is private state of math::FunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_Gauss::D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Gauss.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Gauss has no subclassing; the value is private state of math::Gauss, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_Gauss::Done",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Gauss.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Gauss has no subclassing; the value is private state of math::Gauss, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_Gauss::Index",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Gauss.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Gauss has no subclassing; the value is private state of math::Gauss, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_Gauss::LU",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Gauss.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Gauss has no subclassing; the value is private state of math::Gauss, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_GaussLeastSquare::A2",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_GaussLeastSquare.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::GaussLeastSquares has no subclassing; the value is private state of math::GaussLeastSquares, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_GaussLeastSquare::D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_GaussLeastSquare.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::GaussLeastSquares has no subclassing; the value is private state of math::GaussLeastSquares, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_GaussLeastSquare::Index",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_GaussLeastSquare.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::GaussLeastSquares has no subclassing; the value is private state of math::GaussLeastSquares, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_GaussLeastSquare::LU",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_GaussLeastSquare.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::GaussLeastSquares has no subclassing; the value is private state of math::GaussLeastSquares, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_GaussLeastSquare::Singular",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_GaussLeastSquare.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::GaussLeastSquares has no subclassing; the value is private state of math::GaussLeastSquares, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonFunctionSetRoot::DeltaX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonFunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonFunctionSetRoot has no subclassing; the value is private state of math::NewtonFunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonFunctionSetRoot::FValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonFunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonFunctionSetRoot has no subclassing; the value is private state of math::NewtonFunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonFunctionSetRoot::Indx",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonFunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonFunctionSetRoot has no subclassing; the value is private state of math::NewtonFunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonFunctionSetRoot::Jacobian",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonFunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonFunctionSetRoot has no subclassing; the value is private state of math::NewtonFunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonFunctionSetRoot::Scratch",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonFunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonFunctionSetRoot has no subclassing; the value is private state of math::NewtonFunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonFunctionSetRoot::Sol",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonFunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonFunctionSetRoot has no subclassing; the value is private state of math::NewtonFunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonFunctionSetRoot::TolF",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonFunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonFunctionSetRoot has no subclassing; the value is private state of math::NewtonFunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonFunctionSetRoot::TolX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonFunctionSetRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonFunctionSetRoot has no subclassing; the value is private state of math::NewtonFunctionSetRoot, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::CTol",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::Convex",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::MinEigenValue",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::NoConvexTreatement",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::PreviousMinimum",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::TheGradient",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::TheHessian",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::TheLocation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::TheMinimum",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::TheStatus",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::TheStep",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::XTol",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::myIsBoundsDefined",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::myLeft",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::myRight",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_NewtonMinimum::nbiter",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonMinimum.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::NewtonMinimum has no subclassing; the value is private state of math::NewtonMinimum, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_Powell::EPSZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Powell.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Powell has no subclassing; the value is private state of math::Powell, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_Powell::PreviousMinimum",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Powell.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Powell has no subclassing; the value is private state of math::Powell, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_Powell::TheLocation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Powell.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Powell has no subclassing; the value is private state of math::Powell, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_Powell::TheLocationError",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Powell.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Powell has no subclassing; the value is private state of math::Powell, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_Powell::TheMinimum",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Powell.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Powell has no subclassing; the value is private state of math::Powell, read through its public accessors."
+    },
+    {
+      "upstream_id": "math_Powell::XTol",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Powell.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member kept for derived classes. Rust math::Powell has no subclassing; the value is private state of math::Powell, read through its public accessors."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_BFGS&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.lxx",
+      "rust_item": "rustycad_tkmath::math::Bfgs::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_BissecNewton&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BissecNewton.lxx",
+      "rust_item": "rustycad_tkmath::math::BissecNewton::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_BracketMinimum&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BracketMinimum.lxx",
+      "rust_item": "rustycad_tkmath::math::BracketMinimum::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_BracketedRoot&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BracketedRoot.lxx",
+      "rust_item": "rustycad_tkmath::math::BracketedRoot::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_BrentMinimum&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BrentMinimum.lxx",
+      "rust_item": "rustycad_tkmath::math::BrentMinimum::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_Crout&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Crout.lxx",
+      "rust_item": "rustycad_tkmath::math::Crout::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_FRPR&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FRPR.lxx",
+      "rust_item": "rustycad_tkmath::math::Frpr::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_FunctionAllRoots&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FunctionAllRoots.lxx",
+      "rust_item": "rustycad_tkmath::math::FunctionAllRoots::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_FunctionRoot&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FunctionRoot.lxx",
+      "rust_item": "rustycad_tkmath::math::FunctionRoot::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_FunctionRoots&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FunctionRoots.lxx",
+      "rust_item": "rustycad_tkmath::math::FunctionRoots::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_GaussLeastSquare&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_GaussLeastSquare.lxx",
+      "rust_item": "rustycad_tkmath::math::GaussLeastSquares::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_GaussSingleIntegration&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_GaussSingleIntegration.lxx",
+      "rust_item": "rustycad_tkmath::math::GaussSingleIntegration::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_Householder&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Householder.lxx",
+      "rust_item": "rustycad_tkmath::math::Householder::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_Jacobi&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Jacobi.lxx",
+      "rust_item": "rustycad_tkmath::math::Jacobi::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_Matrix&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Matrix.lxx",
+      "rust_item": "rustycad_tkmath::math::Matrix::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_NewtonFunctionRoot&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonFunctionRoot.lxx",
+      "rust_item": "rustycad_tkmath::math::NewtonFunctionRoot::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_NewtonFunctionSetRoot&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_NewtonFunctionSetRoot.lxx",
+      "rust_item": "rustycad_tkmath::math::NewtonFunctionSetRoot::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_Powell&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Powell.lxx",
+      "rust_item": "rustycad_tkmath::math::Powell::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_SVD&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_SVD.lxx",
+      "rust_item": "rustycad_tkmath::math::Svd::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_TrigonometricFunctionRoots&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_TrigonometricFunctionRoots.lxx",
+      "rust_item": "rustycad_tkmath::math::TrigonometricRoots::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const math_Uzawa&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Uzawa.lxx",
+      "rust_item": "rustycad_tkmath::math::Uzawa::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Free operator<< forwards to Dump(o); Rust Display::fmt forwards to dump with the same text."
+    },
+    {
+      "upstream_id": "operator*(double,const math_Matrix&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_Matrix.lxx",
+      "rust_item": "rustycad_tkmath::math::Matrix::multiplied",
+      "status": "implemented",
+      "notes": "Free operator*(Left, Mat) returns Mat.Multiplied(Left); Rust Matrix::multiplied."
     },
     {
       "upstream_id": "OSD_MemInfo::hasValue(const OSD_MemInfo::Counter) const",
