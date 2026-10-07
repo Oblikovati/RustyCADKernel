@@ -104,10 +104,7 @@ mod hash_policy;
 pub use hash_policy::{DefaultHashPolicy, HashKey, HashPolicy, buckets_from_int, next_map_prime};
 mod base_map;
 pub use base_map::{
-    BaseDoubleMapResize, BaseDoubleMapStorage, BaseIndexedMapStorage, BaseMap,
-    BaseMapBasicIterator, BaseMapBucketIterator, BaseMapIndexedIterator, BaseMapResize,
-    BaseMapStorage, BasicMapIteratorSource, BasicMapNode, BasicMapNodeMut, IndexedCursorSource,
-    IndexedCursorSourceMut, MapLinkNode,
+    BaseMap, BaseMapIndexedIterator, IndexedCursorSource, IndexedCursorSourceMut, MapLinkNode,
 };
 mod chained_slots;
 mod slot_chains;

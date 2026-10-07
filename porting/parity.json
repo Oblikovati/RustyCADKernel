@@ -328741,9 +328741,9 @@
       "upstream_id": "NCollection_BaseMap::Iterator::Iterator() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator",
       "status": "excluded",
-      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on BaseMapBucketIterator; the cursor state and its protected stepping are private to it and to each map cursor."
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on each map cursor; the cursor state and its protected stepping are private to it and to each map cursor."
     },
     {
       "upstream_id": "NCollection_BaseMap::NextPrimeForMap(const size_t) const noexcept",
@@ -328757,9 +328757,9 @@
       "upstream_id": "NCollection_BaseMap::NbBuckets() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::base_map::BaseMap>::nb_buckets",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::nb_buckets",
       "status": "partial",
-      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "BaseMap trait query, implemented by every hashed map (DataMap, Map, DoubleMap, IndexedMap, IndexedDataMap, OrderedMap, OrderedDataMap)."
     },
     {
       "upstream_id": "NCollection_BaseMap::Length() const noexcept",
@@ -328767,23 +328767,23 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::BaseMap::length",
       "status": "partial",
-      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "BaseMap trait query, implemented by every hashed map (DataMap, Map, DoubleMap, IndexedMap, IndexedDataMap, OrderedMap, OrderedDataMap)."
     },
     {
       "upstream_id": "NCollection_BaseMap::Iterator::Reset() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::reset",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator::reset",
       "status": "partial",
-      "notes": "Legacy borrowed-table cursor preserves bucket+node identity, reset and exhausted allocated-state behavior. Table cannot be resized while borrowed. Raw node traversal requires valid readable nodes; arbitrary native invalidation, subclass ABI and noexcept termination are outside scope. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "Public member of the base iterator, reached in C++ only through a map's derived Iterator; Rust gives it to each map cursor (reset on DataMapIterator, and the same method on the cursors of the other hashed maps), typed per map rather than over any BaseMap."
     },
     {
       "upstream_id": "NCollection_BaseMap::Iterator::pNext() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator",
       "status": "excluded",
-      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on BaseMapBucketIterator; the cursor state and its protected stepping are private to it and to each map cursor."
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on each map cursor; the cursor state and its protected stepping are private to it and to each map cursor."
     },
     {
       "upstream_id": "NCollection_BaseMap::Resizable() const noexcept",
@@ -328823,7 +328823,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::BaseMap::is_empty",
       "status": "partial",
-      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "BaseMap trait query, implemented by every hashed map (DataMap, Map, DoubleMap, IndexedMap, IndexedDataMap, OrderedMap, OrderedDataMap)."
     },
     {
       "upstream_id": "NCollection_BaseMap::EndResize(const size_t,const size_t,NCollection_ListNode **,NCollection_ListNode **) noexcept",
@@ -328845,9 +328845,9 @@
       "upstream_id": "NCollection_BaseMap::Buckets() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::buckets",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::buckets",
       "status": "partial",
-      "notes": "Returns actual const/mutable table pointer with native null state. Raw node chains remain caller-owned; pointer provenance, valid live nodes and alias obligations apply. No unrelated C++ object-layout reinterpretation claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "Public bucket table as a safe view (HashBucketTable: table identity, NbBuckets()+1 heads, each chain in native order, None where native returns null) on every hashed map (DataMap::buckets shown; Map, DoubleMap, IndexedMap, IndexedDataMap, OrderedMap and OrderedDataMap have the same method)."
     },
     {
       "upstream_id": "NCollection_BaseMap::Increment() noexcept",
@@ -328861,17 +328861,17 @@
       "upstream_id": "NCollection_BaseMap::Iterator::IsEqual(const NCollection_BaseMap::Iterator &) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::is_equal",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator::is_equal",
       "status": "partial",
-      "notes": "Legacy borrowed-table cursor preserves bucket+node identity, reset and exhausted allocated-state behavior. Table cannot be resized while borrowed. Raw node traversal requires valid readable nodes; arbitrary native invalidation, subclass ABI and noexcept termination are outside scope. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "Public member of the base iterator, reached in C++ only through a map's derived Iterator; Rust gives it to each map cursor (is_equal on DataMapIterator, and the same method on the cursors of the other hashed maps), typed per map rather than over any BaseMap."
     },
     {
       "upstream_id": "NCollection_BaseMap::Allocator() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::base_map::BaseMap>::allocator",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::allocator",
       "status": "partial",
-      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "BaseMap trait query, implemented by every hashed map (DataMap, Map, DoubleMap, IndexedMap, IndexedDataMap, OrderedMap, OrderedDataMap)."
     },
     {
       "upstream_id": "NCollection_BaseMap::Decrement() noexcept",
@@ -328893,9 +328893,9 @@
       "upstream_id": "NCollection_BaseMap::Buckets() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::buckets_mut",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::buckets",
       "status": "partial",
-      "notes": "Returns actual const/mutable table pointer with native null state. Raw node chains remain caller-owned; pointer provenance, valid live nodes and alias obligations apply. No unrelated C++ object-layout reinterpretation claim. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "Public bucket table as a safe view (HashBucketTable: table identity, NbBuckets()+1 heads, each chain in native order, None where native returns null) on every hashed map (DataMap::buckets shown; Map, DoubleMap, IndexedMap, IndexedDataMap, OrderedMap and OrderedDataMap have the same method). The mutable table is not offered: writing raw heads would rewire the map behind its owner (plan D1 class B5)."
     },
     {
       "upstream_id": "NCollection_BaseMap::Destroy",
@@ -328917,9 +328917,9 @@
       "upstream_id": "NCollection_BaseMap::Size() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::base_map::BaseMap>::size",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap::size",
       "status": "partial",
-      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "BaseMap trait query, implemented by every hashed map (DataMap, Map, DoubleMap, IndexedMap, IndexedDataMap, OrderedMap, OrderedDataMap)."
     },
     {
       "upstream_id": "NCollection_BaseMap::decrement() noexcept",
@@ -328933,9 +328933,9 @@
       "upstream_id": "NCollection_BaseMap::Iterator::pMore() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator",
       "status": "excluded",
-      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on BaseMapBucketIterator; the cursor state and its protected stepping are private to it and to each map cursor."
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on each map cursor; the cursor state and its protected stepping are private to it and to each map cursor."
     },
     {
       "upstream_id": "NCollection_BaseMap::Extent() const noexcept",
@@ -328943,15 +328943,15 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::BaseMap::extent",
       "status": "partial",
-      "notes": "Actual BaseMapStorage trait bodies and BaseMap default query bodies expose bucket modulus, count, narrowed int extent/length and attached allocator. Storage adapter ownership and trait composition do not imply arbitrary C++ class layout/inheritance or full derived-map parity. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "BaseMap trait query, implemented by every hashed map (DataMap, Map, DoubleMap, IndexedMap, IndexedDataMap, OrderedMap, OrderedDataMap)."
     },
     {
       "upstream_id": "NCollection_BaseMap::Iterator::Iterator(const NCollection_BaseMap &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator",
       "status": "excluded",
-      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on BaseMapBucketIterator; the cursor state and its protected stepping are private to it and to each map cursor."
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on each map cursor; the cursor state and its protected stepping are private to it and to each map cursor."
     },
     {
       "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(NCollection_BaseMap &&) noexcept",
@@ -328989,9 +328989,9 @@
       "upstream_id": "NCollection_BaseMap::Iterator::Initialize(const NCollection_BaseMap &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::initialize",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator::initialize",
       "status": "partial",
-      "notes": "Legacy borrowed-table cursor preserves bucket+node identity, reset and exhausted allocated-state behavior. Table cannot be resized while borrowed. Raw node traversal requires valid readable nodes; arbitrary native invalidation, subclass ABI and noexcept termination are outside scope. Inherited native/Rust evidence: porting/audits/base-map-storage-method-contracts.json."
+      "notes": "Public member of the base iterator, reached in C++ only through a map's derived Iterator; Rust gives it to each map cursor (initialize on DataMapIterator, and the same method on the cursors of the other hashed maps), typed per map rather than over any BaseMap."
     },
     {
       "upstream_id": "NCollection_BaseMap::nextPrimeForMap(const size_t) const noexcept",
@@ -383649,7 +383649,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Node deleter function-pointer typedef; Rust BaseMapStorage::destroy takes the deleter as impl FnMut(*mut MapLinkNode, &mut BaseAllocator), so no named alias exists."
+      "notes": "Node deleter function-pointer typedef of the protected destroy protocol (plan D1 class B6); each Rust map drops its own entries in clear and Drop, so no named alias exists."
     },
     {
       "upstream_id": "NCollection_BaseMap::myData1",
@@ -383687,17 +383687,17 @@
       "upstream_id": "NCollection_BaseMap::Iterator::myNode",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator",
       "status": "excluded",
-      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on BaseMapBucketIterator; the cursor state and its protected stepping are private to it and to each map cursor."
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on each map cursor; the cursor state and its protected stepping are private to it and to each map cursor."
     },
     {
       "upstream_id": "NCollection_BaseMap::Iterator::myBucket",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator",
       "status": "excluded",
-      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on BaseMapBucketIterator; the cursor state and its protected stepping are private to it and to each map cursor."
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseMap. Rust has no subclassing, so a Rust caller cannot reach it; the state stays private in each map. The public Initialize, Reset and IsEqual rows stay on each map cursor; the cursor state and its protected stepping are private to it and to each map cursor."
     },
     {
       "upstream_id": "NCollection_BaseMap::Iterator::myNbBuckets",
@@ -383705,7 +383705,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Protected copy of the bucket count; private state of BaseMapBucketIterator captured by new/initialize."
+      "notes": "Protected copy of the bucket count; private state of each map cursor (for example DataMapIterator), captured when the cursor is created or initialized."
     },
     {
       "upstream_id": "NCollection_BaseMap::Iterator::myBuckets",
@@ -383713,7 +383713,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Protected copy of the bucket table pointer; private state of BaseMapBucketIterator captured by new/initialize."
+      "notes": "Protected copy of the bucket table pointer; private state of each map cursor (for example DataMapIterator), captured when the cursor is created or initialized."
     },
     {
       "upstream_id": "NCollection_BaseMap::BasicIterator",
@@ -383751,9 +383751,9 @@
       "upstream_id": "NCollection_BaseMap::Iterator",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
-      "status": "implemented",
-      "notes": "Class record: NCollection_BaseMap::Iterator is ported as the type rustycad_tkernel::ncollection::BaseMapBucketIterator; each member is mapped by its own row."
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): NCollection_BaseMap::Iterator has only protected constructors, so it exists in C++ only as the base of each map's Iterator. Rust has no subclassing; each map cursor (DataMapIterator, MapIterator, DoubleMapIterator, IndexedMapIterator, OrderedMapIter, ...) carries its Initialize, Reset and IsEqual."
     },
     {
       "upstream_id": "NCollection_BaseMap",
@@ -383761,17 +383761,16 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::BaseMap",
       "rust_items": [
-        "rustycad_tkernel::ncollection::BaseMap",
-        "rustycad_tkernel::ncollection::BaseMapStorage"
+        "rustycad_tkernel::ncollection::BaseMap"
       ],
       "status": "implemented",
-      "notes": "Class record: the C++ class NCollection_BaseMap is split into trait rustycad_tkernel::ncollection::BaseMap (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkernel::ncollection::BaseMapStorage (its shared state); each member is mapped by its own row."
+      "notes": "Class record: the C++ class NCollection_BaseMap is the trait rustycad_tkernel::ncollection::BaseMap (its public queries, reached as &dyn BaseMap); its protected shared state (bucket table, counts, allocator) is private slot storage in each hashed map (plan D1 class B6). Each member is mapped by its own row."
     },
     {
       "upstream_id": "NCollection_BaseMap::BasicIterator::operator=",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
+      "rust_item": "rustycad_tkernel::ncollection::DataMapIterator",
       "status": "excluded",
       "notes": "Excluded: SFINAE-enabled converting assignment from the mutable to the const iterator of the same map. Rust iterators borrow the map shared or exclusive; a shared iterator is created directly and no mutable-to-const conversion exists (a C++ type trait mechanism, plan D1 class B4).",
       "cpp_selector": {
@@ -383782,9 +383781,9 @@
       "upstream_id": "NCollection_BaseMap::~NCollection_BaseMap",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap",
       "status": "excluded",
-      "notes": "Excluded: the C++ destructor body only releases storage the object owns (Standard::Free of the bucket array). Rust ncollection::BaseMapStorage owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
+      "notes": "Excluded: the C++ destructor body only releases storage the object owns (Standard::Free of the bucket array). Rust ncollection::DataMap owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
     },
     {
       "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(const NCollection_BaseMap&)",
@@ -384424,121 +384423,121 @@
       "upstream_id": "NCollection_BaseIndexedMap",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage",
-      "status": "implemented",
-      "notes": "Base class of indexed maps is the extension storage BaseIndexedMapStorage."
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseIndexedMap. Rust has no subclassing, so a Rust caller cannot reach it; IndexedMap (and IndexedDataMap) keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseIndexedMap::NCollection_BaseIndexedMap(const size_t,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::new",
-      "status": "implemented",
-      "notes": "Protected constructor: bucket count and optional allocator, tables unallocated."
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseIndexedMap. Rust has no subclassing, so a Rust caller cannot reach it; IndexedMap (and IndexedDataMap) keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseIndexedMap::clearIndexTable(const bool) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::clear_index_table",
-      "status": "implemented",
-      "notes": "Protected index-table clear with optional release."
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseIndexedMap. Rust has no subclassing, so a Rust caller cannot reach it; IndexedMap (and IndexedDataMap) keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseIndexedMap::exchangeIndexedMapsData(NCollection_BaseIndexedMap&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::exchange",
-      "status": "implemented",
-      "notes": "Protected swap of both tables, counts and allocator."
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseIndexedMap. Rust has no subclassing, so a Rust caller cannot reach it; IndexedMap (and IndexedDataMap) keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseIndexedMap::resizeIndexTable(const size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::resize_index_table",
-      "status": "implemented",
-      "notes": "Protected index-table reallocation keeping the native prefix; allocation failure (native Standard_OutOfMemory) is a Failure result."
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseIndexedMap. Rust has no subclassing, so a Rust caller cannot reach it; IndexedMap (and IndexedDataMap) keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseIndexedMap::myData2",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::index_buckets",
-      "status": "implemented",
-      "notes": "Protected index table pointer; read through index_buckets() (index_buckets_mut/index_slots for writes)."
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseIndexedMap. Rust has no subclassing, so a Rust caller cannot reach it; IndexedMap (and IndexedDataMap) keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseIndexedMap::~NCollection_BaseIndexedMap",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap",
       "status": "excluded",
-      "notes": "Excluded: the C++ destructor body only releases storage the object owns (Standard::Free of the index-to-node table). Rust ncollection::BaseMapStorage owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
+      "notes": "Excluded: the C++ destructor body only releases storage the object owns (Standard::Free of the index-to-node table). Rust ncollection::IndexedMap owns the same storage in Vec/Box/Arc values that drop glue releases when the owner goes out of scope, so the observable effect is equal and no callable counterpart exists."
     },
     {
       "upstream_id": "NCollection_BaseDoubleMap",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage",
-      "status": "implemented",
-      "notes": "Base class of double maps is the storage BaseDoubleMapStorage."
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseDoubleMap. Rust has no subclassing, so a Rust caller cannot reach it; DoubleMap keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseDoubleMap::NCollection_BaseDoubleMap(const size_t,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::new",
-      "status": "implemented",
-      "notes": "Protected constructor: bucket count and optional allocator, both tables unallocated."
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseDoubleMap. Rust has no subclassing, so a Rust caller cannot reach it; DoubleMap keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseDoubleMap::beginResize(const size_t,size_t&,NCollection_ListNode**&,NCollection_ListNode**&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::begin_resize",
-      "status": "partial",
-      "notes": "Protected resize start. The native out-parameters (new bucket count, two new tables) become one BaseDoubleMapResize plan (bucket_count, slots); allocation failure is a Failure result."
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseDoubleMap. Rust has no subclassing, so a Rust caller cannot reach it; DoubleMap keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseDoubleMap::endResize(const size_t,const size_t,NCollection_ListNode**,NCollection_ListNode**) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::end_resize",
-      "status": "partial",
-      "notes": "Protected resize commit; takes the BaseDoubleMapResize plan instead of the loose count and table pointers."
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseDoubleMap. Rust has no subclassing, so a Rust caller cannot reach it; DoubleMap keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseDoubleMap::destroy(NCollection_DelMapNode,bool)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::destroy",
-      "status": "implemented",
-      "notes": "Protected destroy through the first table, clearing the second; unsafe with the live acyclic chain contract of BaseMapStorage::destroy."
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseDoubleMap. Rust has no subclassing, so a Rust caller cannot reach it; DoubleMap keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseDoubleMap::exchangeDoubleMapsData(NCollection_BaseDoubleMap&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::exchange",
-      "status": "implemented",
-      "notes": "Protected swap of the contiguous tables and common state."
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseDoubleMap. Rust has no subclassing, so a Rust caller cannot reach it; DoubleMap keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseDoubleMap::myData2",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::second_buckets",
-      "status": "implemented",
-      "notes": "Protected second table pointer; read through second_buckets() (second_buckets_mut/second_slots for writes)."
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of the C++ base class NCollection_BaseDoubleMap. Rust has no subclassing, so a Rust caller cannot reach it; DoubleMap keeps the state privately in its safe slot storage (2026-10-07) and exposes the behaviour through its public methods."
     },
     {
       "upstream_id": "NCollection_BaseDoubleMap::~NCollection_BaseDoubleMap() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage",
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
       "status": "excluded",
-      "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkernel::ncollection::BaseDoubleMapStorage needs no callable counterpart.",
+      "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkernel::ncollection::DoubleMap needs no callable counterpart.",
       "cpp_declaration_id": "3c4631bd3ab28c5c37ae7a0a6c7565f7fdb655cc3e0e853ff297c048a3ce9ef5",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
