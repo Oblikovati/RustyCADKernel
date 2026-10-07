@@ -3,6 +3,8 @@
 //! traits over embedded bases; the native overrides inherited by many classes are
 //! functions (`extract_root_result`, `deduct_fill_iterator`...) or macros
 //! (`impl_extract_selection!`) the implementations call.
+mod act;
+mod activator;
 mod context_modif;
 mod context_write;
 mod dispatch;
@@ -26,6 +28,8 @@ mod modifier_tests;
 mod modifiers;
 mod packet_list;
 mod param_editor;
+#[cfg(test)]
+mod pilot_tests;
 mod select_bases;
 mod select_chains;
 mod select_combine;
@@ -39,6 +43,8 @@ mod selection;
 mod selection_more_tests;
 #[cfg(test)]
 mod selection_tests;
+mod session_pilot;
+mod session_pilot_run;
 mod share_out;
 mod share_out_result;
 #[cfg(test)]
@@ -57,6 +63,8 @@ mod transform_tests;
 mod work_library;
 mod work_session;
 
+pub use act::{IFSelectAct, IFSelectActFunc};
+pub use activator::{IFSelectActivator, IFSelectActivatorBase};
 pub use context_modif::IFSelectContextModif;
 pub use context_write::IFSelectContextWrite;
 pub use dispatch::{
@@ -112,6 +120,7 @@ pub use selection::{
     IFSelectSelectBase, IFSelectSelection, IFSelectSelectionIterator, IFSelectTransformer,
     select_base_fill_iterator, selection_complete_result,
 };
+pub use session_pilot::IFSelectSessionPilot;
 pub use share_out::IFSelectShareOut;
 pub use share_out_result::IFSelectShareOutResult;
 pub use sign_counter::{
