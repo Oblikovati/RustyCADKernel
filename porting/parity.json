@@ -8325,7 +8325,7 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "BVH::MatrixType<T,4>::Type",
+      "upstream_id": "BVH::MatrixType<type-parameter-0-0, 4>::Type",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhMat4d",
@@ -8614,7 +8614,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Box::Combine(const BVH_Box&)",
+      "upstream_id": "BVH_Box::Combine(const BVH_Box<T, BVH_Box::N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::combine",
@@ -8984,15 +8984,15 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::BVH_Tree()",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::BVH_Tree<T, N, BVH_BinaryTree>()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTree::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::SetOuter(int)",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::SetOuter(const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::set_outer",
@@ -9000,7 +9000,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::SetInner(int)",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::SetInner(const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::set_inner",
@@ -9008,7 +9008,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::Clear()",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::Clear()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::clear",
@@ -9016,7 +9016,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::Reserve(int)",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::Reserve(const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::reserve",
@@ -9024,7 +9024,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddLeafNode(int,int)",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::AddLeafNode(const int,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::add_leaf_node_uninit",
@@ -9032,7 +9032,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddInnerNode(int,int)",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::AddInnerNode(const int,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::add_inner_node_uninit",
@@ -9040,7 +9040,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::EstimateSAH() const",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::EstimateSAH() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::estimate_sah",
@@ -9048,7 +9048,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::CollapseToQuadTree() const",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::CollapseToQuadTree() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::collapse_to_quad_tree",
@@ -9056,10 +9056,10 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_QuadTree>::BVH_Tree()",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1, BVH_QuadTree>::BVH_Tree<T, N, BVH_QuadTree>()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QuadTree.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTree::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9291,7 +9291,7 @@
       "upstream_id": "BVH_Triangulation::Size() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet>::size",
+      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet<V>>::size",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9299,7 +9299,7 @@
       "upstream_id": "BVH_Triangulation::Box(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet>::element_box",
+      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet<V>>::element_box",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9307,7 +9307,7 @@
       "upstream_id": "BVH_Triangulation::Center(int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet>::center",
+      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet<V>>::center",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -9315,7 +9315,7 @@
       "upstream_id": "BVH_Triangulation::Swap(int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet>::swap",
+      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet<V>>::swap",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10310,22 +10310,6 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Traverse::Select(const handle<BVH_Tree>&) (definition)",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.lxx",
-      "rust_item": "rustycad_tkmath::bvh::select_elements",
-      "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
-    },
-    {
-      "upstream_id": "BVH_PairTraverse::Select(const handle<BVH_Tree>&,const handle<BVH_Tree>&) (definition)",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.lxx",
-      "rust_item": "rustycad_tkmath::bvh::select_pairs",
-      "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
-    },
-    {
       "upstream_id": "BVH_Distance::BVH_Distance()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
@@ -10505,7 +10489,7 @@
       "upstream_id": "BVH_BoxSet::Box(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet>::element_box",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet<V>>::element_box",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10513,7 +10497,7 @@
       "upstream_id": "BVH_BoxSet::Center(int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet>::center",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet<V>>::center",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10521,7 +10505,7 @@
       "upstream_id": "BVH_BoxSet::Size() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet>::size",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet<V>>::size",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10529,7 +10513,7 @@
       "upstream_id": "BVH_BoxSet::Swap(int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet>::swap",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet<V>>::swap",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10569,7 +10553,7 @@
       "upstream_id": "BVH_IndexedBoxSet::Box(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::<rustycad_tkmath::bvh::BvhSet>::element_box",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::<rustycad_tkmath::bvh::BvhSet<V>>::element_box",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10577,7 +10561,7 @@
       "upstream_id": "BVH_IndexedBoxSet::Swap(int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::<rustycad_tkmath::bvh::BvhSet>::swap",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::<rustycad_tkmath::bvh::BvhSet<V>>::swap",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10633,7 +10617,7 @@
       "upstream_id": "BVH_ObjectSet::Size() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet>::size",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet<V>>::size",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10641,7 +10625,7 @@
       "upstream_id": "BVH_ObjectSet::Box(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet>::element_box",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet<V>>::element_box",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10649,7 +10633,7 @@
       "upstream_id": "BVH_ObjectSet::Center(int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet>::center",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet<V>>::center",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10657,7 +10641,7 @@
       "upstream_id": "BVH_ObjectSet::Swap(int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet>::swap",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet<V>>::swap",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10814,7 +10798,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::DistanceToBox(pnt,min,max)",
+      "upstream_id": "BVH::DistanceToBox(const typename BVH::VectorType<T, N>::Type&,const typename BVH::VectorType<T, N>::Type&,const typename BVH::VectorType<T, N>::Type&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
       "rust_item": "rustycad_tkmath::bvh::distance_to_box",
@@ -10822,7 +10806,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::DirectionToNearestPoint(pnt,a,b,c)",
+      "upstream_id": "BVH::DirectionToNearestPoint(const typename BVH::VectorType<T, N>::Type&,const typename BVH::VectorType<T, N>::Type&,const typename BVH::VectorType<T, N>::Type&,const typename BVH::VectorType<T, N>::Type&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
       "rust_item": "rustycad_tkmath::bvh::direction_to_nearest_point",
@@ -10865,12 +10849,12 @@
       "upstream_id": "BVH::PointTriangulationSquareDistance::Accept(int,const T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhPointTriangulationSquareDistance::<rustycad_tkmath::bvh::BvhTraverse>::accept",
+      "rust_item": "rustycad_tkmath::bvh::BvhPointTriangulationSquareDistance::<rustycad_tkmath::bvh::BvhTraverse<V>>::accept",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::SquareDistanceToObject(BVH_Object*,pnt,bool&)",
+      "upstream_id": "BVH::SquareDistanceToObject(BVH_Object<T, N>*,const typename BVH::VectorType<T, N>::Type&,bool&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
       "rust_item": "rustycad_tkmath::bvh::square_distance_to_object",
@@ -10889,12 +10873,12 @@
       "upstream_id": "BVH::PointGeometrySquareDistance::Accept(int,const T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhPointGeometrySquareDistance::<rustycad_tkmath::bvh::BvhTraverse>::accept",
+      "rust_item": "rustycad_tkmath::bvh::BvhPointGeometrySquareDistance::<rustycad_tkmath::bvh::BvhTraverse<V>>::accept",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::SquareDistanceToGeomerty(BVH_Geometry&,pnt,bool&)",
+      "upstream_id": "BVH::SquareDistanceToGeomerty(BVH_Geometry<T, N>&,const typename BVH::VectorType<T, N>::Type&,bool&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
       "rust_item": "rustycad_tkmath::bvh::square_distance_to_geometry",
@@ -29232,7 +29216,7 @@
       "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "BVH::VectorType<T,1>::Type",
+      "upstream_id": "BVH::VectorType<type-parameter-0-0, 1>::Type",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVecNt",
@@ -29256,7 +29240,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::VecComp<T,2>::Get(const BVH_Vec2t&,int)",
+      "upstream_id": "BVH::VecComp<type-parameter-0-0, 2>::Get(const BVH::VecComp<type-parameter-0-0, 2>::BVH_Vec2t&,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::component",
@@ -29280,7 +29264,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::Array::Append(BVH_ArrayNt&,const BVH::VectorType<T,N>::Type&)",
+      "upstream_id": "BVH::Array::Append(BVH::Array::BVH_ArrayNt&,const typename BVH::VectorType<T, BVH::Array::N>::Type&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::array::append",
@@ -29312,7 +29296,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::VectorType<T,2>::Type",
+      "upstream_id": "BVH::VectorType<type-parameter-0-0, 2>::Type",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVecNt",
@@ -29320,7 +29304,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::VectorType<T,3>::Type",
+      "upstream_id": "BVH::VectorType<type-parameter-0-0, 3>::Type",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVecNt",
@@ -29328,7 +29312,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::VectorType<T,4>::Type",
+      "upstream_id": "BVH::VectorType<type-parameter-0-0, 4>::Type",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVecNt",
@@ -29368,7 +29352,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::VecComp<T,3>::Get(const BVH_Vec3t&,int)",
+      "upstream_id": "BVH::VecComp<type-parameter-0-0, 3>::Get(const BVH::VecComp<type-parameter-0-0, 3>::BVH_Vec3t&,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::component",
@@ -29376,7 +29360,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::VecComp<T,4>::Get(const BVH_Vec4t&,int)",
+      "upstream_id": "BVH::VecComp<type-parameter-0-0, 4>::Get(const BVH::VecComp<type-parameter-0-0, 4>::BVH_Vec4t&,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::component",
@@ -29384,7 +29368,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Box::IsOut(const BVH_Box<T,N>&) const",
+      "upstream_id": "BVH_Box::IsOut(const BVH_Box<T, BVH_Box::N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::is_out",
@@ -29392,7 +29376,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Box::Contains(const BVH_Box<T,N>&,bool&) const",
+      "upstream_id": "BVH_Box::Contains(const BVH_Box<T, BVH_Box::N>&,bool&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::contains",
@@ -29400,7 +29384,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BaseBox<T,3,BVH_Box>::Transform(const NCollection_Mat4<T>&)",
+      "upstream_id": "BVH_BaseBox<type-parameter-0-0, 3, BVH_Box>::Transform(const NCollection_Mat4<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::transform",
@@ -29408,7 +29392,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BaseBox<T,3,BVH_Box>::Transformed(const NCollection_Mat4<T>&) const",
+      "upstream_id": "BVH_BaseBox<type-parameter-0-0, 3, BVH_Box>::Transformed(const NCollection_Mat4<T>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::transformed",
@@ -29416,7 +29400,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::CenterAxis::Center(const BVH_Box<T,N>&,int)",
+      "upstream_id": "BVH::CenterAxis::Center(const BVH_Box<T, BVH::CenterAxis::N>&,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::center_axis",
@@ -29424,7 +29408,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::SurfaceCalculator::Area(const BVH_Box<T,N>::BVH_VecNt&)",
+      "upstream_id": "BVH::SurfaceCalculator::Area(const typename BVH_Box<T, BVH::SurfaceCalculator::N>::BVH_VecNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::surface_area",
@@ -29448,7 +29432,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::BoxBoxSquareDistance(const BVH_Box<T,N>&,const BVH_Box<T,N>&)",
+      "upstream_id": "BVH_Tools::BoxBoxSquareDistance(const BVH_Box<T, BVH_Tools::N>&,const BVH_Box<T, BVH_Tools::N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::box_box_square_distance",
@@ -29464,7 +29448,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::PointBoxSquareDistance(const BVH_VecNt&,const BVH_Box<T,N>&)",
+      "upstream_id": "BVH_Tools::PointBoxSquareDistance(const BVH_Tools::BVH_VecNt&,const BVH_Box<T, BVH_Tools::N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::point_box_square_distance",
@@ -29480,7 +29464,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::PointBoxProjection(const BVH_VecNt&,const BVH_Box<T,N>&)",
+      "upstream_id": "BVH_Tools::PointBoxProjection(const BVH_Tools::BVH_VecNt&,const BVH_Box<T, BVH_Tools::N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::point_box_projection",
@@ -29496,7 +29480,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::PointTriangleProjection(const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,BVH_PrjStateInTriangle*,int*,int*)",
+      "upstream_id": "BVH_Tools::PointTriangleProjection(const BVH_Tools::BVH_VecNt&,const BVH_Tools::BVH_VecNt&,const BVH_Tools::BVH_VecNt&,const BVH_Tools::BVH_VecNt&,BVH_Tools::BVH_PrjStateInTriangle*,int*,int*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::point_triangle_projection",
@@ -29512,7 +29496,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_Ray<T,N>&,const BVH_Box<T,N>&,T&,T&)",
+      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_Ray<T, BVH_Tools::N>&,const BVH_Box<T, BVH_Tools::N>&,T&,T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::ray_box_intersection",
@@ -29520,7 +29504,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_Ray<T,N>&,const BVH_VecNt&,const BVH_VecNt&,T&,T&)",
+      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_Ray<T, BVH_Tools::N>&,const BVH_Tools::BVH_VecNt&,const BVH_Tools::BVH_VecNt&,T&,T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::ray_box_intersection_by_corners",
@@ -29528,7 +29512,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_VecNt&,const BVH_VecNt&,const BVH_Box<T,N>&,T&,T&)",
+      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_Tools::BVH_VecNt&,const BVH_Tools::BVH_VecNt&,const BVH_Box<T, BVH_Tools::N>&,T&,T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::ray_box_intersection_by_direction",
@@ -29560,15 +29544,149 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::Child(int) const",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::Child(const int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::child",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::bvh::BvhTree::child",
+          "declaration_sha256": "e19041de16268f6b5cb0f7e915e4a9e946481d33ee26bd8b68c6e09e61769851",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "V"
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "super::BvhBinaryTree",
+                            "resolved_item_path": "rustycad_tkmath::bvh::tree::BvhBinaryTree"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BvhTree",
+                "resolved_item_path": "rustycad_tkmath::bvh::tree::BvhTree"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BvhVector",
+                              "resolved_item_path": "rustycad_tkmath::bvh::vector::BvhVector"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "V"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::Child(int)",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::Child(const int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree::child_mut",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::bvh::BvhTree::child_mut",
+          "declaration_sha256": "bf5696c9933c74669020bdad7f3d90c21cf85f6c2c27a6408c907477dfab66ae",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "V"
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "super::BvhBinaryTree",
+                            "resolved_item_path": "rustycad_tkmath::bvh::tree::BvhBinaryTree"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BvhTree",
+                "resolved_item_path": "rustycad_tkmath::bvh::tree::BvhTree"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BvhVector",
+                              "resolved_item_path": "rustycad_tkmath::bvh::vector::BvhVector"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "V"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::ChangeChild(const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::child_mut",
@@ -29576,15 +29694,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::ChangeChild(int)",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTree::child_mut",
-      "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
-    },
-    {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddLeafNode(const BVH_VecNt&,const BVH_VecNt&,int,int)",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::AddLeafNode(const BVH_Tree<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt&,const BVH_Tree<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt&,const int,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::add_leaf_node",
@@ -29592,7 +29702,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddInnerNode(const BVH_VecNt&,const BVH_VecNt&,int,int)",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::AddInnerNode(const BVH_Tree<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt&,const BVH_Tree<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt&,const int,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::add_inner_node",
@@ -29600,7 +29710,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddLeafNode(const BVH_Box<T,N>&,int,int)",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::AddLeafNode(const BVH_Box<T, BVH_Tree<type-parameter-0-0, value-parameter-0-1, struct BVH_BinaryTree>::N>&,const int,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::add_leaf_node_box",
@@ -29608,7 +29718,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddInnerNode(const BVH_Box<T,N>&,int,int)",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::AddInnerNode(const BVH_Box<T, BVH_Tree<type-parameter-0-0, value-parameter-0-1, struct BVH_BinaryTree>::N>&,const int,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::add_inner_node_box",
@@ -29624,15 +29734,78 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_QuadTree>::Child(int) const",
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1, BVH_QuadTree>::Child(const int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QuadTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::child",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::bvh::BvhTree::child",
+          "declaration_sha256": "78ae6e13a3be10dd8739c8f873ed6b54134410c516b8a3c8336ba0e61b49ec7d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "V"
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "super::BvhQuadTree",
+                            "resolved_item_path": "rustycad_tkmath::bvh::tree::BvhQuadTree"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BvhTree",
+                "resolved_item_path": "rustycad_tkmath::bvh::tree::BvhTree"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BvhVector",
+                              "resolved_item_path": "rustycad_tkmath::bvh::vector::BvhVector"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "V"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
-      "upstream_id": "BVH_Transform::Apply(const BVH_Box<T,N>&) const",
+      "upstream_id": "BVH_Transform::Apply(const BVH_Box<T, BVH_Transform::N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTransform::apply",
@@ -29640,7 +29813,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,3>::DX()",
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 3>::DX()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_x",
@@ -29648,7 +29821,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,3>::DY()",
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 3>::DY()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_y",
@@ -29656,7 +29829,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,3>::DZ()",
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 3>::DZ()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_z",
@@ -29664,7 +29837,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,2>::DX()",
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 2>::DX()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_x",
@@ -29672,7 +29845,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,2>::DY()",
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 2>::DY()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_y",
@@ -29680,7 +29853,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,2>::DZ()",
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 2>::DZ()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_z",
@@ -29688,7 +29861,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,4>::DX()",
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 4>::DX()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_x",
@@ -29696,7 +29869,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,4>::DY()",
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 4>::DY()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_y",
@@ -29704,7 +29877,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,4>::DZ()",
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 4>::DZ()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_z",
@@ -29712,7 +29885,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::MatrixOp<T,4>::Inverse(const BVH_Mat4t&,BVH_Mat4t&)",
+      "upstream_id": "BVH::MatrixOp<type-parameter-0-0, 4>::Inverse(const BVH::MatrixOp<type-parameter-0-0, 4>::BVH_Mat4t&,BVH::MatrixOp<type-parameter-0-0, 4>::BVH_Mat4t&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::matrix_op_inverse",
@@ -29720,7 +29893,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::MatrixOp<T,4>::Multiply(const BVH_Mat4t&,const BVH_Vec4t&)",
+      "upstream_id": "BVH::MatrixOp<type-parameter-0-0, 4>::Multiply(const BVH::MatrixOp<type-parameter-0-0, 4>::BVH_Mat4t&,const BVH::MatrixOp<type-parameter-0-0, 4>::BVH_Vec4t&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::matrix_op_multiply",
@@ -29763,7 +29936,7 @@
       "upstream_id": "BVH_Object()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhObjectTransient::default",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectTransient::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending. BVH_Object() runs the protected BVH_ObjectTransient() (myIsDirty = false, null properties); implementors embed a default BvhObjectTransient."
     },
@@ -29800,7 +29973,7 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_PrimitiveSet(const opencascade::handle<BVH_Builder<T,N>>&)",
+      "upstream_id": "BVH_PrimitiveSet(const opencascade::handle<BVH_Builder<T, BVH_PrimitiveSet::N>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSet::new",
@@ -29808,7 +29981,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_PrimitiveSet::SetBuilder(const opencascade::handle<BVH_Builder<T,N>>&)",
+      "upstream_id": "BVH_PrimitiveSet::SetBuilder(const opencascade::handle<BVH_Builder<T, BVH_PrimitiveSet::N>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSetAccess::set_builder",
@@ -29824,7 +29997,7 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_Triangulation(const opencascade::handle<BVH_Builder<T,N>>&)",
+      "upstream_id": "BVH_Triangulation(const opencascade::handle<BVH_Builder<T, BVH_Triangulation::N>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::new",
@@ -29840,7 +30013,7 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_Sorter::Perform(BVH_Set<T,N>*)",
+      "upstream_id": "BVH_Sorter::Perform(BVH_Set<T, BVH_Sorter::N>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Sorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhSorter::perform",
@@ -29848,7 +30021,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Sorter::Perform(BVH_Set<T,N>*,int,int)",
+      "upstream_id": "BVH_Sorter::Perform(BVH_Set<T, BVH_Sorter::N>*,const int,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Sorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhSorter::perform_range",
@@ -29872,7 +30045,7 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_QuickSorter::Perform(BVH_Set<T,N>*)",
+      "upstream_id": "BVH_QuickSorter::Perform(BVH_Set<T, BVH_QuickSorter::N>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QuickSorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhSorter::perform",
@@ -29880,10 +30053,10 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_QuickSorter::Perform(BVH_Set<T,N>*,int,int)",
+      "upstream_id": "BVH_QuickSorter::Perform(BVH_Set<T, BVH_QuickSorter::N>*,const int,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QuickSorter.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhQuickSorter::<rustycad_tkmath::bvh::BvhSorter>::perform_range",
+      "rust_item": "rustycad_tkmath::bvh::BvhQuickSorter::<rustycad_tkmath::bvh::BvhSorter<V>>::perform_range",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -29896,7 +30069,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_RadixSorter(const BVH_Box<T,N>&)",
+      "upstream_id": "BVH_RadixSorter(const BVH_Box<T, BVH_RadixSorter::N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhRadixSorter::new",
@@ -29904,7 +30077,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_RadixSorter::Perform(BVH_Set<T,N>*)",
+      "upstream_id": "BVH_RadixSorter::Perform(BVH_Set<T, BVH_RadixSorter::N>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhSorter::perform",
@@ -29912,10 +30085,10 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_RadixSorter::Perform(BVH_Set<T,N>*,int,int)",
+      "upstream_id": "BVH_RadixSorter::Perform(BVH_Set<T, BVH_RadixSorter::N>*,const int,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhRadixSorter::<rustycad_tkmath::bvh::BvhSorter>::perform_range",
+      "rust_item": "rustycad_tkmath::bvh::BvhRadixSorter::<rustycad_tkmath::bvh::BvhSorter<V>>::perform_range",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -29936,7 +30109,7 @@
       "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
     },
     {
-      "upstream_id": "BVH_Builder::Build(BVH_Set<T,N>*,BVH_Tree<T,N>*,const BVH_Box<T,N>&) const",
+      "upstream_id": "BVH_Builder::Build(BVH_Set<T, BVH_Builder::N>*,BVH_Tree<T, BVH_Builder::N>*,const BVH_Box<T, BVH_Builder::N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBuilder::build",
@@ -29944,7 +30117,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Builder::updateDepth(BVH_Tree<T,N>*,int) const",
+      "upstream_id": "BVH_Builder::updateDepth(BVH_Tree<T, BVH_Builder::N>*,const int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
       "rust_item": "rustycad_tkmath::bvh::update_depth",
@@ -29960,7 +30133,7 @@
       "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
     },
     {
-      "upstream_id": "BVH_QueueBuilder::Build(BVH_Set<T,N>*,BVH_Tree<T,N>*,const BVH_Box<T,N>&) const",
+      "upstream_id": "BVH_QueueBuilder::Build(BVH_Set<T, BVH_QueueBuilder::N>*,BVH_Tree<T, BVH_QueueBuilder::N>*,const BVH_Box<T, BVH_QueueBuilder::N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::queue_build",
@@ -29968,7 +30141,7 @@
       "notes": "The root, queue, child registration, and serial execution path match the source. For configured worker counts above one, current Rust TypedBuildTool holds one Mutex across the entire mutable build_node/add_children callback, so all node splits are serialized. Native starts myNumOfThreads workers and the pinned two-child barrier probe reaches two simultaneous callbacks; see tools/oracle/tkmath_bvh_queue_parallelism.md. Mutable-only BvhSet/BvhTree implementations remain serial until a separate safe shared-set builder contract is available."
     },
     {
-      "upstream_id": "BVH_QueueBuilder::buildNode(BVH_Set<T,N>*,BVH_Tree<T,N>*,int) const",
+      "upstream_id": "BVH_QueueBuilder::buildNode(BVH_Set<T, BVH_QueueBuilder::N>*,BVH_Tree<T, BVH_QueueBuilder::N>*,const int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhQueueBuilder::build_node",
@@ -29976,7 +30149,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_QueueBuilder::addChildren(BVH_Tree<T,N>*,BVH_BuildQueue&,int,const BVH_ChildNodes&) const",
+      "upstream_id": "BVH_QueueBuilder::addChildren(BVH_Tree<T, BVH_QueueBuilder::N>*,BVH_BuildQueue&,const int,const BVH_QueueBuilder::BVH_ChildNodes&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhQueueBuilder::add_children",
@@ -29984,7 +30157,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_QueueBuilder::BVH_ChildNodes::BVH_ChildNodes(const BVH_Box<T,N>&,const BVH_Box<T,N>&,const BVH_PrimitiveRange&,const BVH_PrimitiveRange&)",
+      "upstream_id": "BVH_QueueBuilder::BVH_ChildNodes::BVH_ChildNodes(const BVH_Box<T, BVH_QueueBuilder::N>&,const BVH_Box<T, BVH_QueueBuilder::N>&,const BVH_QueueBuilder::BVH_PrimitiveRange&,const BVH_QueueBuilder::BVH_PrimitiveRange&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhChildNodes::new",
@@ -30000,15 +30173,15 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_BinnedBuilder::buildNode(BVH_Set<T,N>*,BVH_Tree<T,N>*,int) const",
+      "upstream_id": "BVH_BinnedBuilder::buildNode(BVH_Set<T, BVH_BinnedBuilder::N>*,BVH_Tree<T, BVH_BinnedBuilder::N>*,const int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBinnedBuilder::<rustycad_tkmath::bvh::BvhQueueBuilder>::build_node",
+      "rust_item": "rustycad_tkmath::bvh::BvhBinnedBuilder::<rustycad_tkmath::bvh::BvhQueueBuilder<V>>::build_node",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BinnedBuilder::getSubVolumes(BVH_Set<T,N>*,BVH_Tree<T,N>*,int,BVH_BinVector&,int) const",
+      "upstream_id": "BVH_BinnedBuilder::getSubVolumes(BVH_Set<T, BVH_BinnedBuilder::N>*,BVH_Tree<T, BVH_BinnedBuilder::N>*,const int,BVH_BinnedBuilder::BVH_BinVector&,const int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::get_sub_volumes",
@@ -30032,7 +30205,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::BVH_AxisSelector<T,2>::MainAxis(const BVH_VecNt&)",
+      "upstream_id": "BVH::BVH_AxisSelector<type-parameter-0-0, 2>::MainAxis(const BVH::BVH_AxisSelector<type-parameter-0-0, 2>::BVH_VecNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::main_axis",
@@ -30048,15 +30221,15 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_LinearBuilder::Build(BVH_Set<T,N>*,BVH_Tree<T,N>*,const BVH_Box<T,N>&) const",
+      "upstream_id": "BVH_LinearBuilder::Build(BVH_Set<T, BVH_LinearBuilder::N>*,BVH_Tree<T, BVH_LinearBuilder::N>*,const BVH_Box<T, BVH_LinearBuilder::N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::<rustycad_tkmath::bvh::BvhBuilder>::build",
+      "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::<rustycad_tkmath::bvh::BvhBuilder<V>>::build",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_LinearBuilder::emitHierachy(BVH_Tree<T,N>*,const NCollection_Array1<BVH_EncodedLink>&,int,int,int,int) const",
+      "upstream_id": "BVH_LinearBuilder::emitHierachy(BVH_Tree<T, BVH_LinearBuilder::N>*,const NCollection_Array1<BVH_EncodedLink>&,const int,const int,const int,const int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::emit_hierarchy",
@@ -30072,7 +30245,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UpdateBoundTask::operator()(const BoundData<T,N>&) const",
+      "upstream_id": "BVH::UpdateBoundTask::operator()(const BVH::BoundData<T, BVH::UpdateBoundTask::N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhUpdateBoundTask::run",
@@ -30096,10 +30269,10 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_SweepPlaneBuilder::buildNode(BVH_Set<T,N>*,BVH_Tree<T,N>*,int) const",
+      "upstream_id": "BVH_SweepPlaneBuilder::buildNode(BVH_Set<T, BVH_SweepPlaneBuilder::N>*,BVH_Tree<T, BVH_SweepPlaneBuilder::N>*,const int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_SweepPlaneBuilder.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhSweepPlaneBuilder::<rustycad_tkmath::bvh::BvhQueueBuilder>::build_node",
+      "rust_item": "rustycad_tkmath::bvh::BvhSweepPlaneBuilder::<rustycad_tkmath::bvh::BvhQueueBuilder<V>>::build_node",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -30136,7 +30309,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BoxSet(const opencascade::handle<BVH_Builder<NumType,Dimension>>&)",
+      "upstream_id": "BVH_BoxSet(const opencascade::handle<BVH_Builder<NumType, BVH_BoxSet::Dimension>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::new",
@@ -30144,7 +30317,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BoxSet::Add(const DataType&,const BVH_Box<NumType,Dimension>&)",
+      "upstream_id": "BVH_BoxSet::Add(const DataType&,const BVH_Box<NumType, BVH_BoxSet::Dimension>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::add",
@@ -30152,7 +30325,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_IndexedBoxSet(const opencascade::handle<BVH_Builder<NumType,Dimension>>&)",
+      "upstream_id": "BVH_IndexedBoxSet(const opencascade::handle<BVH_Builder<NumType, BVH_IndexedBoxSet::Dimension>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::new",
@@ -30160,7 +30333,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_IndexedBoxSet::Add(const DataType&,const BVH_Box<NumType,Dimension>&)",
+      "upstream_id": "BVH_IndexedBoxSet::Add(const DataType&,const BVH_Box<NumType, BVH_IndexedBoxSet::Dimension>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::add",
@@ -30176,7 +30349,7 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_Geometry(const opencascade::handle<BVH_Builder<T,N>>&)",
+      "upstream_id": "BVH_Geometry(const opencascade::handle<BVH_Builder<T, BVH_Geometry::N>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhGeometry::new",
@@ -30184,7 +30357,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Geometry::SetBuilder(const opencascade::handle<BVH_Builder<T,N>>&)",
+      "upstream_id": "BVH_Geometry::SetBuilder(const opencascade::handle<BVH_Builder<T, BVH_Geometry::N>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhGeometry::set_builder",
@@ -30200,7 +30373,7 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_DistanceField::Build(BVH_Geometry<T,N>&)",
+      "upstream_id": "BVH_DistanceField::Build(BVH_Geometry<T, BVH_DistanceField::N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::build",
@@ -30208,7 +30381,7 @@
       "notes": "Clean prebuilt BVH parallel execution is source-tested, and dirty-tree requests fall back to the native serial traversal. Pinned native parallel probes on dirty lazy-BVH inputs crashed, timed out, or produced one differing voxel result, so exact dirty-tree parallel behavior remains unsupported rather than being treated as parity. See porting/audits/tkmath-distance-field-parallel.json and its 48-case receipt."
     },
     {
-      "upstream_id": "BVH_DistanceField::BuildSlices(BVH_Geometry<T,N>&,int,int)",
+      "upstream_id": "BVH_DistanceField::BuildSlices(BVH_Geometry<T, BVH_DistanceField::N>&,const int,const int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::build_slices",
