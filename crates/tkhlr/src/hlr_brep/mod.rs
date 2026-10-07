@@ -14,6 +14,14 @@ mod curve;
 mod curve_2d;
 pub use curve::{Curve, MinMaxBox};
 mod curve_tool;
+mod edge_data;
+pub use edge_data::EdgeData;
+mod edge_face_tool;
+pub use edge_face_tool::{EdgeFaceTool, TypeOfResultingEdge};
+mod face_data;
+pub use face_data::FaceData;
+mod face_iterator;
+pub use face_iterator::FaceIterator;
 mod inter_c_surf;
 pub use inter_c_surf::{
     InterCSurf, InterCSurfTypes, TheCSFunctionOfInterCSurf, TheExactInterCSurf,
@@ -22,7 +30,9 @@ pub use inter_c_surf::{
     TheQuadCurvFuncOfTheQuadCurvExactInterCSurf,
 };
 mod line_tool;
+mod make_edge;
 pub use line_tool::LineTool;
+pub use make_edge::{make_edge, make_edge_3d, poly_hlr_angle_and_deflection};
 mod sl_props;
 pub use sl_props::{SLProps, SLPropsATool};
 mod surface;

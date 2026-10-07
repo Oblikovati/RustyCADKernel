@@ -318962,6 +318962,30 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep::MakeEdge(const HLRBRep_Curve&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::make_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep.cxx: MakeEdge (2D conics, projected Bezier and B-spline poles with the periodic segment, the 15-point polyline otherwise), MakeEdge3d (empty copy sharing end vertices within PConfusion) and PolyHLRAngleAndDeflection; hb_edgedata and hb_edgeface compare the resulting edges (vertices, range, type, points) and values bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep::MakeEdge3d(const HLRBRep_Curve&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::make_edge_3d",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep.cxx: MakeEdge (2D conics, projected Bezier and B-spline poles with the periodic segment, the 15-point polyline otherwise), MakeEdge3d (empty copy sharing end vertices within PConfusion) and PolyHLRAngleAndDeflection; hb_edgedata and hb_edgeface compare the resulting edges (vertices, range, type, points) and values bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep::PolyHLRAngleAndDeflection(double,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::poly_hlr_angle_and_deflection",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep.cxx: MakeEdge (2D conics, projected Bezier and B-spline poles with the periodic segment, the 15-point polyline otherwise), MakeEdge3d (empty copy sharing end vertices within PConfusion) and PolyHLRAngleAndDeflection; hb_edgedata and hb_edgeface compare the resulting edges (vertices, range, type, points) and values bit for bit."
+    },
+    {
       "upstream_id": "HLRBRep_AreaLimit::DynamicType() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_AreaLimit.hxx",
@@ -319826,6 +319850,46 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_EdgeData::MinMax()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::min_max_mut",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Set(bool,bool,const TopoDS_Edge&,int,int,bool,bool,bool,bool,double,float,double,float)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::UpdateMinMax(const HLRAlgo_EdgesBlock::MinMaxIndices&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::update_min_max",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Curve()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::curve",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
       "upstream_id": "HLRBRep_EdgeFaceTool::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeFaceTool.hxx",
@@ -319884,6 +319948,22 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "473a7acb0f5d89b2746ff9fa4f7f5ce50b38fe7f061e61285d20e2b5406443da",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeFaceTool::UVPoint(double,HLRBRep_CurvePtr,HLRBRep_SurfacePtr,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeFaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeFaceTool::uv_point",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeFaceTool.cxx: the normal curvature along a direction (0 below gp::Resolution) and UVPoint by the p-curve or by BRepExtrema_ExtPF; hb_edgeface (400 numeric requests) compares both paths bit for bit. UVPoint returns Option<(u, v)> for the native bool with output references."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeFaceTool::CurvatureValue(HLRBRep_SurfacePtr,double,double,const gp_Dir&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeFaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeFaceTool::curvature_value",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeFaceTool.cxx: the normal curvature along a direction (0 below gp::Resolution) and UVPoint by the p-curve or by BRepExtrema_ExtPF; hb_edgeface (400 numeric requests) compares both paths bit for bit. UVPoint returns Option<(u, v)> for the native bool with output references."
     },
     {
       "upstream_id": "HLRBRep_EdgeIList::operator delete(void*) noexcept",
@@ -320174,6 +320254,38 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_FaceData::SetWEdge(int,int,int,TopAbs_Orientation,bool,bool,bool,bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_w_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::SetWire(int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_wire",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Set(const TopoDS_Face&,TopAbs_Orientation,bool,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
       "upstream_id": "HLRBRep_FaceIterator::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.hxx",
@@ -320232,6 +320344,30 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "63f4aca73e46bc72cfab45cd846246e2ba800dd459ba213ae57b315089bda4a6",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::InitEdge(HLRBRep_FaceData&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::init_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::NextEdge()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::next_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
     },
     {
       "upstream_id": "HLRBRep_HLRToShape::operator delete(void*) noexcept",
@@ -324780,6 +324916,702 @@
       "rust_item": "rustycad_tkhlr::hlr_brep::Surface",
       "status": "excluded",
       "notes": "Excluded: HLRBRep_TypeDef.hxx spells the HLR surface as an untyped void* so the template instances can take it; Rust passes typed references instead (&hlr_brep::Surface through hlr_brep::SurfaceTool), see docs/hlr-design.md section 6. No behavior is lost."
+    },
+    {
+      "upstream_id": "HLRBRep_TypeOfResultingEdge",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeOfResultingEdge.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TypeOfResultingEdge",
+      "status": "implemented",
+      "notes": "HLRBRep_TypeOfResultingEdge as the Rust enum hlr_brep::TypeOfResultingEdge (same order and discriminants)."
+    },
+    {
+      "upstream_id": "HLRBRep_Undefined",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeOfResultingEdge.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TypeOfResultingEdge::Undefined",
+      "status": "implemented",
+      "notes": "HLRBRep_TypeOfResultingEdge as the Rust enum hlr_brep::TypeOfResultingEdge (same order and discriminants)."
+    },
+    {
+      "upstream_id": "HLRBRep_IsoLine",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeOfResultingEdge.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TypeOfResultingEdge::IsoLine",
+      "status": "implemented",
+      "notes": "HLRBRep_TypeOfResultingEdge as the Rust enum hlr_brep::TypeOfResultingEdge (same order and discriminants)."
+    },
+    {
+      "upstream_id": "HLRBRep_OutLine",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeOfResultingEdge.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TypeOfResultingEdge::OutLine",
+      "status": "implemented",
+      "notes": "HLRBRep_TypeOfResultingEdge as the Rust enum hlr_brep::TypeOfResultingEdge (same order and discriminants)."
+    },
+    {
+      "upstream_id": "HLRBRep_Rg1Line",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeOfResultingEdge.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TypeOfResultingEdge::Rg1Line",
+      "status": "implemented",
+      "notes": "HLRBRep_TypeOfResultingEdge as the Rust enum hlr_brep::TypeOfResultingEdge (same order and discriminants)."
+    },
+    {
+      "upstream_id": "HLRBRep_RgNLine",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeOfResultingEdge.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TypeOfResultingEdge::RgNLine",
+      "status": "implemented",
+      "notes": "HLRBRep_TypeOfResultingEdge as the Rust enum hlr_brep::TypeOfResultingEdge (same order and discriminants)."
+    },
+    {
+      "upstream_id": "HLRBRep_Sharp",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeOfResultingEdge.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TypeOfResultingEdge::Sharp",
+      "status": "implemented",
+      "notes": "HLRBRep_TypeOfResultingEdge as the Rust enum hlr_brep::TypeOfResultingEdge (same order and discriminants)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Used(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_used",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Used() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::used",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::VSta(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_v_sta",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::VSta() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::v_sta",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::AutoIntersectionDone(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_auto_intersection_done",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::AutoIntersectionDone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::auto_intersection_done",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::RgNLine(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_rgn_line",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::RgNLine() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::rgn_line",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::VerAtEnd(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_ver_at_end",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::VerAtEnd() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::ver_at_end",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::VEnd() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::v_end",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::VEnd(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_v_end",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::VerAtSta() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::ver_at_sta",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::VerAtSta(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_ver_at_sta",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::OutLVEnd(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_out_lv_end",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::OutLVEnd() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::out_lv_end",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Simple(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_simple",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Simple() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::simple",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::ChangeGeometry()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::change_geometry",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Rg1Line(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_rg1_line",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Rg1Line() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::rg1_line",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Tolerance() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::tolerance",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::OutLVSta() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::out_lv_sta",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::OutLVSta(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_out_lv_sta",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Selected(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_selected",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Selected() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::selected",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::CutAtSta() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::cut_at_sta",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::CutAtSta(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_cut_at_sta",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Vertical() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::vertical",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Vertical(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_vertical",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::CutAtEnd() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::cut_at_end",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::CutAtEnd(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_cut_at_end",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Geometry() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::geometry",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::HideCount(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::set_hide_count",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::HideCount() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::hide_count",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::Status()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeData::status_mut",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Sphere() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::sphere",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Sphere(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_sphere",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Orientation(TopAbs_Orientation)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_orientation",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Orientation() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::orientation",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Wires()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::wires_mut",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Cone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::cone",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Cone(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_cone",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Cut() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::cut",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Cut(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_cut",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::WithOutL() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::with_out_l",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::WithOutL(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_with_out_l",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Size(double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_size",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Size() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::size",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Geometry()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::geometry_mut",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Hiding() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::hiding",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Hiding(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_hiding",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Cylinder() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::cylinder",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Cylinder(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_cylinder",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Selected() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::selected",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Selected(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_selected",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Side(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_side",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Side() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::side",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Plane(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_plane",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Plane() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::plane",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Torus() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::torus",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Torus(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_torus",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Back(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_back",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Back() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::back",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Tolerance() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::tolerance",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Closed(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_closed",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Closed() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::closed",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Simple() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::simple",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::Simple(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set_simple",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::BeginningOfWire() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::beginning_of_wire",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::OutLine() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::out_line",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::IsoLine() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::iso_line",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::Double() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::double",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::Edge() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::Wire() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::wire",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::Orientation() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::orientation",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::MoreEdge() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::more_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::EndOfWire() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::end_of_wire",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::SkipWire()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::skip_wire",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceIterator::Internal() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceIterator.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::internal",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
     },
     {
       "upstream_id": "BOPAlgo_PaveFiller::PerformFF(const Message_ProgressRange &)",

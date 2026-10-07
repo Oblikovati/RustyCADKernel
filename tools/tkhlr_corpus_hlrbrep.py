@@ -16,6 +16,10 @@ degree 2 B-splines.
   sample counts, HLRBRep_SLProps normals and curvatures, and HLRBRep_InterCSurf of sight
   lines (Perform(L, S) and the polygon/polyhedron form of HLRBRep_Intersector) on planes,
   cylinders, cones, spheres, tori, Bezier, B-spline, revolution and extrusion faces.
+- `hb_edgedata`, `hb_facedata`, `hb_edgeface`: HLRBRep_EdgeData (Set, flags, status),
+  HLRBRep::MakeEdge and MakeEdge3d, HLRBRep_FaceData with HLRBRep_FaceIterator, and
+  HLRBRep_EdgeFaceTool (curvature, UVPoint by p-curve and by projection) with
+  PolyHLRAngleAndDeflection.
 """
 from __future__ import annotations
 import math
@@ -168,9 +172,56 @@ def surface_requests(rng: random.Random) -> list[str]:
     return requests
 
 
+def edgedata_requests(rng: random.Random) -> list[str]:
+    """hb_edgedata: EdgeData::Set and the flags, MakeEdge and MakeEdge3d."""
+    requests = []
+    for _ in range(500):
+        proj = projector(rng)
+        view = tuple(proj[4:7]) if proj[0] != 2 else (0.0, 0.0, 1.0)
+        curve, u1, u2 = edge(rng, view)
+        flags = [rng.choice((0, 1)) for _ in range(9)]
+        tols = [u1, rng.choice((1e-7, 1e-4)), u2, rng.choice((1e-7, 0.01))]
+        requests.append('hb_edgedata ' + numbers(proj + curve + flags + tols))
+    return requests
+
+
+def facedata_requests(rng: random.Random) -> list[str]:
+    """hb_facedata: FaceData::Set, SetWire, SetWEdge (some out of range) and the walk."""
+    requests = []
+    for index in range(300):
+        fields = surface(rng, index % 9, (0.0, 0.0, 1.0))
+        nw = rng.choice((1, 2, 3))
+        counts = [rng.choice((1, 2, 4)) for _ in range(nw)]
+        fields += [rng.randrange(4), rng.choice((0, 1)), nw, *counts]
+        for wi, ne in enumerate(counts, 1):
+            for ewi in range(1, ne + 1 + (1 if rng.random() < 0.05 else 0)):
+                fields += [wi, ewi, rng.randrange(1, 20), rng.randrange(4)] + [rng.choice((0, 1)) for _ in range(4)]
+        requests.append('hb_facedata ' + numbers(fields + [-1]))
+    return requests
+
+
+def edgeface_requests(rng: random.Random) -> list[str]:
+    """hb_edgeface: the curvature along a direction, UVPoint of a face edge and of a free
+    edge, and PolyHLRAngleAndDeflection."""
+    requests = []
+    for index in range(400):
+        proj = projector(rng)
+        fields = surface(rng, index % 9, (0.0, 0.0, 1.0))
+        u1, u2, v1, v2 = fields[-4:]
+        uv = [u1 + (u2 - u1) * rng.random(), v1 + (v2 - v1) * rng.random()]
+        d = unit(rng.choice(VIEW_DIRS))
+        par = rng.choice((0.0, 0.3, 0.5, 1.0, 0.001, 0.7))
+        curve, _, _ = edge(rng, (0.0, 0.0, 1.0))
+        requests.append('hb_edgeface ' + numbers(proj + fields + uv + list(d) + [par] + curve))
+    return requests
+
+
 def append_hlrbrep_requests(requests: list[str]) -> None:
     """Append every HLRBRep request family in a fixed order."""
     rng = random.Random(0x41B12E9)
     requests.extend(curve_requests(rng))
     requests.extend(cinter_requests(rng))
     requests.extend(surface_requests(rng))
+    requests.extend(edgedata_requests(rng))
+    requests.extend(facedata_requests(rng))
+    requests.extend(edgeface_requests(rng))
