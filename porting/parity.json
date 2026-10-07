@@ -430420,6 +430420,126 @@
       "notes": "C++ protected data member of BRepFill_LocationLaw: Rust keeps it as the crate-private field `disc` of BRepFillLocationLawBase (tkbool/src/brep_fill/location_law/mod.rs), reached by the subclasses and through the BRepFillLocationLaw methods, so it is not public API."
     },
     {
+      "upstream_id": "BRepFill_Section::BRepFill_Section()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_Section::BRepFill_Section(const TopoDS_Shape&,const TopoDS_Vertex&,bool,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::with_profile",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_Section::Set(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::set",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_Section::OriginalShape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::original_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_Section::Wire() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::wire",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_Section::Vertex() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::vertex",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_Section::ModifiedShape(const TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::modified_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_Section::IsLaw() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::is_law",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_Section::IsPunctual() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::is_punctual",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_Section::WithContact() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::with_contact",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_Section::WithCorrection() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Section.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSection::with_correction",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_SectionPlacement::BRepFill_SectionPlacement(const occ::handle<BRepFill_LocationLaw>&,const TopoDS_Shape&,bool,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionPlacement.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionPlacement::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_SectionPlacement::BRepFill_SectionPlacement(const occ::handle<BRepFill_LocationLaw>&,const TopoDS_Shape&,const TopoDS_Shape&,bool,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionPlacement.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionPlacement::with_vertex",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_SectionPlacement::Transformation() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionPlacement.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionPlacement::transformation",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
+      "upstream_id": "BRepFill_SectionPlacement::AbscissaOnPath()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionPlacement.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionPlacement::abscissa_on_path",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
+    },
+    {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",

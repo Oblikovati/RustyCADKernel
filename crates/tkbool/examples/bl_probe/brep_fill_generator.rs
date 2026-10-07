@@ -17,7 +17,7 @@ pub fn failed(error: Failure) {
 }
 
 /// `bl_indexed`.
-fn indexed(result: &IndexedMapOfShape, s: &Shape) -> Result<(), Failure> {
+pub fn indexed(result: &IndexedMapOfShape, s: &Shape) -> Result<(), Failure> {
     if s.is_null() {
         int(-1);
         return Ok(());
