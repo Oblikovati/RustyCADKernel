@@ -3,8 +3,8 @@
     "cpp": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
     "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
     "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
-    "parity": "e26e9dd4031e5b663978135a860b1e6da65fdc76d25659ef04254c381de1f8e4",
-    "rust": "7a9f0e0e883acb38959fd01a59b19d30d85ccb900e5a6e566406836e5847dfc7"
+    "parity": "fe679d0cd0c6a156caf31bc7344dc3c224acc63c674399519cb298ef02b5463f",
+    "rust": "98791b220a502942e46c9a5b1c91735682c4820f106c07f5eaaa5c5287396e51"
   },
   "schema_version": 1,
   "toolkits": {
@@ -61,16 +61,16 @@
     "TKBRep": {
       "api": {
         "by_status": {
-          "claimed_unverified": 8,
+          "claimed_unverified": 0,
           "excluded": 93,
           "partial": 0,
           "unclaimed": 173,
           "upstream_unimplemented": 0,
-          "verified": 3478
+          "verified": 3486
         },
         "declarations": 3752,
-        "done": 3571,
-        "done_percent": 95.2
+        "done": 3579,
+        "done_percent": 95.4
       },
       "boilerplate": {
         "by_status": {
@@ -89,12 +89,9 @@
         "mapped": 1332,
         "unmapped": 4
       },
-      "ledger_defects": {
-        "rows_with_unresolved_rust_target": 4
-      },
+      "ledger_defects": {},
       "open_boilerplate_by_category": {},
       "open_gap_by_category": {
-        "member": 8,
         "record": 173
       },
       "scope": "port",
@@ -1102,7 +1099,7 @@
         "unmapped": 0
       },
       "ledger_defects": {
-        "rows_without_cpp_match": 86
+        "rows_without_cpp_match": 4
       },
       "open_boilerplate_by_category": {
         "rtti-macro": 16
@@ -1145,7 +1142,7 @@
         "unmapped": 0
       },
       "ledger_defects": {
-        "rows_without_cpp_match": 218
+        "rows_without_cpp_match": 8
       },
       "open_boilerplate_by_category": {
         "rtti-macro": 32
@@ -1391,16 +1388,16 @@
     "TKMath": {
       "api": {
         "by_status": {
-          "claimed_unverified": 12,
+          "claimed_unverified": 0,
           "excluded": 278,
           "partial": 20,
-          "unclaimed": 59,
+          "unclaimed": 60,
           "upstream_unimplemented": 0,
-          "verified": 4896
+          "verified": 4907
         },
         "declarations": 5265,
-        "done": 5174,
-        "done_percent": 98.3
+        "done": 5185,
+        "done_percent": 98.5
       },
       "boilerplate": {
         "by_status": {
@@ -1420,8 +1417,7 @@
         "unmapped": 0
       },
       "ledger_defects": {
-        "rows_with_unresolved_rust_target": 8,
-        "rows_without_cpp_match": 23
+        "rows_without_cpp_match": 20
       },
       "open_boilerplate_by_category": {
         "rtti-macro": 20,
@@ -1429,8 +1425,7 @@
       },
       "open_gap_by_category": {
         "alias": 9,
-        "member": 10,
-        "record": 52
+        "record": 51
       },
       "scope": "port",
       "scope_reason": ""
@@ -3032,16 +3027,16 @@
     "TKernel": {
       "api": {
         "by_status": {
-          "claimed_unverified": 10,
-          "excluded": 779,
-          "partial": 546,
-          "unclaimed": 96,
+          "claimed_unverified": 0,
+          "excluded": 799,
+          "partial": 554,
+          "unclaimed": 49,
           "upstream_unimplemented": 0,
-          "verified": 4867
+          "verified": 4896
         },
         "declarations": 6298,
-        "done": 5646,
-        "done_percent": 89.6
+        "done": 5695,
+        "done_percent": 90.4
       },
       "boilerplate": {
         "by_status": {
@@ -3061,7 +3056,6 @@
         "unmapped": 0
       },
       "ledger_defects": {
-        "rows_with_unresolved_rust_target": 7,
         "rows_without_cpp_match": 62
       },
       "open_boilerplate_by_category": {
@@ -3070,10 +3064,9 @@
         "special-member": 8
       },
       "open_gap_by_category": {
-        "alias": 5,
-        "member": 11,
-        "protected-member": 10,
-        "record": 80
+        "alias": 3,
+        "member": 3,
+        "record": 43
       },
       "scope": "port",
       "scope_reason": ""
@@ -3091,9 +3084,9 @@
     },
     "port": {
       "api_declarations": 76041,
-      "api_done": 31937,
-      "api_open": 43015,
-      "api_partial": 1089,
+      "api_done": 32005,
+      "api_open": 42939,
+      "api_partial": 1097,
       "gtests_mapped": 7401,
       "gtests_unmapped": 1050,
       "toolkits": 56
