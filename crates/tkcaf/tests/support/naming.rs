@@ -180,3 +180,50 @@ pub fn fill_selection_valid_map(label: &TdfLabel, valid: &mut TdfLabelMap) {
         children.next();
     }
 }
+
+/// The SelectShape command flow that closes A3 and A5: the triangle face, its first and second
+/// edges, the first face vertex and the first edge and vertex of `solid` (`sub_shapes`, in that
+/// order) are selected without geometry under `test_label`/10/1..6 and resolve to themselves;
+/// the vertex selection then does not solve with only `valid_label` valid.
+pub fn check_selector_command_flow(
+    test_label: &TdfLabel,
+    face: &Shape,
+    edges: &[Shape; 3],
+    solid: &Shape,
+    sub_shapes: [&Shape; 3],
+    valid_label: &TdfLabel,
+) {
+    let selection_root = child(test_label, 10);
+    let selectors: Vec<TNamingSelector> = (1..=6)
+        .map(|tag| TNamingSelector::new(&child(&selection_root, tag)))
+        .collect();
+    let [face_vertex, box_edge, box_vertex] = sub_shapes;
+    assert!(selectors[0].select_alone(face, false, false).unwrap());
+    assert!(selectors[1].select(&edges[0], face, false, false).unwrap());
+    assert!(selectors[2].select_alone(&edges[1], false, false).unwrap());
+    assert!(
+        selectors[3]
+            .select(face_vertex, face, false, false)
+            .unwrap()
+    );
+    assert!(selectors[4].select(box_edge, solid, false, false).unwrap());
+    assert!(
+        selectors[5]
+            .select(box_vertex, solid, false, false)
+            .unwrap()
+    );
+    let expected = [
+        face,
+        &edges[0],
+        &edges[1],
+        face_vertex,
+        box_edge,
+        box_vertex,
+    ];
+    for (selector, shape) in selectors.iter().zip(expected) {
+        assert!(selected(selector).is_same(shape));
+    }
+    let mut valid = TdfLabelMap::default();
+    valid.add(valid_label.clone());
+    assert!(!selectors[3].solve(&mut valid).unwrap());
+}

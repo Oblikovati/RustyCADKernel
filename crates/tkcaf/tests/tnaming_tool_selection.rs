@@ -17,7 +17,9 @@ use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape,
     BRepBuilderAPITransform,
 };
-use support::naming::{add_primitive, child, fill_selection_valid_map, selected, triangle};
+use support::naming::{
+    add_primitive, check_selector_command_flow, child, fill_selection_valid_map, selected, triangle,
+};
 use support::{find_named_shape, make_box, make_box_at, shape_at};
 
 fn point(x: f64, y: f64, z: f64) -> Point3 {
@@ -50,42 +52,8 @@ fn TNaming_Tool_Test__CafNamedShape_A5_SelectorCommandFlow() {
     }
     add_primitive(&edge_label, &edges[0]);
 
-    let selection_root = child(&test_label, 10);
-    let selectors: Vec<TNamingSelector> = (1..=6)
-        .map(|tag| TNamingSelector::new(&child(&selection_root, tag)))
-        .collect();
-    assert!(selectors[0].select_alone(&face, false, false).unwrap());
-    assert!(selectors[1].select(&edges[0], &face, false, false).unwrap());
-    assert!(selectors[2].select_alone(&edges[1], false, false).unwrap());
-    assert!(
-        selectors[3]
-            .select(&first_face_vertex, &face, false, false)
-            .unwrap()
-    );
-    assert!(
-        selectors[4]
-            .select(&first_box_edge, &solid, false, false)
-            .unwrap()
-    );
-    assert!(
-        selectors[5]
-            .select(&first_box_vertex, &solid, false, false)
-            .unwrap()
-    );
-    let expected = [
-        &face,
-        &edges[0],
-        &edges[1],
-        &first_face_vertex,
-        &first_box_edge,
-        &first_box_vertex,
-    ];
-    for (selector, shape) in selectors.iter().zip(expected) {
-        assert!(selected(selector).is_same(shape));
-    }
-    let mut valid = TdfLabelMap::default();
-    valid.add(edge_label.clone());
-    assert!(!selectors[3].solve(&mut valid).unwrap());
+    let sub_shapes = [&first_face_vertex, &first_box_edge, &first_box_vertex];
+    check_selector_command_flow(&test_label, &face, &edges, &solid, sub_shapes, &edge_label);
 }
 
 /// The `TNaming_ToolTest` fixture: a bare data framework.
