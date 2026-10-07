@@ -26,7 +26,8 @@ fn owner_preserves_conditional_auto_traits() {
     movable::<DataMap<i32, Cell<i32>>>();
     movable::<DataMap<i32, PhantomPinned>>();
     assert_not!(DataMap<i32,Cell<i32>>,Sync);
-    assert_not!(DataMap<i32,Cell<i32>>,UnwindSafe);
+    // Owned values follow std collections: Vec<Cell<i32>> is UnwindSafe but not RefUnwindSafe.
+    unwind::<DataMap<i32, Cell<i32>>>();
     assert_not!(DataMap<i32,Cell<i32>>,RefUnwindSafe);
     assert_not!(DataMap<i32,Rc<i32>>,Send);
     assert_not!(DataMap<i32,Rc<i32>>,Sync);

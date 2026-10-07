@@ -1,11 +1,14 @@
-//! Sole ownership of real native bucket tables and sealed typed node chains.
+//! Sole ownership of real native bucket tables and sealed typed node chains (the cell filter map;
+//! DataMap and Map moved to the safe `chained_slots` storage).
 #![allow(unsafe_code)]
 use crate::ncollection::{BaseAllocator, BaseMap, BaseMapStorage, MapLinkNode};
 use std::{marker::PhantomData, panic::RefUnwindSafe};
 pub(in crate::ncollection) mod node_contract;
 pub(super) use node_contract::CanonicalMapNode;
 mod lookup;
+#[cfg(test)]
 mod range;
+#[cfg(test)]
 pub(super) use range::BucketNodeRange;
 mod position;
 pub(super) use position::BucketChainPosition;
@@ -53,9 +56,6 @@ impl<N: CanonicalMapNode> OwnedBucketChains<N> {
     }
     pub(super) unsafe fn node(&self, pointer: *mut MapLinkNode) -> &N {
         unsafe { &*pointer.cast::<N>() }
-    }
-    pub(super) unsafe fn node_mut(&mut self, pointer: *mut MapLinkNode) -> &mut N {
-        unsafe { &mut *pointer.cast::<N>() }
     }
     pub(super) fn clear_with_allocator(&mut self, requested: Option<BaseAllocator>) {
         let release = requested.as_ref() != Some(self.base.allocator());

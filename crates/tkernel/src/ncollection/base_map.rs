@@ -12,6 +12,7 @@ mod link_node;
 mod resize_outputs;
 mod resize_plan;
 use resize_plan::next_resize_count;
+pub(super) use resize_plan::{planned_bucket_count, table_slot_count};
 mod storage;
 pub use bucket_iterator::BaseMapBucketIterator;
 pub use link_node::MapLinkNode;

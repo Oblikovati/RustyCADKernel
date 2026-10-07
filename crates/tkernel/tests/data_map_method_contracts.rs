@@ -74,33 +74,32 @@ fn borrowed_try_binding_misses_copy_value_before_key() {
 }
 
 #[test]
-fn owned_emplacement_hashes_once_and_allocates_before_constructor() {
+fn owned_emplacement_hashes_once_before_constructor() {
     let events = Rc::new(RefCell::new(String::new()));
     let arena = BaseAllocator::incremental(256);
     let mut map = DataMap::with_allocator(TracePolicy(Rc::clone(&events)), 101, arena.clone());
     assert!(map.emplace(CopyTrace(1, 'K', Rc::clone(&events)), || {
-        assert!(arena.reset(false).is_err());
+        // Native IncAllocator::Reset never refuses, and map entries hold no arena lease
+        // (per-node allocation is not observable through the public API, plan D1 B6).
+        assert!(arena.reset(false).is_ok());
         events.borrow_mut().push('C');
         42
     }));
     assert_eq!(&*events.borrow(), "HC");
-    drop(map);
-    arena.reset(false).unwrap();
+    assert_eq!(map.allocator(), &arena);
 }
 
 #[test]
-fn emplacement_constructor_panic_releases_preallocated_node() {
+fn emplacement_constructor_panic_leaves_the_map_unchanged() {
     let arena = BaseAllocator::incremental(256);
     let mut map = DataMap::<i32, i32>::with_allocator(Default::default(), 101, arena.clone());
     let panic = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-        map.emplace(1, || {
-            assert!(arena.reset(false).is_err());
-            panic!("injected value constructor failure");
-        });
+        map.emplace(1, || panic!("injected value constructor failure"));
     }));
     assert!(panic.is_err());
-    assert!(map.is_empty());
-    arena.reset(false).unwrap();
+    assert!(map.is_empty() && !map.is_bound(&1));
+    assert!(map.emplace(1, || 7));
+    assert_eq!(map.find(&1), Ok(&7));
 }
 
 #[test]

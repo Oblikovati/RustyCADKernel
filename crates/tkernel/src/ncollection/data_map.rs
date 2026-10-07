@@ -1,10 +1,11 @@
 //! Chained hash buckets preserving OCCT growth and head-insertion traversal order.
-#![allow(unsafe_code)]
-use super::{BaseAllocator, BaseMap, DefaultHashPolicy, HashPolicy, MapLinkNode};
+use super::{
+    BaseAllocator, BaseMap, DefaultHashPolicy, HashBucketTable, HashPolicy,
+    chained_slots::ChainedSlots,
+};
 use crate::standard::Failure;
 use std::fmt::Debug;
-mod storage;
-use storage::DataMapStorage;
+type DataMapStorage<K, V> = ChainedSlots<K, V>;
 /// Allocator-owned key/value map; `DataMap::<i32,i32>::default().bind(1,42)`.
 pub struct DataMap<K, V, H = DefaultHashPolicy> {
     storage: DataMapStorage<K, V>,
@@ -29,36 +30,39 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     }
     /// Returns allocator identity; `map.allocator()==&arena`.
     pub fn allocator(&self) -> &BaseAllocator {
-        self.storage.base.allocator()
+        self.storage.allocator()
     }
     /// Returns binding count; `map.len()==3`.
     pub fn len(&self) -> usize {
-        self.storage.base.size()
+        self.storage.size()
     }
     /// Returns OCCT's binding extent; `map.extent()==3`.
     pub fn extent(&self) -> usize {
-        self.storage.base.size()
+        self.storage.size()
     }
     /// Checks for no bindings; `map.is_empty()`.
     pub fn is_empty(&self) -> bool {
-        self.storage.base.size() == 0
+        self.storage.size() == 0
     }
     /// Returns the allocated hash modulus; `map.bucket_count()`.
     pub fn bucket_count(&self) -> usize {
-        self.storage.base.nb_buckets()
+        self.storage.nb_buckets()
     }
     /// Grows using OCCT's exact prime-step table and rechains nodes; `map.resize(1000)`.
     pub fn resize(&mut self, size: usize) {
         self.storage.resize(size, &self.hasher);
     }
-    /// Borrows the real native bucket table; `map.buckets().is_null()` before allocation.
-    pub fn buckets(&self) -> *const *mut MapLinkNode {
-        self.storage.base.buckets()
-    }
-    /// Returns native writable Buckets; `map.buckets_mut()`.
-    /// Unsafe pointer writes must preserve live acyclic nodes, ownership, hashes and counts.
-    pub fn buckets_mut(&mut self) -> *mut *mut MapLinkNode {
-        self.storage.base.buckets_mut()
+    /// Native `Buckets()`: the allocated table, or `None` where native returns null.
+    ///
+    /// ```
+    /// # use rustycad_tkernel::ncollection::DataMap;
+    /// let mut map = DataMap::<i32, i32>::default();
+    /// assert!(map.buckets().is_none());
+    /// map.bind(1, 10);
+    /// assert_eq!(map.buckets().map(|table| table.len()), Some(102));
+    /// ```
+    pub fn buckets(&self) -> Option<HashBucketTable<'_, K, V>> {
+        self.storage.buckets()
     }
     /// Checks whether a key is bound; `map.is_bound(&1)`.
     pub fn is_bound(&self, key: &K) -> bool {
@@ -66,20 +70,21 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     }
     /// Borrows a bound value or reports Standard_NoSuchObject; `map.find(&1)?`.
     pub fn find(&self, key: &K) -> Result<&V, Failure> {
-        let (_, node) = self.lookup(key).ok_or_else(|| missing_key(key))?;
-        Ok(unsafe { self.storage.node(node).value() })
+        let (_, slot) = self.lookup(key).ok_or_else(|| missing_key(key))?;
+        Ok(self.storage.slot(slot).value())
     }
     /// Borrows a bound value exclusively; `*map.change_find(&1)?=42`.
     pub fn change_find(&mut self, key: &K) -> Result<&mut V, Failure> {
-        let (_, node) = self.lookup(key).ok_or_else(|| missing_key(key))?;
-        Ok(unsafe { self.storage.node_mut(node).change_value() })
+        let (_, slot) = self.lookup(key).ok_or_else(|| missing_key(key))?;
+        Ok(self.storage.slot_mut(slot).key_value_mut().1)
     }
     /// Removes a binding, returning whether it existed; `map.unbind(&1)`.
     pub fn unbind(&mut self, key: &K) -> bool {
-        let Some((bucket, node)) = self.lookup(key) else {
+        let Some((bucket, slot)) = self.lookup(key) else {
             return false;
         };
-        self.storage.remove(bucket, node);
+        // Native UnBind unlinks and counts down before the node destructor runs.
+        drop(self.storage.remove(bucket, slot));
         true
     }
     /// Frees bindings and optionally bucket storage; `map.clear(true)`.
@@ -102,25 +107,29 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     pub fn values_mut(&mut self) -> impl Iterator<Item = &mut V> {
         self.items_mut().map(|(_, value)| value)
     }
-    fn lookup(&self, key: &K) -> Option<(usize, *mut MapLinkNode)> {
+    fn lookup(&self, key: &K) -> Option<(usize, usize)> {
         self.storage.lookup(key, &self.hasher)
     }
-    fn lookup_with_bucket(&self, key: &K) -> (usize, Option<*mut MapLinkNode>) {
+    fn lookup_with_bucket(&self, key: &K) -> (usize, Option<usize>) {
         self.storage.lookup_with_bucket(key, &self.hasher)
     }
     fn place(&mut self, key: K, construct: impl FnOnce() -> V, replace: bool) -> (bool, &mut V) {
-        if self.is_empty() || self.storage.base.size() > self.storage.base.nb_buckets() {
-            self.resize(self.storage.base.size());
+        if self.is_empty() || self.storage.size() > self.storage.nb_buckets() {
+            self.resize(self.storage.size());
         }
-        let (bucket, index) = self.lookup_with_bucket(&key);
-        if let Some(index) = index {
-            let value = unsafe { self.storage.node_mut(index).change_value() };
-            if replace {
-                *value = construct();
-            }
-            return (false, value);
+        let (bucket, slot) = self.lookup_with_bucket(&key);
+        match slot {
+            Some(slot) => (false, self.update_slot(slot, construct, replace)),
+            None => self.insert_with(bucket, || key, construct),
         }
-        self.insert_with(bucket, || key, construct)
+    }
+    // Native emplaceImpl on a hit: assign a newly constructed value unless it is a Try variant.
+    fn update_slot(&mut self, slot: usize, construct: impl FnOnce() -> V, replace: bool) -> &mut V {
+        let value = self.storage.slot_mut(slot).key_value_mut().1;
+        if replace {
+            *value = construct();
+        }
+        value
     }
     fn insert_with(
         &mut self,
@@ -128,9 +137,9 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
         construct_key: impl FnOnce() -> K,
         construct_value: impl FnOnce() -> V,
     ) -> (bool, &mut V) {
-        // Native placement new allocates before constructing the value base, then its key.
-        let node = self.storage.insert(bucket, construct_key, construct_value);
-        (true, unsafe { self.storage.node_mut(node).change_value() })
+        // Native placement new constructs the value base, then its key.
+        let slot = self.storage.insert(bucket, construct_key, construct_value);
+        (true, self.storage.slot_mut(slot).key_value_mut().1)
     }
 }
 impl<K: Debug, V, H: HashPolicy<K> + Default> Default for DataMap<K, V, H> {
@@ -155,5 +164,3 @@ pub use cursor::{DataMapIterator, DataMapIteratorMut};
 
 mod borrowed_operations;
 mod signed_sizes;
-
-mod iterator_source;

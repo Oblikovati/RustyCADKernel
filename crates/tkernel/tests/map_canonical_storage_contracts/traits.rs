@@ -26,7 +26,8 @@ fn map_and_cursors_preserve_exact_payload_auto_traits() {
     movable::<Map<Cell<i32>>>();
     movable::<Map<PhantomPinned>>();
     assert_not!(Map<Cell<i32>>, Sync);
-    assert_not!(Map<Cell<i32>>, UnwindSafe);
+    // Owned keys follow std collections: Vec<Cell<i32>> is UnwindSafe but not RefUnwindSafe.
+    unwind::<Map<Cell<i32>>>();
     assert_not!(Map<Cell<i32>>, RefUnwindSafe);
     assert_not!(Map<Rc<i32>>, Send);
     assert_not!(MapIter<'static, Cell<i32>>, Send);

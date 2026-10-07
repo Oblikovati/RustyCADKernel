@@ -1,7 +1,7 @@
 use super::fixture::{Collision, native_row};
 use rustycad_tkernel::ncollection::{
     BaseMap, BaseMapBasicIterator, BaseMapStorage, BasicMapIteratorSource, BasicMapNode, DataMap,
-    DataMapNode, MapLinkNode, MapNode,
+    MapLinkNode, MapNode,
 };
 struct NativeKeyBuckets(BaseMapStorage);
 impl NativeKeyBuckets {
@@ -69,53 +69,52 @@ fn populated_data_map() -> DataMap<i32, i32, Collision> {
     map.bind(2, 20);
     map
 }
-type NativeDataCursorResult = (String, *const DataMapNode<i32, i32>, *mut i32);
-fn mutate_canonical_map(map: &mut DataMap<i32, i32, Collision>) -> NativeDataCursorResult {
-    let mut cursor = BaseMapBasicIterator::<DataMapNode<i32, i32>, true>::new(map);
-    unsafe { *cursor.value() = 21 };
-    let mut old = unsafe { cursor.advance_post() };
-    unsafe { *cursor.change_value() = 11 };
-    let (first_key, first_value) = unsafe { (*old.key(), *old.value()) };
-    let (last_key, last_value) = unsafe { (*cursor.key(), *cursor.value()) };
+// The native generic BasicIterator rows, read through the public DataMap::Iterator (plan D1 B6).
+fn mutate_through_public_cursor(map: &mut DataMap<i32, i32, Collision>) -> (String, *const i32) {
+    let mut cursor = map.cursor_mut();
+    *cursor.change_value().unwrap() = 21;
+    let old = cursor.advance_post();
+    let (first_key, first_value) = (*old.key().unwrap(), *old.value().unwrap());
+    let old_value = std::ptr::from_ref(old.value().unwrap());
+    *cursor.change_value().unwrap() = 11;
+    let (last_key, last_value) = (*cursor.key().unwrap(), *cursor.value().unwrap());
     let row = format!("data_iterator {first_key} {first_value} {last_key} {last_value}");
-    (row, old.node(), unsafe { old.value_ptr() })
+    (row, old_value)
 }
 #[test]
-fn generic_data_map_iterator_mutates_sole_canonical_nodes() {
+fn public_data_map_cursor_mutates_values_in_native_chain_order() {
     let mut map = populated_data_map();
-    let (row, old_node, old_value) = mutate_canonical_map(&mut map);
+    let (row, old_value) = mutate_through_public_cursor(&mut map);
     let arrow = old_value == std::ptr::from_mut(map.change_find(&2).unwrap());
     native_row("data_iterator", format!("{row} {}", u8::from(arrow)));
-    assert_const_iterator(&map, old_node);
+    assert_const_iterator(&map, old_value);
     assert_eq!(map.find(&1), Ok(&11));
     assert_eq!(map.find(&2), Ok(&21));
 }
-fn assert_const_iterator(
-    map: &DataMap<i32, i32, Collision>,
-    old_node: *const DataMapNode<i32, i32>,
-) {
-    let cursor = BaseMapBasicIterator::<DataMapNode<i32, i32>>::new(map);
-    native_row("const_iterator", unsafe {
+fn assert_const_iterator(map: &DataMap<i32, i32, Collision>, old_value: *const i32) {
+    let cursor = map.cursor();
+    let same = std::ptr::eq(cursor.value().unwrap(), old_value);
+    native_row(
+        "const_iterator",
         format!(
             "const_iterator {} {} {}",
-            cursor.key(),
-            cursor.value(),
-            u8::from(cursor.node() == old_node)
-        )
-    });
+            cursor.key().unwrap(),
+            cursor.value().unwrap(),
+            u8::from(same)
+        ),
+    );
 }
 #[test]
-fn source_bridge_reports_actual_table_in_unallocated_retained_and_released_states() {
+fn bucket_table_is_unallocated_retained_and_released_like_native() {
     let mut map = DataMap::<i32, i32>::default();
-    assert!(map.basic_bucket_slots().is_none());
-    assert!(map.basic_first_node().is_null());
+    assert!(map.buckets().is_none());
     map.bind(1, 10);
-    assert_eq!(map.basic_bucket_slots().unwrap().as_ptr(), map.buckets());
+    let table = map.buckets().unwrap().identity();
     map.clear(false);
-    assert!(map.basic_bucket_slots().is_some());
-    assert!(!BaseMapBasicIterator::<DataMapNode<i32, i32>>::new(&map).more());
+    assert_eq!(map.buckets().map(|kept| kept.identity()), Some(table));
+    assert!(!map.cursor().more());
     map.clear(true);
-    assert!(map.basic_bucket_slots().is_none());
+    assert!(map.buckets().is_none());
 }
 #[test]
 fn mutable_map_specialization_keeps_keys_readonly() {

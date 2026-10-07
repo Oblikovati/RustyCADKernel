@@ -1,4 +1,4 @@
-use rustycad_tkernel::ncollection::DataMap;
+use rustycad_tkernel::ncollection::{DataMap, HashPolicy};
 use std::{
     cell::{Cell, RefCell},
     rc::Rc,
@@ -16,6 +16,12 @@ pub fn populated(buckets: usize) -> TestDataMap {
 }
 pub fn keys<V>(map: &DataMap<i32, V, CollisionHash>) -> String {
     map.items().map(|(key, _)| format!("{key},")).collect()
+}
+/// Identity of the native `Buckets()` table, `None` where native returns null.
+pub fn table_of<K: std::fmt::Debug, V, H: HashPolicy<K>>(
+    map: &DataMap<K, V, H>,
+) -> Option<*const ()> {
+    map.buckets().map(|table| table.identity())
 }
 pub fn native_row(prefix: &str, actual: String) {
     let expected =

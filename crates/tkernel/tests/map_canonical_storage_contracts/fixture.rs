@@ -1,4 +1,4 @@
-use rustycad_tkernel::ncollection::Map;
+use rustycad_tkernel::ncollection::{HashPolicy, Map};
 #[path = "../support/traced_collision_hash.rs"]
 mod hashing;
 pub use hashing::CollisionHash;
@@ -12,6 +12,10 @@ pub fn populated(buckets: usize) -> TestMap {
 }
 pub fn keys(map: &TestMap) -> String {
     map.iter().map(|key| format!("{key},")).collect()
+}
+/// Identity of the native `Buckets()` table, `None` where native returns null.
+pub fn table_of<K: std::fmt::Debug, H: HashPolicy<K>>(map: &Map<K, H>) -> Option<*const ()> {
+    map.buckets().map(|table| table.identity())
 }
 pub fn native_row(prefix: &str, actual: String) {
     let expected =

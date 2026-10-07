@@ -1,4 +1,4 @@
-use super::fixture::caught;
+use super::fixture::{caught, table_of};
 use rustycad_tkernel::ncollection::{BaseAllocator, DataMap};
 use std::{cell::Cell, rc::Rc};
 struct CopyGate {
@@ -73,11 +73,11 @@ fn same_allocator_clear_retains_the_real_table_and_zero_constructor_grows() {
     let arena = BaseAllocator::incremental(512);
     let mut map = DataMap::<i32, i32>::with_allocator(Default::default(), 0, arena.clone());
     assert_eq!(map.bucket_count(), 0);
-    assert!(map.buckets().is_null());
+    assert!(table_of(&map).is_none());
     map.bind(1, 7);
-    let table = map.buckets();
+    let table = table_of(&map);
     map.clear_with_allocator(Some(arena.clone()));
-    assert_eq!(table, map.buckets());
+    assert_eq!(table, table_of(&map));
     assert_eq!((map.bucket_count(), map.len()), (101, 0));
     assert!(arena.reset(false).is_ok());
 }

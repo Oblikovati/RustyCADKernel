@@ -1,4 +1,5 @@
-//! Native bucket ownership for typed DataMap, Map and extension maps; other families migrate separately.
+//! Native bucket ownership for the extension maps and the families that still use raw nodes;
+//! DataMap and Map moved to the safe `chained_slots` storage.
 #![allow(unsafe_code)]
 use super::{BaseMap, BaseMapResize, MapLinkNode, bucket_table::BucketTable};
 use crate::{ncollection::BaseAllocator, standard::Failure};

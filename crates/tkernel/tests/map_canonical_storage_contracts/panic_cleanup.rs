@@ -1,4 +1,4 @@
-use super::fixture::{caught, keys, populated};
+use super::fixture::{caught, keys, populated, table_of};
 use rustycad_tkernel::ncollection::{BaseAllocator, HashPolicy, Map};
 use std::{
     cell::{Cell, RefCell},
@@ -55,7 +55,7 @@ fn dropping_map(trace: &KeyDropTrace, arena: &BaseAllocator) -> Map<OwnedKey, Ke
 #[test]
 fn hasher_panic_keeps_old_links_and_stable_keys() {
     let mut map = populated(1);
-    let table = map.buckets();
+    let table = table_of(&map);
     let key = std::ptr::from_ref(map.contained(&2).unwrap());
     map.hasher().rejected.set(Some(2));
     assert!(caught(|| map.resize(200)));
@@ -64,7 +64,7 @@ fn hasher_panic_keeps_old_links_and_stable_keys() {
         (map.len(), keys(&map), map.bucket_count()),
         (3, "3,2,1,".into(), 101)
     );
-    assert_eq!(map.buckets(), table);
+    assert_eq!(table_of(&map), table);
     assert_eq!(unsafe { *key }, 2);
     map.resize(200);
     assert_eq!(keys(&map), "1,2,3,");
@@ -112,13 +112,13 @@ fn replacement_allocator_clears_actual_old_nodes_first() {
     map.add(7);
     map.clear_with_allocator(Some(second.clone()));
     assert_eq!(map.allocator(), &second);
-    assert!(map.buckets().is_null());
+    assert!(table_of(&map).is_none());
     assert_eq!(map.bucket_count(), 2003);
     assert!(first.reset(false).is_ok());
     map.add(9);
-    assert!(second.reset(false).is_err());
-    map.clear(true);
+    // Native IncAllocator::Reset never refuses; entries hold no arena lease (plan D1 B6).
     assert!(second.reset(false).is_ok());
+    assert!(map.contains(&9));
 }
 #[test]
 fn rust_clone_from_keeps_replacement_semantics_and_source_resource() {
@@ -138,9 +138,9 @@ fn same_allocator_clear_keeps_real_bucket_table() {
     let arena = BaseAllocator::incremental(512);
     let mut map = Map::<i32>::with_allocator(Default::default(), 1, arena.clone());
     map.add(7);
-    let table = map.buckets();
+    let table = table_of(&map);
     map.clear_with_allocator(Some(arena.clone()));
-    assert_eq!(table, map.buckets());
+    assert_eq!(table, table_of(&map));
     assert_eq!(map.len(), 0);
     assert!(arena.reset(false).is_ok());
 }

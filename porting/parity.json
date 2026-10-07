@@ -81892,7 +81892,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
+      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
     },
     {
       "upstream_id": "NCollection_DataMap::DataMapNode(const TheKeyType&,TheItemType&&,NCollection_ListNode*)",
@@ -81900,7 +81900,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
+      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
     },
     {
       "upstream_id": "NCollection_DataMap::DataMapNode(TheKeyType&&,const TheItemType&,NCollection_ListNode*)",
@@ -81908,7 +81908,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
+      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
     },
     {
       "upstream_id": "NCollection_DataMap::DataMapNode(TheKeyType&&,TheItemType&&,NCollection_ListNode*)",
@@ -81916,7 +81916,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
+      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
     },
     {
       "upstream_id": "NCollection_DataMap::DataMapNode::Key() const",
@@ -81924,7 +81924,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
+      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
     },
     {
       "upstream_id": "NCollection_DataMap::DataMapNode::delNode(NCollection_ListNode*,occ::handle<NCollection_BaseAllocator>&)",
@@ -81932,7 +81932,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
+      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
     },
     {
       "upstream_id": "NCollection_DataMap::Iterator()",
@@ -82124,7 +82124,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::assign_returning",
       "status": "partial",
-      "notes": "Explicit return-reference and self-assignment adapters. Copy keeps destination hasher, allocator and bucket storage; delegates to borrowed Bind (hash original key, allocate, value clone, key clone). Generic C++ subobject/address-sensitive copy, custom destruction and allocator failure semantics remain partial. Native probe: tools/oracle/ncollection_data_map_assignment.cxx; supplemental Rust tests: ncollection_data_map_assignment. Original declaration/test counts unchanged.",
+      "notes": "Explicit return-reference and self-assignment adapters. Copy keeps destination hasher, allocator and bucket storage; delegates to borrowed Bind (hash original key, value clone, key clone). Generic C++ subobject/address-sensitive copy, custom destruction and allocator failure semantics remain partial. Native probe: tools/oracle/ncollection_data_map_assignment.cxx; supplemental Rust tests: ncollection_data_map_assignment. Original declaration/test counts unchanged.",
       "rust_items": [
         "rustycad_tkernel::ncollection::DataMap::assign_returning",
         "rustycad_tkernel::ncollection::DataMap::assign_self"
@@ -82136,7 +82136,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::assign_returning",
       "status": "partial",
-      "notes": "Explicit return-reference and self-assignment adapters. Copy keeps destination hasher, allocator and bucket storage; delegates to borrowed Bind (hash original key, allocate, value clone, key clone). Generic C++ subobject/address-sensitive copy, custom destruction and allocator failure semantics remain partial. Native probe: tools/oracle/ncollection_data_map_assignment.cxx; supplemental Rust tests: ncollection_data_map_assignment. Original declaration/test counts unchanged.",
+      "notes": "Explicit return-reference and self-assignment adapters. Copy keeps destination hasher, allocator and bucket storage; delegates to borrowed Bind (hash original key, value clone, key clone). Generic C++ subobject/address-sensitive copy, custom destruction and allocator failure semantics remain partial. Native probe: tools/oracle/ncollection_data_map_assignment.cxx; supplemental Rust tests: ncollection_data_map_assignment. Original declaration/test counts unchanged.",
       "rust_items": [
         "rustycad_tkernel::ncollection::DataMap::assign_returning",
         "rustycad_tkernel::ncollection::DataMap::assign_self"
@@ -82148,7 +82148,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::move_from_returning",
       "status": "partial",
-      "notes": "Explicit return-reference and self-assignment adapters. Move exchanges contents, hasher, and allocator with stable nodes; Rust swaps do not run arbitrary C++ hasher swap hooks. Native probe: tools/oracle/ncollection_data_map_assignment.cxx; supplemental Rust tests: ncollection_data_map_assignment. Original declaration/test counts unchanged.",
+      "notes": "Explicit return-reference and self-assignment adapters. Move exchanges contents, bucket table, hasher, and allocator; Rust swaps do not run arbitrary C++ hasher swap hooks. Native probe: tools/oracle/ncollection_data_map_assignment.cxx; supplemental Rust tests: ncollection_data_map_assignment. Original declaration/test counts unchanged.",
       "rust_items": [
         "rustycad_tkernel::ncollection::DataMap::move_from_returning",
         "rustycad_tkernel::ncollection::DataMap::assign_self"
@@ -82176,7 +82176,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap::bind_ref",
       "status": "partial",
-      "notes": "Manual NCollection member mapping. `bind_ref` hashes/searches the original key once; on a miss it allocates allocator-owned node storage before cloning the value and then key. A key-clone panic releases the allocation and staged value. On a hit it clones/replaces only the value and returns false. Rust stores an Entry rather than OCCT's combined list node; bucket storage uses the global allocator. User-defined C++ move-assignment/destructor hooks, self-aliasing, and native exception behavior remain partial."
+      "notes": "Manual NCollection member mapping. `bind_ref` hashes/searches the original key once; on a miss it clones the value and then the key into a new slot (the native allocator event needs an injected C++ allocator subclass, plan D1 B6). A key-clone panic drops the staged value and publishes nothing. On a hit it clones/replaces only the value and returns false. Rust stores a slot rather than OCCT's combined list node; bucket storage uses the global allocator. User-defined C++ move-assignment/destructor hooks, self-aliasing, and native exception behavior remain partial."
     },
     {
       "upstream_id": "NCollection_DataMap::Bind(TheKeyType&&,const TheItemType&)",
@@ -84284,7 +84284,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
+      "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
     },
     {
       "upstream_id": "NCollection_Map::MapNode(TheKeyType&&,NCollection_ListNode*)",
@@ -84292,7 +84292,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
+      "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
     },
     {
       "upstream_id": "NCollection_Map::MapNode::Key()",
@@ -84300,7 +84300,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
+      "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
     },
     {
       "upstream_id": "NCollection_Map::MapNode::Key() const",
@@ -84308,7 +84308,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
+      "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
     },
     {
       "upstream_id": "NCollection_Map::Iterator()",
@@ -84492,7 +84492,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::add_ref",
       "status": "partial",
-      "notes": "Borrowed original-key lookup once; allocate node before key clone on miss, no key copy on hit. Added returns the stored key without a second lookup. Native oracle tools/oracle/ncollection_map_borrowed_add.cxx; supplemental tests ncollection_map_borrowed_add. Generic address-sensitive C++ subobject construction, custom allocator/bucket representation and allocation failure semantics remain partial."
+      "notes": "Borrowed original-key lookup once; key clone on miss (the native allocator event needs an injected C++ allocator subclass, plan D1 B6), no key copy on hit. Added returns the stored key without a second lookup. Native oracle tools/oracle/ncollection_map_borrowed_add.cxx; supplemental tests ncollection_map_borrowed_add. Generic address-sensitive C++ subobject construction, custom allocator/bucket representation and allocation failure semantics remain partial."
     },
     {
       "upstream_id": "NCollection_Map::Add(TheKeyType&&)",
@@ -84508,7 +84508,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map::added_ref",
       "status": "partial",
-      "notes": "Borrowed original-key lookup once; allocate node before key clone on miss, no key copy on hit. Added returns the stored key without a second lookup. Native oracle tools/oracle/ncollection_map_borrowed_add.cxx; supplemental tests ncollection_map_borrowed_add. Generic address-sensitive C++ subobject construction, custom allocator/bucket representation and allocation failure semantics remain partial."
+      "notes": "Borrowed original-key lookup once; key clone on miss (the native allocator event needs an injected C++ allocator subclass, plan D1 B6), no key copy on hit. Added returns the stored key without a second lookup. Native oracle tools/oracle/ncollection_map_borrowed_add.cxx; supplemental tests ncollection_map_borrowed_add. Generic address-sensitive C++ subobject construction, custom allocator/bucket representation and allocation failure semantics remain partial."
     },
     {
       "upstream_id": "NCollection_Map::Added(TheKeyType&&)",
@@ -378539,7 +378539,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
+      "notes": "Excluded: DataMapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (DataMapIterator)."
     },
     {
       "upstream_id": "NCollection_DataMap::Iterator::Iterator(NCollection_DataMap<TheKeyType,TheItemType,Hasher>&)",
@@ -378811,7 +378811,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DataMap",
       "status": "excluded",
-      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust ncollection::DataMap keeps its nodes private in allocator-owned storage; every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
+      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
     },
     {
       "upstream_id": "NCollection_DataMap::Iterator",
@@ -379723,7 +379723,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in allocator-owned boxes addressed by typed bucket vectors that are not public; every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
+      "notes": "Excluded: MapNode is the bucket-chain node of the native intrusive hash table. The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum (keys, item, index, chain order) is reachable through the map's lookups and its cursor (MapIterator)."
     },
     {
       "upstream_id": "NCollection_Map::Iterator::Iterator(const NCollection_Map<TheKeyType,Hasher>&)",
@@ -380019,7 +380019,7 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
       "rust_item": "rustycad_tkernel::ncollection::Map",
       "status": "excluded",
-      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust ncollection::Map keeps its nodes private in allocator-owned storage; every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
+      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust map stores its entries in a private slot vector whose bucket chains are slot indices (safe storage, 2026-10-07); every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
     },
     {
       "upstream_id": "NCollection_Map::Iterator",

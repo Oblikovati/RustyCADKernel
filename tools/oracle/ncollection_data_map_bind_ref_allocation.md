@@ -10,13 +10,14 @@ the key. A hit remains `H E V M D` with no allocator event. If key copy throws,
 the already-constructed value is destroyed and placement delete frees the node
 (`H A V K D F`); the map extent stays zero.
 
-The Rust `bind_ref` miss path now calls `BaseAllocator::allocate_value_with`
-before cloning. Its closure clones the value before the key and only then
-builds `Entry`. If a clone panics, the uninitialized allocator-owned box is
-released and any completed local clone is dropped. The Rust allocator still
-owns an `Entry` rather than OCCT's combined base/list node, and bucket arrays
-use Rust's global allocator. Existing-slot replacement also cannot reproduce
-arbitrary C++ move-assignment and destructor hooks, so the API remains partial.
+The Rust `bind_ref` miss path clones the value before the key and then stores
+the entry in the map's safe slot storage (2026-10-07). If a clone panics, any
+completed local clone is dropped and nothing is published. Rust allocators are
+a closed set (no injected subclass), and map entries take no allocator lease,
+so the `A` event is not observable through the Rust API (plan D1 class B6);
+the hash, copy and destructor order is. Existing-slot replacement also cannot
+reproduce arbitrary C++ move-assignment and destructor hooks, so the API
+remains partial.
 
 Reproduce against the pinned OCCT build:
 

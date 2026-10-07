@@ -1,28 +1,28 @@
-//! Stable allocator-owned hash keys with OCCT's insertion and traversal behavior.
-#![allow(unsafe_code)]
+//! Hash keys with OCCT's bucket growth, head insertion and traversal behavior.
 use super::{
-    BaseAllocator, BaseMap, DefaultHashPolicy, HashPolicy, MapLinkNode, MapNode,
-    owned_bucket_chains::{BucketNodeRange, OwnedBucketChains},
+    BaseAllocator, BaseMap, DefaultHashPolicy, HashPolicy,
+    chained_slots::{ChainedSlots, SlotRange},
 };
 use std::fmt::Debug;
 /// A set of hash keys; `Map::<i32>::default().add(42)`.
 pub struct Map<K, H = DefaultHashPolicy> {
-    storage: OwnedBucketChains<MapNode<K>>,
+    // Key-only native MapNode: the slot value is the unit type.
+    storage: ChainedSlots<K, ()>,
     hasher: H,
 }
 /// Shared keys in OCCT bucket order; `map.iter()`.
 pub struct MapIter<'a, K> {
-    entries: BucketNodeRange<'a, MapNode<K>>,
+    entries: SlotRange<'a, K, ()>,
 }
 impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     /// Creates a map with injected equality/hash state; `Map::with_hasher(policy,10)`.
     pub fn with_hasher(hasher: H, buckets: usize) -> Self {
         Self::with_allocator(hasher, buckets, BaseAllocator::common())
     }
-    /// Selects storage for stable key nodes; `Map::with_allocator(policy,10,arena)`.
+    /// Selects the map allocator; `Map::with_allocator(policy,10,arena)`.
     pub fn with_allocator(hasher: H, buckets: usize, resource: BaseAllocator) -> Self {
         Self {
-            storage: OwnedBucketChains::new(buckets, resource),
+            storage: ChainedSlots::new(buckets, resource),
             hasher,
         }
     }
@@ -30,13 +30,13 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     pub fn hasher(&self) -> &H {
         &self.hasher
     }
-    /// Returns the node allocator; `map.allocator()==&arena`.
+    /// Returns the allocator identity; `map.allocator()==&arena`.
     pub fn allocator(&self) -> &BaseAllocator {
-        self.storage.base.allocator()
+        self.storage.allocator()
     }
     /// Counts unique keys; `map.len()==3`.
     pub fn len(&self) -> usize {
-        self.storage.base.size()
+        self.storage.size()
     }
     /// Returns OCCT's key extent; `map.extent()==3`.
     pub fn extent(&self) -> usize {
@@ -44,13 +44,13 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     }
     /// Checks for no keys; `map.is_empty()`.
     pub fn is_empty(&self) -> bool {
-        self.storage.base.size() == 0
+        self.storage.size() == 0
     }
     /// Returns the hash modulus; `map.bucket_count()`.
     pub fn bucket_count(&self) -> usize {
-        self.storage.base.nb_buckets()
+        self.storage.nb_buckets()
     }
-    /// Grows buckets without relocating keys; `map.resize(200)`.
+    /// Grows to the next native prime step and rechains keys; `map.resize(200)`.
     pub fn resize(&mut self, size: usize) {
         self.storage.resize(size, &self.hasher);
     }
@@ -62,7 +62,7 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     pub fn contained(&self, key: &K) -> Option<&K> {
         self.storage
             .lookup(key, &self.hasher)
-            .map(|(_, node)| unsafe { self.storage.node(node).key() })
+            .map(|(_, slot)| self.storage.slot(slot).key())
     }
     /// Adds a key, preserving the existing value on duplicates; `map.add(42)`.
     pub fn add(&mut self, key: K) -> bool {
@@ -76,7 +76,7 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     pub fn emplace(&mut self, key: K) -> bool {
         self.place_key(key, true).0
     }
-    /// Reconstructs and returns a stable stored key; `map.emplaced(42)`.
+    /// Reconstructs and returns the stored key; `map.emplaced(42)`.
     pub fn emplaced(&mut self, key: K) -> &K {
         self.place_key(key, true).1
     }
@@ -90,30 +90,31 @@ impl<K: Debug, H: HashPolicy<K>> Map<K, H> {
     }
     /// Removes an equivalent key, reporting whether found; `map.remove(&42)`.
     pub fn remove(&mut self, key: &K) -> bool {
-        let Some((bucket, node)) = self.storage.lookup(key, &self.hasher) else {
+        let Some((bucket, slot)) = self.storage.lookup(key, &self.hasher) else {
             return false;
         };
-        self.storage.remove(bucket, node);
+        // Native Remove unlinks and counts down before the node destructor runs.
+        drop(self.storage.remove(bucket, slot));
         true
     }
     /// Frees keys and optionally buckets; `map.clear(true)`.
     pub fn clear(&mut self, release: bool) {
         self.storage.clear(release);
     }
-    /// Swaps nodes, allocator and hash policy; `map.exchange(&mut other)`.
+    /// Swaps entries, allocator and hash policy; `map.exchange(&mut other)`.
     pub fn exchange(&mut self, other: &mut Self) {
         std::mem::swap(self, other);
     }
     /// Borrows keys in bucket traversal order; `for key in map.iter() {}`.
     pub fn iter(&self) -> MapIter<'_, K> {
         MapIter {
-            entries: BucketNodeRange::new(&self.storage),
+            entries: SlotRange::new(&self.storage),
         }
     }
     /// Returns an exhausted iterator for OCCT iterator comparisons; `map.iter()!=map.end()`.
     pub fn end(&self) -> MapIter<'_, K> {
         MapIter {
-            entries: BucketNodeRange::default(),
+            entries: SlotRange::default(),
         }
     }
 }
@@ -155,7 +156,7 @@ impl<'a, K: Debug, H: HashPolicy<K>> IntoIterator for &'a Map<K, H> {
 impl<'a, K> Iterator for MapIter<'a, K> {
     type Item = &'a K;
     fn next(&mut self) -> Option<Self::Item> {
-        self.entries.next().map(MapNode::key)
+        self.entries.next().map(|entry| entry.key())
     }
 }
 impl<K> Clone for MapIter<'_, K> {

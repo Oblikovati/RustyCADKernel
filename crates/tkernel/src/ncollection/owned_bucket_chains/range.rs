@@ -20,13 +20,6 @@ impl<'a, N: CanonicalMapNode> BucketNodeRange<'a, N> {
         }
         Some(unsafe { self.source?.node(self.position.node) })
     }
-    pub(in crate::ncollection) fn reset(&mut self) {
-        self.position = self
-            .source
-            .map_or_else(BucketChainPosition::default, |source| {
-                BucketChainPosition::new(&source.base)
-            });
-    }
 }
 // SAFETY: each shared range borrows a graph that cannot mutate; both payloads must be Sync.
 unsafe impl<N: CanonicalMapNode> Send for BucketNodeRange<'_, N>

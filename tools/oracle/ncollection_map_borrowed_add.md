@@ -19,8 +19,10 @@ diff -u tools/oracle/ncollection_map_borrowed_add.expected \
   /tmp/map-borrowed-add-native.actual
 ```
 
-Rust regressions verify the single lookup, copy suppression on hits, live
-node allocation during Clone, stable returned key and panic cleanup. Native
+Rust regressions verify the single lookup, copy suppression on hits, stable
+returned key and panic cleanup. The `A` allocator event needs an injected C++
+allocator subclass; Rust allocators are a closed set and map entries take no
+allocator lease, so it is not observable through the Rust API (plan D1 B6). Native
 bucket allocation and C++ address-sensitive subobject construction, custom
 move/destructor hooks and allocation failure categories remain partial.
 These supplemental cases do not add original OCCT test declarations.

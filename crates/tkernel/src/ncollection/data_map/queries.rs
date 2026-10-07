@@ -23,8 +23,8 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// assert_eq!(map.contained(&1), Some((&1, &10)));
     /// ```
     pub fn contained(&self, key: &K) -> Option<(&K, &V)> {
-        let (_, node) = self.lookup(key)?;
-        let entry = unsafe { self.storage.node(node) };
+        let (_, slot) = self.lookup(key)?;
+        let entry = self.storage.slot(slot);
         Some((entry.key(), entry.value()))
     }
 
@@ -38,8 +38,8 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// assert_eq!(map.seek(&1), Some(&5));
     /// ```
     pub fn contained_mut(&mut self, key: &K) -> Option<(&K, &mut V)> {
-        let (_, node) = self.lookup(key)?;
-        Some(unsafe { self.storage.node_mut(node).key_value_mut() })
+        let (_, slot) = self.lookup(key)?;
+        Some(self.storage.slot_mut(slot).key_value_mut())
     }
 
     /// `Seek`: the bound item or `None` (the native null pointer).
