@@ -6,6 +6,7 @@ mod copy_assignment_policy;
 pub(super) mod emplace_policy;
 mod internal_init;
 mod pointers;
+mod raw_construction;
 mod raw_copy;
 mod resize_storage;
 mod returning;
