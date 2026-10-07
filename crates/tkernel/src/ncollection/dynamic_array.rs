@@ -24,9 +24,12 @@ impl<T> Default for DynamicArray<T> {
 }
 mod block_table;
 mod borrowed;
+#[allow(unsafe_code)]
+mod clear_state;
 mod copy_construction_failure;
 mod copy_date;
 mod copy_policy;
+pub use clear_state::DynamicArrayClearState;
 mod increment;
 pub use copy_construction_failure::DynamicArrayCopyConstructionFailure;
 mod initialized_tail;
@@ -122,6 +125,10 @@ impl<T> DynamicArray<T> {
         &mut self.blocks[block][offset]
     }
     fn ensure_storage_for_index(&mut self, index: usize) {
+        if self.increment == 0 {
+            self.require_retained_first_index(index);
+            return;
+        }
         self.require_element_stride();
         self.reserve_block_count(index / self.increment + 1);
     }

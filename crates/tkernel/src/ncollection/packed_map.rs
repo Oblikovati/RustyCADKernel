@@ -174,3 +174,6 @@ mod engine_contracts;
 
 #[cfg(test)]
 mod predicate_contracts;
+
+#[cfg(test)]
+mod mutation_contracts;

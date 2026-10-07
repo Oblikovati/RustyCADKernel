@@ -1,0 +1,1340 @@
+{
+  "schema": 1,
+  "title": "Array1 protected nontrivial default construction range and initialized-prefix ownership",
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_commit": "07d24fa273a77a0386596a94df67694fe196c040",
+  "status": "partial_domain",
+  "global_coverage_credit_added": 0,
+  "native_header": {
+    "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+    "sha256": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6",
+    "method_lines": [
+      568,
+      579
+    ]
+  },
+  "bindings": [
+    {
+      "cpp_declaration": {
+        "access": "protected",
+        "ancestor_access": [
+          {
+            "access": "public",
+            "qualified_name": "NCollection_Array1",
+            "usr": "c:@ST>1#T@NCollection_Array1"
+          }
+        ],
+        "api_visible": true,
+        "canonical_type": "NCollection_Array1::construct",
+        "default_argument_capture": "complete",
+        "default_argument_observations": [
+          [
+            {
+              "expression": "",
+              "expression_status": "not_applicable",
+              "parameter_index": 0,
+              "state": "absent"
+            },
+            {
+              "expression": "",
+              "expression_status": "not_applicable",
+              "parameter_index": 1,
+              "state": "absent"
+            },
+            {
+              "expression": "",
+              "expression_status": "not_applicable",
+              "parameter_index": 2,
+              "state": "absent"
+            }
+          ]
+        ],
+        "default_arguments": [
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 0,
+            "state": "absent"
+          },
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 1,
+            "state": "absent"
+          },
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 2,
+            "state": "absent"
+          }
+        ],
+        "event": "declaration",
+        "exclusion_reason": "",
+        "expansion_location": {
+          "column": 91,
+          "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+          "line": 569
+        },
+        "id": "78cf0ea7bdb5f3a5c8b9d4e825bec67a4fde174b99ac71523600c5a9d9392a88",
+        "identity_signature": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)",
+        "implicit": false,
+        "kind": "FunctionTemplate",
+        "macro_generated": false,
+        "main_header": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "parameter_types": [
+          "const unsigned long",
+          "const unsigned long",
+          "type-parameter-0-0 *"
+        ],
+        "parent_usr": "c:@ST>1#T@NCollection_Array1",
+        "qualified_name": "NCollection_Array1::construct",
+        "signature": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)",
+        "signature_variants": [
+          "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)"
+        ],
+        "sites": [
+          {
+            "expansion_location": {
+              "column": 91,
+              "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+              "line": 569
+            },
+            "observed_in": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+            "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+            "spelling_location": {
+              "column": 91,
+              "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+              "line": 569
+            }
+          }
+        ],
+        "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "spelling_location": {
+          "column": 91,
+          "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+          "line": 569
+        },
+        "stable_identity": true,
+        "template_signature": "template <typename __template_param_0 = TheItemType> ",
+        "template_signature_variants": [
+          "template <typename __template_param_0 = TheItemType> "
+        ],
+        "usr": "c:@ST>1#T@NCollection_Array1@FT@>1#Tconstruct#l#l#*t0.0#^std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>:::type#",
+        "variadic": false,
+        "written_parameter_types": [
+          "const size_t",
+          "const size_t",
+          "NCollection_Array1::pointer"
+        ]
+      },
+      "rust_body": {
+        "path": "rustycad_tkernel::ncollection::Array1::construct_nontrivial_raw",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "target",
+                {
+                  "raw_pointer": {
+                    "is_mutable": true,
+                    "type": {
+                      "resolved_path": {
+                        "path": "MaybeUninit",
+                        "resolved_item_path": "core::mem::maybe_uninit::MaybeUninit",
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "generic": "T"
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "from",
+                {
+                  "primitive": "usize"
+                }
+              ],
+              [
+                "to",
+                {
+                  "primitive": "usize"
+                }
+              ],
+              [
+                "construct",
+                {
+                  "impl_trait": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "FnMut",
+                          "resolved_item_path": "core::ops::function::FnMut",
+                          "args": {
+                            "parenthesized": {
+                              "inputs": [],
+                              "output": {
+                                "generic": "T"
+                              }
+                            }
+                          }
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ]
+                }
+              ]
+            ],
+            "output": null,
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "impl FnMut() -> T",
+                "kind": {
+                  "type": {
+                    "bounds": [
+                      {
+                        "trait_bound": {
+                          "trait": {
+                            "path": "FnMut",
+                            "resolved_item_path": "core::ops::function::FnMut",
+                            "args": {
+                              "parenthesized": {
+                                "inputs": [],
+                                "output": {
+                                  "generic": "T"
+                                }
+                              }
+                            }
+                          },
+                          "generic_params": [],
+                          "modifier": "none"
+                        }
+                      }
+                    ],
+                    "default": null,
+                    "is_synthetic": true
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": true,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "source_file": "crates/tkernel/src/ncollection/array1/raw_construction.rs",
+        "source_sha256": "381b7782e0272e35e737ada2d6ded4d5866d9a650a72690125b35835e0acdaa4",
+        "source_status": null,
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::Array1",
+              "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "lifetime": "'_"
+                    },
+                    {
+                      "type": {
+                        "generic": "T"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "generics": {
+            "params": [
+              {
+                "name": "T",
+                "kind": {
+                  "type": {
+                    "bounds": [],
+                    "default": null,
+                    "is_synthetic": false
+                  }
+                }
+              }
+            ],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "a9c9570033491313a2c255329abfbbae09a7ca30711fa6bef3e9310076d8e64c"
+      },
+      "status": "partial_domain",
+      "domain": "Default native U=TheItemType nontrivial default construction into caller-owned aligned MaybeUninit slots. Ascending half-open range, callback construction, retained completed prefix on panic; no Clone or Default trait requirement in the Rust callback adapter."
+    }
+  ],
+  "duplicate_template_child": {
+    "declaration": {
+      "access": "protected",
+      "ancestor_access": [
+        {
+          "access": "public",
+          "qualified_name": "NCollection_Array1",
+          "usr": "c:@ST>1#T@NCollection_Array1"
+        }
+      ],
+      "api_visible": false,
+      "canonical_type": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)",
+      "default_argument_capture": "complete",
+      "default_argument_observations": [
+        [
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 0,
+            "state": "absent"
+          },
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 1,
+            "state": "absent"
+          },
+          {
+            "expression": "",
+            "expression_status": "not_applicable",
+            "parameter_index": 2,
+            "state": "absent"
+          }
+        ]
+      ],
+      "default_arguments": [
+        {
+          "expression": "",
+          "expression_status": "not_applicable",
+          "parameter_index": 0,
+          "state": "absent"
+        },
+        {
+          "expression": "",
+          "expression_status": "not_applicable",
+          "parameter_index": 1,
+          "state": "absent"
+        },
+        {
+          "expression": "",
+          "expression_status": "not_applicable",
+          "parameter_index": 2,
+          "state": "absent"
+        }
+      ],
+      "event": "declaration",
+      "exclusion_reason": "template_owned_declaration",
+      "expansion_location": {
+        "column": 91,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 569
+      },
+      "id": "853ec02ef89529920513e45d2f9db0898a3d9ff9c4e29dde9d25e2f427e6a32e",
+      "identity_signature": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)",
+      "implicit": false,
+      "kind": "CXXMethod",
+      "macro_generated": false,
+      "main_header": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "parameter_types": [
+        "const unsigned long",
+        "const unsigned long",
+        "type-parameter-0-0 *"
+      ],
+      "parent_usr": "c:@ST>1#T@NCollection_Array1",
+      "qualified_name": "NCollection_Array1::construct",
+      "signature": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)",
+      "signature_variants": [
+        "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)"
+      ],
+      "sites": [
+        {
+          "expansion_location": {
+            "column": 91,
+            "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+            "line": 569
+          },
+          "observed_in": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+          "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+          "spelling_location": {
+            "column": 91,
+            "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+            "line": 569
+          }
+        }
+      ],
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "spelling_location": {
+        "column": 91,
+        "file": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+        "line": 569
+      },
+      "stable_identity": true,
+      "template_signature": "template <typename __template_param_0 = TheItemType> ",
+      "template_signature_variants": [
+        "template <typename __template_param_0 = TheItemType> "
+      ],
+      "usr": "c:@ST>1#T@NCollection_Array1@FT@>1#Tconstruct#l#l#*t0.0#^std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>:::type#",
+      "variadic": false,
+      "written_parameter_types": [
+        "const size_t",
+        "const size_t",
+        "NCollection_Array1::pointer"
+      ]
+    },
+    "binding_kind": "template_body_duplicate",
+    "independent_credit": 0
+  },
+  "shared_engine": {
+    "id": 3940,
+    "crate_id": 0,
+    "name": "construct_raw_range",
+    "span": {
+      "filename": "crates/tkernel/src/ncollection/array1/raw_construction.rs",
+      "begin": [
+        98,
+        1
+      ],
+      "end": [
+        109,
+        2
+      ]
+    },
+    "visibility": {
+      "restricted": {
+        "parent": 3942,
+        "path": "::ncollection::array1::raw_construction"
+      }
+    },
+    "docs": null,
+    "links": {},
+    "attrs": [
+      {
+        "other": "#[allow(unsafe_code)]"
+      }
+    ],
+    "deprecation": null,
+    "stability": null,
+    "const_stability": null,
+    "inner": {
+      "function": {
+        "sig": {
+          "inputs": [
+            [
+              "target",
+              {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "resolved_path": {
+                      "path": "std::mem::MaybeUninit",
+                      "id": 3941,
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "T"
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "from",
+              {
+                "primitive": "usize"
+              }
+            ],
+            [
+              "to",
+              {
+                "primitive": "usize"
+              }
+            ],
+            [
+              "construct",
+              {
+                "impl_trait": [
+                  {
+                    "trait_bound": {
+                      "trait": {
+                        "path": "FnMut",
+                        "id": 3937,
+                        "args": {
+                          "parenthesized": {
+                            "inputs": [
+                              {
+                                "primitive": "usize"
+                              }
+                            ],
+                            "output": {
+                              "generic": "T"
+                            }
+                          }
+                        }
+                      },
+                      "generic_params": [],
+                      "modifier": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          ],
+          "output": null,
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            },
+            {
+              "name": "impl FnMut(usize) -> T",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "FnMut",
+                          "id": 3937,
+                          "args": {
+                            "parenthesized": {
+                              "inputs": [
+                                {
+                                  "primitive": "usize"
+                                }
+                              ],
+                              "output": {
+                                "generic": "T"
+                              }
+                            }
+                          }
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": true
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      }
+    }
+  },
+  "regression_binding": {
+    "cpp_id": "4d127fe075a88afd03403bfe0b84f72122703bc1504b82c236df3d8fdc34417b",
+    "rust_body": {
+      "path": "rustycad_tkernel::ncollection::Array1::copy_construct_nontrivial_raw",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "target",
+              {
+                "raw_pointer": {
+                  "is_mutable": true,
+                  "type": {
+                    "resolved_path": {
+                      "path": "MaybeUninit",
+                      "resolved_item_path": "core::mem::maybe_uninit::MaybeUninit",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "T"
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "source",
+              {
+                "raw_pointer": {
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "T"
+                  }
+                }
+              }
+            ],
+            [
+              "count",
+              {
+                "primitive": "usize"
+              }
+            ],
+            [
+              "construct",
+              {
+                "impl_trait": [
+                  {
+                    "trait_bound": {
+                      "trait": {
+                        "path": "FnMut",
+                        "resolved_item_path": "core::ops::function::FnMut",
+                        "args": {
+                          "parenthesized": {
+                            "inputs": [
+                              {
+                                "borrowed_ref": {
+                                  "lifetime": null,
+                                  "is_mutable": false,
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              }
+                            ],
+                            "output": {
+                              "generic": "T"
+                            }
+                          }
+                        }
+                      },
+                      "generic_params": [],
+                      "modifier": "none"
+                    }
+                  }
+                ]
+              }
+            ]
+          ],
+          "output": null,
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "impl FnMut(&T) -> T",
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "trait": {
+                          "path": "FnMut",
+                          "resolved_item_path": "core::ops::function::FnMut",
+                          "args": {
+                            "parenthesized": {
+                              "inputs": [
+                                {
+                                  "borrowed_ref": {
+                                    "lifetime": null,
+                                    "is_mutable": false,
+                                    "type": {
+                                      "generic": "T"
+                                    }
+                                  }
+                                }
+                              ],
+                              "output": {
+                                "generic": "T"
+                              }
+                            }
+                          }
+                        },
+                        "generic_params": [],
+                        "modifier": "none"
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": true
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": true,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "source_file": "crates/tkernel/src/ncollection/array1/raw_construction.rs",
+      "source_sha256": "381b7782e0272e35e737ada2d6ded4d5866d9a650a72690125b35835e0acdaa4",
+      "source_status": null,
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::Array1",
+            "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "lifetime": "'_"
+                  },
+                  {
+                    "type": {
+                      "generic": "T"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "generics": {
+          "params": [
+            {
+              "name": "T",
+              "kind": {
+                "type": {
+                  "bounds": [],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              }
+            }
+          ],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "08a8dcb5d621e0a722a87fb5cc5ec94f825a5be39ceac678413ebc56ad07e3a9"
+    },
+    "note": "Existing raw copy construction now shares the range-writing engine; its prior receipt is retained unchanged and its existing tests remain green. No additional declaration credit."
+  },
+  "baseline": {
+    "kind": "missing_callable_compile_error",
+    "restored_baseline": "HEAD:crates/tkernel/src/ncollection/array1/raw_construction.rs restores pre-existing raw copy construction while excluding the new range constructor.",
+    "diagnostic": "E0599 construct_nontrivial_raw absent; ordinary Vec default construction cleans its initialized prefix when later construction fails, unlike this caller-owned native raw protocol."
+  },
+  "native_oracle": {
+    "source": "tools/oracle/tkernel_array_default_construction.cxx",
+    "expected": "tools/oracle/tkernel_array_default_construction.expected",
+    "rows": 7,
+    "compiler": "c++ -std=c++17 -fsanitize=undefined -fno-sanitize-recover=all",
+    "note": "Probe instrumented by UBSan; linked TKernel not fully instrumented. Noncopyable default-constructible element traces member construction, body failure, failed-member cleanup and explicit destruction of completed objects. Uninitialized/failing object bytes are never read."
+  },
+  "validation": {
+    "counts": {
+      "rust": {
+        "passed": 311,
+        "failed": 0,
+        "ignored": 0
+      },
+      "miri": {
+        "passed": 203,
+        "failed": 0,
+        "ignored": 0
+      },
+      "docs": {
+        "passed": 279,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    "native_original_names": [
+      "NCollection_Array1Test.AssignmentOperator",
+      "NCollection_Array1Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+      "NCollection_Array1Test.AssignmentOperatorDifferentSize",
+      "NCollection_Array1Test.AssignmentOperatorEmptySource",
+      "NCollection_Array1Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+      "NCollection_Array1Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+      "NCollection_Array1Test.AssignmentValue",
+      "NCollection_Array1Test.ChangeValue",
+      "NCollection_Array1Test.ChangeValueAccess",
+      "NCollection_Array1Test.ConstructorWithBounds",
+      "NCollection_Array1Test.ConstructorWithNegativeBounds",
+      "NCollection_Array1Test.ConstructorWithSizeTUpperUsesBounds",
+      "NCollection_Array1Test.CopyConstructor",
+      "NCollection_Array1Test.CopyValuesDifferentSize",
+      "NCollection_Array1Test.CopyValuesPreservesBounds",
+      "NCollection_Array1Test.DefaultConstructor",
+      "NCollection_Array1Test.EmplaceValue",
+      "NCollection_Array1Test.EmplaceValue_ReplacesExisting",
+      "NCollection_Array1Test.EmptyRangesAndDefaultIterators",
+      "NCollection_Array1Test.FirstLast",
+      "NCollection_Array1Test.Init",
+      "NCollection_Array1Test.IteratorAccess",
+      "NCollection_Array1Test.Move",
+      "NCollection_Array1Test.ReferenceSizeConstructorRequiresExplicitBufferPolicy",
+      "NCollection_Array1Test.Resize",
+      "NCollection_Array1Test.STLAlgorithmCompatibility_MinMax",
+      "NCollection_Array1Test.STLAlgorithmCompatibility_Replace",
+      "NCollection_Array1Test.STLAlgorithmCompatibility_Sort",
+      "NCollection_Array1Test.STLIteration",
+      "NCollection_Array1Test.SetValue",
+      "NCollection_Array1Test.SizeConstructor_AllocatesCorrectly",
+      "NCollection_Array1Test.SizeConstructor_AtAccess",
+      "NCollection_Array1Test.SizeConstructor_BufferReuse_DataPreserved",
+      "NCollection_Array1Test.SizeConstructor_BufferReuse_NotOwner",
+      "NCollection_Array1Test.SizeConstructor_BufferReuse_WritesGoToBuffer",
+      "NCollection_Array1Test.SizeConstructor_IteratorAccess",
+      "NCollection_Array1Test.SizeConstructor_LegacyValueOperator",
+      "NCollection_Array1Test.SizeConstructor_MoveSemantics",
+      "NCollection_Array1Test.SizeConstructor_Resize_Grow",
+      "NCollection_Array1Test.SizeConstructor_Resize_NoData",
+      "NCollection_Array1Test.SizeConstructor_Resize_Shrink",
+      "NCollection_Array1Test.SizeConstructor_StdVectorBufferReuse",
+      "NCollection_Array1Test.SizeConstructor_ZeroSize",
+      "NCollection_Array1Test.ValueAccess",
+      "NCollection_Array2Test.AssignmentOperator",
+      "NCollection_Array2Test.AssignmentOperatorDetachesDifferentSizeExternalBuffer",
+      "NCollection_Array2Test.AssignmentOperatorReusesSameSizeExternalBuffer",
+      "NCollection_Array2Test.AssignmentOperatorReusesSameSizeOwnedStorage",
+      "NCollection_Array2Test.ChangeValueAccess",
+      "NCollection_Array2Test.ConstructorWithBounds",
+      "NCollection_Array2Test.ConstructorWithNegativeBounds",
+      "NCollection_Array2Test.CopyConstructor",
+      "NCollection_Array2Test.CopyValuesDifferentDimensions",
+      "NCollection_Array2Test.CopyValuesPreservesBounds",
+      "NCollection_Array2Test.DefaultConstructor",
+      "NCollection_Array2Test.EmplaceValue",
+      "NCollection_Array2Test.EmplaceValue_ReplacesExisting",
+      "NCollection_Array2Test.Init",
+      "NCollection_Array2Test.MoveAssignment",
+      "NCollection_Array2Test.MoveConstructor",
+      "NCollection_Array2Test.ReIndex_Interference",
+      "NCollection_Array2Test.ReIndex_UpdateBounds",
+      "NCollection_Array2Test.Resize",
+      "NCollection_Array2Test.ResizeWithTrim_GrowPreservesOldRegion",
+      "NCollection_Array2Test.ResizeWithTrim_NonUnitLowerBounds",
+      "NCollection_Array2Test.ResizeWithTrim_PreservesElementPositions",
+      "NCollection_Array2Test.Resize_ChangeShapeSameSize",
+      "NCollection_Array2Test.Resize_FromEmpty",
+      "NCollection_Array2Test.Resize_NoCopy",
+      "NCollection_Array2Test.Resize_SameSizeNewBounds",
+      "NCollection_Array2Test.Resize_SameSizeNewBounds_Linear",
+      "NCollection_Array2Test.STLIteration",
+      "NCollection_Array2Test.SizeConstructor_AllocatesCorrectly",
+      "NCollection_Array2Test.SizeConstructor_AtAccess",
+      "NCollection_Array2Test.SizeConstructor_BufferReuse_DataPreserved",
+      "NCollection_Array2Test.SizeConstructor_BufferReuse_NotOwner",
+      "NCollection_Array2Test.SizeConstructor_LegacyOperatorZeroBased",
+      "NCollection_Array2Test.SizeConstructor_ResizeWithTrim_GrowPreserves",
+      "NCollection_Array2Test.SizeConstructor_Resize_Grow",
+      "NCollection_Array2Test.SizeConstructor_Resize_NoData",
+      "NCollection_Array2Test.ValueAccess"
+    ],
+    "native_original_count": 81,
+    "original_rust_case_names_match": true,
+    "new_tests": 4,
+    "operation_rows": "Full and middle ranges, first/late construction failure, empty/reversed ranges, null zero/reversed range. Stack and heap fixtures verify completed object values, member cleanup, explicit prefix cleanup and unchanged panic payload.",
+    "checks": {
+      "targets": [
+        "ncollection_array1",
+        "ncollection_array2",
+        "ncollection_arrays_api_behavior",
+        "array1_assignment_pointer_contracts",
+        "array2_assignment_pointer_contracts",
+        "array1_borrowed_init",
+        "ncollection_array2_buffer_prefix",
+        "ncollection_array_set_value_ref",
+        "array_raw_copy_contracts",
+        "array_raw_copy_validation",
+        "array_buffer_constructors",
+        "array_buffer_validation",
+        "array2_resize_assignment",
+        "array2_resize_validation",
+        "array_emplace_assignment",
+        "array_set_value_assignment",
+        "array_const_assignment",
+        "array_copy_values_assignment",
+        "array_internal_set_value",
+        "array_internal_init",
+        "array_internal_emplace",
+        "array_uninitialized",
+        "array_raw_construction",
+        "array2_index_limits",
+        "array_exact_surface",
+        "array_nontrivial_raw_copy",
+        "array_exclusive_initialization",
+        "array_default_construction"
+      ],
+      "results": {
+        "rust": {
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--test",
+            "ncollection_array1",
+            "--test",
+            "ncollection_array2",
+            "--test",
+            "ncollection_arrays_api_behavior",
+            "--test",
+            "array1_assignment_pointer_contracts",
+            "--test",
+            "array2_assignment_pointer_contracts",
+            "--test",
+            "array1_borrowed_init",
+            "--test",
+            "ncollection_array2_buffer_prefix",
+            "--test",
+            "ncollection_array_set_value_ref",
+            "--test",
+            "array_raw_copy_contracts",
+            "--test",
+            "array_raw_copy_validation",
+            "--test",
+            "array_buffer_constructors",
+            "--test",
+            "array_buffer_validation",
+            "--test",
+            "array2_resize_assignment",
+            "--test",
+            "array2_resize_validation",
+            "--test",
+            "array_emplace_assignment",
+            "--test",
+            "array_set_value_assignment",
+            "--test",
+            "array_const_assignment",
+            "--test",
+            "array_copy_values_assignment",
+            "--test",
+            "array_internal_set_value",
+            "--test",
+            "array_internal_init",
+            "--test",
+            "array_internal_emplace",
+            "--test",
+            "array_uninitialized",
+            "--test",
+            "array_raw_construction",
+            "--test",
+            "array2_index_limits",
+            "--test",
+            "array_exact_surface",
+            "--test",
+            "array_nontrivial_raw_copy",
+            "--test",
+            "array_exclusive_initialization",
+            "--test",
+            "array_default_construction"
+          ],
+          "exit": 0
+        },
+        "clippy": {
+          "command": [
+            "cargo",
+            "clippy",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--test",
+            "ncollection_array1",
+            "--test",
+            "ncollection_array2",
+            "--test",
+            "ncollection_arrays_api_behavior",
+            "--test",
+            "array1_assignment_pointer_contracts",
+            "--test",
+            "array2_assignment_pointer_contracts",
+            "--test",
+            "array1_borrowed_init",
+            "--test",
+            "ncollection_array2_buffer_prefix",
+            "--test",
+            "ncollection_array_set_value_ref",
+            "--test",
+            "array_raw_copy_contracts",
+            "--test",
+            "array_raw_copy_validation",
+            "--test",
+            "array_buffer_constructors",
+            "--test",
+            "array_buffer_validation",
+            "--test",
+            "array2_resize_assignment",
+            "--test",
+            "array2_resize_validation",
+            "--test",
+            "array_emplace_assignment",
+            "--test",
+            "array_set_value_assignment",
+            "--test",
+            "array_const_assignment",
+            "--test",
+            "array_copy_values_assignment",
+            "--test",
+            "array_internal_set_value",
+            "--test",
+            "array_internal_init",
+            "--test",
+            "array_internal_emplace",
+            "--test",
+            "array_uninitialized",
+            "--test",
+            "array_raw_construction",
+            "--test",
+            "array2_index_limits",
+            "--test",
+            "array_exact_surface",
+            "--test",
+            "array_nontrivial_raw_copy",
+            "--test",
+            "array_exclusive_initialization",
+            "--test",
+            "array_default_construction",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exit": 0
+        },
+        "fmt": {
+          "command": [
+            "cargo",
+            "fmt",
+            "--all",
+            "--",
+            "--check"
+          ],
+          "exit": 0
+        },
+        "docs": {
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--doc"
+          ],
+          "exit": 0
+        },
+        "compiler": {
+          "command": [
+            "cargo",
+            "+nightly-2026-09-25",
+            "rustdoc",
+            "--locked",
+            "-p",
+            "rustycad-tkernel",
+            "--lib",
+            "--",
+            "-Z",
+            "unstable-options",
+            "--output-format",
+            "json",
+            "--document-private-items"
+          ],
+          "exit": 0
+        }
+      }
+    },
+    "miri": {
+      "targets": [
+        "array_default_construction",
+        "array_exclusive_initialization",
+        "array_nontrivial_raw_copy",
+        "array_raw_construction",
+        "array2_index_limits",
+        "array_exact_surface",
+        "array_internal_emplace",
+        "array_uninitialized",
+        "array_internal_set_value",
+        "array_internal_init",
+        "array_copy_values_assignment",
+        "array_const_assignment",
+        "array_set_value_assignment",
+        "array_emplace_assignment",
+        "array2_resize_assignment",
+        "array2_resize_validation",
+        "array_buffer_constructors",
+        "array_buffer_validation",
+        "array_raw_copy_contracts",
+        "array_raw_copy_validation",
+        "array1_assignment_pointer_contracts",
+        "array2_assignment_pointer_contracts"
+      ],
+      "command": [
+        "cargo",
+        "+nightly-2026-09-25",
+        "miri",
+        "test",
+        "--locked",
+        "-p",
+        "rustycad-tkernel",
+        "--test",
+        "array_default_construction",
+        "--test",
+        "array_exclusive_initialization",
+        "--test",
+        "array_nontrivial_raw_copy",
+        "--test",
+        "array_raw_construction",
+        "--test",
+        "array2_index_limits",
+        "--test",
+        "array_exact_surface",
+        "--test",
+        "array_internal_emplace",
+        "--test",
+        "array_uninitialized",
+        "--test",
+        "array_internal_set_value",
+        "--test",
+        "array_internal_init",
+        "--test",
+        "array_copy_values_assignment",
+        "--test",
+        "array_const_assignment",
+        "--test",
+        "array_set_value_assignment",
+        "--test",
+        "array_emplace_assignment",
+        "--test",
+        "array2_resize_assignment",
+        "--test",
+        "array2_resize_validation",
+        "--test",
+        "array_buffer_constructors",
+        "--test",
+        "array_buffer_validation",
+        "--test",
+        "array_raw_copy_contracts",
+        "--test",
+        "array_raw_copy_validation",
+        "--test",
+        "array1_assignment_pointer_contracts",
+        "--test",
+        "array2_assignment_pointer_contracts"
+      ],
+      "exit": 0
+    }
+  },
+  "ownership_contract": [
+    "Completed objects belong to the caller until explicitly moved out or destroyed, including after callback panic.",
+    "Failing constructor member objects unwind immediately; fully completed earlier objects remain live and readable.",
+    "Caller tracks successful callback count and only destroys the initialized prefix; untouched outside-range storage remains uninitialized.",
+    "Neither public raw construction method allocates or deallocates the backing storage.",
+    "Shared internal range engine writes a slot only after its constructor callback successfully returns."
+  ],
+  "remaining_limits": [
+    "Callback-return construction does not model placement-address-sensitive constructors or partially written failing-slot byte representations.",
+    "This binds the three-argument raw helper, not the receiver two-argument wrapper, public owning constructors, allocation-failure leaks or allocator hooks.",
+    "Nonempty zero-sized Rust T is rejected before arithmetic; native C++ has no sizeof(T)==0 domain.",
+    "Forced alternate U selection and separate trivially-default-constructible no-op overloads receive no new credit.",
+    "Raw alias reentry, invalid pointer/range metadata, and reading or dropping incomplete objects remain outside the unsafe contract.",
+    "Native noexcept automatic container destruction, process termination, double exceptions and exact C++ exception ABI are not modeled by the caught construction trace."
+  ],
+  "inputs": {
+    "crates/tkernel/src/ncollection/array1.rs": "b0f3ce335320e3342175b1a0f8ff13db06bcecbad02ec2bdb636863ecd5c7c51",
+    "crates/tkernel/src/ncollection/array2_resize.rs": "183b12552edc76e4a70dd819fc235ddcfe9fbfb79ba60932b822fdc4dd8acfdf",
+    "crates/tkernel/src/ncollection/array_error.rs": "064d8ff5e8be92c59e9d55529b211fffa6a86ab10b50804889da83536c7f7fa6",
+    "crates/tkernel/src/ncollection/array2_layout.rs": "1a179f1e34c6db624d070dd7802dcb89899b1a4a10d91f260bffc3c8ec52a39f",
+    "crates/tkernel/src/ncollection/array2.rs": "fc8f0031c024eda055e0c5389050e4f3a0bb26cbca0d599ff344e4fe8daf18cc",
+    "crates/tkernel/src/ncollection/array1/assignment_policy.rs": "95473067ddc963054a0f0865533025e6ff70d05fd18a305ac808078e2868445b",
+    "crates/tkernel/src/ncollection/array1/trivial_copy.rs": "0bb4ef9b8b6d2fb2e60de781a9de39b5eb2bb3ded20c2c932adc19a730da6638",
+    "crates/tkernel/src/ncollection/array1/copy_assignment_policy.rs": "30d1c2d598f53f724aa7cadfee156c5383c47c2c49649ed961b9d0f28c55abba",
+    "crates/tkernel/src/ncollection/array1/uninitialized.rs": "ef7c2e1366f4c2ec6ea1d4891464fa8826b557f121c86737854696aa41d20aac",
+    "crates/tkernel/src/ncollection/array1/emplace_policy.rs": "8fc3bb4d3320365098ee355e83b81ff3d94ec7c128bb5b14a33b198c2f6f102d",
+    "crates/tkernel/src/ncollection/array1/buffer_constructors.rs": "24a7e0100535055c08a3b4e4d5b2b606686bb492b532bd327411fe8f14220a4d",
+    "crates/tkernel/src/ncollection/array1/internal_init.rs": "01a3e96e6585895268c47dcfa17b306b77aa8367f286b940f3dcb9f0955cdd3a",
+    "crates/tkernel/src/ncollection/array1/raw_construction.rs": "381b7782e0272e35e737ada2d6ded4d5866d9a650a72690125b35835e0acdaa4",
+    "crates/tkernel/src/ncollection/array1/raw_copy.rs": "c6c04bf4ddded8fa8935e73cec6009a0ca6c8bd498b368f46f5b51dd3df7614d",
+    "crates/tkernel/src/ncollection/array1/returning.rs": "ae77aeae6406e3e0320a41b6c580e7a2ab3035d93dd9db363b39e0cd49b90078",
+    "crates/tkernel/src/ncollection/array1/pointers.rs": "fb5a797f4b184937d450ffadc72b12f710a2f33bb89e03c4e28b5943b3498964",
+    "crates/tkernel/src/ncollection/array1/resize_storage.rs": "098bfcc476955f9e802eec235fed8048a4d660c9082d86762b94438e426d6475",
+    "crates/tkernel/src/ncollection/array2/assignment_policy.rs": "0b578dd32aba999254ebe311b68ac4d67adbe6dd9770e90186b5cca1bea33b53",
+    "crates/tkernel/src/ncollection/array2/copy_assignment_policy.rs": "109989aad5bb05679e6749780d05a886a7a084cbb2b2fdde1b3db6800c449e93",
+    "crates/tkernel/src/ncollection/array2/uninitialized.rs": "6f6dff84acaa61a6cbfb8ff91ddb4a1c130b7e58517aabb16d0588279c6d88ed",
+    "crates/tkernel/src/ncollection/array2/emplace_policy.rs": "399b75178f4b4371b872448a9f8994e011790a9064638a36da8da10e4cebd4dd",
+    "crates/tkernel/src/ncollection/array2/buffer_constructors.rs": "00624b3e4636478cee9e40651a21efb62912c56e78bf7b94745dce72d0f66dab",
+    "crates/tkernel/src/ncollection/array2/internal_init.rs": "651bf9bd8644bcb187ecbbbbc8fa322992239f15cef858b65436e4735e1e3885",
+    "crates/tkernel/src/ncollection/array2/method_contracts.rs": "1d65b65116cd2b938b53dcae956647df1252ab0815cdebe58835ed0c97a0a1a4",
+    "crates/tkernel/src/ncollection/array2/raw_copy.rs": "6f6777170c8fb10c1432fc176e6dffdc98e5bb010d7356230035be6db7d81379",
+    "crates/tkernel/src/ncollection/array2/resize_policy.rs": "00af82c5e5ce72e35553f440ba2dd778e1e500d2c9ae68d961c8b9a7f0735e8b",
+    "crates/tkernel/src/ncollection/array2/resize_policy/assignment.rs": "95477196755d1174e1357d4e213e035ad6754ad1e9240baf6868a231d3942ec1",
+    "tools/oracle/tkernel_array_default_construction.cxx": "6a5d59188a26719d42a55d26e4654f3f0e9acacc8d48eee46653aa1a3d438483",
+    "tools/oracle/tkernel_array_default_construction.expected": "b535ea900efb66c6e9253010f85576efc2ce287abf6e408c97d6074085fcb47a",
+    "crates/tkernel/tests/ncollection_array1.rs": "ff7370d1dbf40fea3bffb5a84ac3de28dc8328ca6475cc0346715c24dbf2611a",
+    "crates/tkernel/tests/ncollection_array1/assignment.rs": "fa4aa737a7732e71e0a9a15529c1333ac0dd4448297109e9e9c6ae9147759a02",
+    "crates/tkernel/tests/ncollection_array1/constructors.rs": "ba1e0e403958f75f07462464d06f824db09415c76e68f8a82b0d77880de34255",
+    "crates/tkernel/tests/ncollection_array1/access.rs": "c70938b9a5386cffb5e300bae193acc3542ef8e6ceed9e852746b638511df911",
+    "crates/tkernel/tests/ncollection_array1/algorithms.rs": "e34e09c569672ba04badf68c379639884e9b9f43d002e01b297e4eeb59261b8c",
+    "crates/tkernel/tests/ncollection_array1/size.rs": "0e0eeea57d8a2dd51496971fa4f45b662f8af52b6c79e66dc1a44d25f377c2b1",
+    "crates/tkernel/tests/ncollection_array2.rs": "7a4cfb4b6f12a0cda4ad983bfa0239c005783d2f2209194e5d5069af8e16c12a",
+    "crates/tkernel/tests/ncollection_array2/assignment.rs": "fbed273fd4a67e8d55cedf0853f7b69ea50a6525bfeceb4441a65627b7e6ef30",
+    "crates/tkernel/tests/ncollection_array2/resize.rs": "f3204ba6db0f3ed709e494839c3f86aa098f7ca71468e2c73113f734842654b1",
+    "crates/tkernel/tests/ncollection_array2/access.rs": "3e5068ea3b9a0eef49096a2776246896e48a2242b474ca9206f4c9ca90af877c",
+    "crates/tkernel/tests/ncollection_array2/construction.rs": "e65c0d48da10452caf97c5badab2db24ebb07b7867dc6a9aebcbbeb2b34fdda3",
+    "crates/tkernel/tests/ncollection_arrays_api_behavior.rs": "1682097b1f16081eef4b190a4b075f51a0f4a84d184e17d09db5bec6f51cf504",
+    "crates/tkernel/tests/array1_assignment_pointer_contracts.rs": "b2f45ffda1320246fb995f1a3cbaabc0faab3f1e4e39434dbbb789de02791607",
+    "crates/tkernel/tests/array2_assignment_pointer_contracts.rs": "50a5ef062599536e0b30fabbfc626af3088ed63c35a4d6f751fdc136fd9dc394",
+    "crates/tkernel/tests/array1_borrowed_init.rs": "4ba8f8691642c1ff772babadfff8e1ef609654909df9c21fe4ba8b19267e9b1a",
+    "crates/tkernel/tests/ncollection_array2_buffer_prefix.rs": "801e1c084e979b30a251c4dffc3f120fdfeb381ed6c25187dccec5d66228ddb6",
+    "crates/tkernel/tests/ncollection_array_set_value_ref.rs": "426104e32b37166444a55478093c17c50561988ad5be68e0a7832446ca3495ed",
+    "crates/tkernel/tests/array_raw_copy_contracts.rs": "64fa266670b4297f666a41bc9e644372918e75765d689237d042bb056926cd11",
+    "crates/tkernel/tests/array_raw_copy_validation.rs": "ebdd8c5ef09069e6d0c20c751499d8e3e9eac553980c45dce4c071eabd790d33",
+    "crates/tkernel/tests/array_buffer_constructors.rs": "cf0c15adccce8a8d70c13f753b9a16ef793238dd8c720fed0ecd17c7d39c7bc1",
+    "crates/tkernel/tests/array_buffer_constructors/support.rs": "e15d1c44331e87864cc426573dac5494000ceec0edee9a646d6247dbfd0306c1",
+    "crates/tkernel/tests/array_buffer_validation.rs": "b71813e6875a3f44b269e91ab65a50f2e3d99fe095b42ff7b94ed368bc45d257",
+    "crates/tkernel/tests/array2_resize_assignment.rs": "d978a897356011b500ce2d581bb9d7b39ef53809127d7c803d51465429eb7efa",
+    "crates/tkernel/tests/array2_resize_assignment/support.rs": "b4d7e39db0a1618f966eac7ad50c42f5d11e9cb62f2c23cddac2b15ca04b98c7",
+    "crates/tkernel/tests/array2_resize_validation.rs": "8217d6d6411604519412e166c0f8545c2785372082efb4046b0b321be9476f22",
+    "crates/tkernel/tests/array_emplace_assignment.rs": "ef075786addde15ef6089b7dd11bf4388bace660e64414a931ad66391f44fa66",
+    "crates/tkernel/tests/array_emplace_assignment/support.rs": "4f58e39643e0e47a6790ee4bcf002cde0caf275cb174f0c0e07ea9992ce7a1ed",
+    "crates/tkernel/tests/array_set_value_assignment.rs": "02bed0fcf2a1d1757f6438d89f313541d161fce146e83b8f8ba4cd4e3cf6d2c7",
+    "crates/tkernel/tests/array_set_value_assignment/support.rs": "3e4d770878f2ab3f303a91cf9bc7da7ec7787248fcd27fc74d222e8f83f8e2bf",
+    "crates/tkernel/tests/array_const_assignment.rs": "a9e91b0e1cd0097ba9eb566cfe75a0d1aae07a0e0e0b3bb728ef9b8445a6ea88",
+    "crates/tkernel/tests/array_const_assignment/support.rs": "163136bf665b857eb9631e0ca431b442d6c48b3f98ef22e24c6e28443373b2c0",
+    "crates/tkernel/tests/array_copy_values_assignment.rs": "4335699d3ce25ac8e51ae75d81dd8b1f125bf2c69804cd22a352e84ee319317d",
+    "crates/tkernel/tests/array_copy_values_assignment/support.rs": "1b24b3a7fd81cfcf0c6f947b878062a1f8a8022fa5ab97b0056a1fe65f5a13f7",
+    "crates/tkernel/tests/array_internal_set_value.rs": "c48d2bad381321630f2782e233acf838a0f74f869c814fa956f60ac7200d23e7",
+    "crates/tkernel/tests/array_internal_set_value/support.rs": "d90515f6d610369fd8fc9b4166f229255e8292b15c7ecd40f2b97a0168baa71a",
+    "crates/tkernel/tests/array_internal_init.rs": "63675cd25763c40d3fe09d97ca1ba735854ebe76dbfaefd3f24312012da859b6",
+    "crates/tkernel/tests/array_internal_init/support.rs": "f9ccabf17493b2d4395bc4681d107358f6b0ab2741c6a5e1fdb171b4bf6b7e87",
+    "crates/tkernel/tests/array_internal_emplace.rs": "704169299a6d7dfe3c51a754d541b23820c56f7014098ea87310b5eb4f574db3",
+    "crates/tkernel/tests/array_internal_emplace/support.rs": "f2ae64a0700ca8614dcb1a8d53b990e03fe283ac2664eb2e88d0cb8c3446f26d",
+    "crates/tkernel/tests/array_uninitialized.rs": "060815af5e809cb2e3d4371006b87aece6078bd7fb7e0877311db6e482c7b332",
+    "crates/tkernel/tests/array_uninitialized/support.rs": "4ce3e3ad6ab7d07da721ca1612fa545ec461bdee5cfbb064536f8705cce1e947",
+    "crates/tkernel/tests/array_raw_construction.rs": "5c72d132bb166958d5ff0aa5975d76ff79c0212b7c322797488f0e0529ccd3f5",
+    "crates/tkernel/tests/array2_index_limits.rs": "3952a7a6c98bd14b4cbcaa1d38182ca97121903525af19952fde27e9f5eeb65c",
+    "crates/tkernel/tests/array2_index_limits/support.rs": "fdb4d563d22dc5c71a817d524e3283e97fec556da3766bbec7409ff4e205f185",
+    "crates/tkernel/tests/array_exact_surface.rs": "f8923c0eed03d9eaaba70b18ba4cea5dd3c3eaae28985b08f678a062dfa55436",
+    "crates/tkernel/tests/array_exact_surface/support.rs": "111026e14052998e92635bea0e6f62e1af7050da3253f739f9dcfd26e8bfed67",
+    "crates/tkernel/tests/array_nontrivial_raw_copy.rs": "0d653f9bd7df7f4c0c4234e973ad363d10bcf5444e68f7b2b294b8c4d0430bb6",
+    "crates/tkernel/tests/array_exclusive_initialization.rs": "808ea25fa0a3248d8a2ef3b7a51f30633818a15da69230ef283e828bfa01c848",
+    "crates/tkernel/tests/array_exclusive_initialization/support.rs": "ff7fad0aaa104719a86f3ac67a098716698536db51a9b9fa6b396d4fd99dd9ca",
+    "crates/tkernel/tests/array_default_construction.rs": "719fdaaa34701d087d6bc59a2139119eb75d54469d4f2f0d90c7e0bc1cb19b72",
+    "crates/tkernel/tests/array_default_construction/support.rs": "601b8b60849b705d47f3096ddc13c4b901b5ce86e1b0f64fa7ee94050944f6b6"
+  },
+  "artifacts": {
+    "rust": {
+      "path": "porting/runtime-evidence/array-default-construction-rust.gz",
+      "sha256": "c95c8ad433e7570d8b80c7d31ce45ab35d5b80a74b45f7f659e35551070f1071",
+      "uncompressed_sha256": "9a547191f42416445f10d509dc7d4af80ac99a66379f2cf98486329c35b089d4"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/array-default-construction-miri.gz",
+      "sha256": "f5c06ed018c17586e3fbf16f9942eb5578878884bccf12c8b76436b2b64a2734",
+      "uncompressed_sha256": "d1344f1f72d0f51b4d32eae3564948d3548950c6853f86e6d9e96a0560dd813c"
+    },
+    "docs": {
+      "path": "porting/runtime-evidence/array-default-construction-docs.gz",
+      "sha256": "5d0778d551dad56e992f5b1d292a9e774edea012589d4a495179f1cf63f227bb",
+      "uncompressed_sha256": "faaea528b83ca593a1925667ca45c986573afa2223e21feb85e6c36b0dcd3fbb"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/array-default-construction-clippy.gz",
+      "sha256": "986ceaa0a18a7efde292078173e9f42f4d7c2b2f1ea7850fdd26c4b77e7cff7c",
+      "uncompressed_sha256": "2b158134c73f96f3b084b8e9b6d749d84f7785fb46439c09361bfe345cf23c5a"
+    },
+    "fmt": {
+      "path": "porting/runtime-evidence/array-default-construction-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-original": {
+      "path": "porting/runtime-evidence/array-default-construction-native-original.gz",
+      "sha256": "33c26764f657b23b9dd1a1b93b61bddacc2a6a8e843f0651595e71453ed427eb",
+      "uncompressed_sha256": "9e843f85e244ec7147432ea3585f709b736b8ef778f4af5539450de4c02ec2fe"
+    },
+    "red": {
+      "path": "porting/runtime-evidence/array-default-construction-red.gz",
+      "sha256": "0dbdb238b4475b1c9056f6fdf8e8d4e772c821e0f4239d4d492b4342c941450a",
+      "uncompressed_sha256": "8c1b37ac6e0b4c9fa3044dc4fcffa78acde876e25e3a25140d7ec86198251561"
+    },
+    "ubsan": {
+      "path": "porting/runtime-evidence/array-default-construction-ubsan.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler": {
+      "path": "porting/runtime-evidence/array-default-construction-compiler.gz",
+      "sha256": "c61be03450b68e45cb681ca3cc54b2a98eda1f2f0fbaa8535213a28d325f1fa3",
+      "uncompressed_sha256": "2acc4bd4a07436f31ba3d32f593378f8ab717cede497f2e1f35b25bf7ae508cf"
+    },
+    "compiler-json": {
+      "path": "porting/runtime-evidence/array-default-construction-compiler-json.gz",
+      "sha256": "80c90ec1d129dcb5a1f55d9f74d4eea7fdfbcde843a095e50ccdfd1103423f3f",
+      "uncompressed_sha256": "a898a7beeb3615f99b644baf29b643d3b79703b21873c5cd26aec85a93850d8b"
+    },
+    "normalized": {
+      "path": "porting/runtime-evidence/array-default-construction-normalized.gz",
+      "sha256": "cc97fa822730da1cf2c34cdb3da4a35d0b9b7c2e0165c0e40913a5ddb4e10115",
+      "uncompressed_sha256": "4edc58e0f0a9ff6609f313cb5f3518b328aabc1cacfb5d5e3d8051d55df7e812"
+    },
+    "checks": {
+      "path": "porting/runtime-evidence/array-default-construction-checks.gz",
+      "sha256": "1dcf4a3c405351de8652ae212739c6aa2cf0c51aaf7fecabcd76a0d8314daa3a",
+      "uncompressed_sha256": "e5a99491b5bc1a224acd2b1b33312514a0e9c86610568588f195d25230806a7f"
+    },
+    "miri-command": {
+      "path": "porting/runtime-evidence/array-default-construction-miri-command.gz",
+      "sha256": "b285cd455afe8f5d95b484779a6eeb6ae5a4c12816915496ea730022b58806f6",
+      "uncompressed_sha256": "be1f2ae2a5d361933f137b74de02c8196c26dd57f022133ad3275366c0a3b382"
+    },
+    "source": {
+      "path": "porting/runtime-evidence/array-default-construction-source.tar.gz",
+      "sha256": "95e6e66a83b4068ba0dd285e6784f0c064a7a1a293841a35672adf92688d5c7f"
+    }
+  }
+}
