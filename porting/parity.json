@@ -374801,16 +374801,16 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::order_next",
-      "status": "partial",
-      "notes": "Public successor link of the OrderedDataMap node: read through the node view (order_next, reached from first_node()). Writing the raw link is not offered: it would rewire the map graph behind its owner (plan D1 class B5), and the Rust map keeps the links as slot indices."
+      "status": "implemented",
+      "notes": "Public successor link of the OrderedDataMap node, exposed through the node handle as plan D1 class B5 prescribes: OrderedNodeRef::order_next (reached from first_node()) yields the linked entry or None where the native pointer is null. The raw pointer value and writes to it are node addresses of internal storage (B5); the Rust map keeps the links as slot indices."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap::OrderedDataMapNode::myOrderPrev",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::order_previous",
-      "status": "partial",
-      "notes": "Public predecessor link of the OrderedDataMap node: read through the node view (order_previous, reached from first_node()). Writing the raw link is not offered: it would rewire the map graph behind its owner (plan D1 class B5), and the Rust map keeps the links as slot indices."
+      "status": "implemented",
+      "notes": "Public predecessor link of the OrderedDataMap node, exposed through the node handle as plan D1 class B5 prescribes: OrderedNodeRef::order_previous (reached from first_node()) yields the linked entry or None where the native pointer is null. The raw pointer value and writes to it are node addresses of internal storage (B5); the Rust map keeps the links as slot indices."
     },
     {
       "upstream_id": "NCollection_OrderedDataMap",
@@ -375125,16 +375125,16 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::order_next",
-      "status": "partial",
-      "notes": "Public successor link of the OrderedMap node: read through the node view (order_next, reached from first_node()). Writing the raw link is not offered: it would rewire the map graph behind its owner (plan D1 class B5), and the Rust map keeps the links as slot indices."
+      "status": "implemented",
+      "notes": "Public successor link of the OrderedMap node, exposed through the node handle as plan D1 class B5 prescribes: OrderedNodeRef::order_next (reached from first_node()) yields the linked entry or None where the native pointer is null. The raw pointer value and writes to it are node addresses of internal storage (B5); the Rust map keeps the links as slot indices."
     },
     {
       "upstream_id": "NCollection_OrderedMap::OrderedMapNode::myOrderPrev",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedMap.hxx",
       "rust_item": "rustycad_tkernel::ncollection::OrderedNodeRef::order_previous",
-      "status": "partial",
-      "notes": "Public predecessor link of the OrderedMap node: read through the node view (order_previous, reached from first_node()). Writing the raw link is not offered: it would rewire the map graph behind its owner (plan D1 class B5), and the Rust map keeps the links as slot indices."
+      "status": "implemented",
+      "notes": "Public predecessor link of the OrderedMap node, exposed through the node handle as plan D1 class B5 prescribes: OrderedNodeRef::order_previous (reached from first_node()) yields the linked entry or None where the native pointer is null. The raw pointer value and writes to it are node addresses of internal storage (B5); the Rust map keeps the links as slot indices."
     },
     {
       "upstream_id": "NCollection_OrderedMap::myFirst",
