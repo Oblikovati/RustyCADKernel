@@ -100,8 +100,13 @@ pub use face_discret::BRepMeshFaceDiscret;
 mod context;
 pub use context::BRepMeshContext;
 
+pub mod delabella;
+
 mod triangulator;
 pub use triangulator::BRepMeshTriangulator;
 
 pub mod mesh_algo;
-pub use mesh_algo::{BRepMeshDelaunayBaseMeshAlgo, BRepMeshMeshAlgoFactory};
+pub use mesh_algo::{
+    BRepMeshDelabellaBaseMeshAlgo, BRepMeshDelabellaMeshAlgoFactory, BRepMeshDelaunayBaseMeshAlgo,
+    BRepMeshMeshAlgoFactory,
+};
