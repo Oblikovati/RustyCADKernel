@@ -10,9 +10,10 @@ use rustycad_tkg3d::top_abs::Orientation;
 /// Standard_NullObject.
 ///
 /// ```
-/// use rustycad_tkhlr::hlr_brep::FaceIterator;
-/// let it = FaceIterator::new();
-/// assert!(!it.more_edge());
+/// use rustycad_tkhlr::hlr_brep::{FaceData, FaceIterator};
+/// let mut it = FaceIterator::new();
+/// let err = it.init_edge(&FaceData::new()).unwrap_err();
+/// assert_eq!(err.exception_type(), "Standard_NullObject");
 /// ```
 #[derive(Default)]
 pub struct FaceIterator {
