@@ -309601,32 +309601,36 @@
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
       "rust_item": "rustycad_tkbo::bop_ds::DataStructure::change_pave_blocks",
-      "status": "partial",
-      "notes": "Creates endpoint paves for ordinary finite and tested infinite line edges, internal line-edge endpoints, and forward/reversed one-vertex pcurve-only and 3D circle seam edges. Same-domain vertex mapping and open/inverted shell paths remain incomplete."
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::UpdatePaveBlocks()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::update_pave_blocks",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::UpdatePaveBlock(const occ::handle<BOPDS_PaveBlock>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::update_pave_block",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::UpdateCommonBlock(const occ::handle<BOPDS_CommonBlock>&,double)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::update_common_block",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::IsCommonBlock(const occ::handle<BOPDS_PaveBlock>&) const",
@@ -309761,9 +309765,10 @@
       "upstream_id": "BOPDS_DS::AloneVertices(int,NCollection_List<int>&) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::alone_vertices",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::RefineFaceInfoOn()",
@@ -309778,25 +309783,28 @@
       "upstream_id": "BOPDS_DS::RefineFaceInfoIn()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::refine_face_info_in",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::SubShapesOnIn(int,int,NCollection_Map<int>&,NCollection_Map<int>&,NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,NCollection_Map<occ::handle<BOPDS_PaveBlock>>&) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::sub_shapes_on_in",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::SharedEdges(int,int,NCollection_List<int>&,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::shared_edges",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::ShapesSD()",
@@ -309885,41 +309893,46 @@
       "upstream_id": "BOPDS_DS::InterfVZ()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::interf_vz",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::InterfEZ()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::interf_ez",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::InterfFZ()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::interf_fz",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::InterfZZ()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::interf_zz",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::NbInterfTypes()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::nb_interf_types",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::AddInterf(int,int)",
@@ -309949,17 +309962,19 @@
       "upstream_id": "BOPDS_DS::HasInterfShapeSubShapes(int,int,bool) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::has_interference_shape_subshapes_mode",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::HasInterfSubShapes(int,int) const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::has_interference_sub_shapes",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::Interferences() const",
@@ -309973,65 +309988,73 @@
       "upstream_id": "BOPDS_DS::Dump() const",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::dump",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::IsSubShape(int,int)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::is_sub_shape",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::Paves(int,NCollection_List<BOPDS_Pave>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::paves",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::UpdatePaveBlocksWithSDVertices()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::update_pave_blocks_with_sd_vertices",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::UpdatePaveBlockWithSDVertices(const occ::handle<BOPDS_PaveBlock>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::update_pave_block_with_sd_vertices",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::UpdateCommonBlockWithSDVertices(const occ::handle<BOPDS_CommonBlock>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::update_common_block_with_sd_vertices",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::InitPaveBlocksForVertex(int)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::init_pave_blocks_for_vertex",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::ReleasePaveBlocks()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::release_pave_blocks",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::IsValidShrunkData(const occ::handle<BOPDS_PaveBlock>&)",
@@ -310045,9 +310068,10 @@
       "upstream_id": "BOPDS_DS::BuildBndBoxSolid(int,Bnd_Box&,bool)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "",
-      "status": "partial",
-      "notes": "Inventoried public BOPDS_DS declaration; behavior has not yet been ported."
+      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::build_bnd_box_solid",
+      "status": "implemented",
+      "notes": "Ported from BOPDS_DS.cxx; native replay tools/oracle/tkbo_ds_updates.cxx (bit-pattern doubles) checked by crates/tkbo/tests/bop_ds_updates.rs.",
+      "source_sha256": "51ac867016dd8f8c4dff8d4733d19e071dd1266475f7fd3cae7e9ae277fa8307"
     },
     {
       "upstream_id": "BOPDS_DS::operator delete(void*) noexcept",

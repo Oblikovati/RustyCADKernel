@@ -1,14 +1,13 @@
 use super::BOPAlgoPaveFiller;
 use crate::bop_algo::{AlertIntersectionOfPairOfShapesFailed, Options};
-use crate::bop_ds::{DataStructure, InterfVE, Pave, PaveBlockHandle, ShapeInfo};
+use crate::bop_ds::{DataStructure, InterfVE, Pave, PaveBlockHandle};
 use crate::int_tools::Context;
 use rustycad_tkbrep::{
-    brep::{BRepBuilder, BRepTool},
+    brep::BRepBuilder,
     topods::{Compound, Edge, Shape, Vertex},
 };
 use rustycad_tkernel::{
     message::AlertHandle,
-    precision,
     standard::{Failure, Handle},
 };
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -166,13 +165,6 @@ impl BOPAlgoPaveFiller {
         Ok((vertex, edge, self.context.clone()))
     }
 
-    pub(super) fn update_vertex(&mut self, index: i32, tolerance: f64) -> Result<i32, Failure> {
-        let structure = self.data_structure.as_mut().ok_or_else(|| {
-            Failure::new("BOPAlgo_PaveFiller::PerformVE requires initialized data structure")
-        })?;
-        update_vertex_record(structure, index, tolerance, self.non_destructive)
-    }
-
     fn append_vertex_edge_interferences(
         &mut self,
         candidate: &SharedVertexCandidate,
@@ -287,67 +279,6 @@ fn append_block_pave(block: &PaveBlockHandle, vertex: i32, parameter: f64) -> bo
     }
     locked.append_ext_pave(Pave::new(vertex, parameter));
     true
-}
-
-fn update_vertex_record(
-    structure: &mut DataStructure,
-    index: i32,
-    new_tolerance: f64,
-    non_destructive: bool,
-) -> Result<i32, Failure> {
-    let representative = structure.shape_sd(index).unwrap_or(index);
-    let has_same_domain = structure.shape_sd(index).is_some();
-    let vertex = Vertex::unchecked(structure.shape(representative)?.clone());
-    if structure.is_new_shape(representative) || has_same_domain || !non_destructive {
-        enlarge_source_vertex(structure, representative, &vertex, new_tolerance)?;
-        return Ok(representative);
-    }
-    append_toleranced_vertex(structure, index, &vertex, new_tolerance)
-}
-
-fn enlarge_source_vertex(
-    structure: &mut DataStructure,
-    index: i32,
-    vertex: &Vertex,
-    new_tolerance: f64,
-) -> Result<(), Failure> {
-    if BRepTool::vertex_tolerance(vertex)? >= new_tolerance {
-        return Ok(());
-    }
-    BRepBuilder::default().update_vertex_tolerance(vertex, new_tolerance)?;
-    expand_vertex_info(structure, index, vertex)
-}
-
-fn append_toleranced_vertex(
-    structure: &mut DataStructure,
-    original: i32,
-    vertex: &Vertex,
-    tolerance: f64,
-) -> Result<i32, Failure> {
-    let point = BRepTool::pnt(vertex)?;
-    let total_tolerance = BRepTool::vertex_tolerance(vertex)?.max(tolerance);
-    let mut copy = Vertex::default();
-    BRepBuilder::default().make_vertex_at(&mut copy, point, total_tolerance)?;
-    let mut info = ShapeInfo::default();
-    info.set_shape_type(ShapeEnum::Vertex);
-    info.set_shape(&copy.clone().into_shape());
-    let new_index = structure.append_shape_info(&info);
-    expand_vertex_info(structure, new_index, &copy)?;
-    structure.add_shape_sd(original, new_index);
-    Ok(new_index)
-}
-
-fn expand_vertex_info(
-    structure: &mut DataStructure,
-    index: i32,
-    vertex: &Vertex,
-) -> Result<(), Failure> {
-    let point = BRepTool::pnt(vertex)?;
-    let gap = BRepTool::vertex_tolerance(vertex)? + precision::confusion();
-    let bounds = structure.change_shape_info(index)?.change_box();
-    bounds.add_point(point);
-    bounds.set_gap(gap);
-    Ok(())
 }
 
 fn append_unique(values: &mut Vec<i32>, value: i32) {

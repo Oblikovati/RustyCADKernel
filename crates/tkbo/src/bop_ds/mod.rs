@@ -16,7 +16,7 @@ mod sub_iterator;
 pub use common_block::{CommonBlock, CommonBlockHandle, common_block_handle, pave_block_handle};
 pub use couple_of_pave_blocks::CoupleOfPaveBlocks;
 pub use curve::BopdsCurve;
-pub use data_structure::DataStructure;
+pub use data_structure::{DataStructure, SubShapesOnIn};
 pub use face_info::{FaceInfo, PaveBlockIndexMap, VertexIndexSet};
 pub use index_range::IndexRange;
 pub use interference::{

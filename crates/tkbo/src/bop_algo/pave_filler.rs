@@ -15,6 +15,8 @@ mod face_face_task;
 #[cfg(test)]
 #[path = "pave_filler/face_face_task_tests.rs"]
 mod face_face_task_tests;
+#[path = "pave_filler/sd_updates.rs"]
+mod sd_updates;
 #[cfg(test)]
 #[path = "pave_filler/section_attribute_tests.rs"]
 mod section_attribute_tests;
@@ -31,7 +33,11 @@ mod vertex_vertex;
 use super::{AlertNullInputShapes, AlertTooFewArguments, Glue, Options, SectionAttribute};
 use crate::{bop_ds::BOPDSIterator, bop_ds::DataStructure, int_tools::Context};
 use rustycad_tkbrep::topods::Shape;
-use rustycad_tkernel::{message::AlertHandle, ncollection::List, standard::Handle};
+use rustycad_tkernel::{
+    message::AlertHandle,
+    ncollection::{List, Map as IndexMap},
+    standard::Handle,
+};
 use std::sync::Arc;
 
 /// `BOPAlgo_PaveFiller` through data-structure and iterator preparation.
@@ -47,6 +53,7 @@ pub struct BOPAlgoPaveFiller {
     avoid_build_pcurve: bool,
     is_primary: bool,
     vertices_to_avoid_extension: Vec<i32>,
+    increased_ss: IndexMap<i32>,
     section_attribute: SectionAttribute,
 }
 
@@ -70,6 +77,7 @@ impl BOPAlgoPaveFiller {
             avoid_build_pcurve: false,
             is_primary: true,
             vertices_to_avoid_extension: Vec::new(),
+            increased_ss: IndexMap::new(1),
             section_attribute: SectionAttribute::new(),
         }
     }
@@ -113,6 +121,7 @@ impl BOPAlgoPaveFiller {
         self.options.clear();
         self.data_structure = None;
         self.iterator = None;
+        self.increased_ss.clear(false);
     }
 
     /// Borrows the prepared data structure when initialization reached that stage.
@@ -188,6 +197,11 @@ impl BOPAlgoPaveFiller {
         &self.vertices_to_avoid_extension
     }
 
+    /// Reads sub-shapes whose tolerance grew during the operation; `filler.increased_ss()`.
+    pub fn increased_ss(&self) -> &IndexMap<i32> {
+        &self.increased_ss
+    }
+
     /// Borrows inherited algorithm options; `filler.options().fuzzy_value()`.
     pub fn options(&self) -> &Options {
         &self.options
@@ -261,4 +275,13 @@ impl BOPAlgoPaveFiller {
 
 fn alert<T: rustycad_tkernel::message::Alert + 'static>(value: T) -> AlertHandle {
     Arc::new(value)
+}
+
+/// The failure of a stage run before `initialize` built the data structure.
+fn missing_structure() -> rustycad_tkernel::standard::Failure {
+    rustycad_tkernel::standard::Failure::with_type(
+        "Standard_NullObject",
+        "BOPAlgo_PaveFiller: data structure is null; expected initialize() to have run",
+        "",
+    )
 }
