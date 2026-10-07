@@ -1,10 +1,12 @@
 //! Private BOPAlgo_FaceFace wrapper used by the PaveFiller task phase.
 use super::super::{AlertIntersectionFailed, Options, ParallelAlgo, ParallelAlgoBase};
-use crate::int_tools::{Context, FaceFace};
+#[cfg(test)]
+use crate::int_tools::Context;
+use crate::int_tools::FaceFace;
 use rustycad_tkbrep::topods::Face;
 use rustycad_tkernel::{
     message::{AlertHandle, ProgressScope},
-    standard::{Failure, Handle},
+    standard::Failure,
 };
 use rustycad_tkmath::{
     bnd::BoundingBox3,
@@ -76,11 +78,17 @@ impl<'a> BOPAlgoFaceFaceTask<'a> {
         self.intersector.set_parameters(spatial, first, second, tol);
     }
 
+    /// Starting points of the walking (`IntTools_FaceFace::SetList`).
+    pub(crate) fn set_list(&mut self, points: &[rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S]) {
+        self.intersector.set_list(points);
+    }
+
     pub(crate) fn set_fuzzy_value(&mut self, fuzzy: f64) {
         self.intersector.set_fuzzy_value(fuzzy);
     }
 
-    pub(crate) fn set_context(&mut self, context: &Handle<Context>) {
+    #[cfg(test)]
+    pub(crate) fn set_context(&mut self, context: &rustycad_tkernel::standard::Handle<Context>) {
         self.intersector.set_context(context);
     }
 

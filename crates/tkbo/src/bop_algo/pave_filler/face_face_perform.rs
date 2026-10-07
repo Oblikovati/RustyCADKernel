@@ -1,265 +1,318 @@
-//! Face/face task preparation and geometric result storage from PerformFF.
+//! `BOPAlgo_PaveFiller::PerformFF` (`BOPAlgo_PaveFiller_6.cxx`): face/face intersection.
 use super::face_face_task::BOPAlgoFaceFaceTask;
-use super::{BOPAlgoPaveFiller, Glue};
-use crate::bop_algo::{AlertIntersectionFailed, ParallelAlgo};
-use crate::bop_ds::{DataStructure, InterfFF};
-use crate::int_tools::{Context, Curve};
-use rustycad_tkbrep::{brep::BRepTool, topods::Face};
-use rustycad_tkernel::{
-    message::AlertHandle,
-    ncollection::Map as IndexMap,
-    standard::{Failure, Handle},
-};
-use rustycad_tkg3d::{adaptor3d::Adaptor3dSurface, top_abs::ShapeEnum};
+use super::{BOPAlgoPaveFiller, Glue, missing_structure};
+use crate::bop_algo::ParallelAlgo;
+use crate::bop_ds::{InterfFF, Pair};
+use crate::int_tools::{Curve, PntOn2Faces, Tools};
+use rustycad_tkbrep::brep::BRepTool;
+use rustycad_tkbrep::topods::{Edge, Face, ShapeIterator};
+use rustycad_tkernel::ncollection::{DataMap, Map};
+use rustycad_tkernel::standard::Failure;
+use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
+use rustycad_tkg3d::top_abs::ShapeEnum;
+use rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S;
+use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::geom_abs::SurfaceType;
-use std::sync::Arc;
+
+#[path = "face_face_seam.rs"]
+mod seam;
 
 impl BOPAlgoPaveFiller {
-    /// Executes ordinary Face/Face tasks and records geometric interferences.
-    /// `filler.perform_ff()?` runs the source task phase before `MakeBlocks`.
+    /// Refreshes the face records of all touched faces and intersects every face pair with
+    /// interfering boxes, storing the section curves and points (`PerformFF`).
+    /// `filler.perform_ff()?`.
     pub fn perform_ff(&mut self) -> Result<(), Failure> {
-        let pairs = self.face_face_pairs()?;
+        let pairs = self.iterator_pairs(ShapeEnum::Face, ShapeEnum::Face)?;
         self.update_touched_face_info(&pairs)?;
         if pairs.is_empty() {
             return Ok(());
         }
-        self.prepare_face_face_pairs(pairs)
-    }
-
-    fn reject_unported_seed_inputs(&self) -> Result<(), Failure> {
-        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
-        let edge_seeds = structure
-            .interf_ee_records()
-            .iter()
-            .any(|row| row.has_index_new());
-        let face_seeds = structure
-            .interf_ef_records()
-            .iter()
-            .any(|row| row.has_index_new());
-        if edge_seeds || face_seeds {
-            return Err(Failure::with_type(
-                "Standard_NotImplemented",
-                "BOPAlgo_PaveFiller::PerformFF seam shifting and edge-face walking seeds are not ported",
-                "",
-            ));
+        let edge_points = self.ee_new_vertices_by_edges()?;
+        let mut tasks = Vec::new();
+        for (first, second) in pairs {
+            if let Some(task) = self.face_face_task(first, second, &edge_points)? {
+                tasks.push(task);
+            }
+        }
+        for task in &mut tasks {
+            task.perform_parallel()?;
+        }
+        for mut task in tasks {
+            self.store_face_face_task(&mut task)?;
         }
         Ok(())
     }
 
-    fn update_touched_face_info(&mut self, pairs: &[[i32; 2]]) -> Result<(), Failure> {
-        let mut faces = IndexMap::default();
-        for pair in pairs {
-            faces.add(pair[0]);
-            faces.add(pair[1]);
+    fn update_touched_face_info(&mut self, pairs: &[(i32, i32)]) -> Result<(), Failure> {
+        let mut faces: Map<i32> = Map::new(1);
+        for (first, second) in pairs {
+            faces.add(*first);
+            faces.add(*second);
         }
-        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        let structure = self.structure_mut()?;
         for index in 0..structure.nb_source_shapes() {
             let info = structure.shape_info(index)?;
             if info.shape_type() == ShapeEnum::Face && info.has_reference() {
                 faces.add(index);
             }
         }
-        let structure = self.data_structure.as_mut().ok_or_else(missing_structure)?;
         structure.update_face_info_on_map(&faces)?;
         structure.update_face_info_in_map(&faces)
     }
 
-    fn face_face_pairs(&mut self) -> Result<Vec<[i32; 2]>, Failure> {
-        let iterator = self.iterator.as_mut().ok_or_else(missing_iterator)?;
-        iterator.initialize(ShapeEnum::Face, ShapeEnum::Face);
-        let mut pairs = Vec::with_capacity(iterator.expected_length().max(0) as usize);
-        while iterator.more() {
-            let (first, second) = iterator.value()?;
-            pairs.push([first, second]);
-            iterator.next();
-        }
-        Ok(pairs)
-    }
-
-    fn prepare_face_face_pairs(&mut self, pairs: Vec<[i32; 2]>) -> Result<(), Failure> {
-        if self.glue != Glue::Off {
-            return self.append_empty_face_face_records(&pairs);
-        }
-        self.reject_unported_seed_inputs()?;
-        let context = self.context.clone();
-        let mut tasks = self.prepare_face_face_tasks(&pairs, &context)?;
-        for task in &mut tasks {
-            task.perform_parallel()?;
-        }
-        self.store_face_face_results(tasks)
-    }
-
-    fn prepare_face_face_tasks(
-        &mut self,
-        pairs: &[[i32; 2]],
-        context: &Handle<Context>,
-    ) -> Result<Vec<BOPAlgoFaceFaceTask<'static>>, Failure> {
-        let mut tasks = Vec::with_capacity(pairs.len());
-        for pair in pairs {
-            if self.prepare_plane_pair(*pair)? {
+    /// New vertices of EE interferences keyed by their edge pair (`aEEMap`).
+    fn ee_new_vertices_by_edges(&self) -> Result<DataMap<Pair, Vec<i32>>, Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        let mut map: DataMap<Pair, Vec<i32>> = DataMap::default();
+        for record in structure.interf_ee_records().iter() {
+            let Some(vertex) = record.get_index_new() else {
                 continue;
+            };
+            let (first, second) = record.indices();
+            let key = Pair::new(first, second);
+            if let Some(list) = map.change_seek(&key) {
+                list.push(vertex);
+            } else {
+                map.bind(key, vec![vertex]);
             }
-            tasks.push(self.configured_face_face_task(*pair, context)?);
         }
-        Ok(tasks)
+        Ok(map)
     }
 
-    fn prepare_plane_pair(&mut self, pair: [i32; 2]) -> Result<bool, Failure> {
-        let faces = self.face_shapes(pair)?;
-        let context = self.context.get().ok_or_else(missing_context)?;
-        if !is_plane_pair(&faces, context)? {
-            return Ok(false);
+    /// Builds the task of one face pair, or records an empty interference for glued pairs and
+    /// non-interfering planes.
+    fn face_face_task(
+        &mut self,
+        first: i32,
+        second: i32,
+        edge_points: &DataMap<Pair, Vec<i32>>,
+    ) -> Result<Option<BOPAlgoFaceFaceTask<'static>>, Failure> {
+        if self.glue != Glue::Off {
+            self.append_empty_face_face_record(first, second, Some(false))?;
+            return Ok(None);
         }
-        if !self.check_planes(pair[0], pair[1])? {
-            self.append_empty_face_face_records(&[pair])?;
-            return Ok(true);
+        let faces = self.face_pair(first, second)?;
+        let types = self.face_surface_types(&faces)?;
+        if types == [SurfaceType::Plane, SurfaceType::Plane] && !self.check_planes(first, second)? {
+            self.append_empty_face_face_record(first, second, None)?;
+            return Ok(None);
         }
-        Ok(false)
-    }
-
-    fn configured_face_face_task(
-        &self,
-        pair: [i32; 2],
-        context: &Handle<Context>,
-    ) -> Result<BOPAlgoFaceFaceTask<'static>, Failure> {
-        let faces = self.face_shapes(pair)?;
+        let (shifted, shift) = if types != [SurfaceType::Plane, SurfaceType::Plane] {
+            self.shift_faces_to_edge_intersections(&faces, edge_points)?
+        } else {
+            (faces.clone(), 0.)
+        };
         let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
         let boxes = [
-            structure.shape_info(pair[0])?.box_bounds().clone(),
-            structure.shape_info(pair[1])?.box_bounds().clone(),
+            structure.shape_info(first)?.box_bounds().clone(),
+            structure.shape_info(second)?.box_bounds().clone(),
         ];
-        let tolerance = face_pair_tolerance(&faces, context)?;
         let mut task = BOPAlgoFaceFaceTask::default();
-        configure_task(self, &mut task, pair, &faces, &boxes, tolerance, context);
-        Ok(task)
-    }
-
-    fn face_shapes(&self, pair: [i32; 2]) -> Result<[Face; 2], Failure> {
-        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
-        Ok([
-            Face::unchecked(structure.shape(pair[0])?.clone()),
-            Face::unchecked(structure.shape(pair[1])?.clone()),
-        ])
-    }
-
-    fn append_empty_face_face_records(&mut self, pairs: &[[i32; 2]]) -> Result<(), Failure> {
-        let structure = self.data_structure.as_mut().ok_or_else(missing_structure)?;
-        for pair in pairs {
-            structure.interf_ff().append(empty_face_face_record(*pair));
+        task.set_run_parallel(self.options.run_parallel());
+        task.set_indices(first, second);
+        task.set_faces(&shifted[0], &shifted[1]);
+        task.set_boxes(&boxes[0], &boxes[1]);
+        // With closed edges the curve tolerance must not be less than the applied shift.
+        task.set_tol_ff(shift.max(self.tolerance_ff(&faces, types)?));
+        let seeds = self.ef_points(first, second)?;
+        if !seeds.is_empty() {
+            task.set_list(&seeds);
         }
-        Ok(())
+        let attribute = self.section_attribute;
+        task.set_parameters(
+            attribute.approximation(),
+            attribute.pcurve_on_s1(),
+            attribute.pcurve_on_s2(),
+            1.0e-7,
+        );
+        task.set_fuzzy_value(self.options.fuzzy_value());
+        Ok(Some(task))
     }
 
-    fn store_face_face_results(
-        &mut self,
-        tasks: Vec<BOPAlgoFaceFaceTask<'static>>,
-    ) -> Result<(), Failure> {
-        for mut task in tasks {
-            if task.parallel_options().has_errors() || !task.intersector().is_done() {
-                self.warn_failed_intersection();
-                self.append_empty_face_face_records(&[task.indices()])?;
-                continue;
-            }
-            self.store_face_face_result(&mut task)?;
-        }
-        Ok(())
-    }
-
-    fn store_face_face_result(
+    fn store_face_face_task(
         &mut self,
         task: &mut BOPAlgoFaceFaceTask<'static>,
     ) -> Result<(), Failure> {
+        let [first, second] = task.indices();
+        if !task.intersector().is_done() || task.parallel_options().has_errors() {
+            self.append_empty_face_face_record(first, second, None)?;
+            let faces = (
+                task.face1().clone().into_shape(),
+                task.face2().clone().into_shape(),
+            );
+            return self.add_intersection_failed_warning(&faces.0, &faces.1);
+        }
+        let tangent = task.intersector().tangent_faces();
         task.intersector_mut().prepare_lines_3d(false)?;
         task.apply_trsf()?;
-        let curves = task.intersector().lines()?.to_vec();
-        let points = task.intersector().points().to_vec();
-        let pair = task.indices();
-        let has_raw_results = raw_face_face_results_exist(curves.len(), points.len());
-        let record = build_face_face_record(task, &curves, &points)?;
-        let structure = self.data_structure.as_mut().ok_or_else(missing_structure)?;
-        append_face_face_result(structure, pair, record, has_raw_results)
+        let curves: Vec<Curve> = task.intersector().lines()?.to_vec();
+        let points: Vec<PntOn2Faces> = task.intersector().points().to_vec();
+        let structure = self.structure_mut()?;
+        if !curves.is_empty() || !points.is_empty() {
+            structure.add_interference(first, second);
+        }
+        let mut record = InterfFF::default();
+        record.set_indices(first, second);
+        record.set_tangent_faces(tangent);
+        record.init(curves.len() as i32, points.len() as i32);
+        append_section_curves(&mut record, &curves, task)?;
+        for point in &points {
+            record.change_points().appended().set_pnt(*point.p1().pnt());
+        }
+        structure.interf_ff().append(record);
+        Ok(())
     }
 
-    fn warn_failed_intersection(&self) {
-        let alert = Arc::new(AlertIntersectionFailed) as AlertHandle;
-        self.options.add_warning(&alert);
+    fn append_empty_face_face_record(
+        &mut self,
+        first: i32,
+        second: i32,
+        tangent: Option<bool>,
+    ) -> Result<(), Failure> {
+        let mut record = InterfFF::default();
+        record.set_indices(first, second);
+        if let Some(tangent) = tangent {
+            record.set_tangent_faces(tangent);
+        }
+        record.init(0, 0);
+        self.structure_mut()?.interf_ff().append(record);
+        Ok(())
+    }
+
+    fn face_pair(&self, first: i32, second: i32) -> Result<[Face; 2], Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        Ok([
+            Face::unchecked(structure.shape(first)?.clone()),
+            Face::unchecked(structure.shape(second)?.clone()),
+        ])
+    }
+
+    fn face_surface_types(&self, faces: &[Face; 2]) -> Result<[SurfaceType; 2], Failure> {
+        let context = self.context_ref()?;
+        Ok([
+            context.surface_adaptor(&faces[0])?.read().get_type()?,
+            context.surface_adaptor(&faces[1])?.read().get_type()?,
+        ])
+    }
+
+    /// Native static `ToleranceFF`: the larger face tolerance, at least 5e-6 unless both
+    /// surfaces are elementary.
+    fn tolerance_ff(&self, faces: &[Face; 2], types: [SurfaceType; 2]) -> Result<f64, Failure> {
+        let mut tolerance =
+            BRepTool::face_tolerance(&faces[0])?.max(BRepTool::face_tolerance(&faces[1])?);
+        let analytic = |kind: SurfaceType| {
+            matches!(
+                kind,
+                SurfaceType::Plane
+                    | SurfaceType::Cylinder
+                    | SurfaceType::Cone
+                    | SurfaceType::Sphere
+                    | SurfaceType::Torus
+            )
+        };
+        if !analytic(types[0]) || !analytic(types[1]) {
+            tolerance = tolerance.max(5.0e-6);
+        }
+        Ok(tolerance)
+    }
+
+    /// Starting points of the walking from EF intersections between the faces (`GetEFPnts`).
+    fn ef_points(&self, first: i32, second: i32) -> Result<Vec<IntSurfPntOn2S>, Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        let mut shapes: Map<i32> = Map::new(1);
+        for face in [first, second] {
+            shapes.add(face);
+            for sub_shape in structure.shape_info(face)?.sub_shapes() {
+                shapes.add(*sub_shape);
+            }
+        }
+        let mut points = Vec::new();
+        for record in structure.interf_ef_records().iter() {
+            if !record.has_index_new() {
+                continue;
+            }
+            let (edge, opposite) = record.indices();
+            if !shapes.contains(&edge) || !shapes.contains(&opposite) {
+                continue;
+            }
+            let parameter = record.common_part().vertex_parameter1();
+            let face = if opposite == first { second } else { first };
+            if let Some(point) = self.ef_point(edge, opposite, face, parameter, face == first)? {
+                points.push(point);
+            }
+        }
+        Ok(points)
+    }
+
+    fn ef_point(
+        &self,
+        edge: i32,
+        opposite: i32,
+        face: i32,
+        parameter: f64,
+        on_first: bool,
+    ) -> Result<Option<IntSurfPntOn2S>, Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        let context = self.context_ref()?;
+        let edge = Edge::unchecked(structure.shape(edge)?.clone());
+        let opposite = Face::unchecked(structure.shape(opposite)?.clone());
+        let face = Face::unchecked(structure.shape(face)?.clone());
+        let (curve, _, _) = BRepTool::curve(&edge)?;
+        let point = curve.eval_d0(parameter)?;
+        let pcurve = BRepTool::curve_on_face(&edge, &face)?.pcurve;
+        let opposite_projector = context.proj_ps(&opposite)?;
+        let mut seed = IntSurfPntOn2S::default();
+        if let Some(pcurve) = pcurve.get() {
+            let uv = pcurve.value(parameter)?;
+            let mut projection = opposite_projector.write();
+            projection.perform(point)?;
+            if !projection.is_done() {
+                return Ok(None);
+            }
+            let (u, v) = projection.lower_distance_parameters()?;
+            if on_first {
+                seed.set_parameters(uv.x(), uv.y(), u, v);
+            } else {
+                seed.set_parameters(u, v, uv.x(), uv.y());
+            }
+            return Ok(Some(seed));
+        }
+        let face_projector = context.proj_ps(&face)?;
+        let mut face_projection = face_projector.write();
+        face_projection.perform(point)?;
+        let mut projection = opposite_projector.write();
+        projection.perform(point)?;
+        if !face_projection.is_done() || !projection.is_done() {
+            return Ok(None);
+        }
+        let (u1, v1) = face_projection.lower_distance_parameters()?;
+        let (u2, v2) = projection.lower_distance_parameters()?;
+        if on_first {
+            seed.set_parameters(u1, v1, u2, v2);
+        } else {
+            seed.set_parameters(u2, v2, u1, v1);
+        }
+        Ok(Some(seed))
     }
 }
 
-fn build_face_face_record(
-    task: &BOPAlgoFaceFaceTask<'static>,
-    curves: &[Curve],
-    points: &[crate::int_tools::PntOn2Faces],
-) -> Result<InterfFF, Failure> {
-    let mut record = InterfFF::default();
-    let pair = task.indices();
-    record.set_indices(pair[0], pair[1]);
-    record.set_tangent_faces(task.intersector().tangent_faces());
-    record.init(curves.len() as i32, points.len() as i32);
-    append_face_face_curves(&mut record, curves, task.tol_ff(), task)?;
-    append_face_face_points(&mut record, points);
-    Ok(record)
-}
-
-fn configure_task(
-    filler: &BOPAlgoPaveFiller,
-    task: &mut BOPAlgoFaceFaceTask<'static>,
-    pair: [i32; 2],
-    faces: &[Face; 2],
-    boxes: &[rustycad_tkmath::bnd::BoundingBox3; 2],
-    tolerance: f64,
-    context: &Handle<Context>,
-) {
-    task.set_indices(pair[0], pair[1]);
-    task.set_faces(&faces[0], &faces[1]);
-    task.set_boxes(&boxes[0], &boxes[1]);
-    task.set_tol_ff(tolerance);
-    configure_task_options(filler, task, context);
-}
-
-fn configure_task_options(
-    filler: &BOPAlgoPaveFiller,
-    task: &mut BOPAlgoFaceFaceTask<'static>,
-    context: &Handle<Context>,
-) {
-    task.set_parameters(
-        filler.section_attribute.approximation(),
-        filler.section_attribute.pcurve_on_s1(),
-        filler.section_attribute.pcurve_on_s2(),
-        1e-7,
-    );
-    task.set_fuzzy_value(filler.options.fuzzy_value());
-    task.set_context(context);
-    task.set_run_parallel(filler.options.run_parallel());
-}
-
-fn is_plane_pair(faces: &[Face; 2], context: &Context) -> Result<bool, Failure> {
-    let first = context.surface_adaptor(&faces[0])?;
-    let second = context.surface_adaptor(&faces[1])?;
-    Ok(first.read().get_type()? == SurfaceType::Plane
-        && second.read().get_type()? == SurfaceType::Plane)
-}
-
-fn empty_face_face_record(pair: [i32; 2]) -> InterfFF {
-    let mut record = InterfFF::default();
-    record.set_indices(pair[0], pair[1]);
-    record.init(0, 0);
-    record
-}
-
-fn append_face_face_curves(
+/// Valid section curves with their boxes enlarged by the face pair tolerance plus the
+/// maximal vertex tolerance of both faces.
+fn append_section_curves(
     record: &mut InterfFF,
     curves: &[Curve],
-    tolerance: f64,
     task: &BOPAlgoFaceFaceTask<'static>,
 ) -> Result<(), Failure> {
-    if curves.is_empty() {
-        return Ok(());
+    let tolerance = task.tol_ff();
+    let mut expansion = tolerance;
+    if !curves.is_empty() {
+        let first = BRepTool::max_tolerance(task.face1(), ShapeEnum::Vertex)?;
+        let second = BRepTool::max_tolerance(task.face2(), ShapeEnum::Vertex)?;
+        expansion += first.max(second);
     }
-    let expansion = tolerance + maximum_face_vertex_tolerance(task)?;
     for curve in curves {
-        let mut bounds = rustycad_tkmath::bnd::BoundingBox3::default();
-        if !crate::int_tools::Tools::check_curve(curve, &mut bounds)? {
+        let mut bounds = BoundingBox3::default();
+        if !Tools::check_curve(curve, &mut bounds)? {
             continue;
         }
         bounds.enlarge(expansion);
@@ -271,76 +324,17 @@ fn append_face_face_curves(
     Ok(())
 }
 
-pub(super) fn raw_face_face_results_exist(curves: usize, points: usize) -> bool {
-    curves > 0 || points > 0
-}
-
-pub(super) fn append_face_face_result(
-    structure: &mut DataStructure,
-    pair: [i32; 2],
-    record: InterfFF,
-    has_raw_results: bool,
-) -> Result<(), Failure> {
-    if has_raw_results {
-        structure.add_interference(pair[0], pair[1]);
+/// Iterates the edges of the wires of a face in native TopoDS_Iterator order.
+fn face_edges(face: &Face) -> Result<Vec<Edge>, Failure> {
+    let mut edges = Vec::new();
+    let mut wires = ShapeIterator::new(face, true, true);
+    while wires.more() {
+        let mut items = ShapeIterator::new(wires.value()?, true, true);
+        while items.more() {
+            edges.push(Edge::unchecked(items.value()?.clone()));
+            items.next();
+        }
+        wires.next();
     }
-    structure.interf_ff().append(record);
-    Ok(())
-}
-
-fn maximum_face_vertex_tolerance(task: &BOPAlgoFaceFaceTask<'static>) -> Result<f64, Failure> {
-    Ok(BRepTool::max_tolerance(task.face1(), ShapeEnum::Vertex)?
-        .max(BRepTool::max_tolerance(task.face2(), ShapeEnum::Vertex)?))
-}
-
-fn append_face_face_points(record: &mut InterfFF, points: &[crate::int_tools::PntOn2Faces]) {
-    for pair in points {
-        record.change_points().appended().set_pnt(*pair.p1().pnt());
-    }
-}
-
-fn face_pair_tolerance(faces: &[Face; 2], context: &Handle<Context>) -> Result<f64, Failure> {
-    let types = face_surface_types(faces, context)?;
-    let maximum = BRepTool::face_tolerance(&faces[0])?.max(BRepTool::face_tolerance(&faces[1])?);
-    Ok(raised_face_tolerance(maximum, types))
-}
-
-fn face_surface_types(
-    faces: &[Face; 2],
-    context: &Handle<Context>,
-) -> Result<[SurfaceType; 2], Failure> {
-    let context = context.get().ok_or_else(missing_context)?;
-    let first = context.surface_adaptor(&faces[0])?;
-    let second = context.surface_adaptor(&faces[1])?;
-    Ok([first.read().get_type()?, second.read().get_type()?])
-}
-
-fn raised_face_tolerance(maximum: f64, types: [SurfaceType; 2]) -> f64 {
-    if types.iter().all(|kind| is_analytic_surface(*kind)) {
-        return maximum;
-    }
-    maximum.max(5e-6)
-}
-
-fn is_analytic_surface(kind: SurfaceType) -> bool {
-    matches!(
-        kind,
-        SurfaceType::Plane
-            | SurfaceType::Cylinder
-            | SurfaceType::Cone
-            | SurfaceType::Sphere
-            | SurfaceType::Torus
-    )
-}
-
-fn missing_structure() -> Failure {
-    Failure::new("BOPAlgo_PaveFiller::PerformFF requires initialized data structure")
-}
-
-fn missing_iterator() -> Failure {
-    Failure::new("BOPAlgo_PaveFiller::PerformFF requires initialized iterator")
-}
-
-fn missing_context() -> Failure {
-    Failure::new("BOPAlgo_PaveFiller::PerformFF requires initialized geometric context")
+    Ok(edges)
 }
