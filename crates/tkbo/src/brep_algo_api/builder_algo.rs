@@ -342,3 +342,19 @@ impl DerefMut for BRepAlgoAPIBuilderAlgo {
         &mut self.algo
     }
 }
+
+/// The queries a `BRepTools_History` is built from (the `TheAlgo` of its template
+/// constructor and `Merge`), for the BRepAlgoAPI Boolean algorithms.
+impl rustycad_tkbrep::brep_tools::HistoryAlgorithm for BRepAlgoAPIBuilderAlgo {
+    fn is_deleted(&mut self, shape: &Shape) -> Result<bool, Failure> {
+        BRepAlgoAPIBuilderAlgo::is_deleted(self, shape)
+    }
+
+    fn modified(&mut self, shape: &Shape) -> Result<Vec<Shape>, Failure> {
+        BRepAlgoAPIBuilderAlgo::modified(self, shape)
+    }
+
+    fn generated(&mut self, shape: &Shape) -> Result<Vec<Shape>, Failure> {
+        BRepAlgoAPIBuilderAlgo::generated(self, shape)
+    }
+}

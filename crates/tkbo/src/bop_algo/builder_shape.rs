@@ -134,3 +134,19 @@ impl BuilderShape {
         }
     }
 }
+
+/// The queries a `BRepTools_History` is built from (the `TheAlgo` of its template
+/// constructor and `Merge`), for `BOPAlgo_Builder` and the algorithms built on it.
+impl rustycad_tkbrep::brep_tools::HistoryAlgorithm for BuilderShape {
+    fn is_deleted(&mut self, shape: &Shape) -> Result<bool, Failure> {
+        BuilderShape::is_deleted(self, shape)
+    }
+
+    fn modified(&mut self, shape: &Shape) -> Result<Vec<Shape>, Failure> {
+        BuilderShape::modified(self, shape)
+    }
+
+    fn generated(&mut self, shape: &Shape) -> Result<Vec<Shape>, Failure> {
+        BuilderShape::generated(self, shape)
+    }
+}

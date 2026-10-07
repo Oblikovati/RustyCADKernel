@@ -302596,6 +302596,15 @@
       "notes": "The alert holding the shape it reports (TopoDS_AlertWithShape base)."
     },
     {
+      "upstream_id": "BOPAlgo_AlertUnableToMakePeriodic(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Alerts.hxx",
+      "source_sha256": "2ec83a1ab93445a9147980c866b8aa0c71299e26b611da0c3ac0b11573d748e4",
+      "rust_item": "rustycad_tkbo::bop_algo::AlertUnableToMakePeriodic::new",
+      "status": "implemented",
+      "notes": "The alert holding the shape it reports (TopoDS_AlertWithShape base)."
+    },
+    {
       "upstream_id": "BOPAlgo_GlueEnum",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_GlueEnum.hxx",
@@ -328402,6 +328411,564 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "d6017e60ee427cfb8189c968f038ba5528fa63b66220f60a7014ea1894551fb0",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::new",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::SetShape(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::set_shape",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::SetPeriodicityParameters(const BOPAlgo_MakePeriodic::PeriodicityParams&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::set_periodicity_parameters",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::PeriodicityParameters() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::periodicity_parameters",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::MakePeriodic(int,bool,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::make_periodic",
+      "status": "implemented",
+      "notes": "The native default period (0.0) is an explicit argument. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::IsPeriodic(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::is_periodic",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::Period(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::period",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::SetTrimmed(int,bool,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::set_trimmed",
+      "status": "implemented",
+      "notes": "The native default start (0.0) is an explicit argument. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::IsInputTrimmed(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::is_input_trimmed",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::PeriodFirst(int) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::period_first",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::MakeXPeriodic(bool,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::make_x_periodic",
+      "status": "implemented",
+      "notes": "The native default period (0.0) is an explicit argument. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::IsXPeriodic() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::is_x_periodic",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::XPeriod() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::x_period",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::SetXTrimmed(bool,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::set_x_trimmed",
+      "status": "implemented",
+      "notes": "Native quirk kept: the start is declared bool, so only 0 or 1 reaches SetTrimmed. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::IsInputXTrimmed() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::is_input_x_trimmed",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::XPeriodFirst() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::x_period_first",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::XRepeat(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::x_repeat",
+      "status": "implemented",
+      "notes": "Returns Result: the history merge reports a failure instead of raising it. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::MakeYPeriodic(bool,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::make_y_periodic",
+      "status": "implemented",
+      "notes": "The native default period (0.0) is an explicit argument. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::IsYPeriodic() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::is_y_periodic",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::YPeriod() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::y_period",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::SetYTrimmed(bool,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::set_y_trimmed",
+      "status": "implemented",
+      "notes": "Native quirk kept: the start is declared bool, so only 0 or 1 reaches SetTrimmed. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::IsInputYTrimmed() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::is_input_y_trimmed",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::YPeriodFirst() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::y_period_first",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::YRepeat(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::y_repeat",
+      "status": "implemented",
+      "notes": "Returns Result: the history merge reports a failure instead of raising it. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::MakeZPeriodic(bool,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::make_z_periodic",
+      "status": "implemented",
+      "notes": "The native default period (0.0) is an explicit argument. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::IsZPeriodic() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::is_z_periodic",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::ZPeriod() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::z_period",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::SetZTrimmed(bool,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::set_z_trimmed",
+      "status": "implemented",
+      "notes": "Native quirk kept: the start is declared bool, so only 0 or 1 reaches SetTrimmed. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::IsInputZTrimmed() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::is_input_z_trimmed",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::ZPeriodFirst() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::z_period_first",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::ZRepeat(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::z_repeat",
+      "status": "implemented",
+      "notes": "Returns Result: the history merge reports a failure instead of raising it. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::Perform()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::perform",
+      "status": "implemented",
+      "notes": "Returns Result: the history merge reports a failure instead of raising it. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::RepeatShape(int,int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::repeat_shape",
+      "status": "implemented",
+      "notes": "Returns Result: the history merge reports a failure instead of raising it. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::RepeatedShape() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::repeated_shape",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::ClearRepetitions()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::clear_repetitions",
+      "status": "implemented",
+      "notes": "Returns Result: the history merge reports a failure instead of raising it. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::Shape() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::shape",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::GetTwins(const TopoDS_Shape&) const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::get_twins",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::History() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::history",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::clear",
+      "status": "implemented",
+      "notes": "An inherent method that also clears the options; Rust has no virtual BOPAlgo_Options::Clear. Returns Result: the history merge reports a failure instead of raising it. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::ToDirectionID(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::to_direction_id",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::CheckData()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `check_data` run by `BOPAlgoMakePeriodic::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::Trim()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `trim` run by `BOPAlgoMakePeriodic::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::MakeIdentical()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `make_identical` run by `BOPAlgoMakePeriodic::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::SplitNegative()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `split_negative` run by `BOPAlgoMakePeriodic::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::SplitPositive()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `split_positive` run by `BOPAlgoMakePeriodic::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::SplitShape(const NCollection_List<TopoDS_Shape>&,const occ::handle<BRepTools_History>&,const occ::handle<BRepTools_History>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `split_shape` run by `BOPAlgoMakePeriodic::perform`; Rust has no subclassing, so it is not an override point. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::UpdateTwins(const BRepTools_History&,const BRepTools_History&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic::repeat_shape",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `update_twins` run by `BOPAlgoMakePeriodic::repeat_shape`; Rust has no subclassing, so it is not an override point. Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::PeriodicityParams::PeriodicityParams()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::PeriodicityParams::new",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::PeriodicityParams::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::PeriodicityParams::clear",
+      "status": "implemented",
+      "notes": "Verified bit for bit (shape, history, twins, repetitions) by the native replay tools/oracle/tkbo_make_periodic.cxx (crates/tkbo/tests/bop_algo_make_periodic.rs); the replay compares the merged history lists sorted and the twins without orientation, because the native order follows the TShape address hashes and changes between two native runs."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::PeriodicityParams::myPeriodic",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::PeriodicityParams::periodic",
+      "status": "implemented",
+      "notes": "Public member of the plain struct, the public Rust field periodic."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::PeriodicityParams::myPeriod",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::PeriodicityParams::period",
+      "status": "implemented",
+      "notes": "Public member of the plain struct, the public Rust field period."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::PeriodicityParams::myIsTrimmed",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::PeriodicityParams::is_trimmed",
+      "status": "implemented",
+      "notes": "Public member of the plain struct, the public Rust field is_trimmed."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::PeriodicityParams::myPeriodFirst",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::PeriodicityParams::period_first",
+      "status": "implemented",
+      "notes": "Public member of the plain struct, the public Rust field period_first."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::myInputShape",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakePeriodic, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::myPeriodicityParams",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakePeriodic, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::myShape",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakePeriodic, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::myRepeatedShape",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakePeriodic, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::myRepeatPeriod",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakePeriodic, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::myRepeatedTwins",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakePeriodic, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::myTwins",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakePeriodic, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::mySplitHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakePeriodic, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
+    },
+    {
+      "upstream_id": "BOPAlgo_MakePeriodic::myHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_MakePeriodic.hxx",
+      "source_sha256": "7634eb6e9c0845d3f2b30c8ba39d55f485795659f5765b99f05e9b9a5475c956",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoMakePeriodic",
+      "status": "excluded",
+      "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BOPAlgoMakePeriodic, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
     },
     {
       "upstream_id": "BOPAlgo_MakerVolume::operator delete(void*) noexcept",
