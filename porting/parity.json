@@ -99385,6 +99385,486 @@
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; occ::handle<Standard_Type> is &RuntimeType; HSequence arguments are slices (None for null); native exceptions and null dereferences are Failure errors."
     },
     {
+      "upstream_id": "IFSelect_SelectFlag::IFSelect_SelectFlag",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectFlag.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectFlag::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectFlag::FlagName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectFlag.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectFlag::flag_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectFlag::RootResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectFlag.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectFlag::<rustycad_tkxsbase::if_select::IFSelectSelection>::root_result",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectFlag::Sort",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectFlag.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectFlag::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::sort",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectFlag::ExtractLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectFlag.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectFlag::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::extract_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectIncorrectEntities::IFSelect_SelectIncorrectEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectIncorrectEntities.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectIncorrectEntities::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRoots::IFSelect_SelectRoots",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRoots.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRoots::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRoots::RootResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRoots.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRoots::<rustycad_tkxsbase::if_select::IFSelectSelection>::root_result",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors. Native defect kept: IFGraph_Cumulate::GetFromEntity adds nothing, so every input entity is a local root."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRoots::HasUniqueResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRoots.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRoots::<rustycad_tkxsbase::if_select::IFSelectSelection>::has_unique_result",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRoots::Sort",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRoots.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRoots::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::sort",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRoots::ExtractLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRoots.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRoots::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::extract_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRootComps::IFSelect_SelectRootComps",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRootComps.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRootComps::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRootComps::RootResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRootComps.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRootComps::<rustycad_tkxsbase::if_select::IFSelectSelection>::root_result",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors. Native defect kept: IFGraph_Cumulate::GetFromEntity adds nothing."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRootComps::HasUniqueResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRootComps.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRootComps::<rustycad_tkxsbase::if_select::IFSelectSelection>::has_unique_result",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRootComps::Sort",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRootComps.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRootComps::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::sort",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRootComps::ExtractLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRootComps.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRootComps::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::extract_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::IFSelect_SelectRange",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRange::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::SetRange",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::set_range",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors. The range members are those of IFSelectRankRange (the dereference target)."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::SetOne",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::set_one",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::SetFrom",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::set_from",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::SetUntil",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::set_until",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::HasLower",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::has_lower",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::Lower",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::lower",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::LowerValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::lower_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::HasUpper",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::has_upper",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::Upper",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::upper",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::UpperValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::upper_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::Sort",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRange::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::sort",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectRange::ExtractLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectRange.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectRange::<rustycad_tkxsbase::if_select::IFSelectSelectExtract>::extract_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors. Native quirk kept: \"From no\" prints the upper rank (0)."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSuite::IFSelect_SelectSuite",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSuite.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSuite::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSuite::AddInput",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSuite.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSuite::add_input",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSuite::AddPrevious",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSuite.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSuite::add_previous",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSuite::AddNext",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSuite.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSuite::add_next",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSuite::NbItems",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSuite.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSuite::nb_items",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSuite::Item",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSuite.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSuite::item",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSuite::SetLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSuite.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSuite::set_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSuite::RootResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSuite.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSuite::<rustycad_tkxsbase::if_select::IFSelectSelection>::root_result",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectSuite::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectSuite.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectSuite::<rustycad_tkxsbase::if_select::IFSelectSelection>::label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectExplore::IFSelect_SelectExplore",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectExplore.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectExploreBase::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors. The protected constructor of the embedded base."
+    },
+    {
+      "upstream_id": "IFSelect_SelectExplore::Level",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectExplore.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectExplore::level",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectExplore::RootResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectExplore.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::explore_root_result",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectExplore::Explore",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectExplore.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectExplore::explore",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectExplore::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectExplore.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::explore_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectExplore::ExploreLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectExplore.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectExplore::explore_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::KeepInputEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectAnyList::keep_input_entity",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::NbItems",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectAnyList::nb_items",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::SetRange",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::set_range",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors. The range members are those of IFSelectRankRange (any_list_base().range)."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::SetOne",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::set_one",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::SetFrom",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::set_from",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::SetUntil",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::set_until",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::HasLower",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::has_lower",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::Lower",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::lower",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::LowerValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::lower_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::HasUpper",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::has_upper",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::Upper",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::upper",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::UpperValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectRankRange::upper_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::RootResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::any_list_root_result",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors. Interface_InterfaceError for more than one input entity."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::FillResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectAnyList::fill_result",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::any_list_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors. Native quirks kept: \" (-> n)\" prints the lower rank and \" (n ->)\" the upper one."
+    },
+    {
+      "upstream_id": "IFSelect_SelectAnyList::ListLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_SelectAnyList.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectSelectAnyList::list_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): abstract classes are traits over embedded bases (the base struct stands for the protected constructor); the overrides many classes inherit are named functions; native exceptions and null dereferences are Failure errors."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",

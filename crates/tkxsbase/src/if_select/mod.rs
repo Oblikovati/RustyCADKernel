@@ -6,11 +6,15 @@
 mod enums;
 mod int_param;
 mod select_bases;
+mod select_chains;
 mod select_combine;
 mod select_deduct;
+mod select_extracts;
 mod select_pointed;
 mod select_types;
 mod selection;
+#[cfg(test)]
+mod selection_more_tests;
 #[cfg(test)]
 mod selection_tests;
 
@@ -23,6 +27,11 @@ pub use select_bases::{
     IFSelectSelectEntityNumber, IFSelectSelectModelEntities, IFSelectSelectModelRoots,
     IFSelectSelectShared, IFSelectSelectSharing,
 };
+pub use select_chains::{
+    IFSelectSelectAnyList, IFSelectSelectAnyListBase, IFSelectSelectExplore,
+    IFSelectSelectExploreBase, IFSelectSelectSuite, any_list_label, any_list_root_result,
+    explore_label, explore_root_result,
+};
 pub use select_combine::{
     IFSelectSelectCombine, IFSelectSelectCombineBase, IFSelectSelectControl,
     IFSelectSelectControlBase, IFSelectSelectDiff, IFSelectSelectIntersection, IFSelectSelectUnion,
@@ -32,6 +41,10 @@ pub(crate) use select_deduct::impl_extract_selection;
 pub use select_deduct::{
     IFSelectSelectDeduct, IFSelectSelectDeductBase, IFSelectSelectExtract,
     IFSelectSelectExtractBase, deduct_fill_iterator, extract_label, extract_root_result,
+};
+pub use select_extracts::{
+    IFSelectRankRange, IFSelectSelectFlag, IFSelectSelectIncorrectEntities, IFSelectSelectRange,
+    IFSelectSelectRootComps, IFSelectSelectRoots,
 };
 pub use select_pointed::IFSelectSelectPointed;
 pub use select_types::{
