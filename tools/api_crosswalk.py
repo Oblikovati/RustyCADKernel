@@ -140,10 +140,14 @@ def scoped_parameter_match(
 
 
 def is_simple_array_reference(text: str) -> bool:
-    """Recognize exact array references, e.g. `const char(&)[N]`, without decay."""
+    """Recognize exact array references and pointers, e.g. `const char(&)[N]`.
+
+    Pointer-to-array parameters such as MathSys::Utils::Solve2x2's `const double(*)[2]`
+    keep their declarator: the element const is not top-level, so nothing is removed.
+    """
     element = r"[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*(?: [A-Za-z_]\w*)*"
     bounds = r"(?:\[(?:[A-Za-z_]\w*|[0-9]+)\])+"
-    return re.fullmatch(rf"{element}\(&&?\){bounds}", text) is not None
+    return re.fullmatch(rf"{element}\((?:\*|&&?)\){bounds}", text) is not None
 
 
 def canonical_parameter_type(text: str) -> str | None:

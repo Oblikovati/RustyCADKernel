@@ -34,6 +34,7 @@ from api_cpp_configuration import (
     ConfigurationEvidence,
     configuration_evidence,
 )
+from api_inventory_conflicts import material_conflicts
 from api_private_headers import split_private_header_rows
 from api_report_inputs import (
     crosswalk_input_hashes,
@@ -449,7 +450,7 @@ def main() -> int:
     conflicts = read_jsonl(
         verify_conflict_artifact(cpp_manifest, args.cpp_manifest.parent)
     )
-    mark_conflicted_declarations(cpp, conflicts)
+    mark_conflicted_declarations(cpp, material_conflicts(conflicts, cpp))
     source_headers = read_json(args.headers)
     rust_doc = read_json(args.rust)
     parity = read_json(args.parity)
