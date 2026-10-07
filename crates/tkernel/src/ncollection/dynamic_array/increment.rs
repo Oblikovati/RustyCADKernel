@@ -1,5 +1,5 @@
-//! Unsigned overflow in native roundUpPow2 is a defined empty metadata state, not an allocation size.
-use super::{ArrayError, BaseAllocator, DynamicArray, LinearVector};
+//! Unsigned overflow defines zero-stride metadata; retained typed storage is tracked separately.
+use super::{BaseAllocator, DynamicArray, LinearVector};
 impl<T> DynamicArray<T> {
     pub(super) fn with_rounded_increment(
         increment: usize,
@@ -20,11 +20,12 @@ impl<T> DynamicArray<T> {
             self.increment
         );
     }
-    pub(super) fn validate_element_index(&self, index: usize) -> Result<(), ArrayError> {
+    pub(super) fn element_coordinates(&self, index: usize) -> (usize, usize) {
         if self.increment == 0 {
-            return Err(self.index_error(index));
+            // Native log2Pow2(0)=0 and the unsigned mask wraps to usize::MAX.
+            return (index, index);
         }
-        Ok(())
+        (index / self.increment, index % self.increment)
     }
 }
 #[cfg(test)]
