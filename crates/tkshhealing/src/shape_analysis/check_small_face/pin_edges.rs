@@ -70,7 +70,8 @@ fn shared_parameters(
     second: &PinEdgeCurve,
     tolerance: f64,
 ) -> Result<(f64, f64), Failure> {
-    let shared_vertex = vertices(first_edge, true).1;
+    // TopExp::LastVertex with its default CumOri = false.
+    let shared_vertex = vertices(first_edge, false).1;
     let point = BRepTool::pnt(&shared_vertex)?;
     let tolerance = shared_tolerance(&shared_vertex, tolerance)?;
     Ok((
@@ -149,8 +150,9 @@ fn projects_inside_shorter(
         &curves.1.curve
     };
     let adaptor = GeomAdaptorCurve::with_curve(chosen)?;
+    // ShapeAnalysis_Curve::Project with its default AdjustToEnds = true.
     let (distance, _, parameter) =
-        ShapeAnalysisCurve.project_adaptor(&adaptor, point, tolerance, false)?;
+        ShapeAnalysisCurve.project_adaptor(&adaptor, point, tolerance, true)?;
     Ok(distance <= tolerance
         && parameter >= chosen.first_parameter()
         && parameter <= chosen.last_parameter())
