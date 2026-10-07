@@ -243507,6 +243507,904 @@
       "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_BaseList::BasicIterator. Rust BaseListBasicIterator spells isize where a signed distance is needed; there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_BaseList::BasicIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator",
+      "status": "implemented",
+      "notes": "Protected typed iterator template BasicIterator<TheNode, TheItemType, IsConstant> is BaseListBasicIterator<N, MUTABLE = !IsConstant>."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::operator*() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::dereference",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::dereference",
+          "declaration_sha256": "9b485789e507b19883696c677274ec94953bc07f395724ba27212a03c4a4b7d6",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::dereference",
+          "declaration_sha256": "1cf702f6ef149175e11697ce7c1720fc00b2d9a45576b9defe3e357540aec7ea",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNodeMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "operator* returns the current node value. One C++ declaration whose IsConstant template parameter selects const or mutable access; Rust splits it into the MUTABLE=false and MUTABLE=true impls of the same method (both selected). The unsafe Rust accessors require the caller to prove the node is live (native undefined behavior otherwise)."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::Value() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::value",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::value",
+          "declaration_sha256": "ab0d46eb4708692b8106d961da84fe695633ad5ea335d44056ab8d24b187fff0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::value",
+          "declaration_sha256": "7da9bd4927af3b47d3b2b1937d2f39d820f53c156062386597196b0372991fcd",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNodeMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Value() returns the current node value. One C++ declaration whose IsConstant template parameter selects const or mutable access; Rust splits it into the MUTABLE=false and MUTABLE=true impls of the same method (both selected). The unsafe Rust accessors require the caller to prove the node is live (native undefined behavior otherwise)."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::operator->() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::arrow",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::arrow",
+          "declaration_sha256": "17bbcfec8726c579c5d414578963401b102d0cc49cf2b261f617f0425c9c0ecb",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::arrow",
+          "declaration_sha256": "7facce1beea9ed0d0c82acda466f7f8e09b666e47559993145cc776baa362ab4",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNodeMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNodeMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "operator-> returns the address of the current node value. One C++ declaration whose IsConstant template parameter selects const or mutable access; Rust splits it into the MUTABLE=false and MUTABLE=true impls of the same method (both selected). The unsafe Rust accessors require the caller to prove the node is live (native undefined behavior otherwise)."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(const NCollection_BaseList&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::new",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::new",
+          "declaration_sha256": "949d63d5f946394f66fa15b0820756401f7f03b399d2a584933b29629e3b45e4",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Constructor from a const list starts at the head; the MUTABLE=false impl takes &BaseListStorage."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(NCollection_BaseList&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::new",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::new",
+          "declaration_sha256": "eb2e3b6adca1a4596b48915b789403d74e03a4a3c53b2f6d6044caf840659a0c",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Constructor from a mutable list starts at the head; the MUTABLE=true impl takes &mut BaseListStorage."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::Init(const NCollection_BaseList&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::init",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::init",
+          "declaration_sha256": "b0d3db548c1a2ed4b54185ca5f57333cb42f5b198456c693b675674e981a5812",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Restarts at the head of a const list (MUTABLE=false impl)."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::Init(NCollection_BaseList&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::init",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::init",
+          "declaration_sha256": "d33dfd8fbe0f4b1907fcbb08fbf400142a08f901216fd92831a3fb2630155ea5",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Restarts at the head of a mutable list (MUTABLE=true impl)."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::Initialize(const NCollection_BaseList&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::initialize",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::initialize",
+          "declaration_sha256": "ab16499a8982894868a7a87d87a41897398c152d26957da6d2d870b63143a218",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Initialize spelling of Init for a const list (MUTABLE=false impl)."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::Initialize(NCollection_BaseList&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::initialize",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListBasicIterator::initialize",
+          "declaration_sha256": "a4441929f44370677ddb6f0c5a342bd2b5cc07369fcd12ec5c2bf057602871df",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "BaseListBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicListNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::base_list::basic_node::BasicListNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Initialize spelling of Init for a mutable list (MUTABLE=true impl)."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::BasicIterator::operator!=(const NCollection_BaseList::BasicIterator<TheNode,TheItemType,theOtherIsConstant>&) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::base_list::basic_iterator::BaseListBasicIterator<N, O>>>::eq",
+      "status": "implemented",
+      "notes": "Native !(a == b) across constness; PartialEq::ne of the generic eq impl, which compares current nodes."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Iterator::myCurrent",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::current",
+      "status": "implemented",
+      "notes": "Public current-node pointer field."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Iterator::myPrevious",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListRawIterator::previous",
+      "status": "implemented",
+      "notes": "Public previous-node pointer field."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::myAllocator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::allocator",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::allocator",
+          "declaration_sha256": "2a95215aca44445d54f24a674be0c9fa74b4e5ceae7a05c6cc901d0dae3d9b62",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected allocator handle; public field of BaseListStorage."
+    },
+    {
+      "upstream_id": "NCollection_DelListNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DelListNode",
+      "status": "implemented",
+      "notes": "Node deleter function-pointer typedef is the type alias DelListNode = unsafe fn(*mut ListLinkNode, &mut BaseAllocator)."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::myFirst",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::first",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::first",
+          "declaration_sha256": "63bd986d8d2582b7506c04747c68e280201b98f95987d4ee17f4bf074b167061",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected list state; public field BaseListStorage::first."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::myLast",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::last",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::last",
+          "declaration_sha256": "81ef6348553a17789ae37dfa68983eb43c2dbbb4176533dc8fcb5ad295db7c37",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected list state; public field BaseListStorage::last."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::myLength",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseListStorage::length",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseListStorage::length",
+          "declaration_sha256": "55188f4a2ebab26a075e948c5341db5dc345e4fe5aa215c94a86e18dce167be4",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected list state; public field BaseListStorage::length."
+    },
+    {
       "upstream_id": "NCollection_BaseSequence::BasicIterator::BasicIterator<TheNode, TheItemType, IsConstant>(const NCollection_BaseSequence::Iterator &) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
@@ -244285,6 +245183,535 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef pointer (std::conditional<value-parameter-0-2, const type-parameter-0-1 *, type-parameter-0-1 *>::type) of NCollection_BaseSequence::BasicIterator. Rust BaseSequenceBasicIterator spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DelSeqNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DelSeqNode",
+      "status": "implemented",
+      "notes": "Node deleter function-pointer typedef is the type alias DelSeqNode = unsafe fn(*mut SeqNode, &mut BaseAllocator)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator",
+      "status": "implemented",
+      "notes": "Protected typed iterator template BasicIterator<TheNode, TheItemType, IsConstant> is BaseSequenceBasicIterator<N, MUTABLE>."
+    },
+    {
+      "upstream_id": "BasicIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Friend declaration `friend class BasicIterator;` inside NCollection_BaseSequence::Iterator; Rust grants the same access through module privacy (BaseSequenceBasicIterator is mapped separately)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::Node() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::node",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::node",
+          "declaration_sha256": "781e2d524b5a3912dc7f1aec7991c5f5cf5b9649f1019234272bcae7c561a245",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseSequenceBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicSequenceNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_node::BasicSequenceNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::node",
+          "declaration_sha256": "098c46ea83210d06a897a131a4ebd2ce285f1065fda71b43303c819364a1a90a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseSequenceBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicSequenceNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_node::BasicSequenceNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Node() returns the current sequence node pointer. One C++ declaration whose IsConstant template parameter selects const or mutable access; Rust splits it into the MUTABLE=false and MUTABLE=true impls of the same method (both selected). The unsafe Rust accessors require the caller to prove the node is live (native undefined behavior otherwise)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator*() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::dereference",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::dereference",
+          "declaration_sha256": "eb0d21807953c06c1adb2dc475fbcdf796dc17c3d7f3af0cf067ed82a05df9ae",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseSequenceBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicSequenceNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_node::BasicSequenceNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::dereference",
+          "declaration_sha256": "039e24c5d37fcadf4579a84c596c1e5835030c066e70e08f687bac7a03618abd",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseSequenceBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicSequenceNodeMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_node::BasicSequenceNodeMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "operator* returns the current item. One C++ declaration whose IsConstant template parameter selects const or mutable access; Rust splits it into the MUTABLE=false and MUTABLE=true impls of the same method (both selected). The unsafe Rust accessors require the caller to prove the node is live (native undefined behavior otherwise)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator->() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::arrow",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::arrow",
+          "declaration_sha256": "b86a4e68349c4a27b00c9fb3a605e7fa6741ae132c1cd62e91e45d7d4b156632",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseSequenceBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicSequenceNode",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_node::BasicSequenceNode"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::arrow",
+          "declaration_sha256": "46496578f3d5a710a15ccb13ceea5b0d5422041d33ac53752378ecb1523fb21a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "generic": "N"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseSequenceBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "BasicSequenceNodeMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::sequence::basic_node::BasicSequenceNodeMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "N"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "operator-> returns the address of the current item. One C++ declaration whose IsConstant template parameter selects const or mutable access; Rust splits it into the MUTABLE=false and MUTABLE=true impls of the same method (both selected). The unsafe Rust accessors require the caller to prove the node is live (native undefined behavior otherwise)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::BasicIterator::operator!=(const NCollection_BaseSequence::BasicIterator<TheNode,TheItemType,theOtherIsConstant>&) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::sequence::basic_iterator::BaseSequenceBasicIterator<N, OTHER>>>::eq",
+      "status": "implemented",
+      "notes": "Native !(a == b) across constness; PartialEq::ne of the generic eq impl."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Iterator::myCurrent",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceRawIterator::current",
+      "status": "implemented",
+      "notes": "Protected current-node pointer; public field of BaseSequenceRawIterator."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Iterator::myPrevious",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequenceRawIterator::previous",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequenceRawIterator::previous",
+          "declaration_sha256": "98f32d4cf4d875c2d4ce9b8c4ec291b18c5a6e4904bb3f9389153f0a235bb735",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected previous-node pointer; public field of BaseSequenceRawIterator."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::myFirstItem",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::first",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequence::first",
+          "declaration_sha256": "7b411019c17b5c7f81dc7ab708900873af1d0dc478e7166ab976111c70d71171",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected sequence state; public field BaseSequence::first."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::myLastItem",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::last",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequence::last",
+          "declaration_sha256": "0b0c817acf8f747a97c99a1ee31c89c64c507f9c9abe6d26a6195da6fbd49149",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected sequence state; public field BaseSequence::last."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::myCurrentItem",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::current",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequence::current",
+          "declaration_sha256": "5cfa8ee4d793f33c6368eddbae5438fd88206017eb2f66721be876f15235270c",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected sequence state; public field BaseSequence::current."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::myCurrentIndex",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::current_index",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequence::current_index",
+          "declaration_sha256": "d992b799139ee29f8743e3bbb7a851846e36a85dfa023990117db06987d1af5f",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected sequence state; public field BaseSequence::current_index."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::mySize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::size",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequence::size",
+          "declaration_sha256": "45f20c558a260bb9361aa993b72b396cf0730a42a2574473741a9295541a4fbb",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected sequence state; public field BaseSequence::size."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::myAllocator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSequence::allocator",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSequence::allocator",
+          "declaration_sha256": "f301463e2a8697fc1ce02edd568af1be672af4834681c92dbc9157059158797e",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Protected sequence state; public field BaseSequence::allocator."
     },
     {
       "upstream_id": "NCollection_BaseMap::NCollection_BaseMap(const size_t,const occ::handle<NCollection_BaseAllocator> &)",
@@ -250522,6 +251949,102 @@
       "notes": "C++ STL-protocol member typedef pointer (std::add_pointer<std::remove_reference<decltype(std::declval<std::conditional<value-parameter-0-2, const type-parameter-0-0, type-parameter-0-0>::type &>()(std::declval<unsigned long>()))>::type>::type) of NCollection_BaseMap::IndexedIterator. Rust BaseMapIndexedIterator spells &mut T / *mut T in its accessors; there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_DelMapNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Node deleter function-pointer typedef; Rust BaseMapStorage::destroy takes the deleter as impl FnMut(*mut MapLinkNode, &mut BaseAllocator), so no named alias exists."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::myData1",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::buckets",
+      "status": "implemented",
+      "notes": "Protected bucket table pointer; read through buckets() (buckets_mut()/bucket_slots for writes)."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::myNbBuckets",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::BaseMap>::nb_buckets",
+      "status": "implemented",
+      "notes": "Protected bucket count; read through BaseMap::nb_buckets."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::mySize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::BaseMap>::size",
+      "status": "implemented",
+      "notes": "Protected element count; read through BaseMap::size (increment/decrement update it)."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::myAllocator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::<rustycad_tkernel::ncollection::BaseMap>::allocator",
+      "status": "implemented",
+      "notes": "Protected allocator handle; read through BaseMap::allocator."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::myNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::node",
+      "status": "implemented",
+      "notes": "Protected current node; private field of BaseMapBucketIterator read through node()."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::myBucket",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator::bucket_index",
+      "status": "implemented",
+      "notes": "Protected current bucket index; read through bucket_index()."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::myNbBuckets",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected copy of the bucket count; private state of BaseMapBucketIterator captured by new/initialize."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Iterator::myBuckets",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected copy of the bucket table pointer; private state of BaseMapBucketIterator captured by new/initialize."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BasicIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator",
+      "status": "implemented",
+      "notes": "Protected typed iterator template is BaseMapBasicIterator."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator",
+      "status": "implemented",
+      "notes": "Random-access indexed iterator template is BaseMapIndexedIterator."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::key_reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of decltype(map.FindKey(i)); Rust BaseMapIndexedIterator::key/key_with return &K directly."
+    },
+    {
       "upstream_id": "NCollection_HArray1::NCollection_HArray1<TheItemType>(const int,const int,const TheItemType &)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
@@ -252633,6 +254156,110 @@
       "rust_item": "rustycad_tkernel::ncollection::Sequence",
       "status": "implemented",
       "notes": "Class template NCollection_Sequence is the generic Rust type Sequence; its members are mapped row by row."
+    },
+    {
+      "upstream_id": "NCollection_BaseIndexedMap",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage",
+      "status": "implemented",
+      "notes": "Base class of indexed maps is the extension storage BaseIndexedMapStorage."
+    },
+    {
+      "upstream_id": "NCollection_BaseIndexedMap::NCollection_BaseIndexedMap(const size_t,const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::new",
+      "status": "implemented",
+      "notes": "Protected constructor: bucket count and optional allocator, tables unallocated."
+    },
+    {
+      "upstream_id": "NCollection_BaseIndexedMap::clearIndexTable(const bool) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::clear_index_table",
+      "status": "implemented",
+      "notes": "Protected index-table clear with optional release."
+    },
+    {
+      "upstream_id": "NCollection_BaseIndexedMap::exchangeIndexedMapsData(NCollection_BaseIndexedMap&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::exchange",
+      "status": "implemented",
+      "notes": "Protected swap of both tables, counts and allocator."
+    },
+    {
+      "upstream_id": "NCollection_BaseIndexedMap::resizeIndexTable(const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::resize_index_table",
+      "status": "implemented",
+      "notes": "Protected index-table reallocation keeping the native prefix; allocation failure (native Standard_OutOfMemory) is a Failure result."
+    },
+    {
+      "upstream_id": "NCollection_BaseIndexedMap::myData2",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseIndexedMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::index_buckets",
+      "status": "implemented",
+      "notes": "Protected index table pointer; read through index_buckets() (index_buckets_mut/index_slots for writes)."
+    },
+    {
+      "upstream_id": "NCollection_BaseDoubleMap",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage",
+      "status": "implemented",
+      "notes": "Base class of double maps is the storage BaseDoubleMapStorage."
+    },
+    {
+      "upstream_id": "NCollection_BaseDoubleMap::NCollection_BaseDoubleMap(const size_t,const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::new",
+      "status": "implemented",
+      "notes": "Protected constructor: bucket count and optional allocator, both tables unallocated."
+    },
+    {
+      "upstream_id": "NCollection_BaseDoubleMap::beginResize(const size_t,size_t&,NCollection_ListNode**&,NCollection_ListNode**&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::begin_resize",
+      "status": "partial",
+      "notes": "Protected resize start. The native out-parameters (new bucket count, two new tables) become one BaseDoubleMapResize plan (bucket_count, slots); allocation failure is a Failure result."
+    },
+    {
+      "upstream_id": "NCollection_BaseDoubleMap::endResize(const size_t,const size_t,NCollection_ListNode**,NCollection_ListNode**) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::end_resize",
+      "status": "partial",
+      "notes": "Protected resize commit; takes the BaseDoubleMapResize plan instead of the loose count and table pointers."
+    },
+    {
+      "upstream_id": "NCollection_BaseDoubleMap::destroy(NCollection_DelMapNode,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::destroy",
+      "status": "implemented",
+      "notes": "Protected destroy through the first table, clearing the second; unsafe with the live acyclic chain contract of BaseMapStorage::destroy."
+    },
+    {
+      "upstream_id": "NCollection_BaseDoubleMap::exchangeDoubleMapsData(NCollection_BaseDoubleMap&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::exchange",
+      "status": "implemented",
+      "notes": "Protected swap of the contiguous tables and common state."
+    },
+    {
+      "upstream_id": "NCollection_BaseDoubleMap::myData2",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseDoubleMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::second_buckets",
+      "status": "implemented",
+      "notes": "Protected second table pointer; read through second_buckets() (second_buckets_mut/second_slots for writes)."
     }
   ],
   "tests": [
