@@ -36944,7 +36944,7 @@
       "upstream_id": "MathRoot::MultipleResult::operator[](size_t) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
-      "rust_item": "rustycad_tkmath::math_root::MultipleResult::<core::ops::index::Index>::index",
+      "rust_item": "rustycad_tkmath::math_root::MultipleResult::<core::ops::index::Index<usize>>::index",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -37016,7 +37016,7 @@
       "upstream_id": "MathRoot::Utils::MultipleSampleValueFn::operator()(size_t,double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
-      "rust_item": "<rustycad_tkmath::math_root::utils::MultipleSampleValueFn<F> as rustycad_tkmath::math_root::utils::MultipleSampleCallback>::sample_at",
+      "rust_item": "rustycad_tkmath::math_root::utils::MultipleSampleValueFn::<rustycad_tkmath::math_root::utils::MultipleSampleCallback>::sample_at",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -37032,7 +37032,7 @@
       "upstream_id": "MathRoot::Utils::MultipleGetValueFn::operator()(size_t) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
-      "rust_item": "<rustycad_tkmath::math_root::utils::MultipleGetValueFn as rustycad_tkmath::math_root::utils::MultipleSampleLookup>::value_at",
+      "rust_item": "rustycad_tkmath::math_root::utils::MultipleGetValueFn::<rustycad_tkmath::math_root::utils::MultipleSampleLookup>::value_at",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -37048,7 +37048,7 @@
       "upstream_id": "MathRoot::Utils::MultipleBrentValueWrapper::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
-      "rust_item": "<rustycad_tkmath::math_root::utils::MultipleBrentValueWrapper<F> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_root::utils::MultipleBrentValueWrapper::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -37064,7 +37064,7 @@
       "upstream_id": "MathRoot::Utils::MultipleGetRootValueFn::operator()(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
-      "rust_item": "<rustycad_tkmath::math_root::utils::MultipleGetRootValueFn<F> as rustycad_tkmath::math_root::utils::MultipleRootValueCallback>::root_value",
+      "rust_item": "rustycad_tkmath::math_root::utils::MultipleGetRootValueFn::<rustycad_tkmath::math_root::utils::MultipleRootValueCallback>::root_value",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -37080,7 +37080,7 @@
       "upstream_id": "MathRoot::Utils::MultipleDerivativeValueWrapper::Value(double,double&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
-      "rust_item": "<rustycad_tkmath::math_root::utils::MultipleDerivativeValueWrapper<F> as rustycad_tkmath::math::Function>::value",
+      "rust_item": "rustycad_tkmath::math_root::utils::MultipleDerivativeValueWrapper::<rustycad_tkmath::math::Function>::value",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -37133,10 +37133,10 @@
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
     {
-      "upstream_id": "MathRoot::Utils::MultipleNoExtraHandler::operator()(size_t,double,double,double,double,MultipleResult&,double) const",
+      "upstream_id": "MathRoot::Utils::MultipleNoExtraHandler::operator()(size_t,double,double,double,double,MathRoot::MultipleResult&,double) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
-      "rust_item": "<rustycad_tkmath::math_root::utils::MultipleNoExtraHandler as rustycad_tkmath::math_root::utils::MultipleIntervalHandler>::handle_interval",
+      "rust_item": "rustycad_tkmath::math_root::utils::MultipleNoExtraHandler::<rustycad_tkmath::math_root::utils::MultipleIntervalHandler>::handle_interval",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
     },
@@ -37315,6 +37315,278 @@
       "rust_item": "rustycad_tkmath::math_root::utils::compute_periodic_root_count",
       "status": "implemented",
       "notes": "Explicit MathRoot namespace mapping; MathRoot::Utils is public as math_root::utils (THE_ prefixes dropped from constants). Templates over Function become generics over math::Function/FunctionWithDerivative; the functor adapters share the caller's function through MultipleFunctionCell (RefCell<&mut F>) and RefCell<math::Vector> where the C++ adapters alias plain references, operator() maps to the named trait methods MultipleSampleCallback::sample_at, MultipleSampleLookup::value_at, MultipleRootValueCallback::root_value and MultipleIntervalHandler::handle_interval, and the mutable Status members become Cell fields read through status(). Trigonometric takes its five coefficients as an array and FindAllRootsWithIntervals its three tolerances as an array; the math_Vector overload is find_all_roots_at_samples; defaults become explicit."
+    },
+    {
+      "upstream_id": "MathRoot::AllRootsResult::NullIntervals",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
+      "rust_item": "rustycad_tkmath::math_root::AllRootsResult::null_intervals",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::AllRootsResult::RootStates",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
+      "rust_item": "rustycad_tkmath::math_root::AllRootsResult::root_states",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::AllRootsResult::Roots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
+      "rust_item": "rustycad_tkmath::math_root::AllRootsResult::roots",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::AllRootsResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
+      "rust_item": "rustycad_tkmath::math_root::AllRootsResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleConfig::FTolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleConfig::f_tolerance",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleConfig::MaxIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleConfig::max_iterations",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleConfig::NbSamples",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleConfig::nb_samples",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleConfig::NullTolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleConfig::null_tolerance",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleConfig::Offset",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleConfig::offset",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleConfig::XTolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleConfig::x_tolerance",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleResult::IsAllNull",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleResult::is_all_null",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleResult::Roots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleResult::roots",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleResult::Values",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleResult::values",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::NullInterval::A",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
+      "rust_item": "rustycad_tkmath::math_root::NullInterval::a",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::NullInterval::B",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
+      "rust_item": "rustycad_tkmath::math_root::NullInterval::b",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::NullInterval::State",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
+      "rust_item": "rustycad_tkmath::math_root::NullInterval::state",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::TrigResult::InfiniteRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Trig.hxx",
+      "rust_item": "rustycad_tkmath::math_root::TrigResult::infinite_roots",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::TrigResult::NbRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Trig.hxx",
+      "rust_item": "rustycad_tkmath::math_root::TrigResult::nb_roots",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::TrigResult::Roots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Trig.hxx",
+      "rust_item": "rustycad_tkmath::math_root::TrigResult::roots",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::TrigResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Trig.hxx",
+      "rust_item": "rustycad_tkmath::math_root::TrigResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
+      "rust_item": "rustycad_tkmath::math_root",
+      "status": "implemented",
+      "notes": "C++ namespace MathRoot is the Rust module math_root."
+    },
+    {
+      "upstream_id": "MathRoot::Utils",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
+      "rust_item": "rustycad_tkmath::math_root::utils",
+      "status": "implemented",
+      "notes": "C++ helper namespace MathRoot::Utils is the Rust module math_root::utils."
+    },
+    {
+      "upstream_id": "MathRoot::MultipleResult::NbIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Multiple.hxx",
+      "rust_item": "rustycad_tkmath::math_root::MultipleResult::iterations",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathRoot::Utils::MultipleGetRootValueFn::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::utils::MultipleGetRootValueFn::<rustycad_tkmath::math_root::utils::MultipleRootValueCallback>::status",
+      "status": "implemented",
+      "notes": "Public status member recorded by the callback; Rust reads it through MultipleRootValueCallback::status."
+    },
+    {
+      "upstream_id": "MathRoot::Utils::MultipleSampleValueFn::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": "rustycad_tkmath::math_root::utils::MultipleSampleValueFn::<rustycad_tkmath::math_root::utils::MultipleSampleCallback>::status",
+      "status": "implemented",
+      "notes": "Public status member recorded by the callback; Rust reads it through MultipleSampleCallback::status."
+    },
+    {
+      "upstream_id": "MathRoot::Utils::MultipleBrentValueWrapper::myFunc",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: bound reference held by the C++ helper functor. Rust math_root::utils::MultipleBrentValueWrapper keeps it as private state set once by MultipleBrentValueWrapper::new; its behavior is the functor's trait method."
+    },
+    {
+      "upstream_id": "MathRoot::Utils::MultipleBrentValueWrapper::myOffset",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: bound reference held by the C++ helper functor. Rust math_root::utils::MultipleBrentValueWrapper keeps it as private state set once by MultipleBrentValueWrapper::new; its behavior is the functor's trait method."
+    },
+    {
+      "upstream_id": "MathRoot::Utils::MultipleDerivativeValueWrapper::myFunc",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: bound reference held by the C++ helper functor. Rust math_root::utils::MultipleDerivativeValueWrapper keeps it as private state set once by MultipleDerivativeValueWrapper::new; its behavior is the functor's trait method."
+    },
+    {
+      "upstream_id": "MathRoot::Utils::MultipleGetRootValueFn::myFunc",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: bound reference held by the C++ helper functor. Rust math_root::utils::MultipleGetRootValueFn keeps it as private state set once by MultipleGetRootValueFn::new; its behavior is the functor's trait method."
+    },
+    {
+      "upstream_id": "MathRoot::Utils::MultipleGetValueFn::mySamples",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: bound reference held by the C++ helper functor. Rust math_root::utils::MultipleGetValueFn keeps it as private state set once by MultipleGetValueFn::new; its behavior is the functor's trait method."
+    },
+    {
+      "upstream_id": "MathRoot::Utils::MultipleSampleValueFn::myFunc",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: bound reference held by the C++ helper functor. Rust math_root::utils::MultipleSampleValueFn keeps it as private state set once by MultipleSampleValueFn::new; its behavior is the functor's trait method."
+    },
+    {
+      "upstream_id": "MathRoot::Utils::MultipleSampleValueFn::myOffset",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: bound reference held by the C++ helper functor. Rust math_root::utils::MultipleSampleValueFn keeps it as private state set once by MultipleSampleValueFn::new; its behavior is the functor's trait method."
+    },
+    {
+      "upstream_id": "MathRoot::Utils::MultipleSampleValueFn::mySamples",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: bound reference held by the C++ helper functor. Rust math_root::utils::MultipleSampleValueFn keeps it as private state set once by MultipleSampleValueFn::new; its behavior is the functor's trait method."
     },
     {
       "upstream_id": "MathSys::LMConfig",
@@ -37525,7 +37797,7 @@
       "notes": "Explicit MathSys namespace mapping; MathSys::Utils is public as math_sys::utils (re-exported from the solver modules), FuncSetType templates take impl FunctionSetWithDerivatives, the fixed-size Function templates take SmallSystem<N>/SymmetricFunction2D, raw C arrays become fixed-size Rust arrays with the same out-parameter writes, native nullptr bound pointers are Option<&Vector> (bounds apply only when both are given), long double is math_poly::LongDouble and std::max/std::clamp keep GCC 13 NaN and inverted-box semantics. Native default arguments (theMaxIter = 100, theTol = 1e-15, theRankTolerance = THE_RANK_TOL, default configs) are explicit Rust arguments."
     },
     {
-      "upstream_id": "MathSys::Utils::Solve2x2(const double[2][2],const double[2],double&,double&)",
+      "upstream_id": "MathSys::Utils::Solve2x2(const double (*)[2],const double*,double&,double&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton2D.hxx",
       "rust_item": "rustycad_tkmath::math_sys::utils::solve_2x2",
@@ -37597,7 +37869,7 @@
       "notes": "Explicit MathSys namespace mapping; MathSys::Utils is public as math_sys::utils (re-exported from the solver modules), FuncSetType templates take impl FunctionSetWithDerivatives, the fixed-size Function templates take SmallSystem<N>/SymmetricFunction2D, raw C arrays become fixed-size Rust arrays with the same out-parameter writes, native nullptr bound pointers are Option<&Vector> (bounds apply only when both are given), long double is math_poly::LongDouble and std::max/std::clamp keep GCC 13 NaN and inverted-box semantics. Native default arguments (theMaxIter = 100, theTol = 1e-15, theRankTolerance = THE_RANK_TOL, default configs) are explicit Rust arguments."
     },
     {
-      "upstream_id": "MathSys::Utils::Solve3x3(const double[3][3],const double[3],double[3])",
+      "upstream_id": "MathSys::Utils::Solve3x3(const double (*)[3],const double*,double*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton3D.hxx",
       "rust_item": "rustycad_tkmath::math_sys::utils::solve_3x3",
@@ -37653,7 +37925,7 @@
       "notes": "Explicit MathSys namespace mapping; MathSys::Utils is public as math_sys::utils (re-exported from the solver modules), FuncSetType templates take impl FunctionSetWithDerivatives, the fixed-size Function templates take SmallSystem<N>/SymmetricFunction2D, raw C arrays become fixed-size Rust arrays with the same out-parameter writes, native nullptr bound pointers are Option<&Vector> (bounds apply only when both are given), long double is math_poly::LongDouble and std::max/std::clamp keep GCC 13 NaN and inverted-box semantics. Native default arguments (theMaxIter = 100, theTol = 1e-15, theRankTolerance = THE_RANK_TOL, default configs) are explicit Rust arguments."
     },
     {
-      "upstream_id": "MathSys::Utils::Solve4x4(const double[4][4],const double[4],double[4])",
+      "upstream_id": "MathSys::Utils::Solve4x4(const double (*)[4],const double*,double*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Newton4D.hxx",
       "rust_item": "rustycad_tkmath::math_sys::utils::solve_4x4",
@@ -37696,9 +37968,9 @@
       "upstream_id": "MathSys::NewtonResultN::operator bool() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
-      "rust_item": "<bool as From<&rustycad_tkmath::math_sys::NewtonResultN>>::from",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonResultN::is_done",
       "status": "implemented",
-      "notes": "Explicit MathSys namespace mapping; MathSys::Utils is public as math_sys::utils (re-exported from the solver modules), FuncSetType templates take impl FunctionSetWithDerivatives, the fixed-size Function templates take SmallSystem<N>/SymmetricFunction2D, raw C arrays become fixed-size Rust arrays with the same out-parameter writes, native nullptr bound pointers are Option<&Vector> (bounds apply only when both are given), long double is math_poly::LongDouble and std::max/std::clamp keep GCC 13 NaN and inverted-box semantics. Native default arguments (theMaxIter = 100, theTol = 1e-15, theRankTolerance = THE_RANK_TOL, default configs) are explicit Rust arguments."
+      "notes": "operator bool returns IsDone(); the Rust item is is_done (the From<&NewtonResultN<N>> for bool sugar is not recorded by rustdoc for a const-generic owner)."
     },
     {
       "upstream_id": "MathSys::NewtonBoundsN",
@@ -37827,6 +38099,286 @@
       "rust_item": "<bool as core::convert::From<&rustycad_tkmath::math_sys::SystemResult>>::from",
       "status": "implemented",
       "notes": "Explicit MathSys namespace mapping; MathSys::Utils is public as math_sys::utils (re-exported from the solver modules), FuncSetType templates take impl FunctionSetWithDerivatives, the fixed-size Function templates take SmallSystem<N>/SymmetricFunction2D, raw C arrays become fixed-size Rust arrays with the same out-parameter writes, native nullptr bound pointers are Option<&Vector> (bounds apply only when both are given), long double is math_poly::LongDouble and std::max/std::clamp keep GCC 13 NaN and inverted-box semantics. Native default arguments (theMaxIter = 100, theTol = 1e-15, theRankTolerance = THE_RANK_TOL, default configs) are explicit Rust arguments."
+    },
+    {
+      "upstream_id": "MathSys::LMConfig::LambdaDecrease",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::LMConfig::lambda_decrease",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::LMConfig::LambdaIncrease",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::LMConfig::lambda_increase",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::LMConfig::LambdaInit",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::LMConfig::lambda_init",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::LMConfig::LambdaMax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::LMConfig::lambda_max",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::LMConfig::LambdaMin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::LMConfig::lambda_min",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::LMConfig::RankTolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::LMConfig::rank_tolerance",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonBoundsN::HasBounds",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonBoundsN::has_bounds",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonBoundsN::Max",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonBoundsN::max",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonBoundsN::Min",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonBoundsN::min",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonOptions::AllowSoftBounds",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonOptions::allow_soft_bounds",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonOptions::EnableLineSearch",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonOptions::enable_line_search",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonOptions::MaxStepRatio",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonOptions::max_step_ratio",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonOptions::SoftBoundsExtension",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonOptions::soft_bounds_extension",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonResultN::ResidualNorm",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonResultN::residual_norm",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonResultN::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonResultN::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonResultN::StepNorm",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonResultN::step_norm",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::NewtonResultN::X",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonResultN::x",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::Gradient",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::gradient",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::IsRoot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::is_root",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::IsStationary",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::is_stationary",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::Jacobian",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::jacobian",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::Rank",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::rank",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::ResidualNorm",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::residual_norm",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::Solution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::solution",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::StepNorm",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::step_norm",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::Value",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::value",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "rust_item": "rustycad_tkmath::math_sys",
+      "status": "implemented",
+      "notes": "C++ namespace MathSys is the Rust module math_sys."
+    },
+    {
+      "upstream_id": "MathSys::Utils",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::utils",
+      "status": "implemented",
+      "notes": "C++ helper namespace MathSys::Utils is the Rust module math_sys::utils."
+    },
+    {
+      "upstream_id": "MathSys::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::Status",
+      "status": "implemented",
+      "notes": "`using MathUtils::Status;` is the Rust re-export math_sys::Status of math_utils::Status."
+    },
+    {
+      "upstream_id": "MathSys::NewtonResultN::NbIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::NewtonResultN::iterations",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::SystemResult::NbIterations",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::SystemResult::iterations",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::Utils::LinearStep::Rank",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LinearAlgebra.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::utils::LinearStep::rank",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::Utils::LinearStep::Solution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LinearAlgebra.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::utils::LinearStep::solution",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::Utils::LinearStep::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LinearAlgebra.hxx",
+      "rust_item": "rustycad_tkmath::math_sys::utils::LinearStep::status",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
     },
     {
       "upstream_id": "Geom2dEval_AHTBezierCurve::Geom2dEval_AHTBezierCurve(const NCollection_Array1<gp_Pnt2d>&,int,double,double)",

@@ -1,6 +1,8 @@
 //! Nonlinear equation systems using native rank-aware linear policies.
 mod types;
 pub use types::SystemResult;
+// MathSys_Types.hxx: `using MathUtils::Status;` makes the shared status visible as MathSys::Status.
+pub use crate::math_utils::Status;
 pub mod linear;
 mod newton;
 pub use newton::{newton, newton_bounded, newton_uniform};
