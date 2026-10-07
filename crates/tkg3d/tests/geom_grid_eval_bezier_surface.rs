@@ -16,20 +16,22 @@ const THE_TOLERANCE: f64 = 1e-10;
 // The 2x2 poles (0,0,0), (1,0,0), (0,1,0), (1,1,theCornerZ) set as the suite sets them.
 fn Poles2x2(theCornerZ: f64) -> Array2<'static, Point3> {
     let mut aPoles: Array2<'static, Point3> = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    aPoles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    aPoles[(2, 1)] = Point3::new(1.0, 0.0, 0.0);
-    aPoles[(1, 2)] = Point3::new(0.0, 1.0, 0.0);
-    aPoles[(2, 2)] = Point3::new(1.0, 1.0, theCornerZ);
+    aPoles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    aPoles.set_value(2, 1, Point3::new(1.0, 0.0, 0.0)).unwrap();
+    aPoles.set_value(1, 2, Point3::new(0.0, 1.0, 0.0)).unwrap();
+    aPoles
+        .set_value(2, 2, Point3::new(1.0, 1.0, theCornerZ))
+        .unwrap();
     aPoles
 }
 
 // The 2x2 weights 1, 1, 1, 2 of the rational tests (higher weight on the corner).
 fn Weights2x2() -> Array2<'static, f64> {
     let mut aWeights: Array2<'static, f64> = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    aWeights[(1, 1)] = 1.0;
-    aWeights[(2, 1)] = 1.0;
-    aWeights[(1, 2)] = 1.0;
-    aWeights[(2, 2)] = 2.0;
+    aWeights.set_value(1, 1, 1.0).unwrap();
+    aWeights.set_value(2, 1, 1.0).unwrap();
+    aWeights.set_value(1, 2, 1.0).unwrap();
+    aWeights.set_value(2, 2, 2.0).unwrap();
     aWeights
 }
 
@@ -38,7 +40,13 @@ fn SinPoles3x3() -> Array2<'static, Point3> {
     let mut aPoles: Array2<'static, Point3> = Array2::with_bounds(1, 3, 1, 3).unwrap();
     for i in 1..=3 {
         for j in 1..=3 {
-            aPoles[(i, j)] = Point3::new(f64::from(i), f64::from(j), f64::from(i + j).sin());
+            aPoles
+                .set_value(
+                    i,
+                    j,
+                    Point3::new(f64::from(i), f64::from(j), f64::from(i + j).sin()),
+                )
+                .unwrap();
         }
     }
     aPoles
@@ -50,7 +58,9 @@ fn ShiftedSinPoles(theNb: i32) -> Array2<'static, Point3> {
     for i in 1..=theNb {
         for j in 1..=theNb {
             let (x, y) = (f64::from(i - 1), f64::from(j - 1));
-            aPoles[(i, j)] = Point3::new(x, y, (x * 0.5 + y * 0.5).sin());
+            aPoles
+                .set_value(i, j, Point3::new(x, y, (x * 0.5 + y * 0.5).sin()))
+                .unwrap();
         }
     }
     aPoles
@@ -85,7 +95,11 @@ fn CheckGridDN(theBezier: &Handle<GeomBezierSurface>, theNU: i32, theNV: i32) {
     for i in 1..=5 {
         for j in 1..=5 {
             let aExpected: Vector3 = theBezier.dn(aParams[i], aParams[j], theNU, theNV).unwrap();
-            EXPECT_NEAR((aGrid[(i, j)] - aExpected).magnitude(), 0.0, THE_TOLERANCE);
+            EXPECT_NEAR(
+                ((*aGrid.value(i, j).unwrap()) - aExpected).magnitude(),
+                0.0,
+                THE_TOLERANCE,
+            );
         }
     }
 }
@@ -109,7 +123,11 @@ fn GeomGridEval_BezierSurfaceTest__BasicEvaluation() {
     for i in 1..=3 {
         for j in 1..=3 {
             let aExpected: Point3 = aBezier.value(aParams[i], aParams[j]).unwrap();
-            EXPECT_NEAR(aGrid[(i, j)].distance(&aExpected), 0.0, THE_TOLERANCE);
+            EXPECT_NEAR(
+                (*aGrid.value(i, j).unwrap()).distance(&aExpected),
+                0.0,
+                THE_TOLERANCE,
+            );
         }
     }
 }
@@ -127,7 +145,11 @@ fn GeomGridEval_BezierSurfaceTest__RationalEvaluation() {
     for i in 1..=5 {
         for j in 1..=5 {
             let aExpected: Point3 = aBezier.value(aParams[i], aParams[j]).unwrap();
-            EXPECT_NEAR(aGrid[(i, j)].distance(&aExpected), 0.0, THE_TOLERANCE);
+            EXPECT_NEAR(
+                (*aGrid.value(i, j).unwrap()).distance(&aExpected),
+                0.0,
+                THE_TOLERANCE,
+            );
         }
     }
 }
@@ -143,7 +165,7 @@ fn GeomGridEval_BezierSurfaceTest__DerivativeD1() {
     for i in 1..=5 {
         for j in 1..=5 {
             let r = aBezier.d1(aParams[i], aParams[j]).unwrap();
-            let g = &aGrid[(i, j)];
+            let g = aGrid.value(i, j).unwrap();
             EXPECT_NEAR(g.point.distance(&r.point), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1u - r.d1u).magnitude(), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1v - r.d1v).magnitude(), 0.0, THE_TOLERANCE);
@@ -162,7 +184,7 @@ fn GeomGridEval_BezierSurfaceTest__DerivativeD2() {
     for i in 1..=5 {
         for j in 1..=5 {
             let r = aBezier.d2(aParams[i], aParams[j]).unwrap();
-            let g = &aGrid[(i, j)];
+            let g = aGrid.value(i, j).unwrap();
             EXPECT_NEAR(g.point.distance(&r.point), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1u - r.d1u).magnitude(), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d1v - r.d1v).magnitude(), 0.0, THE_TOLERANCE);
@@ -184,7 +206,7 @@ fn GeomGridEval_BezierSurfaceTest__DerivativeD3() {
     for i in 1..=5 {
         for j in 1..=5 {
             let r = aBezier.d3(aParams[i], aParams[j]).unwrap();
-            let g = &aGrid[(i, j)];
+            let g = aGrid.value(i, j).unwrap();
             EXPECT_NEAR(g.point.distance(&r.point), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d3u - r.d3u).magnitude(), 0.0, THE_TOLERANCE);
             EXPECT_NEAR((g.d3v - r.d3v).magnitude(), 0.0, THE_TOLERANCE);
@@ -227,7 +249,11 @@ fn GeomGridEval_BezierSurfaceTest__DerivativeDN_BeyondDegree() {
 
     for i in 1..=5 {
         for j in 1..=5 {
-            EXPECT_NEAR(aGrid[(i, j)].magnitude(), 0.0, THE_TOLERANCE);
+            EXPECT_NEAR(
+                (*aGrid.value(i, j).unwrap()).magnitude(),
+                0.0,
+                THE_TOLERANCE,
+            );
         }
     }
 }
@@ -267,7 +293,11 @@ fn GeomGridEval_BezierSurfaceTest__IsolineU_CompareToGeomD0() {
     // Compare against Geom_Surface::D0
     for j in 1..=10 {
         let aExpected: Point3 = aBezier.d0(aUParams[1], aVParams[j]).unwrap();
-        EXPECT_NEAR(aGrid[(1, j)].distance(&aExpected), 0.0, THE_TOLERANCE);
+        EXPECT_NEAR(
+            (*aGrid.value(1, j).unwrap()).distance(&aExpected),
+            0.0,
+            THE_TOLERANCE,
+        );
     }
 }
 
@@ -290,7 +320,11 @@ fn GeomGridEval_BezierSurfaceTest__IsolineV_CompareToGeomD0() {
     // Compare against Geom_Surface::D0
     for i in 1..=10 {
         let aExpected: Point3 = aBezier.d0(aUParams[i], aVParams[1]).unwrap();
-        EXPECT_NEAR(aGrid[(i, 1)].distance(&aExpected), 0.0, THE_TOLERANCE);
+        EXPECT_NEAR(
+            (*aGrid.value(i, 1).unwrap()).distance(&aExpected),
+            0.0,
+            THE_TOLERANCE,
+        );
     }
 }
 
@@ -301,7 +335,9 @@ fn GeomGridEval_BezierSurfaceTest__IsolineRational_CompareToGeomD0() {
     let mut aWeights: Array2<'static, f64> = Array2::with_bounds(1, 3, 1, 3).unwrap();
     for i in 1..=3 {
         for j in 1..=3 {
-            aWeights[(i, j)] = 1.0 + 0.5 * f64::from((i - 1) + (j - 1));
+            aWeights
+                .set_value(i, j, 1.0 + 0.5 * f64::from((i - 1) + (j - 1)))
+                .unwrap();
         }
     }
     let aBezier = RationalBezier(&aPoles, &aWeights);
@@ -315,6 +351,10 @@ fn GeomGridEval_BezierSurfaceTest__IsolineRational_CompareToGeomD0() {
 
     for j in 1..=15 {
         let aExpected: Point3 = aBezier.d0(aUParams[1], aVParams[j]).unwrap();
-        EXPECT_NEAR(aGrid[(1, j)].distance(&aExpected), 0.0, THE_TOLERANCE);
+        EXPECT_NEAR(
+            (*aGrid.value(1, j).unwrap()).distance(&aExpected),
+            0.0,
+            THE_TOLERANCE,
+        );
     }
 }

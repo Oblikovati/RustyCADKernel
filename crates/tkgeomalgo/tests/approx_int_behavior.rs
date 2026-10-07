@@ -29,7 +29,13 @@ fn bump() -> Adaptor3dSurfaceHandle {
     for i in 1..=4 {
         for j in 1..=4 {
             let (x, y) = (f64::from(i - 1), f64::from(j - 1));
-            poles[(i, j)] = Point3::new(-2.0 + x, -2.0 + y, 0.4 * (x + 2.0 * y).sin());
+            poles
+                .set_value(
+                    i,
+                    j,
+                    Point3::new(-2.0 + x, -2.0 + y, 0.4 * (x + 2.0 * y).sin()),
+                )
+                .unwrap();
         }
     }
     let s: Handle<dyn GeomSurface> = Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast();

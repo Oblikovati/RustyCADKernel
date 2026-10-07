@@ -7,6 +7,7 @@ use super::section_curve::{SectionCurve, section_tolerance};
 use super::section_law::{GeomFillSectionLaw, SectionD1, SectionD2};
 use super::sweep_failures::live;
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkg2d::geom2d::arrays::one_based;
@@ -167,8 +168,8 @@ impl GeomFillUniformSection {
             })?;
         for ii in 1..=nb_poles {
             let pole = c.pole(ii)?;
-            poles[(ii, 1)] = pole;
-            poles[(ii, 2)] = pole;
+            poles.set_value(ii, 1, pole).map_err(array2_failure)?;
+            poles.set_value(ii, 2, pole).map_err(array2_failure)?;
         }
         let mut v_knots: Array1<'static, f64> = one_based(2)?;
         v_knots[1] = self.first;

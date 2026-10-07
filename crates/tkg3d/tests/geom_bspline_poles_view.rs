@@ -23,10 +23,10 @@ fn curve() -> Handle<GeomBSplineCurve> {
 
 fn surface() -> Handle<GeomBSplineSurface> {
     let mut poles = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = point(0., 0., 0.);
-    poles[(1, 2)] = point(0., 1., 0.);
-    poles[(2, 1)] = point(1., 0., 0.);
-    poles[(2, 2)] = point(1., 1., 0.);
+    poles.set_value(1, 1, point(0., 0., 0.)).unwrap();
+    poles.set_value(1, 2, point(0., 1., 0.)).unwrap();
+    poles.set_value(2, 1, point(1., 0., 0.)).unwrap();
+    poles.set_value(2, 2, point(1., 1., 0.)).unwrap();
     let knots = array(&[0., 1.]);
     let mults = array(&[2, 2]);
     Handle::new(
@@ -56,8 +56,13 @@ fn bspline_surface_poles_array_reads_current_state_without_copying() {
     let surface = surface();
     let snapshot = surface.poles();
     surface.set_pole(1, 1, point(5., 6., 7.)).unwrap();
-    let observed =
-        surface.poles_array(|poles| (poles[(1, 1)].x(), poles[(1, 1)].y(), poles[(1, 1)].z()));
+    let observed = surface.poles_array(|poles| {
+        (
+            (*poles.value(1, 1).unwrap()).x(),
+            (*poles.value(1, 1).unwrap()).y(),
+            (*poles.value(1, 1).unwrap()).z(),
+        )
+    });
     assert_eq!(observed, (5., 6., 7.));
-    assert_eq!(snapshot[(1, 1)].x(), 0.);
+    assert_eq!((*snapshot.value(1, 1).unwrap()).x(), 0.);
 }

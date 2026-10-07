@@ -18,7 +18,7 @@ const CENTER: ParametricPosition = ParametricPosition {
 fn table(entries: &[((i32, i32), Vector3)], size: i32) -> Array2<'static, Vector3> {
     let mut table = Array2::with_bounds(0, size, 0, size).unwrap();
     for &(index, value) in entries {
-        table[index] = value;
+        table.set_value(index.0, index.1, value).unwrap();
     }
     table
 }

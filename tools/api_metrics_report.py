@@ -100,14 +100,24 @@ def tally_declarations(statuses: Mapping[str, str], records: Mapping[str, Record
 
 
 def ledger_defects(crosswalk: Record) -> dict[str, Counter]:
-    """Ledger rows that prove nothing: no C++ match, or a C++ match with a bad Rust target."""
+    """Ledger rows that prove nothing: no C++ match, or a C++ match with a bad Rust target.
+
+    A row whose declaration the captured Linux configuration compiles out (`cpp_status`
+    `inactive_configuration`, proven by a skipped preprocessor range) has no C++ id by
+    construction; it is accounted, not a defect, once its row resolves.
+    """
     defects: dict[str, Counter] = {}
     for row in crosswalk["crosswalk_rows"]:
-        if row["cpp_ids"] and row_status(row) != "claimed_unverified":
+        if row_status(row) != "claimed_unverified" and (row["cpp_ids"] or proven_inactive(row)):
             continue
         kind = "rows_with_unresolved_rust_target" if row["cpp_ids"] else "rows_without_cpp_match"
         defects.setdefault(toolkit_of(str(row.get("source", ""))), Counter())[kind] += 1
     return defects
+
+
+def proven_inactive(row: Record) -> bool:
+    """True for a resolved row of compiled-out code; e.g. a `defined(_WIN32)` OSD_WNT member."""
+    return row.get("cpp_status") == "inactive_configuration"
 
 
 def gtest_counts(path: pathlib.Path) -> dict[str, Counter]:

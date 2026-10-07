@@ -23,7 +23,7 @@ fn read_curve(r: &mut Reader<'_>) -> Result<Handle<Curve>, Failure> {
         let mut a = Array2::with_bounds(0, wd, 1, dim).unwrap();
         for i in 0..=wd {
             for d in 1..=dim {
-                a[(i, d)] = values.next().unwrap_or(0.);
+                a.set_value(i, d, values.next().unwrap_or(0.)).unwrap();
             }
         }
         curve.set_element(el, &a)?;
@@ -43,7 +43,7 @@ fn table(t: &AssemblyTable) {
     .for_each(p::int);
     for i in cells.lower_row()..=cells.upper_row() {
         for j in cells.lower_col()..=cells.upper_col() {
-            let a = cells[(i, j)].array1();
+            let a = (*cells.value(i, j).unwrap()).array1();
             p::int(a.lower());
             p::int(a.upper());
             a.iter().for_each(|&v| p::int(v));

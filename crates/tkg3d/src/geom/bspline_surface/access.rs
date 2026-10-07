@@ -164,7 +164,7 @@ impl GeomBSplineSurface {
     }
     /// Read the stored poles without copying while the surface read lock is held;
     /// do not call a mutating surface method from `read` (`Poles()` const reference);
-    /// `surface.poles_array(|poles| poles[(1, 1)])`.
+    /// `surface.poles_array(|poles| poles.value(1, 1).copied())`.
     pub fn poles_array<R>(&self, read: impl FnOnce(&Array2<'static, Point3>) -> R) -> R {
         let state = self.state.read();
         let poles: &Array2<'static, Point3> = &state.poles;

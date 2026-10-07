@@ -136,9 +136,9 @@ pub fn p2bss_case(values: &[f64]) {
     for i in rl..=ru {
         for j in cl..=cu {
             if heights {
-                zs[(i, j)] = r.real();
+                zs.set_value(i, j, r.real()).unwrap();
             } else {
-                pts[(i, j)] = r.pnt();
+                pts.set_value(i, j, r.pnt()).unwrap();
             }
         }
     }

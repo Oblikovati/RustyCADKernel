@@ -18,7 +18,7 @@ fn SetUp() -> Handle<GeomBezierSurface> {
     for i in 1..=3 {
         for j in 1..=3 {
             let (x, y) = (f64::from(i), f64::from(j));
-            aPoles[(i, j)] = pnt(x, y, (x + y) * 0.1);
+            aPoles.set_value(i, j, pnt(x, y, (x + y) * 0.1)).unwrap();
         }
     }
     Handle::new(GeomBezierSurface::new(&aPoles).unwrap())
@@ -27,20 +27,20 @@ fn SetUp() -> Handle<GeomBezierSurface> {
 // The 2x2 grid (0,0,0) (1,0,0) / (0,1,0) (1,1,z22) that many tests build.
 fn unit_poles(z22: f64) -> Array2<'static, Point3> {
     let mut aPoles: Array2<'static, Point3> = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    aPoles[(1, 1)] = pnt(0.0, 0.0, 0.0);
-    aPoles[(1, 2)] = pnt(1.0, 0.0, 0.0);
-    aPoles[(2, 1)] = pnt(0.0, 1.0, 0.0);
-    aPoles[(2, 2)] = pnt(1.0, 1.0, z22);
+    aPoles.set_value(1, 1, pnt(0.0, 0.0, 0.0)).unwrap();
+    aPoles.set_value(1, 2, pnt(1.0, 0.0, 0.0)).unwrap();
+    aPoles.set_value(2, 1, pnt(0.0, 1.0, 0.0)).unwrap();
+    aPoles.set_value(2, 2, pnt(1.0, 1.0, z22)).unwrap();
     aPoles
 }
 
 // A 2x2 weight grid in the native assignment order.
 fn weights22(w11: f64, w12: f64, w21: f64, w22: f64) -> Array2<'static, f64> {
     let mut aWeights: Array2<'static, f64> = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    aWeights[(1, 1)] = w11;
-    aWeights[(1, 2)] = w12;
-    aWeights[(2, 1)] = w21;
-    aWeights[(2, 2)] = w22;
+    aWeights.set_value(1, 1, w11).unwrap();
+    aWeights.set_value(1, 2, w12).unwrap();
+    aWeights.set_value(2, 1, w21).unwrap();
+    aWeights.set_value(2, 2, w22).unwrap();
     aWeights
 }
 

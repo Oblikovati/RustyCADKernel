@@ -132,8 +132,14 @@ impl CompPolynomialToPoles {
         }
         let mut domain: Array2<'static, f64> =
             Array2::with_bounds(1, 1, 1, 2).map_err(|e| bad_arguments(e.to_string()))?;
-        domain[(1, 1)] = array_value(polynomial_intervals, polynomial_intervals.lower())?;
-        domain[(1, 2)] = array_value(polynomial_intervals, polynomial_intervals.upper())?;
+        let first = array_value(polynomial_intervals, polynomial_intervals.lower())?;
+        let last = array_value(polynomial_intervals, polynomial_intervals.upper())?;
+        domain
+            .set_value(1, 1, first)
+            .map_err(|e| bad_arguments(e.to_string()))?;
+        domain
+            .set_value(1, 2, last)
+            .map_err(|e| bad_arguments(e.to_string()))?;
         let mut counts: Array1<'static, i32> = one_based(1)?;
         counts[1] = degree.wrapping_add(1);
         let mut result = Self::empty(degree, 2)?;

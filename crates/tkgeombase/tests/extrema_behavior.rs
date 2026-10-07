@@ -137,7 +137,9 @@ fn func_ps_norm_merges_states_within_p_confusion_in_uv() {
 fn glob_opt_func_c_quadric_on_another_surface_returns_u_bounds() {
     let mut poles = Array2::with_bounds(1, 2, 1, 2).unwrap();
     for (i, j, z) in [(1, 1, 0.0), (1, 2, 1.0), (2, 1, 0.5), (2, 2, 0.0)] {
-        poles[(i, j)] = Point3::new(f64::from(i), f64::from(j), z);
+        poles
+            .set_value(i, j, Point3::new(f64::from(i), f64::from(j), z))
+            .unwrap();
     }
     let bezier: Handle<dyn GeomSurface> =
         Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast();

@@ -7,7 +7,7 @@ impl<'a, T> Array2<'a, T> {
     /// use rustycad_tkernel::ncollection::Array2;
     /// let mut values = [3, 4, 5, 6, 99];
     /// let mut array = Array2::from_buffer_bounds(&mut values, -1, 0, 3, 4).unwrap();
-    /// array[(-1, 3)] = 7;
+    /// array.set_value(-1, 3, 7).unwrap();
     /// assert_eq!(array.array1().lower(), 1);
     /// assert_eq!(array.as_slice(), [7, 4, 5, 6]);
     /// ```

@@ -49,8 +49,16 @@ fn spline(kind: i32) -> Result<Handle<dyn GeomSurface>, Failure> {
     let mut weights = Array2::with_bounds(1, 9, 1, 9).unwrap();
     for i in 1..=9 {
         for j in 1..=9 {
-            poles[(i, j)] = Point3::new(f64::from(i - 1), f64::from(j - 1), f64::from(i * j % 3));
-            weights[(i, j)] = if i == 2 && j == 3 { 2. } else { 1. };
+            poles
+                .set_value(
+                    i,
+                    j,
+                    Point3::new(f64::from(i - 1), f64::from(j - 1), f64::from(i * j % 3)),
+                )
+                .unwrap();
+            weights
+                .set_value(i, j, if i == 2 && j == 3 { 2. } else { 1. })
+                .unwrap();
         }
     }
     if kind == 5 {

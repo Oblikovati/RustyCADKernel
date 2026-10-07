@@ -5,6 +5,7 @@
 //! The native functions read `void*` arrays of points, parameters and bound flags
 //! indexed from 1 (index 0 is allocated but never written); here they read
 //! [`PolyhedronGrid`], whose vectors keep that layout.
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::real::real_first;
@@ -65,12 +66,12 @@ fn store_grid(
     (nb_delta_u, nb_delta_v): (i32, i32),
     target: &mut PolyhedronGrid,
     bnd: &mut BoundingBox3,
-) {
+) -> Result<(), Failure> {
     let (i0, j0) = (upars.lower(), vpars.lower());
     let mut index: usize = 1;
     for i1 in 0..=nb_delta_u {
         for i2 in 0..=nb_delta_v {
-            let tp: Point3 = grid[(i1 + 1, i2 + 1)];
+            let tp: Point3 = *grid.value(i1 + 1, i2 + 1).map_err(array2_failure)?;
             target.pnts[index] = tp;
             target.u[index] = upars[i1 + i0];
             target.v[index] = vpars[i2 + j0];
@@ -79,6 +80,7 @@ fn store_grid(
             index += 1;
         }
     }
+    Ok(())
 }
 
 /// `InitUniform`: the grid of `(nbdu + 1) x (nbdv + 1)` points at `u0 + i * dU`,
@@ -103,8 +105,7 @@ pub fn init_uniform(
         (nb_delta_u, nb_delta_v),
         target,
         bnd,
-    );
-    Ok(())
+    )
 }
 
 /// `InitWithParams`: the grid at the given parameters;
@@ -117,8 +118,7 @@ pub fn init_with_params(
     bnd: &mut BoundingBox3,
 ) -> Result<(), Failure> {
     let grid = eval.evaluate_grid(upars, vpars)?;
-    store_grid(&grid, (upars, vpars), (nb_delta_u, nb_delta_v), target, bnd);
-    Ok(())
+    store_grid(&grid, (upars, vpars), (nb_delta_u, nb_delta_v), target, bnd)
 }
 
 /// `ComputeBorderDeflection`: along the isoline at `parameter` (a u-isoline when
@@ -145,16 +145,13 @@ pub fn compute_border_deflection(
     } else {
         eval.evaluate_grid(&varying, &fixed)?
     };
-    let at = |k: i32| {
-        if is_u_iso {
-            grid[(1, k)].xyz()
-        } else {
-            grid[(k, 1)].xyz()
-        }
+    let at = |k: i32| -> Result<Xyz, Failure> {
+        let (row, col) = if is_u_iso { (1, k) } else { (k, 1) };
+        Ok(grid.value(row, col).map_err(array2_failure)?.xyz())
     };
     let mut deflection: f64 = real_first();
     for i in 0..nb_samples {
-        let (p1, p2, par_mid) = (at(2 * i + 1), at(2 * i + 3), at(2 * i + 2));
+        let (p1, p2, par_mid) = (at(2 * i + 1)?, at(2 * i + 3)?, at(2 * i + 2)?);
         let mid: Xyz = (p2 + p1) / 2.0;
         let dist: f64 = (mid - par_mid).modulus();
         if dist > deflection {

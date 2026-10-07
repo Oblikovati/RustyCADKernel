@@ -37,7 +37,7 @@ fn rectangles_reject_wrong_shapes_and_indices() {
     assert!(matches!(mismatch, ArrayError::ShapeMismatch { .. }));
     assert_eq!(mismatch.to_string(), "shape (3, 2): expected (2, 3)");
     array.change_array1().init(9);
-    assert_eq!(array[(0, 0)], 9);
+    assert_eq!((*array.value(0, 0).unwrap()), 9);
     array.resize(0, 3, true).unwrap();
     assert_eq!(
         (array.nb_rows(), array.nb_columns(), array.len()),

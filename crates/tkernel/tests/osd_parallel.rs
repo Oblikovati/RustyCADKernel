@@ -96,7 +96,8 @@ fn multiply_row(
     for col in 0..50 {
         let mut sum = 0.0;
         for inner in 0..50 {
-            sum += first[(index as i32, inner)] * second[(inner, col as i32)];
+            sum += (*first.value(index as i32, inner).unwrap())
+                * (*second.value(inner, col as i32).unwrap());
         }
         result.set(index * 50 + col, sum);
     }

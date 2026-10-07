@@ -34,7 +34,7 @@ pub fn surface(r: &mut Reader) -> Result<Handle<dyn GeomSurface>, Failure> {
             Array2::with_bounds(1, 3, 1, 3).expect("3x3 poles");
         for i in 1..=3 {
             for j in 1..=3 {
-                poles[(i, j)] = r.pnt();
+                poles.set_value(i, j, r.pnt()).unwrap();
             }
         }
         return Ok(Handle::new(GeomBezierSurface::new(&poles)?).cast());

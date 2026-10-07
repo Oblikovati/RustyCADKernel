@@ -23,7 +23,7 @@ fn grid(rows: i32, cols: i32, pole: impl Fn(i32, i32) -> Point3) -> Array2<'stat
     let mut result: Array2<'static, Point3> = Array2::with_bounds(1, rows, 1, cols).unwrap();
     for i in 1..=rows {
         for j in 1..=cols {
-            result[(i, j)] = pole(i, j);
+            result.set_value(i, j, pole(i, j)).unwrap();
         }
     }
     result
@@ -89,7 +89,7 @@ fn is_rational_reads_its_default_tolerance_from_weights_i1_i2() {
     // Epsilon(Weights(I1, I2)) reads row 1, column 3 of a two-column grid.
     assert!(bsplslib::is_rational(&weights, 1, 3, 1, 2, 0.0).is_err());
     assert!(!bsplslib::is_rational(&weights, 1, 3, 1, 2, 1e-9).unwrap());
-    weights[(2, 1)] = 2.0;
+    weights.set_value(2, 1, 2.0).unwrap();
     assert!(bsplslib::is_rational(&weights, 1, 2, 1, 2, 0.0).unwrap());
 }
 
@@ -195,7 +195,10 @@ fn poles_coefficients_need_the_poles_shape() {
     assert!(bsplslib::poles_coefficients(&poles, None, &mut transposed, None).is_err());
     let mut coefficients = grid(2, 3, |_, _| Point3::new(0.0, 0.0, 0.0));
     bsplslib::poles_coefficients(&poles, None, &mut coefficients, None).unwrap();
-    assert_eq!(coefficients[(1, 1)], poles[(1, 1)]);
+    assert_eq!(
+        (*coefficients.value(1, 1).unwrap()),
+        (*poles.value(1, 1).unwrap())
+    );
 }
 
 struct Constant(f64);
@@ -264,9 +267,9 @@ fn function_multiply_requires_weights_and_scales_numerator_and_denominator() {
             .iter()
             .all(|w| (w - 2.0).abs() < 1e-12)
     );
-    let pole = f.poles[(2, 3)];
+    let pole = *f.poles.value(2, 3).unwrap();
     assert!(close(
-        numerator[(2, 3)],
+        *numerator.value(2, 3).unwrap(),
         Point3::new(2.0 * pole.x(), 2.0 * pole.y(), 2.0 * pole.z()),
         1e-10
     ));

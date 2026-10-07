@@ -1,14 +1,16 @@
 //! OCCT's Resource package: resource files (Resource_Manager) with injected host services,
 //! and the Resource_Unicode text conversions with their exact code tables.
 use crate::{
+    impl_transient,
     ncollection::DataMap,
-    standard::Failure,
+    standard::{Failure, StandardTransient},
     tcollection::{AsciiString, ExtendedString},
 };
 use std::sync::atomic::{AtomicBool, Ordering};
 mod cjk;
 mod code_page;
 pub mod convert_unicode;
+mod exceptions;
 mod format_type;
 mod host;
 mod lines;
@@ -19,6 +21,8 @@ mod table_lookup;
 mod tables;
 mod unicode;
 mod values;
+pub(crate) use exceptions::RESOURCE_HIERARCHY;
+pub use exceptions::no_such_resource;
 pub use format_type::FormatType;
 pub use host::{
     NativeResourceConsole, NativeResourceEnvironment, NativeResourceIo, ResourceConsole,
@@ -43,6 +47,8 @@ static DEBUG: AtomicBool = AtomicBool::new(false);
 /// ShapeProcess_Context uses): the name, the three maps, the flags and the host.
 #[derive(Clone)]
 pub struct ResourceManager {
+    // Standard_Transient base: the native manager is shared by handle.
+    parent: StandardTransient,
     name: AsciiString,
     reference: DataMap<AsciiString, AsciiString>,
     user: DataMap<AsciiString, AsciiString>,
@@ -51,6 +57,12 @@ pub struct ResourceManager {
     initialized: bool,
     host: ResourceHost,
 }
+impl_transient!(
+    ResourceManager,
+    "Resource_Manager",
+    StandardTransient,
+    parent
+);
 impl ResourceManager {
     /// Loads `$CSF_<name>Defaults/<name>` then `$CSF_<name>UserDefaults/<name>` (native
     /// `Resource_Manager(aName, Verbose)`); `ResourceManager::new("App", false, host)?`.
@@ -102,6 +114,7 @@ impl ResourceManager {
     }
     fn with_state(name: &str, verbose: bool, host: ResourceHost) -> Self {
         Self {
+            parent: StandardTransient::default(),
             name: c_string(name),
             reference: DataMap::default(),
             user: DataMap::default(),

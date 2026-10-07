@@ -12,8 +12,9 @@ use crate::extrema::ExtPElC;
 use crate::extrema::failures::{extremum_index, not_done, null_object};
 use crate::extrema::pon::POnSurf;
 use crate::extrema::surface_ref::SurfaceRef;
+use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion;
 use rustycad_tkmath::elclib;
@@ -26,6 +27,8 @@ const NB_EXT_MAX: i32 = 4;
 
 /// `Extrema_ExtPExtS`; `ExtPExtS::with_surface(point, &extrusion, 1e-9, 1e-9)?.nb_ext()?`.
 pub struct ExtPExtS {
+    // Standard_Transient base: Extrema_ExtPS holds the native object by handle.
+    parent: StandardTransient,
     uinf: f64,
     usup: f64,
     tolu: f64,
@@ -45,9 +48,12 @@ pub struct ExtPExtS {
     points: [POnSurf; 4],
 }
 
+impl_transient!(ExtPExtS, "Extrema_ExtPExtS", StandardTransient, parent);
+
 impl Default for ExtPExtS {
     fn default() -> Self {
         Self {
+            parent: StandardTransient::default(),
             uinf: 0.0,
             usup: 0.0,
             tolu: 0.0,

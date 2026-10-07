@@ -7,6 +7,7 @@ use super::points_to_bspline_surface::{HeightGrid, PointsToBSplineSurface, Surfa
 use super::points_to_bspline_surface_fit::{PassCurve, array};
 use crate::geom2d_api::points_to_bspline::continuity_code;
 use crate::geom2d_api::points_to_bspline_y::{LinearCoordinate, linear_coordinate};
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::GeomBSplineSurface;
@@ -107,7 +108,9 @@ fn height_surface(
     for j in 1..=v.nb_poles {
         the_curve2.curve_2d(j, &mut poles2)?;
         for i in 1..=u.nb_poles {
-            the_poles[(i, j)] = Point3::new(x.poles[i], y.poles[j], poles2[i].y());
+            the_poles
+                .set_value(i, j, Point3::new(x.poles[i], y.poles[j], poles2[i].y()))
+                .map_err(array2_failure)?;
         }
     }
     GeomBSplineSurface::new(

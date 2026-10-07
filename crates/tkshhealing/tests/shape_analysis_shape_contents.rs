@@ -131,10 +131,10 @@ fn shape_contents_bezier_surface_matches_native() {
     use rustycad_tkg3d::geom::GeomBezierSurface;
     use rustycad_tkmath::gp::Point3;
     let mut poles = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = Point3::new(0., 0., 0.);
-    poles[(2, 1)] = Point3::new(1., 0., 0.);
-    poles[(1, 2)] = Point3::new(0., 1., 0.);
-    poles[(2, 2)] = Point3::new(1., 1., 0.);
+    poles.set_value(1, 1, Point3::new(0., 0., 0.)).unwrap();
+    poles.set_value(2, 1, Point3::new(1., 0., 0.)).unwrap();
+    poles.set_value(1, 2, Point3::new(0., 1., 0.)).unwrap();
+    poles.set_value(2, 2, Point3::new(1., 1., 0.)).unwrap();
     let surface: Handle<dyn GeomSurface> =
         Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast();
     let mut contents = ShapeAnalysisShapeContents::new();

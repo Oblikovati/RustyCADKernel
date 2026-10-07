@@ -18,7 +18,7 @@ fn sphere_patch() -> (Array2<'static, Point3>, Array2<'static, f64>) {
     let mut aWeights: Array2<'static, f64> = Array2::with_bounds(1, 3, 1, 3).unwrap();
     for i in 1..=3 {
         for j in 1..=3 {
-            aWeights[(i, j)] = weights[j as usize - 1][i as usize - 1];
+            aWeights.set_value(i, j, weights[j as usize - 1][i as usize - 1]).unwrap();
         }
     }
     (aPoles, aWeights)

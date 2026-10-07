@@ -8,10 +8,10 @@ use rustycad_tkmath::geom_abs::Shape;
 #[test]
 fn GeomAPI_PointsToBSplineSurface_Test__FailedDegenerateRebuildResetsDoneState() {
     let mut aValidZPoints: Array2<'static, f64> = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    aValidZPoints[(1, 1)] = 0.0;
-    aValidZPoints[(1, 2)] = 1.0;
-    aValidZPoints[(2, 1)] = 1.0;
-    aValidZPoints[(2, 2)] = 0.0;
+    aValidZPoints.set_value(1, 1, 0.0).unwrap();
+    aValidZPoints.set_value(1, 2, 1.0).unwrap();
+    aValidZPoints.set_value(2, 1, 1.0).unwrap();
+    aValidZPoints.set_value(2, 2, 0.0).unwrap();
 
     let mut anApprox = PointsToBSplineSurface::new();
     // EXPECT_NO_THROW
@@ -27,9 +27,9 @@ fn GeomAPI_PointsToBSplineSurface_Test__FailedDegenerateRebuildResetsDoneState()
     assert!(anApprox.is_done());
 
     let mut aZPoints: Array2<'static, f64> = Array2::with_bounds(1, 3, 1, 1).unwrap();
-    aZPoints[(1, 1)] = 0.0;
-    aZPoints[(2, 1)] = 1.0;
-    aZPoints[(3, 1)] = 0.0;
+    aZPoints.set_value(1, 1, 0.0).unwrap();
+    aZPoints.set_value(2, 1, 1.0).unwrap();
+    aZPoints.set_value(3, 1, 0.0).unwrap();
 
     // EXPECT_THROW(..., StdFail_NotDone)
     let thrown = anApprox

@@ -32,7 +32,8 @@ pub(super) type ConstraintRow = Vec<Array1<'static, f64>>;
 /// let mut dependence = Array2::with_bounds(1, 1, 1, 1).unwrap();
 /// dependence.init(1);
 /// let table: AssemblyTable = Handle::new(HArray2::with_bounds(1, 1, 1, 1).unwrap());
-/// table.change_array2()[(1, 1)] = Handle::new(HArray1::from_array(&Array1::from_shared(&[1, 2], 1)));
+/// let cell = Handle::new(HArray1::from_array(&Array1::from_shared(&[1, 2], 1)));
+/// table.change_array2().set_value(1, 1, cell).unwrap();
 /// let mut assembly = Assembly::new(&dependence, &table)?;
 /// let mut h = Matrix::filled(1, 2, 1, 2, 0.0).unwrap();
 /// (h[(1, 1)], h[(2, 1)], h[(2, 2)]) = (2.0, 1.0, 2.0);
@@ -82,7 +83,10 @@ fn table_indexes(table: &AssemblyTable) -> Result<Vec<Vec<i32>>, Failure> {
     let mut result: Vec<Vec<i32>> = Vec::new();
     for dim in cells.lower_row()..=cells.upper_row() {
         for el in cells.lower_col()..=cells.upper_col() {
-            result.push(element_indexes(&cells[(dim, el)])?);
+            let cell = cells
+                .value(dim, el)
+                .map_err(|error| array_failure(error, "FEmTool_Assembly"))?;
+            result.push(element_indexes(cell)?);
         }
     }
     Ok(result)

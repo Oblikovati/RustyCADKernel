@@ -150,7 +150,7 @@ fn grid_surface(r: &mut Reader, kind: i32) -> Handle<dyn GeomSurface> {
         Array2::with_bounds(1, nu, 1, nv).expect("probe poles");
     for i in 1..=nu {
         for j in 1..=nv {
-            poles[(i, j)] = r.pnt();
+            poles.set_value(i, j, r.pnt()).unwrap();
         }
     }
     if kind == 5 {
