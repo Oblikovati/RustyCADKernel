@@ -504630,6 +504630,272 @@
         "linux-gcc-c-locale"
       ],
       "reason": "The test asserts std::is_move_assignable<BRepAlgoAPI_BuilderAlgo>::value is false, a C++ type trait. Every Rust value can be move-assigned (a bitwise move that ends the source binding), so no Rust test can check that the type is not movable; the related copy properties are translated as not_copy_constructible/not_copy_assignable."
+    },
+    {
+      "upstream_id": "BOPAlgo_BOPTest.ModalgBug_25477_FuzzyFuseBridgesSmallGap",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_BOPTest__ModalgBug_25477_FuzzyFuseBridgesSmallGap",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_BOPTest.ModalgBug_24033_CommonResultOrientations",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_BOPTest__ModalgBug_24033_CommonResultOrientations",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DirectOperationsTest.DirectCut_SphereMinusBox",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DirectOperationsTest__DirectCut_SphereMinusBox",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DirectOperationsTest.DirectFuse_SpherePlusBox",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DirectOperationsTest__DirectFuse_SpherePlusBox",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DirectOperationsTest.DirectCommon_OverlappingBoxes",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DirectOperationsTest__DirectCommon_OverlappingBoxes",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DirectOperationsTest.DirectTUC_IdenticalBoxes",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DirectOperationsTest__DirectTUC_IdenticalBoxes",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DirectOperationsTest.DirectCut_NurbsBoxMinusBox",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DirectOperationsTest__DirectCut_NurbsBoxMinusBox",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_TwoStepOperationsTest.TwoStepCut_SphereMinusBox",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_TwoStepOperationsTest__TwoStepCut_SphereMinusBox",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_TwoStepOperationsTest.TwoStepFuse_SpherePlusBox",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_TwoStepOperationsTest__TwoStepFuse_SpherePlusBox",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_TwoStepOperationsTest.TwoStepCommon_OverlappingBoxes",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_TwoStepOperationsTest__TwoStepCommon_OverlappingBoxes",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_TwoStepOperationsTest.TwoStepTUC_IdenticalBoxes",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_TwoStepOperationsTest__TwoStepTUC_IdenticalBoxes",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_ComplexOperationsTest.MultipleIntersectingPrimitives",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_ComplexOperationsTest__MultipleIntersectingPrimitives",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_ComplexOperationsTest.DirectVsTwoStepComparison",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_ComplexOperationsTest__DirectVsTwoStepComparison",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DegenerateToolTest.Cut_AxisAlignedThinTool_NearlyPreservesBoxVolume",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DegenerateToolTest__Cut_AxisAlignedThinTool_NearlyPreservesBoxVolume",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DegenerateToolTest.Fuse_AxisAlignedThinTool_AddsNonOverlappingSlice",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DegenerateToolTest__Fuse_AxisAlignedThinTool_AddsNonOverlappingSlice",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DegenerateToolTest.Cut_LegitimateThinSlab_NotTreatedAsEmpty",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DegenerateToolTest__Cut_LegitimateThinSlab_NotTreatedAsEmpty",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DegenerateToolTest.Common_SolidAndPlanarFace_Unaffected",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DegenerateToolTest__Common_SolidAndPlanarFace_Unaffected",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DegenerateToolTest.Cut_BySemiInfinitePrism_Unaffected",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DegenerateToolTest__Cut_BySemiInfinitePrism_Unaffected",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_DegenerateToolTest.Common_SolidAndHalfspace_Unaffected",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
+      "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_DegenerateToolTest__Common_SolidAndHalfspace_Unaffected",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     }
   ]
 }
