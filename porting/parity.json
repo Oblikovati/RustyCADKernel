@@ -75205,6 +75205,38 @@
       "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_FlatDataMap. Rust FlatDataMap spells usize for sizes and indices; there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_FlatDataMap::ItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsViewMut<FlatDataMap<..>, KeyValueItems> (returned by FlatDataMap::items)."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::ConstItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsView<FlatDataMap<..>, KeyValueItems> (returned by FlatDataMap::items)."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::KeyValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::ConstKeyValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
       "upstream_id": "NCollection_FlatMap::Iterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_FlatMap.hxx",
@@ -76458,6 +76490,38 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_OrderedDataMap. Rust OrderedDataMap spells usize for sizes and indices; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::ItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsViewMut<OrderedDataMap<..>, KeyValueItems> (returned by OrderedDataMap::items)."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::ConstItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsView<OrderedDataMap<..>, KeyValueItems> (returned by OrderedDataMap::items)."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::KeyValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
+      "upstream_id": "NCollection_OrderedDataMap::ConstKeyValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OrderedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
     },
     {
       "upstream_id": "NCollection_OrderedMap::OrderedMapNode(const TheKeyType&,NCollection_ListNode*)",
@@ -78052,36 +78116,525 @@
       "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
     },
     {
-      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<T,std::enable_if_t<HasValue<T>::value>>::Get(const T&)",
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<type-parameter-0-0, std::enable_if<NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value, void>::type>::Get(const T&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::forward_range::AccessorSet<Present<A>,C,D> as SelectAccessor<I>>::read",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::read",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::read",
+          "declaration_sha256": "f860abcd7419f29aa7dd10444d48ee57855cd3d37ff0c1714bbf7f065a49f161",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "A"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "Present",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Present"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "D"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "AccessorSet",
+                "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorSet"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "I"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "ReadAccessor",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::ReadAccessor"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "A"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "AccessorPresence",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorPresence"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Declared",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Declared"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "AccessorPresence",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorPresence"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Declared",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Declared"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "D"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "I"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "SelectAccessor",
+              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::SelectAccessor"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+      "notes": "SFINAE accessor specialization calling host.Value(); Rust selects the same priority (Value, then Current, then CurrentId) statically through AccessorSet<Present<A>, C, D> as SelectAccessor::read."
     },
     {
-      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<T,std::enable_if_t<!HasValue<T>::value&&HasCurrent<T>::value>>::Get(const T&)",
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<type-parameter-0-0, std::enable_if<!NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value && NCollection_ForwardRangeDetail::HasCurrent<type-parameter-0-0, void>::value, void>::type>::Get(const T&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::forward_range::AccessorSet<Missing,Present<A>,D> as SelectAccessor<I>>::read",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::read",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::read",
+          "declaration_sha256": "1130cb738160c489bfc3088f600944ff9bf3ea3716f8b8dd80fb7ae986cab42f",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Missing",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Missing"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "A"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "Present",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Present"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "D"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "AccessorSet",
+                "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorSet"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "I"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "ReadAccessor",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::ReadAccessor"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "A"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "AccessorPresence",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorPresence"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Declared",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Declared"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "D"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "I"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "SelectAccessor",
+              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::SelectAccessor"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+      "notes": "SFINAE accessor specialization calling host.Current(); Rust selects the same priority (Value, then Current, then CurrentId) statically through AccessorSet<Missing, Present<A>, D> as SelectAccessor::read."
     },
     {
-      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<T,std::enable_if_t<!HasValue<T>::value&&!HasCurrent<T>::value&&HasCurrentId<T>::value>>::Get(const T&)",
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<type-parameter-0-0, std::enable_if<!NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value && !NCollection_ForwardRangeDetail::HasCurrent<type-parameter-0-0, void>::value && NCollection_ForwardRangeDetail::HasCurrentId<type-parameter-0-0, void>::value, void>::type>::Get(const T&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::forward_range::AccessorSet<Missing,Missing,Present<A>> as SelectAccessor<I>>::read",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::read",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::read",
+          "declaration_sha256": "b203006be5a8ba78c4c75b1d479fc4384166d37a9d4addebdcb2470d7e2acd3c",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Missing",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Missing"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Missing",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Missing"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "A"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "Present",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Present"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "AccessorSet",
+                "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorSet"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "I"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "ReadAccessor",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::ReadAccessor"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "A"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "I"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "SelectAccessor",
+              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::SelectAccessor"
+            }
+          }
+        }
+      ],
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+      "notes": "SFINAE accessor specialization calling host.CurrentId(); Rust selects the same priority (Value, then Current, then CurrentId) statically through AccessorSet<Missing, Missing, Present<A>> as SelectAccessor::read."
     },
     {
       "upstream_id": "NCollection_ForwardRangeDetail::ArrowProxy::operator->() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::arrow",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardArrowProxy::arrow",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally. The arrow proxy exists to take the address of a by-value result; arrow returns the selected item, projected with Rust field access."
+      "notes": "Returns the address of the stored value (&myValue); ForwardArrowProxy::arrow returns the same identity as *const T."
     },
     {
       "upstream_id": "NCollection_ForwardRangeIterator(HostType*)",
@@ -78132,36 +78685,36 @@
       "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
     },
     {
-      "upstream_id": "NCollection_ForwardRangeIterator::operator==(const NCollection_ForwardRangeIterator&,NCollection_ForwardRangeSentinel)",
+      "upstream_id": "operator==(const NCollection_ForwardRangeIterator<HostType>&,NCollection_ForwardRangeSentinel)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::forward_range::ForwardRangeIter as PartialEq<ForwardRangeSentinel>>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::<core::cmp::PartialEq<rustycad_tkernel::ncollection::forward_range::ForwardRangeSentinel>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+      "notes": "iterator == sentinel is the PartialEq<ForwardRangeSentinel> impl: true when the host has no More()."
     },
     {
-      "upstream_id": "NCollection_ForwardRangeIterator::operator!=(const NCollection_ForwardRangeIterator&,NCollection_ForwardRangeSentinel)",
+      "upstream_id": "operator!=(const NCollection_ForwardRangeIterator<HostType>&,NCollection_ForwardRangeSentinel)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::forward_range::ForwardRangeIter as PartialEq<ForwardRangeSentinel>>::ne",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::<core::cmp::PartialEq<rustycad_tkernel::ncollection::forward_range::ForwardRangeSentinel>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+      "notes": "iterator != sentinel is PartialEq::ne of the same impl."
     },
     {
-      "upstream_id": "NCollection_ForwardRangeIterator::operator==(NCollection_ForwardRangeSentinel,const NCollection_ForwardRangeIterator&)",
+      "upstream_id": "operator==(NCollection_ForwardRangeSentinel,const NCollection_ForwardRangeIterator<HostType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::forward_range::ForwardRangeSentinel as PartialEq<ForwardRangeIter>>::eq",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::<core::cmp::PartialEq<rustycad_tkernel::ncollection::forward_range::ForwardRangeSentinel>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+      "notes": "sentinel == iterator: the mirrored PartialEq<ForwardRangeIter> for ForwardRangeSentinel impl (forward_range.rs) delegates to this iterator-side comparison; rustdoc lists only the iterator-side impl."
     },
     {
-      "upstream_id": "NCollection_ForwardRangeIterator::operator!=(NCollection_ForwardRangeSentinel,const NCollection_ForwardRangeIterator&)",
+      "upstream_id": "operator!=(NCollection_ForwardRangeSentinel,const NCollection_ForwardRangeIterator<HostType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::forward_range::ForwardRangeSentinel as PartialEq<ForwardRangeIter>>::ne",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::<core::cmp::PartialEq<rustycad_tkernel::ncollection::forward_range::ForwardRangeSentinel>>::eq",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+      "notes": "sentinel != iterator: negation of the mirrored comparison, which delegates to this iterator-side impl."
     },
     {
       "upstream_id": "NCollection_ForwardRange(const HostType&)",
@@ -78228,36 +78781,677 @@
       "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally. cend is the same sentinel as end."
     },
     {
-      "upstream_id": "NCollection_ItemsView::KeyValueRef::get() const",
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<type-parameter-0-0, std::enable_if<NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value, void>::type>::ReturnType",
       "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++17 structured-binding protocol (get<I>() with the std::tuple_size/tuple_element specializations). Rust ItemsView items are tuples `(&K, &V)` (KeyValueItems), destructured by patterns (`for (key, value) in view.begin()`); tuple fields have no callable counterpart."
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::Item",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::Item",
+          "declaration_sha256": "76d6333ce3c3e2c3299361c67e9bcece5ec51f8ebed4392be7b687b384aa1076",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "A"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "Present",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Present"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "D"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "AccessorSet",
+                "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorSet"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "I"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "ReadAccessor",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::ReadAccessor"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "A"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "AccessorPresence",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorPresence"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Declared",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Declared"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "AccessorPresence",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorPresence"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Declared",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Declared"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "D"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "I"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "SelectAccessor",
+              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::SelectAccessor"
+            }
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "decltype of host.Value(); the SelectAccessor::Item associated type of AccessorSet<Present<A>, C, D> (reference or value as the accessor returns it)."
     },
     {
-      "upstream_id": "NCollection_ItemsView::KeyValueIndexRef::get() const",
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<type-parameter-0-0, std::enable_if<!NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value && NCollection_ForwardRangeDetail::HasCurrent<type-parameter-0-0, void>::value, void>::type>::ReturnType",
       "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++17 structured-binding protocol (get<I>() with the std::tuple_size/tuple_element specializations). Rust ItemsView items are tuples `(&K, &V, usize)` (KeyValueIndexItems), destructured by patterns (`for (key, value) in view.begin()`); tuple fields have no callable counterpart."
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::Item",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::Item",
+          "declaration_sha256": "0a1b020098be5f3129f70fdadd370b060f1e96529fda1ba26076559599078dd1",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Missing",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Missing"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "A"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "Present",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Present"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "D"
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "AccessorSet",
+                "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorSet"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "I"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "ReadAccessor",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::ReadAccessor"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "A"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "AccessorPresence",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorPresence"
+                            }
+                          }
+                        },
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": null,
+                              "path": "Declared",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Declared"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "D"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "I"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "SelectAccessor",
+              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::SelectAccessor"
+            }
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "decltype of host.Current(); the SelectAccessor::Item associated type of AccessorSet<Missing, Present<A>, D> (reference or value as the accessor returns it)."
     },
     {
-      "upstream_id": "NCollection_ItemsView::KeyIndexRef::get() const",
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<type-parameter-0-0, std::enable_if<!NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value && !NCollection_ForwardRangeDetail::HasCurrent<type-parameter-0-0, void>::value && NCollection_ForwardRangeDetail::HasCurrentId<type-parameter-0-0, void>::value, void>::type>::ReturnType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::Item",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::forward_range::AccessorSet::<rustycad_tkernel::ncollection::forward_range::SelectAccessor<I>>::Item",
+          "declaration_sha256": "65144f6a4b56f6a421076feb050e9b41c2a8cbdcc283c246f06f2c7b60ed5dba",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Missing",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Missing"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Missing",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Missing"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "generic": "A"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "Present",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::Present"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "AccessorSet",
+                "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::AccessorSet"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "I"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "I"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "ReadAccessor",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::ReadAccessor"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "A"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "I"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "SelectAccessor",
+              "resolved_item_path": "rustycad_tkernel::ncollection::forward_range::accessors::SelectAccessor"
+            }
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "decltype of host.CurrentId(); the SelectAccessor::Item associated type of AccessorSet<Missing, Missing, Present<A>> (reference or value as the accessor returns it)."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ detail namespace; its contents live in the Rust module rustycad_tkernel::ncollection::forward_range."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::ArrowProxy",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardArrowProxy",
+      "status": "implemented",
+      "notes": "By-value operator-> holder is ForwardArrowProxy<T>."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::ArrowProxy::myValue",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardArrowProxy::value",
+      "status": "implemented",
+      "notes": "Public stored value of the arrow proxy is the public field value."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter",
+      "status": "implemented",
+      "notes": "Input iterator over a host is the borrowed adapter ForwardRangeIter<'a, I>, also a Rust Iterator."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::PostfixProxy::myValue",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::PostfixProxy::value",
+      "status": "implemented",
+      "notes": "Snapshot taken before a postfix increment is the public field value."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange",
+      "status": "implemented",
+      "notes": "Owning range over a host is ForwardRange<I>."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeSentinel",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeSentinel",
+      "status": "implemented",
+      "notes": "End marker struct compared with iterators in both directions."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::<rustycad_tkernel::ncollection::forward_range::ForwardIteratorTraits>::Value",
+      "status": "implemented",
+      "notes": "Unqualified accessor value type (remove_cvref of ReturnType) is ForwardIteratorTraits::Value."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::<rustycad_tkernel::ncollection::forward_range::ForwardIteratorTraits>::Difference",
+      "status": "implemented",
+      "notes": "std::ptrdiff_t is ForwardIteratorTraits::Difference = isize."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::iterator_category",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::<rustycad_tkernel::ncollection::forward_range::ForwardIteratorTraits>::Category",
+      "status": "implemented",
+      "notes": "std::input_iterator_tag is ForwardIteratorTraits::Category = InputIterator."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::<core::iter::traits::iterator::Iterator>::Item",
+      "status": "implemented",
+      "notes": "AccessorTraits ReturnType is the Iterator::Item (ForwardItem<I>) of the adapter."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef choosing a raw pointer or ArrowProxy for operator->; Rust exposes arrow() (Option<ForwardItem>), arrow_reference() (*const T) and arrow_value() (ForwardArrowProxy<T>) instead of one pointer type."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of NCollection_ForwardRangeIterator<HostType>; ForwardRange::iter/begin return ForwardRangeIter<'_, I> directly."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef equal to iterator; ForwardRange::cbegin returns the same ForwardRangeIter<'_, I>."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange::sentinel",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of NCollection_ForwardRangeSentinel; ForwardRange::end/cend return ForwardRangeSentinel directly."
+    },
+    {
+      "upstream_id": "<deduction guide for NCollection_ForwardRange>(T&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++17 class template argument deduction guide; Rust infers ForwardRange<I> from ForwardRange::new(host)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueRef::get() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: C++17 structured-binding protocol (get<I>() with the std::tuple_size/tuple_element specializations). Rust ItemsView items are tuples `(&K, usize)` (KeyIndexItems), destructured by patterns (`for (key, value) in view.begin()`); tuple fields have no callable counterpart."
+      "notes": "Tuple-protocol get<I>() for structured bindings; Rust tuples destructure natively (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueIndexRef::get() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Tuple-protocol get<I>() for structured bindings; Rust tuples destructure natively (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyIndexRef::get() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Tuple-protocol get<I>() for structured bindings; Rust tuples destructure natively (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
     },
     {
       "upstream_id": "NCollection_ItemsView::Iterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next); its exhaustion (None) replaces the default-constructed end iterator."
+      "rust_item": "rustycad_tkernel::ncollection::ItemsIterator::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Default-constructed end iterator; ItemsIterator::default holds no inner iterator and compares equal to any exhausted cursor."
     },
     {
       "upstream_id": "NCollection_ItemsView::Iterator(MapType&)",
@@ -78271,41 +79465,41 @@
       "upstream_id": "NCollection_ItemsView::Iterator::operator*() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
+      "rust_item": "rustycad_tkernel::ncollection::ItemsIterator::value",
+      "status": "implemented",
+      "notes": "Extracts the current item without advancing; dereferencing an end iterator is undefined natively and returns None in Rust."
     },
     {
       "upstream_id": "NCollection_ItemsView::Iterator::operator++()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
+      "rust_item": "rustycad_tkernel::ncollection::ItemsIterator::advance_returning",
+      "status": "implemented",
+      "notes": "Prefix increment advances and returns the cursor."
     },
     {
       "upstream_id": "NCollection_ItemsView::Iterator::operator++(int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
+      "rust_item": "rustycad_tkernel::ncollection::ItemsIterator::advance_post",
+      "status": "implemented",
+      "notes": "Postfix increment returns the previous cursor copy, then advances."
     },
     {
       "upstream_id": "NCollection_ItemsView::Iterator::operator==(const Iterator<BaseIterator,RefType,Extractor>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
+      "rust_item": "rustycad_tkernel::ncollection::ItemsIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::items_view::iterator::ItemsIterator<J>>>::eq",
+      "status": "implemented",
+      "notes": "Native compares the wrapped map iterators; Rust compares exhaustion, then map identity and position, which is the same relation for iterators over one map."
     },
     {
       "upstream_id": "NCollection_ItemsView::Iterator::operator!=(const Iterator<BaseIterator,RefType,Extractor>&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
+      "rust_item": "rustycad_tkernel::ncollection::ItemsIterator::<core::cmp::PartialEq<rustycad_tkernel::ncollection::items_view::iterator::ItemsIterator<J>>>::eq",
+      "status": "implemented",
+      "notes": "Native !(a == b); PartialEq::ne is the provided negation of the eq impl."
     },
     {
       "upstream_id": "NCollection_ItemsView::View(MapRef)",
@@ -78327,9 +79521,9 @@
       "upstream_id": "NCollection_ItemsView::View::end() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next), whose None marks the end."
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView::end",
+      "status": "implemented",
+      "notes": "Returns the default (exhausted) cursor; ItemsViewMut::end returns an empty mutable range."
     },
     {
       "upstream_id": "NCollection_ItemsView::View::cbegin() const",
@@ -78343,9 +79537,9 @@
       "upstream_id": "NCollection_ItemsView::View::cend() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next), whose None marks the end."
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView::cend",
+      "status": "implemented",
+      "notes": "Same exhausted cursor as end()."
     },
     {
       "upstream_id": "NCollection_ItemsView::View::size() const noexcept",
@@ -78362,6 +79556,254 @@
       "rust_item": "rustycad_tkernel::ncollection::ItemsView::is_empty",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; View<MapType, RefType, Extractor, IsConst> is ItemsView (IsConst = true) / ItemsViewMut over a map implementing ItemsSource<E>/ItemsSourceMut<E>, where E is the extractor marker (KeyValueItems, KeyValueIndexItems, KeyIndexItems) and items are tuples. Implemented for DataMap, IndexedDataMap, FlatDataMap, OrderedDataMap and IndexedMap. Compiler selector includes the pinned declaration noexcept qualifier; mapping status and implementation unchanged (porting/tkernel-noexcept-selector-audit.json)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ namespace; its contents live in the Rust module rustycad_tkernel::ncollection::items_view (re-exported from ncollection)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView",
+      "status": "implemented",
+      "notes": "View<Map, Ref, Extractor, IsConst = true> is ItemsView<M, E> with an extractor marker type; the IsConst = false instantiation is ItemsViewMut<M, E>."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsIterator",
+      "status": "implemented",
+      "notes": "Iterator<BaseIterator, RefType, Extractor> is ItemsIterator<I>, a forward cursor that is also a Rust Iterator over the item tuples."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator::reference",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsIterator::<core::iter::traits::iterator::Iterator>::Item",
+      "status": "implemented",
+      "notes": "reference (= RefType) is the Iterator::Item tuple of ItemsIterator."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator::value_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsIterator::<core::iter::traits::iterator::Iterator>::Item",
+      "status": "implemented",
+      "notes": "value_type is std::decay_t<RefType>; the reference structs are already values, so it is the same Iterator::Item tuple."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator::difference_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "STL iterator typedef (std::ptrdiff_t); ItemsIterator is a Rust Iterator and has no difference type."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator::pointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "STL iterator typedef (void: proxy references have no address); ItemsIterator yields tuples by value."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator::iterator_category",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "STL iterator typedef (std::forward_iterator_tag); ItemsIterator implements Iterator + Clone, the Rust forward-iterator contract."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View::MapRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef choosing const MapType& or MapType& by IsConst; Rust holds &'a M in ItemsView and &'a mut M in ItemsViewMut."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View::base_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the map iterator type; Rust ItemsView obtains the map iterator through ItemsSource::items_begin (an impl Iterator), so no named type exists."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View::iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef Iterator<base_iterator, RefType, Extractor>; ItemsView::begin returns ItemsIterator<impl Iterator> directly."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View::const_iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef equal to iterator; ItemsView::cbegin returns the same ItemsIterator type as begin."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Reference struct for structured bindings; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueRef::Key",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Public reference member Key of the binding struct; it is tuple element .0 of the Rust item tuple (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueRef::Value",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Public reference member Value of the binding struct; it is tuple element .1 of the Rust item tuple (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueIndexRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Reference struct for structured bindings; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueIndexRef::Key",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Public reference member Key of the binding struct; it is tuple element .0 of the Rust item tuple (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueIndexRef::Value",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Public reference member Value of the binding struct; it is tuple element .1 of the Rust item tuple (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueIndexRef::Index",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Public reference member Index of the binding struct; it is tuple element .2 of the Rust item tuple (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyIndexRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Reference struct for structured bindings; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyIndexRef::Key",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Public reference member Key of the binding struct; it is tuple element .0 of the Rust item tuple (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyIndexRef::Index",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Public reference member Index of the binding struct; it is tuple element .1 of the Rust item tuple (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueRef::ValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef choosing const V& or V& by IsConst; Rust items carry &V (ItemsView) or &mut V (ItemsViewMut)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueIndexRef::ValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef choosing const V& or V& by IsConst; Rust items carry &V (ItemsView) or &mut V (ItemsViewMut)."
+    },
+    {
+      "upstream_id": "std::tuple_element<0, NCollection_ItemsView::KeyValueRef<type-parameter-0-0, type-parameter-0-1, value-parameter-0-2>>::type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::tuple_element specialization member for structured bindings; Rust item tuples have native element types (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "std::tuple_element<1, NCollection_ItemsView::KeyValueRef<type-parameter-0-0, type-parameter-0-1, value-parameter-0-2>>::type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::tuple_element specialization member for structured bindings; Rust item tuples have native element types (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "std::tuple_element<0, NCollection_ItemsView::KeyValueIndexRef<type-parameter-0-0, type-parameter-0-1, value-parameter-0-2>>::type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::tuple_element specialization member for structured bindings; Rust item tuples have native element types (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "std::tuple_element<1, NCollection_ItemsView::KeyValueIndexRef<type-parameter-0-0, type-parameter-0-1, value-parameter-0-2>>::type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::tuple_element specialization member for structured bindings; Rust item tuples have native element types (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "std::tuple_element<2, NCollection_ItemsView::KeyValueIndexRef<type-parameter-0-0, type-parameter-0-1, value-parameter-0-2>>::type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::tuple_element specialization member for structured bindings; Rust item tuples have native element types (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "std::tuple_element<0, NCollection_ItemsView::KeyIndexRef<type-parameter-0-0>>::type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::tuple_element specialization member for structured bindings; Rust item tuples have native element types (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "std::tuple_element<1, NCollection_ItemsView::KeyIndexRef<type-parameter-0-0>>::type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "std::tuple_element specialization member for structured bindings; Rust item tuples have native element types (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
     },
     {
       "upstream_id": "NCollection_Iterator()",
@@ -79294,6 +80736,38 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef iterator (NCollection_BaseMap::BasicIterator<NCollection_DataMap<TheKeyType, TheItemType, Hasher>, class NCollection_DataMap::DataMapNode, type-parameter-0-0, type-parameter-0-1, false, false, false>) of NCollection_DataMap. Rust DataMap spells its iter()/iter_mut() iterator types (Iterator/IntoIterator impls); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::ItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsViewMut<DataMap<..>, KeyValueItems> (returned by DataMap::items)."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::ConstItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsView<DataMap<..>, KeyValueItems> (returned by DataMap::items)."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::KeyValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
+      "upstream_id": "NCollection_DataMap::ConstKeyValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
     },
     {
       "upstream_id": "NCollection_DefaultHasher::operator()(const TheKeyType&) const",
@@ -80944,6 +82418,70 @@
       "notes": "C++ STL-protocol member typedef size_type (unsigned long) of NCollection_IndexedDataMap. Rust IndexedDataMap spells usize for sizes and indices; there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_IndexedDataMap::ItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsViewMut<IndexedDataMap<..>, KeyValueItems> (returned by IndexedDataMap::items)."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::ConstItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsView<IndexedDataMap<..>, KeyValueItems> (returned by IndexedDataMap::items)."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::KeyValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::ConstKeyValueRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::IndexedItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsViewMut<IndexedDataMap<..>, KeyValueIndexItems> (returned by IndexedDataMap::indexed_items)."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::ConstIndexedItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsView<IndexedDataMap<..>, KeyValueIndexItems> (returned by IndexedDataMap::indexed_items)."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::KeyValueIndexRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::ConstKeyValueIndexRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedDataMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
+    },
+    {
       "upstream_id": "NCollection_IndexedMap::Iterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
@@ -81470,6 +83008,22 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef reference (const type-parameter-0-0 &) of NCollection_IndexedMap. Rust IndexedMap spells &mut T borrows in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::IndexedItemsView",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native View instantiation; Rust spells ItemsView<IndexedMap<..>, KeyIndexItems> (returned by IndexedMap::indexed_items)."
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::KeyIndexRef",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef of the native binding struct; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index."
     },
     {
       "upstream_id": "NCollection_Map::MapNode(const TheKeyType&,NCollection_ListNode*)",
