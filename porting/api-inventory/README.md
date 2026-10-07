@@ -84,8 +84,9 @@ shared package once per toolkit. `tools/api_metrics_report.py` corrects this:
   expansions, destructors, copy/move constructors, assignment) from the API that needs Rust code.
   The categories come from the declaration table (`macro_generated`, `spelling_location`,
   `access`, `parameter_types`), not from name patterns.
-- `porting/scope.json` records the user's scope decisions: OpenGL visualization is replaced by
-  a new Vulkan renderer, native file formats are excluded, and the DRAW harness is undecided.
+- `porting/scope.json` records the user's scope decisions: the visualization API (TKService,
+  TKV3d, TKMeshVS) and the DRAW toolkits are ported, a new Vulkan 1.3 graphic driver replaces
+  the OpenGL drivers, and native file formats are excluded.
 - Ledger defects count the rows that match no C++ declaration or no Rust item.
 
 Regenerate after each snapshot publication with `python3 tools/api_metrics_report.py`.
