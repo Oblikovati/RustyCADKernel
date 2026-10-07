@@ -1,13 +1,12 @@
 //! 1:1 translation of src/ApplicationFramework/TKCAF/GTests/TNaming_Tool_Test.cxx.
 //!
-//! The cases that drive DNaming functions (TKDCAF, a DRAW toolkit), Boolean operations or
+//! The cases that drive DNaming functions (TKDCAF, a DRAW toolkit) or
 //! TNaming_Selector, TNaming_NamingTool and TNaming_Translator wait for those classes; the
 //! ledger marks them `pending_dependency`.
 #![allow(non_snake_case)]
 mod support;
 
 use rustycad_tkbrep::topods::{Shape, ShapeIterator};
-use rustycad_tkbrep::toptools::MapOfShape;
 use rustycad_tkcaf::tnaming::{
     TNamingBuilder, TNamingIterator, TNamingNamedShape, TNamingNamedShapeMap,
     TNamingNewShapeIterator, TNamingOldShapeIterator, TNamingTool, TNamingTranslator,
@@ -21,6 +20,11 @@ use rustycad_tklcaf::tdf::{TdfData, TdfLabel, TdfTool};
 use rustycad_tklcaf::tdoc_std::TDocStdDocument;
 use rustycad_tkprim::brep_prim_api::{BRepPrimAPIMakeOneAxis, BRepPrimAPIMakeSphere};
 use rustycad_tktopalgo::brep_gprop::BRepGProp;
+use support::naming::{
+    add_naming_deleted, add_naming_generated, add_naming_modified, add_naming_primitives,
+    add_naming_selected, child, collect_naming_sub_shapes, expect_naming_get_shape,
+    expect_naming_shape,
+};
 use support::{find_named_shape, make_box};
 
 /// The `TNaming_ToolTest` fixture: a bare data framework.
@@ -41,10 +45,6 @@ fn make_sphere(radius: f64) -> Shape {
         .solid()
         .unwrap()
         .into_shape()
-}
-
-fn child(label: &TdfLabel, tag: i32) -> TdfLabel {
-    label.find_child(tag, true).unwrap()
 }
 
 fn named_shape_of(label: &TdfLabel) -> Handle<TNamingNamedShape> {
@@ -318,67 +318,6 @@ fn TNaming_ToolTest__NamedShape_MissingUsedShapes() {
     let root = data.root();
     let shape = make_box(10.0, 20.0, 30.0);
     assert!(TNamingTool::named_shape(&shape, &root).unwrap().is_null());
-}
-
-/// The file-static `CollectNamingSubShapes`: the distinct sub-shapes of a type (the shape
-/// itself excluded).
-fn collect_naming_sub_shapes(shape: &Shape, shape_type: ShapeEnum) -> Vec<Shape> {
-    let mut seen = MapOfShape::default();
-    seen.add(shape.clone());
-    support::explore(shape, shape_type)
-        .into_iter()
-        .filter(|current| seen.add(current.clone()))
-        .collect()
-}
-
-fn add_naming_primitives(label: &TdfLabel, shapes: &[Shape]) {
-    let builder = TNamingBuilder::new(label).unwrap();
-    for shape in shapes {
-        builder.generated(shape).unwrap();
-    }
-}
-
-fn add_naming_generated(label: &TdfLabel, olds: &[Shape], news: &[Shape]) {
-    let builder = TNamingBuilder::new(label).unwrap();
-    for (old, new) in olds.iter().zip(news) {
-        builder.generated_from(old, new).unwrap();
-    }
-}
-
-fn add_naming_modified(label: &TdfLabel, olds: &[Shape], news: &[Shape]) {
-    let builder = TNamingBuilder::new(label).unwrap();
-    for (old, new) in olds.iter().zip(news) {
-        builder.modify(old, new).unwrap();
-    }
-}
-
-fn add_naming_deleted(label: &TdfLabel, shapes: &[Shape]) {
-    let builder = TNamingBuilder::new(label).unwrap();
-    for shape in shapes {
-        builder.delete(shape).unwrap();
-    }
-}
-
-fn add_naming_selected(label: &TdfLabel, shapes: &[Shape], contexts: &[Shape]) {
-    let builder = TNamingBuilder::new(label).unwrap();
-    for (shape, context) in shapes.iter().zip(contexts) {
-        builder.select(shape, context).unwrap();
-    }
-}
-
-fn expect_naming_current_shape(label: &TdfLabel, expected: &Shape) {
-    let current = TNamingTool::current_shape(&named_shape_of(label)).unwrap();
-    assert!(current.is_same(expected), "CurrentShape mismatch");
-}
-
-fn expect_naming_get_shape(label: &TdfLabel, expected: &Shape) {
-    let shape = TNamingTool::get_shape(&named_shape_of(label)).unwrap();
-    assert!(shape.is_same(expected), "GetShape mismatch");
-}
-
-fn expect_naming_shape(label: &TdfLabel, expected: &Shape) {
-    expect_naming_current_shape(label, expected);
-    expect_naming_get_shape(label, expected);
 }
 
 /// Copies of some shapes of a slice, by index.

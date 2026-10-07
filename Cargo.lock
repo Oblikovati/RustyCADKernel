@@ -57,6 +57,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "once_cell"
+version = "1.21.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
+
+[[package]]
+name = "pkg-config"
+version = "0.3.34"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f6b464fbc74e149a392436b17d523f769e057cb6877f6a5c4618bc6f11800548"
+
+[[package]]
 name = "rustc_apfloat"
 version = "0.2.3+llvm-462a31f5a5ab"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -79,6 +91,10 @@ dependencies = [
 
 [[package]]
 name = "rustycad-parity"
+version = "0.1.0"
+
+[[package]]
+name = "rustycad-tcl"
 version = "0.1.0"
 
 [[package]]
@@ -155,6 +171,24 @@ dependencies = [
  "rustycad-tkernel",
  "rustycad-tkg3d",
  "rustycad-tklcaf",
+]
+
+[[package]]
+name = "rustycad-tkdraw"
+version = "0.1.0"
+dependencies = [
+ "libc",
+ "rustycad-tcl",
+ "rustycad-tkbrep",
+ "rustycad-tkernel",
+ "rustycad-tkg2d",
+ "rustycad-tkg3d",
+ "rustycad-tkgeomalgo",
+ "rustycad-tkgeombase",
+ "rustycad-tkhlr",
+ "rustycad-tkmath",
+ "rustycad-tkmesh",
+ "rustycad-tktopalgo",
 ]
 
 [[package]]
@@ -340,6 +374,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "rustycad-tkservice"
+version = "0.1.0"
+dependencies = [
+ "libc",
+ "rustycad-tkernel",
+ "rustycad-tkmath",
+ "x11-dl",
+]
+
+[[package]]
 name = "rustycad-tkshhealing"
 version = "0.1.0"
 dependencies = [
@@ -369,6 +413,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "rustycad-tkxsbase"
+version = "0.1.0"
+dependencies = [
+ "rustycad-tkbrep",
+ "rustycad-tkernel",
+ "rustycad-tkg2d",
+ "rustycad-tkg3d",
+ "rustycad-tkgeombase",
+ "rustycad-tkmath",
+ "rustycad-tkshhealing",
+ "rustycad-tktopalgo",
+]
+
+[[package]]
 name = "smallvec"
 version = "1.16.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -393,4 +451,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ae137229bcbd6cdf0f7b80a31df61766145077ddf49416a728b02cb3921ff3fc"
 dependencies = [
  "windows-link",
+]
+
+[[package]]
+name = "x11-dl"
+version = "2.21.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "38735924fedd5314a6e548792904ed8c6de6636285cb9fec04d5b1db85c1516f"
+dependencies = [
+ "libc",
+ "once_cell",
+ "pkg-config",
 ]

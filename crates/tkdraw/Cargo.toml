@@ -1,0 +1,24 @@
+[package]
+name = "rustycad-tkdraw"
+description = "OCCT TKDraw toolkit: the DRAW test harness (Tcl interpreter, variables, drawables, DBRep, DrawTrSurf)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tcl = { path = "../tcl" }
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkmath = { path = "../tkmath" }
+rustycad-tkg2d = { path = "../tkg2d" }
+rustycad-tkg3d = { path = "../tkg3d" }
+rustycad-tkgeombase = { path = "../tkgeombase" }
+rustycad-tkgeomalgo = { path = "../tkgeomalgo" }
+rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tktopalgo = { path = "../tktopalgo" }
+rustycad-tkhlr = { path = "../tkhlr" }
+rustycad-tkmesh = { path = "../tkmesh" }
+# The stream capture of the command log redirects descriptors with dup/dup2 (C library).
+libc = "=0.2.189"

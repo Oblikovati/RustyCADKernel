@@ -1,0 +1,22 @@
+[package]
+name = "rustycad-tcl"
+description = "Project-owned thin binding to the Tcl/Tk 8.6 C API used by the DRAW test harness"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+build = "build.rs"
+links = "tcl8.6"
+
+# This adapter is the one place allowed to call the Tcl/Tk C API. The raw declarations
+# live in `sys`; every other module wraps them in safe Rust and states the contract of
+# each `unsafe` block it uses.
+[lints.rust]
+unsafe_code = "allow"
+missing_docs = "warn"
+unsafe_op_in_unsafe_fn = "deny"
+
+[lints.clippy]
+all = "warn"
+undocumented_unsafe_blocks = "warn"
