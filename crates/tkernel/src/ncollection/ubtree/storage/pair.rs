@@ -17,7 +17,20 @@ pub(in crate::ncollection::ubtree) struct TreePairAllocation<N> {
 impl<N> TreePairAllocation<N> {
     pub(in crate::ncollection::ubtree) fn new_with(
         allocator: &BaseAllocator,
+        construct: impl FnMut(usize) -> N,
+    ) -> Self {
+        Self::construct_with(allocator, construct, Self::cleanup_failed)
+    }
+    pub(in crate::ncollection::ubtree) fn new_native_with(
+        allocator: &BaseAllocator,
+        construct: impl FnMut(usize) -> N,
+    ) -> Self {
+        Self::construct_with(allocator, construct, Self::abandon_failed)
+    }
+    fn construct_with(
+        allocator: &BaseAllocator,
         mut construct: impl FnMut(usize) -> N,
+        failed: fn(Self, Box<dyn Any + Send>) -> !,
     ) -> Self {
         let mut pair = Self::allocate(allocator);
         let result = catch_unwind(AssertUnwindSafe(|| {
@@ -26,13 +39,16 @@ impl<N> TreePairAllocation<N> {
             }
         }));
         if let Err(error) = result {
-            Self::cleanup_failed(pair, error);
+            failed(pair, error);
         }
         pair
     }
-    pub(in crate::ncollection::ubtree) fn edit(mut self, assign: impl FnOnce(&mut Self)) -> Self {
+    pub(in crate::ncollection::ubtree) fn edit_native(
+        mut self,
+        assign: impl FnOnce(&mut Self),
+    ) -> Self {
         if let Err(error) = catch_unwind(AssertUnwindSafe(|| assign(&mut self))) {
-            Self::cleanup_failed(self, error);
+            Self::abandon_failed(self, error);
         }
         self
     }
@@ -61,6 +77,19 @@ impl<N> TreePairAllocation<N> {
         pending.capture(|| drop(pair));
         pending.finish(Ok(()));
         unreachable!("failed pair construction must retain its original panic")
+    }
+    fn abandon_failed(mut pair: Self, error: Box<dyn Any + Send>) -> ! {
+        // OCCT 3d097a0328 Gemmate has no owner guarding unpublished raw children.
+        // Detach every projection before releasing the lease: reset may reclaim bytes afterward.
+        pair.pointer.take();
+        pair.live = [false; 2];
+        if std::mem::size_of::<[N; 2]>() != 0 {
+            // SAFETY: the unique failed allocation is intentionally leaked, with no safe
+            // reference or future payload destructor access. Only the raw allocator retains it.
+            unsafe { pair.allocator.relinquish_typed_to_raw() };
+        }
+        drop(pair);
+        resume_unwind(error)
     }
     pub(in crate::ncollection::ubtree) fn pointer(&self, index: usize) -> *mut N {
         assert!(index < 2, "pair slot {index}; expected 0 or 1");
@@ -96,6 +125,9 @@ impl<N> TreePairAllocation<N> {
 }
 impl<N> Drop for TreePairAllocation<N> {
     fn drop(&mut self) {
+        if self.pointer.is_none() {
+            return;
+        }
         let mut pending = DeferredDestructorPanic::default();
         for index in 0..2 {
             pending.capture(|| self.destroy(index));
@@ -104,3 +136,6 @@ impl<N> Drop for TreePairAllocation<N> {
         pending.finish(Ok(()));
     }
 }
+
+#[cfg(test)]
+mod failed_contracts;

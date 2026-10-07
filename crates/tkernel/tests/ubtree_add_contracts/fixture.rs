@@ -1,3 +1,4 @@
+#![allow(unsafe_code)]
 use crate::allocation_trace::*;
 use rustycad_tkernel::ncollection::BaseAllocator;
 pub fn populated(count: usize) -> (Tree, BaseAllocator) {
@@ -44,17 +45,20 @@ pub fn exact_case(count: usize, rejection: &str) {
     tree.clear();
     assert_eq!(allocations(&allocator), 0);
 }
-pub fn partial_case(rejection: &str) {
+pub fn retained_pair_case(rejection: &str) {
+    use crate::failed_pair_repair::{PairRepair, initialized_slots};
+    use rustycad_tkernel::ncollection::BoundingNode;
     let (mut tree, allocator) = populated(1);
+    let repair = PairRepair::<BoundingNode<Payload<'O'>, Payload<'B'>>>::capture(&allocator);
     let (failed, events) = apply(&mut tree, &allocator, rejection);
     assert!(failed);
-    let native: Vec<&str> = native_row(1, rejection).split_whitespace().collect();
-    let prefix = native[3].strip_suffix("DB100:2,").unwrap();
-    let extra = events.strip_prefix(prefix).unwrap();
-    assert_eq!(extra, failed_union_cleanup_suffix(rejection));
-    assert_eq!(tree.last_node().unwrap().object().0, 1);
-    assert_eq!(tree.root().unwrap().bounds().0, 10);
-    assert_eq!(allocations(&allocator), 1);
+    assert_eq!(
+        result_row(&tree, failed, &events, 1, rejection),
+        native_row(1, rejection)
+    );
     tree.clear();
+    assert_eq!(allocations(&allocator), 1);
+    // SAFETY: original Acc cursor identifies the unpublished pair; only completed slots live.
+    unsafe { repair.reclaim(initialized_slots(rejection)) };
     assert_eq!(allocations(&allocator), 0);
 }

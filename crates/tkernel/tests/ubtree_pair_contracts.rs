@@ -1,14 +1,20 @@
+#![allow(unsafe_code)]
 //! Actual paired allocation and complete native borrowed Gemmate callback phases.
 #[path = "support/ubtree_allocation_trace.rs"]
 pub mod allocation_trace;
+#[path = "support/ubtree_failed_pair_repair.rs"]
+pub mod failed_pair_repair;
 #[path = "ubtree_pair_contracts/fixture.rs"]
 mod fixture;
+use failed_pair_repair::{PairRepair, initialized_slots};
 use fixture::*;
+use rustycad_tkernel::ncollection::{BaseAllocator, BoundingNode};
 #[path = "ubtree_pair_contracts/safety.rs"]
 mod safety;
 fn construct_case(branch: bool, rejection: &str) {
     let (mut tree, allocator) = populated(branch);
     let before = tree.root().unwrap().child_id(0);
+    let repair = PairRepair::<BoundingNode<Payload<'O'>, Payload<'B'>>>::capture(&allocator);
     let inputs = (Payload(99), Payload(3), Payload(30));
     start(&allocator, rejection_tuple(rejection));
     let failed = caught(|| {
@@ -17,13 +23,7 @@ fn construct_case(branch: bool, rejection: &str) {
     let events = finish();
     let published = before != tree.root().unwrap().child_id(0);
     check_construction(&tree, branch, rejection, failed, published, &events);
-    let expected_live = 1 + usize::from(branch) + usize::from(published);
-    assert_eq!(allocations(&allocator), expected_live);
-    if published {
-        assert!(pair_is_contiguous(&tree));
-    }
-    tree.clear();
-    assert_eq!(allocations(&allocator), 0);
+    verify_pair_ownership(&mut tree, &allocator, repair, published, rejection, branch);
 }
 fn check_construction(
     tree: &Tree,
@@ -39,43 +39,26 @@ fn check_construction(
     assert_eq!(u8::from(published).to_string(), native[5]);
     assert_eq!(tree.root().unwrap().bounds().0.to_string(), native[6]);
     assert_eq!(tree.root().unwrap().object().0.to_string(), native[7]);
+    assert_eq!(events, native[3]);
+}
+fn verify_pair_ownership(
+    tree: &mut Tree,
+    allocator: &BaseAllocator,
+    repair: PairRepair<'_, BoundingNode<Payload<'O'>, Payload<'B'>>>,
+    published: bool,
+    rejection: &str,
+    branch: bool,
+) {
+    assert_eq!(allocations(allocator), 2 + usize::from(branch));
     if published {
-        assert_eq!(events, native[3]);
-        return;
+        assert!(pair_is_contiguous(tree));
+        assert!(repair.matches(tree.child(tree.root().unwrap(), 0).unwrap()));
+    } else {
+        // SAFETY: native prepublication failure retains this exact pair and completed slots.
+        unsafe { repair.reclaim(initialized_slots(rejection)) };
     }
-    check_cleanup(events, native[3], rejection, branch);
-}
-fn check_cleanup(events: &str, native: &str, rejection: &str, branch: bool) {
-    assert!(events.starts_with(native), "{rejection}: {events}");
-    let extra = &events[native.len()..];
-    assert_eq!(extra, cleanup_suffix(rejection, branch), "{rejection}");
-}
-fn cleanup_suffix(rejection: &str, branch: bool) -> String {
-    let old_object = if branch { 0 } else { 1 };
-    let old_bounds = if branch { 30 } else { 10 };
-    let count = if branch { 3 } else { 2 };
-    format_cleanup(cleanup_values(rejection, old_object, old_bounds), count)
-}
-fn cleanup_values(rejection: &str, old_object: i32, old_bounds: i32) -> Vec<i32> {
-    match rejection {
-        "NB1" | "NO1" => vec![],
-        "NB2" | "NO2" => vec![0, 0],
-        "AB1" => vec![0, old_bounds, 0, 0],
-        "AO1" => vec![old_object, old_bounds, 0, 0],
-        "AO2" => vec![old_object, old_bounds, 3, 0],
-        "AB2" => vec![old_object, old_bounds, 3, 30],
-        _ => panic!("rejection {rejection}; expected prepublication failure"),
-    }
-}
-fn format_cleanup(values: Vec<i32>, count: usize) -> String {
-    values
-        .iter()
-        .enumerate()
-        .map(|(index, value)| {
-            let kind = if index % 2 == 0 { 'O' } else { 'B' };
-            format!("D{kind}{value}:{count},")
-        })
-        .collect()
+    tree.clear();
+    assert_eq!(allocations(allocator), 0);
 }
 #[test]
 fn native_borrowed_child_construction_and_assignment_matrix() {
