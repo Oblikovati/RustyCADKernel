@@ -17,7 +17,7 @@ use rustycad_tkgeombase::app_cont::Function;
 use rustycad_tkmath::gp::Point3;
 
 /// `bl_curve3d`.
-fn curve3d(c: &Handle<dyn GeomCurve>) -> Result<(), Failure> {
+pub fn curve3d(c: &Handle<dyn GeomCurve>) -> Result<(), Failure> {
     let Some(curve) = c.get() else {
         int(-1);
         return Ok(());
@@ -32,7 +32,7 @@ fn curve3d(c: &Handle<dyn GeomCurve>) -> Result<(), Failure> {
 }
 
 /// `bl_curve2d`.
-fn curve2d(c: &Handle<dyn Geom2dCurve>) -> Result<(), Failure> {
+pub fn curve2d(c: &Handle<dyn Geom2dCurve>) -> Result<(), Failure> {
     let Some(curve) = c.get() else {
         int(-1);
         return Ok(());

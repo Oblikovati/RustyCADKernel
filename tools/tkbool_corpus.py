@@ -43,3 +43,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_brepalgo').append_brepalgo_requests(requests)
     # BRepAlgo_NormalProjection and BRepProj (tkbool_corpus_brepproj.py)
     __import__('tkbool_corpus_brepproj').append_brepproj_requests(requests)
+    # TopOpeBRepTool_CurveTool (tkbool_corpus_topopebreptool_curve_tool.py)
+    __import__('tkbool_corpus_topopebreptool_curve_tool').append_curve_tool_requests(requests)

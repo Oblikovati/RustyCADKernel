@@ -7,6 +7,7 @@ use bl_probe::{
     brep_fill_filling, brep_fill_generator, brep_fill_location_law, brep_fill_multi_line,
     brep_fill_offset_wire, brep_fill_package, brep_fill_pipe, brep_fill_pipe_shell,
     brep_fill_section, brep_fill_section_law, brep_fill_sweep, brep_proj,
+    top_ope_brep_tool_curve_tool,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -58,6 +59,15 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // BRepAlgo_NormalProjection and BRepProj (bl_probe/brep_proj.rs)
     ("ba_normal_projection", brep_proj::normal_projection_case),
     ("bp_projection", brep_proj::projection_case),
+    // TopOpeBRepTool_CurveTool (bl_probe/top_ope_brep_tool_curve_tool.rs)
+    (
+        "tt_make_curves",
+        top_ope_brep_tool_curve_tool::make_curves_case,
+    ),
+    (
+        "tt_pcurve_on_face",
+        top_ope_brep_tool_curve_tool::pcurve_on_face_case,
+    ),
 ];
 
 fn main() {
