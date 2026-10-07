@@ -443120,6 +443120,1510 @@
       "rust_item": "rustycad_tkcaf::tnaming::TNamingNode",
       "status": "implemented",
       "notes": "TNaming mapping (docs/ocaf-design.md section 10): the public headers only forward-declare TNaming_Node (its definition is private to TNaming_NamedShape.cxx); the Rust node of the evolution graph is the Arc-shared TNamingNode with its fields in SharedState."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::DE_ConfigurationContext",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::new",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::Load",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::load",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::LoadFile",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::load_file",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::LoadStr",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::load_str",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::IsParamSet",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::is_param_set",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::GetReal",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::get_real",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::GetInteger",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::get_integer",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::GetBoolean",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::get_boolean",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::GetString",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::get_string",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::GetStringSeq",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::get_string_seq",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::RealVal",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::real_val",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::IntegerVal",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::integer_val",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::BooleanVal",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::boolean_val",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::StringVal",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::string_val",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::GetInternalMap",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::get_internal_map",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationContext::load",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationContext.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationContext::load_line",
+      "status": "implemented",
+      "notes": "DE_ConfigurationContext (docs/de-design.md sections 1 and 5): a transient with its resource DataMap in one SharedState; scope and parameter names are byte strings; the out-parameter getters leave the output unchanged on failure; members that can throw (OSD_File, Value) return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::DE_ConfigurationNode()",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNodeBase::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::DE_ConfigurationNode(const occ::handle<DE_ConfigurationNode> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNodeBase::copied_from",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::Load(const TCollection_AsciiString &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::load_resource_file",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::Load(const occ::handle<DE_ConfigurationContext> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::load",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::Save(const TCollection_AsciiString &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::save_resource_file",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::Save()",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::save",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::DE_SectionGlobal::LengthUnit",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeSectionGlobal::length_unit",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::DE_SectionGlobal::SystemUnit",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeSectionGlobal::system_unit",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::GlobalParameters",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::global_parameters",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded. The public field is the accessor pair global_parameters/set_global_parameters, because a node is shared through handles."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::BuildProvider",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::build_provider",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::Copy",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::copy",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::UpdateLoad",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::update_load",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::IsImportSupported",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::is_import_supported",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::IsExportSupported",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::is_export_supported",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::IsStreamSupported",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::is_stream_supported",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::GetFormat",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::get_format",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::GetVendor",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::get_vendor",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::GetExtensions",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::get_extensions",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::CheckExtension",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::check_extension",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::CheckContent",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::check_content",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::IsEnabled",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::is_enabled",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::SetEnabled",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::set_enabled",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::CustomActivation",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::custom_activation",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::Register",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::register",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_ConfigurationNode::UnRegister",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeConfigurationNode::unregister",
+      "status": "implemented",
+      "notes": "DE_ConfigurationNode (docs/de-design.md section 1): a trait over DeConfigurationNodeBase (GlobalParameters, myIsEnabled, the self handle of ocaf-design.md section 2); pure virtual members are required methods, virtual ones provided with the native default body; Load(path) is load_resource_file and Save(path) save_resource_file because a trait method cannot be overloaded."
+    },
+    {
+      "upstream_id": "DE_Provider::DE_Provider()",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProviderBase::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::DE_Provider(const occ::handle<DE_ConfigurationNode> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProviderBase::with_node",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::GetFormat",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::get_format",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::GetVendor",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::get_vendor",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::GetNode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::get_node",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::SetNode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::set_node",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::ReadStreamList",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProviderReadStreamList",
+      "status": "implemented",
+      "notes": "DE_Provider stream nodes (docs/de-design.md section 2): std::istream&/std::ostream& are &mut dyn IStream and &mut dyn OStream, the TKernel ports with the libstdc++ state bits; the lists are NCollection_List."
+    },
+    {
+      "upstream_id": "DE_Provider::WriteStreamList",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProviderWriteStreamList",
+      "status": "implemented",
+      "notes": "DE_Provider stream nodes (docs/de-design.md section 2): std::istream&/std::ostream& are &mut dyn IStream and &mut dyn OStream, the TKernel ports with the libstdc++ state bits; the lists are NCollection_List."
+    },
+    {
+      "upstream_id": "DE_Provider::ReadStreamNode::ReadStreamNode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProviderReadStreamNode::new",
+      "status": "implemented",
+      "notes": "DE_Provider stream nodes (docs/de-design.md section 2): std::istream&/std::ostream& are &mut dyn IStream and &mut dyn OStream, the TKernel ports with the libstdc++ state bits; the lists are NCollection_List."
+    },
+    {
+      "upstream_id": "DE_Provider::ReadStreamNode::Path",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProviderReadStreamNode::path",
+      "status": "implemented",
+      "notes": "DE_Provider stream nodes (docs/de-design.md section 2): std::istream&/std::ostream& are &mut dyn IStream and &mut dyn OStream, the TKernel ports with the libstdc++ state bits; the lists are NCollection_List."
+    },
+    {
+      "upstream_id": "DE_Provider::ReadStreamNode::Stream",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProviderReadStreamNode::stream",
+      "status": "implemented",
+      "notes": "DE_Provider stream nodes (docs/de-design.md section 2): std::istream&/std::ostream& are &mut dyn IStream and &mut dyn OStream, the TKernel ports with the libstdc++ state bits; the lists are NCollection_List."
+    },
+    {
+      "upstream_id": "DE_Provider::WriteStreamNode::WriteStreamNode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProviderWriteStreamNode::new",
+      "status": "implemented",
+      "notes": "DE_Provider stream nodes (docs/de-design.md section 2): std::istream&/std::ostream& are &mut dyn IStream and &mut dyn OStream, the TKernel ports with the libstdc++ state bits; the lists are NCollection_List."
+    },
+    {
+      "upstream_id": "DE_Provider::WriteStreamNode::Path",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProviderWriteStreamNode::path",
+      "status": "implemented",
+      "notes": "DE_Provider stream nodes (docs/de-design.md section 2): std::istream&/std::ostream& are &mut dyn IStream and &mut dyn OStream, the TKernel ports with the libstdc++ state bits; the lists are NCollection_List."
+    },
+    {
+      "upstream_id": "DE_Provider::WriteStreamNode::Stream",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProviderWriteStreamNode::stream",
+      "status": "implemented",
+      "notes": "DE_Provider stream nodes (docs/de-design.md section 2): std::istream&/std::ostream& are &mut dyn IStream and &mut dyn OStream, the TKernel ports with the libstdc++ state bits; the lists are NCollection_List."
+    },
+    {
+      "upstream_id": "DE_Provider::Read(const TCollection_AsciiString &, const occ::handle<TDocStd_Document> &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::read_document_with_session",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Write(const TCollection_AsciiString &, const occ::handle<TDocStd_Document> &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::write_document_with_session",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Read(const TCollection_AsciiString &, const occ::handle<TDocStd_Document> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::read_document",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Write(const TCollection_AsciiString &, const occ::handle<TDocStd_Document> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::write_document",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Read(DE_Provider::ReadStreamList &, const occ::handle<TDocStd_Document> &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::read_document_streams_with_session",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Write(DE_Provider::WriteStreamList &, const occ::handle<TDocStd_Document> &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::write_document_streams_with_session",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Read(DE_Provider::ReadStreamList &, const occ::handle<TDocStd_Document> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::read_document_streams",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Write(DE_Provider::WriteStreamList &, const occ::handle<TDocStd_Document> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::write_document_streams",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Read(const TCollection_AsciiString &, TopoDS_Shape &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::read_shape_with_session",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Write(const TCollection_AsciiString &, const TopoDS_Shape &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::write_shape_with_session",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Read(const TCollection_AsciiString &, TopoDS_Shape &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::read_shape",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Write(const TCollection_AsciiString &, const TopoDS_Shape &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::write_shape",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Read(DE_Provider::ReadStreamList &, TopoDS_Shape &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::read_shape_streams_with_session",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Write(DE_Provider::WriteStreamList &, const TopoDS_Shape &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::write_shape_streams_with_session",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Read(DE_Provider::ReadStreamList &, TopoDS_Shape &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::read_shape_streams",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_Provider::Write(DE_Provider::WriteStreamList &, const TopoDS_Shape &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Provider.hxx",
+      "rust_item": "rustycad_tkde::de::DeProvider::write_shape_streams",
+      "status": "implemented",
+      "notes": "DE_Provider (docs/de-design.md sections 1 and 2): a trait over DeProviderBase (myNode); the sixteen Read/Write overloads are named by what, from where and with or without a work session; occ::handle<XSControl_WorkSession>& is &mut DeWorkSession (Handle<StandardTransient>) until TKXSBase is ported, TKDE only forwards it; the default bodies report \"doesn't support\" and return false."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::Tolerance3d",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::tolerance3d",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::MaxTolerance3d",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::max_tolerance3d",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::MinTolerance3d",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::min_tolerance3d",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::DetalizationLevel",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::detalization_level",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::NonManifold",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::non_manifold",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixFreeShellMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_free_shell_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixFreeFaceMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_free_face_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixFreeWireMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_free_wire_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixSameParameterMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_same_parameter_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixSolidMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_solid_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixShellOrientationMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_shell_orientation_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::CreateOpenSolidMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::create_open_solid_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixShellMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_shell_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixFaceOrientationMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_face_orientation_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixFaceMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_face_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixWireMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_wire_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixOrientationMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_orientation_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixAddNaturalBoundMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_add_natural_bound_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixMissingSeamMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_missing_seam_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixSmallAreaWireMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_small_area_wire_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::RemoveSmallAreaFaceMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::remove_small_area_face_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixIntersectingWiresMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_intersecting_wires_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixLoopWiresMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_loop_wires_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixSplitFaceMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_split_face_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::AutoCorrectPrecisionMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::auto_correct_precision_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::ModifyTopologyMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::modify_topology_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::ModifyGeometryMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::modify_geometry_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::ClosedWireMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::closed_wire_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::PreferencePCurveMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::preference_pcurve_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixReorderMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_reorder_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixSmallMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_small_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixConnectedMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_connected_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixEdgeCurvesMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_edge_curves_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixDegeneratedMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_degenerated_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixLackingMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_lacking_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixSelfIntersectionMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_self_intersection_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::RemoveLoopMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::remove_loop_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixReversed2dMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_reversed2d_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixRemovePCurveMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_remove_pcurve_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixRemoveCurve3dMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_remove_curve3d_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixAddPCurveMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_add_pcurve_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixAddCurve3dMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_add_curve3d_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixSeamMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_seam_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixShiftedMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_shifted_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixEdgeSameParameterMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_edge_same_parameter_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixNotchedEdgesMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_notched_edges_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixTailMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_tail_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::MaxTailAngle",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::max_tail_angle",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::MaxTailWidth",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::max_tail_width",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixSelfIntersectingEdgeMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_self_intersecting_edge_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixIntersectingEdgesMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_intersecting_edges_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixNonAdjacentIntersectingEdgesMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_non_adjacent_intersecting_edges_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixVertexPositionMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_vertex_position_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixVertexToleranceMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParameters::fix_vertex_tolerance_mode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixMode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParametersFixMode",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixMode::FixOrNot",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParametersFixMode::FIX_OR_NOT",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixMode::NotFix",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParametersFixMode::NOT_FIX",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixParameters::FixMode::Fix",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixParameters.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixParametersFixMode::FIX",
+      "status": "implemented",
+      "notes": "DE_ShapeFixParameters (docs/de-design.md section 5): a Copy struct with the native defaults; FixMode is a newtype over i32 because DE_ShapeFixConfigurationNode::Load casts any integer to it."
+    },
+    {
+      "upstream_id": "DE_ShapeFixConfigurationNode::DE_ShapeFixConfigurationNode()",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixConfigurationNodeBase::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "DE_ShapeFixConfigurationNode (docs/de-design.md section 1): a trait over DeShapeFixConfigurationNodeBase; the base Load/Save, which format nodes call from their overrides, are shape_fix_load/shape_fix_save; keys, comments and order come from one table (de/shape_fix_keys.rs); the text is compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ShapeFixConfigurationNode::DE_ShapeFixConfigurationNode(const occ::handle<DE_ShapeFixConfigurationNode> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixConfigurationNodeBase::copied_from",
+      "status": "implemented",
+      "notes": "DE_ShapeFixConfigurationNode (docs/de-design.md section 1): a trait over DeShapeFixConfigurationNodeBase; the base Load/Save, which format nodes call from their overrides, are shape_fix_load/shape_fix_save; keys, comments and order come from one table (de/shape_fix_keys.rs); the text is compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ShapeFixConfigurationNode::Load",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixConfigurationNode::shape_fix_load",
+      "status": "implemented",
+      "notes": "DE_ShapeFixConfigurationNode (docs/de-design.md section 1): a trait over DeShapeFixConfigurationNodeBase; the base Load/Save, which format nodes call from their overrides, are shape_fix_load/shape_fix_save; keys, comments and order come from one table (de/shape_fix_keys.rs); the text is compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ShapeFixConfigurationNode::Save",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixConfigurationNode::shape_fix_save",
+      "status": "implemented",
+      "notes": "DE_ShapeFixConfigurationNode (docs/de-design.md section 1): a trait over DeShapeFixConfigurationNodeBase; the base Load/Save, which format nodes call from their overrides, are shape_fix_load/shape_fix_save; keys, comments and order come from one table (de/shape_fix_keys.rs); the text is compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ShapeFixConfigurationNode::ShapeFixParameters",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ShapeFixConfigurationNode.hxx",
+      "rust_item": "rustycad_tkde::de::DeShapeFixConfigurationNode::shape_fix_parameters",
+      "status": "implemented",
+      "notes": "DE_ShapeFixConfigurationNode (docs/de-design.md section 1): a trait over DeShapeFixConfigurationNodeBase; the base Load/Save, which format nodes call from their overrides, are shape_fix_load/shape_fix_save; keys, comments and order come from one table (de/shape_fix_keys.rs); the text is compared with the native library by crates/tkde/tests/de_native_oracle.rs. The public field is the accessor pair shape_fix_parameters/set_shape_fix_parameters, because a node is shared through handles."
+    },
+    {
+      "upstream_id": "DE_ValidationUtils::ValidateConfigurationNode",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ValidationUtils.hxx",
+      "rust_item": "rustycad_tkde::de::DeValidationUtils::validate_configuration_node",
+      "status": "implemented",
+      "notes": "DE_ValidationUtils: a unit struct of associated functions; file checks open std streams through the TKernel FileStream port (paths as UTF-8, lossy for other bytes); stream checks read the libstdc++ fail bits; CreateContentBuffer reads through the TKernel default file system. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ValidationUtils::ValidateFileForReading",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ValidationUtils.hxx",
+      "rust_item": "rustycad_tkde::de::DeValidationUtils::validate_file_for_reading",
+      "status": "implemented",
+      "notes": "DE_ValidationUtils: a unit struct of associated functions; file checks open std streams through the TKernel FileStream port (paths as UTF-8, lossy for other bytes); stream checks read the libstdc++ fail bits; CreateContentBuffer reads through the TKernel default file system. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ValidationUtils::ValidateFileForWriting",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ValidationUtils.hxx",
+      "rust_item": "rustycad_tkde::de::DeValidationUtils::validate_file_for_writing",
+      "status": "implemented",
+      "notes": "DE_ValidationUtils: a unit struct of associated functions; file checks open std streams through the TKernel FileStream port (paths as UTF-8, lossy for other bytes); stream checks read the libstdc++ fail bits; CreateContentBuffer reads through the TKernel default file system. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ValidationUtils::ValidateReadStreamList",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ValidationUtils.hxx",
+      "rust_item": "rustycad_tkde::de::DeValidationUtils::validate_read_stream_list",
+      "status": "implemented",
+      "notes": "DE_ValidationUtils: a unit struct of associated functions; file checks open std streams through the TKernel FileStream port (paths as UTF-8, lossy for other bytes); stream checks read the libstdc++ fail bits; CreateContentBuffer reads through the TKernel default file system. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ValidationUtils::ValidateWriteStreamList",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ValidationUtils.hxx",
+      "rust_item": "rustycad_tkde::de::DeValidationUtils::validate_write_stream_list",
+      "status": "implemented",
+      "notes": "DE_ValidationUtils: a unit struct of associated functions; file checks open std streams through the TKernel FileStream port (paths as UTF-8, lossy for other bytes); stream checks read the libstdc++ fail bits; CreateContentBuffer reads through the TKernel default file system. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ValidationUtils::ValidateDocument",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ValidationUtils.hxx",
+      "rust_item": "rustycad_tkde::de::DeValidationUtils::validate_document",
+      "status": "implemented",
+      "notes": "DE_ValidationUtils: a unit struct of associated functions; file checks open std streams through the TKernel FileStream port (paths as UTF-8, lossy for other bytes); stream checks read the libstdc++ fail bits; CreateContentBuffer reads through the TKernel default file system. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ValidationUtils::WarnLengthUnitNotSupported",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ValidationUtils.hxx",
+      "rust_item": "rustycad_tkde::de::DeValidationUtils::warn_length_unit_not_supported",
+      "status": "implemented",
+      "notes": "DE_ValidationUtils: a unit struct of associated functions; file checks open std streams through the TKernel FileStream port (paths as UTF-8, lossy for other bytes); stream checks read the libstdc++ fail bits; CreateContentBuffer reads through the TKernel default file system. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ValidationUtils::CreateContentBuffer(const TCollection_AsciiString &, occ::handle<NCollection_Buffer> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ValidationUtils.hxx",
+      "rust_item": "rustycad_tkde::de::DeValidationUtils::create_content_buffer_from_path",
+      "status": "implemented",
+      "notes": "DE_ValidationUtils: a unit struct of associated functions; file checks open std streams through the TKernel FileStream port (paths as UTF-8, lossy for other bytes); stream checks read the libstdc++ fail bits; CreateContentBuffer reads through the TKernel default file system. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_ValidationUtils::CreateContentBuffer(std::istream &, occ::handle<NCollection_Buffer> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_ValidationUtils.hxx",
+      "rust_item": "rustycad_tkde::de::DeValidationUtils::create_content_buffer",
+      "status": "implemented",
+      "notes": "DE_ValidationUtils: a unit struct of associated functions; file checks open std streams through the TKernel FileStream port (paths as UTF-8, lossy for other bytes); stream checks read the libstdc++ fail bits; CreateContentBuffer reads through the TKernel default file system. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::DE_Wrapper()",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::new",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::DE_Wrapper(const occ::handle<DE_Wrapper> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::from_wrapper",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Load(const TCollection_AsciiString &, const bool)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::load",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Load(const occ::handle<DE_ConfigurationContext> &, const bool)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::load_context",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Save(const TCollection_AsciiString &, const bool, const NCollection_List<TCollection_AsciiString> &, const NCollection_List<TCollection_AsciiString> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::save_to_file",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Save(const bool, const NCollection_List<TCollection_AsciiString> &, const NCollection_List<TCollection_AsciiString> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::save",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::ChangePriority(const TCollection_AsciiString &, const NCollection_List<TCollection_AsciiString> &, const bool)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::change_priority",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::ChangePriority(const NCollection_List<TCollection_AsciiString> &, const bool)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::change_priority_all",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::FindReadProvider(const TCollection_AsciiString &, const bool, occ::handle<DE_Provider> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::find_read_provider",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::FindReadProvider(const TCollection_AsciiString &, std::istream &, occ::handle<DE_Provider> &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::find_read_provider_from_stream",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::GlobalParameters",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::global_parameters",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs. The public field is the accessor pair global_parameters/set_global_parameters."
+    },
+    {
+      "upstream_id": "DE_Wrapper::GlobalWrapper",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::global_wrapper",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::SetGlobalWrapper",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::set_global_wrapper",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::GlobalLoadMutex",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::global_load_mutex",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Bind",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::bind",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::UnBind",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::unbind",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Find",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::find",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::FindProvider",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::find_provider",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::FindWriteProvider",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::find_write_provider",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::UpdateLoad",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::update_load",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::KeepUpdates",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::keep_updates",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::SetKeepUpdates",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::set_keep_updates",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Nodes",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::nodes",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Copy",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::copy",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::sort",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::sort",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Read(const TCollection_AsciiString &, const occ::handle<TDocStd_Document> &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::read_document_with_session",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Write(const TCollection_AsciiString &, const occ::handle<TDocStd_Document> &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::write_document_with_session",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Read(const TCollection_AsciiString &, const occ::handle<TDocStd_Document> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::read_document",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Write(const TCollection_AsciiString &, const occ::handle<TDocStd_Document> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::write_document",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Read(DE_Provider::ReadStreamList &, const occ::handle<TDocStd_Document> &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::read_document_streams_with_session",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Write(DE_Provider::WriteStreamList &, const occ::handle<TDocStd_Document> &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::write_document_streams_with_session",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Read(DE_Provider::ReadStreamList &, const occ::handle<TDocStd_Document> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::read_document_streams",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Write(DE_Provider::WriteStreamList &, const occ::handle<TDocStd_Document> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::write_document_streams",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Read(const TCollection_AsciiString &, TopoDS_Shape &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::read_shape_with_session",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Write(const TCollection_AsciiString &, const TopoDS_Shape &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::write_shape_with_session",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Read(const TCollection_AsciiString &, TopoDS_Shape &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::read_shape",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Write(const TCollection_AsciiString &, const TopoDS_Shape &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::write_shape",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Read(DE_Provider::ReadStreamList &, TopoDS_Shape &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::read_shape_streams_with_session",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Write(DE_Provider::WriteStreamList &, const TopoDS_Shape &, occ::handle<XSControl_WorkSession> &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::write_shape_streams_with_session",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Read(DE_Provider::ReadStreamList &, TopoDS_Shape &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::read_shape_streams",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_Wrapper::Write(DE_Provider::WriteStreamList &, const TopoDS_Shape &, const Message_ProgressRange &)",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_Wrapper.hxx",
+      "rust_item": "rustycad_tkde::de::DeWrapper::write_shape_streams",
+      "status": "implemented",
+      "notes": "DE_Wrapper (docs/de-design.md sections 3 and 4): a struct (no OCCT class overrides its virtual members) with the format DataMap and vendor IndexedDataMaps of TKernel, so the lookup and Save order are native; lookups call node members on a snapshot outside the lock; the global wrapper and load mutex stay process-wide; members that can throw return Result. Compared with the native library by crates/tkde/tests/de_native_oracle.rs."
+    },
+    {
+      "upstream_id": "DE_PluginHolder",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_PluginHolder.hxx",
+      "rust_item": "rustycad_tkde::de::DePluginHolder",
+      "status": "implemented",
+      "notes": "DE_PluginHolder / DE_MultiPluginHolder (docs/de-design.md section 3): register in the global wrapper under the global load mutex and unregister on drop; the multi holder is generic over a tuple of node classes and creates them last class first, as the libstdc++ std::tuple (native probe plugin.multi)."
+    },
+    {
+      "upstream_id": "DE_PluginHolder::DE_PluginHolder<TheConfType>",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_PluginHolder.hxx",
+      "rust_item": "rustycad_tkde::de::DePluginHolder::new",
+      "status": "implemented",
+      "notes": "DE_PluginHolder / DE_MultiPluginHolder (docs/de-design.md section 3): register in the global wrapper under the global load mutex and unregister on drop; the multi holder is generic over a tuple of node classes and creates them last class first, as the libstdc++ std::tuple (native probe plugin.multi)."
+    },
+    {
+      "upstream_id": "DE_MultiPluginHolder",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_PluginHolder.hxx",
+      "rust_item": "rustycad_tkde::de::DeMultiPluginHolder",
+      "status": "implemented",
+      "notes": "DE_PluginHolder / DE_MultiPluginHolder (docs/de-design.md section 3): register in the global wrapper under the global load mutex and unregister on drop; the multi holder is generic over a tuple of node classes and creates them last class first, as the libstdc++ std::tuple (native probe plugin.multi)."
+    },
+    {
+      "upstream_id": "DE_MultiPluginHolder::DE_MultiPluginHolder<TheConfTypes...>",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/DE/DE_PluginHolder.hxx",
+      "rust_item": "rustycad_tkde::de::DeMultiPluginHolder::new",
+      "status": "implemented",
+      "notes": "DE_PluginHolder / DE_MultiPluginHolder (docs/de-design.md section 3): register in the global wrapper under the global load mutex and unregister on drop; the multi holder is generic over a tuple of node classes and creates them last class first, as the libstdc++ std::tuple (native probe plugin.multi)."
     }
   ],
   "tests": [
@@ -551017,6 +552521,111 @@
       "rust_test": "TNaming_Tool_Test__CafBug_26155_ModificationOrderStable",
       "rust_source": "crates/tkcaf/tests/tnaming_tool.rs",
       "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "DE_Wrapper_Configuration_Test.DeWrapperConfiguration_A1_ChangeToOne",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/GTests/DE_Wrapper_Configuration_Test.cxx",
+      "source_sha256": "8659ffd9f3f26cc5b90d0d82af59ae213144397ed275ebddda4e2dbe19835e23",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "DEVRML_ConfigurationNode",
+        "DEIGES_ConfigurationNode",
+        "DEOBJ_ConfigurationNode",
+        "DEGLTF_ConfigurationNode",
+        "DEPLY_ConfigurationNode",
+        "DEXCAF_ConfigurationNode",
+        "DESTEP_ConfigurationNode",
+        "DESTL_ConfigurationNode",
+        "DEBREP_ConfigurationNode"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "DE_Wrapper_Configuration_Test.DeWrapperConfiguration_A2_ChangeToZero",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/GTests/DE_Wrapper_Configuration_Test.cxx",
+      "source_sha256": "8659ffd9f3f26cc5b90d0d82af59ae213144397ed275ebddda4e2dbe19835e23",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "DEVRML_ConfigurationNode",
+        "DEIGES_ConfigurationNode",
+        "DEOBJ_ConfigurationNode",
+        "DEGLTF_ConfigurationNode",
+        "DEPLY_ConfigurationNode",
+        "DEXCAF_ConfigurationNode",
+        "DESTEP_ConfigurationNode",
+        "DESTL_ConfigurationNode",
+        "DEBREP_ConfigurationNode"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "DE_Wrapper_Configuration_Test.DeWrapperConfiguration_A3_InitialConfiguration",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/GTests/DE_Wrapper_Configuration_Test.cxx",
+      "source_sha256": "8659ffd9f3f26cc5b90d0d82af59ae213144397ed275ebddda4e2dbe19835e23",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "DEVRML_ConfigurationNode",
+        "DEIGES_ConfigurationNode",
+        "DEOBJ_ConfigurationNode",
+        "DEGLTF_ConfigurationNode",
+        "DEPLY_ConfigurationNode",
+        "DEXCAF_ConfigurationNode",
+        "DESTEP_ConfigurationNode",
+        "DESTL_ConfigurationNode",
+        "DEBREP_ConfigurationNode"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "DE_Wrapper_Configuration_Test.DeWrapperConfiguration_A4_TwoFormats",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/GTests/DE_Wrapper_Configuration_Test.cxx",
+      "source_sha256": "8659ffd9f3f26cc5b90d0d82af59ae213144397ed275ebddda4e2dbe19835e23",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "DEVRML_ConfigurationNode",
+        "DEIGES_ConfigurationNode",
+        "DEOBJ_ConfigurationNode",
+        "DEGLTF_ConfigurationNode",
+        "DEPLY_ConfigurationNode",
+        "DEXCAF_ConfigurationNode",
+        "DESTEP_ConfigurationNode",
+        "DESTL_ConfigurationNode",
+        "DEBREP_ConfigurationNode"
+      ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "DE_Wrapper_Configuration_Test.DeWrapperConfiguration_A5_EmptyLoad",
+      "toolkit": "TKDE",
+      "source": "src/DataExchange/TKDE/GTests/DE_Wrapper_Configuration_Test.cxx",
+      "source_sha256": "8659ffd9f3f26cc5b90d0d82af59ae213144397ed275ebddda4e2dbe19835e23",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "DEVRML_ConfigurationNode",
+        "DEIGES_ConfigurationNode",
+        "DEOBJ_ConfigurationNode",
+        "DEGLTF_ConfigurationNode",
+        "DEPLY_ConfigurationNode",
+        "DEXCAF_ConfigurationNode",
+        "DESTEP_ConfigurationNode",
+        "DESTL_ConfigurationNode",
+        "DEBREP_ConfigurationNode"
+      ],
       "profiles": [
         "linux-gcc-c-locale"
       ]

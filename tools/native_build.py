@@ -62,6 +62,15 @@ CAF_TOOLKITS: tuple[str, ...] = (*OCAF_TOOLKITS, 'TKDCAF', 'TKFillet', 'TKBool')
 CAF_LINKED_TOOLKITS: tuple[str, ...] = ('TKDCAF', 'TKFillet', 'TKBool', *OCAF_LINKED_TOOLKITS)
 CAF_CLOSURE_TARGETS: list[str] = [*CAF_TOOLKITS, 'gtest_main']
 
+# The TKDE closure: the unchanged DE_Wrapper_Configuration_Test binds the configuration node of
+# every exchange format, so it links the DE format toolkits (TKDECascade holds DEBREP and DEXCAF).
+# It lives in its own tree too, so the other closures keep their flags.
+DE_TOOLKITS: tuple[str, ...] = ('TKDECascade', 'TKDEGLTF', 'TKDEIGES', 'TKDEOBJ', 'TKDEPLY',
+                                'TKDESTEP', 'TKDESTL', 'TKDEVRML')
+# The TKDE closure's shared libraries in link order, dependants first (the formats sit on TKDE).
+DE_LINKED_TOOLKITS: tuple[str, ...] = (*DE_TOOLKITS, 'TKDE', 'TKBRep', 'TKMath', 'TKernel')
+DE_CLOSURE_TARGETS: list[str] = [*DE_TOOLKITS, 'gtest_main']
+
 
 def closure_flags(modules: list[str], toolkits: tuple[str, ...] = ADDITIONAL_TOOLKITS) -> list[str]:
     """CMake flags of a shared oracle closure (the geometry one by default); one spelling for

@@ -34,8 +34,9 @@ notes cite it as "de-design.md section N".
   `DeShapeFixConfigurationNodeBase::copied_from`.
 - **Fallible members.** A member that can throw natively (through `OSD_File`, `Value`, or a
   provider override) returns `Result<_, Failure>`: `DeConfigurationContext::load*`,
-  `DeConfigurationNode::load_resource_file` and `save_resource_file`, the `DeWrapper` loads,
-  saves, lookups and transfers, and every `DeProvider` transfer.
+  `DeConfigurationNode::load` (a null context is a native null dereference),
+  `load_resource_file` and `save_resource_file`, the `DeWrapper` loads, saves, lookups and
+  transfers, and every `DeProvider` transfer.
 
 ## 2. Types that TKDE only forward-declares
 
