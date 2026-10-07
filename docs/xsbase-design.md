@@ -74,20 +74,34 @@ protocol gives it a positive case number.
 
 - `Transfer_ProcessForTransient` and `Transfer_ProcessForFinder` are two instances of
   the native template `Transfer_TransferProcess`. The port writes the algorithm once, as
-  the generic `TransferProcess<K: TransferStart>`, over the start type
-  (`Handle<StandardTransient>` with identity hashing, or `Handle<dyn TransferFinder>`
-  with the `GetHashCode`/`Equates` hashing of `Transfer_FindHasher`). The binder map is
-  the native `NCollection_IndexedDataMap`, so `MapIndex`, `Mapped` and the iteration of
-  the results keep the native numbering. `Transfer_TransientProcess` and
-  `Transfer_FinderProcess` embed their instance and add the model and graph members.
+  the generic `TransferProcess<K: TransferProcessKind>`, over a kind
+  (`TransferTransientKind`: `Handle<StandardTransient>` with identity hashing;
+  `TransferFinderKind`: `Handle<dyn TransferFinder>` with the `GetHashCode`/`Equates`
+  hashing of `Transfer_FindHasher`). The actor and the iterator templates are generic
+  over the same kind. The binder map is the native `NCollection_IndexedDataMap`, so
+  `MapIndex`, `Mapped` and the iteration of the results keep the native numbering.
+- The concrete `TransferProcessForTransient` / `TransferProcessForFinder` embed the
+  generic body and dereference to it. The virtual members (`PrintTrace`, `CheckNum`)
+  are the trait `TransferProcessOps<K>`; the body keeps a weak handle to its owner
+  (bound by the constructors, which return handles), dispatches its own calls through
+  it, and passes it to the actors as the native code passes `this`.
+  `Transfer_TransientProcess` and `Transfer_FinderProcess` embed their instance (the
+  RTTI parent), add the model and graph members and override the virtual members.
 - **Transfer_Binder** is the trait `TransferBinder: Transient` over the embedded
   `TransferBinderBase` (status, execution status, check, next result); the concrete
   binders (`Transfer_SimpleBinderOfTransient`, `Transfer_VoidBinder`,
   `Transfer_MultipleBinder`, `Transfer_TransientListBinder`,
   `TransferBRep_ShapeBinder`...) are structs.
-- **Actors** (`Transfer_ActorOfProcessForTransient` and its subclasses) are traits with
-  the native virtual members (`Recognize`, `Transferring`) as provided methods; the
-  chain of actors (`SetNext`, `IsLast`) lives in the embedded base.
+- **Actors** (`Transfer_ActorOfProcessForTransient` and its subclasses) are the trait
+  `TransferActorOps<K>` with the native virtual members (`Recognize`, `Transferring`) as
+  provided methods; the chain of actors (`SetNext`, `IsLast`) lives in the embedded
+  `TransferActor<K>`. `Transfer_ActorOfTransientProcess` adds the trait
+  `TransferActorOfTransientProcessOps` (`Transfer`, `TransferTransient`); its
+  `Transferring` override is the function `transferring_by_transient_process`, which a
+  derived actor calls from its own `transferring` (the same for the finder actors).
+- The native stream buffers of the messenger send their text when they go out of
+  scope; the port collects the text and sends it at the same point, so the trace
+  lines keep the native order.
 - **Exceptions.** The native process catches `Standard_Failure` around an actor when
   `ErrorHandle` is set and records it in the binder check; the port does the same with
   the `Failure` an actor returns. `Transfer_TransferDeadLoop` and

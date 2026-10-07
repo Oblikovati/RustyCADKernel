@@ -18,4 +18,5 @@ pub mod lib_ctl;
 pub mod moni_tool;
 mod ostream_text;
 pub mod transfer;
+pub mod xs_algo;
 pub mod xs_message;

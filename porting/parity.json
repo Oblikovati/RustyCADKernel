@@ -94892,7 +94892,7 @@
       "upstream_id": "Transfer_FindHasher::operator()(const occ::handle<Transfer_Finder>&) const",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FindHasher.hxx",
-      "rust_item": "rustycad_tkxsbase::transfer::TransferFindHasher::<rustycad_tkernel::ncollection::HashPolicy>::hash",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFindHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<dyn rustycad_tkxsbase::transfer::finder::TransferFinder>>>::hash",
       "status": "implemented",
       "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
     },
@@ -94900,7 +94900,7 @@
       "upstream_id": "Transfer_FindHasher::operator()(const occ::handle<Transfer_Finder>&,const occ::handle<Transfer_Finder>&) const",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FindHasher.hxx",
-      "rust_item": "rustycad_tkxsbase::transfer::TransferFindHasher::<rustycad_tkernel::ncollection::HashPolicy>::equal",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFindHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::standard::handle::Handle<dyn rustycad_tkxsbase::transfer::finder::TransferFinder>>>::equal",
       "status": "implemented",
       "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
     },
@@ -94959,6 +94959,1774 @@
       "rust_item": "rustycad_tkxsbase::transfer::TransferDataInfo::type_name",
       "status": "implemented",
       "notes": "Transfer mapping (docs/xsbase-design.md section 3): binders and finders are traits over embedded bases (the non-virtual members are provided methods); occ::handle<Standard_Type> is &RuntimeType; const char* results are owned texts; HSequence results and arguments are Vec copies; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Transfer_ProcessForTransient(const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcessForTransient::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Transfer_ProcessForTransient(const occ::handle<Message_Messenger>&,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcessForTransient::with_messenger",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. A null printer is None (the default messenger)."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::AddFail(const occ::handle<Standard_Transient>&,const char* const,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_fail_text",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::AddFail(const occ::handle<Standard_Transient>&,const Message_Msg&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_fail_msg",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::AddWarning(const occ::handle<Standard_Transient>&,const char* const,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_warning_text",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::AddWarning(const occ::handle<Standard_Transient>&,const Message_Msg&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_warning_msg",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::PrintTrace",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcessOps::print_trace",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Virtual: the process dispatches its own calls through its bound handle."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::CheckNum",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcessOps::check_num",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Virtual: the process dispatches its own calls through its bound handle."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::clear",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Clean",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::clean",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Resize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::resize",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::SetActor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_actor",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Actor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::actor",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Find",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::find",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::IsBound",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::is_bound",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::IsAlreadyUsed",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::is_already_used",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Transfer_TransferFailure when not mapped."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Bind",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::bind",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Transfer_TransferFailure for a used former binder."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Rebind",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::rebind",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Unbind",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::unbind",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native quirk kept: the binder stays in the map (replaced by itself); only the roots and the masked object change."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::FindElseBind",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::find_else_bind",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::SetMessenger",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_messenger",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. A null messenger is None (the default messenger)."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Messenger",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::messenger",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::SetTraceLevel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_trace_level",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::TraceLevel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::trace_level",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::SendFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::send_fail",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::SendWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::send_warning",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::SendMsg",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::send_msg",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::AddError",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_error",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Mend",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::mend",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Returns the failures of Interface_Check::Mend."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Check",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::check",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::BindTransient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::bind_transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::FindTransient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::find_transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::BindMultiple",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::bind_multiple",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::AddMultiple",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_multiple",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::NbMapped",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::nb_mapped",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Mapped",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::mapped",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_OutOfRange out of 1..NbMapped; the start is returned by value."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::MapIndex",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::map_index",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::MapItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::map_item",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_OutOfRange out of 1..NbMapped."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::SetRoot",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_root",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::SetRootManagement",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_root_management",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::NbRoots",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::nb_roots",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Root",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::root",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_OutOfRange out of 1..NbRoots (the native read of map index 0)."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::RootItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::root_item",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_OutOfRange out of 1..NbRoots."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::RootIndex",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::root_index",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::NestingLevel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::nesting_level",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::ResetNestingLevel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::reset_nesting_level",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Recognize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::recognize",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Transferring",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::transferring",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. With the error handle a failure of an actor is caught and recorded on a void binder (the result is null); without it the failure is returned. The native stream buffers are sent at the end of their scopes."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::Transfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::transfer",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::SetErrorHandle",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_error_handle",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::ErrorHandle",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::error_handle",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::StartTrace",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::start_trace",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::IsLooping",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::is_looping",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::RootResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::root_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::CompleteResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::complete_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::AbnormalResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::abnormal_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::CheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::check_list",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::ResultOne",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::result_one",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native defect kept: the scope array it reads is never filled, so the result is always empty."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::CheckListOne",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::check_list_one",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native defect kept: the scope array it reads is never filled, so the list is always empty."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::IsCheckListEmpty",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::is_check_list_empty",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native defect kept: the scope array it reads is never filled, so a mapped start is always true."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::RemoveResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::remove_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native defect kept: the scope array it reads is never filled, so nothing is removed."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Transfer_ProcessForFinder(const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcessForFinder::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Transfer_ProcessForFinder(const occ::handle<Message_Messenger>&,const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcessForFinder::with_messenger",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. A null printer is None (the default messenger)."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::AddFail(const occ::handle<Transfer_Finder>&,const char* const,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_fail_text",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::AddFail(const occ::handle<Transfer_Finder>&,const Message_Msg&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_fail_msg",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::AddWarning(const occ::handle<Transfer_Finder>&,const char* const,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_warning_text",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::AddWarning(const occ::handle<Transfer_Finder>&,const Message_Msg&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_warning_msg",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::PrintTrace",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcessOps::print_trace",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Virtual: the process dispatches its own calls through its bound handle."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::CheckNum",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcessOps::check_num",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Virtual: the process dispatches its own calls through its bound handle."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::clear",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Clean",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::clean",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Resize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::resize",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::SetActor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_actor",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Actor",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::actor",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Find",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::find",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::IsBound",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::is_bound",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::IsAlreadyUsed",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::is_already_used",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Transfer_TransferFailure when not mapped."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Bind",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::bind",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Transfer_TransferFailure for a used former binder."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Rebind",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::rebind",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Unbind",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::unbind",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native quirk kept: the binder stays in the map (replaced by itself); only the roots and the masked object change."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::FindElseBind",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::find_else_bind",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::SetMessenger",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_messenger",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. A null messenger is None (the default messenger)."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Messenger",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::messenger",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::SetTraceLevel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_trace_level",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::TraceLevel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::trace_level",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::SendFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::send_fail",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::SendWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::send_warning",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::SendMsg",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::send_msg",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::AddError",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_error",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Mend",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::mend",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Returns the failures of Interface_Check::Mend."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Check",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::check",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::BindTransient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::bind_transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::FindTransient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::find_transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::BindMultiple",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::bind_multiple",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::AddMultiple",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::add_multiple",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::NbMapped",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::nb_mapped",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Mapped",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::mapped",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_OutOfRange out of 1..NbMapped; the start is returned by value."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::MapIndex",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::map_index",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::MapItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::map_item",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_OutOfRange out of 1..NbMapped."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::SetRoot",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_root",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::SetRootManagement",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_root_management",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::NbRoots",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::nb_roots",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Root",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::root",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_OutOfRange out of 1..NbRoots (the native read of map index 0)."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::RootItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::root_item",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_OutOfRange out of 1..NbRoots."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::RootIndex",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::root_index",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::NestingLevel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::nesting_level",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::ResetNestingLevel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::reset_nesting_level",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Recognize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::recognize",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Transferring",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::transferring",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. With the error handle a failure of an actor is caught and recorded on a void binder (the result is null); without it the failure is returned. The native stream buffers are sent at the end of their scopes."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::Transfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::transfer",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::SetErrorHandle",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::set_error_handle",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::ErrorHandle",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::error_handle",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::StartTrace",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::start_trace",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::IsLooping",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::is_looping",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::RootResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::root_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::CompleteResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::complete_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::AbnormalResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::abnormal_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::CheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::check_list",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::ResultOne",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::result_one",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native defect kept: the scope array it reads is never filled, so the result is always empty."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::CheckListOne",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::check_list_one",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native defect kept: the scope array it reads is never filled, so the list is always empty."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::IsCheckListEmpty",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::is_check_list_empty",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native defect kept: the scope array it reads is never filled, so a mapped start is always true."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::RemoveResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::remove_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native defect kept: the scope array it reads is never filled, so nothing is removed."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForTransient::Transfer_ActorOfProcessForTransient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfProcessForTransient::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForTransient::Recognize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::recognize",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForTransient::Transferring",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::transferring",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForTransient::TransientResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::transient_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForTransient::NullResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::null_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForTransient::SetLast",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::set_last",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForTransient::IsLast",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::is_last",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForTransient::SetNext",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::set_next",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForTransient::Next",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::next",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForFinder::Transfer_ActorOfProcessForFinder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfProcessForFinder::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForFinder::Recognize",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::recognize",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForFinder::Transferring",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::transferring",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForFinder::TransientResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::transient_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForFinder::NullResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::null_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForFinder::SetLast",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::set_last",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForFinder::IsLast",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::is_last",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForFinder::SetNext",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::set_next",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfProcessForFinder::Next",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOps::next",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForTransient::Transfer_IteratorOfProcessForTransient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForTransient::Add(const occ::handle<Transfer_Binder>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::add",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_NoSuchObject when the starts are recorded."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForTransient::Add(const occ::handle<Transfer_Binder>&,const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::add_with_start",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForTransient::Filter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::filter",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native quirk kept: the item selected is the rank of the start in a map of the starts."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForTransient::HasStarting",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::has_starting",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForTransient::Starting",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::starting",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_NoSuchObject without starts; Standard_OutOfRange without a current item."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForFinder::Transfer_IteratorOfProcessForFinder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForFinder::Add(const occ::handle<Transfer_Binder>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::add",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_NoSuchObject when the starts are recorded."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForFinder::Add(const occ::handle<Transfer_Binder>&,const occ::handle<Transfer_Finder>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::add_with_start",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForFinder::Filter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::filter",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native quirk kept: the item selected is the rank of the start in a map of the starts."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForFinder::HasStarting",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::has_starting",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_IteratorOfProcessForFinder::Starting",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_IteratorOfProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferIteratorOfProcess::starting",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_NoSuchObject without starts; Standard_OutOfRange without a current item."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::Transfer_TransferIterator",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::AddItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::add_item",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::SelectBinder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::select_binder",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::SelectResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::select_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native quirk kept: the result type compared is the one of the current item, so Standard_NoSuchObject without a current item."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::SelectUnique",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::select_unique",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::SelectItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::select_item",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::Number",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::number",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::Start",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::start",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::More",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::more",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::Next",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::next",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::value",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Standard_NoSuchObject without a current item."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::HasResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::has_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::HasUniqueResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::has_unique_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::ResultType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::result_type",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. None for a multiple binder (the native null type)."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::HasTransientResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::has_transient_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::TransientResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::transient_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::Status",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::status",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::HasFails",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::has_fails",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::HasWarnings",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::has_warnings",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransferIterator::Check",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransferIterator::check",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::Transfer_TransientProcess",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::SetModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::set_model",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::Model",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::model",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::SetGraph",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::set_graph",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::HasGraph",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::has_graph",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::HGraph",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::h_graph",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::Graph",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::graph",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. A view of the HGraph; Standard_NullObject without graph (a native null dereference)."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::SetContext",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::set_context",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::GetContext",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::get_context",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. A null type is None."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::Context",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::context",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. The write guard of the map (natively a modifiable reference)."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::TypedSharings",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::typed_sharings",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::IsDataLoaded",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::is_data_loaded",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::IsDataFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::is_data_fail",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::PrintStats",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::print_stats",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::RootsForTransfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::roots_for_transfer",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. The shared list (natively a shared HSequence)."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::PrintTrace",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::<rustycad_tkxsbase::transfer::TransferProcessOps<rustycad_tkxsbase::transfer::kinds::TransferTransientKind>>::print_trace",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_TransientProcess::CheckNum",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferTransientProcess::<rustycad_tkxsbase::transfer::TransferProcessOps<rustycad_tkxsbase::transfer::kinds::TransferTransientKind>>::check_num",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_FinderProcess::Transfer_FinderProcess",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinderProcess::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_FinderProcess::SetModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinderProcess::set_model",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_FinderProcess::Model",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinderProcess::model",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_FinderProcess::NextMappedWithAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinderProcess::next_mapped_with_attribute",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_FinderProcess::TransientMapper",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinderProcess::transient_mapper",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_FinderProcess::PrintStats",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinderProcess::print_stats",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Native quirk kept: \"Errors on :\" has no blank before the count blanks."
+    },
+    {
+      "upstream_id": "Transfer_FinderProcess::PrintTrace",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_FinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferFinderProcess::<rustycad_tkxsbase::transfer::TransferProcessOps<rustycad_tkxsbase::transfer::kinds::TransferFinderKind>>::print_trace",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfTransientProcess::Transfer_ActorOfTransientProcess",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfTransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfTransientProcess::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfTransientProcess::Transferring",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfTransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfTransientProcess::<rustycad_tkxsbase::transfer::TransferActorOps<rustycad_tkxsbase::transfer::kinds::TransferTransientKind>>::transferring",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Calls transferring_by_transient_process: Transfer with the process cast to a transient process."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfTransientProcess::Transfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfTransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfTransientProcessOps::transfer",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfTransientProcess::TransferTransient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfTransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfTransientProcessOps::transfer_transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfTransientProcess::SetShapeFixParameters(const XSAlgo_ShapeProcessor::ParameterMap&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfTransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::set_shape_fix_parameters",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Reached through TransferActorOfTransientProcessOps::shape_processing; the map is moved in."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfTransientProcess::SetShapeFixParameters(XSAlgo_ShapeProcessor::ParameterMap&&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfTransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::set_shape_fix_parameters",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Reached through TransferActorOfTransientProcessOps::shape_processing."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfTransientProcess::GetShapeFixParameters",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfTransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::shape_fix_parameters",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. A copy of the map."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfTransientProcess::SetProcessingFlags",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfTransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::set_flags",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfTransientProcess::GetProcessingFlags",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfTransientProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::flags",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::Transfer_ActorOfFinderProcess",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfFinderProcess::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::ModeTrans",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfFinderProcessOps::mode_trans",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. The write guard of the mode (natively a modifiable reference)."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::Transferring",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfFinderProcess::<rustycad_tkxsbase::transfer::TransferActorOps<rustycad_tkxsbase::transfer::kinds::TransferFinderKind>>::transferring",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Calls transferring_by_finder_process: Transfer with the process cast to a finder process."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::Transfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfFinderProcessOps::transfer",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::TransferTransient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferActorOfFinderProcessOps::transfer_transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::SetShapeFixParameters(const XSAlgo_ShapeProcessor::ParameterMap&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::set_shape_fix_parameters",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Reached through TransferActorOfFinderProcessOps::shape_processing; the map is moved in."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::SetShapeFixParameters(XSAlgo_ShapeProcessor::ParameterMap&&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::set_shape_fix_parameters",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. Reached through TransferActorOfFinderProcessOps::shape_processing."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::GetShapeFixParameters",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::shape_fix_parameters",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists. A copy of the map."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::SetShapeProcessFlags",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::set_flags",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ActorOfFinderProcess::GetShapeProcessFlags",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfFinderProcess.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferShapeProcessing::flags",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::FindTypedTransient(const occ::handle<Standard_Transient>&,const occ::handle<Standard_Type>&,occ::handle<Standard_Transient>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::find_typed_transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForTransient::GetTypedTransient(const occ::handle<Transfer_Binder>&,const occ::handle<Standard_Type>&,occ::handle<Standard_Transient>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::get_typed_transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::FindTypedTransient(const occ::handle<Transfer_Finder>&,const occ::handle<Standard_Type>&,occ::handle<Standard_Transient>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::find_typed_transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::GetTypedTransient(const occ::handle<Transfer_Binder>&,const occ::handle<Standard_Type>&,occ::handle<Standard_Transient>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::get_typed_transient",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::FindTypedTransient(const occ::handle<Transfer_Finder>&,const occ::handle<Standard_Type>&,occ::handle<T>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::find_typed_transient_as",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
+    },
+    {
+      "upstream_id": "Transfer_ProcessForFinder::GetTypedTransient(const occ::handle<Transfer_Binder>&,const occ::handle<Standard_Type>&,occ::handle<T>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ProcessForFinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferProcess::get_typed_transient_as",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
     },
     {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",

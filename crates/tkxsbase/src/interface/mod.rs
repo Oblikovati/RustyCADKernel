@@ -61,7 +61,7 @@ mod static_standards;
 mod static_tests;
 mod static_value;
 #[cfg(test)]
-mod test_norm;
+pub(crate) mod test_norm;
 mod typed_value;
 mod undefined_content;
 
