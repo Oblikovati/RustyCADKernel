@@ -6,7 +6,9 @@ use rustycad_tkbrep::brep_adaptor::BRepAdaptorCurve;
 use rustycad_tkbrep::topexp::{self, Explorer};
 use rustycad_tkbrep::topods::{self, Edge, Face, Vertex};
 use rustycad_tkbrep::toptools::IndexedMapOfShape;
+use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkfillet::brep_fillet_api::BRepFilletAPIMakeFillet2d;
 use rustycad_tkfillet::chfi2d::{
     ChFi2dAnaFilletAlgo, ChFi2dBuilder, ChFi2dChamferAPI, ChFi2dFilletAPI, ChFi2dFilletAlgo,
 };
@@ -17,7 +19,7 @@ use rustycad_tkgeombase::gc::MakeArcOfCircle;
 use rustycad_tkmath::gp::Plane3;
 use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakePolygon,
-    BRepBuilderAPIMakeWire,
+    BRepBuilderAPIMakeShape, BRepBuilderAPIMakeWire,
 };
 
 /// `fl_edge`.
@@ -189,6 +191,38 @@ fn builder_op(
     Ok(())
 }
 
+/// `fl_make_fillet2d`: BRepFilletAPI_MakeFillet2d initialized on the reference face and
+/// the face the builder modified.
+fn make_fillet2d(face: &Face, modified: &Face) -> Result<(), Failure> {
+    let mut api = BRepFilletAPIMakeFillet2d::new();
+    api.init_modified(face, modified)?;
+    int(api.status() as i32);
+    api.build(&ProgressRange::default())?;
+    flag(api.is_done());
+    int(api.nb_fillet());
+    int(api.nb_chamfer());
+    for i in 1..=api.nb_curves() {
+        edge(&topods::edge(api.new_edges(i)?.first().ok_or_else(
+            || Failure::with_message("Standard_NoSuchObject", "NCollection_List::First"),
+        )?)?);
+    }
+    let mut ex = Explorer::new(face, ShapeEnum::Edge, ShapeEnum::Shape)?;
+    while ex.more() {
+        let e = topods::edge(ex.current())?;
+        flag(api.is_modified(&e));
+        if api.has_descendant(&e) {
+            edge(&topods::edge(
+                api.modified(ex.current())?.first().ok_or_else(|| {
+                    Failure::with_message("Standard_NoSuchObject", "NCollection_List::First")
+                })?,
+            )?);
+            edge(&api.basis_edge(&api.descendant_edge(&e)?)?);
+        }
+        ex.next()?;
+    }
+    Ok(())
+}
+
 /// `fl_chfi2d_builder`: see tools/oracle/tkfillet_probe_chfi2d.cxx.
 pub fn builder_case(values: &[f64]) {
     let r = &mut Reader::new(values);
@@ -212,5 +246,6 @@ pub fn builder_case(values: &[f64]) {
         int(b.nb_chamfer());
     }
     attempt(|| face_edges(&b.result()));
+    attempt(|| make_fillet2d(&face, &b.result()));
     end();
 }

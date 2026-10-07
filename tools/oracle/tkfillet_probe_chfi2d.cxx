@@ -6,6 +6,7 @@
 #include <BRepBuilderAPI_MakePolygon.hxx>
 #include <BRepBuilderAPI_MakeWire.hxx>
 #include <BRep_Tool.hxx>
+#include <BRepFilletAPI_MakeFillet2d.hxx>
 #include <ChFi2d_AnaFilletAlgo.hxx>
 #include <ChFi2d_Builder.hxx>
 #include <ChFi2d_ChamferAPI.hxx>
@@ -75,6 +76,16 @@ void fl_face_edges(const TopoDS_Face& face){
 // RemoveChamfer(chamfer a), 8 ModifyChamfer(chamfer a, edge b, edge b, x, y); indices
 // (1-based) in the current result (vertices and edges in TopExp::MapShapes order, the
 // fillets and chamfers of the builder).
+// BRepFilletAPI_MakeFillet2d initialized on the reference face and the face the builder
+// modified: its status, the build, the new edges and the history of the reference edges.
+void fl_make_fillet2d(const TopoDS_Face& face,const TopoDS_Face& modified){
+ BRepFilletAPI_MakeFillet2d api;api.Init(face,modified);ga_int(int(api.Status()));
+ api.Build();ga_flag(api.IsDone());ga_int(api.NbFillet());ga_int(api.NbChamfer());
+ for(int i=1;i<=api.NbCurves();i++)fl_edge(TopoDS::Edge(api.NewEdges(i).First()));
+ for(TopExp_Explorer ex(face,TopAbs_EDGE);ex.More();ex.Next()){TopoDS_Edge e=TopoDS::Edge(ex.Current());
+  ga_flag(api.IsModified(e));
+  if(api.HasDescendant(e)){fl_edge(TopoDS::Edge(api.Modified(e).First()));fl_edge(api.BasisEdge(api.DescendantEdge(e)));}}}
+
 void fl_chfi2d_builder_case(std::istream& in){
  GaReader r{in};int n=r.integer();BRepBuilderAPI_MakePolygon poly;
  for(int i=0;i<n;++i)poly.Add(r.pnt());poly.Close();
@@ -97,4 +108,4 @@ void fl_chfi2d_builder_case(std::istream& in){
    else fl_edge(b.ModifyChamfer(C(a),E(bb),E(bb),x,y)));
   ga_int(int(b.Status()));ga_int(b.NbFillet());ga_int(b.NbChamfer());
  }
- fl_face_edges(b.Result());ga_end();}
+ fl_face_edges(b.Result());GA_TRY(fl_make_fillet2d(face,b.Result()));ga_end();}
