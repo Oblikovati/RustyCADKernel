@@ -9,6 +9,7 @@ use rustycad_tkbrep::topods::Shape;
 use rustycad_tkbrep::toptools::MapOfShape;
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkshhealing::shape_upgrade::ShapeUpgradeUnifySameDomain;
 use std::ops::{Deref, DerefMut};
 
 /// The General Fuse API: splits the arguments by each other and keeps the history.
@@ -212,14 +213,41 @@ impl BRepAlgoAPIBuilderAlgo {
         self.algo.base.set_done();
         self.algo.base.my_shape = general_fuse.shape().clone();
         if self.fill_history {
-            let history = Handle::new(History::new());
+            let history = History::new();
             if let Some(source) = general_fuse.history() {
-                history
-                    .get()
-                    .expect("created history")
-                    .merge_handle(&source)?;
+                history.merge_handle(&source)?;
             }
-            self.history = history;
+            self.history = Handle::new(history);
+        }
+        Ok(())
+    }
+
+    /// Unifies the tangent edges and faces of the result within the fuzzy value and
+    /// `angular_tolerance`, keeping the simplification history (`SimplifyResult`; the
+    /// native defaults are `true, true, Precision::Angular()`);
+    /// `builder.simplify_result(true, true, precision::angular())?`.
+    pub fn simplify_result(
+        &mut self,
+        unify_edges: bool,
+        unify_faces: bool,
+        angular_tolerance: f64,
+    ) -> Result<(), Failure> {
+        if self.algo.has_errors() || (!unify_edges && !unify_faces) {
+            return Ok(());
+        }
+        let unifier =
+            ShapeUpgradeUnifySameDomain::new(self.algo.shape(), unify_edges, unify_faces, true);
+        unifier.set_linear_tolerance(self.algo.fuzzy_value());
+        unifier.set_angular_tolerance(angular_tolerance);
+        unifier.set_safe_input_mode(self.non_destructive);
+        unifier.allow_internal_edges(false);
+        unifier.build()?;
+        self.algo.base.my_shape = unifier.shape();
+        self.simplifier_history = unifier.history();
+        if self.fill_history
+            && let Some(history) = self.history.get()
+        {
+            history.merge_handle(&self.simplifier_history)?;
         }
         Ok(())
     }

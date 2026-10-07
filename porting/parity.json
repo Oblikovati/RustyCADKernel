@@ -441020,6 +441020,15 @@
       "notes": "Non-public data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPIBuilderAlgo, which no derived class needs (Rust has no subclassing); the methods of the type read and write it."
     },
     {
+      "upstream_id": "BRepAlgoAPI_BuilderAlgo::SimplifyResult(bool,bool,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_BuilderAlgo.hxx",
+      "source_sha256": "0cdde3d7f8a5e0356f426289a186b7ccd82231da88496bf32e973ab42c6bfe17",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPIBuilderAlgo::simplify_result",
+      "status": "implemented",
+      "notes": "The native defaults (true, true, Precision::Angular()) are explicit arguments; returns the failure of ShapeUpgrade_UnifySameDomain::Build instead of raising it. Verified bit for bit (shapes, history of the arguments, section edges before and after) by the native replay tools/oracle/tkbo_simplify_result.cxx (crates/tkbo/tests/brep_algo_api_simplify_result.rs); the GTests BRepAlgoAPI_SimplifyTest.A1/A2 and BRepTools_HistoryTest.A8 pass."
+    },
+    {
       "upstream_id": "BRepAlgoAPI_Check()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
@@ -558068,6 +558077,118 @@
       "rust_target": "bop_algo_make_periodic_legacy",
       "rust_test": "connected::BOPAlgo_MakePeriodicTest__MakeConnected_A5_PeriodicRepetitionCanBeCleared",
       "rust_source": "crates/tkbo/tests/bop_algo_make_periodic_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_SimplifyTest.A1_FuseCoplanarBoxes_SimplifiesFaces",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_Simplify_Test.cxx",
+      "source_sha256": "44079cf89b71872b18307510d1ddfe4ef0f18944a3ac4e14a08e6f0b2aae47c5",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_algo_api_simplify_legacy",
+      "rust_test": "BRepAlgoAPI_SimplifyTest__A1_FuseCoplanarBoxes_SimplifiesFaces",
+      "rust_source": "crates/tkbo/tests/brep_algo_api_simplify_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_SimplifyTest.A2_SectionThroughSewnShell_SimplifiesEdges",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepAlgoAPI_Simplify_Test.cxx",
+      "source_sha256": "44079cf89b71872b18307510d1ddfe4ef0f18944a3ac4e14a08e6f0b2aae47c5",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_algo_api_simplify_legacy",
+      "rust_test": "BRepAlgoAPI_SimplifyTest__A2_SectionThroughSewnShell_SimplifiesEdges",
+      "rust_source": "crates/tkbo/tests/brep_algo_api_simplify_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepTools_HistoryTest.A1_IntersectingCircleEdges",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepTools_History_Test.cxx",
+      "source_sha256": "b2264bb4181df2c598e74c1294d79f1c27149f7808692fb4777fd359c4e8f277",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_tools_history_legacy",
+      "rust_test": "BRepTools_HistoryTest__A1_IntersectingCircleEdges",
+      "rust_source": "crates/tkbo/tests/brep_tools_history_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepTools_HistoryTest.A2_IntersectingPlanarFaces",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepTools_History_Test.cxx",
+      "source_sha256": "b2264bb4181df2c598e74c1294d79f1c27149f7808692fb4777fd359c4e8f277",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_tools_history_legacy",
+      "rust_test": "BRepTools_HistoryTest__A2_IntersectingPlanarFaces",
+      "rust_source": "crates/tkbo/tests/brep_tools_history_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepTools_HistoryTest.A3_OverlappingPlanarFaces",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepTools_History_Test.cxx",
+      "source_sha256": "b2264bb4181df2c598e74c1294d79f1c27149f7808692fb4777fd359c4e8f277",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_tools_history_legacy",
+      "rust_test": "BRepTools_HistoryTest__A3_OverlappingPlanarFaces",
+      "rust_source": "crates/tkbo/tests/brep_tools_history_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepTools_HistoryTest.A4_GeneralFuseEdgeAndFace",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepTools_History_Test.cxx",
+      "source_sha256": "b2264bb4181df2c598e74c1294d79f1c27149f7808692fb4777fd359c4e8f277",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_tools_history_legacy",
+      "rust_test": "BRepTools_HistoryTest__A4_GeneralFuseEdgeAndFace",
+      "rust_source": "crates/tkbo/tests/brep_tools_history_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepTools_HistoryTest.A8_FuseAndSimplifyHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepTools_History_Test.cxx",
+      "source_sha256": "b2264bb4181df2c598e74c1294d79f1c27149f7808692fb4777fd359c4e8f277",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_tools_history_legacy",
+      "rust_test": "BRepTools_HistoryTest__A8_FuseAndSimplifyHistory",
+      "rust_source": "crates/tkbo/tests/brep_tools_history_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepTools_HistoryTest.A9_SectionExpandedBoxFacesHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BRepTools_History_Test.cxx",
+      "source_sha256": "b2264bb4181df2c598e74c1294d79f1c27149f7808692fb4777fd359c4e8f277",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "brep_tools_history_legacy",
+      "rust_test": "BRepTools_HistoryTest__A9_SectionExpandedBoxFacesHistory",
+      "rust_source": "crates/tkbo/tests/brep_tools_history_legacy.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
