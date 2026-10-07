@@ -451305,9 +451305,9 @@
       "upstream_id": "Draw_Color::Draw_Color()",
       "toolkit": "TKDraw",
       "source": "src/Draw/TKDraw/Draw/Draw_Color.hxx",
-      "rust_item": "rustycad_tkdraw::draw::DrawColor",
+      "rust_item": "rustycad_tkdraw::draw::DrawColor::<core::default::Default>::default",
       "status": "implemented",
-      "notes": "Default impl (Draw_blanc)."
+      "notes": "Default impl (Draw_blanc). Draw package port (rustycad-tkdraw)."
     },
     {
       "upstream_id": "Draw_Color::Draw_Color(const Draw_ColorKind)",
@@ -453812,6 +453812,2214 @@
       "rust_item": "rustycad_tkdraw::draw::DrawSession::viewer",
       "status": "implemented",
       "notes": "The file-scope globals of Draw.cxx live in DrawSession, which every command receives."
+    },
+    {
+      "upstream_id": "DrawTrSurf::BasicCommands(Draw_Interpretor &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::basic_commands",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Get(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_geometry",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetBSplineCurve(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_bspline_curve",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetBSplineCurve2d(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_bspline_curve_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetBSplineSurface(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_bspline_surface",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetBezierCurve(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_bezier_curve",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetBezierCurve2d(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_bezier_curve_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetBezierSurface(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_bezier_surface",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetCurve(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_curve",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetCurve2d(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_curve_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetPoint(const char *&,gp_Pnt &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_point",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetPoint2d(const char *&,gp_Pnt2d &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_point_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetPolygon2D(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_polygon_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetPolygon3D(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_polygon_3d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetSurface(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_surface",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::GetTriangulation(const char *&)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::get_triangulation",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Parameters()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::parameters",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Set(const char *const,const gp_Pnt &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_point",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Set(const char *const,const gp_Pnt2d &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_point_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Set(const char *const,const occ::handle<Geom2d_Curve> &,const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_curve_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Set(const char *const,const occ::handle<Geom_Geometry> &,const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_geometry",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Set(const char *const,const occ::handle<Poly_Polygon2D> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_polygon_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Set(const char *const,const occ::handle<Poly_Polygon3D> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_polygon_3d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Set(const char *const,const occ::handle<Poly_Triangulation> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_triangulation",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Set(const char *const,const occ::handle<T> &,typename std::enable_if<std::is_base_of<Geom2d_Curve, T>::value>::type *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_curve_2d",
+      "status": "implemented",
+      "notes": "The template overload takes a derived handle; Rust callers cast it with Handle::cast. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf::Set(const char *const,const occ::handle<T> &,typename std::enable_if<std::is_base_of<Geom_Geometry, T>::value>::type *)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf.hxx",
+      "rust_item": "rustycad_tkdraw::draw::DrawSession::set_geometry",
+      "status": "implemented",
+      "notes": "The template overload takes a derived handle; Rust callers cast it with Handle::cast. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::ClearKnots()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::clear",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::ClearPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::clear",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve2d::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve2d::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::DrawTrSurf_BSplineCurve2d(const occ::handle<Geom2d_BSplineCurve> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve2d::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::DrawTrSurf_BSplineCurve2d(const occ::handle<Geom2d_BSplineCurve> &,const Draw_Color &,const Draw_Color &,const Draw_Color &,const Draw_MarkerShape,const int,const bool,const bool,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve2d::with_style",
+      "status": "implemented",
+      "notes": "The colors and flags are grouped (SplineLook or tuples). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::FindKnot(const double,const double,const Draw_Display &,const double,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve2d::find_knot",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::FindPole(const double,const double,const Draw_Display &,const double,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve2d::find_pole",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::KnotsColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::KnotsShape() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::shape",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::PolesColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve2d::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve2d::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::SetKnotsColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::SetKnotsShape(const Draw_MarkerShape)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::set_shape",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::SetPolesColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::ShowKnots()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::show",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve2d::ShowPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::show",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::ClearKnots()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::clear",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::ClearPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::clear",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::DrawOn(Draw_Display &,const bool,const bool) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve::draw_on_with",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::DrawOn(Draw_Display &,const double,const double,const int,const bool,const bool) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve::draw_on_range",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::DrawTrSurf_BSplineCurve(const occ::handle<Geom_BSplineCurve> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::DrawTrSurf_BSplineCurve(const occ::handle<Geom_BSplineCurve> &,const Draw_Color &,const Draw_Color &,const Draw_Color &,const Draw_MarkerShape,const int,const bool,const bool,const int,const double,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve::with_style",
+      "status": "implemented",
+      "notes": "The colors and flags are grouped (SplineLook or tuples). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::FindKnot(const double,const double,const Draw_Display &,const double,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve::find_knot",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::FindPole(const double,const double,const Draw_Display &,const double,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve::find_pole",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::KnotsColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::KnotsShape() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::shape",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::PolesColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineCurve::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::SetKnotsColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::SetKnotsShape(const Draw_MarkerShape)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::set_shape",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::SetPolesColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::ShowKnots()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::show",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineCurve::ShowPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::show",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::ClearIsos()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::clear_isos",
+      "status": "implemented",
+      "notes": "The virtual override also clears the knot-iso flag, which the shared surface part holds. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::ClearKnots()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::clear",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::ClearPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::clear",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::DrawTrSurf_BSplineSurface(const occ::handle<Geom_BSplineSurface> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::DrawTrSurf_BSplineSurface(const occ::handle<Geom_BSplineSurface> &,const Draw_Color &,const Draw_Color &,const Draw_Color &,const Draw_Color &,const Draw_MarkerShape,const int,const bool,const bool,const int,const double,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::with_knot_isos",
+      "status": "implemented",
+      "notes": "Poles and knots are passed as PolesStyle and KnotsStyle. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::DrawTrSurf_BSplineSurface(const occ::handle<Geom_BSplineSurface> &,const int,const int,const Draw_Color &,const Draw_Color &,const Draw_Color &,const Draw_Color &,const Draw_MarkerShape,const int,const bool,const bool,const int,const double,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::with_isos",
+      "status": "implemented",
+      "notes": "The iso counts and colors are a SurfaceLook; poles and knots are styles. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::FindPole(const double,const double,const Draw_Display &,const double,int &,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::find_pole",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::FindUKnot(const double,const double,const Draw_Display &,const double,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::find_u_knot",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::FindVKnot(const double,const double,const Draw_Display &,const double,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::find_v_knot",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::KnotsColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::KnotsShape() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::shape",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::PolesColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::SetKnotsColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::SetKnotsShape(const Draw_MarkerShape)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::set_shape",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::SetPolesColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::ShowIsos(const int,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::show_isos",
+      "status": "implemented",
+      "notes": "The virtual override also clears the knot-iso flag, which the shared surface part holds. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::ShowKnots()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::KnotsStyle::show",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::ShowKnotsIsos()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBSplineSurface::show_knots_isos",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BSplineSurface::ShowPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::show",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::ClearPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::clear",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve2d::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve2d::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::DrawTrSurf_BezierCurve2d(const occ::handle<Geom2d_BezierCurve> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve2d::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::DrawTrSurf_BezierCurve2d(const occ::handle<Geom2d_BezierCurve> &,const Draw_Color &,const Draw_Color &,const bool,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve2d::with_style",
+      "status": "implemented",
+      "notes": "The colors and flags are grouped (SplineLook or tuples). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::FindPole(const double,const double,const Draw_Display &,const double,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve2d::find_pole",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::PolesColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve2d::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve2d::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::SetPolesColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve2d::ShowPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::show",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::ClearPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::clear",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::DrawTrSurf_BezierCurve(const occ::handle<Geom_BezierCurve> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::DrawTrSurf_BezierCurve(const occ::handle<Geom_BezierCurve> &,const Draw_Color &,const Draw_Color &,const bool,const int,const double,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve::with_style",
+      "status": "implemented",
+      "notes": "The colors and flags are grouped (SplineLook or tuples). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::FindPole(const double,const double,const Draw_Display &,const double,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve::find_pole",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::PolesColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierCurve::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::SetPolesColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierCurve::ShowPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierCurve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::show",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::ClearPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::clear",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierSurface::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierSurface::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::DrawTrSurf_BezierSurface(const occ::handle<Geom_BezierSurface> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierSurface::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::DrawTrSurf_BezierSurface(const occ::handle<Geom_BezierSurface> &,const int,const int,const Draw_Color &,const Draw_Color &,const Draw_Color &,const bool,const int,const double,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierSurface::with_style",
+      "status": "implemented",
+      "notes": "The colors and flags are grouped (SplineLook or tuples). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::FindPole(const double,const double,const Draw_Display &,const double,int &,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierSurface::find_pole",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::PolesColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierSurface::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfBezierSurface::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::SetPolesColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_BezierSurface::ShowPoles()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_BezierSurface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::PolesStyle::show",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::ClearCurvature()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::clear_curvature",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::Color() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::DrawTrSurf_Curve2d(const occ::handle<Geom2d_Curve> &,const Draw_Color &,const int,const bool,const bool,const double,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::with_look",
+      "status": "implemented",
+      "notes": "The optional look arguments are a CurveLook. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::DrawTrSurf_Curve2d(const occ::handle<Geom2d_Curve> &,const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::GetCurve() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::curve",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::Is3D() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::<rustycad_tkdraw::draw::Drawable3D>::is_3d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::RadiusMax() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::radius_max",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::RadiusRatio() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::radius_ratio",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::Save(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::<rustycad_tkdraw::draw::Drawable3D>::save",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::SetColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::SetRadiusMax(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::set_radius_max",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::SetRadiusRatio(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::set_radius_ratio",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::ShowCurvature()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::show_curvature",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::curv",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d keeps it in a private field read through its accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::dispcurvradius",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::disporigin",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::look",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::radiusmax",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve2d::radiusratio",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve2d.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve2d",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::ClearCurvature()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::clear_curvature",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::Color() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::DisplayOrigin() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::display_origin",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::DisplayOrigin(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::set_display_origin",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::DrawTrSurf_Curve(const occ::handle<Geom_Curve> &,const Draw_Color &,const int,const double,const int,const bool,const bool,const double,const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve::with_look",
+      "status": "implemented",
+      "notes": "The optional look arguments are a CurveLook. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::DrawTrSurf_Curve(const occ::handle<Geom_Curve> &,const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::GetCurve() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve::curve",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::RadiusMax() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::radius_max",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::RadiusRatio() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::radius_ratio",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::Save(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve::<rustycad_tkdraw::draw::Drawable3D>::save",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::SetColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::set_color",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::SetRadiusMax(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::set_radius_max",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::SetRadiusRatio(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::set_radius_ratio",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::ShowCurvature()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::CurveStyle::show_curvature",
+      "status": "implemented",
+      "notes": "The C++ subclass is composition: the drawable embeds its base part and answers Drawable3D::ancestor, so the member lives on the shared part. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::curv",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve keeps it in a private field read through its accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::dispcurvradius",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::disporigin",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::look",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::radiusmax",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Curve::radiusratio",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Curve.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfCurve",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::CurveStyle holds it behind accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::DrawCurve2dOn(Adaptor2d_Curve2d &,Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable::draw_curve2d_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::DrawCurveOn(Adaptor3d_Curve &,Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable::draw_curve_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::DrawIsoCurveOn(Adaptor3d_IsoCurve &,const GeomAbs_IsoType,const double,const double,const double,Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable::draw_iso_curve_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw::Drawable3D::draw_on",
+      "status": "implemented",
+      "notes": "Pure virtual: the drawables implement Drawable3D::draw_on. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::DrawTrSurf_Drawable(const int,const double,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::GetDeflection() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable::deflection",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::GetDiscretisation() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable::discretisation",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::GetDrawMode() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable::draw_mode",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::SetDeflection(const double)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable::set_deflection",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::SetDiscretisation(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable::set_discretisation",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Drawable::SetDrawMode(const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Drawable.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfDrawable::set_draw_mode",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::BoundsColor",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::bounds_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::CurvColor",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::curv_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::Deflection",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::deflection",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::Discret",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::discret",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::DrawMode",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::draw_mode",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::DrawTrSurf_Params()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::IsShowKnots",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::is_show_knots",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::IsShowPoles",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::is_show_poles",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::IsosColor",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::isos_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::KnotsColor",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::knots_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::KnotsMarker",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::knots_marker",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::KnotsSize",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::knots_size",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::NbUIsos",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::nb_u_isos",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::NbVIsos",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::nb_v_isos",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::NeedKnotsIsos",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::need_knots_isos",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::PntColor",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::pnt_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::PntMarker",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::pnt_marker",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Params::PolesColor",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Params.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfParams::poles_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Color() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Color(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::set_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::DrawTrSurf_Point(const gp_Pnt &,const Draw_MarkerShape,const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::DrawTrSurf_Point(const gp_Pnt2d &,const Draw_MarkerShape,const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::new_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Is3D() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::<rustycad_tkdraw::draw::Drawable3D>::is_3d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Point() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::point",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Point(const gp_Pnt &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::set_point",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Point2d() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::point_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Point2d(const gp_Pnt2d &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::set_point_2d",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Save(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::<rustycad_tkdraw::draw::Drawable3D>::save",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Shape() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::shape",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Shape(const Draw_MarkerShape)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::set_shape",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Point::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Point.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPoint::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::DrawTrSurf_Polygon2D(const occ::handle<Poly_Polygon2D> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "partial",
+      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::Polygon2D() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::polygon",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::Save(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::<rustycad_tkdraw::draw::Drawable3D>::save",
+      "status": "partial",
+      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::ShowNodes() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::show_nodes",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::ShowNodes(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::set_show_nodes",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon2D::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon2D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon2D::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::DrawTrSurf_Polygon3D(const occ::handle<Poly_Polygon3D> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "partial",
+      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::Polygon3D() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::polygon",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::Save(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::<rustycad_tkdraw::draw::Drawable3D>::save",
+      "status": "partial",
+      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::ShowNodes() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::show_nodes",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::ShowNodes(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::set_show_nodes",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Polygon3D::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Polygon3D.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfPolygon3D::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::BoundsColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::bounds_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::ClearIsos()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::clear_isos",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::DrawOn(Draw_Display &,const bool) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::draw_on_with_isos",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::DrawTrSurf_Surface(const occ::handle<Geom_Surface> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::DrawTrSurf_Surface(const occ::handle<Geom_Surface> &,const int,const int,const Draw_Color &,const Draw_Color &,const int,const double,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::with_look",
+      "status": "implemented",
+      "notes": "The iso counts and colors are a SurfaceLook. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::GetSurface() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::surface",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::IsosColor() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::isos_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::NbIsos(int &,int &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::nb_isos",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::Save(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::<rustycad_tkdraw::draw::Drawable3D>::save",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::SetBoundsColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::set_bounds_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::SetIsosColor(const Draw_Color &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::set_isos_color",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::ShowIsos(const int,const int)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::show_isos",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::boundsLook",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface keeps it in a private field read through its accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::isosLook",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface keeps it in a private field read through its accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::nbUIsos",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface keeps it in a private field read through its accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::nbVIsos",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface keeps it in a private field read through its accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Surface::surf",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Surface.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface",
+      "status": "excluded",
+      "notes": "Excluded: protected state; rustycad_tkdraw::draw_tr_surf::DrawTrSurfSurface keeps it in a private field read through its accessors. DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::Copy() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::<rustycad_tkdraw::draw::Drawable3D>::copy",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::DrawOn(Draw_Display &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::<rustycad_tkdraw::draw::Drawable3D>::draw_on",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::DrawTrSurf_Triangulation(const occ::handle<Poly_Triangulation> &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::new",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::Dump(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::<rustycad_tkdraw::draw::Drawable3D>::dump",
+      "status": "partial",
+      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::RegisterFactory()",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::register_factory",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::Restore(Standard_IStream &)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::restore",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::Save(Standard_OStream &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::<rustycad_tkdraw::draw::Drawable3D>::save",
+      "status": "partial",
+      "notes": "Partial: the TKMath Poly writer formats numbers itself (%g), so the text differs from the native stream format (Dump: the precision 15 of the dump command; Save: scientific with 15 digits). DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::ShowNodes() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::show_nodes",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::ShowNodes(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::set_show_nodes",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::ShowTriangles() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::show_triangles",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::ShowTriangles(const bool)",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::set_show_triangles",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::Triangulation() const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::triangulation",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
+    },
+    {
+      "upstream_id": "DrawTrSurf_Triangulation::Whatis(Draw_Interpretor &) const",
+      "toolkit": "TKDraw",
+      "source": "src/Draw/TKDraw/DrawTrSurf/DrawTrSurf_Triangulation.hxx",
+      "rust_item": "rustycad_tkdraw::draw_tr_surf::DrawTrSurfTriangulation::<rustycad_tkdraw::draw::Drawable3D>::whatis",
+      "status": "implemented",
+      "notes": "DrawTrSurf package port (rustycad-tkdraw); the batch oracle (tests/oracle/08_drawtrsurf.tcl) matches native DRAWEXE."
     }
   ],
   "tests": [
