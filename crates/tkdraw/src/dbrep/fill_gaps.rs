@@ -43,11 +43,7 @@ impl DBRepIsoBuilder {
     /// a 2D segment between the ends, unless the p-curves intersect near the vertex,
     /// in which case they are trimmed at the intersection instead (called by
     /// [`DBRepIsoBuilder::new`]; protected in C++).
-    pub fn fill_gaps(
-        &mut self,
-        face: &Face,
-        pcurves: &mut EdgePCurves,
-    ) -> Result<(), Failure> {
+    pub fn fill_gaps(&mut self, face: &Face, pcurves: &mut EdgePCurves) -> Result<(), Failure> {
         let surface = BRepAdaptorSurface::with_face(face, false)?;
         let mut wires = ShapeIterator::new(face, true, true);
         while wires.more() {
