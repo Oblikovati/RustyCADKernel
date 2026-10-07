@@ -44,6 +44,7 @@
 #include "tkservice_probe_driver.cxx"
 #include "tkservice_probe_media.cxx"
 #include "tkservice_probe_mtex.cxx"
+#include "tkservice_probe_window.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -103,6 +104,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sv_media", sv_media_case},
  // Graphic3d_MediaTexture and Graphic3d_MediaTextureSet (tkservice_probe_mtex.cxx)
  {"sv_mtex", sv_mtex_case},
+ // Wasm_Window and Xw_Window (tkservice_probe_window.cxx)
+ {"sv_window", sv_window_case},
 };
 int main() {
  std::string line;

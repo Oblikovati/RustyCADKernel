@@ -15,6 +15,7 @@ pub mod graphic3d;
 pub mod image;
 pub mod media;
 pub mod null_driver;
+pub mod wasm;
 pub mod wnt;
 pub mod xw;
 

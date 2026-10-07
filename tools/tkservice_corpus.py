@@ -51,3 +51,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_driver').append_driver_requests(requests)
     # Media without FFmpeg (tkservice_corpus_media.py)
     __import__('tkservice_corpus_media').append_media_requests(requests)
+    # Wasm_Window and Xw_Window (tkservice_corpus_window.py)
+    __import__('tkservice_corpus_window').append_window_requests(requests)

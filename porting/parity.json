@@ -472713,6 +472713,430 @@
       "notes": "Graphic3d shader data model mapping (visualization-design.md section 3): the shader program, stage and uniform classes are ported as transients; their GLSL text is assembled exactly as natively but only the OpenGL driver compiles it, the Vulkan driver reads the same description and writes its own shaders; protected fields are read through their accessors; the declaration generator is compared text for text by the sv_shader_decl native probe."
     },
     {
+      "upstream_id": "Graphic3d_GlslExtension",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_GlslExtension_GL_OES_standard_derivatives",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_GlslExtension_GL_EXT_shader_texture_lod",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_GlslExtension_GL_EXT_frag_depth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_GlslExtension_GL_EXT_gpu_shader4",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "(unnamed enum at src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx:39:1)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_GlslExtension_NB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::Graphic3d_ShaderManager",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::IsGapiGreaterEqual",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::GapiVersionMajor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::GapiVersionMinor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::SetGapiVersion",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::UseRedAlpha",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::SetUseRedAlpha",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::HasFlatShading",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::ToReverseDFdxSign",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::SetFlatShading",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::ToEmulateDepthClamp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::SetEmulateDepthClamp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::HasGlslExtension",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::EnableGlslExtension",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::genLightKey",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getStdProgramFont",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getStdProgramUnlit",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getStdProgramGouraud",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getStdProgramPhong",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getStdProgramBoundBox",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getBgCubeMapProgram",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getBgSkydomeProgram",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getColoredQuadProgram",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getGridProgram",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getPBREnvBakingProgram",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getStdProgramFboBlit",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getStdProgramStereo",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getStdProgramOitCompositing",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getStdProgramOitDepthPeelingBlend",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::getStdProgramOitDepthPeelingFlush",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::hasGlslBitwiseOps",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::defaultGlslVersion",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::defaultOitGlslVersion",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::pointSpriteAlphaSrc",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::pointSpriteShadingSrc",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::stdComputeLighting",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::myGapi",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::myGapiVersion",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::myGlslExtensions",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::myHasFlatShading",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::myToReverseDFdxSign",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::mySetPointSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::myUseRedAlpha",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::myToEmulateDepthClamp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_ShaderManager::mySRgbState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+    },
+    {
       "upstream_id": "AVBufferPool",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
@@ -473831,6 +474255,798 @@
       "rust_item": "rustycad_tkservice::media::MediaPacketFields::duration_sec",
       "status": "implemented",
       "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "EmscriptenMouseEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::EmscriptenMouseEvent",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. A forward declaration; no Emscripten event exists on Linux."
+    },
+    {
+      "upstream_id": "EmscriptenWheelEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::EmscriptenWheelEvent",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. A forward declaration; no Emscripten event exists on Linux."
+    },
+    {
+      "upstream_id": "EmscriptenTouchEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::EmscriptenTouchEvent",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. A forward declaration; no Emscripten event exists on Linux."
+    },
+    {
+      "upstream_id": "EmscriptenKeyboardEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::EmscriptenKeyboardEvent",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. A forward declaration; no Emscripten event exists on Linux."
+    },
+    {
+      "upstream_id": "EmscriptenUiEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::EmscriptenUiEvent",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. A forward declaration; no Emscripten event exists on Linux."
+    },
+    {
+      "upstream_id": "EmscriptenFocusEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::EmscriptenFocusEvent",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. A forward declaration; no Emscripten event exists on Linux."
+    },
+    {
+      "upstream_id": "Wasm_Window",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::Wasm_Window",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::new",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::MouseButtonsFromNative",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::mouse_buttons_from_native",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::VirtualKeyFromNative",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::virtual_key_from_native",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::SetSizeLogical",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::set_size_logical",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::SetSizeBacking",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::set_size_backing",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::CanvasId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::canvas_id",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::SetDevicePixelRatio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::set_device_pixel_ratio",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::ProcessMessage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::process_message",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::ProcessMouseEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::process_mouse_event",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::ProcessWheelEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::process_wheel_event",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::ProcessTouchEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::process_touch_event",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::ProcessKeyEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::process_key_event",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::ProcessUiEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::process_ui_event",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::ProcessFocusEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindow::process_focus_event",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::IsMapped",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::is_mapped",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::Map",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::map",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::Unmap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::unmap",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::DoResize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::do_resize",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::DoMapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::do_mapping",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::Ratio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::ratio",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::Position",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::position",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::size",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::NativeHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::native_handle",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::NativeParentHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::native_parent_handle",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::NativeFBConfig",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::native_fb_config",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::DevicePixelRatio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::device_pixel_ratio",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::InvalidateContent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::invalidate_content",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs. The override of WasmWindow."
+    },
+    {
+      "upstream_id": "Wasm_Window::myCanvasId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindowFields::canvas_id",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::mySize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindowFields::size",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::myDevicePixelRatio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindowFields::device_pixel_ratio",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::myToScaleBacking",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindowFields::to_scale_backing",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Wasm_Window::myIsMapped",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Wasm/Wasm_Window.hxx",
+      "rust_item": "rustycad_tkservice::wasm::WasmWindowFields::is_mapped",
+      "status": "implemented",
+      "notes": "Wasm_Window mapping (visualization-design.md section 4): the Linux library builds Wasm_Window.cxx without Emscripten, so the window keeps its canvas id, size, pixel ratio and mapping, the size and position of a non-virtual window are left unset natively (0 here), the event translators answer as their non-Emscripten bodies (UI events configure, focus events deactivate, touch events report the touch points, the others are ignored) and the Emscripten event structures are uninhabited types; checked by the sv_window oracle and tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "_XEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwXEvent",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The C union behind XEvent."
+    },
+    {
+      "upstream_id": "XEvent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwXEvent",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindow",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::Xw_Window(const occ::handle<Aspect_DisplayConnection> &,const char *const,const int,const int,const int,const int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindow::create",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::Xw_Window(const occ::handle<Aspect_DisplayConnection> &,const Aspect_Drawable,const Aspect_FBConfig)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindow::wrap",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::VirtualKeyFromNative",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindow::virtual_key_from_native",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::XWindow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindow::x_window",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::ProcessMessage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindow::process_message",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::Map",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::map",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::Unmap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::unmap",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::DoResize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::do_resize",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::DoMapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::do_mapping",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::IsMapped",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::is_mapped",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::Ratio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::ratio",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::Position",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::position",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::size",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::NativeHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::native_handle",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::NativeParentHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::native_parent_handle",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::NativeFBConfig",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::native_fb_config",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::SetTitle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::set_title",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::InvalidateContent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::aspect::AspectWindow::invalidate_content",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. The override of XwWindow."
+    },
+    {
+      "upstream_id": "Xw_Window::myXWindow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindowFields::x_window",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::myFBConfig",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindowFields::fb_config",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::myXLeft",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindowFields::x_left",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::myYTop",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindowFields::y_top",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::myXRight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindowFields::x_right",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::myYBottom",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindowFields::y_bottom",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "Xw_Window::myIsOwnWin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Xw/Xw_Window.hxx",
+      "rust_item": "rustycad_tkservice::xw::XwWindowFields::is_own_win",
+      "status": "implemented",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs."
+    },
+    {
+      "upstream_id": "NSAutoreleasePool",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_LocalPool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_LocalPool",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_LocalPool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_LocalPool::Cocoa_LocalPool",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_LocalPool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "NSView",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "NSWindow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::VirtualKeyFromNative",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::Cocoa_Window(const char *const,const int,const int,const int,const int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::Cocoa_Window(NSView *)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::Map",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::Unmap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::DoResize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::DoMapping",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::IsMapped",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::Ratio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::Position",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::HView",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::SetHView",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::NativeHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::NativeParentHandle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::NativeFBConfig",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::SetTitle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::InvalidateContent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::myHWindow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::myHView",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::myXLeft",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::myYTop",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::myXRight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Cocoa_Window::myYBottom",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+    },
+    {
+      "upstream_id": "Shaders_DeclarationsImpl_glsl",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Shaders/Shaders_DeclarationsImpl_glsl.pxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Shaders: the GLSL source tables of the OpenGL driver; replaced by the Vulkan 1.3 driver (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Shaders_Declarations_glsl",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Shaders/Shaders_Declarations_glsl.pxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Shaders: the GLSL source tables of the OpenGL driver; replaced by the Vulkan 1.3 driver (user decision 2026-10-07)."
     }
   ],
   "tests": [

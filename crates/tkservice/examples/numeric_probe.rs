@@ -4,7 +4,7 @@ use std::io::{self, BufRead};
 mod sv_probe;
 use sv_probe::{
     array, aspects, camera, clip_plane, culling, driver, font, grid, hid, light, marker, material,
-    media, mtex, params, pbr, pixel, shader, stats, texture, tpers,
+    media, mtex, params, pbr, pixel, shader, stats, texture, tpers, window,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -71,6 +71,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sv_media", media::media_case),
     // Graphic3d_MediaTexture and Graphic3d_MediaTextureSet (sv_probe/mtex.rs)
     ("sv_mtex", mtex::mtex_case),
+    // Wasm_Window and Xw_Window (sv_probe/window.rs)
+    ("sv_window", window::window_case),
 ];
 
 fn main() {

@@ -9,6 +9,12 @@ use std::ffi::{CStr, c_void};
 use std::sync::OnceLock;
 use x11_dl::xlib::{Display, Xlib};
 
+mod window;
+pub(crate) use window::XwWindowAttributes;
+pub use window::XwXEvent;
+/// The X key symbols and the event and mask constants `Xw_Window` reads.
+pub(crate) use x11_dl::{keysym, xlib as xconst};
+
 /// The loaded Xlib, or `None` when `libX11.so.6` cannot be loaded.
 pub(crate) fn xlib() -> Option<&'static XlibApi> {
     static LOADED: OnceLock<Option<XlibApi>> = OnceLock::new();
