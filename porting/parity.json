@@ -83419,6 +83419,210 @@
       "notes": "Compiler identity for the pointer partial specialization, resolved against the pinned TKernel declaration inventory. Rust DefaultHashPolicy maps to HashPolicy<K> for pointer K through generic HashKey implementations; native profile remains Linux LP64."
     },
     {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "partial",
+      "notes": "Class record: the generic hasher is the stateless DefaultHashPolicy; its HashPolicy<K> impl requires K: HashKey + PartialEq, so key types without a HashKey impl are not covered.",
+      "cpp_selector": {
+        "kind": "ClassTemplate",
+        "usr": "c:@ST>1#T@NCollection_DefaultHasher"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@SP>1#T@NCollection_DefaultHasher>#*t0.0"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#C"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#I"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#K"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#L"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#S"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#W"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#b"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#c"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#i"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#k"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#l"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#q"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#r"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#s"
+      }
+    },
+    {
+      "upstream_id": "NCollection_DefaultHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DefaultHasher.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DefaultHashPolicy",
+      "status": "implemented",
+      "notes": "Class record: this specialization's key type has a HashKey impl, and DefaultHashPolicy's HashPolicy<K> impl carries both operator() members (hash = static_cast<size_t>, equal = ==).",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@NCollection_DefaultHasher>#w"
+      }
+    },
+    {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode(const TheKey1Type&,const TheKey2Type&,NCollection_ListNode*,NCollection_ListNode*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
@@ -386486,6 +386690,123 @@
       "notes": "Class template NCollection_Array1 is the generic Rust type Array1; its members are mapped row by row."
     },
     {
+      "upstream_id": "NCollection_Array1::construct(const size_t,const size_t,NCollection_Array1::pointer)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::construct_nontrivial_raw",
+      "status": "partial",
+      "notes": "Protected raw storage step; Rust exposes it as the unsafe associated function construct_nontrivial_raw with an explicit target pointer and a constructor closure in place of TheItemType().",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)"
+      }
+    },
+    {
+      "upstream_id": "NCollection_Array1::construct(const size_t,const size_t,NCollection_Array1::pointer)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "status": "excluded",
+      "notes": "Excluded: the trivially default constructible overload does nothing natively ('Do nothing for the existing storage'); Rust owns no raw storage step for it.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long, type-parameter-0-0 *)"
+      }
+    },
+    {
+      "upstream_id": "NCollection_Array1::construct(const size_t,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::construct_nontrivial_raw",
+      "status": "partial",
+      "notes": "Protected raw storage step; Rust exposes it as the unsafe associated function construct_nontrivial_raw with an explicit target pointer and a constructor closure in place of TheItemType(); the own-storage form passes data().",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<!std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long)"
+      }
+    },
+    {
+      "upstream_id": "NCollection_Array1::construct(const size_t,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "status": "excluded",
+      "notes": "Excluded: the trivially default constructible overload does nothing natively ('Do nothing for the existing storage'); Rust owns no raw storage step for it.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<std::is_trivially_default_constructible<type-parameter-1-0>::value, void>::type (unsigned long, unsigned long)"
+      }
+    },
+    {
+      "upstream_id": "NCollection_Array1::destroy(NCollection_Array1::pointer,const size_t,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::destroy_nontrivial_raw",
+      "status": "partial",
+      "notes": "Protected raw storage step; Rust exposes it as the unsafe associated function destroy_nontrivial_raw with an explicit target pointer.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<!std::is_trivially_destructible<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, unsigned long, unsigned long)"
+      }
+    },
+    {
+      "upstream_id": "NCollection_Array1::destroy(NCollection_Array1::pointer,const size_t,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "status": "excluded",
+      "notes": "Excluded: the trivially destructible overload does nothing natively ('Do nothing'); Rust owns no raw storage step for it.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<std::is_trivially_destructible<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, unsigned long, unsigned long)"
+      }
+    },
+    {
+      "upstream_id": "NCollection_Array1::copyAssign(NCollection_Array1::pointer,NCollection_Array1::const_pointer,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::copy_assign_nontrivial_raw",
+      "status": "partial",
+      "notes": "Protected raw storage step; Rust exposes it as the unsafe associated function copy_assign_nontrivial_raw with an explicit target pointer.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)"
+      }
+    },
+    {
+      "upstream_id": "NCollection_Array1::copyAssign(NCollection_Array1::pointer,NCollection_Array1::const_pointer,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::copy_assign_trivial_raw",
+      "status": "partial",
+      "notes": "Protected raw storage step; Rust exposes it as the unsafe associated function copy_assign_trivial_raw with an explicit target pointer (memmove of theCount elements).",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)"
+      }
+    },
+    {
+      "upstream_id": "NCollection_Array1::copyConstruct(NCollection_Array1::pointer,NCollection_Array1::const_pointer,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::copy_construct_nontrivial_raw",
+      "status": "partial",
+      "notes": "Protected raw storage step; Rust exposes it as the unsafe associated function copy_construct_nontrivial_raw with an explicit target pointer.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<!std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)"
+      }
+    },
+    {
+      "upstream_id": "NCollection_Array1::copyConstruct(NCollection_Array1::pointer,NCollection_Array1::const_pointer,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::copy_construct_nontrivial_raw",
+      "status": "partial",
+      "notes": "Protected raw storage step; Rust exposes it as the unsafe associated function copy_construct_nontrivial_raw with an explicit target pointer; the trivially copyable std::uninitialized_copy_n form is the same element-wise copy construction through the caller's copy closure.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<std::is_trivially_copyable<type-parameter-1-0>::value, void>::type (type-parameter-0-0 *, const type-parameter-0-0 *, unsigned long)"
+      }
+    },
+    {
       "upstream_id": "NCollection_Array2(const NCollection_Array2<TheItemType>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
@@ -390448,6 +390769,119 @@
       "notes": "C++17 class template argument deduction guide; Rust infers ForwardRange<I> from ForwardRange::new(host)."
     },
     {
+      "upstream_id": "NCollection_ForwardRangeDetail::HasValue",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "status": "excluded",
+      "notes": "C++-only SFINAE detection of a host Value() accessor; Rust hosts declare their accessors explicitly (ForwardHost::Accessors = AccessorSet<Value, Current, CurrentId> with Present/Missing), so no detection trait exists.",
+      "cpp_selector": {
+        "kind": "ClassTemplate",
+        "usr": "c:@N@NCollection_ForwardRangeDetail@ST>2#T#T@HasValue"
+      }
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::HasValue",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "status": "excluded",
+      "notes": "C++-only SFINAE detection of a host Value() accessor; Rust hosts declare their accessors explicitly (ForwardHost::Accessors = AccessorSet<Value, Current, CurrentId> with Present/Missing), so no detection trait exists.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@NCollection_ForwardRangeDetail@SP>1#T@HasValue>#t0.0#v"
+      }
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::HasCurrent",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "status": "excluded",
+      "notes": "C++-only SFINAE detection of a host Current() accessor; Rust hosts declare their accessors explicitly (ForwardHost::Accessors = AccessorSet<Value, Current, CurrentId> with Present/Missing), so no detection trait exists.",
+      "cpp_selector": {
+        "kind": "ClassTemplate",
+        "usr": "c:@N@NCollection_ForwardRangeDetail@ST>2#T#T@HasCurrent"
+      }
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::HasCurrent",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "status": "excluded",
+      "notes": "C++-only SFINAE detection of a host Current() accessor; Rust hosts declare their accessors explicitly (ForwardHost::Accessors = AccessorSet<Value, Current, CurrentId> with Present/Missing), so no detection trait exists.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@NCollection_ForwardRangeDetail@SP>1#T@HasCurrent>#t0.0#v"
+      }
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::HasCurrentId",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "status": "excluded",
+      "notes": "C++-only SFINAE detection of a host CurrentId() accessor; Rust hosts declare their accessors explicitly (ForwardHost::Accessors = AccessorSet<Value, Current, CurrentId> with Present/Missing), so no detection trait exists.",
+      "cpp_selector": {
+        "kind": "ClassTemplate",
+        "usr": "c:@N@NCollection_ForwardRangeDetail@ST>2#T#T@HasCurrentId"
+      }
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::HasCurrentId",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "status": "excluded",
+      "notes": "C++-only SFINAE detection of a host CurrentId() accessor; Rust hosts declare their accessors explicitly (ForwardHost::Accessors = AccessorSet<Value, Current, CurrentId> with Present/Missing), so no detection trait exists.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@NCollection_ForwardRangeDetail@SP>1#T@HasCurrentId>#t0.0#v"
+      }
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "status": "excluded",
+      "notes": "C++-only primary template: it is only declared, and the enable_if partial specializations select the accessor; Rust selects statically through AccessorSet.",
+      "cpp_selector": {
+        "kind": "ClassTemplate",
+        "usr": "c:@N@NCollection_ForwardRangeDetail@ST>2#T#T@AccessorTraits"
+      }
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::AccessorSet",
+      "status": "implemented",
+      "notes": "Class record: this enable_if accessor specialization is AccessorSet with the matching Present slot; SelectAccessor::read keeps the Value > Current > CurrentId priority.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@NCollection_ForwardRangeDetail@SP>1#T@AccessorTraits>#t0.0#^std::enable_if<!NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value && !NCollection_ForwardRangeDetail::HasCurrent<type-parameter-0-0, void>::value && NCollection_ForwardRangeDetail::HasCurrentId<type-parameter-0-0, void>::value, void>:::type"
+      }
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::AccessorSet",
+      "status": "implemented",
+      "notes": "Class record: this enable_if accessor specialization is AccessorSet with the matching Present slot; SelectAccessor::read keeps the Value > Current > CurrentId priority.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@NCollection_ForwardRangeDetail@SP>1#T@AccessorTraits>#t0.0#^std::enable_if<!NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value && NCollection_ForwardRangeDetail::HasCurrent<type-parameter-0-0, void>::value, void>:::type"
+      }
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::AccessorSet",
+      "status": "implemented",
+      "notes": "Class record: this enable_if accessor specialization is AccessorSet with the matching Present slot; SelectAccessor::read keeps the Value > Current > CurrentId priority.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@NCollection_ForwardRangeDetail@SP>1#T@AccessorTraits>#t0.0#^std::enable_if<NCollection_ForwardRangeDetail::HasValue<type-parameter-0-0, void>::value, void>:::type"
+      }
+    },
+    {
       "upstream_id": "NCollection_ItemsView::KeyValueRef::get() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
@@ -390782,6 +391216,116 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "std::tuple_element specialization member for structured bindings; Rust item tuples have native element types (Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index)."
+    },
+    {
+      "upstream_id": "std::tuple_size",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "status": "excluded",
+      "notes": "C++-only structured-binding specialization; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@std@SP>1#T@tuple_size>#>@N@NCollection_ItemsView@ST>1#T@KeyIndexRef1t0.0"
+      }
+    },
+    {
+      "upstream_id": "std::tuple_size",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "status": "excluded",
+      "notes": "C++-only structured-binding specialization; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@std@SP>3#T#T#Nb@tuple_size>#>@N@NCollection_ItemsView@ST>3#T#T#Nb@KeyValueIndexRef3t0.0t0.1"
+      }
+    },
+    {
+      "upstream_id": "std::tuple_size",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "status": "excluded",
+      "notes": "C++-only structured-binding specialization; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@std@SP>3#T#T#Nb@tuple_size>#>@N@NCollection_ItemsView@ST>3#T#T#Nb@KeyValueRef3t0.0t0.1"
+      }
+    },
+    {
+      "upstream_id": "std::tuple_element",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "status": "excluded",
+      "notes": "C++-only structured-binding specialization; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@std@SP>1#T@tuple_element>#Vl0#>@N@NCollection_ItemsView@ST>1#T@KeyIndexRef1t0.0"
+      }
+    },
+    {
+      "upstream_id": "std::tuple_element",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "status": "excluded",
+      "notes": "C++-only structured-binding specialization; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@std@SP>1#T@tuple_element>#Vl1#>@N@NCollection_ItemsView@ST>1#T@KeyIndexRef1t0.0"
+      }
+    },
+    {
+      "upstream_id": "std::tuple_element",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "status": "excluded",
+      "notes": "C++-only structured-binding specialization; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@std@SP>3#T#T#Nb@tuple_element>#Vl0#>@N@NCollection_ItemsView@ST>3#T#T#Nb@KeyValueIndexRef3t0.0t0.1"
+      }
+    },
+    {
+      "upstream_id": "std::tuple_element",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "status": "excluded",
+      "notes": "C++-only structured-binding specialization; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@std@SP>3#T#T#Nb@tuple_element>#Vl0#>@N@NCollection_ItemsView@ST>3#T#T#Nb@KeyValueRef3t0.0t0.1"
+      }
+    },
+    {
+      "upstream_id": "std::tuple_element",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "status": "excluded",
+      "notes": "C++-only structured-binding specialization; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@std@SP>3#T#T#Nb@tuple_element>#Vl1#>@N@NCollection_ItemsView@ST>3#T#T#Nb@KeyValueIndexRef3t0.0t0.1"
+      }
+    },
+    {
+      "upstream_id": "std::tuple_element",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "status": "excluded",
+      "notes": "C++-only structured-binding specialization; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@std@SP>3#T#T#Nb@tuple_element>#Vl1#>@N@NCollection_ItemsView@ST>3#T#T#Nb@KeyValueRef3t0.0t0.1"
+      }
+    },
+    {
+      "upstream_id": "std::tuple_element",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "status": "excluded",
+      "notes": "C++-only structured-binding specialization; Rust yields plain tuples instead of the reference structs: (&K, &V) / (&K, &mut V) for KeyValueRef, (&K, &V, i32) for KeyValueIndexRef and (&K, i32) for KeyIndexRef, with the native one-based index.",
+      "cpp_selector": {
+        "kind": "ClassTemplatePartialSpecialization",
+        "usr": "c:@N@std@SP>3#T#T#Nb@tuple_element>#Vl2#>@N@NCollection_ItemsView@ST>3#T#T#Nb@KeyValueIndexRef3t0.0t0.1"
+      }
     },
     {
       "upstream_id": "NCollection_Iterator(const NCollection_Iterator<Container,NCollection_Iterator::IsConstant>&)",
