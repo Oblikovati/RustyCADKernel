@@ -25,7 +25,9 @@ use std::io::Read;
 /// ```
 /// use rustycad_tkxsbase::xs_control::{XSControlReader, XSControlReaderOps};
 /// let mut reader = XSControlReader::new();
-/// assert_eq!(reader.transfer_roots(&Default::default()).unwrap(), 0);
+/// assert_eq!(reader.transfer_list(None, &Default::default()).unwrap(), 0);
+/// // Without a model the session has no graph: Standard_DomainError, as natively.
+/// assert!(reader.transfer_roots(&Default::default()).is_err());
 /// ```
 pub trait XSControlReaderOps {
     /// The embedded reader.
