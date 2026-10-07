@@ -465076,6 +465076,670 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesFields::disp_mode",
       "status": "implemented",
       "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::CullingContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingContext",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::CullingContext::DistCull",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingContext::dist_cull",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::CullingContext::SizeCull2",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingContext::size_cull2",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::CullingContext::CullingContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingContext::default",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingPlane",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane::Plane()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingPlane::default",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane::Plane(const NCollection_Vec3<double> &,const NCollection_Vec3<double> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingPlane::new",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane::Origin",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingPlane::origin",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane::Normal",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingPlane::normal",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Graphic3d_CullingTool",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::default",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::(unnamed enum at src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx:270:3)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::PLANES_NB",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). The plane indices are associated constants."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::SetViewVolume",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::set_view_volume",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::SetViewportSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::set_viewport_size",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::SetCullingDistance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::set_culling_distance",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::SetCullingSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::set_culling_size",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::CacheClipPtsProjections",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::cache_clip_pts_projections",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::IsCulled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::is_culled",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Camera",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::camera",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::ProjectionMatrix",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::projection_matrix",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::WorldViewMatrix",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::world_view_matrix",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::ViewportWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::viewport_width",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::ViewportHeight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::viewport_height",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::WorldViewProjState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::world_view_proj_state",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::CameraEye",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::camera_eye",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::CameraDirection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::camera_direction",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::SignedPlanePointDistance",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::signed_plane_point_distance",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::IsOutFrustum",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::is_out_frustum",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::IsTooDistant",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::is_too_distant",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::IsTooSmall",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::is_too_small",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane_Left",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::PLANE_LEFT",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane_Right",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::PLANE_RIGHT",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane_Bottom",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::PLANE_BOTTOM",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane_Top",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::PLANE_TOP",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane_Near",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::PLANE_NEAR",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::Plane_Far",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::PLANE_FAR",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::PlanesNB",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::PLANES_NB",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myClipPlanes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myClipVerts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myCamera",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myMaxClipProjectionPts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myMinClipProjectionPts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myMaxOrthoProjectionPts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myMinOrthoProjectionPts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myIsProjectionParallel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myProjectionMat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myWorldViewMat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myViewportWidth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myViewportHeight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myWorldViewProjState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myCamEye",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myCamDir",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myCamScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_CullingTool::myPixelSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool",
+      "status": "implemented",
+      "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept). Protected field, crate-visible field of the struct."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::Graphic3d_Text",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::new",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::Text",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::text",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::SetText(const NCollection_String &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::set_text",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::SetText(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::set_text_ascii",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::SetText(const char *)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::set_text_str",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::TextFormatter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::text_formatter",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::SetTextFormatter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::set_text_formatter",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::Position",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::position",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::SetPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::set_position",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::Orientation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::orientation",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::HasPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::has_plane",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::SetOrientation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::set_orientation",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::ResetOrientation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::reset_orientation",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::HasOwnAnchorPoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::has_own_anchor_point",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::SetOwnAnchorPoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::set_own_anchor_point",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::Height",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::height",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::SetHeight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::set_height",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::HorizontalAlignment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::horizontal_alignment",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::SetHorizontalAlignment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::set_horizontal_alignment",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::VerticalAlignment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::vertical_alignment",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::SetVerticalAlignment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText::set_vertical_alignment",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::myFormatter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::myText",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::myOrientation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::myHeight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::myHAlign",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::myVAlign",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::myHasPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_Text::myHasOwnAnchor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Text.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dText",
+      "status": "implemented",
+      "notes": "Graphic3d_Text mapping: the text, orientation, height and alignments are behind the handle's shared lock; the text is kept as UTF-8 bytes (NCollection_String); covered by tests/graphic3d_text_test.rs. Protected field, private shared state."
     }
   ],
   "tests": [

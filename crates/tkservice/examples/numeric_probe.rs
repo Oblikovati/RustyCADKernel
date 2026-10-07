@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod sv_probe;
 use sv_probe::{
-    array, aspects, camera, clip_plane, font, grid, hid, light, marker, material, params, pbr,
-    pixel, shader, texture, tpers,
+    array, aspects, camera, clip_plane, culling, font, grid, hid, light, marker, material, params,
+    pbr, pixel, shader, texture, tpers,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -61,6 +61,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sv_fontmgr", font::fontmgr_case),
     ("sv_ftfont", font::ftfont_case),
     ("sv_textfmt", font::textfmt_case),
+    // Graphic3d_CullingTool (sv_probe/culling.rs)
+    ("sv_culling", culling::culling_case),
 ];
 
 fn main() {

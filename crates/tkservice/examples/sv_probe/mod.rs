@@ -3,6 +3,7 @@ pub mod array;
 pub mod aspects;
 pub mod camera;
 pub mod clip_plane;
+pub mod culling;
 pub mod font;
 pub mod grid;
 pub mod hid;

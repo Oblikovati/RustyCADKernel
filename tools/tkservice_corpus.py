@@ -43,3 +43,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_params').append_params_requests(requests)
     # Font_FontMgr, Font_FTFont, Font_TextFormatter (tkservice_corpus_font.py)
     __import__('tkservice_corpus_font').append_font_requests(requests)
+    # Graphic3d_CullingTool (tkservice_corpus_culling.py)
+    __import__('tkservice_corpus_culling').append_culling_requests(requests)

@@ -36,6 +36,7 @@ mod cube_map;
 mod cube_map_order;
 mod cube_map_packed;
 mod cube_map_separate;
+mod culling_tool;
 mod exceptions;
 mod flipper;
 mod hatch_style;
@@ -60,6 +61,7 @@ mod shader_program;
 mod shader_variable;
 mod small_values;
 mod stats_enums;
+mod text;
 mod texture_1d;
 mod texture_2d;
 mod texture_3d;
@@ -124,6 +126,7 @@ pub use cube_map::{
 pub use cube_map_order::{Graphic3dCubeMapOrder, Graphic3dValidatedCubeMapOrder};
 pub use cube_map_packed::{Graphic3dCubeMapPacked, graphic3d_cube_map_packed_check_order};
 pub use cube_map_separate::Graphic3dCubeMapSeparate;
+pub use culling_tool::{Graphic3dCullingContext, Graphic3dCullingPlane, Graphic3dCullingTool};
 pub use exceptions::{
     group_definition_error, priority_definition_error, structure_definition_error,
 };
@@ -164,6 +167,7 @@ pub use shader_variable::{
 };
 pub use small_values::{Graphic3dBufferRange, Graphic3dPolygonOffset, Graphic3dVertex};
 pub use stats_enums::*;
+pub use text::Graphic3dText;
 pub use texture_1d::{
     Graphic3dTexture1D, Graphic3dTexture1DBase, Graphic3dTexture1DMembers,
     Graphic3dTexture1Dmanual, Graphic3dTexture1Dsegment,
