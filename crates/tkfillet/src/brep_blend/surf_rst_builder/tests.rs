@@ -140,7 +140,10 @@ fn the_step_walks_to_the_end_of_the_edge() {
 #[test]
 fn the_vertex_flag_keeps_its_vertex_until_one_is_found() {
     let mut flag = VertexFlag::default();
-    flag.set(None);
+    flag.set(marching::VertexSearch {
+        found: false,
+        last: None,
+    });
     assert!(flag.vertex().is_none());
     flag.is_vtx = true;
     assert!(flag.vertex().is_some());

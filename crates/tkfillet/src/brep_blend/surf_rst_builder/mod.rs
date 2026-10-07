@@ -51,10 +51,11 @@ impl VertexFlag {
         self.is_vtx.then_some(&self.vtx)
     }
 
-    /// The result of a vertex search: the flag, and the vertex when found.
-    fn set(&mut self, found: Option<Vertex>) {
-        self.is_vtx = found.is_some();
-        if let Some(vtx) = found {
+    /// The result of a vertex search: the flag, and the last vertex examined (the
+    /// vertex found, or the last one of the arc).
+    fn set(&mut self, search: marching::VertexSearch) {
+        self.is_vtx = search.found;
+        if let Some(vtx) = search.last {
             self.vtx = vtx;
         }
     }

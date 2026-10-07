@@ -48,6 +48,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_app_func", fl_app_func_case},
  {"fl_walking", fl_walking_case},
  {"fl_surf_rst_walk", fl_surf_rst_walk_case},
+ {"fl_rst_rst_walk", fl_rst_rst_walk_case},
 };
 int main() {
  std::string line;

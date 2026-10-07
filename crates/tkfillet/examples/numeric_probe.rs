@@ -31,6 +31,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_app_func", app_func::app_func_case),
     ("fl_walking", walking::walking_case),
     ("fl_surf_rst_walk", line_builders::surf_rst_walk_case),
+    ("fl_rst_rst_walk", line_builders::rst_rst_walk_case),
 ];
 
 fn main() {

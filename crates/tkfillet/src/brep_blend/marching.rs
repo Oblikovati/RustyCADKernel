@@ -319,24 +319,33 @@ impl ArcSearch<'_> {
 }
 
 /// The vertex of the domain on the arc whose parameter is within its tolerance of `w`
-/// (the vertex loops of the line builders); `None` when there is none.
+/// (the vertex loops of the line builders), and the last vertex examined, which the
+/// native `Vtx` output keeps when none matches.
+pub(crate) struct VertexSearch {
+    pub(crate) found: bool,
+    pub(crate) last: Option<Handle<dyn Adaptor3dHVertex>>,
+}
+
+/// The vertex loop of the line builders on the arc `arc` of `domain` at `w`.
 pub(crate) fn vertex_at_parameter(
     domain: &WalkingDomain,
     arc: &Handle<dyn Adaptor2dCurve2d>,
     w: f64,
-) -> Result<Option<Handle<dyn Adaptor3dHVertex>>, Failure> {
+) -> Result<VertexSearch, Failure> {
     domain.initialize_arc(arc)?;
     domain.init_vertex_iterator()?;
+    let mut last = None;
     while domain.more_vertex() {
         let vtx = domain.vertex()?;
-        if (BRepBlendBlendTool::parameter(&vtx, arc)? - w).abs()
-            <= BRepBlendBlendTool::tolerance(&vtx, arc)?
-        {
-            return Ok(Some(vtx));
+        let matched = (BRepBlendBlendTool::parameter(&vtx, arc)? - w).abs()
+            <= BRepBlendBlendTool::tolerance(&vtx, arc)?;
+        last = Some(vtx);
+        if matched {
+            return Ok(VertexSearch { found: true, last });
         }
         domain.next_vertex()?;
     }
-    Ok(None)
+    Ok(VertexSearch { found: false, last })
 }
 
 /// The arc of index `index` of a domain (`Init` then `Next` up to it).

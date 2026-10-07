@@ -2,6 +2,7 @@
 // walking probe, whose printers they use); the Rust twin is
 // crates/tkfillet/examples/fl_probe/line_builders.rs.
 #include <Adaptor3d_CurveOnSurface.hxx>
+#include <BRepBlend_RstRstLineBuilder.hxx>
 #include <BRepBlend_SurfRstLineBuilder.hxx>
 
 // A 2d curve of fl_curve2d_kind on the range [first, last].
@@ -65,4 +66,47 @@ void fl_surf_rst_walk_case(std::istream& in){
   const Blend_Point& p=b.Line()->Point(b.Line()->NbPoints());double u,v;p.ParametersOnS(u,v);
   math_Vector s(1,3);s(1)=u+pextra;s(2)=v+pextra;s(3)=p.ParameterOnC();
   gp_Pnt2d a,c;double pon=0;GA_TRY(ga_int(b.ArcToRecadre(s,0,a,c,pon));ga_pnt2d(a);ga_pnt2d(c);ga_real(pon));}
+ ga_end();}
+
+void fl_rst_rst_walk_state(const BRepBlend_RstRstLineBuilder& b){
+ ga_flag(b.IsDone());ga_flag(b.Decroch1Start());ga_flag(b.Decroch2Start());ga_flag(b.Decroch1End());ga_flag(b.Decroch2End());
+ if(b.IsDone())fl_builder_line(b.Line());}
+
+// `fl_rst_rst_walk mode S1 U1 U2 V1 V2 Rst1(kind a b c d first last) S2 U1 U2 V1 V2
+// Rst2 Sref1 PCref1 Sref2 PCref2 G first last nv (P D)* savefirst savelast radius choix
+// ch1 ch2 pdep pmax maxstep tol3d tolguide fleche appro X1 X2 recrst1 recp1 recrst2 recp2
+// pextra`: the marching of BRepBlend_RstRstConstRad between the restrictions Rst1 and Rst2
+// of the trimmed surfaces S1 and S2 (Decroch against the reference faces), with the
+// inverses of ChFi3d_FilBuilder. Mode 0 Perform, 1 then Complete(pextra), 3
+// PerformFirstSection then Perform from it to pextra.
+void fl_rst_rst_walk_case(std::istream& in){
+ GaReader r{in};int mode=r.integer();
+ occ::handle<Adaptor3d_Surface> s1=fl_trimmed_surface(r);occ::handle<Adaptor2d_Curve2d> rst1=fl_trimmed_curve2d(r);
+ occ::handle<Adaptor3d_Surface> s2=fl_trimmed_surface(r);occ::handle<Adaptor2d_Curve2d> rst2=fl_trimmed_curve2d(r);
+ occ::handle<Adaptor3d_Surface> sref1=fl_surface(r);occ::handle<Adaptor2d_Curve2d> pcref1=fl_trimmed_curve2d(r);
+ occ::handle<Adaptor3d_Surface> sref2=fl_surface(r);occ::handle<Adaptor2d_Curve2d> pcref2=fl_trimmed_curve2d(r);
+ occ::handle<ChFiDS_ElSpine> spine=fl_el_spine(r);
+ double radius=r.real();int choix=r.integer(),ch1=r.integer(),ch2=r.integer();
+ double pdep=r.real(),pmax=r.real(),maxstep=r.real(),tol3d=r.real(),tolguide=r.real(),fleche=r.real();
+ bool appro=r.flag();math_Vector x(1,2);x(1)=r.real();x(2)=r.real();
+ bool recrst1=r.flag(),recp1=r.flag(),recrst2=r.flag(),recp2=r.flag();double pextra=r.real();
+ occ::handle<Adaptor3d_TopolTool> d1=new Adaptor3d_TopolTool(s1),d2=new Adaptor3d_TopolTool(s2);
+ BRepBlend_RstRstConstRad f(s1,rst1,s2,rst2,spine);f.Set(sref1,pcref1,sref2,pcref2);f.Set(radius,choix);
+ occ::handle<Adaptor3d_CurveOnSurface> hc1=new Adaptor3d_CurveOnSurface();hc1->Load(rst1,s1);
+ occ::handle<Adaptor3d_CurveOnSurface> hc2=new Adaptor3d_CurveOnSurface();hc2->Load(rst2,s2);
+ BRepBlend_SurfCurvConstRadInv finv1(sref1,hc2,spine);BRepBlend_CurvPointRadInv finvp1(spine,hc2);
+ BRepBlend_SurfCurvConstRadInv finv2(sref2,hc1,spine);BRepBlend_CurvPointRadInv finvp2(spine,hc1);
+ finv1.Set(pcref1);finv2.Set(pcref2);finv1.Set(radius,ch1);finvp1.Set(choix);finv2.Set(radius,ch2);finvp2.Set(choix);
+ BRepBlend_RstRstLineBuilder b(s1,rst1,d1,s2,rst2,d2);
+ GA_TRY(b.Line());
+ if(mode==3){
+  double psol=0;math_Vector sol(1,2);sol.Init(0);bool ok=false;
+  GA_TRY(ok=b.PerformFirstSection(f,finv1,finvp1,finv2,finvp2,pdep,pmax,x,tol3d,tolguide,recrst1,recp1,recrst2,recp2,psol,sol);
+         ga_flag(ok);ga_real(psol);fl_vector(sol));
+  fl_rst_rst_walk_state(b);
+  if(ok)GA_TRY(b.Perform(f,finv1,finvp1,finv2,finvp2,psol,pextra,maxstep,tol3d,tolguide,sol,fleche,false));
+  fl_rst_rst_walk_state(b);ga_end();return;}
+ GA_TRY(b.Perform(f,finv1,finvp1,finv2,finvp2,pdep,pmax,maxstep,tol3d,tolguide,x,fleche,appro));
+ fl_rst_rst_walk_state(b);
+ if(mode==1){GA_TRY(ga_flag(b.Complete(f,finv1,finvp1,finv2,finvp2,pextra)));fl_rst_rst_walk_state(b);}
  ga_end();}

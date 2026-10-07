@@ -6,7 +6,9 @@ edge of another face) with the inverses of ChFi3d_FilBuilder: a floor and the to
 a step wall along the X axis (the faces and the edge cut at several lengths, so that the
 marching stops on the floor domain, on the end of the edge, or past the bound), and a
 cylinder on the circular edge of a floor ring. The modes complete the line, search the
-arc to reframe on, and start on the restrictions.
+arc to reframe on, and start on the restrictions. `fl_rst_rst_walk` marches the constant
+fillet between two restrictions: the edges of a floor and of a (tilted) wall along a
+channel, cut at several lengths.
 """
 from __future__ import annotations
 import math
@@ -103,8 +105,74 @@ def random_requests(requests: list[str]) -> None:
         requests.append(surf_rst_walk(rng.choice((0, 0, 1, 2)), *s, run, x, pextra=rng.uniform(-2.0, 13.0)))
 
 
+def rst_rst_walk(mode, side1, side2, refs, g, gbounds, run, x, rec=((1, 1), (1, 1)), pextra=0.0) -> str:
+    """One `fl_rst_rst_walk` request; a side is (surface, bounds, rst), a reference
+    (surface, pcurve), `run` (radius, choix, ch1, ch2, pdep, pmax, maxstep, tol3d,
+    tolguide, fleche, appro)."""
+    fields = [mode]
+    for s, b, rst in (side1, side2):
+        fields += [*s, *b, *rst]
+    for s, pc in refs:
+        fields += [*s, *pc]
+    fields += [*g, *gbounds, 0, 0, 0, *run, *x, *rec[0], *rec[1], pextra]
+    return 'fl_rst_rst_walk ' + numbers(fields)
+
+
+def channel(l1=10.0, l2=10.0, a=0.5, h=0.5, tilt=0.0, slopes=(0.0, 0.0)):
+    """The floor z = 0 for y >= a (its edge y = a, of slope slopes[0], is the first
+    restriction) and the wall through the X axis (tilted by `tilt` from y = 0) for heights
+    above h (its edge at h, of slope slopes[1], is the second one), with the groove and the
+    ledge behind the edges."""
+    floor = surface(0, n=Z, x=X)
+    wall = surface(0, n=(0.0, math.cos(tilt), math.sin(tilt)), x=X)
+    side1 = (floor, (0.0, 10.0, a, 5.0), (0, 0.0, a, 1.0, slopes[0], 0.0, l1))
+    side2 = (wall, (0.0, 10.0, -5.0, -h), (0, 0.0, -h, 1.0, -slopes[1], 0.0, l2))
+    groove = (surface(0, p=(0.0, a, 0.0), n=Y, x=X), (0, 0.0, 0.0, 1.0, 0.0, 0.0, l1))
+    ledge = (surface(0, p=(0.0, 0.0, h), n=Z, x=X), (0, 0.0, 0.0, 1.0, 0.0, 0.0, l2))
+    return side1, side2, (groove, ledge), guide(0, n=X, x=Z), (-1.0, 11.0)
+
+
+def rst_rst_requests(requests: list[str]) -> None:
+    """The channel: the choices, the restriction lengths, the modes and the starts."""
+    c = channel()
+    for choix in range(1, 9):
+        for ch1, ch2 in ((1, 2), (3, 3)):
+            run = (1.0, choix, ch1, ch2, 1.0, 12.0, 2.0, 1e-6, 1e-5, 0.01, 1)
+            requests.append(rst_rst_walk(0, *c, run, (1.0, 1.0)))
+    for l1, l2, tilt in ((10.0, 8.0, 0.0), (6.0, 10.0, 0.0), (7.0, 7.0, 0.0), (10.0, 10.0, 0.3), (8.0, 9.0, -0.2)):
+        c = channel(l1, l2, tilt=tilt)
+        for pdep, pmax, maxstep in ((3.0, 12.0, 2.0), (3.0, 12.0, 0.4), (5.0, -1.0, 1.5)):
+            run = (1.0, 2, 1, 2, pdep, pmax, maxstep, 1e-6, 1e-5, 0.01, 1)
+            requests.append(rst_rst_walk(0, *c, run, (pdep, pdep)))
+    c = channel(10.0, 8.0)
+    run = (1.0, 2, 1, 2, 3.0, 12.0, 2.0, 1e-6, 1e-5, 0.01, 1)
+    for pextra in (-2.0, 1.0):
+        requests.append(rst_rst_walk(1, *c, run, (3.0, 3.0), pextra=pextra))
+    requests.append(rst_rst_walk(0, *c, (1.0, 2, 1, 2, 2.0, 12.0, 2.0, 1e-6, 1e-5, 0.01, 0), (2.0, 2.0)))
+    for pdep, pmax, rec, pextra in ((7.9, 12.0, ((1, 1), (1, 1)), -1.0), (7.9, 12.0, ((0, 0), (0, 1)), -1.0),
+                                    (7.9, 12.0, ((1, 0), (1, 0)), -1.0), (0.2, -1.0, ((1, 1), (1, 1)), 9.0)):
+        run3 = (1.0, 2, 1, 2, pdep, pmax, 2.0, 1e-6, 1e-5, 0.01, 1)
+        requests.append(rst_rst_walk(3, *c, run3, (pdep, pdep), rec=rec, pextra=pextra))
+    for slopes in ((0.1, 0.0), (0.0, 0.2), (0.15, 0.15), (-0.05, 0.0), (0.3, 0.3)):
+        for radius in (1.0, 1.5):
+            c = channel(slopes=slopes)
+            run = (radius, 2, 1, 2, 0.5, 12.0, 1.0, 1e-6, 1e-5, 0.01, 1)
+            requests.append(rst_rst_walk(0, *c, run, (0.5, 0.5)))
+    rng = random.Random(20261010)
+    for _ in range(16):
+        l1, l2 = rng.uniform(4.0, 10.0), rng.uniform(4.0, 10.0)
+        a, h = rng.uniform(0.2, 0.8), rng.uniform(0.2, 0.8)
+        c = channel(l1, l2, a, h, rng.uniform(-0.3, 0.3))
+        pdep = rng.uniform(0.5, min(l1, l2) - 0.5)
+        run = (rng.uniform(0.8, 2.0), rng.choice((1, 2, 2)), 1, 2, pdep, rng.choice((12.0, -1.0)),
+               rng.uniform(0.1, 3.0), 1e-6, 1e-5, rng.choice((0.001, 0.01, 0.1)), 1)
+        x = (pdep + rng.uniform(-0.1, 0.1), pdep + rng.uniform(-0.1, 0.1))
+        requests.append(rst_rst_walk(rng.choice((0, 0, 1)), *c, run, x, pextra=rng.uniform(-2.0, 13.0)))
+
+
 def append_linebuilder_requests(requests: list[str]) -> None:
     """Append the line builder request families."""
     step_requests(requests)
     ring_requests(requests)
     random_requests(requests)
+    rst_rst_requests(requests)

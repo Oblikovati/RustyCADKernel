@@ -71,6 +71,11 @@ FilletSurf.
   the section on both restrictions takes the third value of the surface reframing in
   `InternalPerform` (the second in `PerformFirstSection`), and its end on the arc takes
   the guide parameter.
+- `BRepBlend_RstRstLineBuilder`: when both reframings on the first restriction succeed and
+  its end point wins, the vertex goes to the second restriction; the end on the second
+  restriction takes the tangent on the first one; the end point reframings read the
+  restriction parameter of the last vertex examined even when none matched (as do those
+  of the surface-restriction builder).
 
 ## Verification
 
@@ -82,4 +87,4 @@ FilletSurf.
 | --- | --- |
 | ChFiDS | `fl_spine`, `fl_arc_spine`, `fl_fil_law` |
 | BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad`, `fl_evol_rad_inv`, `fl_chamfer`, `fl_chamfer_inv` |
-| BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func`, `fl_walking`, `fl_surf_rst_walk` |
+| BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func`, `fl_walking`, `fl_surf_rst_walk`, `fl_rst_rst_walk` |
