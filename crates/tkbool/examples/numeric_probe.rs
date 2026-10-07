@@ -3,10 +3,10 @@
 use std::io::{self, BufRead};
 mod bl_probe;
 use bl_probe::{
-    brep_fill_advanced_evolved, brep_fill_compatible, brep_fill_draft, brep_fill_filling,
-    brep_fill_generator, brep_fill_location_law, brep_fill_multi_line, brep_fill_offset_wire,
-    brep_fill_package, brep_fill_pipe, brep_fill_pipe_shell, brep_fill_section,
-    brep_fill_section_law, brep_fill_sweep,
+    brep_algo, brep_fill_advanced_evolved, brep_fill_compatible, brep_fill_draft,
+    brep_fill_filling, brep_fill_generator, brep_fill_location_law, brep_fill_multi_line,
+    brep_fill_offset_wire, brep_fill_package, brep_fill_pipe, brep_fill_pipe_shell,
+    brep_fill_section, brep_fill_section_law, brep_fill_sweep,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -50,6 +50,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "bf_advanced_evolved",
         brep_fill_advanced_evolved::advanced_evolved_case,
     ),
+    // BRepAlgo (bl_probe/brep_algo.rs)
+    ("ba_concat", brep_algo::concat_case),
+    ("ba_concat_c0", brep_algo::concat_c0_case),
+    ("ba_convert", brep_algo::convert_case),
+    ("ba_valid", brep_algo::valid_case),
 ];
 
 fn main() {

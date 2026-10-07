@@ -1,4 +1,5 @@
 //! The TKBool probe operations, one module per C++ probe file under tools/oracle.
+pub mod brep_algo;
 pub mod brep_fill_advanced_evolved;
 pub mod brep_fill_compatible;
 pub mod brep_fill_draft;

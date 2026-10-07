@@ -317190,6 +317190,70 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepAlgo::ConcatenateWire(const TopoDS_Wire&,GeomAbs_Shape,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::concatenate_wire",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo.cxx and BRepAlgo_1.cxx with the native operation order; BRepAlgo is a static-only class, its members are free functions of rustycad_tkbool::brep_algo. Compared with OCCT by tools/verify_tkbool_numeric.py (ba_concat, ba_concat_c0, ba_convert and ba_valid requests: segment, arc and B-spline wires, polygon, disc, stadium and Bezier-edged faces, cube shells and solids). Native quirks kept: the 1e-4 minimal approximation tolerance of ConvertWire and its ends joined within the greatest edge tolerance; the same-curve test of ConcatenateWireC0 by handle identity then by conic type, its periodic adjustments and the tolerances times five; the null wire, edge or face when nothing is built; IsValid forcing the same-parameter flags of the edges of the first faulty status of each new face before checking again. The two IsValid overloads are is_valid and is_valid_result."
+    },
+    {
+      "upstream_id": "BRepAlgo::ConcatenateWireC0(const TopoDS_Wire&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::concatenate_wire_c0",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo.cxx and BRepAlgo_1.cxx with the native operation order; BRepAlgo is a static-only class, its members are free functions of rustycad_tkbool::brep_algo. Compared with OCCT by tools/verify_tkbool_numeric.py (ba_concat, ba_concat_c0, ba_convert and ba_valid requests: segment, arc and B-spline wires, polygon, disc, stadium and Bezier-edged faces, cube shells and solids). Native quirks kept: the 1e-4 minimal approximation tolerance of ConvertWire and its ends joined within the greatest edge tolerance; the same-curve test of ConcatenateWireC0 by handle identity then by conic type, its periodic adjustments and the tolerances times five; the null wire, edge or face when nothing is built; IsValid forcing the same-parameter flags of the edges of the first faulty status of each new face before checking again. The two IsValid overloads are is_valid and is_valid_result."
+    },
+    {
+      "upstream_id": "BRepAlgo::ConvertWire(const TopoDS_Wire&,double,const TopoDS_Face&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::convert_wire",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo.cxx and BRepAlgo_1.cxx with the native operation order; BRepAlgo is a static-only class, its members are free functions of rustycad_tkbool::brep_algo. Compared with OCCT by tools/verify_tkbool_numeric.py (ba_concat, ba_concat_c0, ba_convert and ba_valid requests: segment, arc and B-spline wires, polygon, disc, stadium and Bezier-edged faces, cube shells and solids). Native quirks kept: the 1e-4 minimal approximation tolerance of ConvertWire and its ends joined within the greatest edge tolerance; the same-curve test of ConcatenateWireC0 by handle identity then by conic type, its periodic adjustments and the tolerances times five; the null wire, edge or face when nothing is built; IsValid forcing the same-parameter flags of the edges of the first faulty status of each new face before checking again. The two IsValid overloads are is_valid and is_valid_result."
+    },
+    {
+      "upstream_id": "BRepAlgo::ConvertFace(const TopoDS_Face&,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::convert_face",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo.cxx and BRepAlgo_1.cxx with the native operation order; BRepAlgo is a static-only class, its members are free functions of rustycad_tkbool::brep_algo. Compared with OCCT by tools/verify_tkbool_numeric.py (ba_concat, ba_concat_c0, ba_convert and ba_valid requests: segment, arc and B-spline wires, polygon, disc, stadium and Bezier-edged faces, cube shells and solids). Native quirks kept: the 1e-4 minimal approximation tolerance of ConvertWire and its ends joined within the greatest edge tolerance; the same-curve test of ConcatenateWireC0 by handle identity then by conic type, its periodic adjustments and the tolerances times five; the null wire, edge or face when nothing is built; IsValid forcing the same-parameter flags of the edges of the first faulty status of each new face before checking again. The two IsValid overloads are is_valid and is_valid_result."
+    },
+    {
+      "upstream_id": "BRepAlgo::IsValid(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::is_valid",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo.cxx and BRepAlgo_1.cxx with the native operation order; BRepAlgo is a static-only class, its members are free functions of rustycad_tkbool::brep_algo. Compared with OCCT by tools/verify_tkbool_numeric.py (ba_concat, ba_concat_c0, ba_convert and ba_valid requests: segment, arc and B-spline wires, polygon, disc, stadium and Bezier-edged faces, cube shells and solids). Native quirks kept: the 1e-4 minimal approximation tolerance of ConvertWire and its ends joined within the greatest edge tolerance; the same-curve test of ConcatenateWireC0 by handle identity then by conic type, its periodic adjustments and the tolerances times five; the null wire, edge or face when nothing is built; IsValid forcing the same-parameter flags of the edges of the first faulty status of each new face before checking again. The two IsValid overloads are is_valid and is_valid_result."
+    },
+    {
+      "upstream_id": "BRepAlgo::IsValid(const NCollection_List<TopoDS_Shape>&,const TopoDS_Shape&,bool,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::is_valid_result",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo.cxx and BRepAlgo_1.cxx with the native operation order; BRepAlgo is a static-only class, its members are free functions of rustycad_tkbool::brep_algo. Compared with OCCT by tools/verify_tkbool_numeric.py (ba_concat, ba_concat_c0, ba_convert and ba_valid requests: segment, arc and B-spline wires, polygon, disc, stadium and Bezier-edged faces, cube shells and solids). Native quirks kept: the 1e-4 minimal approximation tolerance of ConvertWire and its ends joined within the greatest edge tolerance; the same-curve test of ConcatenateWireC0 by handle identity then by conic type, its periodic adjustments and the tolerances times five; the null wire, edge or face when nothing is built; IsValid forcing the same-parameter flags of the edges of the first faulty status of each new face before checking again. The two IsValid overloads are is_valid and is_valid_result."
+    },
+    {
+      "upstream_id": "BRepAlgo::IsTopologicallyValid(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::is_topologically_valid",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo.cxx and BRepAlgo_1.cxx with the native operation order; BRepAlgo is a static-only class, its members are free functions of rustycad_tkbool::brep_algo. Compared with OCCT by tools/verify_tkbool_numeric.py (ba_concat, ba_concat_c0, ba_convert and ba_valid requests: segment, arc and B-spline wires, polygon, disc, stadium and Bezier-edged faces, cube shells and solids). Native quirks kept: the 1e-4 minimal approximation tolerance of ConvertWire and its ends joined within the greatest edge tolerance; the same-curve test of ConcatenateWireC0 by handle identity then by conic type, its periodic adjustments and the tolerances times five; the null wire, edge or face when nothing is built; IsValid forcing the same-parameter flags of the edges of the first faulty status of each new face before checking again. The two IsValid overloads are is_valid and is_valid_result."
+    },
+    {
+      "upstream_id": "BRepAlgo_Image::BRepAlgo_Image()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Image.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoImage::new",
+      "status": "implemented",
+      "notes": "The defaulted native constructor: no root and empty image maps (BRepAlgo_Image.cxx)."
+    },
+    {
       "upstream_id": "BRepOffset_Inter3d",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
