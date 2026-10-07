@@ -31785,14 +31785,6 @@
       "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
     },
     {
-      "upstream_id": "BVH_TreeBase::~BVH_TreeBase()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
       "upstream_id": "BVH::EstimateSAH(const BVH_Tree<T,N,BVH_BinaryTree>*,int,T,T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
@@ -31817,14 +31809,6 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
-      "upstream_id": "BVH_Transform::~BVH_Transform()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
       "upstream_id": "BVH_ObjectTransient::SetProperties(const occ::handle<BVH_Properties>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
@@ -31841,14 +31825,6 @@
       "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
     },
     {
-      "upstream_id": "BVH_Object::~BVH_Object()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
       "upstream_id": "BVH_Set()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Set.hxx",
@@ -31857,44 +31833,12 @@
       "notes": "Excluded: defaulted constructor of an abstract, stateless interface; the Rust trait BvhSet has nothing to construct."
     },
     {
-      "upstream_id": "BVH_Set::~BVH_Set()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Set.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
-      "upstream_id": "BVH_PrimitiveSet::~BVH_PrimitiveSet()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
-      "upstream_id": "BVH_Triangulation::~BVH_Triangulation()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
       "upstream_id": "BVH_Sorter()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Sorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhSorter",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending. The abstract BVH_Sorter() only sets myIsParallel = false; every BvhSorter implementor (BvhQuickSorter::new, BvhRadixSorter::new) starts serial the same way."
-    },
-    {
-      "upstream_id": "BVH_Sorter::~BVH_Sorter()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Sorter.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "BVH::EncodeMortonCode(unsigned int,unsigned int,unsigned int)",
@@ -31929,14 +31873,6 @@
       "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
     },
     {
-      "upstream_id": "BVH_QueueBuilder::~BVH_QueueBuilder()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
       "upstream_id": "BVH::SplitPrimitives(BVH_Set<T,N>*,const BVH_Box<T,N>&,int,int,int,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
@@ -31953,44 +31889,12 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BinnedBuilder::~BVH_BinnedBuilder()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
       "upstream_id": "BVH::UpdateBounds(BVH_Set<T,N>*,BVH_Tree<T,N>*,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::update_bounds",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
-    },
-    {
-      "upstream_id": "BVH_LinearBuilder::~BVH_LinearBuilder()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
-      "upstream_id": "BVH_SpatialMedianBuilder::~BVH_SpatialMedianBuilder()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_SpatialMedianBuilder.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
-      "upstream_id": "BVH_SweepPlaneBuilder::~BVH_SweepPlaneBuilder()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_SweepPlaneBuilder.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "BVH_Traverse::Select(const opencascade::handle<BVH_Tree<NumType,Dimension>>&)",
@@ -32015,30 +31919,6 @@
       "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::reject_node",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
-    },
-    {
-      "upstream_id": "BVH_ObjectSet::~BVH_ObjectSet()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
-      "upstream_id": "BVH_Geometry::~BVH_Geometry()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
-    },
-    {
-      "upstream_id": "BVH_DistanceField::~BVH_DistanceField()",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
-      "rust_item": null,
-      "status": "excluded",
-      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "BSplCLib::DN(double,int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,gp_Pnt&,gp_Vec&)",
@@ -87616,7 +87496,11 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: the global placement operator new that DefineAlloc declares only for SunPro <= 4.2 (WORKAROUND_SUNPRO_NEW_PLACEMENT). Rust has no placement new; values are moved into already allocated storage by ordinary assignment."
+      "notes": "Excluded: the global placement operator new that DefineAlloc declares only for SunPro <= 4.2 (WORKAROUND_SUNPRO_NEW_PLACEMENT). Rust has no placement new; values are moved into already allocated storage by ordinary assignment.",
+      "cpp_configuration": {
+        "condition": "defined(__SUNPRO_CC) && (__SUNPRO_CC <= 0x420)",
+        "line": 70
+      }
     },
     {
       "upstream_id": "Standard_Mutex::Sentry(Standard_Mutex&)",
@@ -88174,11 +88058,11 @@
     },
     {
       "upstream_id": "Standard_ConstructionError",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Standard/Standard_ConstructionError.hxx",
+      "toolkit": "TKCAF",
+      "source": "src/ApplicationFramework/TKCAF/TNaming/TNaming_Builder.hxx",
       "rust_item": "rustycad_tkernel::standard::exceptions::construction_error",
       "status": "implemented",
-      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
+      "notes": "Class record of the TKernel exception Standard_ConstructionError: the inventory records the class at its first observed declaration, the forward declaration in TNaming_Builder.hxx. The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
     },
     {
       "upstream_id": "Standard_DimensionError",
@@ -88206,11 +88090,11 @@
     },
     {
       "upstream_id": "Standard_DomainError",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ActorOfProcessForFinder.hxx",
       "rust_item": "rustycad_tkernel::standard::exceptions::domain_error",
       "status": "implemented",
-      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
+      "notes": "Class record of the TKernel exception Standard_DomainError: the inventory records the class at its first observed declaration, the forward declaration in Transfer_ActorOfProcessForFinder.hxx. The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
     },
     {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
@@ -88262,19 +88146,19 @@
     },
     {
       "upstream_id": "Standard_NoMoreObject",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Standard/Standard_NoMoreObject.hxx",
+      "toolkit": "TKCAF",
+      "source": "src/ApplicationFramework/TKCAF/TNaming/TNaming_Iterator.hxx",
       "rust_item": "rustycad_tkernel::standard::exceptions::no_more_object",
       "status": "implemented",
-      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
+      "notes": "Class record of the TKernel exception Standard_NoMoreObject: the inventory records the class at its first observed declaration, the forward declaration in TNaming_Iterator.hxx. The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
     },
     {
       "upstream_id": "Standard_NoSuchObject",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Standard/Standard_NoSuchObject.hxx",
+      "toolkit": "TKCAF",
+      "source": "src/ApplicationFramework/TKCAF/TNaming/TNaming_Iterator.hxx",
       "rust_item": "rustycad_tkernel::standard::exceptions::no_such_object",
       "status": "implemented",
-      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
+      "notes": "Class record of the TKernel exception Standard_NoSuchObject: the inventory records the class at its first observed declaration, the forward declaration in TNaming_Iterator.hxx. The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
     },
     {
       "upstream_id": "Standard_NotImplemented",
@@ -89567,14 +89451,6 @@
       "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_span",
       "status": "implemented",
       "notes": "None raises Standard_NullObject, a negative length Standard_OutOfRange (in that order), as Failure. The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
-    },
-    {
-      "upstream_id": "TCollection_ExtendedString(const char16_t(&)[N])",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_utf16",
-      "status": "implemented",
-      "notes": "The const char16_t(&)[N] template scans for the first zero like the pointer overload, so it maps to the same item."
     },
     {
       "upstream_id": "TCollection_ExtendedString::TCollection_ExtendedString(const std::u16string_view&)",
@@ -108663,14 +108539,6 @@
       "notes": "FSD base behavior and qualified base-body calls are implemented by TextDialect defaults plus public read_fsd_*/write_fsd_*/flush_fsd_*/find_fsd_*_base helpers. The native derived oracle checks stateful overrides that count and delegate, including nested virtual dispatch from FlushEndOfLine and FindTag. Static IsGoodFileType probing uses the base reader. Evidence: tools/oracle/tkernel_fsd_text_dialect_dispatch.cxx and .expected; Rust custom state/delegation tests: crates/tkernel/tests/fsd_api_behavior/text_dialect_state.rs. Clang candidate ea973a63c27388d41143e9cd78d4cfae4d5e99f3f071f3c33a6b0760ee114549; FSD_File.hxx SHA-256 175ceb78d367166624bf87f96ffc6b577744da43e43ab4e95aca87339648ab69."
     },
     {
-      "upstream_id": "Quantity_Color::operator const NCollection_Vec3<float>&() const",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
-      "rust_item": "rustycad_tkernel::quantity::Color::rgb_vec3",
-      "status": "implemented",
-      "notes": "The implicit conversion to the stored linear RGB triple is the explicit rgb_vec3 accessor; Rust has no implicit conversion operators."
-    },
-    {
       "upstream_id": "Quantity_Color::operator delete(void*) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
@@ -108739,12 +108607,12 @@
       "notes": "Class record of the std::hash<Quantity_Color> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::quantity::Color::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
     },
     {
-      "upstream_id": "Quantity_ColorRGBA::operator const NCollection_Vec4<float>&() const",
+      "upstream_id": "Quantity_Color::operator const NCollection_Vec3<float> &",
       "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
-      "rust_item": "rustycad_tkernel::quantity::ColorRgba::to_vec4",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::rgb_vec3",
       "status": "implemented",
-      "notes": "The reinterpret_cast view of RGB plus alpha as one Vec4 is the explicit to_vec4 copy; Rust has no implicit conversion operators."
+      "notes": "The implicit conversion to the stored linear RGB triple is the explicit rgb_vec3 accessor; Rust has no implicit conversion operators."
     },
     {
       "upstream_id": "std::hash",
@@ -108753,6 +108621,14 @@
       "rust_item": "rustycad_tkernel::quantity::ColorRgba::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
       "status": "partial",
       "notes": "Class record of the std::hash<Quantity_ColorRGBA> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::quantity::ColorRgba::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher). Partial as its operator() row: see that row for the difference."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::operator const NCollection_Vec4<float> &",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::to_vec4",
+      "status": "implemented",
+      "notes": "The reinterpret_cast view of RGB plus alpha as one Vec4 is the explicit to_vec4 copy; Rust has no implicit conversion operators."
     },
     {
       "upstream_id": "GeomGridEval::EvaluateGridHelper(const NCollection_Array1<double>&,const NCollection_Array1<double>&,Evaluator)",
@@ -357218,6 +357094,17 @@
       "rust_item": "rustycad_tkernel::tcollection::ExtendedString::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
       "status": "implemented",
       "notes": "Class record of the std::hash<TCollection_ExtendedString> specialization: its one member operator() is mapped by its own row to rustycad_tkernel::tcollection::ExtendedString::<rustycad_tkernel::ncollection::HashKey>::occt_hash, the Rust hash of the key type that the NCollection containers use (a Rust std Hash impl, when present, is separate because it feeds a caller-selected hasher)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::TCollection_ExtendedString",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_utf16",
+      "status": "implemented",
+      "notes": "The const char16_t(&)[N] template scans for the first zero like the pointer overload, so it maps to the same item.",
+      "cpp_selector": {
+        "usr": "c:@S@TCollection_ExtendedString@FT@>1#NlTCollection_ExtendedString#&1{nq#v#"
+      }
     },
     {
       "upstream_id": "std::hash<opencascade::handle<TCollection_HExtendedString>>::operator()",
