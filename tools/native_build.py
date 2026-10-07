@@ -74,13 +74,15 @@ DE_LINKED_TOOLKITS: tuple[str, ...] = (*DE_TOOLKITS, 'TKDE', 'TKBRep', 'TKMath',
 DE_CLOSURE_TARGETS: list[str] = [*DE_TOOLKITS, 'gtest_main']
 
 # The exchange oracle closure (TKXSBase, the foundation of the STEP and IGES toolkits) lives
-# in its own build tree too, so the geometry closure keeps its flags.
-EXCHANGE_TOOLKITS: tuple[str, ...] = ('TKXSBase',)
+# in its own build tree too, so the geometry closure keeps its flags. TKDE is built with it:
+# XSAlgo_ShapeProcessor.hxx includes DE_ShapeFixParameters.hxx although TKXSBase's EXTERNLIB
+# omits TKDE, and a partial tree installs only the headers of the toolkits it builds.
+EXCHANGE_TOOLKITS: tuple[str, ...] = ('TKDE', 'TKXSBase')
 # The exchange closure's shared libraries in link order, dependants first (the EXTERNLIB of
-# TKXSBase and TKShHealing's own TKGeomAlgo).
-EXCHANGE_LINKED_TOOLKITS: tuple[str, ...] = ('TKXSBase', 'TKShHealing', 'TKTopAlgo', 'TKGeomAlgo',
-                                             'TKBRep', 'TKGeomBase', 'TKG3d', 'TKG2d', 'TKMath',
-                                             'TKernel')
+# TKXSBase, TKDE and TKShHealing's own TKGeomAlgo).
+EXCHANGE_LINKED_TOOLKITS: tuple[str, ...] = ('TKXSBase', 'TKDE', 'TKShHealing', 'TKTopAlgo',
+                                             'TKGeomAlgo', 'TKBRep', 'TKGeomBase', 'TKG3d', 'TKG2d',
+                                             'TKMath', 'TKernel')
 EXCHANGE_CLOSURE_TARGETS: list[str] = [*EXCHANGE_TOOLKITS, 'gtest_main']
 
 

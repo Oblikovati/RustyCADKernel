@@ -29,7 +29,7 @@ class XsbaseVerifierProfileTests(unittest.TestCase):
         self.assertEqual(tree, 'target/occt-exchange-full')
         self.assertEqual(targets, EXCHANGE_CLOSURE_TARGETS)
         self.assertEqual(PROFILE_CLOSURES['TKCDF'][1], OCAF_CLOSURE_TARGETS)
-        self.assertIn('-DBUILD_ADDITIONAL_TOOLKITS=TKXSBase', closure_flags(['FoundationClasses'], EXCHANGE_TOOLKITS))
+        self.assertIn('-DBUILD_ADDITIONAL_TOOLKITS=TKDE TKXSBase', closure_flags(['FoundationClasses'], EXCHANGE_TOOLKITS))
         self.assertNotIn('TKXSBase', LINKED_TOOLKITS)
 
     def test_ci_runs_the_tkxsbase_verifier(self):
