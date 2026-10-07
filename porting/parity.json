@@ -76155,8 +76155,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LocalArray::allocate",
-      "status": "partial",
-      "notes": "Rust preserves original array state when replacement default construction panics. Native constructs replacement before publishing it but leaks the partially constructed raw buffer on a throwing element constructor; Rust drops that partial replacement. Successful allocation/retention behavior remains covered by the original LocalArray tests. See tools/oracle/tkernel_local_array_reallocate_exception.md.",
+      "status": "implemented",
+      "notes": "Allocation, inline/heap retention and the replacement-before-publication order match native and are covered by the original LocalArray tests. The state after a throwing element default constructor (native leaks the partial raw buffer, Rust drops the partial replacement and keeps the original) is D1 class B2 (docs/tkernel-rust-refactoring-plan.md), not a parity obligation; tools/oracle/tkernel_local_array_reallocate_exception.md records the native observation.",
       "source_sha256": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f"
     },
     {
@@ -76164,8 +76164,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
       "rust_item": "rustycad_tkernel::ncollection::LocalArray::reallocate",
-      "status": "partial",
-      "notes": "Rust preserves original array state when no-copy replacement default construction panics. Native constructs replacement before publishing it but leaks the partially constructed raw buffer on a throwing element constructor; Rust drops that partial replacement. Successful copy, retention, shrink and growth cases remain covered by the original LocalArray tests. See tools/oracle/tkernel_local_array_reallocate_exception.md.",
+      "status": "implemented",
+      "notes": "Copy, retention, shrink and growth match native and are covered by the original LocalArray tests. The state after a throwing element default constructor (native leaks the partial raw buffer, Rust drops the partial replacement and keeps the original) is D1 class B2 (docs/tkernel-rust-refactoring-plan.md), not a parity obligation; tools/oracle/tkernel_local_array_reallocate_exception.md records the native observation.",
       "source_sha256": "516ac5faff95f20fa5638c2cf8819c0730f6940289316a6a662fbbb6981f141f"
     },
     {
