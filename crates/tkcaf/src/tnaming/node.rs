@@ -44,7 +44,7 @@ pub(crate) struct NodeLinks {
 
 /// `TNaming_Node`: one evolution of a named shape, linked in three chains (the nodes of
 /// the same attribute, the nodes that use the same old shape, the nodes that use the same
-/// new shape). The native `delete` of a node is [`TNamingNode::release`].
+/// new shape). The native `delete` of a node is `TNamingNode::release`.
 pub struct TNamingNode {
     links: SharedState<NodeLinks>,
 }
