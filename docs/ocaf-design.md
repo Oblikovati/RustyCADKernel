@@ -165,3 +165,19 @@ a null handle would give natively.
 - **Tree nodes.** The raw `TDataStd_TreeNode*` links are weak handles: the labels own the
   nodes. The structure members need the node's own handle, bound when the node is added
   to a label; a node never added to a label cannot be linked.
+
+## 8. Function mechanism (TFunction)
+
+- **TFunction_Driver** is the trait `TFunctionDriver: Transient` over the embedded
+  `TFunctionDriverBase` (the label). `Execute` is the required method; `Validate`,
+  `MustExecute`, `Arguments` and `Results` are provided methods with the native bodies.
+  `Execute(occ::handle<TFunction_Logbook>&)` takes `&mut Handle<TFunctionLogbook>`.
+- **TFunction_DriverTable::Get** is the process-wide table, a `OnceLock` handle; the
+  per-thread tables are a `Vec` of maps indexed from 1, grown as `AddDriver` asks.
+- **Logbook, GraphNode, Scope** keep their `NCollection_Map` and `NCollection_DoubleMap`
+  fields (native iteration order); getters that natively return a reference to a map
+  return a copy.
+- **TFunction_IFunction** and **TFunction_Iterator** are plain values; their native
+  exceptions (`Standard_NoSuchObject` for a missing function, driver or graph node) are
+  `Failure` errors, and the native null dereferences (`GetMaxNbThreads` walks the next
+  functions without a scope) are `Standard_NullObject`.
