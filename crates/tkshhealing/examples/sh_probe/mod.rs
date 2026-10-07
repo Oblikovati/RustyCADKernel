@@ -61,6 +61,7 @@ pub mod unify;
 pub mod fix_face;
 
 pub mod fix_shape;
+pub mod fix_shape_checks;
 
 pub mod shape_process;
 
