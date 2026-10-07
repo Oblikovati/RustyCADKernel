@@ -966,6 +966,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "CSLib",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib",
+      "status": "implemented",
+      "notes": "Class record: CSLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkmath::cslib, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "CSLib_DerivativeStatus",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/CSLib/CSLib_DerivativeStatus.hxx",
@@ -1400,6 +1408,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Precision",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision",
+      "status": "implemented",
+      "notes": "Class record: Precision is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkernel::precision, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "PLib::NoWeights()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
@@ -1746,6 +1762,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "ecf2405fabdbc79976274066624e9c4f692c8f0a6b66731a7c16a57687e85e87",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "PLib",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib",
+      "status": "implemented",
+      "notes": "Class record: PLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkmath::plib, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "PLib_JacobiPolynomial::PLib_JacobiPolynomial(int,GeomAbs_Shape)",
@@ -3061,6 +3085,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ElCLib",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/ElCLib/ElCLib.hxx",
+      "rust_item": "rustycad_tkmath::elclib",
+      "status": "implemented",
+      "notes": "Class record: ElCLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkmath::elclib, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "ElSLib::Value(double,double,const gp_Pln&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
@@ -3727,6 +3759,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "c46ea8bb3c45230fe0d364199714a9c8187d08a9b297d36e1bb91ea55431b26f",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "ElSLib",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/ElSLib/ElSLib.hxx",
+      "rust_item": "rustycad_tkmath::elslib",
+      "status": "implemented",
+      "notes": "Class record: ElSLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkmath::elslib, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "gp_Circ::SetAxis",
@@ -9349,6 +9389,14 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
+      "upstream_id": "(unnamed enum at src/FoundationClasses/TKMath/BVH/BVH_Constants.hxx:17:1)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Constants.hxx",
+      "rust_item": "rustycad_tkmath::bvh::constants",
+      "status": "implemented",
+      "notes": "Unnamed enum record ((unnamed enum at src/FoundationClasses/TKMath/BVH/BVH_Constants.hxx:17:1)): C++ declares the enumerators in an anonymous enum used as integer constants; Rust declares them as constants of module rustycad_tkmath::bvh::constants, each mapped by its own row."
+    },
+    {
       "upstream_id": "BVH_Box::BVH_Box()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
@@ -13274,6 +13322,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BSplSLib",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib",
+      "status": "implemented",
+      "notes": "Class record: BSplSLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkmath::bsplslib, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BSplSLib_Cache::BSplSLib_Cache(const int&,const bool&,const NCollection_Array1<double>&,const int&,const bool&,const NCollection_Array1<double>&,const NCollection_Array2<double>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
@@ -16354,6 +16410,14 @@
       "rust_item": "rustycad_tkmath::gp::oy2d",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp",
+      "status": "implemented",
+      "notes": "Class record: gp is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkmath::gp, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "MathPoly::Utils::THE_DISTINCT_ROOT_RESIDUAL_TOLERANCE",
@@ -30769,6 +30833,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Geom2dAdaptor",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor",
+      "status": "implemented",
+      "notes": "Class record: Geom2dAdaptor is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkg2d::geom2d_adaptor, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "Geom2dAdaptor_Curve()",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
@@ -31386,6 +31458,14 @@
       "rust_item": "rustycad_tkmath::bnd::box3_to_bvh",
       "status": "implemented",
       "notes": "Manual explicit mapping; the static overloads become box2_to_bvh/box3_to_bvh and the Get() Standard_ConstructionError of a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Tools",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Tools.hxx",
+      "rust_item": "rustycad_tkmath::bnd",
+      "status": "implemented",
+      "notes": "Class record: Bnd_Tools is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkmath::bnd, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "Bnd_Box::Update(double,double,double)",
@@ -32045,6 +32125,14 @@
       "notes": "Class record: ported as a type, rustycad_tkmath::math::Matrix (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "6f5182daace08b9858b03ccebaddce2a6857726d1fc855021ecb64b416f32e76",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BSplCLib",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib",
+      "status": "implemented",
+      "notes": "Class record: BSplCLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkmath::bsplclib, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "BSplCLib_EvaluatorFunction()",
@@ -43097,6 +43185,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Poly",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly.hxx",
+      "rust_item": "rustycad_tkmath::poly",
+      "status": "implemented",
+      "notes": "Class record: Poly is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkmath::poly, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "TopLoc_Datum3D()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/TopLoc/TopLoc_Datum3D.hxx",
@@ -43211,6 +43307,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "ff5301f327dbd64282e8c94f5906baae7d45cdfff7013b02693bf6d6c3bc35cc",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "math",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math.hxx",
+      "rust_item": "rustycad_tkmath::math",
+      "status": "implemented",
+      "notes": "Class record: math is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkmath::math, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "math_BFGS::math_BFGS(int,double,int,double)",
@@ -44885,6 +44989,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkmath::math::FunctionAllRoots needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "3b96fef55dd1bc6fb151e5cd152a107d79d08f9932909843df914a5cc3ee2f8f",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "math_FunctionSample",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FunctionAllRoots.hxx",
+      "rust_item": "rustycad_tkmath::math::FunctionSample",
+      "status": "implemented",
+      "notes": "Class record: math_FunctionSample is ported as the type rustycad_tkmath::math::FunctionSample; each member is mapped by its own row."
     },
     {
       "upstream_id": "math_FunctionRoot::math_FunctionRoot(math_FunctionWithDerivative&,double,double,int)",
@@ -47221,6 +47333,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "41acea3243948a0a1364d811569e1caff80914dd19be3b4115ea4eb5aa0602bd",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "math_MultipleVarFunctionWithHessian",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_MultipleVarFunctionWithHessian.hxx",
+      "rust_item": "rustycad_tkmath::math::MultipleVarFunctionWithHessian",
+      "status": "implemented",
+      "notes": "Class record: math_MultipleVarFunctionWithHessian is ported as the trait rustycad_tkmath::math::MultipleVarFunctionWithHessian; each member is mapped by its own row."
     },
     {
       "upstream_id": "math_NewtonFunctionRoot::math_NewtonFunctionRoot(math_FunctionWithDerivative&,double,double,double,int)",
@@ -62760,6 +62880,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "TopAbs",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs",
+      "status": "implemented",
+      "notes": "Class record: TopAbs is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkg3d::top_abs, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "TopAbs_Orientation",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_Orientation.hxx",
@@ -71798,6 +71926,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Adaptor3d_Surface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface",
+      "rust_items": [
+        "rustycad_tkg3d::adaptor3d::Adaptor3dSurface",
+        "rustycad_tkg3d::adaptor3d::Adaptor3dSurfaceBase"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class Adaptor3d_Surface is split into trait rustycad_tkg3d::adaptor3d::Adaptor3dSurface (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkg3d::adaptor3d::Adaptor3dSurfaceBase (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "GeomAdaptor::MakeCurve",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor.hxx",
@@ -71872,6 +72012,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "a28144cc79ef4235adae9d1d31a101662aa2a93147234295e0afbf40a6ab6d11",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "GeomAdaptor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor",
+      "status": "implemented",
+      "notes": "Class record: GeomAdaptor is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkg3d::geom_adaptor, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "GeomAdaptor_Curve::GeomAdaptor_Curve()",
@@ -78447,6 +78595,14 @@
       "notes": "Excluded: DEFINE_NCOLLECTION_ALLOC generates this class-specific operator, which allocates from an NCollection_BaseAllocator handle. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "11586513dafb2558f50287be5f3c17421dc55018bf63b6c8a1ec0bf1538b78a7",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_ListNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ListNode.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List",
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust ncollection::List keeps its nodes private in allocator-owned storage; every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
     },
     {
       "upstream_id": "NCollection_Sequence::Node(const TheItemType&)",
@@ -87653,6 +87809,14 @@
       "notes": "Returns the chunk as a slice or None; short and unmasked failed reads terminate the reader. Partial payload bytes past the data retain previous cache contents. The exception-aware `read_data_chunk_istream` reports masked failures with state and gcount while preserving partial writes and the original `io::Error` cause; `read_data_chunk_file` covers FILE and `read_data_chunk` remains the generic Read path. Fixture: tools/oracle/tkernel_standard_istream_exceptions.cxx and tools/oracle/tkernel_standard_read_buffer_file_stream.cxx."
     },
     {
+      "upstream_id": "Standard_ReadBuffer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer",
+      "status": "implemented",
+      "notes": "Class record: Standard_ReadBuffer is ported as the type rustycad_tkernel::standard::ReadBuffer; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "Standard_ReadLineBuffer::Standard_ReadLineBuffer(size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
@@ -90675,6 +90839,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "6d4cb818fcfb10aa1392f976827b86a1b82c616e0ada00ad3d4185fc57310357",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TCollection",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection.hxx",
+      "rust_item": "rustycad_tkernel::tcollection",
+      "status": "implemented",
+      "notes": "Class record: TCollection is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkernel::tcollection, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "TCollection_AsciiString()",
@@ -94051,6 +94223,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Message_ProgressIndicator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressIndicatorHooks",
+      "rust_items": [
+        "rustycad_tkernel::message::ProgressIndicatorHooks",
+        "rustycad_tkernel::message::ProgressIndicator"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class Message_ProgressIndicator is split into trait rustycad_tkernel::message::ProgressIndicatorHooks (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkernel::message::ProgressIndicator (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "Message_ProgressRange()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Message/Message_ProgressRange.hxx",
@@ -94593,6 +94777,18 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): message_runtime_type!(BaseAlert, \"Message_Alert\", StandardTransient) at crates/tkernel/src/message/alert.rs:44 registers descriptor \"Message_Alert\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "ea81c085f8c202198f7dea282c9ee844cef8b8746a66aa40cc3e80ebc7e4d575",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Message_Alert",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Alert.hxx",
+      "rust_item": "rustycad_tkernel::message::Alert",
+      "rust_items": [
+        "rustycad_tkernel::message::Alert",
+        "rustycad_tkernel::message::BaseAlert"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class Message_Alert is split into trait rustycad_tkernel::message::Alert (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkernel::message::BaseAlert (its shared state); each member is mapped by its own row."
     },
     {
       "upstream_id": "Message_AlertExtended::AddAlert(const occ::handle<Message_Report>&,const occ::handle<Message_Attribute>&,Message_Gravity)",
@@ -98979,6 +99175,14 @@
       "notes": "The native process singleton StopwatchStorage becomes an explicitly shared PerfRegistry (injected CPU clock; NativeCpuClock = GetThreadCPU user seconds), so each meter names its registry. Clears every watch."
     },
     {
+      "upstream_id": "OSD_PerfMeter",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfMeter",
+      "status": "implemented",
+      "notes": "Class record: OSD_PerfMeter is ported as the type rustycad_tkernel::osd::PerfMeter; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "OSD_Process::ExecutablePath()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
@@ -99171,6 +99375,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "OSD_Process",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process",
+      "status": "implemented",
+      "notes": "Class record: OSD_Process is ported as the type rustycad_tkernel::osd::Process; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "OSD_Host::OSD_Host()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
@@ -99337,6 +99549,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "9ed508091a226855994254b05e557f6420a3ff9466570421c589ec3688c1c3f9",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "OSD_Host",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host",
+      "status": "implemented",
+      "notes": "Class record: OSD_Host is ported as the type rustycad_tkernel::osd::Host; each member is mapped by its own row."
     },
     {
       "upstream_id": "OSD_Environment::OSD_Environment()",
@@ -99521,6 +99741,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "576a90fce7ca78291d055551602dd2e455e830dedf441afe546ccff332a63beb",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "OSD_Environment",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment",
+      "status": "implemented",
+      "notes": "Class record: OSD_Environment is ported as the type rustycad_tkernel::osd::Environment; each member is mapped by its own row."
     },
     {
       "upstream_id": "OSD_SharedLibrary::OSD_SharedLibrary()",
@@ -101285,6 +101513,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "OSD_DirectoryIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator",
+      "status": "implemented",
+      "notes": "Class record: OSD_DirectoryIterator is ported as the type rustycad_tkernel::osd::DirectoryIterator; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "OSD_FileIterator::OSD_FileIterator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
@@ -101459,6 +101695,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "8190ef706d2d265cc4c9380211502c5ce4b9322810d4052b5755aa5d83f0b579",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "OSD_FileIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator",
+      "status": "implemented",
+      "notes": "Class record: OSD_FileIterator is ported as the type rustycad_tkernel::osd::FileIterator; each member is mapped by its own row."
     },
     {
       "upstream_id": "Units::UnitsFile(const char* const)",
@@ -104273,6 +104517,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "62a52d7049f2b7228c56ae71404eb3841e4b6a55b2897cf70fe3ba78d04bbbab",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Storage",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Storage/Storage.hxx",
+      "rust_item": "rustycad_tkernel::storage",
+      "status": "implemented",
+      "notes": "Class record: Storage is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkernel::storage, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "Storage_BaseDriver::DEFINE_STANDARD_RTTIEXT(Storage_BaseDriver,Standard_Transient)",
@@ -112417,6 +112669,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "GeomLProp",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop",
+      "status": "implemented",
+      "notes": "Class record: GeomLProp is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::geom_lprop, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "GeomLProp_CLPropsBase(const CurveType&,int,double)",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
@@ -113073,6 +113333,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "6cb9a4780108ef31dfb1dc7a9c6c16cd5cca41c9362bd49b76a72bcb7451baa6",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "GProp",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop",
+      "status": "implemented",
+      "notes": "Class record: GProp is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::gprop, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "GProp_CelGProps::GProp_CelGProps()",
@@ -114127,6 +114395,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "d09a08a957f3fdd9ece3e21b549ba40e12a78c951ccfd743883a50d13e83d8db",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Hermit",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Hermit/Hermit.hxx",
+      "rust_item": "rustycad_tkgeombase::hermit",
+      "status": "implemented",
+      "notes": "Class record: Hermit is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::hermit, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "ExtremaPC2d::IsValidTolerance(double)",
@@ -117657,6 +117933,26 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "GeomTools",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools",
+      "status": "implemented",
+      "notes": "Class record: GeomTools is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::geom_tools, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "GeomTools_UndefinedTypeHandler",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler",
+      "rust_items": [
+        "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler",
+        "rustycad_tkgeombase::geom_tools::UndefinedTypeHandlerBase"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class GeomTools_UndefinedTypeHandler is split into trait rustycad_tkgeombase::geom_tools::UndefinedTypeHandler (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkgeombase::geom_tools::UndefinedTypeHandlerBase (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "GeomTools_CurveSet::GeomTools_CurveSet()",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
@@ -121044,6 +121340,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "TopExp",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp",
+      "status": "implemented",
+      "notes": "Class record: TopExp is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::topexp, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "TopExp_Explorer()",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
@@ -121280,6 +121584,14 @@
       "rust_item": "rustycad_tkbrep::toptools::format_version::UPPER",
       "status": "implemented",
       "notes": "Manual TopTools mapping: the TopTools_FormatVersion enumerators (and the unnamed LOWER/UPPER bounds) are the i32 constants of toptools::format_version, because the format number is an int compared and indexed as one. Compared with OCCT by the br_shapeset and br_setread probes."
+    },
+    {
+      "upstream_id": "(unnamed enum at src/ModelingData/TKBRep/TopTools/TopTools_FormatVersion.hxx:31:1)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_FormatVersion.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::format_version",
+      "status": "implemented",
+      "notes": "Unnamed enum record ((unnamed enum at src/ModelingData/TKBRep/TopTools/TopTools_FormatVersion.hxx:31:1)): C++ declares the enumerators in an anonymous enum used as integer constants; Rust declares them as constants of module rustycad_tkbrep::toptools::format_version, each mapped by its own row."
     },
     {
       "upstream_id": "TopTools_LocationSet::TopTools_LocationSet()",
@@ -121772,6 +122084,18 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "a8698d96058ec04542488f2864fa93e2a28705e5f7389a9049d8eca95fd4e2b1",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet",
+      "rust_items": [
+        "rustycad_tkbrep::toptools::ShapeSet",
+        "rustycad_tkbrep::toptools::TopToolsShapeSet"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class TopTools_ShapeSet is split into trait rustycad_tkbrep::toptools::ShapeSet (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkbrep::toptools::TopToolsShapeSet (its shared state); each member is mapped by its own row."
     },
     {
       "upstream_id": "BRep_Builder::MakeFace(TopoDS_Face&) const",
@@ -123879,6 +124203,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRep_PointsOnSurface",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRep/BRep_PointsOnSurface.hxx",
+      "rust_item": "rustycad_tkbrep::brep::BRepPointsOnSurface",
+      "rust_items": [
+        "rustycad_tkbrep::brep::BRepPointsOnSurface",
+        "rustycad_tkbrep::brep::PointsOnSurfaceBase"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class BRep_PointsOnSurface is split into trait rustycad_tkbrep::brep::BRepPointsOnSurface (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkbrep::brep::PointsOnSurfaceBase (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRep_Polygon3D::BRep_Polygon3D(const occ::handle<Poly_Polygon3D>&,const TopLoc_Location&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRep/BRep_Polygon3D.hxx",
@@ -125593,6 +125929,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BinTools",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools.hxx",
+      "rust_item": "rustycad_tkbrep::bintools",
+      "status": "implemented",
+      "notes": "Class record: BinTools is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::bintools, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BinTools_FormatVersion",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BinTools/BinTools_FormatVersion.hxx",
@@ -125655,6 +125999,14 @@
       "rust_item": "rustycad_tkbrep::bintools::format_version::UPPER",
       "status": "implemented",
       "notes": "Manual BinTools mapping (native file format kept as ported, user decision 2026-09): the enumerators are constants with the native values. Compared with OCCT by the bintools probes."
+    },
+    {
+      "upstream_id": "(unnamed enum at src/ModelingData/TKBRep/BinTools/BinTools_FormatVersion.hxx:33:1)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_FormatVersion.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::format_version",
+      "status": "implemented",
+      "notes": "Unnamed enum record ((unnamed enum at src/ModelingData/TKBRep/BinTools/BinTools_FormatVersion.hxx:33:1)): C++ declares the enumerators in an anonymous enum used as integer constants; Rust declares them as constants of module rustycad_tkbrep::bintools::format_version, each mapped by its own row."
     },
     {
       "upstream_id": "BinTools_ObjectType",
@@ -126967,6 +127319,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BinTools_ShapeSetBase",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSetBase.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSetBase",
+      "rust_items": [
+        "rustycad_tkbrep::bintools::BinShapeSetBase",
+        "rustycad_tkbrep::bintools::ShapeSetBaseData"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class BinTools_ShapeSetBase is split into trait rustycad_tkbrep::bintools::BinShapeSetBase (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkbrep::bintools::ShapeSetBaseData (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BinTools_ShapeSet::BinTools_ShapeSet()",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
@@ -127233,6 +127597,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "c35766d3dfb51e59b7e35669b5c8d54a16e1a1c3f747477817ea206e963e48ad",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BinTools_ShapeSet",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BinTools/BinTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::bintools::BinShapeSet",
+      "status": "implemented",
+      "notes": "Class record: BinTools_ShapeSet is ported as the type rustycad_tkbrep::bintools::BinShapeSet; each member is mapped by its own row."
     },
     {
       "upstream_id": "BinTools_ShapeWriter::BinTools_ShapeWriter()",
@@ -127833,6 +128205,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "db7cd2636f19e68e1875b38af08f87420a7b6b5c325c27f9e13c50d3dc0f5357",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepTools",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepTools/BRepTools.hxx",
+      "rust_item": "rustycad_tkbrep::brep_tools",
+      "status": "implemented",
+      "notes": "Class record: BRepTools is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_tools, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepTools_CopyModification::BRepTools_CopyModification(bool,bool)",
@@ -130533,6 +130913,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepLProp",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepLProp/BRepLProp.hxx",
+      "rust_item": "rustycad_tkbrep::brep_lprop",
+      "status": "implemented",
+      "notes": "Class record: BRepLProp is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_lprop, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepLProp_SurfaceTool::Value(const BRepAdaptor_Surface&,double,double,gp_Pnt&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepLProp/BRepLProp_SurfaceTool.hxx",
@@ -131433,6 +131821,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "246255df59d968b27de9f1a6ea886cedf94568fedb7c4758bc202da75d721206",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "AppParCurves",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves",
+      "status": "implemented",
+      "notes": "Class record: AppParCurves is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::app_par_curves, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "AppParCurves_Constraint",
@@ -137261,6 +137657,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BndLib",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/BndLib/BndLib.hxx",
+      "rust_item": "rustycad_tkgeombase::bnd_lib",
+      "status": "implemented",
+      "notes": "Class record: BndLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::bnd_lib, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BndLib_Add2dCurve::Add(const Adaptor2d_Curve2d&,double,Bnd_Box2d&)",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/BndLib/BndLib_Add2dCurve.hxx",
@@ -139749,6 +140153,14 @@
       "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
     },
     {
+      "upstream_id": "AdvApp2Var_ApproxF2var",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var",
+      "status": "implemented",
+      "notes": "Class record: AdvApp2Var_ApproxF2var is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::adv_app2var::approx_f2var, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "AdvApp2Var_Context()",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
@@ -141655,6 +142067,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "1887e0a9cae421470a4469c2d7b7f3564118fe51fbba86863f65c1b8279867ed",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Geom2dConvert",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert",
+      "status": "implemented",
+      "notes": "Class record: Geom2dConvert is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::geom2d_convert, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "Geom2dConvert_ApproxArcsSegments::Status",
@@ -147595,6 +148015,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "GeomConvert",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert",
+      "status": "implemented",
+      "notes": "Class record: GeomConvert is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::geom_convert, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "GeomConvert_ApproxCurve::GeomConvert_ApproxCurve(const occ::handle<Geom_Curve>&,double,GeomAbs_Shape,int,int)",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxCurve.hxx",
@@ -149399,6 +149827,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "e7f90321ffbcc86f60196a9e96f6df481155be3a75e842bcd1211d10b15f32d9",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "GeomLib",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib",
+      "status": "implemented",
+      "notes": "Class record: GeomLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::geom_lib, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "GeomLib_Check2dBSplineCurve::GeomLib_Check2dBSplineCurve(const occ::handle<Geom2d_BSplineCurve>&,double,double)",
@@ -153721,6 +154157,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ProjLib",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/ProjLib/ProjLib.hxx",
+      "rust_item": "rustycad_tkgeombase::proj_lib",
+      "status": "implemented",
+      "notes": "Class record: ProjLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::proj_lib, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "ProjLib_CompProjectedCurve::ProjLib_CompProjectedCurve()",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/ProjLib/ProjLib_CompProjectedCurve.hxx",
@@ -155253,6 +155697,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "GeomProjLib",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomProjLib/GeomProjLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_proj_lib",
+      "status": "implemented",
+      "notes": "Class record: GeomProjLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::geom_proj_lib, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepGraphInc_BitFlags::BRepGraphInc_BitFlags()",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_BitFlags.hxx",
@@ -155405,6 +155857,14 @@
       "rust_item": "rustycad_tkbrep::brep_graph_inc::ParityOrientation::is_reversed",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ParityOrientation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_ParityOrientation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::ParityOrientation",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::ParityOrientation is ported as the type rustycad_tkbrep::brep_graph_inc::ParityOrientation; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepGraphInc_Populate::BuildStatus",
@@ -155726,6 +156186,22 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "7c081c8ad603c30258fcac028b31822015f626151b1bb56665594185231a4c2b",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct::Cache",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::reconstruct::Cache",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc_Reconstruct::Cache is ported as the type rustycad_tkbrep::brep_graph_inc::reconstruct::Cache; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct::Cache::TempScope",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::reconstruct::Cache",
+      "status": "excluded",
+      "notes": "Excluded: RAII scope that resets the cache temporary NCollection_IncAllocator around one reconstruction. The Rust reconstruct::Cache allocates through Vec and HashSet values that Drop frees, so there is no allocator to reset and the scope has no counterpart."
     },
     {
       "upstream_id": "BRepGraph_RepId::Kind",
@@ -156126,6 +156602,14 @@
       "rust_item": "rustycad_tkbrep::brep_graph::TypedId::START_INDEX",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepId",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_RepId is ported as the type rustycad_tkbrep::brep_graph::RepId; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepGraphInc_Storage::BRepGraphInc_Storage()",
@@ -159633,6 +160117,14 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
     },
     {
+      "upstream_id": "BRepGraph_NodeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeId",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_NodeId is ported as the type rustycad_tkbrep::brep_graph::NodeId; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepGraph_ParallelPolicy::WorkerCount()",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ParallelPolicy.hxx",
@@ -160306,6 +160798,14 @@
       "rust_item": "rustycad_tkbrep::brep_graph::TypedId::START_INDEX",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefId",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_RefId is ported as the type rustycad_tkbrep::brep_graph::RefId; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepGraph_RefUID()",
@@ -163680,6 +164180,22 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepGraph_Compact::Result",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Compact.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::compact::CompactResult",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Compact::Result is ported as the type rustycad_tkbrep::brep_graph::compact::CompactResult; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Compact::Options",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Compact.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::compact::Options",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Compact::Options is ported as the type rustycad_tkbrep::brep_graph::compact::Options; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepGraph_Deduplicate::Perform(BRepGraph&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Deduplicate.hxx",
@@ -163937,6 +164453,22 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "dd93ebefa727f697d02015325445d29ba6a26d9fe5625b4b4609e5a96f6b44c0",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepGraph_Deduplicate::Options",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Deduplicate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::deduplicate::Options",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Deduplicate::Options is ported as the type rustycad_tkbrep::brep_graph::deduplicate::Options; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Deduplicate::Result",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Deduplicate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::deduplicate::DeduplicateResult",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Deduplicate::Result is ported as the type rustycad_tkbrep::brep_graph::deduplicate::DeduplicateResult; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepGraph_DefsIterator::ShellOfSolidTraits::IsParentValid(const BRepGraph&,const BRepGraph_DefsIterator::BaseTraits<struct BRepGraph_NodeId::Typed<BRepGraph_NodeId::Kind::Solid>,struct BRepGraph_RefId::Typed<BRepGraph_RefId::Kind::Shell>,struct BRepGraphInc::ShellRef,struct BRepGraph_NodeId::Typed<BRepGraph_NodeId::Kind::Shell>,struct BRepGraphInc::ShellDef>::ParentId)",
@@ -164584,6 +165116,78 @@
       "rust_item": "rustycad_tkbrep::brep_graph::VertexId",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::ShellOfSolidTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ShellOfSolidTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_DefsIterator::ShellOfSolidTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::ShellOfSolidTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::EdgeOfWireTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::EdgeOfWireTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_DefsIterator::EdgeOfWireTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::EdgeOfWireTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::SolidOfCompSolidTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::SolidOfCompSolidTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_DefsIterator::SolidOfCompSolidTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::SolidOfCompSolidTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::WireOfFaceTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::WireOfFaceTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_DefsIterator::WireOfFaceTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::WireOfFaceTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::DefsVertexOfEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::defs_iterator::DefsVertexOfEdge",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_DefsIterator::DefsVertexOfEdge is ported as the type rustycad_tkbrep::brep_graph::defs_iterator::DefsVertexOfEdge; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::CoEdgeOfWireTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::CoEdgeOfWireTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_DefsIterator::CoEdgeOfWireTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::CoEdgeOfWireTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::FaceOfShellTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::FaceOfShellTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_DefsIterator::FaceOfShellTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::FaceOfShellTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::OccurrenceOfProductTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::OccurrenceOfProductTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_DefsIterator::OccurrenceOfProductTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::OccurrenceOfProductTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::ChildOfCompoundTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ChildOfCompoundTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_DefsIterator::ChildOfCompoundTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::ChildOfCompoundTraits; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepGraph_IteratorDetail::NodeTraits<BRepGraphInc::SolidDef>::Count(const BRepGraph&)",
@@ -166418,6 +167022,70 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
     },
     {
+      "upstream_id": "BRepGraph_RefsIterator::RefsVertexOfEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::RefsVertexOfEdge",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_RefsIterator::RefsVertexOfEdge is ported as the type rustycad_tkbrep::brep_graph::refs_iterator::RefsVertexOfEdge; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::ChildOfCompoundTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ChildOfCompoundTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_RefsIterator::ChildOfCompoundTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::ChildOfCompoundTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::SolidOfCompSolidTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::SolidOfCompSolidTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_RefsIterator::SolidOfCompSolidTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::SolidOfCompSolidTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::OccurrenceOfProductTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::OccurrenceOfProductTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_RefsIterator::OccurrenceOfProductTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::OccurrenceOfProductTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::CoEdgeOfWireTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::CoEdgeOfWireTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_RefsIterator::CoEdgeOfWireTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::CoEdgeOfWireTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::WireOfFaceTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::WireOfFaceTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_RefsIterator::WireOfFaceTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::WireOfFaceTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::FaceOfShellTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::FaceOfShellTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_RefsIterator::FaceOfShellTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::FaceOfShellTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::ShellOfSolidTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ShellOfSolidTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_RefsIterator::ShellOfSolidTraits is ported as the type rustycad_tkbrep::brep_graph::parent_traits::ShellOfSolidTraits; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepGraph_RelatedIterator::RelationKind",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RelatedIterator.hxx",
@@ -167861,6 +168529,94 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepGraph_ReverseIterator::FaceFromEdgeCoEdgeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::FaceFromEdgeCoEdgeTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::FaceFromEdgeCoEdgeTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::FaceFromEdgeCoEdgeTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::EdgeOfVertexRefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::EdgeOfVertexRefTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::EdgeOfVertexRefTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::EdgeOfVertexRefTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::OccurrenceFromOccurrenceRefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::OccurrenceFromOccurrenceRefTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::OccurrenceFromOccurrenceRefTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::OccurrenceFromOccurrenceRefTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::FaceFromWireRefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::FaceFromWireRefTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::FaceFromWireRefTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::FaceFromWireRefTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::WireOfCoEdgeUsageTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::WireOfCoEdgeUsageTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::WireOfCoEdgeUsageTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::WireOfCoEdgeUsageTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::CompoundFromChildRefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::CompoundFromChildRefTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::CompoundFromChildRefTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::CompoundFromChildRefTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::SolidFromShellRefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::SolidFromShellRefTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::SolidFromShellRefTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::SolidFromShellRefTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::WireFromEdgeCoEdgeTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::WireFromEdgeCoEdgeTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::WireFromEdgeCoEdgeTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::WireFromEdgeCoEdgeTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::ProductFromOccurrenceRefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::ProductFromOccurrenceRefTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::ProductFromOccurrenceRefTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::ProductFromOccurrenceRefTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::CompSolidFromSolidRefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::CompSolidFromSolidRefTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::CompSolidFromSolidRefTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::CompSolidFromSolidRefTraits; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_ReverseIterator::ShellFromFaceRefTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ReverseIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::reverse_iterator::ShellFromFaceRefTraits",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_ReverseIterator::ShellFromFaceRefTraits is ported as the type rustycad_tkbrep::brep_graph::reverse_iterator::ShellFromFaceRefTraits; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepGraph_Tool::Vertex::Usage(const BRepGraph&,BRepGraph_VertexRefId)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Tool.hxx",
@@ -168484,6 +169240,54 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor."
     },
     {
+      "upstream_id": "BRepGraph_Tool::CoEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Tool.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::tool::co_edge",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Tool::CoEdge is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::tool::co_edge, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Tool::Edge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Tool.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::tool::edge",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Tool::Edge is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::tool::edge, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Tool::Face",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Tool.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::tool::face",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Tool::Face is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::tool::face, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Tool::Vertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Tool.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::tool::vertex",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Tool::Vertex is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::tool::vertex, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Tool::Wire",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Tool.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::tool::wire",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Tool::Wire is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::tool::wire, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Tool::Shell",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Tool.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::tool::shell",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Tool::Shell is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::tool::shell, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepGraph::TopoView::EdgeOps::WiresOf(BRepGraph_EdgeId) const",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_TopoView.hxx",
@@ -169054,6 +169858,102 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
     },
     {
+      "upstream_id": "BRepGraphInc::CompoundDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::CompoundDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::CompoundDef is ported as the type rustycad_tkbrep::brep_graph_inc::CompoundDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::WireDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::WireDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::WireDef is ported as the type rustycad_tkbrep::brep_graph_inc::WireDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CoEdgeDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::CoEdgeDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::CoEdgeDef is ported as the type rustycad_tkbrep::brep_graph_inc::CoEdgeDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::SolidDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::SolidDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::SolidDef is ported as the type rustycad_tkbrep::brep_graph_inc::SolidDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::BaseDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::BaseDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::BaseDef is ported as the type rustycad_tkbrep::brep_graph_inc::BaseDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::OccurrenceDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::OccurrenceDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::OccurrenceDef is ported as the type rustycad_tkbrep::brep_graph_inc::OccurrenceDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::VertexDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::VertexDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::VertexDef is ported as the type rustycad_tkbrep::brep_graph_inc::VertexDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CompSolidDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::CompSolidDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::CompSolidDef is ported as the type rustycad_tkbrep::brep_graph_inc::CompSolidDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::EdgeDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::EdgeDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::EdgeDef is ported as the type rustycad_tkbrep::brep_graph_inc::EdgeDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ShellDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::ShellDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::ShellDef is ported as the type rustycad_tkbrep::brep_graph_inc::ShellDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::FaceDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::FaceDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::FaceDef is ported as the type rustycad_tkbrep::brep_graph_inc::FaceDef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ProductDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::ProductDef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::ProductDef is ported as the type rustycad_tkbrep::brep_graph_inc::ProductDef; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepGraphInc_Load::Counts::NbChildRefs",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Load.hxx",
@@ -169268,6 +170168,14 @@
       "rust_item": "rustycad_tkbrep::brep_graph_inc",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. The BRepGraphInc_Load namespace holds only Counts, which the brep_graph_inc module exports as LoadCounts."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Load::Counts",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Load.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::LoadCounts",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc_Load::Counts is ported as the type rustycad_tkbrep::brep_graph_inc::LoadCounts; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepGraphInc::BaseRef::UID",
@@ -169518,6 +170426,70 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
     },
     {
+      "upstream_id": "BRepGraphInc::WireRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::WireRef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::WireRef is ported as the type rustycad_tkbrep::brep_graph_inc::WireRef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::OccurrenceRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::OccurrenceRef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::OccurrenceRef is ported as the type rustycad_tkbrep::brep_graph_inc::OccurrenceRef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::FaceRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::FaceRef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::FaceRef is ported as the type rustycad_tkbrep::brep_graph_inc::FaceRef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::VertexRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::VertexRef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::VertexRef is ported as the type rustycad_tkbrep::brep_graph_inc::VertexRef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::SolidRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::SolidRef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::SolidRef is ported as the type rustycad_tkbrep::brep_graph_inc::SolidRef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ShellRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::ShellRef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::ShellRef is ported as the type rustycad_tkbrep::brep_graph_inc::ShellRef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ChildRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::ChildRef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::ChildRef is ported as the type rustycad_tkbrep::brep_graph_inc::ChildRef; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::BaseRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::BaseRef",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::BaseRef is ported as the type rustycad_tkbrep::brep_graph_inc::BaseRef; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepGraphInc::CompSolidRelations::SolidRefIds",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
@@ -169628,6 +170600,86 @@
       "rust_item": "rustycad_tkbrep::brep_graph_inc::WireRelations::parent_wire_ref_ids",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraphInc::VertexRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::VertexRelations",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::VertexRelations is ported as the type rustycad_tkbrep::brep_graph_inc::VertexRelations; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::EdgeRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::EdgeRelations",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::EdgeRelations is ported as the type rustycad_tkbrep::brep_graph_inc::EdgeRelations; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ShellRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::ShellRelations",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::ShellRelations is ported as the type rustycad_tkbrep::brep_graph_inc::ShellRelations; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::OccurrenceRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::OccurrenceRelations",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::OccurrenceRelations is ported as the type rustycad_tkbrep::brep_graph_inc::OccurrenceRelations; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::SolidRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::SolidRelations",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::SolidRelations is ported as the type rustycad_tkbrep::brep_graph_inc::SolidRelations; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ProductRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::ProductRelations",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::ProductRelations is ported as the type rustycad_tkbrep::brep_graph_inc::ProductRelations; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CompSolidRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::CompSolidRelations",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::CompSolidRelations is ported as the type rustycad_tkbrep::brep_graph_inc::CompSolidRelations; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::FaceRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::FaceRelations",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::FaceRelations is ported as the type rustycad_tkbrep::brep_graph_inc::FaceRelations; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CompoundRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::CompoundRelations",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::CompoundRelations is ported as the type rustycad_tkbrep::brep_graph_inc::CompoundRelations; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::WireRelations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Relations.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::WireRelations",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::WireRelations is ported as the type rustycad_tkbrep::brep_graph_inc::WireRelations; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepGraphInc::CoEdgeCurve2DRep::Curve",
@@ -169828,6 +170880,62 @@
       "rust_item": "rustycad_tkbrep::brep_graph::FaceTriangulationRepId",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CoEdgePolygon2DRep",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::CoEdgePolygon2DRep",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::CoEdgePolygon2DRep is ported as the type rustycad_tkbrep::brep_graph_inc::CoEdgePolygon2DRep; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CoEdgePolygonOnTriRep",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::CoEdgePolygonOnTriRep",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::CoEdgePolygonOnTriRep is ported as the type rustycad_tkbrep::brep_graph_inc::CoEdgePolygonOnTriRep; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::EdgePolygon3DRep",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::EdgePolygon3DRep",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::EdgePolygon3DRep is ported as the type rustycad_tkbrep::brep_graph_inc::EdgePolygon3DRep; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CoEdgeCurve2DRep",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::CoEdgeCurve2DRep",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::CoEdgeCurve2DRep is ported as the type rustycad_tkbrep::brep_graph_inc::CoEdgeCurve2DRep; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::EdgeCurve3DRep",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::EdgeCurve3DRep",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::EdgeCurve3DRep is ported as the type rustycad_tkbrep::brep_graph_inc::EdgeCurve3DRep; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::FaceTriangulationRep",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::FaceTriangulationRep",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::FaceTriangulationRep is ported as the type rustycad_tkbrep::brep_graph_inc::FaceTriangulationRep; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc::FaceSurfaceRep",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::FaceSurfaceRep",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc::FaceSurfaceRep is ported as the type rustycad_tkbrep::brep_graph_inc::FaceSurfaceRep; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepGraph::LayerRegistry()",
@@ -174915,6 +176023,78 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepGraph_Data",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::BRepGraph",
+      "status": "excluded",
+      "notes": "Excluded: BRepGraph_Data is the internal pimpl storage of BRepGraph (forward-declared in BRepGraph.hxx, reached only through BRepGraph::data()). Rust keeps the same storage as crate-private fields of brep_graph::BRepGraph (inc_storage, layers, caches) and builds the views on demand."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Validate is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::validate, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Copy",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::copy",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Copy is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::copy, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Deduplicate",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::deduplicate",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Deduplicate is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::deduplicate, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Transform",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::transform",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Transform is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::transform, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Populate",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::populate",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc_Populate is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph_inc::populate, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Tool",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::tool",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Tool is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::tool, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Compact",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::compact",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Compact is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph::compact, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::reconstruct",
+      "status": "implemented",
+      "notes": "Class record: BRepGraphInc_Reconstruct is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkbrep::brep_graph_inc::reconstruct, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepGraph_DeferredScope::BRepGraph_DeferredScope(BRepGraph&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DeferredScope.hxx",
@@ -176321,6 +177501,110 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
     },
     {
+      "upstream_id": "BRepGraph::EditorView::GenOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::GenOps is ported as the type rustycad_tkbrep::brep_graph::editor::GenOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompoundOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompoundOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::CompoundOps is ported as the type rustycad_tkbrep::brep_graph::editor::CompoundOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::WireOps is ported as the type rustycad_tkbrep::brep_graph::editor::WireOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::CoEdgeOps is ported as the type rustycad_tkbrep::brep_graph::editor::CoEdgeOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::VertexOps is ported as the type rustycad_tkbrep::brep_graph::editor::VertexOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::SolidOps is ported as the type rustycad_tkbrep::brep_graph::editor::SolidOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::ShellOps is ported as the type rustycad_tkbrep::brep_graph::editor::ShellOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::BoundaryIssue",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::BoundaryIssue",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::BoundaryIssue is ported as the type rustycad_tkbrep::brep_graph::editor::BoundaryIssue; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::FaceOps is ported as the type rustycad_tkbrep::brep_graph::editor::FaceOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::EdgeOps is ported as the type rustycad_tkbrep::brep_graph::editor::EdgeOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompSolidOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompSolidOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::CompSolidOps is ported as the type rustycad_tkbrep::brep_graph::editor::CompSolidOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ProductOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ProductOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::ProductOps is ported as the type rustycad_tkbrep::brep_graph::editor::ProductOps; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::OccurrenceOps",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::OccurrenceOps",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::EditorView::OccurrenceOps is ported as the type rustycad_tkbrep::brep_graph::editor::OccurrenceOps; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepGraph_MutGuard(BRepGraph&,BRepGraphInc_Storage&,T*,TypeId)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
@@ -176555,6 +177839,22 @@
       "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::AddResult::topology_root",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::Result",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::AddResult",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::ShapesView::Result is ported as the type rustycad_tkbrep::brep_graph::shapes_view::AddResult; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::Options",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::Options",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph::ShapesView::Options is ported as the type rustycad_tkbrep::brep_graph::shapes_view::Options; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepGraph_SupplementEditor::BRepGraph_SupplementEditor(BRepGraph&)",
@@ -177034,6 +178334,30 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "6b96066fc0d9c960cbd636e4ba535fbda2bb528318b5a264d2754c00ee9ce080",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Options",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::Options",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Validate::Options is ported as the type rustycad_tkbrep::brep_graph::validate::Options; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Issue",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::Issue",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Validate::Issue is ported as the type rustycad_tkbrep::brep_graph::validate::Issue; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Result",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::ValidationResult",
+      "status": "implemented",
+      "notes": "Class record: BRepGraph_Validate::Result is ported as the type rustycad_tkbrep::brep_graph::validate::ValidationResult; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepGraph_Transform::MoveRef(BRepGraph&,BRepGraph_ChildRefId,const gp_Trsf&)",
@@ -177532,6 +178856,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "fa6841f2685c8c49609bddd94d9b6ea5d29f4f96da21f6454dba5912df20501a",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Intf",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf",
+      "status": "implemented",
+      "notes": "Class record: Intf is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeomalgo::intf, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "Intf_PIType",
@@ -178964,6 +180296,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "d001fa66a38e09f2ccd9a3efc47255534dd0c6adaec85c6e2450b345d6680fd9",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "GccEnt",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent",
+      "status": "implemented",
+      "notes": "Class record: GccEnt is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeomalgo::gcc_ent, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "GccEnt_BadQualifier",
@@ -183213,6 +184553,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "IntImpParGen",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen",
+      "status": "implemented",
+      "notes": "Class record: IntImpParGen is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeomalgo::int_imp_par_gen, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "NormalizeOnDomain(double&,const IntRes2d_Domain&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen_Tool.hxx",
@@ -187111,6 +188459,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "IntSurf",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf",
+      "status": "implemented",
+      "notes": "Class record: IntSurf is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeomalgo::int_surf, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "IntSurf_Couple::IntSurf_Couple()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Couple.hxx",
@@ -188760,6 +190116,14 @@
       "notes": "Class record: ported as a type, rustycad_tkgeomalgo::law::LawLinear (evidence: RuntimeTyped::TYPE_NAME); each member is mapped by its own row.",
       "cpp_declaration_id": "1813362f649f709bf15eb420360911dab7aa37346f51de09689ed60b636ae881",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Law",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law",
+      "status": "implemented",
+      "notes": "Class record: Law is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeomalgo::law, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "Law_BSpFunc::Law_BSpFunc()",
@@ -191986,6 +193350,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "LocalAnalysis",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis",
+      "status": "implemented",
+      "notes": "Class record: LocalAnalysis is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeomalgo::local_analysis, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "LocalAnalysis_CurveContinuity::LocalAnalysis_CurveContinuity(const occ::handle<Geom_Curve>&,double,const occ::handle<Geom_Curve>&,double,GeomAbs_Shape,double,double,double,double,double,double,double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
@@ -193732,6 +195104,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "FairCurve_Energy",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel",
+      "rust_items": [
+        "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel",
+        "rustycad_tkgeomalgo::fair_curve::FairCurveEnergy"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class FairCurve_Energy is split into trait rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkgeomalgo::fair_curve::FairCurveEnergy (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "FairCurve_EnergyOfBatten::FairCurve_EnergyOfBatten(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,int,const FairCurve_BattenLaw&,double,bool,double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfBatten.hxx",
@@ -194985,6 +196369,18 @@
       "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. A Rust port of the class needs no callable counterpart.",
       "cpp_declaration_id": "44554f3b52e4d57730a0e87d0dbc71c88845fac8548275e7264e6b161d2e2f01",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPointDump",
+      "rust_items": [
+        "rustycad_tkgeomalgo::hatch_gen::IntersectionPointDump",
+        "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class HatchGen_IntersectionPoint is split into trait rustycad_tkgeomalgo::hatch_gen::IntersectionPointDump (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkgeomalgo::hatch_gen::IntersectionPoint (its shared state); each member is mapped by its own row."
     },
     {
       "upstream_id": "HatchGen_PointOnElement::HatchGen_PointOnElement()",
@@ -196869,6 +198265,14 @@
       "notes": "Class record: ported as a type, rustycad_tkgeomalgo::geom2d_gcc::QualifiedCurve (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "2fc7820143dee7f165d4ce8a6e096da0371cc1bb05043eb6319ee0713345d4bc",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Geom2dGcc",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc",
+      "status": "implemented",
+      "notes": "Class record: Geom2dGcc is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeomalgo::geom2d_gcc, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "Geom2dGcc_Circ2d2TanOn::Geom2dGcc_Circ2d2TanOn(const Geom2dGcc_QualifiedCurve&,const Geom2dGcc_QualifiedCurve&,const Geom2dAdaptor_Curve&,double,double,double,double)",
@@ -208812,6 +210216,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "GeomAPI",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_api",
+      "status": "implemented",
+      "notes": "Class record: GeomAPI is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeomalgo::geom_api, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "GeomAPI_ExtremaCurveCurve::GeomAPI_ExtremaCurveCurve()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomAPI/GeomAPI_ExtremaCurveCurve.hxx",
@@ -214630,6 +216042,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "IntPatch_TheIWalking",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheIWalking",
+      "status": "implemented",
+      "notes": "Class record: IntPatch_TheIWalking is ported as the type alias rustycad_tkgeomalgo::int_patch::IntPatchTheIWalking; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "IntPatch_ThePathPointOfTheSOnBounds::IntPatch_ThePathPointOfTheSOnBounds()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ThePathPointOfTheSOnBounds.hxx",
@@ -215945,6 +217365,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "69484ebc8931ddf35f8adfe4f1baa1811662eef237464c66d4e9684133150bae",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "GeomFill",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill",
+      "status": "implemented",
+      "notes": "Class record: GeomFill is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeomalgo::geom_fill, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "GeomFill_AppSweep()",
@@ -222351,6 +223779,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "IntPatch_PolyhedronBVH",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH",
+      "status": "implemented",
+      "notes": "Class record: IntPatch_PolyhedronBVH is ported as the type rustycad_tkgeomalgo::int_patch::IntPatchPolyhedronBVH; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "IntPatch_ImpImpIntersection::IntPatch_ImpImpIntersection()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
@@ -222537,6 +223973,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "05fe82da9c50a18b3e2064987911aad9ceccd22910989a849b260d39dbccdc39",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection",
+      "status": "implemented",
+      "notes": "Class record: IntPatch_ImpImpIntersection is ported as the type rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection; each member is mapped by its own row."
     },
     {
       "upstream_id": "IntPatch_ImpPrmIntersection::IntPatch_ImpPrmIntersection()",
@@ -222927,6 +224371,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "IntPatch_PolyArc",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyArc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyArc",
+      "status": "implemented",
+      "notes": "Class record: IntPatch_PolyArc is ported as the type rustycad_tkgeomalgo::int_patch::IntPatchPolyArc; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "IntPatch_PolyLine::IntPatch_PolyLine()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyLine.hxx",
@@ -223041,6 +224493,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "21961446c12dee72d0a0cb6415507e22a21f1dc64cf48a1371636e57e67a0bf0",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "IntPatch_PolyLine",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PolyLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolyLine",
+      "status": "implemented",
+      "notes": "Class record: IntPatch_PolyLine is ported as the type rustycad_tkgeomalgo::int_patch::IntPatchPolyLine; each member is mapped by its own row."
     },
     {
       "upstream_id": "IntPatch_Polygo::Error() const",
@@ -223172,6 +224632,18 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "58d1ef207cc981a318f815edc6b20de9e60023228c22ad9bab3f285d74e8ddbd",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "IntPatch_Polygo",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polygo.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo",
+      "rust_items": [
+        "rustycad_tkgeomalgo::int_patch::IntPatchPolygo",
+        "rustycad_tkgeomalgo::int_patch::IntPatchPolygoBase"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class IntPatch_Polygo is split into trait rustycad_tkgeomalgo::int_patch::IntPatchPolygo (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkgeomalgo::int_patch::IntPatchPolygoBase (its shared state); each member is mapped by its own row."
     },
     {
       "upstream_id": "IntPatch_Polyhedron::IntPatch_Polyhedron(const occ::handle<Adaptor3d_Surface>&,int,int)",
@@ -228695,6 +230167,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "5e346b447aaf5b9f471b67bc949ce5318221e4207c5a992008098b61f7d271eb",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Bisector",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/Bisector/Bisector.hxx",
+      "rust_item": "rustycad_tktopalgo::bisector",
+      "status": "implemented",
+      "notes": "Class record: Bisector is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tktopalgo::bisector, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "Bisector_Bisec::Bisector_Bisec()",
@@ -234855,6 +236335,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ApproxInt_SvSurfaces",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_SvSurfaces.hxx",
+      "rust_item": "rustycad_tkgeomalgo::approx_int::ApproxIntSvSurfaces",
+      "rust_items": [
+        "rustycad_tkgeomalgo::approx_int::ApproxIntSvSurfaces",
+        "rustycad_tkgeomalgo::approx_int::ApproxIntSvSurfacesBase"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class ApproxInt_SvSurfaces is split into trait rustycad_tkgeomalgo::approx_int::ApproxIntSvSurfaces (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkgeomalgo::approx_int::ApproxIntSvSurfacesBase (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "GeomInt_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfWLApprox(math_MultipleVarFunctionWithGradient&,const math_Vector&,double,double,double,int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
@@ -240035,6 +241527,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "GeomInt",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_int",
+      "status": "implemented",
+      "notes": "Class record: GeomInt is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeomalgo::geom_int, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "IntPolyh_PointNormal::Point",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_ArrayOfPointNormal.hxx",
@@ -244112,6 +245612,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepLib",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib",
+      "status": "implemented",
+      "notes": "Class record: BRepLib is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tktopalgo::brep_lib, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepLib_MakeFace::BRepLib_MakeFace()",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_MakeFace.hxx",
@@ -245412,6 +246920,18 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "23acb334c3268879c1e2457a4c6f42ca0d662c25b53232a20b8e1109871d1f2c",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepLib_PointCloudShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepLib/BRepLib_PointCloudShape.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape",
+      "rust_items": [
+        "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape",
+        "rustycad_tktopalgo::brep_lib::BRepLibPointCloudShapeBase"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class BRepLib_PointCloudShape is split into trait rustycad_tktopalgo::brep_lib::BRepLibPointCloudShape (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tktopalgo::brep_lib::BRepLibPointCloudShapeBase (its shared state); each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepLib_BoundaryModified",
@@ -247510,6 +249030,25 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "bbbcacb7eb05e3f8285d62f88ccc685c3cda34249a5c9b5c9a3bcf776b629a81",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps::BRepGProp_MeshObjType",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::MeshObjType",
+      "status": "implemented",
+      "notes": "Class record: BRepGProp_MeshProps::BRepGProp_MeshObjType is ported as the enum rustycad_tktopalgo::brep_gprop::MeshObjType; each member is mapped by its own row.",
+      "cpp_selector": {
+        "usr": "c:@S@BRepGProp_MeshProps@EA@BRepGProp_MeshObjType"
+      }
+    },
+    {
+      "upstream_id": "BRepGProp_MeshProps",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshProps.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps",
+      "status": "implemented",
+      "notes": "Class record: BRepGProp_MeshProps is ported as the type rustycad_tktopalgo::brep_gprop::BRepGPropMeshProps; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepApprox_Approx()",
@@ -252620,6 +254159,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepBuilderAPI",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api",
+      "status": "implemented",
+      "notes": "Class record: BRepBuilderAPI is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tktopalgo::brep_builder_api, whose free functions carry its static members; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepBuilderAPI_Collect::BRepBuilderAPI_Collect()",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Collect.hxx",
@@ -256132,6 +257679,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepBuilderAPI_Command",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Command.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape",
+      "rust_items": [
+        "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape",
+        "rustycad_tktopalgo::brep_builder_api::BRepBuilderAPICommand"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class BRepBuilderAPI_Command is split into trait rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeShape (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tktopalgo::brep_builder_api::BRepBuilderAPICommand (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepBuilderAPI_DifferentPointsOnClosedCurve",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_EdgeError.hxx",
@@ -257422,6 +258981,18 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(BRepBuilderAPISewing, \"BRepBuilderAPI_Sewing\", StandardTransient) at crates/tktopalgo/src/brep_builder_api/sewing/mod.rs:99 registers descriptor \"BRepBuilderAPI_Sewing\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "476b1543e4ab419859043506b38b0b6d06b5c106e89a9079ea493fc0642196ec",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BRepTools_ReShape",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepBuilderAPI/BRepBuilderAPI_Sewing.hxx",
+      "rust_item": "rustycad_tkbrep::brep_tools::ReShape",
+      "rust_items": [
+        "rustycad_tkbrep::brep_tools::ReShape",
+        "rustycad_tkbrep::brep_tools::BRepToolsReShape"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class BRepTools_ReShape is split into trait rustycad_tkbrep::brep_tools::ReShape (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkbrep::brep_tools::BRepToolsReShape (its shared state); each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepBuilderAPI_DisconnectedShell",
@@ -260330,6 +261901,14 @@
       "notes": "enumerator of the enum ported as BRepExtremaFilterResult."
     },
     {
+      "upstream_id": "BRepExtrema_ElementFilter",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ElementFilter.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaElementFilter",
+      "status": "implemented",
+      "notes": "Class record: BRepExtrema_ElementFilter is ported as the trait rustycad_tktopalgo::brep_extrema::BRepExtremaElementFilter; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepExtrema_OverlapTool::intersectTrianglesExact(const int,const int)",
       "toolkit": "TKTopAlgo",
       "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_OverlapTool.hxx",
@@ -260466,6 +262045,22 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepExtremaProximityDistTool, which no derived class needs (Rust has no subclassing), read through proximity_distance()."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool",
+      "status": "implemented",
+      "notes": "Class record: BRepExtrema_ProximityDistTool is ported as the type rustycad_tktopalgo::brep_extrema::BRepExtremaProximityDistTool; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepExtrema_ProximityDistTool::PrjState",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_ProximityDistTool.hxx",
+      "rust_item": "rustycad_tktopalgo::brep_extrema::BRepExtremaPrjState",
+      "status": "implemented",
+      "notes": "Class record: BRepExtrema_ProximityDistTool::PrjState is ported as the type rustycad_tktopalgo::brep_extrema::BRepExtremaPrjState; each member is mapped by its own row."
     },
     {
       "upstream_id": "BRepExtrema_VertexInspector::Dimension",
@@ -326499,6 +328094,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "GeomEval_RepCurveDesc::Base",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDesc",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepCurveDesc::Base is ported as the trait rustycad_tkg3d::geom_eval::RepCurveDesc; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "Geom_BezierSurface::init(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
@@ -326633,6 +328236,14 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(GeomBSplineSurface, \"Geom_BSplineSurface\", dyn GeomBoundedSurface) at crates/tkg3d/src/geom/bspline_surface.rs:36 registers descriptor \"Geom_BSplineSurface\"; C++ base_type is Geom_BoundedSurface. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "65260dff5851b3c8c44af2080eccc4ce009a6cce2f788efb0793b93f60980b38",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Base",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDesc",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepSurfaceDesc::Base is ported as the trait rustycad_tkg3d::geom_eval::RepSurfaceDesc; each member is mapped by its own row."
     },
     {
       "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
@@ -337791,6 +339402,14 @@
       ]
     },
     {
+      "upstream_id": "ExtremaPC2d_GridEvaluator",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/ExtremaPC2d/ExtremaPC2d_GridEvaluator.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema_pc2d::GridEvaluator",
+      "status": "implemented",
+      "notes": "Class record: ExtremaPC2d_GridEvaluator is ported as the type alias rustycad_tkgeombase::extrema_pc2d::GridEvaluator; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "ExtremaPC::Result()",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/ExtremaPC/ExtremaPC.hxx",
@@ -338054,6 +339673,14 @@
           }
         }
       ]
+    },
+    {
+      "upstream_id": "ExtremaPC_GridEvaluator",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/ExtremaPC/ExtremaPC_GridEvaluator.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema_pc::GridEvaluator",
+      "status": "implemented",
+      "notes": "Class record: ExtremaPC_GridEvaluator is ported as the type alias rustycad_tkgeombase::extrema_pc::GridEvaluator; each member is mapped by its own row."
     },
     {
       "upstream_id": "FEmTool_LinearFlexion::DependenceTable() const",
@@ -338880,6 +340507,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Extrema_ExtPElC",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_ExtPElC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::ExtPElC",
+      "status": "implemented",
+      "notes": "Class record: Extrema_ExtPElC is ported as the type rustycad_tkgeombase::extrema::ExtPElC; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "Extrema_ExtPElC2d::IsDone() const",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_ExtPElC2d.hxx",
@@ -338978,6 +340613,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "95792379e9c2ca6853708f803a062c0b2f689c5d3f6ebe0bfd6109679e269f83",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Extrema_ExtPElC2d",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_ExtPElC2d.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::ExtPElC2d",
+      "status": "implemented",
+      "notes": "Class record: Extrema_ExtPElC2d is ported as the type rustycad_tkgeombase::extrema::ExtPElC2d; each member is mapped by its own row."
     },
     {
       "upstream_id": "Extrema_POnCurv()",
@@ -340018,6 +341661,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "AppDef_ParFunctionOfMyGradientbisOfBSplineCompute",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppDef/AppDef_BSplineCompute.hxx",
+      "rust_item": "rustycad_tkgeombase::app_def::ParFunctionOfMyGradientbisOfBSplineCompute",
+      "status": "implemented",
+      "notes": "Class record: AppDef_ParFunctionOfMyGradientbisOfBSplineCompute is ported as the type alias rustycad_tkgeombase::app_def::ParFunctionOfMyGradientbisOfBSplineCompute; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "AppDef_Compute(const AppDef_MultiLine&,int,int,double,double,int,bool,Approx_ParametrizationType,bool)",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/AppDef/AppDef_Compute.hxx",
@@ -340270,6 +341921,14 @@
       "notes": "Class record: ported as a type, rustycad_tkgeombase::app_par_curves::ResolConstraint (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "180809888c53347207cccfdddec987901793ce17f5dcc0012513929c6c4c4dd4",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "AppDef_ParFunctionOfMyGradientOfCompute",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppDef/AppDef_Compute.hxx",
+      "rust_item": "rustycad_tkgeombase::app_def::ParFunctionOfMyGradientOfCompute",
+      "status": "implemented",
+      "notes": "Class record: AppDef_ParFunctionOfMyGradientOfCompute is ported as the type alias rustycad_tkgeombase::app_def::ParFunctionOfMyGradientOfCompute; each member is mapped by its own row."
     },
     {
       "upstream_id": "AppDef_Gradient_BFGSOfMyGradientOfCompute(math_MultipleVarFunctionWithGradient&,const math_Vector&,double,double,double,int)",
@@ -340538,6 +342197,14 @@
       "notes": "Class record: ported as a type, rustycad_tkgeombase::app_par_curves::Gradient (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "5425985103f62ca111875c970d9ab48f40ced4b5d51312d2cd105f8525f6a559",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "AppDef_ParFunctionOfTheGradient",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppDef/AppDef_Gradient_BFGSOfTheGradient.hxx",
+      "rust_item": "rustycad_tkgeombase::app_def::ParFunctionOfTheGradient",
+      "status": "implemented",
+      "notes": "Class record: AppDef_ParFunctionOfTheGradient is ported as the type alias rustycad_tkgeombase::app_def::ParFunctionOfTheGradient; each member is mapped by its own row."
     },
     {
       "upstream_id": "AppDef_LinearCriteria::SetParameters(const occ::handle<NCollection_HArray1<double>>&)",
@@ -342248,6 +343915,14 @@
       "notes": "Class record: ported as a type, rustycad_tkgeombase::app_def::MultiLine (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "f0fa3aef4845b389a8bfbeb6733e76baa5a3b24468d62cee674e7d4189b10f25",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "AppDef_BSpParFunctionOfMyBSplGradientOfBSplineCompute",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppDef/AppDef_BSpGradient_BFGSOfMyBSplGradientOfBSplineCompute.hxx",
+      "rust_item": "rustycad_tkgeombase::app_def::BSpParFunctionOfMyBSplGradientOfBSplineCompute",
+      "status": "implemented",
+      "notes": "Class record: AppDef_BSpParFunctionOfMyBSplGradientOfBSplineCompute is ported as the type alias rustycad_tkgeombase::app_def::BSpParFunctionOfMyBSplGradientOfBSplineCompute; each member is mapped by its own row."
     },
     {
       "upstream_id": "ProjLib_CompProjectedCurve::ShallowCopy() const",
@@ -346837,6 +348512,14 @@
       "notes": "The class template over the tool type is the generic ToolAccess<Tool>."
     },
     {
+      "upstream_id": "LProp_CurveUtils::DirectAccess",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::DirectAccess",
+      "status": "implemented",
+      "notes": "Class record: LProp_CurveUtils::DirectAccess is ported as the type rustycad_tkgeombase::lprop::curve_access::DirectAccess; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "LProp_CLProps3d",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/LProp/LProp_CLProps3d.hxx",
@@ -346859,6 +348542,14 @@
       "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::ToolAccess",
       "status": "implemented",
       "notes": "The class template over the tool type is the generic ToolAccess<Tool>."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::DirectAccess",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::DirectAccess",
+      "status": "implemented",
+      "notes": "Class record: LProp_SurfaceUtils::DirectAccess is ported as the type rustycad_tkgeombase::geom_lprop::surface_access::DirectAccess; each member is mapped by its own row."
     },
     {
       "upstream_id": "GeomLProp_CLPropsBase",
@@ -347727,6 +349418,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ExtremaPC2d::Result",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/ExtremaPC2d/ExtremaPC2d.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema_pc_core::PcResult",
+      "status": "implemented",
+      "notes": "Class record: ExtremaPC2d::Result is ported as the type rustycad_tkgeombase::extrema_pc_core::PcResult; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "ExtremaPC::IsClosedPeriodicDomain",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/ExtremaPC/ExtremaPC.hxx",
@@ -348133,6 +349832,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ExtremaPC::Result",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/ExtremaPC/ExtremaPC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema_pc_core::PcResult",
+      "status": "implemented",
+      "notes": "Class record: ExtremaPC::Result is ported as the type rustycad_tkgeombase::extrema_pc_core::PcResult; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "GeomTools_UndefinedTypeHandler::base_type",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_UndefinedTypeHandler.hxx",
@@ -348365,6 +350072,14 @@
       "notes": "Excluded: `base_type` is the typedef that DEFINE_STANDARD_RTTIEXT generates to name the base class; Rust has no type member for it, the base is the FEmTool_ElementaryCriterion (ElementaryCriterion trait) the Rust type implements or embeds."
     },
     {
+      "upstream_id": "FEmTool_LinearFlexion",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearFlexion",
+      "status": "implemented",
+      "notes": "Class record: FEmTool_LinearFlexion is ported as the type alias rustycad_tkgeombase::fem_tool::LinearFlexion; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "FEmTool_LinearJerk::base_type",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
@@ -348373,12 +350088,28 @@
       "notes": "Excluded: `base_type` is the typedef that DEFINE_STANDARD_RTTIEXT generates to name the base class; Rust has no type member for it, the base is the FEmTool_ElementaryCriterion (ElementaryCriterion trait) the Rust type implements or embeds."
     },
     {
+      "upstream_id": "FEmTool_LinearJerk",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearJerk",
+      "status": "implemented",
+      "notes": "Class record: FEmTool_LinearJerk is ported as the type alias rustycad_tkgeombase::fem_tool::LinearJerk; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "FEmTool_LinearTension::base_type",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: `base_type` is the typedef that DEFINE_STANDARD_RTTIEXT generates to name the base class; Rust has no type member for it, the base is the FEmTool_ElementaryCriterion (ElementaryCriterion trait) the Rust type implements or embeds."
+    },
+    {
+      "upstream_id": "FEmTool_LinearTension",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearTension",
+      "status": "implemented",
+      "notes": "Class record: FEmTool_LinearTension is ported as the type alias rustycad_tkgeombase::fem_tool::LinearTension; each member is mapped by its own row."
     },
     {
       "upstream_id": "AppParCurves_TangencyPoint",
@@ -348831,6 +350562,18 @@
       "notes": "Excluded: protected data member, private state in Rust; app_cont::FunctionBase keeps it private, set by set_number_of_points and read by get_nb_of_2d_points."
     },
     {
+      "upstream_id": "AppCont_Function",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::Function",
+      "rust_items": [
+        "rustycad_tkgeombase::app_cont::Function",
+        "rustycad_tkgeombase::app_cont::FunctionBase"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class AppCont_Function is split into trait rustycad_tkgeombase::app_cont::Function (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkgeombase::app_cont::FunctionBase (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "PeriodicityInfo::isPeriodic",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_LeastSquare.hxx",
@@ -348977,6 +350720,14 @@
       "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmgaus1_",
       "status": "implemented",
       "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base",
+      "status": "implemented",
+      "notes": "Class record: AdvApp2Var_MathBase is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkgeombase::adv_app2var::math_base, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "AdvApp2Var_Incremental",
@@ -349127,6 +350878,14 @@
       "notes": "Class record: ported as a type, rustycad_tkgeombase::geom2d_convert::PPoint (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "f0336da3e596282602615658ffbd9f7625082f1df2215a9d9f29029c8c0c0eb2",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxArcsSegments",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxArcsSegments.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxArcsSegments",
+      "status": "implemented",
+      "notes": "Class record: Geom2dConvert_ApproxArcsSegments is ported as the type rustycad_tkgeombase::geom2d_convert::ApproxArcsSegments; each member is mapped by its own row."
     },
     {
       "upstream_id": "GeomConvert_MinGap",
@@ -350601,6 +352360,14 @@
       "notes": "Class record: ported as a type, rustycad_tkgeombase::app_par_curves::ResolConstraint (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "d84ca05a20464a59a8bccb8534aa859311c47dc73eac971249e0d5ac6a366498",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "AppDef_TheFunction",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppDef/AppDef_TheFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::app_def::TheFunction",
+      "status": "implemented",
+      "notes": "Class record: AppDef_TheFunction is ported as the type alias rustycad_tkgeombase::app_def::TheFunction; each member is mapped by its own row."
     },
     {
       "upstream_id": "AppDef_ParFunctionOfTheGradient::Perform",
@@ -352239,6 +354006,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Extrema_ExtElC2d",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_ExtCC2d.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::ExtElC2d",
+      "status": "implemented",
+      "notes": "Class record: Extrema_ExtElC2d is ported as the type rustycad_tkgeombase::extrema::ExtElC2d; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "Extrema_ExtCC::PrepareResults(const Extrema_ExtElC&,bool,double,double,double,double)",
       "toolkit": "TKGeomBase",
       "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_ExtCC.hxx",
@@ -352349,6 +354124,14 @@
       "notes": "Class record: ported as a type, rustycad_tkgeombase::extrema::POnCurve (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "bee3e5880678b5c0890a3c694a782b83ec149830282f027ea72fce12f6ffe579",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Extrema_ExtElC",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Extrema/Extrema_ExtCC.hxx",
+      "rust_item": "rustycad_tkgeombase::extrema::ExtElC",
+      "status": "implemented",
+      "notes": "Class record: Extrema_ExtElC is ported as the type rustycad_tkgeombase::extrema::ExtElC; each member is mapped by its own row."
     },
     {
       "upstream_id": "Extrema_ExtElC::PlanarLineCircleExtrema",
@@ -353101,6 +354884,46 @@
       "notes": "public field of the value record, a public field of the Rust struct."
     },
     {
+      "upstream_id": "GeomEval_RepCurveDesc::Map1d",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Map1d",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepCurveDesc::Map1d is ported as the type rustycad_tkg3d::geom_eval::Map1d; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Domain1d",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Domain1d",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepCurveDesc::Domain1d is ported as the type rustycad_tkg3d::geom_eval::Domain1d; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::DerivBounded",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescDerivBounded",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepCurveDesc::DerivBounded is ported as the type rustycad_tkg3d::geom_eval::RepCurveDescDerivBounded; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Full",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescFull",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepCurveDesc::Full is ported as the type rustycad_tkg3d::geom_eval::RepCurveDescFull; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "GeomEval_RepCurveDesc::Mapped",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepCurveDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepCurveDescMapped",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepCurveDesc::Mapped is ported as the type rustycad_tkg3d::geom_eval::RepCurveDescMapped; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "GeomEval_RepSurfaceDesc",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
@@ -353251,6 +355074,46 @@
       "rust_item": "rustycad_tkg3d::geom_eval::Map2d::swap_uv",
       "status": "implemented",
       "notes": "public field of the value record, a public field of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Full",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescFull",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepSurfaceDesc::Full is ported as the type rustycad_tkg3d::geom_eval::RepSurfaceDescFull; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::DerivBounded",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescDerivBounded",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepSurfaceDesc::DerivBounded is ported as the type rustycad_tkg3d::geom_eval::RepSurfaceDescDerivBounded; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Domain2d",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Domain2d",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepSurfaceDesc::Domain2d is ported as the type rustycad_tkg3d::geom_eval::Domain2d; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Mapped",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::RepSurfaceDescMapped",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepSurfaceDesc::Mapped is ported as the type rustycad_tkg3d::geom_eval::RepSurfaceDescMapped; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "GeomEval_RepSurfaceDesc::Map2d",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_RepSurfaceDesc.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::Map2d",
+      "status": "implemented",
+      "notes": "Class record: GeomEval_RepSurfaceDesc::Map2d is ported as the type rustycad_tkg3d::geom_eval::Map2d; each member is mapped by its own row."
     },
     {
       "upstream_id": "Geom_OsculatingSurface",
@@ -354095,6 +355958,14 @@
       "notes": "protected data member of the C++ class, read by subclasses in place; Rust has no field inheritance, so the value is private state of ReadLineBuffer and is reached through ReadLineBuffer::read_line, is_multiline_mode and set_multiline_mode."
     },
     {
+      "upstream_id": "Standard_ReadLineBuffer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer",
+      "status": "implemented",
+      "notes": "Class record: Standard_ReadLineBuffer is ported as the type rustycad_tkernel::standard::ReadLineBuffer; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "Standard_JsonKey_CloseChild",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
@@ -354183,6 +356054,14 @@
       "notes": "Class record: ported as a type, rustycad_tkernel::standard::dump::DumpValue (evidence: member row owner); each member is mapped by its own row.",
       "cpp_declaration_id": "c3b46df6ffdb60e40af283cf8ce9b05ebc041739c93efc8ab6e4dd86f38dc02f",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Standard_Dump",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump",
+      "status": "implemented",
+      "notes": "Class record: Standard_Dump is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkernel::standard::dump, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "opencascade::handle::handle(const handle<T>&)",
@@ -357819,6 +359698,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "OSD_FileNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode",
+      "status": "implemented",
+      "notes": "Class record: OSD_FileNode is ported as the type rustycad_tkernel::osd::FileNode; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "OSD_File::~OSD_File()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
@@ -359457,6 +361344,14 @@
       "notes": "counter-count sentinel (7) of OSD_MemInfo::Counter; Rust gives the count as MemCounter::ALL.len()."
     },
     {
+      "upstream_id": "OSD_MemInfo",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo",
+      "status": "implemented",
+      "notes": "Class record: OSD_MemInfo is ported as the type rustycad_tkernel::osd::MemInfo; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "OSD_Function",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Function.hxx",
@@ -360004,6 +361899,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "8d8a16955760b3ea74165d249fb92936029e6b5b162eb9082b72ce97e18103c2",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Standard",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard",
+      "status": "implemented",
+      "notes": "Class record: Standard is a static-only utility class (no instances, no state); Rust ports it as module rustycad_tkernel::standard, whose free functions carry its static members; each member is mapped by its own row."
     },
     {
       "upstream_id": "Standard_Persistent",
@@ -360678,6 +362581,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "67a4166f55063b4411bc8ba47a19acc9bf001a85a4afdbfb7c4acf55b0b80fb9",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "CSLib_Class2d",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d",
+      "status": "implemented",
+      "notes": "Class record: CSLib_Class2d is ported as the type rustycad_tkmath::cslib::Class2d; each member is mapped by its own row."
     },
     {
       "upstream_id": "CSLib_Done",
@@ -363953,6 +365864,18 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BVH_ObjectTransient",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObject",
+      "rust_items": [
+        "rustycad_tkmath::bvh::BvhObject",
+        "rustycad_tkmath::bvh::BvhObjectTransient"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class BVH_ObjectTransient is split into trait rustycad_tkmath::bvh::BvhObject (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkmath::bvh::BvhObjectTransient (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BVH_TreeBaseTransient::BVH_TreeBaseTransient()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
@@ -364021,6 +365944,30 @@
       "notes": "Excluded: protected recursive radix step over raw std::pair iterators. Rust bvh::BvhRadixSorter::<BvhSorter>::perform_range runs the same recursion over slices."
     },
     {
+      "upstream_id": "BVH::BitPredicate",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BitPredicate",
+      "status": "implemented",
+      "notes": "Class record: BVH::BitPredicate is ported as the type rustycad_tkmath::bvh::BitPredicate; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BVH::RadixSorter",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": "rustycad_tkmath::bvh::sort_links",
+      "status": "implemented",
+      "notes": "Class record: BVH::RadixSorter is a static-only helper whose one public member Sort is the free function bvh::sort_links (the protected recursive perform step is excluded by its own row)."
+    },
+    {
+      "upstream_id": "BVH::BitComparator",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BitComparator",
+      "status": "implemented",
+      "notes": "Class record: BVH::BitComparator is ported as the type rustycad_tkmath::bvh::BitComparator; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BVH_ParallelDistanceFieldBuilder(BVH_DistanceField<T, BVH_ParallelDistanceFieldBuilder::N>*,BVH_Geometry<T, BVH_ParallelDistanceFieldBuilder::N>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
@@ -364081,6 +366028,14 @@
       "notes": "Excluded: the C++ destructor is trivial (= default in the pinned source), so destruction only releases the members. Rust drop glue releases the same fields when the owner goes out of scope. Rust rustycad_tkmath::bvh::BvhQueueBuilder needs no callable counterpart.",
       "cpp_declaration_id": "bb09158ce8b6fc22ae72193a594f915fe6f4e05b0a51c3ac8c6a0257ba7321c4",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_TypedBuildTool",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhQueueBuilder",
+      "status": "excluded",
+      "notes": "Excluded: protected adapter class that binds raw set/tree/queue pointers so BVH_BuildThread can call buildNode and addChildren. Rust drives bvh::BvhQueueBuilder::build_node and add_children directly from the build loop, so no adapter object exists; every member row of the class is excluded with the same reason."
     },
     {
       "upstream_id": "BVH::SquareDistanceToPoint::SquareDistanceToPoint<T, N, BVHSetType>()",
@@ -367557,6 +369512,14 @@
       ]
     },
     {
+      "upstream_id": "Poly_ArrayOfNodes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
+      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes",
+      "status": "implemented",
+      "notes": "Class record: Poly_ArrayOfNodes is ported as the type alias rustycad_tkmath::poly::ArrayOfNodes; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "Poly_ArrayOfUVNodes()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
@@ -367847,6 +369810,14 @@
           }
         }
       ]
+    },
+    {
+      "upstream_id": "Poly_ArrayOfUVNodes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
+      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes",
+      "status": "implemented",
+      "notes": "Class record: Poly_ArrayOfUVNodes is ported as the type alias rustycad_tkmath::poly::ArrayOfUvNodes; each member is mapped by its own row."
     },
     {
       "upstream_id": "Poly_CoherentTriangulation::RemoveDegenerated(const double,NCollection_List<Poly_CoherentTriangulation::TwoIntegers>*)",
@@ -370235,6 +372206,14 @@
       "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
     },
     {
+      "upstream_id": "Bnd_Range",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
+      "rust_item": "rustycad_tkmath::bnd::Range1",
+      "status": "implemented",
+      "notes": "Class record: Bnd_Range is ported as the type rustycad_tkmath::bnd::Range1; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "Poly_MakeLoops::Link::flags",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
@@ -370385,6 +372364,14 @@
       "rust_item": "rustycad_tkmath::poly::MeshPurpose",
       "status": "implemented",
       "notes": "typedef unsigned int Poly_MeshPurpose is the Rust alias poly::MeshPurpose."
+    },
+    {
+      "upstream_id": "(unnamed enum at src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx:20:1)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx",
+      "rust_item": "rustycad_tkmath::poly::mesh_purpose",
+      "status": "implemented",
+      "notes": "Unnamed enum record ((unnamed enum at src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx:20:1)): C++ declares the enumerators in an anonymous enum used as integer constants; Rust declares them as constants of module rustycad_tkmath::poly::mesh_purpose, each mapped by its own row."
     },
     {
       "upstream_id": "Poly_MakeLoops::ListOfLink",
@@ -370825,6 +372812,46 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "Poly_MakeLoops",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops",
+      "status": "implemented",
+      "notes": "Class record: Poly_MakeLoops is ported as the type rustycad_tkmath::poly::make_loops::MakeLoops; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::Link",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::Link",
+      "status": "implemented",
+      "notes": "Class record: Poly_MakeLoops::Link is ported as the type rustycad_tkmath::poly::make_loops::Link; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::Helper",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoopsHelper",
+      "status": "implemented",
+      "notes": "Class record: Poly_MakeLoops::Helper is ported as the trait rustycad_tkmath::poly::make_loops::MakeLoopsHelper; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::HeapOfInteger",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::HeapOfInteger",
+      "status": "implemented",
+      "notes": "Class record: Poly_MakeLoops::HeapOfInteger is ported as the type rustycad_tkmath::poly::make_loops::HeapOfInteger; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::Hasher",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LinkHasher",
+      "status": "implemented",
+      "notes": "Class record: Poly_MakeLoops::Hasher is ported as the type rustycad_tkmath::poly::make_loops::LinkHasher; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "math_OK",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Status.hxx",
@@ -371209,6 +373236,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "math_MultipleVarFunctionWithGradient",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BFGS.hxx",
+      "rust_item": "rustycad_tkmath::math::MultipleVarFunctionWithGradient",
+      "status": "implemented",
+      "notes": "Class record: math_MultipleVarFunctionWithGradient is ported as the trait rustycad_tkmath::math::MultipleVarFunctionWithGradient; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "math_BissecNewton::TheStatus",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_BissecNewton.hxx",
@@ -371325,6 +373360,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkmath::math::BissecNewton needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "7e922991d555e2626c41d1b888cfa7e5cef7897bf6d26e4250385832a94bc82c",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "math_FunctionWithDerivative",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_BissecNewton.hxx",
+      "rust_item": "rustycad_tkmath::math::FunctionWithDerivative",
+      "status": "implemented",
+      "notes": "Class record: math_FunctionWithDerivative is ported as the trait rustycad_tkmath::math::FunctionWithDerivative; each member is mapped by its own row."
     },
     {
       "upstream_id": "math_BrentMinimum::EPSZ",
@@ -371679,6 +373722,14 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkmath::math::FunctionSetRoot needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "a84781aaf6b4082c7d27628cd72c7e93394b300319647046fdfd9567508c7a58",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "math_FunctionSetWithDerivatives",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_FunctionSetRoot.hxx",
+      "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives",
+      "status": "implemented",
+      "notes": "Class record: math_FunctionSetWithDerivatives is ported as the trait rustycad_tkmath::math::FunctionSetWithDerivatives; each member is mapped by its own row."
     },
     {
       "upstream_id": "math_Gauss::D",
@@ -374962,6 +377013,22 @@
       "rust_item": "rustycad_tkernel::ncollection::SparseArray",
       "status": "implemented",
       "notes": "Class template NCollection_SparseArray is the generic Rust type SparseArray; its members are mapped row by row."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray",
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator class. Rust iteration over SparseArray is SparseArray::entries, entries_mut, iter and iter_mut (ascending index order), which visit the same elements in the same order; Key() is the entry index and Restart() is a fresh entries() call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ConstIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray",
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value const iterator class. Rust iteration over SparseArray is SparseArray::entries and iter (ascending index order), which visit the same elements in the same order; Key() is the entry index and Restart() is a fresh entries() call."
     },
     {
       "upstream_id": "NCollection_List::Iterator::Iterator(NCollection_List<TheItemType>&)",
@@ -379211,6 +381278,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "NCollection_DataMap::DataMapNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap",
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust ncollection::DataMap keeps its nodes private in allocator-owned storage; every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
+    },
+    {
       "upstream_id": "NCollection_DoubleMap::DoubleMapNode::DoubleMapNode(K1&&,std::in_place_t,NCollection_ListNode*,NCollection_ListNode*,Args2&&...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
@@ -379419,6 +381494,14 @@
       "notes": "Class record: ported as a type, rustycad_tkernel::ncollection::DoubleMap (evidence: ledger record row); each member is mapped by its own row.",
       "cpp_declaration_id": "7d1c54a60b6cb94b2a55829f05c40660750cd0504480312c9a89d3ae31e63ed3",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_DoubleMap::DoubleMapNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DoubleMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DoubleMap",
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust ncollection::DoubleMap keeps its nodes private in allocator-owned storage; every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
     },
     {
       "upstream_id": "NCollection_IndexedDataMap::Iterator::Iterator(NCollection_IndexedDataMap<TheKeyType,TheItemType,Hasher>&)",
@@ -380403,6 +382486,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "NCollection_Map::MapNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Map",
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust ncollection::Map keeps its nodes private in allocator-owned storage; every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
+    },
+    {
       "upstream_id": "NCollection_MapAlgo",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_MapAlgo.hxx",
@@ -381005,6 +383096,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "NCollection_HeapAllocator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HeapAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HeapAllocatorObject",
+      "status": "implemented",
+      "notes": "Class record: NCollection_HeapAllocator is ported as the type rustycad_tkernel::ncollection::HeapAllocatorObject; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "NCollection_AlignedAllocator::myAlignment",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AlignedAllocator.hxx",
@@ -381049,6 +383148,14 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): allocator_subclass!(AlignedAllocatorObject, \"NCollection_AlignedAllocator\", AllocatorObject) at crates/tkernel/src/ncollection/allocator_object.rs:113 registers descriptor \"NCollection_AlignedAllocator\"; C++ base_type is NCollection_BaseAllocator. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "6c74a3da36a1bc6ac4f9b0c673f65ca2801553e436f5455cce866af0098e195d",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AlignedAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AlignedAllocatorObject",
+      "status": "implemented",
+      "notes": "Class record: NCollection_AlignedAllocator is ported as the type rustycad_tkernel::ncollection::AlignedAllocatorObject; each member is mapped by its own row."
     },
     {
       "upstream_id": "NCollection_Allocator::address(NCollection_Allocator::reference) const",
@@ -384172,6 +386279,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "NCollection_SeqNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence",
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust ncollection::Sequence keeps its nodes private in allocator-owned storage; every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
+    },
+    {
       "upstream_id": "NCollection_SparseArrayBase::BasicIterator::value_type",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
@@ -385140,6 +387255,26 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "NCollection_BaseMap::Iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBucketIterator",
+      "status": "implemented",
+      "notes": "Class record: NCollection_BaseMap::Iterator is ported as the type rustycad_tkernel::ncollection::BaseMapBucketIterator; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMap",
+      "rust_items": [
+        "rustycad_tkernel::ncollection::BaseMap",
+        "rustycad_tkernel::ncollection::BaseMapStorage"
+      ],
+      "status": "implemented",
+      "notes": "Class record: the C++ class NCollection_BaseMap is split into trait rustycad_tkernel::ncollection::BaseMap (its virtual interface, reached as Handle<dyn Trait> or &dyn Trait) and rustycad_tkernel::ncollection::BaseMapStorage (its shared state); each member is mapped by its own row."
+    },
+    {
       "upstream_id": "NCollection_HArray1::value_type",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
@@ -385654,6 +387789,14 @@
       "notes": "Class record: ported as a type, rustycad_tkernel::ncollection::Sequence (evidence: ledger record row); each member is mapped by its own row.",
       "cpp_declaration_id": "88f4a757f89f190a2dbaf9a97180b1d59333279de1e3d436c25dd75966037bf4",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Node",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence",
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing of the native intrusive container (OCCT documents the node classes as internal). The Rust ncollection::Sequence keeps its nodes private in allocator-owned storage; every node datum is reached through the container lookups and its cursor, and nodes are freed by Drop instead of delNode."
     },
     {
       "upstream_id": "NCollection_BaseIndexedMap",
