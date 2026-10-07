@@ -459896,6 +459896,94 @@
       ],
       "status": "implemented",
       "notes": "Graphic3d_Camera mapping (visualization-design.md section 1): the camera state, including the lazily computed double and float matrices that the native const accessors cache in mutable members, sits behind the handle's shared lock, so matrices and points are returned by value; the projection math is generic over f32 and f64 like the native templates (camera_projection.rs); Standard_ASSERT_RAISE (raised in release builds) and Raise_if checks return Standard_ProgramError or Standard_OutOfRange with the values; the matrices, stereo projections, conversions, frustum, fitting and interpolation are compared bit for bit by the sv_camera, sv_camera_fit and sv_camera_interp native probes. The mutable reference is a getter and a setter."
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3d",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BndBox3d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBndBox3d",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox4d",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BndBox4d.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBndBox4d",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox4f",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BndBox4f.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBndBox4f",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
+    },
+    {
+      "upstream_id": "Graphic3d_Flipper",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Flipper.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFlipper",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
+    },
+    {
+      "upstream_id": "Graphic3d_Flipper::Graphic3d_Flipper",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Flipper.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFlipper::new",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
+    },
+    {
+      "upstream_id": "Graphic3d_Flipper::RefPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Flipper.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFlipper::ref_plane",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
+    },
+    {
+      "upstream_id": "Graphic3d_Flipper::SetRefPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Flipper.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFlipper::set_ref_plane",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
+    },
+    {
+      "upstream_id": "Graphic3d_Flipper::Apply(const NCollection_Mat4<T> &,Bnd_Box &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Flipper.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFlipper::apply_bnd",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated. Only the double instantiation compiles natively (Bnd_Box::Get takes doubles); a void box is left."
+    },
+    {
+      "upstream_id": "Graphic3d_Flipper::Apply(const NCollection_Mat4<T> &,BVH_Box<T, 3> &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Flipper.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFlipper::apply_bvh",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
+    },
+    {
+      "upstream_id": "Graphic3d_Flipper::Compute",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Flipper.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFlipper::compute",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
+    },
+    {
+      "upstream_id": "Graphic3d_Flipper::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Flipper.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFlipper::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d box and flipper mapping: the BndBox typedefs are type aliases of the TKMath BVH box; Graphic3d_Flipper keeps its reference plane behind the handle's shared lock and its templates are generic over f32 and f64 with the native operation order; the GoogleTest suites Graphic3d_BndBox_Test and Graphic3d_Flipper_Test are translated."
     }
   ],
   "tests": [
@@ -567354,6 +567442,300 @@
       "rust_target": "graphic3d_aspects_test",
       "rust_test": "Graphic3d_AspectsTest__ShadingModel_PbrNotAffectedByPhongMaterial",
       "rust_source": "crates/tkservice/tests/graphic3d_aspects_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.DefaultConstructor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__DefaultConstructor",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.PointConstructor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__PointConstructor",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.PointsConstructor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__PointsConstructor",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.AddPoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__AddPoint",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.CombineBoxes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__CombineBoxes",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.BoxSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__BoxSize",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.BoxCenter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__BoxCenter",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.BoxArea",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__BoxArea",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.TransformationIdentity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__TransformationIdentity",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.TransformationTranslation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__TransformationTranslation",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.TransformationScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__TransformationScale",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.TransformationRotation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__TransformationRotation",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.TransformationComposed",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__TransformationComposed",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_BndBox3dTest.TransformationInvalidBox",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_BndBox_Test.cxx",
+      "source_sha256": "89aae7c3b7b2baeaeca725d9281549e29e7befe45404415044cf82174ecab708",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_bnd_box_test",
+      "rust_test": "Graphic3d_BndBox3dTest__TransformationInvalidBox",
+      "rust_source": "crates/tkservice/tests/graphic3d_bnd_box_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_FlipperTest.Compute_IdentityWorldView_ReturnsIdentity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Flipper_Test.cxx",
+      "source_sha256": "0c0a0a6ba2406142b563ac59bd57573feecfa446022251fa4066480625a70a96",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_flipper_test",
+      "rust_test": "Graphic3d_FlipperTest__Compute_IdentityWorldView_ReturnsIdentity",
+      "rust_source": "crates/tkservice/tests/graphic3d_flipper_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_FlipperTest.Compute_180AroundZ_IsSelfInverse",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Flipper_Test.cxx",
+      "source_sha256": "0c0a0a6ba2406142b563ac59bd57573feecfa446022251fa4066480625a70a96",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_flipper_test",
+      "rust_test": "Graphic3d_FlipperTest__Compute_180AroundZ_IsSelfInverse",
+      "rust_source": "crates/tkservice/tests/graphic3d_flipper_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_FlipperTest.Apply_NoFlip_BoxUnchanged",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Flipper_Test.cxx",
+      "source_sha256": "0c0a0a6ba2406142b563ac59bd57573feecfa446022251fa4066480625a70a96",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_flipper_test",
+      "rust_test": "Graphic3d_FlipperTest__Apply_NoFlip_BoxUnchanged",
+      "rust_source": "crates/tkservice/tests/graphic3d_flipper_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_FlipperTest.Apply_VoidBox_RemainsVoid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Flipper_Test.cxx",
+      "source_sha256": "0c0a0a6ba2406142b563ac59bd57573feecfa446022251fa4066480625a70a96",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_flipper_test",
+      "rust_test": "Graphic3d_FlipperTest__Apply_VoidBox_RemainsVoid",
+      "rust_source": "crates/tkservice/tests/graphic3d_flipper_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_FlipperTest.Apply_180AroundZ_Involution",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Flipper_Test.cxx",
+      "source_sha256": "0c0a0a6ba2406142b563ac59bd57573feecfa446022251fa4066480625a70a96",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_flipper_test",
+      "rust_test": "Graphic3d_FlipperTest__Apply_180AroundZ_Involution",
+      "rust_source": "crates/tkservice/tests/graphic3d_flipper_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_FlipperTest.Compute_ObjectTransformChangesDecision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Flipper_Test.cxx",
+      "source_sha256": "0c0a0a6ba2406142b563ac59bd57573feecfa446022251fa4066480625a70a96",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_flipper_test",
+      "rust_test": "Graphic3d_FlipperTest__Compute_ObjectTransformChangesDecision",
+      "rust_source": "crates/tkservice/tests/graphic3d_flipper_test.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_FlipperTest.SetRefPlane_RoundTrip",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/GTests/Graphic3d_Flipper_Test.cxx",
+      "source_sha256": "0c0a0a6ba2406142b563ac59bd57573feecfa446022251fa4066480625a70a96",
+      "rust_package": "rustycad-tkservice",
+      "rust_target": "graphic3d_flipper_test",
+      "rust_test": "Graphic3d_FlipperTest__SetRefPlane_RoundTrip",
+      "rust_source": "crates/tkservice/tests/graphic3d_flipper_test.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

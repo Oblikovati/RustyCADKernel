@@ -14,6 +14,7 @@ mod aspects_equal;
 mod aspects_members;
 mod aspects_style;
 mod attrib_buffer;
+mod bnd_box;
 mod bound_buffer;
 mod bsdf;
 mod buffer;
@@ -30,6 +31,7 @@ mod cube_map;
 mod cube_map_order;
 mod cube_map_packed;
 mod cube_map_separate;
+mod flipper;
 mod hatch_style;
 mod index_buffer;
 mod marker_image;
@@ -78,6 +80,7 @@ pub use aspects_style::{
     graphic3d_default_line_pattern_for_type, graphic3d_default_line_type_for_pattern,
 };
 pub use attrib_buffer::Graphic3dAttribBuffer;
+pub use bnd_box::{Graphic3dBndBox3d, Graphic3dBndBox4d, Graphic3dBndBox4f};
 pub use bound_buffer::{Graphic3dBoundBuffer, Graphic3dBoundBufferState};
 pub use bsdf::{Graphic3dBsdf, Graphic3dFresnel, Graphic3dFresnelModel};
 pub use buffer::{
@@ -99,6 +102,7 @@ pub use cube_map::{
 pub use cube_map_order::{Graphic3dCubeMapOrder, Graphic3dValidatedCubeMapOrder};
 pub use cube_map_packed::{Graphic3dCubeMapPacked, graphic3d_cube_map_packed_check_order};
 pub use cube_map_separate::Graphic3dCubeMapSeparate;
+pub use flipper::Graphic3dFlipper;
 pub use hatch_style::Graphic3dHatchStyle;
 pub use index_buffer::{
     Graphic3dIndexBuffer, Graphic3dIndexBufferMembers, Graphic3dIndexBufferSource,
