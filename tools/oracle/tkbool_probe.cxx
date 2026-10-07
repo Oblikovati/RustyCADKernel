@@ -40,9 +40,10 @@
 #include "tkbool_probe_brepfill_generator.cxx"
 #include "tkbool_probe_brepfill_package.cxx"
 #include "tkbool_probe_brepfill_compatible.cxx"
+#include "tkbool_probe_brepfill_section_law.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFill (tkbool_probe_brepfill_generator.cxx, tkbool_probe_brepfill_package.cxx,
- // tkbool_probe_brepfill_compatible.cxx)
+ // tkbool_probe_brepfill_compatible.cxx, tkbool_probe_brepfill_section_law.cxx)
  {"bf_generator", bl_bf_generator_case},
  {"bf_face", bl_bf_face_case},
  {"bf_shell", bl_bf_shell_case},
@@ -51,6 +52,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"bf_compute_acr", bl_bf_compute_acr_case},
  {"bf_insert_acr", bl_bf_insert_acr_case},
  {"bf_compatible", bl_bf_compatible_case},
+ {"bf_shape_law", bl_bf_shape_law_case},
+ {"bf_nsections", bl_bf_nsections_case},
 };
 int main() {
  std::string line;

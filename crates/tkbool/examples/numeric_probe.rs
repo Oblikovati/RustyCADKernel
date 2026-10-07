@@ -2,7 +2,9 @@
 //! `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod bl_probe;
-use bl_probe::{brep_fill_compatible, brep_fill_generator, brep_fill_package};
+use bl_probe::{
+    brep_fill_compatible, brep_fill_generator, brep_fill_package, brep_fill_section_law,
+};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -11,7 +13,7 @@ type ProbeCase = fn(&[f64]);
 /// its operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // BRepFill (bl_probe/brep_fill_generator.rs, bl_probe/brep_fill_package.rs,
-    // bl_probe/brep_fill_compatible.rs)
+    // bl_probe/brep_fill_compatible.rs, bl_probe/brep_fill_section_law.rs)
     ("bf_generator", brep_fill_generator::generator_case),
     ("bf_face", brep_fill_package::face_case),
     ("bf_shell", brep_fill_package::shell_case),
@@ -20,6 +22,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bf_compute_acr", brep_fill_package::compute_acr_case),
     ("bf_insert_acr", brep_fill_package::insert_acr_case),
     ("bf_compatible", brep_fill_compatible::compatible_case),
+    ("bf_shape_law", brep_fill_section_law::shape_law_case),
+    ("bf_nsections", brep_fill_section_law::nsections_case),
 ];
 
 fn main() {

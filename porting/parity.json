@@ -429692,6 +429692,382 @@
       "notes": "Translated from BRepFill_CompatibleWires.cxx (Perform, SameNumberByPolarMethod, SameNumberByACR, ComputeOrigin, SearchOrigin and their static helpers) with the native operation and map iteration order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_compatible requests: closed sections by origins and by the polar method, punctual and looping sections, open sections by origins and curvilinear cuts, mixed topologies). The sequences of shapes are slices; native out-of-range sequence reads (unchecked in release builds) are Standard_OutOfRange errors."
     },
     {
+      "upstream_id": "BRepFill_SectionLaw::NbLaw() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::nb_law",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::Law(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::law",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::IndexOfEdge(const TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::index_of_edge",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::IsConstant() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::is_constant",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::IsUClosed() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::is_u_closed",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::IsVClosed() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::is_v_closed",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::is_done",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::IsVertex() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::is_vertex",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::ConcatenedLaw() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::concatened_law",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::Continuity(int,double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::continuity",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::VertexTol(int,double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::vertex_tol",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::Vertex(int,double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::vertex",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::D0(double,TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::d0",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::Init(const TopoDS_Wire&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::init",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::CurrentEdge()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw::current_edge",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::IsVertex() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::is_vertex",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::IsConstant() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::is_constant",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::ConcatenedLaw() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::concatened_law",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::Continuity(int,double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::continuity",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::VertexTol(int,double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::vertex_tol",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::Vertex(int,double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::vertex",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::D0(double,TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::d0",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_NSections::IsVertex() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::is_vertex",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_NSections::IsConstant() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::is_constant",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_NSections::ConcatenedLaw() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::concatened_law",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_NSections::Continuity(int,double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::continuity",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_NSections::VertexTol(int,double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::vertex_tol",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_NSections::Vertex(int,double) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::vertex",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_NSections::D0(double,TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections::<rustycad_tkbool::brep_fill::BRepFillSectionLaw>::d0",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::BRepFill_ShapeLaw(const TopoDS_Vertex&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::with_vertex",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::BRepFill_ShapeLaw(const TopoDS_Wire&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::with_wire",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::BRepFill_ShapeLaw(const TopoDS_Wire&,const occ::handle<Law_Function>&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::with_wire_and_law",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::Edge(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw::edge",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_NSections::BRepFill_NSections(const NCollection_Sequence<TopoDS_Shape>&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections::new",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_NSections::BRepFill_NSections(const NCollection_Sequence<TopoDS_Shape>&,const NCollection_Sequence<gp_Trsf>&,const NCollection_Sequence<double>&,double,double,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections::with_placements",
+      "status": "implemented",
+      "notes": "BRepFill section-law mapping: BRepFill_SectionLaw is the trait BRepFillSectionLaw reached through Handle<dyn ...> (its protected data in BRepFillSectionLawBase), BRepFill_ShapeLaw and BRepFill_NSections are transient structs implementing it; translated with the native operation order and compared with OCCT by tools/verify_tkbool_numeric.py (bf_shape_law, bf_nsections requests). Out-parameters (D0 shape) become return values; a null law that the native code dereferences (a crash) is a Standard_NullObject or Standard_OutOfRange error."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSectionLaw",
+      "status": "implemented",
+      "notes": "Class record: ported as a trait reached as Handle<dyn Trait>, rustycad_tkbool::brep_fill::BRepFillSectionLaw; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillShapeLaw",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillShapeLaw; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_NSections",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillNSections",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillNSections; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(BRepFill_SectionLaw, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type = BRepFill_SectionLaw that DEFINE_STANDARD_RTTIEXT(BRepFill_ShapeLaw, BRepFill_SectionLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
+      "upstream_id": "BRepFill_NSections::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_NSections.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type = BRepFill_SectionLaw that DEFINE_STANDARD_RTTIEXT(BRepFill_NSections, BRepFill_SectionLaw) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::myLaws",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_SectionLaw: Rust keeps it as the crate-private field `laws` of BRepFillSectionLawBase (tkbool/src/brep_fill/section_law/mod.rs), reached by the derived laws and through the BRepFillSectionLaw methods, so it is not public API."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::uclosed",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_SectionLaw: Rust keeps it as the crate-private field `uclosed` of BRepFillSectionLawBase (tkbool/src/brep_fill/section_law/mod.rs), reached by the derived laws and through the BRepFillSectionLaw methods, so it is not public API."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::vclosed",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_SectionLaw: Rust keeps it as the crate-private field `vclosed` of BRepFillSectionLawBase (tkbool/src/brep_fill/section_law/mod.rs), reached by the derived laws and through the BRepFillSectionLaw methods, so it is not public API."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::myDone",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_SectionLaw: Rust keeps it as the crate-private field `done` of BRepFillSectionLawBase (tkbool/src/brep_fill/section_law/mod.rs), reached by the derived laws and through the BRepFillSectionLaw methods, so it is not public API."
+    },
+    {
+      "upstream_id": "BRepFill_SectionLaw::myIndices",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_SectionLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_SectionLaw: Rust keeps it as the crate-private field `indices` of BRepFillSectionLawBase (tkbool/src/brep_fill/section_law/mod.rs), reached by the derived laws and through the BRepFillSectionLaw methods, so it is not public API."
+    },
+    {
+      "upstream_id": "BRepFill_ShapeLaw::vertex",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ShapeLaw.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ protected data member of BRepFill_ShapeLaw: Rust keeps it as the private field `vertex` of BRepFillShapeLaw, read through IsVertex (BRepFillSectionLaw::is_vertex), so it is not public API."
+    },
+    {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",

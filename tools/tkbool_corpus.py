@@ -17,3 +17,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_brepfill_package').append_package_requests(requests)
     # BRepFill_CompatibleWires (tkbool_corpus_brepfill_compatible.py)
     __import__('tkbool_corpus_brepfill_compatible').append_compatible_requests(requests)
+    # BRepFill_ShapeLaw and BRepFill_NSections (tkbool_corpus_brepfill_section_law.py)
+    __import__('tkbool_corpus_brepfill_section_law').append_section_law_requests(requests)
