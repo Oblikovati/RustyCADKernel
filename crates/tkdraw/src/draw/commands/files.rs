@@ -77,10 +77,11 @@ pub(super) fn restore(
         return Ok(1);
     };
     session.set_progress_bar(Some(Rc::new(DrawProgressIndicator::new(di, 1.0))));
-    let restored = session.restore(&type_name, &mut stream).or_else(|| {
+    let mut restored = session.restore(&type_name, &mut stream)?;
+    if restored.is_none() {
         stream.rewind();
-        session.restore(SHAPE_TYPE, &mut stream)
-    });
+        restored = session.restore(SHAPE_TYPE, &mut stream)?;
+    }
     let Some(drawable) = restored else {
         di.append(format!("Error: cannot restore a {type_name}"))?;
         return Ok(1);

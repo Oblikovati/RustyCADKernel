@@ -51,9 +51,12 @@ impl DrawNumber {
 
     /// `Restore`: reads one number; a missing number restores 0 (`operator>>` stores 0
     /// on failure since C++11, which overwrites the `RealLast()` initial value).
-    pub fn restore(_session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        _session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let value = stream.read_real().unwrap_or(0.0);
-        Some(Rc::new(Self::new(value)))
+        Ok(Some(Rc::new(Self::new(value))))
     }
 }
 
@@ -167,7 +170,7 @@ mod tests {
         let mut input = DrawIStream::new(stream.take_text().into_bytes());
         let console = Rc::new(crate::draw::RecordingConsole::default());
         let session = DrawSession::new(console, crate::draw::DrawViewer::batch());
-        let restored = DrawNumber::restore(&session, &mut input).unwrap();
+        let restored = DrawNumber::restore(&session, &mut input).unwrap().unwrap();
         assert_eq!(restored.downcast_ref::<DrawNumber>().unwrap().value(), -2.5);
     }
 

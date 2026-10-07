@@ -9,6 +9,8 @@ use crate::draw::drawable::DrawableHandle;
 use crate::draw::ostream::DrawOStream;
 use crate::draw::view::DrawView;
 use rustycad_tkernel::standard::Failure;
+// `FitView` keeps the old extent on ties and NaN, as `std::min`/`std::max` do.
+use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkmath::gp::Point3;
 use std::rc::Rc;
 
@@ -341,28 +343,13 @@ impl DrawViewer {
             }
             let [u1, u2, v1, v2] = drawable.bounds();
             extent = [
-                extent[0].min_c(u1),
-                extent[1].max_c(u2),
-                extent[2].min_c(v1),
-                extent[3].max_c(v2),
+                std_min(extent[0], u1),
+                std_max(extent[1], u2),
+                std_min(extent[2], v1),
+                std_max(extent[3], v2),
             ];
         }
         Ok(extent)
-    }
-}
-
-/// The comparisons of `FitView`, which keep the old value on ties and NaN.
-trait CppMinMax {
-    fn min_c(self, other: f64) -> f64;
-    fn max_c(self, other: f64) -> f64;
-}
-
-impl CppMinMax for f64 {
-    fn min_c(self, other: f64) -> f64 {
-        if other < self { other } else { self }
-    }
-    fn max_c(self, other: f64) -> f64 {
-        if other > self { other } else { self }
     }
 }
 

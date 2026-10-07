@@ -89,7 +89,10 @@ impl DrawTrSurfBezierSurface {
 
     /// `Restore`: a surface read in the compact GeomTools format (no surface when it
     /// is not a Bezier surface), with the settings of `DrawTrSurf::Parameters()`.
-    pub fn restore(session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let params = current(session);
         let surface = stream
             .read_through(SurfaceSet::read_surface)
@@ -102,12 +105,12 @@ impl DrawTrSurfBezierSurface {
         };
         let poles = PolesStyle::new(params.is_show_poles, params.poles_color);
         let discretisation = (params.discret, params.deflection, params.draw_mode);
-        Some(Rc::new(Self::with_style(
+        Ok(Some(Rc::new(Self::with_style(
             surface,
             look,
             poles,
             discretisation,
-        )))
+        ))))
     }
 }
 

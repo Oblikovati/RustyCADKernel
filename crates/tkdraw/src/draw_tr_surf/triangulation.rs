@@ -115,10 +115,13 @@ impl DrawTrSurfTriangulation {
 
     /// `Restore`: `Poly::ReadTriangulation`; text that does not read gives a drawable
     /// without triangulation.
-    pub fn restore(_session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        _session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let triangulation = stream.read_buffered(|input| poly::read_triangulation(input));
-        let drawable = Self::new(triangulation.unwrap_or_default()).ok()?;
-        Some(Rc::new(drawable))
+        let drawable = Self::new(triangulation.unwrap_or_default())?;
+        Ok(Some(Rc::new(drawable)))
     }
 
     /// The node numbers at the nodes, in yellow.

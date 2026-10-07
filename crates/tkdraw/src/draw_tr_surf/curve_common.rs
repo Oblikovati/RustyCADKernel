@@ -128,30 +128,44 @@ fn reached_limit(distance: f64) -> bool {
 }
 
 /// The orientation arrow at `tip` along `direction` (screen-sized, 20 by 10 pixels),
-/// drawn without growing the bounds; nothing when `direction` is shorter than
-/// `gp::Resolution()`.
+/// drawn without growing the bounds (`Draw_Bounds = false`); nothing when
+/// `direction` is shorter than `gp::Resolution()`.
 pub(crate) fn draw_orientation_arrow(
     display: &mut DrawDisplay<'_>,
     tip: Point2,
     direction: Vector2,
 ) -> Result<(), Failure> {
     display.set_draw_bounds(false);
-    if direction.magnitude() > gp::resolution() {
-        let length = 20.0 / display.zoom();
-        let half_width = 10.0 / display.zoom();
-        let d = Direction2::from_vector(direction)?;
-        let (x, y) = (tip.x(), tip.y());
-        display.move_to(Point2::new(
-            x - length * d.x() - half_width * d.y(),
-            y - length * d.y() + half_width * d.x(),
-        ));
-        display.draw_to(tip);
-        display.draw_to(Point2::new(
-            x - length * d.x() + half_width * d.y(),
-            y - length * d.y() - half_width * d.x(),
-        ));
-    }
+    let drawn = draw_arrow(display, tip, direction);
     display.set_draw_bounds(true);
+    drawn
+}
+
+/// The arrow of [`draw_orientation_arrow`] with the bounds left as they are (the
+/// DBRep edge arrows).
+pub(crate) fn draw_arrow(
+    display: &mut DrawDisplay<'_>,
+    tip: Point2,
+    direction: Vector2,
+) -> Result<(), Failure> {
+    // `if (v.Magnitude() > gp::Resolution())`: nothing for NaN either.
+    let long_enough = direction.magnitude() > gp::resolution();
+    if !long_enough {
+        return Ok(());
+    }
+    let length = 20.0 / display.zoom();
+    let half_width = 10.0 / display.zoom();
+    let d = Direction2::from_vector(direction)?;
+    let (x, y) = (tip.x(), tip.y());
+    display.move_to(Point2::new(
+        x - length * d.x() - half_width * d.y(),
+        y - length * d.y() + half_width * d.x(),
+    ));
+    display.draw_to(tip);
+    display.draw_to(Point2::new(
+        x - length * d.x() + half_width * d.y(),
+        y - length * d.y() - half_width * d.x(),
+    ));
     Ok(())
 }
 

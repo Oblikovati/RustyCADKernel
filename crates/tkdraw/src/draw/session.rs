@@ -25,9 +25,22 @@ use std::fs::File;
 use std::rc::{Rc, Weak};
 use std::sync::Arc;
 
+thread_local! {
+    // `Draw::GetProgressBar()` as the drawables see it: `Save` has no session
+    // parameter, so the last indicator a session installed is kept here.
+    static ACTIVE_PROGRESS: RefCell<Option<Rc<DrawProgressIndicator>>> = const { RefCell::new(None) };
+}
+
+/// `Draw::GetProgressBar()` for code without a session (drawable `Save`): the
+/// indicator the current session installed, if any.
+pub fn active_progress_bar() -> Option<Rc<DrawProgressIndicator>> {
+    ACTIVE_PROGRESS.with(|active| active.borrow().clone())
+}
+
 /// A restore factory (`Draw_Drawable3D::FactoryFunction_t`). The session stands for
 /// the package globals a factory reads (`DrawTrSurf::Parameters()`, ...).
-pub type DrawableFactory = fn(&DrawSession, &mut DrawIStream) -> Option<DrawableHandle>;
+pub type DrawableFactory =
+    fn(&DrawSession, &mut DrawIStream) -> Result<Option<DrawableHandle>, Failure>;
 
 /// A command body with access to the session: `int f(Draw_Interpretor&, int, const char**)`
 /// plus the globals it reads.
@@ -213,9 +226,16 @@ impl DrawSession {
 
     /// `Draw_Drawable3D::Restore`: the drawable read by the factory of `type_name`, or
     /// `None` when no factory is registered.
-    pub fn restore(&self, type_name: &str, stream: &mut DrawIStream) -> Option<DrawableHandle> {
-        let factory = self.factories.borrow().get(type_name).copied()?;
-        factory(self, stream)
+    pub fn restore(
+        &self,
+        type_name: &str,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
+        let factory = self.factories.borrow().get(type_name).copied();
+        match factory {
+            Some(factory) => factory(self, stream),
+            None => Ok(None),
+        }
     }
 
     /// The function-local statics of a package above Draw (such as
@@ -273,8 +293,10 @@ impl DrawSession {
         &self.perf_registry
     }
 
-    /// `Draw::SetProgressBar`.
+    /// `Draw::SetProgressBar`. The indicator is also published to
+    /// [`active_progress_bar`] for the drawables whose `Save` reads the C++ global.
     pub fn set_progress_bar(&self, progress: Option<Rc<DrawProgressIndicator>>) {
+        ACTIVE_PROGRESS.with(|active| *active.borrow_mut() = progress.clone());
         *self.progress.borrow_mut() = progress;
     }
 

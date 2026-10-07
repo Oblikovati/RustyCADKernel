@@ -89,11 +89,14 @@ impl DrawTrSurfCurve2d {
 
     /// `Restore`: a curve read in the compact GeomTools format, with the curve color
     /// and discretisation of `DrawTrSurf::Parameters()`.
-    pub fn restore(session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let params = current(session);
         let curve = stream.read_through(Curve2dSet::read_curve2d);
         let look = CurveLook::new(params.curv_color);
-        Some(Rc::new(Self::with_look(curve, look, params.discret)))
+        Ok(Some(Rc::new(Self::with_look(curve, look, params.discret))))
     }
 
     /// The orientation arrow at the end of the drawn range.

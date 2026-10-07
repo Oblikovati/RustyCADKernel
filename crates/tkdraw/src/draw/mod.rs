@@ -59,7 +59,7 @@ pub use progress::{
     set_default_console_mode, set_default_graph_mode, set_default_tcl_mode, set_stop_indicator,
     stop_indicator,
 };
-pub use session::{DrawSession, DrawableFactory, LastPick, SessionCommand};
+pub use session::{DrawSession, DrawableFactory, LastPick, SessionCommand, active_progress_bar};
 pub use view::DrawView;
 pub use viewer::{DrawSelection, DrawViewer, MAXVIEW};
 pub use window::{BUTTON_PRESS, DrawWindow, DrawWindowEvent, DrawWindowSystem, MOTION_NOTIFY};

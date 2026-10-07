@@ -1,6 +1,7 @@
 //! `DRAWEXE`: the DRAW test harness executable (`Draw_Main` with `Draw_InitAppli`).
 //!
-//! Registers the `Draw` commands (`Draw::Commands`) and runs `Draw_Appli`. The process
+//! Registers the `Draw`, `DBRep` and `DrawTrSurf` commands (as `Draw_InitAppli` of the
+//! C++ DRAWEXE does) and runs `Draw_Appli`. The process
 //! ends with `Tcl_Exit(0)`, as the C++ executable does when its global interpreter is
 //! destroyed: the exit status is 0 whatever the scripts did.
 use rustycad_tkdraw::draw::{DrawConsole, DrawSession, ProcessConsole, commands, draw_appli};
@@ -10,6 +11,7 @@ use std::rc::Rc;
 /// `Draw_InitAppli` of DRAWEXE: the commands of this toolkit.
 fn init_appli(session: &DrawSession) -> Result<(), Failure> {
     commands(session)?;
+    rustycad_tkdraw::dbrep::basic_commands(session)?;
     rustycad_tkdraw::draw_tr_surf::basic_commands(session)
 }
 

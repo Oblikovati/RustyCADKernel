@@ -176,12 +176,15 @@ impl DrawTrSurfBSplineSurface {
     /// `Restore`: a surface read in the compact GeomTools format (no surface when it
     /// is not a BSpline surface), with the settings of `DrawTrSurf::Parameters()`:
     /// knot isos when `NeedKnotsIsos`, else `NbUIsos` x `NbVIsos` isos.
-    pub fn restore(session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let params = current(session);
         let surface = stream
             .read_through(SurfaceSet::read_surface)
             .cast::<GeomBSplineSurface>();
-        Some(Rc::new(Self::from_params(surface, &params)))
+        Ok(Some(Rc::new(Self::from_params(surface, &params))))
     }
 
     /// The drawable `DrawTrSurf::Set` and `Restore` make with the parameters.

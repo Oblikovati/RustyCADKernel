@@ -185,14 +185,21 @@ impl DrawTrSurfBSplineCurve {
 
     /// `Restore`: a curve read in the compact GeomTools format (no curve when it is
     /// not a BSpline curve), with the settings of `DrawTrSurf::Parameters()`.
-    pub fn restore(session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let params = current(session);
         let curve = stream
             .read_through(CurveSet::read_curve)
             .cast::<GeomBSplineCurve>();
         let discretisation = (params.discret, params.deflection, params.draw_mode);
         let look = SplineLook::from_params(&params);
-        Some(Rc::new(Self::with_style(curve, &look, discretisation)))
+        Ok(Some(Rc::new(Self::with_style(
+            curve,
+            &look,
+            discretisation,
+        ))))
     }
 
     /// The current settings as constructor arguments.

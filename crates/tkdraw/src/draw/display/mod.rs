@@ -36,6 +36,8 @@ pub struct ViewQuery {
     pub matrix: rustycad_tkmath::gp::Transform3,
     /// The zoom.
     pub zoom: f64,
+    /// The focal distance (`Draw_Viewer::Focal`).
+    pub focal: f64,
 }
 
 /// A view and the shared state a display draws with.
@@ -129,6 +131,7 @@ impl<'a> DrawDisplay<'a> {
             frame: surface.viewer_frame(),
             matrix: surface.matrix(),
             zoom: surface.zoom(),
+            focal: surface.focal_distance(),
         })
     }
 

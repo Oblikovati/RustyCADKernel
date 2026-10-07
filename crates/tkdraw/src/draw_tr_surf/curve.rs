@@ -90,12 +90,15 @@ impl DrawTrSurfCurve {
     /// `Restore`: a curve read in the compact GeomTools format, with the colors and
     /// discretisation of `DrawTrSurf::Parameters()`. A record that cannot be read
     /// gives a drawable without curve, as upstream (drawing it fails).
-    pub fn restore(session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let params = current(session);
         let curve = stream.read_through(CurveSet::read_curve);
         let look = CurveLook::new(params.curv_color);
         let discretisation = (params.discret, params.deflection, params.draw_mode);
-        Some(Rc::new(Self::with_look(curve, look, discretisation)))
+        Ok(Some(Rc::new(Self::with_look(curve, look, discretisation))))
     }
 
     /// The curve drawing of `DrawOn`, shared with the Bezier and BSpline curves.

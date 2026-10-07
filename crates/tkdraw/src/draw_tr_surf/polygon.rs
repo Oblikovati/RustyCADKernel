@@ -82,9 +82,12 @@ impl DrawTrSurfPolygon3D {
 
     /// `Restore`: `Poly::ReadPolygon3D`; text that does not read gives a drawable
     /// without polygon.
-    pub fn restore(_session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        _session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let polygon = stream.read_buffered(|input| poly::read_polygon3d(input));
-        Some(Rc::new(Self::new(polygon.unwrap_or_default())))
+        Ok(Some(Rc::new(Self::new(polygon.unwrap_or_default()))))
     }
 }
 
@@ -167,9 +170,12 @@ impl DrawTrSurfPolygon2D {
 
     /// `Restore`: `Poly::ReadPolygon2D`; text that does not read gives a drawable
     /// without polygon.
-    pub fn restore(_session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        _session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let polygon = stream.read_buffered(|input| poly::read_polygon2d(input));
-        Some(Rc::new(Self::new(polygon.unwrap_or_default())))
+        Ok(Some(Rc::new(Self::new(polygon.unwrap_or_default()))))
     }
 }
 

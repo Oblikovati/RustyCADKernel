@@ -104,7 +104,10 @@ impl DrawTrSurfPoint {
     /// `Restore`: `1 x y z` or `0 x y`, with the marker and color of
     /// `DrawTrSurf::Parameters()`; a missing number reads as 0 (`operator>>` since
     /// C++11).
-    pub fn restore(session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let params = current(session);
         let is_3d = stream.read_through(|io| {
             let mut value = 0;
@@ -127,7 +130,7 @@ impl DrawTrSurfPoint {
                 params.pnt_color,
             ))
         };
-        Some(point)
+        Ok(Some(point))
     }
 }
 

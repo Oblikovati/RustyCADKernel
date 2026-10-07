@@ -89,7 +89,10 @@ impl DrawTrSurfBezierCurve {
 
     /// `Restore`: a curve read in the compact GeomTools format (no curve when it is
     /// not a Bezier curve), with the settings of `DrawTrSurf::Parameters()`.
-    pub fn restore(session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let params = current(session);
         let curve = stream
             .read_through(CurveSet::read_curve)
@@ -97,7 +100,7 @@ impl DrawTrSurfBezierCurve {
         let colors = (params.curv_color, params.poles_color);
         let discretisation = (params.discret, params.deflection, params.draw_mode);
         let restored = Self::with_style(curve, colors, params.is_show_poles, discretisation);
-        Some(Rc::new(restored))
+        Ok(Some(Rc::new(restored)))
     }
 }
 

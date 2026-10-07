@@ -37,7 +37,7 @@ fn session() -> (Rc<DrawSession>, Rc<FakeWindowSystem>) {
 /// The drawable `type_name` restores from `record`.
 fn restore(session: &DrawSession, type_name: &str, record: &str) -> DrawableHandle {
     let mut stream = DrawIStream::new(record.as_bytes().to_vec());
-    session.restore(type_name, &mut stream).unwrap()
+    session.restore(type_name, &mut stream).unwrap().unwrap()
 }
 
 /// Stores and displays `drawable` in `name`, returning the window calls it made.

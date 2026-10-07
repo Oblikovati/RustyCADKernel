@@ -164,7 +164,10 @@ impl DrawTrSurfSurface {
 
     /// `Restore`: a surface read in the compact GeomTools format, with the settings of
     /// `DrawTrSurf::Parameters()`.
-    pub fn restore(session: &DrawSession, stream: &mut DrawIStream) -> Option<DrawableHandle> {
+    pub fn restore(
+        session: &DrawSession,
+        stream: &mut DrawIStream,
+    ) -> Result<Option<DrawableHandle>, Failure> {
         let params = current(session);
         let surface = stream.read_through(SurfaceSet::read_surface);
         let look = SurfaceLook {
@@ -174,7 +177,11 @@ impl DrawTrSurfSurface {
             isos_color: params.isos_color,
         };
         let discretisation = (params.discret, params.deflection, params.draw_mode);
-        Some(Rc::new(Self::with_look(surface, look, discretisation)))
+        Ok(Some(Rc::new(Self::with_look(
+            surface,
+            look,
+            discretisation,
+        ))))
     }
 
     /// `DrawOn(dis, Iso)`: the isos when `with_isos`, the finite bounds, then the
