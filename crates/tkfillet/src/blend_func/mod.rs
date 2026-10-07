@@ -12,7 +12,7 @@ mod chamf_inv;
 mod chamfer;
 mod chamfer_macro;
 mod chamfer_plane;
-mod choice;
+pub(crate) mod choice;
 pub(crate) mod const_rad;
 mod const_rad_inv;
 mod const_throat;

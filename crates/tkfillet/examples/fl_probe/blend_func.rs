@@ -303,10 +303,11 @@ pub(super) fn curve2d(r: &mut Reader<'_>) -> Handle<dyn Adaptor2dCurve2d> {
 
 /// `fl_inverse`: the math members and the bounds of an inverse function at `x`.
 pub(super) fn inverse(f: &mut dyn BlendInverseBounds, x: &Vector<'_>, tol: f64) {
-    int(f.variables());
-    int(f.equations());
-    let mut fv = Vector::filled(1, 4, 0.0).expect("vector");
-    let mut d = Matrix::filled(1, 4, 1, 4, 0.0).expect("matrix");
+    let (nv, ne) = (f.variables(), f.equations());
+    int(nv);
+    int(ne);
+    let mut fv = Vector::filled(1, ne, 0.0).expect("vector");
+    let mut d = Matrix::filled(1, ne, 1, nv, 0.0).expect("matrix");
     let ok = f.value(x, &mut fv);
     attempt(|| {
         f.take_failure().map(|()| {
@@ -330,10 +331,10 @@ pub(super) fn inverse(f: &mut dyn BlendInverseBounds, x: &Vector<'_>, tol: f64) 
         })
     });
     attempt(|| f.is_solution(x, tol).map(flag));
-    let mut tv = Vector::filled(1, 4, 0.0).expect("vector");
+    let mut tv = Vector::filled(1, nv, 0.0).expect("vector");
     attempt(|| f.get_tolerance(&mut tv, tol).map(|()| vector(&tv)));
-    let mut inf = Vector::filled(1, 4, 0.0).expect("vector");
-    let mut sup = Vector::filled(1, 4, 0.0).expect("vector");
+    let mut inf = Vector::filled(1, nv, 0.0).expect("vector");
+    let mut sup = Vector::filled(1, nv, 0.0).expect("vector");
     attempt(|| {
         f.get_bounds(&mut inf, &mut sup)?;
         vector(&inf);

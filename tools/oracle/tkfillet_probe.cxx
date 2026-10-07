@@ -25,6 +25,7 @@
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkfillet_probe_chfids.cxx"
 #include "tkfillet_probe_blendfunc.cxx"
+#include "tkfillet_probe_brepblend.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // ChFiDS (tkfillet_probe_chfids.cxx)
  {"fl_spine", fl_spine_case},
@@ -37,6 +38,9 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_evol_rad_inv", fl_evol_rad_inv_case},
  {"fl_chamfer", fl_chamfer_case},
  {"fl_chamfer_inv", fl_chamfer_inv_case},
+ // BRepBlend (tkfillet_probe_brepblend.cxx)
+ {"fl_rad_inv", fl_rad_inv_case},
+ {"fl_blend_tool", fl_blend_tool_case},
 };
 int main() {
  std::string line;

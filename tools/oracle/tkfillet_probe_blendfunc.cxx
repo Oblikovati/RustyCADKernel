@@ -167,9 +167,10 @@ void fl_evol_rad_case(std::istream& in){
 occ::handle<Adaptor2d_Curve2d> fl_curve2d(GaReader& r){
  gp_Pnt2d p=r.pnt2d();gp_Dir2d d=r.dir2d();return new Geom2dAdaptor_Curve(new Geom2d_Line(p,d));}
 
-// The math members and the bounds of an inverse function at X.
-void fl_inverse(Blend_FuncInv& f,const math_Vector& x,double tol){
- math_Vector fv(1,4),inf(1,4),sup(1,4),tv(1,4);math_Matrix d(1,4,1,4);
+// The math members and the bounds of an inverse function at X, sized by its counts.
+template<class F> void fl_inverse(F& f,const math_Vector& x,double tol){
+ const int nv=f.NbVariables(),ne=f.NbEquations();
+ math_Vector fv(1,ne),inf(1,nv),sup(1,nv),tv(1,nv);math_Matrix d(1,ne,1,nv);
  fv.Init(0);inf.Init(0);sup.Init(0);tv.Init(0);d.Init(0);
  ga_int(f.NbVariables());ga_int(f.NbEquations());
  GA_TRY(ga_flag(f.Value(x,fv));fl_vector(fv));

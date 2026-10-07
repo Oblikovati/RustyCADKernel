@@ -1,5 +1,6 @@
 //! The TKFillet probe operations, one module per C++ probe file under tools/oracle.
 pub mod blend_func;
+pub mod brep_blend;
 pub mod chamfer;
 pub mod chfi_ds;
 pub mod fillet;
