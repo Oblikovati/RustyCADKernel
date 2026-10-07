@@ -72,6 +72,13 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_reparam_pcurv", fl_reparam_pcurv_case},
  {"fl_project_pcurv", fl_project_pcurv_case},
  {"fl_b0_bounds", fl_b0_bounds_case},
+ {"fl_compute_arete", fl_compute_arete_case},
+ {"fl_fil_common_point", fl_fil_common_point_case},
+ {"fl_b0_stripes", fl_b0_stripes_case},
+ {"fl_b0_tols", fl_b0_tols_case},
+ {"fl_int_cs", fl_int_cs_case},
+ {"fl_computes_int_pc", fl_computes_int_pc_case},
+ {"fl_b0_inter2d", fl_b0_inter2d_case},
 };
 int main() {
  std::string line;

@@ -44,7 +44,7 @@ fn adaptor_bounds(s: &dyn Adaptor3dSurface) -> Result<(), Failure> {
 }
 
 /// `fl_curve2d`.
-fn curve2d(c: &Handle<dyn Geom2dCurve>) {
+pub(super) fn curve2d(c: &Handle<dyn Geom2dCurve>) {
     flag(c.is_null());
     let Some(curve) = c.get() else {
         return;

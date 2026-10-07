@@ -1,5 +1,18 @@
 // The free functions of ChFi3d_Builder_0 that run without the TKBool data structure.
 #include <BRepAdaptor_Curve.hxx>
+#include <BRepAdaptor_Curve2d.hxx>
+#include <BRepBlend_Extremity.hxx>
+#include <BRepTopAdaptor_HVertex.hxx>
+#include <ChFiDS_CommonPoint.hxx>
+#include <ChFiDS_FaceInterference.hxx>
+#include <ChFiDS_Spine.hxx>
+#include <ChFiDS_Stripe.hxx>
+#include <ChFiDS_SurfData.hxx>
+#include <Geom2dInt_GInter.hxx>
+#include <Geom_OffsetSurface.hxx>
+#include <Geom_TrimmedCurve.hxx>
+#include <IntSurf_Transition.hxx>
+#include <NCollection_HSequence.hxx>
 #include <BRepTools.hxx>
 #include <BRep_Tool.hxx>
 #include <Bnd_Box.hxx>
@@ -154,4 +167,111 @@ void fl_b0_bounds_case(std::istream& in){
  GA_TRY(occ::handle<Geom2d_Curve> c;fl_boundary(ChFi3d_mkbound(s,c,s1,p1,gp_Vec2d(d1),s2,p2,gp_Vec2d(d2),t3d,ta));fl_bezier2d(c));
  GA_TRY(occ::handle<Geom2d_Curve> c;gp_Vec w1=v1,w2=v2;fl_boundary(ChFi3d_mkbound(s,c,s1,p1,w1,s2,p2,w2,t3d,ta));fl_bezier2d(c);
   ga_xyz(w1.XYZ());ga_xyz(w2.XYZ()));
+ ga_end();}
+
+// A common point: point, vector, parameter, vertex, arc (parameter, transition), tolerance.
+void fl_common_point(const ChFiDS_CommonPoint& cp){
+ ga_pnt(cp.Point());ga_flag(cp.HasVector());if(cp.HasVector())ga_xyz(cp.Vector().XYZ());ga_real(cp.Parameter());
+ ga_flag(cp.IsVertex());if(cp.IsVertex())ga_pnt(BRep_Tool::Pnt(cp.Vertex()));
+ ga_flag(cp.IsOnArc());if(cp.IsOnArc()){ga_real(cp.ParameterOnArc());ga_int(int(cp.TransitionOnArc()));}ga_real(cp.Tolerance());}
+// A common point of `fl_compute_arete`: 0 alone, 1 on the arc at the parameter, 2 on a
+// vertex of the arc.
+ChFiDS_CommonPoint fl_arete_point(int mode,const TopoDS_Edge& arc,double param){
+ ChFiDS_CommonPoint cp;if(mode==1)cp.SetArc(1e-7,arc,param,TopAbs_FORWARD);
+ if(mode==2)cp.SetVertex(TopExp::FirstVertex(arc));return cp;}
+
+// `fl_compute_arete SURFACE UV1 UV2 m1 pa1 m2 pa2 iflag tol3d tol2d GUIDE pardeb parfin`:
+// ChFi3d_ComputeArete between the common points (on the arcs (0,0,0)-(1,0,0) and
+// (0,1,0)-(1,1,1)); the guide is the given 3d curve when iflag > 0.
+void fl_compute_arete_case(std::istream& in){
+ GaReader r{in};occ::handle<Geom_Surface> s=fl_geom_surface(r);gp_Pnt2d uv1=r.pnt2d(),uv2=r.pnt2d();
+ int m1=r.integer();double pa1=r.real();int m2=r.integer();double pa2=r.real();int iflag=r.integer();double tol3d=r.real(),tol2d=r.real();
+ occ::handle<Geom_Curve> c3d=fl_geom_guide(r);double pd=r.real(),pf=r.real();if(iflag==0)c3d.Nullify();
+ ChFiDS_CommonPoint p1=fl_arete_point(m1,fl_segment(gp_Pnt(0,0,0),gp_Pnt(1,0,0),false),pa1);
+ ChFiDS_CommonPoint p2=fl_arete_point(m2,fl_segment(gp_Pnt(0,1,0),gp_Pnt(1,1,1),false),pa2);
+ GA_TRY(occ::handle<Geom2d_Curve> pc;double reached=-1;ChFi3d_ComputeArete(p1,uv1,p2,uv2,s,c3d,pc,pd,pf,tol3d,tol2d,reached,iflag);
+  ga_real(reached);ga_real(pd);ga_real(pf);ga_flag(c3d.IsNull());if(!c3d.IsNull()){ga_pnt(c3d->Value(pd));ga_pnt(c3d->Value(pf));}fl_curve2d(pc));
+ ga_end();}
+
+// `fl_fil_common_point SOLID fi ei P u v param tol isVertex isArc pa hasTangent T trans
+// start cptol Tol`: ChFi3d_FilCommonPoint of the extremity on the face fi and its edge ei
+// (explorer orders; the vertex is the first one of the edge).
+void fl_fil_common_point_case(std::istream& in){
+ GaReader r{in};TopoDS_Shape s=fl_solid(r);int fi=r.integer(),ei=r.integer();gp_Pnt p=r.pnt();double u=r.real(),v=r.real(),param=r.real(),tol=r.real();
+ bool isv=r.flag(),isa=r.flag();double pa=r.real();bool hast=r.flag();gp_Vec t(r.xyz());int trans=r.integer();bool start=r.flag();double cptol=r.real(),Tol=r.real();
+ TopExp_Explorer ef(s,TopAbs_FACE);for(int i=1;i<fi;++i)ef.Next();TopoDS_Face f=TopoDS::Face(ef.Current());
+ TopExp_Explorer ee(f,TopAbs_EDGE);for(int i=1;i<ei;++i)ee.Next();TopoDS_Edge e=TopoDS::Edge(ee.Current());
+ occ::handle<BRepAdaptor_Curve2d> arc=new BRepAdaptor_Curve2d(e,f);
+ BRepBlend_Extremity ext(p,u,v,param,tol);
+ if(isv)ext.SetVertex(new BRepTopAdaptor_HVertex(TopExp::FirstVertex(e),arc));
+ if(isa){IntSurf_Transition tl,ta;ext.AddArc(arc,pa,tl,ta);}
+ if(hast)ext.SetTangent(t);
+ ChFiDS_CommonPoint cp;cp.SetTolerance(cptol);
+ GA_TRY(ChFi3d_FilCommonPoint(ext,IntSurf_TypeTrans(trans),start,cp,Tol);fl_common_point(cp));
+ ga_end();}
+
+// `fl_b0_stripes n P1..Pn rev nsd`: ChFi3d_IndexOfSurfData and ChFi3d_EdgeFromV1 of a
+// stripe on the spine of the segments (reversed by the bits of rev) with nsd surfaces, at
+// both vertices of each edge.
+void fl_b0_stripes_case(std::istream& in){
+ GaReader r{in};int n=r.integer();std::vector<gp_Pnt> pts;for(int i=0;i<n;++i)pts.push_back(r.pnt());int rev=r.integer(),nsd=r.integer();
+ occ::handle<ChFiDS_Spine> spine=new ChFiDS_Spine();std::vector<TopoDS_Edge> es;
+ for(int i=0;i+1<n;++i){es.push_back(fl_segment(pts[i],pts[i+1],(rev>>i)&1));spine->SetEdges(es.back());}
+ occ::handle<ChFiDS_Stripe> st=new ChFiDS_Stripe();st->ChangeSpine()=spine;
+ if(nsd>=0){st->ChangeSetOfSurfData()=new NCollection_HSequence<occ::handle<ChFiDS_SurfData>>();
+  for(int i=0;i<nsd;++i)st->ChangeSetOfSurfData()->Append(new ChFiDS_SurfData());}
+ for(const TopoDS_Edge& e:es)for(const TopoDS_Vertex& v:{TopExp::FirstVertex(e),TopExp::LastVertex(e)}){
+  GA_TRY(int sens=7;ga_int(ChFi3d_IndexOfSurfData(v,st,sens));ga_int(sens));
+  GA_TRY(int sens=7;TopoDS_Edge x=ChFi3d_EdgeFromV1(v,st,sens);ga_flag(x.IsSame(es.front()));ga_flag(x.IsSame(es.back()));ga_int(sens));}
+ ga_end();}
+
+// `fl_b0_tols SURFACE tol2d L1 L2 GUIDE f l s[3] u[3][3] t P3d offset Q1 Q2 bezier P1 P2 P3`:
+// ChFi3d_ConvTol2dToTol3d, ChFi3d_EvalTolReached (the lines on the surface against the
+// guide on [f, l]), ChFi3d_TrsfTrans, ChFi3d_SearchPivot, ChFi3d_Parameters (on the
+// surface, offset when asked) and ChFi3d_TrimCurve (of the guide or the Bezier curve).
+void fl_b0_tols_case(std::istream& in){
+ GaReader r{in};occ::handle<Geom_Surface> gs=fl_geom_surface(r);double tol2d=r.real();
+ gp_Pnt2d a1=r.pnt2d();gp_Dir2d d1=r.dir2d();gp_Pnt2d a2=r.pnt2d();gp_Dir2d d2=r.dir2d();
+ occ::handle<Geom_Curve> c=fl_geom_guide(r);double f=r.real(),l=r.real();
+ int s[3];for(int& x:s)x=r.integer();double u[3][3];for(auto& row:u)for(double& x:row)x=r.real();double t=r.real();
+ gp_Pnt p3d=r.pnt();double off=r.real();gp_Pnt q1=r.pnt(),q2=r.pnt();bool bez=r.flag();
+ NCollection_Array1<gp_Pnt> poles(1,3);for(int i=1;i<=3;++i)poles(i)=r.pnt();
+ occ::handle<Adaptor3d_Surface> hs=new GeomAdaptor_Surface(gs);
+ GA_TRY(ga_real(ChFi3d_ConvTol2dToTol3d(hs,tol2d)));
+ GA_TRY(ga_real(ChFi3d_EvalTolReached(hs,new Geom2d_Line(a1,d1),hs,new Geom2d_Line(a2,d2),new Geom_TrimmedCurve(c,f,l))));
+ for(int k=0;k<4;++k)ga_int(int(ChFi3d_TrsfTrans(IntSurf_TypeTrans(k))));
+ ga_int(ChFi3d_SearchPivot(s,u,t));
+ GA_TRY(occ::handle<Geom_Surface> ps=gs;if(off!=0)ps=new Geom_OffsetSurface(gs,off);double pu=0,pv=0;ChFi3d_Parameters(ps,p3d,pu,pv);ga_real(pu);ga_real(pv));
+ GA_TRY(occ::handle<Geom_Curve> tc=c;if(bez)tc=new Geom_BezierCurve(poles);occ::handle<Geom_TrimmedCurve> g;ChFi3d_TrimCurve(tc,q1,q2,g);
+  ga_real(g->FirstParameter());ga_real(g->LastParameter()));
+ ga_end();}
+
+// `fl_int_cs SURFACE u1 u2 v1 v2 GUIDE f l wc`: ChFi3d_IntCS of the guide on [f, l] with the
+// surface restricted to [u1, u2] x [v1, v2].
+void fl_int_cs_case(std::istream& in){
+ GaReader r{in};occ::handle<Geom_Surface> gs=fl_geom_surface(r);double u1=r.real(),u2=r.real(),v1=r.real(),v2=r.real();
+ occ::handle<Geom_Curve> c=fl_geom_guide(r);double f=r.real(),l=r.real(),wc=r.real();
+ GA_TRY(gp_Pnt2d p(-3,-3);double w=wc;ga_flag(ChFi3d_IntCS(new GeomAdaptor_Surface(gs,u1,u2,v1,v2),new GeomAdaptor_Curve(c,f,l),p,w));
+  ga_pnt2d(p);ga_real(w));
+ ga_end();}
+
+// `fl_computes_int_pc SURFACE1 P1 D1 f1 l1 SURFACE2 P2 D2 f2 l2 u1 u2`: ChFi3d_ComputesIntPC
+// of the interferences whose pcurves on the surfaces are the lines (P, D) on [f, l].
+void fl_computes_int_pc_case(std::istream& in){
+ GaReader r{in};occ::handle<GeomAdaptor_Surface> s[2];ChFiDS_FaceInterference fi[2];
+ for(int k=0;k<2;++k){s[k]=new GeomAdaptor_Surface(fl_geom_surface(r));gp_Pnt2d p=r.pnt2d();gp_Dir2d d=r.dir2d();double f=r.real(),l=r.real();
+  fi[k].SetInterference(0,TopAbs_FORWARD,occ::handle<Geom2d_Curve>(),new Geom2d_Line(p,d));fi[k].SetFirstParameter(f);fi[k].SetLastParameter(l);}
+ double u1=r.real(),u2=r.real();
+ GA_TRY(double a=u1,b=u2;gp_Pnt p;ChFi3d_ComputesIntPC(fi[0],fi[1],s[0],s[1],a,b,p);ga_real(a);ga_real(b);ga_pnt(p));
+ GA_TRY(double a=u1,b=u2;ChFi3d_ComputesIntPC(fi[0],fi[1],s[0],s[1],a,b);ga_real(a);ga_real(b));
+ ga_end();}
+
+// `fl_b0_inter2d C1 f1 l1 C2 f2 l2 tol`: Geom2dInt_GInter of the 2d curves on their ranges,
+// ChFi3d_HasTransversalIntersection and ChFi3d_HasCommonEndpoint.
+void fl_b0_inter2d_case(std::istream& in){
+ GaReader r{in};occ::handle<Geom2d_Curve> c1=occ::down_cast<Geom2dAdaptor_Curve>(fl_curve2d_kind(r))->Curve();double f1=r.real(),l1=r.real();
+ occ::handle<Geom2d_Curve> c2=occ::down_cast<Geom2dAdaptor_Curve>(fl_curve2d_kind(r))->Curve();double f2=r.real(),l2=r.real();double tol=r.real();
+ GA_TRY(Geom2dAdaptor_Curve a1(c1,f1,l1),a2(c2,f2,l2);Geom2dInt_GInter inter(a1,a2,tol,tol);ga_flag(inter.IsDone());
+  ga_int(inter.NbPoints());ga_int(inter.NbSegments());ga_flag(ChFi3d_HasTransversalIntersection(inter));
+  bool s1=false,s2=true;ga_flag(ChFi3d_HasCommonEndpoint(inter,a1,a2,tol,s1,s2));ga_flag(s1);ga_flag(s2));
  ga_end();}

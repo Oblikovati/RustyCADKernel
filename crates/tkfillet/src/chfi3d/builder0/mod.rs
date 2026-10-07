@@ -4,12 +4,16 @@
 
 //! The free functions the fillet builders share. Those that read or write the
 //! TopOpeBRepDS data structure wait for TKBool (docs/tkfillet-progress.md).
+mod arete;
 mod boundaries;
 mod bounds;
 mod faces;
 mod pcurves;
+mod solve;
 mod spines;
+mod stripes;
 
+pub use arete::{Arete, compute_arete, fil_common_point, trsf_trans};
 pub use boundaries::{
     BoundAndPCurve, BoundEnd, build_pcurve, build_pcurve_3d, build_pcurve_on, mkbound,
     mkbound_geom, mkbound_points, mkbound_segment, mkbound_tangents_2d, mkbound_tangents_3d,
@@ -23,4 +27,9 @@ pub use pcurves::{
     check_same_parameter, compute_pcurv, compute_pcurv_geom, compute_pcurv_on, project_pcurv,
     reparam_pcurv, same_parameter, same_parameter_geom,
 };
+pub use solve::{computes_int_pc, int_cs, parameters, search_pivot, trim_curve};
 pub use spines::{circular_spine, inter_plane_edge, spine};
+pub use stripes::{
+    conv_tol2d_to_tol3d, edge_from_v1, eval_tol_reached, has_common_endpoint,
+    has_transversal_intersection, index_of_surf_data,
+};

@@ -100,7 +100,7 @@ FilletSurf.
 | BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func`, `fl_walking`, `fl_surf_rst_walk`, `fl_rst_rst_walk` |
 | ChFi2d | `fl_chfi2d_fillet`, `fl_chfi2d_chamfer`, `fl_chfi2d_builder` |
 | ChFi3d | `fl_hatching_domains` (`ChFi3d_ComputeHatchingDomains`), `fl_concave_side` (`ChFi3d::ConcaveSide` on every edge of box, prism, cylinder, cone, sphere, torus and revolved solids), `fl_search_sing` (`ChFi3d_SearchSing` and its `math_FunctionRoot`) |
-| ChFi3d_Builder_0 | `fl_b0_scalars`, `fl_bound_srf`, `fl_bound_fac`, `fl_enlarge_box`, `fl_b0_faces`, `fl_b0_spines`, `fl_inter_plane_edge`, `fl_b0_pcurves`, `fl_reparam_pcurv`, `fl_project_pcurv`, `fl_b0_bounds` |
+| ChFi3d_Builder_0 | `fl_b0_scalars`, `fl_bound_srf`, `fl_bound_fac`, `fl_enlarge_box`, `fl_b0_faces`, `fl_b0_spines`, `fl_inter_plane_edge`, `fl_b0_pcurves`, `fl_reparam_pcurv`, `fl_project_pcurv`, `fl_b0_bounds`, `fl_compute_arete`, `fl_fil_common_point`, `fl_b0_stripes`, `fl_b0_tols`, `fl_int_cs`, `fl_computes_int_pc`, `fl_b0_inter2d` |
 | BRepFilletAPI | `fl_chfi2d_builder` (`BRepFilletAPI_MakeFillet2d` on the edited face) |
 
 The GTests of `ChFi3d_Hatching_Test.cxx` are translated in

@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod fl_probe;
 use fl_probe::{
-    app_func, blend_func, brep_blend, builder0, chamfer, chfi_ds, chfi2d, chfi3d, fillet,
-    line_builders, rst_rst, surf_rst, walking,
+    app_func, blend_func, brep_blend, builder0, builder0_solve, chamfer, chfi_ds, chfi2d, chfi3d,
+    fillet, line_builders, rst_rst, surf_rst, walking,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -52,6 +52,13 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_reparam_pcurv", builder0::reparam_pcurv_case),
     ("fl_project_pcurv", builder0::project_pcurv_case),
     ("fl_b0_bounds", builder0::bounds_case),
+    ("fl_compute_arete", builder0_solve::compute_arete_case),
+    ("fl_fil_common_point", builder0_solve::fil_common_point_case),
+    ("fl_b0_stripes", builder0_solve::stripes_case),
+    ("fl_b0_tols", builder0_solve::tols_case),
+    ("fl_int_cs", builder0_solve::int_cs_case),
+    ("fl_computes_int_pc", builder0_solve::computes_int_pc_case),
+    ("fl_b0_inter2d", builder0_solve::inter2d_case),
 ];
 
 fn main() {

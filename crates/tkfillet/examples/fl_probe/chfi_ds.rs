@@ -17,7 +17,7 @@ fn vec3(v: Vector3) {
 }
 
 /// `fl_segment`: the segment `a`-`b`, or `b`-`a` reversed.
-fn segment(a: Point3, b: Point3, reversed: bool) -> Result<Edge, Failure> {
+pub(super) fn segment(a: Point3, b: Point3, reversed: bool) -> Result<Edge, Failure> {
     if !reversed {
         return BRepBuilderAPIMakeEdge::from_points(a, b)?.edge();
     }

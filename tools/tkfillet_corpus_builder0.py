@@ -110,6 +110,53 @@ def corner_bounds(requests: list[str]) -> None:
                                                                1, 0, 0.2, 0, 1, 0.3, s1, s2, 1e-4, 1e-2, free]))
 
 
+def aretes(requests: list[str]) -> None:
+    guide_line = guide(0, (0, 0, 0), (0.6, 0.8, 0), (0, 0, 1), 0)
+    for s in (SURFACES[0], SURFACES[2], SURFACES[3]):
+        for uv1, uv2 in (((0, 0), (0, 3)), ((0, 3), (0, 0)), ((0.5, 1), (2, 1)), ((2, 1), (0.5, 1)), ((0, 0), (2, 3)), ((0.2, 0.1), (1.0, 0.7))):
+            for m1, m2 in ((0, 0), (1, 1), (2, 1)):
+                for iflag in (0, 1, 2):
+                    requests.append('fl_compute_arete ' + numbers([*s, *uv1, *uv2, m1, 0.5, m2, 0.25, iflag, 1e-4, 1e-5,
+                                                                   *guide_line, 0.0, 2.0]))
+
+
+def common_points(requests: list[str]) -> None:
+    for p in ((0, 0, 0), (0, 0, 5), (0.5, 0.3, 10)):
+        for ei in (1, 3):
+            for isv, isa in ((0, 0), (1, 0), (0, 1), (1, 1)):
+                for trans, start in ((0, 1), (1, 0), (2, 1)):
+                    requests.append('fl_fil_common_point ' + numbers([0, 10, 20, 30, 0, 1, ei, *p, 0.1, 0.2, 7.5, 1e-3, isv, isa,
+                                                                      4.0, 1, 0, 0, 1, trans, start, 1e-5, 1e-4]))
+    for rev, nsd in ((0, -1), (0, 0), (0, 3), (5, 2), (2, 4)):
+        requests.append('fl_b0_stripes ' + numbers([4, 0, 0, 0, 1, 0, 0, 1, 1, 0, 2, 1, 1, rev, nsd]))
+
+
+def tolerances(requests: list[str]) -> None:
+    pivots = (([1, 1, 1], [0.0] * 9), ([1, -1, 1], [0, 1, 2, 3, 0, -1, 0.5, 0.5, 0]), ([-1, -1, -1], [0, 2, -1, 1, 0, 3, -2, 1, 0]))
+    for s in (SURFACES[0], SURFACES[2], SURFACES[3], SURFACES[5]):
+        for (sens, u), off in zip(pivots, (0.0, 0.5, 1.0)):
+            requests.append('fl_b0_tols ' + numbers([*s, 1e-9, 0, 0, 1, 0, 0, 0.1, 1, 0, *LINE_X, 0, 1, *sens, *u, 1e-9,
+                                                     1, 2, 0.5, off, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2, 1, 1]))
+            requests.append('fl_b0_tols ' + numbers([*s, 1e-7, 0.5, 0, 0, 1, 0.5, 0.1, 0.6, 0.8, *CIRCLE2, 0.2, 2.0, *sens, *u, 1e-3,
+                                                     2, 0, 1, off, 2, 0, 1, 0, 2, 1, 1, 0, 0, 0, 1, 1, 1, 2, 0, 1]))
+    for s, bounds in ((SURFACES[0], (-5, 5, -5, 5)), (SURFACES[2], (0, 2 * PI, -3, 3)), (SURFACES[3], (0, 2 * PI, -1.5, 1.5)), (SURFACES[2], (0, PI, -3, 3))):
+        for g, f, l in ((SLANT, -5, 5), (guide(0, (-5, 0, 0.5), (1, 0, 0), (0, 0, 1), 0), 0, 10), (CIRCLE2, 0, 2 * PI)):
+            for wc in (-2e100, 2e100, 1.0, 6.0):
+                requests.append('fl_int_cs ' + numbers([*s, *bounds, *g, f, l, wc]))
+
+
+def meetings(requests: list[str]) -> None:
+    other = surface(0, (0, 0, 0), (1, 0, 0), (0, 1, 0))
+    for s1, s2 in ((SURFACES[0], SURFACES[0]), (SURFACES[0], other), (SURFACES[2], SURFACES[0])):
+        for (u1, u2) in ((0.5, 0.5), (1.4, 0.2), (0.0, 0.0)):
+            requests.append('fl_computes_int_pc ' + numbers([*s1, 0, 0, 1, 0, -1, 3, *s2, 0.5, -1, 0, 1, -1, 3, u1, u2]))
+    curves = (([0, 0, 0, 1, 0], 0, 4), ([0, 4, 0, -1, 0], 0, 4), ([0, 2, -1, 0, 1], 0, 2), ([1, 2, 0, 2, 0], 0, PI),
+              ([0, 0, 0, 1, 0], 4, 6), ([0, 1, 0, 1, 0], 0, 4), ([1, 0, 0, 1, 0], 0, 2 * PI))
+    for i, (c1, f1, l1) in enumerate(curves):
+        for c2, f2, l2 in curves[i + 1:]:
+            requests.append('fl_b0_inter2d ' + numbers([*c1, f1, l1, *c2, f2, l2, 1e-7]))
+
+
 def append_builder0_requests(requests: list[str]) -> None:
     """Append the ChFi3d_Builder_0 request families."""
     scalars(requests)
@@ -119,3 +166,7 @@ def append_builder0_requests(requests: list[str]) -> None:
     plane_cuts(requests)
     pcurves(requests)
     corner_bounds(requests)
+    aretes(requests)
+    common_points(requests)
+    tolerances(requests)
+    meetings(requests)

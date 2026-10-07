@@ -3,6 +3,7 @@ pub mod app_func;
 pub mod blend_func;
 pub mod brep_blend;
 pub mod builder0;
+pub mod builder0_solve;
 pub mod chamfer;
 pub mod chfi2d;
 pub mod chfi3d;
