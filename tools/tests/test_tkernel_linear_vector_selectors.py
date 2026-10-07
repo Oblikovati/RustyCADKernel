@@ -39,7 +39,8 @@ EXPECTED = {
             "NCollection_LinearVector<TheItemType> &)"
         ),
         "rustycad_tkernel::ncollection::LinearVector::assign",
-        "partial",
+        # Implemented since Phase 2: its only gap was a D1 class B2 throwing-copy state.
+        "implemented",
     ),
     "NCollection_LinearVector::operator=(NCollection_LinearVector<TheItemType>&&)": (
         "c801644c4c70988b579335d314c2fee74348414c441c0d9d562af7801c301d99",
