@@ -49,3 +49,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_stats').append_stats_requests(requests)
     # The Graphic3d driver model on a null driver (tkservice_corpus_driver.py)
     __import__('tkservice_corpus_driver').append_driver_requests(requests)
+    # Media without FFmpeg (tkservice_corpus_media.py)
+    __import__('tkservice_corpus_media').append_media_requests(requests)

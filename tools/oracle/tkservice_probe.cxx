@@ -42,6 +42,7 @@
 #include "tkservice_probe_culling.cxx"
 #include "tkservice_probe_stats.cxx"
 #include "tkservice_probe_driver.cxx"
+#include "tkservice_probe_media.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -97,6 +98,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"sv_stats", sv_stats_case},
  // The Graphic3d driver model on a null driver (tkservice_probe_driver.cxx)
  {"sv_scene", sv_scene_case},
+ // Media without FFmpeg (tkservice_probe_media.cxx)
+ {"sv_media", sv_media_case},
 };
 int main() {
  std::string line;

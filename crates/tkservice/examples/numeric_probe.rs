@@ -4,7 +4,7 @@ use std::io::{self, BufRead};
 mod sv_probe;
 use sv_probe::{
     array, aspects, camera, clip_plane, culling, driver, font, grid, hid, light, marker, material,
-    params, pbr, pixel, shader, stats, texture, tpers,
+    media, params, pbr, pixel, shader, stats, texture, tpers,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -67,6 +67,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("sv_stats", stats::stats_case),
     // The Graphic3d driver model on the null driver (sv_probe/driver.rs)
     ("sv_scene", driver::scene_case),
+    // Media without FFmpeg (sv_probe/media.rs)
+    ("sv_media", media::media_case),
 ];
 
 fn main() {

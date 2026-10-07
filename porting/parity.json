@@ -472383,6 +472383,1126 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dGraduatedTrihedronAxisAspect::name_offset",
       "status": "implemented",
       "notes": "Graphic3d_GraduatedTrihedron mapping: plain value structs with public fields (the getters and setters are the field accesses); the axis index checks raise Standard_OutOfRange; the cubic axes callback is an optional fn of the view; covered by tests/graphic3d_driver_model_test.rs."
+    },
+    {
+      "upstream_id": "AVBufferPool",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaAvBufferPool",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. A forward declaration of an FFmpeg structure; none exists without FFmpeg."
+    },
+    {
+      "upstream_id": "AVBufferRef",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaAvBufferRef",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. A forward declaration of an FFmpeg structure; none exists without FFmpeg."
+    },
+    {
+      "upstream_id": "AVRational",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaAvRational",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. A forward declaration of an FFmpeg structure; none exists without FFmpeg."
+    },
+    {
+      "upstream_id": "AVPacket",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaAvPacket",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. A forward declaration of an FFmpeg structure; none exists without FFmpeg."
+    },
+    {
+      "upstream_id": "Media_BufferPool",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaBufferPool",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_BufferPool::Media_BufferPool",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaBufferPool::default",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_BufferPool::Release",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaBufferPool::release",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_BufferPool::Init",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaBufferPool::init",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_BufferPool::BufferSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaBufferPool::buffer_size",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_BufferPool::GetBuffer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaBufferPool::get_buffer",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_BufferPool::myPool",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaBufferPoolFields::pool",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_BufferPool::myBufferSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaBufferPoolFields::buffer_size",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_IFrameQueue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_IFrameQueue.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaIFrameQueue",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_IFrameQueue::LockFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_IFrameQueue.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaIFrameQueue::lock_frame",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_IFrameQueue::ReleaseFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_IFrameQueue.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaIFrameQueue::release_frame",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScaler",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler::Media_Scaler",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScaler::default",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler::Release",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScaler::release",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler::Init",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScaler::init",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler::Convert",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScaler::convert",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler::IsValid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScaler::is_valid",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler::mySwsContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScalerFields::sws_context",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler::mySrcDims",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScalerFields::src_dims",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler::mySrcFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScalerFields::src_format",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler::myResDims",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScalerFields::res_dims",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Scaler::myResFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaScalerFields::res_format",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::Media_PlayerContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::new",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. The frame queue is an optional shared trait object; the worker thread starts."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::DumpFirstFrame(const TCollection_AsciiString &,TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::dump_first_frame",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::DumpFirstFrame(const TCollection_AsciiString &,const TCollection_AsciiString &,TCollection_AsciiString &,int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::dump_first_frame_to_image",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::PlaybackState",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::playback_state",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. Returns (paused, progress, duration)."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::PlayPause",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::play_pause",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. Returns (paused, progress, duration)."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::SetInput",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::set_input",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::Seek",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::seek",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::Pause",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::pause",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::Resume",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::resume",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::ToForceRgb",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::to_force_rgb",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_PlayerContext::SetForceRgb",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_PlayerContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPlayerContext::set_force_rgb",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimer",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::Media_Timer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimer::default",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::ElapsedTime",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimer::elapsed_time",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::PlaybackSpeed",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimer::playback_speed",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::SetPlaybackSpeed",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimer::set_playback_speed",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::IsStarted",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimer::is_started",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::Start",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimer::start",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::Pause",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimer::pause",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::Stop",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimer::stop",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::Seek",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimer::seek",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::myTimer",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimerFields::timer",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::myTimerFrom",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimerFields::timer_from",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Timer::myTimerSpeed",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaTimerFields::timer_speed",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::Media_CodecContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::default",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::Init(const AVStream &,double,int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::init",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::Init(const AVStream &,double,int,int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::init_codec",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::Context",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::context",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::Close",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::close",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::SizeX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::size_x",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::SizeY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::size_y",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::StreamIndex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::stream_index",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::Flush",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::flush",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::CanProcessPacket",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::can_process_packet",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::SendPacket",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::send_packet",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::ReceiveFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::receive_frame",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::myCodecCtx",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContextFields::codec_ctx",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::myCodec",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContextFields::codec",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::myPtsStartBase",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContextFields::pts_start_base",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::myPtsStartStream",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContextFields::pts_start_stream",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::myTimeBase",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContextFields::time_base",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::myStreamIndex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContextFields::stream_index",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_CodecContext::myPixelAspectRatio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContextFields::pixel_aspect_ratio",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::Media_FormatContext",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::default",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::FormatAVErrorDescription",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::format_av_error_description",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::SecondsToUnits(double)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::seconds_to_units",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::SecondsToUnits(const AVRational &,double)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::seconds_to_units_in",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::Stream",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::stream",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. Standard_ProgramError without FFmpeg."
+    },
+    {
+      "upstream_id": "Media_FormatContext::FormatUnitsToSeconds",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::format_units_to_seconds",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::UnitsToSeconds",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::units_to_seconds",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::StreamUnitsToSeconds",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::stream_units_to_seconds",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::StreamSecondsToUnits",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::stream_seconds_to_units",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::FormatTime",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::format_time",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::FormatTimeProgress",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::format_time_progress",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::Context",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::context",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::OpenInput",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::open_input",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::Close",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::close",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::NbSteams",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::nb_steams",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::StreamInfo",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::stream_info",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::PtsStartBase",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::pts_start_base",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::Duration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::duration",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::ReadPacket",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::read_packet",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::SeekStream",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::seek_stream",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::Seek",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::seek",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::myFormatCtx",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContextFields::format_ctx",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::myPtsStartBase",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContextFields::pts_start_base",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_FormatContext::myDuration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContextFields::duration",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::Media_Frame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::default",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::FormatFFmpeg2Occt",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::format_ffmpeg_2_occt",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::FormatOcct2FFmpeg",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::format_occt_2_ffmpeg",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::ChangeFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::frame",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. Null without FFmpeg."
+    },
+    {
+      "upstream_id": "Media_Frame::IsFullRangeYUV",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::is_full_range_yuv",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::Swap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::swap",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::IsEmpty",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::is_empty",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::Unref",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::unref",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::size",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::SizeX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::size_x",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::SizeY",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::size_y",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::Format",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::format",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::Plane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::plane",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::LineSize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::line_size",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::BestEffortTimestamp",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::best_effort_timestamp",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::Frame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::frame",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::Pts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::pts",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::SetPts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::set_pts",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::PixelAspectRatio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::pixel_aspect_ratio",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::SetPixelAspectRatio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::set_pixel_aspect_ratio",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::IsLocked",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::is_locked",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::SetLocked",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::set_locked",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::InitWrapper",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::init_wrapper",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::myFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrameFields::frame",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::myFramePts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrameFields::frame_pts",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::myPixelRatio",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrameFields::pixel_ratio",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Frame::myIsLocked",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaFrameFields::is_locked",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::Media_Packet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::default",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::ChangePacket",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::packet",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. Null without FFmpeg."
+    },
+    {
+      "upstream_id": "Media_Packet::ChangeData",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::data",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs. Null without FFmpeg."
+    },
+    {
+      "upstream_id": "Media_Packet::Unref",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::unref",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::Packet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::packet",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::Data",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::data",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::size",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::Pts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::pts",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::Dts",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::dts",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::Duration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::duration",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::DurationSeconds",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::duration_seconds",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::SetDurationSeconds",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::set_duration_seconds",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::StreamIndex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::stream_index",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::IsKeyFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::is_key_frame",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::SetKeyFrame",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::set_key_frame",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::myPacket",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacketFields::packet",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
+    },
+    {
+      "upstream_id": "Media_Packet::myDurationSec",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
+      "rust_item": "rustycad_tkservice::media::MediaPacketFields::duration_sec",
+      "status": "implemented",
+      "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
     }
   ],
   "tests": [

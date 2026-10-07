@@ -188,6 +188,7 @@ pub use frame_stats::{
 };
 pub use frame_stats_data::{Graphic3dFrameStatsData, Graphic3dFrameStatsDataTmp};
 pub use frame_stats_text::Graphic3dFrameStatsDict;
+pub(crate) use frame_stats_text::split_time;
 pub use graduated_trihedron::{
     Graphic3dGraduatedTrihedron, Graphic3dGraduatedTrihedronAxisAspect,
     Graphic3dGraduatedTrihedronCallback,
