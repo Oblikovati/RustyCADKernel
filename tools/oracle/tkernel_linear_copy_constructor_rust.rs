@@ -2,6 +2,8 @@
 //! Run normally to compare native traces; Miri uses separate instrumented unit-test repair.
 use rustycad_tkernel::ncollection::LinearVector;
 use std::panic::{AssertUnwindSafe, catch_unwind};
+#[path = "../../crates/tkernel/tests/support/linear_constructor_item.rs"]
+mod item;
 #[path = "../../crates/tkernel/tests/support/linear_copy_constructor_fixture.rs"]
 mod fixture;
 use fixture::{COPY_CASES, CopySpec, CopyTrace, filled, row};

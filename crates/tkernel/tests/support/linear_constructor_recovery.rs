@@ -1,15 +1,13 @@
 //! Test-only typed repair; no constructor invokes this as normal recovery.
 #![allow(unsafe_code)]
-use super::{
-    assert_native,
-    fixture::{CopyItem, CopyTrace},
-};
+use super::item::{CopyItem, CopyTrace};
 
-pub(super) fn repair(
+pub(crate) fn repair(
     name: &str,
     expected_capacity: usize,
     trace: &CopyTrace,
     allocation: (*mut CopyItem<'_>, usize),
+    assert_native: impl Fn(&str),
 ) {
     let (pointer, capacity) = allocation;
     assert_eq!(capacity, expected_capacity);
