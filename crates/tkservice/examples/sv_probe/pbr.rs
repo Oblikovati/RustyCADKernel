@@ -5,10 +5,10 @@ use rustycad_tkernel::quantity::ColorRgba;
 use rustycad_tkservice::graphic3d::{Graphic3dBsdf, Graphic3dFresnel, Graphic3dPbrMaterial};
 use rustycad_tkservice::image::{ImageColorRgf, ImageFormat, ImagePixMap};
 
-fn vec3(v: Vec3<f32>) {
+pub fn vec3(v: Vec3<f32>) {
     [v.x, v.y, v.z].into_iter().for_each(|c| real(f64::from(c)));
 }
-fn vec4(v: Vec4<f32>) {
+pub fn vec4(v: Vec4<f32>) {
     [v.x, v.y, v.z, v.w]
         .into_iter()
         .for_each(|c| real(f64::from(c)));
@@ -50,7 +50,7 @@ pub fn factor_case(values: &[f64]) {
     end();
 }
 
-fn print_bsdf(b: &Graphic3dBsdf) {
+pub fn print_bsdf(b: &Graphic3dBsdf) {
     vec4(b.kc);
     vec3(b.kd);
     vec4(b.ks);

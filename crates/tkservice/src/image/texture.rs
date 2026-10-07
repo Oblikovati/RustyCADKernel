@@ -7,10 +7,10 @@ use super::texture_io::{copy_file_range, fail, open_input, probe_format, read_pr
 use super::{
     ImageAlienPixMap, ImageCompressedPixMap, ImageDdsParser, ImagePixMap, ImageSupportedFormats,
 };
-use crate::json_dump::{class_begin, field_dumped, field_real};
+use crate::json_dump::{class_begin, field_dumped, field_real, field_string};
 use rustycad_tkernel::ncollection::{Buffer, HashPolicy};
 use rustycad_tkernel::osd::SeekDir;
-use rustycad_tkernel::standard::dump::{DumpOutput, DumpStream, add_values_separator};
+use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Handle, StandardTransient, Transient};
 use rustycad_tkernel::tcollection::AsciiString;
 use std::io::{self, Write};
@@ -156,8 +156,8 @@ pub trait ImageTextureSource: Transient {
     fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
         let base = self.texture_base();
         class_begin(stream, "Image_Texture")?;
-        field_text(stream, "TextureId", base.texture_id.as_bytes())?;
-        field_text(stream, "ImagePath", base.image_path.as_bytes())?;
+        field_string(stream, "myTextureId", base.texture_id.as_bytes())?;
+        field_string(stream, "myImagePath", base.image_path.as_bytes())?;
         if let Some(buffer) = base.buffer.get() {
             field_dumped(stream, depth, "myBuffer.get()", &|s, d| {
                 buffer.dump_json(s, d)
@@ -230,14 +230,6 @@ pub trait ImageTextureSource: Transient {
         }
         Handle::new(image).cast()
     }
-}
-
-/// `OCCT_DUMP_FIELD_VALUE_STRING` of a text field.
-fn field_text(stream: &mut DumpStream, name: &str, value: &[u8]) -> io::Result<()> {
-    add_values_separator(stream)?;
-    stream.write_fragment(format!("\"{name}\": \"").as_bytes())?;
-    stream.write_fragment(value)?;
-    stream.write_fragment(b"\"")
 }
 
 /// The non-virtual members of `Image_Texture`.

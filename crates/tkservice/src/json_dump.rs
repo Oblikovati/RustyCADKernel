@@ -33,6 +33,15 @@ pub(crate) fn field_real(stream: &mut DumpStream, field: &str, value: f64) -> io
     rustycad_tkernel::standard::dump::dump_real(stream, &key(field)?, value)
 }
 
+/// `OCCT_DUMP_FIELD_VALUE_STRING`: `"<name>": "<value>"` with the value bytes as they are.
+pub(crate) fn field_string(stream: &mut DumpStream, field: &str, value: &[u8]) -> io::Result<()> {
+    let name = key(field)?;
+    add_values_separator(stream)?;
+    stream.write_fragment(format!("\"{name}\": \"").as_bytes())?;
+    stream.write_fragment(value)?;
+    stream.write_fragment(b"\"")
+}
+
 /// `OCCT_DUMP_FIELD_VALUES_DUMPED`: `"<name>": {<child dump>}`, skipped at depth 0; the child
 /// is dumped at `depth - 1`.
 pub(crate) fn field_dumped(

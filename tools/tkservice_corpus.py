@@ -19,3 +19,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_pixel').append_pixel_requests(requests)
     # Graphic3d_PBRMaterial and Graphic3d_BSDF (tkservice_corpus_pbr.py)
     __import__('tkservice_corpus_pbr').append_pbr_requests(requests)
+    # Graphic3d_MaterialAspect (tkservice_corpus_material.py)
+    __import__('tkservice_corpus_material').append_material_requests(requests)

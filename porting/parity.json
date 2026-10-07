@@ -452681,6 +452681,374 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPbrMaterial::dump_json",
       "status": "implemented",
       "notes": "Graphic3d material mapping (docs/visualization-design.md section 1): value classes with public fields where the native ones are public; range checks return the Graphic3d_MaterialDefinitionError with the offending value; colours outside [0, 1] return the Standard_OutOfRange of the Quantity_Color constructor; numeric members are compared bit for bit by the sv_pbr_lut, sv_pbr_factor, sv_pbr_bsdf and sv_fresnel native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::NumberOfMaterials",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::number_of_materials",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::MaterialName(const int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::material_name_of",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::MaterialType(const int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::material_type_of",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::MaterialFromName(const char *const,Graphic3d_NameOfMaterial &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::material_from_name",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes. The bool and out-parameter become an Option; the native loop also matches \"Default\"."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::MaterialFromName(const char *const)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::material_from_name_or_default",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::Graphic3d_MaterialAspect()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::Graphic3d_MaterialAspect(const Graphic3d_NameOfMaterial)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::new",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::Name",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::name",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::RequestedName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::requested_name",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::StringName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::string_name",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::MaterialName() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::material_name",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetMaterialName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_material_name",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::Reset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::reset",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::Color",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::color",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_color",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes. The Quantity_Color(NCollection_Vec3<float>) range check of the scaled color cannot fail (coefficients <= 1) but is returned as a Result."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::Transparency",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::transparency",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::Alpha",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::alpha",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetTransparency",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_transparency",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetAlpha",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_alpha",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::AmbientColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::ambient_color",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetAmbientColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_ambient_color",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::DiffuseColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::diffuse_color",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetDiffuseColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_diffuse_color",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SpecularColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::specular_color",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetSpecularColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_specular_color",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::EmissiveColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::emissive_color",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetEmissiveColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_emissive_color",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::Shininess",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::shininess",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetShininess",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_shininess",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::IncreaseShine",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::increase_shine",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes. A NaN result is kept, as natively: only an ordered out-of-range value reverts."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::RefractionIndex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::refraction_index",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetRefractionIndex",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_refraction_index",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::BSDF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::bsdf",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetBSDF",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_bsdf",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::PBRMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::pbr_material",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetPBRMaterial",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_pbr_material",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::ReflectionMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::reflection_mode",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::MaterialType() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::material_type",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::MaterialType(const Graphic3d_TypeOfMaterial) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::is_material_type",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetMaterialType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_material_type",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes. Native quirk: the type is assigned before the comparison, so the material never becomes user-defined here."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::IsDifferent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::is_different",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::operator!=",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::<core::cmp::PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::IsEqual",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::is_equal",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::operator==",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_MaterialAspect::SetReflectionModeOff",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dMaterialAspect::set_reflection_mode_off",
+      "status": "implemented",
+      "notes": "Graphic3d_MaterialAspect mapping: a value class over the predefined-material table (material_table.rs builds the native RawMaterial cases of material_specs.rs once); range checks return the Graphic3d_MaterialDefinitionError or Standard_OutOfRange with the offending value and compare like the native code (a NaN passes); the table, the setters and the DumpJson text are compared bit for bit by the sv_material, sv_material_rank and sv_material_edit native probes. Deprecated natively (Standard_DEPRECATED); #[deprecated] with the native message."
     }
   ],
   "tests": [
