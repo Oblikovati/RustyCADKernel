@@ -90217,9 +90217,8 @@
       "upstream_id": "TCollection_ExtendedString::ToWideString() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::to_wide_string",
-      "status": "implemented",
-      "notes": "Windows only (#[cfg(windows)]), where wchar_t is UTF-16.",
+      "status": "excluded",
+      "notes": "Windows only (_WIN32): the C++ declaration and its Rust port rustycad_tkernel::tcollection::ExtendedString::to_wide_string (#[cfg(windows)]) are both absent from the Linux capture, so neither side can be compared on this configuration.",
       "cpp_configuration": {
         "condition": "defined(_WIN32)",
         "line": 810
