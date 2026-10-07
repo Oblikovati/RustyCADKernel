@@ -84,8 +84,7 @@ impl PlotPoint for Point2 {
 /// points are [`CURVE_LIMIT`] apart.
 ///
 /// Native quirk kept: a curve whose points never get that far apart loops forever.
-/// The tests are written `!(d < limit)` so that a NaN distance ends the loop as the
-/// C++ `while (d < limit)` does.
+/// A NaN distance ends the loop, as the C++ `while (d < limit)` does.
 pub(crate) fn finite_range<P: PlotPoint>(
     (mut first, mut last): (f64, f64),
     d0: impl Fn(f64) -> Result<P, Failure>,
@@ -97,7 +96,7 @@ pub(crate) fn finite_range<P: PlotPoint>(
         loop {
             delta *= 2.0;
             (first, last) = (-delta, delta);
-            if !(d0(first)?.distance_to(d0(last)?) < CURVE_LIMIT) {
+            if reached_limit(d0(first)?.distance_to(d0(last)?)) {
                 break;
             }
         }
@@ -106,7 +105,7 @@ pub(crate) fn finite_range<P: PlotPoint>(
         loop {
             delta *= 2.0;
             first = last - delta;
-            if !(d0(first)?.distance_to(end) < CURVE_LIMIT) {
+            if reached_limit(d0(first)?.distance_to(end)) {
                 break;
             }
         }
@@ -115,12 +114,17 @@ pub(crate) fn finite_range<P: PlotPoint>(
         loop {
             delta *= 2.0;
             last = first + delta;
-            if !(start.distance_to(d0(last)?) < CURVE_LIMIT) {
+            if reached_limit(start.distance_to(d0(last)?)) {
                 break;
             }
         }
     }
     Ok((first, last))
+}
+
+/// The end test of the range doubling: `!(distance < CURVE_LIMIT)`, true for NaN.
+fn reached_limit(distance: f64) -> bool {
+    distance >= CURVE_LIMIT || distance.is_nan()
 }
 
 /// The orientation arrow at `tip` along `direction` (screen-sized, 20 by 10 pixels),
@@ -219,8 +223,8 @@ impl CurvatureDisplay {
         d0: impl Fn(f64) -> Result<P::Point, Failure>,
     ) -> Result<(), Failure> {
         for interval in 1..bounds.len() as i32 {
-            let mut t = bound(&bounds, interval)?;
-            let step = (bound(&bounds, interval + 1)? - t) / f64::from(self.samples);
+            let mut t = bound(bounds, interval)?;
+            let step = (bound(bounds, interval + 1)? - t) / f64::from(self.samples);
             for _ in 1..=self.samples {
                 self.draw_radius(display, props, &d0, t)?;
                 t += step;

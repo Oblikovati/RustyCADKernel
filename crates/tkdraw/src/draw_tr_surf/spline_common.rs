@@ -8,7 +8,7 @@ use super::curve_common::PlotPoint;
 use super::params::DrawTrSurfParams;
 use crate::draw::{DrawColor, DrawColorKind, DrawDisplay, DrawMarkerShape};
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkmath::gp::Point2;
+use rustycad_tkmath::gp::{Point2, Point3};
 use std::cell::Cell;
 
 /// The control polygon settings (`drawPoles`, `polesLook`).
@@ -20,7 +20,7 @@ use std::cell::Cell;
 /// poles.clear();
 /// assert!(!poles.shown());
 /// ```
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct PolesStyle {
     shown: Cell<bool>,
     color: Cell<DrawColor>,
@@ -74,7 +74,7 @@ impl PolesStyle {
 /// let knots = KnotsStyle::default_shown();
 /// assert_eq!((knots.shape(), knots.size()), (DrawMarkerShape::Losange, 5));
 /// ```
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct KnotsStyle {
     shown: Cell<bool>,
     shape: Cell<DrawMarkerShape>,
@@ -235,6 +235,60 @@ pub(crate) fn draw_polygon<P: PlotPoint>(
     for pole in rest {
         pole.draw_on(display);
     }
+}
+
+/// The pole net of a surface: each V column of poles along U (closed when the surface
+/// is U-periodic), then each U row along V (closed when V-periodic), in `color`.
+pub(crate) fn draw_pole_net(
+    display: &mut DrawDisplay<'_>,
+    color: DrawColor,
+    (nb_u, nb_v): (i32, i32),
+    (u_periodic, v_periodic): (bool, bool),
+    pole: impl Fn(i32, i32) -> Result<Point3, Failure>,
+) -> Result<(), Failure> {
+    display.set_color(color);
+    for j in 1..=nb_v {
+        display.move_to_3d(pole(1, j)?);
+        for i in 2..=nb_u {
+            display.draw_to_3d(pole(i, j)?);
+        }
+        if u_periodic {
+            display.draw_to_3d(pole(1, j)?);
+        }
+    }
+    for i in 1..=nb_u {
+        display.move_to_3d(pole(i, 1)?);
+        for j in 2..=nb_v {
+            display.draw_to_3d(pole(i, j)?);
+        }
+        if v_periodic {
+            display.draw_to_3d(pole(i, 1)?);
+        }
+    }
+    Ok(())
+}
+
+/// The `FindPole` loop of the surfaces: the first pole after `(u_index, v_index)` in
+/// U-then-V order whose projection is within `precision` of `target`; `(0, 0)` when
+/// none is. Both indices advance first, so the search resumes at the next V column.
+pub(crate) fn find_net_index(
+    display: &DrawDisplay<'_>,
+    (target, precision): (Point2, f64),
+    (u_index, v_index): (i32, i32),
+    (nb_u, nb_v): (i32, i32),
+    pole: impl Fn(i32, i32) -> Result<Point3, Failure>,
+) -> Result<(i32, i32), Failure> {
+    let mut u = u_index + 1;
+    for v in v_index + 1..=nb_v {
+        while u <= nb_u {
+            if display.project(pole(u, v)?).distance(target) <= precision {
+                return Ok((u, v));
+            }
+            u += 1;
+        }
+        u = 1;
+    }
+    Ok((0, 0))
 }
 
 /// The search loop of `FindPole` and `FindKnot`: the first index after `index`, up to

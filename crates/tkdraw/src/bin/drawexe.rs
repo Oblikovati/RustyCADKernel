@@ -9,7 +9,8 @@ use std::rc::Rc;
 
 /// `Draw_InitAppli` of DRAWEXE: the commands of this toolkit.
 fn init_appli(session: &DrawSession) -> Result<(), Failure> {
-    commands(session)
+    commands(session)?;
+    rustycad_tkdraw::draw_tr_surf::basic_commands(session)
 }
 
 fn main() {

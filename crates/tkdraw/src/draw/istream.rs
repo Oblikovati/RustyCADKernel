@@ -3,6 +3,7 @@
 use super::shared_buffer::SharedBuffer;
 use rustycad_tkernel::standard::strtod;
 use rustycad_tkernel::storage::IoStream;
+use std::io::Cursor;
 
 /// An input stream over the bytes of a saved DRAW file.
 ///
@@ -54,6 +55,10 @@ impl DrawIStream {
     /// `operator>>(char*)`: the next whitespace-delimited word; `None` (and `fail`) at
     /// the end.
     pub fn read_word(&mut self) -> Option<String> {
+        // The sentry: a failed stream extracts nothing more.
+        if self.failed {
+            return None;
+        }
         self.skip_whitespace();
         let start = self.position;
         while self
@@ -73,6 +78,9 @@ impl DrawIStream {
     /// `operator>>(double&)`: the longest number at the position; `None` (and `fail`;
     /// C++11 then stores 0) when none is there.
     pub fn read_real(&mut self) -> Option<f64> {
+        if self.failed {
+            return None;
+        }
         self.skip_whitespace();
         let rest = &self.bytes[self.position..];
         let length = number_prefix_length(rest);
@@ -84,6 +92,24 @@ impl DrawIStream {
         }
         self.position += consumed;
         Some(value)
+    }
+
+    /// Lets `read` consume this stream as a [`std::io::BufRead`] (the Poly readers take one);
+    /// the position advances by what it consumed.
+    ///
+    /// ```
+    /// use rustycad_tkdraw::draw::DrawIStream;
+    /// use std::io::BufRead;
+    /// let mut stream = DrawIStream::new(b"line one\nrest".to_vec());
+    /// let mut line = String::new();
+    /// stream.read_buffered(|input| input.read_line(&mut line)).unwrap();
+    /// assert_eq!(stream.read_word().as_deref(), Some("rest"));
+    /// ```
+    pub fn read_buffered<R>(&mut self, read: impl FnOnce(&mut Cursor<&[u8]>) -> R) -> R {
+        let mut input = Cursor::new(&self.bytes[self.position..]);
+        let result = read(&mut input);
+        self.position += usize::try_from(input.position()).unwrap_or(0);
+        result
     }
 
     /// Lets `read` extract from this stream through the TKernel `std::istream` model
@@ -104,6 +130,9 @@ impl DrawIStream {
     pub fn read_through<R>(&mut self, read: impl FnOnce(&mut IoStream) -> R) -> R {
         let buffer = SharedBuffer::new(self.bytes[self.position..].to_vec());
         let mut stream = buffer.stream(6);
+        if self.failed {
+            stream.set_state(rustycad_tkernel::storage::state::FAIL);
+        }
         let result = read(&mut stream);
         self.failed |= stream.fail();
         let (_, consumed) = buffer.finish(stream);

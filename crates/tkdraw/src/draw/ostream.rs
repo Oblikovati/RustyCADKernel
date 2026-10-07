@@ -116,6 +116,27 @@ impl DrawOStream {
         written
     }
 
+    /// Lets `write` print raw bytes on this stream (the Poly writers take a
+    /// [`std::io::Write`]; they format numbers on their own); what it wrote is
+    /// appended, also when it fails.
+    ///
+    /// ```
+    /// use rustycad_tkdraw::draw::DrawOStream;
+    /// use std::io::Write;
+    /// let mut stream = DrawOStream::new();
+    /// stream.write_bytes_through(|out| out.write_all(b"raw")).unwrap();
+    /// assert_eq!(stream.text(), "raw");
+    /// ```
+    pub fn write_bytes_through<E>(
+        &mut self,
+        write: impl FnOnce(&mut Vec<u8>) -> Result<(), E>,
+    ) -> Result<(), E> {
+        let mut bytes = Vec::new();
+        let written = write(&mut bytes);
+        self.text.push_str(&String::from_utf8_lossy(&bytes));
+        written
+    }
+
     /// Right-aligns `text` in the pending width (the default `std::ios::right` fill).
     fn pad_and_push(&mut self, text: String) -> &mut Self {
         let width = std::mem::take(&mut self.width);

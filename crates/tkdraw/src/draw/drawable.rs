@@ -203,7 +203,7 @@ impl dyn Drawable3D {
 
 /// `drawable` as `type_id` when it is that class or derives from it: the
 /// [`Drawable3D::ancestor`] answer of a drawable that embeds a base drawable `part`.
-pub fn kind_of<'a, T: Drawable3D>(part: &'a T, type_id: TypeId) -> Option<&'a dyn Any> {
+pub fn kind_of<T: Drawable3D>(part: &T, type_id: TypeId) -> Option<&dyn Any> {
     if TypeId::of::<T>() == type_id {
         return Some(part);
     }
