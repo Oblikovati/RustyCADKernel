@@ -2,9 +2,11 @@
 use super::{BaseAllocator, BoundingVolume, DynamicArray, UBTree};
 mod balance;
 mod insertion;
+mod native_insertion;
 mod payload;
 use crate::stl::MersenneTwister;
 pub use insertion::BoundingTreeInsertion;
+pub use native_insertion::NativeBoundingTree;
 
 /// A pending object with its bound (native `ObjBnd`, public fields `myObj`/`myBnd`).
 pub struct ObjBnd<T, B> {
