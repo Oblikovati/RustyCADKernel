@@ -274924,12 +274924,123 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "AreFused(double,float,double,float)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Interval.lxx",
+      "status": "excluded",
+      "notes": "A file-static helper of Intrv_Interval.lxx (internal linkage, not callable outside the Intrv_Interval members); ported as the private function are_fused of crates/tkhlr/src/intrv/interval.rs, which the Intrv probes cover through the interval members."
+    },
+    {
       "upstream_id": "Intrv_Position",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
       "rust_item": "rustycad_tkhlr::intrv::Position",
       "status": "implemented",
       "notes": "Intrv mapping (docs/hlr-design.md section 3, docs/tkhlr-progress.md): Intrv_Interval is the Copy value Interval with f32 tolerances and the native mixed float/double arithmetic; Intrv_Intervals keeps its sequence in a Vec walked with the native 1-based index; the Interval/Intervals overloads take _interval suffixes; output references become a returned tuple; Value raises Standard_OutOfRange as a Failure; compared with OCCT by tools/verify_tkhlr_numeric.py (iv_* requests)."
+    },
+    {
+      "upstream_id": "Intrv_OverlappingAtStart",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::OverlappingAtStart",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_Enclosing",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::Enclosing",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_JustOverlappingAtEnd",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::JustOverlappingAtEnd",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_JustAfter",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::JustAfter",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_Inside",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::Inside",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_After",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::After",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_JustBefore",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::JustBefore",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_JustOverlappingAtStart",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::JustOverlappingAtStart",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_Before",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::Before",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_JustEnclosingAtStart",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::JustEnclosingAtStart",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_Similar",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::Similar",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_JustEnclosingAtEnd",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::JustEnclosingAtEnd",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Intrv_OverlappingAtEnd",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Intrv/Intrv_Position.hxx",
+      "rust_item": "rustycad_tkhlr::intrv::Position::OverlappingAtEnd",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
     },
     {
       "upstream_id": "TopBas_TestInterference::TopBas_TestInterference()",
@@ -275359,7 +275470,7 @@
       "upstream_id": "HLRAlgo_BiPoint::IndicesT()",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
-      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::default",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::<core::default::Default>::default",
       "status": "implemented",
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests)."
     },
@@ -275383,7 +275494,7 @@
       "upstream_id": "HLRAlgo_BiPoint()",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
-      "rust_item": "rustycad_tkhlr::hlr_algo::BiPoint::default",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPoint::<core::default::Default>::default",
       "status": "implemented",
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests)."
     },
@@ -275620,6 +275731,166 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkhlr::hlr_algo::BiPoint needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "69e4aa59eabe4c041e565c911152906f6b059d65bf562c01016f5c0c9f06bbbd",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::EMskFlags",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointMask",
+      "status": "implemented",
+      "notes": "The protected native mask enum as a public Rust enum with the native values; the record keeps its flags packed as natively (docs/hlr-design.md sections 5 and 6)."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::EMskRgNLine",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointMask::EMskRgNLine",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::EMskIntLine",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointMask::EMskIntLine",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::EMskOutLine",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointMask::EMskOutLine",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::EMskRg1Line",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointMask::EMskRg1Line",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::EMskHidden",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointMask::EMskHidden",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::IndicesT::FaceConex2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::face_conex2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::IndicesT::Face2Pt2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::face2_pt2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::IndicesT::ShapeIndex",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::shape_index",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::PointsT::Pnt2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointPoints::pnt2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::IndicesT::SegFlags",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::seg_flags",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::IndicesT::Face2Pt1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::face2_pt1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::PointsT::PntP2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointPoints::pnt_p2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::IndicesT::MaxSeg",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::max_seg",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::IndicesT::Face1Pt1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::face1_pt1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::IndicesT::Face1Pt2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::face1_pt2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::PointsT::Pnt1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointPoints::pnt1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::PointsT::PntP1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointPoints::pnt_p1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::IndicesT::FaceConex1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::face_conex1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_BiPoint::IndicesT::MinSeg",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_BiPoint.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::BiPointIndices::min_seg",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
     },
     {
       "upstream_id": "HLRAlgo_Coincidence::HLRAlgo_Coincidence()",
@@ -276048,7 +276319,7 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "HLRAlgo_EdgesBlock::MinMaxIndices::Minimize(const MinMaxIndices&)",
+      "upstream_id": "HLRAlgo_EdgesBlock::MinMaxIndices::Minimize(const HLRAlgo_EdgesBlock::MinMaxIndices&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
       "rust_item": "rustycad_tkhlr::hlr_algo::MinMaxIndices::minimize",
@@ -276056,7 +276327,7 @@
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests)."
     },
     {
-      "upstream_id": "HLRAlgo_EdgesBlock::MinMaxIndices::Maximize(const MinMaxIndices&)",
+      "upstream_id": "HLRAlgo_EdgesBlock::MinMaxIndices::Maximize(const HLRAlgo_EdgesBlock::MinMaxIndices&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
       "rust_item": "rustycad_tkhlr::hlr_algo::MinMaxIndices::maximize",
@@ -276176,7 +276447,7 @@
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests)."
     },
     {
-      "upstream_id": "HLRAlgo_EdgesBlock::UpdateMinMax(const MinMaxIndices&)",
+      "upstream_id": "HLRAlgo_EdgesBlock::UpdateMinMax(const HLRAlgo_EdgesBlock::MinMaxIndices&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
       "rust_item": "rustycad_tkhlr::hlr_algo::EdgesBlock::update_min_max",
@@ -276240,6 +276511,70 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(EdgesBlock, \"HLRAlgo_EdgesBlock\", StandardTransient) at crates/tkhlr/src/hlr_algo/edges_block.rs:44 registers descriptor \"HLRAlgo_EdgesBlock\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "21f66759653e6fcd643b8a4b8dd54350fd83a12f4d1b2d31a1701ba6e17832cd",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRAlgo_EdgesBlock::EMskFlags",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::EdgesBlockMask",
+      "status": "implemented",
+      "notes": "The protected native mask enum as a public Rust enum with the native values; the record keeps its flags packed as natively (docs/hlr-design.md sections 5 and 6)."
+    },
+    {
+      "upstream_id": "HLRAlgo_EdgesBlock::EMaskDouble",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::EdgesBlockMask::EMaskDouble",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_EdgesBlock::EMaskOutLine",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::EdgesBlockMask::EMaskOutLine",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_EdgesBlock::EMaskOrient",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::EdgesBlockMask::EMaskOrient",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_EdgesBlock::EMaskInternal",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::EdgesBlockMask::EMaskInternal",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_EdgesBlock::EMaskIsoLine",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::EdgesBlockMask::EMaskIsoLine",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_EdgesBlock::MinMaxIndices::Max",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::MinMaxIndices::max",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_EdgesBlock::MinMaxIndices::Min",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_EdgesBlock.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::MinMaxIndices::min",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
     },
     {
       "upstream_id": "HLRAlgo_Interference::HLRAlgo_Interference()",
@@ -276797,7 +277132,7 @@
       "upstream_id": "HLRAlgo_PolyData::FaceIndices()",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
-      "rust_item": "rustycad_tkhlr::hlr_algo::FaceIndices::default",
+      "rust_item": "rustycad_tkhlr::hlr_algo::FaceIndices::<core::default::Default>::default",
       "status": "implemented",
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests)."
     },
@@ -276890,7 +277225,7 @@
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests)."
     },
     {
-      "upstream_id": "HLRAlgo_PolyData::HideByPolyData(const HLRAlgo_BiPoint::PointsT&,Triangle&,HLRAlgo_BiPoint::IndicesT&,bool,HLRAlgo_EdgeStatus&)",
+      "upstream_id": "HLRAlgo_PolyData::HideByPolyData(const HLRAlgo_BiPoint::PointsT&,HLRAlgo_PolyData::Triangle&,HLRAlgo_BiPoint::IndicesT&,bool,HLRAlgo_EdgeStatus&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
       "rust_item": "rustycad_tkhlr::hlr_algo::PolyData::hide_by_poly_data",
@@ -276966,10 +277301,90 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRAlgo_PolyData::Triangle::Param",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyTriangle::param",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyData::Triangle::TolAng",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyTriangle::tol_ang",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyData::FaceIndices::Max",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::FaceIndices::max",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyData::Triangle::V2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyTriangle::v2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyData::FaceIndices::Index",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::FaceIndices::index",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyData::FaceIndices::Min",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::FaceIndices::min",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyData::Triangle::TolParam",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyTriangle::tol_param",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyData::Triangle::Tolerance",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyTriangle::tolerance",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyData::Triangle::V1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyTriangle::v1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyData::Triangle::V3",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyTriangle::v3",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
       "upstream_id": "HLRAlgo_PolyHidingData::PlaneT()",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyHidingData.hxx",
-      "rust_item": "rustycad_tkhlr::hlr_algo::HidingPlane::default",
+      "rust_item": "rustycad_tkhlr::hlr_algo::HidingPlane::<core::default::Default>::default",
       "status": "implemented",
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests)."
     },
@@ -276977,7 +277392,7 @@
       "upstream_id": "HLRAlgo_PolyHidingData()",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyHidingData.hxx",
-      "rust_item": "rustycad_tkhlr::hlr_algo::PolyHidingData::default",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyHidingData::<core::default::Default>::default",
       "status": "implemented",
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests)."
     },
@@ -277084,6 +277499,46 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkhlr::hlr_algo::PolyHidingData needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "f81a6241ea7afd1156cd5c27fb301960862b5252f2c38f8b40e23e6e862236a8",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyHidingData::PlaneT::Normal",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyHidingData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::HidingPlane::normal",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyHidingData::TriangleIndices::Index",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyHidingData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::HidingTriangleIndices::index",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyHidingData::TriangleIndices::Min",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyHidingData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::HidingTriangleIndices::min",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyHidingData::TriangleIndices::Max",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyHidingData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::HidingTriangleIndices::max",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyHidingData::PlaneT::D",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyHidingData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::HidingPlane::d",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
     },
     {
       "upstream_id": "HLRAlgo_PolyInternalData::HLRAlgo_PolyInternalData(int,int)",
@@ -277307,7 +277762,7 @@
       "upstream_id": "HLRAlgo_PolyInternalNode::NodeData()",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
-      "rust_item": "rustycad_tkhlr::hlr_algo::NodeData::default",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeData::<core::default::Default>::default",
       "status": "implemented",
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests)."
     },
@@ -277396,12 +277851,196 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRAlgo_PolyInternalNode::NodeIndices::Flag",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeIndices::flag",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalNode::NodeData::PCu2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeData::p_cu2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalNode::NodeIndices::Edg1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeIndices::edg1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalNode::NodeData::Scal",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeData::scal",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalNode::NodeData::PCu1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeData::p_cu1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalNode::NodeIndices::Edg2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeIndices::edg2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalNode::NodeData::UV",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeData::uv",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalNode::NodeIndices::NdSg",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeIndices::nd_sg",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalNode::NodeData::Normal",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeData::normal",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalNode::NodeData::Point",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalNode.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::NodeData::point",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
       "upstream_id": "HLRAlgo_PolyMask",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
       "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask",
       "status": "implemented",
       "notes": "HLRAlgo mapping (docs/hlr-design.md section 5, docs/tkhlr-progress.md): the value classes (BiPoint, EdgeStatus, the interference records, Projector, the Poly* records) are Copy/Clone values; the transients (EdgesBlock, WiresBlock, PolyData, PolyShellData, PolyInternalNode, PolyInternalData, PolyAlgo) keep their fields behind SharedState locks and their reference accessors return copies or write guards; the native NCollection_Array1*& pointers are &mut handles to the shared arrays compared by identity; overloads take distinct Rust names, output references become returned values; native exceptions and null or out-of-range reads are Failure errors; compared with OCCT by tools/verify_tkhlr_numeric.py (ha_* requests)."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_FMskFrBack",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::FMskFrBack",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_FMskSide",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::FMskSide",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_EMskOutLin3",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::EMskOutLin3",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_FMskBack",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::FMskBack",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_EMskGrALin2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::EMskGrALin2",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_FMskFlat",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::FMskFlat",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_FMskOrBack",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::FMskOrBack",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_FMskHiding",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::FMskHiding",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_EMskOutLin1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::EMskOutLin1",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_EMskGrALin1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::EMskGrALin1",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_FMskOnOutL",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::FMskOnOutL",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_EMskOutLin2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::EMskOutLin2",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyMask_EMskGrALin3",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyMask.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyMask::EMskGrALin3",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
     },
     {
       "upstream_id": "HLRAlgo_PolyShellData::HLRAlgo_PolyShellData(int)",
@@ -277506,6 +278145,22 @@
       "notes": "DEFINE_STANDARD_RTTI get_type_name(): impl_transient!(PolyShellData, \"HLRAlgo_PolyShellData\", StandardTransient) at crates/tkhlr/src/hlr_algo/poly_shell_data.rs:43 registers descriptor \"HLRAlgo_PolyShellData\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
       "cpp_declaration_id": "e822270063ab5c082abdc09100461e2fb4c0251163660c05841a1507914bb0d6",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyShellData::ShellIndices::Max",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyShellData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::ShellIndices::max",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyShellData::ShellIndices::Min",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyShellData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::ShellIndices::min",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
     },
     {
       "upstream_id": "HLRAlgo_Projector::HLRAlgo_Projector()",
@@ -277828,6 +278483,54 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRAlgo_PolyInternalSegment::NxtSg2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalSegment.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyInternalSegment::nxt_sg2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalSegment::Conex2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalSegment.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyInternalSegment::conex2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalSegment::LstSg1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalSegment.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyInternalSegment::lst_sg1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalSegment::LstSg2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalSegment.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyInternalSegment::lst_sg2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalSegment::NxtSg1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalSegment.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyInternalSegment::nxt_sg1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_PolyInternalSegment::Conex1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_PolyInternalSegment.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::PolyInternalSegment::conex1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
       "upstream_id": "HLRAlgo_TriangleData::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_TriangleData.hxx",
@@ -277886,6 +278589,38 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "63693e444a26ae545a4af911d8b02c59456a142b22b9a3c3c60356f8d210646a",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRAlgo_TriangleData::Node2",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_TriangleData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::TriangleData::node2",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_TriangleData::Node3",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_TriangleData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::TriangleData::node3",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_TriangleData::Node1",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_TriangleData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::TriangleData::node1",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
+    },
+    {
+      "upstream_id": "HLRAlgo_TriangleData::Flags",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRAlgo/HLRAlgo_TriangleData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_algo::TriangleData::flags",
+      "status": "implemented",
+      "notes": "Public field of the native record, a public field of the Rust record (docs/hlr-design.md section 5); the HLRAlgo probes compare the records bit for bit."
     },
     {
       "upstream_id": "HLRAlgo_WiresBlock",
@@ -282680,12 +283415,76 @@
       "notes": "Exact native record corpus; native uninitialized line type/radius have documented Rust defaults. Null walking dereference reports Standard_NullObject."
     },
     {
+      "upstream_id": "Contap_Circle",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_IType.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapIType::Circle",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Contap_Lin",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_IType.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapIType::Lin",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Contap_Walking",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_IType.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapIType::Walking",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Contap_Restriction",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_IType.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapIType::Restriction",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
       "upstream_id": "Contap_TFunction",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TFunction.hxx",
       "rust_item": "rustycad_tkhlr::contap::ContapTFunction",
       "status": "implemented",
       "notes": "Exact native record corpus; native uninitialized line type/radius have documented Rust defaults. Null walking dereference reports Standard_NullObject."
+    },
+    {
+      "upstream_id": "Contap_DraftPrs",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTFunction::DraftPrs",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Contap_DraftStd",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTFunction::DraftStd",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Contap_ContourPrs",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTFunction::ContourPrs",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "Contap_ContourStd",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TFunction.hxx",
+      "rust_item": "rustycad_tkhlr::contap::ContapTFunction::ContourStd",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
     },
     {
       "upstream_id": "Contap_ContAna::Contap_ContAna()",
@@ -289539,7 +290338,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch()",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::new",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::new",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289547,7 +290346,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch(const gp_Pnt&,double,const occ::handle<Adaptor3d_HVertex>&,const occ::handle<Adaptor2d_Curve2d>&,double)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::on_vertex",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::on_vertex",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289555,7 +290354,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch(const gp_Pnt&,double,const occ::handle<Adaptor2d_Curve2d>&,double)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::on_arc",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::on_arc",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289563,7 +290362,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch::SetValue(const gp_Pnt&,double,const occ::handle<Adaptor3d_HVertex>&,const occ::handle<Adaptor2d_Curve2d>&,double)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::set_value_on_vertex",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::set_value_on_vertex",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289571,7 +290370,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch::SetValue(const gp_Pnt&,double,const occ::handle<Adaptor2d_Curve2d>&,double)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::set_value_on_arc",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::set_value_on_arc",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289579,7 +290378,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch::Value() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::value",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::value",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289587,7 +290386,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch::Tolerance() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::tolerance",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::tolerance",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289595,7 +290394,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch::IsNew() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::is_new",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::is_new",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289603,7 +290402,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch::Vertex() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::vertex",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::vertex",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289611,7 +290410,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch::Arc() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::arc",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::arc",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289619,7 +290418,7 @@
       "upstream_id": "Contap_ThePathPointOfTheSearch::Parameter() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_ThePathPointOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapThePathPointOfTheSearch::parameter",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchThePathPointOfTheSOnBounds::parameter",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289697,7 +290496,7 @@
       "upstream_id": "Contap_TheSegmentOfTheSearch()",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSegmentOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSegmentOfTheSearch::new",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheSegmentOfTheSOnBounds::new",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289705,7 +290504,7 @@
       "upstream_id": "Contap_TheSegmentOfTheSearch::SetValue(const occ::handle<Adaptor2d_Curve2d>&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSegmentOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSegmentOfTheSearch::set_value",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheSegmentOfTheSOnBounds::set_value",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289713,7 +290512,7 @@
       "upstream_id": "Contap_TheSegmentOfTheSearch::SetLimitPoint(const Contap_ThePathPointOfTheSearch&,bool)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSegmentOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSegmentOfTheSearch::set_limit_point",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheSegmentOfTheSOnBounds::set_limit_point",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289721,7 +290520,7 @@
       "upstream_id": "Contap_TheSegmentOfTheSearch::Curve() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSegmentOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSegmentOfTheSearch::curve",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheSegmentOfTheSOnBounds::curve",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289729,7 +290528,7 @@
       "upstream_id": "Contap_TheSegmentOfTheSearch::HasFirstPoint() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSegmentOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSegmentOfTheSearch::has_first_point",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheSegmentOfTheSOnBounds::has_first_point",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289737,7 +290536,7 @@
       "upstream_id": "Contap_TheSegmentOfTheSearch::FirstPoint() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSegmentOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSegmentOfTheSearch::first_point",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheSegmentOfTheSOnBounds::first_point",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289745,7 +290544,7 @@
       "upstream_id": "Contap_TheSegmentOfTheSearch::HasLastPoint() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSegmentOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSegmentOfTheSearch::has_last_point",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheSegmentOfTheSOnBounds::has_last_point",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289753,7 +290552,7 @@
       "upstream_id": "Contap_TheSegmentOfTheSearch::LastPoint() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSegmentOfTheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSegmentOfTheSearch::last_point",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheSegmentOfTheSOnBounds::last_point",
       "status": "implemented",
       "notes": "Identical native IntStart record specialization reuses the existing IntPatch implementation. 288 new exact differential requests cover every constructor, setter, copied limit and handle/exception result. Direct tests verify limit reset and vertex-state transitions."
     },
@@ -289821,7 +290620,7 @@
       "upstream_id": "Contap_TheSearchInside()",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::new",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::new",
       "status": "implemented",
       "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
     },
@@ -289829,7 +290628,7 @@
       "upstream_id": "Contap_TheSearchInside(Contap_SurfFunction&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::with_domain",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::with_domain",
       "status": "implemented",
       "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
     },
@@ -289837,7 +290636,7 @@
       "upstream_id": "Contap_TheSearchInside::Perform(Contap_SurfFunction&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,double)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::perform",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::perform",
       "status": "implemented",
       "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
     },
@@ -289845,7 +290644,7 @@
       "upstream_id": "Contap_TheSearchInside::Perform(Contap_SurfFunction&,const occ::handle<Adaptor3d_Surface>&,double,double)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::perform_from",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::perform_from",
       "status": "implemented",
       "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
     },
@@ -289853,7 +290652,7 @@
       "upstream_id": "Contap_TheSearchInside::IsDone() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::is_done",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::is_done",
       "status": "implemented",
       "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
     },
@@ -289861,7 +290660,7 @@
       "upstream_id": "Contap_TheSearchInside::NbPoints() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::nb_points",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::nb_points",
       "status": "implemented",
       "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
     },
@@ -289869,7 +290668,7 @@
       "upstream_id": "Contap_TheSearchInside::Value(int) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearchInside.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearchInside::value",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchInside::value",
       "status": "implemented",
       "notes": "Native IntStart_SearchInside specialization over ContapSurfFunction and real adaptor domains. 144 new exact requests exercise constructor, both Perform overloads, repeated searches, sampled and outside-domain starts, all result fields and not-done/out-of-range exceptions."
     },
@@ -290190,7 +290989,7 @@
       "upstream_id": "Contap_TheSearch()",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::new",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::new",
       "status": "implemented",
       "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
     },
@@ -290198,7 +290997,7 @@
       "upstream_id": "Contap_TheSearch::Perform(Contap_ArcFunction&,const occ::handle<Adaptor3d_TopolTool>&,double,double,bool)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::perform",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::perform",
       "status": "implemented",
       "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
     },
@@ -290206,7 +291005,7 @@
       "upstream_id": "Contap_TheSearch::IsDone() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::is_done",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::is_done",
       "status": "implemented",
       "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
     },
@@ -290214,7 +291013,7 @@
       "upstream_id": "Contap_TheSearch::AllArcSolution() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::all_arc_solution",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::all_arc_solution",
       "status": "implemented",
       "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
     },
@@ -290222,7 +291021,7 @@
       "upstream_id": "Contap_TheSearch::NbPoints() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::nb_points",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::nb_points",
       "status": "implemented",
       "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
     },
@@ -290230,7 +291029,7 @@
       "upstream_id": "Contap_TheSearch::Point(int) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::point",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::point",
       "status": "implemented",
       "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
     },
@@ -290238,7 +291037,7 @@
       "upstream_id": "Contap_TheSearch::NbSegments() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::nb_segments",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::nb_segments",
       "status": "implemented",
       "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
     },
@@ -290246,7 +291045,7 @@
       "upstream_id": "Contap_TheSearch::Segment(int) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheSearch.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheSearch::segment",
+      "rust_item": "rustycad_tkgeomalgo::int_start::SearchOnBoundaries::segment",
       "status": "implemented",
       "notes": "Native IntStart restriction search over Contap tools and records. 216 exact differential requests exercise every public getter, real boundary roots and coincident segments, repeated Perform, regularity recheck, all-arc solutions, and not-done/range errors."
     },
@@ -290334,7 +291133,7 @@
       "upstream_id": "Contap_TheIWalking(double,double,double,bool)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::new",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::new",
       "status": "implemented",
       "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
     },
@@ -290342,7 +291141,7 @@
       "upstream_id": "Contap_TheIWalking::SetTolerance(double,double,double)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::set_tolerance",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::set_tolerance",
       "status": "implemented",
       "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
     },
@@ -290350,7 +291149,7 @@
       "upstream_id": "Contap_TheIWalking::Perform(const NCollection_Sequence<IntSurf_PathPoint>&,const NCollection_Sequence<IntSurf_InteriorPoint>&,Contap_SurfFunction&,const occ::handle<Adaptor3d_Surface>&,bool)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::perform",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::perform",
       "status": "implemented",
       "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
     },
@@ -290358,7 +291157,7 @@
       "upstream_id": "Contap_TheIWalking::Perform(const NCollection_Sequence<IntSurf_PathPoint>&,Contap_SurfFunction&,const occ::handle<Adaptor3d_Surface>&,bool)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::perform_open",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::perform_open",
       "status": "implemented",
       "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
     },
@@ -290366,7 +291165,7 @@
       "upstream_id": "Contap_TheIWalking::IsDone() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::is_done",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::is_done",
       "status": "implemented",
       "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
     },
@@ -290374,7 +291173,7 @@
       "upstream_id": "Contap_TheIWalking::NbLines() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::nb_lines",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::nb_lines",
       "status": "implemented",
       "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
     },
@@ -290382,7 +291181,7 @@
       "upstream_id": "Contap_TheIWalking::Value(int) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::value",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::value",
       "status": "implemented",
       "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
     },
@@ -290390,7 +291189,7 @@
       "upstream_id": "Contap_TheIWalking::NbSinglePnts() const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::nb_single_pnts",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::nb_single_pnts",
       "status": "implemented",
       "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
     },
@@ -290398,7 +291197,7 @@
       "upstream_id": "Contap_TheIWalking::SinglePnt(int) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
-      "rust_item": "rustycad_tkhlr::contap::ContapTheIWalking::single_pnt",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::single_pnt",
       "status": "implemented",
       "notes": "Native IntWalk specialization over Contap surface functions and walking-line state. 216 exact requests compare complete polylines/single points for boundary and interior seeds, reverse/hole flags, both Perform overloads and every public query. Contap-specific tangent-flag setter behavior retained."
     },
@@ -290471,6 +291270,142 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. Rust rustycad_tkhlr::contap::ContapTheIWalking needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "aaf801d723001e2162318073465ba50d42637d33deb9d403a120099731487a43",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::Cadrage(math_Vector&,math_Vector&,math_Vector&,double&,int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `cadrage` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::AddPointInCurrentLine(int,const IntSurf_PathPoint&,const occ::handle<Contap_TheIWLineOfTheIWalking>&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `add_point_in_current_line` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::RemoveTwoEndPoints(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `remove_two_end_points` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::IsPointOnLine(const IntSurf_PntOn2S&,const math_Vector&,const math_Vector&,math_FunctionSetRoot&,Contap_SurfFunction&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `is_point_on_line` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::TestArretPassage(const NCollection_Sequence<double>&,const NCollection_Sequence<double>&,const math_Vector&,int,int&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `test_arret_passage_closed` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::IsValidEndPoint(int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `is_valid_end_point` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::TestArretAjout(Contap_SurfFunction&,math_Vector&,int&,IntSurf_PntOn2S&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `test_arret_ajout` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::OpenLine(int,const IntSurf_PntOn2S&,const NCollection_Sequence<IntSurf_PathPoint>&,Contap_SurfFunction&,const occ::handle<Contap_TheIWLineOfTheIWalking>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `open_line` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::TestArretPassage(const NCollection_Sequence<double>&,const NCollection_Sequence<double>&,Contap_SurfFunction&,math_Vector&,int&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `test_arret_passage_open` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::ComputeCloseLine(const NCollection_Sequence<double>&,const NCollection_Sequence<double>&,const NCollection_Sequence<IntSurf_PathPoint>&,const NCollection_Sequence<IntSurf_InteriorPoint>&,Contap_SurfFunction&,bool&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `compute_close_line` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::TestDeflection(Contap_SurfFunction&,bool,const math_Vector&,IntWalk_StatusDeflection,int&,double&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `test_deflection` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::TestArretCadre(const NCollection_Sequence<double>&,const NCollection_Sequence<double>&,const occ::handle<Contap_TheIWLineOfTheIWalking>&,Contap_SurfFunction&,math_Vector&,int&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `test_arret_cadre` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::FillPntsInHoles(Contap_SurfFunction&,NCollection_Sequence<int>&,NCollection_Sequence<IntSurf_InteriorPoint>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `fill_pnts_in_holes` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::MakeWalkingPoint(int,double,double,Contap_SurfFunction&,IntSurf_PntOn2S&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `make_walking_point` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::IsPointOnLine(const gp_Pnt2d&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `is_point_on_line_2d` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::ComputeOpenLine(const NCollection_Sequence<double>&,const NCollection_Sequence<double>&,const NCollection_Sequence<IntSurf_PathPoint>&,Contap_SurfFunction&,bool&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: Contap_TheIWalking is a type alias of IntWalkIWalking, whose private method `compute_open_line` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "Contap_TheIWalking::Clear()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/Contap/Contap_TheIWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::clear",
+      "status": "implemented",
+      "notes": "C++ protected member; Contap_TheIWalking is a type alias of IntWalkIWalking (crates/tkhlr/src/contap/walking.rs), whose member is public."
     },
     {
       "upstream_id": "ShapeAnalysis_FreeBounds::ShapeAnalysis_FreeBounds()",
@@ -320042,6 +320977,118 @@
       "notes": "Ported from HLRBRep_EdgeData.hxx/.lxx/.cxx: the flag bits, hide count, end vertices, box, status and projected curve; the native overload pairs are get/set_ members. hb_edgedata (500 numeric requests) compares Set (tolerance as float, status tolerances as float curve resolutions) and every flag bit for bit. The vertex indices and tolerance of a default record are uninitialized natively (0 here)."
     },
     {
+      "upstream_id": "HLRBRep_EdgeData::EMaskFlags",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask",
+      "status": "implemented",
+      "notes": "The protected native mask enum as a public Rust enum with the native values; the record keeps its flags packed as natively (docs/hlr-design.md sections 5 and 6)."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskSimple",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskSimple",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskVerAtEnd",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskVerAtEnd",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskVerAtSta",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskVerAtSta",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskOutLVEnd",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskOutLVEnd",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskSelected",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskSelected",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskRgNLine",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskRgNLine",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskCutAtSta",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskCutAtSta",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskCutAtEnd",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskCutAtEnd",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskVertical",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskVertical",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskUsed",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskUsed",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskIntDone",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskIntDone",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskRg1Line",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskRg1Line",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_EdgeData::EMaskOutLVSta",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::EdgeDataMask::EMaskOutLVSta",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
       "upstream_id": "HLRBRep_EdgeFaceTool::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_EdgeFaceTool.hxx",
@@ -320564,6 +321611,126 @@
       "rust_item": "rustycad_tkhlr::hlr_brep::FaceData::set",
       "status": "implemented",
       "notes": "Ported from HLRBRep_FaceData.hxx/.lxx/.cxx: the flag bits with the orientation in the low four bits, size, wire blocks and HLR surface. hb_facedata (300 numeric requests, every surface kind, out-of-range wire edges) compares Set, SetWire, SetWEdge and every flag bit for bit. A null wire block returns Standard_NullObject where the native code dereferences null."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::EMaskFlags",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask",
+      "status": "implemented",
+      "notes": "The protected native mask enum as a public Rust enum with the native values; the record keeps its flags packed as natively (docs/hlr-design.md sections 5 and 6)."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskCylinder",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskCylinder",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskCut",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskCut",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskSimple",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskSimple",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskPlane",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskPlane",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskSide",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskSide",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskBack",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskBack",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::EMaskOrient",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::EMaskOrient",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskSphere",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskSphere",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskClosed",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskClosed",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskSelected",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskSelected",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskCone",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskCone",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskHiding",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskHiding",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskWithOutL",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskWithOutL",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
+    },
+    {
+      "upstream_id": "HLRBRep_FaceData::FMaskTorus",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::FaceDataMask::FMaskTorus",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 value; the protected mask enums of the records are public Rust enums whose values the records use for their packed flags."
     },
     {
       "upstream_id": "HLRBRep_FaceIterator::operator delete(void*) noexcept",
@@ -323090,6 +324257,78 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_TheExactInterCSurf::ParameterOnSurface(double&,double&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpIntCS::parameter_on_surface",
+      "status": "implemented",
+      "notes": "HLRBRep_TheExactInterCSurf is IntImpIntCS on the HLR curve-surface function (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheExactInterCSurf::IsEmpty() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpIntCS::is_empty",
+      "status": "implemented",
+      "notes": "HLRBRep_TheExactInterCSurf is IntImpIntCS on the HLR curve-surface function (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheExactInterCSurf::Point() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpIntCS::point",
+      "status": "implemented",
+      "notes": "HLRBRep_TheExactInterCSurf is IntImpIntCS on the HLR curve-surface function (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheExactInterCSurf::Function()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpIntCS::function",
+      "status": "implemented",
+      "notes": "HLRBRep_TheExactInterCSurf is IntImpIntCS on the HLR curve-surface function (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheExactInterCSurf::ParameterOnCurve() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpIntCS::parameter_on_curve",
+      "status": "implemented",
+      "notes": "HLRBRep_TheExactInterCSurf is IntImpIntCS on the HLR curve-surface function (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheExactInterCSurf(double,double,double,const HLRBRep_TheCSFunctionOfInterCSurf&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpIntCS::new",
+      "status": "implemented",
+      "notes": "HLRBRep_TheExactInterCSurf is IntImpIntCS on the HLR curve-surface function (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheExactInterCSurf(const HLRBRep_TheCSFunctionOfInterCSurf&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpIntCS::from_function",
+      "status": "implemented",
+      "notes": "HLRBRep_TheExactInterCSurf is IntImpIntCS on the HLR curve-surface function (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheExactInterCSurf::Perform(double,double,double,math_FunctionSetRoot&,double,double,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpIntCS::perform",
+      "status": "implemented",
+      "notes": "HLRBRep_TheExactInterCSurf is IntImpIntCS on the HLR curve-surface function (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheExactInterCSurf::IsDone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpIntCS::is_done",
+      "status": "implemented",
+      "notes": "HLRBRep_TheExactInterCSurf is IntImpIntCS on the HLR curve-surface function (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
       "upstream_id": "HLRBRep_TheIntConicCurveOfCInter::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntConicCurveOfCInter.hxx",
@@ -324670,6 +325909,54 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_TheQuadCurvExactInterCSurf(HLRBRep_Surface*,const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::QuadCurvExact::new",
+      "status": "implemented",
+      "notes": "HLRBRep_TheQuadCurvExactInterCSurf is QuadCurvExact on the HLR surface and line tools (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheQuadCurvExactInterCSurf::IsDone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::QuadCurvExact::is_done",
+      "status": "implemented",
+      "notes": "HLRBRep_TheQuadCurvExactInterCSurf is QuadCurvExact on the HLR surface and line tools (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheQuadCurvExactInterCSurf::NbRoots() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::QuadCurvExact::nb_roots",
+      "status": "implemented",
+      "notes": "HLRBRep_TheQuadCurvExactInterCSurf is QuadCurvExact on the HLR surface and line tools (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheQuadCurvExactInterCSurf::Root(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::QuadCurvExact::root",
+      "status": "implemented",
+      "notes": "HLRBRep_TheQuadCurvExactInterCSurf is QuadCurvExact on the HLR surface and line tools (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheQuadCurvExactInterCSurf::Intervals(int,double&,double&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::QuadCurvExact::intervals",
+      "status": "implemented",
+      "notes": "HLRBRep_TheQuadCurvExactInterCSurf is QuadCurvExact on the HLR surface and line tools (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheQuadCurvExactInterCSurf::NbIntervals() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::QuadCurvExact::nb_intervals",
+      "status": "implemented",
+      "notes": "HLRBRep_TheQuadCurvExactInterCSurf is QuadCurvExact on the HLR surface and line tools (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
       "upstream_id": "HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf.hxx",
@@ -324728,6 +326015,38 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "a708680b9d8bb8397069ba6d0fe631833c9b94c538e1d4d0206bf722fb9b5c7a",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf::Derivative(double,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::QuadCurvFunc::derivative",
+      "status": "implemented",
+      "notes": "HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf is QuadCurvFunc on the HLR line tool (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf(const IntSurf_Quadric&,const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::QuadCurvFunc::new",
+      "status": "implemented",
+      "notes": "HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf is QuadCurvFunc on the HLR line tool (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf::Value(double,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::QuadCurvFunc::value",
+      "status": "implemented",
+      "notes": "HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf is QuadCurvFunc on the HLR line tool (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf::Values(double,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::QuadCurvFunc::values",
+      "status": "implemented",
+      "notes": "HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf is QuadCurvFunc on the HLR line tool (crates/tkhlr/src/hlr_brep/inter_c_surf.rs); hb_surface compares the sight-line intersections bit for bit."
     },
     {
       "upstream_id": "HLRBRep_VertexList::operator delete(void*) noexcept",
@@ -324822,7 +326141,7 @@
       "notes": "Ported from HLRBRep_VertexList.hxx/.cxx; the list iterator is the slice of the interferences from its position; Current() returns Standard_NoSuchObject and the transition members Standard_DomainError as natively. hb_hider (400 numeric requests: ShapeToHLR::Load, Update and InitBoundSort on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, then HLRBRep_Hider::Hide by every hiding face) compares the visible parts of every edge bit for bit."
     },
     {
-      "upstream_id": "HLRBRep_VertexList(const HLRBRep_EdgeInterferenceTool&,const NCollection_List<HLRAlgo_Interference>::Iterator&)",
+      "upstream_id": "HLRBRep_VertexList(const HLRBRep_EdgeInterferenceTool&,const NCollection_List<class HLRAlgo_Interference>::Iterator&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_VertexList.hxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::VertexList::new",

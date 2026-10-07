@@ -7,20 +7,55 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::Orientation;
 
 // The bits of `myFlags` (`EMaskFlags`); the low four bits hold the orientation.
-const EMASK_ORIENT: i32 = 15;
-const FMASK_SELECTED: i32 = 16;
-const FMASK_BACK: i32 = 32;
-const FMASK_SIDE: i32 = 64;
-const FMASK_CLOSED: i32 = 128;
-const FMASK_HIDING: i32 = 256;
-const FMASK_SIMPLE: i32 = 512;
-const FMASK_CUT: i32 = 1024;
-const FMASK_WITH_OUT_L: i32 = 2048;
-const FMASK_PLANE: i32 = 4096;
-const FMASK_CYLINDER: i32 = 8192;
-const FMASK_CONE: i32 = 16384;
-const FMASK_SPHERE: i32 = 32768;
-const FMASK_TORUS: i32 = 65536;
+/// HLRBRep_FaceData::EMaskFlags: the bits of `myFlags` (orientation in the low four bits); protected natively, public here so that the packed
+/// flags can be read; `FaceDataMask::EMaskOrient as i32 == 15`.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[repr(i32)]
+pub enum FaceDataMask {
+    /// `EMaskOrient`.
+    EMaskOrient = 15,
+    /// `FMaskSelected`.
+    FMaskSelected = 16,
+    /// `FMaskBack`.
+    FMaskBack = 32,
+    /// `FMaskSide`.
+    FMaskSide = 64,
+    /// `FMaskClosed`.
+    FMaskClosed = 128,
+    /// `FMaskHiding`.
+    FMaskHiding = 256,
+    /// `FMaskSimple`.
+    FMaskSimple = 512,
+    /// `FMaskCut`.
+    FMaskCut = 1024,
+    /// `FMaskWithOutL`.
+    FMaskWithOutL = 2048,
+    /// `FMaskPlane`.
+    FMaskPlane = 4096,
+    /// `FMaskCylinder`.
+    FMaskCylinder = 8192,
+    /// `FMaskCone`.
+    FMaskCone = 16384,
+    /// `FMaskSphere`.
+    FMaskSphere = 32768,
+    /// `FMaskTorus`.
+    FMaskTorus = 65536,
+}
+
+const EMASK_ORIENT: i32 = FaceDataMask::EMaskOrient as i32;
+const FMASK_SELECTED: i32 = FaceDataMask::FMaskSelected as i32;
+const FMASK_BACK: i32 = FaceDataMask::FMaskBack as i32;
+const FMASK_SIDE: i32 = FaceDataMask::FMaskSide as i32;
+const FMASK_CLOSED: i32 = FaceDataMask::FMaskClosed as i32;
+const FMASK_HIDING: i32 = FaceDataMask::FMaskHiding as i32;
+const FMASK_SIMPLE: i32 = FaceDataMask::FMaskSimple as i32;
+const FMASK_CUT: i32 = FaceDataMask::FMaskCut as i32;
+const FMASK_WITH_OUT_L: i32 = FaceDataMask::FMaskWithOutL as i32;
+const FMASK_PLANE: i32 = FaceDataMask::FMaskPlane as i32;
+const FMASK_CYLINDER: i32 = FaceDataMask::FMaskCylinder as i32;
+const FMASK_CONE: i32 = FaceDataMask::FMaskCone as i32;
+const FMASK_SPHERE: i32 = FaceDataMask::FMaskSphere as i32;
+const FMASK_TORUS: i32 = FaceDataMask::FMaskTorus as i32;
 
 /// One flag of `myFlags`: the getter and the setter of the native overload pair.
 macro_rules! face_flag {

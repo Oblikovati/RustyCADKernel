@@ -94,11 +94,28 @@ pub struct BiPointFace {
     pub pt2: i32,
 }
 
-const MASK_RG1_LINE: i32 = 1;
-const MASK_RGN_LINE: i32 = 2;
-const MASK_OUT_LINE: i32 = 4;
-const MASK_INT_LINE: i32 = 8;
-const MASK_HIDDEN: i32 = 16;
+/// HLRAlgo_BiPoint::EMskFlags: the bits of `SegFlags` (regular once, regular n times, outline, internal line, hidden); protected natively, public here so that the packed
+/// flags can be read; `BiPointMask::EMskRg1Line as i32 == 1`.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[repr(i32)]
+pub enum BiPointMask {
+    /// `EMskRg1Line`.
+    EMskRg1Line = 1,
+    /// `EMskRgNLine`.
+    EMskRgNLine = 2,
+    /// `EMskOutLine`.
+    EMskOutLine = 4,
+    /// `EMskIntLine`.
+    EMskIntLine = 8,
+    /// `EMskHidden`.
+    EMskHidden = 16,
+}
+
+const MASK_RG1_LINE: i32 = BiPointMask::EMskRg1Line as i32;
+const MASK_RGN_LINE: i32 = BiPointMask::EMskRgNLine as i32;
+const MASK_OUT_LINE: i32 = BiPointMask::EMskOutLine as i32;
+const MASK_INT_LINE: i32 = BiPointMask::EMskIntLine as i32;
+const MASK_HIDDEN: i32 = BiPointMask::EMskHidden as i32;
 
 /// HLRAlgo_BiPoint: a segment of a polygonal edge with its projection, its faces and
 /// its flags (regular once, regular n times, outline, internal line, hidden). The six

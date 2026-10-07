@@ -7,19 +7,52 @@ use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 
 // The bits of `myFlags` (`EMaskFlags`).
-const EMASK_SELECTED: i32 = 1;
-const EMASK_USED: i32 = 2;
-const EMASK_RG1_LINE: i32 = 4;
-const EMASK_VERTICAL: i32 = 8;
-const EMASK_SIMPLE: i32 = 16;
-const EMASK_OUT_LV_STA: i32 = 32;
-const EMASK_OUT_LV_END: i32 = 64;
-const EMASK_INT_DONE: i32 = 128;
-const EMASK_CUT_AT_STA: i32 = 256;
-const EMASK_CUT_AT_END: i32 = 512;
-const EMASK_VER_AT_STA: i32 = 1024;
-const EMASK_VER_AT_END: i32 = 2048;
-const EMASK_RGN_LINE: i32 = 4096;
+/// HLRBRep_EdgeData::EMaskFlags: the bits of `myFlags`; protected natively, public here so that the packed
+/// flags can be read; `EdgeDataMask::EMaskSelected as i32 == 1`.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[repr(i32)]
+pub enum EdgeDataMask {
+    /// `EMaskSelected`.
+    EMaskSelected = 1,
+    /// `EMaskUsed`.
+    EMaskUsed = 2,
+    /// `EMaskRg1Line`.
+    EMaskRg1Line = 4,
+    /// `EMaskVertical`.
+    EMaskVertical = 8,
+    /// `EMaskSimple`.
+    EMaskSimple = 16,
+    /// `EMaskOutLVSta`.
+    EMaskOutLVSta = 32,
+    /// `EMaskOutLVEnd`.
+    EMaskOutLVEnd = 64,
+    /// `EMaskIntDone`.
+    EMaskIntDone = 128,
+    /// `EMaskCutAtSta`.
+    EMaskCutAtSta = 256,
+    /// `EMaskCutAtEnd`.
+    EMaskCutAtEnd = 512,
+    /// `EMaskVerAtSta`.
+    EMaskVerAtSta = 1024,
+    /// `EMaskVerAtEnd`.
+    EMaskVerAtEnd = 2048,
+    /// `EMaskRgNLine`.
+    EMaskRgNLine = 4096,
+}
+
+const EMASK_SELECTED: i32 = EdgeDataMask::EMaskSelected as i32;
+const EMASK_USED: i32 = EdgeDataMask::EMaskUsed as i32;
+const EMASK_RG1_LINE: i32 = EdgeDataMask::EMaskRg1Line as i32;
+const EMASK_VERTICAL: i32 = EdgeDataMask::EMaskVertical as i32;
+const EMASK_SIMPLE: i32 = EdgeDataMask::EMaskSimple as i32;
+const EMASK_OUT_LV_STA: i32 = EdgeDataMask::EMaskOutLVSta as i32;
+const EMASK_OUT_LV_END: i32 = EdgeDataMask::EMaskOutLVEnd as i32;
+const EMASK_INT_DONE: i32 = EdgeDataMask::EMaskIntDone as i32;
+const EMASK_CUT_AT_STA: i32 = EdgeDataMask::EMaskCutAtSta as i32;
+const EMASK_CUT_AT_END: i32 = EdgeDataMask::EMaskCutAtEnd as i32;
+const EMASK_VER_AT_STA: i32 = EdgeDataMask::EMaskVerAtSta as i32;
+const EMASK_VER_AT_END: i32 = EdgeDataMask::EMaskVerAtEnd as i32;
+const EMASK_RGN_LINE: i32 = EdgeDataMask::EMaskRgNLine as i32;
 
 /// One flag of `myFlags`: the getter and the setter of the native overload pair.
 macro_rules! edge_flag {
