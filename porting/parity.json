@@ -30397,6 +30397,1278 @@
       "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
+      "upstream_id": "BVH_Tools::BVH_PrjStateInTriangle_EDGE",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
+      "rust_item": "rustycad_tkmath::bvh::tools::PrjStateInTriangle::Edge",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "BVH_Tools::BVH_PrjStateInTriangle_INNER",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
+      "rust_item": "rustycad_tkmath::bvh::tools::PrjStateInTriangle::Inner",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "BVH_Tools::BVH_PrjStateInTriangle_VERTEX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
+      "rust_item": "rustycad_tkmath::bvh::tools::PrjStateInTriangle::Vertex",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "BVH_Bin::Count",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBin::count",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::BVH_PairNodesInStack::Metric",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairNodesInStack::metric",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::BVH_PairNodesInStack::NodeID1",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairNodesInStack::node_id1",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::BVH_PairNodesInStack::NodeID2",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairNodesInStack::node_id2",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_ChildNodes::Boxes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhChildNodes::boxes",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_ChildNodes::Ranges",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhChildNodes::ranges",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_PrimitiveRange::Start",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveRange::start",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_Traverse::BVH_NodeInStack::Metric",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhNodeInStack::metric",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_Traverse::BVH_NodeInStack::NodeID",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhNodeInStack::node_id",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH::BitComparator::myBit",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: public C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH::BitPredicate::myBit",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: public C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH::BoundData::myBVH",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: public C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH::BoundData::myHeight",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: public C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH::BoundData::myLevel",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: public C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH::BoundData::myNode",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: public C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH::BoundData::mySet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: public C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH::SquareDistanceToPoint::myIsOutside",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhSquareDistanceToPoint keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_Bin::Box",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBin::bounding",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilder::BVH_SplitPlane::LftVoxel",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSplitPlane::left_voxel",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilder::BVH_SplitPlane::RghVoxel",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSplitPlane::right_voxel",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_Box::myMaxPoint",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhBox keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_Box::myMinPoint",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhBox keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::myBoxes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhBoxSet keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::myElements",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhBoxSet keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_BuildThread::myBuildQueue",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhBuildThread keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_BuildThread::myBuildTool",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhBuildThread keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_BuildThread::myWorkThread",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhBuildThread keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_BuilderTransient::myIsParallel",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhBuilderTransient keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_BuilderTransient::myLeafNodeSize",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhBuilderTransient keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_BuilderTransient::myMaxTreeDepth",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhBuilderTransient keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_Distance::myIsDone",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistance keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::myComputeSign",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistanceField keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::myCornerMax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistanceField keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::myCornerMin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistanceField keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::myDimensionX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistanceField keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::myDimensionY",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistanceField keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::myDimensionZ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistanceField keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::myIsParallel",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistanceField keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::myMaximumSize",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistanceField keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::myVoxelData",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistanceField keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::myVoxelSize",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhDistanceField keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_Geometry::myBVH",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhGeometry keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_Geometry::myBox",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhGeometry keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_Geometry::myBuilder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhGeometry keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_Geometry::myIsDirty",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhGeometry keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet::myIndices",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhIndexedBoxSet keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::myObjects",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhObjectSet keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::myIsDone",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhPairDistance keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::myBVHSet1",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhPairTraverse keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::myBVHSet2",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhPairTraverse keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_PrimitiveSet::myBVH",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhPrimitiveSet keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_PrimitiveSet::myBox",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhPrimitiveSet keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_PrimitiveSet::myBuilder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhPrimitiveSet keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_PrimitiveRange::Final",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveRange::end",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_TypedBuildTool::myAlgo",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_TypedBuildTool::myBVH",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_TypedBuildTool::myBuildQueue",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_TypedBuildTool::mySet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_QuickSorter::myAxis",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QuickSorter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhQuickSorter keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_RadixSorter::myBox",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhRadixSorter keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_RadixSorter::myEncodedLinks",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhRadixSorter keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_Transform::myTransform",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhTransform keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_Transform::myTransformInversed",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhTransform keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_Traverse::myBVHSet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member that holds implementation state. Rust bvh::BvhTraverse keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_TreeBase::myMaxPointBuffer",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: public C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_TreeBase::myMinPointBuffer",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: public C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH_TreeBase::myNodeInfoBuffer",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: public C++ data member that holds implementation state. the Rust port of this helper keeps the same value as private state behind its constructor and methods; there is no public field to map."
+    },
+    {
+      "upstream_id": "BVH::Array::BVH_ArrayNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::ArrayType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH::BVH_AxisSelector::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH::BoxMinMax::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH::PointGeometrySquareDistance::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH::PointTriangulationSquareDistance::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH::RadixSorter::LinkIterator",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (struct std::pair<unsigned int, int> *). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH::SquareDistanceToPoint::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilder::BVH_BinVector",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH_Bin<type-parameter-0-0, value-parameter-0-1>[BVH_BinnedBuilder::Bins]). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilder::BVH_SplitPlanes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (struct BVH_BinnedBuilder::BVH_SplitPlane[BVH_BinnedBuilder::Bins + 1]). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_Box::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_LinearBuilder::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_LinearBuilder::LinkIterator",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (struct std::pair<unsigned int, int> *). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH_Tools<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH_Box<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_RadixSorter::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_Ray::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Ray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_Set::BVH_BoxNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Set.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH_Box<type-parameter-0-0, value-parameter-0-1>). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_Tools::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_Transform::BVH_MatNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::MatrixType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_Traverse::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH_Box<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_TreeBase::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH_Box<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH_Triangulation::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template instance (BVH::VectorType<type-parameter-0-0, value-parameter-0-1>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types of the generic item."
+    },
+    {
+      "upstream_id": "BVH::UpdateBoundTask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhUpdateBoundTask",
+      "status": "implemented",
+      "notes": "Class template BVH::UpdateBoundTask is the generic Rust struct bvh::BvhUpdateBoundTask over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_BaseTraverse",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBaseTraverse",
+      "status": "implemented",
+      "notes": "Class template BVH_BaseTraverse is the generic Rust trait bvh::BvhBaseTraverse over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBinnedBuilder",
+      "status": "implemented",
+      "notes": "Class template BVH_BinnedBuilder is the generic Rust struct bvh::BvhBinnedBuilder over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Box",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBox",
+      "status": "implemented",
+      "notes": "Class template BVH_Box is the generic Rust struct bvh::BvhBox over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_BoxSet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet",
+      "status": "implemented",
+      "notes": "Class template BVH_BoxSet is the generic Rust struct bvh::BvhBoxSet over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Builder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBuilder",
+      "status": "implemented",
+      "notes": "Class template BVH_Builder is the generic Rust trait bvh::BvhBuilder over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Distance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance",
+      "status": "implemented",
+      "notes": "Class template BVH_Distance is the generic Rust struct bvh::BvhDistance over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_DistanceField",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField",
+      "status": "implemented",
+      "notes": "Class template BVH_DistanceField is the generic Rust struct bvh::BvhDistanceField over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Geometry",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry",
+      "status": "implemented",
+      "notes": "Class template BVH_Geometry is the generic Rust struct bvh::BvhGeometry over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet",
+      "status": "implemented",
+      "notes": "Class template BVH_IndexedBoxSet is the generic Rust struct bvh::BvhIndexedBoxSet over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_LinearBuilder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder",
+      "status": "implemented",
+      "notes": "Class template BVH_LinearBuilder is the generic Rust struct bvh::BvhLinearBuilder over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Object",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObject",
+      "status": "implemented",
+      "notes": "Class template BVH_Object is the generic Rust trait bvh::BvhObject over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet",
+      "status": "implemented",
+      "notes": "Class template BVH_ObjectSet is the generic Rust struct bvh::BvhObjectSet over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_PairDistance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistance",
+      "status": "implemented",
+      "notes": "Class template BVH_PairDistance is the generic Rust struct bvh::BvhPairDistance over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairTraverse",
+      "status": "implemented",
+      "notes": "Class template BVH_PairTraverse is the generic Rust trait bvh::BvhPairTraverse over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_PrimitiveSet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSet",
+      "status": "implemented",
+      "notes": "Class template BVH_PrimitiveSet is the generic Rust struct bvh::BvhPrimitiveSet over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildQueue.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhQueueBuilder",
+      "status": "implemented",
+      "notes": "Class template BVH_QueueBuilder is the generic Rust trait bvh::BvhQueueBuilder over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_QuickSorter",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QuickSorter.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhQuickSorter",
+      "status": "implemented",
+      "notes": "Class template BVH_QuickSorter is the generic Rust struct bvh::BvhQuickSorter over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_RadixSorter",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhRadixSorter",
+      "status": "implemented",
+      "notes": "Class template BVH_RadixSorter is the generic Rust struct bvh::BvhRadixSorter over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Ray",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Ray.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhRay",
+      "status": "implemented",
+      "notes": "Class template BVH_Ray is the generic Rust struct bvh::BvhRay over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Set",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Set.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSet",
+      "status": "implemented",
+      "notes": "Class template BVH_Set is the generic Rust trait bvh::BvhSet over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Sorter",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Sorter.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSorter",
+      "status": "implemented",
+      "notes": "Class template BVH_Sorter is the generic Rust trait bvh::BvhSorter over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_SpatialMedianBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSpatialMedianBuilder",
+      "status": "implemented",
+      "notes": "Class template BVH_SpatialMedianBuilder is the generic Rust struct bvh::BvhSpatialMedianBuilder over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_SweepPlaneBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSweepPlaneBuilder",
+      "status": "implemented",
+      "notes": "Class template BVH_SweepPlaneBuilder is the generic Rust struct bvh::BvhSweepPlaneBuilder over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Transform",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTransform",
+      "status": "implemented",
+      "notes": "Class template BVH_Transform is the generic Rust struct bvh::BvhTransform over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Traverse",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTraverse",
+      "status": "implemented",
+      "notes": "Class template BVH_Traverse is the generic Rust trait bvh::BvhTraverse over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_Triangulation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTriangulation",
+      "status": "implemented",
+      "notes": "Class template BVH_Triangulation is the generic Rust struct bvh::BvhTriangulation over the BvhVector/scalar parameters."
+    },
+    {
+      "upstream_id": "BVH_BaseTraverse()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ member of an abstract base used only by derived classes. Rust has no inheritance; the BvhBaseTraverse trait carries the behavior."
+    },
+    {
+      "upstream_id": "BVH_BuilderTransient::BVH_BuilderTransient(const int,const int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ member of an abstract base used only by derived classes. Rust has no inheritance; bvh::BvhBuilderTransient::new carries the behavior."
+    },
+    {
+      "upstream_id": "BVH_Builder(const int,const int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ member of an abstract base used only by derived classes. Rust has no inheritance; bvh::BvhBuilderTransient::new carries the behavior."
+    },
+    {
+      "upstream_id": "BVH_ObjectTransient::BVH_ObjectTransient()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ member of an abstract base used only by derived classes. Rust has no inheritance; BvhObjectTransient::default carries the behavior."
+    },
+    {
+      "upstream_id": "BVH_TreeBaseTransient::BVH_TreeBaseTransient()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ member of an abstract base used only by derived classes. Rust has no inheritance; bvh::BvhTree carries the behavior."
+    },
+    {
+      "upstream_id": "BVH_TreeBaseTransient::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ member of an abstract base used only by derived classes. Rust has no inheritance; bvh::BvhTree::dump_json (the base version is a no-op) carries the behavior."
+    },
+    {
+      "upstream_id": "BVH_TreeBaseTransient::DumpNode(const int,Standard_OStream&,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ member of an abstract base used only by derived classes. Rust has no inheritance; bvh::BvhTree::dump_node (the base version is a no-op) carries the behavior."
+    },
+    {
+      "upstream_id": "BVH_TreeBaseTransient",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: transient RTTI base of BVH_TreeBase with only protected no-op dumps. Rust bvh::BvhTree is a plain generic struct and owns dump_json/dump_node directly."
+    },
+    {
+      "upstream_id": "BVH_BuildThread::threadFunction(void*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected OSD_Thread entry trampoline taking a void*. Rust bvh::BvhBuildThread::run is the thread body; no raw-pointer entry point exists."
+    },
+    {
+      "upstream_id": "BVH::RadixSorter::perform(BVH::RadixSorter::LinkIterator,BVH::RadixSorter::LinkIterator,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected recursive radix step over raw std::pair iterators. Rust bvh::BvhRadixSorter::<BvhSorter>::perform_range runs the same recursion over slices."
+    },
+    {
+      "upstream_id": "BVH_ParallelDistanceFieldBuilder(BVH_DistanceField<T, BVH_ParallelDistanceFieldBuilder::N>*,BVH_Geometry<T, BVH_ParallelDistanceFieldBuilder::N>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_Parallel functor holding raw pointers to the field and geometry. Rust bvh::BvhDistanceField::build calls build_slices for each slice range itself."
+    },
+    {
+      "upstream_id": "BVH_ParallelDistanceFieldBuilder::operator()(const int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_Parallel functor body; Rust bvh::BvhDistanceField::build_slices is the same per-slice step."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_TypedBuildTool::BVH_TypedBuildTool(BVH_Set<T, BVH_QueueBuilder::N>*,BVH_Tree<T, BVH_QueueBuilder::N>*,BVH_BuildQueue&,const BVH_QueueBuilder<T, BVH_QueueBuilder::N>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: BVH_BuildTool adapter that binds raw pointers for BVH_BuildThread. Rust drives bvh::BvhQueueBuilder::build_node/add_children directly from the queue."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::BVH_TypedBuildTool::Perform(const int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: adapter body that calls BuildNode and AddChildren; Rust calls bvh::BvhQueueBuilder::build_node and add_children directly."
+    },
+    {
+      "upstream_id": "BVH::SquareDistanceToPoint::SquareDistanceToPoint<T, N, BVHSetType>()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSquareDistanceToPoint::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Default construction (myIsOutside = true)."
+    },
+    {
+      "upstream_id": "BVH::PointGeometrySquareDistance::PointGeometrySquareDistance<T, N>()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPointGeometrySquareDistance::new",
+      "status": "implemented",
+      "notes": "Rust new takes the point and geometry that native code assigns with SetObject/SetBVHSet right after default construction."
+    },
+    {
+      "upstream_id": "BVH::PointTriangulationSquareDistance::PointTriangulationSquareDistance<T, N>()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPointTriangulationSquareDistance::new",
+      "status": "implemented",
+      "notes": "Rust new takes the point and triangulation that native code assigns with SetObject/SetBVHSet right after default construction."
+    },
+    {
+      "upstream_id": "BVH::SquareDistanceToPoint::Stop() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBaseTraverse::stop",
+      "status": "implemented",
+      "notes": "The override returns false, the same as the BvhBaseTraverse::stop default that the Rust selectors keep."
+    },
+    {
+      "upstream_id": "BVH_Bin<T, N>()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBin::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Default bin (Count = 0, void box)."
+    },
+    {
+      "upstream_id": "BVH_Traverse::BVH_NodeInStack::BVH_NodeInStack(const int,const MetricType&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhNodeInStack::new",
+      "status": "implemented",
+      "notes": "Same stack-entry constructor."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::BVH_PairNodesInStack::BVH_PairNodesInStack(const int,const int,const MetricType&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairNodesInStack::new",
+      "status": "implemented",
+      "notes": "Same stack-entry constructor."
+    },
+    {
+      "upstream_id": "BVH",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
+      "rust_item": "rustycad_tkmath::bvh",
+      "status": "implemented",
+      "notes": "C++ namespace BVH is the Rust module bvh."
+    },
+    {
+      "upstream_id": "BVH::Array",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::array",
+      "status": "implemented",
+      "notes": "Static-function holder BVH::Array<T, N> is the Rust module bvh::array of generic functions."
+    },
+    {
+      "upstream_id": "BVH_Tools",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
+      "rust_item": "rustycad_tkmath::bvh::tools",
+      "status": "implemented",
+      "notes": "Static-function holder BVH_Tools<T, N> is the Rust module bvh::tools of generic functions."
+    },
+    {
+      "upstream_id": "BVH_TreeBase",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree",
+      "status": "implemented",
+      "notes": "BVH_TreeBase<T, N> storage and queries are part of the generic Rust struct bvh::BvhTree<V, A>."
+    },
+    {
+      "upstream_id": "BVH::ArrayType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: compile-time helper template that selects a type or an N-specific static function. Rust resolves the same choice through the BvhVector trait (associated types and methods) on the vector type."
+    },
+    {
+      "upstream_id": "BVH::BoxMinMax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: compile-time helper template that selects a type or an N-specific static function. Rust resolves the same choice through the BvhVector trait (associated types and methods) on the vector type."
+    },
+    {
+      "upstream_id": "BVH::CenterAxis",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: compile-time helper template that selects a type or an N-specific static function. Rust resolves the same choice through the BvhVector trait (associated types and methods) on the vector type."
+    },
+    {
+      "upstream_id": "BVH::SurfaceCalculator",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: compile-time helper template that selects a type or an N-specific static function. Rust resolves the same choice through the BvhVector trait (associated types and methods) on the vector type."
+    },
+    {
+      "upstream_id": "BVH::BVH_AxisSelector<type-parameter-0-0, 2>::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template specialization (BVH::VectorType<type-parameter-0-0, 2>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
+      "upstream_id": "BVH::MatrixOp<type-parameter-0-0, 4>::BVH_Mat4t",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template specialization (BVH::MatrixType<type-parameter-0-0, 4>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
+      "upstream_id": "BVH::MatrixOp<type-parameter-0-0, 4>::BVH_Vec4t",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template specialization (BVH::VectorType<type-parameter-0-0, 4>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 2>::BVH_Vec2t",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template specialization (BVH::VectorType<type-parameter-0-0, 2>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 3>::BVH_Vec3t",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template specialization (BVH::VectorType<type-parameter-0-0, 3>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
+      "upstream_id": "BVH::UnitVector<type-parameter-0-0, 4>::BVH_Vec4t",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template specialization (BVH::VectorType<type-parameter-0-0, 4>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
+      "upstream_id": "BVH::VecComp<type-parameter-0-0, 2>::BVH_Vec2t",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template specialization (BVH::VectorType<type-parameter-0-0, 2>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
+      "upstream_id": "BVH::VecComp<type-parameter-0-0, 3>::BVH_Vec3t",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template specialization (BVH::VectorType<type-parameter-0-0, 3>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
+      "upstream_id": "BVH::VecComp<type-parameter-0-0, 4>::BVH_Vec4t",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template specialization (BVH::VectorType<type-parameter-0-0, 4>::Type). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
+      "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ member typedef of a template specialization (BVH_TreeBase<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
+    },
+    {
       "upstream_id": "BSplCLib::DN(double,int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,gp_Pnt&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
