@@ -237290,6 +237290,382 @@
       "notes": "Exposes the protected nonvirtual reset operation. All fields are replaced using the existing native-order implementation; direct void/oriented/repeated transitions match the native probe. Clang candidate 0e1912c1fef294976c62061e79d58c810343753733127307eb0787b614e9d8a5. Supplemental evidence: porting/audits/tkmath-protected-bounds.json; no legacy mapping count increase."
     },
     {
+      "upstream_id": "Bnd_B2",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2",
+      "status": "implemented",
+      "notes": "Class template Bnd_B2<RealType> is the generic Rust alias CompactBox2<T> over CompactBounds<T, 2>."
+    },
+    {
+      "upstream_id": "Bnd_B3",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3",
+      "status": "implemented",
+      "notes": "Class template Bnd_B3<RealType> is the generic Rust alias CompactBox3<T> over CompactBounds<T, 3>."
+    },
+    {
+      "upstream_id": "Bnd_B2d",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ alias of a template instance; Rust spells the instance directly as bnd::CompactBox2<f64>."
+    },
+    {
+      "upstream_id": "Bnd_B2f",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ alias of a template instance; Rust spells the instance directly as bnd::CompactBox2<f32>."
+    },
+    {
+      "upstream_id": "Bnd_B3d",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ alias of a template instance; Rust spells the instance directly as bnd::CompactBox3<f64>."
+    },
+    {
+      "upstream_id": "Bnd_B3f",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ alias of a template instance; Rust spells the instance directly as bnd::CompactBox3<f32>."
+    },
+    {
+      "upstream_id": "Bnd_B2::THE_RealLast",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::real_last",
+      "status": "implemented",
+      "notes": "Static constexpr RealType(1e30) void sentinel; Rust exposes it as the associated function real_last() in the storage scalar."
+    },
+    {
+      "upstream_id": "Bnd_B3::THE_RealLast",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::real_last",
+      "status": "implemented",
+      "notes": "Static constexpr RealType(1e30) void sentinel; Rust exposes it as the associated function real_last() in the storage scalar."
+    },
+    {
+      "upstream_id": "Bnd_Box::MaskFlags",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box. Rust bnd::BoundingBox3 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box::VoidMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box. Rust bnd::BoundingBox3 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box::XminMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box. Rust bnd::BoundingBox3 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box::XmaxMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box. Rust bnd::BoundingBox3 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box::YminMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box. Rust bnd::BoundingBox3 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box::YmaxMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box. Rust bnd::BoundingBox3 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box::ZminMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box. Rust bnd::BoundingBox3 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box::ZmaxMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box. Rust bnd::BoundingBox3 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box::WholeMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box. Rust bnd::BoundingBox3 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::MaskFlags",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box2d. Rust bnd::BoundingBox2 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::VoidMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box2d. Rust bnd::BoundingBox2 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::XminMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box2d. Rust bnd::BoundingBox2 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::XmaxMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box2d. Rust bnd::BoundingBox2 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::YminMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box2d. Rust bnd::BoundingBox2 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::YmaxMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box2d. Rust bnd::BoundingBox2 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::WholeMask",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ bit-flag enumeration of Bnd_Box2d. Rust bnd::BoundingBox2 keeps the same bit values in its private flags field and exposes them only through is_void/is_whole/is_open_* queries."
+    },
+    {
+      "upstream_id": "Bnd_Box::Limits",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits3",
+      "status": "implemented",
+      "notes": "Bnd_Box::Limits aggregate returned by Get() is the Rust struct bnd::BoxLimits3."
+    },
+    {
+      "upstream_id": "Bnd_Box::Limits::Xmin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits3::x_min",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_Box::Limits::Xmax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits3::x_max",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_Box::Limits::Ymin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits3::y_min",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_Box::Limits::Ymax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits3::y_max",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_Box::Limits::Zmin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits3::z_min",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_Box::Limits::Zmax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits3::z_max",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Limits",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits2",
+      "status": "implemented",
+      "notes": "Bnd_Box2d::Limits aggregate returned by Get() is the Rust struct bnd::BoxLimits2."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Limits::Xmin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits2::x_min",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Limits::Xmax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits2::x_max",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Limits::Ymin",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits2::y_min",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Limits::Ymax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoxLimits2::y_max",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_OBB::HalfSizes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::ObbHalfSizes",
+      "status": "implemented",
+      "notes": "Bnd_OBB::HalfSizes aggregate is the Rust struct bnd::ObbHalfSizes."
+    },
+    {
+      "upstream_id": "Bnd_OBB::HalfSizes::X",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::ObbHalfSizes::x",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_OBB::HalfSizes::Y",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::ObbHalfSizes::y",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_OBB::HalfSizes::Z",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::ObbHalfSizes::z",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Bnd_Range::Bounds",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ aggregate returned by Bnd_Range::Get() for structured bindings. Rust bnd::Range1::get returns Option<[f64; 2]> holding [min, max] in the same order."
+    },
+    {
+      "upstream_id": "Bnd_Range::Bounds::Min",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ aggregate returned by Bnd_Range::Get() for structured bindings. Rust bnd::Range1::get returns Option<[f64; 2]> holding [min, max] in the same order."
+    },
+    {
+      "upstream_id": "Bnd_Range::Bounds::Max",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ aggregate returned by Bnd_Range::Get() for structured bindings. Rust bnd::Range1::get returns Option<[f64; 2]> holding [min, max] in the same order."
+    },
+    {
+      "upstream_id": "Bnd_VoxelGrid",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: forward declaration of Bnd_BoundSortBox's private implementation class (defined in Bnd_BoundSortBox.cxx). The Rust counterpart is the crate-private bnd::sort_box::voxel_grid::VoxelGrid owned by bnd::BoundSortBox."
+    },
+    {
+      "upstream_id": "Bnd_Range::IntersectStatus_Out",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
+      "rust_item": "rustycad_tkmath::bnd::IntersectStatus::Out",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "Bnd_Range::IntersectStatus_In",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
+      "rust_item": "rustycad_tkmath::bnd::IntersectStatus::In",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "Bnd_Range::IntersectStatus_Boundary",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
+      "rust_item": "rustycad_tkmath::bnd::IntersectStatus::Boundary",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
       "upstream_id": "Poly_Triangulation::unsetCachedMinMax()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
