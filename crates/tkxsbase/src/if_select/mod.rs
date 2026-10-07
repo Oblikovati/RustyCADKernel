@@ -59,7 +59,7 @@ mod signature_list;
 mod signature_tests;
 mod signatures;
 #[cfg(test)]
-mod test_work_library;
+pub(crate) mod test_work_library;
 mod transform_standard;
 #[cfg(test)]
 mod transform_tests;

@@ -133,6 +133,20 @@ The work session details:
 - The editors and the edit forms are built as handles (the editor receives its form as
   `this`): `IFSelectEditorBase::bind_self` records the handle of an editor.
 
+The XSControl details:
+
+- `XSControl_Controller` is abstract: the trait `XSControlController` over the embedded
+  `XSControlControllerBase`. A norm calls `bind_self` with its handle, because `Record`
+  registers `this` in the process-wide table of the norms.
+- `XSControl_Vars` has only virtual members: they are `XSControlVarsOps` methods. The
+  in-out names (`const char*&`) are `&mut String`.
+- `XSControlWorkSession::new` returns the handle of the session, bound to its
+  IFSelect base (so `SetModel` calls the overridden `ClearData`) and given to the
+  controller in `Customise`. The native global mutex of `SelectNorm`, `NewModel` and
+  `TransferWriteShape` is a process-wide `Mutex`.
+- The transfer reader's `Context` is a write guard on the map: drop it before the next
+  call on the reader.
+
 XSAlgo (the shape processing) needs two items from outside TKXSBase:
 
 - `DE_ShapeFixParameters` is a TKDE header that TKXSBase includes without linking TKDE
