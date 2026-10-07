@@ -41,6 +41,8 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_shapeconstruct').append_shapeconstruct_requests(requests)
     # ShapeConstruct package functions: B-spline conversions and JoinPCurves.
     __import__('tkshhealing_corpus_construct_package').append_construct_package_requests(requests)
+    # ShapeProcess and ShapeProcessAPI: contexts, sequences and operation flags.
+    __import__('tkshhealing_corpus_shape_process').append_shape_process_requests(requests)
     __import__('tkshhealing_corpus_analysiscurve').append_analysis_curve_requests(requests)
     # ShapeAnalysis_Surface: singularity state, projection and closure.
     __import__('tkshhealing_corpus_analysis_surface').append_analysis_surface_requests(requests)

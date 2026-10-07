@@ -200,6 +200,22 @@ torus pass and substitutes a rejected (null) candidate. The ShapeConstruct packa
 (ConvertCurveToBSpline, ConvertSurfaceToBSpline, JoinPCurves) are compared by the
 `sh_construct_pkg` requests.
 
+## ShapeProcess and ShapeProcessAPI
+
+Ported in October 2026 (wave 3): ShapeProcess_Context (`ShapeProcessContext`, the
+resource manager shared as `Arc<SharedState<ResourceManager>>` with the process-wide
+LoadResourceManager cache), ShapeProcess_Operator/UOperator/OperFunc (the trait
+`ShapeProcessOperator`, `ShapeProcessUOperator`, `ShapeProcessOperFunc`),
+ShapeProcess_ShapeContext (`ShapeProcessShapeContext`, which derefs to the context),
+ShapeProcess (the process-wide operator registry, `perform_sequence` and
+`perform_operations`), ShapeProcess_OperLibrary (the 18 operators) and
+ShapeProcessAPI_ApplySequence. They are compared with OCCT by the `sp_context`,
+`sp_process` and `sp_apply` requests (tools/tkshhealing_corpus_shape_process.py). Native
+quirks kept: GetReal/GetInteger raise Standard_OutOfRange on a blank value. Known limits,
+kept out of the corpus: natively FixFaceSize or FixShape after ToBezier crash on the
+converted plane face; ToBezier with SurfaceMode on extrusion faces diverges in
+ShapeUpgrade_ShapeConvertToBezier (whose Perform row is partial).
+
 ## ShapeUpgrade
 
 Ported: the package functions (C0BSplineToSequenceOfC1BSplineCurve in 3D and 2D),

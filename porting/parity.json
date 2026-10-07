@@ -390538,6 +390538,249 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeProcess::OperationsFlags",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperationsFlags",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). std::bitset<Last + 1> is a u32 bit set with set/test.",
+      "cpp_declaration_id": "02c5980934b299401434a078aeff13ded41785d25eee15ce33e9bf53a3f09a16"
+    },
+    {
+      "upstream_id": "ShapeProcess::Operation",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). The enumerators keep the native order.",
+      "cpp_declaration_id": "ac132f5fc4a9cbb2f4c10210e5f59723f60f0251e22a5b857cd5f6ec0e11f23c"
+    },
+    {
+      "upstream_id": "ShapeProcess::DirectFaces",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::DirectFaces",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "c0f79270271a55df9f257ceced07209ab430de48ef36a80b699cc98c57b20469"
+    },
+    {
+      "upstream_id": "ShapeProcess::SameParameter",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::SameParameter",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "cef9dc117946c97ec82232e129de7111d7fc61892f3e5b1ff305bf55dd214dd9"
+    },
+    {
+      "upstream_id": "ShapeProcess::SetTolerance",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::SetTolerance",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "8ab2ecb907c91da245701e92377383bda0c99dc82171d099a11ad41a4ce1424c"
+    },
+    {
+      "upstream_id": "ShapeProcess::SplitAngle",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::SplitAngle",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "4983beca5660e555466c963e044f8ae5168b236b93c314eb3b8a2dbbbdc94ba4"
+    },
+    {
+      "upstream_id": "ShapeProcess::BSplineRestriction",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::BSplineRestriction",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "4f71c24dc90f00cfbcf6b0a6fe33c78856396f75860ad28e1b1107fa67e6248b"
+    },
+    {
+      "upstream_id": "ShapeProcess::ElementaryToRevolution",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::ElementaryToRevolution",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "dc7f66c2c24ffbc75adfe20deca15cfa709034aaaafa3f8e348a0b1aa9a384d8"
+    },
+    {
+      "upstream_id": "ShapeProcess::SweptToElementary",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::SweptToElementary",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "445aa356cd2680245b9c1280b6ba829813db2ee2062e63943154b2a856c7be61"
+    },
+    {
+      "upstream_id": "ShapeProcess::SurfaceToBSpline",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::SurfaceToBSpline",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "cf06158966a0ccd3d104b7d7d897505254668f944d94b0cd86c6d6ce3ee0dd91"
+    },
+    {
+      "upstream_id": "ShapeProcess::ToBezier",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::ToBezier",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "7a36ef1b4a2191c43f5bc97bc3c31e7061160971b525615d241882ad376bb9ce"
+    },
+    {
+      "upstream_id": "ShapeProcess::SplitContinuity",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::SplitContinuity",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "ef3f7a10785745f8299064010e82cd1f87e1ee97e5912bac0d2bb56acbda6f7e"
+    },
+    {
+      "upstream_id": "ShapeProcess::SplitClosedFaces",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::SplitClosedFaces",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "61c3af344403ad84bd63af0df1044d642a70b4f3a9e46cc07f7dfe2d95bc4584"
+    },
+    {
+      "upstream_id": "ShapeProcess::FixWireGaps",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::FixWireGaps",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "f6f23c679bcc1584b650bd7bd8e071373fd3dbc87873aec2b087ab32f1f2fec7"
+    },
+    {
+      "upstream_id": "ShapeProcess::FixFaceSize",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::FixFaceSize",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "e5f2195ae0dcfd63b04d80dc103b76f972d4afd372512143ab24ce02db964766"
+    },
+    {
+      "upstream_id": "ShapeProcess::DropSmallSolids",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::DropSmallSolids",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "5107df9177adfdda522f1e4f76f08cefcbd698407a09a27aa45922b2fb736e84"
+    },
+    {
+      "upstream_id": "ShapeProcess::DropSmallEdges",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::DropSmallEdges",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "4e6b4383622bf40ce20cd9b6c9cf1dcd0ac95637cdf227b9c68ce40e7c440e0c"
+    },
+    {
+      "upstream_id": "ShapeProcess::FixShape",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::FixShape",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "1625f60509dd6572fd4cd96a820bcc0f83e23223e24187bc7227b8fb46cdda8c"
+    },
+    {
+      "upstream_id": "ShapeProcess::SplitClosedEdges",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::SplitClosedEdges",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "39c3f15e63aaf592affb2fbe4a210b6f36b6b71ecd1d3f33a233cb5ce0beaea9"
+    },
+    {
+      "upstream_id": "ShapeProcess::SplitCommonVertex",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::SplitCommonVertex",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "0bcea091eb61a2d702fa916b752706103de78582ebeeb016d578e85054d7ee98"
+    },
+    {
+      "upstream_id": "ShapeProcess::First",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::FIRST",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Alias of DirectFaces.",
+      "cpp_declaration_id": "1342460a7094e58a673c3f1437169763657bcb4fd4bcb8ceb4399b25c30b137e"
+    },
+    {
+      "upstream_id": "ShapeProcess::Last",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperation::LAST",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Alias of SplitCommonVertex.",
+      "cpp_declaration_id": "cdc86a41e8b7ed6c193fdfbe04834a2d468b91e02896d0d0eff87348509ce151"
+    },
+    {
+      "upstream_id": "ShapeProcess::RegisterOperator(const char*const,const occ::handle<ShapeProcess_Operator>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcess::register_operator",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Process-wide registry as natively.",
+      "cpp_declaration_id": "54c439ca0d69dcb49607ecff3d366eaf8e94baf4c184ef3757c8a418cb6c6f05"
+    },
+    {
+      "upstream_id": "ShapeProcess::FindOperator(const char*const,occ::handle<ShapeProcess_Operator>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcess::find_operator",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). None for an unknown name or a null operator.",
+      "cpp_declaration_id": "d10bf42b112b20e50530771b7b3a239b4837602d4bb4f7fe0fb4689c946d80ee"
+    },
+    {
+      "upstream_id": "ShapeProcess::ToOperationFlag(const char*)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcess::to_operation_flag",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). A null name is None.",
+      "cpp_declaration_id": "f8bf0a4025c96cc3364e805ec44dabe93c2f6f37552b1b4db61716d0ab4b0441"
+    },
+    {
+      "upstream_id": "ShapeProcess::Perform(const occ::handle<ShapeProcess_Context>&,const char*const,const Message_ProgressRange&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcess::perform_sequence",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). The exec.op sequence with the messenger reports.",
+      "cpp_declaration_id": "7eb35f70966d53da59f8ed5915d94dc622d9fe3fd72fc0fbf86c0f94dfc4e4dd"
+    },
+    {
+      "upstream_id": "ShapeProcess::Perform(const occ::handle<ShapeProcess_Context>&,const ShapeProcess::OperationsFlags&,const Message_ProgressRange&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcess::perform_operations",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). The operation flags in native order.",
+      "cpp_declaration_id": "b63eda9c7495e044a3fcf287b08a92dbf78cd958f83ad34a2db8ec6cfd782067"
+    },
+    {
       "upstream_id": "ShapeProcess_OperLibrary::operator delete(void*) noexcept",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_OperLibrary.hxx",
@@ -390598,6 +390841,24 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeProcess_OperLibrary::Init()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_OperLibrary.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperLibrary::init",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Once per process: ShapeExtend::Init and the 18 operators.",
+      "cpp_declaration_id": "cf2188e5dc7b0ccb5a14a1ef488a4b6a7cab76b1db3bafe1d81f795cdc443c46"
+    },
+    {
+      "upstream_id": "ShapeProcess_OperLibrary::ApplyModifier(const TopoDS_Shape&,const occ::handle<ShapeProcess_ShapeContext>&,const occ::handle<BRepTools_Modification>&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,const occ::handle<ShapeExtend_MsgRegistrator>&,bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_OperLibrary.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperLibrary::apply_modifier",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Compounds child by child without messages, as natively.",
+      "cpp_declaration_id": "37927a02afa81c9a7e0b5f165de02ef6afcaec78cfc53778c3fec05e99d3d584"
+    },
+    {
       "upstream_id": "ShapeProcessAPI_ApplySequence::operator delete(void*) noexcept",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcessAPI/ShapeProcessAPI_ApplySequence.hxx",
@@ -390656,6 +390917,473 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "d026c113a694cdcf3efa61233414dc23508136cdae85cfc84b51993704aac2e8",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "ShapeProcessAPI_ApplySequence::ShapeProcessAPI_ApplySequence(const char*const,const char*const)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcessAPI/ShapeProcessAPI_ApplySequence.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process_api::ShapeProcessAPIApplySequence::new",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "9d90269d06407e2d4225cf1ec964274134c929cc13a9627af0985260a1922f74"
+    },
+    {
+      "upstream_id": "ShapeProcessAPI_ApplySequence::Context()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcessAPI/ShapeProcessAPI_ApplySequence.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process_api::ShapeProcessAPIApplySequence::context",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Non-const reference: context / set_context.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_process_api::ShapeProcessAPIApplySequence::context",
+        "rustycad_tkshhealing::shape_process_api::ShapeProcessAPIApplySequence::set_context"
+      ],
+      "cpp_declaration_id": "c3c0643447409737a268f93ff77a337f0ae2c4c6f145e57f23e6b00d0a2e30e8"
+    },
+    {
+      "upstream_id": "ShapeProcessAPI_ApplySequence::PrepareShape(const TopoDS_Shape&,const bool,const TopAbs_ShapeEnum,const Message_ProgressRange&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcessAPI/ShapeProcessAPI_ApplySequence.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process_api::ShapeProcessAPIApplySequence::prepare_shape",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). fillmap and until are unused natively.",
+      "cpp_declaration_id": "ee9317412682f8f9cb8fcfa59571047276367b143d662fafc43f6599b4d91e9e"
+    },
+    {
+      "upstream_id": "ShapeProcessAPI_ApplySequence::ClearMap()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcessAPI/ShapeProcessAPI_ApplySequence.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process_api::ShapeProcessAPIApplySequence::clear_map",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Empty natively.",
+      "cpp_declaration_id": "366f8b1dca5d36745d18b58d3434360ce6e06bbb5cc6d6a10e1bc05709ed30e2"
+    },
+    {
+      "upstream_id": "ShapeProcessAPI_ApplySequence::Map() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcessAPI/ShapeProcessAPI_ApplySequence.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process_api::ShapeProcessAPIApplySequence::map",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Returns a copy.",
+      "cpp_declaration_id": "350e9a2607cf527b5814c48c6bc6983af33ba5e66360183e05ab8d3d79b57a53"
+    },
+    {
+      "upstream_id": "ShapeProcessAPI_ApplySequence::PrintPreparationResult() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcessAPI/ShapeProcessAPI_ApplySequence.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process_api::ShapeProcessAPIApplySequence::print_preparation_result",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Same body as PrintStatistics, reused.",
+      "cpp_declaration_id": "9a3066c7a1d7b72f5645dce73ddcaa8def2b052ab1b4020cd3da0b2bc9d9cc72"
+    },
+    {
+      "upstream_id": "ShapeProcess_OperFunc",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_OperFunc.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperFunc",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). The function pointer type; a native exception is the Err value.",
+      "cpp_declaration_id": "cee0fd2c5e3e329487f7a488c3bbef609f66d3aa528e2ecc49c590e4f622eef2"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::ShapeProcess_Context()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::new",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). No manager, default messenger, trace 1.",
+      "cpp_declaration_id": "c212d4d0cae0bb9749a295e713124b409942f452c9c2a4bbfd1cb1412cb1736e"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::ShapeProcess_Context(const char*const,const char*const)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::with_file",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Init(file, scope) first.",
+      "cpp_declaration_id": "b33ea372d59974037947417b808936402b0dc37cc75683188fc231fa7c1c3f3c"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::Init(const char*const,const char*const)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::init",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Always true; an empty name gives an empty manager.",
+      "cpp_declaration_id": "8c48c0193989b6dce65ebb9584bcc826bc3f27fde13bca887d30acdf5dca598b"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::LoadResourceManager(const char*const)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::load_resource_manager",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). The process-wide cache keyed by name and file times returns a copy; a failed stat reads 0 (undefined natively).",
+      "cpp_declaration_id": "d25915107f33372e1bce3870e1b041454055020fae92db44c7b54938f61ddbc9"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::ResourceManager() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::resource_manager",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). None is the native null handle; the manager is shared.",
+      "cpp_declaration_id": "614ed734df269011445f969398c6dd56639712ca8c20ea65f52146d9c8d99834"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::SetScope(const char*const)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::set_scope",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "8b649109af7690cbe7455923103f0ca0ff8d8661d172f11c62a894a10ce14ef3"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::UnSetScope()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::un_set_scope",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "49989e678169638e3120af58e61e91ed8906e215310cfb1d0daedd7f21bc9523"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::IsParamSet(const char*const) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::is_param_set",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "425fcf2cb206d40a679e8e8ccc884e1a4f6590df1209a5491180ced74822d7b7"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::GetReal(const char*const,double&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::get_real",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Native quirk kept: a blank value raises Standard_OutOfRange.",
+      "cpp_declaration_id": "ed2c370978841930f5eda046e8a55b17528483ed2c412e9a480d188aba02749b"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::GetInteger(const char*const,int&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::get_integer",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Native quirk kept: a blank value raises Standard_OutOfRange.",
+      "cpp_declaration_id": "2e8918af6d42c43274beca411ba7e1e18b2d0edd2dec8642cb7330a2b0979ce8"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::GetBoolean(const char*const,bool&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::get_boolean",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Resource_Manager::Integer != 0; its exceptions give None.",
+      "cpp_declaration_id": "b56ed472df83a028e27b83f48b1e84fef49ef7acb531919a4009733899d70c86"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::GetString(const char*const,TCollection_AsciiString&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::get_string",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "074e626b5951086086fd185b7a1d10e71a2d5546c565b614e72ba5ad9bca2a1a"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::RealVal(const char*const,const double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::real_val",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "53bc6658f03c8fae9802ac69979fc6d9eea82235cc54d74230904ceec7df8477"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::IntegerVal(const char*const,const int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::integer_val",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "f44bc3e8605e2abf772e88fcf9e0e2badc8b50c1edc1ac85ed65fec6734cdbdc"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::BooleanVal(const char*const,const bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::boolean_val",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "864a08aaaf521e56a1447e05e8745f7b456edc1a5ab57e25c65d67e3826486a5"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::StringVal(const char*const,const char*const) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::string_val",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Returns an owned string.",
+      "cpp_declaration_id": "3fa63fac8e22cd0dba2d332992173db44cd4c3394d8b1a819dde456a6fba37c7"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::SetMessenger(const occ::handle<Message_Messenger>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::set_messenger",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). None (null) restores the default messenger.",
+      "cpp_declaration_id": "def37a7f8be89be463603296472d38b8476dec7a8c98c4a73efd9b32f078ba20"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::Messenger() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::messenger",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "2d30da4a2d9c874e72ee9ddb12200577fd55cbcdaec4789e21e6d52b474302fc"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::SetTraceLevel(const int)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::set_trace_level",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "3083370a278376fd467c2d2a08b262a80805a4c1723d0fce3b40d2b78de5556c"
+    },
+    {
+      "upstream_id": "ShapeProcess_Context::TraceLevel() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Context.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessContext::trace_level",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "65d1ed1dcf7a690eb103344f65015c55f2b1f71f8c1d9096c8f3f76bfc62cf53"
+    },
+    {
+      "upstream_id": "ShapeProcess_Operator::Perform(const occ::handle<ShapeProcess_Context>&,const Message_ProgressRange&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_Operator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessOperator::perform",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Trait method.",
+      "cpp_declaration_id": "518cf74cb3ca54935151a423ba9fb8d94eb21d8698155c609c6e02daf98d0fa3"
+    },
+    {
+      "upstream_id": "ShapeProcess_UOperator::ShapeProcess_UOperator(const ShapeProcess_OperFunc)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_UOperator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessUOperator::new",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "3e19bb810b0efc746af71b18f16d6d149c1b0e91eb76adb49a43115850f3c1a9"
+    },
+    {
+      "upstream_id": "ShapeProcess_UOperator::Perform(const occ::handle<ShapeProcess_Context>&,const Message_ProgressRange&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_UOperator.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessUOperator::<rustycad_tkshhealing::shape_process::ShapeProcessOperator>::perform",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "0037a938028c8d4e96f4ff7dd545ac33b26414c4a16f28a5e79334cef30daa2e"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::ShapeProcess_ShapeContext(const char*const,const char*const)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::new",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "26b3ed62e540f9917dfa2e3f164e714d42b174384149c9058542e9ae6a566db1"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::ShapeProcess_ShapeContext(const TopoDS_Shape&,const char*const,const char*const)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::with_shape",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "a3bf22c083f05642e94425c5406052af65c17ae74f23d36582dbc2b511c4e9be"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::Init(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::init",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "b4f8d0de23a65e097a828f150871fc3d2d6bfd59f3d30507b457f6e503cdb74a"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::Shape() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::shape",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "5d78e6d0b3f7c80650d3b733f26cd47cded2a96cdacf5ce659a2a4b7a57aa311"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::Result() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::result",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "2d5a1d56d6ddd877beb13320657b746478de1d1f1b33adc7f990d8850cae5faa"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::Map() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::map",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Returns a copy.",
+      "cpp_declaration_id": "fab7af35f43e57a6db650c38f25b8ddbb23edc09b2226f64a4735ca46963dee2"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::SetDetalisation(const TopAbs_ShapeEnum)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::set_detalisation",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "385f313b27254a85a97bb1abbb7c5ed35fc0c8110ffc4497ebcc3fb671d68465"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::GetDetalisation() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::get_detalisation",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "708526bab8429466b344450a22a1e9b2bba021791b0a56d750dc37c569e6dcd2"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::SetResult(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::set_result",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "5e3d48f06d7611b8587d39ddcf9ed8485604619039c57c6a1ecf0fa76f0506ec"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::AddMessage(const TopoDS_Shape&,const Message_Msg&,const Message_Gravity)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::add_message",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "2502466bfbb509f6ce1ddff70f9cdd3368b561e481d572bcbe3f088c9473f942"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::GetContinuity(const char*const,GeomAbs_Shape&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::get_continuity",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "cd630bbfbf89c5c05fe1cbe481e117dd952d4ec14afaff585a155f3f9aae3407"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::ContinuityVal(const char*const,const GeomAbs_Shape) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::continuity_val",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "c17a4577bedde41f40e0870c761b823a14a3028cb1810c9caf80348aba199802"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::PrintStatistics() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::print_statistics",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "5e0080119c7761f7f12b3ebbe13b2854e7e2fa3ff322d397a695fb2b3e4e5cb3"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::SetNonManifold(bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::set_non_manifold",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "55b4a07e1d2dcf89a42bf5160a7ef1789d10938a6f73f0d0af88114cc9d69a46"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::IsNonManifold()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::is_non_manifold",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ",
+      "cpp_declaration_id": "5a50c296c6959c94e54085c08ffc9aeb7dfd02c9c5be4511f6e8811e692f3c10"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::Messages() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::messages",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Const accessor.",
+      "cpp_declaration_id": "bd3c3158a484ae0a3955406fd5506ed39b25342c859d834a4a7b7c479a68bcce"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::Messages()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::messages",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Non-const reference: messages / set_messages.",
+      "rust_items": [
+        "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::messages",
+        "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::set_messages"
+      ],
+      "cpp_declaration_id": "a53a0ce119eeb05108411feab8a76f657ccd32503b55284c177470bcf9eea3ec"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::RecordModification(const NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,const occ::handle<ShapeExtend_MsgRegistrator>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::record_modification_map",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). The static RecModif of the replacement map.",
+      "cpp_declaration_id": "b87a0c95f331ba6f50a6f207343ace8610782a652f2f80758ab6c85310960be5"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::RecordModification(const TopoDS_Shape&,const BRepTools_Modifier&,const occ::handle<ShapeExtend_MsgRegistrator>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::record_modification_modifier",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). ExplodeModifier then the map overload.",
+      "cpp_declaration_id": "7e7dae02f480cadc1c0907a1453686af84b14db41bbd3dafb9c52f6a731e8cd5"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::RecordModification(const occ::handle<ShapeBuild_ReShape>&,const occ::handle<ShapeExtend_MsgRegistrator>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::record_modification_reshape",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). The static RecModif of the reshape with the message chains.",
+      "cpp_declaration_id": "9e31818dd17bfa28d5b2f27bf9f51f1435b0a73ff9ae7ad25b83daa4e304fd33"
+    },
+    {
+      "upstream_id": "ShapeProcess_ShapeContext::RecordModification(const occ::handle<ShapeBuild_ReShape>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeProcess/ShapeProcess_ShapeContext.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_process::ShapeProcessShapeContext::record_modification_reshape_only",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sp_context, sp_process and sp_apply requests (tkshhealing_probe_shape_process.cxx). Without messages.",
+      "cpp_declaration_id": "ea399d0087e05fb9bb768f8fbda55d7795945ed5df94a311096cc2a72304eb68"
     },
     {
       "upstream_id": "NCollection_Lerp",
