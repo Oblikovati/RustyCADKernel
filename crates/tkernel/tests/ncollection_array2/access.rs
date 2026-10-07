@@ -4,7 +4,7 @@ fn NCollection_Array2Test__ValueAccess() {
     for row in 1..=3 {
         for col in 1..=4 {
             assert_eq!(*array.value(row, col).unwrap(), 100 * row + col);
-            assert_eq!(array[(row, col)], 100 * row + col);
+            assert_eq!((*array.value(row, col).unwrap()), 100 * row + col);
         }
     }
 }
@@ -16,9 +16,9 @@ fn NCollection_Array2Test__ChangeValueAccess() {
             *array.change_value(row, col).unwrap() = row * 100 + col;
         }
     }
-    assert_eq!(array[(1, 2)], 102);
+    assert_eq!((*array.value(1, 2).unwrap()), 102);
     *array.change_value(1, 2).unwrap() = 999;
-    assert_eq!(array[(1, 2)], 999);
+    assert_eq!((*array.value(1, 2).unwrap()), 999);
 }
 #[test]
 fn NCollection_Array2Test__Init() {
@@ -60,8 +60,8 @@ fn NCollection_Array2Test__STLIteration() {
     for value in &mut array {
         *value += 1;
     }
-    assert_eq!(array[(1, 1)], 12);
-    assert_eq!(array[(2, 3)], 24);
+    assert_eq!((*array.value(1, 1).unwrap()), 12);
+    assert_eq!((*array.value(2, 3).unwrap()), 24);
 }
 #[derive(Clone, Default)]
 struct Pair {
@@ -95,10 +95,10 @@ fn NCollection_Array2Test__EmplaceValue() {
         100,
         2.71,
     );
-    check_pair(&array[(1, 1)], 42, 3.14);
-    check_pair(&array[(2, 3)], 100, 2.71);
-    check_pair(&array[(1, 2)], 0, 0.0);
-    check_pair(&array[(3, 4)], 0, 0.0);
+    check_pair(array.value(1, 1).unwrap(), 42, 3.14);
+    check_pair(array.value(2, 3).unwrap(), 100, 2.71);
+    check_pair(array.value(1, 2).unwrap(), 0, 0.0);
+    check_pair(array.value(3, 4).unwrap(), 0, 0.0);
 }
 #[test]
 fn NCollection_Array2Test__EmplaceValue_ReplacesExisting() {
@@ -121,10 +121,10 @@ fn NCollection_Array2Test__EmplaceValue_ReplacesExisting() {
         120,
         12.0,
     );
-    check_pair(&array[(1, 1)], 11, 1.1);
-    check_pair(&array[(1, 2)], 120, 12.0);
-    check_pair(&array[(2, 1)], 21, 2.1);
-    check_pair(&array[(2, 2)], 22, 2.2);
+    check_pair(array.value(1, 1).unwrap(), 11, 1.1);
+    check_pair(array.value(1, 2).unwrap(), 120, 12.0);
+    check_pair(array.value(2, 1).unwrap(), 21, 2.1);
+    check_pair(array.value(2, 2).unwrap(), 22, 2.2);
 }
 #[test]
 fn NCollection_Array2Test__SizeConstructor_AtAccess() {
@@ -143,9 +143,9 @@ fn NCollection_Array2Test__SizeConstructor_AtAccess() {
 #[test]
 fn NCollection_Array2Test__SizeConstructor_LegacyOperatorZeroBased() {
     let mut array = Array2::<i32>::with_size(2, 3);
-    array[(0, 0)] = 1;
-    array[(0, 1)] = 2;
-    array[(1, 2)] = 9;
+    array.set_value(0, 0, 1).unwrap();
+    array.set_value(0, 1, 2).unwrap();
+    array.set_value(1, 2, 9).unwrap();
     assert_eq!(*array.at(0, 0).unwrap(), 1);
     assert_eq!(*array.at(0, 1).unwrap(), 2);
     assert_eq!(*array.at(1, 2).unwrap(), 9);

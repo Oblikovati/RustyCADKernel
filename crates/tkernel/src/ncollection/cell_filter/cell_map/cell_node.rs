@@ -1,6 +1,5 @@
 //! `Map<Cell>` destruction receives its allocator from the canonical node owner.
 use super::{CellIndex, CellObjectNode, MapNode};
-use crate::ncollection::destructor_unwind::DeferredDestructorPanic;
 use crate::ncollection::owned_bucket_chains::{CanonicalMapNode, node_contract::sealed};
 use crate::ncollection::{BaseAllocator, BasicMapNode};
 #[repr(C)]
@@ -55,12 +54,9 @@ impl<T> sealed::Sealed for CellMapNode<T> {}
 unsafe impl<T> CanonicalMapNode for CellMapNode<T> {
     unsafe fn release_owned(pointer: *mut Self, allocator: &BaseAllocator) {
         let cell = unsafe { Self::cell_ptr(pointer) };
-        let mut panics = DeferredDestructorPanic::default();
-        unsafe { CellRecord::drop_objects(cell, allocator, &mut panics) };
-        panics.capture(|| unsafe {
-            crate::ncollection::node_release::release_typed_node(pointer, allocator)
-        });
-        panics.finish(Ok(()));
+        // A panicking object Drop leaks the unvisited objects and this node; never a double drop.
+        unsafe { CellRecord::drop_objects(cell, allocator) };
+        unsafe { crate::ncollection::node_release::release_typed_node(pointer, allocator) };
     }
 }
 impl<T> CellMapNode<T> {
@@ -73,12 +69,11 @@ impl<T> CellRecord<T> {
     pub(in crate::ncollection::cell_filter) unsafe fn drop_objects(
         cell: *mut CellRecord<T>,
         allocator: &BaseAllocator,
-        panics: &mut DeferredDestructorPanic,
     ) {
         let mut node = unsafe { (*cell).objects };
         while !node.is_null() {
             let next = unsafe { (*node).next };
-            panics.capture(|| unsafe { CellObjectNode::drop_object(node) });
+            unsafe { CellObjectNode::drop_object(node) };
             unsafe { CellObjectNode::release_storage(node, allocator) };
             node = next;
         }

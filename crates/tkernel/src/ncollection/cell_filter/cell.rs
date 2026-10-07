@@ -1,7 +1,6 @@
 //! Standalone native Cell operations use the same record and object nodes as the map engine.
 #![allow(unsafe_code)]
 use super::{CellGeometry, cell_map::cell_node::CellRecord};
-use crate::ncollection::destructor_unwind::DeferredDestructorPanic;
 use crate::ncollection::{Array1, BaseAllocator, HashPolicy};
 /// Owning adapter for protected native `Cell`, with allocator leases outside its native fields.
 /// `CellFilterCell::<i32>::from_indices(&[1, 2], arena)` constructs a lookup-only cell.
@@ -87,15 +86,7 @@ impl<T> PartialEq for CellFilterCell<T> {
 impl<T> Eq for CellFilterCell<T> {}
 impl<T> Drop for CellFilterCell<T> {
     fn drop(&mut self) {
-        let mut panics = DeferredDestructorPanic::default();
-        unsafe {
-            CellRecord::drop_objects(
-                std::ptr::addr_of_mut!(self.record),
-                &self.allocator,
-                &mut panics,
-            )
-        };
-        panics.finish(Ok(()));
+        unsafe { CellRecord::drop_objects(std::ptr::addr_of_mut!(self.record), &self.allocator) };
     }
 }
 /// Native `CellHasher` callable adapters; `CellFilterCellHasher.hash(&cell)` hashes its index.

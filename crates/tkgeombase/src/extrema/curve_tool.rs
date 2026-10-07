@@ -63,6 +63,78 @@ pub type ToolD3<T> = (
     <T as ExtremaCurveTool>::Vector,
 );
 
+/// A point with its first derivative, through [`ExtremaCurveAccess`].
+pub type AccessD1<T> = (
+    <T as ExtremaCurveAccess>::Point,
+    <T as ExtremaCurveAccess>::Vector,
+);
+/// A point with its first two derivatives, through [`ExtremaCurveAccess`].
+pub type AccessD2<T> = (
+    <T as ExtremaCurveAccess>::Point,
+    <T as ExtremaCurveAccess>::Vector,
+    <T as ExtremaCurveAccess>::Vector,
+);
+
+/// The members of [`ExtremaCurveTool`] that the point-curve locating templates
+/// (`Extrema_GCurveLocator`, `Extrema_GFuncExtPC`, `Extrema_GenLocateExtPC`) call.
+/// Every [`ExtremaCurveTool`] provides it; a tool that only serves those templates
+/// (`HLRBRep_CurveTool` on the projected curves of TKHLR) implements it directly;
+/// `<CurveTool as ExtremaCurveAccess>::first_parameter(&adaptor)?`.
+pub trait ExtremaCurveAccess: 'static {
+    /// The curve type the tool reads.
+    type Curve: ?Sized;
+    /// `gp_Pnt` or `gp_Pnt2d`.
+    type Point: GpPoint<Vector = Self::Vector>;
+    /// `gp_Vec` or `gp_Vec2d`.
+    type Vector: GpVector;
+    /// `FirstParameter(C)`.
+    fn first_parameter(curve: &Self::Curve) -> Result<f64, Failure>;
+    /// `LastParameter(C)`.
+    fn last_parameter(curve: &Self::Curve) -> Result<f64, Failure>;
+    /// `GetType(C)`.
+    fn get_type(curve: &Self::Curve) -> Result<CurveType, Failure>;
+    /// `Value(C, U)`.
+    fn value(curve: &Self::Curve, u: f64) -> Result<Self::Point, Failure>;
+    /// `D0(C, U, P)`.
+    fn d0(curve: &Self::Curve, u: f64) -> Result<Self::Point, Failure>;
+    /// `D1(C, U, P, V)`.
+    fn d1(curve: &Self::Curve, u: f64) -> Result<AccessD1<Self>, Failure>;
+    /// `D2(C, U, P, V1, V2)`.
+    fn d2(curve: &Self::Curve, u: f64) -> Result<AccessD2<Self>, Failure>;
+    /// `DN(C, U, N)`.
+    fn dn(curve: &Self::Curve, u: f64, n: i32) -> Result<Self::Vector, Failure>;
+}
+
+impl<T: ExtremaCurveTool> ExtremaCurveAccess for T {
+    type Curve = <T as ExtremaCurveTool>::Curve;
+    type Point = <T as ExtremaCurveTool>::Point;
+    type Vector = <T as ExtremaCurveTool>::Vector;
+    fn first_parameter(curve: &Self::Curve) -> Result<f64, Failure> {
+        <T as ExtremaCurveTool>::first_parameter(curve)
+    }
+    fn last_parameter(curve: &Self::Curve) -> Result<f64, Failure> {
+        <T as ExtremaCurveTool>::last_parameter(curve)
+    }
+    fn get_type(curve: &Self::Curve) -> Result<CurveType, Failure> {
+        <T as ExtremaCurveTool>::get_type(curve)
+    }
+    fn value(curve: &Self::Curve, u: f64) -> Result<Self::Point, Failure> {
+        <T as ExtremaCurveTool>::value(curve, u)
+    }
+    fn d0(curve: &Self::Curve, u: f64) -> Result<Self::Point, Failure> {
+        <T as ExtremaCurveTool>::d0(curve, u)
+    }
+    fn d1(curve: &Self::Curve, u: f64) -> Result<AccessD1<Self>, Failure> {
+        <T as ExtremaCurveTool>::d1(curve, u)
+    }
+    fn d2(curve: &Self::Curve, u: f64) -> Result<AccessD2<Self>, Failure> {
+        <T as ExtremaCurveTool>::d2(curve, u)
+    }
+    fn dn(curve: &Self::Curve, u: f64, n: i32) -> Result<Self::Vector, Failure> {
+        <T as ExtremaCurveTool>::dn(curve, u, n)
+    }
+}
+
 /// The `TheCurve`/`TheCurveTool`/`ThePoint`/`TheVector`/`ThePOnC`/`TheExtPElC`
 /// parameters of the Extrema templates, implemented by `CurveTool` (3D) and
 /// `Curve2dTool` (2D). Each member is the static tool member of the same name;

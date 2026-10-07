@@ -98,7 +98,7 @@ fn reorder_wire(plan: &MissingSeamPlan, wire: &Wire, precision: f64) -> Result<W
     fixer.set_face(&plan.face)?;
     fixer.set_precision(precision);
     fixer.load(wire)?;
-    fixer.fix_reorder()?;
+    fixer.fix_reorder(false)?;
     fixer.wire()
 }
 

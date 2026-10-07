@@ -48,7 +48,10 @@ fn array2_counts_ends_and_flat_offsets() {
     *grid.change_last().unwrap() = 15;
     *grid.change_at_offset(4).unwrap() = 14;
     assert_eq!(*grid.at_offset(4).unwrap(), 14);
-    assert_eq!((grid[(0, 0)], grid[(1, 2)]), (10, 15));
+    assert_eq!(
+        ((*grid.value(0, 0).unwrap()), (*grid.value(1, 2).unwrap())),
+        (10, 15)
+    );
     assert!(grid.at_offset(6).is_err());
 }
 
@@ -125,8 +128,8 @@ fn harray2_initializes_and_shares_the_rectangle() {
         .set_value(2, 3, 9)
         .unwrap();
     let alias = grid.clone();
-    assert_eq!(alias.get().unwrap().array2()[(2, 3)], 9);
-    assert_eq!(alias.get().unwrap().array2()[(1, 1)], 7);
+    assert_eq!((*alias.get().unwrap().array2().value(2, 3).unwrap()), 9);
+    assert_eq!((*alias.get().unwrap().array2().value(1, 1).unwrap()), 7);
     assert_eq!(
         HArray2::<i32>::with_bounds(1, 2, 1, 2)
             .unwrap()

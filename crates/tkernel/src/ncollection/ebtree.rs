@@ -1,6 +1,6 @@
 //! Editable bounding tree maintains object-to-leaf bindings through node moves.
 use super::{BaseAllocator, BoundingNode, BoundingVolume, DataMap, HashKey, TreeSelector, UBTree};
-use crate::{ncollection::destructor_unwind::DeferredDestructorPanic, standard::Failure};
+use crate::standard::Failure;
 mod native_insertion;
 mod removal;
 /// Unique objects with indexed removal; `EBTree::<i32, Bounds>::default()`.
@@ -71,8 +71,7 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
         Ok(self.tree.node(*self.objects.find(object)?))
     }
     /// Absorb the sibling and update ancestor bounds in place; `tree.remove(&1)`.
-    /// The surviving leaf is rebound before ancestor callbacks. Rust cleanup panics
-    /// repair its index before resuming; a failed bounds assignment retains native partial state.
+    /// The surviving leaf is rebound before the ancestor bounds are updated, as natively.
     pub fn remove(&mut self, object: &T) -> bool {
         let Ok(&index) = self.objects.find(object) else {
             return false;
@@ -95,7 +94,6 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
     }
     /// Release nodes and bindings, then adopt `allocator` for future nodes when given
     /// (native `Clear(aNewAlloc)`); `tree.clear_with_allocator(Some(arena))`.
-    /// Rust destructor panics drain both structures and retain the original allocator.
     pub fn clear_with_allocator(&mut self, allocator: Option<BaseAllocator>) {
         self.clear_object_index_and_nodes();
         if let Some(resource) = allocator {
@@ -103,11 +101,8 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
         }
     }
     fn clear_object_index_and_nodes(&mut self) {
-        let mut destructor_panics = DeferredDestructorPanic::default();
-        destructor_panics.capture(|| self.objects.clear(false));
-        destructor_panics.capture(|| self.tree.clear());
-        // Keep the graph and index consistent even when a map-key destructor unwinds.
-        destructor_panics.finish(Ok(()));
+        self.objects.clear(false);
+        self.tree.clear();
     }
     /// The underlying UBTree, for the inherited read-only members (`Root`, `IsEmpty`,
     /// `Allocator`, `Select`); `tree.as_ubtree().root()`.

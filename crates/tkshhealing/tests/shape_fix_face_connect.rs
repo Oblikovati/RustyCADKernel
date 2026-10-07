@@ -254,7 +254,7 @@ fn duplicate_connection_does_not_change_result() {
 fn rebuilding_result_is_stable() {
     let (face1, face2) = (rectangle(0.0, 1.0), rectangle(1.0, 2.0));
     let shell = shell_of(&[face1.clone(), face2.clone()]);
-    let connector = connector(&face1, &face2);
+    let mut connector = connector(&face1, &face2);
     let result1 = connector.build(&shell, 1.0e-6, 1.0e-7).unwrap();
     let result2 = connector.build(&result1, 1.0e-6, 1.0e-7).unwrap();
     assert_eq!(edge_count(&result1.clone().into_shape()), 7);

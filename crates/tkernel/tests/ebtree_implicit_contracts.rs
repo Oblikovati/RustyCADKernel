@@ -45,19 +45,6 @@ fn implicit_branches_destroy_entire_map_before_native_tree_preorder() {
     implicit_case(3);
 }
 #[test]
-fn map_destructor_panic_still_releases_tree_and_incremental_leases() {
-    let allocator = BaseAllocator::incremental(1024);
-    let mut tree = Editable::with_allocator(allocator.clone());
-    populate(&mut tree, 3);
-    start(&allocator, ('D', 'O', 1));
-    let failed = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| drop(tree))).is_err();
-    let events = finish();
-    assert!(failed);
-    assert_eq!(events.matches("DO").count(), 8);
-    assert_eq!(events.matches("DB").count(), 5);
-    allocator.reset(true).unwrap();
-}
-#[test]
 fn broader_editable_convenience_construction_gap_remains_explicit() {
     let allocator = BaseAllocator::accumulating(65536).unwrap();
     let mut tree = Editable::with_allocator(allocator.clone());

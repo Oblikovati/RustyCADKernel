@@ -86,7 +86,11 @@ impl ShapeFixFace {
             .with_mut(|fields| fields.shape = face.clone());
         *self.face_state.write() = face.clone();
         *self.status.write() = 0;
-        *self.analysis_surface.write() = initialize_face_surface(&face);
+        // Native keeps the previous analysis surface when the new face has no surface.
+        let surface = initialize_face_surface(&face);
+        if !surface.is_null() {
+            *self.analysis_surface.write() = surface;
+        }
         *self.forward.write() = face.orientation() != Orientation::Reversed;
     }
 
@@ -223,7 +227,8 @@ fn initialize_face_surface(face_shape: &Shape) -> Handle<ShapeAnalysisSurface> {
     let Ok(face) = topods::face(face_shape) else {
         return Handle::default();
     };
-    let Ok((surface, _)) = BRepTool::surface_with_location(&face) else {
+    // BRep_Tool::Surface(face): the surface with the face location applied.
+    let Ok(surface) = BRepTool::surface(&face) else {
         return Handle::default();
     };
     if surface.is_null() {

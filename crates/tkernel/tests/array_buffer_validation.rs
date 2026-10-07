@@ -98,7 +98,7 @@ fn bounded_array_constructors_support_nonzero_signed_origins() {
     assert_eq!(array1[i32::MIN + 3], 6);
     drop(array1);
     let array2 = Array2::from_buffer_bounds(&mut buffer, -5, -4, -3, -2).unwrap();
-    assert_eq!(array2[(-4, -2)], 6);
+    assert_eq!((*array2.value(-4, -2).unwrap()), 6);
     assert_eq!(
         (array2.array1().lower(), array2.array1().upper()),
         (-13, -10)

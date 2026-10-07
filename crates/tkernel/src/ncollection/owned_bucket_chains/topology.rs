@@ -1,6 +1,6 @@
 //! Head publication and removal update the one native table/count, without an ownership registry.
 use super::{BaseMap, CanonicalMapNode, MapLinkNode, OwnedBucketChains};
-use crate::ncollection::{destructor_unwind::DeferredDestructorPanic, node_owner::NativeNodeOwner};
+use crate::ncollection::{native_noexcept::terminate_on_unwind, node_owner::NativeNodeOwner};
 impl<N: CanonicalMapNode> OwnedBucketChains<N> {
     pub(in crate::ncollection) fn allocate_node(
         &mut self,
@@ -39,15 +39,14 @@ impl<N: CanonicalMapNode> OwnedBucketChains<N> {
         }
     }
     pub(in crate::ncollection) fn clear(&mut self, release: bool) {
-        let mut panics = DeferredDestructorPanic::default();
+        // Native node destructors are noexcept; the bucket table still names unreleased nodes.
         unsafe {
             self.base.destroy(
                 |node, allocator| {
-                    panics.capture(|| N::release_owned(node.cast::<N>(), allocator));
+                    terminate_on_unwind(|| N::release_owned(node.cast::<N>(), allocator));
                 },
                 release,
             )
         };
-        panics.finish(Ok(()));
     }
 }

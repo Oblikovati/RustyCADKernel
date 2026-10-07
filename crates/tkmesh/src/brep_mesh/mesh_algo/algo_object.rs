@@ -27,7 +27,7 @@ impl_transient_interface!(
 );
 
 /// `BRepMesh_CustomBaseMeshAlgo` in the runtime type system (abstract; its only
-/// native concrete descendant is the Delabella algorithm).
+/// native concrete descendant is `BRepMeshDelabellaBaseMeshAlgo`).
 pub trait CustomBaseMeshAlgo: ConstrainedBaseMeshAlgo {}
 impl_transient_interface!(
     dyn CustomBaseMeshAlgo,
@@ -82,6 +82,28 @@ node_insertion_core!(
     DelaunayDeflectionControlMeshAlgo
 );
 
+/// The algorithm object behind a face-algorithm handle, locked because `Perform` takes
+/// the C++ object mutably through a shared handle; `LockedFaceCore::new(core)`.
+pub(super) struct LockedFaceCore(Mutex<Box<dyn FaceMeshingCore>>);
+
+impl LockedFaceCore {
+    /// Boxes and locks one algorithm object.
+    pub(super) fn new(core: impl FaceMeshingCore + 'static) -> Self {
+        Self(Mutex::new(Box::new(core)))
+    }
+    /// The object's Perform under the lock.
+    pub(super) fn perform(
+        &self,
+        face: &FaceHandle,
+        parameters: &MeshParameters,
+        range: &ProgressRange<'_>,
+    ) -> Result<(), Failure> {
+        // A panic cannot happen in the cores; a poisoned lock still holds a usable core.
+        let mut core = self.0.lock().unwrap_or_else(PoisonError::into_inner);
+        core.perform_face(face, parameters, range)
+    }
+}
+
 /// `BRepMesh_DelaunayBaseMeshAlgo` as a handle: the plain algorithm, or one of the
 /// node-insertion template instances over it (whose dynamic type is this class, as
 /// the C++ templates declare no RTTI of their own).
@@ -94,7 +116,7 @@ node_insertion_core!(
 /// ```
 pub struct BRepMeshDelaunayBaseMeshAlgo {
     transient: StandardTransient,
-    core: Mutex<Box<dyn FaceMeshingCore>>,
+    core: LockedFaceCore,
 }
 impl_transient!(
     BRepMeshDelaunayBaseMeshAlgo,
@@ -120,7 +142,7 @@ impl BRepMeshDelaunayBaseMeshAlgo {
     pub fn from_core(core: impl FaceMeshingCore + 'static) -> Self {
         Self {
             transient: StandardTransient::default(),
-            core: Mutex::new(Box::new(core)),
+            core: LockedFaceCore::new(core),
         }
     }
 }
@@ -132,9 +154,7 @@ impl MeshAlgo for BRepMeshDelaunayBaseMeshAlgo {
         parameters: &MeshParameters,
         range: &ProgressRange<'_>,
     ) -> Result<(), Failure> {
-        // A panic cannot happen in the cores; a poisoned lock still holds a usable core.
-        let mut core = self.core.lock().unwrap_or_else(PoisonError::into_inner);
-        core.perform_face(face, parameters, range)
+        self.core.perform(face, parameters, range)
     }
 }
 impl BaseMeshAlgo for BRepMeshDelaunayBaseMeshAlgo {}

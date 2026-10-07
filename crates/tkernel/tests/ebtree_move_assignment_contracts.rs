@@ -1,8 +1,8 @@
-//! EBTree virtual Clear ordering, allocator/map exchange and panic-safe ownership recovery.
+//! EBTree virtual Clear ordering and allocator/map exchange.
 #[path = "support/bounding_tree_trace.rs"]
+#[allow(dead_code)] // Shared trace; move assignment never injects a rejection.
 mod trace;
 mod ebtree_move_assignment_contracts {
-    pub mod failures;
     pub mod fixture;
 }
 use ebtree_move_assignment_contracts::fixture::{Editable, editable_populated, optional_editable};

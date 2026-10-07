@@ -43,7 +43,10 @@ fn linear_constraints_check_their_sizes_and_share_their_arrays() {
     let scalar = PlateLinearScalarConstraint::from_matrix(&constraints, &matrix).unwrap();
     let copy = scalar.clone();
     copy.set_coeff(2, 2, Xyz::new(1.0, 0.0, 0.0)).unwrap();
-    assert_eq!(scalar.coeff().unwrap()[(2, 2)], Xyz::new(1.0, 0.0, 0.0));
+    assert_eq!(
+        (*scalar.coeff().unwrap().value(2, 2).unwrap()),
+        Xyz::new(1.0, 0.0, 0.0)
+    );
     assert!(scalar.set_ppc(3, ppc(0.0, 0.0, 0.0)).is_err());
     let by_row =
         PlateLinearScalarConstraint::from_row(&constraints, &array(&[Xyz::new(0.0, 0.0, 1.0); 2]))

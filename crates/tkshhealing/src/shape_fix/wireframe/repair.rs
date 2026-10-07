@@ -1,6 +1,4 @@
-use super::{
-    FixRoot, ShapeFixWireframe, ShapeFixWireframeShapeLists, merge_faces, merge_free_wires,
-};
+use super::{FixRoot, ShapeFixWireframe, ShapeFixWireframeShapeLists};
 use crate::{shape_build::ShapeBuildReShape, shape_extend::ShapeExtendStatus};
 use rustycad_tkbrep::{
     brep::BRepBuilder,
@@ -50,6 +48,10 @@ impl ShapeFixWireframe {
         for child in ShapeIterator::new(&original, true, true) {
             let (replacement, changed) = self.fix_small_edge_child(child, &mut replacements)?;
             modified |= changed;
+            // check if resulting shape if not empty
+            if replacement.is_null() {
+                continue;
+            }
             builder.add(&mut compound, &replacement)?;
         }
         self.publish_small_edge_compound(original, compound, modified)
@@ -64,7 +66,9 @@ impl ShapeFixWireframe {
         let source = child.clone();
         let mut replacement = self.cached_or_repair_child(child, replacements)?;
         let changed = !replacement.is_same(&source);
-        replacement.set_location(&location, false)?;
+        if !replacement.is_null() {
+            replacement.set_location(&location, false)?;
+        }
         Ok((replacement, changed))
     }
     fn cached_or_repair_child(
@@ -108,57 +112,7 @@ impl ShapeFixWireframe {
             &mut multiple,
             false,
             -1.,
-        )
-    }
-    /// Merge marked wire edges while updating face-link maps; `tool.merge_small_edges(&mut small,&mut edge_faces,&mut face_small,&mut multiple,false,-1.0)?`.
-    pub fn merge_small_edges(
-        &self,
-        small: &mut MapOfShape,
-        edge_faces: &mut ShapeFixWireframeShapeLists,
-        face_small: &mut ShapeFixWireframeShapeLists,
-        multiple: &mut MapOfShape,
-        mode_drop: bool,
-        limit_angle: f64,
-    ) -> Result<bool, Failure> {
-        let drop_mode = mode_drop || self.mode_drop_small_edges();
-        if small.is_empty() {
-            return Ok(false);
-        }
-        self.reset_joined_vertices();
-        let angle_limit = effective_angle_limit(limit_angle, self.limit_angle());
-        let face_changed = merge_faces::merge_face_small_edges(
-            self,
-            small,
-            edge_faces,
-            face_small,
-            multiple,
-            angle_limit,
-            drop_mode,
         )?;
-        let free_changed =
-            merge_free_wires::merge_small_edges(self, small, multiple, angle_limit, drop_mode)?;
-        let changed = face_changed || free_changed;
-        self.apply_joined_vertex_replacements()?;
-        if !changed {
-            return Ok(false);
-        }
-        merge_free_wires::finish_free_wire_merge(self, &self.context())
+        Ok(self.status_small_edges(ShapeExtendStatus::Done))
     }
-}
-
-fn effective_angle_limit(explicit: f64, configured: f64) -> Option<f64> {
-    if !(explicit > -1.0 || configured > -1.0) {
-        return None;
-    }
-    if explicit < configured {
-        return Some(configured);
-    }
-    Some(explicit)
-}
-
-pub(super) fn unported_small_edge_merge() -> Failure {
-    Failure::with_message(
-        "Standard_NotImplemented",
-        "ShapeFix_Wireframe::MergeSmallEdges found a small-edge map; expected a merged or mode-dropped replacement",
-    )
 }

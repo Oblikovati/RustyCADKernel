@@ -10,7 +10,7 @@ fn CheckGridPoints(
     for iU in 1..=theCounts.0 {
         for iV in 1..=theCounts.1 {
             let aExpected: Point3 = theSurf.value(theUParams[iU], theVParams[iV]).unwrap();
-            EXPECT_NEAR(theGrid[(iU, iV)].distance(&aExpected), 0.0, THE_TOLERANCE);
+            EXPECT_NEAR((*theGrid.value(iU, iV).unwrap()).distance(&aExpected), 0.0, THE_TOLERANCE);
         }
     }
 }
@@ -48,22 +48,22 @@ fn GeomGridEval_BSplineSurfaceTest__CornerPoints() {
     let aGrid: Array2<Point3> = anEval.evaluate_grid(&aUParams, &aVParams).unwrap();
 
     EXPECT_NEAR(
-        aGrid[(1, 1)].distance(&Point3::new(0.0, 0.0, 0.0)),
+        (*aGrid.value(1, 1).unwrap()).distance(&Point3::new(0.0, 0.0, 0.0)),
         0.0,
         THE_TOLERANCE,
     );
     EXPECT_NEAR(
-        aGrid[(2, 1)].distance(&Point3::new(1.0, 0.0, 0.0)),
+        (*aGrid.value(2, 1).unwrap()).distance(&Point3::new(1.0, 0.0, 0.0)),
         0.0,
         THE_TOLERANCE,
     );
     EXPECT_NEAR(
-        aGrid[(1, 2)].distance(&Point3::new(0.0, 1.0, 0.0)),
+        (*aGrid.value(1, 2).unwrap()).distance(&Point3::new(0.0, 1.0, 0.0)),
         0.0,
         THE_TOLERANCE,
     );
     EXPECT_NEAR(
-        aGrid[(2, 2)].distance(&Point3::new(1.0, 1.0, 1.0)),
+        (*aGrid.value(2, 2).unwrap()).distance(&Point3::new(1.0, 1.0, 1.0)),
         0.0,
         THE_TOLERANCE,
     );
@@ -103,7 +103,7 @@ fn GeomGridEval_BSplineSurfaceTest__HigherDegree() {
             let x: f64 = f64::from(i - 1) * 1.0;
             let y: f64 = f64::from(j - 1) * 1.0;
             let z: f64 = (f64::from(i + j - 2) * PI / 6.0).cos();
-            aPoles[(i, j)] = Point3::new(x, y, z);
+            aPoles.set_value(i, j, Point3::new(x, y, z)).unwrap();
         }
     }
 

@@ -45,20 +45,3 @@ pub fn exact_case(count: usize, rejection: &str) {
     tree.clear();
     assert_eq!(allocations(&allocator), 0);
 }
-pub fn retained_pair_case(rejection: &str) {
-    use crate::failed_pair_repair::{PairRepair, initialized_slots};
-    use rustycad_tkernel::ncollection::BoundingNode;
-    let (mut tree, allocator) = populated(1);
-    let repair = PairRepair::<BoundingNode<Payload<'O'>, Payload<'B'>>>::capture(&allocator);
-    let (failed, events) = apply(&mut tree, &allocator, rejection);
-    assert!(failed);
-    assert_eq!(
-        result_row(&tree, failed, &events, 1, rejection),
-        native_row(1, rejection)
-    );
-    tree.clear();
-    assert_eq!(allocations(&allocator), 1);
-    // SAFETY: original Acc cursor identifies the unpublished pair; only completed slots live.
-    unsafe { repair.reclaim(initialized_slots(rejection)) };
-    assert_eq!(allocations(&allocator), 0);
-}

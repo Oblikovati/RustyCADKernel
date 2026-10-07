@@ -1,11 +1,11 @@
 //! Native mutation results; synthetic extent probes do not claim giant-set execution.
+//! Native rows with an injected allocation failure are D1 class B3 and are not reproduced.
 #![allow(deprecated)]
 use super::storage::allocation::observation::capture;
 use super::{PackedInteger, PackedMap};
 use crate::ncollection::packed_map_algo as algo;
 use std::collections::BTreeMap;
 use std::sync::OnceLock;
-mod callbacks;
 mod synthetic;
 fn fixture() -> &'static BTreeMap<&'static str, Vec<i128>> {
     static ROWS: OnceLock<BTreeMap<&'static str, Vec<i128>>> = OnceLock::new();
@@ -94,19 +94,15 @@ fn snapshot<T: PackedInteger>(result: i32, map: &PackedMap<T>) -> Vec<i128> {
     row.extend(keys);
     row
 }
-fn caught(fail: bool, operation: impl FnOnce() -> i32) -> i32 {
-    capture(fail, || {
-        std::panic::catch_unwind(std::panic::AssertUnwindSafe(operation))
-    })
-    .0
-    .unwrap_or(-1)
+fn traced(operation: impl FnOnce() -> i32) -> i32 {
+    capture(operation).0
 }
 fn ordinary_row<T: PackedInteger>(name: &str, op: usize, shape: usize, mode: usize) {
     let (a, b): (usize, usize) = [(0, 2), (2, 0), (2, 3), (3, 4)][shape];
     let mut left: PackedMap<T> = profile(a);
     let right: PackedMap<T> = profile(b);
     let mut destination: PackedMap<T> = profile(4);
-    let result: i32 = caught(mode / 2 != 0, || {
+    let result: i32 = traced(|| {
         if op.is_multiple_of(2) {
             unary(op, !mode.is_multiple_of(2), &mut left, &right)
         } else {
@@ -122,9 +118,10 @@ fn ordinary_row<T: PackedInteger>(name: &str, op: usize, shape: usize, mode: usi
     assert_eq!(snapshot(result, map), fixture()[key.as_str()], "{key}");
 }
 fn ordinary<T: PackedInteger>(name: &str) {
+    // Modes 2 and 3 inject a bucket allocation failure: D1 class B3, not reproduced.
     for op in 0..8 {
-        for case in 0..16 {
-            ordinary_row::<T>(name, op, case / 4, case % 4);
+        for case in 0..8 {
+            ordinary_row::<T>(name, op, case / 2, case % 2);
         }
     }
 }

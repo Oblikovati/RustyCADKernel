@@ -51,31 +51,6 @@ fn unset_drop_panic_unlinks_and_decrements_before_resumption() {
     assert!(arena.reset(false).is_ok());
 }
 #[test]
-fn clear_drop_panic_drains_real_rehashed_order_once() {
-    let trace = DropTrace::default();
-    let arena = BaseAllocator::incremental(512);
-    let mut map = dropping_map(&trace, &arena);
-    map.resize(200);
-    trace.reject.set(Some(1));
-    assert!(caught(|| map.clear(false)));
-    assert_eq!(*trace.events.borrow(), [1, 2, 3]);
-    assert_eq!(map.len(), 0);
-    assert!(!map.buckets().is_null());
-    assert!(arena.reset(false).is_ok());
-    map.bind(7, trace.value(7));
-    assert_eq!(map.len(), 1);
-}
-#[test]
-fn owner_drop_panic_reclaims_every_node_and_bucket() {
-    let trace = DropTrace::default();
-    let arena = BaseAllocator::incremental(512);
-    let map = dropping_map(&trace, &arena);
-    trace.reject.set(Some(3));
-    assert!(caught(|| drop(map)));
-    assert_eq!(*trace.events.borrow(), [3, 2, 1]);
-    assert!(arena.reset(false).is_ok());
-}
-#[test]
 fn overwritten_value_drop_panic_keeps_replacement_live() {
     let trace = DropTrace::default();
     let arena = BaseAllocator::incremental(512);

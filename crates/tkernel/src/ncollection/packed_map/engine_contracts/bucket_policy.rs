@@ -1,4 +1,5 @@
-//! Exact native allocation-boundary traces; injected failure is not host heap exhaustion.
+//! Exact native allocation-boundary traces of ReSize. The native rows with an injected
+//! allocation failure (`:1` suffix) are D1 class B3 and are not reproduced.
 use super::{PackedInteger, PackedMap, PackedWord, pointers};
 mod fixture_index;
 use crate::ncollection::packed_map::storage::allocation::observation::capture;
@@ -50,14 +51,13 @@ fn header<T: PackedInteger>(map: &PackedMap<T>) -> Vec<String> {
     .map(|value| value.to_string())
     .collect()
 }
-fn scenario<T: PackedInteger>(state: usize, request: usize, fail: bool) -> String {
+fn scenario<T: PackedInteger>(state: usize, request: usize) -> String {
     let mut map = initial::<T>(state);
     let before = snapshot(&map);
     let addresses = pointers(&map);
     let table = map.buckets.heads;
-    let (result, events) = capture(fail, || {
-        std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| map.resize(request)))
-    });
+    let (result, events) =
+        capture(|| std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| map.resize(request))));
     let retained = retained_nodes(&map, &addresses);
     format!(
         "{before}|{}|{}|{}|{}|{}",
@@ -90,13 +90,11 @@ fn check_request<T: PackedInteger>(
     index: usize,
     request: usize,
 ) {
-    for fail in [false, true] {
-        let key = format!("{name}:{state}:{index}:{}", u8::from(fail));
-        let expected = fixture
-            .get(key.as_str())
-            .unwrap_or_else(|| panic!("native row {key}: expected a unique oracle fixture entry"));
-        assert_eq!(scenario::<T>(state, request, fail), *expected, "{key}");
-    }
+    let key = format!("{name}:{state}:{index}:0");
+    let expected = fixture
+        .get(key.as_str())
+        .unwrap_or_else(|| panic!("native row {key}: expected a unique oracle fixture entry"));
+    assert_eq!(scenario::<T>(state, request), *expected, "{key}");
 }
 macro_rules! widths {
     ($($name:ident: $ty:ty),+) => { $(#[test] fn $name() { native_bucket_policy::<$ty>(stringify!($ty)); })+ };

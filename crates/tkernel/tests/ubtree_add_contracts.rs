@@ -39,12 +39,6 @@ fn search_extent_and_second_union_copy_failures_match_native_cleanup() {
     }
 }
 #[test]
-fn unpublished_pair_failure_retains_native_allocation_and_exact_callbacks() {
-    for rejection in ["NB1", "NO2", "AB1"] {
-        retained_pair_case(rejection);
-    }
-}
-#[test]
 fn borrowed_add_exact_function_binding_accepts_borrowed_payloads() {
     let object = String::from("borrowed");
     borrowed_call(object.as_str());

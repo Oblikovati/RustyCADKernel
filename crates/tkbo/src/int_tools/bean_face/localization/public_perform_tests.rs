@@ -108,10 +108,10 @@ fn curved_face(surface: &str, located: bool) -> Face {
 
 fn bezier_surface() -> rustycad_tkernel::standard::Handle<dyn GeomSurface> {
     let mut poles = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    poles[(2, 1)] = Point3::new(1.0, 0.0, 0.0);
-    poles[(1, 2)] = Point3::new(0.0, 1.0, 0.0);
-    poles[(2, 2)] = Point3::new(1.0, 1.0, 0.0);
+    poles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    poles.set_value(2, 1, Point3::new(1.0, 0.0, 0.0)).unwrap();
+    poles.set_value(1, 2, Point3::new(0.0, 1.0, 0.0)).unwrap();
+    poles.set_value(2, 2, Point3::new(1.0, 1.0, 0.0)).unwrap();
     rustycad_tkernel::standard::Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()
 }
 
@@ -121,7 +121,9 @@ fn bspline_surface() -> rustycad_tkernel::standard::Handle<dyn GeomSurface> {
         for v in 1..=6 {
             let x = f64::from(u - 1) / 5.0;
             let y = f64::from(v - 1) / 5.0;
-            poles[(u, v)] = Point3::new(x, y, 0.08 * x * y);
+            poles
+                .set_value(u, v, Point3::new(x, y, 0.08 * x * y))
+                .unwrap();
         }
     }
     let (knots, multiplicities) = cubic_knots();
@@ -143,7 +145,7 @@ fn curved_bezier_surface() -> rustycad_tkernel::standard::Handle<dyn GeomSurface
             let x = f64::from(u - 1) / 2.0;
             let y = f64::from(v - 1) / 2.0;
             let z = if u == 2 { 0.3 } else { 0.0 };
-            poles[(u, v)] = Point3::new(x, y, z);
+            poles.set_value(u, v, Point3::new(x, y, z)).unwrap();
         }
     }
     rustycad_tkernel::standard::Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()
@@ -156,7 +158,7 @@ fn curved_bspline_surface() -> rustycad_tkernel::standard::Handle<dyn GeomSurfac
             let x = f64::from(u - 1) / 5.0;
             let y = f64::from(v - 1) / 5.0;
             let z = 0.24 * x * y + 0.12 * x * x + 0.08 * y * y;
-            poles[(u, v)] = Point3::new(x, y, z);
+            poles.set_value(u, v, Point3::new(x, y, z)).unwrap();
         }
     }
     let (knots, multiplicities) = cubic_knots();

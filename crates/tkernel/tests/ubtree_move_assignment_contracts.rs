@@ -2,6 +2,8 @@
 #[path = "ubtree_move_assignment_contracts/failures.rs"]
 mod failures;
 #[path = "ubtree_kill_contracts/fixture.rs"]
+#[allow(dead_code, unused_imports)]
+// Shared kill fixture; transfer uses only its population helpers.
 mod fixture;
 use fixture::{Trace, Tree, populated};
 use rustycad_tkernel::ncollection::BaseAllocator;

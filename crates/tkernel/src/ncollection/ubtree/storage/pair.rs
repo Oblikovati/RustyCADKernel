@@ -1,13 +1,7 @@
 //! One real contiguous allocation, with payload lifetime independent from block lifetime.
 #![allow(unsafe_code)]
-use crate::ncollection::{AllocatedBox, BaseAllocator, destructor_unwind::DeferredDestructorPanic};
-use std::{
-    any::Any,
-    marker::PhantomData,
-    mem::MaybeUninit,
-    panic::{AssertUnwindSafe, catch_unwind, resume_unwind},
-    ptr::NonNull,
-};
+use crate::ncollection::{AllocatedBox, BaseAllocator};
+use std::{marker::PhantomData, mem::MaybeUninit, ptr::NonNull};
 pub(in crate::ncollection::ubtree) struct TreePairAllocation<N> {
     pointer: Option<NonNull<N>>,
     allocator: BaseAllocator,
@@ -15,42 +9,17 @@ pub(in crate::ncollection::ubtree) struct TreePairAllocation<N> {
     ownership: PhantomData<AllocatedBox<N>>,
 }
 impl<N> TreePairAllocation<N> {
+    /// One native `[N; 2]` block; a panicking `construct` drops the initialised slot and
+    /// releases the block through `Drop` (memory safety only, D1 class B2).
     pub(in crate::ncollection::ubtree) fn new_with(
         allocator: &BaseAllocator,
-        construct: impl FnMut(usize) -> N,
-    ) -> Self {
-        Self::construct_with(allocator, construct, Self::cleanup_failed)
-    }
-    pub(in crate::ncollection::ubtree) fn new_native_with(
-        allocator: &BaseAllocator,
-        construct: impl FnMut(usize) -> N,
-    ) -> Self {
-        Self::construct_with(allocator, construct, Self::abandon_failed)
-    }
-    fn construct_with(
-        allocator: &BaseAllocator,
         mut construct: impl FnMut(usize) -> N,
-        failed: fn(Self, Box<dyn Any + Send>) -> !,
     ) -> Self {
         let mut pair = Self::allocate(allocator);
-        let result = catch_unwind(AssertUnwindSafe(|| {
-            for index in 0..2 {
-                pair.initialize(index, construct(index));
-            }
-        }));
-        if let Err(error) = result {
-            failed(pair, error);
+        for index in 0..2 {
+            pair.initialize(index, construct(index));
         }
         pair
-    }
-    pub(in crate::ncollection::ubtree) fn edit_native(
-        mut self,
-        assign: impl FnOnce(&mut Self),
-    ) -> Self {
-        if let Err(error) = catch_unwind(AssertUnwindSafe(|| assign(&mut self))) {
-            Self::abandon_failed(self, error);
-        }
-        self
     }
     fn allocate(allocator: &BaseAllocator) -> Self {
         let allocation = allocator.allocate_value(MaybeUninit::<[N; 2]>::uninit());
@@ -70,26 +39,6 @@ impl<N> TreePairAllocation<N> {
         // SAFETY: this uniquely owned slot has storage but no live payload yet.
         unsafe { self.pointer(index).write(value) };
         self.live[index] = true;
-    }
-    fn cleanup_failed(pair: Self, error: Box<dyn Any + Send>) -> ! {
-        let mut pending = DeferredDestructorPanic::default();
-        pending.capture(|| resume_unwind(error));
-        pending.capture(|| drop(pair));
-        pending.finish(Ok(()));
-        unreachable!("failed pair construction must retain its original panic")
-    }
-    fn abandon_failed(mut pair: Self, error: Box<dyn Any + Send>) -> ! {
-        // OCCT 3d097a0328 Gemmate has no owner guarding unpublished raw children.
-        // Detach every projection before releasing the lease: reset may reclaim bytes afterward.
-        pair.pointer.take();
-        pair.live = [false; 2];
-        if std::mem::size_of::<[N; 2]>() != 0 {
-            // SAFETY: the unique failed allocation is intentionally leaked, with no safe
-            // reference or future payload destructor access. Only the raw allocator retains it.
-            unsafe { pair.allocator.relinquish_typed_to_raw() };
-        }
-        drop(pair);
-        resume_unwind(error)
     }
     pub(in crate::ncollection::ubtree) fn pointer(&self, index: usize) -> *mut N {
         assert!(index < 2, "pair slot {index}; expected 0 or 1");
@@ -128,14 +77,10 @@ impl<N> Drop for TreePairAllocation<N> {
         if self.pointer.is_none() {
             return;
         }
-        let mut pending = DeferredDestructorPanic::default();
+        // A panicking payload Drop leaks the rest of the block: never a double drop.
         for index in 0..2 {
-            pending.capture(|| self.destroy(index));
+            self.destroy(index);
         }
         self.deallocate();
-        pending.finish(Ok(()));
     }
 }
-
-#[cfg(test)]
-mod failed_contracts;

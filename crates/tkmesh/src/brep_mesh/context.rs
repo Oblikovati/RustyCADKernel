@@ -3,8 +3,9 @@
 
 //! `BRepMesh_Context`: the IMeshTools context with the BRepMesh strategies.
 use super::{
-    BRepMeshEdgeDiscret, BRepMeshFaceDiscret, BRepMeshMeshAlgoFactory, BRepMeshModelBuilder,
-    BRepMeshModelHealer, BRepMeshModelPostProcessor, BRepMeshModelPreProcessor,
+    BRepMeshDelabellaMeshAlgoFactory, BRepMeshEdgeDiscret, BRepMeshFaceDiscret,
+    BRepMeshMeshAlgoFactory, BRepMeshModelBuilder, BRepMeshModelHealer, BRepMeshModelPostProcessor,
+    BRepMeshModelPreProcessor,
 };
 use crate::imesh_data::MeshShape;
 use crate::imesh_tools::{Context, MeshAlgoFactory, MeshAlgoType, MeshContext};
@@ -37,14 +38,13 @@ impl BRepMeshContext {
         Self::with_environment(mesh_type, &|name: &str| std::env::var(name).ok())
     }
 
-    /// The constructor with an injected environment lookup (OSD_Environment natively).
-    /// Delabella is refused: its third-party triangulation library is not ported;
+    /// The constructor with an injected environment lookup (OSD_Environment natively);
     /// `BRepMeshContext::with_environment(MeshAlgoType::Default, &|_| None)?`.
     pub fn with_environment(
         mesh_type: MeshAlgoType,
         environment: &dyn Fn(&str) -> Option<String>,
     ) -> Result<Self, Failure> {
-        let factory = algo_factory(resolve_mesh_type(mesh_type, environment))?;
+        let factory = algo_factory(resolve_mesh_type(mesh_type, environment));
         let context = Context::new();
         context.set_model_builder(&Handle::new(BRepMeshModelBuilder::new()).cast());
         context.set_edge_discret(&Handle::new(BRepMeshEdgeDiscret::new()).cast());
@@ -89,14 +89,11 @@ fn resolve_mesh_type(
 }
 
 /// The algorithm factory of a resolved mesh type.
-fn algo_factory(mesh_type: MeshAlgoType) -> Result<Handle<dyn MeshAlgoFactory>, Failure> {
-    if mesh_type == MeshAlgoType::Delabella {
-        return Err(Failure::with_message(
-            "Standard_ProgramError",
-            "BRepMesh_Context: mesh type IMeshTools_MeshAlgoType_Delabella needs the third-party delabella library, which is not ported; expected Watson or Default",
-        ));
+fn algo_factory(mesh_type: MeshAlgoType) -> Handle<dyn MeshAlgoFactory> {
+    match mesh_type {
+        MeshAlgoType::Delabella => Handle::new(BRepMeshDelabellaMeshAlgoFactory::new()).cast(),
+        _ => Handle::new(BRepMeshMeshAlgoFactory::new()).cast(),
     }
-    Ok(Handle::new(BRepMeshMeshAlgoFactory::new()).cast())
 }
 
 impl MeshShape for BRepMeshContext {
@@ -143,12 +140,12 @@ mod tests {
     }
 
     #[test]
-    fn delabella_is_refused_with_a_named_failure() {
-        let error = BRepMeshContext::with_environment(MeshAlgoType::Delabella, &|_| None).err();
-        assert_eq!(
-            error.map(|e| e.exception_type().to_string()),
-            Some("Standard_ProgramError".into())
+    fn mesh_type_selects_the_factory() {
+        assert!(
+            algo_factory(MeshAlgoType::Delabella)
+                .is_instance_name("BRepMesh_DelabellaMeshAlgoFactory")
         );
-        assert!(BRepMeshContext::with_environment(MeshAlgoType::Watson, &|_| None).is_ok());
+        assert!(algo_factory(MeshAlgoType::Watson).is_instance_name("BRepMesh_MeshAlgoFactory"));
+        assert!(BRepMeshContext::with_environment(MeshAlgoType::Delabella, &|_| None).is_ok());
     }
 }

@@ -1,9 +1,6 @@
-//! Shared native unlink/assignment/relink ordering, with explicit Rust unwind cleanup.
+//! Shared native unlink/assignment/relink ordering for indexed substitution.
 use super::{IndexedNode, IndexedStorage};
-use crate::{
-    ncollection::{HashPolicy, destructor_unwind::DeferredDestructorPanic},
-    standard::Failure,
-};
+use crate::{ncollection::HashPolicy, standard::Failure};
 impl<N: IndexedNode> IndexedStorage<N>
 where
     N::Key: std::fmt::Debug,
@@ -53,20 +50,11 @@ impl<N: IndexedNode> IndexedStorage<N> {
         assign: impl FnOnce(*mut N),
     ) {
         let node = self.node(index);
-        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| assign(node.cast())));
+        // Native relinks after the assignment; no caller can observe the order in between, and
+        // relinking first keeps a panicking `clone_from` from leaving the node unchained.
         if detached {
             self.prepend(bucket, node);
         }
-        if let Err(panic) = result {
-            self.clear_failed_assignment(panic);
-        }
-    }
-    fn clear_failed_assignment(&mut self, panic: Box<dyn std::any::Any + Send>) {
-        // A throwing clone_from can change the hash key partially. Clearing is a Rust safety
-        // extension; native nonthrowing assignment/unlink/relink order remains unchanged.
-        let mut panics = DeferredDestructorPanic::default();
-        panics.capture(|| std::panic::resume_unwind(panic));
-        panics.capture(|| self.clear(false));
-        panics.finish(Ok(()));
+        assign(node.cast());
     }
 }

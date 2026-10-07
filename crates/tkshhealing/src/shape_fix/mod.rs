@@ -42,7 +42,7 @@ mod free_bounds;
 pub use free_bounds::ShapeFixFreeBounds;
 
 mod package;
-pub use package::ShapeFix;
+pub use package::{ShapeFix, ShapeFixRemovedSmallEdges};
 
 mod shell;
 pub use shell::ShapeFixShell;

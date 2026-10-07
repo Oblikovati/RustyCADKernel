@@ -37,8 +37,8 @@ fn stretch_of_a_flat_square_is_its_bilinear_patch() -> Result<(), Failure> {
         (1, 3, 3)
     );
     // P4 is the first row and P2 the last in the stretch layout.
-    assert_eq!(poles[(1, 2)], Point3::new(0., 1.5, 0.));
-    assert_eq!(poles[(2, 2)], Point3::new(1.5, 1.5, 0.));
+    assert_eq!((*poles.value(1, 2).unwrap()), Point3::new(0., 1.5, 0.));
+    assert_eq!((*poles.value(2, 2).unwrap()), Point3::new(1.5, 1.5, 0.));
     Ok(())
 }
 

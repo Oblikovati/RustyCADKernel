@@ -1,17 +1,18 @@
-mod native_reader;
-pub use native_reader::PackedWordReader;
-/// Unsigned storage word for packed integer blocks.
-pub trait PackedWord: Copy + Default {
-    /// Trusted primitive rehash path; custom words default to transactional scratch storage.
-    /// Example: `assert!(<u32 as PackedWord>::NATIVE_REHASH_READER.is_some())`.
-    const NATIVE_REHASH_READER: Option<PackedWordReader<Self>> = None;
+/// Seals both traits to the native integral types: `NCollection_PackedMap` static-asserts
+/// `std::is_integral`, so no caller-defined key or word exists natively (D1 class RX).
+mod sealed {
+    pub trait SealedWord {}
+    pub trait SealedInteger {}
+}
+/// Unsigned storage word for packed integer blocks; implemented by `u32` and `u64` only.
+pub trait PackedWord: Copy + Default + sealed::SealedWord {
     /// Preserve the low word bits; `u32::from_bits(42)`.
     fn from_bits(value: u64) -> Self;
     /// Widen without sign extension; `word.bits()`.
     fn bits(self) -> u64;
 }
+impl sealed::SealedWord for u32 {}
 impl PackedWord for u32 {
-    const NATIVE_REHASH_READER: Option<PackedWordReader<Self>> = Some(native_reader::U32_READER);
     fn from_bits(value: u64) -> Self {
         value as Self
     }
@@ -19,8 +20,8 @@ impl PackedWord for u32 {
         u64::from(self)
     }
 }
+impl sealed::SealedWord for u64 {}
 impl PackedWord for u64 {
-    const NATIVE_REHASH_READER: Option<PackedWordReader<Self>> = Some(native_reader::U64_READER);
     fn from_bits(value: u64) -> Self {
         value
     }
@@ -29,7 +30,7 @@ impl PackedWord for u64 {
     }
 }
 /// Integral type with OCCT's width and bit-preserving signed conversion.
-pub trait PackedInteger: Copy + Ord + Default + std::fmt::Debug {
+pub trait PackedInteger: Copy + Ord + Default + std::fmt::Debug + sealed::SealedInteger {
     /// Matching unsigned block/index storage type.
     type Word: PackedWord;
     /// Whether to use 64 rather than 32 bits per block.
@@ -45,6 +46,7 @@ pub trait PackedInteger: Copy + Ord + Default + std::fmt::Debug {
 }
 macro_rules! integer {
     ($type:ty, $word:ty) => {
+        impl sealed::SealedInteger for $type {}
         impl PackedInteger for $type {
             type Word = $word;
             const IS_64_BIT: bool = size_of::<Self>() > 4;
@@ -76,6 +78,7 @@ integer!(u16, u32);
 integer!(isize, u64);
 #[cfg(target_pointer_width = "32")]
 integer!(isize, u32);
+impl sealed::SealedInteger for bool {}
 impl PackedInteger for bool {
     type Word = u32;
     const IS_64_BIT: bool = false;
@@ -88,3 +91,6 @@ impl PackedInteger for bool {
         bits != 0
     }
 }
+
+#[cfg(test)]
+mod native_hash_tests;

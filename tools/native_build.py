@@ -46,13 +46,25 @@ LINKED_TOOLKITS: tuple[str, ...] = ('TKOffset', 'TKFillet', 'TKBO', 'TKMesh', 'T
 CLOSURE_TARGETS: list[str] = [*ADDITIONAL_TOOLKITS, 'gtest_main']
 
 
-def closure_flags(modules: list[str]) -> list[str]:
-    """CMake flags of the shared oracle closure; one spelling for every tool, so the tools
-    never reconfigure the tree back and forth; closure_flags(snapshot(source)['modules'])."""
+# The OCAF oracle closure (TKCDF and TKLCAF suites) lives in its own build tree, so the
+# geometry closure above keeps its flags. TKBin is here because the unchanged TKLCAF suites
+# call BinDrivers::DefineFormat; TKCAF for TNaming and TDataXtd; TKPrim for their boxes.
+OCAF_TOOLKITS: tuple[str, ...] = ('TKBin', 'TKCAF', 'TKPrim')
+# The OCAF closure's shared libraries in link order, dependants first (TKCAF sits on TKBO).
+OCAF_LINKED_TOOLKITS: tuple[str, ...] = ('TKBin', 'TKBinL', 'TKCAF', 'TKBO', 'TKPrim', 'TKTopAlgo',
+                                         'TKGeomAlgo', 'TKBRep', 'TKGeomBase', 'TKG3d', 'TKG2d',
+                                         'TKLCAF', 'TKCDF', 'TKMath', 'TKernel')
+OCAF_CLOSURE_TARGETS: list[str] = [*OCAF_TOOLKITS, 'gtest_main']
+
+
+def closure_flags(modules: list[str], toolkits: tuple[str, ...] = ADDITIONAL_TOOLKITS) -> list[str]:
+    """CMake flags of a shared oracle closure (the geometry one by default); one spelling for
+    every tool, so the tools never reconfigure the tree back and forth;
+    closure_flags(snapshot(source)['modules'])."""
     flags = ['-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
              '-DBUILD_GTEST=ON', '-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON',
              '-DGTEST_USE_FETCHCONTENT=ON',
-             '-DBUILD_ADDITIONAL_TOOLKITS=' + ' '.join(ADDITIONAL_TOOLKITS)]
+             '-DBUILD_ADDITIONAL_TOOLKITS=' + ' '.join(toolkits)]
     return flags + [f'-DBUILD_MODULE_{name}={"ON" if name == "FoundationClasses" else "OFF"}'
                     for name in modules]
 

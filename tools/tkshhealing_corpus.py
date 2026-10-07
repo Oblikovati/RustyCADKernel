@@ -39,6 +39,18 @@ def append_tkshhealing_requests(requests: list[str]) -> None:
     __import__('tkshhealing_corpus_canonical').append_canonical_requests(requests)
     # ShapeConstruct_Curve: adjustments, B-spline conversions and OCC90 knot spacing.
     __import__('tkshhealing_corpus_shapeconstruct').append_shapeconstruct_requests(requests)
+    # ShapeConstruct package functions: B-spline conversions and JoinPCurves.
+    __import__('tkshhealing_corpus_construct_package').append_construct_package_requests(requests)
+    # ShapeFix_Face: Perform and each Fix method on planar, looped and periodic faces.
+    __import__('tkshhealing_corpus_fix_face').append_fix_face_requests(requests)
+    # Shape-level ShapeFix: ShapeFix_Shape, Wireframe, small faces / solids, shells, solids.
+    __import__('tkshhealing_corpus_fix_shape').append_fix_shape_requests(requests)
+    # ShapeUpgrade_UnifySameDomain: sewn faces, revolution pieces, wires and settings.
+    __import__('tkshhealing_corpus_unify').append_unify_requests(requests)
+    # ShapeAlgo_AlgoContainer: polyline approximation, wire matching and delegations.
+    __import__('tkshhealing_corpus_shape_algo').append_shape_algo_requests(requests)
+    # ShapeProcess and ShapeProcessAPI: contexts, sequences and operation flags.
+    __import__('tkshhealing_corpus_shape_process').append_shape_process_requests(requests)
     __import__('tkshhealing_corpus_analysiscurve').append_analysis_curve_requests(requests)
     # ShapeAnalysis_Surface: singularity state, projection and closure.
     __import__('tkshhealing_corpus_analysis_surface').append_analysis_surface_requests(requests)

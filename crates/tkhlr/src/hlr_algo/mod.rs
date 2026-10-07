@@ -18,7 +18,7 @@ mod bi_point;
 mod edge_iterator;
 mod edge_status;
 mod edges_block;
-mod failures;
+pub(crate) mod failures;
 mod interference;
 mod min_max;
 mod poly_algo;
@@ -35,10 +35,12 @@ mod projector;
 mod projector_project;
 mod wires_block;
 
-pub use bi_point::{BiPoint, BiPointFace, BiPointIndices, BiPointPoints, BiPointRegularity};
+pub use bi_point::{
+    BiPoint, BiPointFace, BiPointIndices, BiPointMask, BiPointPoints, BiPointRegularity,
+};
 pub use edge_iterator::EdgeIterator;
 pub use edge_status::EdgeStatus;
-pub use edges_block::EdgesBlock;
+pub use edges_block::{EdgesBlock, EdgesBlockMask};
 pub use interference::{Coincidence, Interference, Intersection};
 pub use min_max::{
     MinMaxIndices, add_min_max, copy_min_max, decode_min_max, encode_min_max, enlarge_min_max,

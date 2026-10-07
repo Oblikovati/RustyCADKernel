@@ -115,12 +115,12 @@ fn PLibTest__HermiteInterpolate() {
 
     // Define constraints: f(0) = 0, f'(0) = 1, f(1) = 1, f'(1) = 0
     let mut aFirstConstr: Array2<f64> = Array2::with_bounds(1, aDimension, 0, aFirstOrder).unwrap();
-    aFirstConstr[(1, 0)] = 0.0; // f(0) = 0
-    aFirstConstr[(1, 1)] = 1.0; // f'(0) = 1
+    aFirstConstr.set_value(1, 0, 0.0).unwrap(); // f(0) = 0
+    aFirstConstr.set_value(1, 1, 1.0).unwrap(); // f'(0) = 1
 
     let mut aLastConstr: Array2<f64> = Array2::with_bounds(1, aDimension, 0, aLastOrder).unwrap();
-    aLastConstr[(1, 0)] = 1.0; // f(1) = 1
-    aLastConstr[(1, 1)] = 0.0; // f'(1) = 0
+    aLastConstr.set_value(1, 0, 1.0).unwrap(); // f(1) = 1
+    aLastConstr.set_value(1, 1, 0.0).unwrap(); // f'(1) = 0
 
     let aCoeffCount: i32 = aFirstOrder + aLastOrder + 2;
 

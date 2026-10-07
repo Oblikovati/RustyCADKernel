@@ -128,7 +128,7 @@ fn PLibJacobiPolynomialTest__GaussIntegrationWeights() {
     for i in aWeights.lower_row()..=aWeights.upper_row() {
         for j in aWeights.lower_col()..=aWeights.upper_col() {
             assert!(
-                !precision::is_infinite(aWeights[(i, j)]),
+                !precision::is_infinite(*aWeights.value(i, j).unwrap()),
                 "Weight should be finite at ({i},{j})"
             );
         }

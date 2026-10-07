@@ -2,40 +2,6 @@
 use super::fixture::*;
 use rustycad_tkernel::ncollection::{BaseAllocator, BoundingNode, BoundingVolume, UBTree};
 #[test]
-fn failed_native_assignment_does_not_invoke_abandoned_child_destructors() {
-    let (mut tree, allocator) = populated(false);
-    let repair =
-        crate::failed_pair_repair::PairRepair::<BoundingNode<Payload<'O'>, Payload<'B'>>>::capture(
-            &allocator,
-        );
-    let inputs = (Payload(99), Payload(3), Payload(30));
-    start(&allocator, ('A', 'B', 1));
-    arm_cleanup_failure();
-    let failure = rejected_assignment(&mut tree, &inputs);
-    let events = finish();
-    assert_assignment_failure(failure);
-    assert_eq!(events, "NB0:2,NO0:2,NB0:2,NO0:2,AB10:2,");
-    assert!(tree.root().unwrap().is_leaf());
-    assert_eq!(allocations(&allocator), 2);
-    // SAFETY: AB1 leaves both actual children initialized; finish disabled callback rejection.
-    unsafe { repair.reclaim(2) };
-    tree.clear();
-    assert_eq!(allocations(&allocator), 0);
-}
-fn assert_assignment_failure(failure: Box<dyn std::any::Any + Send>) {
-    let message = failure.downcast_ref::<String>().unwrap();
-    assert!(message.contains("phase A"));
-}
-fn rejected_assignment(
-    tree: &mut Tree,
-    inputs: &(Payload<'B'>, Payload<'O'>, Payload<'B'>),
-) -> Box<dyn std::any::Any + Send> {
-    std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-        tree.gemmate_ref(0, &inputs.0, &inputs.1, &inputs.2);
-    }))
-    .unwrap_err()
-}
-#[test]
 fn implicit_destructor_failure_drains_every_payload_and_block() {
     let (mut tree, allocator) = populated(true);
     tree.gemmate_ref(0, &Payload(99), &Payload(3), &Payload(30));

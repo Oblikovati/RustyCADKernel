@@ -1,6 +1,7 @@
 //! Row-major arrays with independently bounded rows and columns.
 use super::array1::checked_array_extent as extent;
 use super::{Array1, ArrayError};
+use crate::standard::Failure;
 
 mod assignment_policy;
 mod buffer_constructors;
@@ -316,19 +317,17 @@ fn bounded_offset(index: i32, lower: i32, size: usize) -> Result<usize, ArrayErr
     })
 }
 
-impl<T> std::ops::Index<(i32, i32)> for Array2<'_, T> {
-    type Output = T;
-    fn index(&self, (row, col): (i32, i32)) -> &T {
-        self.value(row, col)
-            .unwrap_or_else(|error| panic!("{error}"))
-    }
+// No `Index<(i32, i32)>`/`IndexMut` impls: an operator cannot return the
+// Standard_OutOfRange that `NCollection_Array2::Value` raises, and a panic on a caller's
+// index is not a failure channel (docs/tkernel-rust-refactoring-plan.md, D3). Callers use
+// `value`, `change_value` and `set_value` and map the error with [`array2_failure`].
+
+/// The native `Standard_OutOfRange` (or bounds/shape failure) for an `Array2` error, so
+/// callers propagate it with `?`; `grid.value(1, 1).map_err(array2_failure)?`.
+pub fn array2_failure(error: ArrayError) -> Failure {
+    error.into_failure("NCollection_Array2")
 }
-impl<T> std::ops::IndexMut<(i32, i32)> for Array2<'_, T> {
-    fn index_mut(&mut self, (row, col): (i32, i32)) -> &mut T {
-        self.change_value(row, col)
-            .unwrap_or_else(|error| panic!("{error}"))
-    }
-}
+
 impl<'b, T> IntoIterator for &'b Array2<'_, T> {
     type Item = &'b T;
     type IntoIter = std::slice::Iter<'b, T>;

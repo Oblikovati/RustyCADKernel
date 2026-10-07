@@ -75,7 +75,13 @@ fn c0_surface_poles() -> Array2<'static, Point3> {
     for u in 1_i32..=5 {
         for v in 1_i32..=5 {
             let z = (u.saturating_sub(3).max(0) + v.saturating_sub(3).max(0)) as f64;
-            poles[(u, v)] = Point3::new((u - 1) as f64 / 4., (v - 1) as f64 / 4., z);
+            poles
+                .set_value(
+                    u,
+                    v,
+                    Point3::new((u - 1) as f64 / 4., (v - 1) as f64 / 4., z),
+                )
+                .unwrap();
         }
     }
     poles

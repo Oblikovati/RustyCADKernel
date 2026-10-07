@@ -7,6 +7,7 @@ mod geometry;
 mod grid;
 mod init;
 mod load_wires;
+mod patch_faces;
 mod perform;
 mod split_by_grid;
 mod split_by_line;

@@ -241,7 +241,7 @@ def modif_requests(s: ModificationScene) -> list[str]:
 
 def ops_count(ops: list[int]) -> list[int]:
     """The ops of an op list (each op code with its operand count), to count them."""
-    widths = {0: 1, 1: 1, 2: 1, 3: 4, 4: 2, 5: 3, 6: 1, 7: 0, 8: 0, 9: 3, 10: 0}
+    widths = {0: 1, 1: 1, 2: 1, 3: 4, 4: 2, 5: 3, 6: 1, 7: 0, 8: 0, 9: 3, 10: 0, 11: 0, 12: 2, 13: 1}
     codes, k = [], 0
     while k < len(ops):
         codes.append(ops[k])
@@ -256,6 +256,122 @@ def message_requests(s: ModificationScene) -> list[str]:
     return [request('sc_modif', s.tokens(), kind, reg, 6, *ops) for kind in (1, 2) for reg in (0, 1)]
 
 
+def spline_scene() -> ModificationScene:
+    """Faces on extrusions, revolutions, offsets of them, a plane and trimmed wrappers."""
+    from tktopalgo_corpus_breplib_records import geom_bezier, geom_bspline, geom_gp
+    pre = Prelude()
+    circle = geom_gp(1, radius=2.)
+    spline = geom_bspline(3, False, [(0., 0., 0.), (1., 2., 0.5), (3., 0., 1.), (4., 1., 0.)],
+                          [(0., 4), (1., 4)])
+    line = geom_gp(0, p=(1., 0., 0.), d=(0.2, 0., 1.))
+    meridian = geom_bezier([(1., 0., 0.), (2., 0., 1.), (1.5, 0., 2.)])
+    s_: dict[str, int] = {}
+    s_['plane'] = pre.elementary(PLANE, O, Z, X, False)
+    s_['ext_circle'] = pre.extrusion(circle, Z)
+    s_['ext_spline'] = pre.extrusion(spline, (0., 0.6, 0.8))
+    s_['rev_line'] = pre.revolution(line, O, Z)
+    s_['rev_bezier'] = pre.revolution(meridian, O, Z)
+    s_['off_ext'] = pre.offset(s_['ext_circle'], 0.3)
+    s_['off_plane'] = pre.offset(s_['plane'], 0.5)
+    s_['trim_rev'] = pre.trimmed(s_['rev_bezier'], 0., 3., 0., 1.)
+    s_['trim_ext'] = pre.trimmed(s_['ext_spline'], 0., 1., -1., 2.)
+    s_['cyl'] = pre.elementary(CYLINDER, (0.5, -1., 0.), Z, X, False, 1.5)
+    s_['rev_torus'] = pre.revolution(geom_gp(1, p=(3., 0., 0.), n=(0., 1., 0.), radius=1.), O, Z)
+    s_['rev_sphere'] = pre.revolution(geom_gp(1, p=(0., 0., 0.), n=(0., 1., 0.), radius=2.), O, Z)
+    s_['rev_cyl'] = pre.revolution(geom_gp(0, p=(1.5, 0., 0.), d=(0., 0., 1.)), O, Z)
+    s_['ext_line'] = pre.extrusion(geom_gp(0, p=(0., 1., 0.), d=(1., 0., 0.)), Z)
+    s_['tor'] = pre.elementary(TORUS, O, Z, X, False, 3., 1.)
+    s_['sph'] = pre.elementary(SPHERE, O, Z, X, False, 2.)
+    scene = ModificationScene(pre, pre.program())
+    for name, surface in s_.items():
+        bounded_face(scene, name, surface)
+    scene.compound = scene.program.container(COMPOUND)
+    for face in scene.faces.values():
+        scene.program.add(scene.compound, face)
+    scene.other_edge = scene.edges['plane'][0]
+    return scene
+
+
+SPLINE_MODES = [(1, 1, 1, 0), (1, 1, 1, 1), (0, 0, 0, 0), (1, 1, 0, 1), (0, 1, 0, 0)]
+
+
+def convert_to_bspline_requests(s: ModificationScene) -> list[str]:
+    """ShapeCustom_ConvertToBSpline under several mode sets, on every face."""
+    out = []
+    for modes in SPLINE_MODES:
+        for name in s.faces:
+            ops = face_ops(s, name)
+            out.append(request('sc_modif', s.tokens(), 3, *modes, 1, len(ops_count(ops)), *ops))
+        out.append(request('sc_modif', s.tokens(), 3, *modes, 1, 4, 6, s.compound, 7, 8, 10))
+    return out
+
+
+def swept_to_elementary_requests(s: ModificationScene) -> list[str]:
+    """ShapeCustom_SweptToElementary on every face, with the p-curves of the swept faces
+    also moved onto the torus and sphere faces (the native shifts). The elementary torus and
+    sphere faces themselves are left out: NewCurve2d of a copied edge on a non-swept face
+    whose new face is a torus or a sphere dereferences a null swept surface natively
+    (SIGSEGV; the Rust port raises Standard_NullObject, covered by a unit test)."""
+    out = []
+    for name in (n for n in s.faces if n not in ('tor', 'sph')):
+        ops = face_ops(s, name)
+        if name.startswith(('rev_', 'ext_')):
+            e = s.edges[name][0]
+            ops += [3, e, s.faces[name], s.other_edge, s.faces['tor'],
+                    3, e, s.faces[name], s.other_edge, s.faces['sph']]
+        out.append(request('sc_modif', s.tokens(), 4, 1, len(ops_count(ops)), *ops))
+    out.append(request('sc_modif', s.tokens(), 4, 1, 4, 6, s.compound, 7, 8, 10))
+    return out
+
+
+C0, C1, C2, C3 = 0, 2, 4, 5
+RESTRICTIONS: list[list[float | int]] = [
+    [5, 1, 1, 1, 0.01, 1e-6, C1, C2, 9, 10000, 1, 0, 0],
+    [5, 1, 1, 1, 0.01, 1e-6, C1, C2, 9, 10000, 1, 0, 6, 2, 1, 4, 1, 5, 1, 6, 1, 12, 1, 14, 1],
+    [5, 1, 1, 1, 1e-3, 1e-6, C2, C1, 2, 4, 0, 1, 9, 3, 1, 7, 1, 8, 1, 9, 1, 10, 1, 11, 1, 13, 1, 15, 1, 0, 6],
+    [5, 0, 1, 1, 1e-3, 1e-5, C0, C0, 3, 2, 1, 0, 3, 12, 1, 14, 1, 1, 8],
+    [5, 1, 0, 0, 0.1, 1e-4, C3, C2, 1, 1, 1, 1, 2, 2, 1, 3, 1],
+]
+
+
+def bspline_restriction_requests(s: ModificationScene) -> list[str]:
+    """ShapeCustom_BSplineRestriction under several settings and modes on every face, then
+    the modifier on the compound and the error queries."""
+    out = []
+    for restriction in RESTRICTIONS:
+        for name in s.faces:
+            ops = face_ops(s, name) + [11]
+            out.append(request('sc_modif', s.tokens(), *restriction, 1, len(ops_count(ops)), *ops))
+        out.append(request('sc_modif', s.tokens(), *restriction, 1, 5, 6, s.compound, 7, 8, 11, 10))
+    return out
+
+
+def package_requests() -> list[str]:
+    """The ShapeCustom package functions and ApplyModifier with a reshape on single faces,
+    on the scene compound and on an assembly sharing one face three times (twice located,
+    once in a nested compound)."""
+    scene = spline_scene()
+    p = scene.program
+    turned = scene.prelude.location(rotation(O, (0., 0., 1.), 0.5))
+    shared = scene.faces['ext_circle']
+    nested = p.container(COMPOUND)
+    p.add(nested, shared)
+    assembly = p.container(COMPOUND)
+    for child in (shared, p.located(shared, turned), nested, scene.faces['plane']):
+        p.add(assembly, child)
+    targets = [scene.faces[name] for name in ('plane', 'ext_circle', 'rev_cyl', 'cyl', 'rev_bezier')]
+    targets += [scene.compound, assembly]
+    out = []
+    for target in targets:
+        ops: list[int] = []
+        for k in range(7):
+            ops += [12, k, target]
+        out.append(request('sc_modif', scene.tokens(), 1, 0, len(ops_count(ops)), *ops))
+        for modification in ([1], [3, 1, 1, 1, 1], [4]):
+            out.append(request('sc_modif', scene.tokens(), *modification, 0, 1, 13, target))
+    return out
+
+
 def append_shapecustom_requests(requests: list[str]) -> None:
     """Append every ShapeCustom request family in a fixed order."""
     requests += is_linear_requests()
@@ -265,3 +381,8 @@ def append_shapecustom_requests(requests: list[str]) -> None:
     scene = modification_scene()
     requests += modif_requests(scene)
     requests += message_requests(scene)
+    swept = spline_scene()
+    requests += convert_to_bspline_requests(swept)
+    requests += swept_to_elementary_requests(swept)
+    requests += bspline_restriction_requests(swept)
+    requests += package_requests()

@@ -21,7 +21,7 @@ fn append_surface_state(output: &mut String, evaluator: &GeomGridEvalSurface<'_>
     )
     .unwrap();
     if !points.is_empty() {
-        let point = points[(1, 1)];
+        let point = *points.value(1, 1).unwrap();
         write!(output, " {} {} {}", point.x(), point.y(), point.z()).unwrap();
     }
     output.push('\n');

@@ -92,7 +92,7 @@ fn reorder_wire(wire: &Wire, face: &Face) -> Result<Wire, Failure> {
     )?);
     let fixer = ShapeFixWire::new();
     fixer.init(&analyzer);
-    fixer.fix_reorder()?;
+    fixer.fix_reorder(false)?;
     fixer.wire()
 }
 

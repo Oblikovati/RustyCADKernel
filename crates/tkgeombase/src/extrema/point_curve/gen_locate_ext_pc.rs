@@ -4,16 +4,16 @@
 //! found by math_FunctionRoot.
 use super::curve_reference::CurveReference;
 use super::func_ext_pc::GFuncExtPC;
-use crate::extrema::curve_tool::ExtremaCurveTool;
+use crate::extrema::curve_tool::ExtremaCurveAccess;
 use crate::extrema::failures::not_done;
 use crate::extrema::pon::POnCurve;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::math::FunctionRoot;
 
-/// `Extrema_GenLocateExtPC` over one [`ExtremaCurveTool`] (the aliases
+/// `Extrema_GenLocateExtPC` over one [`ExtremaCurveAccess`] (the aliases
 /// `Extrema_LocEPCOfLocateExtPC` and `Extrema_LocEPCOfLocateExtPC2d`);
 /// `GenLocateExtPC::<CurveTool>::with_range(point, &adaptor, 0.5, (0.0, 1.0), 1e-9)?`.
-pub struct GenLocateExtPC<'a, T: ExtremaCurveTool> {
+pub struct GenLocateExtPC<'a, T: ExtremaCurveAccess> {
     done: bool,
     tol_u: f64,
     umin: f64,
@@ -21,7 +21,7 @@ pub struct GenLocateExtPC<'a, T: ExtremaCurveTool> {
     function: GFuncExtPC<'a, T>,
 }
 
-impl<T: ExtremaCurveTool> Default for GenLocateExtPC<'_, T> {
+impl<T: ExtremaCurveAccess> Default for GenLocateExtPC<'_, T> {
     fn default() -> Self {
         Self {
             done: false,
@@ -33,7 +33,7 @@ impl<T: ExtremaCurveTool> Default for GenLocateExtPC<'_, T> {
     }
 }
 
-impl<'a, T: ExtremaCurveTool> GenLocateExtPC<'a, T> {
+impl<'a, T: ExtremaCurveAccess> GenLocateExtPC<'a, T> {
     /// `Extrema_GenLocateExtPC()`; `GenLocateExtPC::<CurveTool>::new()`.
     pub fn new() -> Self {
         Self::default()

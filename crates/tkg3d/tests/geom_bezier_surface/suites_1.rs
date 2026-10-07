@@ -164,7 +164,7 @@ fn Geom_BezierSurface_Test__PolesAccess() {
     let aPoles = myOriginalSurface.poles();
     assert_eq!(aPoles.nb_rows(), 3);
     assert_eq!(aPoles.nb_columns(), 3);
-    assert!(aPoles[(1, 1)].is_equal(&pnt(1.0, 1.0, 0.2), 1e-10));
+    assert!((*aPoles.value(1, 1).unwrap()).is_equal(&pnt(1.0, 1.0, 0.2), 1e-10));
 }
 
 #[test]

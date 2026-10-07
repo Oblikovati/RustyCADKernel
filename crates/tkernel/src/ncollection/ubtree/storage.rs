@@ -66,12 +66,6 @@ impl<N> TreeArena<N> {
     ) -> TreePairAllocation<N> {
         TreePairAllocation::new_with(allocator, construct)
     }
-    pub(super) fn allocate_native_pair(
-        allocator: &BaseAllocator,
-        construct: impl FnMut(usize) -> N,
-    ) -> TreePairAllocation<N> {
-        TreePairAllocation::new_native_with(allocator, construct)
-    }
     pub(super) fn child_pairs(&self, children: [usize; 2]) -> Vec<usize> {
         let mut pairs = Vec::new();
         self.record_child_pairs(children, &mut pairs);

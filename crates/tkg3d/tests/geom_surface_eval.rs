@@ -129,11 +129,17 @@ fn Geom_SurfaceEvalTest__BSplineSurface_EvalD2_ConsistentWithOldAPI() {
     let mut aPoles = Array2::<Point3>::with_bounds(1, 3, 1, 3).unwrap();
     for i in 1..=3 {
         for j in 1..=3 {
-            aPoles[(i, j)] = Point3::new(
-                f64::from(i - 1),
-                f64::from(j - 1),
-                0.1 * f64::from((i - 2) * (j - 2)),
-            );
+            aPoles
+                .set_value(
+                    i,
+                    j,
+                    Point3::new(
+                        f64::from(i - 1),
+                        f64::from(j - 1),
+                        0.1 * f64::from((i - 2) * (j - 2)),
+                    ),
+                )
+                .unwrap();
         }
     }
 
@@ -229,15 +235,15 @@ fn Geom_SurfaceEvalTest__CylindricalSurface_EvalD1_ValidResults() {
 fn Geom_SurfaceEvalTest__BezierSurface_EvalD2_ConsistentWithOldAPI() {
     // Create a simple 3x3 Bezier surface with some curvature
     let mut aPoles = Array2::<Point3>::with_bounds(1, 3, 1, 3).unwrap();
-    aPoles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    aPoles[(1, 2)] = Point3::new(0.0, 1.0, 0.0);
-    aPoles[(1, 3)] = Point3::new(0.0, 2.0, 0.0);
-    aPoles[(2, 1)] = Point3::new(1.0, 0.0, 0.5);
-    aPoles[(2, 2)] = Point3::new(1.0, 1.0, 1.0);
-    aPoles[(2, 3)] = Point3::new(1.0, 2.0, 0.5);
-    aPoles[(3, 1)] = Point3::new(2.0, 0.0, 0.0);
-    aPoles[(3, 2)] = Point3::new(2.0, 1.0, 0.0);
-    aPoles[(3, 3)] = Point3::new(2.0, 2.0, 0.0);
+    aPoles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    aPoles.set_value(1, 2, Point3::new(0.0, 1.0, 0.0)).unwrap();
+    aPoles.set_value(1, 3, Point3::new(0.0, 2.0, 0.0)).unwrap();
+    aPoles.set_value(2, 1, Point3::new(1.0, 0.0, 0.5)).unwrap();
+    aPoles.set_value(2, 2, Point3::new(1.0, 1.0, 1.0)).unwrap();
+    aPoles.set_value(2, 3, Point3::new(1.0, 2.0, 0.5)).unwrap();
+    aPoles.set_value(3, 1, Point3::new(2.0, 0.0, 0.0)).unwrap();
+    aPoles.set_value(3, 2, Point3::new(2.0, 1.0, 0.0)).unwrap();
+    aPoles.set_value(3, 3, Point3::new(2.0, 2.0, 0.0)).unwrap();
 
     let aSurf = Handle::new(GeomBezierSurface::new(&aPoles).unwrap());
 

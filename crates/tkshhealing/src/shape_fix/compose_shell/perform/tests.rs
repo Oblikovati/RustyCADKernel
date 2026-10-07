@@ -2,6 +2,7 @@ use super::*;
 use crate::shape_build::ShapeBuildReShape;
 use crate::shape_extend::{ShapeExtendCompositeSurface, ShapeExtendParametrisation};
 use crate::shape_fix::FixRoot;
+use rustycad_tkbrep::topods::Face;
 use rustycad_tkernel::ncollection::HArray2;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::geom::{GeomPlane, GeomSurface};

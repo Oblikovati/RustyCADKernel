@@ -1,7 +1,8 @@
 //! `OSD_ThreadPool`: `NbThreads() - 1` lazily started worker threads; the thread that
 //! runs a launcher is always the last participant.
 use super::{Parallel, job::standard_program_error, worker::Worker};
-use crate::standard::Failure;
+use crate::impl_transient;
+use crate::standard::{Failure, StandardTransient};
 use std::sync::{
     Arc, Mutex, MutexGuard, OnceLock,
     atomic::{AtomicI32, Ordering},
@@ -9,9 +10,13 @@ use std::sync::{
 
 /// `OSD_ThreadPool`; `ThreadPool::new(4).nb_threads() == 4`.
 pub struct ThreadPool {
+    // Standard_Transient base: the native pool is shared by handle.
+    parent: StandardTransient,
     workers: Mutex<Vec<Arc<Worker>>>,
     nb_default_threads: AtomicI32,
 }
+
+impl_transient!(ThreadPool, "OSD_ThreadPool", StandardTransient, parent);
 
 impl ThreadPool {
     /// `DefaultPool`: the process-wide pool, sized by the first call only (a static
@@ -24,6 +29,7 @@ impl ThreadPool {
     /// launched by default; `ThreadPool::new(2)`.
     pub fn new(nb_threads: i32) -> Self {
         let pool: Self = Self {
+            parent: StandardTransient::default(),
             workers: Mutex::new(Vec::new()),
             nb_default_threads: AtomicI32::new(0),
         };

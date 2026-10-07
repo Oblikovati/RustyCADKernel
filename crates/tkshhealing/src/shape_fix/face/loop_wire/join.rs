@@ -107,6 +107,6 @@ fn merge_paths(first: &Wire, second: &Wire) -> Result<Wire, Failure> {
     combined.add_wire(second, 0)?;
     let fixer = super::ShapeFixWire::new();
     fixer.load_wire_data(&rustycad_tkernel::standard::Handle::new(combined))?;
-    fixer.fix_reorder()?;
+    fixer.fix_reorder(false)?;
     fixer.wire()
 }

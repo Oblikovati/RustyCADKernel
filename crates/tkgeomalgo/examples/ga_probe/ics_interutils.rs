@@ -67,7 +67,7 @@ fn sampling(r: &mut Reader, s: &Adaptor3dSurfaceHandle) -> Result<(), Failure> {
     real(gap);
     box3d_print(&bnd);
     for (i, j) in [(1, 1), (1, 50), (25, 25), (13, 37), (50, 1), (50, 50)] {
-        pnt(pts[(i, j)]);
+        pnt(*pts.value(i, j).unwrap());
     }
     let [x, y, z] = &xyz_bounds;
     iu::do_new_bounds::<S>(s, [u0, u1, v0, v1], &pts, [x, y, z])?

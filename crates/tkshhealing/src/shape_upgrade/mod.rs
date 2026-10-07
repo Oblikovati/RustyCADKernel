@@ -19,7 +19,9 @@ pub use package::{BoundedCurve2dSequence, BoundedCurveSequence, ShapeUpgrade};
 pub use remove_locations::{ShapeReplacements, ShapeUpgradeRemoveLocations};
 pub use split_curve::{ShapeUpgradeSplitCurve, SplitCurve, SplitCurveData, SplitCurveFields};
 pub use tool::ShapeUpgradeTool;
-pub use unify_same_domain::ShapeUpgradeUnifySameDomain;
+pub use unify_same_domain::{
+    DataMapOfFacePlane, DataMapOfShapeMapOfShape, ShapeUpgradeUnifySameDomain,
+};
 
 mod shell_sewing;
 pub use shell_sewing::ShapeUpgradeShellSewing;

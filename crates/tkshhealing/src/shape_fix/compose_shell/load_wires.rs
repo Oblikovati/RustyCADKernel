@@ -139,7 +139,7 @@ fn append_manifold_wire(
     {
         orient = reorder_periodic_wire(&fixer, face)?;
     }
-    fixer.fix_reorder()?;
+    fixer.fix_reorder(false)?;
     if fixer.status_reorder(crate::shape_extend::ShapeExtendStatus::Done3) {
         orient = -1;
     }

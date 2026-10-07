@@ -1,23 +1,6 @@
 //! Public mutable nodes can copy links or detach descendants; ownership still belongs to the arena.
-use super::fixture::{Trace, caught, populated};
-use rustycad_tkernel::ncollection::{BaseAllocator, BoundingNode};
-#[test]
-fn clear_drains_detached_descendants_even_if_an_orphan_destructor_panics() {
-    let trace = Trace::default();
-    let allocator = BaseAllocator::incremental(1024);
-    let mut tree = populated(&trace, allocator.clone());
-    let quiet = Trace::default();
-    *tree.change_node_by_id(0).unwrap() = BoundingNode::new(quiet.item(77), quiet.item(77));
-    trace.clear();
-    trace.reject('D', 'O');
-    assert!(caught(|| tree.clear()));
-    assert_eq!(
-        trace.events(),
-        "DO0,DB30,DO0,DB40,DO1,DB1,DO3,DB3,DO2,DB2,DO4,DB4,"
-    );
-    assert!(tree.is_empty());
-    allocator.reset(true).unwrap();
-}
+use super::fixture::{Trace, populated};
+use rustycad_tkernel::ncollection::BaseAllocator;
 #[test]
 fn clear_terminates_after_public_link_copy_creates_cycle_and_duplicate_edges() {
     let trace = Trace::default();

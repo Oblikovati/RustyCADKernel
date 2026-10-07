@@ -123,6 +123,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "rustycad-tkcdf"
+version = "0.1.0"
+dependencies = [
+ "rustycad-tkernel",
+]
+
+[[package]]
 name = "rustycad-tkernel"
 version = "0.1.0"
 dependencies = [
@@ -224,7 +231,16 @@ dependencies = [
  "rustycad-tkgeomalgo",
  "rustycad-tkgeombase",
  "rustycad-tkmath",
+ "rustycad-tkprim",
  "rustycad-tktopalgo",
+]
+
+[[package]]
+name = "rustycad-tklcaf"
+version = "0.1.0"
+dependencies = [
+ "rustycad-tkcdf",
+ "rustycad-tkernel",
 ]
 
 [[package]]

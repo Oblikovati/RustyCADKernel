@@ -54,7 +54,7 @@ fn spline(r: &mut Reader, kind: i32) -> Result<Handle<dyn GeomSurface>, Failure>
     let mut poles: Array2<'static, Point3> = Array2::with_bounds(1, nu, 1, nv).expect("probe grid");
     for i in 1..=nu {
         for j in 1..=nv {
-            poles[(i, j)] = r.pnt();
+            poles.set_value(i, j, r.pnt()).unwrap();
         }
     }
     if kind == 5 {

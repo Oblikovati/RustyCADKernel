@@ -1,8 +1,7 @@
 //! Native removal publishes each metadata phase before calling user destruction.
 use super::{BaseAllocator, BaseMap, IndexedNode, IndexedStorage, MapLinkNode};
 use crate::ncollection::{
-    BaseIndexedMapStorage, destructor_unwind::DeferredDestructorPanic,
-    node_release::release_typed_node,
+    BaseIndexedMapStorage, native_noexcept::terminate_on_unwind, node_release::release_typed_node,
 };
 impl<N: IndexedNode> IndexedStorage<N> {
     pub(in crate::ncollection) fn unlink(&mut self, bucket: usize, target: *mut MapLinkNode) {
@@ -69,18 +68,15 @@ impl<N: IndexedNode> IndexedStorage<N> {
     }
     pub(in crate::ncollection) fn destroy_last(&mut self, bucket: usize, node: *mut MapLinkNode) {
         self.unlink(bucket, node);
-        let mut panics = DeferredDestructorPanic::default();
-        panics.capture(|| unsafe { release_typed_node(node.cast::<N>(), self.allocator()) });
+        self.release_node(node);
         self.topology.edit(|base| {
             base.base_mut().decrement();
         });
-        panics.finish(Ok(()));
     }
     pub(in crate::ncollection) fn clear(&mut self, release: bool) {
-        let mut panics = DeferredDestructorPanic::default();
         if self.len() != 0 {
             for bucket in 0..=self.bucket_count() {
-                self.destroy_chain(self.head(bucket), &mut panics);
+                self.destroy_chain(self.head(bucket));
                 self.topology
                     .edit(|base| base.base_mut().bucket_slots_mut()[bucket] = std::ptr::null_mut());
             }
@@ -89,14 +85,17 @@ impl<N: IndexedNode> IndexedStorage<N> {
             base.base_mut().finish_destroy(release);
             base.clear_index_table(release);
         });
-        panics.finish(Ok(()));
     }
-    fn destroy_chain(&self, mut node: *mut MapLinkNode, panics: &mut DeferredDestructorPanic) {
+    fn destroy_chain(&self, mut node: *mut MapLinkNode) {
         while !node.is_null() {
             let next = unsafe { (*node).next() };
-            panics.capture(|| unsafe { release_typed_node(node.cast::<N>(), self.allocator()) });
+            self.release_node(node);
             node = next;
         }
+    }
+    fn release_node(&self, node: *mut MapLinkNode) {
+        // Native node destructors are noexcept; the links above still name this node.
+        terminate_on_unwind(|| unsafe { release_typed_node(node.cast::<N>(), self.allocator()) });
     }
     pub(in crate::ncollection) fn clear_with_allocator(
         &mut self,

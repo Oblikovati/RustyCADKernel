@@ -187,14 +187,90 @@ the trait `ShapeCustomModification: BRepToolsModification`; the three modificati
 `ShapeCustomDirectModification` and `ShapeCustomConvertToRevolution`, applied with
 TKBRep's `Modifier`. `crates/tkshhealing/tests/shape_custom_*.rs` hold the behavior tests.
 
-Not ported yet, because they use classes of the parallel ShapeAnalysis/ShapeConstruct work
-that are not in this branch: ShapeCustom_BSplineRestriction (ShapeAnalysis,
-ShapeAnalysis_Curve, ShapeConstruct), ShapeCustom_ConvertToBSpline (ShapeConstruct),
-ShapeCustom_Surface (ShapeAnalysis_Geom, ShapeAnalysis_Surface),
-ShapeCustom_SweptToElementary (ShapeAnalysis_Surface) and the package functions of
-ShapeCustom.hxx (they use the four classes). The api audit of ShapeCustom is 0 stale with
-48 rows (6 of them the excluded RTTI macros); the 64 missing members belong to those
-classes.
+Ported in October 2026 (wave 3): ShapeCustom_ConvertToBSpline, ShapeCustom_SweptToElementary,
+ShapeCustom_Surface, ShapeCustom_BSplineRestriction and the package functions of
+ShapeCustom.hxx (`ShapeCustom`, with `ApplyModifier`). They are compared with OCCT by the
+`sc_modif` kinds 3 to 5 and ops 11 to 13 and by `sc_surface`
+(tools/tkshhealing_corpus_shapecustom.py, tools/tkshhealing_corpus_construct_package.py).
+Native quirks kept and documented in the code: SweptToElementary never converts a wrapped
+swept surface and dereferences a null swept surface in NewCurve2d (a SIGSEGV natively, a
+Standard_NullObject failure in Rust, left out of the corpus); BSplineRestriction approximates
+3D conics with the 2D continuity; ShapeCustom_Surface keeps the swapped bounds of the V-iso
+torus pass and substitutes a rejected (null) candidate. The ShapeConstruct package functions
+(ConvertCurveToBSpline, ConvertSurfaceToBSpline, JoinPCurves) are compared by the
+`sh_construct_pkg` requests.
+
+## ShapeProcess and ShapeProcessAPI
+
+Ported in October 2026 (wave 3): ShapeProcess_Context (`ShapeProcessContext`, the
+resource manager shared as `Arc<SharedState<ResourceManager>>` with the process-wide
+LoadResourceManager cache), ShapeProcess_Operator/UOperator/OperFunc (the trait
+`ShapeProcessOperator`, `ShapeProcessUOperator`, `ShapeProcessOperFunc`),
+ShapeProcess_ShapeContext (`ShapeProcessShapeContext`, which derefs to the context),
+ShapeProcess (the process-wide operator registry, `perform_sequence` and
+`perform_operations`), ShapeProcess_OperLibrary (the 18 operators) and
+ShapeProcessAPI_ApplySequence. They are compared with OCCT by the `sp_context`,
+`sp_process` and `sp_apply` requests (tools/tkshhealing_corpus_shape_process.py). Native
+quirks kept: GetReal/GetInteger raise Standard_OutOfRange on a blank value. Known limits,
+kept out of the corpus: natively FixFaceSize or FixShape after ToBezier crash on the
+converted plane face; ToBezier with SurfaceMode on extrusion faces diverges in
+ShapeUpgrade_ShapeConvertToBezier (whose Perform row is partial).
+
+## ShapeFix_Face evidence (wave 3)
+
+The `sh_fix_face` requests (tools/tkshhealing_corpus_fix_face.py) compare Perform (also
+with the wire, loop, split and intersecting-wire modes off) and each public Fix method
+with OCCT on planar faces with holes, crossing and coincident wires, a wire through one
+vertex twice and whole and partial cylinder, cone, sphere and torus faces. They exposed
+two faithfulness bugs, now fixed: the second wire pass of Perform skipped FixLoopWire and
+the removed-segment check when ShapeFix_Wire::Perform returned false, and the first pass
+reset its `fixed` flag for wires that were neither performed nor dropped.
+
+## Shape-level ShapeFix evidence (wave 3)
+
+The `sh_fix_shape` requests (tools/tkshhealing_corpus_fix_shape.py) compare
+ShapeFix_Shape::Perform, ShapeFix::SameParameter, FixVertexPosition, RemoveSmallEdges,
+ShapeFix_Wireframe (FixWireGaps then FixSmallEdges, also in drop mode and with a limit
+angle, with both statuses), ShapeFix_FixSmallFace, ShapeFix_FixSmallSolid and
+ShapeFix_Shell / ShapeFix_Solid with OCCT, on the `sh_unify` and `sh_fix_face` inputs,
+primitive solids and faces and free wires with small edges. They exposed a restructured
+ShapeFix_Wireframe::MergeSmallEdges that was not faithful (a two-edge wire was never
+merged, the angle limit always took the smaller angle, the circle protection, FAIL1 and
+the unconditional FixConnected of each wire were missing, and exceptions of JoinEdges
+were not caught). MergeSmallEdges and the static JoinEdges are now ported line by line
+(crates/tkshhealing/src/shape_fix/wireframe/merge_small and join_edges.rs). Native
+quirks kept: the free-wire block compares the faces of a small edge with the whole shape
+(the exhausted face explorer returns it); without a shared face set, `take_next` keeps
+its initial value (the previous edge is the same as the next one) and the drop branches
+then remove the previous edge from the context while the middle edge leaves the wire;
+FixConnected at the end of each wire uses the default maximal tolerance of the internal
+ShapeFix_Wire. Where the native drop branch would loop forever (a neighbour renamed to
+itself in a small-edge list), the Rust port returns a Standard_ProgramError failure.
+
+Small faces (a lone or sewn spot face, a strip between two squares, thin and needle
+boxes) also run ShapeFix_FixSmallFace (op 6), one ShapeAnalysis_CheckSmallFace over all
+faces (op 13: CheckSpotFace, then CheckStripFace with the strip edges), and the strip
+replacement alone (ops 14 and 15: ReplaceInCaseOfStrip, RemoveFacesInCaseOfStrip, then
+FixShape). They exposed three faithfulness bugs, now fixed: `Shape()` returned the shape
+before FixShape (native `myShape = FixShape()`), FixShape kept `ShapeFix_Face::Result()`
+instead of `Face()`, and ComputeSharedEdgeForStripFace did not replace the far vertices
+by the near shared vertex when an edge is closed, kept INTERNAL/EXTERNAL vertex
+orientations instead of mapping them to REVERSED, and skipped the computed p-curve of an
+edge on a plane. FixSplitFace and SplitOneFace stay partial: the native public path reads
+the uninitialized `myPrecision`.
+
+## ShapeAlgo
+
+Ported in October 2026 (wave 3): ShapeAlgo_ToolContainer, ShapeAlgo_AlgoContainer
+(ConnectNextWire, both ApproxBSplineCurve overloads through GeomInt_WLApprox, HomoWires
+and the members that delegate to ShapeUpgrade, ShapeConstruct, ShapeCustom_Surface and
+ShapeAnalysis) and the package functions (Init, SetAlgoContainer, AlgoContainer with the
+process-wide current container). The native members are virtual, but no OCCT class
+overrides them, so the Rust types are concrete. They are compared with OCCT by the
+`sh_algo_geom` and `sh_algo_shape` requests (tools/tkshhealing_corpus_shape_algo.py).
+Native quirks kept: ApproxBSplineCurve drops the poles after the last coincident pair
+once a piece is cut; HomoWires gives a wire of nearly null range as its first edge
+repeated once per edge of the other wire.
 
 ## ShapeUpgrade
 
@@ -204,6 +280,23 @@ ShapeUpgrade_Tool, ShapeUpgrade_RemoveLocations and ShapeUpgrade_SplitCurve
 `ShapeUpgradeTool` and `ShapeUpgradeRemoveLocations` are Transients, and the curve
 splitter is the trait `SplitCurve` with the struct `ShapeUpgradeSplitCurve`.
 `crates/tkshhealing/tests/shape_upgrade_basics.rs` holds the behavior tests.
+
+ShapeUpgrade_UnifySameDomain was ported again in October 2026 (wave 3), this time as a
+faithful translation of the whole native algorithm (module
+`shape_upgrade/unify_same_domain`): UnifyFaces/IntUnifyFaces (the face groups of the same
+domain, the p-curves moved onto the reference surface, the seams, the periodic B-spline
+conversion with ConcatBSplines, the relocation to a new U or V origin, the wire walk with
+the rebuilt seams, SplitWire, the internal wires and the new faces merged in the
+context), UnifyEdges (MergeEdges, generateSubSeq, MergeSubSeq for lines, circles,
+degenerated edges and B-spline chains, UnionPCurves, GlueEdgesWith3DCurves, the face and
+shell fixes) and FillHistory. It replaces the earlier focused implementation, which only
+handled the paths its tests pinned. The `sh_unify` requests
+(tools/tkshhealing_corpus_unify.py) compare the result digest and the history of every
+input sub-shape with OCCT on sewn planar polygons, sewn pieces of cylinders, cones and
+spheres (faces and shells), wires and a box under ten setting variants. The existing
+unify tests pass unchanged except one premise: the merged edge of the B-spline face
+gets no stored p-curve on its plane natively (the native probe reads it through the
+planar projection of BRep_Tool::CurveOnSurface). The three remaining GTests need TKBO.
 
 Not ported yet, because they use classes of the parallel ShapeAnalysis/ShapeFix work that
 are not in this branch: ShapeUpgrade_ShellSewing (ShapeAnalysis_ShapeTolerance),
@@ -755,13 +848,13 @@ unmapped suites are FaceConnect (16), Face (4), Shape (7), and UnifySameDomain (
 
 All 16 declarations in `ShapeFix_FaceConnect_Test.cxx` are mapped as a unit. The
 filtered gate passes 16 unchanged native OCCT tests and all 16 Rust translations.
-The implementation groups only registered faces, delegates shared-boundary sewing to
-the existing `BRepBuilderAPI_Sewing` port, and retains unrelated shell faces. The test
-cases cover null and duplicate registration, clear/reuse, coincident and tolerance-gap
-boundaries, orientation, chains, independent pairs, and stable rebuilds. `Build` remains
-an API-level partial: its fixing-tolerance argument and the later `ShapeFix_Wire` /
-`ShapeFix_Face` repair phase are not yet ported; the pinned rectangular-face suite needs
-no such repair. TKShHealing now maps 127/143 source declarations. Remaining unmapped
+In October 2026 (wave 3) the class was ported again as a faithful translation of the
+native maps and of collectFreeEdges, sewConnectedFaces and rebuildShell (the edge
+replacement wires, the ShapeFix_Wire reorder and repair with the fixing tolerance, the
+ShapeFix_Face orientation fix and the vertex merge); the 16 translations pass unchanged.
+The `sh_face_connect` requests compare only the cases whose result does not depend on
+the order of the connection map, which natively follows the TShape addresses.
+TKShHealing now maps 127/143 source declarations. Remaining unmapped
 suites are Shape (7) and UnifySameDomain (9).
 
 ### Pending whole-source suite blockers

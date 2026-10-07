@@ -1,17 +1,11 @@
-//! Native copy-constructor failure has no container destructor to reclaim its raw storage.
+//! Copy construction clones every element into an exact-capacity allocation, as natively.
 use super::LinearVector;
 
 impl<T: Clone> LinearVector<T> {
-    pub(super) fn construct_copy(
-        &self,
-        #[cfg(test)] observe_failure: impl FnOnce(&mut Self),
-    ) -> Self {
-        Self::construct_owned(
-            self.len(),
-            |destination| destination.clone_unpublished_from(self, 0),
-            #[cfg(test)]
-            observe_failure,
-        )
+    pub(super) fn construct_copy(&self) -> Self {
+        Self::construct_owned(self.len(), |destination| {
+            destination.clone_unpublished_from(self, 0)
+        })
     }
 
     pub(super) fn clone_unpublished_from(&mut self, source: &Self, beginning: usize) {

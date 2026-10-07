@@ -91,7 +91,7 @@ impl PlatePlate {
         for block in &scalar {
             for irow in 1..=block.col_length() {
                 for icol in 1..=block.row_length() {
-                    sec_member[k] += block.coeff(irow, icol) * block.ppc(icol).value();
+                    sec_member[k] += block.coeff(irow, icol)? * block.ppc(icol).value();
                 }
                 k += 1;
             }
@@ -101,7 +101,7 @@ impl PlatePlate {
             let offset: i32 = (icoor - 1) * sub;
             self.store_xyz_solution(&xyz, &mut solution, |i| sol[offset + i], icoor)?;
         }
-        store_scalar_solution(&scalar, &mut solution, |i| sol[i], layout);
+        store_scalar_solution(&scalar, &mut solution, |i| sol[i], layout)?;
         self.solution = Some(solution);
         Ok(())
     }
@@ -132,8 +132,8 @@ impl PlatePlate {
                     for irow2 in 1..=other.col_length() {
                         for icol in 1..=block.row_length() {
                             for icol2 in 1..=other.row_length() {
-                                mat[(k + irow - 1, k2 + irow2 - 1)] += (block.coeff(irow, icol)
-                                    * other.coeff(irow2, icol2))
+                                mat[(k + irow - 1, k2 + irow2 - 1)] += (block.coeff(irow, icol)?
+                                    * other.coeff(irow2, icol2)?)
                                     * tmp[(icol, icol2)];
                             }
                         }
@@ -162,7 +162,7 @@ impl PlatePlate {
                     add_xyz(
                         mat,
                         (k + irow - 1, j, layout.sub),
-                        block.coeff(irow, icol),
+                        block.coeff(irow, icol)?,
                         vmat[icol],
                     );
                 }
@@ -191,8 +191,8 @@ impl PlatePlate {
                 for irow2 in 1..=other.col_length() {
                     for icol in 1..=block.row_length() {
                         for icol2 in 1..=other.row_length() {
-                            let c: Xyz = block.coeff(irow, icol);
-                            let factor: f64 = other.coeff(irow2, icol2);
+                            let c: Xyz = block.coeff(irow, icol)?;
+                            let factor: f64 = other.coeff(irow2, icol2)?;
                             let t: f64 = tmp[(icol, icol2)];
                             let (row, col, sub) = (k + irow - 1, k2 + irow2 - 1, layout.sub);
                             mat[(row, col)] += c.x() * factor * t;
@@ -222,7 +222,7 @@ impl PlatePlate {
                     add_xyz(
                         mat,
                         (k + irow - 1, j, layout.sub),
-                        block.coeff(irow, icol),
+                        block.coeff(irow, icol)?,
                         vmat[icol],
                     );
                 }
@@ -240,17 +240,18 @@ fn store_scalar_solution(
     solution: &mut [Xyz],
     sol: impl Fn(i32) -> f64,
     layout: Layout,
-) {
+) -> Result<(), Failure> {
     let (mut ksol, mut k_solution): (i32, usize) = (3 * layout.sub, layout.n_ppc2 as usize);
     for block in scalar {
         for icol in 1..=block.row_length() {
             let mut vsol = Xyz::new(0.0, 0.0, 0.0);
             for irow in 1..=block.col_length() {
-                vsol += block.coeff(irow, icol) * sol(ksol + irow - 1);
+                vsol += block.coeff(irow, icol)? * sol(ksol + irow - 1);
             }
             solution[k_solution] = vsol;
             k_solution += 1;
         }
         ksol += block.col_length();
     }
+    Ok(())
 }

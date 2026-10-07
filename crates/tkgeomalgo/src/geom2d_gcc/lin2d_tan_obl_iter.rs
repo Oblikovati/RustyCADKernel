@@ -179,7 +179,12 @@ impl Lin2dTanOblIter {
     pub fn intersection2(&self) -> Result<(f64, f64, Point2), Failure> {
         self.check_done("Geom2dGcc_Lin2dTanOblIter::Intersection2")?;
         if self.paral2 {
-            return Err(is_parallel("Geom2dGcc_Lin2dTanOblIter::Intersection2"));
+            // Native `throw Geom2dGcc_IsParallel()` has an empty message; the Rust error
+            // names the member and the expected shape instead (AGENTS.md error rule).
+            return Err(is_parallel(
+                "Geom2dGcc_Lin2dTanOblIter::Intersection2: the solution is parallel to the line; \
+                 expected a secant line",
+            ));
         }
         Ok((self.par2sol, self.pararg2, self.pntint2sol))
     }

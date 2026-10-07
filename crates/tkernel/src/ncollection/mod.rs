@@ -8,13 +8,13 @@ pub use h_array1_of_real::HArray1OfReal;
 mod local_array;
 pub use local_array::LocalArray;
 mod array2;
-pub use array2::Array2;
+pub use array2::{Array2, array2_failure};
 mod generic_transient;
 mod harray;
 pub use harray::{HArray1, HArray2};
 mod linear_vector;
 mod raw_element_lifetime;
-pub use linear_vector::{GrowthProgress, LinearVector, LinearVectorGrowth};
+pub use linear_vector::LinearVector;
 mod vector_component;
 pub use vector_component::{
     VectorAbsoluteComponent, VectorDumpComponent, VectorMagnitudeComponent, VectorSquareComponent,
@@ -110,7 +110,7 @@ pub use base_map::{
     IndexedCursorSourceMut, MapLinkNode,
 };
 mod data_map_node;
-mod destructor_unwind;
+mod native_noexcept;
 pub use data_map_node::{DataMapNode, DataMapNodeOwner};
 mod double_map_node;
 pub use double_map_node::{DoubleMapNode, DoubleMapNodeOwner};
@@ -172,14 +172,12 @@ mod ubtree;
 pub use ebtree::EBTree;
 pub use ubtree::{BoundingNode, BoundingVolume, FallibleTreeSelector, TreeSelector, UBTree};
 mod ubtree_filler;
-pub use ubtree_filler::{
-    BoundingTreeInsertion, NativeBoundingTree, ObjBnd, UBTreeFiller, UBTreeFillerWithSelfAssignment,
-};
+pub use ubtree_filler::{BoundingTreeInsertion, NativeBoundingTree, ObjBnd, UBTreeFiller};
 
 mod packed_map;
 pub use packed_map::{
     PackedCursor, PackedInteger, PackedMap, PackedMapIter, PackedMapNode, PackedMapOperand,
-    PackedWord, PackedWordReader,
+    PackedWord,
 };
 pub mod packed_map_algo;
 
@@ -241,7 +239,3 @@ mod ordered_node_links;
 mod ordered_node_owner;
 pub use ordered_data_map_node::{OrderedDataMapNode, OrderedDataMapNodeOwner};
 pub use ordered_map_node::{OrderedMapNode, OrderedMapNodeOwner};
-
-mod ordered_resize_interruption;
-pub use ordered_data_map::OrderedDataMapResizeInterruption;
-pub use ordered_map::OrderedMapResizeInterruption;

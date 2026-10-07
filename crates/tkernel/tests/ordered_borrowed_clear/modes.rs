@@ -15,9 +15,6 @@ impl ClearMode {
             Self::Current => "self",
         }
     }
-    pub fn retains_buckets(self) -> bool {
-        matches!(self, Self::Same | Self::Current)
-    }
 }
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum ClearState {

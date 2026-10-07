@@ -94,17 +94,29 @@ fn surface_face(surface: Handle<dyn GeomSurface>) -> Face {
 
 fn bezier(sharp_last: bool) -> Handle<dyn GeomSurface> {
     let mut poles = Array2::<Point3>::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    poles[(1, 2)] = if sharp_last {
-        Point3::new(0.0, 0.0, 0.0)
-    } else {
-        Point3::new(0.0, 5.0e-5, 0.0)
-    };
-    poles[(2, 1)] = Point3::new(1.0, 0.0, 0.0);
-    poles[(2, 2)] = if sharp_last {
-        Point3::new(5.0e-5, 0.0, 0.0)
-    } else {
-        Point3::new(1.0, 5.0e-5, 0.0)
-    };
+    poles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    poles
+        .set_value(
+            1,
+            2,
+            if sharp_last {
+                Point3::new(0.0, 0.0, 0.0)
+            } else {
+                Point3::new(0.0, 5.0e-5, 0.0)
+            },
+        )
+        .unwrap();
+    poles.set_value(2, 1, Point3::new(1.0, 0.0, 0.0)).unwrap();
+    poles
+        .set_value(
+            2,
+            2,
+            if sharp_last {
+                Point3::new(5.0e-5, 0.0, 0.0)
+            } else {
+                Point3::new(1.0, 5.0e-5, 0.0)
+            },
+        )
+        .unwrap();
     Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()
 }

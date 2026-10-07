@@ -187,32 +187,3 @@ impl<T, const N: usize> LocalArray<T, N> {
         }
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::LocalArray;
-    use smallvec::SmallVec;
-
-    struct PanickingDefault {
-        value: i32,
-    }
-
-    impl Default for PanickingDefault {
-        fn default() -> Self {
-            panic!("replacement default constructor failure");
-        }
-    }
-
-    #[test]
-    fn replacement_growth_keeps_old_values_when_default_panics() {
-        let elements = SmallVec::from_vec(vec![PanickingDefault { value: 42 }]);
-        let mut array = LocalArray::<PanickingDefault, 2> { elements };
-        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-            array.reallocate(3, false);
-        }));
-
-        assert!(result.is_err());
-        assert_eq!(array.len(), 1);
-        assert_eq!(array[0].value, 42);
-    }
-}

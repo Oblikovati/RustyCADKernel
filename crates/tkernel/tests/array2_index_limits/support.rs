@@ -28,8 +28,10 @@ fn operation(array: &mut Array2<'_, i32>, index: (i32, i32), op: i32) -> Result<
     match op {
         0 => array.value(index.0, index.1).copied(),
         1 => array.change_value(index.0, index.1).map(mutate_value),
-        2 => Ok(array[index]),
-        3 => Ok(mutate_value(&mut array[index])),
+        // The native operator() pair; Rust has no Index impl (plan D3), so the checked
+        // accessors carry them and report the same Standard_OutOfRange as an error.
+        2 => array.value(index.0, index.1).copied(),
+        3 => array.change_value(index.0, index.1).map(mutate_value),
         _ => assignment_operation(array, index.0, index.1, op),
     }
 }

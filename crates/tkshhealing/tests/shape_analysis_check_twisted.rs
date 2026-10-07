@@ -91,8 +91,8 @@ fn bezier(twisted: bool) -> Handle<dyn GeomSurface> {
         } else {
             f64::from(u - 1)
         };
-        poles[(u, 1)] = Point3::new(x, 0.0, 0.0);
-        poles[(u, 2)] = Point3::new(x, 1.0, 0.0);
+        poles.set_value(u, 1, Point3::new(x, 0.0, 0.0)).unwrap();
+        poles.set_value(u, 2, Point3::new(x, 1.0, 0.0)).unwrap();
     }
     Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()
 }

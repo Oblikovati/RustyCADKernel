@@ -46,15 +46,6 @@ fn observed_cell<'a>(arena: &BaseAllocator, probe: &'a DropProbe) -> CellFilterC
     cell
 }
 #[test]
-fn standalone_cell_drop_panic_drains_remaining_targets_and_releases_leases() {
-    let (arena, probe) = (BaseAllocator::incremental(1024), DropProbe::default());
-    let cell = observed_cell(&arena, &probe);
-    probe.fail_drop.set(Some(3));
-    assert!(catch_unwind(AssertUnwindSafe(|| drop(cell))).is_err());
-    assert_eq!(*probe.seen.borrow(), [3, 2, 1]);
-    assert!(arena.reset(false).is_ok());
-}
-#[test]
 fn standalone_cell_copy_failure_leaves_its_canonical_chain_reachable() {
     let (arena, probe) = (BaseAllocator::incremental(1024), DropProbe::default());
     let mut cell = observed_cell(&arena, &probe);

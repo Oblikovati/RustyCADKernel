@@ -82,8 +82,8 @@ fn tension_dependence_table_uses_one_based_indexes() {
     assert_eq!(
         (
             table.array2().lower_row(),
-            table.array2()[(0, 0)],
-            table.array2()[(0, 1)]
+            (*table.array2().value(0, 0).unwrap()),
+            (*table.array2().value(0, 1).unwrap())
         ),
         (0, 1, 0)
     );
@@ -171,10 +171,15 @@ fn curve_get_element_rescales_the_columns_lower_col_to_dimension() {
     let mut read = Array2::with_bounds(0, 5, 2, 3).unwrap();
     curve.get_element(1, &mut read).unwrap();
     assert_eq!(
-        (read[(1, 2)], read[(1, 3)], read[(3, 2)], read[(3, 3)]),
+        (
+            (*read.value(1, 2).unwrap()),
+            (*read.value(1, 3).unwrap()),
+            (*read.value(3, 2).unwrap()),
+            (*read.value(3, 3).unwrap())
+        ),
         (1., 0.5, 1., 0.5)
     );
-    assert_eq!(read[(0, 3)], 1.);
+    assert_eq!((*read.value(0, 3).unwrap()), 1.);
 }
 
 #[test]
@@ -191,8 +196,14 @@ fn table(cells: &[&[i32]]) -> AssemblyTable {
     let table: AssemblyTable =
         Handle::new(HArray2::with_bounds(1, 1, 1, cells.len() as i32).unwrap());
     for (cell, j) in cells.iter().zip(1..) {
-        table.change_array2()[(1, j)] =
-            Handle::new(HArray1::from_array(&Array1::from_shared(cell, 1)));
+        table
+            .change_array2()
+            .set_value(
+                1,
+                j,
+                Handle::new(HArray1::from_array(&Array1::from_shared(cell, 1))),
+            )
+            .unwrap();
     }
     table
 }

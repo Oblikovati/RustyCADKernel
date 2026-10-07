@@ -65,24 +65,6 @@ pub fn exact_case(count: usize, target: i32, rejection: &str) {
     assert_eq!(row, native_row(count, target, rejection));
     assert_native_clear(&mut tree, &allocator, count, target, rejection);
 }
-pub fn retained_pair_case(rejection: &str) {
-    use crate::failed_pair_repair::{PairRepair, initialized_slots};
-    use rustycad_tkernel::ncollection::BoundingNode;
-    let (mut tree, allocator) = populated(1);
-    let repair = PairRepair::<BoundingNode<Key, Payload<'B'>>>::capture(&allocator);
-    let (failed, result, events) = apply(&mut tree, &allocator, 9, rejection);
-    assert!(failed);
-    let row = format!(
-        "editable 1 9 {rejection} {events} 1 {result} {}",
-        state(&tree, 9)
-    );
-    assert_eq!(row, native_row(1, 9, rejection));
-    assert_native_clear(&mut tree, &allocator, 1, 9, rejection);
-    assert_eq!(allocations(&allocator), 1);
-    // SAFETY: exact failed typed pair, known completed children, and no reset/intervening owner.
-    unsafe { repair.reclaim(initialized_slots(rejection)) };
-    assert_eq!(allocations(&allocator), 0);
-}
 fn clear_row(prefix: &str) -> &'static str {
     include_str!("../../../../tools/oracle/tkernel_ebtree_add_contracts.expected")
         .lines()

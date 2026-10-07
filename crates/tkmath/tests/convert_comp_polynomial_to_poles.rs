@@ -80,10 +80,10 @@ fn Convert_CompPolynomialToPolesTest__TwoSpansUniformContinuity() {
     let aCoeffs = reals(&[0.0, 1.0, 1.0, -1.0]);
 
     let mut aPolyIntervals: Array2<'static, f64> = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    aPolyIntervals[(1, 1)] = 0.0;
-    aPolyIntervals[(1, 2)] = 1.0;
-    aPolyIntervals[(2, 1)] = 0.0;
-    aPolyIntervals[(2, 2)] = 1.0;
+    aPolyIntervals.set_value(1, 1, 0.0).unwrap();
+    aPolyIntervals.set_value(1, 2, 1.0).unwrap();
+    aPolyIntervals.set_value(2, 1, 0.0).unwrap();
+    aPolyIntervals.set_value(2, 2, 1.0).unwrap();
 
     let aTrueIntervals = reals(&[0.0, 0.5, 1.0]);
 

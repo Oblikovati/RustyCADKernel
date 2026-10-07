@@ -102,7 +102,7 @@ fn occ24881_valid_box_has_no_wire_gap_failures() {
             let wire = topods::wire(&child).unwrap();
             wire_fixer.load(&wire).unwrap();
             wire_fixer.set_face(&face).unwrap();
-            wire_fixer.fix_reorder().unwrap();
+            wire_fixer.fix_reorder(false).unwrap();
             wire_fixer.fix_gaps_3d().unwrap();
             assert!(!wire_fixer.status_gaps_3d(ShapeExtendStatus::Fail));
             wire_fixer.fix_gaps_2d().unwrap();

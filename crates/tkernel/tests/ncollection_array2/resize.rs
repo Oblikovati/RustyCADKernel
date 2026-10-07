@@ -2,7 +2,7 @@ fn check_region(array: &Array2<'_, i32>, rows: i32, cols: i32, lower: (i32, i32)
     for row in 0..rows {
         for col in 0..cols {
             assert_eq!(
-                array[(lower.0 + row, lower.1 + col)],
+                (*array.value(lower.0 + row, lower.1 + col).unwrap()),
                 (lower.0 + row) * factor + lower.1 + col
             );
         }
@@ -15,7 +15,7 @@ fn NCollection_Array2Test__Resize() {
     shape(&array, 6, 7, (0, 0));
     for row in 0..4 {
         for col in 0..5 {
-            assert_eq!(array[(row, col)], (row + 1) * 100 + col + 1);
+            assert_eq!((*array.value(row, col).unwrap()), (row + 1) * 100 + col + 1);
         }
     }
 }
@@ -71,7 +71,7 @@ fn check_rebased(trim: bool) {
     shape(&array, 3, 3, (5, 10));
     for row in 5..=7 {
         for col in 10..=12 {
-            assert_eq!(array[(row, col)], (row - 4) * 10 + col - 9);
+            assert_eq!((*array.value(row, col).unwrap()), (row - 4) * 10 + col - 9);
         }
     }
 }
@@ -112,7 +112,7 @@ fn NCollection_Array2Test__ResizeWithTrim_GrowPreservesOldRegion() {
     array.resize_trim_bounds(1, 4, 1, 3, true).unwrap();
     for row in 1..=2 {
         for col in 1..=2 {
-            assert_eq!(array[(row, col)], 99);
+            assert_eq!((*array.value(row, col).unwrap()), 99);
         }
     }
 }

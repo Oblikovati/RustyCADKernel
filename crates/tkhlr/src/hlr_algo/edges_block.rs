@@ -8,11 +8,28 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, SharedState, StandardTransient};
 use rustycad_tkg3d::top_abs::Orientation;
 
-const MASK_ORIENT: i32 = 15;
-const MASK_OUT_LINE: i32 = 16;
-const MASK_INTERNAL: i32 = 32;
-const MASK_DOUBLE: i32 = 64;
-const MASK_ISO_LINE: i32 = 128;
+/// HLRAlgo_EdgesBlock::EMskFlags: the bits of the edge flags (orientation in the low four bits, outline, internal, double, isoline); protected natively, public here so that the packed
+/// flags can be read; `EdgesBlockMask::EMaskOrient as i32 == 15`.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[repr(i32)]
+pub enum EdgesBlockMask {
+    /// `EMaskOrient`.
+    EMaskOrient = 15,
+    /// `EMaskOutLine`.
+    EMaskOutLine = 16,
+    /// `EMaskInternal`.
+    EMaskInternal = 32,
+    /// `EMaskDouble`.
+    EMaskDouble = 64,
+    /// `EMaskIsoLine`.
+    EMaskIsoLine = 128,
+}
+
+const MASK_ORIENT: i32 = EdgesBlockMask::EMaskOrient as i32;
+const MASK_OUT_LINE: i32 = EdgesBlockMask::EMaskOutLine as i32;
+const MASK_INTERNAL: i32 = EdgesBlockMask::EMaskInternal as i32;
+const MASK_DOUBLE: i32 = EdgesBlockMask::EMaskDouble as i32;
+const MASK_ISO_LINE: i32 = EdgesBlockMask::EMaskIsoLine as i32;
 
 struct EdgesBlockState {
     edges: Array1<'static, i32>,

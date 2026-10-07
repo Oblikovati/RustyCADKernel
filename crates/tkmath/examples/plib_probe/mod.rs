@@ -147,7 +147,7 @@ pub fn hermite_interp_case(v: &[f64]) {
     for (grid, order) in [(&mut fc, fo), (&mut lc, lo)] {
         for i in 1..=dim {
             for j in 0..=order {
-                grid[(i, j)] = f.real();
+                grid.set_value(i, j, f.real()).unwrap();
             }
         }
     }

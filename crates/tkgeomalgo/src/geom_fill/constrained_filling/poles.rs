@@ -5,6 +5,7 @@
 //! The poles of the filled surface: the Coons construction `S0` of the boundaries,
 //! the correction `S1` of the tangent fields, and their sum.
 use super::{GeomFillConstrainedFilling, required};
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2, HArray1};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::arrays::at;
@@ -94,7 +95,8 @@ impl GeomFillConstrainedFilling {
                 polij += k1 * (-ab0 * ab1);
                 polij += k2 * (-ab1 * ab2);
                 polij += k3 * (-ab2 * ab3);
-                ss0[(i, j)] = Point3::from(polij);
+                ss0.set_value(i, j, Point3::from(polij))
+                    .map_err(array2_failure)?;
             }
         }
         self.s0 = Some(ss0);
@@ -200,7 +202,8 @@ impl GeomFillConstrainedFilling {
             Array2::with_bounds(1, ni, 1, nj).map_err(errors::array_bounds)?;
         for i in 1..=ni {
             for j in 1..=nj {
-                ss1[(i, j)] = Point3::from(self.correction(&nt, i, j)?);
+                ss1.set_value(i, j, Point3::from(self.correction(&nt, i, j)?))
+                    .map_err(array2_failure)?;
             }
         }
         self.s1 = Some(ss1);
@@ -246,7 +249,8 @@ impl GeomFillConstrainedFilling {
             Array2::with_bounds(1, ni, 1, nj).map_err(errors::array_bounds)?;
         for i in 1..=ni {
             for j in 1..=nj {
-                temp[(i, j)] = Point3::from(grid_at(t0, i, j)? + grid_at(t1, i, j)?);
+                temp.set_value(i, j, Point3::from(grid_at(t0, i, j)? + grid_at(t1, i, j)?))
+                    .map_err(array2_failure)?;
             }
         }
         let u = (
