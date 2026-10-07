@@ -115,10 +115,14 @@ impl TNamingNode {
         Ok(attribute.transaction() <= transaction
             && transaction <= attribute.until_transaction()?)
     }
-    /// The native `delete` of a node: every link is dropped, so that no reference cycle
-    /// outlives it.
+    /// The native `delete` of a node: the links to the other nodes of the shape chains are
+    /// dropped, which breaks every reference cycle. Its shapes, attribute and attribute link
+    /// stay readable: natively an iterator that still stands on a deleted node reads the
+    /// stale memory (`TNaming::Transform` iterates a label while its builder clears it).
     pub(crate) fn release(&self) {
-        *self.links.write() = NodeLinks::default();
+        let mut links = self.links.write();
+        links.next_same_old = None;
+        links.next_same_new = None;
     }
     /// `DumpJson`: the six links. A negative depth recurses without end on the node graph
     /// (a node's shape points back to it); the native dump overflows the stack, the port
@@ -302,7 +306,8 @@ mod tests {
             &after_new
         ));
         node.release();
-        assert!(node.next_same_attribute().is_none() && node.old().is_none());
+        assert!(node.next_same_shape(&old).is_none() && node.next_same_shape(&new).is_none());
+        assert!(node.old().is_some());
     }
 
     #[test]

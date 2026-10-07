@@ -234,8 +234,13 @@ explicit `new`/`delete`.
   `TNamingRefShapePtr`) and pointer equality is `Arc::ptr_eq` (two null pointers are
   equal, as natively). The chain links (`nextSameAttribute`, `nextSameOld`,
   `nextSameNew`, `myOld`, `myNew`, `FirstUse`) are strong, so a walk never meets a freed
-  node. The native `delete` of a node or ref shape is `release`, which drops every link and
-  so breaks the reference cycles (a ref shape's first use points back to it). `myAtt` is a
+  node. The native `delete` of a ref shape is `release`, which drops its first use (a ref
+  shape's first use points back to it); the `delete` of a node drops its links to the other
+  nodes of the shape chains, which breaks the remaining cycles, and keeps its shapes,
+  attribute and attribute link readable. Natively an iterator that stands on a deleted node
+  reads freed memory (`TNaming::Transform` iterates a label while its builder clears the
+  named shape, which is safe only when the builder backs it up, in a later transaction);
+  the port reads what `RemoveNode` left in the node instead. `myAtt` is a
   `WeakHandle<TNamingNamedShape>`: `BackupCopy` and `Restore` move the nodes from one
   attribute to the other and re-point it, as natively.
 - **Clear on destruction.** `~TNaming_NamedShape` calls `Clear`, which unlinks the nodes
