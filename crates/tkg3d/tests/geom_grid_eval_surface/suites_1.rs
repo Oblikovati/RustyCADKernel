@@ -18,12 +18,12 @@ fn GeomGridEval_PlaneTest__DerivativeD1() {
     for iU in 1..=6 {
         for iV in 1..=4 {
             EXPECT_NEAR(
-                ((*aGrid.value(iU, iV).unwrap()).d1u - aRef.d1u).magnitude(),
+                (aGrid.value(iU, iV).unwrap().d1u - aRef.d1u).magnitude(),
                 0.0,
                 THE_TOLERANCE,
             );
             EXPECT_NEAR(
-                ((*aGrid.value(iU, iV).unwrap()).d1v - aRef.d1v).magnitude(),
+                (aGrid.value(iU, iV).unwrap().d1v - aRef.d1v).magnitude(),
                 0.0,
                 THE_TOLERANCE,
             );
@@ -44,9 +44,9 @@ fn GeomGridEval_PlaneTest__DerivativeD2() {
     // For a plane, all second derivatives are zero
     for iU in 1..=6 {
         for iV in 1..=4 {
-            EXPECT_NEAR((*aGrid.value(iU, iV).unwrap()).d2u.magnitude(), 0.0, THE_TOLERANCE);
-            EXPECT_NEAR((*aGrid.value(iU, iV).unwrap()).d2v.magnitude(), 0.0, THE_TOLERANCE);
-            EXPECT_NEAR((*aGrid.value(iU, iV).unwrap()).d2uv.magnitude(), 0.0, THE_TOLERANCE);
+            EXPECT_NEAR(aGrid.value(iU, iV).unwrap().d2u.magnitude(), 0.0, THE_TOLERANCE);
+            EXPECT_NEAR(aGrid.value(iU, iV).unwrap().d2v.magnitude(), 0.0, THE_TOLERANCE);
+            EXPECT_NEAR(aGrid.value(iU, iV).unwrap().d2uv.magnitude(), 0.0, THE_TOLERANCE);
         }
     }
 }
