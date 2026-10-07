@@ -84580,13 +84580,6 @@
       "notes": "Copy adds one reference. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
     {
-      "upstream_id": "opencascade::handle::handle(handle<T>&&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "status": "excluded",
-      "notes": "Rust moves the handle; the moved-from value cannot be used, so there is nothing to port. The C++ move leaves the source null."
-    },
-    {
       "upstream_id": "opencascade::handle::~handle<T>",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
@@ -84633,13 +84626,6 @@
       "rust_item": "rustycad_tkernel::standard::Handle::from_view",
       "status": "implemented",
       "notes": "A raw pointer to an object a handle owns is a HandleView in Rust; rustycad_tkernel::standard::Handle::from_view adds one reference (or gives null), as handle(const T*) on an owned object. A fresh object is rustycad_tkernel::standard::Handle::new; Rust cannot adopt an unowned pointer. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
-    },
-    {
-      "upstream_id": "opencascade::handle::operator=(handle<T>&&)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "status": "excluded",
-      "notes": "Rust moves the handle. The C++ move assignment swaps the two handles, so the source receives the old target; std::mem::swap is the Rust counterpart when the source is kept, and the probe compares that swap."
     },
     {
       "upstream_id": "opencascade::handle::get() const",
