@@ -257,6 +257,25 @@ def outliner_requests(rng: random.Random) -> list[str]:
     return requests
 
 
+def intersector_requests(rng: random.Random) -> list[str]:
+    """hb_intersector: self and pair intersections of edges (the second edge often the
+    first one, so that the ends meet), a simulated point and sight lines on a face."""
+    requests = []
+    for index in range(600):
+        proj = projector(rng)
+        view = tuple(proj[4:7]) if proj[0] != 2 else (0.0, 0.0, 1.0)
+        first, u1, u2 = edge(rng, view)
+        second = first if index % 3 == 0 else edge(rng, view)[0]
+        ends = [rng.choice((0.0, 0.0, 0.01, 0.1)) for _ in range(4)]
+        params = [u1 + (u2 - u1) * rng.random(), u1 + (u2 - u1) * rng.random()]
+        sights: list[float] = []
+        for _ in range(3):
+            sights += [round(rng.uniform(-4, 4), 3), round(rng.uniform(-4, 4), 3), rng.choice((-100.0, 0.0, 5.0, 100.0))]
+        requests.append('hb_intersector ' + numbers(proj + first + second + ends + [rng.choice((0, 1))] + params
+                                                     + surface(rng, index % 9, view) + sights))
+    return requests
+
+
 def append_hlrbrep_requests(requests: list[str]) -> None:
     """Append every HLRBRep request family in a fixed order."""
     rng = random.Random(0x41B12E9)
@@ -267,3 +286,4 @@ def append_hlrbrep_requests(requests: list[str]) -> None:
     requests.extend(facedata_requests(rng))
     requests.extend(edgeface_requests(rng))
     requests.extend(outliner_requests(rng))
+    requests.extend(intersector_requests(rng))

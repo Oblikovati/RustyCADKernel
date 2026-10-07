@@ -213,3 +213,9 @@ and 17.
 - **Uninitialized members.** The line data of a default `HLRBRep_Curve` (`myOX` ...
   `myOF`) and its type are uninitialized natively until `Update`; the port starts them
   at 0 and OtherCurve.
+- **The loaded surface of the intersector.** `HLRBRep_Intersector::Load` keeps a
+  pointer to the surface of the face under test and `Perform(L, P)` reads it. The port
+  keeps no reference: `load` forgets the cached polyhedron and `perform_line` takes the
+  surface again, so the borrow lasts one call. The polyhedron of a non-elementary
+  surface is built on the first sight line after `load` and kept until the next one,
+  as the native `myPolyhedron`.

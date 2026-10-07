@@ -320910,6 +320910,118 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_Intersector::SimulateOnePoint(HLRBRep_EdgeData*,double,HLRBRep_EdgeData*,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::simulate_one_point",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::Perform(HLRBRep_EdgeData*,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::perform_self",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::Perform(int,HLRBRep_EdgeData*,double,double,int,HLRBRep_EdgeData*,double,double,bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::perform_edges",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::Perform(const gp_Lin&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::perform_line",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::Destroy()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::destroy",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::Load(HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::load",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::IsDone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::is_done",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::CSPoint(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::cs_point",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::Segment(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::segment",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::Point(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::point",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::NbPoints() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::nb_points",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::CSSegment(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::cs_segment",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Intersector::NbSegments() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Intersector::nb_segments",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Intersector.hxx/.cxx: the self and two-edge intersections with HLRBRep_CInter on the visible ranges (the moved ends and the widening loop of edges that end at each other), SimulateOnePoint, and the sight line against the loaded face (HLRBRep_InterCSurf, analytic on the elementary types, else on the cached polyhedron within the box range). Load keeps no pointer: the port forgets the polyhedron there and takes the surface again in perform_line (docs/hlr-design.md section 6). hb_intersector (600 numeric requests: random projectors, edges of every curve kind, a third of them paired with themselves so that the ends meet, moved ends, both NoBound values, and three sight lines against faces of every surface kind) compares every result bit for bit."
+    },
+    {
       "upstream_id": "HLRBRep_LineTool::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",

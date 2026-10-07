@@ -29,6 +29,8 @@ pub use inter_c_surf::{
     ThePolyhedronOfInterCSurf, ThePolyhedronToolOfInterCSurf, TheQuadCurvExactInterCSurf,
     TheQuadCurvFuncOfTheQuadCurvExactInterCSurf,
 };
+mod intersector;
+pub use intersector::Intersector;
 mod line_tool;
 mod make_edge;
 pub use line_tool::LineTool;
