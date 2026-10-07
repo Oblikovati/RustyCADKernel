@@ -10,10 +10,11 @@ use rustycad_tkbrep::topods::{Shape, ShapeIterator};
 use rustycad_tkbrep::toptools::MapOfShape;
 use rustycad_tkcaf::tnaming::{
     TNamingBuilder, TNamingIterator, TNamingNamedShape, TNamingNamedShapeMap,
-    TNamingNewShapeIterator, TNamingOldShapeIterator, TNamingTool,
+    TNamingNewShapeIterator, TNamingOldShapeIterator, TNamingTool, TNamingTranslator,
 };
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkernel::tcollection::AsciiString;
+use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeombase::gprop::GProps;
 use rustycad_tklcaf::tdf::{TdfData, TdfLabel, TdfTool};
@@ -537,4 +538,35 @@ fn TNaming_Tool_Test__CafBug_26155_ModificationOrderStable() {
             Some(reference) => assert!((current_x - reference).abs() <= tolerance),
         }
     }
+}
+
+// bugs/caf/bug24263: TNaming_CopyShape copies a solid and its faces while preserving the
+// orientation carried by each source shape.
+#[test]
+fn TNaming_Tool_Test__CafBug_24263_CopyShapePreservesOrientation() {
+    let solid = make_box(100.0, 100.0, 100.0);
+    let mut translator = TNamingTranslator::new();
+    translator.add(&solid);
+    let faces = support::explore(&solid, ShapeEnum::Face);
+    for face in &faces {
+        translator.add(face);
+    }
+    let reversed = |shape: &Shape| shape.orientation() == Orientation::Reversed;
+    let nb_reversed = faces.iter().filter(|face| reversed(face)).count();
+    assert_eq!(faces.len(), 6);
+    assert!(nb_reversed > 0);
+
+    translator.perform().unwrap();
+    assert!(translator.is_done());
+    let copied = translator.copied_shape(&solid);
+    assert!(!copied.is_null());
+    assert_eq!(copied.orientation(), Orientation::Forward);
+    let mut copied_reversed = 0;
+    for face in &faces {
+        let copied_face = translator.copied_shape(face);
+        assert!(!copied_face.is_null());
+        assert_eq!(copied_face.orientation(), face.orientation());
+        copied_reversed += usize::from(reversed(&copied_face));
+    }
+    assert_eq!(copied_reversed, nb_reversed);
 }

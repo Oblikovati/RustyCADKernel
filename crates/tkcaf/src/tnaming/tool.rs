@@ -361,7 +361,7 @@ fn current_shape_in(
 /// The OR-N block of `CurrentShape`: for a selection of a non-vertex with a naming, the
 /// orientation of an `ORIENTATION` name (or child name, `FORWARD` without one), when it is
 /// `FORWARD` or `REVERSED`.
-fn orientation_to_apply(
+pub(crate) fn orientation_to_apply(
     named: &TNamingNamedShape,
     shape: &Shape,
 ) -> Result<Option<Orientation>, Failure> {
