@@ -436651,7 +436651,7 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "Blend_AppFunction::Derivatives(const math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_AppFunction::Derivatives(const math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_AppFunction.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::derivatives",
@@ -436659,7 +436659,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_AppFunction::GetBounds(math_VectorBase<>&,math_VectorBase<>&) const",
+      "upstream_id": "Blend_AppFunction::GetBounds(math_Vector&,math_Vector&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_AppFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::get_bounds",
@@ -436699,7 +436699,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_AppFunction::GetTolerance(double,double,double,math_VectorBase<>&,math_VectorBase<>&) const",
+      "upstream_id": "Blend_AppFunction::GetTolerance(double,double,double,math_Vector&,math_Vector&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_AppFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::get_tolerance_3d",
@@ -436707,7 +436707,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_AppFunction::GetTolerance(math_VectorBase<>&,double) const",
+      "upstream_id": "Blend_AppFunction::GetTolerance(math_Vector&,double) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_AppFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::get_tolerance",
@@ -436731,7 +436731,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_AppFunction::IsSolution(const math_VectorBase<>&,double)",
+      "upstream_id": "Blend_AppFunction::IsSolution(const math_Vector&,double)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_AppFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::is_solution",
@@ -436851,7 +436851,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_AppFunction::Value(const math_VectorBase<>&,math_VectorBase<>&)",
+      "upstream_id": "Blend_AppFunction::Value(const math_Vector&,math_Vector&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_AppFunction.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSet::value",
@@ -436859,7 +436859,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_AppFunction::Values(const math_VectorBase<>&,math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_AppFunction::Values(const math_Vector&,math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_AppFunction.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::values",
@@ -436883,7 +436883,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_CurvPointFuncInv::Derivatives(const math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_CurvPointFuncInv::Derivatives(const math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_CurvPointFuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::derivatives",
@@ -436891,7 +436891,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_CurvPointFuncInv::GetBounds(math_VectorBase<>&,math_VectorBase<>&) const",
+      "upstream_id": "Blend_CurvPointFuncInv::GetBounds(math_Vector&,math_Vector&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_CurvPointFuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::get_bounds",
@@ -436899,7 +436899,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_CurvPointFuncInv::GetTolerance(math_VectorBase<>&,double) const",
+      "upstream_id": "Blend_CurvPointFuncInv::GetTolerance(math_Vector&,double) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_CurvPointFuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::get_tolerance",
@@ -436907,7 +436907,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_CurvPointFuncInv::IsSolution(const math_VectorBase<>&,double)",
+      "upstream_id": "Blend_CurvPointFuncInv::IsSolution(const math_Vector&,double)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_CurvPointFuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::is_solution",
@@ -436939,7 +436939,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_CurvPointFuncInv::Value(const math_VectorBase<>&,math_VectorBase<>&)",
+      "upstream_id": "Blend_CurvPointFuncInv::Value(const math_Vector&,math_Vector&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_CurvPointFuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSet::value",
@@ -436947,7 +436947,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_CurvPointFuncInv::Values(const math_VectorBase<>&,math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_CurvPointFuncInv::Values(const math_Vector&,math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_CurvPointFuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::values",
@@ -436987,7 +436987,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_FuncInv::Derivatives(const math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_FuncInv::Derivatives(const math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_FuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::derivatives",
@@ -436995,7 +436995,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_FuncInv::GetBounds(math_VectorBase<>&,math_VectorBase<>&) const",
+      "upstream_id": "Blend_FuncInv::GetBounds(math_Vector&,math_Vector&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_FuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::get_bounds",
@@ -437003,7 +437003,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_FuncInv::GetTolerance(math_VectorBase<>&,double) const",
+      "upstream_id": "Blend_FuncInv::GetTolerance(math_Vector&,double) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_FuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::get_tolerance",
@@ -437011,7 +437011,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_FuncInv::IsSolution(const math_VectorBase<>&,double)",
+      "upstream_id": "Blend_FuncInv::IsSolution(const math_Vector&,double)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_FuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::is_solution",
@@ -437043,7 +437043,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_FuncInv::Value(const math_VectorBase<>&,math_VectorBase<>&)",
+      "upstream_id": "Blend_FuncInv::Value(const math_Vector&,math_Vector&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_FuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSet::value",
@@ -437051,7 +437051,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_FuncInv::Values(const math_VectorBase<>&,math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_FuncInv::Values(const math_Vector&,math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_FuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::values",
@@ -437555,7 +437555,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_RstRstFunction::Decroch(const math_VectorBase<>&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "upstream_id": "Blend_RstRstFunction::Decroch(const math_Vector&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_RstRstFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendRstRstFunction::decroch",
@@ -437563,7 +437563,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_RstRstFunction::Derivatives(const math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_RstRstFunction::Derivatives(const math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_RstRstFunction.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::derivatives",
@@ -437571,7 +437571,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_RstRstFunction::GetBounds(math_VectorBase<>&,math_VectorBase<>&) const",
+      "upstream_id": "Blend_RstRstFunction::GetBounds(math_Vector&,math_Vector&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_RstRstFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::get_bounds",
@@ -437611,7 +437611,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_RstRstFunction::GetTolerance(double,double,double,math_VectorBase<>&,math_VectorBase<>&) const",
+      "upstream_id": "Blend_RstRstFunction::GetTolerance(double,double,double,math_Vector&,math_Vector&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_RstRstFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::get_tolerance_3d",
@@ -437619,7 +437619,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_RstRstFunction::GetTolerance(math_VectorBase<>&,double) const",
+      "upstream_id": "Blend_RstRstFunction::GetTolerance(math_Vector&,double) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_RstRstFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::get_tolerance",
@@ -437643,7 +437643,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_RstRstFunction::IsSolution(const math_VectorBase<>&,double)",
+      "upstream_id": "Blend_RstRstFunction::IsSolution(const math_Vector&,double)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_RstRstFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::is_solution",
@@ -437835,7 +437835,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_RstRstFunction::Value(const math_VectorBase<>&,math_VectorBase<>&)",
+      "upstream_id": "Blend_RstRstFunction::Value(const math_Vector&,math_Vector&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_RstRstFunction.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSet::value",
@@ -437843,7 +437843,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_RstRstFunction::Values(const math_VectorBase<>&,math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_RstRstFunction::Values(const math_Vector&,math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_RstRstFunction.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::values",
@@ -437883,7 +437883,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfCurvFuncInv::Derivatives(const math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_SurfCurvFuncInv::Derivatives(const math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfCurvFuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::derivatives",
@@ -437891,7 +437891,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfCurvFuncInv::GetBounds(math_VectorBase<>&,math_VectorBase<>&) const",
+      "upstream_id": "Blend_SurfCurvFuncInv::GetBounds(math_Vector&,math_Vector&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfCurvFuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::get_bounds",
@@ -437899,7 +437899,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfCurvFuncInv::GetTolerance(math_VectorBase<>&,double) const",
+      "upstream_id": "Blend_SurfCurvFuncInv::GetTolerance(math_Vector&,double) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfCurvFuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::get_tolerance",
@@ -437907,7 +437907,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfCurvFuncInv::IsSolution(const math_VectorBase<>&,double)",
+      "upstream_id": "Blend_SurfCurvFuncInv::IsSolution(const math_Vector&,double)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfCurvFuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::is_solution",
@@ -437939,7 +437939,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfCurvFuncInv::Value(const math_VectorBase<>&,math_VectorBase<>&)",
+      "upstream_id": "Blend_SurfCurvFuncInv::Value(const math_Vector&,math_Vector&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfCurvFuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSet::value",
@@ -437947,7 +437947,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfCurvFuncInv::Values(const math_VectorBase<>&,math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_SurfCurvFuncInv::Values(const math_Vector&,math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfCurvFuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::values",
@@ -437963,7 +437963,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfPointFuncInv::Derivatives(const math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_SurfPointFuncInv::Derivatives(const math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfPointFuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::derivatives",
@@ -437971,7 +437971,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfPointFuncInv::GetBounds(math_VectorBase<>&,math_VectorBase<>&) const",
+      "upstream_id": "Blend_SurfPointFuncInv::GetBounds(math_Vector&,math_Vector&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfPointFuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::get_bounds",
@@ -437979,7 +437979,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfPointFuncInv::GetTolerance(math_VectorBase<>&,double) const",
+      "upstream_id": "Blend_SurfPointFuncInv::GetTolerance(math_Vector&,double) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfPointFuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::get_tolerance",
@@ -437987,7 +437987,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfPointFuncInv::IsSolution(const math_VectorBase<>&,double)",
+      "upstream_id": "Blend_SurfPointFuncInv::IsSolution(const math_Vector&,double)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfPointFuncInv.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendInverseBounds::is_solution",
@@ -438019,7 +438019,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfPointFuncInv::Value(const math_VectorBase<>&,math_VectorBase<>&)",
+      "upstream_id": "Blend_SurfPointFuncInv::Value(const math_Vector&,math_Vector&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfPointFuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSet::value",
@@ -438027,7 +438027,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfPointFuncInv::Values(const math_VectorBase<>&,math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_SurfPointFuncInv::Values(const math_Vector&,math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfPointFuncInv.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::values",
@@ -438035,7 +438035,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfRstFunction::Decroch(const math_VectorBase<>&,gp_Vec&,gp_Vec&) const",
+      "upstream_id": "Blend_SurfRstFunction::Decroch(const math_Vector&,gp_Vec&,gp_Vec&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfRstFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendSurfRstFunction::decroch",
@@ -438043,7 +438043,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfRstFunction::Derivatives(const math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_SurfRstFunction::Derivatives(const math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfRstFunction.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::derivatives",
@@ -438051,7 +438051,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfRstFunction::GetBounds(math_VectorBase<>&,math_VectorBase<>&) const",
+      "upstream_id": "Blend_SurfRstFunction::GetBounds(math_Vector&,math_Vector&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfRstFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::get_bounds",
@@ -438091,7 +438091,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfRstFunction::GetTolerance(double,double,double,math_VectorBase<>&,math_VectorBase<>&) const",
+      "upstream_id": "Blend_SurfRstFunction::GetTolerance(double,double,double,math_Vector&,math_Vector&) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfRstFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::get_tolerance_3d",
@@ -438099,7 +438099,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfRstFunction::GetTolerance(math_VectorBase<>&,double) const",
+      "upstream_id": "Blend_SurfRstFunction::GetTolerance(math_Vector&,double) const",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfRstFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::get_tolerance",
@@ -438123,7 +438123,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfRstFunction::IsSolution(const math_VectorBase<>&,double)",
+      "upstream_id": "Blend_SurfRstFunction::IsSolution(const math_Vector&,double)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfRstFunction.hxx",
       "rust_item": "rustycad_tkfillet::blend::BlendAppFunction::is_solution",
@@ -438307,7 +438307,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfRstFunction::Value(const math_VectorBase<>&,math_VectorBase<>&)",
+      "upstream_id": "Blend_SurfRstFunction::Value(const math_Vector&,math_Vector&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfRstFunction.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSet::value",
@@ -438315,7 +438315,7 @@
       "notes": "Blend mapping (docs/tkfillet-progress.md): the abstract classes are traits over math::FunctionSetWithDerivatives (BlendAppFunction, BlendFunction, BlendSurfRstFunction, BlendRstRstFunction and the inverse-function traits); a pure member re-declared by a subclass is the trait member of its first declaration; a body that an abstract class defines over a pure member of its base is a free function of the blend module that the implementations call; output references become returned values, section arrays are grouped in SectionPoles/SweepD1/SweepD2, native exceptions become Failure values and solver-callback exceptions are kept for take_failure."
     },
     {
-      "upstream_id": "Blend_SurfRstFunction::Values(const math_VectorBase<>&,math_VectorBase<>&,math_Matrix&)",
+      "upstream_id": "Blend_SurfRstFunction::Values(const math_Vector&,math_Vector&,math_Matrix&)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/Blend/Blend_SurfRstFunction.hxx",
       "rust_item": "rustycad_tkmath::math::FunctionSetWithDerivatives::values",
