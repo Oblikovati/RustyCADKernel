@@ -2,21 +2,19 @@ use super::{Debug, Failure, HashPolicy, IndexedMap};
 impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
     /// Replaces a key while rejecting duplicates at another index; `map.substitute(2,25)?`.
     pub fn substitute(&mut self, index: usize, key: K) -> Result<(), Failure> {
-        let (bucket, detached) =
-            self.storage
-                .prepare_substitute(index, &key, &self.hasher, "IndexedMap")?;
+        let place = self
+            .storage
+            .prepare_substitute(index, &key, &self.hasher, "IndexedMap")?;
         self.storage
-            .replace_substitute(index, bucket, detached, |node| unsafe {
-                *(*node).key1() = key;
-            });
+            .replace_substitute(index, place, |stored, ()| *stored = key);
         Ok(())
     }
-    /// Exchanges two indices without moving key storage; `map.swap(1,3)?`.
+    /// Exchanges the keys of two indices; bucket chains are unchanged; `map.swap(1,3)?`.
     pub fn swap(&mut self, first: usize, second: usize) -> Result<(), Failure> {
         self.check_index(first)?;
         self.check_index(second)?;
         if first != second {
-            self.storage.swap(first, second);
+            self.storage.swap_indices(first, second);
         }
         Ok(())
     }
@@ -73,13 +71,11 @@ impl<K: Debug + Clone, H: HashPolicy<K> + Clone> Clone for IndexedMap<K, H> {
 impl<K: Debug + Clone, H: HashPolicy<K>> IndexedMap<K, H> {
     /// Copies into the existing key with native assignment semantics; `map.substitute_ref(1, &7)?`.
     pub fn substitute_ref(&mut self, index: usize, key: &K) -> Result<(), Failure> {
-        let (bucket, detached) =
-            self.storage
-                .prepare_substitute(index, key, &self.hasher, "IndexedMap")?;
+        let place = self
+            .storage
+            .prepare_substitute(index, key, &self.hasher, "IndexedMap")?;
         self.storage
-            .replace_substitute(index, bucket, detached, |node| unsafe {
-                (*node).key1().clone_from(key);
-            });
+            .replace_substitute(index, place, |stored, ()| stored.clone_from(key));
         Ok(())
     }
 }

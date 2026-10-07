@@ -1,4 +1,4 @@
-//! Rust unwind extensions retain canonical ownership after partial user operations.
+//! Rust unwind extensions keep every binding after partial user operations.
 use rustycad_tkernel::ncollection::{BaseAllocator, HashPolicy, IndexedDataMap};
 use std::{cell::RefCell, panic::AssertUnwindSafe, rc::Rc};
 #[derive(Debug, Default)]
@@ -57,10 +57,9 @@ fn payload(value: i32, kind: char, events: &Rc<RefCell<Events>>) -> Payload {
         events: events.clone(),
     }
 }
-fn setup() -> (Map, Rc<RefCell<Events>>, BaseAllocator) {
+fn setup() -> (Map, Rc<RefCell<Events>>) {
     let arena = BaseAllocator::accumulating(4096).unwrap();
-    let map = Map::with_allocator(Policy, 1, arena.clone());
-    (map, Rc::default(), arena)
+    (Map::with_allocator(Policy, 1, arena), Rc::default())
 }
 fn fill(map: &mut Map, events: &Rc<RefCell<Events>>) {
     for value in 1..=3 {
@@ -71,39 +70,27 @@ fn fill(map: &mut Map, events: &Rc<RefCell<Events>>) {
     }
     events.borrow_mut().recorded.clear();
 }
-fn live(arena: &BaseAllocator) -> i32 {
-    arena
-        .accumulating_chain()
-        .iter()
-        .map(|block| block.alloc_count)
-        .sum()
-}
 #[test]
-fn borrowed_substitute_assigns_key_then_value_in_the_original_allocation() {
-    let (mut map, events, arena) = setup();
+fn borrowed_substitute_assigns_key_then_value_into_the_existing_binding() {
+    let (mut map, events) = setup();
     fill(&mut map, &events);
-    let address = std::ptr::from_ref(map.native_node(2).unwrap()).addr();
     let key = payload(9, 'K', &events);
     let value = payload(90, 'V', &events);
     map.substitute_ref(2, &key, &value).unwrap();
     assert_eq!(events.borrow().recorded, [('A', 'K'), ('A', 'V')]);
-    assert_eq!(
-        std::ptr::from_ref(map.native_node(2).unwrap()).addr(),
-        address
-    );
-    assert_eq!((map.find_index(&key), live(&arena)), (2, 3));
+    assert_eq!((map.find_index(&key), map.len()), (2, 3));
     assert_eq!(map.find_from_index(2).unwrap().value, 90);
 }
 #[test]
-fn failed_borrowed_copy_releases_new_node_and_retains_existing_prefix() {
+fn failed_borrowed_copy_publishes_nothing_and_retains_existing_bindings() {
     for kind in ['K', 'V'] {
-        let (mut map, events, arena) = setup();
+        let (mut map, events) = setup();
         fill(&mut map, &events);
         let key = payload(9, 'K', &events);
         let value = payload(90, 'V', &events);
         events.borrow_mut().fail = Some(('C', kind));
         assert!(std::panic::catch_unwind(AssertUnwindSafe(|| map.add_ref(&key, &value))).is_err());
-        assert_eq!((map.len(), live(&arena)), (3, 3));
+        assert_eq!(map.len(), 3);
         assert_eq!(map.find_from_index(3).unwrap().value, 30);
         assert_copy_failure_events(kind, &events.borrow());
     }

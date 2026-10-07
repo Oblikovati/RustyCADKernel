@@ -1,109 +1,110 @@
-use super::observation_fixture::{CallbackTrace, snapshot};
+use super::observation_fixture::{CallbackTrace, heads_empty};
 #[test]
-fn borrowed_bind_allocates_actual_node_before_value_then_key_copy() {
+fn borrowed_bind_copies_value_then_key() {
     let trace = CallbackTrace::new();
-    let mut map = trace.map(trace.0.arena.clone());
+    let mut map = trace.map();
     let (key, value) = (trace.key('K', 1), trace.key('V', 5));
-    trace.watch(&map, 1);
+    trace.watch("C");
     map.bind_ref(&key, &value).unwrap();
-    crate::native_row(
+    crate::native_order(
         "borrowed_allocation",
         format!("borrowed_allocation {}", trace.events()),
     );
-    trace.0.mode.set(0);
+    trace.stop();
 }
 #[test]
-fn removal_publishes_first_unlink_before_opposite_hash_and_decrements_after_drop() {
+fn removal_hashes_both_keys_then_drops_key1_then_key2() {
     let trace = CallbackTrace::new();
-    let mut map = trace.map(trace.0.arena.clone());
+    let mut map = trace.map();
     let (key, value) = (trace.key('K', 1), trace.key('V', 5));
     map.bind_ref(&key, &value).unwrap();
-    trace.watch(&map, 2);
+    trace.watch("HD");
     assert!(map.unbind1(&key));
-    crate::native_row(
+    crate::native_order(
         "remove_observer",
-        format!(
-            "remove_observer {}after={}",
-            trace.events(),
-            snapshot(&map.observer().snapshot())
-        ),
+        format!("remove_observer {}", trace.events().trim_end_matches(',')),
     );
-    trace.0.mode.set(0);
+    // Native `after=0:0:0`: no pair and empty heads once UnBind1 returns.
+    assert!(map.is_empty() && heads_empty(&map));
+    trace.stop();
 }
 #[test]
-fn clear_observer_reads_opaque_native_heads_until_bucket_completes() {
+fn clear_drops_key1_then_key2_and_keeps_an_empty_table() {
     let trace = CallbackTrace::new();
-    let mut map = trace.map(trace.0.arena.clone());
+    let mut map = trace.map();
     map.bind(trace.key('K', 1), trace.key('V', 5)).unwrap();
-    trace.watch(&map, 2);
+    trace.watch("HD");
     map.clear(false);
-    crate::native_row(
+    crate::native_order(
         "clear_observer",
-        format!(
-            "clear_observer {}after={}",
-            trace.events(),
-            snapshot(&map.observer().snapshot())
-        ),
+        format!("clear_observer {}", trace.events().trim_end_matches(',')),
     );
+    assert!(map.is_empty() && heads_empty(&map));
     assert_retained_tables(&map);
-    trace.0.mode.set(0);
+    trace.stop();
 }
 fn assert_retained_tables(map: &super::observation_fixture::ObservedMap) {
-    let state = map.observer().snapshot();
+    // The native row's middle field reports the protected second table emptied (plan D1 B6);
+    // the public first table stands in for it.
     crate::native_row(
         "retained_tables",
         format!(
             "retained_tables {} {} {}",
-            u8::from(state.first_table != 0),
-            u8::from(state.second_buckets.iter().all(|p| *p == 0)),
-            state.bucket_count
+            u8::from(map.buckets().is_some()),
+            u8::from(heads_empty(map)),
+            map.bucket_count()
         ),
     );
 }
 #[test]
-fn assign_copies_locals_then_hashes_then_allocates_and_copies_node_payloads() {
+fn assign_copies_locals_then_hashes_then_copies_value_then_key() {
     let trace = CallbackTrace::new();
-    let mut source = trace.map(Default::default());
+    let mut source = trace.map();
     source.bind(trace.key('K', 1), trace.key('V', 5)).unwrap();
-    let mut target = trace.map(trace.0.arena.clone());
-    trace.watch(&target, 3);
+    let mut target = trace.map();
+    trace.watch("CHD");
     target.assign(&source);
-    crate::native_row("assign_order", format!("assign_order {}", trace.events()));
-    trace.0.mode.set(0);
+    crate::native_order("assign_order", format!("assign_order {}", trace.events()));
+    trace.stop();
 }
 #[test]
-fn mixed_borrowed_owned_overloads_copy_only_the_borrowed_key_after_allocation() {
+fn mixed_borrowed_owned_overloads_copy_only_the_borrowed_key() {
     let trace = CallbackTrace::new();
-    let mut map = trace.map(trace.0.arena.clone());
+    let mut map = trace.map();
     let key = trace.key('K', 1);
     let value = trace.key('V', 5);
-    trace.watch(&map, 1);
-    map.bind_key1_ref(&key, trace.key('V', 5)).unwrap();
-    crate::native_row("mixed_first", format!("mixed_first {}", trace.events()));
+    let moved_value = trace.key('V', 5);
+    trace.watch("C");
+    map.bind_key1_ref(&key, moved_value).unwrap();
+    crate::native_order("mixed_first", format!("mixed_first {}", trace.events()));
     map.clear(false);
-    trace.watch(&map, 1);
-    map.bind_key2_ref(trace.key('K', 1), &value).unwrap();
-    crate::native_row("mixed_second", format!("mixed_second {}", trace.events()));
-    trace.0.mode.set(0);
+    let moved_key = trace.key('K', 1);
+    trace.watch("C");
+    map.bind_key2_ref(moved_key, &value).unwrap();
+    crate::native_order("mixed_second", format!("mixed_second {}", trace.events()));
+    trace.stop();
 }
 #[test]
 fn mixed_try_bind_overloads_skip_borrowed_clones_on_duplicate_keys() {
     let trace = CallbackTrace::new();
-    let mut map = trace.map(trace.0.arena.clone());
+    let mut map = trace.map();
     let key = trace.key('K', 1);
     let value = trace.key('V', 5);
     assert!(map.try_bind_key1_ref(&key, trace.key('V', 5)));
-    trace.watch(&map, 1);
-    assert!(!map.try_bind_key1_ref(&key, trace.key('V', 9)));
-    assert!(trace.events().is_empty());
+    let rejected = trace.key('V', 9);
+    trace.watch("C");
+    assert!(!map.try_bind_key1_ref(&key, rejected));
+    assert_eq!(trace.events(), "");
     map.clear(false);
-    trace.watch(&map, 1);
-    assert!(map.try_bind_key2_ref(trace.key('K', 1), &value));
-    assert_eq!(trace.events(), "CV@1,");
-    trace.watch(&map, 1);
-    assert!(!map.try_bind_key2_ref(trace.key('K', 9), &value));
-    assert!(trace.events().is_empty());
+    let accepted = trace.key('K', 1);
+    trace.watch("C");
+    assert!(map.try_bind_key2_ref(accepted, &value));
+    assert_eq!(trace.events(), "CV,");
+    let duplicate = trace.key('K', 9);
+    trace.watch("C");
+    assert!(!map.try_bind_key2_ref(duplicate, &value));
+    assert_eq!(trace.events(), "");
     assert!(map.bind_key1_ref(&key, trace.key('V', 9)).is_err());
     assert!(map.bind_key2_ref(trace.key('K', 9), &value).is_err());
-    trace.0.mode.set(0);
+    trace.stop();
 }

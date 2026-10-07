@@ -1,4 +1,4 @@
-use rustycad_tkernel::ncollection::{HashPolicy, IndexedMap, IndexedMapNode};
+use rustycad_tkernel::ncollection::{HashPolicy, IndexedMap};
 use std::fmt::Write;
 #[derive(Clone)]
 pub struct IntPolicy(pub bool);
@@ -11,43 +11,34 @@ impl HashPolicy<i32> for IntPolicy {
     }
 }
 pub type Probe = IndexedMap<i32, IntPolicy>;
-fn nodes(map: &Probe) -> std::collections::BTreeMap<usize, &IndexedMapNode<i32>> {
-    (1..=map.len())
-        .map(|i| {
-            let node = map.native_node(i).unwrap();
-            (std::ptr::from_ref(node).addr(), node)
-        })
-        .collect()
-}
+/// The native row through public APIs: size, modulus, table presence, every index in order and
+/// every nonempty bucket chain. The native index table (`myData2`, protected, plan D1 class B6)
+/// is allocated and released with the bucket table, so its field repeats the table's.
 pub fn topology_row(label: &str, map: &Probe) -> String {
-    let state = map.observer().snapshot();
-    let mut row = row_header(label, &state);
-    for i in 1..=map.len() {
-        let node = map.native_node(i).unwrap();
-        assert_eq!(state.indices[i - 1], std::ptr::from_ref(node).addr());
-        write!(row, "{}:{},", node.value(), node.index_value()).unwrap();
+    let table = u8::from(map.buckets().is_some());
+    let mut row = format!(
+        "{label} {} {} {table} {table} I",
+        map.len(),
+        map.bucket_count()
+    );
+    for (key, index) in map.indexed_items() {
+        write!(row, "{key}:{index},").unwrap();
     }
     row.push_str(" B");
-    append_buckets(&mut row, map, &state.buckets);
-    assert!(
-        state
-            .indices
-            .iter()
-            .skip(map.len())
-            .all(|address| *address == 0)
-    );
+    append_buckets(&mut row, map);
     row
 }
-fn append_buckets(row: &mut String, map: &Probe, heads: &[usize]) {
-    let nodes = nodes(map);
-    for (bucket, &head) in heads.iter().enumerate().filter(|(_, head)| **head != 0) {
-        write!(row, "{bucket}=").unwrap();
-        let mut address = head;
-        while address != 0 {
-            let node = nodes[&address];
-            write!(row, "{},", node.value()).unwrap();
-            address = node.link().next().addr();
+fn append_buckets(row: &mut String, map: &Probe) {
+    let Some(table) = map.buckets() else {
+        return;
+    };
+    for bucket in 0..table.len() {
+        let keys: Vec<i32> = table.chain(bucket).unwrap().map(|(key, _)| *key).collect();
+        if keys.is_empty() {
+            continue;
         }
+        write!(row, "{bucket}=").unwrap();
+        keys.iter().for_each(|key| write!(row, "{key},").unwrap());
         row.push(';');
     }
 }
@@ -105,14 +96,4 @@ fn all_native_distinct_bucket_transitions() {
 #[test]
 fn all_native_collision_transitions() {
     matrix(true);
-}
-
-fn row_header(label: &str, state: &rustycad_tkernel::ncollection::IndexedMapObservation) -> String {
-    format!(
-        "{label} {} {} {} {} I",
-        state.size,
-        state.bucket_count,
-        u8::from(state.bucket_table != 0),
-        u8::from(state.index_table != 0)
-    )
 }

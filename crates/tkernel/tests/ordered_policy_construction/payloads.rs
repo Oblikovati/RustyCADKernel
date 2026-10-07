@@ -1,6 +1,4 @@
-use rustycad_tkernel::ncollection::{
-    BasicMapIteratorSource, HashPolicy, OrderedDataMap, OrderedMap,
-};
+use rustycad_tkernel::ncollection::{HashPolicy, OrderedDataMap, OrderedMap};
 use std::{cell::Cell, rc::Rc};
 struct Payload {
     key: i32,
@@ -31,9 +29,16 @@ fn non_clone_set_payload_moves_graph_and_drops_exactly_once() {
     let drops = Rc::new(Cell::new(0));
     let mut source = OrderedMap::with_hasher(PayloadHash, 101);
     source.add(payload(1, &drops));
-    let first = source.basic_first_node();
+    let first = source
+        .first_node()
+        .map(|node| std::ptr::from_ref(node.key()));
     let target = OrderedMap::move_from_with(&mut source, |_| PayloadHash);
-    assert_eq!(target.basic_first_node(), first);
+    assert_eq!(
+        target
+            .first_node()
+            .map(|node| std::ptr::from_ref(node.key())),
+        first
+    );
     drop(source);
     assert_eq!(drops.get(), 0);
     drop(target);

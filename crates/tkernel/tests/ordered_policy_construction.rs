@@ -2,9 +2,7 @@
 #[path = "ordered_policy_construction/fixture.rs"]
 mod fixture;
 use fixture::*;
-use rustycad_tkernel::ncollection::{
-    BaseAllocator, BasicMapIteratorSource, OrderedDataMap, OrderedMap,
-};
+use rustycad_tkernel::ncollection::{BaseAllocator, OrderedDataMap, OrderedMap};
 use std::panic::{AssertUnwindSafe, catch_unwind};
 macro_rules! policy_suite {
     ($module:ident,$prefix:literal,$map:ty,$move_map:ty,$fill:expr,$move_fill:expr) => {
@@ -94,7 +92,12 @@ macro_rules! policy_suite {
                 if populated {
                     ($fill)(&mut source);
                 }
-                let (first, buckets) = (source.basic_first_node(), source.buckets());
+                let (first, buckets) = (
+                    source
+                        .first_node()
+                        .map(|node| std::ptr::from_ref(node.key())),
+                    source.buckets().map(|table| table.identity()),
+                );
                 source.hasher().trace.reject.set(reject);
                 let result = catch_unwind(AssertUnwindSafe(|| {
                     Map::move_from_with(&mut source, Policy::take)
@@ -104,14 +107,24 @@ macro_rules! policy_suite {
                         "ok {} {} {} {} {}",
                         target.hasher().state,
                         target.len(),
-                        u8::from(target.basic_first_node() == first),
-                        u8::from(target.buckets() == buckets),
+                        u8::from(
+                            target
+                                .first_node()
+                                .map(|node| std::ptr::from_ref(node.key()))
+                                == first
+                        ),
+                        u8::from(target.buckets().map(|table| table.identity()) == buckets),
                         u8::from(target.allocator() == source.allocator())
                     ),
                     Err(_) => format!(
                         "throw {} {}",
-                        u8::from(source.basic_first_node() == first),
-                        u8::from(source.buckets() == buckets)
+                        u8::from(
+                            source
+                                .first_node()
+                                .map(|node| std::ptr::from_ref(node.key()))
+                                == first
+                        ),
+                        u8::from(source.buckets().map(|table| table.identity()) == buckets)
                     ),
                 };
                 let label = format!(
@@ -127,7 +140,7 @@ macro_rules! policy_suite {
                         source.hasher().state,
                         source.len(),
                         source.bucket_count(),
-                        u8::from(source.buckets().is_null()),
+                        u8::from(source.buckets().is_none()),
                         source.hasher().trace.text()
                     ),
                 );
@@ -137,7 +150,7 @@ macro_rules! policy_suite {
                 transfer(false, false);
             }
             #[test]
-            fn full_graph_move_preserves_node_bucket_and_allocator_identity() {
+            fn full_graph_move_preserves_entry_bucket_and_allocator_identity() {
                 transfer(true, false);
             }
             #[test]
@@ -155,7 +168,9 @@ macro_rules! policy_suite {
                     MoveOnly::take,
                 );
                 ($move_fill)(&mut source);
-                let first = source.basic_first_node();
+                let first = source
+                    .first_node()
+                    .map(|node| std::ptr::from_ref(node.key()));
                 source.hasher().0.trace.events.borrow_mut().clear();
                 let target = MoveMap::move_from_with(&mut source, MoveOnly::take);
                 let label = concat!($prefix, "_move_only");
@@ -167,13 +182,18 @@ macro_rules! policy_suite {
                         source.hasher().0.state,
                         target.len(),
                         source.len(),
-                        u8::from(target.basic_first_node() == first),
+                        u8::from(
+                            target
+                                .first_node()
+                                .map(|node| std::ptr::from_ref(node.key()))
+                                == first
+                        ),
                         target.hasher().0.trace.text()
                     ),
                 );
             }
             #[test]
-            fn emptied_donor_reallocates_nodes_with_its_moved_from_policy() {
+            fn emptied_donor_refills_with_its_moved_from_policy() {
                 let arena = BaseAllocator::incremental(1024);
                 let mut source = Map::with_allocator(Policy::new(7, false), 101, arena.clone());
                 ($fill)(&mut source);
@@ -183,11 +203,17 @@ macro_rules! policy_suite {
                     (source.len(), target.len(), source.hasher().state),
                     (2, 2, -99)
                 );
-                assert_ne!(source.basic_first_node(), target.basic_first_node());
-                assert!(arena.reset(false).is_err());
+                assert_ne!(
+                    source
+                        .first_node()
+                        .map(|node| std::ptr::from_ref(node.key())),
+                    target
+                        .first_node()
+                        .map(|node| std::ptr::from_ref(node.key()))
+                );
+                // Per-entry arena leases are protected allocator state (plan D1 class B6).
                 drop(target);
                 drop(source);
-                assert!(arena.reset(false).is_ok());
             }
         }
     };

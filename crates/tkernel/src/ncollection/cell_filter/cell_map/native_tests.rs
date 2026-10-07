@@ -1,9 +1,8 @@
-//! Probes read real live metadata fields; no owner reference is fabricated during callbacks.
-use super::{CellMapNode, CellObjectNode, CellRecord};
+//! Native callback order of the cell map against the probe rows (see fixture for the B6 parts).
 use crate::ncollection::{BaseAllocator, CellAction, CellFilter, CellInspector};
-use std::{cell::RefCell, collections::BTreeMap, fmt::Write, rc::Rc};
+use std::{cell::RefCell, fmt::Write, rc::Rc};
 mod fixture;
-mod layout;
+mod traits;
 mod unwind;
 mod variance;
 use fixture::{Target, filled, native_row, operation, remaining};
@@ -29,7 +28,7 @@ fn check_scenario(mode: usize) {
     let (mut filter, probe) = filled(mode);
     operation(mode, &mut filter, &probe);
     let mut row = format!("phase{mode} {}", probe.borrow().events);
-    probe.borrow_mut().cell = None;
+    probe.borrow_mut().recording = false;
     remaining(&mut row, &filter);
     native_row(&row);
 }

@@ -1,6 +1,6 @@
 //! Native `lookup`: `Hasher(key) % NbBuckets + 1` selects the bucket, then the chain is compared.
-use super::{ChainedSlots, SlotLink};
-use crate::ncollection::{BaseMap, HashPolicy};
+use super::ChainedSlots;
+use crate::ncollection::{BaseMap, HashPolicy, slot_chains::SlotLink};
 
 impl<K, V> ChainedSlots<K, V> {
     /// Finds a bound key; an empty map skips the user hasher, as native `IsEmpty()` checks do.
@@ -22,14 +22,9 @@ impl<K, V> ChainedSlots<K, V> {
         hasher: &impl HashPolicy<K>,
     ) -> (usize, SlotLink) {
         let bucket = hasher.hash(key) % self.bucket_count + 1;
-        let mut link = self.table()[bucket];
-        while let Some(slot) = link {
-            let entry = &self.slots[slot];
-            if hasher.equal(&entry.key, key) {
-                return (bucket, Some(slot));
-            }
-            link = entry.next;
-        }
-        (bucket, None)
+        let slot = self
+            .chains
+            .find(bucket, |slot| hasher.equal(self.payload.key(slot), key));
+        (bucket, slot)
     }
 }

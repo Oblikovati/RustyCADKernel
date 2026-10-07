@@ -1,10 +1,11 @@
-//! Native BaseMap inheritance and generic iterator construction over the actual ordered graph.
-#![allow(unsafe_code)]
+//! Native BaseMap queries and the insertion-order and bucket traversals of the ordered maps,
+//! read through their public cursors and the `Buckets()` view. The native generic
+//! `BaseMap::BasicIterator` the probe also drove is a protected member (plan D1 class B6).
 #[path = "ordered_base_bridge/fixture.rs"]
 mod fixture;
 use fixture::*;
 use rustycad_tkernel::ncollection::{
-    BaseAllocator, BaseMap, BasicMapIteratorSource, HashPolicy, OrderedDataMap, OrderedMap,
+    BaseAllocator, BaseMap, HashPolicy, OrderedDataMap, OrderedMap,
 };
 #[test]
 fn set_base_queries_retain_native_empty_full_and_clear_states() {
@@ -13,17 +14,17 @@ fn set_base_queries_retain_native_empty_full_and_clear_states() {
     fill_set(&mut map);
     queries("set_full", &map);
     map.resize(200);
-    let buckets = map.buckets();
+    let buckets = map.buckets().map(|table| table.identity());
     map.clear(false);
     queries("set_retained", &map);
-    let slots = map.basic_bucket_slots().unwrap();
-    assert_eq!(slots.len(), 1009 + 1);
+    let table = map.buckets().unwrap();
+    assert_eq!(table.len(), 1009 + 1);
     native_row(
         "set_zeroed",
         format!(
             "set_zeroed {} {}",
-            u8::from(buckets == map.buckets()),
-            u8::from(slots.iter().all(|node| node.is_null()))
+            u8::from(buckets == Some(table.identity())),
+            u8::from(bucket_pairs(&table).is_empty())
         ),
     );
     map.clear(true);
@@ -38,138 +39,117 @@ fn data_base_queries_retain_native_empty_full_and_clear_states() {
     map.resize(200);
     map.clear(false);
     queries("data_retained", &map);
-    assert!(
-        map.basic_bucket_slots()
-            .unwrap()
-            .iter()
-            .all(|node| node.is_null())
-    );
+    assert!(bucket_pairs(&map.buckets().unwrap()).is_empty());
     map.clear(true);
     queries("data_released", &map);
 }
 #[test]
-fn native_set_iterators_traverse_actual_order_and_bucket_graphs() {
+fn set_traversals_follow_insertion_order_and_bucket_chains() {
     let mut map = Set::new(101);
     fill_set(&mut map);
-    set_order("set_order", SetOrder::new(&map));
-    set_buckets("set_buckets", SetBucket::new(&map));
+    record("set_order", map.iter().map(|key| (key, key)));
+    let table = map.buckets().unwrap();
+    record(
+        "set_buckets",
+        bucket_pairs(&table).into_iter().map(|(key, _)| (key, key)),
+    );
 }
 #[test]
-fn native_data_iterators_traverse_actual_order_and_bucket_graphs() {
+fn data_traversals_follow_insertion_order_and_bucket_chains() {
     let mut map = Map::new(101);
     fill_map(&mut map);
-    data_order("data_order", DataOrder::new(&map));
-    data_buckets("data_buckets", DataBucket::new(&map));
+    record("data_order", map.items());
+    record(
+        "data_buckets",
+        bucket_pairs(&map.buckets().unwrap()).into_iter(),
+    );
 }
 #[test]
-fn native_set_value_aliases_key_in_real_allocator_owned_nodes() {
+fn set_cursor_value_aliases_its_key() {
     let arena = BaseAllocator::fresh_heap();
     let mut map = Set::with_allocator(BridgeHash, 0, arena.clone());
     fill_set(&mut map);
-    let buckets = map.buckets_mut();
-    let iterator = SetOrder::new(&map);
-    // SAFETY: the borrowed iterator holds this live map, and both shared references alias its key.
-    let aliases = unsafe { std::ptr::eq(iterator.key(), iterator.value()) };
-    let _: &i32 = unsafe { iterator.value() };
+    let buckets = map.buckets().map(|table| table.identity());
+    let cursor = map.iter();
+    let aliases = std::ptr::eq(cursor.key().unwrap(), cursor.value().unwrap());
+    let first = map.first_node().unwrap();
     native_row(
         "set_identity",
         format!(
             "set_identity {} {} {} {} 1",
             u8::from(aliases),
-            u8::from(iterator.node() == map.basic_first_node()),
-            u8::from(buckets.cast_const() == map.buckets()),
+            u8::from(std::ptr::eq(cursor.key().unwrap(), first.key())),
+            u8::from(buckets == map.buckets().map(|table| table.identity())),
             u8::from(BaseMap::allocator(&map) == &arena)
         ),
     );
 }
 #[test]
-fn native_mutable_data_iterator_edits_only_items_and_retains_node_identity() {
+fn mutable_data_traversal_edits_only_items_and_keeps_the_table() {
     let mut map = Map::new(101);
     fill_map(&mut map);
-    let first = map.basic_first_node();
-    let buckets = map.buckets_mut();
-    let mut iterator = DataMutable::new(&mut map);
-    assert_eq!(iterator.node(), first);
-    while iterator.more() {
-        // SAFETY: the exclusive map borrow and sequential short payload borrows exclude aliases.
-        unsafe {
-            let key = *iterator.key();
-            *iterator.value() += key;
-            iterator.advance();
-        }
+    let first = map.first_node().map(|node| *node.key());
+    let buckets = map.buckets().map(|table| table.identity());
+    for (key, value) in map.items_mut() {
+        *value += key;
     }
-    data_order("data_mutated", DataOrder::new(&map));
+    record("data_mutated", map.items());
     native_row(
         "data_identity",
         format!(
             "data_identity {} {} 1 1",
-            u8::from(first == map.basic_first_node()),
-            u8::from(buckets.cast_const() == map.buckets())
+            u8::from(first == map.first_node().map(|node| *node.key())),
+            u8::from(buckets == map.buckets().map(|table| table.identity()))
         ),
     );
     assert_eq!(map.first_node().unwrap().value(), &44);
 }
 #[test]
-fn actual_bucket_tables_change_on_resize_while_nodes_stay_put() {
+fn bucket_tables_change_on_resize_while_order_stays() {
     let mut set = Set::new(101);
     fill_set(&mut set);
-    let (node, buckets) = (set.basic_first_node(), set.buckets());
+    let (first, buckets) = (
+        *set.first().unwrap(),
+        set.buckets().map(|table| table.identity()),
+    );
     set.resize(200);
     native_row(
         "set_resize",
         format!(
             "set_resize {} {}",
-            u8::from(node == set.basic_first_node()),
-            u8::from(buckets != set.buckets())
+            u8::from(first == *set.first().unwrap()),
+            u8::from(buckets != set.buckets().map(|table| table.identity()))
         ),
     );
     let mut map = Map::new(101);
     fill_map(&mut map);
-    let (node, buckets) = (map.basic_first_node(), map.buckets());
+    let (first, buckets) = (
+        *map.first().unwrap(),
+        map.buckets().map(|table| table.identity()),
+    );
     map.resize(200);
     native_row(
         "data_resize",
         format!(
             "data_resize {} {}",
-            u8::from(node == map.basic_first_node()),
-            u8::from(buckets != map.buckets())
+            u8::from(first == *map.first().unwrap()),
+            u8::from(buckets != map.buckets().map(|table| table.identity()))
         ),
     );
 }
 #[test]
-fn mutable_bucket_accessor_projects_writable_table_without_copying() {
-    let mut map = Map::new(0);
-    assert!(map.buckets_mut().is_null());
-    fill_map(&mut map);
-    let buckets = map.buckets_mut();
-    // SAFETY: bucket zero remains null; writing the same pointer preserves graph and registry invariants.
-    unsafe {
-        assert!((*buckets).is_null());
-        *buckets = std::ptr::null_mut();
-    }
-    assert_eq!(
-        buckets.cast_const(),
-        map.basic_bucket_slots().unwrap().as_ptr()
-    );
-    data_order("data_order", DataOrder::new(&map));
-}
-#[test]
-fn native_bridge_coexists_with_safe_cursor_and_allocator_validation() {
+fn detached_cursor_reports_a_removed_entry() {
     let arena = BaseAllocator::incremental(1024);
-    let mut map = Map::with_allocator(BridgeHash, 101, arena.clone());
+    let mut map = Map::with_allocator(BridgeHash, 101, arena);
     fill_map(&mut map);
     let cursor = map.cursor();
-    let first = map.basic_first_node();
-    assert_eq!(DataOrder::new(&map).node(), first);
     assert_eq!(cursor.value(&map), Ok(&40));
     map.unbind(&4);
     assert!(cursor.value(&map).is_err());
-    assert_ne!(map.basic_first_node(), first);
-    assert!(arena.reset(false).is_err());
+    assert_eq!(map.first(), Ok(&1));
     map.clear(false);
-    assert!(arena.reset(false).is_ok());
-    assert!(!DataOrder::new(&map).more());
-    assert!(!DataBucket::new(&map).more());
+    assert!(map.items().next().is_none());
+    assert!(bucket_pairs(&map.buckets().unwrap()).is_empty());
 }
 struct OpaqueKey(i32);
 struct OpaquePolicy;
@@ -196,6 +176,6 @@ fn base_bridges_need_no_payload_debug_clone_or_hasher_clone() {
     let mut map = OrderedDataMap::with_hasher(OpaquePolicy, 0);
     map.bind(OpaqueKey(1), OpaqueKey(2));
     assert_eq!(BaseMap::size(&map), 1);
-    assert!(!map.basic_first_node().is_null());
-    assert_eq!(map.basic_bucket_slots().unwrap().as_ptr(), map.buckets());
+    assert!(map.first_node().is_some());
+    assert!(map.buckets().is_some());
 }

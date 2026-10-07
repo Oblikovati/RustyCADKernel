@@ -1,14 +1,14 @@
-use super::{Debug, Failure, HashPolicy, IndexedDataMap, IndexedDataMapNode, IndexedNode};
+use super::{Debug, Failure, HashPolicy, IndexedDataMap};
 impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Replaces an indexed pair, rejecting keys bound elsewhere; `map.substitute(2,25,2.5)?`.
     pub fn substitute(&mut self, index: usize, key: K, value: V) -> Result<(), Failure> {
-        let (bucket, detached) =
-            self.storage
-                .prepare_substitute(index, &key, &self.hasher, "IndexedDataMap")?;
+        let place = self
+            .storage
+            .prepare_substitute(index, &key, &self.hasher, "IndexedDataMap")?;
         self.storage
-            .replace_substitute(index, bucket, detached, |node| unsafe {
-                *IndexedDataMapNode::key_ptr(node) = key;
-                *IndexedDataMapNode::value_ptr(node) = value;
+            .replace_substitute(index, place, |stored_key, stored_value| {
+                *stored_key = key;
+                *stored_value = value;
             });
         Ok(())
     }
@@ -17,7 +17,7 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
         self.check_index(first)?;
         self.check_index(second)?;
         if first != second {
-            self.storage.swap(first, second);
+            self.storage.swap_indices(first, second);
         }
         Ok(())
     }
@@ -82,15 +82,15 @@ impl<K: Debug + Clone, V: Clone, H: HashPolicy<K> + Clone> Clone for IndexedData
 }
 
 impl<K: Debug + Clone, V: Clone, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
-    /// Assigns key then item into an existing native node; `map.substitute_ref(1,&7,&42)?`.
+    /// Assigns key then item into an existing binding; `map.substitute_ref(1,&7,&42)?`.
     pub fn substitute_ref(&mut self, index: usize, key: &K, value: &V) -> Result<(), Failure> {
-        let (bucket, detached) =
-            self.storage
-                .prepare_substitute(index, key, &self.hasher, "IndexedDataMap")?;
+        let place = self
+            .storage
+            .prepare_substitute(index, key, &self.hasher, "IndexedDataMap")?;
         self.storage
-            .replace_substitute(index, bucket, detached, |node| unsafe {
-                (*IndexedDataMapNode::key_ptr(node)).clone_from(key);
-                (*IndexedDataMapNode::value_ptr(node)).clone_from(value);
+            .replace_substitute(index, place, |stored_key, stored_value| {
+                stored_key.clone_from(key);
+                stored_value.clone_from(value);
             });
         Ok(())
     }

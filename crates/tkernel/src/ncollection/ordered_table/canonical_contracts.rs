@@ -1,6 +1,7 @@
-//! White-box joins prove the live container uses native allocation/layout and node links.
+//! White-box checks of the order links, chain successors and rehash order against the native
+//! rows. The probe's node layout, reservation and arena rows describe allocator-owned nodes
+//! (plan D1 classes B5 and B6) and are not compared.
 use super::*;
-use crate::ncollection::{BaseMap, OrderedMapNode};
 use std::{cell::RefCell, rc::Rc};
 #[derive(Clone, Default)]
 struct CanonicalHash(Rc<RefCell<String>>);
@@ -23,150 +24,81 @@ fn native_row(label: &str, observed: String) {
             .unwrap()
     );
 }
-fn graph<V, N: StorageNode<i32, V>>(label: &str, map: &OrderedTable<i32, V, CanonicalHash, N>) {
+// Each entry in insertion order with the key of its bucket-chain successor (0 at a chain end);
+// the trailing 1 is the native check that every order back link names the previous entry.
+fn graph<V>(label: &str, map: &OrderedTable<i32, V, CanonicalHash>) {
     let mut observed = format!("{label} ");
-    let mut previous = std::ptr::null_mut();
-    for slot in map.items().map(|(key, _)| map.lookup(key).unwrap()) {
-        let node = map.node_pointer(slot);
-        unsafe {
-            assert_eq!(*N::previous(node), previous);
-            let next = (*node).next();
-            let key = if next.is_null() { 0 } else { *N::key(next) };
-            observed.push_str(&format!("{}:{key},", map.key(slot)));
-        }
-        previous = node;
+    let mut previous = None;
+    let mut link = map.first();
+    while let Some(slot) = link {
+        assert_eq!(map.order[slot].previous, previous);
+        let next = map
+            .storage
+            .chains()
+            .next(slot)
+            .map_or(0, |next| *map.key(next));
+        observed.push_str(&format!("{}:{next},", map.key(slot)));
+        previous = Some(slot);
+        link = map.next_slot(slot);
     }
     observed.push_str(" 1");
     native_row(label, observed);
 }
-fn exercise<V: Default, N: StorageNode<i32, V>>(
-    prefix: &str,
-    map: &mut OrderedTable<i32, V, CanonicalHash, N>,
-) {
-    for key in [1, 2, 3, 6, 5] {
+fn exercise<V: Default>(prefix: &str, map: &mut OrderedTable<i32, V, CanonicalHash>) {
+    for key in [4, 1, 2, 3, 6, 5] {
         map.place(key, V::default, false, false);
     }
     assert!(map.remove(&1));
     map.place(9, V::default, false, false);
     graph(&format!("{prefix}_before"), map);
-    let old = map.node_pointer(map.first.unwrap());
+    let first = map.serial(map.first().unwrap());
     map.hasher.0.borrow_mut().clear();
     map.resize(200);
-    native_row(
-        &format!("{prefix}_rehash"),
-        format!(
-            "{prefix}_rehash {} {}",
-            map.hasher.0.borrow(),
-            u8::from(old == map.node_pointer(map.first.unwrap()))
-        ),
+    let same = map.first().map(|slot| map.serial(slot)) == Some(first);
+    let rehash = format!(
+        "{prefix}_rehash {} {}",
+        map.hasher.0.borrow(),
+        u8::from(same)
     );
+    native_row(&format!("{prefix}_rehash"), rehash);
     graph(&format!("{prefix}_after"), map);
     map.clear(false);
-    native_row(
-        &format!("{prefix}_clear"),
-        format!(
-            "{prefix}_clear {} {}",
-            map.resource()
-                .accumulating_chain()
-                .iter()
-                .map(|block| block.alloc_count)
-                .sum::<i32>(),
-            map.bucket_count
-        ),
-    );
-    assert_eq!(map.base.size(), 0);
-    assert!(!map.base.buckets().is_null());
-}
-fn allocation_span<V: Default, N: StorageNode<i32, V>>(
-    map: &mut OrderedTable<i32, V, CanonicalHash, N>,
-) -> usize {
-    let node = map.node_pointer(map.first.unwrap());
-    let before = map
-        .resource()
-        .accumulating_block(node.addr())
-        .unwrap()
-        .free_size;
-    map.place(100, V::default, false, false);
-    let after = map
-        .resource()
-        .accumulating_block(node.addr())
-        .unwrap()
-        .free_size;
-    assert!(map.remove(&100));
-    before - after
-}
-fn reservation_matches_native<N>(label: &str, span: usize) {
-    native_row(label, format!("{label} {}", size_of::<N>()));
-    // Exact cursor padding closes the measured +4 byte adaptation for these aligned nodes.
-    assert_eq!(span, size_of::<N>());
+    // The native row counts live arena allocations after Clear(false): none, as no entry remains.
+    let clear = format!("{prefix}_clear {} {}", map.len(), map.bucket_count());
+    native_row(&format!("{prefix}_clear"), clear);
+    assert!(map.buckets().is_some());
 }
 #[test]
-fn native_set_storage_layout_allocations_links_and_rehash() {
+fn native_set_links_chains_and_rehash() {
     let arena = BaseAllocator::accumulating(1024).unwrap();
-    let mut map =
-        OrderedTable::<i32, (), _, OrderedMapNode<i32>>::new(CanonicalHash::default(), 101, arena);
-    let (_, slot) = map.place(4, || (), false, false);
-    let node = map.node_pointer(slot);
-    let span = allocation_span(&mut map);
-    let key = map.key(slot) as *const i32;
-    native_row(
-        "set_layout",
-        format!(
-            "set_layout {} {} {} {} {}",
-            size_of::<OrderedMapNode<i32>>(),
-            size_of::<OrderedMapNode<i32>>(),
-            key.addr() - node.addr(),
-            key.addr() - node.addr(),
-            map.resource()
-                .accumulating_block(node.addr())
-                .unwrap()
-                .alloc_count
-        ),
-    );
-    reservation_matches_native::<OrderedMapNode<i32>>("set_reservation", span);
+    let mut map = OrderedTable::<i32, (), _>::new(CanonicalHash::default(), 101, arena);
     exercise("set", &mut map);
 }
 #[test]
-fn native_data_storage_layout_allocations_links_and_rehash() {
+fn native_data_links_chains_and_rehash() {
     let arena = BaseAllocator::accumulating(1024).unwrap();
     let mut map = OrderedTable::<i32, i32, _>::new(CanonicalHash::default(), 101, arena);
-    let (_, slot) = map.place(4, || 40, false, false);
-    let node = map.node_pointer(slot);
-    let span = allocation_span(&mut map);
-    native_row(
-        "data_layout",
-        format!(
-            "data_layout {} {} {} {} {}",
-            size_of::<OrderedDataMapNode<i32, i32>>(),
-            size_of::<OrderedDataMapNode<i32, i32>>(),
-            (map.key(slot) as *const i32).addr() - node.addr(),
-            (map.value(slot) as *const i32).addr() - node.addr(),
-            map.resource()
-                .accumulating_block(node.addr())
-                .unwrap()
-                .alloc_count
-        ),
-    );
-    reservation_matches_native::<OrderedDataMapNode<i32, i32>>("data_reservation", span);
     exercise("data", &mut map);
 }
 #[test]
-fn identity_slots_reuse_without_owning_or_relinking_nodes() {
+fn removed_identities_are_never_reused_and_slots_move_with_their_entries() {
     let mut map = OrderedTable::<i32, i32, _>::new(
         CanonicalHash::default(),
         101,
         BaseAllocator::incremental(512),
     );
     let (_, first) = map.place(1, || 10, false, false);
-    let old = map.node_pointer(first);
-    let (_, second) = map.place(2, || 20, false, false);
-    map.remove(&1);
-    let (_, reused) = map.place(3, || 30, false, false);
-    assert_eq!(reused, first);
-    assert_ne!(old, map.node_pointer(reused));
-    assert_eq!(map.next_slot(second), Some(reused));
-    assert_eq!(map.slot_of(old), None);
+    let removed = map.serial(first);
+    map.place(2, || 20, false, false);
+    map.place(3, || 30, false, false);
+    assert!(map.remove(&1));
+    let (_, last) = map.place(4, || 40, false, false);
+    assert_eq!(map.slot_of(removed), None);
+    assert_eq!(
+        map.items().map(|(key, _)| *key).collect::<Vec<_>>(),
+        [2, 3, 4]
+    );
+    assert_eq!(map.slot_of(map.serial(last)), Some(last));
     map.clear(true);
-    assert!(map.resource().reset(false).is_ok());
-    assert!(map.base.buckets().is_null());
+    assert!(map.buckets().is_none());
 }

@@ -1,28 +1,20 @@
-//! Single native key/value nodes sharing the reviewed canonical indexed-table engine.
-#![allow(unsafe_code)]
-use super::{
-    BaseAllocator, DefaultHashPolicy, HashPolicy, IndexedDataMapNode, MapLinkNode,
-    indexed_storage::{IndexedNode, IndexedStorage},
-};
+//! Key/value bindings with dense one-based indices over the safe slots IndexedMap uses.
+use super::{BaseAllocator, BaseMap, DefaultHashPolicy, HashPolicy, chained_slots::ChainedSlots};
 use crate::standard::Failure;
 use std::fmt::Debug;
 /// Key/value bindings addressed by key or dense one-based index; `IndexedDataMap::<i32,i32>::default().add(1,42)`.
 pub struct IndexedDataMap<K, V, H = DefaultHashPolicy> {
-    storage: IndexedStorage<IndexedDataMapNode<K, V>>,
+    storage: ChainedSlots<K, V>,
     hasher: H,
 }
 /// Shared values in index order; `map.iter()`.
 pub struct IndexedDataValues<'a, V> {
-    nodes: &'a [*mut MapLinkNode],
-    project: unsafe fn(*mut MapLinkNode) -> *const V,
-    payload: std::marker::PhantomData<&'a V>,
+    items: &'a [V],
     position: usize,
 }
 /// Exclusive values in index order; `map.iter_mut()`.
 pub struct IndexedDataValuesMut<'a, V> {
-    nodes: std::slice::Iter<'a, *mut MapLinkNode>,
-    project: unsafe fn(*mut MapLinkNode) -> *mut V,
-    payload: std::marker::PhantomData<&'a mut V>,
+    items: std::slice::IterMut<'a, V>,
 }
 /// Shared key/value pairs in index order; `map.items()`.
 pub struct IndexedDataItems<'a, K, V> {
@@ -37,13 +29,13 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Selects storage for keys and values; `IndexedDataMap::with_allocator(policy,10,arena)`.
     pub fn with_allocator(hasher: H, buckets: usize, resource: BaseAllocator) -> Self {
         Self {
-            storage: IndexedStorage::new(buckets, resource),
+            storage: ChainedSlots::new(buckets, resource),
             hasher,
         }
     }
     /// Returns binding count; `map.len()==3`.
     pub fn len(&self) -> usize {
-        self.storage.len()
+        self.storage.size()
     }
     /// Returns OCCT's dense index extent; `map.extent()==3`.
     pub fn extent(&self) -> usize {
@@ -57,15 +49,15 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     pub fn hasher(&self) -> &H {
         &self.hasher
     }
-    /// Returns the allocator of key and value nodes; `map.allocator()==&arena`.
+    /// Returns the map allocator; `map.allocator()==&arena`.
     pub fn allocator(&self) -> &BaseAllocator {
         self.storage.allocator()
     }
     /// Returns the hash modulus; `map.bucket_count()`.
     pub fn bucket_count(&self) -> usize {
-        self.storage.bucket_count()
+        self.storage.nb_buckets()
     }
-    /// Grows bucket storage without relocating entries; `map.resize(200)`.
+    /// Grows bucket storage and rechains entries in native bucket order; `map.resize(200)`.
     pub fn resize(&mut self, size: usize) {
         self.storage.resize(size, &self.hasher);
     }
@@ -74,7 +66,7 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
         if self.is_empty() {
             return 0;
         }
-        self.storage.lookup(key, &self.hasher).0
+        self.storage.find_index(key, &self.hasher).0
     }
     /// Checks membership using the injected policy; `map.contains(&42)`.
     pub fn contains(&self, key: &K) -> bool {
@@ -83,17 +75,17 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Borrows a key by index; `map.find_key(1)?`.
     pub fn find_key(&self, index: usize) -> Result<&K, Failure> {
         self.check_index(index)?;
-        Ok(self.storage.key(index))
+        Ok(self.storage.key_at(index))
     }
     /// Borrows a value by index; `map.find_from_index(1)?`.
     pub fn find_from_index(&self, index: usize) -> Result<&V, Failure> {
         self.check_index(index)?;
-        Ok(self.storage.value(index))
+        Ok(self.storage.value_at(index))
     }
     /// Borrows a value exclusively by index; `*map.change_from_index(1)?=42`.
     pub fn change_from_index(&mut self, index: usize) -> Result<&mut V, Failure> {
         self.check_index(index)?;
-        Ok(self.storage.value_mut(index))
+        Ok(self.storage.value_at_mut(index))
     }
     /// Finds a value by key or reports NoSuchObject; `map.find_from_key(&42)?`.
     pub fn find_from_key(&self, key: &K) -> Result<&V, Failure> {
@@ -106,12 +98,12 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Returns an optional borrowed value; `map.seek(&42)`.
     pub fn seek(&self, key: &K) -> Option<&V> {
         let index = self.find_index(key);
-        (index != 0).then(|| self.storage.value(index))
+        (index != 0).then(|| self.storage.value_at(index))
     }
     /// Returns an optional exclusive value; `map.change_seek(&42)`.
     pub fn change_seek(&mut self, key: &K) -> Option<&mut V> {
         let index = self.find_index(key);
-        (index != 0).then(|| self.storage.value_mut(index))
+        (index != 0).then(|| self.storage.value_at_mut(index))
     }
     /// Drops entries and optionally bucket storage; `map.clear(true)`.
     pub fn clear(&mut self, release: bool) {
@@ -120,7 +112,7 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     /// Swaps entries, policies and allocators; `map.exchange(&mut other)`.
     pub fn exchange(&mut self, other: &mut Self) {
         std::mem::swap(&mut self.hasher, &mut other.hasher);
-        self.storage.exchange(&mut other.storage);
+        std::mem::swap(&mut self.storage, &mut other.storage);
     }
 }
 impl<K: Debug, V, H: HashPolicy<K> + Default> IndexedDataMap<K, V, H> {
@@ -165,15 +157,5 @@ pub use cursor::{IndexedDataMapIterator, IndexedDataMapIteratorMut};
 impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
     fn check_index(&self, index: usize) -> Result<(), Failure> {
         self.storage.check_index(index, "IndexedDataMap")
-    }
-    /// Observes the actual shared native metadata during key/value destruction; `map.observer().snapshot().size`.
-    pub fn observer(&self) -> super::IndexedMapObserver {
-        self.storage.observer()
-    }
-    /// Borrows the actual single native node for extension code; `map.native_node(1)?.index_value()`.
-    pub fn native_node(&self, index: usize) -> Result<&IndexedDataMapNode<K, V>, Failure> {
-        self.check_index(index)?;
-        // SAFETY: the checked slot stays live during this shared map borrow.
-        Ok(unsafe { &*self.storage.node(index).cast() })
     }
 }

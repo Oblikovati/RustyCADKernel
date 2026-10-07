@@ -1,8 +1,7 @@
-//! Standalone native Cell operations use the same record and object nodes as the map engine.
-#![allow(unsafe_code)]
+//! Standalone native Cell operations use the same record as the map engine.
 use super::{CellGeometry, cell_map::cell_node::CellRecord};
 use crate::ncollection::{Array1, BaseAllocator, HashPolicy};
-/// Owning adapter for protected native `Cell`, with allocator leases outside its native fields.
+/// Owning adapter for protected native `Cell`; it keeps the allocator identity it was given.
 /// `CellFilterCell::<i32>::from_indices(&[1, 2], arena)` constructs a lookup-only cell.
 pub struct CellFilterCell<T> {
     record: CellRecord<T>,
@@ -43,7 +42,7 @@ impl<T> CellFilterCell<T> {
     pub fn hash_code(&self) -> usize {
         self.record.hash_code()
     }
-    /// Borrow newest-first targets; `cell.targets().count()` follows actual native links.
+    /// Borrow newest-first targets, the native list order; `cell.targets().count()`.
     pub fn targets(&self) -> impl Iterator<Item = &T> {
         self.record.targets()
     }
@@ -56,26 +55,27 @@ impl<T> CellFilterCell<T> {
     }
     /// Native assignment discards existing targets without invoking their destructors.
     /// `destination.move_from_discard(&mut source)` can leak resources owned by discarded targets.
-    /// Rust releases their storage leases; incremental block bytes remain retained. Other allocator
-    /// kinds reclaim node storage, an extension to native incremental-only object allocation.
     pub fn move_from_discard(&mut self, source: &mut Self) -> &mut Self {
-        self.record
-            .move_from_discard(&mut source.record, &self.allocator);
+        self.record.move_from_discard(&mut source.record);
         self.allocator = source.allocator.clone();
         self
     }
     /// Native self assignment preserves the index but discards its object head without Target Drop.
-    /// `cell.move_self_discard()` can leak target-owned resources; storage release follows `move_from_discard`.
+    /// `cell.move_self_discard()` can leak target-owned resources, as `move_from_discard` does.
     pub fn move_self_discard(&mut self) -> &mut Self {
-        self.record.discard_objects(&self.allocator);
+        self.record.discard_objects();
         self
     }
 }
 impl<T: Clone> CellFilterCell<T> {
-    /// Build a native Object-first node in this cell's arena; `cell.prepend_target(&value)`.
+    /// Copy a target to the head of the list; `cell.prepend_target(&value)`.
     /// This safely adapts external initialization of protected `Cell::Objects`.
     pub fn prepend_target(&mut self, target: &T) {
-        self.record.prepend(target, &self.allocator);
+        self.record.prepend(target);
+    }
+    /// The allocator identity given at construction or adopted by a move; `cell.allocator()`.
+    pub fn allocator(&self) -> &BaseAllocator {
+        &self.allocator
     }
 }
 impl<T> PartialEq for CellFilterCell<T> {
@@ -84,11 +84,6 @@ impl<T> PartialEq for CellFilterCell<T> {
     }
 }
 impl<T> Eq for CellFilterCell<T> {}
-impl<T> Drop for CellFilterCell<T> {
-    fn drop(&mut self) {
-        unsafe { CellRecord::drop_objects(std::ptr::addr_of_mut!(self.record), &self.allocator) };
-    }
-}
 /// Native `CellHasher` callable adapters; `CellFilterCellHasher.hash(&cell)` hashes its index.
 #[derive(Clone, Copy, Default)]
 pub struct CellFilterCellHasher;

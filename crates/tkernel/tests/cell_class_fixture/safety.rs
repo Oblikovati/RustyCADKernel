@@ -46,7 +46,7 @@ fn observed_cell<'a>(arena: &BaseAllocator, probe: &'a DropProbe) -> CellFilterC
     cell
 }
 #[test]
-fn standalone_cell_copy_failure_leaves_its_canonical_chain_reachable() {
+fn standalone_cell_copy_failure_keeps_its_targets() {
     let (arena, probe) = (BaseAllocator::incremental(1024), DropProbe::default());
     let mut cell = observed_cell(&arena, &probe);
     probe.fail_clone.set(true);
@@ -62,7 +62,6 @@ fn standalone_cell_copy_failure_leaves_its_canonical_chain_reachable() {
         cell.targets().map(|target| target.id).collect::<Vec<_>>(),
         [3, 2, 1]
     );
-    assert_eq!(super::live_nodes(&arena), 3);
     drop(cell);
     assert!(arena.reset(false).is_ok());
 }
@@ -79,7 +78,7 @@ fn standalone_cell_preserves_payload_covariance_and_owned_node_thread_traits() {
     assert_eq!(shorten_cell(cell, &token).index(), [1]);
 }
 #[test]
-fn move_between_arenas_adopts_the_creating_allocator_for_transferred_nodes() {
+fn move_between_arenas_discards_old_targets_and_adopts_the_source_allocator() {
     let (first, second, probe) = (
         BaseAllocator::incremental(1024),
         BaseAllocator::incremental(1024),
@@ -89,7 +88,6 @@ fn move_between_arenas_adopts_the_creating_allocator_for_transferred_nodes() {
     let mut destination = observed_cell(&second, &probe);
     destination.move_from_discard(&mut source);
     assert!(second.reset(false).is_ok());
-    assert_eq!(super::live_nodes(&first), 3);
     assert!(probe.seen.borrow().is_empty());
     drop(destination);
     drop(source);

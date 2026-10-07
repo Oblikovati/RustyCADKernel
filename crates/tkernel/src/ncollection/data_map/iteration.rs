@@ -1,6 +1,6 @@
 //! Safe ranges borrow the map and follow its bucket chains in native order.
 use super::DataMapStorage;
-use crate::ncollection::chained_slots::{ChainPosition, ChainSlot, SlotRange, SlotRangeMut};
+use crate::ncollection::slot_chains::{ChainPosition, SlotRange};
 /// Shared key/value traversal in native bucket order; `map.items()`.
 pub struct DataMapItems<'a, K, V> {
     entries: SlotRange<'a, K, V>,
@@ -8,7 +8,7 @@ pub struct DataMapItems<'a, K, V> {
 impl<'a, K, V> DataMapItems<'a, K, V> {
     pub(super) fn new(source: &'a DataMapStorage<K, V>) -> Self {
         Self {
-            entries: SlotRange::new(source),
+            entries: SlotRange::new(source.view()),
         }
     }
     pub(super) fn from_position(
@@ -16,10 +16,10 @@ impl<'a, K, V> DataMapItems<'a, K, V> {
         position: ChainPosition,
     ) -> Self {
         Self {
-            entries: SlotRange::from_position(source, position),
+            entries: SlotRange::from_position(source.map(DataMapStorage::view), position),
         }
     }
-    pub(super) fn current(&self) -> Option<&'a ChainSlot<K, V>> {
+    pub(super) fn current(&self) -> Option<(&'a K, &'a V)> {
         self.entries.current()
     }
     pub(super) fn reset(&mut self) {
@@ -29,9 +29,7 @@ impl<'a, K, V> DataMapItems<'a, K, V> {
 impl<'a, K, V> Iterator for DataMapItems<'a, K, V> {
     type Item = (&'a K, &'a V);
     fn next(&mut self) -> Option<Self::Item> {
-        self.entries
-            .next()
-            .map(|entry| (entry.key(), entry.value()))
+        self.entries.next()
     }
 }
 impl<K, V> Default for DataMapItems<'_, K, V> {
@@ -54,6 +52,3 @@ impl<K, V> PartialEq for DataMapItems<'_, K, V> {
     }
 }
 impl<K, V> Eq for DataMapItems<'_, K, V> {}
-
-/// Exclusive traversal lending each value once in native order; `map.items_mut()`.
-pub(super) type DataMapItemsMut<'a, K, V> = SlotRangeMut<'a, K, V>;

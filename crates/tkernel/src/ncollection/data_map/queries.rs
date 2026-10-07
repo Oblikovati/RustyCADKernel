@@ -24,8 +24,7 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// ```
     pub fn contained(&self, key: &K) -> Option<(&K, &V)> {
         let (_, slot) = self.lookup(key)?;
-        let entry = self.storage.slot(slot);
-        Some((entry.key(), entry.value()))
+        Some(self.storage.payload().entry(slot))
     }
 
     /// `Contained()`: the stored key and a mutable item of an equivalent key, if bound.
@@ -39,7 +38,7 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
     /// ```
     pub fn contained_mut(&mut self, key: &K) -> Option<(&K, &mut V)> {
         let (_, slot) = self.lookup(key)?;
-        Some(self.storage.slot_mut(slot).key_value_mut())
+        Some(self.storage.payload_mut().entry_mut(slot))
     }
 
     /// `Seek`: the bound item or `None` (the native null pointer).

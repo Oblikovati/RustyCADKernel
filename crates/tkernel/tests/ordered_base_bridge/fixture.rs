@@ -1,6 +1,5 @@
 use rustycad_tkernel::ncollection::{
-    BaseMap, BaseMapBasicIterator, BasicMapIteratorSource, HashPolicy, OrderedDataMap,
-    OrderedDataMapNode, OrderedMap, OrderedMapNode,
+    BaseMap, HashBucketTable, HashPolicy, OrderedDataMap, OrderedMap,
 };
 #[derive(Default)]
 pub struct BridgeHash;
@@ -14,13 +13,6 @@ impl HashPolicy<i32> for BridgeHash {
 }
 pub type Set = OrderedMap<i32, BridgeHash>;
 pub type Map = OrderedDataMap<i32, i32, BridgeHash>;
-pub type SetOrder<'a> = BaseMapBasicIterator<'a, OrderedMapNode<i32>, false, true, true>;
-pub type SetBucket<'a> = BaseMapBasicIterator<'a, OrderedMapNode<i32>, false, true, false>;
-pub type DataOrder<'a> = BaseMapBasicIterator<'a, OrderedDataMapNode<i32, i32>, false, false, true>;
-pub type DataBucket<'a> =
-    BaseMapBasicIterator<'a, OrderedDataMapNode<i32, i32>, false, false, false>;
-pub type DataMutable<'a> =
-    BaseMapBasicIterator<'a, OrderedDataMapNode<i32, i32>, true, false, true>;
 pub fn native_row(label: &str, observed: String) {
     let expected = include_str!("../../../../tools/oracle/tkernel_ordered_base_bridge.expected");
     assert_eq!(
@@ -31,7 +23,28 @@ pub fn native_row(label: &str, observed: String) {
             .unwrap()
     );
 }
-pub fn queries<T: BaseMap + BasicMapIteratorSource>(label: &str, map: &T) {
+/// The two public null checks of the native row: `Buckets()` and `FirstNode()`.
+pub trait OrderedProbe: BaseMap {
+    fn table_absent(&self) -> bool;
+    fn first_absent(&self) -> bool;
+}
+impl OrderedProbe for Set {
+    fn table_absent(&self) -> bool {
+        self.buckets().is_none()
+    }
+    fn first_absent(&self) -> bool {
+        self.first_node().is_none()
+    }
+}
+impl OrderedProbe for Map {
+    fn table_absent(&self) -> bool {
+        self.buckets().is_none()
+    }
+    fn first_absent(&self) -> bool {
+        self.first_node().is_none()
+    }
+}
+pub fn queries<T: OrderedProbe>(label: &str, map: &T) {
     let base: &dyn BaseMap = map;
     native_row(
         label,
@@ -42,8 +55,8 @@ pub fn queries<T: BaseMap + BasicMapIteratorSource>(label: &str, map: &T) {
             base.length(),
             base.size(),
             u8::from(base.is_empty()),
-            u8::from(map.basic_bucket_slots().is_none()),
-            u8::from(map.basic_first_node().is_null())
+            u8::from(map.table_absent()),
+            u8::from(map.first_absent())
         ),
     );
 }
@@ -57,22 +70,19 @@ pub fn fill_map(map: &mut Map) {
         map.bind(key, key * 10);
     }
 }
-macro_rules! record_keys {
-    ($name:ident,$cursor:ident) => {
-        pub fn $name(label: &str, mut cursor: $cursor<'_>) {
-            let mut observed = format!("{label} ");
-            while cursor.more() {
-                // SAFETY: the fixture's map borrow retains every current node; reads never escape.
-                unsafe {
-                    observed.push_str(&format!("{}:{},", cursor.key(), cursor.value()));
-                    cursor.advance();
-                }
-            }
-            native_row(label, observed);
-        }
-    };
+/// A native row of `key:value,` pairs, from any traversal.
+pub fn record<'a, K: std::fmt::Display + 'a, V: std::fmt::Display + 'a>(
+    label: &str,
+    pairs: impl Iterator<Item = (&'a K, &'a V)>,
+) {
+    let observed: String = pairs
+        .map(|(key, value)| format!("{key}:{value},"))
+        .collect();
+    native_row(label, format!("{label} {observed}"));
 }
-record_keys!(set_order, SetOrder);
-record_keys!(set_buckets, SetBucket);
-record_keys!(data_order, DataOrder);
-record_keys!(data_buckets, DataBucket);
+/// Every chain of a bucket table in native order (bucket `0..=NbBuckets`, then each chain).
+pub fn bucket_pairs<'a, K, V>(table: &HashBucketTable<'a, K, V>) -> Vec<(&'a K, &'a V)> {
+    (0..table.len())
+        .flat_map(|bucket| table.chain(bucket).unwrap())
+        .collect()
+}

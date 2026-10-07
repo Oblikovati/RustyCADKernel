@@ -2,23 +2,21 @@ use super::{
     adapters::OrderedExchangeFixture,
     fixture::{SwapPolicy, SwapTrace, native_row},
 };
-use rustycad_tkernel::ncollection::{BaseAllocator, MapLinkNode};
+use rustycad_tkernel::ncollection::BaseAllocator;
 use std::{
     panic::{AssertUnwindSafe, catch_unwind},
     rc::Rc,
 };
 struct GraphSnapshot {
-    first: *mut (),
-    buckets: *const *mut MapLinkNode,
+    first: *const (),
+    buckets: *const (),
     arena: BaseAllocator,
 }
 impl GraphSnapshot {
     fn capture<M: OrderedExchangeFixture>(map: &M) -> Self {
         Self {
-            first: map.basic_first_node().cast(),
-            buckets: map
-                .basic_bucket_slots()
-                .map_or(std::ptr::null(), |slots| slots.as_ptr()),
+            first: map.first_identity(),
+            buckets: map.table_identity(),
             arena: map.allocator().clone(),
         }
     }
@@ -75,21 +73,13 @@ impl<M: OrderedExchangeFixture> SwapScenario<M> {
     }
     fn verify_release(self, empty: bool) {
         let trace = Rc::clone(&self.trace);
-        let (first, second) = (
-            self.first.allocator().clone(),
-            self.second.allocator().clone(),
-        );
-        if !empty {
-            assert!(first.reset(false).is_err());
-            assert!(second.reset(false).is_err());
-        }
+        // Per-entry arena leases are protected allocator state (plan D1 class B6); the drop
+        // count proves every payload is released exactly once.
         drop(self);
         assert_eq!(
             trace.drops.get(),
             if empty { 0 } else { 3 * M::PAYLOADS_PER_NODE }
         );
-        assert!(first.reset(false).is_ok());
-        assert!(second.reset(false).is_ok());
     }
     fn execute(&mut self, assign: bool) -> bool {
         catch_unwind(AssertUnwindSafe(|| {
@@ -167,7 +157,7 @@ pub fn self_assign<M: OrderedExchangeFixture>(prefix: &str) {
     let trace = Rc::new(SwapTrace::default());
     let mut map = M::construct(SwapPolicy::new(7, &trace), 101, BaseAllocator::common());
     map.insert(4, &trace);
-    let node = map.basic_first_node();
+    let node = map.first_identity();
     trace.rejected.set(1);
     map.native_self_assign();
     let label = format!("{prefix}_self");
@@ -177,7 +167,7 @@ pub fn self_assign<M: OrderedExchangeFixture>(prefix: &str) {
             "{label} {} {} {} {} 0 {}",
             map.policy().state,
             map.size(),
-            u8::from(node == map.basic_first_node()),
+            u8::from(node == map.first_identity()),
             trace.phase.get(),
             trace.drops.get()
         ),
@@ -188,7 +178,7 @@ pub fn self_exchange<M: OrderedExchangeFixture>(prefix: &str, rejected: usize) {
     let trace = Rc::new(SwapTrace::default());
     let mut map = M::construct(SwapPolicy::new(7, &trace), 101, BaseAllocator::common());
     map.insert(4, &trace);
-    let node = map.basic_first_node();
+    let node = map.first_identity();
     trace.rejected.set(rejected);
     let success = catch_unwind(AssertUnwindSafe(|| map.native_self_exchange())).is_ok();
     let status = if success { "ok" } else { "throw" };
@@ -199,7 +189,7 @@ pub fn self_exchange<M: OrderedExchangeFixture>(prefix: &str, rejected: usize) {
             "{label} {status} {} {} {} {} 0 {} {}",
             map.policy().state,
             map.size(),
-            u8::from(node == map.basic_first_node()),
+            u8::from(node == map.first_identity()),
             trace.phase.get(),
             trace.drops.get(),
             trace.events.borrow()

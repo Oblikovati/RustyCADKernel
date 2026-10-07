@@ -26,24 +26,10 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
         let Some(found) = self.match_first(one, first) else {
             return false;
         };
-        self.match_second_through_primary(two, second) == Some(found)
-    }
-    fn match_second_through_primary(
-        &self,
-        bucket: usize,
-        second: &B,
-    ) -> Option<*mut super::MapLinkNode> {
-        let mut node = self.storage.head(bucket, true);
-        while !node.is_null() {
-            if self
-                .second_policy
-                .equal(unsafe { self.storage.node(node) }.key2(), second)
-            {
-                return Some(node);
-            }
-            node = unsafe { (*node).next() };
-        }
-        None
+        let through_first = self
+            .storage
+            .find2_through_first(two, |stored| self.second_policy.equal(stored, second));
+        through_first == Some(found)
     }
 
     /// `Find1(key1, key2&)`: copies the partner of a bound first key into `output`.

@@ -1,15 +1,13 @@
+//! Shared ranges follow the first-key chains in native bucket order.
 use super::{Debug, DoubleMap, DoubleMapItems, DoubleMapValues, HashPolicy};
+use crate::ncollection::{HashBucketTable, slot_chains::SlotRange};
 impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H1, H2> {
     /// Borrows both keys in first-key bucket order; `for (first,second) in map.items() {}`.
     pub fn items(&self) -> DoubleMapItems<'_, A, B> {
         DoubleMapItems {
-            source: Some(&self.storage),
-            position: super::super::owned_bucket_chains::BucketChainPosition::new(
-                self.storage.base().base(),
-            ),
+            entries: SlotRange::new(self.storage.view()),
         }
     }
-
     /// Borrows second keys in first-key bucket order; `map.iter().count()`.
     pub fn iter(&self) -> DoubleMapValues<'_, A, B> {
         DoubleMapValues {
@@ -22,51 +20,55 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
             pairs: DoubleMapItems::default(),
         }
     }
+    /// Native `Buckets()`: the first (Key1) table, yielding `(key1, key2)` pairs per chain, or
+    /// `None` where native returns null. The second table is a protected member (plan D1 B6).
+    ///
+    /// ```
+    /// # use rustycad_tkernel::ncollection::DoubleMap;
+    /// let mut map = DoubleMap::<i32, i32>::default();
+    /// assert!(map.buckets().is_none());
+    /// map.bind(1, 5).unwrap();
+    /// let table = map.buckets().unwrap();
+    /// assert_eq!(table.len(), 102);
+    /// assert_eq!(table.chain(2)?.collect::<Vec<_>>(), [(&1, &5)]);
+    /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
+    /// ```
+    pub fn buckets(&self) -> Option<HashBucketTable<'_, A, B>> {
+        self.storage.buckets()
+    }
 }
 
 impl<'a, A, B> DoubleMapItems<'a, A, B> {
-    pub(super) fn current(&self) -> Option<&'a super::DoubleMapNode<A, B>> {
-        if self.position.node.is_null() {
-            return None;
-        }
-        Some(unsafe { self.source?.node(self.position.node) })
+    pub(super) fn current(&self) -> Option<(&'a A, &'a B)> {
+        self.entries.current()
     }
     pub(super) fn reset(&mut self) {
-        self.position = self.source.map_or_else(Default::default, |source| {
-            super::super::owned_bucket_chains::BucketChainPosition::new(source.base().base())
-        });
+        self.entries.reset();
     }
 }
 impl<'a, A, B> Iterator for DoubleMapItems<'a, A, B> {
     type Item = (&'a A, &'a B);
     fn next(&mut self) -> Option<Self::Item> {
-        let node = self.current()?;
-        self.position.advance(self.source?.base().base());
-        Some((node.key1(), node.key2()))
+        self.entries.next()
     }
 }
 impl<A, B> Clone for DoubleMapItems<'_, A, B> {
     fn clone(&self) -> Self {
         Self {
-            source: self.source,
-            position: self.position,
+            entries: self.entries.clone(),
         }
     }
 }
 impl<A, B> Default for DoubleMapItems<'_, A, B> {
     fn default() -> Self {
         Self {
-            source: None,
-            position: Default::default(),
+            entries: SlotRange::default(),
         }
     }
 }
-// SAFETY: these readonly ranges borrow an immutable owner and expose only shared payload references.
-unsafe impl<A: Sync, B: Sync> Send for DoubleMapItems<'_, A, B> {}
-unsafe impl<A: Sync, B: Sync> Sync for DoubleMapItems<'_, A, B> {}
 impl<A, B> PartialEq for DoubleMapItems<'_, A, B> {
     fn eq(&self, other: &Self) -> bool {
-        self.position.node == other.position.node
+        self.entries == other.entries
     }
 }
 impl<A, B> Eq for DoubleMapItems<'_, A, B> {}
