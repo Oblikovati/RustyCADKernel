@@ -13,6 +13,7 @@
 //! docs/xsbase-design.md fixes how the C++ constructs of the packages map to Rust.
 mod c_text;
 pub mod interface;
+pub mod lib_ctl;
 pub mod moni_tool;
 mod ostream_text;
 pub mod xs_message;
