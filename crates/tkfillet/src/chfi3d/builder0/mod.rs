@@ -7,6 +7,8 @@
 mod arete;
 mod boundaries;
 mod bounds;
+mod curves;
+mod curves_walk;
 mod faces;
 mod pcurves;
 mod smooth;
@@ -24,6 +26,7 @@ pub use bounds::{
     boite, boite4, bound_fac, bound_srf, enlarge_box_curve, enlarge_box_edge, enlarge_box_pcurve,
     in_period,
 };
+pub use curves::{IntersectionCurves, compute_curves};
 pub use faces::{conexfaces, edge_state, evalconti, kparticular};
 pub use pcurves::{
     check_same_parameter, compute_pcurv, compute_pcurv_geom, compute_pcurv_on, project_pcurv,

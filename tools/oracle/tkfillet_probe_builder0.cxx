@@ -20,6 +20,7 @@
 #include <ChFiDS_Map.hxx>
 #include <GeomAdaptor_Curve.hxx>
 #include <GeomAdaptor_Surface.hxx>
+#include <GeomAdaptor_TransformedSurface.hxx>
 #include <GeomFill_Boundary.hxx>
 #include <Geom_BSplineCurve.hxx>
 #include <Geom_BezierCurve.hxx>
@@ -322,4 +323,23 @@ void fl_b0_smooth_case(std::istream& in){
   GA_TRY(ga_flag(ChFi3d_IsSmooth(c)));
   GA_TRY(occ::handle<Geom_BSplineCurve> bs=ChFi3d_ApproxByC2(c);ga_flag(bs.IsNull());if(!bs.IsNull()){ga_int(bs->Degree());ga_int(bs->NbPoles());
    ga_real(bs->FirstParameter());ga_real(bs->LastParameter());ga_pnt(bs->Value(0.5*(bs->FirstParameter()+bs->LastParameter())));}));
+ ga_end();}
+
+// A 3d curve: its range and three points.
+void fl_curve3d(const occ::handle<Geom_Curve>& c){
+ ga_flag(c.IsNull());if(c.IsNull())return;double f=c->FirstParameter(),l=c->LastParameter();ga_real(f);ga_real(l);
+ GA_TRY(ga_pnt(c->Value(f));ga_pnt(c->Value(0.5*(f+l)));ga_pnt(c->Value(l)));}
+
+// `fl_compute_curves SURFACE1 SURFACE2 Pardeb(4) Parfin(4) tol3d tol2d whole wrap`:
+// ChFi3d_ComputeCurves of the surfaces between the known ends; with wrap, the surfaces
+// are adapted by GeomAdaptor_TransformedSurface (no GeomInt, the walking is used).
+void fl_compute_curves_case(std::istream& in){
+ GaReader r{in};occ::handle<Adaptor3d_Surface> s1=fl_surface(r),s2=fl_surface(r);
+ NCollection_Array1<double> deb(1,4),fin(1,4);for(int i=1;i<=4;++i)deb(i)=r.real();for(int i=1;i<=4;++i)fin(i)=r.real();
+ double tol3d=r.real(),tol2d=r.real();bool whole=r.flag(),wrap=r.flag();
+ if(wrap){s1=new GeomAdaptor_TransformedSurface(occ::down_cast<GeomAdaptor_Surface>(s1)->Surface(),gp_Trsf());
+  s2=new GeomAdaptor_TransformedSurface(occ::down_cast<GeomAdaptor_Surface>(s2)->Surface(),gp_Trsf());}
+ occ::handle<Geom_Curve> c;occ::handle<Geom2d_Curve> p1,p2;double t=-1;
+ GA_TRY(ga_flag(ChFi3d_ComputeCurves(s1,s2,deb,fin,c,p1,p2,tol3d,tol2d,t,whole)));
+ ga_real(t);fl_curve3d(c);fl_curve2d(p1);fl_curve2d(p2);
  ga_end();}

@@ -1,7 +1,8 @@
-//! The ChFi3d_Builder_0 topology searches and the smoothness of guides
-//! (`fl_b0_topology`, `fl_b0_smooth`); the twin of the last part of
+//! The ChFi3d_Builder_0 topology searches, the smoothness of guides and the
+//! intersection curves (`fl_b0_topology`, `fl_b0_smooth`, `fl_compute_curves`); the twin of the last part of
 //! tools/oracle/tkfillet_probe_builder0.cxx.
-use super::blend_func::geom_guide;
+use super::blend_func::{geom_guide, surface};
+use super::builder0::curve2d;
 use super::chfi3d::{edge_faces, solid};
 use super::common::{Reader, attempt, end, flag, int, pnt, real};
 use rustycad_tkbrep::topexp::{self, Explorer};
@@ -11,8 +12,11 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkfillet::chfi_ds::Map;
 use rustycad_tkfillet::chfi3d as b0;
+use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCurve, GeomTrimmedCurve};
+use rustycad_tkg3d::geom_adaptor::{GeomAdaptorSurface, GeomAdaptorTransformedSurface};
 use rustycad_tkg3d::top_abs::ShapeEnum;
+use rustycad_tkmath::gp::Transform3;
 
 /// `fl_index`.
 fn index(s: &Shape, x: &Shape, kind: ShapeEnum) -> Result<i32, Failure> {
@@ -191,5 +195,62 @@ pub fn smooth_case(values: &[f64]) {
         });
         Ok(())
     });
+    end();
+}
+
+/// `fl_curve3d`.
+fn curve3d(c: &Handle<dyn GeomCurve>) {
+    flag(c.is_null());
+    let Some(curve) = c.get() else {
+        return;
+    };
+    let (f, l) = (curve.first_parameter(), curve.last_parameter());
+    real(f);
+    real(l);
+    attempt(|| {
+        pnt(curve.value(f)?);
+        pnt(curve.value(0.5 * (f + l))?);
+        pnt(curve.value(l)?);
+        Ok(())
+    });
+}
+
+/// The surface of a GeomAdaptor_Surface handle adapted by
+/// GeomAdaptor_TransformedSurface with the identity.
+fn transformed(s: &Handle<dyn Adaptor3dSurface>) -> Handle<dyn Adaptor3dSurface> {
+    let geom = s
+        .cast::<GeomAdaptorSurface>()
+        .get()
+        .expect("a GeomAdaptor_Surface")
+        .surface();
+    Handle::new(
+        GeomAdaptorTransformedSurface::with_surface(&geom, Transform3::default()).expect("adaptor"),
+    )
+    .cast()
+}
+
+/// `fl_compute_curves`: see tools/oracle/tkfillet_probe_builder0.cxx.
+pub fn compute_curves_case(values: &[f64]) {
+    let r = &mut Reader::new(values);
+    let (s1, s2) = (surface(r), surface(r));
+    let deb = [r.real(), r.real(), r.real(), r.real()];
+    let fin = [r.real(), r.real(), r.real(), r.real()];
+    let (tol3d, tol2d, whole, wrap) = (r.real(), r.real(), r.flag(), r.flag());
+    let (s1, s2) = if wrap {
+        (transformed(&s1), transformed(&s2))
+    } else {
+        (s1, s2)
+    };
+    let mut out = b0::IntersectionCurves {
+        tolreached: -1.0,
+        ..Default::default()
+    };
+    attempt(|| {
+        b0::compute_curves((&s1, &s2), (deb, fin), (tol3d, tol2d), whole, &mut out).map(flag)
+    });
+    real(out.tolreached);
+    curve3d(&out.c3d);
+    curve2d(&out.pc1);
+    curve2d(&out.pc2);
     end();
 }

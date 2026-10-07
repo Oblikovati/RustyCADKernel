@@ -168,6 +168,56 @@ def topology(requests: list[str]) -> None:
         requests.append('fl_b0_smooth ' + numbers([kind, *g, *poles, f, l]))
 
 
+def intersection_curves(requests: list[str]) -> None:
+    """Known ends on the intersection of surface pairs, each branch of ComputeCurves."""
+    sq3, s5, s8 = math.sqrt(3), math.sqrt(5), math.sqrt(8)
+    plane_x = surface(0, (0, 0, 0), (1, 0, 0), (0, 1, 0))
+    plane_x1 = surface(0, (1, 0, 0), (1, 0, 0), (0, 1, 0))
+    plane_z05 = surface(0, (0, 0, 0.5))
+    oblique = surface(0, (0, 0, 0), (0, 0.5, 1), (1, 0, 0))
+    cyl2, sph3, tor = SURFACES[2], SURFACES[3], SURFACES[5]
+    sph3b = surface(2, (2, 0, 0), a=3.0)
+    cyl1x = surface(1, (0, 0, 0), (1, 0, 0), (0, 1, 0), a=1.0)
+
+    def on_cyl_x(u):
+        v = math.sqrt(4 - math.cos(u) ** 2)
+        return [math.atan2(math.cos(u), v), math.sin(u), u, v]
+
+    def on_spheres(t):
+        y, z = s8 * math.cos(t), s8 * math.sin(t)
+        return [math.atan2(y, 1), math.asin(z / 3), math.atan2(y, -1), math.asin(z / 3)]
+
+    lat = math.asin(s5 / 3)
+    cases = [
+        (SURFACES[0], plane_x, [0, 0, 0, 0], [0, 5, 5, 0]),
+        (SURFACES[0], plane_x, [0, 5, 5, 0], [0, 0, 0, 0]),
+        (SURFACES[0], cyl2, [2, 0, 0, 0], [0, 2, PI / 2, 0]),
+        (cyl2, SURFACES[0], [0, 0, 2, 0], [PI / 2, 0, 0, 2]),
+        (plane_x1, cyl2, [sq3, 0, PI / 3, 0], [sq3, 3, PI / 3, 3]),
+        (oblique, cyl2, [2, 0, 0, 0], [0, 0, 0, 0]),
+        (sph3, cyl2, [0.3, lat, 0.3, s5], [1.5, lat, 1.5, s5]),
+        (sph3, sph3b, on_spheres(0.2), on_spheres(1.3)),
+        (cyl2, cyl1x, on_cyl_x(0.2)[0:2] + on_cyl_x(0.2)[2:4], on_cyl_x(1.2)),
+        (tor, plane_z05, [0.1, PI / 6, (5 + math.cos(PI / 6)) * math.cos(0.1), (5 + math.cos(PI / 6)) * math.sin(0.1)],
+         [1.0, PI / 6, (5 + math.cos(PI / 6)) * math.cos(1.0), (5 + math.cos(PI / 6)) * math.sin(1.0)]),
+    ]
+    for s1, s2, deb, fin in cases:
+        for whole in (0, 1):
+            requests.append('fl_compute_curves ' + numbers([*s1, *s2, *deb, *fin, 1e-4, 1e-5, whole, 0]))
+    # The walking fallback: identical ends make GeomInt skip its closed lines, and a
+    # plane almost parallel to the axis gives a refused ellipse.
+    walks = [
+        (sph3, sph3b, on_spheres(0.4), on_spheres(0.4)),
+        (cyl2, cyl1x, on_cyl_x(0.5), on_cyl_x(0.5)),
+        (surface(0, (1, 0, 0), (1, 0, 1e-7), (0, 1, 0)), cyl2, [sq3, 0, PI / 3, 0], [sq3, 1, PI / 3, 1]),
+        (sph3, cyl2, [0.3, lat, 0.3, s5], [0.3, lat, 0.3, s5]),
+    ]
+    for s1, s2, deb, fin in walks:
+        requests.append('fl_compute_curves ' + numbers([*s1, *s2, *deb, *fin, 1e-4, 1e-5, 0, 0]))
+    for s1, s2, deb, fin in (cases[6], cases[7], cases[8], cases[2]):
+        requests.append('fl_compute_curves ' + numbers([*s1, *s2, *deb, *fin, 1e-4, 1e-5, 0, 1]))
+
+
 def append_builder0_requests(requests: list[str]) -> None:
     """Append the ChFi3d_Builder_0 request families."""
     scalars(requests)
@@ -182,3 +232,4 @@ def append_builder0_requests(requests: list[str]) -> None:
     tolerances(requests)
     meetings(requests)
     topology(requests)
+    intersection_curves(requests)

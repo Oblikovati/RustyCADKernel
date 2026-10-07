@@ -312056,6 +312056,14 @@
       "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; found shapes become returned values (Option when the search may fail), the in/out shapes of cherche_face1, cherche_element and cherche_edge stay &mut as natively, and native exceptions become Failure values. Compared with OCCT by the fl_b0_topology and fl_b0_smooth probes of tools/verify_tkfillet_numeric.py."
     },
     {
+      "upstream_id": "ChFi3d_ComputeCurves",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::compute_curves",
+      "status": "implemented",
+      "notes": "ChFi3d_ComputeCurves fills an IntersectionCurves (written as natively also on failure); analytic plane-plane and plane-cylinder cases, GeomInt_IntSS on the trimmed surfaces, then IntWalk_PWalking with GeomInt_WLApprox. Compared with OCCT by the fl_compute_curves probe of tools/verify_tkfillet_numeric.py."
+    },
+    {
       "upstream_id": "BRepOffset_Analyse",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
