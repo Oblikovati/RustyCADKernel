@@ -39,6 +39,8 @@ def fixture_files(folder: Path) -> dict[str, Path]:
         "crosswalk_rows": [
             row("implemented", ["a"]), row("missing_rust_target", ["b"]),
             row("partial", ["c"]), row("missing_cpp", []), row("implemented", ["a"]),
+            # Compiled out of the Linux capture and proven by a skipped range: not a defect.
+            dict(row("excluded", []), cpp_status="inactive_configuration"),
         ],
         "unclaimed_cpp_declarations": [{"id": "d"}, {"id": "e"}, {"id": "f"}],
     }
