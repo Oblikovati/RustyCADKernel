@@ -149277,6 +149277,41 @@
       "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The derived interferences reach it through Deref/DerefMut; the protected constructor, SelfInterference and members are Interference::new, self_interference and the *_mut accessors. Compared with OCCT by the intf_interference probe."
     },
     {
+      "upstream_id": "Intf_Interference::SelfIntf",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Intf_Interference: Rust keeps it as the private field `self_interference` of Interference (tkgeomalgo/src/intf/interference.rs), the state of Interference; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "Intf_Interference::mySPoins",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Intf_Interference: Rust keeps it as the private field `section_points` of Interference (tkgeomalgo/src/intf/interference.rs), the state of Interference; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "Intf_Interference::mySLines",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Intf_Interference: Rust keeps it as the private field `section_lines` of Interference (tkgeomalgo/src/intf/interference.rs), the state of Interference; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "Intf_Interference::Tolerance",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Intf_Interference: Rust keeps it as the private field `tolerance` of Interference (tkgeomalgo/src/intf/interference.rs), the state of Interference; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "Intf_Interference::myTZones",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Intf_Interference: Rust keeps it as the private field `tangent_zones` of Interference (tkgeomalgo/src/intf/interference.rs), the state of Interference; derived types reach it through the methods, so it is not public API."
+    },
+    {
       "upstream_id": "Intf_InterferencePolygon2d::Intf_InterferencePolygon2d()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_InterferencePolygon2d.hxx",
@@ -149371,6 +149406,13 @@
       "rust_item": "rustycad_tkgeomalgo::intf::Polygon2d",
       "status": "excluded",
       "notes": "Intf_Polygon2d is a trait; a Rust implementor is dropped by its owner, so the virtual destructor has no counterpart."
+    },
+    {
+      "upstream_id": "Intf_Polygon2d::myBox",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Polygon2d.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of the abstract Intf_Polygon2d: the Rust trait rustycad_tkgeomalgo::intf::Polygon2d has no data; each implementor keeps its box and returns it through the required method Polygon2d::bounding, so it is not public API."
     },
     {
       "upstream_id": "Intf_Tool::Intf_Tool()",
@@ -151389,6 +151431,35 @@
       "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
     },
     {
+      "upstream_id": "IntRes2d_Intersection::lseg",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of IntRes2d_Intersection: Rust keeps it as the private field `lseg` of Intersection (tkgeomalgo/src/int_res2d/intersection.rs), the state of Intersection; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::lpnt",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of IntRes2d_Intersection: Rust keeps it as the private field `lpnt` of Intersection (tkgeomalgo/src/int_res2d/intersection.rs), the state of Intersection; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::done",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::done",
+      "status": "implemented",
+      "notes": "Public data member of IntRes2d_Intersection: the public field of the Rust struct."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::reverse",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of IntRes2d_Intersection: Rust keeps it as the private field `reverse` of Intersection (tkgeomalgo/src/int_res2d/intersection.rs), the state of Intersection; derived types reach it through the methods, so it is not public API."
+    },
+    {
       "upstream_id": "IntRes2d_IntersectionPoint()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionPoint.hxx",
@@ -152307,6 +152378,70 @@
       "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::second_intersection",
       "status": "implemented",
       "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "Interval::Binf",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::binf",
+      "status": "implemented",
+      "notes": "Public data member of Interval: the public field of the Rust struct."
+    },
+    {
+      "upstream_id": "Interval::Bsup",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::bsup",
+      "status": "implemented",
+      "notes": "Public data member of Interval: the public field of the Rust struct."
+    },
+    {
+      "upstream_id": "Interval::HasFirstBound",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::has_first_bound",
+      "status": "implemented",
+      "notes": "Data member of Interval: the public field `has_first_bound` of the Rust struct."
+    },
+    {
+      "upstream_id": "PeriodicInterval::Bsup",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::bsup",
+      "status": "implemented",
+      "notes": "Public data member of PeriodicInterval: the public field of the Rust struct."
+    },
+    {
+      "upstream_id": "Interval::HasLastBound",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::has_last_bound",
+      "status": "implemented",
+      "notes": "Data member of Interval: the public field `has_last_bound` of the Rust struct."
+    },
+    {
+      "upstream_id": "PeriodicInterval::Binf",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::binf",
+      "status": "implemented",
+      "notes": "Public data member of PeriodicInterval: the public field of the Rust struct."
+    },
+    {
+      "upstream_id": "PeriodicInterval::isnull",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::isnull",
+      "status": "implemented",
+      "notes": "Public data member of PeriodicInterval: the public field of the Rust struct."
+    },
+    {
+      "upstream_id": "Interval::IsNull",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::is_null",
+      "status": "implemented",
+      "notes": "Public data member of Interval: the public field `is_null` of the Rust struct."
     },
     {
       "upstream_id": "IntCurve_IntConicConic::IntCurve_IntConicConic(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Lin2d&,const IntRes2d_Domain&,double,double)",
@@ -157325,6 +157460,188 @@
       "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
     },
     {
+      "upstream_id": "FairCurve_Batten::Poles",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `poles` of FairCurveBatten (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::NewHeight",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `new.height` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::Knots",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `knots` of FairCurveBatten (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::OldAngle1",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.angle1` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::NewSlope",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `new.slope` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::NewP2",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `new.p2` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::OldAngle2",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.angle2` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::NewSlidingFactor",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `new.sliding_factor` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::OldP1",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.p1` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::OldP2",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.p2` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::NewP1",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `new.p1` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::OldSlidingFactor",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.sliding_factor` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::Degree",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `degree` of FairCurveBatten (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::NewAngle1",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `new.angle1` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::Flatknots",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `flatknots` of FairCurveBatten (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::OldFreeSliding",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.free_sliding` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::OldConstraintOrder1",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.constraint_order1` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::NewConstraintOrder1",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `new.constraint_order1` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::myCode",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `code` of FairCurveBatten (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::NewFreeSliding",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `new.free_sliding` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::OldConstraintOrder2",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.constraint_order2` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::OldSlope",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.slope` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::Mults",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `mults` of FairCurveBatten (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::NewAngle2",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `new.angle2` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::NewConstraintOrder2",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `new.constraint_order2` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::OldHeight",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.height` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
+    },
+    {
       "upstream_id": "FairCurve_BattenLaw::FairCurve_BattenLaw(double,double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_BattenLaw.hxx",
@@ -157387,6 +157704,55 @@
       "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfEnergy::set_derivative_order",
       "status": "implemented",
       "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy::MyNbValAux",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_DistributionOfEnergy: Rust keeps it as the private field `nb_val_aux` of FairCurveDistributionOfEnergy (tkgeomalgo/src/fair_curve/distribution.rs), the state of FairCurveDistributionOfEnergy; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy::MyNbEqua",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_DistributionOfEnergy: Rust keeps it as the private field `nb_equa` of FairCurveDistributionOfEnergy (tkgeomalgo/src/fair_curve/distribution.rs), the state of FairCurveDistributionOfEnergy; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy::MyNbVar",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_DistributionOfEnergy: Rust keeps it as the private field `nb_var` of FairCurveDistributionOfEnergy (tkgeomalgo/src/fair_curve/distribution.rs), the state of FairCurveDistributionOfEnergy; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy::MyPoles",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_DistributionOfEnergy: Rust keeps it as the private field `poles` of FairCurveDistributionOfEnergy (tkgeomalgo/src/fair_curve/distribution.rs), the state of FairCurveDistributionOfEnergy; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy::MyBSplOrder",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_DistributionOfEnergy: Rust keeps it as the private field `bspl_order` of FairCurveDistributionOfEnergy (tkgeomalgo/src/fair_curve/distribution.rs), the state of FairCurveDistributionOfEnergy; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy::MyFlatKnots",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_DistributionOfEnergy: Rust keeps it as the private field `flat_knots` of FairCurveDistributionOfEnergy (tkgeomalgo/src/fair_curve/distribution.rs), the state of FairCurveDistributionOfEnergy; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy::MyDerivativeOrder",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_DistributionOfEnergy: Rust keeps it as the private field `derivative_order` of FairCurveDistributionOfEnergy (tkgeomalgo/src/fair_curve/distribution.rs), the state of FairCurveDistributionOfEnergy; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "FairCurve_DistributionOfJerk::FairCurve_DistributionOfJerk(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,const FairCurve_BattenLaw&,int)",
@@ -157499,6 +157865,41 @@
       "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel::poles",
       "status": "implemented",
       "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::MyContrOrder1",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Energy: Rust keeps it as the private field `contr_order1` of FairCurveEnergy (tkgeomalgo/src/fair_curve/energy.rs), the state of FairCurveEnergyModel; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::MyContrOrder2",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Energy: Rust keeps it as the private field `contr_order2` of FairCurveEnergy (tkgeomalgo/src/fair_curve/energy.rs), the state of FairCurveEnergyModel; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::MyWithAuxValue",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Energy: Rust keeps it as the private field `with_aux_value` of FairCurveEnergy (tkgeomalgo/src/fair_curve/energy.rs), the state of FairCurveEnergyModel; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::MyPoles",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Energy: Rust keeps it as the private field `poles` of FairCurveEnergy (tkgeomalgo/src/fair_curve/energy.rs), the state of FairCurveEnergyModel; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::MyNbVar",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of FairCurve_Energy: Rust keeps it as the private field `nb_var` of FairCurveEnergy (tkgeomalgo/src/fair_curve/energy.rs), the state of FairCurveEnergyModel; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "FairCurve_EnergyOfBatten::FairCurve_EnergyOfBatten(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,int,const FairCurve_BattenLaw&,double,bool,double,double)",
@@ -158197,6 +158598,55 @@
       "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
     },
     {
+      "upstream_id": "HatchGen_IntersectionPoint::myBefore",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of HatchGen_IntersectionPoint: Rust keeps it as the private field `my_before` of IntersectionPoint (tkgeomalgo/src/hatch_gen/intersection_point.rs), the state of IntersectionPoint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::myPosit",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of HatchGen_IntersectionPoint: Rust keeps it as the private field `my_posit` of IntersectionPoint (tkgeomalgo/src/hatch_gen/intersection_point.rs), the state of IntersectionPoint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::myAfter",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of HatchGen_IntersectionPoint: Rust keeps it as the private field `my_after` of IntersectionPoint (tkgeomalgo/src/hatch_gen/intersection_point.rs), the state of IntersectionPoint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::myIndex",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of HatchGen_IntersectionPoint: Rust keeps it as the private field `my_index` of IntersectionPoint (tkgeomalgo/src/hatch_gen/intersection_point.rs), the state of IntersectionPoint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::mySegBeg",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of HatchGen_IntersectionPoint: Rust keeps it as the private field `my_seg_beg` of IntersectionPoint (tkgeomalgo/src/hatch_gen/intersection_point.rs), the state of IntersectionPoint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::mySegEnd",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of HatchGen_IntersectionPoint: Rust keeps it as the private field `my_seg_end` of IntersectionPoint (tkgeomalgo/src/hatch_gen/intersection_point.rs), the state of IntersectionPoint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::myParam",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of HatchGen_IntersectionPoint: Rust keeps it as the private field `my_param` of IntersectionPoint (tkgeomalgo/src/hatch_gen/intersection_point.rs), the state of IntersectionPoint; derived types reach it through the methods, so it is not public API."
+    },
+    {
       "upstream_id": "HatchGen_PointOnElement::HatchGen_PointOnElement()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnElement.hxx",
@@ -158251,6 +158701,13 @@
       "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnElement::<rustycad_tkgeomalgo::hatch_gen::IntersectionPointDump>::dump",
       "status": "implemented",
       "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnElement::myType",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnElement.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of HatchGen_PointOnElement: Rust keeps it as the private field `my_type` of PointOnElement (tkgeomalgo/src/hatch_gen/point_on_element.rs), the state of PointOnElement; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "HatchGen_PointOnHatching::HatchGen_PointOnHatching()",
@@ -158341,6 +158798,13 @@
       "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
     },
     {
+      "upstream_id": "HatchGen_PointOnHatching::myPoints",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of HatchGen_PointOnHatching: Rust keeps it as the private field `my_points` of PointOnHatching (tkgeomalgo/src/hatch_gen/point_on_hatching.rs), the state of PointOnHatching; derived types reach it through the methods, so it is not public API."
+    },
+    {
       "upstream_id": "Geom2dHatch_Classifier::Geom2dHatch_Classifier()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
@@ -158411,6 +158875,48 @@
       "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::position",
       "status": "implemented",
       "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::rejected",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Geom2dHatch_Classifier: Rust keeps it as the private field `rejected` of FaceClassifier (tkgeomalgo/src/topclass/face_classifier.rs), the state of FaceClassifier; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::myPosition",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Geom2dHatch_Classifier: Rust keeps it as the private field `my_position` of FaceClassifier (tkgeomalgo/src/topclass/face_classifier.rs), the state of FaceClassifier; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::myEdge",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Geom2dHatch_Classifier: Rust keeps it as the private field `my_edge` of FaceClassifier (tkgeomalgo/src/topclass/face_classifier.rs), the state of FaceClassifier; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::nowires",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Geom2dHatch_Classifier: Rust keeps it as the private field `nowires` of FaceClassifier (tkgeomalgo/src/topclass/face_classifier.rs), the state of FaceClassifier; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::myClassifier",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Geom2dHatch_Classifier: Rust keeps it as the private field `my_classifier` of FaceClassifier (tkgeomalgo/src/topclass/face_classifier.rs), the state of FaceClassifier; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::myEdgeParameter",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of Geom2dHatch_Classifier: Rust keeps it as the private field `my_edge_parameter` of FaceClassifier (tkgeomalgo/src/topclass/face_classifier.rs), the state of FaceClassifier; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "Geom2dHatch_FClass2dOfClassifier::Geom2dHatch_FClass2dOfClassifier()",
@@ -161645,6 +162151,30 @@
       "notes": "IntWalk mapping: NCollection_LinearVector<IntWalk_WalkingData> is a Vec (0-based as natively)."
     },
     {
+      "upstream_id": "IntWalk_WalkingData::ustart",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_VectorOfWalkingData.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkWalkingData::ustart",
+      "status": "implemented",
+      "notes": "Public data member of IntWalk_WalkingData: the public field of the Rust struct."
+    },
+    {
+      "upstream_id": "IntWalk_WalkingData::etat",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_VectorOfWalkingData.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkWalkingData::etat",
+      "status": "implemented",
+      "notes": "Public data member of IntWalk_WalkingData: the public field of the Rust struct."
+    },
+    {
+      "upstream_id": "IntWalk_WalkingData::vstart",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_VectorOfWalkingData.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkWalkingData::vstart",
+      "status": "implemented",
+      "notes": "Public data member of IntWalk_WalkingData: the public field of the Rust struct."
+    },
+    {
       "upstream_id": "IntWalk_TheFunctionOfTheInt2S",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_TheFunctionOfTheInt2S.hxx",
@@ -162139,6 +162669,22 @@
       "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::reset_fields",
       "status": "implemented",
       "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 11): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records, ics_hinter)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::myIsParallel",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::my_is_parallel",
+      "status": "implemented",
+      "notes": "Data member of IntCurveSurface_Intersection: the public field `my_is_parallel` of the Rust struct."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Intersection::done",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::Intersection::done",
+      "status": "implemented",
+      "notes": "Public data member of IntCurveSurface_Intersection: the public field of the Rust struct."
     },
     {
       "upstream_id": "IntCurveSurface_IntersectionPoint()",
@@ -163789,6 +164335,27 @@
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
     },
     {
+      "upstream_id": "GeomFill_Profiler::mySequence",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Profiler.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_Profiler: Rust keeps it as the private field `my_sequence` of GeomFillProfiler (tkgeomalgo/src/geom_fill/profiler.rs), the state of GeomFillProfiler; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomFill_Profiler::myIsPeriodic",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Profiler.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_Profiler: Rust keeps it as the private field `my_is_periodic` of GeomFillProfiler (tkgeomalgo/src/geom_fill/profiler.rs), the state of GeomFillProfiler; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomFill_Profiler::myIsDone",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Profiler.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_Profiler: Rust keeps it as the private field `my_is_done` of GeomFillProfiler (tkgeomalgo/src/geom_fill/profiler.rs), the state of GeomFillProfiler; derived types reach it through the methods, so it is not public API."
+    },
+    {
       "upstream_id": "GeomFill_SectionGenerator::GeomFill_SectionGenerator()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SectionGenerator.hxx",
@@ -163851,6 +164418,13 @@
       "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillSectionGenerator::parameter",
       "status": "implemented",
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_SectionGenerator::myParams",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SectionGenerator.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_SectionGenerator: Rust keeps it as the private field `my_params` of GeomFillSectionGenerator (tkgeomalgo/src/geom_fill/section_generator.rs), the state of GeomFillSectionGenerator; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "GeomFill_Generator::GeomFill_Generator()",
@@ -163923,6 +164497,27 @@
       "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFilling::weights",
       "status": "implemented",
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Filling::myWeights",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Filling.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_Filling: Rust keeps it as the private field `my_weights` of GeomFillFilling (tkgeomalgo/src/geom_fill/filling.rs), the state of GeomFillFilling; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomFill_Filling::myPoles",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Filling.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_Filling: Rust keeps it as the private field `my_poles` of GeomFillFilling (tkgeomalgo/src/geom_fill/filling.rs), the state of GeomFillFilling; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomFill_Filling::IsRational",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Filling.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_Filling: Rust keeps it as the private field `is_rational` of GeomFillFilling (tkgeomalgo/src/geom_fill/filling.rs), the state of GeomFillFilling; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "GeomFill_Coons::GeomFill_Coons()",
@@ -165035,6 +165630,34 @@
       "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray::dump",
       "status": "implemented",
       "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::myNbAllocated",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of IntPolyh_Array: Rust keeps it as the private field `nb_allocated` of IntPolyhArray (tkgeomalgo/src/int_polyh/array.rs), the state of IntPolyhArray; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::myVectorOfType",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of IntPolyh_Array: Rust keeps it as the private field `vector` of IntPolyhArray (tkgeomalgo/src/int_polyh/array.rs), the state of IntPolyhArray; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::myIncrement",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of IntPolyh_Array: Rust keeps it as the private field `increment` of IntPolyhArray (tkgeomalgo/src/int_polyh/array.rs), the state of IntPolyhArray; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "IntPolyh_Array::myNbItems",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of IntPolyh_Array: Rust keeps it as the private field `nb_items` of IntPolyhArray (tkgeomalgo/src/int_polyh/array.rs), the state of IntPolyhArray; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "IntPolyh_Couple()",
@@ -168051,6 +168674,70 @@
       "notes": "Enumerator of GeomFill_Gordon::BuildStage: the variant NotStarted of the Rust enum that the GeomFill_Gordon::BuildStage row names."
     },
     {
+      "upstream_id": "GeomFill_Gordon::BuildReport::FailedStage",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildReport::failed_stage",
+      "status": "implemented",
+      "notes": "Public data member of GeomFill_Gordon::BuildReport: the public field `failed_stage` of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildReport::MaxReparametrizationDeviation",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildReport::max_reparametrization_deviation",
+      "status": "implemented",
+      "notes": "Public data member of GeomFill_Gordon::BuildReport: the public field `max_reparametrization_deviation` of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildReport::MaxProfileDeviation",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildReport::max_profile_deviation",
+      "status": "implemented",
+      "notes": "Public data member of GeomFill_Gordon::BuildReport: the public field `max_profile_deviation` of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildReport::Status",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildReport::status",
+      "status": "implemented",
+      "notes": "Public data member of GeomFill_Gordon::BuildReport: the public field `status` of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildReport::MaxApproximationDeviation",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildReport::max_approximation_deviation",
+      "status": "implemented",
+      "notes": "Public data member of GeomFill_Gordon::BuildReport: the public field `max_approximation_deviation` of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildReport::MaxGuideDeviation",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildReport::max_guide_deviation",
+      "status": "implemented",
+      "notes": "Public data member of GeomFill_Gordon::BuildReport: the public field `max_guide_deviation` of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildReport::MaxContactGap",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildReport::max_contact_gap",
+      "status": "implemented",
+      "notes": "Public data member of GeomFill_Gordon::BuildReport: the public field `max_contact_gap` of the Rust struct."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildReport::IsApproximate",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildReport::is_approximate",
+      "status": "implemented",
+      "notes": "Public data member of GeomFill_Gordon::BuildReport: the public field `is_approximate` of the Rust struct."
+    },
+    {
       "upstream_id": "GeomFill_NetworkSurface::ResultStatus",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
@@ -169537,6 +170224,13 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchLine::static_type",
       "status": "implemented",
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Line::typ",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Line.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of IntPatch_Line: Rust keeps it as the private field `typ` of LineFields (tkgeomalgo/src/int_patch/line.rs), the state of IntPatchLine; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "IntPatch_Point::IntPatch_Point()",
@@ -173584,6 +174278,13 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_LocationDraft::myPoles2d",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationDraft.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_LocationDraft: Rust keeps it as the private field `poles2d` of DraftFields (tkgeomalgo/src/geom_fill/location_draft.rs), the state of GeomFillLocationDraft; derived types reach it through the methods, so it is not public API."
+    },
+    {
       "upstream_id": "GeomFill_LocationGuide::GeomFill_LocationGuide(const occ::handle<GeomFill_TrihedronWithGuide>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationGuide.hxx",
@@ -173838,6 +174539,13 @@
       "rust_item": "<rustycad_tkgeomalgo::geom_fill::GeomFillLocationGuide as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_LocationGuide::myPoles2d",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_LocationGuide.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_LocationGuide: Rust keeps it as the private field `poles2d` of GuideLocFields (tkgeomalgo/src/geom_fill/location_guide.rs), the state of GeomFillLocationGuide; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "GeomFill_LocationLaw::SetCurve(const occ::handle<Adaptor3d_Curve>&)",
@@ -175830,6 +176538,20 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_TrihedronLaw::myCurve",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronLaw.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_TrihedronLaw: Rust keeps it as the private field `curve` of LawCurves (tkgeomalgo/src/geom_fill/trihedron_law.rs), the state of GeomFillTrihedronLaw; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomFill_TrihedronLaw::myTrimmed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronLaw.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_TrihedronLaw: Rust keeps it as the private field `trimmed` of LawCurves (tkgeomalgo/src/geom_fill/trihedron_law.rs), the state of GeomFillTrihedronLaw; derived types reach it through the methods, so it is not public API."
+    },
+    {
       "upstream_id": "GeomFill_TrihedronWithGuide::Guide() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronWithGuide.hxx",
@@ -175860,6 +176582,27 @@
       "rust_item": "<dyn rustycad_tkgeomalgo::geom_fill::GeomFillTrihedronWithGuide as rustycad_tkernel::standard::RuntimeTyped>::static_type",
       "status": "implemented",
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_TrihedronWithGuide::myGuide",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronWithGuide.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_TrihedronWithGuide: Rust keeps it as the private field `guide` of GuideFields (tkgeomalgo/src/geom_fill/trihedron_with_guide.rs), the state of GeomFillTrihedronWithGuide; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomFill_TrihedronWithGuide::myCurPointOnGuide",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronWithGuide.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_TrihedronWithGuide: Rust keeps it as the private field `cur_point_on_guide` of GuideFields (tkgeomalgo/src/geom_fill/trihedron_with_guide.rs), the state of GeomFillTrihedronWithGuide; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomFill_TrihedronWithGuide::myTrimG",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronWithGuide.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomFill_TrihedronWithGuide: Rust keeps it as the private field `trim_g` of GuideFields (tkgeomalgo/src/geom_fill/trihedron_with_guide.rs), the state of GeomFillTrihedronWithGuide; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "GeomFill_UniformSection::GeomFill_UniformSection(const occ::handle<Geom_Curve>&,double,double)",
@@ -176107,6 +176850,22 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchBVHTraversal::perform",
       "status": "implemented",
       "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_BVHTraversal::TrianglePair::First",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTrianglePair::first",
+      "status": "implemented",
+      "notes": "Public data member of IntPatch_BVHTraversal::TrianglePair: the public field `first` of the Rust struct."
+    },
+    {
+      "upstream_id": "IntPatch_BVHTraversal::TrianglePair::Second",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_BVHTraversal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTrianglePair::second",
+      "status": "implemented",
+      "notes": "Public data member of IntPatch_BVHTraversal::TrianglePair: the public field `second` of the Rust struct."
     },
     {
       "upstream_id": "IntPatch_ImpImpIntersection::IntPatch_ImpImpIntersection()",
@@ -176515,6 +177274,13 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygo::dump",
       "status": "implemented",
       "notes": "IntPatch polyhedra and polygons (docs/geomalgo-design.md section 16): the polyhedron reuses the IntCurveSurface polyhedron helpers, the BVH set and traversal use the TKMath BVH port, the interference derefs to Intf_Interference, IntPatch_Polygo is a trait over Intf_Polygon2d; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_polyh, ip_bvh, ip_interf, ip_polyline, ip_polyarc, ip_t3bits requests)."
+    },
+    {
+      "upstream_id": "IntPatch_Polygo::myError",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polygo.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of IntPatch_Polygo: Rust keeps it as the private field `error` of IntPatchPolygoBase (tkgeomalgo/src/int_patch/polygo.rs), the state of IntPatchPolygo; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "IntPatch_Polyhedron::IntPatch_Polyhedron(const occ::handle<Adaptor3d_Surface>&,int,int)",
@@ -177673,6 +178439,139 @@
       "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
     },
     {
+      "upstream_id": "GeomPlate_CurveConstraint::myOrder",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `order` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myG2Crit",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `g2_crit` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myLProp",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `lprop` of GeomPlateCurveConstraint (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myNbPoints",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `nb_points` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myFrontiere",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `frontiere` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myHCurve2d",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `hcurve_2d` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myConstG1",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `const_g1` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myTang",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member that GeomPlate_CurveConstraint never reads (no member uses it): GeomPlateCurveConstraint does not keep it (see CurveConstraintState::empty), so there is no behavior to port."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::my3dCurve",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `curve_3d` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myTolDist",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `tol_dist` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::my2dCurve",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `curve_2d` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myConstG2",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `const_g2` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myG1Crit",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `g1_crit` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myTolAng",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `tol_ang` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myTolV",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `tol_v` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myTolU",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `tol_u` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myTolCurv",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `tol_curv` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myConstG0",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `const_g0` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "GeomPlate_CurveConstraint::myG0Crit",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_CurveConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_CurveConstraint: Rust keeps it as the private field `g0_crit` of CurveConstraintState (tkgeomalgo/src/geom_plate/curve_constraint.rs), the state of GeomPlateCurveConstraint; derived types reach it through the methods, so it is not public API."
+    },
+    {
       "upstream_id": "GeomPlate_MakeApprox::GeomPlate_MakeApprox(const occ::handle<GeomPlate_Surface>&,const AdvApp2Var_Criterion&,double,int,int,GeomAbs_Shape,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_MakeApprox.hxx",
@@ -177903,6 +178802,13 @@
       "rust_item": "rustycad_tkgeomalgo::geom_plate::GeomPlatePointConstraint::static_type",
       "status": "implemented",
       "notes": "GeomPlate mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 19): each class is a file of geom_plate (two for the larger ones); the constraints are handle-shared structs, GeomPlate_Surface implements GeomSurface, C++ output references become returned values, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gplate_* requests)."
+    },
+    {
+      "upstream_id": "GeomPlate_PointConstraint::myOrder",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomPlate/GeomPlate_PointConstraint.hxx",
+      "status": "excluded",
+      "notes": "C++ protected data member of GeomPlate_PointConstraint: Rust keeps it as the private field `order` of PointConstraintState (tkgeomalgo/src/geom_plate/point_constraint.rs), the state of GeomPlatePointConstraint; derived types reach it through the methods, so it is not public API."
     },
     {
       "upstream_id": "GeomPlate_Surface::GeomPlate_Surface(const occ::handle<Geom_Surface>&,const Plate_Plate&)",
@@ -186685,6 +187591,22 @@
       "rust_item": "rustycad_tkgeomalgo::geom_int::adjust_periodic",
       "status": "implemented",
       "notes": "GeomInt (docs/geomalgo-design.md section 20): surfaces are Handle<GeomAdaptorSurface> compared by address, domains Rc<dyn TheTopolTool>, line sequences Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange, in-out references become &mut parameters or returned tuples, the native sorts run the libstdc++ algorithm; exceptions (and the null dereferences of the native code) become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gi_intss, gi_lconst, gi_lines, gi_ltool, gi_pcurves, gi_trim, gi_mkbsp, gi_rline, gi_adjust, gi_porient requests)."
+    },
+    {
+      "upstream_id": "IntPolyh_PointNormal::Point",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_ArrayOfPointNormal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPointNormal::point",
+      "status": "implemented",
+      "notes": "Public data member of IntPolyh_PointNormal: the public field `point` of the Rust struct."
+    },
+    {
+      "upstream_id": "IntPolyh_PointNormal::Normal",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_ArrayOfPointNormal.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhPointNormal::normal",
+      "status": "implemented",
+      "notes": "Public data member of IntPolyh_PointNormal: the public field `normal` of the Rust struct."
     },
     {
       "upstream_id": "BRepCheck::Add(NCollection_List<BRepCheck_Status>&,BRepCheck_Status)",
