@@ -291414,8 +291414,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3d.hxx",
       "source_sha256": "38fcb22f964ab82aceee65a03a2fe61702aed72b6a484e01e9c4a8ce9935a3c9",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3d::build",
-      "status": "partial",
-      "notes": "Native copied-curve Init, OCC966 bounds, wrapper recursion, knot snapping, segmentation and fallback. All 348 candidates accounted: 332 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences in multipart offset Build(false). Build is partial parity; crashes are never exact passes. Replay: tools/verify_split_curve3d.py. No original legacy declarations exist for this class."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Trimmed and offset recursion, OCC966 clamping of non-periodic bounds, one-piece reuse and trimming, knot snapping and per-piece Segment with the trimmed fallback match. The 16 multipart offset Build(false) requests crash natively (Geom_OffsetCurve on the null pieces Build(false) leaves) and return a named Rust failure (D3); tools/verify_split_curve3d.py replays all 348 candidates (332 exact)."
     },
     {
       "upstream_id": "ShapeUpgrade_SplitCurve3d::GetCurves() const",
@@ -291660,8 +291660,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
       "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::build",
-      "status": "partial",
-      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Revolution and extrusion sweeps (the extrusion end trim with the U ends read before the basis split, std::max/std::min order), trimmed and offset recursion, one-patch reuse, knot snapping and the patch grid with Segment fallback match. The 16 swept multipart Build(false) requests crash natively (sweeps of null pieces) and return a named Rust failure (D3). sh_split_surface: 642 requests match, including the extrusion-end requests; tools/verify_split_surface.py replays the crash candidates."
     },
     {
       "upstream_id": "ShapeUpgrade_SplitSurface::Compute(bool)",
@@ -291678,8 +291678,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
       "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::perform",
-      "status": "partial",
-      "notes": "Native range/area initialization, sorted parameter merge, analytic/spline segmentation, knot snapping, sweep and offset/trim recursion, status and shared composite state. 650 candidates accounted: 634 exact, 16 native SIGSEGV/Rust Standard_ConstructionError divergences for swept multipart Build(false). Both Build and Perform retain partial parity; crashes are never exact passes. Replay: tools/verify_split_surface.py. No original legacy declarations exist for this class."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Compute (status reset, virtual) then Build, as natively; see Build."
     },
     {
       "upstream_id": "ShapeUpgrade_SplitSurface::USplitValues() const",
@@ -292084,8 +292084,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2d.hxx",
       "source_sha256": "3ba87b8d468f51115f255e9a01047885b03272f653eacbbe77417f17a7885f8c",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2d::build",
-      "status": "partial",
-      "notes": "Native OCC966 Init, 2D single-spline segmentation even for Segment=false, knot snapping and recursive trimmed/offset curves; shared 2D/3D kernel retains dimensional policy differences. All 600 candidates accounted: 530 exact, 70 native SIGSEGV/Rust Standard_ConstructionError divergences in offset Build(false). Build is partial parity; crashes are never exact passes. Replay tools/verify_split_curve2d.py. No original legacy declarations for this class."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). As SplitCurve3d, without OCC966 clamping and with the native single-spline Segment even for Segment = false. The 70 offset Build(false) requests crash natively (Geom2d_OffsetCurve on null pieces) and return a named Rust failure (D3); tools/verify_split_curve2d.py replays all 600 candidates (530 exact)."
     },
     {
       "upstream_id": "ShapeUpgrade_SplitCurve2d::GetCurves() const",
@@ -295357,8 +295357,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_TransferParametersProj.hxx",
       "source_sha256": "a4398b562a7cdb39ecd987c1f4cb6174369318b513ff2ad5afd1c2c5265fef5a",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisTransferParametersProj::copy_nm_vertex_edge",
-      "status": "partial",
-      "notes": "Native projection/linear candidate selection, sequential bounds and closed-tail repair, per-representation range projection, knot snapping, collapsed-span expansion, and both non-manifold vertex copy algorithms. ForceProjection maps to force_projection/set_force_projection. 382 candidates accounted: 380 exact comparisons plus 2 native SIGSEGV/Rust Standard_NullObject divergences (not exact passes); mandatory tools/verify_transfer_projection.py replay; six offset fixtures retain Geom2d_UndefinedValue during scene construction and are exact exception cases, not transfer successes. Native whole-request exception capture matches Rust outer attempt. CopyNMVertex(edge) is partial for projection onto a null spatial curve; native ShapeAnalysis_Curve::Project dereferences C2 while Rust returns a typed null-object failure. No original legacy declarations. Existing splitter crash divergences remain separately accounted and unchanged."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Point representations copied in native order (the source 3D and pcurve points dropped, their parameter kept), the projection when the ranges differ, UpdateVertex and the pcurve tolerance pass match. Projection on a null 3D curve of the target crashes natively and is a named Rust failure (D3); tools/verify_transfer_projection.py replays all 382 candidates."
     },
     {
       "upstream_id": "ShapeAnalysis_TransferParametersProj::CopyNMVertex(const TopoDS_Vertex&,const TopoDS_Face&,const TopoDS_Face&)",
@@ -296507,8 +296507,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_WireDivide.hxx",
       "source_sha256": "34b4127390e214e2f10b69607af427144da8a988b7fe7e5893e5ad241d6b3cdd",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::WireDivider::perform",
-      "status": "partial",
-      "notes": "Native wire splitting pipeline: parameter synchronization including crossed CorrectSplitValues tail bounds, retained spatial criterion in inactive EdgeMode, seam rebuilding, endpoint sharing, small-piece removal and midpoint repair, representation range transfer, and non-manifold vertex replacement. 701 candidates: 699 exact comparisons and 2 native SIGSEGV/Rust Standard_NullObject divergences, separately required by tools/verify_wire_divide.py; neither crash counts as parity. Perform remains partial for native default-null-context dereference and pcurve-only internal-vertex CopyNMVertex null-spatial-curve crash. No original legacy declarations in pinned GTests. Prior splitter/transfer divergences remain unchanged."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Edge mode, CorrectSplitValues, seam splitting, endpoint copies and context records, non-manifold vertex projection, small-piece merging (FixSmallCurves Approx), range transfer, SameRange and the non-manifold vertex placement match. The default null context and the pcurve-only internal vertex (CopyNMVertex on a null 3D curve) crash natively and are named Rust failures (D3); tools/verify_wire_divide.py replays all 701 candidates (699 exact)."
     },
     {
       "upstream_id": "ShapeUpgrade_WireDivide::Wire() const",
@@ -309139,7 +309139,7 @@
       "source_sha256": "6a227e5bf88a89be6da4c47a3b403d97c50dc443406ef8edc61cfb31b6ddfb19",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::FaceDivider::perform",
       "status": "partial",
-      "notes": "Surface-then-wire subdivision with virtual policy dispatch, native context/status lifetime and protected vertex copies. Nine native oracle cases plus both translated legacy safety regressions pass. Advanced operations inherit remaining ComposeShell/configured-policy limitations and are retained as partial; no complete face/toolkit parity claim."
+      "notes": "Reviewed line by line against the C++ (2026-10-07). The body (status reset, default context, SplitSurface then SplitCurves) is faithful. Partial only because it runs ShapeFix_ComposeShell::Perform, whose row is not yet claimed complete; nine native oracle cases pass."
     },
     {
       "upstream_id": "ShapeUpgrade_FaceDivide::SplitSurface(double)",
@@ -309148,7 +309148,7 @@
       "source_sha256": "6a227e5bf88a89be6da4c47a3b403d97c50dc443406ef8edc61cfb31b6ddfb19",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::FaceDivider::split_surface",
       "status": "partial",
-      "notes": "Surface-then-wire subdivision with virtual policy dispatch, native context/status lifetime and protected vertex copies. Nine native oracle cases plus both translated legacy safety regressions pass. Advanced operations inherit remaining ComposeShell/configured-policy limitations and are retained as partial; no complete face/toolkit parity claim."
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Face UV bounds, the 1% extension of non-periodic ranges (std::min order), the virtual surface splitter, vertex protection on DONE3 and the ComposeShell set-up match. Partial only because it runs ShapeFix_ComposeShell::Perform, whose row is not yet claimed complete."
     },
     {
       "upstream_id": "ShapeUpgrade_FaceDivide::SplitCurves()",
@@ -309156,8 +309156,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_FaceDivide.hxx",
       "source_sha256": "6a227e5bf88a89be6da4c47a3b403d97c50dc443406ef8edc61cfb31b6ddfb19",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::FaceDivider::split_curves",
-      "status": "partial",
-      "notes": "Surface-then-wire subdivision with virtual policy dispatch, native context/status lifetime and protected vertex copies. Nine native oracle cases plus both translated legacy safety regressions pass. Advanced operations inherit remaining ComposeShell/configured-policy limitations and are retained as partial; no complete face/toolkit parity claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Context application per face, FAIL3 on a non-face, wire loop with the virtual wire tool, FAIL1/DONE1 and the final Apply match. Nine native oracle cases."
     },
     {
       "upstream_id": "ShapeUpgrade_FaceDivide::Result() const",
@@ -309409,7 +309409,7 @@
       "source_sha256": "15d4747561787c7873c5d73c381535717dd3e214813a99a912ed8768b40e5392",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeFaceDivideArea::set_numbers_uv_splits",
       "status": "partial",
-      "notes": "Area criterion and recursive subdivision backed by eight native oracle cases, including sphere recursion with twenty patch bounds/areas. MaxArea/NbParts mutable accessors use paired Rust setters. Perform inherits remaining composition/configured-policy limitations; SetNumbersUVSplits reports checked overflow outside native defined behavior. Additional oracle tests, no legacy declaration mapping or whole-class parity claim."
+      "notes": "Partial only for a native defect: Reviewed line by line against the C++ (2026-10-07). Both counts are stored and myNbParts = U * V when both are positive; the product of two positive counts can overflow int, which is undefined behaviour natively. Rust returns Standard_OutOfRange with the counts and keeps myNbParts."
     },
     {
       "upstream_id": "ShapeUpgrade_FaceDivideArea::SetSplittingByNumber(bool)",
@@ -309743,8 +309743,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideAngle.hxx",
       "source_sha256": "9be068e980f7d12ccc488c9e1b198cd216144f691394ed3f74eb4124ebe72dbb",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideAngle::init_tool",
-      "status": "partial",
-      "notes": "Eight native policy rows compare selected angle, face/edge counts, tool identities and statuses. Angle reset clears wire policy while retaining face tool; ClosedEdges deliberately ignores requested count and recreates all child tools. Angle InitTool/SetMaxAngle return explicit Rust failure for a null face tool where native dereferences null. Inherited Perform remains partial; these are configuration API claims, not whole-class parity."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). The face tool gets a new SplitSurfaceAngle and a null wire tool, then is set back. Native null dereferences (a null handle the caller can configure) are named Rust failures, as everywhere in this toolkit (decision D3). Eight native policy rows compare angle, tool identities and statuses."
     },
     {
       "upstream_id": "ShapeUpgrade_ShapeDivideAngle::SetMaxAngle(double)",
@@ -309752,8 +309752,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_ShapeDivideAngle.hxx",
       "source_sha256": "9be068e980f7d12ccc488c9e1b198cd216144f691394ed3f74eb4124ebe72dbb",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideAngle::set_max_angle",
-      "status": "partial",
-      "notes": "Eight native policy rows compare selected angle, face/edge counts, tool identities and statuses. Angle reset clears wire policy while retaining face tool; ClosedEdges deliberately ignores requested count and recreates all child tools. Angle InitTool/SetMaxAngle return explicit Rust failure for a null face tool where native dereferences null. Inherited Perform remains partial; these are configuration API claims, not whole-class parity."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Delegates to InitTool as natively. Native null dereferences (a null handle the caller can configure) are named Rust failures, as everywhere in this toolkit (decision D3). Eight native policy rows."
     },
     {
       "upstream_id": "ShapeUpgrade_ShapeDivideAngle::MaxAngle() const",
@@ -310304,7 +310304,7 @@
       "source_sha256": "60dc67b219b5ba1a3c20906daa446032193c6cf3855368411e69bea03facb9e7",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeShapeDivideArea::set_numbers_uv_splits",
       "status": "partial",
-      "notes": "Native shape subdivision oracle covers configuration and selected topology/status behavior; inherited child-policy limits remain. Closed-face SplitSurface remains partial pending precision regression and full domain coverage. Checked positive UV-product overflow is outside native defined signed arithmetic. No new legacy declaration mapping or whole-class parity claim."
+      "notes": "Partial only for a native defect: Reviewed line by line against the C++ (2026-10-07). The by-number mode, MaxArea -1, both counts and myNbParts = U * V are set; the product of two positive counts can overflow int, which is undefined behaviour natively. Rust returns Standard_OutOfRange with the counts and keeps the previous configuration."
     },
     {
       "upstream_id": "ShapeUpgrade_ShapeDivideArea::SetSplittingByNumber(bool)",
@@ -310704,8 +310704,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_BoxBndTree.hxx",
       "source_sha256": "5eec0d310a0e6c80781b27ba7f8e12dd63e7f911bcc988d50e89a8f42f6ff001",
       "rust_item": "rustycad_tkshhealing::shape_analysis::ShapeAnalysisBoxBndTreeSelector::accept",
-      "status": "partial",
-      "notes": "Fourteen native selector rows cover endpoint orientation, tail preference, status and reset retention. Rust tests also cover shared-array updates, exclusion/index precedence and fallible tree traversal. Free-boundary chaining reuses this selector. Accept returns explicit Failure for null sequence where native dereferences null; no approved behavior exception or whole-class parity claim. Additional oracle tests, no legacy declaration mappings."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Shared-vertex and distance branches, the RealSmall reset of the other index, the stop rule and the DONE1..DONE4/FAIL2 statuses match ShapeAnalysis_BoxBndTree.cxx. Native null dereferences (a null handle the caller can configure) are named Rust failures, as everywhere in this toolkit (decision D3). Fourteen native selector rows; free-boundary chaining reuses this selector and is compared by the sh_free_bounds requests."
     },
     {
       "upstream_id": "ShapeAnalysis_BoxBndTreeSelector",
@@ -316171,8 +316171,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct.hxx",
       "source_sha256": "aa2f5717e5c78c2de8f80a02cc5093b3de99a7aa9bc3f841b18f193cd1cf56ec",
       "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::join_curves_3d",
-      "status": "partial",
-      "notes": "Native join fixtures and shared-face wireframe checks; tools/oracle/tkshhealing_shapeconstruct_join_curves.cxx. Broader rational/periodic/exceptional domains still require evidence; no legacy completion claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Fixed: the B-splines are segmented to the ranges (SegmentCurve), the reversal flags are returned also when the join fails, and the 2D join goes through GeomAPI::To3d and To2d on the XOY plane. Compared by sh_construct_pkg ops 4 and 5 (tkshhealing_probe_construct_package.cxx) on lines, circles, Bezier and B-spline curves and trimmed circles over adjacent, swapped, gapped and inner pieces in all orientation pairs (2D with and without the crossing guard)."
     },
     {
       "upstream_id": "BRepAlgo_Image::SetRoot(const TopoDS_Shape &)",
@@ -316243,8 +316243,8 @@
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeConstruct/ShapeConstruct.hxx",
       "source_sha256": "aa2f5717e5c78c2de8f80a02cc5093b3de99a7aa9bc3f841b18f193cd1cf56ec",
       "rust_item": "rustycad_tkshhealing::shape_construct::ShapeConstructCurve::join_curves_2d",
-      "status": "partial",
-      "notes": "Native join fixtures and shared-face wireframe checks; tools/oracle/tkshhealing_shapeconstruct_join_curves.cxx. Broader rational/periodic/exceptional domains still require evidence; no legacy completion claim."
+      "status": "implemented",
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Fixed: the B-splines are segmented to the ranges (SegmentCurve), the reversal flags are returned also when the join fails, and the 2D join goes through GeomAPI::To3d and To2d on the XOY plane. Compared by sh_construct_pkg ops 4 and 5 (tkshhealing_probe_construct_package.cxx) on lines, circles, Bezier and B-spline curves and trimmed circles over adjacent, swapped, gapped and inner pieces in all orientation pairs (2D with and without the crossing guard)."
     },
     {
       "upstream_id": "ShapeConstruct",

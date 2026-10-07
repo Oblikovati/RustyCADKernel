@@ -24,18 +24,21 @@ impl SweepKind {
     }
 }
 impl SplitSurfaceData {
+    /// `start` is (UFirst, ULast): the U ends read before the basis curve is split, which
+    /// may snap or clamp the shared U values.
     pub(super) fn build_swept(
         &self,
         kind: SweepKind,
         basis: &Handle<dyn GeomCurve>,
         segment: bool,
+        start: (f64, f64),
     ) -> Result<(), Failure> {
         let curves = self.split_sweep_curve(kind, basis, segment)?;
         let along = split_snapshot(&self.values(kind.is_revolution()))?;
         let count = curves.curves().array1().len() as i32;
         let grid = self.allocate_sweep_grid(kind, count, (along.len() as i32 - 1).max(1))?;
         for index in 1..=count {
-            self.fill_sweep_curve(&grid, kind, &curves, index, &along)?;
+            self.fill_sweep_curve(&grid, (kind, start), &curves, index, &along)?;
         }
         self.adopt_natural_grid(&grid)?;
         self.adopt_curve_status(&curves);
@@ -93,7 +96,7 @@ impl SplitSurfaceData {
     fn fill_sweep_curve(
         &self,
         grid: &SurfaceGrid,
-        kind: SweepKind,
+        (kind, start): (SweepKind, (f64, f64)),
         curves: &ShapeUpgradeSplitCurve3d,
         index: i32,
         along: &[f64],
@@ -107,7 +110,7 @@ impl SplitSurfaceData {
         let surface = kind.surface(&curve)?;
         let ranges = sweep_ranges(along);
         for (slot, range) in ranges.into_iter().enumerate() {
-            let patch = self.sweep_patch(kind, &surface, range, along.len() > 2)?;
+            let patch = sweep_patch((kind, start), &surface, range, along.len() > 2)?;
             let (row, column) = if kind.is_revolution() {
                 (slot as i32 + 1, index)
             } else {
@@ -117,47 +120,49 @@ impl SplitSurfaceData {
         }
         Ok(())
     }
-    fn sweep_patch(
-        &self,
-        kind: SweepKind,
-        surface: &Handle<dyn GeomSurface>,
-        range: (f64, f64),
-        multiple: bool,
-    ) -> Result<Handle<dyn GeomSurface>, Failure> {
-        let natural = surface.bounds();
-        let same = if kind.is_revolution() {
-            range == (natural.0, natural.1)
-        } else {
-            range == (natural.2, natural.3)
-        };
-        if !multiple && same {
-            return Ok(surface.clone());
-        }
-        if kind.is_revolution() {
-            return trimmed_surface(surface, (range.0, range.1, natural.2, natural.3));
-        }
-        if multiple {
-            return trimmed_surface(surface, (natural.0, natural.1, range.0, range.1));
-        }
-        self.trim_extrusion_end(surface, natural, range)
+}
+
+fn sweep_patch(
+    (kind, start): (SweepKind, (f64, f64)),
+    surface: &Handle<dyn GeomSurface>,
+    range: (f64, f64),
+    multiple: bool,
+) -> Result<Handle<dyn GeomSurface>, Failure> {
+    let natural = surface.bounds();
+    let same = if kind.is_revolution() {
+        range == (natural.0, natural.1)
+    } else {
+        range == (natural.2, natural.3)
+    };
+    if !multiple && same {
+        return Ok(surface.clone());
     }
-    fn trim_extrusion_end(
-        &self,
-        surface: &Handle<dyn GeomSurface>,
-        natural: (f64, f64, f64, f64),
-        range: (f64, f64),
-    ) -> Result<Handle<dyn GeomSurface>, Failure> {
-        let u = split_snapshot(&self.values(true))?;
-        trimmed_surface(
-            surface,
-            (
-                natural.0.max(u[0]),
-                u[u.len() - 1].min(natural.1),
-                range.0.max(natural.2),
-                range.1.min(natural.3),
-            ),
-        )
+    if kind.is_revolution() {
+        return trimmed_surface(surface, (range.0, range.1, natural.2, natural.3));
     }
+    if multiple {
+        return trimmed_surface(surface, (natural.0, natural.1, range.0, range.1));
+    }
+    // std::max(U1, UFirst), std::min(ULast, U2), std::max(VFirst, V1), std::min(VLast, V2).
+    trimmed_surface(
+        surface,
+        (
+            native_max(natural.0, start.0),
+            native_min(start.1, natural.1),
+            native_max(range.0, natural.2),
+            native_min(range.1, natural.3),
+        ),
+    )
+}
+
+/// `std::max(a, b)`: `a < b ? b : a`.
+fn native_max(first: f64, second: f64) -> f64 {
+    if first < second { second } else { first }
+}
+
+/// `std::min(a, b)`: `b < a ? b : a`.
+fn native_min(first: f64, second: f64) -> f64 {
+    if second < first { second } else { first }
 }
 
 fn sweep_ranges(along: &[f64]) -> Vec<(f64, f64)> {

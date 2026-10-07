@@ -17,7 +17,6 @@ impl SplitSurfaceData {
             });
         }
         let surface = self.with(|fields| fields.surface.clone());
-        let _natural = surface.bounds();
         self.dispatch_surface(&surface, bounds, segment)
     }
     fn dispatch_surface(
@@ -31,6 +30,7 @@ impl SplitSurfaceData {
                 SweepKind::Revolution(revolution.axis()),
                 &revolution.basis_curve(),
                 segment,
+                (bounds.0, bounds.1),
             );
         }
         if let Some(extrusion) = surface.cast::<GeomSurfaceOfLinearExtrusion>().get() {
@@ -38,6 +38,7 @@ impl SplitSurfaceData {
                 SweepKind::Extrusion(extrusion.direction()),
                 &extrusion.basis_curve(),
                 segment,
+                (bounds.0, bounds.1),
             );
         }
         self.dispatch_wrapper(surface, bounds, segment)
