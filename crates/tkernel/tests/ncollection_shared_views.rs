@@ -14,7 +14,11 @@ fn shared_views_do_not_own_and_detach_on_write() {
     let grid: Array2<'_, f64> = Array2::from_shared(&buffer, 1, 2, 1, 3).unwrap();
     assert!(!grid.is_deletable());
     assert_eq!(
-        (grid.upper_row(), grid.upper_col(), grid[(2, 3)]),
+        (
+            grid.upper_row(),
+            grid.upper_col(),
+            (*grid.value(2, 3).unwrap())
+        ),
         (2, 3, 1.0)
     );
     assert!(Array2::from_shared(&buffer, 1, 3, 1, 3).is_err());

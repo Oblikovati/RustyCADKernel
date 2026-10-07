@@ -10,10 +10,10 @@ type CopyAdaptor = GeomAdaptorTransformedSurface;
 
 fn native_bezier_fixture() -> Handle<dyn GeomSurface> {
     let mut poles: Array2<'static, Point3> = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    poles[(1, 2)] = Point3::new(0.0, 1.0, 0.0);
-    poles[(2, 1)] = Point3::new(1.0, 0.0, 0.0);
-    poles[(2, 2)] = Point3::new(1.0, 1.0, 1.0);
+    poles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    poles.set_value(1, 2, Point3::new(0.0, 1.0, 0.0)).unwrap();
+    poles.set_value(2, 1, Point3::new(1.0, 0.0, 0.0)).unwrap();
+    poles.set_value(2, 2, Point3::new(1.0, 1.0, 1.0)).unwrap();
     Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()
 }
 

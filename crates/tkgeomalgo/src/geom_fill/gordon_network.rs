@@ -11,6 +11,7 @@ use super::gordon_rebuild::{RebuildReport, equalize_parameters};
 use super::gordon_reorder::{SourceNetwork, reorder_network};
 use super::network_surface::has_rational_curve;
 use rustycad_tkernel::ncollection::Array2;
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::GeomBSplineCurve;
@@ -154,7 +155,13 @@ impl<'n> NetworkPreparation<'n> {
         let mut a_points = grid(table)?;
         for (pi, a_profile) in self.my_profiles.iter().enumerate() {
             for gi in 0..table.cols {
-                a_points[(gi as i32 + 1, pi as i32 + 1)] = adaptor_d0(a_profile, table.at(pi, gi))?;
+                a_points
+                    .set_value(
+                        gi as i32 + 1,
+                        pi as i32 + 1,
+                        adaptor_d0(a_profile, table.at(pi, gi))?,
+                    )
+                    .map_err(array2_failure)?;
             }
         }
         Ok(a_points)
@@ -166,8 +173,13 @@ impl<'n> NetworkPreparation<'n> {
         let mut a_weights = grid(table)?;
         for (pi, a_profile) in self.my_profiles.iter().enumerate() {
             for gi in 0..table.cols {
-                a_weights[(gi as i32 + 1, pi as i32 + 1)] =
-                    curve_weight_at(a_profile, table.at(pi, gi))?;
+                a_weights
+                    .set_value(
+                        gi as i32 + 1,
+                        pi as i32 + 1,
+                        curve_weight_at(a_profile, table.at(pi, gi))?,
+                    )
+                    .map_err(array2_failure)?;
             }
         }
         Ok(a_weights)

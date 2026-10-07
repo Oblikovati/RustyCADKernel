@@ -8,6 +8,7 @@ use super::gordon_params::null_curve;
 use super::network_surface_skin::point_of;
 use super::network_surface_skin::{array, grid};
 use crate::geom_api::PointsToBSplineSurface;
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -80,7 +81,9 @@ fn sample_grid(
             } else {
                 (k, ci as i32 + 1)
             };
-            a_points[cell] = points[points.lower() + k - 1];
+            a_points
+                .set_value(cell.0, cell.1, points[points.lower() + k - 1])
+                .map_err(array2_failure)?;
         }
     }
     Ok(a_points)

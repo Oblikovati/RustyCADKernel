@@ -24,8 +24,13 @@ fn range_surface(kind: i32) -> Handle<dyn GeomSurface> {
     let mut poles = Array2::with_bounds(1, 2, 1, 2).unwrap();
     for row in 1..=2 {
         for col in 1..=2 {
-            poles[(row, col)] =
-                Point3::new(f64::from(row - 1) * 2.0, f64::from(col - 1) * 3.0, 0.0);
+            poles
+                .set_value(
+                    row,
+                    col,
+                    Point3::new(f64::from(row - 1) * 2.0, f64::from(col - 1) * 3.0, 0.0),
+                )
+                .unwrap();
         }
     }
     Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()

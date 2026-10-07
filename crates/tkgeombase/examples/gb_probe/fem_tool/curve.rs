@@ -106,7 +106,7 @@ fn assembly_command(r: &mut Reader<'_>, a: &mut Assembly) -> Result<(), Failure>
                 Matrix::with_bounds(v.lower_row(), v.upper_row(), v.lower_col(), v.upper_col())
                     .unwrap();
             for i in v.lower_row()..=v.upper_row() {
-                (v.lower_col()..=v.upper_col()).for_each(|j| m[(i, j)] = v[(i, j)]);
+                (v.lower_col()..=v.upper_col()).for_each(|j| m[(i, j)] = *v.value(i, j).unwrap());
             }
             a.add_matrix(el, d1, d2, &m)?;
         }
@@ -141,7 +141,7 @@ pub fn assembly_case(values: &[f64]) {
     let (dr, dc) = (r.integer(), r.integer());
     let mut dep = Array2::with_bounds(1, dr, 1, dc).unwrap();
     for i in 1..=dr {
-        (1..=dc).for_each(|j| dep[(i, j)] = r.integer());
+        (1..=dc).for_each(|j| dep.set_value(i, j, r.integer()).unwrap());
     }
     let (tr, tc) = (r.integer(), r.integer());
     let table: AssemblyTable = Handle::new(HArray2::with_bounds(1, tr, 1, tc).unwrap());
@@ -150,7 +150,10 @@ pub fn assembly_case(values: &[f64]) {
             let (lower, length) = (r.integer(), r.integer());
             let mut cell = Array1::with_bounds(lower, lower + length - 1).unwrap();
             (0..length).for_each(|k| cell[lower + k] = r.integer());
-            table.change_array2()[(i, j)] = Handle::new(HArray1::from_owned(cell));
+            table
+                .change_array2()
+                .set_value(i, j, Handle::new(HArray1::from_owned(cell)))
+                .unwrap();
         }
     }
     let count = r.integer();

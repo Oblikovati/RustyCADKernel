@@ -31,8 +31,12 @@ pub fn face(surface: &Handle<dyn GeomSurface>) -> Face {
 pub fn spline(count: i32) -> Handle<dyn GeomSurface> {
     let mut poles = Array2::with_bounds(1, 2, 1, count).unwrap();
     for j in 1..=count {
-        poles[(1, j)] = Point3::new(0., f64::from(j - 1), 0.);
-        poles[(2, j)] = Point3::new(1., f64::from(j - 1), 0.);
+        poles
+            .set_value(1, j, Point3::new(0., f64::from(j - 1), 0.))
+            .unwrap();
+        poles
+            .set_value(2, j, Point3::new(1., f64::from(j - 1), 0.))
+            .unwrap();
     }
     let v: Vec<f64> = (0..count).map(f64::from).collect();
     let mults: Vec<i32> = (0..count)

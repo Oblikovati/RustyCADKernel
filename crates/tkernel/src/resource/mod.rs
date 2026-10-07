@@ -1,8 +1,8 @@
 //! OCCT's Resource package: resource files (Resource_Manager) with injected host services,
 //! and the Resource_Unicode text conversions with their exact code tables.
 use crate::{
-    ncollection::DataMap,
     impl_transient,
+    ncollection::DataMap,
     standard::{Failure, StandardTransient},
     tcollection::{AsciiString, ExtendedString},
 };
@@ -57,7 +57,12 @@ pub struct ResourceManager {
     initialized: bool,
     host: ResourceHost,
 }
-impl_transient!(ResourceManager, "Resource_Manager", StandardTransient, parent);
+impl_transient!(
+    ResourceManager,
+    "Resource_Manager",
+    StandardTransient,
+    parent
+);
 impl ResourceManager {
     /// Loads `$CSF_<name>Defaults/<name>` then `$CSF_<name>UserDefaults/<name>` (native
     /// `Resource_Manager(aName, Verbose)`); `ResourceManager::new("App", false, host)?`.

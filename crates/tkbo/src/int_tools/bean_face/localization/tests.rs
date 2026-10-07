@@ -168,10 +168,10 @@ fn vertical_edge() -> Edge {
 
 fn flat_bezier_face() -> Face {
     let mut poles = Array2::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    poles[(2, 1)] = Point3::new(1.0, 0.0, 0.0);
-    poles[(1, 2)] = Point3::new(0.0, 1.0, 0.0);
-    poles[(2, 2)] = Point3::new(1.0, 1.0, 0.0);
+    poles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    poles.set_value(2, 1, Point3::new(1.0, 0.0, 0.0)).unwrap();
+    poles.set_value(1, 2, Point3::new(0.0, 1.0, 0.0)).unwrap();
+    poles.set_value(2, 2, Point3::new(1.0, 1.0, 0.0)).unwrap();
     let surface: Handle<dyn GeomSurface> =
         Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast();
     BRepBuilderAPIMakeFace::from_surface_bounds(&surface, (0.0, 1.0, 0.0, 1.0), 1e-7)
@@ -198,7 +198,9 @@ fn cubic_bspline_face() -> Face {
         for v in 1..=6 {
             let x = f64::from(u - 1) / 5.0;
             let y = f64::from(v - 1) / 5.0;
-            poles[(u, v)] = Point3::new(x, y, 0.08 * x * y);
+            poles
+                .set_value(u, v, Point3::new(x, y, 0.08 * x * y))
+                .unwrap();
         }
     }
     let (knots, mults) = cubic_knots();

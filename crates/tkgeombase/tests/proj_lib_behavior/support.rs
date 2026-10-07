@@ -92,7 +92,9 @@ fn flat_bezier() -> Handle<dyn GeomSurface> {
     let mut poles: Array2<'static, Point3> = Array2::with_bounds(1, 3, 1, 3).unwrap();
     for i in 1..=3 {
         for j in 1..=3 {
-            poles[(i, j)] = Point3::new(f64::from(i - 1), f64::from(j - 1), 0.0);
+            poles
+                .set_value(i, j, Point3::new(f64::from(i - 1), f64::from(j - 1), 0.0))
+                .unwrap();
         }
     }
     Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()

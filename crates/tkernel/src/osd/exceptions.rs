@@ -150,7 +150,9 @@ const HIERARCHY: [(&str, &str); 21] = [
 
 /// The class column of a hierarchy table, computed at compile time so the names are
 /// written once; `class_names(HIERARCHY)[12] == "OSD_Signal"`.
-const fn class_names<const N: usize>(pairs: [(&'static str, &'static str); N]) -> [&'static str; N] {
+const fn class_names<const N: usize>(
+    pairs: [(&'static str, &'static str); N],
+) -> [&'static str; N] {
     let mut names = [""; N];
     let mut index = 0;
     while index < N {
@@ -178,12 +180,27 @@ mod tests {
     #[test]
     fn constructors_follow_the_hierarchy_table() {
         let constructors: [fn(&str) -> Failure; 21] = [
-            exception, exception_access_violation, exception_array_bounds_exceeded,
-            exception_ctrl_break, exception_illegal_instruction, exception_in_page_error,
-            exception_int_overflow, exception_invalid_disposition,
-            exception_noncontinuable_exception, exception_priv_instruction,
-            exception_stack_overflow, exception_status_no_memory, signal, sigbus, sighup,
-            sigill, sigint, sigkill, sigquit, sigsegv, sigsys,
+            exception,
+            exception_access_violation,
+            exception_array_bounds_exceeded,
+            exception_ctrl_break,
+            exception_illegal_instruction,
+            exception_in_page_error,
+            exception_int_overflow,
+            exception_invalid_disposition,
+            exception_noncontinuable_exception,
+            exception_priv_instruction,
+            exception_stack_overflow,
+            exception_status_no_memory,
+            signal,
+            sigbus,
+            sighup,
+            sigill,
+            sigint,
+            sigkill,
+            sigquit,
+            sigsegv,
+            sigsys,
         ];
         for (constructor, (class, _)) in constructors.iter().zip(HIERARCHY) {
             let failure = constructor("text");

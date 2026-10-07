@@ -9,6 +9,7 @@ use super::section_curve::section_tolerance;
 use super::section_law::{GeomFillSectionLaw, SectionD1, SectionD2};
 use super::sweep_failures::{live, sweep_failure};
 use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::arrays::put;
@@ -254,10 +255,10 @@ impl GeomFillSectionLaw for GeomFillNSections {
             }
         };
         for i in 1..=s.nb_u_poles() {
-            let mut min = w_surf[(i, 1)];
+            let mut min = *w_surf.value(i, 1).map_err(array2_failure)?;
             for j in 2..=s.nb_v_poles() {
-                if min > w_surf[(i, j)] {
-                    min = w_surf[(i, j)];
+                if min > (*w_surf.value(i, j).map_err(array2_failure)?) {
+                    min = *w_surf.value(i, j).map_err(array2_failure)?;
                 }
             }
             put(weights, i, min)?;

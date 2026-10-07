@@ -159,7 +159,7 @@ fn GeomFill_Gordon__NetworkSurface_InvalidWeightsReportsInvalidInput() {
     let aGuideParams = reals(&[0.0, 1.0]);
 
     let mut aWeights = makeUnitWeightGrid(&aProfiles, &aGuideParams);
-    aWeights[(2, 2)] = 0.0;
+    aWeights.set_value(2, 2, 0.0).unwrap();
 
     let aNetwork = network_of(
         (&aProfiles, &aGuides),
@@ -190,9 +190,9 @@ fn GeomFill_Gordon__NetworkSurface_CompatibleRationalWeightsProducesRationalSurf
 
     let mut aWeights: Array2<'static, f64> = Array2::with_bounds(1, 3, 1, 3).unwrap();
     for aProfileIdx in 1..=3 {
-        aWeights[(1, aProfileIdx)] = 1.0;
-        aWeights[(2, aProfileIdx)] = 0.75;
-        aWeights[(3, aProfileIdx)] = 1.0;
+        aWeights.set_value(1, aProfileIdx, 1.0).unwrap();
+        aWeights.set_value(2, aProfileIdx, 0.75).unwrap();
+        aWeights.set_value(3, aProfileIdx, 1.0).unwrap();
     }
 
     let aNetwork = network_of(

@@ -179,8 +179,8 @@ fn bspline_surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failur
     let mut w: Array2<'static, f64> = Array2::with_bounds(1, nu, 1, nv).unwrap();
     for i in 1..=nu {
         for j in 1..=nv {
-            p[(i, j)] = r.pnt();
-            w[(i, j)] = r.real();
+            p.set_value(i, j, r.pnt()).unwrap();
+            w.set_value(i, j, r.real()).unwrap();
         }
     }
     let nku = r.integer();

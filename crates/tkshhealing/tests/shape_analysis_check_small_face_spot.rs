@@ -251,31 +251,49 @@ fn surface_face(surface: Handle<dyn GeomSurface>) -> Face {
 
 fn bezier_surface(strip_in_v: bool, width: f64) -> Handle<dyn GeomSurface> {
     let mut poles = Array2::<Point3>::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    poles[(1, 2)] = if strip_in_v {
-        Point3::new(0.0, width, 0.0)
-    } else {
-        Point3::new(0.0, 1.0, 0.0)
-    };
-    poles[(2, 1)] = if strip_in_v {
-        Point3::new(1.0, 0.0, 0.0)
-    } else {
-        Point3::new(width, 0.0, 0.0)
-    };
-    poles[(2, 2)] = if strip_in_v {
-        Point3::new(1.0, width, 0.0)
-    } else {
-        Point3::new(width, 1.0, 0.0)
-    };
+    poles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    poles
+        .set_value(
+            1,
+            2,
+            if strip_in_v {
+                Point3::new(0.0, width, 0.0)
+            } else {
+                Point3::new(0.0, 1.0, 0.0)
+            },
+        )
+        .unwrap();
+    poles
+        .set_value(
+            2,
+            1,
+            if strip_in_v {
+                Point3::new(1.0, 0.0, 0.0)
+            } else {
+                Point3::new(width, 0.0, 0.0)
+            },
+        )
+        .unwrap();
+    poles
+        .set_value(
+            2,
+            2,
+            if strip_in_v {
+                Point3::new(1.0, width, 0.0)
+            } else {
+                Point3::new(width, 1.0, 0.0)
+            },
+        )
+        .unwrap();
     Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()
 }
 
 fn bspline_strip_surface() -> Handle<dyn GeomSurface> {
     let mut poles = Array2::<Point3>::with_bounds(1, 2, 1, 2).unwrap();
-    poles[(1, 1)] = Point3::new(0.0, 0.0, 0.0);
-    poles[(1, 2)] = Point3::new(0.0, 1e-8, 0.0);
-    poles[(2, 1)] = Point3::new(1.0, 0.0, 0.0);
-    poles[(2, 2)] = Point3::new(1.0, 1e-8, 0.0);
+    poles.set_value(1, 1, Point3::new(0.0, 0.0, 0.0)).unwrap();
+    poles.set_value(1, 2, Point3::new(0.0, 1e-8, 0.0)).unwrap();
+    poles.set_value(2, 1, Point3::new(1.0, 0.0, 0.0)).unwrap();
+    poles.set_value(2, 2, Point3::new(1.0, 1e-8, 0.0)).unwrap();
     let (knots, mults) = clamped_linear_knots();
     Handle::new(
         GeomBSplineSurface::new(

@@ -172,11 +172,11 @@ fn GeomHash_SurfaceHasherTest__BSplineSurface_HigherDegree_CopiedSurfaces_SameHa
     let mut aPoles: Array2<'static, Point3> = Array2::with_bounds(1, 4, 1, 4).unwrap();
     for i in 1..=4 {
         for j in 1..=4 {
-            aPoles[(i, j)] = pnt(
+            aPoles.set_value(i, j, pnt(
                 f64::from(i - 1) * 1.0,
                 f64::from(j - 1) * 1.0,
                 f64::from(i + j) * 0.1,
-            );
+            )).unwrap();
         }
     }
     let (aUKnots, aVKnots) = (reals(&[0.0, 1.0]), reals(&[0.0, 1.0]));

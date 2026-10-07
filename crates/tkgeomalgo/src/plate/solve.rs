@@ -294,7 +294,7 @@ impl PlatePlate {
             for irow in 1..=block.col_length() {
                 for icol in 1..=block.row_length() {
                     sec_member[offset + k] +=
-                        block.coeff(irow, icol) * block.ppc(icol).value().coord(icoor)?;
+                        block.coeff(irow, icol)? * block.ppc(icol).value().coord(icoor)?;
                 }
                 k += 1;
             }
@@ -321,7 +321,7 @@ impl PlatePlate {
             for icol in 1..=block.row_length() {
                 let mut vsol: f64 = 0.0;
                 for irow in 1..=block.col_length() {
-                    vsol += block.coeff(irow, icol) * sol(ksol + irow - 1);
+                    vsol += block.coeff(irow, icol)? * sol(ksol + irow - 1);
                 }
                 solution[k_solution].set_coord(icoor, vsol)?;
                 k_solution += 1;

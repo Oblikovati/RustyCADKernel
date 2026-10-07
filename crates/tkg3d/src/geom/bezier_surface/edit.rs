@@ -2,7 +2,7 @@
 
 //! The structural edits of Geom_BezierSurface: exchange of the directions, degree
 //! elevation, insertion and removal of pole rows and columns, and segmentation.
-use super::grid::{add_col, add_row, at1, delete_col, delete_row, one_based_grid, put2};
+use super::grid::{add_col, add_row, at1, at2, delete_col, delete_row, one_based_grid, put2};
 use super::state::SurfaceState;
 use crate::geom::errors;
 use rustycad_tkernel::ncollection::{Array1, Array2};
@@ -52,8 +52,8 @@ impl SurfaceState {
         let mut nweights: Array2<'static, f64> = one_based_grid(nv, nu)?;
         for i in 1..=nv {
             for j in 1..=nu {
-                put2(&mut npoles, i, j, self.poles[(j, i)])?;
-                put2(&mut nweights, i, j, self.weights[(j, i)])?;
+                put2(&mut npoles, i, j, at2(&self.poles, j, i)?)?;
+                put2(&mut nweights, i, j, at2(&self.weights, j, i)?)?;
             }
         }
         self.poles = npoles;

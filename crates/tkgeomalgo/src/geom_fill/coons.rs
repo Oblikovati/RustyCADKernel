@@ -7,6 +7,7 @@ use super::filling::{
     Rows, at, blend, blend_terms, coords, corner_terms, corners, domain_error, fill_four_sided,
     lengths, point_from, put2,
 };
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::arrays::one_based;
@@ -169,22 +170,24 @@ fn fill_inner(
     (fv, gv): (&Array1<'static, f64>, &Array1<'static, f64>),
 ) -> Result<(), Failure> {
     let (npol_u, npol_v) = (grid.col_length(), grid.row_length());
-    let value = |grid: &Array2<'static, Point3>, i: i32, j: i32| coords(grid[(i, j)]);
+    let value = |grid: &Array2<'static, Point3>, i: i32, j: i32| -> Result<[f64; 3], Failure> {
+        Ok(coords(*grid.value(i, j).map_err(array2_failure)?))
+    };
     let corner = [
-        value(grid, 1, 1),
-        value(grid, 1, npol_v),
-        value(grid, npol_u, 1),
-        value(grid, npol_u, npol_v),
+        value(grid, 1, 1)?,
+        value(grid, 1, npol_v)?,
+        value(grid, npol_u, 1)?,
+        value(grid, npol_u, npol_v)?,
     ];
     for j in 2..npol_v {
         let (fvj, gvj) = (fv[j], gv[j]);
         for i in 2..npol_u {
             let (fui, gui) = (fu[i], gu[i]);
             let edges = [
-                value(grid, i, 1),
-                value(grid, i, npol_v),
-                value(grid, 1, j),
-                value(grid, npol_u, j),
+                value(grid, i, 1)?,
+                value(grid, i, npol_v)?,
+                value(grid, 1, j)?,
+                value(grid, npol_u, j)?,
             ];
             let p: Point3 = point_from(|k| {
                 fvj * edges[0][k] + gvj * edges[1][k] + fui * edges[2][k] + gui * edges[3][k]

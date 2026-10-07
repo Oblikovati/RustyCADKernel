@@ -5,6 +5,7 @@
 //! their `Init`, the planar frame `M` of the arc and the 1-based math vectors.
 use super::sweep_failures::matrix_with_bounds;
 use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::convert::CompPolynomialToPoles;
 use rustycad_tkmath::gp::{Matrix3, Vector3, Xyz};
@@ -34,7 +35,7 @@ pub(crate) fn basis_matrix(ordre: i32) -> Result<Matrix<'static>, Failure> {
     let mut result = matrix_with_bounds(1, ordre, 1, ordre)?;
     for jj in 1..=ordre {
         for ii in 1..=ordre {
-            result[(ii, jj)] = snapped(poles[(ii, jj)]);
+            result[(ii, jj)] = snapped(*poles.value(ii, jj).map_err(array2_failure)?);
         }
     }
     Ok(result)

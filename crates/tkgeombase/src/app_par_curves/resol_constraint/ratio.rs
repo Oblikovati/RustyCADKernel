@@ -74,7 +74,8 @@ impl ResolConstraint {
             let mut inc_col: i32 = 0;
             for k in 1..nb_cu {
                 inc3 += 1;
-                let (code1, code2) = (ibont[(k, i)], ibont[(k + 1, i)]);
+                let code1: i32 = *ibont.value(k, i).map_err(out_of_range)?;
+                let code2: i32 = *ibont.value(k + 1, i).map_err(out_of_range)?;
                 tabs.read(ssp, [npt, k, nb3d, code1], Slot::First, t)?;
                 t.ip = if k <= nb3d || code1 == 3 {
                     3 * npol

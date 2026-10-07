@@ -63,8 +63,8 @@ pub fn surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
             let mut weights = Array2::with_bounds(1, nu, 1, nv).unwrap();
             for i in 1..=nu {
                 for j in 1..=nv {
-                    poles[(i, j)] = r.pnt();
-                    weights[(i, j)] = r.real();
+                    poles.set_value(i, j, r.pnt()).unwrap();
+                    weights.set_value(i, j, r.real()).unwrap();
                 }
             }
             Ok(Handle::new(GeomBezierSurface::with_weights(&poles, &weights)?).cast())

@@ -9,7 +9,9 @@ fn assert_descriptor<T: RuntimeTyped + Transient>(object: &T, name: &str) {
     assert_eq!(T::TYPE_NAME, name);
     assert_eq!(T::static_type().name(), name);
     assert_eq!(object.dynamic_type().name(), name);
-    let parent = T::static_type().parent().map(|parent| parent.name().to_owned());
+    let parent = T::static_type()
+        .parent()
+        .map(|parent| parent.name().to_owned());
     assert_eq!(parent.as_deref(), Some("Standard_Transient"));
 }
 

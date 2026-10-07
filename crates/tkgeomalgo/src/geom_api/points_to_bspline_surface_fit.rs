@@ -6,6 +6,7 @@
 use super::points_to_bspline_surface::{PointsToBSplineSurface, SurfaceFitSettings};
 use super::points_to_bspline_surface_tangent::{build_parameters, build_periodic_tangent};
 use crate::geom2d_api::points_to_bspline::continuity_code;
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2, HArray1};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::GeomBSplineSurface;
@@ -124,7 +125,9 @@ fn surface_of(
     for j in 1..=v.nb_poles {
         the_curve2.curve_3d(j, &mut poles2)?;
         for i in 1..=u.nb_poles {
-            the_poles[(i, j)] = poles2[i];
+            the_poles
+                .set_value(i, j, poles2[i])
+                .map_err(array2_failure)?;
         }
     }
     GeomBSplineSurface::new(

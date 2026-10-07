@@ -119,7 +119,7 @@ fn array2_bounded_constructor_reuses_the_prefix_with_native_flat_bounds() {
     let pointer = buffer.as_ptr();
     let mut array = Array2::from_buffer_bounds(&mut buffer, -1, 0, 3, 4).unwrap();
     let prefix = array2_bounds_row(&array, pointer == array.data_ptr());
-    array[(-1, 4)].value = 71;
+    array.change_value(-1, 4).unwrap().value = 71;
     let counters = capture_counters(array.as_slice());
     let during = counter_row(&counters);
     drop(array);

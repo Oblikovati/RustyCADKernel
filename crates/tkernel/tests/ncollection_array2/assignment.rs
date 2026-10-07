@@ -4,10 +4,10 @@ fn NCollection_Array2Test__CopyConstructor() {
     original.init(123);
     let copy = original.clone();
     shape(&copy, 3, 4, (1, 1));
-    assert_eq!(copy[(2, 3)], 123);
-    original[(2, 3)] = 999;
-    assert_ne!(copy[(2, 3)], original[(2, 3)]);
-    assert_eq!(copy[(2, 3)], 123);
+    assert_eq!((*copy.value(2, 3).unwrap()), 123);
+    original.set_value(2, 3, 999).unwrap();
+    assert_ne!((*copy.value(2, 3).unwrap()), (*original.value(2, 3).unwrap()));
+    assert_eq!((*copy.value(2, 3).unwrap()), 123);
 }
 #[test]
 fn NCollection_Array2Test__AssignmentOperator() {
@@ -16,9 +16,9 @@ fn NCollection_Array2Test__AssignmentOperator() {
     dest.init(0);
     dest.assign(&source);
     shape(&dest, 3, 4, (5, 10));
-    assert_eq!(dest[(6, 12)], 612);
-    source[(6, 12)] = 999;
-    assert_eq!(dest[(6, 12)], 612);
+    assert_eq!((*dest.value(6, 12).unwrap()), 612);
+    source.set_value(6, 12, 999).unwrap();
+    assert_eq!((*dest.value(6, 12).unwrap()), 612);
 }
 #[test]
 fn NCollection_Array2Test__AssignmentOperatorReusesSameSizeOwnedStorage() {
@@ -29,7 +29,7 @@ fn NCollection_Array2Test__AssignmentOperatorReusesSameSizeOwnedStorage() {
     assert_eq!(dest.as_slice().as_ptr(), pointer);
     assert!(dest.is_deletable());
     shape(&dest, 3, 4, (10, 20));
-    assert_eq!(dest[(11, 22)], 1122);
+    assert_eq!((*dest.value(11, 22).unwrap()), 1122);
 }
 #[test]
 fn NCollection_Array2Test__AssignmentOperatorReusesSameSizeExternalBuffer() {
@@ -51,7 +51,7 @@ fn NCollection_Array2Test__AssignmentOperatorDetachesDifferentSizeExternalBuffer
     assert_ne!(dest.as_slice().as_ptr(), pointer);
     assert!(dest.is_deletable());
     shape(&dest, 2, 3, (5, 7));
-    assert_eq!(dest[(6, 8)], 608);
+    assert_eq!((*dest.value(6, 8).unwrap()), 608);
     assert_eq!(buffer, [1, 2, 3, 4]);
 }
 #[test]
@@ -60,8 +60,8 @@ fn NCollection_Array2Test__CopyValuesPreservesBounds() {
     let mut dest = Array2::<i32>::with_bounds(1, 2, 1, 3).unwrap();
     dest.copy_values(&source).unwrap();
     shape(&dest, 2, 3, (1, 1));
-    assert_eq!(dest[(1, 1)], 507);
-    assert_eq!(dest[(2, 3)], 609);
+    assert_eq!((*dest.value(1, 1).unwrap()), 507);
+    assert_eq!((*dest.value(2, 3).unwrap()), 609);
 }
 #[test]
 fn NCollection_Array2Test__CopyValuesDifferentDimensions() {
@@ -71,10 +71,10 @@ fn NCollection_Array2Test__CopyValuesDifferentDimensions() {
 }
 fn check_move(mut dest: Array2<'static, i32>) {
     let mut source = Array2::with_bounds(1, 5, 1, 10).unwrap();
-    source[(3, 7)] = 123;
+    source.set_value(3, 7, 123).unwrap();
     dest.move_from(&mut source);
     shape(&dest, 5, 10, (1, 1));
-    assert_eq!(dest[(3, 7)], 123);
+    assert_eq!((*dest.value(3, 7).unwrap()), 123);
     assert_eq!(source.len(), 0);
     assert_eq!(source.nb_rows(), 0);
 }

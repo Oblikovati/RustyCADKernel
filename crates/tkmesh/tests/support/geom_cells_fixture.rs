@@ -25,7 +25,13 @@ fn spline_surface(kind: i32) -> Handle<dyn GeomSurface> {
     let mut poles = Array2::with_bounds(1, nu, 1, nv).unwrap();
     for u in 1..=nu {
         for v in 1..=nv {
-            poles[(u, v)] = Point3::new(f64::from(u), f64::from(v), f64::from((u * v) % 3) * 0.25);
+            poles
+                .set_value(
+                    u,
+                    v,
+                    Point3::new(f64::from(u), f64::from(v), f64::from((u * v) % 3) * 0.25),
+                )
+                .unwrap();
         }
     }
     if kind != 5 {

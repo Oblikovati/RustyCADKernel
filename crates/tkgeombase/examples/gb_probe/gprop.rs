@@ -107,8 +107,8 @@ fn points_mode(
         let mut d2: Array2<'static, f64> = Array2::with_bounds(1, rows, 1, cols).unwrap();
         for i in 1..=rows {
             for j in 1..=cols {
-                p2[(i, j)] = pts[(i - 1) * cols + j];
-                d2[(i, j)] = den[(i - 1) * cols + j];
+                p2.set_value(i, j, pts[(i - 1) * cols + j]).unwrap();
+                d2.set_value(i, j, den[(i - 1) * cols + j]).unwrap();
             }
         }
         props(&PGProps::from_points_2d(&p2));

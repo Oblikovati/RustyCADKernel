@@ -70,7 +70,12 @@ pub struct ProgressIndicator {
     shared: Arc<IndicatorShared>,
     root: ProgressScope<'static>,
 }
-impl_transient!(ProgressIndicator, "Message_ProgressIndicator", StandardTransient, parent);
+impl_transient!(
+    ProgressIndicator,
+    "Message_ProgressIndicator",
+    StandardTransient,
+    parent
+);
 impl ProgressIndicator {
     /// Protected native constructor: position 0 and an active unnamed root scope
     /// with max 1; `ProgressIndicator::new(Box::new(hooks))`.

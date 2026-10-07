@@ -82,7 +82,10 @@ fn table_indexes(table: &AssemblyTable) -> Result<Vec<Vec<i32>>, Failure> {
     let mut result: Vec<Vec<i32>> = Vec::new();
     for dim in cells.lower_row()..=cells.upper_row() {
         for el in cells.lower_col()..=cells.upper_col() {
-            result.push(element_indexes(&cells[(dim, el)])?);
+            let cell = cells
+                .value(dim, el)
+                .map_err(|error| array_failure(error, "FEmTool_Assembly"))?;
+            result.push(element_indexes(cell)?);
         }
     }
     Ok(result)

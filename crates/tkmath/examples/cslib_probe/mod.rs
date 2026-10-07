@@ -26,7 +26,7 @@ impl Fields<'_> {
         let mut table = Array2::with_bounds(0, size, 0, size).unwrap();
         for i in 0..=size {
             for j in 0..=size {
-                table[(i, j)] = self.vector();
+                table.set_value(i, j, self.vector()).unwrap();
             }
         }
         table

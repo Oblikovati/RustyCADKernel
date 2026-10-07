@@ -16,11 +16,17 @@ fn warped_surface(height: f64) -> Result<Handle<dyn GeomSurface>, Failure> {
     let mut poles = Array2::with_bounds(1, 3, 1, 3).unwrap();
     for i in 1..=3 {
         for j in 1..=3 {
-            poles[(i, j)] = Point3::new(
-                f64::from(i - 1),
-                f64::from(j - 1),
-                f64::from((i - 1) * (j - 1)) * height,
-            );
+            poles
+                .set_value(
+                    i,
+                    j,
+                    Point3::new(
+                        f64::from(i - 1),
+                        f64::from(j - 1),
+                        f64::from((i - 1) * (j - 1)) * height,
+                    ),
+                )
+                .unwrap();
         }
     }
     Ok(Handle::new(GeomBezierSurface::new(&poles)?).cast())

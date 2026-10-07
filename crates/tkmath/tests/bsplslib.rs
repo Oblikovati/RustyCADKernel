@@ -38,7 +38,7 @@ fn BSplSLibTest__UnitWeights_SmallSurface_ReturnsNonOwning() {
 
     for i in 1..=aNbU {
         for j in 1..=aNbV {
-            EXPECT_DOUBLE_EQ(aWeights[(i, j)], 1.0);
+            EXPECT_DOUBLE_EQ(*aWeights.value(i, j).unwrap(), 1.0);
         }
     }
 }
@@ -52,8 +52,8 @@ fn BSplSLibTest__UnitWeights_MaxBezierSize_ReturnsNonOwning() {
 
     assert_eq!(aWeights.len() as i32, aNbU * aNbV);
     assert!(!aWeights.is_deletable());
-    EXPECT_DOUBLE_EQ(aWeights[(1, 1)], 1.0);
-    EXPECT_DOUBLE_EQ(aWeights[(aNbU, aNbV)], 1.0);
+    EXPECT_DOUBLE_EQ(*aWeights.value(1, 1).unwrap(), 1.0);
+    EXPECT_DOUBLE_EQ(*aWeights.value(aNbU, aNbV).unwrap(), 1.0);
 }
 
 #[test]
@@ -65,8 +65,8 @@ fn BSplSLibTest__UnitWeights_AtMaxLimit_ReturnsNonOwning() {
 
     assert_eq!(aWeights.len() as i32, aNbU * aNbV);
     assert!(!aWeights.is_deletable());
-    EXPECT_DOUBLE_EQ(aWeights[(1, 1)], 1.0);
-    EXPECT_DOUBLE_EQ(aWeights[(aNbU, aNbV)], 1.0);
+    EXPECT_DOUBLE_EQ(*aWeights.value(1, 1).unwrap(), 1.0);
+    EXPECT_DOUBLE_EQ(*aWeights.value(aNbU, aNbV).unwrap(), 1.0);
 }
 
 #[test]
@@ -83,7 +83,7 @@ fn BSplSLibTest__UnitWeights_OverMaxLimit_ReturnsOwning() {
 
     for i in 1..=aNbU {
         for j in 1..=aNbV {
-            EXPECT_DOUBLE_EQ(aWeights[(i, j)], 1.0);
+            EXPECT_DOUBLE_EQ(*aWeights.value(i, j).unwrap(), 1.0);
         }
     }
 }
@@ -94,5 +94,5 @@ fn BSplSLibTest__UnitWeights_SingleElement() {
 
     assert_eq!(aWeights.len(), 1);
     assert!(!aWeights.is_deletable());
-    EXPECT_DOUBLE_EQ(aWeights[(1, 1)], 1.0);
+    EXPECT_DOUBLE_EQ(*aWeights.value(1, 1).unwrap(), 1.0);
 }

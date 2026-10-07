@@ -15,6 +15,7 @@ use super::network_surface_skin::{
     make_reference_surface, pole_weight,
 };
 use crate::geom_api::Interpolate;
+use rustycad_tkernel::ncollection::array2_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2, HArray1};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -115,8 +116,12 @@ fn closed_contact_rows(
     if needs_start {
         for pi in 0..nb_cols {
             let profile = n.profiles[pi as usize].get().ok_or_else(null_curve)?;
-            points[(1, pi + 1)] = profile.value(profile.first_parameter())?;
-            weights[(1, pi + 1)] = pole_weight(profile, 1)?;
+            points
+                .set_value(1, pi + 1, profile.value(profile.first_parameter())?)
+                .map_err(array2_failure)?;
+            weights
+                .set_value(1, pi + 1, pole_weight(profile, 1)?)
+                .map_err(array2_failure)?;
         }
     }
     let (row0, col0) = (input_points.lower_row(), input_points.lower_col());
@@ -124,14 +129,42 @@ fn closed_contact_rows(
     for gi in 0..input_points.nb_rows() as i32 {
         for pi in 0..nb_cols {
             let row: i32 = gi + offset as i32 + 1;
-            points[(row, pi + 1)] = input_points[(row0 + gi, col0 + pi)];
-            weights[(row, pi + 1)] = input_weights[(wrow0 + gi, wcol0 + pi)];
+            points
+                .set_value(
+                    row,
+                    pi + 1,
+                    *input_points
+                        .value(row0 + gi, col0 + pi)
+                        .map_err(array2_failure)?,
+                )
+                .map_err(array2_failure)?;
+            weights
+                .set_value(
+                    row,
+                    pi + 1,
+                    *input_weights
+                        .value(wrow0 + gi, wcol0 + pi)
+                        .map_err(array2_failure)?,
+                )
+                .map_err(array2_failure)?;
         }
     }
     if needs_end {
         for pi in 1..=nb_cols {
-            points[(nb_guides as i32, pi)] = points[(1, pi)];
-            weights[(nb_guides as i32, pi)] = weights[(1, pi)];
+            points
+                .set_value(
+                    nb_guides as i32,
+                    pi,
+                    *points.value(1, pi).map_err(array2_failure)?,
+                )
+                .map_err(array2_failure)?;
+            weights
+                .set_value(
+                    nb_guides as i32,
+                    pi,
+                    *weights.value(1, pi).map_err(array2_failure)?,
+                )
+                .map_err(array2_failure)?;
         }
     }
     Ok((points, weights))

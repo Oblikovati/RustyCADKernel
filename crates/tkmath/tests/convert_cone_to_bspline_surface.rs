@@ -48,7 +48,7 @@ fn Convert_ConeToBSplineSurfaceTest__WeightsArePositive() {
     let aWeights = aConv.weights();
     for i in 1..=aConv.nb_u_poles() {
         for j in 1..=aConv.nb_v_poles() {
-            assert!(aWeights[(i, j)] > 0.0);
+            assert!((*aWeights.value(i, j).unwrap()) > 0.0);
         }
     }
 }

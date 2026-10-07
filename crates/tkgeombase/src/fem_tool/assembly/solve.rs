@@ -113,8 +113,10 @@ impl Assembly {
                     None => {
                         for j in i..=n {
                             for k in block_beg..=block_end {
-                                h1[(j, k)] = 0;
-                                h1[(k, j)] = 0;
+                                let pattern_failure =
+                                    |error| array_failure(error, "FEmTool_Assembly::Solve");
+                                h1.set_value(j, k, 0).map_err(pattern_failure)?;
+                                h1.set_value(k, j, 0).map_err(pattern_failure)?;
                             }
                         }
                         block_beg = block_end + 1;
