@@ -294149,14 +294149,6 @@
       "notes": "Ported BOPDS_PaveBlock state used by pave splitting; tools/verify_tkbo_foundations.py checks native interval, extra-pave, update, and shrunk-box behavior. Rust owned vectors replace NCollection_List handles."
     },
     {
-      "upstream_id": "BOPDS_PaveBlock::DEFINE_STANDARD_RTTIEXT(BOPDS_PaveBlock,Standard_Transient)",
-      "toolkit": "TKBO",
-      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_PaveBlock.hxx",
-      "rust_item": "Rust static type metadata",
-      "status": "excluded",
-      "notes": "Standard RTTI metadata is not a Rust callable API; Rust type identity is static."
-    },
-    {
       "upstream_id": "BOPDS_CommonBlock()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
@@ -294323,14 +294315,6 @@
       "rust_item": "rustycad_tkbo::bop_ds::CommonBlock::tolerance",
       "status": "implemented",
       "notes": "Reads the exact stored tolerance, including signed zero and NaN."
-    },
-    {
-      "upstream_id": "BOPDS_CommonBlock::DEFINE_STANDARD_RTTIEXT(BOPDS_CommonBlock,Standard_Transient)",
-      "toolkit": "TKBO",
-      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CommonBlock.hxx",
-      "rust_item": "Rust static type metadata",
-      "status": "excluded",
-      "notes": "Standard RTTI metadata is not a callable API; Rust type identity is static."
     },
     {
       "upstream_id": "BOPDS_CoupleOfPaveBlocks()",
@@ -295709,14 +295693,6 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "BOPDS_DS",
-      "toolkit": "TKBO",
-      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
-      "rust_item": "rustycad_tkbo::bop_ds::DataStructure::<core::default::Default>::default",
-      "status": "implemented",
-      "notes": "Creates empty BOPDS argument and shape storage."
-    },
-    {
       "upstream_id": "BOPDS_DS()",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_DS.hxx",
@@ -296484,7 +296460,7 @@
       "notes": "Source translation with native tkbo_options.cxx behavioral oracle; manual mapping, independent declaration inventory pending."
     },
     {
-      "upstream_id": "BOPAlgo_Options::BOPAlgo_Options(allocator)",
+      "upstream_id": "BOPAlgo_Options(const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Options.hxx",
       "rust_item": "rustycad_tkbo::bop_algo::Options::with_allocator",
@@ -298794,12 +298770,93 @@
       "notes": "Native enumeration values; compiler inventory of enumerators remains pending."
     },
     {
+      "upstream_id": "BOPAlgo_GlueOff",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_GlueEnum.hxx",
+      "source_sha256": "63953346089e587fb1e474b3e99778c7018d23795e4a030858489b10a1ad3f4d",
+      "rust_item": "rustycad_tkbo::bop_algo::Glue::Off",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_GlueShift",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_GlueEnum.hxx",
+      "source_sha256": "63953346089e587fb1e474b3e99778c7018d23795e4a030858489b10a1ad3f4d",
+      "rust_item": "rustycad_tkbo::bop_algo::Glue::Shift",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_GlueFull",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_GlueEnum.hxx",
+      "source_sha256": "63953346089e587fb1e474b3e99778c7018d23795e4a030858489b10a1ad3f4d",
+      "rust_item": "rustycad_tkbo::bop_algo::Glue::Full",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
       "upstream_id": "BOPAlgo_Operation",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Operation.hxx",
       "rust_item": "rustycad_tkbo::bop_algo::Operation",
       "status": "implemented",
       "notes": "Native enumeration values; compiler inventory of enumerators remains pending."
+    },
+    {
+      "upstream_id": "BOPAlgo_COMMON",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Operation.hxx",
+      "source_sha256": "5842e86d1fedc022ae8bef25212c683e88ea301cb140746007edb059df5ac6f6",
+      "rust_item": "rustycad_tkbo::bop_algo::Operation::Common",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_FUSE",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Operation.hxx",
+      "source_sha256": "5842e86d1fedc022ae8bef25212c683e88ea301cb140746007edb059df5ac6f6",
+      "rust_item": "rustycad_tkbo::bop_algo::Operation::Fuse",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_CUT",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Operation.hxx",
+      "source_sha256": "5842e86d1fedc022ae8bef25212c683e88ea301cb140746007edb059df5ac6f6",
+      "rust_item": "rustycad_tkbo::bop_algo::Operation::Cut",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_CUT21",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Operation.hxx",
+      "source_sha256": "5842e86d1fedc022ae8bef25212c683e88ea301cb140746007edb059df5ac6f6",
+      "rust_item": "rustycad_tkbo::bop_algo::Operation::Cut21",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_SECTION",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Operation.hxx",
+      "source_sha256": "5842e86d1fedc022ae8bef25212c683e88ea301cb140746007edb059df5ac6f6",
+      "rust_item": "rustycad_tkbo::bop_algo::Operation::Section",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_UNKNOWN",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Operation.hxx",
+      "source_sha256": "5842e86d1fedc022ae8bef25212c683e88ea301cb140746007edb059df5ac6f6",
+      "rust_item": "rustycad_tkbo::bop_algo::Operation::Unknown",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
     },
     {
       "upstream_id": "BRepAlgoAPI_Algo::Shape",
@@ -319403,7 +319460,7 @@
       "notes": "Protected step ported as the private helper `make_blocks` run by `make_blocks`; Rust has no subclass extension point for it. Source translation verified bit for bit by the native replay tools/oracle/tkbo_pave_filler_perform.cxx (crates/tkbo/tests/bop_algo_pave_filler_perform.rs)."
     },
     {
-      "upstream_id": "BOPAlgo_PaveFiller::GetPBBox(const TopoDS_Edge&,const occ::handle<BOPDS_PaveBlock>&,NCollection_DataMap<occ::handle<BOPDS_PaveBlock>,Bnd_Box>&,double&,double&,double&,double&,Bnd_Box&)",
+      "upstream_id": "BOPAlgo_PaveFiller::GetPBBox(const TopoDS_Edge&,const occ::handle<BOPDS_PaveBlock>&,BOPAlgo_DataMapOfPaveBlockBndBox&,double&,double&,double&,double&,Bnd_Box&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
       "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
@@ -319439,7 +319496,7 @@
       "notes": "Protected step ported as the private helper `existing_shared_edge` run by `make_blocks`; Rust has no subclass extension point for it. Source translation verified bit for bit by the native replay tools/oracle/tkbo_pave_filler_perform.cxx (crates/tkbo/tests/bop_algo_pave_filler_perform.rs)."
     },
     {
-      "upstream_id": "BOPAlgo_PaveFiller::IsExistingPaveBlock(const occ::handle<BOPDS_PaveBlock>&,const BOPDS_Curve&,double,const NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,BOPTools_BoxSet<double,3,int>&,const NCollection_Map<occ::handle<BOPDS_PaveBlock>>&,occ::handle<BOPDS_PaveBlock>&,double&)",
+      "upstream_id": "BOPAlgo_PaveFiller::IsExistingPaveBlock(const occ::handle<BOPDS_PaveBlock>&,const BOPDS_Curve&,double,const NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,BOPTools_BoxTree&,const NCollection_Map<occ::handle<BOPDS_PaveBlock>>&,occ::handle<BOPDS_PaveBlock>&,double&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
       "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
@@ -319592,7 +319649,7 @@
       "notes": "Source translation verified bit for bit by the native replay tools/oracle/tkbo_pave_filler_perform.cxx (crates/tkbo/tests/bop_algo_pave_filler_perform.rs)."
     },
     {
-      "upstream_id": "BOPAlgo_PaveFiller::ProcessExistingPaveBlocks(int,int,int,const NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,BOPTools_BoxSet<double,3,int>&,const NCollection_DataMap<int,NCollection_List<int>>&,NCollection_IndexedDataMap<TopoDS_Shape,BOPDS_CoupleOfPaveBlocks,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,int,TopTools_ShapeMapHasher>&,NCollection_DataMap<occ::handle<BOPDS_PaveBlock>,NCollection_List<int>>&,NCollection_Map<occ::handle<BOPDS_PaveBlock>>&)",
+      "upstream_id": "BOPAlgo_PaveFiller::ProcessExistingPaveBlocks(int,int,int,const NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,BOPTools_BoxTree&,const NCollection_DataMap<int,NCollection_List<int>>&,NCollection_IndexedDataMap<TopoDS_Shape,BOPDS_CoupleOfPaveBlocks,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,int,TopTools_ShapeMapHasher>&,BOPAlgo_DataMapOfPaveBlockListOfInteger&,NCollection_Map<occ::handle<BOPDS_PaveBlock>>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
       "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
@@ -319601,7 +319658,7 @@
       "notes": "Protected step ported as the private helper `process_existing_blocks_at_bounds` run by `make_blocks`; Rust has no subclass extension point for it. Source translation verified bit for bit by the native replay tools/oracle/tkbo_pave_filler_perform.cxx (crates/tkbo/tests/bop_algo_pave_filler_perform.rs)."
     },
     {
-      "upstream_id": "BOPAlgo_PaveFiller::ProcessExistingPaveBlocks(int,int,int,int,const TopoDS_Edge&,const NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,BOPTools_BoxSet<double,3,int>&,NCollection_IndexedDataMap<TopoDS_Shape,BOPDS_CoupleOfPaveBlocks,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,int,TopTools_ShapeMapHasher>&,NCollection_List<occ::handle<BOPDS_PaveBlock>>&,NCollection_DataMap<occ::handle<BOPDS_PaveBlock>,NCollection_List<int>>&,NCollection_Map<occ::handle<BOPDS_PaveBlock>>&)",
+      "upstream_id": "BOPAlgo_PaveFiller::ProcessExistingPaveBlocks(int,int,int,int,const TopoDS_Edge&,const NCollection_IndexedMap<occ::handle<BOPDS_PaveBlock>>&,BOPTools_BoxTree&,NCollection_IndexedDataMap<TopoDS_Shape,BOPDS_CoupleOfPaveBlocks,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,int,TopTools_ShapeMapHasher>&,NCollection_List<occ::handle<BOPDS_PaveBlock>>&,BOPAlgo_DataMapOfPaveBlockListOfInteger&,NCollection_Map<occ::handle<BOPDS_PaveBlock>>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
       "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
@@ -319799,7 +319856,7 @@
       "notes": "Source translation verified bit for bit by the native replay tools/oracle/tkbo_pave_filler_perform.cxx (crates/tkbo/tests/bop_algo_pave_filler_perform.rs)."
     },
     {
-      "upstream_id": "BOPAlgo_PaveFiller::UpdateExistingPaveBlocks(const occ::handle<BOPDS_PaveBlock>&,NCollection_List<occ::handle<BOPDS_PaveBlock>>&,const NCollection_DataMap<occ::handle<BOPDS_PaveBlock>,NCollection_List<int>>&)",
+      "upstream_id": "BOPAlgo_PaveFiller::UpdateExistingPaveBlocks(const occ::handle<BOPDS_PaveBlock>&,NCollection_List<occ::handle<BOPDS_PaveBlock>>&,const BOPAlgo_DataMapOfPaveBlockListOfInteger&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
       "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
@@ -319808,7 +319865,7 @@
       "notes": "Protected step ported as the private helper `update_existing_pave_blocks` run by `make_blocks`; Rust has no subclass extension point for it. Source translation verified bit for bit by the native replay tools/oracle/tkbo_pave_filler_perform.cxx (crates/tkbo/tests/bop_algo_pave_filler_perform.rs)."
     },
     {
-      "upstream_id": "BOPAlgo_PaveFiller::UpdateFaceInfo(NCollection_DataMap<occ::handle<BOPDS_PaveBlock>,NCollection_List<occ::handle<BOPDS_PaveBlock>>>&,const NCollection_DataMap<int,int>&,const NCollection_DataMap<occ::handle<BOPDS_PaveBlock>,NCollection_List<int>>&)",
+      "upstream_id": "BOPAlgo_PaveFiller::UpdateFaceInfo(NCollection_DataMap<occ::handle<BOPDS_PaveBlock>,NCollection_List<occ::handle<BOPDS_PaveBlock>>>&,const NCollection_DataMap<int,int>&,const BOPAlgo_DataMapOfPaveBlockListOfInteger&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_PaveFiller.hxx",
       "source_sha256": "38ac88fd601aae1251452b3a85619cd251728edd4da08d07a83bb014548df2a9",
@@ -320741,7 +320798,7 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "BOPAlgo_BOP::BOPAlgo_PIOperation()",
+      "upstream_id": "BOPAlgo_BOP::BOPAlgo_PIOperation",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_BOP.hxx",
       "source_sha256": "6940b010ab605c50c1bdb2159ce26703088555c16a17d3fd2749a8aea5226d40",
@@ -320885,6 +320942,24 @@
       "notes": "Protected step ported as the private helper `treat_empty_shape` run by `BOPAlgoBOP::perform`; Rust has no subclass extension point for it. Source translation verified bit for bit by the native replay tools/oracle/tkbo_bop.cxx (crates/tkbo/tests/bop_algo_bop.rs)."
     },
     {
+      "upstream_id": "BOPAlgo_BOP::PIOperation_BuildShape",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_BOP.hxx",
+      "source_sha256": "6940b010ab605c50c1bdb2159ce26703088555c16a17d3fd2749a8aea5226d40",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_BOP::PIOperation_Last",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_BOP.hxx",
+      "source_sha256": "6940b010ab605c50c1bdb2159ce26703088555c16a17d3fd2749a8aea5226d40",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
       "upstream_id": "BOPAlgo_Builder::operator delete(void*) noexcept",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
@@ -320955,7 +321030,7 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "BOPAlgo_Builder::BOPAlgo_PIOperation()",
+      "upstream_id": "BOPAlgo_Builder::BOPAlgo_PIOperation",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
       "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
@@ -321457,6 +321532,105 @@
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoBuilder::new",
       "status": "implemented",
       "notes": "Source translation verified bit for bit by the native replay tools/oracle/tkbo_builder_general_fuse.cxx (crates/tkbo/tests/bop_algo_builder_general_fuse.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_TreatVertices",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_TreatEdges",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_TreatWires",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_TreatFaces",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_TreatShells",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_TreatSolids",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_TreatCompsolids",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_TreatCompounds",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_FillHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_PostTreat",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Builder::PIOperation_Last",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Builder.hxx",
+      "source_sha256": "2f3c3b3cbc4c7bd58f98b56747c954e8d851d50c9dd6add34f65ecd6df91b108",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
     },
     {
       "upstream_id": "BOPAlgo_BuilderArea::operator delete(void*) noexcept",
@@ -322407,7 +322581,7 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "upstream_id": "BOPAlgo_Section::BOPAlgo_PIOperation()",
+      "upstream_id": "BOPAlgo_Section::BOPAlgo_PIOperation",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Section.hxx",
       "source_sha256": "f289e9efaaa86d1ea4b5db884bf3d0a1d3c59868a435f2ce8da008754f1b21e1",
@@ -322477,6 +322651,60 @@
       "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoSection::new",
       "status": "implemented",
       "notes": "Source translation verified bit for bit by the native replay tools/oracle/tkbo_brep_algo_api.cxx (crates/tkbo/tests/brep_algo_api_booleans.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_Section::PIOperation_TreatVertices",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Section.hxx",
+      "source_sha256": "f289e9efaaa86d1ea4b5db884bf3d0a1d3c59868a435f2ce8da008754f1b21e1",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Section::PIOperation_TreatEdges",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Section.hxx",
+      "source_sha256": "f289e9efaaa86d1ea4b5db884bf3d0a1d3c59868a435f2ce8da008754f1b21e1",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Section::PIOperation_BuildSection",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Section.hxx",
+      "source_sha256": "f289e9efaaa86d1ea4b5db884bf3d0a1d3c59868a435f2ce8da008754f1b21e1",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Section::PIOperation_FillHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Section.hxx",
+      "source_sha256": "f289e9efaaa86d1ea4b5db884bf3d0a1d3c59868a435f2ce8da008754f1b21e1",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Section::PIOperation_PostTreat",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Section.hxx",
+      "source_sha256": "f289e9efaaa86d1ea4b5db884bf3d0a1d3c59868a435f2ce8da008754f1b21e1",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
+    },
+    {
+      "upstream_id": "BOPAlgo_Section::PIOperation_Last",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Section.hxx",
+      "source_sha256": "f289e9efaaa86d1ea4b5db884bf3d0a1d3c59868a435f2ce8da008754f1b21e1",
+      "rust_item": "rustycad_tkbo::bop_algo::PISteps",
+      "status": "excluded",
+      "notes": "Excluded: progress-indicator step of the native PI weighting. The Rust Boolean pipeline runs without a Message_ProgressRange (Perform(range) maps to perform()), so no step weights are computed."
     },
     {
       "upstream_id": "BOPAlgo_ShellSplitter::operator delete(void*) noexcept",
@@ -322762,7 +322990,7 @@
       "notes": "Static helper ported as a free function of bop_algo::tools. Source translation verified bit for bit by the native replay tools/oracle/tkbo_pave_filler_perform.cxx (crates/tkbo/tests/bop_algo_pave_filler_perform.rs)."
     },
     {
-      "upstream_id": "BOPAlgo_Tools::FillMap(const type-parameter-0-0&,const type-parameter-0-0&,type-parameter-0-1&,const occ::handle<NCollection_BaseAllocator>&)",
+      "upstream_id": "BOPAlgo_Tools::FillMap(const TheType&,const TheType&,TheMap&,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Tools.hxx",
       "source_sha256": "98425506b9f2af957c6c72df1181c7d1b0791eb9d3e6c416786ef7cb0b0b2087",
@@ -322780,7 +323008,7 @@
       "notes": "Static helper ported as a free function of bop_algo::tools. Source translation verified bit for bit by the native replay tools/oracle/tkbo_pave_filler_perform.cxx (crates/tkbo/tests/bop_algo_pave_filler_perform.rs)."
     },
     {
-      "upstream_id": "BOPAlgo_Tools::MakeBlocks(const type-parameter-0-0&,type-parameter-0-1&,const occ::handle<NCollection_BaseAllocator>&)",
+      "upstream_id": "BOPAlgo_Tools::MakeBlocks(const TheMap&,TheList&,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_Tools.hxx",
       "source_sha256": "98425506b9f2af957c6c72df1181c7d1b0791eb9d3e6c416786ef7cb0b0b2087",
