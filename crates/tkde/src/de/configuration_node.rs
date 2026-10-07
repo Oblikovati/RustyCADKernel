@@ -4,7 +4,7 @@
 //! `DE_ConfigurationNode`: the settings of one format and vendor, which build the provider
 //! that transfers files of that format.
 use super::configuration_node_base::DeConfigurationNodeBase;
-use super::{DeConfigurationContext, DeProvider, DeSectionGlobal};
+use super::{DeConfigurationContext, DeProvider, DeSectionGlobal, DeWrapper, live};
 use rustycad_tkernel::{
     impl_transient_interface,
     message::Message,
@@ -24,7 +24,7 @@ pub trait DeConfigurationNode: Transient {
     /// The embedded base with the native private fields.
     fn configuration_node_base(&self) -> &DeConfigurationNodeBase;
     /// `Load(theResource)` (pure virtual): reads the node's values from a context.
-    fn load(&self, resource: &Handle<DeConfigurationContext>) -> bool;
+    fn load(&self, resource: &Handle<DeConfigurationContext>) -> Result<bool, Failure>;
     /// `Save()` (pure virtual): the node's values as resource text.
     fn save(&self) -> AsciiString;
     /// `BuildProvider()` (pure virtual): a new provider for this node's format.
@@ -45,7 +45,7 @@ pub trait DeConfigurationNode: Transient {
         if let Some(context) = resource.get() {
             context.load_file(resource_path)?;
         }
-        Ok(self.load(&resource))
+        self.load(&resource)
     }
     /// `UpdateLoad(theToImport, theToKeep)`: whether the node can be used; `true` by default.
     fn update_load(&self, to_import: bool, to_keep: bool) -> bool {
@@ -81,8 +81,20 @@ pub trait DeConfigurationNode: Transient {
     /// `Save(theResourcePath)` (non-virtual): writes [`DeConfigurationNode::save`] to a
     /// file; `false` with a failure message when the file cannot be created.
     fn save_resource_file(&self, resource_path: &AsciiString) -> Result<bool, Failure> {
-        let text: AsciiString = self.save();
-        write_resource_file(resource_path, &text, true)
+        write_resource_file(resource_path, true, || self.save())
+    }
+    /// `Register(theWrapper)`: binds this node to the wrapper; `Standard_NullObject` for a
+    /// node without an owning handle (ocaf-design.md section 2) or a null wrapper.
+    fn register(&self, wrapper: &Handle<DeWrapper>) -> Result<(), Failure> {
+        let node: Handle<dyn DeConfigurationNode> = self.configuration_node_base().this()?;
+        live(wrapper, "DE_ConfigurationNode::Register")?.bind(&node);
+        Ok(())
+    }
+    /// `UnRegister(theWrapper)`: unbinds the node of this format and vendor.
+    fn unregister(&self, wrapper: &Handle<DeWrapper>) -> Result<(), Failure> {
+        let node: Handle<dyn DeConfigurationNode> = self.configuration_node_base().this()?;
+        live(wrapper, "DE_ConfigurationNode::UnRegister")?.unbind(&node);
+        Ok(())
     }
     /// `IsEnabled()`: the loading status.
     fn is_enabled(&self) -> bool {
@@ -124,12 +136,12 @@ fn matches_extension(extensions: &List<AsciiString>, extension: &AsciiString) ->
 }
 
 /// The `OSD_File::Build` + `Write` of `DE_ConfigurationNode::Save(path)` and
-/// `DE_Wrapper::Save(path)`; `report` sends the node's failure message (the wrapper sends
-/// none).
+/// `DE_Wrapper::Save(path)`: the text is made once the file is created, as natively;
+/// `report` sends the node's failure message (the wrapper sends none).
 pub(crate) fn write_resource_file(
     resource_path: &AsciiString,
-    text: &AsciiString,
     report: bool,
+    text: impl FnOnce() -> AsciiString,
 ) -> Result<bool, Failure> {
     let mut file: File = File::with_path(CadPath::new(resource_path.as_bytes()));
     // The native try/catch around Build turns its exceptions into a failed save.
@@ -145,7 +157,8 @@ pub(crate) fn write_resource_file(
         }
         return Ok(false);
     }
-    file.write(text, text.length())?;
+    let text: AsciiString = text();
+    file.write(&text, text.length())?;
     file.close()?;
     Ok(true)
 }
@@ -174,8 +187,8 @@ mod tests {
 
     #[test]
     fn a_resource_file_in_a_missing_directory_is_not_written() {
-        let text = AsciiString::new("a : 1\n");
-        let written = write_resource_file(&AsciiString::new("/no/such/dir/x.txt"), &text, false);
+        let path = AsciiString::new("/no/such/dir/x.txt");
+        let written = write_resource_file(&path, false, || AsciiString::new("a : 1\n"));
         assert!(!written.expect("no failure"));
     }
 }
