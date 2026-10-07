@@ -71,41 +71,10 @@ fn match_direct_endpoints(
     vertices: [&Vertex; 4],
     distance: f64,
 ) -> Result<Option<SharedEndpoints>, Failure> {
-    let [first_start, _, second_start, _] = vertices;
-    let first = if first_start.is_same(&second_start.clone().into_shape()) {
-        first_start.clone()
-    } else {
-        let position = midpoint(BRepTool::pnt(first_start)?, BRepTool::pnt(second_start)?);
-        let tolerance = (distance / 2.0) * 1.0001;
-        let shared = make_vertex(position, tolerance)?;
-        replace_vertex(context, first_start, &shared)?;
-        replace_vertex(context, second_start, &shared)?;
-        shared
-    };
-    let second = direct_far_vertex(context, vertices, &first)?;
-    Ok(Some(SharedEndpoints { first, second }))
-}
-
-fn direct_far_vertex(
-    context: &Handle<ShapeBuildReShape>,
-    vertices: [&Vertex; 4],
-    first: &Vertex,
-) -> Result<Vertex, Failure> {
     let [first_start, first_end, second_start, second_end] = vertices;
-    if first_start.is_same(&first_end.clone().into_shape())
-        || second_start.is_same(&second_end.clone().into_shape())
-    {
-        return Ok(first.clone());
-    }
-    if !first_end.is_same(&second_end.clone().into_shape()) {
-        let point = midpoint(BRepTool::pnt(first_end)?, BRepTool::pnt(second_end)?);
-        let deviation = BRepTool::pnt(first_end)?.distance(&BRepTool::pnt(second_end)?);
-        let second = make_vertex(point, deviation)?;
-        replace_far_endpoints(context, first_end, second_end, &second)?;
-        return Ok(second);
-    }
-    let _ = first;
-    Ok(first_end.clone())
+    let first = near_vertex(context, first_start, second_start, distance)?;
+    let second = far_vertex(context, vertices, &first, (first_end, second_end))?;
+    Ok(Some(SharedEndpoints { first, second }))
 }
 
 fn match_crossed_endpoints(
@@ -113,57 +82,66 @@ fn match_crossed_endpoints(
     vertices: [&Vertex; 4],
     distance: f64,
 ) -> Result<Option<SharedEndpoints>, Failure> {
-    let [first_start, _, _, second_end] = vertices;
-    let point = midpoint(BRepTool::pnt(first_start)?, BRepTool::pnt(second_end)?);
-    let first = if first_start.is_same(&second_end.clone().into_shape()) {
-        first_start.clone()
-    } else {
-        let shared = make_vertex(point, (distance / 2.0) * 1.0001)?;
-        replace_vertex(context, first_start, &shared)?;
-        replace_vertex(context, second_end, &shared)?;
-        shared
-    };
-    let second = crossed_far_vertex(context, vertices, &first)?;
+    let [first_start, first_end, second_start, second_end] = vertices;
+    let first = near_vertex(context, first_start, second_end, distance)?;
+    let second = far_vertex(context, vertices, &first, (first_end, second_start))?;
     Ok(Some(SharedEndpoints { first, second }))
 }
 
-fn crossed_far_vertex(
+/// `theFirstVer`: the common vertex, or a new vertex at the middle (tolerance half the
+/// distance, times 1.0001) replacing both.
+fn near_vertex(
     context: &Handle<ShapeBuildReShape>,
-    vertices: [&Vertex; 4],
     first: &Vertex,
+    second: &Vertex,
+    distance: f64,
 ) -> Result<Vertex, Failure> {
-    let [first_start, first_end, second_start, second_end] = vertices;
-    if first_start.is_same(&first_end.clone().into_shape())
-        || second_start.is_same(&second_end.clone().into_shape())
-    {
+    if first.is_same(second) {
         return Ok(first.clone());
     }
-    if !first_end.is_same(&second_start.clone().into_shape()) {
-        let point = midpoint(BRepTool::pnt(first_end)?, BRepTool::pnt(second_start)?);
-        let deviation = BRepTool::pnt(first_end)?.distance(&BRepTool::pnt(second_start)?);
-        let second = make_vertex(point, deviation)?;
-        replace_far_endpoints(context, first_end, second_start, &second)?;
-        return Ok(second);
-    }
-    Ok(first_end.clone())
+    let position = midpoint(BRepTool::pnt(first)?, BRepTool::pnt(second)?);
+    let shared = make_vertex(position, (distance / 2.0) * 1.0001)?;
+    replace_vertex(context, first, &shared)?;
+    replace_vertex(context, second, &shared)?;
+    Ok(shared)
 }
 
-fn replace_far_endpoints(
+/// `theSecondVer`: the first vertex when an edge is closed, the common far vertex, or a
+/// new vertex at the middle (tolerance the distance); both far vertices are replaced
+/// when `V2` is not the result.
+fn far_vertex(
     context: &Handle<ShapeBuildReShape>,
-    old_first: &Vertex,
-    old_second: &Vertex,
-    replacement: &Vertex,
-) -> Result<(), Failure> {
-    replace_vertex(context, old_first, replacement)?;
-    replace_vertex(context, old_second, replacement)
+    [first_start, first_end, second_start, second_end]: [&Vertex; 4],
+    first: &Vertex,
+    (near, other): (&Vertex, &Vertex),
+) -> Result<Vertex, Failure> {
+    let second = if first_start.is_same(first_end) || second_start.is_same(second_end) {
+        first.clone()
+    } else if !near.is_same(other) {
+        let (p1, p2) = (BRepTool::pnt(near)?, BRepTool::pnt(other)?);
+        make_vertex(midpoint(p1, p2), p1.distance(&p2))?
+    } else {
+        near.clone()
+    };
+    if !first_end.is_same(&second) {
+        replace_vertex(context, first_end, &second)?;
+        replace_vertex(context, other, &second)?;
+    }
+    Ok(second)
 }
 
+/// Native: the replacement is FORWARD for a forward vertex, REVERSED otherwise.
 fn replace_vertex(
     context: &Handle<ShapeBuildReShape>,
     old: &Vertex,
     replacement: &Vertex,
 ) -> Result<(), Failure> {
-    let oriented = replacement.oriented(old.orientation());
+    let orientation = if old.orientation() == Orientation::Forward {
+        Orientation::Forward
+    } else {
+        Orientation::Reversed
+    };
+    let oriented = replacement.oriented(orientation);
     ReShape::replace(context.get().unwrap(), &old.clone().into_shape(), &oriented)
 }
 
@@ -233,7 +211,7 @@ fn add_shared_edge_pcurve(
 ) -> Result<(), Failure> {
     let source_curve = BRepTool::curve(source)?;
     let curve = BRepTool::curve_on_face(source, face)?;
-    if curve.pcurve.is_null() || !curve.is_stored {
+    if curve.pcurve.is_null() {
         return Ok(());
     }
     let mut replacement: Handle<dyn Geom2dCurve> = Handle::default();

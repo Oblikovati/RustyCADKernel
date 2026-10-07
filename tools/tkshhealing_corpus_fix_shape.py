@@ -12,8 +12,8 @@ import math
 
 from tktopalgo_corpus_breplib_records import numbers
 from tkshhealing_corpus_fix_face import lateral_inputs, loop_inputs, planar_inputs
-from tkshhealing_corpus_unify import (PI, arc, face_inputs, polygon_inputs, polygons, revolved_inputs, segment, wire,
-                                      wire_inputs)
+from tkshhealing_corpus_unify import (PI, arc, face_inputs, polygon_inputs, polygons, revolved_inputs, segment, square,
+                                      wire, wire_inputs)
 
 
 def solid_inputs() -> list[list[float]]:
@@ -46,9 +46,24 @@ def small_edge_inputs() -> list[list[float]]:
     ]
 
 
+def small_face_inputs() -> list[list[float]]:
+    """Small faces: a lone spot face, a spot face sewn into a larger face, a strip between
+    two squares, thin and needle boxes."""
+    s, w = 1e-5, 1e-5
+    big = [(s, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0), (0, s, 0), (s, s, 0)]
+    strip = [(0, 1, 0), (1, 1, 0), (1, 1 + w, 0), (0, 1 + w, 0)]
+    return [
+        polygons([square(0, 0, s)], 1e-7),
+        polygons([square(0, 0, s), big], 1e-7),
+        polygons([square(0, 0), strip, square(0, 1 + w)], 1e-7),
+        [3, 1.0, 1.0, w],
+        [3, w, w, 1.0],
+    ]
+
+
 def inputs() -> list[list[float]]:
     unify = polygon_inputs() + revolved_inputs() + wire_inputs() + face_inputs() + [[3, 1.0, 2.0, 3.0]]
-    unify += small_edge_inputs()
+    unify += small_edge_inputs() + small_face_inputs()
     faces = planar_inputs() + loop_inputs() + lateral_inputs()
     return [[0, *s] for s in unify] + [[1, *f] for f in faces] + [[2, *s] for s in solid_inputs()]
 
@@ -56,7 +71,7 @@ def inputs() -> list[list[float]]:
 def append_fix_shape_requests(requests: list[str]) -> None:
     """Append the shape-level ShapeFix requests."""
     for shape in inputs():
-        for op in range(13):
+        for op in range(16):
             requests.append('sh_fix_shape ' + numbers(shape + [1e-7, 1.0, op]))
-        for op in (0, 3, 4, 5, 7, 11, 12):
+        for op in (0, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15):
             requests.append('sh_fix_shape ' + numbers(shape + [1e-3, 0.1, op]))

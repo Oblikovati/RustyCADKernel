@@ -31,6 +31,8 @@ pub(super) fn fix_strip_face(
     shape = apply_context(fixer, &shape)?;
     *fixer.input.write() = shape.clone();
     let result = finish_strip_phase(fixer, &shape, done)?;
+    // Native: myShape = FixShape(); myResult = myShape.
+    *fixer.input.write() = result.clone();
     *fixer.result.write() = result.clone();
     Ok(result)
 }

@@ -4,7 +4,7 @@ use super::brep_lib_common::shape;
 use super::common::{Reader, attempt, end, flag};
 use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkbrep::topods::{self, Shape};
+use rustycad_tkbrep::topods::{self, Edge, Shape};
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -12,6 +12,7 @@ use rustycad_tkprim::brep_prim_api::{
     BRepPrimAPIMakeCone, BRepPrimAPIMakeCylinder, BRepPrimAPIMakeOneAxis, BRepPrimAPIMakeSphere,
     BRepPrimAPIMakeTorus,
 };
+use rustycad_tkshhealing::shape_analysis::ShapeAnalysisCheckSmallFace;
 use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
 use rustycad_tkshhealing::shape_extend::ShapeExtendStatus;
 use rustycad_tkshhealing::shape_fix::{
@@ -112,6 +113,66 @@ fn wireframe(s: &Shape, prec: f64, maxtol: f64, op: i32) -> Result<(), Failure> 
     shape(&fixer.shape())
 }
 
+fn strip_edge(edge: &Edge) -> Result<(), Failure> {
+    flag(!edge.is_null());
+    if edge.is_null() {
+        return Ok(());
+    }
+    shape(edge)
+}
+
+fn small_faces(s: &Shape, prec: f64) -> Result<(), Failure> {
+    let mut analyzer = ShapeAnalysisCheckSmallFace::new();
+    let faces: Vec<Shape> = Explorer::new(s, ShapeEnum::Face, ShapeEnum::Shape)?.collect();
+    for face in &faces {
+        let face = topods::face(face)?;
+        attempt(|| {
+            flag(analyzer.check_spot_face(&face, prec)?);
+            Ok(())
+        });
+    }
+    for face in &faces {
+        let face = topods::face(face)?;
+        let (mut e1, mut e2) = (Edge::default(), Edge::default());
+        attempt(|| {
+            flag(analyzer.check_strip_face(&face, &mut e1, &mut e2, prec)?);
+            strip_edge(&e1)?;
+            strip_edge(&e2)
+        });
+    }
+    Ok(())
+}
+
+fn strips(s: &Shape, prec: f64, fix: bool) -> Result<(), Failure> {
+    let fixer = Handle::new(ShapeFixFixSmallFace::default());
+    fixer.init(s.clone());
+    FixRoot::set_precision(&*fixer, prec);
+    let ctx = fixer.context();
+    let ctx = ctx.get().ok_or_else(null_context)?;
+    for face in Explorer::new(s, ShapeEnum::Face, ShapeEnum::Shape)? {
+        let applied = ctx.apply(&face, ShapeEnum::Shape)?;
+        if applied.is_null() {
+            continue;
+        }
+        let mut face = topods::face(&applied)?;
+        let (mut e1, mut e2) = (Edge::default(), Edge::default());
+        if !ShapeAnalysisCheckSmallFace::new().check_strip_face(&face, &mut e1, &mut e2, prec)? {
+            continue;
+        }
+        let ok = fixer.replace_in_case_of_strip(&mut face, &mut e1, &mut e2, prec)?;
+        flag(ok);
+        if ok {
+            fixer.remove_faces_in_case_of_strip(&face)?;
+        }
+    }
+    shape(&ctx.apply(s, ShapeEnum::Shape)?)?;
+    if fix {
+        fixer.init(ctx.apply(s, ShapeEnum::Shape)?);
+        shape(&fixer.fix_shape()?)?;
+    }
+    Ok(())
+}
+
 fn run(mut s: Shape, prec: f64, maxtol: f64, op: i32) -> Result<(), Failure> {
     let ctx = Handle::new(ShapeBuildReShape::new());
     match op {
@@ -154,6 +215,8 @@ fn run(mut s: Shape, prec: f64, maxtol: f64, op: i32) -> Result<(), Failure> {
             shape(&result)
         }
         9 => shells(&s),
+        13 => small_faces(&s, prec),
+        14 | 15 => strips(&s, prec, op == 15),
         _ => solids(&s),
     }
 }

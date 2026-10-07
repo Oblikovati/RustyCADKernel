@@ -247,6 +247,18 @@ FixConnected at the end of each wire uses the default maximal tolerance of the i
 ShapeFix_Wire. Where the native drop branch would loop forever (a neighbour renamed to
 itself in a small-edge list), the Rust port returns a Standard_ProgramError failure.
 
+Small faces (a lone or sewn spot face, a strip between two squares, thin and needle
+boxes) also run ShapeFix_FixSmallFace (op 6), one ShapeAnalysis_CheckSmallFace over all
+faces (op 13: CheckSpotFace, then CheckStripFace with the strip edges), and the strip
+replacement alone (ops 14 and 15: ReplaceInCaseOfStrip, RemoveFacesInCaseOfStrip, then
+FixShape). They exposed three faithfulness bugs, now fixed: `Shape()` returned the shape
+before FixShape (native `myShape = FixShape()`), FixShape kept `ShapeFix_Face::Result()`
+instead of `Face()`, and ComputeSharedEdgeForStripFace did not replace the far vertices
+by the near shared vertex when an edge is closed, kept INTERNAL/EXTERNAL vertex
+orientations instead of mapping them to REVERSED, and skipped the computed p-curve of an
+edge on a plane. FixSplitFace and SplitOneFace stay partial: the native public path reads
+the uninitialized `myPrecision`.
+
 ## ShapeAlgo
 
 Ported in October 2026 (wave 3): ShapeAlgo_ToolContainer, ShapeAlgo_AlgoContainer

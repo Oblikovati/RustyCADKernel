@@ -16,7 +16,13 @@
 //  6 ShapeFix_FixSmallFace (precision) Init then Perform;
 //  7, 8 ShapeFix_FixSmallSolid (volume threshold maxtol) Remove or Merge with a context;
 //  9 ShapeFix_Shell Perform on each shell, 10 ShapeFix_Solid Perform on each solid: the
-//    flag, the status flags and the digest of each.
+//    flag, the status flags and the digest of each;
+//  13 one ShapeAnalysis_CheckSmallFace (precision): the CheckSpotFace flag of each face,
+//    then the CheckStripFace flag of each face and the digests of the two strip edges;
+//  14 ShapeFix_FixSmallFace (precision) Init, then on each strip face ReplaceInCaseOfStrip
+//    (the flag) and RemoveFacesInCaseOfStrip: the shape with the context applied; 15 the
+//    same, then the result of FixShape.
+#include <ShapeAnalysis_CheckSmallFace.hxx>
 #include <ShapeFix.hxx>
 #include <ShapeFix_FixSmallFace.hxx>
 #include <ShapeFix_FixSmallSolid.hxx>
@@ -48,6 +54,22 @@ void sfs_solids(const TopoDS_Shape& s){
  for(TopExp_Explorer e(s,TopAbs_SOLID);e.More();e.Next()){
   occ::handle<ShapeFix_Solid> f=new ShapeFix_Solid(TopoDS::Solid(e.Current()));
   GA_TRY(ga_flag(f->Perform());for(ShapeExtend_Status x:sfs_statuses)ga_flag(f->Status(x));tp_shape(f->Shape()))}}
+void sfs_edge(const TopoDS_Edge& e){ga_flag(!e.IsNull());if(!e.IsNull())tp_shape(e);}
+void sfs_small_faces(const TopoDS_Shape& s,double prec){
+ ShapeAnalysis_CheckSmallFace a;
+ for(TopExp_Explorer e(s,TopAbs_FACE);e.More();e.Next())GA_TRY(ga_flag(a.CheckSpotFace(TopoDS::Face(e.Current()),prec)))
+ for(TopExp_Explorer e(s,TopAbs_FACE);e.More();e.Next()){
+  TopoDS_Face f=TopoDS::Face(e.Current());TopoDS_Edge e1,e2;
+  GA_TRY(ga_flag(a.CheckStripFace(f,e1,e2,prec));sfs_edge(e1);sfs_edge(e2))}}
+void sfs_strips(const TopoDS_Shape& s,double prec,bool fix){
+ occ::handle<ShapeFix_FixSmallFace> fx=new ShapeFix_FixSmallFace;fx->Init(s);fx->SetPrecision(prec);
+ for(TopExp_Explorer e(s,TopAbs_FACE);e.More();e.Next()){
+  TopoDS_Face f=TopoDS::Face(fx->Context()->Apply(e.Current()));if(f.IsNull())continue;
+  ShapeAnalysis_CheckSmallFace a;TopoDS_Edge e1,e2;
+  if(!a.CheckStripFace(f,e1,e2,prec))continue;
+  bool ok=fx->ReplaceInCaseOfStrip(f,e1,e2,prec);ga_flag(ok);if(ok)fx->RemoveFacesInCaseOfStrip(f);}
+ tp_shape(fx->Context()->Apply(s));
+ if(fix){fx->Init(fx->Context()->Apply(s));tp_shape(fx->FixShape());}}
 void sfs_run(TopoDS_Shape s,double prec,double maxtol,int op){
  occ::handle<ShapeBuild_ReShape> ctx=new ShapeBuild_ReShape;
  if(op==0){sfs_shape_fix(s,prec,maxtol);return;}
@@ -64,6 +86,8 @@ void sfs_run(TopoDS_Shape s,double prec,double maxtol,int op){
  if(op==7||op==8){occ::handle<ShapeFix_FixSmallSolid> f=new ShapeFix_FixSmallSolid;f->SetVolumeThreshold(maxtol);
   tp_shape(op==7?f->Remove(s,ctx):f->Merge(s,ctx));return;}
  if(op==9){sfs_shells(s);return;}
+ if(op==13){sfs_small_faces(s,prec);return;}
+ if(op==14||op==15){sfs_strips(s,prec,op==15);return;}
  sfs_solids(s);}
 void sh_fix_shape_case(std::istream& input){
  GaReader r{input};TopoDS_Shape s;GA_TRY(s=sfs_input(r))
