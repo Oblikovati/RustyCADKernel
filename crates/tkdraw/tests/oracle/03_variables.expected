@@ -1,0 +1,28 @@
+DRAW is running in batch mode
+standard: 1 1 1 1 1 0
+types: numeric drawable 3d drawable 3d drawable 3d
+pi=3.1415926535897931 pinf=1.7976931348623157e+308 minf=-1.7976931348623157e+308
+n: 1 0 numeric n value n
+protect: n  1
+set protected: 1 <can't set "n": variable is protected> value n dval 3
+dset protected: 7 -> 7
+unprotect: n  0
+after set: 0 <9>
+copy: 1.5 1 1
+independent: 1.5 2
+renamevar: 0 1 1.5 c
+renamevar pairs: 1 0 0
+copy of protected: 0 3.1415926535897931
+unset: 0 0
+dump: ||*********** Dump of b *************|2
+autodisplay: 0 1 0 1
+display/erase: <b > <> <b > <> <> <>
+repaint: <>
+bad view number in draw
+draw: 1
+dgetenv: <>
+dsetenv: <hello>
+dsetenv removed: <>
+lastrep:  0 0 0 0
+local: 1 0
+array element: 0 <2>

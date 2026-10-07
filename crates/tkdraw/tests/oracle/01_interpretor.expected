@@ -1,0 +1,26 @@
+DRAW is running in batch mode
+batch: 1
+dset result: 2.5
+help dset: var1 value1 vr2 value2 ...
+DRAW General Commands: batch chrono cpulimit dbreak dchrono ddebugtraces decho dlocale dlog dparallel dperf dputs dsetsignal dtracelevel dversion meminfo spy wait
+DRAW Variables management: 2dclear autodisplay brestore bsave clear copy dgetenv display dname donly draw dset dsetenv dtyp dump dval erase isdraw isprot lastrep pick protect renamevar repaint unprotect
+DRAW Numeric functions: acos asin atan2 cos sin sqrt tan
+DRAW Unit Commands: unit unitconvtoMDTV unitconvtoSI unitparsing unitsdico
+DRAW Message Commands: ClearReport CollectMetricMessages PrintMessenger PrintReport SendMessage SetMessagePrinter SetReportMetric
+DRAW Graphic Commands: 2dfit 2dmd 2dmu 2dpd 2dpl 2dpr 2dpu 2dzoom color d delete dflush dfont dptv dtext fd fit focal fu grid hardcopy hcolor l md mu pd pl pr ptv pu r u view wclick wzoom xwd zoom
+Draw Plugin: dtryload pload
+file: 1
+catch: 1 <>
+unknown: 1 <invalid command name "nosuchcommand">
+dlog status: off
+dlog status: on
+log: added line|dval 1+1 |2|
+log after reset: <>
+Unrecognized option(s): bad
+dlog bad: 1 <>
+dval 2*3 
+6
+Unrecognized option: maybe
+decho bad: 1
+complete script result follows
+42

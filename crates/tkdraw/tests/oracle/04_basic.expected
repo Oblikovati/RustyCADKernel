@@ -1,0 +1,37 @@
+DRAW is running in batch mode
+plain text
+no newline|after
+colored when colors are on
+-bogus
+dputs syntax: 0
+Syntax error: wrong number of arguments
+dputs empty: 1
+ddebugtraces: 0
+ddebugtraces set: 3
+ddebugtraces args: 1 <Syntax error: wrong number of arguments>
+dtracelevel: info
+dtracelevel warning: warn
+Error: unknown gravity 'loud'
+dtracelevel bad: 1
+dbreak: 
+dlocale numeric: C
+Error: cannot recognize argument LC_BAD as one of LC_ macros
+dlocale bad: 1
+chrono flag: Chronometers activated.
+Chronometers deactivated.
+Chronometers activated.
+
+chrono var: 1 chronometer
+chrono bad: 1 <Syntax error at '-bogus'
+>
+wait: 
+spy:  1 <Cannot open /nonexistent/dir/file for writing
+>
+dsetsignal: Signal mode: set|Catch FPE: 0|Stack Trace Length: 0|
+Syntax error: unknown argument 'sometimes'
+dsetsignal bad: 1
+meminfo bad: 1 <Syntax error at 'nothing'!
+>
+Syntax error: unknown argument '-nothing'
+dparallel bad: 1
+dtryload: Loading /nonexistent/libnothing.so failed: /nonexistent/libnothing.so: cannot open shared object file: No such file or directory

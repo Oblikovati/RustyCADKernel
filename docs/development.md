@@ -56,6 +56,11 @@ proofs. Other production modules remain safe Rust. Native bindings use separate 
 crates with explicitly scoped policies. `rustycad-cmath` is the first: it declares
 the platform libm `asinh`/`acosh`/`atanh`, because OCCT calls them and Rust's own
 formulas can differ in the last bit.
+`rustycad-tcl` is the second: hand-written declarations of the Tcl/Tk 8.6 functions
+that OCCT DRAW calls (no bindgen), linked through `pkg-config tcl8.6`/`tk8.6`, behind a
+safe wrapper. Its `header_check` test compiles every declaration against the installed
+`tcl.h`/`tk.h` with `cc`, so building it needs the Tcl/Tk 8.6 development packages and a C
+compiler.
 The facade depends on the TKernel workspace crate; `smallvec` 1.16.2 supplies inline storage behind the
 `LocalArray` interface. Rayon 1.12.0 supplies parallel workers behind the `osd` interface. `allocator-api2` 0.4.0 supplies allocator-aware storage behind NCollection interfaces.
 `cargo deny check` checks advisory,
