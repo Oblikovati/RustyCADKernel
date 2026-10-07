@@ -52,7 +52,7 @@ impl TopOpeBRepToolHBoxTool {
 
     /// `Clear()`; `hbt.clear()`.
     pub fn clear(&self) {
-        self.my_ims.write().clear(true);
+        self.my_ims.write().clear(false);
     }
 
     /// `AddBoxes(S, TS, TA)` (TA natively defaulted to SHAPE): the box of every
@@ -163,7 +163,7 @@ impl TopOpeBRepToolHBoxTool {
         self.my_ims.read().len() as i32
     }
 
-    /// `ChangeIMS()`: the map modified by `f`; `hbt.change_ims(|m| m.clear())`.
+    /// `ChangeIMS()`: the map modified by `f`; `hbt.change_ims(|m| m.clear(false))`.
     pub fn change_ims<R>(
         &self,
         f: impl FnOnce(&mut IndexedDataMap<Shape, BoundingBox3>) -> R,
