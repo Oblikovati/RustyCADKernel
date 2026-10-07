@@ -7,6 +7,7 @@
 //! [`Array1`] API, exactly as the native `Array1()`/`ChangeArray1()` expose the base class.
 mod copy_construction;
 mod initialization;
+mod matrix_copy_construction;
 mod matrix_initialization;
 
 use super::generic_transient::impl_generic_transient;
@@ -206,14 +207,6 @@ impl<T: Default + Send + Sync + 'static> HArray2<T> {
     }
 }
 
-impl<T: Clone + Send + Sync + 'static> HArray2<T> {
-    /// Copies a rectangle and its bounds into a new shared array; `HArray2::from_array(&grid)`.
-    pub fn from_array(values: &Array2<'_, T>) -> Self {
-        let mut copy = Array2::default();
-        copy.assign(values);
-        Self::from_owned(copy)
-    }
-}
 impl<T: Clone + Send + Sync + 'static> Clone for HArray2<T> {
     fn clone(&self) -> Self {
         Self::from_array(&self.array2())
